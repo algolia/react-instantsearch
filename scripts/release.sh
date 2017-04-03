@@ -27,8 +27,8 @@ if [[ -n $(cd packages/react-instantsearch-theme-algolia && npm owner add "$(npm
 fi
 
 currentBranch=`git rev-parse --abbrev-ref HEAD`
-if [ $currentBranch != 'v2' ]; then
-  printf "Release: You must be on v2\n"
+if [ $currentBranch != 'ris-v3' ]; then
+  printf "Release: You must be on v3\n"
   exit 1
 fi
 
@@ -38,7 +38,7 @@ if [[ -n $(git status --porcelain) ]]; then
 fi
 
 # printf "\n\nRelease: update working tree"
-git pull origin v2
+git pull origin ris-v3
 git fetch origin --tags
 
 # printf "Release: install dependencies"
@@ -92,7 +92,7 @@ git tag "v$newVersion"
 printf "\n\nRelease: almost done, check everything in another terminal tab if you want.\n"
 read -p "=> Release: when ready, press [ENTER] to push to github and publish the package"
 
-git push origin v2
+git push origin ris-v3
 git push origin --tags
 
 printf "\n\nRelease: pushed to github, publish on npm"
