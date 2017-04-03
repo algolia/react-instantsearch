@@ -1,3 +1,13 @@
+<a name="3.3.1"></a>
+## [3.3.1](https://github.com/algolia/instantsearch.js/compare/v3.3.0...v3.3.1) (2017-04-03)
+
+
+### Bug Fixes
+
+* **SFFV:** fix wrong query behaviour with slow network (#2086) ([c3a844b](https://github.com/algolia/instantsearch.js/commit/c3a844b)), closes [#2086](https://github.com/algolia/instantsearch.js/issues/2086)
+
+
+
 <a name="3.3.0"></a>
 # [3.3.0](https://github.com/algolia/instantsearch.js/compare/v3.2.2-beta0...v3.3.0) (2017-03-22)
 
