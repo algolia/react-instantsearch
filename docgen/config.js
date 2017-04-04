@@ -5,7 +5,7 @@ const configs = {
   production: {
     docsDist: rootPath('docs-production/react'),
     storyBookPublicPath: 'storybook/',
-    publicPath: '/instantsearch.js/react/',
+    publicPath: '/react-instantsearch/',
   },
   development: {
     docsDist: rootPath('docs/react'),

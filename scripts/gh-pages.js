@@ -26,11 +26,11 @@ const defaultOptions = {
 if (
   process.env.CI === 'true' &&
   process.env.TRAVIS_PULL_REQUEST === 'false' &&
-  process.env.TRAVIS_BRANCH === 'v2'
+  process.env.TRAVIS_BRANCH === 'master'
 ) {
   ghpages.publish(site, {
     ...defaultOptions,
-    repo: `https://${process.env.GH_TOKEN}@github.com/algolia/instantsearch.js.git`,
+    repo: `https://${process.env.GH_TOKEN}@github.com/algolia/react-instantsearch.git`,
   }, end);
 } else if (process.env.CI === undefined) { // dev mode
   ghpages.publish(site, defaultOptions, end);
