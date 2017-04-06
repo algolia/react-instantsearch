@@ -50,8 +50,12 @@ export default createConnector({
         label: PropTypes.string,
         value: PropTypes.number.isRequired,
       })
-    ).isRequired,
+    ),
     transformItems: PropTypes.func,
+  },
+  
+  defaultProps: {
+    items: [],
   },
 
   getProvidedProps(props, searchState) {
