@@ -3,8 +3,10 @@ import HitsPerPageSelectComponent from '../components/HitsPerPage.js';
 
 /**
  * The HitsPerPage widget displays a dropdown menu to let the user change the number
- * of displayed hits. If you just want to configure the number of hits per page without
- * displaying a widget, you should use the `<Configure hitsPerPage={20} />` widget. See [<Configure />](widgets/Configure.html)
+ * of displayed hits.
+ *
+ * If you only want to configure the number of hits per page without
+ * displaying a widget, you should use the `<Configure hitsPerPage={20} />` widget. See [`<Configure /> documentation`](widgets/Configure.html)
  *
  * @name HitsPerPage
  * @kind widget
