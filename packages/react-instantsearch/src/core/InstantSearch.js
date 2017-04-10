@@ -1,14 +1,14 @@
-import React, { PropTypes, Component, Children } from 'react';
+import React, {PropTypes, Component, Children} from 'react';
 import createInstantSearchManager from './createInstantSearchManager';
 
 function validateNextProps(props, nextProps) {
   if (!props.searchState && nextProps.searchState) {
     throw new Error(
-      "You can't switch <InstantSearch> from being uncontrolled to controlled"
+      'You can\'t switch <InstantSearch> from being uncontrolled to controlled'
     );
   } else if (props.searchState && !nextProps.searchState) {
     throw new Error(
-      "You can't switch <InstantSearch> from being controlled to uncontrolled"
+      'You can\'t switch <InstantSearch> from being controlled to uncontrolled'
     );
   }
 }
@@ -52,6 +52,7 @@ class InstantSearch extends Component {
     this.isControlled = Boolean(props.searchState);
 
     const initialState = this.isControlled ? props.searchState : {};
+    this.state = {};
 
     this.aisManager = createInstantSearchManager({
       indexName: props.indexName,
@@ -59,6 +60,8 @@ class InstantSearch extends Component {
       algoliaClient: props.algoliaClient,
       initialState,
     });
+
+    this.isUnmounting = false;
   }
 
   componentWillReceiveProps(nextProps) {
@@ -71,6 +74,10 @@ class InstantSearch extends Component {
     if (this.isControlled) {
       this.aisManager.onExternalStateUpdate(nextProps.searchState);
     }
+  }
+
+  componentWillUnmount() {
+    this.isUnmounting = true;
   }
 
   getChildContext() {
@@ -105,12 +112,14 @@ class InstantSearch extends Component {
   }
 
   onWidgetsInternalStateUpdate(searchState) {
-    searchState = this.aisManager.transitionState(searchState);
+    if (!this.isUnmounting) {
+      searchState = this.aisManager.transitionState(searchState);
 
-    this.onSearchStateChange(searchState);
+      this.onSearchStateChange(searchState);
 
-    if (!this.isControlled) {
-      this.aisManager.onExternalStateUpdate(searchState);
+      if (!this.isControlled) {
+        this.aisManager.onExternalStateUpdate(searchState);
+      }
     }
   }
 
@@ -130,7 +139,7 @@ class InstantSearch extends Component {
 
   render() {
     const childrenCount = Children.count(this.props.children);
-    const { Root, props } = this.props.root;
+    const {Root, props} = this.props.root;
     if (childrenCount === 0) return null;
     else return <Root {...props}>{this.props.children}</Root>;
   }
