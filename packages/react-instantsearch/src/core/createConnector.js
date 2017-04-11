@@ -127,7 +127,7 @@ export default function createConnector(connectorDesc) {
             ...this.context.ais.store.getState(),
             widgets: newState,
           });
-          this.context.ais.onInternalStateUpdate(newState);
+          this.context.ais.onSearchStateChange(newState);
         }
       }
     }
