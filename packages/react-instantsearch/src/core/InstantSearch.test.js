@@ -206,6 +206,33 @@ describe('InstantSearch', () => {
     expect(context.ais.widgetsManager).toBe(ism.widgetsManager);
   });
 
+  it('onSearchStateChange and update should not be called if the widget is unmounting', () => {
+    const ism = {
+      transitionState: jest.fn(),
+      onExternalStateUpdate: jest.fn(),
+    };
+    createInstantSearchManager.mockImplementation(() => ism);
+    const onSearchStateChange = jest.fn();
+    const wrapper = mount(
+      <InstantSearch
+        {...DEFAULT_PROPS}
+        onSearchStateChange={onSearchStateChange}
+      >
+        <div />
+      </InstantSearch>
+    );
+    const {
+      ais: { onInternalStateUpdate },
+    } = wrapper.instance().getChildContext();
+
+    wrapper.unmount();
+    onInternalStateUpdate({});
+
+    expect(ism.onExternalStateUpdate.mock.calls.length).toBe(0);
+    expect(ism.onExternalStateUpdate.mock.calls.length).toBe(0);
+    expect(ism.onExternalStateUpdate.mock.calls.length).toBe(0);
+  });
+
   describe('createHrefForState', () => {
     it('passes through to createURL when it is defined', () => {
       const widgetsIds = [];
