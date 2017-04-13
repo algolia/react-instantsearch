@@ -1,4 +1,4 @@
-import { isEmpty, each, isPlainObject } from 'lodash';
+import { isEmpty, isPlainObject } from 'lodash';
 
 // From https://github.com/reactjs/react-redux/blob/master/src/utils/shallowEqual.js
 export function shallowEqual(objA, objB) {
