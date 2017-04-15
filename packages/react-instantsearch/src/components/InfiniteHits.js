@@ -1,4 +1,5 @@
-import React, { PropTypes, Component } from 'react';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 
 import classNames from './classNames.js';
 import translatable from '../core/translatable';
@@ -36,10 +37,8 @@ class InfiniteHits extends Component {
 
 InfiniteHits.propTypes = {
   hits: PropTypes.array,
-  hitComponent: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.func,
-  ]).isRequired,
+  hitComponent: PropTypes.oneOfType([PropTypes.string, PropTypes.func])
+    .isRequired,
   hasMore: PropTypes.bool.isRequired,
   refine: PropTypes.func.isRequired,
   translate: PropTypes.func.isRequired,
