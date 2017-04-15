@@ -13,7 +13,8 @@ import {
   connectRange,
 } from 'react-instantsearch/connectors';
 
-import React, { PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 import GoogleMap from 'google-map-react';
 import { fitBounds } from 'google-map-react/utils';
 
@@ -355,11 +356,11 @@ function Results() {
 
 const Range = React.createClass({
   propTypes: {
-    min: React.PropTypes.number,
-    max: React.PropTypes.number,
-    currentRefinement: React.PropTypes.object,
-    refine: React.PropTypes.func.isRequired,
-    canRefine: React.PropTypes.bool.isRequired,
+    min: PropTypes.number,
+    max: PropTypes.number,
+    currentRefinement: PropTypes.object,
+    refine: PropTypes.func.isRequired,
+    canRefine: PropTypes.bool.isRequired,
   },
 
   getInitialState() {
