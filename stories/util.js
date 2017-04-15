@@ -25,16 +25,14 @@ Wrap.propTypes = {
   children: React.PropTypes.node,
 };
 
-const WrapWithHits = (
-  {
-    searchParameters: askedSearchParameters = {},
-    children,
-    searchBox = true,
-    hasPlayground = false,
-    linkedStoryGroup,
-    pagination = true,
-  }
-) => {
+const WrapWithHits = ({
+  searchParameters: askedSearchParameters = {},
+  children,
+  searchBox = true,
+  hasPlayground = false,
+  linkedStoryGroup,
+  pagination = true,
+}) => {
   const sourceCodeUrl = `https://github.com/algolia/react-instantsearch/tree/master/stories/${linkedStoryGroup}.stories.js`;
   const playgroundLink = hasPlayground
     ? <button

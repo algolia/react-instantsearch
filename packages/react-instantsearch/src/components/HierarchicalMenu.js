@@ -81,5 +81,5 @@ class HierarchicalMenu extends Component {
 }
 
 export default translatable({
-  showMore: extended => extended ? 'Show less' : 'Show more',
+  showMore: extended => (extended ? 'Show less' : 'Show more'),
 })(HierarchicalMenu);
