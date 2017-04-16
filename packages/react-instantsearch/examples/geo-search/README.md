@@ -3,7 +3,7 @@ This example shows how to perform a geo search using `react-instantsearch`.
 To start the example:
 
 ```sh
-yarn install --no-lockfile
+yarn install
 yarn start
 ```
 
