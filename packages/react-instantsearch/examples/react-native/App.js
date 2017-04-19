@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default createClass({
+export default React.createClass({
   displayName: 'React Native example',
   render() {
     return (

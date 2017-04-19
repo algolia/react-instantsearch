@@ -1,7 +1,7 @@
 /* eslint react/prop-types: 0 */
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import React from 'react';
+import React, { Component } from 'react';
 import {
   connectSearchBox,
   connectRefinementList,
@@ -58,13 +58,13 @@ const MaterialUiExample = props => (
   </InstantSearch>
 );
 
-const Content = React.createClass({
-  getInitialState() {
-    return { drawer: !isMobile };
-  },
-  drawerAction() {
+class Content extends Component {
+  state = { drawer: !isMobile };
+
+  drawerAction = () => {
     this.setState({ drawer: !this.state.drawer });
-  },
+  };
+
   render() {
     const baseDrawerStyle = {
       transition: 'none',
@@ -146,8 +146,8 @@ const Content = React.createClass({
         </div>
       </div>
     );
-  },
-});
+  }
+}
 
 const MaterialUiSearchBox = ({ currentRefinement, refine }) => {
   const style = {
@@ -256,7 +256,7 @@ const MaterialUiNestedList = function({ id, items, refine }) {
   );
 };
 
-const MaterialUiSortBy = React.createClass({
+class MaterialUiSortBy extends Component {
   render() {
     return (
       <IconMenu
@@ -281,8 +281,8 @@ const MaterialUiSortBy = React.createClass({
         ))}
       </IconMenu>
     );
-  },
-});
+  }
+}
 
 function CustomHits({ hits, marginLeft, hasMore, refine }) {
   const cardStyle = isMobile
