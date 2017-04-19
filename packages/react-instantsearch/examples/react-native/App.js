@@ -31,8 +31,9 @@ const styles = StyleSheet.create({
   },
 });
 
-export default React.createClass({
-  displayName: 'React Native example',
+export default class extends Component {
+  static displayName = 'React Native example';
+
   render() {
     return (
       <View style={styles.maincontainer}>
@@ -46,8 +47,8 @@ export default React.createClass({
         </InstantSearch>
       </View>
     );
-  },
-});
+  }
+}
 
 class SearchBox extends Component {
   render() {
