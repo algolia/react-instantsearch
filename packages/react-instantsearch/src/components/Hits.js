@@ -20,10 +20,9 @@ Hits.propTypes = {
   hitComponent: PropTypes.func.isRequired,
 };
 
+/* eslint-disable react/display-name */
 Hits.defaultProps = {
-  hitComponent: (
-    hit // eslint-disable-line react/display-name
-  ) => (
+  hitComponent: hit => (
     <div
       style={{
         borderBottom: '1px solid #bbb',
@@ -35,5 +34,6 @@ Hits.defaultProps = {
     </div>
   ),
 };
+/* eslint-enable react/display-name */
 
 export default Hits;

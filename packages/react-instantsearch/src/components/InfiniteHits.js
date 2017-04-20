@@ -44,10 +44,9 @@ InfiniteHits.propTypes = {
   translate: PropTypes.func.isRequired,
 };
 
+/* eslint-disable react/display-name */
 InfiniteHits.defaultProps = {
-  hitComponent: (
-    hit // eslint-disable-line react/display-name
-  ) => (
+  hitComponent: hit => (
     <div
       style={{
         borderBottom: '1px solid #bbb',
@@ -59,6 +58,7 @@ InfiniteHits.defaultProps = {
     </div>
   ),
 };
+/* eslint-enable react/display-name */
 
 export default translatable({
   loadMore: 'Load more',
