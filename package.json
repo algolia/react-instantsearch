@@ -12,6 +12,7 @@
     "docs:deploy-preview": "yarn docs:build-preview && rm -f preview.zip && zip -r -9 preview.zip docs-production/ && netlify deploy && rm preview.zip",
     "release": "./scripts/release.sh",
     "lint": "if [ \"$CI\" = \"true\" ]; then eslint .; else eslint . --cache; fi",
+    "reformat": "find . -name '*.js' | grep -v node_modules | xargs prettier --write --single-quote --trailing-comma es5",
     "docs:doctoc": "doctoc --maxlevel 1 README.md",
     "test": "./scripts/test.sh",
     "test:build": "./scripts/test:build.sh",

@@ -39,7 +39,8 @@ export default function createInstantSearch(defaultAlgoliaClient, root) {
       if (nextProps.algoliaClient) {
         this.client = nextProps.algoliaClient;
       } else if (
-        props.appId !== nextProps.appId || props.apiKey !== nextProps.apiKey
+        props.appId !== nextProps.appId ||
+        props.apiKey !== nextProps.apiKey
       ) {
         this.client = defaultAlgoliaClient(nextProps.appId, nextProps.apiKey);
       }

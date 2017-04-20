@@ -190,45 +190,43 @@ OptionCapacity.propTypes = {
   value: PropTypes.string,
 };
 
-const CapacitySelector = connectMultiRange(({
-  items,
-  currentRefinement,
-  refine,
-}) => {
-  const selectValue = e => refine(e.target.value);
+const CapacitySelector = connectMultiRange(
+  ({ items, currentRefinement, refine }) => {
+    const selectValue = e => refine(e.target.value);
 
-  const allOption = (
-    <OptionCapacity
-      label=""
-      value=""
-      isSelected={Boolean(currentRefinement)}
-      key="all"
-    />
-  );
-
-  const options = items.map(item => {
-    const val = parseFloat(item.value.split(':')[0]);
-    const label = `${val} person${val > 1 ? 's' : ''}`;
-    return (
+    const allOption = (
       <OptionCapacity
-        label={label}
-        value={item.value}
-        isSelected={item.isRefined}
-        key={item.value}
+        label=""
+        value=""
+        isSelected={Boolean(currentRefinement)}
+        key="all"
       />
     );
-  });
 
-  options.unshift(allOption);
+    const options = items.map(item => {
+      const val = parseFloat(item.value.split(':')[0]);
+      const label = `${val} person${val > 1 ? 's' : ''}`;
+      return (
+        <OptionCapacity
+          label={label}
+          value={item.value}
+          isSelected={item.isRefined}
+          key={item.value}
+        />
+      );
+    });
 
-  return (
-    <div className="capacity-menu-wrapper">
-      <select defaultValue={currentRefinement} onChange={selectValue}>
-        {options}
-      </select>
-    </div>
-  );
-});
+    options.unshift(allOption);
+
+    return (
+      <div className="capacity-menu-wrapper">
+        <select defaultValue={currentRefinement} onChange={selectValue}>
+          {options}
+        </select>
+      </div>
+    );
+  }
+);
 
 function DatesAndGuest() {
   return (

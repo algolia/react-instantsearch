@@ -171,7 +171,8 @@ class SearchBox extends Component {
     const searchInputEvents = Object.keys(this.props).reduce((props, prop) => {
       if (
         ['onsubmit', 'onreset', 'onchange'].indexOf(prop.toLowerCase()) ===
-          -1 && prop.indexOf('on') === 0
+          -1 &&
+        prop.indexOf('on') === 0
       ) {
         return { ...props, [prop]: this.props[prop] };
       }

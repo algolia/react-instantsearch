@@ -45,7 +45,9 @@ InfiniteHits.propTypes = {
 };
 
 InfiniteHits.defaultProps = {
-  hitComponent: hit => ( // eslint-disable-line react/display-name
+  hitComponent: (
+    hit // eslint-disable-line react/display-name
+  ) => (
     <div
       style={{
         borderBottom: '1px solid #bbb',
