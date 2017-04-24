@@ -19,7 +19,7 @@ import CurrentRefinementsComponent from '../components/CurrentRefinements.js';
  * @example
  * import React from 'react';
  *
- * import {ClearAll, RefinementList} from '../packages/react-instantsearch/dom';
+ * import {InstantSearch, CurrentRefinements, RefinementList} from '../packages/react-instantsearch/dom';
  *
  * export default function App() {
  *   return (
