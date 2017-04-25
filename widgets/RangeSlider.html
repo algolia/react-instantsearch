@@ -7,45 +7,43 @@ using the <a href="connectors/connectRange.html">connectRange connector</a>.</p>
   <div class="code-wrap">
     <code><span class="cs-comment">// Here&#39;s an example showing how to connect the airbnb rheostat slider to React InstantSearch using the</span>
 <span class="cs-comment">// range connector</span>
-
-<span class="cs-keyword">import</span> <span class="cs-def">React</span>, {<span class="cs-def">PropTypes</span>} <span class="cs-keyword">from</span> <span class="cs-string">&#39;react&#39;</span>;
+<span class="cs-keyword">import</span> <span class="cs-def">PropTypes</span> <span class="cs-keyword">from</span> <span class="cs-string">&#39;prop-types&#39;</span>;
+<span class="cs-keyword">import</span> <span class="cs-def">React</span>, {<span class="cs-def">Component</span>} <span class="cs-keyword">from</span> <span class="cs-string">&#39;react&#39;</span>;
 <span class="cs-keyword">import</span> {<span class="cs-def">connectRange</span>} <span class="cs-keyword">from</span> <span class="cs-string">&#39;react-instantsearch/connectors&#39;</span>;
 <span class="cs-keyword">import</span> <span class="cs-def">Rheostat</span> <span class="cs-keyword">from</span> <span class="cs-string">&#39;rheostat&#39;</span>;
 
-<span class="cs-keyword">const</span> <span class="cs-def">Range</span> <span class="cs-operator">=</span> <span class="cs-variable">React</span>.<span class="cs-property">createClass</span>({
-  <span class="cs-property">propTypes</span>: {
-    <span class="cs-property">min</span>: <span class="cs-variable">React</span>.<span class="cs-property">PropTypes</span>.<span class="cs-property">number</span>,
-    <span class="cs-property">max</span>: <span class="cs-variable">React</span>.<span class="cs-property">PropTypes</span>.<span class="cs-property">number</span>,
-    <span class="cs-property">currentRefinement</span>: <span class="cs-variable">React</span>.<span class="cs-property">PropTypes</span>.<span class="cs-property">object</span>,
-    <span class="cs-property">refine</span>: <span class="cs-variable">React</span>.<span class="cs-property">PropTypes</span>.<span class="cs-property">func</span>.<span class="cs-property">isRequired</span>,
-    <span class="cs-property">canRefine</span>: <span class="cs-variable">React</span>.<span class="cs-property">PropTypes</span>.<span class="cs-property">bool</span>.<span class="cs-property">isRequired</span>,
-  },
+<span class="cs-keyword">class</span> <span class="cs-def">Range</span> <span class="cs-keyword">extends</span> <span class="cs-variable">React</span>.<span class="cs-property">Component</span> {
+  <span class="cs-keyword">static</span> <span class="cs-property">propTypes</span> <span class="cs-operator">=</span> {
+    <span class="cs-property">min</span>: <span class="cs-variable">PropTypes</span>.<span class="cs-property">number</span>,
+    <span class="cs-property">max</span>: <span class="cs-variable">PropTypes</span>.<span class="cs-property">number</span>,
+    <span class="cs-property">currentRefinement</span>: <span class="cs-variable">PropTypes</span>.<span class="cs-property">object</span>,
+    <span class="cs-property">refine</span>: <span class="cs-variable">PropTypes</span>.<span class="cs-property">func</span>.<span class="cs-property">isRequired</span>,
+    <span class="cs-property">canRefine</span>: <span class="cs-variable">PropTypes</span>.<span class="cs-property">bool</span>.<span class="cs-property">isRequired</span>,
+  };
 
-  <span class="cs-property">getInitialState</span>() {
-    <span class="cs-keyword">return</span> {<span class="cs-property">currentValues</span>: {<span class="cs-property">min</span>: <span class="cs-keyword">this</span>.<span class="cs-property">props</span>.<span class="cs-property">min</span>, <span class="cs-property">max</span>: <span class="cs-keyword">this</span>.<span class="cs-property">props</span>.<span class="cs-property">max</span>}};
-  },
+  <span class="cs-variable">state</span> <span class="cs-operator">=</span> {<span class="cs-property">currentValues</span>: {<span class="cs-property">min</span>: <span class="cs-keyword">this</span>.<span class="cs-property">props</span>.<span class="cs-property">min</span>, <span class="cs-property">max</span>: <span class="cs-keyword">this</span>.<span class="cs-property">props</span>.<span class="cs-property">max</span>}};
 
-  <span class="cs-property">componentWillReceiveProps</span>(<span class="cs-def">sliderState</span>) {
-    <span class="cs-keyword">if</span> (<span class="cs-variable-2">sliderState</span>.<span class="cs-property">canRefine</span>) {
-      <span class="cs-keyword">this</span>.<span class="cs-property">setState</span>({<span class="cs-property">currentValues</span>: {<span class="cs-property">min</span>: <span class="cs-variable-2">sliderState</span>.<span class="cs-property">currentRefinement</span>.<span class="cs-property">min</span>, <span class="cs-property">max</span>: <span class="cs-variable-2">sliderState</span>.<span class="cs-property">currentRefinement</span>.<span class="cs-property">max</span>}});
+  <span class="cs-variable">componentWillReceiveProps</span>(<span class="cs-variable">sliderState</span>) {
+    <span class="cs-keyword">if</span> (<span class="cs-variable">sliderState</span>.<span class="cs-property">canRefine</span>) {
+      <span class="cs-keyword">this</span>.<span class="cs-property">setState</span>({<span class="cs-property">currentValues</span>: {<span class="cs-property">min</span>: <span class="cs-variable">sliderState</span>.<span class="cs-property">currentRefinement</span>.<span class="cs-property">min</span>, <span class="cs-property">max</span>: <span class="cs-variable">sliderState</span>.<span class="cs-property">currentRefinement</span>.<span class="cs-property">max</span>}});
     }
-  },
+  }
 
-  <span class="cs-property">onValuesUpdated</span>(<span class="cs-def">sliderState</span>) {
+  <span class="cs-variable">onValuesUpdated</span> <span class="cs-operator">=</span> (<span class="cs-def">sliderState</span>) <span class="cs-operator">=&gt;</span> {
     <span class="cs-keyword">this</span>.<span class="cs-property">setState</span>({<span class="cs-property">currentValues</span>: {<span class="cs-property">min</span>: <span class="cs-variable-2">sliderState</span>.<span class="cs-property">values</span>[<span class="cs-number">0</span>], <span class="cs-property">max</span>: <span class="cs-variable-2">sliderState</span>.<span class="cs-property">values</span>[<span class="cs-number">1</span>]}});
-  },
+  };
 
-  <span class="cs-property">onChange</span>(<span class="cs-def">sliderState</span>) {
+  <span class="cs-variable">onChange</span> <span class="cs-operator">=</span> (<span class="cs-def">sliderState</span>) <span class="cs-operator">=&gt;</span> {
     <span class="cs-keyword">if</span> (<span class="cs-keyword">this</span>.<span class="cs-property">props</span>.<span class="cs-property">currentRefinement</span>.<span class="cs-property">min</span> <span class="cs-operator">!==</span> <span class="cs-variable-2">sliderState</span>.<span class="cs-property">values</span>[<span class="cs-number">0</span>] <span class="cs-operator">||</span>
       <span class="cs-keyword">this</span>.<span class="cs-property">props</span>.<span class="cs-property">currentRefinement</span>.<span class="cs-property">max</span> <span class="cs-operator">!==</span> <span class="cs-variable-2">sliderState</span>.<span class="cs-property">values</span>[<span class="cs-number">1</span>]) {
       <span class="cs-keyword">this</span>.<span class="cs-property">props</span>.<span class="cs-property">refine</span>({<span class="cs-property">min</span>: <span class="cs-variable-2">sliderState</span>.<span class="cs-property">values</span>[<span class="cs-number">0</span>], <span class="cs-property">max</span>: <span class="cs-variable-2">sliderState</span>.<span class="cs-property">values</span>[<span class="cs-number">1</span>]});
     }
-  },
+  };
 
-  <span class="cs-property">render</span>() {
+  <span class="cs-variable">render</span>() {
     <span class="cs-keyword">const</span> {<span class="cs-def">min</span>, <span class="cs-def">max</span>, <span class="cs-def">currentRefinement</span>} <span class="cs-operator">=</span> <span class="cs-keyword">this</span>.<span class="cs-property">props</span>;
     <span class="cs-keyword">const</span> {<span class="cs-def">currentValues</span>} <span class="cs-operator">=</span> <span class="cs-keyword">this</span>.<span class="cs-property">state</span>;
-    <span class="cs-keyword">return</span> <span class="cs-variable-2">min</span> <span class="cs-operator">!==</span> <span class="cs-variable-2">max</span> <span class="cs-operator">?</span>
+    <span class="cs-keyword">return</span> <span class="cs-variable">min</span> <span class="cs-operator">!==</span> <span class="cs-variable">max</span> <span class="cs-operator">?</span>
       <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">div</span><span class="cs-tag cs-bracket">&gt;</span>
         <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">Rheostat</span>
           <span class="cs-attribute">min</span>={<span class="cs-variable">min</span>}
@@ -59,12 +57,12 @@ using the <a href="connectors/connectRange.html">connectRange connector</a>.</p>
           <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">div</span><span class="cs-tag cs-bracket">&gt;</span>{<span class="cs-variable">currentValues</span>.<span class="cs-property">max</span>}<span class="cs-tag cs-bracket">&lt;/</span><span class="cs-tag">div</span><span class="cs-tag cs-bracket">&gt;</span>
         <span class="cs-tag cs-bracket">&lt;/</span><span class="cs-tag">div</span><span class="cs-tag cs-bracket">&gt;</span>
       <span class="cs-tag cs-bracket">&lt;/</span><span class="cs-tag">div</span><span class="cs-tag cs-bracket">&gt;</span> : <span class="cs-atom">null</span>;
-  },
-});
+  }
+}
 
 <span class="cs-keyword">const</span> <span class="cs-def">ConnectedRange</span> <span class="cs-operator">=</span> <span class="cs-variable">connectRange</span>(<span class="cs-variable">Range</span>);</code>
   </div>
-</pre></p><h2 id="classnames">CSS classes<a class="anchor" href="widgets/RangeSlider.html#classnames"></a></h2><p>This widget has no theming options.</p><h2 id="translations">Translation keys<a class="anchor" href="widgets/RangeSlider.html#translations"></a></h2><p>This widget has no translations.</p></div></div></section><footer class="ac-footer"><div class="ac-footer-container"><p class="ac-footer-links">Code licensed under<a class="ac-footer-link-item" href="https://github.com/algolia/react-instantsearch/blob/master/LICENSE">MIT</a><br><a class="ac-footer-link-item" href="https://github.com/algolia/react-instantsearch/">GitHub</a><a class="ac-footer-link-item" href="https://github.com/algolia/react-instantsearch/issues">issues</a><a class="ac-footer-link-item" href="https://www.algolia.com/policies/privacy">Privacy policy</a></p></div><div class="ac-footer-container ac-footer-brand"><p>This project is part of</p><img class="ac-footer-brand-icon" src="images/community-badge-458585c6be6bf3ddbe4b8515977f413b.svg"><figure><img class="ac-footer-brand-logo" src="https://res.cloudinary.com/hilnmyskv/image/upload/v1484219849/algolia-community-logo-words-darkbg.svg"><figcaption>Algolia Community</figcaption></figure><a class="ac-footer-btn ac-footer-btn-cta" href="https://community.algolia.com/">See More</a><span class="ac-icon ac-icon-love-dark"></span></div><p class="ac-footer-version">Latest version: 4.0.0-beta.1</p><div class="ac-footer-actions"><div class="footer-container"><p>Build unique search experiences with Algolia</p><a class="ac-footer-btn ac-footer-btn-ghost-grey" href="https://www.algolia.com/why?utm_medium=social-owned&amp;utm_source=react%20instantsearch%20website&amp;utm_campaign=homepage&amp;utm_term=why">See Why<span class="ac-icon-triangle"></span></a><a class="ac-footer-btn ac-footer-btn-ghost-blue" href="https://www.algolia.com/users/sign_up?utm_medium=social-owned&amp;utm_source=react%20instantsearch%20website&amp;utm_campaign=homepage&amp;utm_term=get_started">Get Started For Free</a></div></div></footer><script src="https://cdn.jsdelivr.net/g/jquery@3(jquery.slim.min.js),docsearch.js@2,underscorejs@1"></script><script>docsearch({
+</pre></p><h2 id="classnames">CSS classes<a class="anchor" href="widgets/RangeSlider.html#classnames"></a></h2><p>This widget has no theming options.</p><h2 id="translations">Translation keys<a class="anchor" href="widgets/RangeSlider.html#translations"></a></h2><p>This widget has no translations.</p></div></div></section><footer class="ac-footer"><div class="ac-footer-container"><p class="ac-footer-links">Code licensed under<a class="ac-footer-link-item" href="https://github.com/algolia/react-instantsearch/blob/master/LICENSE">MIT</a><br><a class="ac-footer-link-item" href="https://github.com/algolia/react-instantsearch/">GitHub</a><a class="ac-footer-link-item" href="https://github.com/algolia/react-instantsearch/issues">issues</a><a class="ac-footer-link-item" href="https://www.algolia.com/policies/privacy">Privacy policy</a></p></div><div class="ac-footer-container ac-footer-brand"><p>This project is part of</p><img class="ac-footer-brand-icon" src="images/community-badge-458585c6be6bf3ddbe4b8515977f413b.svg"><figure><img class="ac-footer-brand-logo" src="https://res.cloudinary.com/hilnmyskv/image/upload/v1484219849/algolia-community-logo-words-darkbg.svg"><figcaption>Algolia Community</figcaption></figure><a class="ac-footer-btn ac-footer-btn-cta" href="https://community.algolia.com/">See More</a><span class="ac-icon ac-icon-love-dark"></span></div><p class="ac-footer-version">Latest version: 4.0.0-beta.4</p><div class="ac-footer-actions"><div class="footer-container"><p>Build unique search experiences with Algolia</p><a class="ac-footer-btn ac-footer-btn-ghost-grey" href="https://www.algolia.com/why?utm_medium=social-owned&amp;utm_source=react%20instantsearch%20website&amp;utm_campaign=homepage&amp;utm_term=why">See Why<span class="ac-icon-triangle"></span></a><a class="ac-footer-btn ac-footer-btn-ghost-blue" href="https://www.algolia.com/users/sign_up?utm_medium=social-owned&amp;utm_source=react%20instantsearch%20website&amp;utm_campaign=homepage&amp;utm_term=get_started">Get Started For Free</a></div></div></footer><script src="https://cdn.jsdelivr.net/g/jquery@3(jquery.slim.min.js),docsearch.js@2,underscorejs@1"></script><script>docsearch({
   apiKey: '5cb6763f264e31381e18639a1147634c',
   indexName: 'react-instantsearch',
   inputSelector: '#searchbox',
@@ -143,4 +141,4 @@ function _kms(u){
   }, 1);
 }
 _kms('//i.kissmetrics.com/i.js');
-_kms('//scripts.kissmetrics.com/' + _kmk + '.2.js');</script><script src="/react-instantsearch/js/common-build-e7b1221f6fa2c51fb44bc140d7c67bd2.js"></script><script src="/react-instantsearch/js/main-build-0c00879784859e15e10e001d24eaef8a.js"></script></body>
+_kms('//scripts.kissmetrics.com/' + _kmk + '.2.js');</script><script src="/react-instantsearch/js/common-build-9abd5608c5f6d8175788788051fcd5e3.js"></script><script src="/react-instantsearch/js/main-build-05ec394138dbefe36f85a61bb8584237.js"></script></body>
