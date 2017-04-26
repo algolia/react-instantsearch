@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { find, isEmpty, has } from 'lodash';
+import { find, isEmpty } from 'lodash';
 import {
   cleanUpValue,
   getIndex,
@@ -129,7 +129,6 @@ export default createConnector({
       searchState,
       this.context
     );
-    const index = getIndex(this.context);
     const results = getResults(searchResults, this.context);
 
     const items = props.items.map(item => {
