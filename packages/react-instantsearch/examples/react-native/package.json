@@ -6,7 +6,8 @@
     "prop-types": "^15.5.8",
     "react": "^15.5.4",
     "react-instantsearch": "beta",
-    "react-native": "^0.42.0"
+    "react-native": "^0.42.0",
+    "react-navigation": "^1.0.0-beta.9"
   },
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start"
