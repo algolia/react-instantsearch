@@ -12,6 +12,7 @@ import {
   ListView,
   TextInput,
   Image,
+  StatusBar,
   Button,
 } from 'react-native';
 import { InstantSearch } from 'react-instantsearch/native';
@@ -19,23 +20,70 @@ import {
   connectSearchBox,
   connectInfiniteHits,
   connectRefinementList,
+  connectStats,
 } from 'react-instantsearch/connectors';
+import StarRating from 'react-native-star-rating';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const styles = StyleSheet.create({
-  maincontainer: {
-    paddingTop: 20,
-    paddingBottom: 10,
-  },
+  maincontainer: {},
   item: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: 'white',
   },
+  options: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: 'white',
+    padding: 5,
+    borderBottomColor: 'gray',
+    borderBottomWidth: 1,
+  },
+  header: {
+    backgroundColor: '#162331',
+    paddingTop: 25,
+    flexDirection: 'column',
+  },
+  searchBoxContainer: {
+    backgroundColor: '#162331',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  itemContent: {
+    paddingLeft: 15,
+  },
+  itemName: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    paddingBottom: 5,
+  },
+  itemType: {
+    fontSize: 13,
+    fontWeight: '200',
+    paddingBottom: 5,
+  },
+  itemPrice: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    paddingBottom: 5,
+  },
+  starRating: { alignSelf: 'flex-start' },
 });
-
 export default class extends Component {
   static displayName = 'React Native example';
-
+  static navigationOptions = ({ navigation }) => ({
+    header: (
+      <View style={styles.header}>
+        <Text
+          style={{ alignSelf: 'center', color: 'white', fontWeight: 'bold' }}
+        >
+          AEKI
+        </Text>
+      </View>
+    ),
+  });
   constructor(props) {
     super(props);
     this.onSearchStateChange = this.onSearchStateChange.bind(this);
@@ -59,15 +107,22 @@ export default class extends Component {
           searchState={this.state.searchState}
           onSearchStateChange={this.onSearchStateChange}
         >
-          <ConnectedSearchBox />
-          <Button
-            onPress={() =>
-              navigate('Filters', {
-                onSearchStateChange: this.onSearchStateChange,
-                searchState: this.state.searchState,
-              })}
-            title="Chat with Lucy"
-          />
+          <StatusBar backgroundColor="blue" barStyle="light-content" />
+          <View style={styles.searchBoxContainer}>
+            <ConnectedSearchBox />
+          </View>
+
+          <View style={styles.options}>
+            <ConnectedStats />
+            <Button
+              onPress={() =>
+                navigate('Filters', {
+                  onSearchStateChange: this.onSearchStateChange,
+                  searchState: this.state.searchState,
+                })}
+              title="Filters"
+            />
+          </View>
           <ConnectedHits />
           <ConnectedRefinementList attributeName="category" />
         </InstantSearch>
@@ -80,9 +135,19 @@ class SearchBox extends Component {
   render() {
     return (
       <TextInput
-        style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+        style={{
+          height: 40,
+          backgroundColor: 'white',
+          borderWidth: 1,
+          borderRadius: 5,
+          padding: 10,
+          margin: 10,
+          flexGrow: 1,
+        }}
         onChangeText={text => this.props.refine(text)}
         value={this.props.currentRefinement}
+        placeholder={'Search a product...'}
+        clearButtonMode={'always'}
       />
     );
   }
@@ -111,6 +176,7 @@ class Hits extends Component {
           <ListView
             dataSource={ds.cloneWithRows(this.props.hits)}
             renderRow={this._renderRow}
+            renderSeparator={this.renderSeparator}
             onEndReached={this.onEndReached.bind(this)}
           />
         </View>
@@ -118,14 +184,49 @@ class Hits extends Component {
     return hits;
   }
 
-  _renderRow = hit => (
-    <View style={styles.item}>
-      <Image style={{ height: 100, width: 100 }} source={{ uri: hit.image }} />
-      <Text>
-        {hit.name}
-      </Text>
-    </View>
-  );
+  _renderRow = hit => {
+    return (
+      <View style={styles.item}>
+        <Image
+          style={{ height: 100, width: 100 }}
+          source={{ uri: hit.image }}
+        />
+        <View style={styles.itemContent}>
+          <Text style={styles.itemName}>
+            {hit.name}
+          </Text>
+          <Text style={styles.itemType}>
+            {hit.type}
+          </Text>
+          <Text style={styles.itemPrice}>
+            ${hit.price}
+          </Text>
+          <View style={styles.starRating}>
+            <StarRating
+              disabled={true}
+              maxStars={5}
+              rating={hit.rating}
+              starSize={15}
+              starColor="#FBAE00"
+            />
+          </View>
+        </View>
+
+      </View>
+    );
+  };
+
+  renderSeparator = (sectionID, rowID, adjacentRowHighlighted) => {
+    return (
+      <View
+        key={`${sectionID}-${rowID}`}
+        style={{
+          height: adjacentRowHighlighted ? 4 : 1,
+          backgroundColor: adjacentRowHighlighted ? '#3B5998' : '#CCCCCC',
+        }}
+      />
+    );
+  };
 }
 
 Hits.propTypes = {
@@ -135,5 +236,8 @@ Hits.propTypes = {
 };
 
 const ConnectedHits = connectInfiniteHits(Hits);
+const ConnectedStats = connectStats(({ nbHits, processingTimeMS }) => {
+  return <Text>{nbHits} hits found in {processingTimeMS}ms</Text>;
+});
 
 const ConnectedRefinementList = connectRefinementList(() => null);

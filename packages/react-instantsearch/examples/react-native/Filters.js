@@ -40,13 +40,20 @@ export default class extends Component {
   static displayName = 'React Native example';
   constructor(props) {
     super(props);
+    this.saveQuery = this.saveQuery.bind(this);
     this.onSearchStateChange = this.onSearchStateChange.bind(this);
-    this.state = { searchState: props.navigation.state.params.searchState };
+    this.state = {
+      searchState: props.navigation.state.params.searchState,
+      query: '',
+    };
   }
   onSearchStateChange(nextState) {
     const searchState = { ...this.state.searchState, ...nextState };
     this.setState({ searchState });
     this.props.navigation.state.params.onSearchStateChange(searchState);
+  }
+  saveQuery(text) {
+    this.setState({ query: text });
   }
   render() {
     const { params } = this.props.navigation.state;
@@ -59,7 +66,11 @@ export default class extends Component {
           onSearchStateChange={this.onSearchStateChange}
           searchState={this.state.searchState}
         >
-          <ConnectedRefinementList attributeName="category" />
+          <ConnectedRefinementList
+            attributeName="category"
+            saveQuery={this.saveQuery}
+            query={this.state.query}
+          />
         </InstantSearch>
       </View>
     );
@@ -81,7 +92,11 @@ class RefinementList extends Component {
       : null;
     return (
       <View>
-        <SearchBox searchForItems={searchForItems} />
+        <SearchBox
+          saveQuery={this.props.saveQuery}
+          searchForItems={searchForItems}
+          currentRefinement={this.props.query}
+        />
         {facets}
       </View>
     );
@@ -94,6 +109,7 @@ class RefinementList extends Component {
         <Text
           style={refinement.isRefined ? styles.itemRefined : {}}
           onPress={() => {
+            this.props.saveQuery('');
             this.props.refine(refinement.value);
           }}
         >
@@ -112,7 +128,10 @@ class SearchBox extends Component {
     return (
       <TextInput
         style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-        onChangeText={text => this.props.searchForItems(text)}
+        onChangeText={text => {
+          this.props.saveQuery(text);
+          this.props.searchForItems(text);
+        }}
         value={this.props.currentRefinement}
       />
     );
