@@ -14,6 +14,29 @@ function getCurrentRefinement(props, searchState) {
   return '';
 }
 
+function getHits(searchResults) {
+  if (searchResults.results) {
+    if (
+      searchResults.results.hits && Array.isArray(searchResults.results.hits)
+    ) {
+      return searchResults.results.hits;
+    } else {
+      return Object.keys(searchResults.results).reduce(
+        (hits, index) => [
+          ...hits,
+          {
+            index,
+            hits: searchResults.results[index].hits,
+          },
+        ],
+        []
+      );
+    }
+  } else {
+    return [];
+  }
+}
+
 /**
  * connectAutoComplete connector provides the logic to create connected
  * components that will render the results retrieved from
@@ -32,14 +55,8 @@ export default createConnector({
   displayName: 'AlgoliaAutoComplete',
 
   getProvidedProps(props, searchState, searchResults) {
-    const hits = [];
-    if (searchResults.results) {
-      Object.keys(searchResults.results).forEach(index => {
-        hits.push({ index, hits: searchResults.results[index].hits });
-      });
-    }
     return {
-      hits,
+      hits: getHits(searchResults),
       currentRefinement: getCurrentRefinement(props, searchState),
     };
   },
