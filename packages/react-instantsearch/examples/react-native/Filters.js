@@ -72,20 +72,15 @@ class Filters extends Component {
   };
   constructor(props) {
     super(props);
-    this.saveQuery = this.saveQuery.bind(this);
     this.onSearchStateChange = this.onSearchStateChange.bind(this);
     this.state = {
       searchState: props.navigation.state.params.searchState,
-      query: '',
     };
   }
   onSearchStateChange(nextState) {
     const searchState = { ...this.state.searchState, ...nextState };
     this.setState({ searchState });
     this.props.navigation.state.params.onSearchStateChange(searchState);
-  }
-  saveQuery(text) {
-    this.setState({ query: text });
   }
   render() {
     return (
@@ -100,7 +95,6 @@ class Filters extends Component {
           <ConnectedRefinementList
             attributeName="category"
             saveQuery={this.saveQuery}
-            query={this.state.query}
           />
         </InstantSearch>
       </View>
@@ -115,13 +109,22 @@ Filters.propTypes = {
 export default Filters;
 
 class RefinementList extends Component {
+  constructor(props) {
+    super(props);
+    this.saveQuery = this.saveQuery.bind(this);
+    this.state = {
+      query: '',
+    };
+  }
+  saveQuery(text) {
+    this.setState({ query: text });
+  }
   render() {
     const ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2,
     });
     const { items, searchForItems } = this.props;
-    console.log('items', items);
-    const facets = items.length > 0
+    const facets = this
       ? <ListView
           dataSource={ds.cloneWithRows(items)}
           renderRow={this._renderRow}
@@ -132,10 +135,16 @@ class RefinementList extends Component {
       : null;
     return (
       <View style={styles.searchBoxContainer}>
-        <SearchBox
-          saveQuery={this.props.saveQuery}
-          searchForItems={searchForItems}
-          currentRefinement={this.props.query}
+        <TextInput
+          style={styles.searchBox}
+          onChangeText={text => {
+            this.saveQuery(text);
+            searchForItems(text);
+          }}
+          placeholder={'Search a category...'}
+          clearButtonMode={'always'}
+          underlineColorAndroid={'white'}
+          spellCheck={false}
         />
         {facets}
       </View>
@@ -149,7 +158,7 @@ class RefinementList extends Component {
     return (
       <TouchableHighlight
         onPress={() => {
-          this.props.saveQuery('');
+          this.saveQuery('');
           this.props.refine(refinement.value);
         }}
       >
@@ -183,27 +192,3 @@ RefinementList.propTypes = {
 };
 
 const ConnectedRefinementList = connectRefinementList(RefinementList);
-
-class SearchBox extends Component {
-  render() {
-    return (
-      <TextInput
-        style={styles.searchBox}
-        onChangeText={text => {
-          this.props.saveQuery(text);
-          this.props.searchForItems(text);
-        }}
-        placeholder={'Search a category...'}
-        clearButtonMode={'always'}
-        underlineColorAndroid={'white'}
-        spellCheck={false}
-      />
-    );
-  }
-}
-
-SearchBox.propTypes = {
-  currentRefinement: PropTypes.string,
-  saveQuery: PropTypes.func,
-  searchForItems: PropTypes.func,
-};
