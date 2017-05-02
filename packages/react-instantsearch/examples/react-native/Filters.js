@@ -11,33 +11,65 @@ import {
   View,
   ListView,
   TextInput,
-  Image,
+  Platform,
+  TouchableHighlight,
 } from 'react-native';
 import { InstantSearch } from 'react-instantsearch/native';
-import {
-  connectSearchBox,
-  connectInfiniteHits,
-  connectRefinementList,
-} from 'react-instantsearch/connectors';
+import { connectRefinementList } from 'react-instantsearch/connectors';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const styles = StyleSheet.create({
-  maincontainer: {
-    paddingTop: 20,
-    paddingBottom: 10,
+  mainContainer: {
+    backgroundColor: 'white',
+    flexGrow: 1,
+  },
+  header: {
+    backgroundColor: '#162331',
+    paddingTop: 25,
+    flexDirection: 'column',
   },
   item: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between',
     backgroundColor: 'white',
     minHeight: 30,
+    padding: 10,
   },
   itemRefined: {
     fontWeight: 'bold',
   },
+  searchBoxContainer: {
+    backgroundColor: '#162331',
+  },
+  searchBox: {
+    backgroundColor: 'white',
+    height: 40,
+    borderWidth: 1,
+    padding: 10,
+    margin: 10,
+    ...Platform.select({
+      ios: {
+        borderRadius: 5,
+      },
+      android: {},
+    }),
+  },
 });
 
-export default class extends Component {
+class Filters extends Component {
   static displayName = 'React Native example';
+  static navigationOptions = {
+    title: 'AEKI',
+    headerBackTitle: null,
+    headerStyle: {
+      backgroundColor: '#162331',
+    },
+    headerTitleStyle: {
+      color: 'white',
+      alignSelf: 'center',
+    },
+  };
   constructor(props) {
     super(props);
     this.saveQuery = this.saveQuery.bind(this);
@@ -56,9 +88,8 @@ export default class extends Component {
     this.setState({ query: text });
   }
   render() {
-    const { params } = this.props.navigation.state;
     return (
-      <View style={styles.maincontainer}>
+      <View style={styles.mainContainer}>
         <InstantSearch
           appId="latency"
           apiKey="6be0576ff61c053d5f9a3225e2a90f76"
@@ -77,21 +108,30 @@ export default class extends Component {
   }
 }
 
+Filters.propTypes = {
+  navigation: PropTypes.object,
+};
+
+export default Filters;
+
 class RefinementList extends Component {
   render() {
     const ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2,
     });
-    const { items, refine, searchForItems } = this.props;
+    const { items, searchForItems } = this.props;
+    console.log('items', items);
     const facets = items.length > 0
       ? <ListView
           dataSource={ds.cloneWithRows(items)}
           renderRow={this._renderRow}
+          renderSeparator={this._renderSeparator}
           keyboardShouldPersistTaps={'always'}
+          style={styles.mainContainer}
         />
       : null;
     return (
-      <View>
+      <View style={styles.searchBoxContainer}>
         <SearchBox
           saveQuery={this.props.saveQuery}
           searchForItems={searchForItems}
@@ -103,23 +143,44 @@ class RefinementList extends Component {
   }
 
   _renderRow = refinement => {
+    const icon = refinement.isRefined
+      ? <Icon name="check" color="#000" />
+      : null;
     return (
-      <View style={styles.item}>
-
-        <Text
-          style={refinement.isRefined ? styles.itemRefined : {}}
-          onPress={() => {
-            this.props.saveQuery('');
-            this.props.refine(refinement.value);
-          }}
-        >
-          {refinement.label}
-        </Text>
-
-      </View>
+      <TouchableHighlight
+        onPress={() => {
+          this.props.saveQuery('');
+          this.props.refine(refinement.value);
+        }}
+      >
+        <View style={styles.item}>
+          <Text style={refinement.isRefined ? styles.itemRefined : {}}>
+            {refinement.label} ({refinement.count})
+          </Text>
+          {icon}
+        </View>
+      </TouchableHighlight>
     );
   };
+
+  _renderSeparator = (sectionID, rowID, adjacentRowHighlighted) => (
+    <View
+      key={`${sectionID}-${rowID}`}
+      style={{
+        height: adjacentRowHighlighted ? 4 : 1,
+        backgroundColor: adjacentRowHighlighted ? '#3B5998' : '#CCCCCC',
+      }}
+    />
+  );
 }
+
+RefinementList.propTypes = {
+  query: PropTypes.string,
+  saveQuery: PropTypes.func,
+  searchForItems: PropTypes.func,
+  refine: PropTypes.func,
+  items: PropTypes.array,
+};
 
 const ConnectedRefinementList = connectRefinementList(RefinementList);
 
@@ -127,18 +188,22 @@ class SearchBox extends Component {
   render() {
     return (
       <TextInput
-        style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+        style={styles.searchBox}
         onChangeText={text => {
           this.props.saveQuery(text);
           this.props.searchForItems(text);
         }}
-        value={this.props.currentRefinement}
+        placeholder={'Search a category...'}
+        clearButtonMode={'always'}
+        underlineColorAndroid={'white'}
+        spellCheck={false}
       />
     );
   }
 }
 
 SearchBox.propTypes = {
-  refine: PropTypes.func.isRequired,
   currentRefinement: PropTypes.string,
+  saveQuery: PropTypes.func,
+  searchForItems: PropTypes.func,
 };

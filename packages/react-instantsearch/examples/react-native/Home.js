@@ -14,6 +14,7 @@ import {
   Image,
   StatusBar,
   Button,
+  Platform,
 } from 'react-native';
 import { InstantSearch } from 'react-instantsearch/native';
 import {
@@ -23,7 +24,6 @@ import {
   connectStats,
 } from 'react-instantsearch/connectors';
 import StarRating from 'react-native-star-rating';
-import Icon from 'react-native-vector-icons/FontAwesome';
 
 const styles = StyleSheet.create({
   maincontainer: {},
@@ -51,6 +51,20 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
+  searchBox: {
+    backgroundColor: 'white',
+    height: 40,
+    borderWidth: 1,
+    padding: 10,
+    margin: 10,
+    flexGrow: 1,
+    ...Platform.select({
+      ios: {
+        borderRadius: 5,
+      },
+      android: {},
+    }),
+  },
   itemContent: {
     paddingLeft: 15,
   },
@@ -71,19 +85,19 @@ const styles = StyleSheet.create({
   },
   starRating: { alignSelf: 'flex-start' },
 });
-export default class extends Component {
+class Home extends Component {
   static displayName = 'React Native example';
-  static navigationOptions = ({ navigation }) => ({
-    header: (
-      <View style={styles.header}>
-        <Text
-          style={{ alignSelf: 'center', color: 'white', fontWeight: 'bold' }}
-        >
-          AEKI
-        </Text>
-      </View>
-    ),
-  });
+  static navigationOptions = {
+    title: 'AEKI',
+    headerBackTitle: null,
+    headerStyle: {
+      backgroundColor: '#162331',
+    },
+    headerTitleStyle: {
+      color: 'white',
+      alignSelf: 'center',
+    },
+  };
   constructor(props) {
     super(props);
     this.onSearchStateChange = this.onSearchStateChange.bind(this);
@@ -96,7 +110,6 @@ export default class extends Component {
 
   render() {
     const { navigate } = this.props.navigation;
-    console.log('this.state.searchState', this.state.searchState);
 
     return (
       <View style={styles.maincontainer}>
@@ -131,23 +144,23 @@ export default class extends Component {
   }
 }
 
+Home.propTypes = {
+  navigation: PropTypes.object,
+};
+
+export default Home;
+
 class SearchBox extends Component {
   render() {
     return (
       <TextInput
-        style={{
-          height: 40,
-          backgroundColor: 'white',
-          borderWidth: 1,
-          borderRadius: 5,
-          padding: 10,
-          margin: 10,
-          flexGrow: 1,
-        }}
+        style={styles.searchBox}
         onChangeText={text => this.props.refine(text)}
         value={this.props.currentRefinement}
         placeholder={'Search a product...'}
         clearButtonMode={'always'}
+        underlineColorAndroid={'white'}
+        spellCheck={false}
       />
     );
   }
@@ -184,49 +197,42 @@ class Hits extends Component {
     return hits;
   }
 
-  _renderRow = hit => {
-    return (
-      <View style={styles.item}>
-        <Image
-          style={{ height: 100, width: 100 }}
-          source={{ uri: hit.image }}
-        />
-        <View style={styles.itemContent}>
-          <Text style={styles.itemName}>
-            {hit.name}
-          </Text>
-          <Text style={styles.itemType}>
-            {hit.type}
-          </Text>
-          <Text style={styles.itemPrice}>
-            ${hit.price}
-          </Text>
-          <View style={styles.starRating}>
-            <StarRating
-              disabled={true}
-              maxStars={5}
-              rating={hit.rating}
-              starSize={15}
-              starColor="#FBAE00"
-            />
-          </View>
+  _renderRow = hit => (
+    <View style={styles.item}>
+      <Image style={{ height: 100, width: 100 }} source={{ uri: hit.image }} />
+      <View style={styles.itemContent}>
+        <Text style={styles.itemName}>
+          {hit.name}
+        </Text>
+        <Text style={styles.itemType}>
+          {hit.type}
+        </Text>
+        <Text style={styles.itemPrice}>
+          ${hit.price}
+        </Text>
+        <View style={styles.starRating}>
+          <StarRating
+            disabled={true}
+            maxStars={5}
+            rating={hit.rating}
+            starSize={15}
+            starColor="#FBAE00"
+          />
         </View>
-
       </View>
-    );
-  };
 
-  renderSeparator = (sectionID, rowID, adjacentRowHighlighted) => {
-    return (
-      <View
-        key={`${sectionID}-${rowID}`}
-        style={{
-          height: adjacentRowHighlighted ? 4 : 1,
-          backgroundColor: adjacentRowHighlighted ? '#3B5998' : '#CCCCCC',
-        }}
-      />
-    );
-  };
+    </View>
+  );
+
+  renderSeparator = (sectionID, rowID, adjacentRowHighlighted) => (
+    <View
+      key={`${sectionID}-${rowID}`}
+      style={{
+        height: adjacentRowHighlighted ? 4 : 1,
+        backgroundColor: adjacentRowHighlighted ? '#3B5998' : '#CCCCCC',
+      }}
+    />
+  );
 }
 
 Hits.propTypes = {
@@ -236,8 +242,8 @@ Hits.propTypes = {
 };
 
 const ConnectedHits = connectInfiniteHits(Hits);
-const ConnectedStats = connectStats(({ nbHits, processingTimeMS }) => {
-  return <Text>{nbHits} hits found in {processingTimeMS}ms</Text>;
-});
+const ConnectedStats = connectStats(({ nbHits, processingTimeMS }) => (
+  <Text>{nbHits} hits found in {processingTimeMS}ms</Text>
+));
 
 const ConnectedRefinementList = connectRefinementList(() => null);

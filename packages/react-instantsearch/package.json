@@ -28,6 +28,7 @@
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-native": "^0.41.2",
-    "react-test-renderer": "^15.5.4"
+    "react-test-renderer": "^15.5.4",
+    "react-navigation": "latest"
   }
 }
