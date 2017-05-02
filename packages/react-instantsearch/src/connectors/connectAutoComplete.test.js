@@ -79,7 +79,7 @@ describe('connectAutoComplete', () => {
     });
   });
   describe('multi index', () => {
-    let context = {
+    const context = {
       context: {
         ais: { mainTargetedIndex: 'first' },
         multiIndexContext: { targetedIndex: 'first' },

@@ -1,10 +1,8 @@
 import createConnector from '../core/createConnector';
-import { omit } from 'lodash';
 import {
   cleanUpValue,
   refineValue,
   getCurrentRefinementValue,
-  getIndex,
 } from '../core/indexUtils';
 
 const getId = () => 'query';
