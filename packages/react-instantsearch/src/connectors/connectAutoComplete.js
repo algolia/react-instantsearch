@@ -1,23 +1,36 @@
 import createConnector from '../core/createConnector';
 import { omit } from 'lodash';
+import {
+  cleanUpValue,
+  refineValue,
+  getCurrentRefinementValue,
+  getIndex,
+} from '../core/indexUtils';
 
 const getId = () => 'query';
 
-function getCurrentRefinement(props, searchState) {
+function getCurrentRefinement(props, searchState, context) {
   const id = getId();
-  if (typeof searchState[id] !== 'undefined') {
-    return searchState[id];
-  }
-  if (typeof props.defaultRefinement !== 'undefined') {
-    return props.defaultRefinement;
-  }
-  return '';
+  return getCurrentRefinementValue(
+    props,
+    searchState,
+    context,
+    id,
+    '',
+    currentRefinement => {
+      if (currentRefinement) {
+        return currentRefinement;
+      }
+      return '';
+    }
+  );
 }
 
 function getHits(searchResults) {
   if (searchResults.results) {
     if (
-      searchResults.results.hits && Array.isArray(searchResults.results.hits)
+      searchResults.results.hits &&
+      Array.isArray(searchResults.results.hits)
     ) {
       return searchResults.results.hits;
     } else {
@@ -35,6 +48,17 @@ function getHits(searchResults) {
   } else {
     return [];
   }
+}
+
+function refine(props, searchState, nextRefinement, context) {
+  const id = getId();
+  const nextValue = { [id]: nextRefinement };
+  const resetPage = true;
+  return refineValue(searchState, nextValue, context, resetPage);
+}
+
+function cleanUp(props, searchState, context) {
+  return cleanUpValue(searchState, context, getId());
 }
 
 /**
@@ -57,20 +81,16 @@ export default createConnector({
   getProvidedProps(props, searchState, searchResults) {
     return {
       hits: getHits(searchResults),
-      currentRefinement: getCurrentRefinement(props, searchState),
+      currentRefinement: getCurrentRefinement(props, searchState, this.context),
     };
   },
 
-  refine(props, searchState, nextCurrentRefinement) {
-    const id = getId();
-    return {
-      ...searchState,
-      [id]: nextCurrentRefinement,
-    };
+  refine(props, searchState, nextRefinement) {
+    return refine(props, searchState, nextRefinement, this.context);
   },
 
   cleanUp(props, searchState) {
-    return omit(searchState, getId());
+    return cleanUp(props, searchState, this.context);
   },
 
   /* connectAutoComplete needs to be considered as a widget to trigger a search if no others widgets are used.
@@ -78,6 +98,8 @@ export default createConnector({
    * See createConnector.js
     * */
   getSearchParameters(searchParameters, props, searchState) {
-    return searchParameters.setQuery(getCurrentRefinement(props, searchState));
+    return searchParameters.setQuery(
+      getCurrentRefinement(props, searchState, this.context)
+    );
   },
 });
