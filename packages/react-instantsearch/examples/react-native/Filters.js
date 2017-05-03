@@ -15,7 +15,10 @@ import {
   TouchableHighlight,
 } from 'react-native';
 import { InstantSearch } from 'react-instantsearch/native';
-import { connectRefinementList } from 'react-instantsearch/connectors';
+import {
+  connectRefinementList,
+  connectSearchBox,
+} from 'react-instantsearch/connectors';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const styles = StyleSheet.create({
@@ -96,6 +99,7 @@ class Filters extends Component {
             attributeName="category"
             saveQuery={this.saveQuery}
           />
+          <VirtualSearchBox />
         </InstantSearch>
       </View>
     );
@@ -192,3 +196,4 @@ RefinementList.propTypes = {
 };
 
 const ConnectedRefinementList = connectRefinementList(RefinementList);
+const VirtualSearchBox = connectSearchBox(() => null);
