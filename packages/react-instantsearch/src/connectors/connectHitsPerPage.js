@@ -33,7 +33,7 @@ function getCurrentRefinement(props, searchState, context) {
  * @name connectHitsPerPage
  * @kind connector
  * @propType {number} defaultRefinement - The number of items selected by default
- * @propType {{value: number, label: string}[]} items - List of hits per page options.
+ * @propType {{value: number, label: string}[]} [items] - List of hits per page options.
  * @propType {function} [transformItems] - Function to modify the items being displayed, e.g. for filtering or sorting them. Takes an items as parameter and expects it back in return.
  * @providedPropType {function} refine - a function to remove a single filter
  * @providedPropType {function} createURL - a function to generate a URL for the corresponding search state
@@ -50,8 +50,12 @@ export default createConnector({
         label: PropTypes.string,
         value: PropTypes.number.isRequired,
       })
-    ).isRequired,
+    ),
     transformItems: PropTypes.func,
+  },
+  
+  defaultProps: {
+    items: [],
   },
 
   getProvidedProps(props, searchState) {
