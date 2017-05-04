@@ -8,8 +8,6 @@ rm -rf dist/* &&
 cp package.json dist/ &&
 cp README.md dist/
 
-NODE_ENV=production
-
 # first make es module build
 export BABEL_ENV=es
 mkdir -p dist/es &&
