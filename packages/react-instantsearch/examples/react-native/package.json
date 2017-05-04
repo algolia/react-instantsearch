@@ -3,10 +3,12 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
+    "native-base": "^2.1.3",
     "prop-types": "^15.5.8",
     "react": "^15.5.4",
     "react-instantsearch": "beta",
     "react-native": "^0.42.0",
+    "react-native-modal-dropdown": "^0.4.2",
     "react-native-star-rating": "^1.0.7",
     "react-native-vector-icons": "^4.0.1",
     "react-navigation": "^1.0.0-beta.9"

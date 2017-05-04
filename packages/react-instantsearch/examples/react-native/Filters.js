@@ -95,10 +95,7 @@ class Filters extends Component {
           onSearchStateChange={this.onSearchStateChange}
           searchState={this.state.searchState}
         >
-          <ConnectedRefinementList
-            attributeName="category"
-            saveQuery={this.saveQuery}
-          />
+          <ConnectedRefinementList attributeName="category" />
           <VirtualSearchBox />
         </InstantSearch>
       </View>
@@ -146,6 +143,7 @@ class RefinementList extends Component {
             searchForItems(text);
           }}
           placeholder={'Search a category...'}
+          value={this.state.query}
           clearButtonMode={'always'}
           underlineColorAndroid={'white'}
           spellCheck={false}
