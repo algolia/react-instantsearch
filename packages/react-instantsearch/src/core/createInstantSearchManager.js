@@ -41,6 +41,12 @@ export default function createInstantSearchManager({
     searching: false,
   });
 
+  let skip = false;
+
+  function skipSearch() {
+    skip = true;
+  }
+
   function updateClient(client) {
     helper.setClient(client);
     search();
@@ -62,10 +68,12 @@ export default function createInstantSearchManager({
   }
 
   function search() {
-    const widgetSearchParameters = getSearchParameters(helper.state);
+    if (!skip) {
+      const widgetSearchParameters = getSearchParameters(helper.state);
 
-    helper.setState(widgetSearchParameters)
-          .search();
+      helper.setState(widgetSearchParameters)
+            .search();
+    }
   }
 
   function handleSearchSuccess(content) {
@@ -178,5 +186,6 @@ export default function createInstantSearchManager({
     onSearchForFacetValues,
     updateClient,
     updateIndex,
+    skipSearch,
   };
 }
