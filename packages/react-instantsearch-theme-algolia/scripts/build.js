@@ -1,3 +1,4 @@
+/* eslint-disable import/no-commonjs */
 const { join } = require('path');
 const { render } = require('node-sass');
 const postcss = require('postcss');
