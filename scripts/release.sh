@@ -59,7 +59,7 @@ read -p "=> Release: press [ENTER] to view changes since latest version.."
 conventional-changelog --preset angular --output-unreleased | less
 
 additionalInfo=''
-if [[ $beta ]]; then
+if $beta; then
   additionalInfo=' (You are releasing a BETA version, add -beta.x, x being a number)'
 fi
 
