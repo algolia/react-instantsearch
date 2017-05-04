@@ -1,3 +1,13 @@
+<a name="3.3.2"></a>
+## [3.3.2](https://github.com/algolia/react-instantsearch/compare/v3.3.1...v3.3.2) (2017-05-04)
+
+
+### Bug Fixes
+
+* **InstantSearch:** dont fire request/onsearchStateChange when unmounting (#84) ([0739f15](https://github.com/algolia/react-instantsearch/commit/0739f15))
+
+
+
 <a name="3.3.1"></a>
 ## [3.3.1](https://github.com/algolia/instantsearch.js/compare/v3.3.0...v3.3.1) (2017-04-03)
 
