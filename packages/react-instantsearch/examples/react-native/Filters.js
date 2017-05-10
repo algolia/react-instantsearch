@@ -10,15 +10,11 @@ import {
   Text,
   View,
   ListView,
-  TextInput,
   Platform,
   TouchableHighlight,
 } from 'react-native';
 import { InstantSearch } from 'react-instantsearch/native';
-import {
-  connectRefinementList,
-  connectSearchBox,
-} from 'react-instantsearch/connectors';
+import { connectStats } from 'react-instantsearch/connectors';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const styles = StyleSheet.create({
@@ -73,102 +69,22 @@ class Filters extends Component {
       alignSelf: 'center',
     },
   };
-  constructor(props) {
-    super(props);
-    this.onSearchStateChange = this.onSearchStateChange.bind(this);
-    this.state = {
-      searchState: props.navigation.state.params.searchState,
-    };
-  }
-  onSearchStateChange(nextState) {
-    const searchState = { ...this.state.searchState, ...nextState };
-    this.setState({ searchState });
-    this.props.navigation.state.params.onSearchStateChange(searchState);
-  }
-  render() {
-    return (
-      <View style={styles.mainContainer}>
-        <InstantSearch
-          appId="latency"
-          apiKey="6be0576ff61c053d5f9a3225e2a90f76"
-          indexName="ikea"
-          onSearchStateChange={this.onSearchStateChange}
-          searchState={this.state.searchState}
-        >
-          <ConnectedRefinementList attributeName="category" />
-          <VirtualSearchBox />
-        </InstantSearch>
-      </View>
-    );
-  }
-}
-
-Filters.propTypes = {
-  navigation: PropTypes.object,
-};
-
-export default Filters;
-
-class RefinementList extends Component {
-  constructor(props) {
-    super(props);
-    this.saveQuery = this.saveQuery.bind(this);
-    this.state = {
-      query: '',
-    };
-  }
-  saveQuery(text) {
-    this.setState({ query: text });
-  }
-  render() {
-    const ds = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2,
-    });
-    const { items, searchForItems } = this.props;
-    const facets = this
-      ? <ListView
-          dataSource={ds.cloneWithRows(items)}
-          renderRow={this._renderRow}
-          renderSeparator={this._renderSeparator}
-          keyboardShouldPersistTaps={'always'}
-          style={styles.mainContainer}
-        />
-      : null;
-    return (
-      <View style={styles.searchBoxContainer}>
-        <TextInput
-          style={styles.searchBox}
-          onChangeText={text => {
-            this.saveQuery(text);
-            searchForItems(text);
-          }}
-          placeholder={'Search a category...'}
-          value={this.state.query}
-          clearButtonMode={'always'}
-          underlineColorAndroid={'white'}
-          spellCheck={false}
-        />
-        {facets}
-      </View>
-    );
-  }
-
   _renderRow = refinement => {
-    const icon = refinement.isRefined
-      ? <Icon name="check" color="#000" />
-      : null;
+    console.log('navigate', this.props);
     return (
       <TouchableHighlight
         onPress={() => {
-          this.saveQuery('');
-          this.props.refine(refinement.value);
+          this.props.navigation.navigate(refinement, {
+            onSearchStateChange: this.props.navigation.state.params
+              .onSearchStateChange,
+            searchState: this.props.navigation.state.params.searchState,
+          });
         }}
       >
         <View style={styles.item}>
-          <Text style={refinement.isRefined ? styles.itemRefined : {}}>
-            {refinement.label} ({refinement.count})
+          <Text>
+            {refinement}
           </Text>
-          {icon}
         </View>
       </TouchableHighlight>
     );
@@ -183,15 +99,26 @@ class RefinementList extends Component {
       }}
     />
   );
+  render() {
+    const ds = new ListView.DataSource({
+      rowHasChanged: (r1, r2) => r1 !== r2,
+    });
+    return (
+      <View style={styles.mainContainer}>
+        <ListView
+          dataSource={ds.cloneWithRows(['Categories', 'Price'])}
+          renderRow={this._renderRow}
+          renderSeparator={this._renderSeparator}
+          keyboardShouldPersistTaps={'always'}
+          style={styles.mainContainer}
+        />
+      </View>
+    );
+  }
 }
 
-RefinementList.propTypes = {
-  query: PropTypes.string,
-  saveQuery: PropTypes.func,
-  searchForItems: PropTypes.func,
-  refine: PropTypes.func,
-  items: PropTypes.array,
+Filters.propTypes = {
+  navigation: PropTypes.object,
 };
 
-const ConnectedRefinementList = connectRefinementList(RefinementList);
-const VirtualSearchBox = connectSearchBox(() => null);
+export default Filters;

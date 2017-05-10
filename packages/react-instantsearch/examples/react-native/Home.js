@@ -24,6 +24,7 @@ import {
   connectRefinementList,
   connectStats,
   connectSortBy,
+  connectRange,
 } from 'react-instantsearch/connectors';
 import StarRating from 'react-native-star-rating';
 import IosIcon from 'react-native-vector-icons/Ionicons';
@@ -158,6 +159,7 @@ class Home extends Component {
           </View>
           <ConnectedHits />
           <ConnectedRefinementList attributeName="category" />
+          <VirtualRange attributeName="price" />
         </InstantSearch>
       </View>
     );
@@ -318,3 +320,5 @@ const ConnectedSortBy = connectSortBy(
     );
   }
 );
+
+const VirtualRange = connectRange(() => null);
