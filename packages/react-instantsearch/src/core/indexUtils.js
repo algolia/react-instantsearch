@@ -162,13 +162,12 @@ export function getCurrentRefinementValue(
 
 export function cleanUpValue(searchState, context, id) {
   const index = getIndex(context);
-  let namespace;
 
   if (hasMultipleIndex(context)) {
     return omit(searchState, `indices.${index}.${id}`);
   }
 
-  namespace = getNamespaceAndId(id);
+  const namespace = getNamespaceAndId(id);
   if (namespace.namespace && namespace.id) {
     return {
       ...searchState,
