@@ -32,3 +32,4 @@ one command away to start the developer environment, [read our CONTRIBUTING guid
 [algolia-website]: https://www.algolia.com/
 [instantsearch.js-github]: https://github.com/algolia/instantsearch.js
 [instantsearch-android-github]: https://github.com/algolia/instantsearch-android
+
