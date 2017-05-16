@@ -1,5 +1,5 @@
 ---
-title: Routing
+title: Routing and URLs
 mainTitle: Guide
 layout: main.pug
 category: guide
