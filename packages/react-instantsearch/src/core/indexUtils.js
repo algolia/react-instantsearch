@@ -115,6 +115,14 @@ function refineSingleIndexWithNamespace(
   };
 }
 
+function getNamespaceAndId(input) {
+  const parts = input.match(/^([^.]*)\.(.*)/);
+  const namespace = parts && parts[1];
+  const id = parts && parts[2];
+
+  return { namespace, id };
+}
+
 // eslint-disable-next-line max-params
 export function getCurrentRefinementValue(
   props,
@@ -125,13 +133,25 @@ export function getCurrentRefinementValue(
   refinementsCallback
 ) {
   const index = getIndex(context);
+  const namespace = getNamespaceAndId(id);
   const refinements =
     (hasMultipleIndex(context) && has(searchState, `indices.${index}.${id}`)) ||
+    (!hasMultipleIndex(context) &&
+      namespace.namespace &&
+      namespace.id &&
+      has(searchState[namespace.namespace], namespace.id)) ||
     (!hasMultipleIndex(context) && has(searchState, id));
   if (refinements) {
-    const currentRefinement = hasMultipleIndex(context)
-      ? get(searchState.indices[index], id)
-      : get(searchState, id);
+    let currentRefinement;
+
+    if (hasMultipleIndex(context)) {
+      currentRefinement = get(searchState.indices[index], id);
+    } else if (namespace.namespace && namespace.id) {
+      currentRefinement = get(searchState[namespace.namespace], namespace.id);
+    } else {
+      currentRefinement = get(searchState, id);
+    }
+
     return refinementsCallback(currentRefinement);
   }
   if (props.defaultRefinement) {
@@ -142,7 +162,22 @@ export function getCurrentRefinementValue(
 
 export function cleanUpValue(searchState, context, id) {
   const index = getIndex(context);
-  return hasMultipleIndex(context)
-    ? omit(searchState, `indices.${index}.${id}`)
-    : omit(searchState, `${id}`);
+  let namespace;
+
+  if (hasMultipleIndex(context)) {
+    return omit(searchState, `indices.${index}.${id}`);
+  }
+
+  namespace = getNamespaceAndId(id);
+  if (namespace.namespace && namespace.id) {
+    return {
+      ...searchState,
+      [namespace.namespace]: omit(
+        searchState[namespace.namespace],
+        `${namespace.id}`
+      ),
+    };
+  }
+
+  return omit(searchState, `${id}`);
 }

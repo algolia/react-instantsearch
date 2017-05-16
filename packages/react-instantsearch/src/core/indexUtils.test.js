@@ -104,7 +104,11 @@ describe('utility method for manipulating the search state', () => {
         last: 'last',
         refinement: 'refinement',
         another: 'another',
-        namespace: { refinement: 'refinement', another: 'another' },
+        namespace: {
+          refinement: 'refinement',
+          another: 'another',
+          'nested.another': 'nested.another',
+        },
       };
 
       let expectedRefinement = value => expect(value).toEqual('refinement');
@@ -125,6 +129,17 @@ describe('utility method for manipulating the search state', () => {
         searchState,
         context,
         'namespace.another',
+        null,
+        expectedRefinement
+      );
+
+      expectedRefinement = value => expect(value).toEqual('nested.another');
+
+      getCurrentRefinementValue(
+        {},
+        searchState,
+        context,
+        'namespace.nested.another',
         null,
         expectedRefinement
       );
@@ -158,7 +173,11 @@ describe('utility method for manipulating the search state', () => {
         last: 'last',
         refinement: 'refinement',
         another: 'another',
-        namespace: { refinement: 'refinement', another: 'another' },
+        namespace: {
+          refinement: 'refinement',
+          another: 'another',
+          'nested.another': 'nested.another',
+        },
       };
 
       searchState = cleanUpValue(searchState, context, 'refinement');
@@ -167,7 +186,11 @@ describe('utility method for manipulating the search state', () => {
         page: 1,
         last: 'last',
         another: 'another',
-        namespace: { refinement: 'refinement', another: 'another' },
+        namespace: {
+          refinement: 'refinement',
+          another: 'another',
+          'nested.another': 'nested.another',
+        },
       });
 
       searchState = cleanUpValue(searchState, context, 'namespace.another');
@@ -176,10 +199,26 @@ describe('utility method for manipulating the search state', () => {
         page: 1,
         last: 'last',
         another: 'another',
-        namespace: { refinement: 'refinement' },
+        namespace: {
+          refinement: 'refinement',
+          'nested.another': 'nested.another',
+        },
       });
 
       searchState = cleanUpValue(searchState, context, 'namespace.refinement');
+
+      expect(searchState).toEqual({
+        page: 1,
+        last: 'last',
+        another: 'another',
+        namespace: { 'nested.another': 'nested.another' },
+      });
+
+      searchState = cleanUpValue(
+        searchState,
+        context,
+        'namespace.nested.another'
+      );
 
       expect(searchState).toEqual({
         page: 1,
