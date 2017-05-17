@@ -111,6 +111,8 @@ describe('utility method for manipulating the search state', () => {
         },
       };
 
+      expect.assertions(5); //async assertions
+
       let expectedRefinement = value => expect(value).toEqual('refinement');
 
       getCurrentRefinementValue(
@@ -150,7 +152,7 @@ describe('utility method for manipulating the search state', () => {
         context,
         'refinement',
         'defaultValue',
-        expectedRefinement
+        () => {}
       );
 
       expect(value).toEqual('defaultValue');
@@ -161,7 +163,7 @@ describe('utility method for manipulating the search state', () => {
         context,
         'refinement',
         null,
-        expectedRefinement
+        () => {}
       );
 
       expect(value).toEqual('defaultRefinement');
@@ -336,10 +338,17 @@ describe('utility method for manipulating the search state', () => {
         refinement: 'refinement',
         indices: {
           first: {
-            namespace: { refinement: 'refinement', another: 'another' },
+            refinement: 'refinement',
+            namespace: {
+              refinement: 'refinement',
+              another: 'another',
+              'nested.another': 'nested.another',
+            },
           },
         },
       };
+
+      expect.assertions(6); //async assertions
 
       let expectedRefinement = value => expect(value).toEqual('refinement');
 
@@ -348,6 +357,17 @@ describe('utility method for manipulating the search state', () => {
         searchState,
         context,
         'refinement',
+        null,
+        expectedRefinement
+      );
+
+      expectedRefinement = value => expect(value).toEqual('refinement');
+
+      getCurrentRefinementValue(
+        {},
+        searchState,
+        context,
+        'namespace.refinement',
         null,
         expectedRefinement
       );
@@ -363,13 +383,24 @@ describe('utility method for manipulating the search state', () => {
         expectedRefinement
       );
 
+      expectedRefinement = value => expect(value).toEqual('nested.another');
+
+      getCurrentRefinementValue(
+        {},
+        searchState,
+        context,
+        'namespace.nested.another',
+        null,
+        expectedRefinement
+      );
+
       let value = getCurrentRefinementValue(
         {},
         {},
         context,
         'refinement',
         'defaultValue',
-        expectedRefinement
+        () => {}
       );
 
       expect(value).toEqual('defaultValue');
@@ -380,7 +411,7 @@ describe('utility method for manipulating the search state', () => {
         context,
         'refinement',
         null,
-        expectedRefinement
+        () => {}
       );
 
       expect(value).toEqual('defaultRefinement');
@@ -392,7 +423,11 @@ describe('utility method for manipulating the search state', () => {
         indices: {
           first: {
             refinement: 'refinement',
-            namespace: { refinement: 'refinement', another: 'another' },
+            namespace: {
+              refinement: 'refinement',
+              another: 'another',
+              'nested.another': 'nested.another',
+            },
           },
         },
       };
@@ -403,7 +438,11 @@ describe('utility method for manipulating the search state', () => {
         page: 1,
         indices: {
           first: {
-            namespace: { refinement: 'refinement', another: 'another' },
+            namespace: {
+              refinement: 'refinement',
+              another: 'another',
+              'nested.another': 'nested.another',
+            },
           },
         },
       });
@@ -412,14 +451,42 @@ describe('utility method for manipulating the search state', () => {
 
       expect(searchState).toEqual({
         page: 1,
-        indices: { first: { namespace: { refinement: 'refinement' } } },
+        indices: {
+          first: {
+            namespace: {
+              refinement: 'refinement',
+              'nested.another': 'nested.another',
+            },
+          },
+        },
       });
 
       searchState = cleanUpValue(searchState, context, 'namespace.refinement');
 
       expect(searchState).toEqual({
         page: 1,
-        indices: { first: { namespace: {} } },
+        indices: {
+          first: {
+            namespace: {
+              'nested.another': 'nested.another',
+            },
+          },
+        },
+      });
+
+      searchState = cleanUpValue(
+        searchState,
+        context,
+        'namespace.nested.another'
+      );
+
+      expect(searchState).toEqual({
+        page: 1,
+        indices: {
+          first: {
+            namespace: {},
+          },
+        },
       });
     });
 
