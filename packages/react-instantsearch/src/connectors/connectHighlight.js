@@ -25,7 +25,7 @@ const highlight = ({ attributeName, hit, highlightProperty }) =>
  *   const parsedHit = highlight({attributeName, hit, highlightProperty});
  *   return parsedHit.map(part => {
  *     if(part.isHighlighted) return <em>{part.value}</em>;
- *     return part.value:
+ *     return part.value;
  *   });
  * });
  */
