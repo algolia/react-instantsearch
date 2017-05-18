@@ -16,10 +16,10 @@ import {
 } from 'react-native';
 import { InstantSearch } from 'react-instantsearch/native';
 import {
-  connectMenu,
   connectRefinementList,
   connectSearchBox,
   connectRange,
+  connectMenu,
 } from 'react-instantsearch/connectors';
 import Stats from './Stats';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -101,10 +101,10 @@ class Filters extends Component {
           justifyContent: 'space-around',
         }}
       >
-        <ConnectedMenu attributeName="category" />
+        <ConnectedRefinementList attributeName="type" />
         <Stats navigation={this.props.navigation} />
         <VirtualSearchBox />
-        <VirtualRefinementList attributeName="type" />
+        <VirtualMenu attributeName="category" />
         <VirtualRange attributeName="price" />
       </InstantSearch>
     );
@@ -117,7 +117,7 @@ Filters.propTypes = {
 
 export default Filters;
 
-class Menu extends Component {
+class RefinementList extends Component {
   constructor(props) {
     super(props);
     this.saveQuery = this.saveQuery.bind(this);
@@ -192,7 +192,7 @@ class Menu extends Component {
   );
 }
 
-Menu.propTypes = {
+RefinementList.propTypes = {
   query: PropTypes.string,
   saveQuery: PropTypes.func,
   searchForItems: PropTypes.func,
@@ -200,7 +200,8 @@ Menu.propTypes = {
   items: PropTypes.array,
 };
 
-const ConnectedMenu = connectMenu(Menu);
+const ConnectedRefinementList = connectRefinementList(RefinementList);
 const VirtualSearchBox = connectSearchBox(() => null);
-const VirtualRefinementList = connectRefinementList(() => null);
+
 const VirtualRange = connectRange(() => null);
+const VirtualMenu = connectMenu(() => null);

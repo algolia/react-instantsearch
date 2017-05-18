@@ -70,7 +70,6 @@ class Filters extends Component {
     },
   };
   _renderRow = refinement => {
-    console.log('navigate', this.props);
     return (
       <TouchableHighlight
         onPress={() => {
@@ -106,7 +105,7 @@ class Filters extends Component {
     return (
       <View style={styles.mainContainer}>
         <ListView
-          dataSource={ds.cloneWithRows(['Categories', 'Price'])}
+          dataSource={ds.cloneWithRows(['Type', 'Price', 'Categories'])}
           renderRow={this._renderRow}
           renderSeparator={this._renderSeparator}
           keyboardShouldPersistTaps={'always'}

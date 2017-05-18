@@ -23,6 +23,7 @@ import {
   connectInfiniteHits,
   connectRefinementList,
   connectStats,
+  connectMenu,
   connectSortBy,
   connectRange,
 } from 'react-instantsearch/connectors';
@@ -158,8 +159,9 @@ class Home extends Component {
             />
           </View>
           <ConnectedHits />
-          <ConnectedRefinementList attributeName="category" />
+          <VirtualRefinementList attributeName="type" />
           <VirtualRange attributeName="price" />
+          <VirtualMenu attributeName="category" />
         </InstantSearch>
       </View>
     );
@@ -268,8 +270,6 @@ const ConnectedStats = connectStats(({ nbHits, processingTimeMS }) => (
   <Text>{nbHits} hits found in {processingTimeMS}ms</Text>
 ));
 
-const ConnectedRefinementList = connectRefinementList(() => null);
-
 const ConnectedSortBy = connectSortBy(
   ({ refine, items, currentRefinement }) => {
     const icon = Platform.OS === 'ios'
@@ -322,3 +322,5 @@ const ConnectedSortBy = connectSortBy(
 );
 
 const VirtualRange = connectRange(() => null);
+const VirtualRefinementList = connectRefinementList(() => null);
+const VirtualMenu = connectMenu(() => null);

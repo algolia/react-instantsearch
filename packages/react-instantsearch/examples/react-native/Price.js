@@ -11,6 +11,7 @@ import {
   connectRefinementList,
   connectSearchBox,
   connectRange,
+  connectMenu,
 } from 'react-instantsearch/connectors';
 import Stats from './Stats';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
@@ -96,9 +97,10 @@ class Filters extends Component {
         >
           <View style={{ marginTop: 50 }}>
             <ConnectedRange attributeName="price" />
-            <Stats />
+            <Stats navigation={this.props.navigation} />
           </View>
-          <VirtualRefinementList attributeName="category" />
+          <VirtualRefinementList attributeName="type" />
+          <VirtualMenu attributeName="category" />
           <VirtualSearchBox />
         </InstantSearch>
       </View>
@@ -174,4 +176,5 @@ class Range extends React.Component {
 
 const VirtualRefinementList = connectRefinementList(() => null);
 const VirtualSearchBox = connectSearchBox(() => null);
+const VirtualMenu = connectMenu(() => null);
 const ConnectedRange = connectRange(Range);
