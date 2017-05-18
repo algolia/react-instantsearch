@@ -106,6 +106,7 @@ class Filters extends Component {
         <VirtualSearchBox />
         <VirtualRefinementList attributeName="type" />
         <VirtualRange attributeName="price" />
+        <VirtualRange attributeName="rating" />
       </InstantSearch>
     );
   }

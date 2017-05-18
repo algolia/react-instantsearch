@@ -105,7 +105,12 @@ class Filters extends Component {
     return (
       <View style={styles.mainContainer}>
         <ListView
-          dataSource={ds.cloneWithRows(['Type', 'Price', 'Categories'])}
+          dataSource={ds.cloneWithRows([
+            'Type',
+            'Categories',
+            'Price',
+            'Rating',
+          ])}
           renderRow={this._renderRow}
           renderSeparator={this._renderSeparator}
           keyboardShouldPersistTaps={'always'}

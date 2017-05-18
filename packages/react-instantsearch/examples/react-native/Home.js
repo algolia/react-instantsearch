@@ -162,6 +162,7 @@ class Home extends Component {
           <VirtualRefinementList attributeName="type" />
           <VirtualRange attributeName="price" />
           <VirtualMenu attributeName="category" />
+          <VirtualRange attributeName="rating" />
         </InstantSearch>
       </View>
     );
