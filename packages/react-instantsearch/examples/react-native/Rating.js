@@ -11,7 +11,7 @@ import {
   Text,
   ListView,
   View,
-  Platform,
+  Dimensions,
   TouchableHighlight,
 } from 'react-native';
 import { InstantSearch } from 'react-instantsearch/native';
@@ -20,53 +20,20 @@ import {
   connectSearchBox,
   connectRange,
   connectMenu,
+  connectCurrentRefinements,
 } from 'react-instantsearch/connectors';
 import Stats from './Stats';
 import { isEmpty } from 'lodash';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: 'white',
     flexGrow: 1,
   },
-  container: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  header: {
-    backgroundColor: '#162331',
-    paddingTop: 25,
-    flexDirection: 'column',
-  },
-  item: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    backgroundColor: 'white',
-    minHeight: 30,
-    padding: 10,
-  },
-  itemRefined: {
-    fontWeight: 'bold',
-  },
-  searchBoxContainer: {
-    backgroundColor: '#162331',
-  },
-  searchBox: {
-    backgroundColor: 'white',
-    height: 40,
-    borderWidth: 1,
-    padding: 10,
-    margin: 10,
-    ...Platform.select({
-      ios: {
-        borderRadius: 5,
-      },
-      android: {},
-    }),
-  },
 });
+
+const window = Dimensions.get('window');
 
 class Filters extends Component {
   static displayName = 'React Native example';
@@ -103,9 +70,43 @@ class Filters extends Component {
           onSearchStateChange={this.onSearchStateChange}
           searchState={this.state.searchState}
         >
-          <View style={{ marginTop: 50 }}>
+          <View
+            style={{
+              backgroundColor: '#162331',
+            }}
+          >
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <Text
+                style={{
+                  margin: 5,
+                  fontWeight: 'bold',
+                  fontSize: 15,
+                  color: 'white',
+                  alignSelf: 'center',
+                }}
+              >
+                RATINGS
+              </Text>
+              <ConnectedCurrentRefinements />
+            </View>
             <ConnectedRating attributeName="rating" />
-            <Stats navigation={this.props.navigation} />
+            <View
+              style={{
+                position: 'absolute',
+                height: 100,
+                left: 0,
+                top: window.height - 100,
+                width: window.width,
+              }}
+            >
+              <Stats navigation={this.props.navigation} />
+            </View>
           </View>
           <VirtualRefinementList attributeName="type" />
           <VirtualMenu attributeName="category" />
@@ -161,9 +162,11 @@ class Rating extends Component {
   _renderRow = ({ max, min, count, selected }) => {
     return (
       <TouchableHighlight
-        style={{ backgroundColor: selected ? 'lightgrey' : 'white' }}
+        style={{ backgroundColor: selected ? '#162331' : 'white' }}
         onPress={() => {
-          this.props.refine({ min, max });
+          return selected
+            ? this.props.refine({ min: this.props.min, max: this.props.max })
+            : this.props.refine({ min, max });
         }}
       >
         <View
@@ -176,9 +179,10 @@ class Rating extends Component {
             rating={min}
             starSize={30}
             starColor="#FBAE00"
+            emptyStarColor={selected ? 'white' : 'gray'}
           />
-          <Text> and up! </Text>
-          <Text>({count})</Text>
+          <Text style={{ color: selected ? 'white' : 'black' }}> and up! </Text>
+          <Text style={{ color: selected ? 'white' : 'black' }}>({count})</Text>
         </View>
       </TouchableHighlight>
     );
@@ -195,15 +199,7 @@ class Rating extends Component {
   );
 
   render() {
-    const {
-      translate,
-      refine,
-      min,
-      max,
-      count,
-      createURL,
-      canRefine,
-    } = this.props;
+    const { translate, refine, min, max, count, createURL } = this.props;
     const items = [];
     for (let i = max; i >= min; i--) {
       const hasCount = !isEmpty(count.filter(item => Number(item.value) === i));
@@ -244,8 +240,39 @@ class Rating extends Component {
   }
 }
 
+class CurrentRefinements extends React.Component {
+  render() {
+    const { items, refine } = this.props;
+    const clear = items.find(item => item.attributeName === 'rating');
+    const icon = clear
+      ? <TouchableHighlight
+          onPress={() => {
+            return refine(clear.value);
+          }}
+        >
+          <Icon name="times" size={20} color="white" />
+        </TouchableHighlight>
+      : null;
+    return (
+      <View
+        style={{
+          position: 'absolute',
+          alignSelf: 'center',
+          left: window.width - 30,
+          top: 3,
+        }}
+      >
+        {icon}
+      </View>
+    );
+  }
+}
+
 const VirtualRefinementList = connectRefinementList(() => null);
 const VirtualSearchBox = connectSearchBox(() => null);
 const VirtualMenu = connectMenu(() => null);
 const VirtualRange = connectRange(() => null);
 const ConnectedRating = connectRange(Rating);
+const ConnectedCurrentRefinements = connectCurrentRefinements(
+  CurrentRefinements
+);

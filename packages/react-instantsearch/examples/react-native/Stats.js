@@ -12,6 +12,7 @@ export default connectStats(({ nbHits, processingTimeMS, navigation }) => {
           searchState: navigation.state.params.searchState,
         });
       }}
+      color="white"
     />
   );
 });

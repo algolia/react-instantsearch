@@ -10,11 +10,16 @@ import {
   Text,
   View,
   ListView,
-  Platform,
   TouchableHighlight,
 } from 'react-native';
 import { InstantSearch } from 'react-instantsearch/native';
-import { connectStats } from 'react-instantsearch/connectors';
+import {
+  connectCurrentRefinements,
+  connectMenu,
+  connectRange,
+  connectRefinementList,
+  connectSearchBox,
+} from 'react-instantsearch/connectors';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const styles = StyleSheet.create({
@@ -26,33 +31,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#162331',
     paddingTop: 25,
     flexDirection: 'column',
-  },
-  item: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    backgroundColor: 'white',
-    minHeight: 30,
-    padding: 10,
-  },
-  itemRefined: {
-    fontWeight: 'bold',
-  },
-  searchBoxContainer: {
-    backgroundColor: '#162331',
-  },
-  searchBox: {
-    backgroundColor: 'white',
-    height: 40,
-    borderWidth: 1,
-    padding: 10,
-    margin: 10,
-    ...Platform.select({
-      ios: {
-        borderRadius: 5,
-      },
-      android: {},
-    }),
   },
 });
 
@@ -69,24 +47,128 @@ class Filters extends Component {
       alignSelf: 'center',
     },
   };
-  _renderRow = refinement => {
+  constructor(props) {
+    super(props);
+    this.onSearchStateChange = this.onSearchStateChange.bind(this);
+    this.state = {
+      searchState: props.navigation.state.params.searchState,
+    };
+  }
+  onSearchStateChange(nextState) {
+    const searchState = { ...this.state.searchState, ...nextState };
+    this.setState({ searchState });
+    this.props.navigation.state.params.onSearchStateChange(searchState);
+  }
+
+  render() {
     return (
-      <TouchableHighlight
-        onPress={() => {
-          this.props.navigation.navigate(refinement, {
-            onSearchStateChange: this.props.navigation.state.params
-              .onSearchStateChange,
-            searchState: this.props.navigation.state.params.searchState,
-          });
-        }}
-      >
-        <View style={styles.item}>
-          <Text>
-            {refinement}
-          </Text>
-        </View>
-      </TouchableHighlight>
+      <View style={styles.mainContainer}>
+        <InstantSearch
+          appId="latency"
+          apiKey="6be0576ff61c053d5f9a3225e2a90f76"
+          indexName="ikea"
+          onSearchStateChange={this.onSearchStateChange}
+          searchState={this.state.searchState}
+        >
+          <ConnectedRefinements navigation={this.props.navigation} />
+          <VirtualRefinementList attributeName="type" />
+          <VirtualMenu attributeName="category" />
+          <VirtualRange attributeName="price" />
+          <VirtualRange attributeName="rating" />
+          <VirtualSearchBox />
+        </InstantSearch>
+      </View>
     );
+  }
+}
+
+Filters.propTypes = {
+  navigation: PropTypes.object,
+};
+
+class Refinements extends React.Component {
+  constructor(props) {
+    super(props);
+    this._renderRow = this._renderRow.bind(this);
+    this.mapping = {
+      Categories: {
+        attributeName: 'category',
+        value: item => item.currentRefinement,
+      },
+      Type: {
+        attributeName: 'type',
+        value: item => {
+          const values = item.items.map(i => i.label).join(' - ');
+          return values;
+        },
+      },
+      Price: {
+        attributeName: 'price',
+        value: item =>
+          `From ${item.currentRefinement.min}$ to ${item.currentRefinement.max}$`,
+      },
+      Rating: {
+        attributeName: 'rating',
+        value: item =>
+          `From ${item.currentRefinement.min} stars to ${item.currentRefinement.max} stars`,
+      },
+      ClearAll: {
+        attributeName: 'clearAll',
+      },
+    };
+  }
+
+  _renderRow = refinement => {
+    const item = this.props.items.find(
+      i => i.attributeName === this.mapping[refinement].attributeName
+    );
+    const refinementValue = item ? this.mapping[refinement].value(item) : '-';
+    const row = refinement !== 'ClearAll'
+      ? <TouchableHighlight
+          onPress={() => {
+            this.props.navigation.navigate(refinement, {
+              onSearchStateChange: this.props.navigation.state.params
+                .onSearchStateChange,
+              searchState: this.props.navigation.state.params.searchState,
+            });
+          }}
+        >
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              padding: 10,
+            }}
+          >
+            <View style={{ flex: 4 }}>
+              <Text style={{ fontWeight: 'bold' }}>
+                {refinement}
+              </Text>
+              <Text style={{ paddingTop: 5 }}>
+                {refinementValue}
+              </Text>
+            </View>
+            <View>
+              <Icon name="pencil" size={20} />
+            </View>
+          </View>
+        </TouchableHighlight>
+      : <TouchableHighlight onPress={() => this.props.refine(this.props.items)}>
+          <View>
+            <Text
+              style={{
+                color: 'blue',
+                fontWeight: 'bold',
+                padding: 10,
+                alignSelf: 'center',
+              }}
+            >
+              CLEAR ALL
+            </Text>
+          </View>
+        </TouchableHighlight>;
+    return <View>{row}</View>;
   };
 
   _renderSeparator = (sectionID, rowID, adjacentRowHighlighted) => (
@@ -103,13 +185,14 @@ class Filters extends Component {
       rowHasChanged: (r1, r2) => r1 !== r2,
     });
     return (
-      <View style={styles.mainContainer}>
+      <View>
         <ListView
           dataSource={ds.cloneWithRows([
             'Type',
             'Categories',
             'Price',
             'Rating',
+            'ClearAll',
           ])}
           renderRow={this._renderRow}
           renderSeparator={this._renderSeparator}
@@ -121,8 +204,10 @@ class Filters extends Component {
   }
 }
 
-Filters.propTypes = {
-  navigation: PropTypes.object,
-};
+const ConnectedRefinements = connectCurrentRefinements(Refinements);
+const VirtualRefinementList = connectRefinementList(() => null);
+const VirtualSearchBox = connectSearchBox(() => null);
+const VirtualMenu = connectMenu(() => null);
+const VirtualRange = connectRange(() => null);
 
 export default Filters;
