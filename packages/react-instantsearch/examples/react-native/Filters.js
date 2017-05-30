@@ -4,6 +4,7 @@
  * @flow
  */
 import PropTypes from 'prop-types';
+import { Actions } from 'react-native-router-flux';
 import React, { Component } from 'react';
 import {
   StyleSheet,
@@ -26,38 +27,23 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: 'white',
     flexGrow: 1,
-  },
-  header: {
-    backgroundColor: '#162331',
-    paddingTop: 25,
-    flexDirection: 'column',
+    marginTop: 30,
   },
 });
 
 class Filters extends Component {
   static displayName = 'React Native example';
-  static navigationOptions = {
-    title: 'AEKI',
-    headerBackTitle: null,
-    headerStyle: {
-      backgroundColor: '#162331',
-    },
-    headerTitleStyle: {
-      color: 'white',
-      alignSelf: 'center',
-    },
-  };
   constructor(props) {
     super(props);
     this.onSearchStateChange = this.onSearchStateChange.bind(this);
     this.state = {
-      searchState: props.navigation.state.params.searchState,
+      searchState: this.props.searchState,
     };
   }
   onSearchStateChange(nextState) {
     const searchState = { ...this.state.searchState, ...nextState };
     this.setState({ searchState });
-    this.props.navigation.state.params.onSearchStateChange(searchState);
+    this.props.onSearchStateChange(searchState);
   }
 
   render() {
@@ -70,7 +56,10 @@ class Filters extends Component {
           onSearchStateChange={this.onSearchStateChange}
           searchState={this.state.searchState}
         >
-          <ConnectedRefinements navigation={this.props.navigation} />
+          <ConnectedRefinements
+            searchState={this.state.searchState}
+            onSearchStateChange={this.onSearchStateChange}
+          />
           <VirtualRefinementList attributeName="type" />
           <VirtualMenu attributeName="category" />
           <VirtualRange attributeName="price" />
@@ -83,7 +72,8 @@ class Filters extends Component {
 }
 
 Filters.propTypes = {
-  navigation: PropTypes.object,
+  searchState: PropTypes.object,
+  onSearchStateChange: PropTypes.func.isRequired,
 };
 
 class Refinements extends React.Component {
@@ -126,10 +116,9 @@ class Refinements extends React.Component {
     const row = refinement !== 'ClearAll'
       ? <TouchableHighlight
           onPress={() => {
-            this.props.navigation.navigate(refinement, {
-              onSearchStateChange: this.props.navigation.state.params
-                .onSearchStateChange,
-              searchState: this.props.navigation.state.params.searchState,
+            Actions[refinement]({
+              searchState: this.props.searchState,
+              onSearchStateChange: this.props.onSearchStateChange,
             });
           }}
         >
@@ -203,6 +192,13 @@ class Refinements extends React.Component {
     );
   }
 }
+
+Refinements.propTypes = {
+  searchState: PropTypes.object.isRequired,
+  refine: PropTypes.func.isRequired,
+  onSearchStateChange: PropTypes.func.isRequired,
+  items: PropTypes.array.isRequired,
+};
 
 const ConnectedRefinements = connectCurrentRefinements(Refinements);
 const VirtualRefinementList = connectRefinementList(() => null);

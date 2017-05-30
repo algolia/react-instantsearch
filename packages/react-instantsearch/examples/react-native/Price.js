@@ -20,16 +20,12 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: 'white',
     flexGrow: 1,
+    marginTop: 50,
   },
   container: {
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'center',
-  },
-  header: {
-    backgroundColor: '#162331',
-    paddingTop: 25,
-    flexDirection: 'column',
   },
   item: {
     flexDirection: 'row',
@@ -62,28 +58,17 @@ const styles = StyleSheet.create({
 
 class Filters extends Component {
   static displayName = 'React Native example';
-  static navigationOptions = {
-    title: 'AEKI',
-    headerBackTitle: null,
-    headerStyle: {
-      backgroundColor: '#162331',
-    },
-    headerTitleStyle: {
-      color: 'white',
-      alignSelf: 'center',
-    },
-  };
   constructor(props) {
     super(props);
     this.onSearchStateChange = this.onSearchStateChange.bind(this);
     this.state = {
-      searchState: props.navigation.state.params.searchState,
+      searchState: props.searchState,
     };
   }
   onSearchStateChange(nextState) {
     const searchState = { ...this.state.searchState, ...nextState };
     this.setState({ searchState });
-    this.props.navigation.state.params.onSearchStateChange(searchState);
+    this.props.onSearchStateChange(searchState);
   }
   render() {
     return (
@@ -97,7 +82,10 @@ class Filters extends Component {
         >
           <View style={{ marginTop: 50 }}>
             <ConnectedRange attributeName="price" />
-            <Stats navigation={this.props.navigation} />
+            <Stats
+              searchState={this.state.searchState}
+              onSearchStateChange={this.onSearchStateChange}
+            />
           </View>
           <VirtualRefinementList attributeName="type" />
           <VirtualMenu attributeName="category" />
@@ -109,7 +97,8 @@ class Filters extends Component {
 }
 
 Filters.propTypes = {
-  navigation: PropTypes.object,
+  searchState: PropTypes.object.isRequired,
+  onSearchStateChange: PropTypes.func.isRequired,
 };
 
 export default Filters;
@@ -173,6 +162,13 @@ class Range extends React.Component {
     );
   }
 }
+
+Range.propTypes = {
+  min: PropTypes.number.isRequired,
+  max: PropTypes.number.isRequired,
+  currentRefinement: PropTypes.object.isRequired,
+  refine: PropTypes.func.isRequired,
+};
 
 const VirtualRefinementList = connectRefinementList(() => null);
 const VirtualSearchBox = connectSearchBox(() => null);

@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: 'white',
     flexGrow: 1,
+    marginTop: 63,
   },
 });
 
@@ -37,28 +38,17 @@ const window = Dimensions.get('window');
 
 class Filters extends Component {
   static displayName = 'React Native example';
-  static navigationOptions = {
-    title: 'AEKI',
-    headerBackTitle: null,
-    headerStyle: {
-      backgroundColor: '#162331',
-    },
-    headerTitleStyle: {
-      color: 'white',
-      alignSelf: 'center',
-    },
-  };
   constructor(props) {
     super(props);
     this.onSearchStateChange = this.onSearchStateChange.bind(this);
     this.state = {
-      searchState: props.navigation.state.params.searchState,
+      searchState: props.searchState,
     };
   }
   onSearchStateChange(nextState) {
     const searchState = { ...this.state.searchState, ...nextState };
     this.setState({ searchState });
-    this.props.navigation.state.params.onSearchStateChange(searchState);
+    this.props.onSearchStateChange(searchState);
   }
   render() {
     return (
@@ -75,6 +65,7 @@ class Filters extends Component {
               backgroundColor: '#162331',
             }}
           >
+            <ConnectedRating attributeName="rating" />
             <View
               style={{
                 flexDirection: 'row',
@@ -82,20 +73,8 @@ class Filters extends Component {
                 justifyContent: 'center',
               }}
             >
-              <Text
-                style={{
-                  margin: 5,
-                  fontWeight: 'bold',
-                  fontSize: 15,
-                  color: 'white',
-                  alignSelf: 'center',
-                }}
-              >
-                RATINGS
-              </Text>
               <ConnectedCurrentRefinements />
             </View>
-            <ConnectedRating attributeName="rating" />
             <View
               style={{
                 position: 'absolute',
@@ -105,7 +84,10 @@ class Filters extends Component {
                 width: window.width,
               }}
             >
-              <Stats navigation={this.props.navigation} />
+              <Stats
+                searchState={this.state.searchState}
+                onSearchStateChange={this.props.onSearchStateChange}
+              />
             </View>
           </View>
           <VirtualRefinementList attributeName="type" />
@@ -119,7 +101,8 @@ class Filters extends Component {
 }
 
 Filters.propTypes = {
-  navigation: PropTypes.object,
+  searchState: PropTypes.object.isRequired,
+  onSearchStateChange: PropTypes.func.isRequired,
 };
 
 export default Filters;
@@ -159,34 +142,31 @@ class Rating extends Component {
     return { max, min: lowerBound, count, selected };
   }
 
-  _renderRow = ({ max, min, count, selected }) => {
-    return (
-      <TouchableHighlight
-        style={{ backgroundColor: selected ? '#162331' : 'white' }}
-        onPress={() => {
-          return selected
-            ? this.props.refine({ min: this.props.min, max: this.props.max })
-            : this.props.refine({ min, max });
-        }}
+  _renderRow = ({ max, min, count, selected }) => (
+    <TouchableHighlight
+      style={{ backgroundColor: selected ? '#162331' : 'white' }}
+      onPress={() =>
+        (selected
+          ? this.props.refine({ min: this.props.min, max: this.props.max })
+          : this.props.refine({ min, max }))}
+    >
+      <View
+        pointerEvents="none"
+        style={{ padding: 10, flexDirection: 'row', alignItems: 'center' }}
       >
-        <View
-          pointerEvents="none"
-          style={{ padding: 10, flexDirection: 'row', alignItems: 'center' }}
-        >
-          <StarRating
-            disabled={true}
-            maxStars={max}
-            rating={min}
-            starSize={30}
-            starColor="#FBAE00"
-            emptyStarColor={selected ? 'white' : 'gray'}
-          />
-          <Text style={{ color: selected ? 'white' : 'black' }}> and up! </Text>
-          <Text style={{ color: selected ? 'white' : 'black' }}>({count})</Text>
-        </View>
-      </TouchableHighlight>
-    );
-  };
+        <StarRating
+          disabled={true}
+          maxStars={max}
+          rating={min}
+          starSize={30}
+          starColor="#FBAE00"
+          emptyStarColor={selected ? 'white' : 'gray'}
+        />
+        <Text style={{ color: selected ? 'white' : 'black' }}> and up! </Text>
+        <Text style={{ color: selected ? 'white' : 'black' }}>({count})</Text>
+      </View>
+    </TouchableHighlight>
+  );
 
   _renderSeparator = (sectionID, rowID, adjacentRowHighlighted) => (
     <View
@@ -245,28 +225,40 @@ class CurrentRefinements extends React.Component {
     const { items, refine } = this.props;
     const clear = items.find(item => item.attributeName === 'rating');
     const icon = clear
-      ? <TouchableHighlight
-          onPress={() => {
-            return refine(clear.value);
-          }}
-        >
-          <Icon name="times" size={20} color="white" />
+      ? <TouchableHighlight onPress={() => refine(clear.value)}>
+          <View style={{ flexDirection: 'row' }}>
+            <Text
+              style={{
+                margin: 5,
+                fontWeight: 'bold',
+                fontSize: 15,
+                color: 'white',
+                alignSelf: 'center',
+              }}
+            >
+              CLEAR
+            </Text>
+            <Icon
+              name="times"
+              size={20}
+              color="white"
+              style={{ alignSelf: 'center' }}
+            />
+          </View>
         </TouchableHighlight>
       : null;
     return (
-      <View
-        style={{
-          position: 'absolute',
-          alignSelf: 'center',
-          left: window.width - 30,
-          top: 3,
-        }}
-      >
+      <View>
         {icon}
       </View>
     );
   }
 }
+
+CurrentRefinements.propTypes = {
+  items: PropTypes.array.isRequired,
+  refine: PropTypes.func.isRequired,
+};
 
 const VirtualRefinementList = connectRefinementList(() => null);
 const VirtualSearchBox = connectSearchBox(() => null);

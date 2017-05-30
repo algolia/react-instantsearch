@@ -30,6 +30,7 @@ import {
 import StarRating from 'react-native-star-rating';
 import IosIcon from 'react-native-vector-icons/Ionicons';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import { Actions } from 'react-native-router-flux';
 
 const styles = StyleSheet.create({
   maincontainer: {},
@@ -54,11 +55,6 @@ const styles = StyleSheet.create({
   },
   sortByArrow: {
     paddingLeft: 3,
-  },
-  header: {
-    backgroundColor: '#162331',
-    paddingTop: 25,
-    flexDirection: 'column',
   },
   searchBoxContainer: {
     backgroundColor: '#162331',
@@ -101,21 +97,12 @@ const styles = StyleSheet.create({
 });
 class Home extends Component {
   static displayName = 'React Native example';
-  static navigationOptions = {
-    title: 'AEKI',
-    headerBackTitle: null,
-    headerStyle: {
-      backgroundColor: '#162331',
-    },
-    headerTitleStyle: {
-      color: 'white',
-      alignSelf: 'center',
-    },
-  };
   constructor(props) {
     super(props);
     this.onSearchStateChange = this.onSearchStateChange.bind(this);
-    this.state = { searchState: {} };
+    this.state = {
+      searchState: this.props.searchState ? this.props.searchState : {},
+    };
   }
 
   onSearchStateChange(nextState) {
@@ -123,8 +110,6 @@ class Home extends Component {
   }
 
   render() {
-    const { navigate } = this.props.navigation;
-
     return (
       <View style={styles.maincontainer}>
         <InstantSearch
@@ -151,9 +136,9 @@ class Home extends Component {
             />
             <Button
               onPress={() =>
-                navigate('Filters', {
-                  onSearchStateChange: this.onSearchStateChange,
+                Actions.Filters({
                   searchState: this.state.searchState,
+                  onSearchStateChange: this.onSearchStateChange,
                 })}
               title="Filters"
             />
@@ -170,7 +155,7 @@ class Home extends Component {
 }
 
 Home.propTypes = {
-  navigation: PropTypes.object,
+  searchState: PropTypes.object,
 };
 
 export default Home;

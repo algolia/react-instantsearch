@@ -29,11 +29,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     flex: 1,
   },
-  header: {
-    backgroundColor: '#162331',
-    paddingTop: 25,
-    flexDirection: 'column',
-  },
   item: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -65,28 +60,17 @@ const styles = StyleSheet.create({
 
 class Filters extends Component {
   static displayName = 'React Native example';
-  static navigationOptions = {
-    title: 'AEKI',
-    headerBackTitle: null,
-    headerStyle: {
-      backgroundColor: '#162331',
-    },
-    headerTitleStyle: {
-      color: 'white',
-      alignSelf: 'center',
-    },
-  };
   constructor(props) {
     super(props);
     this.onSearchStateChange = this.onSearchStateChange.bind(this);
     this.state = {
-      searchState: props.navigation.state.params.searchState,
+      searchState: props.searchState,
     };
   }
   onSearchStateChange(nextState) {
     const searchState = { ...this.state.searchState, ...nextState };
     this.setState({ searchState });
-    this.props.navigation.state.params.onSearchStateChange(searchState);
+    this.props.onSearchStateChange(searchState);
   }
   render() {
     return (
@@ -102,7 +86,7 @@ class Filters extends Component {
         }}
       >
         <ConnectedMenu attributeName="category" />
-        <Stats navigation={this.props.navigation} />
+        <Stats />
         <VirtualSearchBox />
         <VirtualRefinementList attributeName="type" />
         <VirtualRange attributeName="price" />
@@ -113,7 +97,8 @@ class Filters extends Component {
 }
 
 Filters.propTypes = {
-  navigation: PropTypes.object,
+  searchState: PropTypes.object.isRequired,
+  onSearchStateChange: PropTypes.func.isRequired,
 };
 
 export default Filters;
