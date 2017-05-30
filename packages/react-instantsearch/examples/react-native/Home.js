@@ -33,7 +33,7 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import { Actions } from 'react-native-router-flux';
 
 const styles = StyleSheet.create({
-  maincontainer: {},
+  maincontainer: { marginTop: 63 },
   item: {
     flexDirection: 'row',
     alignItems: 'center',

@@ -109,7 +109,6 @@ export default Filters;
 
 class Rating extends Component {
   static propTypes = {
-    translate: PropTypes.func.isRequired,
     refine: PropTypes.func.isRequired,
     createURL: PropTypes.func.isRequired,
     min: PropTypes.number,
@@ -179,7 +178,7 @@ class Rating extends Component {
   );
 
   render() {
-    const { translate, refine, min, max, count, createURL } = this.props;
+    const { refine, min, max, count, createURL } = this.props;
     const items = [];
     for (let i = max; i >= min; i--) {
       const hasCount = !isEmpty(count.filter(item => Number(item.value) === i));
@@ -198,7 +197,6 @@ class Rating extends Component {
           max,
           refine,
           count: itemCount,
-          translate,
           createURL,
           isLastSelectableItem: i === Number(lastSelectableItem.value),
         })

@@ -164,9 +164,9 @@ class Range extends React.Component {
 }
 
 Range.propTypes = {
-  min: PropTypes.number.isRequired,
-  max: PropTypes.number.isRequired,
-  currentRefinement: PropTypes.object.isRequired,
+  min: PropTypes.number,
+  max: PropTypes.number,
+  currentRefinement: PropTypes.object,
   refine: PropTypes.func.isRequired,
 };
 

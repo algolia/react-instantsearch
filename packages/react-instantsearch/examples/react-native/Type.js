@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: 'white',
     flex: 1,
+    marginTop: 63,
   },
   item: {
     flexDirection: 'row',
@@ -74,27 +75,29 @@ class Filters extends Component {
   }
   render() {
     return (
-      <InstantSearch
-        appId="latency"
-        apiKey="6be0576ff61c053d5f9a3225e2a90f76"
-        indexName="ikea"
-        onSearchStateChange={this.onSearchStateChange}
-        searchState={this.state.searchState}
-        style={{
-          flex: 1,
-          justifyContent: 'space-around',
-        }}
-      >
-        <ConnectedRefinementList attributeName="type" />
-        <Stats
+      <View style={styles.mainContainer}>
+        <InstantSearch
+          appId="latency"
+          apiKey="6be0576ff61c053d5f9a3225e2a90f76"
+          indexName="ikea"
+          onSearchStateChange={this.onSearchStateChange}
           searchState={this.state.searchState}
-          onSearchStateChange={this.props.onSearchStateChange}
-        />
-        <VirtualSearchBox />
-        <VirtualMenu attributeName="category" />
-        <VirtualRange attributeName="price" />
-        <VirtualRange attributeName="rating" />
-      </InstantSearch>
+          style={{
+            flex: 1,
+            justifyContent: 'space-around',
+          }}
+        >
+          <ConnectedRefinementList attributeName="type" />
+          <Stats
+            searchState={this.state.searchState}
+            onSearchStateChange={this.props.onSearchStateChange}
+          />
+          <VirtualSearchBox />
+          <VirtualMenu attributeName="category" />
+          <VirtualRange attributeName="price" />
+          <VirtualRange attributeName="rating" />
+        </InstantSearch>
+      </View>
     );
   }
 }
@@ -138,7 +141,7 @@ class RefinementList extends Component {
             this.saveQuery(text);
             searchForItems(text);
           }}
-          placeholder={'Search a Type...'}
+          placeholder={'Search a type...'}
           value={this.state.query}
           clearButtonMode={'always'}
           underlineColorAndroid={'white'}
