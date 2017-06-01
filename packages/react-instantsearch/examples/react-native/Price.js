@@ -15,7 +15,7 @@ import {
 } from 'react-instantsearch/connectors';
 import Stats from './Stats';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
-
+import { isNumber } from 'lodash';
 const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: 'white',
@@ -108,8 +108,8 @@ class Range extends React.Component {
     super(props);
     this.state = {
       currentValues: {
-        min: Math.trunc(this.props.min),
-        max: Math.trunc(this.props.max),
+        min: this.props.min,
+        max: this.props.max,
       },
     };
   }
@@ -143,12 +143,16 @@ class Range extends React.Component {
   };
 
   render() {
+    console.log(this.state.currentValues.min);
+    console.log(this.state.currentValues.max);
     const slider = this.props.min
       ? <MultiSlider
-          values={[this.state.currentValues.min, this.state.currentValues.max]}
+          values={[
+            Math.trunc(this.state.currentValues.min),
+            Math.trunc(this.state.currentValues.max),
+          ]}
           min={Math.trunc(this.props.min)}
           max={Math.trunc(this.props.max)}
-          sliderLength={280}
           onValuesChange={this.sliderOneValuesChange}
           onValuesChangeFinish={this.sliderOneValuesChangeFinish}
         />
