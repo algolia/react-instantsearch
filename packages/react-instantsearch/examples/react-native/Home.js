@@ -26,6 +26,7 @@ import {
   connectMenu,
   connectSortBy,
   connectRange,
+  connectHighlight,
 } from 'react-instantsearch/connectors';
 import StarRating from 'react-native-star-rating';
 import IosIcon from 'react-native-vector-icons/Ionicons';
@@ -212,10 +213,18 @@ class Hits extends Component {
       <Image style={{ height: 100, width: 100 }} source={{ uri: hit.image }} />
       <View style={styles.itemContent}>
         <Text style={styles.itemName}>
-          {hit.name}
+          <CustomHighlight
+            attributeName="name"
+            hit={hit}
+            highlightProperty="_highlightResult"
+          />
         </Text>
         <Text style={styles.itemType}>
-          {hit.type}
+          <CustomHighlight
+            attributeName="type"
+            hit={hit}
+            highlightProperty="_highlightResult"
+          />
         </Text>
         <Text style={styles.itemPrice}>
           ${hit.price}
@@ -304,6 +313,18 @@ const ConnectedSortBy = connectSortBy(
         {icon}
       </View>
     );
+  }
+);
+
+const CustomHighlight = connectHighlight(
+  ({ highlight, attributeName, hit, highlightProperty }) => {
+    const parsedHit = highlight({ attributeName, hit, highlightProperty });
+    const highligtedHit = parsedHit.map(part => {
+      if (part.isHighlighted)
+        return <Text style={{ backgroundColor: '#ffff99' }}>{part.value}</Text>; //regular highlighting logic, but you can add yours here.
+      return part.value;
+    });
+    return <Text>{highligtedHit}</Text>;
   }
 );
 
