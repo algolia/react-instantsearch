@@ -1,8 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Platform } from 'react-native';
@@ -15,7 +10,7 @@ import {
 } from 'react-instantsearch/connectors';
 import Stats from './Stats';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
-import { isNumber } from 'lodash';
+
 const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: 'white',
@@ -26,33 +21,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'center',
-  },
-  item: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    backgroundColor: 'white',
-    minHeight: 30,
-    padding: 10,
-  },
-  itemRefined: {
-    fontWeight: 'bold',
-  },
-  searchBoxContainer: {
-    backgroundColor: '#162331',
-  },
-  searchBox: {
-    backgroundColor: 'white',
-    height: 40,
-    borderWidth: 1,
-    padding: 10,
-    margin: 10,
-    ...Platform.select({
-      ios: {
-        borderRadius: 5,
-      },
-      android: {},
-    }),
   },
 });
 
@@ -82,11 +50,11 @@ class Filters extends Component {
         >
           <View style={{ marginTop: 50 }}>
             <ConnectedRange attributeName="price" />
-            <Stats
-              searchState={this.state.searchState}
-              onSearchStateChange={this.onSearchStateChange}
-            />
           </View>
+          <Stats
+            searchState={this.state.searchState}
+            onSearchStateChange={this.onSearchStateChange}
+          />
           <VirtualRefinementList attributeName="type" />
           <VirtualMenu attributeName="category" />
           <VirtualSearchBox />
@@ -143,8 +111,6 @@ class Range extends React.Component {
   };
 
   render() {
-    console.log(this.state.currentValues.min);
-    console.log(this.state.currentValues.max);
     const slider = this.props.min
       ? <MultiSlider
           values={[
@@ -159,9 +125,9 @@ class Range extends React.Component {
       : null;
     return (
       <View style={styles.container}>
-        <Text>{Math.trunc(this.state.currentValues.min)}</Text>
+        <Text>$ {Math.trunc(this.state.currentValues.min)}</Text>
         {slider}
-        <Text>{Math.trunc(this.state.currentValues.max)}</Text>
+        <Text>$ {Math.trunc(this.state.currentValues.max)}</Text>
       </View>
     );
   }

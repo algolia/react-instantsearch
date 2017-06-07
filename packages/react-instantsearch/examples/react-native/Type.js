@@ -23,20 +23,25 @@ import {
 } from 'react-instantsearch/connectors';
 import Stats from './Stats';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
+import Highlight from './Highlight';
 const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: 'white',
     flex: 1,
-    marginTop: 63,
+    ...Platform.select({
+      ios: {
+        marginTop: 63,
+      },
+      android: { marginTop: 50 },
+    }),
   },
   item: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     backgroundColor: 'white',
-    minHeight: 30,
-    padding: 10,
+    minHeight: 41,
+    padding: 11,
   },
   itemRefined: {
     fontWeight: 'bold',
@@ -127,6 +132,7 @@ class RefinementList extends Component {
     const { items, searchForItems } = this.props;
     const facets = this
       ? <ListView
+          enableEmptySections={true}
           dataSource={ds.cloneWithRows(items)}
           renderRow={this._renderRow}
           renderSeparator={this._renderSeparator}
@@ -146,26 +152,36 @@ class RefinementList extends Component {
           clearButtonMode={'always'}
           underlineColorAndroid={'white'}
           spellCheck={false}
+          autoCorrect={false}
+          autoCapitalize={'none'}
         />
         {facets}
       </View>
     );
   }
 
-  _renderRow = refinement => {
+  _renderRow = (refinement, sectionId, rowId) => {
     const icon = refinement.isRefined
       ? <Icon name="check" color="#000" />
       : null;
+    const label = this.props.isFromSearch
+      ? <Highlight
+          attributeName="label"
+          hit={refinement}
+          highlightProperty="_highlightResult"
+        />
+      : refinement.label;
     return (
       <TouchableHighlight
         onPress={() => {
           this.saveQuery('');
           this.props.refine(refinement.value);
         }}
+        key={rowId}
       >
         <View style={styles.item}>
           <Text style={refinement.isRefined ? styles.itemRefined : {}}>
-            {refinement.label} ({refinement.count})
+            {label} ({refinement.count})
           </Text>
           {icon}
         </View>
@@ -190,6 +206,7 @@ RefinementList.propTypes = {
   searchForItems: PropTypes.func,
   refine: PropTypes.func,
   items: PropTypes.array,
+  isFromSearch: PropTypes.bool,
 };
 
 const ConnectedRefinementList = connectRefinementList(RefinementList);

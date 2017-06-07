@@ -13,7 +13,11 @@ export default class App extends Component {
       <Router>
         <Scene
           key="root"
-          navigationBarStyle={{ backgroundColor: '#162331' }}
+          navigationBarStyle={{
+            backgroundColor: '#162331',
+            borderColor: '#162331',
+            borderBottomColor: 'transparent',
+          }}
           titleStyle={{ color: 'white' }}
         >
           <Scene key="Home" component={Home} title="AEKI" initial={true} />

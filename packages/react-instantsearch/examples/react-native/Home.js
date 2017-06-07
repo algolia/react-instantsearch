@@ -16,6 +16,7 @@ import {
   StatusBar,
   Button,
   Platform,
+  Dimensions,
 } from 'react-native';
 import { InstantSearch } from 'react-instantsearch/native';
 import {
@@ -26,15 +27,32 @@ import {
   connectMenu,
   connectSortBy,
   connectRange,
-  connectHighlight,
 } from 'react-instantsearch/connectors';
+import Highlight from './Highlight';
 import StarRating from 'react-native-star-rating';
 import IosIcon from 'react-native-vector-icons/Ionicons';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import { Actions } from 'react-native-router-flux';
 
+const { height } = Dimensions.get('window');
+
 const styles = StyleSheet.create({
-  maincontainer: { marginTop: 63 },
+  maincontainer: {
+    ...Platform.select({
+      ios: {
+        marginTop: 63,
+      },
+      android: { marginTop: 50 },
+    }),
+  },
+  items: {
+    ...Platform.select({
+      ios: {
+        height: height - 170,
+      },
+      android: { height: height - 185 },
+    }),
+  },
   item: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -106,6 +124,8 @@ class Home extends Component {
     };
   }
 
+  componentWillReceiveProps() {}
+
   onSearchStateChange(nextState) {
     this.setState({ searchState: { ...this.state.searchState, ...nextState } });
   }
@@ -142,6 +162,7 @@ class Home extends Component {
                   onSearchStateChange: this.onSearchStateChange,
                 })}
               title="Filters"
+              color="#162331"
             />
           </View>
           <ConnectedHits />
@@ -172,6 +193,8 @@ class SearchBox extends Component {
         clearButtonMode={'always'}
         underlineColorAndroid={'white'}
         spellCheck={false}
+        autoCorrect={false}
+        autoCapitalize={'none'}
       />
     );
   }
@@ -196,7 +219,7 @@ class Hits extends Component {
       rowHasChanged: (r1, r2) => r1 !== r2,
     });
     const hits = this.props.hits.length > 0
-      ? <View>
+      ? <View style={styles.items}>
           <ListView
             dataSource={ds.cloneWithRows(this.props.hits)}
             renderRow={this._renderRow}
@@ -208,19 +231,19 @@ class Hits extends Component {
     return hits;
   }
 
-  _renderRow = hit => (
-    <View style={styles.item}>
+  _renderRow = (hit, sectionId, rowId) => (
+    <View style={styles.item} key={rowId}>
       <Image style={{ height: 100, width: 100 }} source={{ uri: hit.image }} />
       <View style={styles.itemContent}>
         <Text style={styles.itemName}>
-          <CustomHighlight
+          <Highlight
             attributeName="name"
             hit={hit}
             highlightProperty="_highlightResult"
           />
         </Text>
         <Text style={styles.itemType}>
-          <CustomHighlight
+          <Highlight
             attributeName="type"
             hit={hit}
             highlightProperty="_highlightResult"
@@ -313,18 +336,6 @@ const ConnectedSortBy = connectSortBy(
         {icon}
       </View>
     );
-  }
-);
-
-const CustomHighlight = connectHighlight(
-  ({ highlight, attributeName, hit, highlightProperty }) => {
-    const parsedHit = highlight({ attributeName, hit, highlightProperty });
-    const highligtedHit = parsedHit.map(part => {
-      if (part.isHighlighted)
-        return <Text style={{ backgroundColor: '#ffff99' }}>{part.value}</Text>; //regular highlighting logic, but you can add yours here.
-      return part.value;
-    });
-    return <Text>{highligtedHit}</Text>;
   }
 );
 

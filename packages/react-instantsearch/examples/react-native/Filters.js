@@ -12,6 +12,7 @@ import {
   View,
   ListView,
   TouchableHighlight,
+  Platform,
 } from 'react-native';
 import { InstantSearch } from 'react-instantsearch/native';
 import {
@@ -27,7 +28,12 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: 'white',
     flexGrow: 1,
-    marginTop: 30,
+    ...Platform.select({
+      ios: {
+        marginTop: 30,
+      },
+      android: { marginTop: 25 },
+    }),
   },
 });
 

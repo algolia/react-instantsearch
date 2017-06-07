@@ -1,8 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import StarRating from 'react-native-star-rating';
@@ -11,7 +6,6 @@ import {
   Text,
   ListView,
   View,
-  Dimensions,
   TouchableHighlight,
 } from 'react-native';
 import { InstantSearch } from 'react-instantsearch/native';
@@ -20,21 +14,17 @@ import {
   connectSearchBox,
   connectRange,
   connectMenu,
-  connectCurrentRefinements,
 } from 'react-instantsearch/connectors';
 import Stats from './Stats';
 import { isEmpty } from 'lodash';
-import Icon from 'react-native-vector-icons/FontAwesome';
 
 const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: 'white',
     flexGrow: 1,
-    marginTop: 63,
+    marginTop: 50,
   },
 });
-
-const window = Dimensions.get('window');
 
 class Filters extends Component {
   static displayName = 'React Native example';
@@ -60,36 +50,11 @@ class Filters extends Component {
           onSearchStateChange={this.onSearchStateChange}
           searchState={this.state.searchState}
         >
-          <View
-            style={{
-              backgroundColor: '#162331',
-            }}
-          >
-            <ConnectedRating attributeName="rating" />
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <ConnectedCurrentRefinements />
-            </View>
-            <View
-              style={{
-                position: 'absolute',
-                height: 100,
-                left: 0,
-                top: window.height - 100,
-                width: window.width,
-              }}
-            >
-              <Stats
-                searchState={this.state.searchState}
-                onSearchStateChange={this.props.onSearchStateChange}
-              />
-            </View>
-          </View>
+          <ConnectedRating attributeName="rating" />
+          <Stats
+            searchState={this.state.searchState}
+            onSearchStateChange={this.props.onSearchStateChange}
+          />
           <VirtualRefinementList attributeName="type" />
           <VirtualMenu attributeName="category" />
           <VirtualRange attributeName="price" />
@@ -208,6 +173,7 @@ class Rating extends Component {
     return (
       <View>
         <ListView
+          enableEmptySections={true}
           dataSource={ds.cloneWithRows(items)}
           renderRow={this._renderRow}
           renderSeparator={this._renderSeparator}
@@ -218,51 +184,8 @@ class Rating extends Component {
   }
 }
 
-class CurrentRefinements extends React.Component {
-  render() {
-    const { items, refine } = this.props;
-    const clear = items.find(item => item.attributeName === 'rating');
-    const icon = clear
-      ? <TouchableHighlight onPress={() => refine(clear.value)}>
-          <View style={{ flexDirection: 'row' }}>
-            <Text
-              style={{
-                margin: 5,
-                fontWeight: 'bold',
-                fontSize: 15,
-                color: 'white',
-                alignSelf: 'center',
-              }}
-            >
-              CLEAR
-            </Text>
-            <Icon
-              name="times"
-              size={20}
-              color="white"
-              style={{ alignSelf: 'center' }}
-            />
-          </View>
-        </TouchableHighlight>
-      : null;
-    return (
-      <View>
-        {icon}
-      </View>
-    );
-  }
-}
-
-CurrentRefinements.propTypes = {
-  items: PropTypes.array.isRequired,
-  refine: PropTypes.func.isRequired,
-};
-
 const VirtualRefinementList = connectRefinementList(() => null);
 const VirtualSearchBox = connectSearchBox(() => null);
 const VirtualMenu = connectMenu(() => null);
 const VirtualRange = connectRange(() => null);
 const ConnectedRating = connectRange(Rating);
-const ConnectedCurrentRefinements = connectCurrentRefinements(
-  CurrentRefinements
-);
