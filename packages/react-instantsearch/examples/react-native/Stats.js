@@ -22,18 +22,16 @@ const styles = {
     width,
   },
 };
-export default connectStats(
-  ({ nbHits, processingTimeMS, searchState, onSearchStateChange }) => (
-    <View style={styles.stats}>
-      <Button
-        title={`${nbHits} hits found in ${processingTimeMS}ms`}
-        onPress={() =>
-          Actions.Home({
-            searchState,
-            onSearchStateChange,
-          })}
-        color="#162331"
-      />
-    </View>
-  )
-);
+export default connectStats(({ nbHits, searchState, onSearchStateChange }) => (
+  <View style={styles.stats}>
+    <Button
+      title={`See ${nbHits} products`}
+      onPress={() =>
+        Actions.Home({
+          searchState,
+          onSearchStateChange,
+        })}
+      color="#162331"
+    />
+  </View>
+));

@@ -128,11 +128,20 @@ class Range extends React.Component {
           onValuesChangeFinish={this.sliderOneValuesChangeFinish}
         />
       : null;
+    const content = this.props.min !== this.props.max
+      ? <View style={styles.container}>
+          <Text style={{ marginTop: 5 }}>
+            $ {Math.trunc(this.state.currentValues.min)}
+          </Text>
+          {slider}
+          <Text style={{ marginTop: 5 }}>
+            $ {Math.trunc(this.state.currentValues.max)}
+          </Text>
+        </View>
+      : <Text>$ {Math.trunc(this.state.currentValues.min)}</Text>;
     return (
       <View style={styles.container}>
-        <Text>$ {Math.trunc(this.state.currentValues.min)}</Text>
-        {slider}
-        <Text>$ {Math.trunc(this.state.currentValues.max)}</Text>
+        {content}
       </View>
     );
   }

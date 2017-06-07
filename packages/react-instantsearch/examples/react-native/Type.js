@@ -153,8 +153,8 @@ class RefinementList extends Component {
 
   _renderRow = (refinement, sectionId, rowId) => {
     const icon = refinement.isRefined
-      ? <Icon name="check" color="#000" />
-      : null;
+      ? <Icon name="check-square-o" color="#e29b0b" />
+      : <Icon name="square-o" color="#000" />;
     const label = this.props.isFromSearch
       ? <Highlight
           attributeName="label"
@@ -172,7 +172,7 @@ class RefinementList extends Component {
       >
         <View style={styles.item}>
           <Text style={refinement.isRefined ? styles.itemRefined : {}}>
-            {label} ({refinement.count})
+            {label}
           </Text>
           {icon}
         </View>

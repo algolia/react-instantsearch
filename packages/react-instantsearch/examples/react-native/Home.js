@@ -279,8 +279,8 @@ Hits.propTypes = {
 };
 
 const ConnectedHits = connectInfiniteHits(Hits);
-const ConnectedStats = connectStats(({ nbHits, processingTimeMS }) => (
-  <Text>{nbHits} hits found in {processingTimeMS}ms</Text>
+const ConnectedStats = connectStats(({ nbHits }) => (
+  <Text>{nbHits} products found</Text>
 ));
 
 const ConnectedSortBy = connectSortBy(
