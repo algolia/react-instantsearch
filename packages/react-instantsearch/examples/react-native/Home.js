@@ -1,8 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import ModalDropdown from 'react-native-modal-dropdown';
@@ -223,7 +218,7 @@ class Hits extends Component {
           <ListView
             dataSource={ds.cloneWithRows(this.props.hits)}
             renderRow={this._renderRow}
-            renderSeparator={this.renderSeparator}
+            renderSeparator={this._renderSeparator}
             onEndReached={this.onEndReached.bind(this)}
           />
         </View>
@@ -266,7 +261,7 @@ class Hits extends Component {
     </View>
   );
 
-  renderSeparator = (sectionID, rowID, adjacentRowHighlighted) => (
+  _renderSeparator = (sectionID, rowID, adjacentRowHighlighted) => (
     <View
       key={`${sectionID}-${rowID}`}
       style={{

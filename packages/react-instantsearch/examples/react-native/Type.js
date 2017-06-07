@@ -1,8 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import {
@@ -87,10 +82,6 @@ class Filters extends Component {
           indexName="ikea"
           onSearchStateChange={this.onSearchStateChange}
           searchState={this.state.searchState}
-          style={{
-            flex: 1,
-            justifyContent: 'space-around',
-          }}
         >
           <ConnectedRefinementList attributeName="type" />
           <Stats
@@ -211,6 +202,5 @@ RefinementList.propTypes = {
 
 const ConnectedRefinementList = connectRefinementList(RefinementList);
 const VirtualSearchBox = connectSearchBox(() => null);
-
 const VirtualRange = connectRange(() => null);
 const VirtualMenu = connectMenu(() => null);
