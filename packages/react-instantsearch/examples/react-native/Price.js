@@ -15,7 +15,12 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: 'white',
     flexGrow: 1,
-    marginTop: 50,
+    ...Platform.select({
+      ios: {
+        marginTop: 63,
+      },
+      android: { marginTop: 50 },
+    }),
   },
   container: {
     alignItems: 'center',
