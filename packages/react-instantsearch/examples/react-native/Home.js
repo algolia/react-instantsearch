@@ -24,9 +24,11 @@ import {
   connectRange,
 } from 'react-instantsearch/connectors';
 import Highlight from './Highlight';
+import Spinner from './Spinner';
 import StarRating from 'react-native-star-rating';
 import IosIcon from 'react-native-vector-icons/Ionicons';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+
 import { Actions } from 'react-native-router-flux';
 
 const { height } = Dimensions.get('window');
@@ -39,6 +41,7 @@ const styles = StyleSheet.create({
       },
       android: { marginTop: 50 },
     }),
+    flex: 1,
   },
   items: {
     ...Platform.select({
@@ -136,9 +139,7 @@ class Home extends Component {
           onSearchStateChange={this.onSearchStateChange}
         >
           <StatusBar backgroundColor="blue" barStyle="light-content" />
-          <View style={styles.searchBoxContainer}>
-            <ConnectedSearchBox />
-          </View>
+          <ConnectedSearchBox />
 
           <View style={styles.options}>
             <ConnectedStats />
@@ -159,6 +160,7 @@ class Home extends Component {
               title="Filters"
               color="#162331"
             />
+            <Spinner />
           </View>
           <ConnectedHits />
           <VirtualRefinementList attributeName="type" />
@@ -180,17 +182,20 @@ export default Home;
 class SearchBox extends Component {
   render() {
     return (
-      <TextInput
-        style={styles.searchBox}
-        onChangeText={text => this.props.refine(text)}
-        value={this.props.currentRefinement}
-        placeholder={'Search a product...'}
-        clearButtonMode={'always'}
-        underlineColorAndroid={'white'}
-        spellCheck={false}
-        autoCorrect={false}
-        autoCapitalize={'none'}
-      />
+      <View style={styles.searchBoxContainer}>
+        <Spinner />
+        <TextInput
+          style={styles.searchBox}
+          onChangeText={text => this.props.refine(text)}
+          value={this.props.currentRefinement}
+          placeholder={'Search a product...'}
+          clearButtonMode={'always'}
+          underlineColorAndroid={'white'}
+          spellCheck={false}
+          autoCorrect={false}
+          autoCapitalize={'none'}
+        />
+      </View>
     );
   }
 }

@@ -19,6 +19,7 @@ import {
 import Stats from './Stats';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Highlight from './Highlight';
+import Spinner from './Spinner';
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -48,6 +49,7 @@ const styles = StyleSheet.create({
   searchBox: {
     backgroundColor: 'white',
     height: 40,
+    flex: 1,
     borderWidth: 1,
     padding: 10,
     margin: 10,
@@ -83,10 +85,6 @@ class Filters extends Component {
           indexName="ikea"
           onSearchStateChange={this.onSearchStateChange}
           searchState={this.state.searchState}
-          style={{
-            flex: 1,
-            justifyContent: 'space-around',
-          }}
         >
           <ConnectedMenu attributeName="category" />
           <Stats
@@ -137,20 +135,23 @@ class Menu extends Component {
       : null;
     return (
       <View style={styles.searchBoxContainer}>
-        <TextInput
-          style={styles.searchBox}
-          onChangeText={text => {
-            this.saveQuery(text);
-            searchForItems(text);
-          }}
-          placeholder={'Search a category...'}
-          value={this.state.query}
-          clearButtonMode={'always'}
-          underlineColorAndroid={'white'}
-          spellCheck={false}
-          autoCorrect={false}
-          autoCapitalize={'none'}
-        />
+        <View style={{ flexDirection: 'row' }}>
+          <Spinner />
+          <TextInput
+            style={styles.searchBox}
+            onChangeText={text => {
+              this.saveQuery(text);
+              searchForItems(text);
+            }}
+            placeholder={'Search a category...'}
+            value={this.state.query}
+            clearButtonMode={'always'}
+            underlineColorAndroid={'white'}
+            spellCheck={false}
+            autoCorrect={false}
+            autoCapitalize={'none'}
+          />
+        </View>
         {facets}
       </View>
     );
