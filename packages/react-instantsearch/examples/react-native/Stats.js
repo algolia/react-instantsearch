@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, View, Platform, Dimensions } from 'react-native';
 import { connectStats } from 'react-instantsearch/connectors';
 import { Actions } from 'react-native-router-flux';
+import Spinner from './Spinner';
 
 const { height, width } = Dimensions.get('window');
 const styles = {
@@ -33,5 +34,6 @@ export default connectStats(({ nbHits, searchState, onSearchStateChange }) => (
         })}
       color="#162331"
     />
+    <Spinner left={110} bottom={597} />
   </View>
 ));

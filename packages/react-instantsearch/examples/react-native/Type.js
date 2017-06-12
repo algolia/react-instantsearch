@@ -19,6 +19,8 @@ import {
 import Stats from './Stats';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Highlight from './Highlight';
+import Spinner from './Spinner';
+
 const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: 'white',
@@ -121,7 +123,7 @@ class RefinementList extends Component {
       rowHasChanged: (r1, r2) => r1 !== r2,
     });
     const { items, searchForItems } = this.props;
-    const facets = this
+    const facets = items.length > 0
       ? <ListView
           enableEmptySections={true}
           dataSource={ds.cloneWithRows(items)}

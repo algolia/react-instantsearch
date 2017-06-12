@@ -183,7 +183,7 @@ class SearchBox extends Component {
   render() {
     return (
       <View style={styles.searchBoxContainer}>
-        <Spinner />
+        <Spinner left={60} />
         <TextInput
           style={styles.searchBox}
           onChangeText={text => this.props.refine(text)}
