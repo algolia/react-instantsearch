@@ -1,3 +1,52 @@
+<a name="4.0.3"></a>
+## [4.0.3](https://github.com/algolia/react-instantsearch/compare/v4.0.2...v4.0.3) (2017-06-14)
+
+
+### Bug Fixes
+
+* **SFFV:** search status we're not inside search state (#125) ([5f3e670](https://github.com/algolia/react-instantsearch/commit/5f3e670))
+
+
+
+<a name="4.0.2"></a>
+## [4.0.2](https://github.com/algolia/react-instantsearch/compare/v4.0.1...v4.0.2) (2017-05-30)
+
+
+
+<a name="4.0.1"></a>
+## [4.0.1](https://github.com/algolia/react-instantsearch/compare/v4.0.0...v4.0.1) (2017-05-17)
+
+
+### Bug Fixes
+
+* **state:** nested attributes for faceting were not handled ([11bd122](https://github.com/algolia/react-instantsearch/commit/11bd122))
+
+
+
+<a name="4.0.0"></a>
+# [4.0.0](https://github.com/algolia/react-instantsearch/compare/v4.0.0-beta.6...v4.0.0) (2017-05-15)
+
+### Features and migration guide
+
+You can find all the details of the release and the migration guide from v3 to v4 here: https://discourse.algolia.com/t/react-instantsearch-v4/1329. 
+
+
+<a name="4.0.0-beta.6"></a>
+# [4.0.0-beta.6](https://github.com/algolia/react-instantsearch/compare/v4.0.0-beta.5...v4.0.0-beta.6) (2017-05-04)
+
+
+
+<a name="4.0.0-beta.5"></a>
+# [4.0.0-beta.5](https://github.com/algolia/react-instantsearch/compare/v4.0.0-beta.4...v4.0.0-beta.5) (2017-05-02)
+
+
+### Bug Fixes
+
+* **connectAutoComplete:** allow usage with hits from a single index (#75) ([8b3b358](https://github.com/algolia/react-instantsearch/commit/8b3b358)), closes [#74](https://github.com/algolia/react-instantsearch/issues/74)
+* **InstantSearch:** update algoliaClient when it change (#70) ([9e97dbd](https://github.com/algolia/react-instantsearch/commit/9e97dbd))
+
+
+
 <a name="4.0.0-beta.4"></a>
 # [4.0.0-beta.4](https://github.com/algolia/react-instantsearch/compare/v4.0.0-beta.3...v4.0.0-beta.4) (2017-04-25)
 

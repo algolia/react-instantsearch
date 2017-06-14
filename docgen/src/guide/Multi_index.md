@@ -1,12 +1,10 @@
 ---
 title: Multi index
-mainTitle: Guide
+mainTitle: Guides
 layout: main.pug
 category: guide
 navWeight: 50
 ---
-
-**This is a beta feature available via `yarn add react-instantsearch@beta`**.
 
 Whenever you want to:
 

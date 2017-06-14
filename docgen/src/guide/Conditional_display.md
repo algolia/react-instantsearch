@@ -1,6 +1,6 @@
 ---
-title: Conditional Display
-mainTitle: Guide
+title: Conditional display
+mainTitle: Guides
 layout: main.pug
 category: guide
 navWeight: 40
@@ -66,6 +66,22 @@ const content = createConnector({
     displayName: 'ConditionalError',
     getProvidedProps(props, searchState, searchResults) {
       return {loading: searchResults.searching};
+    },
+})(({loading}) => {
+    const content = loading
+      ? <div>We are loading</div>
+      : <div>Search finished</div>;
+    return <div>{content}</div>;
+ });
+```
+
+Alternatively, if you're using the search in List feature then you can know when the search results are loading by doing: 
+
+```jsx
+const content = createConnector({
+    displayName: 'ConditionalError',
+    getProvidedProps(props, searchState, searchResults) {
+      return {loading: searchResults.searchingForFacetValues};
     },
 })(({loading}) => {
     const content = loading
