@@ -23,8 +23,8 @@ import {
   connectSortBy,
   connectRange,
 } from 'react-instantsearch/connectors';
-import Highlight from './Highlight';
-import Spinner from './Spinner';
+import Highlight from './components/Highlight';
+import Spinner from './components/Spinner';
 import StarRating from 'react-native-star-rating';
 import IosIcon from 'react-native-vector-icons/Ionicons';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';

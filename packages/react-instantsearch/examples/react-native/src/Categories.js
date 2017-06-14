@@ -16,10 +16,10 @@ import {
   connectSearchBox,
   connectRange,
 } from 'react-instantsearch/connectors';
-import Stats from './Stats';
+import Stats from './components/Stats';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Highlight from './Highlight';
-import Spinner from './Spinner';
+import Highlight from './components/Highlight';
+import Spinner from './components/Spinner';
 
 const styles = StyleSheet.create({
   mainContainer: {

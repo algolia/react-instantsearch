@@ -30,6 +30,18 @@ const styles = StyleSheet.create({
       android: { marginTop: 25 },
     }),
   },
+  filtersRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: 10,
+  },
+  clearAll: {
+    color: 'blue',
+    fontWeight: 'bold',
+    padding: 10,
+    alignSelf: 'center',
+  },
 });
 
 class Filters extends Component {
@@ -114,7 +126,7 @@ class Refinements extends React.Component {
       i => i.attributeName === this.mapping[refinement].attributeName
     );
     const refinementValue = item ? this.mapping[refinement].value(item) : '-';
-    const row = refinement !== 'ClearAll'
+    const filtersRow = refinement !== 'ClearAll'
       ? <TouchableHighlight
           onPress={() => {
             Actions[refinement]({
@@ -123,14 +135,7 @@ class Refinements extends React.Component {
             });
           }}
         >
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              padding: 10,
-            }}
-          >
+          <View style={styles.filtersRow}>
             <View style={{ flex: 4 }}>
               <Text style={{ fontWeight: 'bold' }}>
                 {refinement}
@@ -146,24 +151,17 @@ class Refinements extends React.Component {
         </TouchableHighlight>
       : <TouchableHighlight onPress={() => this.props.refine(this.props.items)}>
           <View>
-            <Text
-              style={{
-                color: 'blue',
-                fontWeight: 'bold',
-                padding: 10,
-                alignSelf: 'center',
-              }}
-            >
+            <Text style={styles.clearAll}>
               CLEAR ALL
             </Text>
           </View>
         </TouchableHighlight>;
-    return <View>{row}</View>;
+    return <View>{filtersRow}</View>;
   };
 
-  _renderSeparator = (sectionID, rowID, adjacentRowHighlighted) => (
+  _renderSeparator = (sectionID, rowId, adjacentRowHighlighted) => (
     <View
-      key={`${sectionID}-${rowID}`}
+      key={`${sectionID}-${rowId}`}
       style={{
         height: adjacentRowHighlighted ? 4 : 1,
         backgroundColor: adjacentRowHighlighted ? '#3B5998' : '#CCCCCC',

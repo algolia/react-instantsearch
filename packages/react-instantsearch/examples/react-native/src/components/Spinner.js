@@ -8,7 +8,7 @@ export default createConnector({
   displayName: 'ConditionalQuery',
   getProvidedProps(props, searchState, results) {
     return {
-      loading: results.searching,
+      loading: results.searching || results.searchingForFacetValues,
       left: props.left ? props.left : 0,
       bottom: props.bottom ? props.bottom : height - 20,
     };

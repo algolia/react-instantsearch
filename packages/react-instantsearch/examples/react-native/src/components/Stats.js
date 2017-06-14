@@ -34,6 +34,6 @@ export default connectStats(({ nbHits, searchState, onSearchStateChange }) => (
         })}
       color="#162331"
     />
-    <Spinner left={110} bottom={597} />
+    <Spinner left={100} bottom={597} />
   </View>
 ));

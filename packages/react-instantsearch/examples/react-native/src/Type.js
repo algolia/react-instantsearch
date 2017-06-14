@@ -16,10 +16,9 @@ import {
   connectRange,
   connectMenu,
 } from 'react-instantsearch/connectors';
-import Stats from './Stats';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Highlight from './Highlight';
-import Spinner from './Spinner';
+import Stats from './components/Stats';
+import Highlight from './components/Highlight';
 
 const styles = StyleSheet.create({
   mainContainer: {

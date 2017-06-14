@@ -8,7 +8,7 @@ import {
   connectRange,
   connectMenu,
 } from 'react-instantsearch/connectors';
-import Stats from './Stats';
+import Stats from './components/Stats';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
 
 const styles = StyleSheet.create({

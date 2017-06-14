@@ -16,7 +16,7 @@ import {
   connectRange,
   connectMenu,
 } from 'react-instantsearch/connectors';
-import Stats from './Stats';
+import Stats from './components/Stats';
 import { isEmpty } from 'lodash';
 
 const styles = StyleSheet.create({
