@@ -1,10 +1,10 @@
 import { Router, Scene } from 'react-native-router-flux';
-import Home from './Home';
-import Filters from './Filters';
-import Price from './Price';
-import Categories from './Categories';
-import Type from './Type';
-import Rating from './Rating';
+import Home from './src/Home';
+import Filters from './src/Filters';
+import Price from './src/Price';
+import Categories from './src/Categories';
+import Type from './src/Type';
+import Rating from './src/Rating';
 import React, { Component } from 'react';
 
 export default class App extends Component {

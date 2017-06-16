@@ -1,4 +1,5 @@
 {
-  "name": "reactnative",
-  "displayName": "reactnative"
+  "expo": {
+    "sdkVersion": "17.0.0"
+  }
 }

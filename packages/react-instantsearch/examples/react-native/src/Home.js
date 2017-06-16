@@ -22,6 +22,7 @@ import {
   connectMenu,
   connectSortBy,
   connectRange,
+  connectCurrentRefinements,
 } from 'react-instantsearch/connectors';
 import Highlight from './components/Highlight';
 import Spinner from './components/Spinner';
@@ -111,6 +112,7 @@ const styles = StyleSheet.create({
     paddingBottom: 5,
   },
   starRating: { alignSelf: 'flex-start' },
+  filters: { flexDirection: 'row', alignItems: 'center' },
 });
 class Home extends Component {
   static displayName = 'React Native example';
@@ -151,16 +153,10 @@ class Home extends Component {
               ]}
               defaultRefinement={'ikea'}
             />
-            <Button
-              onPress={() =>
-                Actions.Filters({
-                  searchState: this.state.searchState,
-                  onSearchStateChange: this.onSearchStateChange,
-                })}
-              title="Filters"
-              color="#162331"
+            <Filters
+              searchState={this.state.searchState}
+              onSearchStateChange={this.onSearchStateChange}
             />
-            <Spinner />
           </View>
           <ConnectedHits />
           <VirtualRefinementList attributeName="type" />
@@ -339,6 +335,23 @@ const ConnectedSortBy = connectSortBy(
   }
 );
 
+const Filters = connectCurrentRefinements(
+  ({ items, searchState, onSearchStateChange }) => {
+    return (
+      <View style={styles.filters}>
+        <Button
+          onPress={() =>
+            Actions.Filters({
+              searchState,
+              onSearchStateChange,
+            })}
+          title={`Filters (${items.length})`}
+          color="#162331"
+        />
+      </View>
+    );
+  }
+);
 const VirtualRange = connectRange(() => null);
 const VirtualRefinementList = connectRefinementList(() => null);
 const VirtualMenu = connectMenu(() => null);
