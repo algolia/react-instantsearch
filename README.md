@@ -6,6 +6,8 @@ InstantSearch projects: **React InstantSearch** | [InstantSearch.js][instantsear
 
 ## React InstantSearch
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/algolia/react-instantsearch.svg)](https://greenkeeper.io/)
+
 > ⚡ Lightning-fast search for React and React Native apps
 
 Built by [Algolia][algolia-website].
