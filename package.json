@@ -97,7 +97,7 @@
     "postcss-scss": "^0.4.1",
     "prettier": "^1.2.2",
     "pretty-bytes-cli": "^2.0.0",
-    "prop-types": "^15.5.8",
+    "prop-types": "^15.5.10",
     "pug": "^2.0.0-beta11",
     "qs": "^6.3.1",
     "react": "^15.6.1",
