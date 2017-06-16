@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    paddingLeft: 8,
   },
   sortByArrow: {
     paddingLeft: 3,
@@ -112,7 +113,11 @@ const styles = StyleSheet.create({
     paddingBottom: 5,
   },
   starRating: { alignSelf: 'flex-start' },
-  filters: { flexDirection: 'row', alignItems: 'center' },
+  filters: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
 });
 class Home extends Component {
   static displayName = 'React Native example';
@@ -281,7 +286,7 @@ Hits.propTypes = {
 
 const ConnectedHits = connectInfiniteHits(Hits);
 const ConnectedStats = connectStats(({ nbHits }) => (
-  <Text>{nbHits} products found</Text>
+  <Text style={{ paddingLeft: 8 }}>{nbHits} products found</Text>
 ));
 
 const ConnectedSortBy = connectSortBy(
@@ -337,17 +342,15 @@ const ConnectedSortBy = connectSortBy(
 
 const Filters = connectCurrentRefinements(
   ({ items, searchState, onSearchStateChange }) => (
-    <View style={styles.filters}>
-      <Button
-        onPress={() =>
-          Actions.Filters({
-            searchState,
-            onSearchStateChange,
-          })}
-        title={`Filters (${items.length})`}
-        color="#162331"
-      />
-    </View>
+    <Button
+      onPress={() =>
+        Actions.Filters({
+          searchState,
+          onSearchStateChange,
+        })}
+      title={`Filters (${items.length})`}
+      color="#162331"
+    />
   )
 );
 const VirtualRange = connectRange(() => null);
