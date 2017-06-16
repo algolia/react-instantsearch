@@ -336,21 +336,19 @@ const ConnectedSortBy = connectSortBy(
 );
 
 const Filters = connectCurrentRefinements(
-  ({ items, searchState, onSearchStateChange }) => {
-    return (
-      <View style={styles.filters}>
-        <Button
-          onPress={() =>
-            Actions.Filters({
-              searchState,
-              onSearchStateChange,
-            })}
-          title={`Filters (${items.length})`}
-          color="#162331"
-        />
-      </View>
-    );
-  }
+  ({ items, searchState, onSearchStateChange }) => (
+    <View style={styles.filters}>
+      <Button
+        onPress={() =>
+          Actions.Filters({
+            searchState,
+            onSearchStateChange,
+          })}
+        title={`Filters (${items.length})`}
+        color="#162331"
+      />
+    </View>
+  )
 );
 const VirtualRange = connectRange(() => null);
 const VirtualRefinementList = connectRefinementList(() => null);
