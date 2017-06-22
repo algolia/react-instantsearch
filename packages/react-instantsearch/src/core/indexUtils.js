@@ -138,6 +138,7 @@ export function getCurrentRefinementValue(
     (hasMultipleIndex(context) &&
       searchState.indices &&
       namespace &&
+      searchState.indices[`${index}`] &&
       has(searchState.indices[`${index}`][namespace], `${attributeName}`)) ||
     (hasMultipleIndex(context) &&
       searchState.indices &&
