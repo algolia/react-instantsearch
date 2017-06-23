@@ -21,6 +21,9 @@ In this tutorial, you'll learn how to:
 
 **If you prefer to get started by watching a video, [we created one for you](videos/).**
 
+**If you want to use React InstantSearch with React Native, [read our dedicated Getting Started for React Native](guide/React_native.html).**
+
+
 ## Before we start
 
 React InstantSearch is meant to be used with Algolia.

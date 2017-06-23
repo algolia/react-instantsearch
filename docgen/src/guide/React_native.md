@@ -6,9 +6,643 @@ category: guide
 navWeight: 35
 ---
 
-React InstantSearch is compatible with [react-native](https://facebook.github.io/react-native/).
+React InstantSearch is compatible with [react-native](https://facebook.github.io/react-native/)
 
-[Read the example](https://github.com/algolia/react-instantsearch/tree/master/packages/react-instantsearch/examples/react-native) linking `react-instantsearch` to [react-native](https://facebook.github.io/react-native/).
+In this tutorial, you’ll learn how to:
+
+* install react-instantsearch in your [React Native](https://facebook.github.io/react-native/)  project
+* bootstrap an app using the <InstantSearch> component
+* display infinite results from Algolia
+* add widgets to filter the results
+* connect your own component to the search
+
+## Before we start
+React InstantSearch is meant to be used with Algolia.
+
+Therefore, you’ll need the credentials to an Algolia index. To ease this getting started, here are the credentials to an already configured index:
+
+* appId: latency
+* searchKey: 3d9875e51fbd20c7754e65422f7ce5e1
+* indexName: ikea
+
+It contains sample data for an e-commerce website.
+
+This guide also expects you to have a working [React Native](https://facebook.github.io/react-native/)  project. If you need to setup a [React Native](https://facebook.github.io/react-native/)  project, we suggest you use [create-react-native-app](https://github.com/react-community/create-react-native-app) which is the [easiest way to start building a new React Native application](https://facebook.github.io/react-native/docs/getting-started.html). 
+
+## Install react-instantsearch
+
+React InstantSearch is available in the [npm](https://www.npmjs.com) registry. Install it:
+
+```shell
+yarn add react-instantsearch
+```
+
+Note: we use `yarn add` to install dependencies but React InstantSearch is also installable via `npm install`.
+
+## Add the `<InstantSearch>` component
+
+[`<InstantSearch>`](widgets/InstantSearch.html) is the component that will connect to Algolia
+and will synchronise all the widgets together.
+
+It maintains the state of the search, does the queries, and provides the results to the widgets so that they can update themselves when needed.
+
+```jsx
+import React from 'react';
+import { InstantSearch } from 'react-instantsearch/native';
+import { StyleSheet, View } from 'react-native';
+
+export default class App extends React.Component {
+  render() {
+    return (
+      <View style={styles.container}>
+        <InstantSearch
+          appId="latency"
+          apiKey="6be0576ff61c053d5f9a3225e2a90f76"
+          indexName="ikea"
+        >
+          {/* Search widgets will go there */}
+        </InstantSearch>
+      </View>
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginTop: 20,
+  },
+});
+```
+
+`appId`, `apiKey` and `indexName` are mandatory. Those props are the
+credentials of your application in Algolia. They can be found in your [Algolia
+dashboard](https://www.algolia.com/api-keys).
+
+Congrats 🎉! Your application is now connected to Algolia.
+
+In this section we've seen:
+- How to connect a part of a [React](https://facebook.github.io/react/) application to Algolia
+- How to configure your Algolia credentials
+
+ > To get more *under the hood* information about the `<InstantSearch>` wrapper
+ > component, [read our guide](guide/<InstantSearch>.html).
+
+## Display infinite results
+
+The core of a search experience is to display results. By default, React InstantSearch will do a query at the start of the page and will retrieve the most relevant hits. Because we are on mobile, it makes sense to create an infinite scroll experience. 
+
+Unlike when using React InstantSearch for the web, we don’t provide yet any widgets for React Native. But you’ll still be able to build an amazing search experience using what we call [connectors](guide/Connectors.html).  
+
+Connectors are higher order components. They encapsulate the logic for a specific kind of widget and they provide a way to interact with the instantsearch context.
+
+**Checkout our [dedicated connectors guide](guide/connectors.html). to learn more about them**
+
+To display results, we are gonna use the [connectInfiniteHits](connectors/connectInfiniteHits.html) connector. 
+This connector will give you all the results returned by Algolia, and it will update when there are new results. It will also keep track of all the accumulated hits while the user is scrolling. 
+
+This connector gives you three interesting properties: 
+
+* `hits`, the records that match the search state
+* `hasMore`, a boolean that indicates if there are more pages to load
+* `refine`, the function to call when the end of the page is reach to load more results. 
+
+On the React Native side we are going to take advantage of the [FlatList](https://facebook.github.io/react-native/docs/flatlist.html) to render this infinite scroll. 
+
+Let’s create our own React Native Infinite Hits widget: 
+
+```jsx
+// First, we need to add the connectInfiniteHits connector to our import
+import { connectInfiniteHits } from 'react-instantsearch/connectors';
+// We also need to import the FlatList and other React Native component
+import { StyleSheet, View, FlatList, Image, Text } from 'react-native';
+
+
+// [...]
+
+const Hits = connectInfiniteHits(({ hits, hasMore, refine }) => {
+
+  /* if there are still results, you can 
+  call the refine function to load more */
+  const onEndReached = function() {
+    if (hasMore) {
+      refine();
+    }
+  };
+
+  const keyExtractor = (item, index) => item.objectID;
+
+  return (
+    <FlatList
+      data={hits}
+      onEndReached={onEndReached}
+      keyExtractor={keyExtractor}
+      renderItem={({ item }) => {
+        return (
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Image
+              style={{ height: 100, width: 100 }}
+              source={{ uri: item.image }}
+            />
+            <View style={{ flex: 1 }}>
+              <Text>
+                {item.name}
+              </Text>
+              <Text>
+                {item.type}
+              </Text>
+            </View>
+          </View>
+        );
+      }}
+    />
+  );
+});
+```
+
+We can then call this component in the render of App:
+
+```jsx
+const App = () =>
+  <InstantSearch
+    appId="latency"
+    apiKey="3d9875e51fbd20c7754e65422f7ce5e1"
+    indexName="bestbuy"
+  >
+   <Hits/>
+  </InstantSearch>
+```
+
+You should now be able to see the results and scroll to fetch more of them. Of course depending of the attributes available on your records you might want to change this template. 
+
+In this section we've seen:
+- how to display the results from Algolia
+- how to build an infinite scrolling experience
+
+## Add a SearchBox
+
+Now that we've added the results, we can start querying our index. To do this, we are gonna use the [connectSearchBox](connectors/connectSearchBox.html) connector. 
+
+This connector gives you two interesting properties: 
+
+* `currentRefinement`, the current query
+* `refine`, the function to call when a new query is entered
+
+On the React Native side we are going to take advantage of the [TextInput](http://facebook.github.io/react-native/releases/0.45/docs/textinput.html#textinput) to render this search box. 
+
+```jsx
+// We need to add the connectSearchBox to our import
+import {
+  connectInfiniteHits,
+  connectSearchBox,
+} from 'react-instantsearch/connectors';
+// We need to add the TextInput to our import
+import {
+  StyleSheet,
+  View,
+  FlatList,
+  Image,
+  Text,
+  TextInput,
+} from 'react-native';
+// [...]
+
+const SearchBox = connectSearchBox(({ refine, currentRefinement }) => {
+  const styles = {
+    height: 60,
+    borderWidth: 1,
+    padding: 10,
+    margin: 10,
+    flex: 1,
+  };
+  return (
+    <TextInput
+      style={styles}
+      onChangeText={text => refine(text)}
+      value={currentRefinement}
+      placeholder={'Search a product...'}
+      clearButtonMode={'always'}
+      spellCheck={false}
+      autoCorrect={false}
+      autoCapitalize={'none'}
+    />
+  );
+});
+
+```
+
+Let’s add this new `<SearchBox>` component to our InstantSearch instance. 
+
+```jsx
+const App = () =>
+   <View style={styles.container}>
+        <InstantSearch
+            appId="latency"
+            apiKey="6be0576ff61c053d5f9a3225e2a90f76"
+            indexName="ikea"
+        >
+            <View
+            style={{
+                flexDirection: 'row',
+            }}
+            >
+            <SearchBox />
+            </View>
+            <Hits />
+        </InstantSearch>
+    </View>
+```
+
+
+The search is now interactive but we don't see what matched in each of the products.
+
+Good thing for us, Algolia computes the matching part. 
+
+For taking  advantage of this feature, we need to use the [connectHighlight](connectors/connectHighlight.html) connector. Let’s create a new `<Highlight>` component. 
+
+This connector gives you one interesting properties: 
+
+* `highlight`, a function that returns an array of parsed hits indicating if they are highlighted or not. 
+
+When using this component you will have to provide two properties: 
+
+* `attributeName` attribute name from the record that you want to highlight. 
+* `hit` , the hit to highlight
+
+```jsx 
+//We need to the connectHighlight to our import
+import {
+  connectInfiniteHits,
+  connectSearchBox,
+  connectHighlight,
+} from 'react-instantsearch/connectors';
+
+const Highlight = connectHighlight(
+  ({ highlight, attributeName, hit, highlightProperty }) => {
+    const parsedHit = highlight({
+      attributeName,
+      hit,
+      highlightProperty: '_highlightResult',
+    });
+    const highligtedHit = parsedHit.map((part, idx) => {
+      if (part.isHighlighted)
+        return (
+          <Text key={idx} style={{ backgroundColor: '#ffff99' }}>
+            {part.value}
+          </Text>
+        );
+      return part.value;
+    });
+    return <Text>{highligtedHit}</Text>;
+  }
+);
+```
+
+Let’s use this new `<Highlight/>` component inside our `<Hits/>` template: 
+
+```jsx
+// [...]
+
+const Hits = connectInfiniteHits(({ hits, hasMore, refine }) => {
+  
+ // [...]
+
+  return (
+    <FlatList
+      data={hits}
+      onEndReached={onEndReached}
+      keyExtractor={keyExtractor}
+      renderItem={({ item }) => {
+        return (
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Image
+              style={{ height: 100, width: 100 }}
+              source={{ uri: item.image }}
+            />
+            <View style={{ flex: 1 }}>
+              <Text>
+                <Highlight attributeName="name" hit={item} />
+
+              </Text>
+              <Text>
+                <Highlight attributeName="type" hit={item} />
+
+              </Text>
+            </View>
+          </View>
+        );
+      }}
+    />
+  );
+});
+```
+
+Now the search displays the results and highlights the part of the hit attribute that matches the query. This pattern is very important in search, especially with Algolia, so that the user knows what's going on. This way we create the search dialog between the user and the data.
+
+In this part, we've seen the following:
+- how to add a SearchBox to make queries into the records
+- how to highlight the matched part of the results
+- the importance of highlighting in a text-based search
+
+## Add RefinementList
+
+While the SearchBox is the way to go when it comes to textual search, you
+may also want to provide filters based on the structure of the records.
+
+Algolia provides a set of parameters for filtering by facets, numbers or geo
+location. Instantsearch packages those into a set of widgets and connectors.
+
+Since the dataset used here is an e-commerce one, let's add a RefinementList using the [connectRefinementList](connectors/connectRefinementList.html) connector
+to filter the products by categories.
+
+This connector gives you two interesting properties: 
+
+* `items `, the list of refinements. Each item has a `isRefined` property indicating if they are selected or not. 
+* `refine`, the function to call when a new category is selected
+
+On the React Native side we are going to take advantage of the [FlatList](https://facebook.github.io/react-native/docs/flatlist.html) and the [TouchableHighlight](http://facebook.github.io/react-native/releases/0.45/docs/touchablehighlight.html#touchablehighlight) component to render this refinement list. 
+
+```jsx
+// We need to add the RefinementList to our import
+import {
+  connectInfiniteHits,
+  connectSearchBox,
+  connectHighlight,
+  connectRefinementList,
+} from 'react-instantsearch/connectors';
+//We need to add the TouchableHighlight to our import
+import {
+  StyleSheet,
+  View,
+  FlatList,
+  Image,
+  Text,
+  TextInput,
+  TouchableHighlight,
+} from 'react-native';
+
+// [...]
+
+const RefinementList = connectRefinementList(({ refine, items }) => {
+  const keyExtractor = (item, index) => index;
+
+  return (
+    <FlatList
+      data={items}
+      keyExtractor={keyExtractor}
+      ListHeaderComponent={() =>
+        <Text style={{ marginTop: 20, height: 50, alignSelf: 'center' }}>
+          Categories
+        </Text>}
+      renderItem={({ item }) => {
+        return (
+          <View style={{ height: 30 }}>
+            <TouchableHighlight
+              onPress={() => {
+                refine(item.value);
+              }}
+            >
+              <Text style={item.isRefined ? { fontWeight: 'bold' } : {}}>
+                {item.label}
+              </Text>
+            </TouchableHighlight>
+          </View>
+        );
+      }}
+    />
+  );
+});
+```
+
+Let’s add this new `<RefinementList>` component to our InstantSearch instance. 
+
+```jsx
+const App = () =>
+   <View style={styles.container}>
+        <InstantSearch
+            appId="latency"
+            apiKey="6be0576ff61c053d5f9a3225e2a90f76"
+            indexName="ikea"
+         >
+            <View
+            style={{
+                flexDirection: 'row',
+            }}
+            >
+            <SearchBox />
+            </View>
+            <RefinementList attributeName="category" />
+            <Hits />
+        </InstantSearch>
+    </View>
+```
+
+The `attributeName` props specifies the faceted attribute to use in this widget. This attribute should be declared as a facet in the index configuration as well.
+
+The values displayed are computed by Algolia from the results.
+
+So far, we've seen the following:
+- there are components for all types of refinements
+- the RefinementList works with facets
+- facets are computed from the results
+
+## Putting our Refinement List in a Modal
+Because we don’t have that much space available on our mobile application, we are going to extract this RefinementList and display it inside a [Modal](http://facebook.github.io/react-native/releases/0.45/docs/modal.html#modal).
+
+When using the [Modal](http://facebook.github.io/react-native/releases/0.45/docs/modal.html#modal), components that are displayed inside it are mounted and unmounted depending if the [Modal](http://facebook.github.io/react-native/releases/0.45/docs/modal.html#modal) is visible or not. One thing to know about React InstantSearch is that a refinement is applied only if its corresponding widget is mounted. If a widget is unmounted then its state is removed from the search state as well. 
+
+To keep track of the refinements applied inside the [Modal](http://facebook.github.io/react-native/releases/0.45/docs/modal.html#modal) (or another screen if you have navigation), you will need to use another `<InstantSearch/>` instance and synchronise the search state between those two instances. 
+
+ `<InstantSearch/>` takes two interesting props: 
+
+* `onSearchStateChange`, a function that is called every time the search state change. 
+* `searchState`, the search state to apply to an instance. 
+
+We are going to leverage those two props to keep in sync our two different `<InstantSearch/>` instances. 
+
+First, let’s create the Modal: 
+
+```jsx
+//We need to import the Modal
+import {
+  StyleSheet,
+  View,
+  FlatList,
+  Image,
+  Text,
+  TextInput,
+  TouchableHighlight,
+  Modal,
+} from 'react-native';
+
+// [...] 
+
+class Categories extends React.Component {
+  render() {
+    return (
+      <View style={{ marginTop: 22 }}>
+        <Modal
+          animationType={'none'}
+          transparent={false}
+          visible={this.props.modalVisible}
+        >
+          <View style={{ marginTop: 22 }}>
+            <InstantSearch
+              appId="latency"
+              apiKey="6be0576ff61c053d5f9a3225e2a90f76"
+              indexName="ikea"
+              onSearchStateChange={this.props.onSearchStateChange}
+              searchState={this.props.searchState}
+            >
+              <RefinementList attributeName="category" />
+              <TouchableHighlight
+                onPress={() => {
+                  this.props.setModalVisible(!this.props.modalVisible);
+                }}
+              >
+                <Text
+                  style={{ marginTop: 20, height: 50, alignSelf: 'center' }}
+                >
+                  Close
+                </Text>
+              </TouchableHighlight>
+            </InstantSearch>
+          </View>
+        </Modal>
+      </View>
+    );
+  }
+}
+```
+
+Second, let’s add our Modal to our first `<InstantSearch/>` instances:
+
+```jsx
+export default class App extends React.Component {
+  constructor() {
+    super();
+    this.state = { modalVisible: false, searchState: {} };
+    this.setModalVisible = this.setModalVisible.bind(this);
+    this.onSearchStateChange = this.onSearchStateChange.bind(this);
+  }
+
+  onSearchStateChange(searchState) {
+    this.setState({ searchState });
+  }
+
+  setModalVisible(visible) {
+    this.setState({ modalVisible: visible });
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <InstantSearch
+          appId="latency"
+          apiKey="6be0576ff61c053d5f9a3225e2a90f76"
+          indexName="ikea"
+          onSearchStateChange={this.onSearchStateChange}
+          searchState={this.state.searchState}
+        >
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              padding: 10,
+            }}
+          >
+            <SearchBox />
+            <TouchableHighlight
+              onPress={() => {
+                this.setModalVisible(true);
+              }}
+            >
+              <Text>Categories</Text>
+            </TouchableHighlight>
+          </View>
+          <Hits />
+          <Categories
+            setModalVisible={this.setModalVisible}
+            modalVisible={this.state.modalVisible}
+            onSearchStateChange={this.onSearchStateChange}
+            searchState={this.state.searchState}
+          />
+        </InstantSearch>
+      </View>
+    );
+  }
+}
+```
+
+If you try the application and select a category, you’ll see that when you close the [Modal](http://facebook.github.io/react-native/releases/0.45/docs/modal.html#modal), the refinement is not applied to the search. This is because for a refinement to be applied, it needs to **be present inside the search state** and have a **corresponding widget mounted**. 
+
+So indeed, we will need a RefinementList mounted on our first `<InstantSearch/>`. Of course, we don’t want to render anything, we just want to apply the refinement. 
+
+Hopefully we can leverage a concept that is called [Virtual Widgets](guide/Virtual_widgets.html). A [Virtual Widget](guide/Virtual_widgets.html) allows you to pre refine any widget without rendering anything. 
+
+Let’s create one for our RefinementList: 
+
+```jsx
+const VirtualRefinementList = connectRefinementList(() => null);
+```
+
+Let’s add it to our first `<InstantSearch/>` instance: 
+
+```jsx
+
+// […]
+
+<InstantSearch
+    appId="latency"
+    apiKey="6be0576ff61c053d5f9a3225e2a90f76"
+    indexName="ikea"
+    onSearchStateChange={this.onSearchStateChange}
+    searchState={this.state.searchState}
+>
+    <View
+    style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: 10,
+    }}
+    >
+    <SearchBox />
+    <TouchableHighlight
+        onPress={() => {
+        this.setModalVisible(true);
+        }}
+    >
+        <Text>Categories</Text>
+    </TouchableHighlight>
+    </View>
+    <Hits />
+    <VirtualRefinementList attributeName="category" />
+    <Categories
+    setModalVisible={this.setModalVisible}
+    modalVisible={this.state.modalVisible}
+    onSearchStateChange={this.onSearchStateChange}
+    searchState={this.state.searchState}
+    />
+</InstantSearch>
+```
+
+🎉  Congrats, categories are now correctly applied!
+
+In this part, we've seen the following:
+- how to synchronise different InstantSearch instances to share the same state. 
+- how to apply a refinement across your whole application when using navigation element such as Modal, Drawer, Tabs… 
+
+## Next steps
+
+At this point, you know the basics of React InstantSearch. Read the guidex to know and do more with it.
+
+You can also checkout our [more advanced React Native example](https://github.com/algolia/react-instantsearch/tree/master/packages/react-instantsearch/examples/react-native) linking `react-instantsearch` to [react-native](https://facebook.github.io/react-native/).
+
+<div class="guide-nav">
+Next: <a href="guide/">Guide →</a>
+</div>
+
+
 
 <div class="guide-nav">
     <div class="guide-nav-left">
