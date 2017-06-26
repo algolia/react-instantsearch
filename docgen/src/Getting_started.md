@@ -1,5 +1,5 @@
 ---
-title: Getting started tutorial
+title: React
 layout: main.pug
 category: gettingstarted
 withHeadings: true
