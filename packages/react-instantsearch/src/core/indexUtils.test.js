@@ -230,11 +230,20 @@ describe('utility method for manipulating the search state', () => {
       });
     });
     it('get results', () => {
-      const searchResults = { results: { hits: ['some'] } };
+      const searchResults = { results: { hits: ['some'], index: 'index' } };
 
       const results = getResults(searchResults, context);
 
-      expect(results).toEqual({ hits: ['some'] });
+      expect(results.hits).toEqual(['some']);
+    });
+    it('get no results if index name is different than context', () => {
+      const searchResults = {
+        results: { hits: ['some'], index: 'otherIndex' },
+      };
+
+      const results = getResults(searchResults, context);
+
+      expect(results).toBeNull();
     });
   });
   describe('when there are multiple index', () => {
@@ -348,7 +357,7 @@ describe('utility method for manipulating the search state', () => {
         },
       };
 
-      expect.assertions(6); //async assertions
+      expect.assertions(7); //async assertions
 
       let expectedRefinement = value => expect(value).toEqual('refinement');
 
@@ -399,6 +408,17 @@ describe('utility method for manipulating the search state', () => {
         {},
         context,
         'refinement',
+        'defaultValue',
+        () => {}
+      );
+
+      expect(value).toEqual('defaultValue');
+
+      value = getCurrentRefinementValue(
+        {},
+        searchState,
+        context,
+        'anotherNamespace.refinement.top',
         'defaultValue',
         () => {}
       );
@@ -491,19 +511,23 @@ describe('utility method for manipulating the search state', () => {
     });
 
     it('get results', () => {
-      let searchResults = { results: { first: { some: 'results' } } };
+      let searchResults = {
+        results: { first: { hits: 'results', index: 'first' } },
+      };
 
-      let results = getResults(searchResults, context);
+      let results = getResults(searchResults, {
+        ais: { mainTargetedIndex: 'first' },
+      });
 
-      expect(results).toEqual({ some: 'results' });
+      expect(results.hits).toEqual('results');
 
-      searchResults = { results: { first: { some: 'results' } } };
+      searchResults = { results: { second: { some: 'results' } } };
 
       results = getResults(searchResults, {
         ais: { mainTargetedIndex: 'first' },
       });
 
-      expect(results).toEqual({ some: 'results' });
+      expect(results).toBeNull();
     });
   });
 });
