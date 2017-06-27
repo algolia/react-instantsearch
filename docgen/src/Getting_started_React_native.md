@@ -319,6 +319,7 @@ const Highlight = connectHighlight(
 Let’s use this new `<Highlight/>` component inside our `<Hits/>` template: 
 
 ```jsx
+
 // [...]
 
 const Hits = connectInfiniteHits(({ hits, hasMore, refine }) => {
