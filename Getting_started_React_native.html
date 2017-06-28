@@ -1,0 +1,684 @@
+<!DOCTYPE html><html><head><base href="/react-instantsearch/"><meta content="IE=edge" http-equiv="X-UA-Compatible"><meta charset="utf-8"><meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport"><link rel="icon" href="assets/img/react-instant-favicon-5717e9ae7b4d3193178bd3693d294c8e.png"><meta content="Add instant-search and autocomplete to your React and React Native apps with a few lines of code. Powered by Algolia." name="description"><!-- / Twitter card--><meta content="summary_large_image" name="twitter:card"><meta content="https://community.algolia.com/react-instantsearch/" name="twitter:site"><meta content="Algolia" name="twitter:creator"><meta content="React InstantSearch" name="twitter:title"><meta content="⚡ Lightning-fast search for React and React Native apps" name="twitter:description"><meta content="https://res.cloudinary.com/hilnmyskv/image/upload/v1481193392/meta-instant-search-react_hrf6st.jpg" name="twitter:image"><!-- / OG meta--><meta content="https://community.algolia.com/react-instantsearch/" property="og:url"><meta content="React InstantSearch" property="og:title"><meta content="https://res.cloudinary.com/hilnmyskv/image/upload/v1481193392/meta-instant-search-react_hrf6st.jpg" property="og:image"><meta content="website" property="og:type"><meta content="⚡ Lightning-fast search for React and React Native apps" property="og:description"><meta content="React InstantSearch" property="og:site_name"><title>React InstantSearch | React Native</title><link rel="stylesheet" href="stylesheets/index-b9aa7e6f8863b98cbdf276c01b11a2b1.css"></head></html><body class="documentation"><nav class="cm-navigation"><div class="cm-navigation__brands"><div class="cm-navigation__brands--algolia"><a id="algoliaLogo" href="https://algolia.com"><img src="images/logo-algolia-2d26f30ee2a934215894d85b6643621a.svg" width="100" alt="Algolia logo"></a></div><div class="cm-navigation__brands--community"><a class="cm-badge no-mobile" href="https://community.algolia.com" title="Click to go to community, hover to access latest community projects"><img src="images/logo-community-30cc6fba75662d98ca03098ee76dddd7.svg"> <span>Community</span></a></div><div class="cm-navigation__brands--project"><a href="">React InstantSearch</a></div><div class="cm-navigation__dropdown-holder"><div class="cm-navigation__brands-dropdown"><div class="cm-navigation__brands-dropdown__container"><div data-inject-community=""></div></div><div class="cm-navigation__brands-dropdown__footer"><a href="https://community.algolia.com"><img class="community-logo" src="https://res.cloudinary.com/hilnmyskv/image/upload/v1484219849/algolia-community-logo-words.svg"></a></div></div></div></div><div class="cm-navigation__menu-mobile-trigger"><button id="open-menu"><img src="images/menu-icon-abd3d907f4e1a298716f93345dd9c901.svg"></button></div><div class="cm-navigation__menu"><div class="cm-menu__search"><div class="cm-menu__search--holder"><div class="cm-search__input"><input id="searchbox" placeholder="Search something.." type="search"><button id="search"><svg><use xlink:href="#search-icon"></use></svg></button><button id="cancel"><svg><use xlink:href="#cancel-icon"></use></svg></button></div></div></div><ul class="cm-menu__list"><li class="cm-menu__list__item"><a class="dropdown-toggler" aria-controls="dropdown-1" aria-expanded="false" data-toggle-dropdown="dropdown-1">Getting Started <span class="glyph">&#x25BC;</span></a><ul class="simple-dropdown" id="dropdown-1" role="tree" tabindex="-1"><li><a href="Getting_Started.html" role="treeitem" data-link="true">React</a></li><li><a href="Getting_Started_React_Native.html" role="treeitem" data-link="true">React Native</a></li></ul></li><li class="cm-menu__list__item"><a class="dropdown-toggler" aria-controls="dropdown-2" aria-expanded="false" data-toggle-dropdown="dropdown-2">Learn <span class="glyph">&#x25BC;</span></a><ul class="simple-dropdown" id="dropdown-2" role="tree" tabindex="-1"><li><a href="guide/" role="treeitem" data-link="true">Guides</a></li><li><a href="videos/" role="treeitem" data-link="true">Videos</a></li></ul></li><li class="cm-menu__list__item"><a class="dropdown-toggler" aria-controls="dropdown-3" aria-expanded="false" data-toggle-dropdown="dropdown-3">API <span class="glyph">&#x25BC;</span></a><ul class="simple-dropdown" id="dropdown-3" role="tree" tabindex="-1"><li><a href="widgets/InstantSearch.html" role="treeitem" data-link="true">&lt;InstantSearch&gt;</a></li><li><a href="widgets/&lt;Index&gt;.html" role="treeitem" data-link="true">&lt;Index&gt;</a></li><li><a href="widgets/" role="treeitem" data-link="true">Widgets</a></li><li><a href="connectors/" role="treeitem" data-link="true">Connectors</a></li></ul></li><li class="cm-menu__list__item"><a class="dropdown-toggler" aria-controls="dropdown-4" aria-expanded="false" data-toggle-dropdown="dropdown-4">Examples <span class="glyph">&#x25BC;</span></a><ul class="simple-dropdown" id="dropdown-4" role="tree" tabindex="-1"><li><a href="examples/Demos.html" role="treeitem" data-link="true">Demos</a></li><li><a href="examples/Recipes.html" role="treeitem" data-link="true">Recipes</a></li></ul></li><li class="cm-menu__list__item"><a href="https://github.com/algolia/react-instantsearch/" data-link="true"><figure class="github-icon"><svg width="40px" height="39px"><use xlink:href="#github-icon"></use></svg><figcaption>GitHub</figcaption></figure></a></li></ul></div></nav><svg style="display: none;"><defs><symbol id="search-icon" viewbox="0 0 15 15"><path d="M10.052 10.88c-1.1.91-2.483 1.406-3.91 1.403C2.75 12.283 0 9.533 0 6.14 0 2.75 2.75 0 6.142 0c3.392 0 6.14 2.75 6.14 6.142 0 1.485-.526 2.847-1.403 3.91l3.95 3.95c.227.227.228.596-.002.826-.228.227-.597.228-.826 0l-3.95-3.95zm-3.91.234c2.745 0 4.972-2.227 4.972-4.972 0-2.747-2.227-4.972-4.972-4.972-2.747 0-4.972 2.225-4.972 4.972 0 2.745 2.225 4.972 4.972 4.972z" fill-rule="evenodd"></path></symbol><symbol id="cancel-icon" viewbox="0 0 13 13"><path d="M5.274 6.5L.614 1.84 0 1.225 1.226 0l.613.613 4.66 4.66 4.66-4.66.614-.613L13 1.226l-.613.613-4.66 4.66 4.66 4.66.613.614L11.774 13l-.613-.613-4.66-4.66-4.66 4.66-.614.613L0 11.774l.613-.613" fill-rule="evenodd"></path></symbol><symbol id="github-icon" viewbox="0 0 40 39"><path id="Shape" d="M19.998,0 C8.955,0 0,8.954 0,20 C0,28.837 5.73,36.333 13.678,38.977 C14.678,39.161 15.043,38.544 15.043,38.013 C15.043,37.538 15.026,36.281 15.016,34.613 C9.453,35.82 8.28,31.93 8.28,31.93 C7.37,29.62 6.058,29.005 6.058,29.005 C4.242,27.765 6.195,27.79 6.195,27.79 C8.203,27.93 9.259,29.85 9.259,29.85 C11.042,32.907 13.939,32.024 15.079,31.512 C15.259,30.222 15.777,29.339 16.349,28.839 C11.907,28.334 7.239,26.617 7.239,18.954 C7.239,16.771 8.019,14.984 9.297,13.587 C9.091,13.081 8.404,11.047 9.493,8.294 C9.493,8.294 11.173,7.756 14.993,10.344 C16.624924,9.89926425 18.308563,9.672627 20,9.67 C21.7,9.68 23.41,9.9 25.008,10.345 C28.826,7.757 30.502,8.295 30.502,8.295 C31.592,11.048 30.907,13.082 30.702,13.588 C31.984,14.985 32.757,16.772 32.757,18.955 C32.757,26.638 28.081,28.329 23.627,28.823 C24.343,29.441 24.983,30.661 24.983,32.526 C24.983,35.201 24.958,37.358 24.958,38.013 C24.958,38.549 25.318,39.171 26.334,38.976 C34.274,36.326 40,28.836 40,20 C40,8.955 31.045,0 19.998,0"></path></symbol></defs></svg><section class="hero-section shrink"><div class="container"><div class="hero-container"><div class="fl-left article-title doc-only"><figure><img src="images/react-instant-search-logo-947d8b3814b2be59641f8ba04e6e5d5b.svg" width="46"><figcaption><h1>React Native</h1></figcaption></figure></div></div></div></section><section class="documentation-section"><a class="sidebar-opener"></a><div class="container"><nav class="sidebar"><div class="sidebar-container sidebar-navScroll"><h2 class="sidebar-header">React Native</h2><ul class="sidebar-elements"><li class="sidebar-element level-h2 navItem Getting_started_React_native.html"><a href="Getting_started.html">React</a><ul></ul></li><li class="sidebar-element level-h2 navItem-active Getting_started_React_native.html"><a class="navItem-active" href="Getting_started_React_native.html">React Native</a><ul><li class="sidebar-element level-h3"><a href="Getting_started_React_native.html#welcome-to-react-instantsearch">Welcome to React InstantSearch </a></li><li class="sidebar-element level-h3"><a href="Getting_started_React_native.html#before-we-start">Before we start </a></li><li class="sidebar-element level-h3"><a href="Getting_started_React_native.html#install-react-instantsearch">Install react-instantsearch </a></li><li class="sidebar-element level-h3"><a href="Getting_started_React_native.html#add-the-instantsearch-component">Add the &lt;InstantSearch&gt; component </a></li><li class="sidebar-element level-h3"><a href="Getting_started_React_native.html#display-infinite-results">Display infinite results </a></li><li class="sidebar-element level-h3"><a href="Getting_started_React_native.html#add-a-searchbox">Add a SearchBox </a></li><li class="sidebar-element level-h3"><a href="Getting_started_React_native.html#highlight-your-results">Highlight your results </a></li><li class="sidebar-element level-h3"><a href="Getting_started_React_native.html#filter-your-results">Filter your results </a></li><li class="sidebar-element level-h3"><a href="Getting_started_React_native.html#putting-our-filters-in-a-modal">Putting our filters in a Modal </a></li><li class="sidebar-element level-h3"><a href="Getting_started_React_native.html#next-steps">Next steps </a></li></ul></li></ul></div></nav><div class="documentation-container"><div class="content"><h2 id="welcome-to-react-instantsearch">Welcome to React InstantSearch <a class="anchor" href="Getting_started_React_native.html#welcome-to-react-instantsearch" aria-hidden="true"></a></h2>
+<p>Get your app running with React Native using React InstantSearch in 7 Easy Steps:</p>
+<ol>
+<li>install <code>react-instantsearch</code> in your <a href="https://facebook.github.io/react-native/">React Native</a>  project</li>
+<li>bootstrap an app using the <code>&lt;InstantSearch&gt;</code> component</li>
+<li>display infinite results from Algolia</li>
+<li>add a search box</li>
+<li>highlight the results that match the query</li>
+<li>filter the results</li>
+<li>display those filter in a modal</li>
+</ol>
+<h2 id="before-we-start">Before we start <a class="anchor" href="Getting_started_React_native.html#before-we-start" aria-hidden="true"></a></h2>
+<p>React InstantSearch is meant to be used with Algolia, therefore, you’ll need the credentials to an Algolia index. To make it easier for you to get started, here are the credentials to an already configured index:</p>
+<ul>
+<li>appId: latency</li>
+<li>searchKey: 3d9875e51fbd20c7754e65422f7ce5e1</li>
+<li>indexName: ikea</li>
+</ul>
+<p>It contains sample data for an e-commerce website.</p>
+<p>This guide also expects you to have a working <a href="https://facebook.github.io/react-native/">React Native</a> project. If you need to setup a <a href="https://facebook.github.io/react-native/">React Native</a> project, we suggest you use <a href="https://github.com/react-community/create-react-native-app">create-react-native-app</a> which is the <a href="https://facebook.github.io/react-native/docs/getting-started.html">easiest way to start building a new React Native application</a>. You can get your React Native app running within a few seconds and see the results using the <a href="https://itunes.apple.com/app/apple-store/id982107779?ct=www&amp;mt=8">iOS Expo client</a> or the <a href="https://play.google.com/store/apps/details?id=host.exp.exponent&amp;referrer=www">Android Expo client</a>.</p>
+<h2 id="install-react-instantsearch">Install react-instantsearch <a class="anchor" href="Getting_started_React_native.html#install-react-instantsearch" aria-hidden="true"></a></h2>
+<p>React InstantSearch is available in the <a href="https://www.npmjs.com">npm</a> registry. To install it:</p>
+<pre class="code-sample language-shell">
+  <div class="heading">Command</div>
+  <div class="code-wrap">
+    <code>yarn add react-instantsearch
+</code>
+  </div>
+</pre>
+<p>Note: we use <code>yarn add</code> to install dependencies but React InstantSearch is also installable via <code>npm install --save react-instantsearch</code>.</p>
+<h2 id="add-the-instantsearch-component">Add the <code>&lt;InstantSearch&gt;</code> component <a class="anchor" href="Getting_started_React_native.html#add-the-instantsearch-component" aria-hidden="true"></a></h2>
+<p><a href="widgets/InstantSearch.html"><code>&lt;InstantSearch&gt;</code></a> is the component that will connect to Algolia
+and will synchronise all the widgets together.</p>
+<p>It maintains the state of the search, does the queries, and provides the results to the widgets so that they can update themselves when needed.</p>
+<pre class="code-sample language-jsx">
+  <div class="heading">Code</div>
+  <div class="code-wrap">
+    <code><span class="cs-keyword">import</span> <span class="cs-def">React</span> <span class="cs-keyword">from</span> <span class="cs-string">&#39;react&#39;</span>;
+<span class="cs-keyword">import</span> { <span class="cs-def">InstantSearch</span> } <span class="cs-keyword">from</span> <span class="cs-string">&#39;react-instantsearch/native&#39;</span>;
+<span class="cs-keyword">import</span> { <span class="cs-def">StyleSheet</span>, <span class="cs-def">View</span> } <span class="cs-keyword">from</span> <span class="cs-string">&#39;react-native&#39;</span>;
+
+<span class="cs-keyword">export</span> <span class="cs-keyword">default</span> <span class="cs-keyword">class</span> <span class="cs-def">App</span> <span class="cs-keyword">extends</span> <span class="cs-variable">React</span>.<span class="cs-property">Component</span> {
+  <span class="cs-property">render</span>() {
+    <span class="cs-keyword">return</span> (
+      <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">View</span> <span class="cs-attribute">style</span>={<span class="cs-variable">styles</span>.<span class="cs-property">container</span>}<span class="cs-tag cs-bracket">&gt;</span>
+        <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">InstantSearch</span>
+          <span class="cs-attribute">appId</span>=<span class="cs-string">&quot;latency&quot;</span>
+          <span class="cs-attribute">apiKey</span>=<span class="cs-string">&quot;6be0576ff61c053d5f9a3225e2a90f76&quot;</span>
+          <span class="cs-attribute">indexName</span>=<span class="cs-string">&quot;ikea&quot;</span>
+        <span class="cs-tag cs-bracket">&gt;</span>
+          <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">Text</span><span class="cs-tag cs-bracket">&gt;</span> 
+            Congrats 🎉! Your application is now connected to Algolia!
+          <span class="cs-tag cs-bracket">&lt;/</span><span class="cs-tag">Text</span><span class="cs-tag cs-bracket">&gt;</span> 
+        <span class="cs-tag cs-bracket">&lt;/</span><span class="cs-tag">InstantSearch</span><span class="cs-tag cs-bracket">&gt;</span>
+      <span class="cs-tag cs-bracket">&lt;/</span><span class="cs-tag">View</span><span class="cs-tag cs-bracket">&gt;</span>
+    );
+  }
+}
+
+<span class="cs-keyword">const</span> <span class="cs-def">styles</span> <span class="cs-operator">=</span> <span class="cs-variable">StyleSheet</span>.<span class="cs-property">create</span>({
+  <span class="cs-property">container</span>: {
+    <span class="cs-property">flex</span>: <span class="cs-number">1</span>,
+    <span class="cs-property">marginTop</span>: <span class="cs-number">20</span>,
+  },
+});
+</code>
+  </div>
+</pre>
+<p><code>appId</code>, <code>apiKey</code> and <code>indexName</code> are mandatory. Those props are the
+credentials of your application in Algolia. They can be found in your <a href="https://www.algolia.com/api-keys">Algolia
+dashboard</a>.</p>
+<p>Congrats 🎉! Your application is now connected to Algolia.</p>
+<div class="highlight-key-part">
+  <div class="highlight-key-part__title">In this section we've seen:</div>
+<ul>
+<li>
+<p>How to connect a part of a <a href="https://facebook.github.io/react/">React</a> application to Algolia</p>
+</li>
+<li>
+<p>How to configure your Algolia credentials</p>
+</li>
+</ul>
+<blockquote>
+<p>To get more <em>under the hood</em> information about the <code>&lt;InstantSearch&gt;</code> wrapper
+component, <a href="guide/%3CInstantSearch%3E.html">read our guide</a>.</p>
+</blockquote>
+</div>
+<h2 id="display-infinite-results">Display infinite results <a class="anchor" href="Getting_started_React_native.html#display-infinite-results" aria-hidden="true"></a></h2>
+<p>The core of a search experience is to display results. By default, React InstantSearch will do a query at the start of the page and will retrieve the most relevant hits. Because we are on mobile, it makes sense to create an infinite scroll experience.</p>
+<p>We don’t provide any widgets for React native yet, but you’ll still be able to build an amazing search experience using what we call <a href="guide/Connectors.html">connectors</a>.</p>
+<p>Connectors are higher order components. They encapsulate the logic for a specific kind of widget and they provide a way to interact with the InstantSearch context.</p>
+<p><strong>Checkout our dedicated <a href="guide/connectors.html">connectors guide</a>. to learn more about them</strong></p>
+<p>To display results, we are going to use the <a href="connectors/connectInfiniteHits.html">connectInfiniteHits</a> connector.
+This connector will give you all the results returned by Algolia, and it will update when there are new results. It will also keep track of all the accumulated hits while the user is scrolling.</p>
+<p>This connector gives you three interesting properties:</p>
+<ul>
+<li><code>hits</code>, the records that match the search state</li>
+<li><code>hasMore</code>, a boolean that indicates if there are more pages to load</li>
+<li><code>refine</code>, the function to call when the end of the page is reached to load more results.</li>
+</ul>
+<p>On the React Native side we are going to take advantage of the <a href="https://facebook.github.io/react-native/docs/flatlist.html">FlatList</a> to render this infinite scroll.</p>
+<p>Let’s create our own React Native Infinite Hits widget:</p>
+<pre class="code-sample language-jsx">
+  <div class="heading">Code</div>
+  <div class="code-wrap">
+    <code><span class="cs-comment">// First, we need to add the connectInfiniteHits connector to our import</span>
+<span class="cs-keyword">import</span> { <span class="cs-def">connectInfiniteHits</span> } <span class="cs-keyword">from</span> <span class="cs-string">&#39;react-instantsearch/connectors&#39;</span>;
+<span class="cs-comment">// We also need to import the FlatList and other React Native component</span>
+<span class="cs-keyword">import</span> { <span class="cs-def">StyleSheet</span>, <span class="cs-def">View</span>, <span class="cs-def">FlatList</span>, <span class="cs-def">Image</span>, <span class="cs-def">Text</span> } <span class="cs-keyword">from</span> <span class="cs-string">&#39;react-native&#39;</span>;
+
+
+<span class="cs-comment">// [...]</span>
+
+<span class="cs-keyword">const</span> <span class="cs-def">Hits</span> <span class="cs-operator">=</span> <span class="cs-variable">connectInfiniteHits</span>(({ <span class="cs-def">hits</span>, <span class="cs-def">hasMore</span>, <span class="cs-def">refine</span> }) <span class="cs-operator">=&gt;</span> {
+
+  <span class="cs-comment">/* if there are still results, you can </span>
+<span class="cs-comment">  call the refine function to load more */</span>
+  <span class="cs-keyword">const</span> <span class="cs-def">onEndReached</span> <span class="cs-operator">=</span> <span class="cs-keyword">function</span>() {
+    <span class="cs-keyword">if</span> (<span class="cs-variable-2">hasMore</span>) {
+      <span class="cs-variable-2">refine</span>();
+    }
+  };
+
+  <span class="cs-keyword">return</span> (
+    <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">FlatList</span>
+      <span class="cs-attribute">data</span>={<span class="cs-variable">hits</span>}
+      <span class="cs-attribute">onEndReached</span>={<span class="cs-variable">onEndReached</span>}
+      <span class="cs-attribute">keyExtractor</span>={(<span class="cs-variable">item</span>, <span class="cs-variable">index</span>) <span class="cs-operator">=&gt;</span> <span class="cs-variable">item</span>.<span class="cs-property">objectID</span>}
+      <span class="cs-attribute">renderItem</span>={({ <span class="cs-property">item</span> }) <span class="cs-operator">=&gt;</span> {
+        <span class="cs-keyword">return</span> (
+          <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">View</span> <span class="cs-attribute">style</span>={{ <span class="cs-variable">flexDirection</span>: <span class="cs-string">&#39;row&#39;</span>, <span class="cs-variable">alignItems</span>: <span class="cs-string">&#39;center&#39;</span> }}<span class="cs-tag cs-bracket">&gt;</span>
+            <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">Image</span>
+              <span class="cs-attribute">style</span>={{ <span class="cs-variable">height</span>: <span class="cs-number">100</span>, <span class="cs-variable">width</span>: <span class="cs-number">100</span> }}
+              <span class="cs-attribute">source</span>={{ <span class="cs-variable">uri</span>: <span class="cs-variable">item</span>.<span class="cs-property">image</span> }}
+            <span class="cs-tag cs-bracket">/&gt;</span>
+            <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">View</span> <span class="cs-attribute">style</span>={{ <span class="cs-variable">flex</span>: <span class="cs-number">1</span> }}<span class="cs-tag cs-bracket">&gt;</span>
+              <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">Text</span><span class="cs-tag cs-bracket">&gt;</span>
+                {<span class="cs-variable">item</span>.<span class="cs-property">name</span>}
+              <span class="cs-tag cs-bracket">&lt;/</span><span class="cs-tag">Text</span><span class="cs-tag cs-bracket">&gt;</span>
+              <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">Text</span><span class="cs-tag cs-bracket">&gt;</span>
+                {<span class="cs-variable">item</span>.<span class="cs-property">type</span>}
+              <span class="cs-tag cs-bracket">&lt;/</span><span class="cs-tag">Text</span><span class="cs-tag cs-bracket">&gt;</span>
+            <span class="cs-tag cs-bracket">&lt;/</span><span class="cs-tag">View</span><span class="cs-tag cs-bracket">&gt;</span>
+          <span class="cs-tag cs-bracket">&lt;/</span><span class="cs-tag">View</span><span class="cs-tag cs-bracket">&gt;</span>
+        );
+      }}
+    <span class="cs-tag cs-bracket">/&gt;</span>
+  );
+});
+</code>
+  </div>
+</pre>
+<p>We can then call this component in the render function of <code>&lt;App/&gt;</code>:</p>
+<pre class="code-sample language-jsx">
+  <div class="heading">Code</div>
+  <div class="code-wrap">
+    <code><span class="cs-keyword">const</span> <span class="cs-def">App</span> <span class="cs-operator">=</span> () <span class="cs-operator">=&gt;</span>
+  <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">InstantSearch</span>
+    <span class="cs-attribute">appId</span>=<span class="cs-string">&quot;latency&quot;</span>
+    <span class="cs-attribute">apiKey</span>=<span class="cs-string">&quot;3d9875e51fbd20c7754e65422f7ce5e1&quot;</span>
+    <span class="cs-attribute">indexName</span>=<span class="cs-string">&quot;ikea&quot;</span>
+  <span class="cs-tag cs-bracket">&gt;</span>
+   <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">Hits</span><span class="cs-tag cs-bracket">/&gt;</span>
+  <span class="cs-tag cs-bracket">&lt;/</span><span class="cs-tag">InstantSearch</span><span class="cs-tag cs-bracket">&gt;</span>
+</code>
+  </div>
+</pre>
+<p>You should now be able to see the results and scroll to fetch more of them. Of course depending of the attributes available on your records you might want to change this template.</p>
+<div class="highlight-key-part">
+  <div class="highlight-key-part__title">In this section we've seen:</div>
+<ul>
+<li>
+<p>how to display the results from Algolia</p>
+</li>
+<li>
+<p>how to build an infinite scrolling experience</p>
+</li>
+</ul>
+</div>
+<h2 id="add-a-searchbox">Add a SearchBox <a class="anchor" href="Getting_started_React_native.html#add-a-searchbox" aria-hidden="true"></a></h2>
+<p>Now that we’ve added the results, we can start querying our index. To do this, we are gonna use the <a href="connectors/connectSearchBox.html">connectSearchBox</a> connector.</p>
+<p>This connector gives you two interesting properties:</p>
+<ul>
+<li><code>currentRefinement</code>, the current query</li>
+<li><code>refine</code>, the function to call when a new query is entered. It takes the new query as a parameter.</li>
+</ul>
+<p>On the React Native side we are going to take advantage of the <a href="http://facebook.github.io/react-native/releases/0.45/docs/textinput.html#textinput">TextInput</a> to render this search box.</p>
+<pre class="code-sample language-jsx">
+  <div class="heading">Code</div>
+  <div class="code-wrap">
+    <code><span class="cs-comment">// We need to add the connectSearchBox to our import</span>
+<span class="cs-keyword">import</span> {
+  <span class="cs-def">connectInfiniteHits</span>,
+  <span class="cs-def">connectSearchBox</span>,
+} <span class="cs-keyword">from</span> <span class="cs-string">&#39;react-instantsearch/connectors&#39;</span>;
+<span class="cs-comment">// We need to add the TextInput to our import</span>
+<span class="cs-keyword">import</span> {
+  <span class="cs-def">StyleSheet</span>,
+  <span class="cs-def">View</span>,
+  <span class="cs-def">FlatList</span>,
+  <span class="cs-def">Image</span>,
+  <span class="cs-def">Text</span>,
+  <span class="cs-def">TextInput</span>,
+} <span class="cs-keyword">from</span> <span class="cs-string">&#39;react-native&#39;</span>;
+
+<span class="cs-comment">// [...]</span>
+
+<span class="cs-keyword">const</span> <span class="cs-def">SearchBox</span> <span class="cs-operator">=</span> <span class="cs-variable">connectSearchBox</span>(({ <span class="cs-def">refine</span>, <span class="cs-def">currentRefinement</span> }) <span class="cs-operator">=&gt;</span> {
+
+  <span class="cs-keyword">const</span> <span class="cs-def">styles</span> <span class="cs-operator">=</span> {
+    <span class="cs-property">height</span>: <span class="cs-number">60</span>,
+    <span class="cs-property">borderWidth</span>: <span class="cs-number">1</span>,
+    <span class="cs-property">padding</span>: <span class="cs-number">10</span>,
+    <span class="cs-property">margin</span>: <span class="cs-number">10</span>,
+    <span class="cs-property">flex</span>: <span class="cs-number">1</span>,
+  };
+
+  <span class="cs-keyword">return</span> (
+    <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">TextInput</span>
+      <span class="cs-attribute">style</span>={<span class="cs-variable">styles</span>}
+      <span class="cs-attribute">onChangeText</span>={<span class="cs-variable">text</span> <span class="cs-operator">=&gt;</span> <span class="cs-variable">refine</span>(<span class="cs-variable">text</span>)}
+      <span class="cs-attribute">value</span>={<span class="cs-variable">currentRefinement</span>}
+      <span class="cs-attribute">placeholder</span>={<span class="cs-string">&#39;Search a product...&#39;</span>}
+      <span class="cs-attribute">clearButtonMode</span>={<span class="cs-string">&#39;always&#39;</span>}
+      <span class="cs-attribute">spellCheck</span>={<span class="cs-atom">false</span>}
+      <span class="cs-attribute">autoCorrect</span>={<span class="cs-atom">false</span>}
+      <span class="cs-attribute">autoCapitalize</span>={<span class="cs-string">&#39;none&#39;</span>}
+    <span class="cs-tag cs-bracket">/&gt;</span>
+  );
+});
+
+</code>
+  </div>
+</pre>
+<p>Let’s add this new <code>&lt;SearchBox&gt;</code> component to our InstantSearch instance.</p>
+<pre class="code-sample language-jsx">
+  <div class="heading">Code</div>
+  <div class="code-wrap">
+    <code><span class="cs-keyword">const</span> <span class="cs-def">App</span> <span class="cs-operator">=</span> () <span class="cs-operator">=&gt;</span>
+  <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">View</span> <span class="cs-attribute">style</span>={<span class="cs-variable">styles</span>.<span class="cs-property">container</span>}<span class="cs-tag cs-bracket">&gt;</span>
+    <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">InstantSearch</span>
+      <span class="cs-attribute">appId</span>=<span class="cs-string">&quot;latency&quot;</span>
+      <span class="cs-attribute">apiKey</span>=<span class="cs-string">&quot;6be0576ff61c053d5f9a3225e2a90f76&quot;</span>
+      <span class="cs-attribute">indexName</span>=<span class="cs-string">&quot;ikea&quot;</span>
+    <span class="cs-tag cs-bracket">&gt;</span>
+      <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">View</span>
+        <span class="cs-attribute">style</span>={{
+          <span class="cs-variable">flexDirection</span>: <span class="cs-string">&#39;row&#39;</span>,
+        }}
+      <span class="cs-tag cs-bracket">&gt;</span>
+        <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">SearchBox</span> <span class="cs-tag cs-bracket">/&gt;</span>
+      <span class="cs-tag cs-bracket">&lt;/</span><span class="cs-tag">View</span><span class="cs-tag cs-bracket">&gt;</span>
+      <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">Hits</span> <span class="cs-tag cs-bracket">/&gt;</span>
+    <span class="cs-tag cs-bracket">&lt;/</span><span class="cs-tag">InstantSearch</span><span class="cs-tag cs-bracket">&gt;</span>
+  <span class="cs-tag cs-bracket">&lt;/</span><span class="cs-tag">View</span><span class="cs-tag cs-bracket">&gt;</span>
+</code>
+  </div>
+</pre>
+<div class="highlight-key-part">
+  <div class="highlight-key-part__title">In this section we've seen:</div>
+<ul>
+<li>how to add a SearchBox to make queries into the records</li>
+</ul>
+</div>
+<h2 id="highlight-your-results">Highlight your results <a class="anchor" href="Getting_started_React_native.html#highlight-your-results" aria-hidden="true"></a></h2>
+<p>The search is now interactive but we don’t see what matched in each of the products.</p>
+<p>Good thing for us, Algolia computes the matching part.</p>
+<p>For taking  advantage of this feature, we need to use the <a href="connectors/connectHighlight.html">connectHighlight</a> connector. Let’s create a new <code>&lt;Highlight&gt;</code> component.</p>
+<p>This connector gives you one interesting properties:</p>
+<ul>
+<li><code>highlight</code>, a function that returns an array of parsed hits indicating if they are highlighted or not.</li>
+</ul>
+<p>When using this component you will have to provide two properties:</p>
+<ul>
+<li><code>attributeName</code> attribute name from the record that you want to highlight.</li>
+<li><code>hit</code> , the hit to highlight</li>
+</ul>
+<pre class="code-sample language-jsx">
+  <div class="heading">Code</div>
+  <div class="code-wrap">
+    <code><span class="cs-comment">// We need to import the connectHighlight to our import</span>
+<span class="cs-keyword">import</span> {
+  <span class="cs-def">connectInfiniteHits</span>,
+  <span class="cs-def">connectSearchBox</span>,
+  <span class="cs-def">connectHighlight</span>,
+} <span class="cs-keyword">from</span> <span class="cs-string">&#39;react-instantsearch/connectors&#39;</span>;
+
+<span class="cs-keyword">const</span> <span class="cs-def">Highlight</span> <span class="cs-operator">=</span> <span class="cs-variable">connectHighlight</span>(
+  ({ <span class="cs-def">highlight</span>, <span class="cs-def">attributeName</span>, <span class="cs-def">hit</span>, <span class="cs-def">highlightProperty</span> }) <span class="cs-operator">=&gt;</span> {
+    <span class="cs-keyword">const</span> <span class="cs-def">parsedHit</span> <span class="cs-operator">=</span> <span class="cs-variable-2">highlight</span>({
+      <span class="cs-property">attributeName</span>,
+      <span class="cs-property">hit</span>,
+      <span class="cs-property">highlightProperty</span>: <span class="cs-string">&#39;_highlightResult&#39;</span>,
+    });
+    <span class="cs-keyword">const</span> <span class="cs-def">highlightedHit</span> <span class="cs-operator">=</span> <span class="cs-variable-2">parsedHit</span>.<span class="cs-property">map</span>((<span class="cs-def">part</span>, <span class="cs-def">idx</span>) <span class="cs-operator">=&gt;</span> {
+      <span class="cs-keyword">if</span> (<span class="cs-variable-2">part</span>.<span class="cs-property">isHighlighted</span>)
+        <span class="cs-keyword">return</span> (
+          <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">Text</span> <span class="cs-attribute">key</span>={<span class="cs-variable">idx</span>} <span class="cs-attribute">style</span>={{ <span class="cs-variable">backgroundColor</span>: <span class="cs-string">&#39;#ffff99&#39;</span> }}<span class="cs-tag cs-bracket">&gt;</span>
+            {<span class="cs-variable">part</span>.<span class="cs-property">value</span>}
+          <span class="cs-tag cs-bracket">&lt;/</span><span class="cs-tag">Text</span><span class="cs-tag cs-bracket">&gt;</span>
+        );
+      <span class="cs-keyword">return</span> <span class="cs-variable-2">part</span>.<span class="cs-property">value</span>;
+    });
+    <span class="cs-keyword">return</span> <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">Text</span><span class="cs-tag cs-bracket">&gt;</span>{<span class="cs-variable">highlightedHit</span>}<span class="cs-tag cs-bracket">&lt;/</span><span class="cs-tag">Text</span><span class="cs-tag cs-bracket">&gt;</span>;
+  }
+);
+</code>
+  </div>
+</pre>
+<p>Let’s use this new <code>&lt;Highlight/&gt;</code> component inside our <code>&lt;Hits/&gt;</code> template:</p>
+<pre class="code-sample language-jsx">
+  <div class="heading">Code</div>
+  <div class="code-wrap">
+    <code>
+<span class="cs-comment">// [...]</span>
+
+<span class="cs-keyword">const</span> <span class="cs-def">Hits</span> <span class="cs-operator">=</span> <span class="cs-variable">connectInfiniteHits</span>(({ <span class="cs-def">hits</span>, <span class="cs-def">hasMore</span>, <span class="cs-def">refine</span> }) <span class="cs-operator">=&gt;</span> {
+  
+ <span class="cs-comment">// [...]</span>
+
+  <span class="cs-keyword">return</span> (
+    <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">FlatList</span>
+      <span class="cs-attribute">data</span>={<span class="cs-variable">hits</span>}
+      <span class="cs-attribute">onEndReached</span>={<span class="cs-variable">onEndReached</span>}
+      <span class="cs-attribute">keyExtractor</span>={(<span class="cs-variable">item</span>, <span class="cs-variable">index</span>) <span class="cs-operator">=&gt;</span> <span class="cs-variable">item</span>.<span class="cs-property">objectID</span>}
+      <span class="cs-attribute">renderItem</span>={({ <span class="cs-property">item</span> }) <span class="cs-operator">=&gt;</span> {
+        <span class="cs-keyword">return</span> (
+          <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">View</span> <span class="cs-attribute">style</span>={{ <span class="cs-variable">flexDirection</span>: <span class="cs-string">&#39;row&#39;</span>, <span class="cs-variable">alignItems</span>: <span class="cs-string">&#39;center&#39;</span> }}<span class="cs-tag cs-bracket">&gt;</span>
+            <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">Image</span>
+              <span class="cs-attribute">style</span>={{ <span class="cs-variable">height</span>: <span class="cs-number">100</span>, <span class="cs-variable">width</span>: <span class="cs-number">100</span> }}
+              <span class="cs-attribute">source</span>={{ <span class="cs-variable">uri</span>: <span class="cs-variable">item</span>.<span class="cs-property">image</span> }}
+            <span class="cs-tag cs-bracket">/&gt;</span>
+            <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">View</span> <span class="cs-attribute">style</span>={{ <span class="cs-variable">flex</span>: <span class="cs-number">1</span> }}<span class="cs-tag cs-bracket">&gt;</span>
+              <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">Text</span><span class="cs-tag cs-bracket">&gt;</span>
+                <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">Highlight</span> <span class="cs-attribute">attributeName</span>=<span class="cs-string">&quot;name&quot;</span> <span class="cs-attribute">hit</span>={<span class="cs-variable">item</span>} <span class="cs-tag cs-bracket">/&gt;</span>
+              <span class="cs-tag cs-bracket">&lt;/</span><span class="cs-tag">Text</span><span class="cs-tag cs-bracket">&gt;</span>
+              <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">Text</span><span class="cs-tag cs-bracket">&gt;</span>
+                <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">Highlight</span> <span class="cs-attribute">attributeName</span>=<span class="cs-string">&quot;type&quot;</span> <span class="cs-attribute">hit</span>={<span class="cs-variable">item</span>} <span class="cs-tag cs-bracket">/&gt;</span>
+              <span class="cs-tag cs-bracket">&lt;/</span><span class="cs-tag">Text</span><span class="cs-tag cs-bracket">&gt;</span>
+            <span class="cs-tag cs-bracket">&lt;/</span><span class="cs-tag">View</span><span class="cs-tag cs-bracket">&gt;</span>
+          <span class="cs-tag cs-bracket">&lt;/</span><span class="cs-tag">View</span><span class="cs-tag cs-bracket">&gt;</span>
+        );
+      }}
+    <span class="cs-tag cs-bracket">/&gt;</span>
+  );
+});
+</code>
+  </div>
+</pre>
+<p>Now the search displays the results and highlights the part of the hit attribute that matches the query. This pattern is very important in search, especially with Algolia, so that the user knows what’s going on. This way the search experience becomes a dialogue between the user and the data.</p>
+<div class="highlight-key-part">
+  <div class="highlight-key-part__title">In this section we've seen:</div>
+<ul>
+<li>
+<p>how to highlight the matched part of the results</p>
+</li>
+<li>
+<p>the importance of highlighting in a text-based search</p>
+</li>
+</ul>
+</div>
+<h2 id="filter-your-results">Filter your results <a class="anchor" href="Getting_started_React_native.html#filter-your-results" aria-hidden="true"></a></h2>
+<p>While the SearchBox is the way to go when it comes to textual search, you may also want to provide filters based on the structure of the records.</p>
+<p>Algolia provides a set of parameters for filtering by facets, numbers or even geolocation. React InstantSearch packages those into a set of widgets (only for web) and connectors.</p>
+<p>Since the dataset used here is an e-commerce one, let’s filter the products by categories using a the <a href="connectors/connectRefinementList.html">connectRefinementList</a> connector.</p>
+<p>This connector gives you two interesting properties:</p>
+<ul>
+<li><code>items</code>, the list of refinements. Each item has a <code>isRefined</code> property indicating if they are selected or not.</li>
+<li><code>refine</code>, the function to call when a new category is selected</li>
+</ul>
+<p>On the React Native side we are going to take advantage of the <a href="https://facebook.github.io/react-native/docs/flatlist.html">FlatList</a> and the <a href="http://facebook.github.io/react-native/releases/0.45/docs/touchablehighlight.html#touchablehighlight">TouchableHighlight</a> component to render this refinement list.</p>
+<pre class="code-sample language-jsx">
+  <div class="heading">Code</div>
+  <div class="code-wrap">
+    <code><span class="cs-comment">// We need to add the RefinementList to our import</span>
+<span class="cs-keyword">import</span> {
+  <span class="cs-def">connectInfiniteHits</span>,
+  <span class="cs-def">connectSearchBox</span>,
+  <span class="cs-def">connectHighlight</span>,
+  <span class="cs-def">connectRefinementList</span>,
+} <span class="cs-keyword">from</span> <span class="cs-string">&#39;react-instantsearch/connectors&#39;</span>;
+<span class="cs-comment">// We need to add the TouchableHighlight to our import</span>
+<span class="cs-keyword">import</span> {
+  <span class="cs-def">StyleSheet</span>,
+  <span class="cs-def">View</span>,
+  <span class="cs-def">FlatList</span>,
+  <span class="cs-def">Image</span>,
+  <span class="cs-def">Text</span>,
+  <span class="cs-def">TextInput</span>,
+  <span class="cs-def">TouchableHighlight</span>,
+} <span class="cs-keyword">from</span> <span class="cs-string">&#39;react-native&#39;</span>;
+
+<span class="cs-comment">// [...]</span>
+
+<span class="cs-keyword">const</span> <span class="cs-def">RefinementList</span> <span class="cs-operator">=</span> <span class="cs-variable">connectRefinementList</span>(({ <span class="cs-def">refine</span>, <span class="cs-def">items</span> }) <span class="cs-operator">=&gt;</span>
+  <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">FlatList</span>
+    <span class="cs-attribute">data</span>={<span class="cs-variable">items</span>}
+    <span class="cs-attribute">keyExtractor</span>={(<span class="cs-variable">item</span>, <span class="cs-variable">index</span>) <span class="cs-operator">=&gt;</span> <span class="cs-variable">item</span>.<span class="cs-property">objectID</span>}
+    <span class="cs-attribute">ListHeaderComponent</span>={() <span class="cs-operator">=&gt;</span>
+      <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">Text</span> <span class="cs-attribute">style</span>={{ <span class="cs-variable">marginTop</span>: <span class="cs-number">20</span>, <span class="cs-variable">height</span>: <span class="cs-number">50</span>, <span class="cs-variable">alignSelf</span>: <span class="cs-string">&#39;center&#39;</span> }}<span class="cs-tag cs-bracket">&gt;</span>
+        Categories
+      <span class="cs-tag cs-bracket">&lt;/</span><span class="cs-tag">Text</span><span class="cs-tag cs-bracket">&gt;</span>}
+    <span class="cs-attribute">renderItem</span>={({ <span class="cs-property">item</span> }) <span class="cs-operator">=&gt;</span> {
+      <span class="cs-keyword">return</span> (
+        <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">View</span> <span class="cs-attribute">style</span>={{ <span class="cs-variable">height</span>: <span class="cs-number">30</span> }}<span class="cs-tag cs-bracket">&gt;</span>
+          <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">TouchableHighlight</span>
+            <span class="cs-attribute">onPress</span>={() <span class="cs-operator">=&gt;</span> {
+              <span class="cs-variable">refine</span>(<span class="cs-variable">item</span>.<span class="cs-property">value</span>);
+            }}
+          <span class="cs-tag cs-bracket">&gt;</span>
+            <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">Text</span> <span class="cs-attribute">style</span>={<span class="cs-variable">item</span>.<span class="cs-property">isRefined</span> <span class="cs-operator">?</span> { <span class="cs-property">fontWeight</span>: <span class="cs-string">&#39;bold&#39;</span> } : {}}<span class="cs-tag cs-bracket">&gt;</span>
+              {<span class="cs-variable">item</span>.<span class="cs-property">label</span>}
+            <span class="cs-tag cs-bracket">&lt;/</span><span class="cs-tag">Text</span><span class="cs-tag cs-bracket">&gt;</span>
+          <span class="cs-tag cs-bracket">&lt;/</span><span class="cs-tag">TouchableHighlight</span><span class="cs-tag cs-bracket">&gt;</span>
+        <span class="cs-tag cs-bracket">&lt;/</span><span class="cs-tag">View</span><span class="cs-tag cs-bracket">&gt;</span>
+      );
+    }}
+  <span class="cs-tag cs-bracket">/&gt;</span>
+);
+</code>
+  </div>
+</pre>
+<p>Let’s add this new <code>&lt;RefinementList&gt;</code> component to our InstantSearch instance.</p>
+<pre class="code-sample language-jsx">
+  <div class="heading">Code</div>
+  <div class="code-wrap">
+    <code><span class="cs-keyword">const</span> <span class="cs-def">App</span> <span class="cs-operator">=</span> () <span class="cs-operator">=&gt;</span>
+  <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">View</span> <span class="cs-attribute">style</span>={<span class="cs-variable">styles</span>.<span class="cs-property">container</span>}<span class="cs-tag cs-bracket">&gt;</span>
+    <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">InstantSearch</span>
+      <span class="cs-attribute">appId</span>=<span class="cs-string">&quot;latency&quot;</span>
+      <span class="cs-attribute">apiKey</span>=<span class="cs-string">&quot;6be0576ff61c053d5f9a3225e2a90f76&quot;</span>
+      <span class="cs-attribute">indexName</span>=<span class="cs-string">&quot;ikea&quot;</span>
+    <span class="cs-tag cs-bracket">&gt;</span>
+      <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">View</span>
+        <span class="cs-attribute">style</span>={{
+          <span class="cs-variable">flexDirection</span>: <span class="cs-string">&#39;row&#39;</span>,
+        }}
+      <span class="cs-tag cs-bracket">&gt;</span>
+        <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">SearchBox</span> <span class="cs-tag cs-bracket">/&gt;</span>
+      <span class="cs-tag cs-bracket">&lt;/</span><span class="cs-tag">View</span><span class="cs-tag cs-bracket">&gt;</span>
+      <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">RefinementList</span> <span class="cs-attribute">attributeName</span>=<span class="cs-string">&quot;category&quot;</span> <span class="cs-tag cs-bracket">/&gt;</span>
+      <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">Hits</span> <span class="cs-tag cs-bracket">/&gt;</span>
+    <span class="cs-tag cs-bracket">&lt;/</span><span class="cs-tag">InstantSearch</span><span class="cs-tag cs-bracket">&gt;</span>
+  <span class="cs-tag cs-bracket">&lt;/</span><span class="cs-tag">View</span><span class="cs-tag cs-bracket">&gt;</span>
+</code>
+  </div>
+</pre>
+<p>The <code>attributeName</code> props specifies the faceted attribute to use in this widget. This attribute should be declared as a facet in the index configuration as well.</p>
+<p>The values displayed are computed by Algolia from the results.</p>
+<div class="highlight-key-part">
+  <div class="highlight-key-part__title">In this section we've seen:</div>
+<ul>
+<li>
+<p>there are components for all types of refinements</p>
+</li>
+<li>
+<p>the RefinementList works with facets</p>
+</li>
+<li>
+<p>facets are computed from the results</p>
+</li>
+</ul>
+</div>
+<h2 id="putting-our-filters-in-a-modal">Putting our filters in a Modal <a class="anchor" href="Getting_started_React_native.html#putting-our-filters-in-a-modal" aria-hidden="true"></a></h2>
+<p>We don’t have that much space available on our mobile screen so we’re going to extract this RefinementList and display it inside a <a href="http://facebook.github.io/react-native/releases/0.45/docs/modal.html#modal">Modal</a>.</p>
+<p>When using the <a href="http://facebook.github.io/react-native/releases/0.45/docs/modal.html#modal">Modal</a>, components that are displayed inside it are mounted and unmounted depending if the <a href="http://facebook.github.io/react-native/releases/0.45/docs/modal.html#modal">Modal</a> is visible or not. One thing to know about React InstantSearch is that a refinement is applied only if its corresponding widget is mounted. If a widget is unmounted then its state is removed from the search state as well.</p>
+<p>To keep track of the refinements applied inside the <a href="http://facebook.github.io/react-native/releases/0.45/docs/modal.html#modal">Modal</a> (or another screen if you have navigation), you will need to use another <code>&lt;InstantSearch/&gt;</code> instance and synchronise the search state between those two instances.</p>
+<p><code>&lt;InstantSearch&gt;</code> takes two interesting props:</p>
+<ul>
+<li><code>onSearchStateChange</code>, a function that is called every time the search state change.</li>
+<li><code>searchState</code>, the search state to apply to an instance.</li>
+</ul>
+<p>We are going to leverage those two props to keep in sync our two different <code>&lt;InstantSearch&gt;</code> instances.</p>
+<p>First, let’s create the Modal:</p>
+<pre class="code-sample language-jsx">
+  <div class="heading">Code</div>
+  <div class="code-wrap">
+    <code><span class="cs-comment">//We need to import the Modal</span>
+<span class="cs-keyword">import</span> {
+  <span class="cs-def">StyleSheet</span>,
+  <span class="cs-def">View</span>,
+  <span class="cs-def">FlatList</span>,
+  <span class="cs-def">Image</span>,
+  <span class="cs-def">Text</span>,
+  <span class="cs-def">TextInput</span>,
+  <span class="cs-def">TouchableHighlight</span>,
+  <span class="cs-def">Modal</span>,
+} <span class="cs-keyword">from</span> <span class="cs-string">&#39;react-native&#39;</span>;
+
+<span class="cs-comment">// [...] </span>
+
+<span class="cs-keyword">class</span> <span class="cs-def">Categories</span> <span class="cs-keyword">extends</span> <span class="cs-variable">React</span>.<span class="cs-property">Component</span> {
+  <span class="cs-property">render</span>() {
+    <span class="cs-keyword">return</span> (
+      <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">View</span> <span class="cs-attribute">style</span>={{ <span class="cs-variable">marginTop</span>: <span class="cs-number">22</span> }}<span class="cs-tag cs-bracket">&gt;</span>
+        <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">Modal</span>
+          <span class="cs-attribute">animationType</span>={<span class="cs-string">&#39;none&#39;</span>}
+          <span class="cs-attribute">transparent</span>={<span class="cs-atom">false</span>}
+          <span class="cs-attribute">visible</span>={<span class="cs-keyword">this</span>.<span class="cs-property">props</span>.<span class="cs-property">modalVisible</span>}
+        <span class="cs-tag cs-bracket">&gt;</span>
+          <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">View</span> <span class="cs-attribute">style</span>={{ <span class="cs-variable">marginTop</span>: <span class="cs-number">22</span> }}<span class="cs-tag cs-bracket">&gt;</span>
+            <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">InstantSearch</span>
+              <span class="cs-attribute">appId</span>=<span class="cs-string">&quot;latency&quot;</span>
+              <span class="cs-attribute">apiKey</span>=<span class="cs-string">&quot;6be0576ff61c053d5f9a3225e2a90f76&quot;</span>
+              <span class="cs-attribute">indexName</span>=<span class="cs-string">&quot;ikea&quot;</span>
+              <span class="cs-attribute">onSearchStateChange</span>={<span class="cs-keyword">this</span>.<span class="cs-property">props</span>.<span class="cs-property">onSearchStateChange</span>}
+              <span class="cs-attribute">searchState</span>={<span class="cs-keyword">this</span>.<span class="cs-property">props</span>.<span class="cs-property">searchState</span>}
+            <span class="cs-tag cs-bracket">&gt;</span>
+              <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">RefinementList</span> <span class="cs-attribute">attributeName</span>=<span class="cs-string">&quot;category&quot;</span> <span class="cs-tag cs-bracket">/&gt;</span>
+              <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">TouchableHighlight</span>
+                <span class="cs-attribute">onPress</span>={() <span class="cs-operator">=&gt;</span> {
+                  <span class="cs-keyword">this</span>.<span class="cs-property">props</span>.<span class="cs-property">setModalVisible</span>(<span class="cs-operator">!</span><span class="cs-keyword">this</span>.<span class="cs-property">props</span>.<span class="cs-property">modalVisible</span>);
+                }}
+              <span class="cs-tag cs-bracket">&gt;</span>
+                <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">Text</span>
+                  <span class="cs-attribute">style</span>={{ <span class="cs-variable">marginTop</span>: <span class="cs-number">20</span>, <span class="cs-variable">height</span>: <span class="cs-number">50</span>, <span class="cs-variable">alignSelf</span>: <span class="cs-string">&#39;center&#39;</span> }}
+                <span class="cs-tag cs-bracket">&gt;</span>
+                  Close
+                <span class="cs-tag cs-bracket">&lt;/</span><span class="cs-tag">Text</span><span class="cs-tag cs-bracket">&gt;</span>
+              <span class="cs-tag cs-bracket">&lt;/</span><span class="cs-tag">TouchableHighlight</span><span class="cs-tag cs-bracket">&gt;</span>
+            <span class="cs-tag cs-bracket">&lt;/</span><span class="cs-tag">InstantSearch</span><span class="cs-tag cs-bracket">&gt;</span>
+          <span class="cs-tag cs-bracket">&lt;/</span><span class="cs-tag">View</span><span class="cs-tag cs-bracket">&gt;</span>
+        <span class="cs-tag cs-bracket">&lt;/</span><span class="cs-tag">Modal</span><span class="cs-tag cs-bracket">&gt;</span>
+      <span class="cs-tag cs-bracket">&lt;/</span><span class="cs-tag">View</span><span class="cs-tag cs-bracket">&gt;</span>
+    );
+  }
+}
+</code>
+  </div>
+</pre>
+<p>Second, let’s add our Modal to our first <code>&lt;InstantSearch&gt;</code> instance:</p>
+<pre class="code-sample language-jsx">
+  <div class="heading">Code</div>
+  <div class="code-wrap">
+    <code><span class="cs-keyword">export</span> <span class="cs-keyword">default</span> <span class="cs-keyword">class</span> <span class="cs-def">App</span> <span class="cs-keyword">extends</span> <span class="cs-variable">React</span>.<span class="cs-property">Component</span> {
+  <span class="cs-property">constructor</span>() {
+    <span class="cs-keyword">super</span>();
+    <span class="cs-keyword">this</span>.<span class="cs-property">state</span> <span class="cs-operator">=</span> { <span class="cs-property">modalVisible</span>: <span class="cs-atom">false</span>, <span class="cs-property">searchState</span>: {} };
+    <span class="cs-keyword">this</span>.<span class="cs-property">setModalVisible</span> <span class="cs-operator">=</span> <span class="cs-keyword">this</span>.<span class="cs-property">setModalVisible</span>.<span class="cs-property">bind</span>(<span class="cs-keyword">this</span>);
+    <span class="cs-keyword">this</span>.<span class="cs-property">onSearchStateChange</span> <span class="cs-operator">=</span> <span class="cs-keyword">this</span>.<span class="cs-property">onSearchStateChange</span>.<span class="cs-property">bind</span>(<span class="cs-keyword">this</span>);
+  }
+
+  <span class="cs-property">onSearchStateChange</span>(<span class="cs-def">searchState</span>) {
+    <span class="cs-keyword">this</span>.<span class="cs-property">setState</span>({ <span class="cs-property">searchState</span> });
+  }
+
+  <span class="cs-property">setModalVisible</span>(<span class="cs-def">visible</span>) {
+    <span class="cs-keyword">this</span>.<span class="cs-property">setState</span>({ <span class="cs-property">modalVisible</span>: <span class="cs-variable-2">visible</span> });
+  }
+
+  <span class="cs-property">render</span>() {
+    <span class="cs-keyword">return</span> (
+      <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">View</span> <span class="cs-attribute">style</span>={<span class="cs-variable">styles</span>.<span class="cs-property">container</span>}<span class="cs-tag cs-bracket">&gt;</span>
+        <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">InstantSearch</span>
+          <span class="cs-attribute">appId</span>=<span class="cs-string">&quot;latency&quot;</span>
+          <span class="cs-attribute">apiKey</span>=<span class="cs-string">&quot;6be0576ff61c053d5f9a3225e2a90f76&quot;</span>
+          <span class="cs-attribute">indexName</span>=<span class="cs-string">&quot;ikea&quot;</span>
+          <span class="cs-attribute">onSearchStateChange</span>={<span class="cs-keyword">this</span>.<span class="cs-property">onSearchStateChange</span>}
+          <span class="cs-attribute">searchState</span>={<span class="cs-keyword">this</span>.<span class="cs-property">state</span>.<span class="cs-property">searchState</span>}
+        <span class="cs-tag cs-bracket">&gt;</span>
+          <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">View</span>
+            <span class="cs-attribute">style</span>={{
+              <span class="cs-variable">flexDirection</span>: <span class="cs-string">&#39;row&#39;</span>,
+              <span class="cs-variable">alignItems</span>: <span class="cs-string">&#39;center&#39;</span>,
+              <span class="cs-variable">padding</span>: <span class="cs-number">10</span>,
+            }}
+          <span class="cs-tag cs-bracket">&gt;</span>
+            <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">SearchBox</span> <span class="cs-tag cs-bracket">/&gt;</span>
+            <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">TouchableHighlight</span>
+              <span class="cs-attribute">onPress</span>={() <span class="cs-operator">=&gt;</span> {
+                <span class="cs-keyword">this</span>.<span class="cs-property">setModalVisible</span>(<span class="cs-atom">true</span>);
+              }}
+            <span class="cs-tag cs-bracket">&gt;</span>
+              <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">Text</span><span class="cs-tag cs-bracket">&gt;</span>Categories<span class="cs-tag cs-bracket">&lt;/</span><span class="cs-tag">Text</span><span class="cs-tag cs-bracket">&gt;</span>
+            <span class="cs-tag cs-bracket">&lt;/</span><span class="cs-tag">TouchableHighlight</span><span class="cs-tag cs-bracket">&gt;</span>
+          <span class="cs-tag cs-bracket">&lt;/</span><span class="cs-tag">View</span><span class="cs-tag cs-bracket">&gt;</span>
+          <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">Hits</span> <span class="cs-tag cs-bracket">/&gt;</span>
+          <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">Categories</span>
+            <span class="cs-attribute">setModalVisible</span>={<span class="cs-keyword">this</span>.<span class="cs-property">setModalVisible</span>}
+            <span class="cs-attribute">modalVisible</span>={<span class="cs-keyword">this</span>.<span class="cs-property">state</span>.<span class="cs-property">modalVisible</span>}
+            <span class="cs-attribute">onSearchStateChange</span>={<span class="cs-keyword">this</span>.<span class="cs-property">onSearchStateChange</span>}
+            <span class="cs-attribute">searchState</span>={<span class="cs-keyword">this</span>.<span class="cs-property">state</span>.<span class="cs-property">searchState</span>}
+          <span class="cs-tag cs-bracket">/&gt;</span>
+        <span class="cs-tag cs-bracket">&lt;/</span><span class="cs-tag">InstantSearch</span><span class="cs-tag cs-bracket">&gt;</span>
+      <span class="cs-tag cs-bracket">&lt;/</span><span class="cs-tag">View</span><span class="cs-tag cs-bracket">&gt;</span>
+    );
+  }
+}
+</code>
+  </div>
+</pre>
+<p>If you try the application and select a category, you’ll see that when you close the <a href="http://facebook.github.io/react-native/releases/0.45/docs/modal.html#modal">Modal</a>, the refinement is not applied to the search. This is because for a refinement to be applied, it needs to <strong>be present inside the search state</strong> and have a <strong>corresponding widget mounted</strong>.</p>
+<p>So indeed, we will need a RefinementList mounted on our first <code>&lt;InstantSearch/&gt;</code>. Of course, we don’t want to render anything, we just want to apply the refinement.</p>
+<p>Luckily we can leverage a concept that is called <a href="guide/Virtual_widgets.html">Virtual Widgets</a>. A <a href="guide/Virtual_widgets.html">Virtual Widget</a> allows you to pre refine any widget without rendering anything.</p>
+<p>Let’s create one for our RefinementList:</p>
+<pre class="code-sample language-jsx">
+  <div class="heading">Code</div>
+  <div class="code-wrap">
+    <code><span class="cs-keyword">const</span> <span class="cs-def">VirtualRefinementList</span> <span class="cs-operator">=</span> <span class="cs-variable">connectRefinementList</span>(() <span class="cs-operator">=&gt;</span> <span class="cs-atom">null</span>);
+</code>
+  </div>
+</pre>
+<p>Let’s add it to our first <code>&lt;InstantSearch/&gt;</code> instance:</p>
+<pre class="code-sample language-jsx">
+  <div class="heading">Code</div>
+  <div class="code-wrap">
+    <code>
+<span class="cs-comment">// […]</span>
+
+<span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">InstantSearch</span>
+  <span class="cs-attribute">appId</span>=<span class="cs-string">&quot;latency&quot;</span>
+  <span class="cs-attribute">apiKey</span>=<span class="cs-string">&quot;6be0576ff61c053d5f9a3225e2a90f76&quot;</span>
+  <span class="cs-attribute">indexName</span>=<span class="cs-string">&quot;ikea&quot;</span>
+  <span class="cs-attribute">onSearchStateChange</span>={<span class="cs-keyword">this</span>.<span class="cs-property">onSearchStateChange</span>}
+  <span class="cs-attribute">searchState</span>={<span class="cs-keyword">this</span>.<span class="cs-property">state</span>.<span class="cs-property">searchState</span>}
+<span class="cs-tag cs-bracket">&gt;</span>
+  <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">View</span>
+    <span class="cs-attribute">style</span>={{
+      <span class="cs-variable">flexDirection</span>: <span class="cs-string">&#39;row&#39;</span>,
+      <span class="cs-variable">alignItems</span>: <span class="cs-string">&#39;center&#39;</span>,
+      <span class="cs-variable">padding</span>: <span class="cs-number">10</span>,
+    }}
+  <span class="cs-tag cs-bracket">&gt;</span>
+    <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">SearchBox</span> <span class="cs-tag cs-bracket">/&gt;</span>
+    <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">TouchableHighlight</span>
+      <span class="cs-attribute">onPress</span>={() <span class="cs-operator">=&gt;</span> {
+        <span class="cs-keyword">this</span>.<span class="cs-property">setModalVisible</span>(<span class="cs-atom">true</span>);
+      }}
+    <span class="cs-tag cs-bracket">&gt;</span>
+      <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">Text</span><span class="cs-tag cs-bracket">&gt;</span>Categories<span class="cs-tag cs-bracket">&lt;/</span><span class="cs-tag">Text</span><span class="cs-tag cs-bracket">&gt;</span>
+    <span class="cs-tag cs-bracket">&lt;/</span><span class="cs-tag">TouchableHighlight</span><span class="cs-tag cs-bracket">&gt;</span>
+  <span class="cs-tag cs-bracket">&lt;/</span><span class="cs-tag">View</span><span class="cs-tag cs-bracket">&gt;</span>
+  <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">Hits</span> <span class="cs-tag cs-bracket">/&gt;</span>
+  <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">VirtualRefinementList</span> <span class="cs-attribute">attributeName</span>=<span class="cs-string">&quot;category&quot;</span> <span class="cs-tag cs-bracket">/&gt;</span>
+  <span class="cs-tag cs-bracket">&lt;</span><span class="cs-tag">Categories</span>
+    <span class="cs-attribute">setModalVisible</span>={<span class="cs-keyword">this</span>.<span class="cs-property">setModalVisible</span>}
+    <span class="cs-attribute">modalVisible</span>={<span class="cs-keyword">this</span>.<span class="cs-property">state</span>.<span class="cs-property">modalVisible</span>}
+    <span class="cs-attribute">onSearchStateChange</span>={<span class="cs-keyword">this</span>.<span class="cs-property">onSearchStateChange</span>}
+    <span class="cs-attribute">searchState</span>={<span class="cs-keyword">this</span>.<span class="cs-property">state</span>.<span class="cs-property">searchState</span>}
+  <span class="cs-tag cs-bracket">/&gt;</span>
+<span class="cs-tag cs-bracket">&lt;/</span><span class="cs-tag">InstantSearch</span><span class="cs-tag cs-bracket">&gt;</span>
+</code>
+  </div>
+</pre>
+<p>🎉  Congrats, you can now filter your results by categories!</p>
+<div class="highlight-key-part">
+  <div class="highlight-key-part__title">In this section we've seen:</div>
+<ul>
+<li>
+<p>how to synchronise different InstantSearch instances to share the same state.</p>
+</li>
+<li>
+<p>how to apply a refinement across your whole application when using navigation element such as Modal, Drawer, Tabs…</p>
+</li>
+</ul>
+</div>
+<h2 id="next-steps">Next steps <a class="anchor" href="Getting_started_React_native.html#next-steps" aria-hidden="true"></a></h2>
+<p>At this point, you know the basics of React InstantSearch. Read the guide to know and do more with it.</p>
+<div class="guide-nav">
+Next: <a href="guide/">Guide →</a>
+</div>
+</div></div></div></section><footer class="ac-footer"><div class="ac-footer-container"><p class="ac-footer-links">Code licensed under<a class="ac-footer-link-item" href="https://github.com/algolia/react-instantsearch/blob/master/LICENSE">MIT</a><br><a class="ac-footer-link-item" href="https://github.com/algolia/react-instantsearch/">GitHub</a><a class="ac-footer-link-item" href="https://github.com/algolia/react-instantsearch/issues">issues</a><a class="ac-footer-link-item" href="https://www.algolia.com/policies/privacy">Privacy policy</a></p></div><div class="ac-footer-container ac-footer-brand"><p>This project is part of</p><img class="ac-footer-brand-icon" src="images/community-badge-458585c6be6bf3ddbe4b8515977f413b.svg"><figure><img class="ac-footer-brand-logo" src="https://res.cloudinary.com/hilnmyskv/image/upload/v1484219849/algolia-community-logo-words-darkbg.svg"><figcaption>Algolia Community</figcaption></figure><a class="ac-footer-btn ac-footer-btn-cta" href="https://community.algolia.com/">See More</a><span class="ac-icon ac-icon-love-dark"></span></div><p class="ac-footer-version">Latest version: 4.0.5</p><div class="ac-footer-actions"><div class="footer-container"><p>Build unique search experiences with Algolia</p><a class="ac-footer-btn ac-footer-btn-ghost-grey" href="https://www.algolia.com/why?utm_medium=social-owned&amp;utm_source=react%20instantsearch%20website&amp;utm_campaign=homepage&amp;utm_term=why">See Why<span class="ac-icon-triangle"></span></a><a class="ac-footer-btn ac-footer-btn-ghost-blue" href="https://www.algolia.com/users/sign_up?utm_medium=social-owned&amp;utm_source=react%20instantsearch%20website&amp;utm_campaign=homepage&amp;utm_term=get_started">Get Started For Free</a></div></div></footer><script src="https://cdn.jsdelivr.net/g/jquery@3(jquery.slim.min.js),docsearch.js@2,underscorejs@1"></script><script>docsearch({
+  apiKey: '5cb6763f264e31381e18639a1147634c',
+  indexName: 'react-instantsearch',
+  inputSelector: '#searchbox',
+  debug: true
+});
+window.twttr = (function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0],
+            t = window.twttr || {};
+    if (d.getElementById(id)) return t;
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "https://platform.twitter.com/widgets.js";
+    fjs.parentNode.insertBefore(js, fjs);
+
+    t._e = [];
+    t.ready = function (f) {
+        t._e.push(f);
+    };
+
+    return t;
+}(document, "script", "twitter-wjs"));
+</script><!--Google Tag Manager--><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-N8JP8G" height="0" width="0" style="display:none;visibility:hidden;"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-N8JP8G');</script><script src="/react-instantsearch/js/common-build-a38e1f3e5a0e1431413bdb3147b918c9.js"></script><script src="/react-instantsearch/js/main-build-6d90a74318fb36de1c0814d6f4d0eca8.js"></script></body>
