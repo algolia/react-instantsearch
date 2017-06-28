@@ -53,6 +53,25 @@ describe('createInstantSearchManager', () => {
     expect(widgetIds).toEqual([]);
   });
 
+  it('initialize with results', () => {
+    const ism = createInstantSearchManager({
+      indexName: 'index',
+      initialState: {},
+      searchParameters: {},
+      algoliaClient: client,
+      resultsState: { some: 'results' },
+    });
+
+    const store = ism.store.getState();
+    expect(store).toEqual({
+      error: null,
+      metadata: [],
+      results: { some: 'results' },
+      searching: false,
+      widgets: {},
+    });
+  });
+
   describe('Widget manager', () => {
     it('triggers the search when a widget is added', () => {
       const ism = createInstantSearchManager({

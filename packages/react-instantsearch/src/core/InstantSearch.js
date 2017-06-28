@@ -30,6 +30,7 @@ function validateNextProps(props, nextProps) {
  * @propType {func} [onSearchStateChange] - Function to be called everytime a new search is done. Useful for [URL Routing](guide/Routing.html).
  * @propType {object} [searchState] - Object to inject some search state. Switches the InstantSearch component in controlled mode. Useful for [URL Routing](guide/Routing.html).
  * @propType {func} [createURL] - Function to call when creating links, useful for [URL Routing](guide/Routing.html).
+ * @propType {object} [resultsState] - Object or Array to inject some results to be used at first rendering. Useful for [Server Side Rendering](guide/Server-side_rendering.html). This object or array comes from the `findResults` function. 
  * @example
  * import {InstantSearch, SearchBox, Hits} from 'react-instantsearch/dom';
  *
@@ -49,7 +50,6 @@ function validateNextProps(props, nextProps) {
 class InstantSearch extends Component {
   constructor(props) {
     super(props);
-
     this.isControlled = Boolean(props.searchState);
     const initialState = this.isControlled ? props.searchState : {};
     this.isUnmounting = false;
@@ -59,6 +59,7 @@ class InstantSearch extends Component {
       searchParameters: props.searchParameters,
       algoliaClient: props.algoliaClient,
       initialState,
+      resultsState: props.resultsState,
     });
   }
 
@@ -68,9 +69,9 @@ class InstantSearch extends Component {
     if (this.props.indexName !== nextProps.indexName) {
       this.aisManager.updateIndex(nextProps.indexName);
     }
-    
+
     if (this.props.algoliaClient !== nextProps.algoliaClient) {
-      this.aisManager.updateClient(nextProps.algoliaClient)
+      this.aisManager.updateClient(nextProps.algoliaClient);
     }
 
     if (this.isControlled) {
@@ -93,6 +94,7 @@ class InstantSearch extends Component {
           createHrefForState: this.createHrefForState.bind(this),
           onSearchForFacetValues: this.onSearchForFacetValues.bind(this),
           onSearchStateChange: this.onSearchStateChange.bind(this),
+          onSearchParameters: this.onSearchParameters.bind(this),
         },
       };
     }
@@ -130,6 +132,18 @@ class InstantSearch extends Component {
     }
   }
 
+  onSearchParameters(getSearchParameters, context, props) {
+    if (this.props.onSearchParameters) {
+      const searchState = this.props.searchState ? this.props.searchState : {};
+      this.props.onSearchParameters(
+        getSearchParameters,
+        context,
+        props,
+        searchState
+      );
+    }
+  }
+
   onSearchForFacetValues(searchState) {
     this.aisManager.onSearchForFacetValues(searchState);
   }
@@ -158,6 +172,9 @@ InstantSearch.propTypes = {
 
   searchState: PropTypes.object,
   onSearchStateChange: PropTypes.func,
+
+  onSearchParameters: PropTypes.func,
+  resultsState: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
 
   children: PropTypes.node,
 
