@@ -69,6 +69,7 @@ describe('createInstantSearchManager', () => {
       metadata: [],
       results: { some: 'results' },
       searching: false,
+      searchingForFacetValues: false,
       widgets: {},
     });
   });

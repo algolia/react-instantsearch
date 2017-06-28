@@ -74,7 +74,7 @@ export default function createConnector(connectorDesc) {
               props: this.getProvidedProps(this.props),
             });
           }
-        };
+        });
 
         const getSearchParameters = hasSearchParameters
           ? searchParameters =>
