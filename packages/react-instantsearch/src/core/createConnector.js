@@ -51,7 +51,7 @@ export default function createConnector(connectorDesc) {
       static defaultClassNames = Composed.defaultClassNames;
       static propTypes = connectorDesc.propTypes;
       static defaultProps = connectorDesc.defaultProps;
-      static getSearchParameters = connectorDesc.getSearchParameters; //can be removed ?
+      static getSearchParameters = connectorDesc.getSearchParameters; //can be removed?
 
       static contextTypes = {
         // @TODO: more precise state manager propType
@@ -74,7 +74,7 @@ export default function createConnector(connectorDesc) {
               props: this.getProvidedProps(this.props),
             });
           }
-        });
+        };
 
         const getSearchParameters = hasSearchParameters
           ? searchParameters =>
@@ -187,8 +187,14 @@ export default function createConnector(connectorDesc) {
           widgets,
           metadata,
           resultsFacetValues,
+          searchingForFacetValues,
         } = store.getState();
-        const searchState = { results, searching, error };
+        const searchState = {
+          results,
+          searching,
+          error,
+          searchingForFacetValues,
+        };
         return connectorDesc.getProvidedProps.call(
           this,
           props,

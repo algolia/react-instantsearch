@@ -43,6 +43,7 @@ export default function createInstantSearchManager({
     results: resultsState ? resultsState : null,
     error: null,
     searching: false,
+    searchingForFacetValues: false,
   });
 
   let skip = false;
@@ -146,7 +147,12 @@ export default function createInstantSearchManager({
 
   function handleSearchSuccess(content) {
     const state = store.getState();
-    let results = state.results ? state.results : [];
+    let results = state.results ? state.results : {};
+
+    /*if switching from mono index to multi index and vice versa, 
+    results needs to reset to {}*/
+    results = !isEmpty(derivedHelpers) && results.getFacetByName ? {} : results;
+
     if (!isEmpty(derivedHelpers)) {
       results[indexMapping[content.index]] = content;
     } else {
