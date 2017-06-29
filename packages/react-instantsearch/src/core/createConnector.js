@@ -64,7 +64,7 @@ export default function createConnector(connectorDesc) {
         const { ais: { store, widgetsManager }, multiIndexContext } = context;
         this.state = {
           props: this.getProvidedProps(props),
-          canRender: false, //indicate if component are rendered on a server or on an client.
+          canRender: false, //use to know if a component is rendered (browser), or not (server).
         };
 
         this.unsubscribe = store.subscribe(() => {
