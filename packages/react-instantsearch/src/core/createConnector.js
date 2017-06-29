@@ -51,7 +51,6 @@ export default function createConnector(connectorDesc) {
       static defaultClassNames = Composed.defaultClassNames;
       static propTypes = connectorDesc.propTypes;
       static defaultProps = connectorDesc.defaultProps;
-      static getSearchParameters = connectorDesc.getSearchParameters; //can be removed?
 
       static contextTypes = {
         // @TODO: more precise state manager propType

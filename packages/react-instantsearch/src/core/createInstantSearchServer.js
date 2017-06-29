@@ -59,22 +59,19 @@ const findResults = function(App, params) {
       return acc;
     }, {});
 
-  let search;
-
   if (isEmpty(mergedSearchParameters)) {
     const helper = algoliasearchHelper(client, sharedSearchParameters.index);
     return helper.searchOnce(sharedSearchParameters);
   } else {
-    search = Object.keys(mergedSearchParameters).map(key => {
+    const search = Object.keys(mergedSearchParameters).map(key => {
       const helper = algoliasearchHelper(
         client,
         mergedSearchParameters[key].index
       );
       return helper.searchOnce(mergedSearchParameters[key]);
     });
+    return Promise.all(search);
   }
-
-  return Promise.all(search);
 };
 
 const decorateResults = function(results) {
