@@ -25,7 +25,13 @@ export default class App extends Component {
             }),
           }}
         >
-          <Scene key="Home" component={Home} title="AEKI" initial={true} />
+          <Scene
+            key="Home"
+            component={Home}
+            title="AEKI"
+            initial={true}
+            hideBackImage={Platform.OS === 'android'}
+          />
           <Scene
             key="Filters"
             component={Filters}
