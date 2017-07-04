@@ -40,7 +40,7 @@ export default function createInstantSearchManager({
   const store = createStore({
     widgets: initialState,
     metadata: [],
-    results: resultsState ? resultsState : null,
+    results: resultsState || null,
     error: null,
     searching: false,
     searchingForFacetValues: false,
