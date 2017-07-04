@@ -10,7 +10,7 @@ import { getIndex, hasMultipleIndex } from './indexUtils';
 import { isEmpty } from 'lodash';
 import cis from './createInstantSearch';
 
-const searchParameters = [];
+let searchParameters = [];
 let client;
 let indexName = '';
 
@@ -58,6 +58,8 @@ const findResults = function(App, params) {
       acc[index] = sp;
       return acc;
     }, {});
+
+  searchParameters = [];
 
   if (isEmpty(mergedSearchParameters)) {
     const helper = algoliasearchHelper(client, sharedSearchParameters.index);
