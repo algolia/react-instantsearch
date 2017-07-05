@@ -24,6 +24,9 @@ examples: [{
     id: 'geo-search',
     title: 'Geo search using dynamic search parameters'
   }, {
+    id: 'server-side-rendering',
+    title: 'Server Side Rendering'
+  }, {
     id: 'next-app',
     title: 'Server Side Rendering using next.js'
   }]
