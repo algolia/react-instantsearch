@@ -42,7 +42,7 @@ const createInstantSearch = function(defaultAlgoliaClient, root) {
     });
   };
 
-  const findResults = function(App, params) {
+  const findResultsState = function(App, params) {
     ReactDom.renderToString(<App {...params} />);
     const sharedSearchParameters = searchParameters
       .filter(searchParameter => !hasMultipleIndex(searchParameter.context))
@@ -135,7 +135,7 @@ const createInstantSearch = function(defaultAlgoliaClient, root) {
     }
   }
 
-  return { InstantSearch: CreateInstantSearchServer, findResults };
+  return { InstantSearch: CreateInstantSearchServer, findResultsState };
 };
 
 export { createInstantSearch };

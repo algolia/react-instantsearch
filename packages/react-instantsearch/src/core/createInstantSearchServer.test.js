@@ -16,7 +16,7 @@ describe('createInstantSearchServer', () => {
   const algoliaClientFactory = jest.fn(() => algoliaClient);
   const {
     InstantSearch: CustomInstantSearch,
-    findResults,
+    findResultsState,
   } = createInstantSearch(algoliaClientFactory, {
     Root: 'div',
   });
@@ -66,7 +66,7 @@ describe('createInstantSearchServer', () => {
 
         expect.assertions(3);
 
-        return findResults(App).then(data => {
+        return findResultsState(App).then(data => {
           expect(data._originalResponse).toBeDefined();
           expect(data.content).toBeDefined();
           expect(data.state.index).toBe('indexName');
@@ -86,7 +86,7 @@ describe('createInstantSearchServer', () => {
 
         expect.assertions(3);
 
-        return findResults(App, {
+        return findResultsState(App, {
           searchState: { index: 'index search state' },
         }).then(data => {
           expect(data._originalResponse).toBeDefined();
@@ -140,7 +140,7 @@ describe('createInstantSearchServer', () => {
 
         expect.assertions(3);
 
-        return findResults(App).then(data => {
+        return findResultsState(App).then(data => {
           expect(data.length).toBe(2);
           expect(data.find(d => d.state.index === 'index1')).toBeTruthy();
           expect(data.find(d => d.state.index === 'index2')).toBeTruthy();
@@ -165,7 +165,7 @@ describe('createInstantSearchServer', () => {
 
         expect.assertions(3);
 
-        return findResults(App, {
+        return findResultsState(App, {
           searchState: {
             indices: {
               index1: { index: 'index1 new name' },

@@ -11,27 +11,27 @@ React InstantSearch is compatible with server-side rendering.
 We provide two API entries to handle it: 
 
 * a new type of `<InstantSearch>` available under `'react-instantsearch/server'`
-* a `findResults` function available under `'react-instantsearch/server'`
+* a `findResultsState` function available under `'react-instantsearch/server'`
 
 Here are the steps you need to follow to migrate:
 
 1. Import `<InstantSearch>` from `'react-instantsearch/server'` instead of `'react-instantsearch/dom'`. 
 
-2. Use `findResults` to get a `resultsState` server side. 
+2. Use `findResultsState` to get a `resultsState` server side. 
 
 ```jsx
 server.get('/', async (req, res) => {
-  const resultsState = await findResults(App);
+  const resultsState = await findResultsState(App);
 
   [...]
 });
 ```
 
-**(Optional)**: If you need to forward a `searchState` to your `<InstantSearch/>` instance, just pass it as a second parameter of the findResults function. 
+**(Optional)**: If you need to forward a `searchState` to your `<InstantSearch/>` instance, just pass it as a second parameter of the findResultsState function. 
 
 ```jsx
 server.get('/', async (req, res) => {
-  const resultsState = await findResults(App, {searchState});
+  const resultsState = await findResultsState(App, {searchState});
 
   //[...]
 });
@@ -52,7 +52,7 @@ const App = ({resultsState}) =>
     </InstantSearch>;
 
 server.get('/', async (req, res) => {
-  const resultsState = await findResults(App);
+  const resultsState = await findResultsState(App);
   const appString = renderToString(<App {resultsState} />);
   res.send(...);
 });

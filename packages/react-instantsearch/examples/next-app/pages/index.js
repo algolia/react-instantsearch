@@ -2,7 +2,7 @@ import { Head, InstantSearch } from '../components';
 import React from 'react';
 import PropTypes from 'prop-types';
 import Router from 'next/router';
-import { findResults } from 'react-instantsearch/server';
+import { findResultsState } from 'react-instantsearch/server';
 import qs from 'qs';
 
 const searchStateToUrl = searchState =>
@@ -21,7 +21,7 @@ export default class extends React.Component {
 
   static async getInitialProps(params) {
     const searchState = qs.parse(params.asPath.substring(2)); //nextjs params.query doesn't handle nested objects
-    const resultsState = await findResults(InstantSearch, { searchState });
+    const resultsState = await findResultsState(InstantSearch, { searchState });
     return { resultsState };
   }
 

@@ -3,14 +3,14 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import App from './app';
 import template from './template';
-import { findResults } from 'react-instantsearch/server';
+import { findResultsState } from 'react-instantsearch/server';
 
 const server = express();
 
 server.use('/assets', express.static('assets'));
 
 server.get('/', async (req, res) => {
-  const resultsState = await findResults(App);
+  const resultsState = await findResultsState(App);
   const initialState = { resultsState };
   const appString = renderToString(<App {...initialState} />);
 
