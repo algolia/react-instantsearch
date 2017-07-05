@@ -8,11 +8,13 @@ let cachedFiles;
 
 export default function() {
   return function(files, metalsmith, done) {
-    const allFilles = Object.entries(files).reduce((memo, [filename, file]) => {
-      return /\.jsdoc$/.test(filename)
-        ? [...memo, { filename: filename.replace(/\.jsdoc$/, ''), ...file }]
-        : memo;
-    }, []);
+    const allFilles = Object.entries(files).reduce(
+      (memo, [filename, file]) =>
+        /\.jsdoc$/.test(filename)
+          ? [...memo, { filename: filename.replace(/\.jsdoc$/, ''), ...file }]
+          : memo,
+      []
+    );
 
     const filesToParse = allFilles
       .filter(file => hasChanged(file))

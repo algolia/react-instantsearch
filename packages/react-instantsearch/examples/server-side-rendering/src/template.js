@@ -1,5 +1,5 @@
-export default ({ body, title, initialState }) => {
-  return `
+export default ({ body, title, initialState }) =>
+  `
     <!DOCTYPE html>
     <html>
       <head>
@@ -14,4 +14,3 @@ export default ({ body, title, initialState }) => {
       <script src="/assets/bundle.js"></script>
     </html>
   `;
-};
