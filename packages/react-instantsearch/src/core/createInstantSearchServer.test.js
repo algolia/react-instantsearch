@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 
-import { createInstantSearch, findResults } from './createInstantSearchServer';
+import { createInstantSearch } from './createInstantSearchServer';
 import createConnector from './createConnector';
 import React from 'react';
 import { shallow } from 'enzyme';
@@ -14,7 +14,10 @@ describe('createInstantSearchServer', () => {
     search: () => Promise.resolve({ results: [{ query: 'query' }] }),
   };
   const algoliaClientFactory = jest.fn(() => algoliaClient);
-  const CustomInstantSearch = createInstantSearch(algoliaClientFactory, {
+  const {
+    InstantSearch: CustomInstantSearch,
+    findResults,
+  } = createInstantSearch(algoliaClientFactory, {
     Root: 'div',
   });
   const Connected = createConnector({

@@ -1,10 +1,7 @@
-import {
-  createInstantSearch,
-  findResults,
-} from './src/core/createInstantSearchServer';
+import { createInstantSearch } from './src/core/createInstantSearchServer';
 import algoliasearch from 'algoliasearch/lite';
 
-const InstantSearch = createInstantSearch(algoliasearch, {
+const { InstantSearch, findResults } = createInstantSearch(algoliasearch, {
   Root: 'div',
   props: { className: 'ais-InstantSearch__root' },
 });
