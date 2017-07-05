@@ -10,14 +10,14 @@ React InstantSearch is compatible with server-side rendering.
 
 We provide two API entries to handle it: 
 
-* a new type of `<InstantSearch>` available under `'react-instantsearch/server'`
+* a new type of [`<InstantSearch>`](widgets/InstantSearch.html) available under `'react-instantsearch/server'`
 * a `findResultsState` function available under `'react-instantsearch/server'`
 
 Here are the steps you need to follow to migrate:
 
-1. Import `<InstantSearch>` from `'react-instantsearch/server'` instead of `'react-instantsearch/dom'`. 
+1. Import [`<InstantSearch>`](widgets/InstantSearch.html) from `'react-instantsearch/server'` instead of `'react-instantsearch/dom'`. 
 
-2. Use `findResultsState` to get a `resultsState` server side. 
+2. Use [`findResultsState`](server-side-renderings/findResultsState.html) to get a `resultsState` server side. 
 
 ```jsx
 server.get('/', async (req, res) => {
