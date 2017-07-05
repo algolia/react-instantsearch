@@ -9,12 +9,10 @@ block content
   h2#description Description
     a.anchor(href=`${navPath}#description`)
   div!=h.markdown(description)
-  div.storybook-section
-    a.btn.btn-cta(href=`${storyBookPublicPath}?selectedKind=${name}&selectedStory=default` target='_blank') See live example
-  h2#proptypes Props
+  h2#proptypes Params
     a.anchor(href=`${navPath}#proptypes`)    
   if params
-    table.api.proptypes
+    table.api.params
       tbody
         each type in params
           tr.api-entry-values
@@ -36,7 +34,7 @@ block content
           tr.api-entry-description
             td(colspan=3)!=h.markdown(type.description)
   else
-    p This widget has no props.
+    p This function has no param.
   if requirements
     h2#requirements Requirements
       a.anchor(href=`${navPath}#requirements`)
@@ -50,33 +48,4 @@ block content
   if examples
     each example in examples
       p!=h.highlight(example, {lang: 'jsx'})
-  h2#classnames CSS classes
-    a.anchor(href=`${navPath}#classnames`)
-  if themekey
-    table.api
-      tbody
-        each type in themekey
-          tr.api-entry-values
-            td.api-entry-name
-              - var themeId = `default-theme-entry-${name}-${type.key}`;
-              div.api-entry(id=themeId)=`.${type.key} {}`
-                a.anchor(href=`${navPath}#${themeId}`)
-          tr.api-entry-description
-            td(colspan=3)!=h.markdown(type.description)
-  else
-    p This widget has no theming options.
-  h2#translations Translation keys
-    a.anchor(href=`${navPath}#translations`)
-  if translationkey
-    table.api
-      tbody
-        each type in translationkey
-          tr.api-entry-values
-            td.api-entry-name
-              - var themeId = `default-theme-entry-${name}-${type.key}`;
-              div.api-entry(id=themeId)=type.key
-                a.anchor(href=`${navPath}#${themeId}`)
-          tr.api-entry-description
-            td(colspan=3)!=h.markdown(type.description)
-  else
-    p This widget has no translations.
+ 

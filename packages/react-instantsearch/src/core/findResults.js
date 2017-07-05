@@ -1,18 +1,16 @@
-import { findResults } from './createInstantSearchServer';
-
 /** 
  * Useful only for getting parsed by js-doc. 
- * If put inside createInstantSearchServer.js, jsdoc-parse is not able to parse it. 
+ * If put inside createInstantSearchServer.js (where findResults can be found),
+ *  jsdoc-parse is not able to parse it. 
  * **/
 
+/* eslint valid-jsdoc: 0 */
 /**
- * The connectSortBy connector provides the logic to build a widget that will
- *  display a list of indices. This allows a user to change how the hits are being sorted.
+ * The `findResults` function provides a way to retrieve a `resultsState` given an [`<InstantSearch/>`](widgets/InstantSearch.html) 
+ * application. It can then be passed as a prop of an [`<InstantSearch/>`](widgets/InstantSearch.html) instance. 
  * @name findResults
- * @requirements Algolia handles sorting by creating replica indices. [Read more about sorting](https://www.algolia.com/doc/guides/relevance/sorting/) on
- * the Algolia website.
  * @kind server-side-rendering
- * @param {string} App - The default selected index.
- * @param {} params - The list of indexes to search in.
+ * @param {function} App - An application instance that contains an <InstantSearch/> app. 
+ * @param {object} params - A list of props to apply to an <InstantSearch/> instance. Commonly use to pass a `searchState` such as {searchState: {}}
  */
-export { findResults };
+export function findResults() {}
