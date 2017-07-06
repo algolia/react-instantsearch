@@ -9,6 +9,7 @@ import ReactDom from 'react-dom/server';
 import { getIndex, hasMultipleIndex } from './indexUtils';
 import { isEmpty } from 'lodash';
 import cis from './createInstantSearch';
+import algoliasearch from 'algoliasearch/lite';
 
 /**
  * Creates a specialized root InstantSearch component. It accepts
@@ -19,8 +20,11 @@ import cis from './createInstantSearch';
  * @returns {object} an InstantSearch root
  */
 
-const createInstantSearch = function(defaultAlgoliaClient, root) {
-  const InstantSearch = cis(defaultAlgoliaClient, root);
+const createInstantSearch = function() {
+  const InstantSearch = cis(algoliasearch, {
+    Root: 'div',
+    props: { className: 'ais-InstantSearch__root' },
+  });
 
   let searchParameters = [];
   let client;
@@ -117,8 +121,7 @@ const createInstantSearch = function(defaultAlgoliaClient, root) {
 
     constructor(props) {
       super();
-      client =
-        props.algoliaClient || defaultAlgoliaClient(props.appId, props.apiKey);
+      client = props.algoliaClient || algoliasearch(props.appId, props.apiKey);
       client.addAlgoliaAgent(`react-instantsearch ${version}`);
       indexName = props.indexName;
     }

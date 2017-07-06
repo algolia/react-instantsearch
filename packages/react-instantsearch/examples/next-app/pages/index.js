@@ -1,8 +1,7 @@
-import { Head, InstantSearch } from '../components';
+import { Head, InstantSearch, findResultsState } from '../components';
 import React from 'react';
 import PropTypes from 'prop-types';
 import Router from 'next/router';
-import { findResultsState } from 'react-instantsearch/server';
 import qs from 'qs';
 
 const searchStateToUrl = searchState =>

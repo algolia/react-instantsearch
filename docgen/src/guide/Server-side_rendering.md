@@ -8,18 +8,72 @@ navWeight: 30
 
 React InstantSearch is compatible with server-side rendering. 
 
-We provide two API entries to handle it: 
+We provide a new API entry, `createIntantSearch`, available under `'react-instantsearch/server'`. 
 
-* a new type of [`<InstantSearch>`](widgets/InstantSearch.html) available under `'react-instantsearch/server'`
-* a `findResultsState` function available under `'react-instantsearch/server'`
+When calling this function you will get access to:  
+
+* a new type of [`<InstantSearch>`](widgets/InstantSearch.html) accepting a `resultsState` prop. 
+* a `findResultsState` function to retrieve a `resultsState`. 
 
 Here are the steps you need to follow to migrate:
 
-1. Import [`<InstantSearch>`](widgets/InstantSearch.html) from `'react-instantsearch/server'` instead of `'react-instantsearch/dom'`. 
+1. In the file containing your `<InstantSearch>` instance you can't use the one imported from `'react-instantsearch/dom'`. 
 
-2. Use [`findResultsState`](server-side-renderings/findResultsState.html) to get a `resultsState` server side. 
+> Instead you're going to use `createInstantSearch` under `'react-instantserver/server'` and call it to retrieve a new `<InstantSearch>` instance and the `findResultsState` function. 
 
 ```jsx
+import React, { Component } from 'react';
+import { SearchBox, Hits } from 'react-instantsearch/dom';
+import { createInstantSearch } from 'react-instantsearch/server';
+
+const { InstantSearch, findResultsState } = createInstantSearch();
+
+class App extends Component {
+  render() {
+    return (
+      <InstantSearch
+        appId=""
+        apiKey=""
+        indexName=""
+      >
+        <SearchBox />
+        <Hits />
+      </InstantSearch>
+    );
+  }
+}
+
+export { App, findResultsState };
+```
+
+**Notes:** 
+* If you have several `<InstantSearch>` instances on the same page you'll need to create a new `<InstantSearch>` using `createInstantSearch` for each of them. 
+* Don't use `createInstantSearch` under your App component
+
+```jsx
+class App extends Component {
+  render() {
+    // don't do that!
+    const { InstantSearch } = createInstantSearch();
+    return (
+      <InstantSearch
+        appId=""
+        apiKey=""
+        indexName=""
+      >
+        <SearchBox />
+        <Hits />
+      </InstantSearch>
+    );
+  }
+}
+```
+
+2. On the Server-side you'll need to import the [`findResultsState`](server-side-rendering/findResultsState.html) function you just exported. This function get the `resultsState` for the first rendering. 
+
+```jsx
+import { App, findResultsState } from './app';
+
 server.get('/', async (req, res) => {
   const resultsState = await findResultsState(App);
 
@@ -31,29 +85,43 @@ server.get('/', async (req, res) => {
 
 ```jsx
 server.get('/', async (req, res) => {
-  const resultsState = await findResultsState(App, {searchState});
+  const resultsState = await findResultsState(App, {searchState: {query: 'chair'}});
 
   //[...]
 });
 ```
 
-3. Forward this `resultState` as a prop of your `<InstantSearch>` instance. 
+3. Modify your App to let the `<InstantSearch>` instance accept a `resultsState` prop. 
 
 ```jsx
-const App = ({resultsState}) => 
-    <InstantSearch
-        appId="appId"
-        apiKey="apiKey"
-        indexName="indexName"
+class App extends Component {
+  render() {
+    const { resultsState } = this.props;
+
+    return (
+      <InstantSearch
+        appId="latency"
+        apiKey="6be0576ff61c053d5f9a3225e2a90f76"
+        indexName="ikea"
         resultsState={resultsState}
-    >
+      >
+        <Configure hitsPerPage={3} />
         <SearchBox />
         <Hits />
-    </InstantSearch>;
+        <RefinementList attributeName="category" />
+      </InstantSearch>
+    );
+  }
+}
+```
 
+4. On the Server-side, forward the `resultsState` prop to your App.
+
+```jsx
 server.get('/', async (req, res) => {
   const resultsState = await findResultsState(App);
   const appString = renderToString(<App {resultsState} />);
+
   res.send(...);
 });
 ```

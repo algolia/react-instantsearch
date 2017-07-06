@@ -6,9 +6,10 @@ import {
   Hits,
   Configure,
 } from 'react-instantsearch/dom';
-import { InstantSearch } from 'react-instantsearch/server';
+import { createInstantSearch } from 'react-instantsearch/server';
 
-export default class App extends Component {
+const { InstantSearch, findResultsState } = createInstantSearch();
+class App extends Component {
   render() {
     const { resultsState } = this.props;
 
@@ -31,3 +32,5 @@ export default class App extends Component {
 App.propTypes = {
   resultsState: PropTypes.object,
 };
+
+export { App, findResultsState };

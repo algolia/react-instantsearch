@@ -6,8 +6,7 @@ import {
   Hits,
   Configure,
 } from 'react-instantsearch/dom';
-import { InstantSearch } from 'react-instantsearch/server';
-
+import { InstantSearch } from './instantsearchserver';
 export default class extends React.Component {
   static propTypes = {
     searchState: PropTypes.object,
