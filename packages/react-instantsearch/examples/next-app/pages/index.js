@@ -1,4 +1,4 @@
-import { Head, InstantSearch, findResultsState } from '../components';
+import { Head, App, findResultsState } from '../components';
 import React from 'react';
 import PropTypes from 'prop-types';
 import Router from 'next/router';
@@ -20,7 +20,7 @@ export default class extends React.Component {
 
   static async getInitialProps(params) {
     const searchState = qs.parse(params.asPath.substring(2)); //nextjs params.query doesn't handle nested objects
-    const resultsState = await findResultsState(InstantSearch, { searchState });
+    const resultsState = await findResultsState(App, { searchState });
     return { resultsState };
   }
 
@@ -44,7 +44,7 @@ export default class extends React.Component {
       <div>
         <Head title="Home" />
         <div>
-          <InstantSearch
+          <App
             resultsState={this.props.resultsState}
             onSearchStateChange={this.onSearchStateChange}
             searchState={this.state.searchState}

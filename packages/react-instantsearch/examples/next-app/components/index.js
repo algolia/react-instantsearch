@@ -1,3 +1,3 @@
 export * from './head';
-export { default as InstantSearch } from './instantsearch';
-export { findResultsState } from './instantsearchserver';
+export { default as App } from './app';
+export { findResultsState } from './instantsearch';
