@@ -23,7 +23,7 @@ block content
             td.api-entry-type
               span type:
               = ' '
-              code=type.type
+              code=type.type.names
             td.api-entry-default-value
               if type.defaultValue
                 span default:
@@ -34,7 +34,22 @@ block content
           tr.api-entry-description
             td(colspan=3)!=h.markdown(type.description)
   else
-    p This function has no param.
+    p This function has no params.
+  h2#proptypes Returns
+    a.anchor(href=`${navPath}#proptypes`)       
+  if returns
+    table.api.returns
+      tbody
+        each type in returns
+          tr.api-entry-values
+            td.api-entry-type
+              span type:
+              = ' '
+              code=type.type.names
+          tr.api-entry-description
+            td(colspan=3)!=h.markdown(type.description)
+  else
+    p This function returns nothing. 
   if requirements
     h2#requirements Requirements
       a.anchor(href=`${navPath}#requirements`)
@@ -43,9 +58,9 @@ block content
     h2#operations Operations
       a.anchor(href=`${navPath}#operations`)
     div!=h.markdown(operations)
-  h2#example Example usage
-    a.anchor(href=`${navPath}#example`)
   if examples
+    h2#example Example usage
+      a.anchor(href=`${navPath}#example`)
     each example in examples
       p!=h.highlight(example, {lang: 'jsx'})
  

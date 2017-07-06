@@ -17,9 +17,7 @@ describe('createInstantSearchServer', () => {
   const {
     InstantSearch: CustomInstantSearch,
     findResultsState,
-  } = createInstantSearch(algoliaClientFactory, {
-    Root: 'div',
-  });
+  } = createInstantSearch(algoliaClientFactory);
   const Connected = createConnector({
     displayName: 'CoolConnector',
     getProvidedProps: () => null,

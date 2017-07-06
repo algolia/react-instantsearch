@@ -9,18 +9,8 @@ import ReactDom from 'react-dom/server';
 import { getIndex, hasMultipleIndex } from './indexUtils';
 import { isEmpty } from 'lodash';
 import cis from './createInstantSearch';
-import algoliasearch from 'algoliasearch/lite';
 
-/**
- * Creates a specialized root InstantSearch component. It accepts
- * an algolia client and a specification of the root Element. This is the version dedicated to
- * server side rendering. 
- * @param {function} defaultAlgoliaClient - a function that builds an Algolia client
- * @param {object} root - the defininition of the root of an InstantSearch sub tree.
- * @returns {object} an InstantSearch root
- */
-
-const createInstantSearch = function() {
+const createInstantSearch = function(algoliasearch) {
   const InstantSearch = cis(algoliasearch, {
     Root: 'div',
     props: { className: 'ais-InstantSearch__root' },
