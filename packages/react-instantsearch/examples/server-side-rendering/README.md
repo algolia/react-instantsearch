@@ -4,8 +4,9 @@ To start the example:
 
 ```sh
 yarn install --no-lockfile
-yarn build
 yarn start
 ```
 
 Read more about react-instantsearch [in our documentation](https://community.algolia.com/react-instantsearch/).
+
+This example was made possible thanks to https://github.com/Roilan/react-server-boilerplate.
