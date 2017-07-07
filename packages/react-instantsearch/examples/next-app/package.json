@@ -13,7 +13,7 @@
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-instantsearch": "beta",
-    "react-instantsearch-theme-algolia": "^4.0.0-beta.6",
+    "react-instantsearch-theme-algolia": "beta",
     "style-loader": "^0.17.0"
   }
 }

@@ -1,27 +1,11 @@
 {
-  "name": "react-server-boilerplate",
-  "version": "1.0.2",
-  "description": "React server side rendering boilerplate",
+  "license": "MIT",
+  "private": true,
   "main": "index.js",
   "scripts": {
-    "start": "cd dist && node server.js",
+    "start": "yarn build && cd dist && node server.js",
     "build": "webpack"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Roilan/react-server-boilerplate"
-  },
-  "keywords": [
-    "react",
-    "react server",
-    "reactjs"
-  ],
-  "author": "Roilan <roilan14@gmail.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Roilan/react-server-boilerplate/issues"
-  },
-  "homepage": "https://github.com/Roilan/react-server-boilerplate",
   "devDependencies": {
     "babel-core": "^6.25.0",
     "babel-loader": "^6.4.1",
@@ -43,6 +27,6 @@
     "prop-types": "^15.5.10",
     "react": "^15.2.0",
     "react-dom": "^15.2.0",
-    "react-instantsearch": "^beta"
+    "react-instantsearch": "beta"
   }
 }
