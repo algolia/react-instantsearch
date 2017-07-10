@@ -14,9 +14,14 @@ const stories = storiesOf('Breadcrumb', module);
 stories.addDecorator(withKnobs);
 
 stories.add('default', () => (
-  <WrapWithHits hasPlayground={true} linkedStoryGroup="HierarchicalMenu">
-    <HierarchicalMenu
-      attributes={['category', 'sub_category', 'sub_sub_category']}
-    />
-  </WrapWithHits>
+  <div>
+    <WrapWithHits hasPlayground={true} linkedStoryGroup="HierarchicalMenu">
+      <Breadcrumb
+        attributes={['category', 'sub_category', 'sub_sub_category']}
+      />
+      <HierarchicalMenu
+        attributes={['category', 'sub_category', 'sub_sub_category']}
+      />
+    </WrapWithHits>
+  </div>
 ));
