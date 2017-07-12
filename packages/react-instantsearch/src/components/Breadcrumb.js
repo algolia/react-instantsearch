@@ -28,10 +28,7 @@ class Breadcrumb extends Component {
         <span {...cx('itemLabel')}>
           {item.label}
         </span>
-        {' '}
-        <span {...cx('itemCount')}>
-          {item.count}
-        </span>
+
       </Link>
     );
   };
