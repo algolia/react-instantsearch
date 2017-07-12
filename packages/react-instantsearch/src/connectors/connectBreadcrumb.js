@@ -25,22 +25,38 @@ export default createConnector({
       searchState,
       searchResults
     );
-    console.log('newProps', newProps);
-    return newProps;
+
+    var assembleBreadcrumb = function(items) {
+      return items === null
+        ? []
+        : items.reduce(function(acc, item) {
+            if (item.isRefined === true) {
+              acc.push({
+                label: item.label,
+                value: item.value,
+                count: item.count,
+              });
+              acc = acc.concat(assembleBreadcrumb(item.items));
+            }
+            return acc;
+          }, []);
+    };
+
+    console.log('Recursion Result', assembleBreadcrumb(newProps.items));
+    return assembleBreadcrumb(newProps.items);
   },
 
   refine(props, searchState, nextRefinement) {
-    return {};
+    return blop.refine(props, searchState, nextRefinement, this.context);
   },
 
   cleanUp(props, searchState) {
     return {};
   },
-  /*
+
   getSearchParameters(searchParameters, props, searchState) {
     return searchParameters;
   },
-  */
 
   getMetadata(props, searchState) {
     return {};

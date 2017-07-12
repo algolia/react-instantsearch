@@ -11,7 +11,6 @@ const cx = classNames('Breadcrumb');
 class Breadcrumb extends Component {
   render() {
     console.log('props', this.props);
-    console.log('Current Refinement', this.props.currentRefinement);
     return <div>{this.props.currentRefinement}</div>;
   }
 }
