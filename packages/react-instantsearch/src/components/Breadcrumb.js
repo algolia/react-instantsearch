@@ -7,11 +7,43 @@ import Link from './Link';
 import classNames from './classNames.js';
 
 const cx = classNames('Breadcrumb');
-
+/*
 class Breadcrumb extends Component {
   render() {
     console.log('props', this.props);
     return <div>{this.props.currentRefinement}</div>;
+  }
+}*/
+
+class Breadcrumb extends Component {
+  renderItem = item => {
+    const { createURL, refine } = this.props;
+    console.log(this.props);
+    return (
+      <Link
+        {...cx('itemLink')}
+        onClick={() => refine(item.value)}
+        href={createURL(item.value)}
+      >
+        <span {...cx('itemLabel')}>
+          {item.label}
+        </span>
+        {' '}
+        <span {...cx('itemCount')}>
+          {item.count}
+        </span>
+      </Link>
+    );
+  };
+
+  render() {
+    return (
+      <List
+        renderItem={this.renderItem}
+        cx={cx}
+        {...pick(this.props, ['translate', 'items', 'canRefine'])}
+      />
+    );
   }
 }
 

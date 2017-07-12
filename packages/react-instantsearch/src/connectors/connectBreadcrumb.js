@@ -42,8 +42,56 @@ export default createConnector({
           }, []);
     };
 
-    console.log('Recursion Result', assembleBreadcrumb(newProps.items));
-    return assembleBreadcrumb(newProps.items);
+    const arrayTest = [
+      {
+        count: 319,
+        isRefined: false,
+        items: null,
+        label: 'Bathroom',
+        value: 'Bathroom',
+      },
+      {
+        count: 143,
+        isRefined: true,
+        items: [
+          {
+            count: 43,
+            isRefined: false,
+            items: null,
+            label: 'Bakeware',
+            value: 'Cooking > Bakeware',
+          },
+          {
+            count: 18,
+            isRefined: true,
+            items: null,
+            label: 'Diswashing accessories',
+            value: 'Cooking',
+          },
+          {
+            count: 82,
+            isRefined: false,
+            items: null,
+            label: 'Food storage & organizing',
+            value: 'Cooking > Food storage & organizing',
+          },
+        ],
+        label: 'Cooking',
+        value: undefined,
+      },
+      {
+        count: 880,
+        isRefined: false,
+        items: null,
+        label: 'Decoration',
+        value: 'Decoration',
+      },
+    ];
+    // console.log("Array test", assembleBreadcrumb(arrayTest));
+    // console.log("New props", newProps);
+    // console.log("test", assembleBreadcrumb(newProps.items));
+
+    return { items: assembleBreadcrumb(newProps.items) };
   },
 
   refine(props, searchState, nextRefinement) {

@@ -244,10 +244,6 @@ export default createConnector({
         currentRefinement
       );
     }
-    console.log(
-      'SP',
-      searchParameters.getHierarchicalFacetBreadcrumb('category')
-    );
     return searchParameters;
   },
 
