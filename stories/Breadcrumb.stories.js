@@ -19,8 +19,10 @@ stories.add('default', () => (
       <Breadcrumb
         attributes={['category', 'sub_category', 'sub_sub_category']}
       />
+      <hr />
       <HierarchicalMenu
         attributes={['category', 'sub_category', 'sub_sub_category']}
+        defaultRefinement="Bathroom > Faucets"
       />
     </WrapWithHits>
   </div>

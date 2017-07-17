@@ -10,7 +10,7 @@ import {
   getResults,
 } from '../core/indexUtils';
 import blop from './blop';
-
+import { filter } from 'lodash';
 export const getId = props => props.attributes[0];
 
 const namespace = 'hierarchicalMenu';
@@ -26,75 +26,28 @@ export default createConnector({
       searchResults
     );
 
-    var assembleBreadcrumb = function(items) {
-      return items === null
+    const assembleBreadcrumb = function(items, previous) {
+      return !items
         ? []
         : items.reduce(function(acc, item) {
             if (item.isRefined === true) {
               acc.push({
                 label: item.label,
-                value: item.value,
-                count: item.count,
+                value: previous
+                  ? `${previous[previous.length - 1].value} > ${item.label}`
+                  : item.label,
               });
-              acc = acc.concat(assembleBreadcrumb(item.items));
+              acc = acc.concat(assembleBreadcrumb(item.items, acc));
             }
             return acc;
           }, []);
     };
 
-    const arrayTest = [
-      {
-        count: 319,
-        isRefined: false,
-        items: null,
-        label: 'Bathroom',
-        value: 'Bathroom',
-      },
-      {
-        count: 143,
-        isRefined: true,
-        items: [
-          {
-            count: 43,
-            isRefined: false,
-            items: null,
-            label: 'Bakeware',
-            value: 'Cooking > Bakeware',
-          },
-          {
-            count: 18,
-            isRefined: true,
-            items: null,
-            label: 'Diswashing accessories',
-            value: 'Cooking',
-          },
-          {
-            count: 82,
-            isRefined: false,
-            items: null,
-            label: 'Food storage & organizing',
-            value: 'Cooking > Food storage & organizing',
-          },
-        ],
-        label: 'Cooking',
-        value: undefined,
-      },
-      {
-        count: 880,
-        isRefined: false,
-        items: null,
-        label: 'Decoration',
-        value: 'Decoration',
-      },
-    ];
-    // console.log("Array test", assembleBreadcrumb(arrayTest));
-    // console.log("New props", newProps);
-    // console.log("test", assembleBreadcrumb(newProps.items));
-
     return { items: assembleBreadcrumb(newProps.items) };
   },
 
   refine(props, searchState, nextRefinement) {
+    console.log('refine', nextRefinement);
     return blop.refine(props, searchState, nextRefinement, this.context);
   },
 

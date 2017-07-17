@@ -20,20 +20,24 @@ class Breadcrumb extends Component {
     const { createURL, refine } = this.props;
     console.log(this.props);
     return (
-      <Link
-        {...cx('itemLink')}
-        onClick={() => refine(item.value)}
-        href={createURL(item.value)}
-      >
-        <span {...cx('itemLabel')}>
-          {item.label}
-        </span>
+      <div>
+        <Link
+          {...cx('itemLink')}
+          onClick={() => refine(item.value)}
+          href={createURL(item.value)}
+        >
+          <span {...cx('itemLabel')}>
+            {item.label}
+          </span>
 
-      </Link>
+        </Link>
+        <span> &gt; </span>
+      </div>
     );
   };
 
   render() {
+    //map avec separator
     return (
       <List
         renderItem={this.renderItem}
