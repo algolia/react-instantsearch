@@ -427,7 +427,7 @@ const RefinementList = connectRefinementList(({ refine, items }) =>
 );
 ```
 
-Let’s add this new `<RefinementList>` component to our `<InstantSearch>`.
+Let’s add this new `<RefinementList>` component to our `<InstantSearch>` component.
 
 ```jsx
 const App = () =>
