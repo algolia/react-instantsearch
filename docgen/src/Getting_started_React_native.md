@@ -242,7 +242,7 @@ const SearchBox = connectSearchBox(({ refine, currentRefinement }) => {
 
 ```
 
-Let’s add this new `<SearchBox>` component inside our `<InstantSearch>`.
+Let’s add this new `<SearchBox>` component inside our `<InstantSearch>` component.
 
 ```jsx
 const App = () =>
@@ -316,7 +316,7 @@ const Highlight = connectHighlight(
 );
 ```
 
-Let’s use this new `<Highlight>` component inside our `<Hits>` template:
+Let’s use this new `<Highlight>` component inside our hits rendering:
 
 ```jsx
 
