@@ -32,7 +32,7 @@ const App = () =>
 
 In some situations not only you want default refinements but you also do not want the user to be able to unselect them.
 
-To do this, you can use a [`<VirtualWidgets>`](guide/Virtual_widgets.html). It allows you to pre refine any widget without
+To do this, you can use a [`<VirtualWidget>`](guide/Virtual_widgets.html). It allows you to pre refine any widget without
 rendering anything.
 
 By default the [`<CurrentRefinements>`](widgets/CurrentRefinements.html) widget or the
