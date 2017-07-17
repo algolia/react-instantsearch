@@ -533,7 +533,7 @@ class Categories extends React.Component {
 }
 ```
 
-Second, let’s add our Modal to our first `<InstantSearch>`:
+Second, let’s add our Modal to our first `<InstantSearch>` component:
 
 ```jsx
 export default class App extends React.Component {
