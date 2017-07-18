@@ -30,10 +30,10 @@ export default createConnector({
       return !items
         ? []
         : items.reduce((acc, item) => {
-            if (item.isRefined === true) {
+            if (item.isRefined) {
               acc.push({
                 label: item.label,
-                // It it's a nested "items", "value" is equal to the previous value concatenated with the current label
+                // If it's a nested "items", "value" is equal to the previous value concatenated with the current label
                 // If it's the first level, it is equal to the current label
                 value: previous
                   ? `${previous[previous.length - 1].value} > ${item.label}`
