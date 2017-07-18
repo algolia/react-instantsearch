@@ -7,44 +7,35 @@ import Link from './Link';
 import classNames from './classNames.js';
 
 const cx = classNames('Breadcrumb');
-/*
-class Breadcrumb extends Component {
-  render() {
-    console.log('props', this.props);
-    return <div>{this.props.currentRefinement}</div>;
-  }
-}*/
 
 class Breadcrumb extends Component {
-  renderItem = item => {
-    const { createURL, refine } = this.props;
-    console.log(this.props);
-    return (
-      <div>
+  static propTypes = {
+    refine: PropTypes.func.isRequired,
+    createURL: PropTypes.func.isRequired,
+    separator: PropTypes.string,
+  };
+
+  render() {
+    //console.log("separator", this.props.separator);
+    const { createURL, refine, items } = this.props;
+    const breadcrumb = items.map((item, idx) => {
+      const separator = idx === items.length - 1 ? '' : ' > ';
+      return (
         <Link
           {...cx('itemLink')}
           onClick={() => refine(item.value)}
           href={createURL(item.value)}
+          key={idx}
         >
           <span {...cx('itemLabel')}>
             {item.label}
           </span>
-
+          {separator}
         </Link>
-        <span> &gt; </span>
-      </div>
-    );
-  };
+      );
+    });
 
-  render() {
-    //map avec separator
-    return (
-      <List
-        renderItem={this.renderItem}
-        cx={cx}
-        {...pick(this.props, ['translate', 'items', 'canRefine'])}
-      />
-    );
+    return <div>{breadcrumb}</div>;
   }
 }
 
