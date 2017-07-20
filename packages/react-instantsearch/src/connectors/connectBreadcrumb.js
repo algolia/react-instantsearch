@@ -32,7 +32,7 @@ export default createConnector({
       }
       return undefined;
     },
-    separator: PropTypes.string,
+    separator: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
     rootPath: PropTypes.string,
     defaultRefinement: PropTypes.string,
     transformItems: PropTypes.func,
