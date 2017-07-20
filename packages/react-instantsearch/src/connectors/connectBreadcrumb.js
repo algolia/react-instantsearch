@@ -18,6 +18,31 @@ const namespace = 'hierarchicalMenu';
 export default createConnector({
   displayName: 'AlgoliaBreadcrumb',
 
+  propTypes: {
+    attributes: (props, propName, componentName) => {
+      const isNotString = val => typeof val !== 'string';
+      if (
+        !Array.isArray(props[propName]) ||
+        props[propName].some(isNotString) ||
+        props[propName].length < 1
+      ) {
+        return new Error(
+          `Invalid prop ${propName} supplied to ${componentName}. Expected an Array of Strings`
+        );
+      }
+      return undefined;
+    },
+    separator: PropTypes.string,
+    rootPath: PropTypes.string,
+    defaultRefinement: PropTypes.string,
+    transformItems: PropTypes.func,
+  },
+
+  defaultProps: {
+    separator: ' > ',
+    rootPath: null,
+  },
+
   getProvidedProps(props, searchState, searchResults) {
     const newProps = blop.getProvidedProps.call(
       this,
@@ -54,7 +79,7 @@ export default createConnector({
   },
 
   cleanUp(props, searchState) {
-    return {};
+    return blop.cleanUp(props, searchState, this.context);
   },
 
   getSearchParameters(searchParameters, props, searchState) {

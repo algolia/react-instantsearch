@@ -16,10 +16,10 @@ class Breadcrumb extends Component {
   };
 
   render() {
-    //console.log("separator", this.props.separator);
+    console.log('separator', this.props.separator);
     const { createURL, refine, items } = this.props;
     const breadcrumb = items.map((item, idx) => {
-      const separator = idx === items.length - 1 ? '' : ' > ';
+      const separator = idx === items.length - 1 ? '' : this.props.separator;
       return (
         <Link
           {...cx('itemLink')}

@@ -22,7 +22,7 @@ stories.add('default', () => (
       <hr />
       <HierarchicalMenu
         attributes={['category', 'sub_category', 'sub_sub_category']}
-        defaultRefinement="Bathroom > Faucets"
+        defaultRefinement="Cooking > Kitchen textiles"
       />
     </WrapWithHits>
   </div>
