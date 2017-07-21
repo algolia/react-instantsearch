@@ -37,20 +37,25 @@ class Breadcrumb extends Component {
     //console.log('separator', this.props.separator);
     const { createURL, refine, items, canRefine } = this.props;
     const breadcrumb = items.map((item, idx) => {
-      const separator = idx === items.length - 1 ? '' : this.props.separator;
-      return (
-        <Link
-          {...cx('itemLink')}
-          onClick={() => refine(item.value)}
-          href={createURL(item.value)}
-          key={idx}
-        >
-          <span {...cx('itemLabel')}>
-            {item.label}
-          </span>
-          {separator}
-        </Link>
-      );
+      const isLast = idx === items.length - 1;
+      const separator = isLast ? '' : this.props.separator;
+      return !isLast
+        ? <Link
+            {...cx('itemLink')}
+            onClick={() => refine(item.value)}
+            href={createURL(item.value)}
+            key={idx}
+          >
+            <span {...cx('itemLabel')}>
+              {item.label}
+            </span>
+            {separator}
+          </Link>
+        : <div {...cx('itemLink', 'itemDisabled')} key={idx}>
+            <span {...cx('itemLabel')}>
+              {item.label}
+            </span>
+          </div>;
     });
 
     return (

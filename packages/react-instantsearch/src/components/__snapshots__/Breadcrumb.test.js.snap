@@ -25,7 +25,15 @@ exports[`Breadcrumb default breadcrumb 1`] = `
     >
       white1
     </span>
-    
   </a>
+  <div
+    className="ais-Breadcrumb__itemLink ais-Breadcrumb__itemDisabled"
+  >
+    <span
+      className="ais-Breadcrumb__itemLabel"
+    >
+      white1.1
+    </span>
+  </div>
 </div>
 `;

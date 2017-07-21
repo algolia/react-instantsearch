@@ -23,6 +23,10 @@ describe('Breadcrumb', () => {
               value: 'white > white1',
               label: 'white1',
             },
+            {
+              value: 'white > white1 > white1.1',
+              label: 'white1.1',
+            },
           ]}
           canRefine={true}
         />
@@ -46,13 +50,17 @@ describe('Breadcrumb', () => {
             value: 'white > white1',
             label: 'white1',
           },
+          {
+            value: 'white > white1 > white1.1',
+            label: 'white1.1',
+          },
         ]}
         canRefine={true}
       />
     );
 
     const items = wrapper.find('.ais-Breadcrumb__itemLink');
-    expect(items.length).toBe(2);
+    expect(items.length).toBe(3);
 
     items.first().simulate('click');
     expect(refine.mock.calls.length).toBe(1);
@@ -61,6 +69,9 @@ describe('Breadcrumb', () => {
     items.at(1).simulate('click');
     expect(refine.mock.calls.length).toBe(2);
     expect(refine.mock.calls[1][0]).toEqual('white > white1');
+
+    items.at(2).simulate('click');
+    expect(refine.mock.calls.length).toBe(2);
 
     wrapper.unmount();
   });
