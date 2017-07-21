@@ -165,12 +165,18 @@ export default createConnector({
   },
 
   getProvidedProps(props, searchState, searchResults) {
-    return hierarchicalMenuLogic.getProvidedProps.call(
+    const providedProps = hierarchicalMenuLogic.getProvidedProps.call(
       this,
       props,
       searchState,
       searchResults
     );
+
+    const items = props.transformItems
+      ? props.transformItems(providedProps.items)
+      : providedProps.items;
+
+    return { ...providedProps, items };
   },
 
   refine(props, searchState, nextRefinement) {

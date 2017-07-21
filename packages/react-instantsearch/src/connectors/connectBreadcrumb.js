@@ -4,6 +4,26 @@ import hierarchicalMenuLogic from './hierarchicalMenuLogic';
 import { SearchParameters } from 'algoliasearch-helper';
 export const getId = props => props.attributes[0];
 
+function assembleBreadcrumb(items, previous) {
+  return !items
+    ? []
+    : items.reduce((acc, item) => {
+        if (item.isRefined) {
+          acc.push({
+            label: item.label,
+            // If it's a nested "items", "value" is equal to the previous value concatenated with the current label
+            // If it's the first level, it is equal to the current label
+            value: previous
+              ? `${previous[previous.length - 1].value} > ${item.label}`
+              : item.label,
+          });
+          // Create a variable in order to keep the same acc for the recursion, otherwise reduce returns a new one
+          acc = acc.concat(assembleBreadcrumb(item.items, acc));
+        }
+        return acc;
+      }, []);
+}
+
 export default createConnector({
   displayName: 'AlgoliaBreadcrumb',
 
@@ -33,33 +53,20 @@ export default createConnector({
   },
 
   getProvidedProps(props, searchState, searchResults) {
-    const newProps = hierarchicalMenuLogic.getProvidedProps.call(
+    const { items, canRefine } = hierarchicalMenuLogic.getProvidedProps.call(
       this,
       props,
       searchState,
       searchResults
     );
 
-    const assembleBreadcrumb = (items, previous) => {
-      return !items
-        ? []
-        : items.reduce((acc, item) => {
-            if (item.isRefined) {
-              acc.push({
-                label: item.label,
-                // If it's a nested "items", "value" is equal to the previous value concatenated with the current label
-                // If it's the first level, it is equal to the current label
-                value: previous
-                  ? `${previous[previous.length - 1].value} > ${item.label}`
-                  : item.label,
-              });
-              // Create a variable in order to keep the same acc for the recursion, otherwise reduce returns a new one
-              acc = acc.concat(assembleBreadcrumb(item.items, acc));
-            }
-            return acc;
-          }, []);
+    const refinedItems = assembleBreadcrumb(items);
+    return {
+      items: props.transformItems
+        ? props.transformItems(refinedItems)
+        : refinedItems,
+      canRefine,
     };
-    return { items: assembleBreadcrumb(newProps.items) };
   },
 
   refine(props, searchState, nextRefinement) {

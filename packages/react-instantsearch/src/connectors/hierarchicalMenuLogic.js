@@ -145,7 +145,7 @@ export default {
       : [];
 
     return {
-      items: props.transformItems ? props.transformItems(items) : items,
+      items,
       currentRefinement: getCurrentRefinement(props, searchState, this.context),
       canRefine: items.length > 0,
     };
