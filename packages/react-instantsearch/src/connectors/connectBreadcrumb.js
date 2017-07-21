@@ -1,19 +1,8 @@
 import PropTypes from 'prop-types';
 import createConnector from '../core/createConnector';
-import connectHierarchicalMenu from './connectHierarchicalMenu';
+import hierarchicalMenuLogic from './hierarchicalMenuLogic';
 import { SearchParameters } from 'algoliasearch-helper';
-import {
-  cleanUpValue,
-  getIndex,
-  refineValue,
-  getCurrentRefinementValue,
-  getResults,
-} from '../core/indexUtils';
-import blop from './blop';
-import { filter } from 'lodash';
 export const getId = props => props.attributes[0];
-
-const namespace = 'hierarchicalMenu';
 
 export default createConnector({
   displayName: 'AlgoliaBreadcrumb',
@@ -44,7 +33,7 @@ export default createConnector({
   },
 
   getProvidedProps(props, searchState, searchResults) {
-    const newProps = blop.getProvidedProps.call(
+    const newProps = hierarchicalMenuLogic.getProvidedProps.call(
       this,
       props,
       searchState,
@@ -74,19 +63,13 @@ export default createConnector({
   },
 
   refine(props, searchState, nextRefinement) {
-    console.log('refine', nextRefinement);
-    return blop.refine(props, searchState, nextRefinement, this.context);
-  },
-
-  cleanUp(props, searchState) {
-    return blop.cleanUp(props, searchState, this.context);
-  },
-
-  getSearchParameters(searchParameters, props, searchState) {
-    return searchParameters;
-  },
-
-  getMetadata(props, searchState) {
-    return {};
+    //console.log("refine", nextRefinement);
+    return hierarchicalMenuLogic.refine.call(
+      this,
+      props,
+      searchState,
+      nextRefinement,
+      this.context
+    );
   },
 });

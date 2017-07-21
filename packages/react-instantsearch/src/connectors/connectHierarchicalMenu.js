@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import createConnector from '../core/createConnector';
+import hierarchicalMenuLogic from './hierarchicalMenuLogic';
 import { SearchParameters } from 'algoliasearch-helper';
 import {
   cleanUpValue,
@@ -164,111 +165,43 @@ export default createConnector({
   },
 
   getProvidedProps(props, searchState, searchResults) {
-    const { showMore, limitMin, limitMax } = props;
-    const id = getId(props);
-    const results = getResults(searchResults, this.context);
-
-    const isFacetPresent =
-      Boolean(results) && Boolean(results.getFacetByName(id));
-
-    if (!isFacetPresent) {
-      return {
-        items: [],
-        currentRefinement: getCurrentRefinement(
-          props,
-          searchState,
-          this.context
-        ),
-        canRefine: false,
-      };
-    }
-
-    const limit = showMore ? limitMax : limitMin;
-    const value = results.getFacetValues(id, { sortBy });
-    const items = value.data
-      ? transformValue(value.data, limit, props, searchState, this.context)
-      : [];
-
-    return {
-      items: props.transformItems ? props.transformItems(items) : items,
-      currentRefinement: getCurrentRefinement(props, searchState, this.context),
-      canRefine: items.length > 0,
-    };
+    return hierarchicalMenuLogic.getProvidedProps.call(
+      this,
+      props,
+      searchState,
+      searchResults
+    );
   },
 
   refine(props, searchState, nextRefinement) {
-    return refine(props, searchState, nextRefinement, this.context);
+    return hierarchicalMenuLogic.refine.call(
+      this,
+      props,
+      searchState,
+      nextRefinement,
+      this.context
+    );
   },
 
   cleanUp(props, searchState) {
-    return cleanUp(props, searchState, this.context);
+    return hierarchicalMenuLogic.cleanUp.call(
+      this,
+      props,
+      searchState,
+      this.context
+    );
   },
 
   getSearchParameters(searchParameters, props, searchState) {
-    const {
-      attributes,
-      separator,
-      rootPath,
-      showParentLevel,
-      showMore,
-      limitMin,
-      limitMax,
-    } = props;
-
-    const id = getId(props);
-    const limit = showMore ? limitMax : limitMin;
-
-    searchParameters = searchParameters
-      .addHierarchicalFacet({
-        name: id,
-        attributes,
-        separator,
-        rootPath,
-        showParentLevel,
-      })
-      .setQueryParameters({
-        maxValuesPerFacet: Math.max(
-          searchParameters.maxValuesPerFacet || 0,
-          limit
-        ),
-      });
-
-    const currentRefinement = getCurrentRefinement(
+    return hierarchicalMenuLogic.getSearchParameters.call(
+      this,
+      searchParameters,
       props,
-      searchState,
-      this.context
+      searchState
     );
-    if (currentRefinement !== null) {
-      searchParameters = searchParameters.toggleHierarchicalFacetRefinement(
-        id,
-        currentRefinement
-      );
-    }
-    return searchParameters;
   },
 
   getMetadata(props, searchState) {
-    const rootAttribute = props.attributes[0];
-    const id = getId(props);
-    const currentRefinement = getCurrentRefinement(
-      props,
-      searchState,
-      this.context
-    );
-
-    return {
-      id,
-      index: getIndex(this.context),
-      items: !currentRefinement
-        ? []
-        : [
-            {
-              label: `${rootAttribute}: ${currentRefinement}`,
-              attributeName: rootAttribute,
-              value: nextState => refine(props, nextState, '', this.context),
-              currentRefinement,
-            },
-          ],
-    };
+    return hierarchicalMenuLogic.getMetadata.call(this, props, searchState);
   },
 });

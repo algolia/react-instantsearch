@@ -1,15 +1,14 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+import { Breadcrumb } from '../packages/react-instantsearch/dom';
 import {
-  HierarchicalMenu,
-  Breadcrumb,
-  Panel,
-  SearchBox,
-} from '../packages/react-instantsearch/dom';
-import { withKnobs, text, boolean, number } from '@storybook/addon-knobs';
+  connectHierarchicalMenu,
+} from '../packages/react-instantsearch/connectors';
+import { withKnobs } from '@storybook/addon-knobs';
 import { WrapWithHits } from './util';
 
 const stories = storiesOf('Breadcrumb', module);
+const VirtualHierarchicalMenu = connectHierarchicalMenu(() => null);
 
 stories.addDecorator(withKnobs);
 
@@ -20,10 +19,11 @@ stories.add('default', () => (
         attributes={['category', 'sub_category', 'sub_sub_category']}
       />
       <hr />
-      <HierarchicalMenu
+      <VirtualHierarchicalMenu
         attributes={['category', 'sub_category', 'sub_sub_category']}
         defaultRefinement="Cooking > Kitchen textiles"
       />
+
     </WrapWithHits>
   </div>
 ));
