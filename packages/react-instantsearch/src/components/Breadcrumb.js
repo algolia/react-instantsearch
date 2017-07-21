@@ -1,23 +1,41 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { pick } from 'lodash';
-import translatable from '../core/translatable';
-import List from './List';
 import Link from './Link';
 import classNames from './classNames.js';
 
 const cx = classNames('Breadcrumb');
+
+const itemsPropType = PropTypes.arrayOf(
+  PropTypes.shape({
+    label: PropTypes.string.isRequired,
+    value: PropTypes.string,
+  })
+);
 
 class Breadcrumb extends Component {
   static propTypes = {
     refine: PropTypes.func.isRequired,
     createURL: PropTypes.func.isRequired,
     separator: PropTypes.string,
+    canRefine: PropTypes.bool.isRequired,
+    items: itemsPropType,
   };
 
+  static contextTypes = {
+    canRefine: PropTypes.func,
+  };
+
+  componentWillMount() {
+    if (this.context.canRefine) this.context.canRefine(this.props.canRefine);
+  }
+
+  componentWillReceiveProps(props) {
+    if (this.context.canRefine) this.context.canRefine(props.canRefine);
+  }
+
   render() {
-    console.log('separator', this.props.separator);
-    const { createURL, refine, items } = this.props;
+    //console.log('separator', this.props.separator);
+    const { createURL, refine, items, canRefine } = this.props;
     const breadcrumb = items.map((item, idx) => {
       const separator = idx === items.length - 1 ? '' : this.props.separator;
       return (
@@ -35,7 +53,11 @@ class Breadcrumb extends Component {
       );
     });
 
-    return <div>{breadcrumb}</div>;
+    return (
+      <div {...cx('root', !canRefine && 'noRefinement')}>
+        {breadcrumb}
+      </div>
+    );
   }
 }
 

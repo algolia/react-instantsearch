@@ -1,12 +1,8 @@
 /* eslint-env jest, jasmine */
-
-import { SearchParameters } from 'algoliasearch-helper';
-
 import connect from './connectBreadcrumb';
 jest.mock('../core/createConnector');
 
 let props;
-let params;
 
 describe('connectHierarchicalMenu', () => {
   describe('single index', () => {

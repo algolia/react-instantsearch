@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Breadcrumb default breadcrumb 1`] = `
+<div
+  className="ais-Breadcrumb__root"
+>
+  <a
+    className="ais-Breadcrumb__itemLink"
+    href="#"
+    onClick={[Function]}
+  >
+    <span
+      className="ais-Breadcrumb__itemLabel"
+    >
+      white
+    </span>
+  </a>
+  <a
+    className="ais-Breadcrumb__itemLink"
+    href="#"
+    onClick={[Function]}
+  >
+    <span
+      className="ais-Breadcrumb__itemLabel"
+    >
+      white1
+    </span>
+    
+  </a>
+</div>
+`;
