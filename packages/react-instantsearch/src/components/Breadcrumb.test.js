@@ -60,18 +60,22 @@ describe('Breadcrumb', () => {
     );
 
     const items = wrapper.find('.ais-Breadcrumb__itemLink');
-    expect(items.length).toBe(3);
+    expect(items.length).toBe(4);
 
     items.first().simulate('click');
     expect(refine.mock.calls.length).toBe(1);
-    expect(refine.mock.calls[0][0]).toEqual('white');
-
-    items.at(1).simulate('click');
-    expect(refine.mock.calls.length).toBe(2);
-    expect(refine.mock.calls[1][0]).toEqual('white > white1');
+    expect(refine.mock.calls[0][0]).toEqual();
 
     items.at(2).simulate('click');
     expect(refine.mock.calls.length).toBe(2);
+    expect(refine.mock.calls[1][0]).toEqual('white');
+
+    items.at(2).simulate('click');
+    expect(refine.mock.calls.length).toBe(3);
+    expect(refine.mock.calls[2][0]).toEqual('white > white1');
+
+    items.at(3).simulate('click');
+    expect(refine.mock.calls.length).toBe(3);
 
     wrapper.unmount();
   });

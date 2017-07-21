@@ -53,7 +53,7 @@ export default createConnector({
   },
 
   getProvidedProps(props, searchState, searchResults) {
-    const { items, canRefine } = hierarchicalMenuLogic.getProvidedProps.call(
+    const { items } = hierarchicalMenuLogic.getProvidedProps.call(
       this,
       props,
       searchState,
@@ -61,11 +61,12 @@ export default createConnector({
     );
 
     const refinedItems = assembleBreadcrumb(items);
+    const transformedItems = props.transformItems
+      ? props.transformItems(refinedItems)
+      : refinedItems;
     return {
-      items: props.transformItems
-        ? props.transformItems(refinedItems)
-        : refinedItems,
-      canRefine,
+      items: transformedItems,
+      canRefine: transformedItems.length > 0,
     };
   },
 

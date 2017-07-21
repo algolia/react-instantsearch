@@ -8,7 +8,7 @@ const cx = classNames('Breadcrumb');
 const itemsPropType = PropTypes.arrayOf(
   PropTypes.shape({
     label: PropTypes.string.isRequired,
-    value: PropTypes.string,
+    value: PropTypes.string.isRequired,
   })
 );
 
@@ -19,6 +19,7 @@ class Breadcrumb extends Component {
     separator: PropTypes.string,
     canRefine: PropTypes.bool.isRequired,
     items: itemsPropType,
+    rootURL: PropTypes.string,
   };
 
   static contextTypes = {
@@ -35,7 +36,21 @@ class Breadcrumb extends Component {
 
   render() {
     //console.log('separator', this.props.separator);
+
     const { createURL, refine, items, canRefine } = this.props;
+    const rootPath = canRefine
+      ? <a
+          {...cx('itemLink')}
+          onClick={() => (!this.props.rootURL ? refine() : null)}
+          href={this.props.rootURL ? this.props.rootURL : createURL()}
+        >
+          <span {...cx('itemLabel')}>
+            Home
+          </span>
+          {this.props.separator}
+        </a>
+      : null;
+
     const breadcrumb = items.map((item, idx) => {
       const isLast = idx === items.length - 1;
       const separator = isLast ? '' : this.props.separator;
@@ -60,6 +75,7 @@ class Breadcrumb extends Component {
 
     return (
       <div {...cx('root', !canRefine && 'noRefinement')}>
+        {rootPath}
         {breadcrumb}
       </div>
     );
