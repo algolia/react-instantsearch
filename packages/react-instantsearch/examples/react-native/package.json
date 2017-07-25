@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "jest-expo": "18.0.0",
-    "react-native-scripts": "0.0.50",
     "react-test-renderer": "16.0.0-alpha.13"
+    "react-native-scripts": "1.0.0",
+    "jest-expo": "19.0.1"
   },
   "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "scripts": {
@@ -20,11 +20,11 @@
   },
   "dependencies": {
     "@ptomasroos/react-native-multi-slider": "^0.0.8",
-    "expo": "^18.0.9",
+    "expo": "^19.0.0",
     "lodash": "^4.17.4",
     "native-base": "^2.2.1",
     "prop-types": "^15.5.8",
-    "react": "16.0.0-alpha.6",
+    "react": "16.0.0-alpha.13",
     "react-dom": "16.0.0-alpha.6",
     "react-instantsearch": "beta",
     "react-native": "^0.46.3",
