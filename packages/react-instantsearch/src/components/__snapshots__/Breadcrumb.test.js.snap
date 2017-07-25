@@ -5,6 +5,17 @@ exports[`Breadcrumb default breadcrumb 1`] = `
   className="ais-Breadcrumb__root"
 >
   <a
+    className="ais-Breadcrumb__itemLink ais-Breadcrumb__itemLinkRoot"
+    href="#"
+    onClick={[Function]}
+  >
+    <span
+      className="ais-Breadcrumb__itemLabel"
+    >
+      Home
+    </span>
+  </a>
+  <a
     className="ais-Breadcrumb__itemLink"
     href="#"
     onClick={[Function]}

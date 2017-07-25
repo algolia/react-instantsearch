@@ -35,8 +35,28 @@ stories
       <Panel title="Category">
         <Breadcrumb
           attributes={['category', 'sub_category', 'sub_sub_category']}
+          separator=" / "
+          //defaultRefinement="Cooking > Kitchen textiles"
         />
       </Panel>
+      <HierarchicalMenu
+        attributes={['category', 'sub_category', 'sub_sub_category']}
+        defaultRefinement="Cooking > Bakeware"
+      />
+    </WrapWithHits>
+  )
+  .add('playground', () =>
+    <WrapWithHits hasPlayground={true} linkedStoryGroup="Breadcrumb">
+      <Panel title="Category">
+        <Breadcrumb
+          attributes={['category', 'sub_category', 'sub_sub_category']}
+          separator=" / "
+        />
+      </Panel>
+      <HierarchicalMenu
+        attributes={['category', 'sub_category', 'sub_sub_category']}
+        defaultRefinement="Cooking > Bakeware"
+      />
     </WrapWithHits>
   )
   .add('with rootURL', () =>
@@ -44,7 +64,7 @@ stories
 
       <Breadcrumb
         attributes={['category', 'sub_category', 'sub_sub_category']}
-        rootURL="http://www.amazon.fr"
+        rootURL="https://www.algolia.com"
       />
       <HierarchicalMenu
         attributes={['category', 'sub_category', 'sub_sub_category']}

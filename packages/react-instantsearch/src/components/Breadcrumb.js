@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import Link from './Link';
+import translatable from '../core/translatable';
 import classNames from './classNames.js';
 
 const cx = classNames('Breadcrumb');
@@ -16,7 +17,9 @@ class Breadcrumb extends Component {
   static propTypes = {
     refine: PropTypes.func.isRequired,
     createURL: PropTypes.func.isRequired,
-    separator: PropTypes.string,
+    separator: PropTypes.arrayOf(
+      PropTypes.oneOfType([PropTypes.string, PropTypes.element])
+    ),
     canRefine: PropTypes.bool.isRequired,
     items: itemsPropType,
     rootURL: PropTypes.string,
@@ -35,12 +38,10 @@ class Breadcrumb extends Component {
   }
 
   render() {
-    //console.log('separator', this.props.separator);
-
     const { createURL, refine, items, canRefine } = this.props;
     const rootPath = canRefine
       ? <a
-          {...cx('itemLink')}
+          {...cx('itemLink', 'itemLinkRoot')}
           onClick={() => (!this.props.rootURL ? refine() : null)}
           href={this.props.rootURL ? this.props.rootURL : createURL()}
         >
@@ -82,4 +83,6 @@ class Breadcrumb extends Component {
   }
 }
 
-export default Breadcrumb;
+export default translatable({
+  rootURL: 'Home',
+})(Breadcrumb);

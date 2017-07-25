@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import createConnector from '../core/createConnector';
 import hierarchicalMenuLogic from './hierarchicalMenuLogic';
-import { SearchParameters } from 'algoliasearch-helper';
 export const getId = props => props.attributes[0];
 
 function assembleBreadcrumb(items, previous) {
@@ -71,7 +70,6 @@ export default createConnector({
   },
 
   refine(props, searchState, nextRefinement) {
-    //console.log("refine", nextRefinement);
     return hierarchicalMenuLogic.refine.call(
       this,
       props,

@@ -66,7 +66,7 @@ describe('Breadcrumb', () => {
     expect(refine.mock.calls.length).toBe(1);
     expect(refine.mock.calls[0][0]).toEqual();
 
-    items.at(2).simulate('click');
+    items.at(1).simulate('click');
     expect(refine.mock.calls.length).toBe(2);
     expect(refine.mock.calls[1][0]).toEqual('white');
 
@@ -76,6 +76,43 @@ describe('Breadcrumb', () => {
 
     items.at(3).simulate('click');
     expect(refine.mock.calls.length).toBe(3);
+
+    wrapper.unmount();
+  });
+
+  it('root URL prop', () => {
+    const refine = jest.fn();
+    const rootLink = 'www.algolia.com';
+
+    const wrapper = mount(
+      <Breadcrumb
+        refine={refine}
+        createURL={() => '#'}
+        rootURL={rootLink}
+        items={[
+          {
+            value: 'white',
+            label: 'white',
+          },
+          {
+            value: 'white > white1',
+            label: 'white1',
+          },
+          {
+            value: 'white > white1 > white1.1',
+            label: 'white1.1',
+          },
+        ]}
+        canRefine={true}
+      />
+    );
+
+    const items = wrapper.find('.ais-Breadcrumb__itemLink');
+    expect(items.length).toBe(4);
+
+    items.first().simulate('click');
+    expect(refine.mock.calls.length).toBe(0);
+    expect(wrapper.find('a').first().prop('href')).toEqual('www.algolia.com');
 
     wrapper.unmount();
   });
