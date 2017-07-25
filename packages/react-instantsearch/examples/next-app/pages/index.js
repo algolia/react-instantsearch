@@ -37,15 +37,12 @@ export default class extends React.Component {
 
   onSearchStateChange = searchState => {
     clearTimeout(this.debouncedSetState);
-    this.debouncedSetState = setTimeout(
-      () => {
-        const href = searchStateToUrl(searchState);
-        Router.push(href, href, {
-          shallow: true,
-        });
-      },
-      updateAfter
-    );
+    this.debouncedSetState = setTimeout(() => {
+      const href = searchStateToUrl(searchState);
+      Router.push(href, href, {
+        shallow: true,
+      });
+    }, updateAfter);
     this.setState({ searchState });
   };
 
