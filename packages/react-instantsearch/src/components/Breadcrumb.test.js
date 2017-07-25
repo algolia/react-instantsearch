@@ -80,7 +80,7 @@ describe('Breadcrumb', () => {
     wrapper.unmount();
   });
 
-  it('root URL prop', () => {
+  it('lets you provide a rootURL prop', () => {
     const refine = jest.fn();
     const rootLink = 'www.algolia.com';
 

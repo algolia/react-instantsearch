@@ -6,11 +6,11 @@ import {
   HierarchicalMenu,
 } from '../packages/react-instantsearch/dom';
 import { connectHierarchicalMenu } from '../packages/react-instantsearch/connectors';
-import { withKnobs } from '@storybook/addon-knobs';
+import { withKnobs, object, text } from '@storybook/addon-knobs';
 import { WrapWithHits } from './util';
 
 const stories = storiesOf('Breadcrumb', module);
-//const VirtualHierarchicalMenu = connectHierarchicalMenu(() => null);
+const VirtualHierarchicalMenu = connectHierarchicalMenu(() => null);
 
 stories.addDecorator(withKnobs);
 
@@ -36,7 +36,6 @@ stories
         <Breadcrumb
           attributes={['category', 'sub_category', 'sub_sub_category']}
           separator=" / "
-          //defaultRefinement="Cooking > Kitchen textiles"
         />
       </Panel>
       <HierarchicalMenu
@@ -50,26 +49,15 @@ stories
       <Panel title="Category">
         <Breadcrumb
           attributes={['category', 'sub_category', 'sub_sub_category']}
-          separator=" / "
+          separator={text('separator', '/')}
+          translations={object('translations', {
+            rootURL: 'Home',
+          })}
         />
       </Panel>
-      <HierarchicalMenu
+      <VirtualHierarchicalMenu
         attributes={['category', 'sub_category', 'sub_sub_category']}
         defaultRefinement="Cooking > Bakeware"
       />
-    </WrapWithHits>
-  )
-  .add('with rootURL', () =>
-    <WrapWithHits hasPlayground={true} linkedStoryGroup="Breadcrumb">
-
-      <Breadcrumb
-        attributes={['category', 'sub_category', 'sub_sub_category']}
-        rootURL="https://www.algolia.com"
-      />
-      <HierarchicalMenu
-        attributes={['category', 'sub_category', 'sub_sub_category']}
-        defaultRefinement="Cooking > Kitchen textiles"
-      />
-
     </WrapWithHits>
   );

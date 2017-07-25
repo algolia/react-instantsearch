@@ -23,6 +23,7 @@ class Breadcrumb extends Component {
     canRefine: PropTypes.bool.isRequired,
     items: itemsPropType,
     rootURL: PropTypes.string,
+    translate: PropTypes.func.isRequired,
   };
 
   static contextTypes = {
@@ -38,7 +39,7 @@ class Breadcrumb extends Component {
   }
 
   render() {
-    const { createURL, refine, items, canRefine } = this.props;
+    const { createURL, refine, items, canRefine, translate } = this.props;
     const rootPath = canRefine
       ? <a
           {...cx('itemLink', 'itemLinkRoot')}
@@ -46,7 +47,7 @@ class Breadcrumb extends Component {
           href={this.props.rootURL ? this.props.rootURL : createURL()}
         >
           <span {...cx('itemLabel')}>
-            Home
+            {translate('rootURL')}
           </span>
           {this.props.separator}
         </a>
