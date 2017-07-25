@@ -9,11 +9,26 @@ describe('connectScrollTo', () => {
     const context = { context: { ais: { mainTargetedIndex: 'index' } } };
     const getProvidedProps = connect.getProvidedProps.bind(context);
     it('provides the correct props to the component', () => {
-      props = getProvidedProps({ scrollOn: 'p' }, { p: 1 });
-      expect(props).toEqual({ value: 1 });
+      props = getProvidedProps(
+        { scrollOn: 'p' },
+        { p: 1, configure: 3, refinementList: 'ok' }
+      );
+      expect(props).toEqual({ value: 1, hasNotChanged: false });
+
+      props = getProvidedProps(
+        { scrollOn: 'p' },
+        { p: 1, configure: 3, refinementList: 'not ok' }
+      );
+      expect(props).toEqual({ value: 1, hasNotChanged: false });
+
+      props = getProvidedProps(
+        { scrollOn: 'p' },
+        { p: 2, configure: 3, refinementList: 'not ok' }
+      );
+      expect(props).toEqual({ value: 2, hasNotChanged: true });
 
       props = getProvidedProps({ scrollOn: 'anything' }, { anything: 2 });
-      expect(props).toEqual({ value: 2 });
+      expect(props).toEqual({ value: 2, hasNotChanged: false });
     });
   });
   describe('multi index', () => {
@@ -29,13 +44,13 @@ describe('connectScrollTo', () => {
         { scrollOn: 'p' },
         { indices: { second: { p: 1 } } }
       );
-      expect(props).toEqual({ value: 1 });
+      expect(props).toEqual({ value: 1, hasNotChanged: false });
 
       props = getProvidedProps(
         { scrollOn: 'anything' },
         { indices: { second: { anything: 2 } } }
       );
-      expect(props).toEqual({ value: 2 });
+      expect(props).toEqual({ value: 2, hasNotChanged: true });
     });
   });
 });
