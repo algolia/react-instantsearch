@@ -117,6 +117,34 @@ describe('Breadcrumb', () => {
     wrapper.unmount();
   });
 
+  it('lets you use custom components as a separator', () => {
+    const tree = renderer
+      .create(
+        <Breadcrumb
+          refine={() => null}
+          createURL={() => '#'}
+          separator={<span>🔍</span>}
+          items={[
+            {
+              value: 'white',
+              label: 'white',
+            },
+            {
+              value: 'white > white1',
+              label: 'white1',
+            },
+            {
+              value: 'white > white1 > white1.1',
+              label: 'white1.1',
+            },
+          ]}
+          canRefine={true}
+        />
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
   it('lets you customize its translations', () => {
     const tree = renderer
       .create(

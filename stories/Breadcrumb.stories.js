@@ -38,6 +38,7 @@ stories
           separator=" / "
         />
       </Panel>
+      <hr />
       <HierarchicalMenu
         attributes={['category', 'sub_category', 'sub_sub_category']}
         defaultRefinement="Cooking > Bakeware"
@@ -46,15 +47,14 @@ stories
   )
   .add('with custom component', () =>
     <WrapWithHits hasPlayground={true} linkedStoryGroup="Breadcrumb">
-      <Panel title="Category">
-        <Breadcrumb
-          attributes={['category', 'sub_category', 'sub_sub_category']}
-          separator={<span> ⚡ </span>}
-        />
-      </Panel>
-      <HierarchicalMenu
+      <Breadcrumb
         attributes={['category', 'sub_category', 'sub_sub_category']}
-        defaultRefinement="Cooking > Bakeware"
+        separator={<span> ⚡ </span>}
+      />
+      <hr />
+      <VirtualHierarchicalMenu
+        attributes={['category', 'sub_category', 'sub_sub_category']}
+        defaultRefinement="Winter holidays > Toys & play"
       />
     </WrapWithHits>
   )

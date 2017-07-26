@@ -97,3 +97,61 @@ exports[`Breadcrumb lets you customize its translations 1`] = `
   </div>
 </div>
 `;
+
+exports[`Breadcrumb lets you use custom components as a separator 1`] = `
+<div
+  className="ais-Breadcrumb__root"
+>
+  <a
+    className="ais-Breadcrumb__itemLink ais-Breadcrumb__itemLinkRoot"
+    href="#"
+    onClick={[Function]}
+  >
+    <span
+      className="ais-Breadcrumb__itemLabel"
+    >
+      Home
+    </span>
+    <span>
+      🔍
+    </span>
+  </a>
+  <a
+    className="ais-Breadcrumb__itemLink"
+    href="#"
+    onClick={[Function]}
+  >
+    <span
+      className="ais-Breadcrumb__itemLabel"
+    >
+      white
+    </span>
+    <span>
+      🔍
+    </span>
+  </a>
+  <a
+    className="ais-Breadcrumb__itemLink"
+    href="#"
+    onClick={[Function]}
+  >
+    <span
+      className="ais-Breadcrumb__itemLabel"
+    >
+      white1
+    </span>
+    <span>
+      🔍
+    </span>
+  </a>
+  <div
+    className="ais-Breadcrumb__itemLink ais-Breadcrumb__itemDisabled"
+  >
+    <span
+      className="ais-Breadcrumb__itemLabel"
+    >
+      white1.1
+    </span>
+  </div>
+</div>
+`;
