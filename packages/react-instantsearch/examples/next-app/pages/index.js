@@ -28,24 +28,21 @@ export default class extends React.Component {
      to initialize the searchState. 
   */
   static async getInitialProps(params) {
-    const searchState = qs.parse(
-      params.asPath.substring(params.asPath.indexOf('?') + 1)
-    );
+    const searchState = params.asPath.includes('?')
+      ? qs.parse(params.asPath.substring(params.asPath.indexOf('?') + 1))
+      : {};
     const resultsState = await findResultsState(App, { searchState });
     return { resultsState, searchState };
   }
 
   onSearchStateChange = searchState => {
     clearTimeout(this.debouncedSetState);
-    this.debouncedSetState = setTimeout(
-      () => {
-        const href = searchStateToUrl(searchState);
-        Router.push(href, href, {
-          shallow: true,
-        });
-      },
-      updateAfter
-    );
+    this.debouncedSetState = setTimeout(() => {
+      const href = searchStateToUrl(searchState);
+      Router.push(href, href, {
+        shallow: true,
+      });
+    }, updateAfter);
     this.setState({ searchState });
   };
 
