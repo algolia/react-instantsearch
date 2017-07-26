@@ -10,7 +10,7 @@ exports[`Breadcrumb default breadcrumb 1`] = `
     onClick={[Function]}
   >
     <span
-      className="ais-Breadcrumb__itemLabel"
+      className="ais-Breadcrumb__rootLabel"
     >
       Home
     </span>
@@ -59,7 +59,7 @@ exports[`Breadcrumb lets you customize its translations 1`] = `
     onClick={[Function]}
   >
     <span
-      className="ais-Breadcrumb__itemLabel"
+      className="ais-Breadcrumb__rootLabel"
     >
       ROOT_LABEL
     </span>
@@ -108,7 +108,7 @@ exports[`Breadcrumb lets you use custom components as a separator 1`] = `
     onClick={[Function]}
   >
     <span
-      className="ais-Breadcrumb__itemLabel"
+      className="ais-Breadcrumb__rootLabel"
     >
       Home
     </span>

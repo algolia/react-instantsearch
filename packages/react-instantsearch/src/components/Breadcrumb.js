@@ -17,9 +17,7 @@ class Breadcrumb extends Component {
   static propTypes = {
     refine: PropTypes.func.isRequired,
     createURL: PropTypes.func.isRequired,
-    separator: PropTypes.arrayOf(
-      PropTypes.oneOfType([PropTypes.string, PropTypes.element])
-    ),
+    separator: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
     canRefine: PropTypes.bool.isRequired,
     items: itemsPropType,
     rootURL: PropTypes.string,
@@ -46,7 +44,7 @@ class Breadcrumb extends Component {
           onClick={() => (!this.props.rootURL ? refine() : null)}
           href={this.props.rootURL ? this.props.rootURL : createURL()}
         >
-          <span {...cx('itemLabel')}>
+          <span {...cx('rootLabel')}>
             {translate('rootLabel')}
           </span>
           {this.props.separator}
