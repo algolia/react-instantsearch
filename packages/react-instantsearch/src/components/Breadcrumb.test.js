@@ -8,7 +8,7 @@ import { mount } from 'enzyme';
 import Breadcrumb from './Breadcrumb';
 
 describe('Breadcrumb', () => {
-  it('default breadcrumb', () => {
+  it('outputs the default breadcrumb', () => {
     const tree = renderer
       .create(
         <Breadcrumb
@@ -80,7 +80,7 @@ describe('Breadcrumb', () => {
     wrapper.unmount();
   });
 
-  it('lets you provide a rootURL prop', () => {
+  it('has a rootURL prop', () => {
     const refine = jest.fn();
     const rootLink = 'www.algolia.com';
 
@@ -117,7 +117,7 @@ describe('Breadcrumb', () => {
     wrapper.unmount();
   });
 
-  it('lets you use custom components as a separator', () => {
+  it('has a separator prop that can be a custom component', () => {
     const tree = renderer
       .create(
         <Breadcrumb
@@ -145,7 +145,7 @@ describe('Breadcrumb', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('lets you customize its translations', () => {
+  it('has customizable translations', () => {
     const tree = renderer
       .create(
         <Breadcrumb
@@ -176,7 +176,7 @@ describe('Breadcrumb', () => {
   });
 
   describe('Panel compatibility', () => {
-    it('Should indicate when no more refinement', () => {
+    it('Should indicate when there is no more refinement', () => {
       const canRefine = jest.fn();
       const wrapper = mount(
         <Breadcrumb
