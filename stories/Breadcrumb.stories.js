@@ -44,6 +44,20 @@ stories
       />
     </WrapWithHits>
   )
+  .add('with custom component', () =>
+    <WrapWithHits hasPlayground={true} linkedStoryGroup="Breadcrumb">
+      <Panel title="Category">
+        <Breadcrumb
+          attributes={['category', 'sub_category', 'sub_sub_category']}
+          separator={<span> ⚡ </span>}
+        />
+      </Panel>
+      <HierarchicalMenu
+        attributes={['category', 'sub_category', 'sub_sub_category']}
+        defaultRefinement="Cooking > Bakeware"
+      />
+    </WrapWithHits>
+  )
   .add('playground', () =>
     <WrapWithHits hasPlayground={true} linkedStoryGroup="Breadcrumb">
       <Panel title="Category">
