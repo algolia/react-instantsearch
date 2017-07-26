@@ -117,6 +117,36 @@ describe('Breadcrumb', () => {
     wrapper.unmount();
   });
 
+  it('lets you customize its translations', () => {
+    const tree = renderer
+      .create(
+        <Breadcrumb
+          refine={() => null}
+          createURL={() => '#'}
+          translations={{
+            rootURL: 'ROOT_URL',
+          }}
+          items={[
+            {
+              value: 'white',
+              label: 'white',
+            },
+            {
+              value: 'white > white1',
+              label: 'white1',
+            },
+            {
+              value: 'white > white1 > white1.1',
+              label: 'white1.1',
+            },
+          ]}
+          canRefine={true}
+        />
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
   describe('Panel compatibility', () => {
     it('Should indicate when no more refinement', () => {
       const canRefine = jest.fn();
