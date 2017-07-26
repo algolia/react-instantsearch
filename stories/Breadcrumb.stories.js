@@ -65,7 +65,7 @@ stories
           attributes={['category', 'sub_category', 'sub_sub_category']}
           separator={text('separator', '/')}
           translations={object('translations', {
-            rootURL: 'Home',
+            rootLabel: 'Home',
           })}
         />
       </Panel>

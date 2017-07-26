@@ -61,7 +61,7 @@ exports[`Breadcrumb lets you customize its translations 1`] = `
     <span
       className="ais-Breadcrumb__itemLabel"
     >
-      ROOT_URL
+      ROOT_LABEL
     </span>
   </a>
   <a

@@ -152,7 +152,7 @@ describe('Breadcrumb', () => {
           refine={() => null}
           createURL={() => '#'}
           translations={{
-            rootURL: 'ROOT_URL',
+            rootLabel: 'ROOT_LABEL',
           }}
           items={[
             {

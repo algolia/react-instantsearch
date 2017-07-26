@@ -47,7 +47,7 @@ class Breadcrumb extends Component {
           href={this.props.rootURL ? this.props.rootURL : createURL()}
         >
           <span {...cx('itemLabel')}>
-            {translate('rootURL')}
+            {translate('rootLabel')}
           </span>
           {this.props.separator}
         </a>
@@ -85,5 +85,5 @@ class Breadcrumb extends Component {
 }
 
 export default translatable({
-  rootURL: 'Home',
+  rootLabel: 'Home',
 })(Breadcrumb);
