@@ -63,7 +63,7 @@ stories
       <Panel title="Category">
         <Breadcrumb
           attributes={['category', 'sub_category', 'sub_sub_category']}
-          separator={text('separator', '/')}
+          separator={text('separator', ' / ')}
           translations={object('translations', {
             rootLabel: 'Home',
           })}
