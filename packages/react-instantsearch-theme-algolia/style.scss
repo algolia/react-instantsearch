@@ -3,111 +3,105 @@
 // Functions
 // ------------------------------------
 @function str-replace($string, $search, $replace: '') {
-  $index: str-index($string, $search);
-
-  @if $index {
-    @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
-  }
-
-  @return $string;
+    $index: str-index($string, $search);
+    @if $index {
+        @return str-slice($string, 1, $index - 1)+$replace+str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+    }
+    @return $string;
 }
 
 // ------------------------------------
 // Mixins
 // ------------------------------------
-
 @mixin closedCaret() {
-  &:after {
-    content: '';
-    display: block;
-    position: absolute;
-    top: 50%;
-    right: -22px;
-    width: 14px;
-    height: 14px;
-    background: url("data:image/svg+xml;utf8,<svg viewBox=\'0 0 8 13\' xmlns=\'http://www.w3.org/2000/svg\'><path d=\'M1.5 1.5l5 4.98-5 5.02\' stroke=\'%23697782\' stroke-width=\'1.5\' fill=\'none\' fill-rule=\'evenodd\' stroke-linecap=\'round\' opacity=\'.4\'/></svg>")no-repeat center center / contain;
-    transform: translateY(-50%)
-  }
+    &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 50%;
+        right: -22px;
+        width: 14px;
+        height: 14px;
+        background: url("data:image/svg+xml;utf8,<svg viewBox=\'0 0 8 13\' xmlns=\'http://www.w3.org/2000/svg\'><path d=\'M1.5 1.5l5 4.98-5 5.02\' stroke=\'%23697782\' stroke-width=\'1.5\' fill=\'none\' fill-rule=\'evenodd\' stroke-linecap=\'round\' opacity=\'.4\'/></svg>")no-repeat center center / contain;
+        transform: translateY(-50%)
+    }
 }
 
 @mixin openCaret() {
-  &:after {
-    top: 25%;
-    transform: rotate(90deg)
-  }
+    &:after {
+        top: 25%;
+        transform: rotate(90deg)
+    }
 }
 
-@mixin button(){
-  background-color: #ffffff;
-  box-shadow: 0 1px 1px 0 rgba(85, 95, 110, 0.2) !important;
-  border: solid 1px #d4d8e3 !important;
-  padding: 6px 8px;
-  font-size: 12px;
-  font-weight: 600;
-  text-align: center;
-  color: #697782;
-  border-radius: 4px;
-  outline: none;
-
-  &:focus {
-    background: darken(white, 5%)
-  }
-
+@mixin button() {
+    background-color: #ffffff;
+    box-shadow: 0 1px 1px 0 rgba(85, 95, 110, 0.2) !important;
+    border: solid 1px #d4d8e3 !important;
+    padding: 6px 8px;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+    color: #697782;
+    border-radius: 4px;
+    outline: none;
+    &:focus {
+        background: darken(white, 5%)
+    }
 }
 
-@mixin buttonSecondary(){
-  padding: 4px 8px;
-  border-radius: 4px;
-  border: none;
-  font-size: 12px;
-  color: #fff;
-  background: $main-color;
+@mixin buttonSecondary() {
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: none;
+    font-size: 12px;
+    color: #fff;
+    background: $main-color;
 }
 
-@mixin buttonTernary(){
-  background: transparent;
-  border: none;
+@mixin buttonTernary() {
+    background: transparent;
+    border: none;
 }
 
 @mixin counterStyle() {
-  border-radius: 31px;
-  background-color: rgba(#2751af, 0.1);
-  color: $main-color;
-  font-size: 12px;
-  padding: 2px 10px;
+    border-radius: 31px;
+    background-color: rgba(#2751af, 0.1);
+    color: $main-color;
+    font-size: 12px;
+    padding: 2px 10px;
 }
 
 @mixin placeholder {
     &::-webkit-input-placeholder {
         @content;
     }
-
-    &:-moz-placeholder { /* Firefox 18- */
+    &:-moz-placeholder {
+        /* Firefox 18- */
         @content;
     }
-
-    &::-moz-placeholder {  /* Firefox 19+ */
+    &::-moz-placeholder {
+        /* Firefox 19+ */
         @content;
     }
-
     &:-ms-input-placeholder {
         @content;
     }
 }
 
-@mixin buttonLink(){
+@mixin buttonLink() {
     cursor: pointer;
 }
 
-@mixin disabled(){
-  &[disabled],
-  &:disabled  {
-    opacity: 0.5;
-    pointer-events: none
-  }
+@mixin disabled() {
+    &[disabled],
+    &:disabled {
+        opacity: 0.5;
+        pointer-events: none
+    }
 }
 
-@mixin input(){
+@mixin input() {
     padding: 8px 16px;
     border-radius: 4px;
     background-color: #ffffff;
@@ -118,7 +112,7 @@
     border: none;
 }
 
-@mixin select(){
+@mixin select() {
     appearance: none;
     background: transparent;
     border: none;
@@ -134,16 +128,14 @@
     transition: background 0.2s ease, box-shadow 0.2s ease;
     border-radius: 4px;
     text-align: left;
-
     &:hover,
     &:active {
-      box-shadow: none;
+        box-shadow: none;
     }
-
     &:focus,
     &:active {
-      outline: none;
-      background: darken(white, 5%) url("data:image/svg+xml;utf8,<svg viewBox=\'0 0 12 7\' xmlns=\'http://www.w3.org/2000/svg\'><path d=\'M11 1L6.02 6 1 1\' stroke-width=\'1.5\' stroke=\'%23BFC7D8\' fill=\'none\' fill-rule=\'evenodd\' stroke-linecap=\'round\'/></svg>") no-repeat center right 16px / 10px
+        outline: none;
+        background: darken(white, 5%) url("data:image/svg+xml;utf8,<svg viewBox=\'0 0 12 7\' xmlns=\'http://www.w3.org/2000/svg\'><path d=\'M11 1L6.02 6 1 1\' stroke-width=\'1.5\' stroke=\'%23BFC7D8\' fill=\'none\' fill-rule=\'evenodd\' stroke-linecap=\'round\'/></svg>") no-repeat center right 16px / 10px
     }
 }
 
@@ -151,35 +143,30 @@
 // Variables
 // ------------------------------------
 $main-color: #3369e7;
-
-$sffv-searchbox-config:(
-        input-width: 300px,
-        input-height: 32px,
-        border-width: 1px,
-        border-radius: 3px,
-        input-border-color: #D4D8E3,
-        input-focus-border-color: #D4D8E3,
-        input-background: #FFFFFF,
-        input-focus-background: #FFFFFF,
-        font-size: 14px,
-        placeholder-color: #697782,
-        icon: sbx-icon-search-13,
-        icon-size: 14px,
-        icon-position: left,
-        icon-color: #bfc7d8,
-        icon-background: #FFFFFF,
-        icon-background-opacity: 0,
-        icon-clear: sbx-icon-clear-3,
-        icon-clear-size: 12px
-);
-
+$sffv-searchbox-config:( input-width: 300px,
+input-height: 32px,
+border-width: 1px,
+border-radius: 3px,
+input-border-color: #D4D8E3,
+input-focus-border-color: #D4D8E3,
+input-background: #FFFFFF,
+input-focus-background: #FFFFFF,
+font-size: 14px,
+placeholder-color: #697782,
+icon: sbx-icon-search-13,
+icon-size: 14px,
+icon-position: left,
+icon-color: #bfc7d8,
+icon-background: #FFFFFF,
+icon-background-opacity: 0,
+icon-clear: sbx-icon-clear-3,
+icon-clear-size: 12px);
 // ------------------------------------
 // Import
 // ------------------------------------
-
-@import
-'mixins/searchbox.shipow',
+@import 'mixins/searchbox.shipow',
 'styles/InstantSearch',
+'styles/Breadcrumb',
 'styles/ClearAll',
 'styles/CurrentRefinements',
 'styles/HierarchicalMenu',
