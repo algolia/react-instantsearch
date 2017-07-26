@@ -34,23 +34,24 @@ export default createConnector({
     );
 
     /*
-      search state has changed only if the props.scrollOn (id) has changed. 
+      We need to keep track of the search state to know if there's a change in the app
+      that was not triggered by the props.scrollOn (id) or the Configure widget. 
       This is useful when using ScrollTo in combination of Pagination. As pagination
-      can be change by every widgetw, we want to scroll only if it cames from the pagination
-      one. We also remove the configure key to do this comparaison because for now configure
-      values are not present in the search state before a first refinements and will false 
+      can be change by every widget, we want to scroll only if it cames from the pagination
+      widget itself. We also remove the configure key to do this comparaison because for 
+      now configure values are not present in the search state before a first refinements and will false 
       the results. 
       See: https://github.com/algolia/react-instantsearch/issues/164
     */
-    const cleanSearchState = cleanUpValue(
+    const cleanedSearchState = cleanUpValue(
       cleanUpValue(searchState, this.context, 'configure'),
       this.context,
       id
     );
 
-    const hasNotChanged = isEqual(this._prevSearchState, cleanSearchState);
+    const hasNotChanged = isEqual(this._prevSearchState, cleanedSearchState);
 
-    this._prevSearchState = cleanSearchState;
+    this._prevSearchState = cleanedSearchState;
 
     return { value, hasNotChanged };
   },
