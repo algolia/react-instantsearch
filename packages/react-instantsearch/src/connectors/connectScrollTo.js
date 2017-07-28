@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import createConnector from '../core/createConnector';
 import { getCurrentRefinementValue, cleanUpValue } from '../core/indexUtils';
 import { isEqual } from 'lodash';
+import { shallowEqual } from '../core/utils';
 /**
  * connectScrollTo connector provides the logic to build a widget that will
  * let the page scroll to a certain point.
@@ -33,6 +34,10 @@ export default createConnector({
       currentRefinement => currentRefinement
     );
 
+    if (!this._prevSearchState) {
+      this._prevSearchState = {};
+    }
+
     /*
       We need to keep track of the search state to know if there's a change in the app
       that was not triggered by the props.scrollOn (id) or the Configure widget. 
@@ -49,7 +54,10 @@ export default createConnector({
       id
     );
 
-    const hasNotChanged = isEqual(this._prevSearchState, cleanedSearchState);
+    const hasNotChanged = shallowEqual(
+      this._prevSearchState,
+      cleanedSearchState
+    );
 
     this._prevSearchState = cleanedSearchState;
 
