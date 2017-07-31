@@ -3,8 +3,7 @@ This example shows how to do server side rendering and React InstantSearch.
 ## Clone the example
 
 ```
-curl https://codeload.github.com/algolia/react-instantsearch/tar.gz/master | tar -xz --strip=2 react-instantsearch-master/react-instantsearch/packages/react-instantsearch/examples/server-side-rendering
-cd server-side-rendering
+curl https://codeload.github.com/algolia/react-instantsearch/tar.gz/master | tar -xz --strip=2 react-instantsearch-master/packages/react-instantsearch/examples/server-side-rendering
 ```
 
 ## Start the example
