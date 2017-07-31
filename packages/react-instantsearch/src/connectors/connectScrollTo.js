@@ -11,6 +11,7 @@ import { shallowEqual } from '../core/utils';
  * @kind connector
  * @propType {string} [scrollOn="page"] - Widget searchState key on which to listen for changes, default to the pagination widget.
  * @providedPropType {any} value - the current refinement applied to the widget listened by scrollTo
+ * @providedPropType {boolean} hasNotChanged - indicate if the refinement came from the scrollOn observed widget
  */
 export default createConnector({
   displayName: 'AlgoliaScrollTo',
