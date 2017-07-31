@@ -1,11 +1,11 @@
+This example shows how to do server side rendering and React InstantSearch.
+
 ## Clone the example
 
 ```
 curl https://codeload.github.com/algolia/react-instantsearch/tar.gz/master | tar -xz --strip=2 react-instantsearch-master/react-instantsearch/packages/react-instantsearch/examples/server-side-rendering
 cd server-side-rendering
 ```
-
-This example shows how to do server side rendering and React InstantSearch.
 
 ## Start the example
 
