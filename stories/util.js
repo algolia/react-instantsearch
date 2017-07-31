@@ -7,7 +7,6 @@ import {
   Pagination,
   Highlight,
   Configure,
-  RefinementList,
 } from '../packages/react-instantsearch/dom';
 import { connectHits } from '../packages/react-instantsearch/connectors';
 import { linkTo } from '@storybook/react';
@@ -86,7 +85,6 @@ const WrapWithHits = ({
               <ClearAll translations={{ reset: 'Clear all filters' }} />
             </div>
             <CustomHits />
-            <RefinementList attributeName="category" />
             <div className="hit-pagination">
               {pagination ? <Pagination showLast={true} /> : null}
             </div>

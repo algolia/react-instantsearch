@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 
 import createConnector from '../core/createConnector';
 import { getCurrentRefinementValue, cleanUpValue } from '../core/indexUtils';
-import { isEqual } from 'lodash';
 import { shallowEqual } from '../core/utils';
 /**
  * connectScrollTo connector provides the logic to build a widget that will
