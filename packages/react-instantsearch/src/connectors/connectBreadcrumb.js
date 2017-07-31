@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import createConnector from '../core/createConnector';
 import hierarchicalMenuLogic from './hierarchicalMenuLogic';
+
 export const getId = props => props.attributes[0];
 
 function assembleBreadcrumb(items, previous) {
@@ -10,13 +11,13 @@ function assembleBreadcrumb(items, previous) {
         if (item.isRefined) {
           acc.push({
             label: item.label,
-            // If it's a nested "items", "value" is equal to the previous value concatenated with the current label
-            // If it's the first level, it is equal to the current label
+            // If dealing with a nested "items", "value" is equal to the previous value concatenated with the current label
+            // If dealing with the first level, "value" is equal to the current label
             value: previous
               ? `${previous[previous.length - 1].value} > ${item.label}`
               : item.label,
           });
-          // Create a variable in order to keep the same acc for the recursion, otherwise reduce returns a new one
+          // Create a variable in order to keep the same acc for the recursion, otherwise "reduce" returns a new one
           acc = acc.concat(assembleBreadcrumb(item.items, acc));
         }
         return acc;
@@ -40,15 +41,14 @@ export default createConnector({
       }
       return undefined;
     },
+    rootURL: PropTypes.string,
     separator: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-    rootPath: PropTypes.string,
-    defaultRefinement: PropTypes.string,
     transformItems: PropTypes.func,
   },
 
   defaultProps: {
+    rootURL: null,
     separator: ' > ',
-    rootPath: null,
   },
 
   getProvidedProps(props, searchState, searchResults) {
@@ -63,9 +63,10 @@ export default createConnector({
     const transformedItems = props.transformItems
       ? props.transformItems(refinedItems)
       : refinedItems;
+
     return {
-      items: transformedItems,
       canRefine: transformedItems.length > 0,
+      items: transformedItems,
     };
   },
 

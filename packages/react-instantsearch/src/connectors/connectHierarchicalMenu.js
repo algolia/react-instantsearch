@@ -1,87 +1,8 @@
 import PropTypes from 'prop-types';
 import createConnector from '../core/createConnector';
 import hierarchicalMenuLogic from './hierarchicalMenuLogic';
-import { SearchParameters } from 'algoliasearch-helper';
-import {
-  cleanUpValue,
-  getIndex,
-  refineValue,
-  getCurrentRefinementValue,
-  getResults,
-} from '../core/indexUtils';
 
 export const getId = props => props.attributes[0];
-
-const namespace = 'hierarchicalMenu';
-
-function getCurrentRefinement(props, searchState, context) {
-  return getCurrentRefinementValue(
-    props,
-    searchState,
-    context,
-    `${namespace}.${getId(props)}`,
-    null,
-    currentRefinement => {
-      if (currentRefinement === '') {
-        return null;
-      }
-      return currentRefinement;
-    }
-  );
-}
-
-function getValue(path, props, searchState, context) {
-  const { id, attributes, separator, rootPath, showParentLevel } = props;
-
-  const currentRefinement = getCurrentRefinement(props, searchState, context);
-  let nextRefinement;
-
-  if (currentRefinement === null) {
-    nextRefinement = path;
-  } else {
-    const tmpSearchParameters = new SearchParameters({
-      hierarchicalFacets: [
-        {
-          name: id,
-          attributes,
-          separator,
-          rootPath,
-          showParentLevel,
-        },
-      ],
-    });
-
-    nextRefinement = tmpSearchParameters
-      .toggleHierarchicalFacetRefinement(id, currentRefinement)
-      .toggleHierarchicalFacetRefinement(id, path)
-      .getHierarchicalRefinement(id)[0];
-  }
-
-  return nextRefinement;
-}
-
-function transformValue(value, limit, props, searchState, context) {
-  return value.slice(0, limit).map(v => ({
-    label: v.name,
-    value: getValue(v.path, props, searchState, context),
-    count: v.count,
-    isRefined: v.isRefined,
-    items: v.data && transformValue(v.data, limit, props, searchState, context),
-  }));
-}
-
-function refine(props, searchState, nextRefinement, context) {
-  const id = getId(props);
-  const nextValue = { [id]: nextRefinement || '' };
-  const resetPage = true;
-  return refineValue(searchState, nextValue, context, resetPage, namespace);
-}
-
-function cleanUp(props, searchState, context) {
-  return cleanUpValue(searchState, context, `${namespace}.${getId(props)}`);
-}
-
-const sortBy = ['name:asc'];
 
 /**
  * connectHierarchicalMenu connector provides the logic to build a widget that will
@@ -145,22 +66,22 @@ export default createConnector({
       }
       return undefined;
     },
-    separator: PropTypes.string,
-    rootPath: PropTypes.string,
-    showParentLevel: PropTypes.bool,
     defaultRefinement: PropTypes.string,
-    showMore: PropTypes.bool,
     limitMin: PropTypes.number,
     limitMax: PropTypes.number,
+    rootPath: PropTypes.string,
+    separator: PropTypes.string,
+    showMore: PropTypes.bool,
+    showParentLevel: PropTypes.bool,
     transformItems: PropTypes.func,
   },
 
   defaultProps: {
-    showMore: false,
     limitMin: 10,
     limitMax: 20,
-    separator: ' > ',
     rootPath: null,
+    separator: ' > ',
+    showMore: false,
     showParentLevel: true,
   },
 

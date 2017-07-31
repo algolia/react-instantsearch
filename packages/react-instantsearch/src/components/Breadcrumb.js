@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import Link from './Link';
-import translatable from '../core/translatable';
 import classNames from './classNames.js';
+import translatable from '../core/translatable';
 
 const cx = classNames('Breadcrumb');
 
@@ -15,12 +15,12 @@ const itemsPropType = PropTypes.arrayOf(
 
 class Breadcrumb extends Component {
   static propTypes = {
-    refine: PropTypes.func.isRequired,
-    createURL: PropTypes.func.isRequired,
-    separator: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
     canRefine: PropTypes.bool.isRequired,
+    createURL: PropTypes.func.isRequired,
     items: itemsPropType,
+    refine: PropTypes.func.isRequired,
     rootURL: PropTypes.string,
+    separator: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
     translate: PropTypes.func.isRequired,
   };
 
@@ -37,7 +37,7 @@ class Breadcrumb extends Component {
   }
 
   render() {
-    const { createURL, refine, items, canRefine, translate } = this.props;
+    const { canRefine, createURL, items, refine, translate } = this.props;
     const rootPath = canRefine
       ? <a
           {...cx('itemLink', 'itemLinkRoot')}

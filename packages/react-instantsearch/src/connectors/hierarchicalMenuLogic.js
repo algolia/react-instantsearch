@@ -143,9 +143,6 @@ export default {
       ? transformValue(value.data, limit, props, searchState, this.context)
       : [];
 
-    console.log(items);
-    console.log(items.length > 0);
-
     return {
       items,
       currentRefinement: getCurrentRefinement(props, searchState, this.context),
