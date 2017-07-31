@@ -1,12 +1,11 @@
 import PropTypes from 'prop-types';
-import createConnector from '../core/createConnector';
 import { SearchParameters } from 'algoliasearch-helper';
 import {
   cleanUpValue,
-  getIndex,
-  refineValue,
   getCurrentRefinementValue,
+  getIndex,
   getResults,
+  refineValue,
 } from '../core/indexUtils';
 
 export const getId = props => props.attributes[0];
