@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import {
   InstantSearch,
@@ -12,41 +11,33 @@ import {
   SearchBox,
   ClearAll,
 } from 'react-instantsearch/dom';
-import { withRouter } from 'react-router';
 import 'react-instantsearch-theme-algolia/style.css';
+import PropTypes from 'prop-types';
 import qs from 'qs';
-import { isEqual } from 'lodash';
+
+const updateAfter = 700;
+
+const createURL = state => `?${qs.stringify(state)}`;
+
+const searchStateToUrl = (props, searchState) =>
+  searchState ? `${props.location.pathname}${createURL(searchState)}` : '';
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { searchState: { ...qs.parse(props.router.location.query) } };
+    this.state = { searchState: qs.parse(props.location.search.slice(1)) };
   }
 
-  componentWillReceiveProps() {
-    this.setState({ searchState: qs.parse(this.props.router.location.query) });
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return !isEqual(this.state.searchState, nextState.searchState);
-  }
-
-  onSearchStateChange(nextSearchState) {
-    const THRESHOLD = 700;
-    const newPush = Date.now();
-    this.setState({ lastPush: newPush, searchState: nextSearchState });
-    if (this.state.lastPush && newPush - this.state.lastPush <= THRESHOLD) {
-      this.props.router.replace(
-        nextSearchState ? `?${qs.stringify(nextSearchState)}` : ''
+  onSearchStateChange = searchState => {
+    clearTimeout(this.debouncedSetState);
+    this.debouncedSetState = setTimeout(() => {
+      this.props.history.push(
+        searchStateToUrl(this.props, searchState),
+        searchState
       );
-    } else {
-      this.props.router.push(
-        nextSearchState ? `?${qs.stringify(nextSearchState)}` : ''
-      );
-    }
-  }
-
-  createURL = state => `?${qs.stringify(state)}`;
+    }, updateAfter);
+    this.setState({ searchState });
+  };
 
   render() {
     return (
@@ -56,9 +47,8 @@ class App extends Component {
         indexName="ikea"
         searchState={this.state.searchState}
         onSearchStateChange={this.onSearchStateChange.bind(this)}
-        createURL={this.createURL.bind(this)}
+        createURL={createURL}
       >
-
         <div>
           <div
             style={{
@@ -85,7 +75,6 @@ class App extends Component {
               <RefinementList attributeName="colors" />
               <p>Range Ratings</p>
               <StarRating attributeName="rating" max={6} />
-
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
               <div style={{ display: 'flex', justifyContent: 'space-around' }}>
@@ -106,7 +95,10 @@ class App extends Component {
 }
 
 App.propTypes = {
-  router: PropTypes.object.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }),
+  location: PropTypes.object.isRequired,
 };
 
-export default withRouter(App);
+export default App;

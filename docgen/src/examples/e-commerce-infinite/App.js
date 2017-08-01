@@ -50,13 +50,14 @@ const Header = () =>
         width={40}
       />
     </a>
-    <a href="./" className="logo">aeki</a>
+    <a href="./" className="logo">
+      aeki
+    </a>
     <ConnectedSearchBox />
   </header>;
 
 const Facets = () =>
   <aside>
-
     <ClearAll
       translations={{
         reset: 'Clear all filters',
@@ -154,7 +155,9 @@ function CustomHits({ hits, refine, hasMore }) {
     ? <button onClick={refine} className="btn btn-primary btn-block">
         Load more
       </button>
-    : <button disabled className="btn btn-primary btn-block">Load more</button>;
+    : <button disabled className="btn btn-primary btn-block">
+        Load more
+      </button>;
   return (
     <main id="hits">
       {hits.map((hit, idx) => <Hit item={hit} key={idx} />)}
@@ -174,7 +177,11 @@ const Hit = ({ item }) => {
   return (
     <article className="hit">
       <div className="product-picture-wrapper">
-        <div className="product-picture"><img src={`${item.image}`} /></div>
+        <div className="product-picture">
+          <img
+            src={`https://res.cloudinary.com/hilnmyskv/image/fetch/h_300,q_100,f_auto/${item.image}`}
+          />
+        </div>
       </div>
       <div className="product-desc-wrapper">
         <div className="product-name">
@@ -185,7 +192,9 @@ const Hit = ({ item }) => {
         </div>
         <div className="ais-StarRating__ratingLink">
           {icons}
-          <div className="product-price">${item.price}</div>
+          <div className="product-price">
+            ${item.price}
+          </div>
         </div>
       </div>
     </article>

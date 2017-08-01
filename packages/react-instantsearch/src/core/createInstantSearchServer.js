@@ -9,6 +9,7 @@ import ReactDom from 'react-dom/server';
 import { getIndex, hasMultipleIndex } from './indexUtils';
 import { isEmpty } from 'lodash';
 import cis from './createInstantSearch';
+import highlightTags from './highlightTags.js';
 
 const createInstantSearch = function(algoliasearch) {
   const InstantSearch = cis(algoliasearch, {
@@ -48,25 +49,22 @@ const createInstantSearch = function(algoliasearch) {
             searchParameter.props,
             searchParameter.searchState
           ),
-        new SearchParameters({ index: indexName })
+        new SearchParameters({ index: indexName, ...highlightTags })
       );
 
     const mergedSearchParameters = searchParameters
       .filter(searchParameter => hasMultipleIndex(searchParameter.context))
-      .reduce(
-        (acc, searchParameter) => {
-          const index = getIndex(searchParameter.context);
-          const sp = searchParameter.getSearchParameters.call(
-            { context: searchParameter.context },
-            acc[index] ? acc[index] : sharedSearchParameters,
-            searchParameter.props,
-            searchParameter.searchState
-          );
-          acc[index] = sp;
-          return acc;
-        },
-        {}
-      );
+      .reduce((acc, searchParameter) => {
+        const index = getIndex(searchParameter.context);
+        const sp = searchParameter.getSearchParameters.call(
+          { context: searchParameter.context },
+          acc[index] ? acc[index] : sharedSearchParameters,
+          searchParameter.props,
+          searchParameter.searchState
+        );
+        acc[index] = sp;
+        return acc;
+      }, {});
 
     searchParameters = [];
 
@@ -90,16 +88,13 @@ const createInstantSearch = function(algoliasearch) {
       return undefined;
     }
     return Array.isArray(results)
-      ? results.reduce(
-          (acc, result) => {
-            acc[result.state.index] = new SearchResults(
-              new SearchParameters(result.state),
-              result._originalResponse.results
-            );
-            return acc;
-          },
-          []
-        )
+      ? results.reduce((acc, result) => {
+          acc[result.state.index] = new SearchResults(
+            new SearchParameters(result.state),
+            result._originalResponse.results
+          );
+          return acc;
+        }, [])
       : new SearchResults(
           new SearchParameters(results.state),
           results._originalResponse.results

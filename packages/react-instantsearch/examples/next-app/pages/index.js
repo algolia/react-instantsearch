@@ -6,6 +6,8 @@ import qs from 'qs';
 
 const updateAfter = 700;
 
+const createURL = state => `?${qs.stringify(state)}`;
+
 const searchStateToUrl = searchState =>
   searchState ? `${window.location.pathname}?${qs.stringify(searchState)}` : '';
 
@@ -26,7 +28,9 @@ export default class extends React.Component {
      to initialize the searchState. 
   */
   static async getInitialProps(params) {
-    const searchState = qs.parse(params.asPath.substring(params.asPath.indexOf('?') + 1))
+    const searchState = params.asPath.includes('?')
+      ? qs.parse(params.asPath.substring(params.asPath.indexOf('?') + 1))
+      : {};
     const resultsState = await findResultsState(App, { searchState });
     return { resultsState, searchState };
   }
@@ -63,6 +67,7 @@ export default class extends React.Component {
                 ? this.state.searchState
                 : this.props.searchState
             }
+            createURL={createURL}
           />
         </div>
       </div>

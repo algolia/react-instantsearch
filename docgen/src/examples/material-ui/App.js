@@ -164,16 +164,14 @@ const MaterialUiSearchBox = ({ currentRefinement, refine }) => {
         className="material-icons"
         onTouchTap={() => refine('')}
       >
-        {' '}
-        clear{' '}
+        {' '}clear{' '}
       </FontIcon>
     : null;
 
   return (
     <div style={style}>
       <FontIcon style={{ color: 'lightgrey' }} className="material-icons">
-        {' '}
-        search{' '}
+        {' '}search{' '}
       </FontIcon>
       <TextField
         value={currentRefinement}
@@ -225,7 +223,9 @@ const MaterialUiCheckBoxRefinementList = ({
 const MaterialUiNestedList = function({ id, items, refine }) {
   return (
     <List>
-      <Subheader style={{ fontSize: 18 }}>{id.toUpperCase()}</Subheader>
+      <Subheader style={{ fontSize: 18 }}>
+        {id.toUpperCase()}
+      </Subheader>
       {items.map((item, idx) => {
         const nestedElements = item.items
           ? item.items.map((child, childIdx) =>
@@ -320,7 +320,10 @@ function CustomHits({ hits, marginLeft, hasMore, refine }) {
               subtitle={<Highlight attributeName="name" hit={hit} />}
             />
             <div style={imageHolderStyle}>
-              <img src={hit.image} style={{ maxWidth: 120, maxHeight: 120 }} />
+              <img
+                src={`https://res.cloudinary.com/hilnmyskv/image/fetch/h_300,q_100,f_auto/${hit.image}`}
+                style={{ maxWidth: 120, maxHeight: 120 }}
+              />
             </div>
             <CardTitle
               title={

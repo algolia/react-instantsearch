@@ -101,13 +101,21 @@ const CustomHits = connectHits(({ hits }) =>
     {hits.map((hit, idx) =>
       <div key={idx} className="hit">
         <div>
-          <div className="hit-picture"><img src={`${hit.image}`} /></div>
+          <div className="hit-picture">
+            <img
+              src={`https://res.cloudinary.com/hilnmyskv/image/fetch/h_100,q_100,f_auto/${hit.image}`}
+            />
+          </div>
         </div>
         <div className="hit-content">
           <div>
             <Highlight attributeName="name" hit={hit} />
-            <span> - ${hit.price}</span>
-            <span> - {hit.rating} stars</span>
+            <span>
+              {' '}- ${hit.price}
+            </span>
+            <span>
+              {' '}- {hit.rating} stars
+            </span>
           </div>
           <div className="hit-type">
             <Highlight attributeName="type" hit={hit} />

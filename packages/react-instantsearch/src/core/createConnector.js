@@ -62,15 +62,19 @@ export default function createConnector(connectorDesc) {
         super(props, context);
 
         const { ais: { store, widgetsManager }, multiIndexContext } = context;
+        const canRender = false;
         this.state = {
-          props: this.getProvidedProps(props),
-          canRender: false, //use to know if a component is rendered (browser), or not (server).
+          props: this.getProvidedProps({ ...props, canRender }),
+          canRender, // use to know if a component is rendered (browser), or not (server).
         };
 
         this.unsubscribe = store.subscribe(() => {
           if (this.state.canRender) {
             this.setState({
-              props: this.getProvidedProps(this.props),
+              props: this.getProvidedProps({
+                ...this.props,
+                canRender: this.state.canRender,
+              }),
             });
           }
         });
@@ -150,7 +154,7 @@ export default function createConnector(connectorDesc) {
       componentWillUnmount() {
         this.unsubscribe();
         if (isWidget) {
-          this.unregisterWidget(); //will schedule an update
+          this.unregisterWidget(); // will schedule an update
           if (hasCleanUp) {
             const newState = connectorDesc.cleanUp.call(
               this,

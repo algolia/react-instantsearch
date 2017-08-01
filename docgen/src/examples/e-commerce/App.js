@@ -52,13 +52,14 @@ const Header = () =>
         width={40}
       />
     </a>
-    <a href="./" className="logo">aeki</a>
+    <a href="./" className="logo">
+      aeki
+    </a>
     <ConnectedSearchBox />
   </header>;
 
 const Facets = () =>
   <aside>
-
     <ClearAll
       translations={{
         reset: 'Clear all filters',
@@ -170,7 +171,11 @@ const Hit = ({ item }) => {
   return (
     <article className="hit">
       <div className="product-picture-wrapper">
-        <div className="product-picture"><img src={`${item.image}`} /></div>
+        <div className="product-picture">
+          <img
+            src={`https://res.cloudinary.com/hilnmyskv/image/fetch/h_300,q_100,f_auto/${item.image}`}
+          />
+        </div>
       </div>
       <div className="product-desc-wrapper">
         <div className="product-name">
@@ -181,7 +186,9 @@ const Hit = ({ item }) => {
         </div>
         <div className="ais-StarRating__ratingLink">
           {icons}
-          <div className="product-price">${item.price}</div>
+          <div className="product-price">
+            ${item.price}
+          </div>
         </div>
       </div>
     </article>
@@ -224,7 +231,9 @@ const CustomResults = createConnector({
           <Stats />
         </section>
         <ConnectedHits />
-        <footer><Pagination showLast={true} /></footer>
+        <footer>
+          <Pagination showLast={true} />
+        </footer>
       </div>
     );
   }

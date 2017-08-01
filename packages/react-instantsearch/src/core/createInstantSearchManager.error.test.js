@@ -12,9 +12,14 @@ jest.mock('algoliasearch-helper/src/algoliasearch.helper.js', () => {
     'algoliasearch-helper/src/algoliasearch.helper.js'
   );
   Helper.prototype._dispatchAlgoliaResponse = function(state) {
-    this.emit('error', { count: count++ }, state);
+    if (count > 3) {
+      this.emit('result', { count: count++ }, state);
+    } else {
+      this.emit('error', { count: count++ }, state);
+    }
   };
-  Helper.prototype.searchForFacetValues = () => Promise.reject('error');
+  Helper.prototype.searchForFacetValues = () =>
+    Promise.reject(new Error('error'));
   return Helper;
 });
 
@@ -55,7 +60,7 @@ describe('createInstantSearchManager errors', () => {
 
           const store = ism.store.getState();
           expect(store.error).toEqual({ count: 0 });
-          expect(store.results).toBe(null);
+          expect(store.results).toEqual(null);
 
           ism.widgetsManager.update();
 
@@ -108,8 +113,43 @@ describe('createInstantSearchManager errors', () => {
 
         return Promise.resolve().then(() => {
           const store = ism.store.getState();
-          expect(store.error).toEqual('error');
+          expect(store.error.message).toEqual('error');
           expect(store.searchingForFacetValues).toBe(false);
+        });
+      });
+    });
+
+    describe('reset error after a succesful query', () => {
+      it('on widget lifecyle', () => {
+        const ism = createInstantSearchManager({
+          indexName: 'index',
+          initialState: {},
+          searchParameters: {},
+          algoliaClient: client,
+        });
+
+        ism.widgetsManager.registerWidget({
+          getSearchParameters: params => params.setQuery('search'),
+        });
+
+        expect(ism.store.getState().error).toBe(null);
+
+        return Promise.resolve().then(() => {
+          jest.runAllTimers();
+
+          const store = ism.store.getState();
+          expect(store.error).toEqual({ count: 3 });
+          expect(store.results).toEqual(null);
+
+          ism.widgetsManager.update();
+
+          return Promise.resolve().then(() => {
+            jest.runAllTimers();
+
+            const store1 = ism.store.getState();
+            expect(store1.error).toEqual(null);
+            expect(store1.results).toEqual({ count: 4 });
+          });
         });
       });
     });
