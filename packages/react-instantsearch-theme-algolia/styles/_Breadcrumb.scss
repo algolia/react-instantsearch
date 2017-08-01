@@ -6,4 +6,13 @@
 
 .ais-Breadcrumb__itemLink {
     display: inline;
+    font-weight: bold;
+}
+
+.ais-Breadcrumb__itemDisabled {
+    font-weight: normal;
+}
+
+.ais-Breadcrumb__separator {
+    font-weight: normal;
 }

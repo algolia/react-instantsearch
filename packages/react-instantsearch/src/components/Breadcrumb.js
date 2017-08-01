@@ -47,7 +47,10 @@ class Breadcrumb extends Component {
           <span {...cx('rootLabel')}>
             {translate('rootLabel')}
           </span>
-          {this.props.separator}
+          <span {...cx('separator')}>
+            {this.props.separator}
+          </span>
+
         </a>
       : null;
 
@@ -64,7 +67,9 @@ class Breadcrumb extends Component {
             <span {...cx('itemLabel')}>
               {item.label}
             </span>
-            {separator}
+            <span {...cx('separator')}>
+              {separator}
+            </span>
           </Link>
         : <div {...cx('itemLink', 'itemDisabled')} key={idx}>
             <span {...cx('itemLabel')}>
