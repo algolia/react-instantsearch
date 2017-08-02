@@ -40,17 +40,23 @@ describe('connectScrollTo', () => {
     };
     const getProvidedProps = connect.getProvidedProps.bind(context);
     it('provides the correct props to the component', () => {
-      props = getProvidedProps(
-        { scrollOn: 'p' },
-        { indices: { second: { p: 1 } } }
-      );
-      expect(props).toEqual({ value: 1, hasNotChanged: false });
+      const searchState = { indices: { second: { p: 1 } } };
 
-      props = getProvidedProps(
-        { scrollOn: 'anything' },
-        { indices: { second: { anything: 2 } } }
-      );
+      props = getProvidedProps({ scrollOn: 'p' }, searchState);
+      expect(props).toEqual({ value: 1, hasNotChanged: true });
+
+      searchState.indices.second = { ...searchState.indices.second, p: 2 };
+
+      props = getProvidedProps({ scrollOn: 'p' }, searchState);
       expect(props).toEqual({ value: 2, hasNotChanged: true });
+
+      searchState.indices.second = {
+        ...searchState.indices.second,
+        anything: 'ok',
+      };
+
+      props = getProvidedProps({ scrollOn: 'p' }, searchState);
+      expect(props).toEqual({ value: 2, hasNotChanged: false });
     });
   });
 });
