@@ -39,38 +39,42 @@ class Breadcrumb extends Component {
   render() {
     const { canRefine, createURL, items, refine, translate } = this.props;
     const rootPath = canRefine
-      ? <a
-          {...cx('itemLink', 'itemLinkRoot')}
-          onClick={() => (!this.props.rootURL ? refine() : null)}
-          href={this.props.rootURL ? this.props.rootURL : createURL()}
-        >
-          <span {...cx('rootLabel')}>
-            {translate('rootLabel')}
-          </span>
+      ? <div {...cx('item')}>
+          <a
+            {...cx('itemLink', 'itemLinkRoot')}
+            onClick={() => (!this.props.rootURL ? refine() : null)}
+            href={this.props.rootURL ? this.props.rootURL : createURL()}
+          >
+            <span {...cx('rootLabel')}>
+              {translate('rootLabel')}
+            </span>
+          </a>
           <span {...cx('separator')}>
             {this.props.separator}
           </span>
-        </a>
+        </div>
       : null;
 
     const breadcrumb = items.map((item, idx) => {
       const isLast = idx === items.length - 1;
       const separator = isLast ? '' : this.props.separator;
       return !isLast
-        ? <Link
-            {...cx('itemLink')}
-            onClick={() => refine(item.value)}
-            href={createURL(item.value)}
-            key={idx}
-          >
-            <span {...cx('itemLabel')}>
-              {item.label}
-            </span>
+        ? <div {...cx('item')} key={idx}>
+            <Link
+              {...cx('itemLink')}
+              onClick={() => refine(item.value)}
+              href={createURL(item.value)}
+              key={idx}
+            >
+              <span {...cx('itemLabel')}>
+                {item.label}
+              </span>
+            </Link>
             <span {...cx('separator')}>
               {separator}
             </span>
-          </Link>
-        : <div {...cx('itemLink', 'itemDisabled')} key={idx}>
+          </div>
+        : <div {...cx('itemLink', 'itemDisabled', 'item')} key={idx}>
             <span {...cx('itemLabel')}>
               {item.label}
             </span>

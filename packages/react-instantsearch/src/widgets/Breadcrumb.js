@@ -46,9 +46,11 @@ import BreadcrumbComponent from '../components/Breadcrumb.js';
  * @themeKey ais-Breadcrumb__root - The widget container
  * @themeKey ais-Breadcrumb__itemLinkRoot - The root link (originating page)
  * @themeKey ais-Breadcrumb__rootLabel - The root label
+ * @themeKey ais-Breadcrumb__item - Contains the link, the label and the separator
  * @themeKey ais-Breadcrumb__itemLink - The link containing the label
  * @themeKey ais-Breadcrumb__itemLabel - The link's label
  * @themeKey ais-Breadcrumb__itemDisabled - For the last item of the breadcrumb which is not clickable
+ * @themeKey ais-Breadcrumb__separator - The separator
  * @themeKey ais-Breadcrumb__noRefinement - present when there is no refinement
  * @translationKey rootLabel - The root's label. Accepts a string
  * @example
