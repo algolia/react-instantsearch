@@ -26,7 +26,6 @@ stories
           attributes={['category', 'sub_category', 'sub_sub_category']}
           defaultRefinement="Cooking > Kitchen textiles"
         />
-
       </WrapWithHits>
     </div>
   )

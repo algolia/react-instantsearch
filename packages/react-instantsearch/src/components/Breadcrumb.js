@@ -50,7 +50,6 @@ class Breadcrumb extends Component {
           <span {...cx('separator')}>
             {this.props.separator}
           </span>
-
         </a>
       : null;
 

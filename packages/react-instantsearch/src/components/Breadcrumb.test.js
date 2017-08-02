@@ -60,11 +60,11 @@ describe('Breadcrumb', () => {
     );
 
     const items = wrapper.find('.ais-Breadcrumb__itemLink');
-    expect(items.length).toBe(4); //Home + Breadcrumb (3 levels)
+    expect(items.length).toBe(4);
 
     items.first().simulate('click');
     expect(refine.mock.calls.length).toBe(1);
-    expect(refine.mock.calls[0][0]).toEqual(); //Home = empty refinement
+    expect(refine.mock.calls[0][0]).toEqual();
 
     items.at(1).simulate('click');
     expect(refine.mock.calls.length).toBe(2);
@@ -74,7 +74,7 @@ describe('Breadcrumb', () => {
     expect(refine.mock.calls.length).toBe(3);
     expect(refine.mock.calls[2][0]).toEqual('white > white1');
 
-    items.at(3).simulate('click'); //last item shouldn't be clickable
+    items.at(3).simulate('click');
     expect(refine.mock.calls.length).toBe(3);
 
     wrapper.unmount();
