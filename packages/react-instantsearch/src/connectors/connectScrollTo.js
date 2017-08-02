@@ -15,7 +15,7 @@ import { omit } from 'lodash';
  * @kind connector
  * @propType {string} [scrollOn="page"] - Widget searchState key on which to listen for changes, default to the pagination widget.
  * @providedPropType {any} value - the current refinement applied to the widget listened by scrollTo
- * @providedPropType {boolean} hasNotChanged - indicate if the refinement came from the scrollOn observed widget
+ * @providedPropType {boolean} hasNotChanged - indicates whether the refinement came from the scrollOn argument (for instance page by default)
  */
 export default createConnector({
   displayName: 'AlgoliaScrollTo',
@@ -50,13 +50,14 @@ export default createConnector({
     }
 
     /*
-      We need to keep track of the search state to know if there's a change in the app
-      that was not triggered by the props.scrollOn (id) or the Configure widget. 
-      This is useful when using ScrollTo in combination of Pagination. As pagination
-      can be change by every widget, we want to scroll only if it cames from the pagination
-      widget itself. We also remove the configure key to do this comparaison because for 
-      now configure values are not present in the search state before a first refinements and will false 
-      the results. 
+      if there is a change in the app that has been triggered by another element than 
+      "props.scrollOn (id) or the Configure widget, we need to keep track of the search state to 
+      know if there's a change in the app that was not triggered by the props.scrollOn (id) 
+      or the Configure widget. This is useful when using ScrollTo in combination of Pagination. 
+      As pagination can be change by every widget, we want to scroll only if it cames from the pagination
+      widget itself. We also remove the configure key from the search state to do this comparaison because for 
+      now configure values are not present in the search state before a first refinement has been made
+      and will false the results. 
       See: https://github.com/algolia/react-instantsearch/issues/164
     */
     const cleanedSearchState = omit(omit(searchState, 'configure'), id);
