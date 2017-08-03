@@ -40,7 +40,7 @@ import BreadcrumbComponent from '../components/Breadcrumb.js';
  * on the Algolia dashboard or configured as `attributesForFaceting` via a set settings call to the Algolia API.
  *
  * @propType {string} attributes - List of attributes to use to generate the hierarchy of the menu. See the example for the convention to follow
- * @propType {string} [separator=' > '] -  Symbol used for separating hyperlinks
+ * @propType {string} [separator='>'] -  Symbol used for separating hyperlinks
  * @propType {string} [rootURL=null] - The originating page (homepage)
  * @propType {function} [transformItems] - Function to modify the items being displayed, e.g. for filtering or sorting them. Takes an items as parameter and expects it back in return
  * @themeKey ais-Breadcrumb__root - The widget container

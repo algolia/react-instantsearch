@@ -25,6 +25,8 @@ stories
         <HierarchicalMenu
           attributes={['category', 'sub_category', 'sub_sub_category']}
           defaultRefinement="Cooking > Kitchen textiles"
+          limitMax={3}
+          showMore={true}
         />
       </WrapWithHits>
     </div>
