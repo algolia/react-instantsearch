@@ -39,7 +39,7 @@ class Breadcrumb extends Component {
   render() {
     const { canRefine, createURL, items, refine, translate } = this.props;
     const rootPath = canRefine
-      ? <div {...cx('item')}>
+      ? <span {...cx('item')}>
           <a
             {...cx('itemLink', 'itemLinkRoot')}
             onClick={() => (!this.props.rootURL ? refine() : null)}
@@ -52,14 +52,14 @@ class Breadcrumb extends Component {
           <span {...cx('separator')}>
             {this.props.separator}
           </span>
-        </div>
+        </span>
       : null;
 
     const breadcrumb = items.map((item, idx) => {
       const isLast = idx === items.length - 1;
       const separator = isLast ? '' : this.props.separator;
       return !isLast
-        ? <div {...cx('item')} key={idx}>
+        ? <span {...cx('item')} key={idx}>
             <Link
               {...cx('itemLink')}
               onClick={() => refine(item.value)}
@@ -73,19 +73,19 @@ class Breadcrumb extends Component {
             <span {...cx('separator')}>
               {separator}
             </span>
-          </div>
-        : <div {...cx('itemLink', 'itemDisabled', 'item')} key={idx}>
+          </span>
+        : <span {...cx('itemLink', 'itemDisabled', 'item')} key={idx}>
             <span {...cx('itemLabel')}>
               {item.label}
             </span>
-          </div>;
+          </span>;
     });
 
     return (
-      <div {...cx('root', !canRefine && 'noRefinement')}>
+      <span {...cx('root', !canRefine && 'noRefinement')}>
         {rootPath}
         {breadcrumb}
-      </div>
+      </span>
     );
   }
 }

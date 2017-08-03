@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Breadcrumb has a separator prop that can be a custom component 1`] = `
-<div
+<span
   className="ais-Breadcrumb__root"
 >
-  <div
+  <span
     className="ais-Breadcrumb__item"
   >
     <a
@@ -25,8 +25,8 @@ exports[`Breadcrumb has a separator prop that can be a custom component 1`] = `
         🔍
       </span>
     </span>
-  </div>
-  <div
+  </span>
+  <span
     className="ais-Breadcrumb__item"
   >
     <a
@@ -47,8 +47,8 @@ exports[`Breadcrumb has a separator prop that can be a custom component 1`] = `
         🔍
       </span>
     </span>
-  </div>
-  <div
+  </span>
+  <span
     className="ais-Breadcrumb__item"
   >
     <a
@@ -69,8 +69,8 @@ exports[`Breadcrumb has a separator prop that can be a custom component 1`] = `
         🔍
       </span>
     </span>
-  </div>
-  <div
+  </span>
+  <span
     className="ais-Breadcrumb__itemLink ais-Breadcrumb__itemDisabled ais-Breadcrumb__item"
   >
     <span
@@ -78,15 +78,15 @@ exports[`Breadcrumb has a separator prop that can be a custom component 1`] = `
     >
       white1.1
     </span>
-  </div>
-</div>
+  </span>
+</span>
 `;
 
 exports[`Breadcrumb has customizable translations 1`] = `
-<div
+<span
   className="ais-Breadcrumb__root"
 >
-  <div
+  <span
     className="ais-Breadcrumb__item"
   >
     <a
@@ -103,8 +103,8 @@ exports[`Breadcrumb has customizable translations 1`] = `
     <span
       className="ais-Breadcrumb__separator"
     />
-  </div>
-  <div
+  </span>
+  <span
     className="ais-Breadcrumb__item"
   >
     <a
@@ -121,8 +121,8 @@ exports[`Breadcrumb has customizable translations 1`] = `
     <span
       className="ais-Breadcrumb__separator"
     />
-  </div>
-  <div
+  </span>
+  <span
     className="ais-Breadcrumb__item"
   >
     <a
@@ -139,8 +139,8 @@ exports[`Breadcrumb has customizable translations 1`] = `
     <span
       className="ais-Breadcrumb__separator"
     />
-  </div>
-  <div
+  </span>
+  <span
     className="ais-Breadcrumb__itemLink ais-Breadcrumb__itemDisabled ais-Breadcrumb__item"
   >
     <span
@@ -148,15 +148,15 @@ exports[`Breadcrumb has customizable translations 1`] = `
     >
       white1.1
     </span>
-  </div>
-</div>
+  </span>
+</span>
 `;
 
 exports[`Breadcrumb outputs the default breadcrumb 1`] = `
-<div
+<span
   className="ais-Breadcrumb__root"
 >
-  <div
+  <span
     className="ais-Breadcrumb__item"
   >
     <a
@@ -173,8 +173,8 @@ exports[`Breadcrumb outputs the default breadcrumb 1`] = `
     <span
       className="ais-Breadcrumb__separator"
     />
-  </div>
-  <div
+  </span>
+  <span
     className="ais-Breadcrumb__item"
   >
     <a
@@ -191,8 +191,8 @@ exports[`Breadcrumb outputs the default breadcrumb 1`] = `
     <span
       className="ais-Breadcrumb__separator"
     />
-  </div>
-  <div
+  </span>
+  <span
     className="ais-Breadcrumb__item"
   >
     <a
@@ -209,8 +209,8 @@ exports[`Breadcrumb outputs the default breadcrumb 1`] = `
     <span
       className="ais-Breadcrumb__separator"
     />
-  </div>
-  <div
+  </span>
+  <span
     className="ais-Breadcrumb__itemLink ais-Breadcrumb__itemDisabled ais-Breadcrumb__item"
   >
     <span
@@ -218,6 +218,6 @@ exports[`Breadcrumb outputs the default breadcrumb 1`] = `
     >
       white1.1
     </span>
-  </div>
-</div>
+  </span>
+</span>
 `;
