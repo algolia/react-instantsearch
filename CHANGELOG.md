@@ -1,3 +1,16 @@
+<a name="4.0.10"></a>
+## [4.0.10](https://github.com/algolia/react-instantsearch/compare/v4.0.9...v4.0.10) (2017-08-03)
+
+
+### Bug Fixes
+
+* **PoweredBy:** add a label to the Algolia logo ([2a6cf4f](https://github.com/algolia/react-instantsearch/commit/2a6cf4f))
+* **react:** remove typo around `"" 2` (#220) ([1e8af68](https://github.com/algolia/react-instantsearch/commit/1e8af68))
+* **ScrollTo:** scroll to only if change triggered by the widget observed (#202) ([b97174e](https://github.com/algolia/react-instantsearch/commit/b97174e))
+* **theme:** format the count of items appearing in a refinement (#217) ([ed7c8d5](https://github.com/algolia/react-instantsearch/commit/ed7c8d5))
+
+
+
 <a name="4.0.9"></a>
 ## [4.0.9](https://github.com/algolia/react-instantsearch/compare/v4.0.8...v4.0.9) (2017-07-20)
 
