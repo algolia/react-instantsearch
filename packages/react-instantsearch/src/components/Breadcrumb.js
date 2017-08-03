@@ -82,10 +82,10 @@ class Breadcrumb extends Component {
     });
 
     return (
-      <span {...cx('root', !canRefine && 'noRefinement')}>
+      <div {...cx('root', !canRefine && 'noRefinement')}>
         {rootPath}
         {breadcrumb}
-      </span>
+      </div>
     );
   }
 }
