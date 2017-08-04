@@ -6,6 +6,10 @@ import BreadcrumbComponent from '../components/Breadcrumb.js';
  * is in relation to the website or web application’s hierarchy.
  * In terms of usability, using a breadcrumb reduces the number of actions a visitor needs to take in 
  * order to get to a higher-level page.
+ * 
+ * If you want to select a specific refinement for your Breadcrumb component, you will need to use a Virtual Hierarchical Menu 
+ * (https://community.algolia.com/react-instantsearch/guide/Virtual_widgets.html) and set its
+ * defaultRefinement that will be then used by the Breadcrumb.
  *
  * @name Breadcrumb
  * @kind widget

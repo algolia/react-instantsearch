@@ -35,9 +35,6 @@ function transformValue(values) {
  * The breadcrumb component is s a type of secondary navigation scheme that 
  * reveals the user’s location in a website or web application.
  * 
- * If you want to use the "defaultRefinement" prop, you can do so by using a Virtual Hierarchical Menu 
- * (https://community.algolia.com/react-instantsearch/guide/Virtual_widgets.html) and set its
- * defaultRefinement that will be then used by the Breadcrumb.
  * @name connectBreadcrumb
  * @requirements To use this widget, your attributes must be formatted in a specific way.
  * If you want for example to have a Breadcrumb of categories, objects in your index
