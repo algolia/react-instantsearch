@@ -12,6 +12,7 @@
     "search",
     "fast",
     "algolia",
+    "instantsearch",
     "components",
     "react-native"
   ],
