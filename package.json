@@ -111,7 +111,7 @@
     "stat-mode": "^0.2.2",
     "string": "^3.3.3",
     "style-loader": "^0.18.2",
-    "uglify-js": "^3.0.25",
+    "uglify-js": "^3.0.27",
     "webpack": "^3.3.0",
     "webpack-bundle-analyzer": "^2.8.3",
     "webpack-dev-middleware": "^1.11.0",
