@@ -19,7 +19,7 @@
     "preset": "jest-expo"
   },
   "dependencies": {
-    "@ptomasroos/react-native-multi-slider": "^0.0.8",
+    "@ptomasroos/react-native-multi-slider": "^0.0.9",
     "expo": "^19.0.0",
     "lodash": "^4.17.4",
     "native-base": "^2.2.1",
