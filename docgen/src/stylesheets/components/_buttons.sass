@@ -81,12 +81,12 @@
 .btn-static-theme
   border: none
   color: #fff
-  background-image: linear-gradient(to right, $purple-heart, $algolia-blue)
+  background-image: linear-gradient(80deg, $theme-color, #00A7FF)
   &:hover, &:focus
     color: #fff
-    background-color: darken($theme-color, 10%)
+    background-image: linear-gradient(80deg, $theme-color, #00A7FF)
   &:active, &.active
-    background-image: linear-gradient(to right, darken($purple-heart, 5%), darken($algolia-blue, 5%))
+    background-image: linear-gradient(80deg, darken($theme-color, 4%), darken(#00A7FF, 4%))
   &.btn-shadow
     box-shadow: 0 2px 6px 0 rgba($koromiko, 0.4)
     &:hover, &:focus

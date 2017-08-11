@@ -9,8 +9,7 @@ var alg = require('algolia-frontend-components/javascripts.js');
 const docSearch = {
   apiKey: '5cb6763f264e31381e18639a1147634c',
   indexName: 'react-instantsearch',
-  inputSelector: '#searchbox',
-  debug: true
+  inputSelector: '#searchbox'
 };
 
 const header = new alg.communityHeader(docSearch);
