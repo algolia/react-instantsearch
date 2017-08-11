@@ -29,8 +29,7 @@ export default function highlight(source, lang) {
     )}">${text}</span>`;
   });
 
-  return `<pre class="code-sample language-${lang}">
-  <div class="heading">${heading}</div>
+  return `<pre class="code-sample cm-s-mdn-like codeMirror">
   <div class="code-wrap">
     <code>${tokenizedSource}</code>
   </div>

@@ -8,7 +8,7 @@ export default function activateClipboard(codeSamples) {
 
     const setup = () => {
       clearTimeout(timeout);
-      copyToClipboard.innerHTML = '<span class="icon icon-copy"><svg><use xlink:href="#icon-copy" /></svg></span>';
+      copyToClipboard.innerHTML = '<i class="icon icon-copy"></i>';
       copyToClipboard.setAttribute('title', 'copy')
       copyToClipboard.classList.remove('clipboard-done');
       copyToClipboard.classList.add('clipboard');

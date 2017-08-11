@@ -115,7 +115,7 @@ $offset-height: 60px
         &:before
           height: 0
       a
-        color: $accent-color
+        color: #00A7FF
 
     .heading
       background: #fff
@@ -262,6 +262,11 @@ $offset-height: 60px
   .typed-link
     color: inherit
     text-decoration: underline
+
+  // remove before element offset when on table
+  table tbody .api-entry:before
+    display: none !important
+
 
 .examples-section > .container
   padding-top: 60px
