@@ -118,12 +118,23 @@
     "url": "https://github.com/algolia/vue-instantsearch/"
   }],
   "mobileMenu": [{
-    "name": "Getting Started",
-    "url": "getting-started/getting-started.html"
+    "name": "React",
+    "url": "Getting_started.html"
+  },{
+    "name": "React Native",
+    "url": "Getting_started_React_native.html"
   },
   {
-    "name": "Components",
-    "url": "components/index.html"
+    "name": "API",
+    "url": "widgets/InstantSearch.html"
+  },
+  {
+    "name": "Guides",
+    "url": "guide/"
+  },
+  {
+    "name": "Videos",
+    "url": "videos/"
   },
   {
     "name": "Examples",
@@ -131,7 +142,7 @@
   },{
     "name": "Github",
     "image": "<img src='assets/img/github-icon.svg'/>",
-    "url": "https://github.com/algolia/vue-instantsearch/"
+    "url": "https://github.com/algolia/react-instantsearch/"
   }],
   "docSearch": {
     "input_selector": "searchbox",

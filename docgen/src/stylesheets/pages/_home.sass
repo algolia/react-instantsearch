@@ -1,6 +1,11 @@
 a
   color: #00A7FF
 
+.home
+  @media (max-width: $screen-md)
+    .btn-static-theme
+      margin: auto
+      display: block
 
 .screen-mockup
   top: -260px
@@ -47,6 +52,11 @@ a
     left: 50%
     top: 50px
 
+  @media (max-width: $screen-sm)
+    .phone_illustration,
+    .computer_illustration
+      transform: scale(0.5)
+
 .start-section
   @include diagonal(-4deg, /*$titan-white*/ $titan-white, 180px, after)
     top: -80px
@@ -86,6 +96,12 @@ a
   .flex-it-3:hover .p-large
     background: #f7f7f7 !important
 
+  .flex-container
+    padding: 0
+
+  @media (max-width: $screen-sm)
+    .flex-it-3
+      flex: 0 1 100%
 
 .discover-section
   @include diagonal(-4deg, /*$titan-white*/ #FFF, 180px, after)
@@ -193,3 +209,6 @@ ul.subtle-check-list
       use
         fill: $purple-heart
         width: 12px
+
+  @media (max-width: $screen-sm)
+    transform: scale(0.7)
