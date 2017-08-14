@@ -353,4 +353,199 @@ class App extends Component {
 }
 ```
 
-This function will simply take the value that our refinementList says is relevant for that refinement, and take it as truth.
+This function will simply take the value that our refinementList says is relevant for that refinement, and put it in the current state of our App. Now we have communication in both directions between the search state and with the state of our hits. Next up: adding new refinements.
+
+## Refining from within hits
+
+To be able to refine from a hit, we need to change the state in `App`. We add a function to this class to do that cleanly: 
+
+```jsx
+class App extends Component {
+  refine = ({ attributeName, value }) => {
+    this.setState(state => {
+      const index = state.refinements[attributeName].indexOf(value);
+
+      if (index === -1) {
+        const oldValue = state.refinements[attributeName];
+        return {
+          ...state,
+          refinements: {
+            ...state.refinements,
+            [attributeName]: [...oldValue, value],
+          },
+        };
+      }
+
+      const newValue = state.refinements[attributeName].slice();
+      newValue.splice(index, 1);
+      return {
+        ...state,
+        refinements: {
+          ...state.refinements,
+          [attributeName]: newValue,
+        },
+      };
+    });
+  };
+}
+```
+
+This function works as follows: it has a `attributeName` and `value`, the value is what we want to add to the `VirtualRefinementList`, a string, for example `nodejs` or `react`. We will first check if our array for this attribute already contains that value. If it doesn't contain it, we simply add it to the array, if the array already contains the value we want, we remove it. Finally this value is set as the new state. Correspondingly, that change in state will trigger a change in `defaultRefinement` of the `VirtualRefinementList` for that attribute, and update the search interface. 
+
+But we still need to call this function. What we do is add `this.refine` as a prop to the `Hit` component, and call it there when needed. The inside of the `Hit` component now looks like this: 
+
+```jsx
+import React from 'react';
+
+const Tags = ({ keywords = [], onClick }) =>
+  <div>
+    {keywords.map((keyword, i) =>
+      <span key={keyword}>
+        {i > 0 && ', '}
+        <button
+          onClick={() => onClick({ attributeName: 'keywords', value: keyword })}
+        >
+          {keyword}
+        </button>
+      </span>
+    )}
+  </div>;
+
+const Hit = ({ hit: { name, description, keywords, owner }, refine }) =>
+  <article>
+    <h1>
+      <a
+        href={`https://yarn.fyi/${name}`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {name}
+      </a>
+    </h1>
+    <p>
+      {description}
+    </p>
+    <p>
+      by{' '}
+      <button
+        onClick={() =>
+          refine({
+            attributeName: 'owner.name',
+            value: owner.name,
+          })}
+      >
+        {owner.name}
+      </button>
+    </p>
+    <Tags keywords={keywords} onClick={refine} />
+  </article>;
+
+export default Hit;
+```
+
+Our final `App.js` looks like this: 
+
+```jsx
+import React, { Component } from 'react';
+import { render } from 'react-dom';
+import {
+  Configure,
+  InstantSearch,
+  SearchBox,
+  Hits,
+  CurrentRefinements,
+  RefinementList,
+} from 'react-instantsearch/dom';
+
+import Hit from './Hit';
+import VirtualRefinementList from './VirtualRefinementList';
+
+export default class Search extends Component {
+  state = {
+    refinements: {
+      keywords: [],
+      'owner.name': [],
+    },
+  };
+
+  refine = ({ attributeName, value }) => {
+    this.setState(state => {
+      const index = state.refinements[attributeName].indexOf(value);
+
+      if (index === -1) {
+        const oldValue = state.refinements[attributeName];
+        return {
+          ...state,
+          refinements: {
+            ...state.refinements,
+            [attributeName]: [...oldValue, value],
+          },
+        };
+      }
+
+      const newValue = state.refinements[attributeName].slice();
+      newValue.splice(index, 1);
+      return {
+        ...state,
+        refinements: {
+          ...state.refinements,
+          [attributeName]: newValue,
+        },
+      };
+    });
+  };
+
+  onRefine = ({ attributeName, value }) =>
+    this.setState(state => ({
+      ...state,
+      refinements: {
+        ...state.refinements,
+        [attributeName]: value,
+      },
+    }));
+
+  render() {
+    return (
+      <InstantSearch
+        appId="OFCNCOG2CU"
+        apiKey="f54e21fa3a2a0160595bb058179bfb1e"
+        indexName="npm-search"
+      >
+        <Configure
+          attributesToRetrieve={[
+            'name',
+            'description',
+            'keywords',
+            'owner.name',
+          ]}
+        />
+        <SearchBox />
+        <CurrentRefinements />
+        <div style={{ display: 'flex', border: '1px solid black' }}>
+          <RefinementList attributeName="keywords" withSearchBox />
+          <RefinementList attributeName="owner.name" withSearchBox />
+        </div>
+        <VirtualRefinementList
+          attributeName="keywords"
+          defaultRefinement={[...this.state.refinements.keywords]}
+          onRefine={this.onRefine}
+        />
+        <VirtualRefinementList
+          attributeName="owner.name"
+          defaultRefinement={[...this.state.refinements['owner.name']]}
+          onRefine={this.onRefine}
+        />
+        <Hits
+          hitComponent={({ hit }) => <Hit hit={hit} refine={this.refine} />}
+        />
+      </InstantSearch>
+    );
+  }
+}
+```
+
+This then gets us our result, as seen in the beginning: 
+
+<iframe src="https://codesandbox.io/embed/oY1klpZYB" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+
+Have a nice day ☀️
