@@ -30,6 +30,9 @@
   color: $bunting
   transform: translate(-240px)
 
+  @media (max-width: $screen-sm)
+    transform: translate(-140px)
+
   &::-webkit-input-placeholder
     color: $bunting
   &:-moz-placeholder
@@ -40,14 +43,21 @@
     color: $bunting
 
 
+
+
 .algc-menu__search--holder.open button#search
   transform: translate(calc(-240px + 4em), -50%)
+  @media (max-width: $screen-sm)
+    transform: translate(calc(-140px + 4em), -50%)
 
 .algc-navigation__brands svg.algc-arrowseparator path
   fill: $logan
 
 
 // Dropdown
+.algc-navigation__menu .algc-menu__sublist:before
+  display: none
+
 .algc-dropdownroot
   .algc-dropdownroot__dropdownarrow
     background: #F7F7FF
