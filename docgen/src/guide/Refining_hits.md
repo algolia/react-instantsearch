@@ -14,7 +14,7 @@ In some interfaces, you want to have buttons _inside_ your Hits that will change
 
 ## Regular setup
 
-First, we'll set up a regular project wit create-react-app and react-instantsearch.
+First, we'll set up a regular project with create-react-app and react-instantsearch.
 
 ```sh
 $ yarn create react-app refining-hits # or npm install -g create-react-app && create-react-app refining-hits
@@ -30,7 +30,8 @@ index.setSettings({
 });
 ```
 
-An index that already has these settings is the index for search on [Yarn](https://yarn.fyi), which is used in this guide. We will get started in `App.js` and set up a regular React InstantSearch setup:
+In this guide we will use the search index we use on the [Yarn](https://yarn.fyi) website. It already has the mandatory `attributesForFaceting ` configured.
+We will get started in `App.js` and set up a regular React InstantSearch app:
 
 ```jsx
 import React, { Component } from 'react';
@@ -111,7 +112,7 @@ const Hit = ({ hit: { name, description, keywords, owner } }) =>
 export default Hit;
 ```
 
-In this component we took the name, description and owner of a certain package, and render these as hits. To enable this as HitComponent, we will change the line in `App.js` that renders the `Hit` component:
+In this component we took the name, description and owner of a certain package, and render these as hits. To enable this as `hitComponent`, we will change the line in `App.js` that renders the `Hit` component:
 
 ```jsx
 import React, { Component } from 'react';
@@ -150,7 +151,7 @@ class App extends Component {
 export default App;
 ```
 
-We manually render the `hitComponent` as a function, because we want to add extra functions to the `Hit` component later. Now we will also set up two `RefinementList`s for `keywords` and `owner.name`. We do this in a container so that the difference is clear, but obviously you can change the rendering of this however you prefer:
+We manually render the `hitComponent` as a function, because we want to add extra functions to the `Hit` component later. Now we will also set up two `RefinementList`s for `keywords` and `owner.name`. We do this in a container so that the difference is clear, but you can change the rendering of this however you prefer:
 
 ```jsx
 import {
@@ -275,7 +276,7 @@ class App extends Component {
 export default App;
 ```
 
-We will change the state of `App` from within the `Hit` component later so that it will update the `defaultRefinement` of each respective `VirtualRefinementList`. To be able to handle with that cleanly, let's add a lifecycle hook in `VirtualRefinementList`:
+We will change the state of `App` from within the `Hit` component later so that it will update the `defaultRefinement` of each respective `VirtualRefinementList`. We want to use this new data with our connector every time it changes, so let's add a lifecycle hook in `VirtualRefinementList`:
 
 ```jsx
 const equals = (arr1, arr2) =>
@@ -307,7 +308,7 @@ class RefinementList extends Component {
 }
 ```
 
-We compare the current refinement with the previous current refinement. If they aren't the same, then we will call a callback `onRefine` from our props with the current `attributeName` and with the new value. We do the same for the `defaultRefinement` so that the correct refinement is always chosen.
+We compare the current refinement with the previous current refinement. If they aren't the same, then we will call the  `onRefine` callback from our props with the current `attributeName` and with the new value. We do the same for the `defaultRefinement` so that the correct refinement is always chosen.
 
 We made this callback, but now we also need to do something with it in `App.js`: 
 
@@ -353,7 +354,7 @@ class App extends Component {
 }
 ```
 
-This function will simply take the value that our refinementList says is relevant for that refinement, and put it in the current state of our App. Now we have communication in both directions between the search state and with the state of our hits. Next up: adding new refinements.
+This function will take the value that our refinementList says is relevant for that refinement, and put it in the current state of our App. Now we have communication in both directions between the search state and with the state of our hits. Next up: adding new refinements.
 
 ## Refining from within hits
 
@@ -390,9 +391,9 @@ class App extends Component {
 }
 ```
 
-This function works as follows: it has a `attributeName` and `value`, the value is what we want to add to the `VirtualRefinementList`, a string, for example `nodejs` or `react`. We will first check if our array for this attribute already contains that value. If it doesn't contain it, we simply add it to the array, if the array already contains the value we want, we remove it. Finally this value is set as the new state. Correspondingly, that change in state will trigger a change in `defaultRefinement` of the `VirtualRefinementList` for that attribute, and update the search interface. 
+This function works as follows: it has an `attributeName` and a `value`, the value is what we want to add to the `VirtualRefinementList`, a string, for example `nodejs` or `react`. We will first check if our array for this attribute already contains that value. If it doesn't contain it, we simply add it to the array, if the array already contains the value we want, we remove it. Finally this value is set as the new state. Correspondingly, that change in state will trigger a change in `defaultRefinement` of the `VirtualRefinementList` for that attribute, and update the search interface. 
 
-But we still need to call this function. What we do is add `this.refine` as a prop to the `Hit` component, and call it there when needed. The inside of the `Hit` component now looks like this: 
+But we still need to call this function. What we do is add `this.refine` as a prop to the `Hit` component, and call it there when needed. The implementation of the `Hit` component now looks like this: 
 
 ```jsx
 import React from 'react';
