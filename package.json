@@ -15,10 +15,11 @@
     "lint:fix": "eslint . --fix",
     "docs:doctoc": "doctoc --maxlevel 1 README.md",
     "test": "./scripts/test.sh",
+    "test:recipes": "./scripts/test:recipes.sh",
     "test:build": "NODE_ENV=production ./scripts/test:build.sh",
     "test:regressions": "webpack --config test/regressions/webpack.config.js && rm -rf test/screenshots && happo run && babel-node ./test/regressions/normalize.js",
     "argos": "argos upload test/screenshots --token $ARGOS_TOKEN || true",
-    "dev": "jest --watch --bail",
+    "dev": "NODE_ENV=development jest --watch --bail",
     "docs:storybook-start": "start-storybook -p 6006 -c ./storybook -s ./storybook/public",
     "docs:storybook-build-production": "build-storybook -s ./storybook/public -o docs-production/react-instantsearch/storybook -c ./storybook"
   },
@@ -72,7 +73,6 @@
     "happo-target-firefox": "^5.0.0-rc.6",
     "happypack": "^4.0.0-beta.1",
     "hasha": "^3.0.0",
-    "jest-cli": "^20.0.4",
     "jsdoc-parse": "^1.2.7",
     "json": "^9.0.6",
     "jstransformer-markdown-it": "^2.0.0",
@@ -122,7 +122,8 @@
     "node": "7.10.0"
   },
   "jest": {
-    "notify": false
+    "notify": false,
+    "testPathIgnorePatterns": ["/packages/react-instantsearch/examples"]
   },
   "license": "MIT",
   "author": {

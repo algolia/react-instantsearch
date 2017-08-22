@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import ModalDropdown from 'react-native-modal-dropdown';
 import {
   StyleSheet,
   Text,
@@ -36,12 +35,6 @@ const { height } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   maincontainer: {
-    ...Platform.select({
-      ios: {
-        marginTop: 63,
-      },
-      android: { marginTop: 50 },
-    }),
     flex: 1,
   },
   items: {
@@ -49,7 +42,7 @@ const styles = StyleSheet.create({
       ios: {
         height: height - 170,
       },
-      android: { height: height - 185 },
+      android: { height: height - 165 },
     }),
   },
   item: {
@@ -289,57 +282,27 @@ const ConnectedStats = connectStats(({ nbHits }) =>
   </Text>
 );
 
-const ConnectedSortBy = connectSortBy(
-  ({ refine, items, currentRefinement }) => {
-    const icon =
-      Platform.OS === 'ios'
-        ? <IosIcon
-            size={13}
-            name="ios-arrow-down"
-            color="#000"
-            style={styles.sortByArrow}
-          />
-        : <MaterialIcon
-            size={20}
-            name="arrow-drop-down"
-            color="#000"
-            style={styles.sortByArrow}
-          />;
-    return (
-      <View style={styles.sortBy}>
-        <ModalDropdown
-          animated={false}
-          defaultValue={
-            items.find(item => item.value === currentRefinement).label
-          }
-          onSelect={(index, value) =>
-            refine(items.find(item => item.label === value).value)}
-          options={items.map(item => item.label)}
-          renderRow={item => {
-            const itemValue = items.find(i => i.label === item).value;
-            return (
-              <Text
-                style={{
-                  fontSize: 13,
-                  fontWeight: itemValue === currentRefinement ? 'bold' : '200',
-                  padding: 10,
-                }}
-              >
-                {item}
-              </Text>
-            );
-          }}
-          dropdownStyle={{
-            width: 200,
-            height: 110,
-          }}
-          textStyle={{ fontSize: 15 }}
+const ConnectedSortBy = connectSortBy(() => {
+  const icon =
+    Platform.OS === 'ios'
+      ? <IosIcon
+          size={13}
+          name="ios-arrow-down"
+          color="#000"
+          style={styles.sortByArrow}
         />
-        {icon}
-      </View>
-    );
-  }
-);
+      : <MaterialIcon
+          size={20}
+          name="arrow-drop-down"
+          color="#000"
+          style={styles.sortByArrow}
+        />;
+  return (
+    <View style={styles.sortBy}>
+      {icon}
+    </View>
+  );
+});
 
 const Filters = connectCurrentRefinements(
   ({ items, searchState, onSearchStateChange }) =>

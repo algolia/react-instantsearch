@@ -1,7 +1,9 @@
 {
   "private": true,
   "devDependencies": {
-    "react-scripts": "1.0.10"
+    "jest-environment-jsdom-11.0.0": "^20.0.9",
+    "react-scripts": "1.0.10",
+    "react-test-renderer": "^15.6.1"
   },
   "dependencies": {
     "lodash": "^4.17.4",
@@ -14,7 +16,15 @@
     "react-router": "^3.0.5"
   },
   "scripts": {
-    "start": "react-scripts start"
+    "start": "react-scripts start",
+    "test": "jest"
+  },
+  "jest": {
+    "notify": false,
+    "testEnvironment": "jest-environment-jsdom-11.0.0",
+    "moduleNameMapper": {
+      "\\.(css)$": "identity-obj-proxy"
+    }
   },
   "main": "index.js",
   "license": "MIT"
