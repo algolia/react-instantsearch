@@ -1,3 +1,33 @@
+<a name="4.1.0-beta.5"></a>
+# [4.1.0-beta.5](https://github.com/algolia/react-instantsearch/compare/v4.1.0-beta.4...v4.1.0-beta.5) (2017-08-08)
+
+
+### Bug Fixes
+
+* **SSR:** clean SP before rendering agan (#238) ([e765886](https://github.com/algolia/react-instantsearch/commit/e765886))
+
+
+### Features
+
+* **Breadcrumb:** add a new widget & connector (#228) ([7f8f3ae](https://github.com/algolia/react-instantsearch/commit/7f8f3ae))
+
+
+
+<a name="4.1.0-beta.4"></a>
+# [4.1.0-beta.4](https://github.com/algolia/react-instantsearch/compare/v4.1.0-beta.3...v4.1.0-beta.4) (2017-08-03)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency lint-staged to version ^4.0.0 (#201) ([6867a1b](https://github.com/algolia/react-instantsearch/commit/6867a1b))
+* **nextjs/ssr:** parse `params.asPath` (#189) ([ae17da0](https://github.com/algolia/react-instantsearch/commit/ae17da0))
+* **PoweredBy:** add a label to the Algolia logo (#216) ([cd235bd](https://github.com/algolia/react-instantsearch/commit/cd235bd))
+* **react:** remove typo around `"" 2` (#220) ([f73eb04](https://github.com/algolia/react-instantsearch/commit/f73eb04))
+* **ScrollTo:** scroll to only if change triggered by the widget observed (#202) ([2d76022](https://github.com/algolia/react-instantsearch/commit/2d76022))
+* **theme:** format the count of items appearing in a refinement (#217) ([2225c24](https://github.com/algolia/react-instantsearch/commit/2225c24))
+
+
+
 <a name="4.1.0-beta.3"></a>
 # [4.1.0-beta.3](https://github.com/algolia/react-instantsearch/compare/v4.1.0-beta.2...v4.1.0-beta.3) (2017-07-25)
 

@@ -21,7 +21,7 @@
     "node-sass": "4.5.3",
     "sass-loader": "6.0.6",
     "react-test-renderer": "^15.6.1",
-    "webpack": "3.4.1",
+    "webpack": "3.5.3",
     "webpack-node-externals": "1.6.0"
   },
   "dependencies": {
@@ -29,6 +29,7 @@
     "prop-types": "^15.5.10",
     "react": "^15.2.0",
     "react-dom": "^15.2.0",
-    "react-instantsearch": "4.1.0-beta.3"
+    "react-instantsearch": "4.1.0-beta.5",
+    "react-instantsearch-theme-algolia": "4.1.0-beta.5"
   }
 }

@@ -122,6 +122,7 @@ printf "\n\nRelease: Package was published to npm."
 for d in packages/react-instantsearch/examples/* ; do 
     cd $d
     yarn upgrade react-instantsearch@$newVersion
+    yarn upgrade react-instantsearch-theme-algolia@$newVersion
     cd ../../../..
 done
 
@@ -129,7 +130,9 @@ commitMessage="chore(deps): update examples to react-instantsearch v$newVersion"
 git add .
 printf "$commitMessage" | git commit --file -
 
-printf "\n\nUpdate of react-instantsearch in all examples: almost done, check everything in another terminal tab if you want.\n"
-read -p "=> Release: when ready, press [ENTER] to push to github"
+printf "\n\nUpdate of react-instantsearch version in all examples\n" 
+printf "\n\nalmost done, check everything in another terminal tab if you want." 
+
+read -p "=> Update of react-instantsearch version in all examples: when ready, press [ENTER] to push to github"
 
 git push origin master
