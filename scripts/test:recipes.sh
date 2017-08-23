@@ -9,8 +9,8 @@ for d in packages/react-instantsearch/examples/* ; do
     printf "recipes: $d" 
     cd $d
     if [ "$CI" = "true" ]
-        then jest --runInBand 
-        else jest
+        then jest --runInBand --config $d
+        else jest --config $d
     fi
     cd ../../../..
 done
