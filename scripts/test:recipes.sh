@@ -6,6 +6,7 @@
 set -e
 
 for d in packages/react-instantsearch/examples/* ; do 
+    printf "recipes: $d" 
     cd $d
     jest
     cd ../../../..
