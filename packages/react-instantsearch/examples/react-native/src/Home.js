@@ -28,6 +28,7 @@ import Spinner from './components/Spinner';
 import StarRating from 'react-native-star-rating';
 import IosIcon from 'react-native-vector-icons/Ionicons';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import { Dropdown } from 'react-native-material-dropdown';
 
 import { Actions } from 'react-native-router-flux';
 
@@ -64,9 +65,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingLeft: 8,
-  },
-  sortByArrow: {
-    paddingLeft: 3,
   },
   searchBoxContainer: {
     backgroundColor: '#162331',
@@ -282,27 +280,21 @@ const ConnectedStats = connectStats(({ nbHits }) =>
   </Text>
 );
 
-const ConnectedSortBy = connectSortBy(() => {
-  const icon =
-    Platform.OS === 'ios'
-      ? <IosIcon
-          size={13}
-          name="ios-arrow-down"
-          color="#000"
-          style={styles.sortByArrow}
-        />
-      : <MaterialIcon
-          size={20}
-          name="arrow-drop-down"
-          color="#000"
-          style={styles.sortByArrow}
-        />;
-  return (
-    <View style={styles.sortBy}>
-      {icon}
-    </View>
-  );
-});
+const ConnectedSortBy = connectSortBy(({ refine, items, currentRefinement }) =>
+  <View style={styles.sortBy}>
+    <Dropdown
+      data={items}
+      onChangeText={(value, data) => refine(value)}
+      containerStyle={{
+        width: 110,
+        height: 30,
+        bottom: 30,
+      }}
+      label=""
+      value={items.find(item => item.value === currentRefinement).label}
+    />
+  </View>
+);
 
 const Filters = connectCurrentRefinements(
   ({ items, searchState, onSearchStateChange }) =>
