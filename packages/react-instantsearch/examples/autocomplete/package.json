@@ -1,6 +1,7 @@
 {
   "private": true,
   "devDependencies": {
+    "jest-cli": "^20.0.4",
     "react-scripts": "1.0.10",
     "identity-obj-proxy": "^3.0.0",
     "react-test-renderer": "^15.6.1"
