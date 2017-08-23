@@ -26,8 +26,6 @@ import {
 import Highlight from './components/Highlight';
 import Spinner from './components/Spinner';
 import StarRating from 'react-native-star-rating';
-import IosIcon from 'react-native-vector-icons/Ionicons';
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import { Dropdown } from 'react-native-material-dropdown';
 
 import { Actions } from 'react-native-router-flux';
@@ -284,7 +282,7 @@ const ConnectedSortBy = connectSortBy(({ refine, items, currentRefinement }) =>
   <View style={styles.sortBy}>
     <Dropdown
       data={items}
-      onChangeText={(value, data) => refine(value)}
+      onChangeText={value => refine(value)}
       containerStyle={{
         width: 110,
         height: 30,
