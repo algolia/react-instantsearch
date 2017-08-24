@@ -19,7 +19,7 @@
     "test:build": "NODE_ENV=production ./scripts/test:build.sh",
     "test:regressions": "webpack --config test/regressions/webpack.config.js && rm -rf test/screenshots && happo run && babel-node ./test/regressions/normalize.js",
     "argos": "argos upload test/screenshots --token $ARGOS_TOKEN || true",
-    "dev": "NODE_ENV=development jest --watch --bail",
+    "dev": "jest --watch --bail",
     "docs:storybook-start": "start-storybook -p 6006 -c ./storybook -s ./storybook/public",
     "docs:storybook-build-production": "build-storybook -s ./storybook/public -o docs-production/react-instantsearch/storybook -c ./storybook"
   },
@@ -104,7 +104,6 @@
     "react-autosuggest": "^9.3.1",
     "react-dom": "^15.6.1",
     "react-hot-loader": "^3.0.0-beta.7",
-    "react-instantsearch": "4.0.9",
     "react-tap-event-plugin": "^2.0.1",
     "recursive-readdir": "^2.2.1",
     "replace-in-file": "^2.5.3",
