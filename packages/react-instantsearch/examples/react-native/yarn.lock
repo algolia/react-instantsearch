@@ -27,8 +27,8 @@
     exec-async "^2.2.0"
 
 "@expo/schemer@^1.0.28":
-  version "1.0.43"
-  resolved "https://registry.yarnpkg.com/@expo/schemer/-/schemer-1.0.43.tgz#e5129f904c192b79dc88e952d8ce5e6bfa158eb6"
+  version "1.0.44"
+  resolved "https://registry.yarnpkg.com/@expo/schemer/-/schemer-1.0.44.tgz#d74a94ba0217f160c1a86ce1c6a42f581485a542"
   dependencies:
     ajv "^5.2.2"
     babel-polyfill "^6.23.0"
@@ -956,7 +956,6 @@ babel-preset-jest@^20.0.3:
   dependencies:
     babel-plugin-jest-hoist "^20.0.3"
 
-<<<<<<< HEAD
 babel-preset-react-native@3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/babel-preset-react-native/-/babel-preset-react-native-3.0.1.tgz#ad9e96e39eac6673f3382e9bea9d17c8aa95da3c"
@@ -996,11 +995,6 @@ babel-preset-react-native@3.0.1:
 babel-preset-react-native@^1.9.1:
   version "1.9.2"
   resolved "https://registry.yarnpkg.com/babel-preset-react-native/-/babel-preset-react-native-1.9.2.tgz#b22addd2e355ff3b39671b79be807e52dfa145f2"
-=======
-babel-preset-react-native@2.1.0, babel-preset-react-native@^2.0.0, babel-preset-react-native@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/babel-preset-react-native/-/babel-preset-react-native-2.1.0.tgz#9013ebd82da1c88102bf588810ff59e209ca2b8a"
->>>>>>> master
   dependencies:
     babel-plugin-check-es2015-constants "^6.5.0"
     babel-plugin-react-transform "2.0.2"
@@ -1032,9 +1026,9 @@ babel-preset-react-native@2.1.0, babel-preset-react-native@^2.0.0, babel-preset-
     babel-plugin-transform-regenerator "^6.5.0"
     react-transform-hmr "^1.0.4"
 
-babel-preset-react-native@^1.9.1:
-  version "1.9.2"
-  resolved "https://registry.yarnpkg.com/babel-preset-react-native/-/babel-preset-react-native-1.9.2.tgz#b22addd2e355ff3b39671b79be807e52dfa145f2"
+babel-preset-react-native@^2.0.0, babel-preset-react-native@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/babel-preset-react-native/-/babel-preset-react-native-2.1.0.tgz#9013ebd82da1c88102bf588810ff59e209ca2b8a"
   dependencies:
     babel-plugin-check-es2015-constants "^6.5.0"
     babel-plugin-react-transform "2.0.2"
@@ -1998,8 +1992,8 @@ expand-range@^1.8.1:
     fill-range "^2.1.0"
 
 expo@^20.0.0:
-  version "20.0.1"
-  resolved "https://registry.yarnpkg.com/expo/-/expo-20.0.1.tgz#3dbc85d760c2a01fc9a3d39836674ee97beac4b8"
+  version "20.0.2"
+  resolved "https://registry.yarnpkg.com/expo/-/expo-20.0.2.tgz#0d20c99d53ec1c43729d775eb2f1aa14c7aa47cc"
   dependencies:
     "@expo/vector-icons" "^5.0.0"
     babel-preset-expo "^3.0.0"
@@ -2251,8 +2245,8 @@ forever-agent@~0.6.1:
   resolved "https://registry.yarnpkg.com/forever-agent/-/forever-agent-0.6.1.tgz#fbc71f0c41adeb37f96c577ad1ed42d8fdacca91"
 
 form-data@^2.1.1:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/form-data/-/form-data-2.2.0.tgz#9a5e3b9295f980b2623cf64fa238b14cebca707b"
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/form-data/-/form-data-2.3.1.tgz#6fb94fbd71885306d73d15cc497fe4cc4ecd44bf"
   dependencies:
     asynckit "^0.4.0"
     combined-stream "^1.0.5"
