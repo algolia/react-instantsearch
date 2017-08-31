@@ -21,6 +21,7 @@ import {
   connectInfiniteHits,
 } from 'react-instantsearch/connectors';
 import 'react-instantsearch-theme-algolia/style.scss';
+import { ProgessiveImage } from 'react-progressive-image';
 
 export default function App() {
   return (
@@ -160,7 +161,7 @@ function CustomHits({ hits, refine, hasMore }) {
       </button>;
   return (
     <main id="hits">
-      {hits.map((hit, idx) => <Hit item={hit} key={idx} />)}
+      {hits.map(hit => <Hit item={hit} key={hit.objectID} />)}
       {loadMoreButton}
     </main>
   );
