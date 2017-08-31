@@ -21,7 +21,6 @@ import {
   connectInfiniteHits,
 } from 'react-instantsearch/connectors';
 import 'react-instantsearch-theme-algolia/style.scss';
-import { ProgessiveImage } from 'react-progressive-image';
 
 export default function App() {
   return (
