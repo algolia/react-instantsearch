@@ -98,8 +98,8 @@ export default createConnector({
     limitMin: PropTypes.number,
     limitMax: PropTypes.number,
     defaultRefinement: PropTypes.oneOfType([
-      PropTypes.string, 
-      PropTypes.number
+      PropTypes.string,
+      PropTypes.number,
     ]),
     withSearchBox: PropTypes.bool,
     searchForFacetValues: PropTypes.bool, // @deprecated
