@@ -7,6 +7,9 @@ import SnippetComponent from '../components/Snippet.js';
  * Read more about it in the [Highlighting results](guide/Highlighting_results.html) guide.
  * @name Snippet
  * @kind widget
+ * @requirements To use this widget, the attribute name passed to the `attributeName` prop must be 
+ * present in "Attributes to snippet" on the Algolia dashboard or configured as `attributesToSnippet` 
+ * via a set settings call to the Algolia API.
  * @propType {string} attributeName - the location of the highlighted snippet attribute in the hit
  * @propType {object} hit - the hit object containing the highlighted snippet attribute
  * @propType {string} [tagName='em'] - the tag to be used for highlighted parts of the attribute
@@ -15,9 +18,15 @@ import SnippetComponent from '../components/Snippet.js';
  *
  * import { connectHits, Snippet, InstantSearch } from 'react-instantsearch/dom';
  *
- * const CustomHits = connectHits(hits => {
- *  return hits.map((hit) => <p><Snippet attributeName="description" hit={hit}/></p>);
- * });
+ * const CustomHits = connectHits(({ hits }) =>
+ * <div>
+ *   {hits.map(hit =>
+ *     <p key={hit.objectID}>
+ *       <Snippet attributeName="description" hit={hit} />
+ *     </p>
+ *   )}
+ * </div>
+ * );
  *
  * export default function App() {
  *  return (
