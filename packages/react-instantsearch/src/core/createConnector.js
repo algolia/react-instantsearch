@@ -91,7 +91,7 @@ export default function createConnector(connectorDesc) {
             nextWidgetsState
           );
         }
-        return null;
+        return {};
       }
 
       getSearchParameters(searchParameters) {
