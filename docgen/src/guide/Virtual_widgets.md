@@ -29,7 +29,7 @@ const App = () =>
     <Menu attributeName="fruits" defaultRefinement="Orange" />
   </InstantSearch>;
 ```
-In this case, we are using the `VirtualMenu` to pre refine our results (within the `clothes` search, only display `hoodies`). Think of the `VirtualMenu` as a hidden filter where we define attributes and values that will always apply the our search results.
+In this case, we are using the `VirtualMenu` to pre refine our results (within the `clothes` search, only display `hoodies`). Think of the `VirtualMenu` as a hidden filter where we define attributes and values that will always be applied to our search results
 
 **Notes**:
 * The `<Hoodies>` component is what we call a virtual widget.
