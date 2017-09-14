@@ -26,7 +26,7 @@ const sidebarContainer = document.querySelector('.sidebar');
 if(sidebarContainer) {
   const headerHeight = document.querySelector('.algc-navigation').getBoundingClientRect().height;
   const contentContainer = document.querySelector('.documentation-container');
-  fixSidebar({sidebarContainer, topOffset: headerHeight});
+  fixSidebar({sidebarContainer, topOffset: headerHeight, contentContainer: container});
   followSidebarNavigation(sidebarContainer.querySelectorAll('a'), contentContainer.querySelectorAll('h2'));
 }
 
