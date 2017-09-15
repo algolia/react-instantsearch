@@ -186,6 +186,7 @@ caniuse-db@^1.0.30000529, caniuse-db@^1.0.30000634, caniuse-db@^1.0.30000639:
   resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000730.tgz#c9e1919a9f586c85d79265e7a84261b8421f92bd"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 caniuse-lite@^1.0.30000718, caniuse-lite@^1.0.30000726:
   version "1.0.30000730"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000730.tgz#26a14ff1b3bfc1f1cb4da75c2c73451b3f1ade1a"
@@ -198,6 +199,11 @@ caniuse-lite@^1.0.30000718, caniuse-lite@^1.0.30000726:
   version "1.0.30000727"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000727.tgz#20c895768398ded5f98a4beab4a76c285def41d2"
 >>>>>>> chore(deps): update dependency autoprefixer to v7.1.4
+=======
+caniuse-lite@^1.0.30000718, caniuse-lite@^1.0.30000726:
+  version "1.0.30000730"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000730.tgz#26a14ff1b3bfc1f1cb4da75c2c73451b3f1ade1a"
+>>>>>>> chore(deps): update yarn.lock
 
 caseless@~0.12.0:
   version "0.12.0"
@@ -1202,18 +1208,17 @@ postcss-zindex@^2.0.1:
     uniqs "^2.0.0"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 postcss@6.0.11, postcss@^6.0.11, postcss@^6.0.3:
 =======
 <<<<<<< HEAD
 postcss@6.0.11, postcss@^6.0.10, postcss@^6.0.3:
 >>>>>>> chore(deps): update dependency autoprefixer to v7.1.4
+=======
+postcss@6.0.11, postcss@^6.0.11, postcss@^6.0.3:
+>>>>>>> chore(deps): update yarn.lock
   version "6.0.11"
   resolved "https://registry.yarnpkg.com/postcss/-/postcss-6.0.11.tgz#f48db210b1d37a7f7ab6499b7a54982997ab6f72"
-=======
-postcss@6.0.10:
-  version "6.0.10"
-  resolved "https://registry.yarnpkg.com/postcss/-/postcss-6.0.10.tgz#c311b89734483d87a91a56dc9e53f15f4e6e84e4"
->>>>>>> chore(deps): update dependency autoprefixer to v7.1.4
   dependencies:
     chalk "^2.1.0"
     source-map "^0.5.7"
@@ -1228,17 +1233,6 @@ postcss@^5.0.10, postcss@^5.0.11, postcss@^5.0.12, postcss@^5.0.13, postcss@^5.0
     source-map "^0.5.6"
     supports-color "^3.2.3"
 
-<<<<<<< HEAD
-=======
-postcss@^6.0.11, postcss@^6.0.3:
-  version "6.0.11"
-  resolved "https://registry.yarnpkg.com/postcss/-/postcss-6.0.11.tgz#f48db210b1d37a7f7ab6499b7a54982997ab6f72"
-  dependencies:
-    chalk "^2.1.0"
-    source-map "^0.5.7"
-    supports-color "^4.4.0"
-
->>>>>>> chore(deps): update dependency autoprefixer to v7.1.4
 prepend-http@^1.0.0:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/prepend-http/-/prepend-http-1.0.4.tgz#d4f4562b0ce3696e41ac52d0e002e57a635dc6dc"
