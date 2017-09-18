@@ -5071,14 +5071,14 @@ react-native-material-buttons@^0.4.0:
     prop-types "^15.5.9"
     react-native-material-ripple "^0.7.0"
 
-react-native-material-dropdown@^0.3.1:
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/react-native-material-dropdown/-/react-native-material-dropdown-0.3.1.tgz#3ca8bb0e913213f57b99288ed2b8ac6e32627f63"
+react-native-material-dropdown@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/react-native-material-dropdown/-/react-native-material-dropdown-0.4.0.tgz#0b1e3e0f4f42e1ceeafe853721f7db7287ef7fed"
   dependencies:
     prop-types "^15.5.9"
     react-native-material-buttons "^0.4.0"
     react-native-material-ripple "^0.7.0"
-    react-native-material-textfield "^0.8.0"
+    react-native-material-textfield "^0.9.0"
 
 react-native-material-ripple@^0.7.0:
   version "0.7.5"
@@ -5086,9 +5086,9 @@ react-native-material-ripple@^0.7.0:
   dependencies:
     prop-types "^15.5.10"
 
-react-native-material-textfield@^0.8.0:
-  version "0.8.4"
-  resolved "https://registry.yarnpkg.com/react-native-material-textfield/-/react-native-material-textfield-0.8.4.tgz#267f3a46e9257a25a6b719ebaf34131019f901a0"
+react-native-material-textfield@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/react-native-material-textfield/-/react-native-material-textfield-0.9.0.tgz#ff83903df90eaf635f4a73c09682996bcbec383f"
   dependencies:
     prop-types "^15.5.9"
 
