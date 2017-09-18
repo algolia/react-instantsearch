@@ -83,7 +83,7 @@
     "@storybook/addons": "^3.1.6",
     "@storybook/react": "^3.1.9",
     "@storybook/ui": "^3.1.9",
-    "algolia-aerial": "~1.0.0",
+    "algolia-aerial": "^1.1.0",
     "algolia-frontend-components": "0.0.33",
     "argos-cli": "^0.0.9",
     "async": "^2.5.0",
