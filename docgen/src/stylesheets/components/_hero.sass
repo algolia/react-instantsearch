@@ -13,6 +13,10 @@
     max-width: 80%
     line-height: 1.5
 
+
+  img
+    max-width: 334px
+
   &:not(.hero-doc)
     @include diagonal(-6deg, $white, 300px, before)
       bottom: -190px
@@ -24,6 +28,10 @@
         bottom: -80px
 
   @media (max-width: $screen-sm)
+    .btn
+      width: 100%
+      margin-bottom: 1em
+
     figure
       img
         width: 80%

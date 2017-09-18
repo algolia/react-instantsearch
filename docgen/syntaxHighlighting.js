@@ -11,6 +11,10 @@ export default function highlight(source, lang) {
   if (lang === 'html') {
     lang = 'htmlmixed';
   }
+  if (lang === 'shell') {
+    lang = 'shell';
+  }
+
 
   const heading = lang === 'shell' ? 'Command' : 'Code';
 
@@ -23,11 +27,8 @@ export default function highlight(source, lang) {
       return;
     }
 
-    tokenizedSource += `<span class="cm-${style.replace(
-      / +/g,
-      ' cm-'
-    )}">${text}</span>`;
+    tokenizedSource += `<span class="cm-${style.replace(/ +/g,' cm-')}">${text}</span>`;
   });
 
-  return `<pre class="code-sample cm-s-mdn-like codeMirror"><div class="code-wrap"><code>${tokenizedSource}</code></div></pre>`;
+  return `<pre class="code-sample cm-s-mdn-like codeMirror ${lang}"><div class="code-wrap"><code>${tokenizedSource}</code></div></pre>`;
 }
