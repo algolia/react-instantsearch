@@ -9,7 +9,7 @@ export function fixSidebar({sidebarContainer, topOffset, contentContainer}) {
   let boundaries = getStartStopBoundaries(sidebarParent, sidebarContainer, topOffset);
 
   // If the sidebar is too big for the page, let's not change anyething
-  if(isSidebarBiggerThanContent({sidebarParent, contentContainer})) return;
+  if(isSidebarBiggerThanContent({sidebarContainer, contentContainer})) return;
 
   sidebarParent.style.position = 'relative';
 
@@ -114,8 +114,8 @@ export function followSidebarNavigation(sidebarLinks, contentHeaders) {
   document.addEventListener('scroll', findActiveSidebarLink);
 }
 
-function isSidebarBiggerThanContent({sidebarParent, contentContainer}) {
-  const sidebarHeight = sidebarParent.getBoundingClientRect().height;
+function isSidebarBiggerThanContent({sidebarContainer, contentContainer}) {
+  const sidebarHeight = sidebarContainer.getBoundingClientRect().height;
   const contentHeight = contentContainer.getBoundingClientRect().height;
 
   return sidebarHeight >= contentHeight;
