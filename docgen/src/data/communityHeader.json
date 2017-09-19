@@ -66,11 +66,11 @@
     "dropdownItems": [
       {
         "name": "Guides",
-        "url": "/guide"
+        "url": "guide"
       },
       {
         "name": "Videos",
-        "url": "/videos"
+        "url": "videos"
       }
     ]
   },
