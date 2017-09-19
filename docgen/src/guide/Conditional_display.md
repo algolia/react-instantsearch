@@ -75,7 +75,7 @@ const content = createConnector({
  });
 ```
 
-Alternatively, if you're using the search in List feature then you can know when the search results are loading by doing: 
+Alternatively, if you're using the search in List feature then you can know when the search results are loading by doing:
 
 ```jsx
 const content = createConnector({
