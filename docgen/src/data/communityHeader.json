@@ -115,7 +115,7 @@
   },{
     "name": "Github",
     "image": "<img src='assets/img/github-icon.svg'/>",
-    "url": "https://github.com/algolia/vue-instantsearch/"
+    "url": "https://github.com/algolia/react-instantsearch"
   }],
   "mobileMenu": [{
     "name": "React",

@@ -11,6 +11,9 @@ export default function highlight(source, lang) {
   if (lang === 'html') {
     lang = 'htmlmixed';
   }
+  if (lang === 'js') {
+    lang = 'jsx';
+  }
   if (lang === 'shell') {
     lang = 'shell';
   }
