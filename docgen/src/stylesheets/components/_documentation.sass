@@ -30,10 +30,15 @@ $offset-height: 60px
   h2,h3,h4
     color: $bunting
 
-  h2
+  h2:not(.text-lg)
     font-size: 28px
     padding-right: 1em
     padding-bottom: 8px
+
+    code
+      background: rgba($royal-blue, 0.1)
+      color: $royal-blue
+      line-height: 1.4
 
     &:first-of-type
       margin-top: 0
@@ -108,6 +113,8 @@ $offset-height: 60px
             color: $logan
 
     .content
+      position: relative
+      z-index: 2
       & p:first-child
         margin-top: 0
       & h2:first-child
@@ -192,7 +199,7 @@ $offset-height: 60px
       display: inline
       visibility: hidden
 
-    h2, h3
+    h2, h3, .api-entry
       .anchor
         text-decoration: none
 
@@ -455,3 +462,22 @@ $offset-height: 60px
   margin-bottom: 8px
   font-weight: 500
   color: $bunting
+
+
+.guide-nav
+  display: flex
+  flex-flow: row wrap
+  padding: 1em 0
+  margin-top: 1em
+  border-top: 1px solid $ghost
+  border-bottom: 1px solid $ghost
+
+  .guide-nav-left,
+  .guide-nav-right
+    flex: 0 1 50%
+
+    a
+      margin-left: 1em
+
+  .guide-nav-right
+    text-align: right

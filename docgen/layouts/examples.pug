@@ -8,8 +8,8 @@ block content
       - values = examples
   div.examples-container.flex-container.flex-dir-row
     each val in values
-      div.flex-it-2.p-large
-        h2=val.title
+      div.flex-it-2.p-small
+        h4=val.title
         div.fill-white.elevation1.radius6
           div.links
             a.color-white.text-lg(href=`${examplesEndpoint}/${val.id}`) View demo
