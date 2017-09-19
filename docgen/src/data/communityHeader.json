@@ -84,7 +84,7 @@
       },
       {
         "name": "&lt;Index>",
-        "url": "widgets/index.html"
+        "url": "widgets/<Index>.html"
       },
       {
         "name": "Widgets",

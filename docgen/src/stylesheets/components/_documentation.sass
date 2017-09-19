@@ -56,20 +56,28 @@ $offset-height: 60px
     font-size: 18px
     font-weight: normal
 
-  .api tr td:first-child
-    vertical-align: top
+  .api
+    position: relative
+    z-index: 2
 
-    p, ul
-      font-size: 90%
-      margin: .5em 0
-      line-height: 1.5em
+    tr td:first-child
+      vertical-align: top
 
-    ul
-      padding-left: 1.5em
+      p, ul
+        font-size: 90%
+        margin: .5em 0
+        line-height: 1.5em
 
-    em
-      text-decoration: underline
-      font-style: normal
+      ul
+        padding-left: 1.5em
+
+      em
+        text-decoration: underline
+        font-style: normal
+
+  td.api-entry-name:only-child
+    border-right: 1px solid #D0D0D0
+
 
   .documentation-container
     float: left
@@ -230,6 +238,8 @@ $offset-height: 60px
 
         p
           margin-top: 0
+
+
   .editThisPage
     position: absolute
     font-size: 12px
@@ -478,6 +488,11 @@ $offset-height: 60px
 
     a
       margin-left: 1em
+  .guide-nav-left:only-child
+    flex: 0 1 100%
+
+  .guide-nav-right:only-child
+    flex: 0 1 100%
 
   .guide-nav-right
     text-align: right
