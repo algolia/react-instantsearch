@@ -1,5 +1,5 @@
 export default function sidebar(options) {
-  const {headersContainer, sidebarContainer} = options;
+  const { headersContainer, sidebarContainer } = options;
 
   const list = document.createElement('ul');
   list.classList.add('no-mobile');
@@ -12,19 +12,29 @@ export default function sidebar(options) {
 
 function sidebarFollowScroll(sidebarContainer) {
   const linksContainer = sidebarContainer.querySelector('ul');
-  const {height, navHeight, footerHeight, menuHeight, sidebarTop, titleHeight} =
-    getPositionsKeyElements(sidebarContainer);
+  const {
+    height,
+    navHeight,
+    footerHeight,
+    menuHeight,
+    sidebarTop,
+    titleHeight,
+  } = getPositionsKeyElements(sidebarContainer);
   const positionSidebar = () => {
     const currentScroll = window.pageYOffset;
     if (currentScroll > sidebarTop - navHeight) {
       const fold = height - footerHeight - menuHeight - navHeight;
       if (currentScroll > fold) {
-        sidebarContainer.style.top = `${(fold - currentScroll + navHeight ) - 200}px`;
+        sidebarContainer.style.top = `${fold -
+          currentScroll +
+          navHeight -
+          200}px`;
       } else {
         sidebarContainer.style.top = null;
       }
       sidebarContainer.classList.add('fixed');
-      linksContainer.style.maxHeight = `calc(100vh - ${titleHeight + navHeight}px)`;
+      linksContainer.style.maxHeight = `calc(100vh - ${titleHeight +
+        navHeight}px)`;
     } else {
       sidebarContainer.classList.remove('fixed');
       linksContainer.style.maxHeight = '';
@@ -56,14 +66,21 @@ function scrollSpy(sidebarContainer, headersContainer) {
 
   const findActiveSidebarLink = () => {
     const highestVisibleHeaders = headers
-      .map(header => ({element: header, rect: header.getBoundingClientRect()}))
-      .filter(({rect}) =>
-        rect.top < window.innerHeight / 3 && rect.bottom < window.innerHeight
+      .map(header => ({
+        element: header,
+        rect: header.getBoundingClientRect(),
+      }))
+      .filter(
+        ({ rect }) =>
+          rect.top < window.innerHeight / 3 && rect.bottom < window.innerHeight
         // top element relative viewport position should be at least 1/3 viewport
         // and element should be in viewport
       )
       // then we take the closest to this position as reference
-      .sort((header1, header2) => Math.abs(header1.rect.top) < Math.abs(header2.rect.top) ? -1 : 1);
+      .sort(
+        (header1, header2) =>
+          Math.abs(header1.rect.top) < Math.abs(header2.rect.top) ? -1 : 1
+      );
 
     if (headers[0] && highestVisibleHeaders.length === 0) {
       setActiveSidebarLink(headers[0]);
@@ -89,7 +106,9 @@ function activeLinks(sidebarContainer) {
 
   linksContainer.addEventListener('click', e => {
     if (e.target.tagName === 'A') {
-      [...linksContainer.querySelectorAll('a')].forEach(item => item.classList.remove('active'));
+      [...linksContainer.querySelectorAll('a')].forEach(item =>
+        item.classList.remove('active')
+      );
       e.target.classList.add('active');
     }
   });
@@ -133,5 +152,12 @@ function getPositionsKeyElements($sidebar) {
   const menuHeight = menu.offsetHeight;
   const titleHeight = title.offsetHeight;
 
-  return {sidebarTop, height, navHeight, footerHeight, menuHeight, titleHeight};
+  return {
+    sidebarTop,
+    height,
+    navHeight,
+    footerHeight,
+    menuHeight,
+    titleHeight,
+  };
 }
