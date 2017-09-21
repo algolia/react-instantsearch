@@ -1,17 +1,16 @@
 import dropdowns from './dropdowns.js';
 import move from './mover.js';
 import activateClipboard from './activateClipboard.js';
-
-import {fixSidebar, followSidebarNavigation} from './fix-sidebar.js';
-
-var alg = require('algolia-frontend-components/javascripts.js');
+import { fixSidebar, followSidebarNavigation } from './fix-sidebar.js';
+import alg from 'algolia-frontend-components/javascripts.js';
 
 const docSearch = {
   apiKey: '5cb6763f264e31381e18639a1147634c',
   indexName: 'react-instantsearch',
-  inputSelector: '#searchbox'
+  inputSelector: '#searchbox',
 };
 
+// eslint-disable-next-line no-unused-vars new-cap
 const header = new alg.communityHeader(docSearch);
 
 const container = document.querySelector('.documentation-container');
@@ -23,11 +22,20 @@ activateClipboard(codeSamples);
 // bindRunExamples(codeSamples);
 
 const sidebarContainer = document.querySelector('.sidebar');
-if(sidebarContainer) {
-  const headerHeight = document.querySelector('.algc-navigation').getBoundingClientRect().height;
+if (sidebarContainer) {
+  const headerHeight = document
+    .querySelector('.algc-navigation')
+    .getBoundingClientRect().height;
   const contentContainer = document.querySelector('.documentation-container');
-  fixSidebar({sidebarContainer, topOffset: headerHeight, contentContainer: container});
-  followSidebarNavigation(sidebarContainer.querySelectorAll('a'), contentContainer.querySelectorAll('h2'));
+  fixSidebar({
+    sidebarContainer,
+    topOffset: headerHeight,
+    contentContainer: container,
+  });
+  followSidebarNavigation(
+    sidebarContainer.querySelectorAll('a'),
+    contentContainer.querySelectorAll('h2')
+  );
 }
 
 // The Following function will make the '.sidebar-opener'

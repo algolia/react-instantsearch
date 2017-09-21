@@ -17,9 +17,8 @@ export default function highlight(source, lang) {
   if (lang === 'shell') {
     lang = 'shell';
   }
-
-
-  const heading = lang === 'shell' ? 'Command' : 'Code';
+  // eslint-disable-next-line no-unused-var
+  const codeType = lang === 'shell' ? 'Command' : 'Code';
 
   // this is a synchronous callback API
   runMode(source, lang, (text, style) => {
@@ -30,8 +29,11 @@ export default function highlight(source, lang) {
       return;
     }
 
-    tokenizedSource += `<span class="cm-${style.replace(/ +/g,' cm-')}">${text}</span>`;
+    tokenizedSource += `<span class="cm-${style.replace(
+      / +/g,
+      ' cm-'
+    )}">${text}</span>`;
   });
 
-  return `<pre class="code-sample cm-s-mdn-like codeMirror ${lang}"><div class="code-wrap"><code>${tokenizedSource}</code></div></pre>`;
+  return `<pre class="code-sample cm-s-mdn-like codeMirror ${lang}" data-code-type="${codeType}"><div class="code-wrap"><code>${tokenizedSource}</code></div></pre>`;
 }

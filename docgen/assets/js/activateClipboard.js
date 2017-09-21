@@ -5,11 +5,12 @@ export default function activateClipboard(codeSamples) {
     const cleanAfter = 800;
     let timeout;
     const copyToClipboard = document.createElement('button');
+    const codeAttribute = codeSample.getAttribute('data-code-type');
 
     const setup = () => {
       clearTimeout(timeout);
       copyToClipboard.innerHTML = '<i class="icon icon-copy"></i>';
-      copyToClipboard.setAttribute('title', 'copy')
+      copyToClipboard.setAttribute('title', 'copy');
       copyToClipboard.classList.remove('clipboard-done');
       copyToClipboard.classList.add('clipboard');
     };
@@ -27,7 +28,11 @@ export default function activateClipboard(codeSamples) {
 
     const heading = document.createElement('div');
     heading.className = 'heading';
-    heading.innerHTML = 'Code';
+
+    // eslint-disable-next-line no-unused-expressions
+    codeAttribute === 'Command'
+      ? (heading.innerHTML = 'Command')
+      : (heading.innerHTML = 'Code');
     heading.appendChild(copyToClipboard);
     codeSample.parentNode.insertBefore(heading, codeSample);
 

@@ -1,4 +1,6 @@
+// eslint-disable-next-line import/no-commonjs
 const algoliaComponents = require('algolia-frontend-components');
+// eslint-disable-next-line import/no-commonjs
 const fs = require('fs');
 
 import pkg from '../packages/react-instantsearch/package.json';
