@@ -10,7 +10,8 @@ const docSearch = {
   inputSelector: '#searchbox',
 };
 
-// eslint-disable-next-line no-unused-vars new-cap
+/* eslint-disable no-unused-vars */
+/* eslint-disable new-cap */
 const header = new alg.communityHeader(docSearch);
 
 const container = document.querySelector('.documentation-container');
