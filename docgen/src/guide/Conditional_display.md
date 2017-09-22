@@ -67,6 +67,78 @@ const Content = connectStateResults(
 );
 ```
 
+## Conditional display when dealing with multi indices
+
+If you're using the `<Index>` API and want to apply some conditional rendering you have access to the `searchResults` but also to all the results of every used indices looking at `allSearchResults`. 
+
+```jsx
+const App = () => (
+  <InstantSearch appId="" apiKey="" indexName="first">
+    <SearchBox />
+    <AllResults>
+      <div>
+        <Index indexName="first">
+          <IndexResults>
+            <div>
+              <div>first: </div>
+              <Hits />
+            </div>
+          </IndexResults>
+        </Index>
+        <Index indexName="second">
+          <IndexResults>
+            <div>
+              <div>second: </div>
+              <Hits />
+            </div>
+          </IndexResults>
+        </Index>
+        <Index indexName="third">
+          <IndexResults>
+            <div>
+              <div>third: </div>
+              <Hits />
+            </div>
+          </IndexResults>
+        </Index>
+      </div>
+    </AllResults>
+  </InstantSearch>
+);
+
+const IndexResults = connectStateResults(
+  ({ searchState, searchResults, children }) =>
+    searchResults && searchResults.nbHits !== 0 ? (
+      children
+    ) : (
+      <div>
+        No results has been found for {searchState.query} and index{' '}
+        {searchResults ? searchResults.index : ''}
+      </div>
+    )
+);
+
+const AllResults = connectStateResults(({ allSearchResults, children }) => {
+  const noResults =
+    allSearchResults &&
+    Object.values(allSearchResults).reduce(
+      (acc, results) => results.nbHits === 0,
+      false
+    );
+  return noResults ? (
+    <div>
+      <div>No results in category, products or brand</div>
+      <Index indexName="first" />
+      <Index indexName="second" />
+      <Index indexName="third" />
+    </div>
+  ) : (
+    children
+  );
+});
+```
+
+
 <div class="guide-nav">
     <div class="guide-nav-left">
         Previous: <a href="guide/Custom_connectors.html">← Custom Connectors</a>
