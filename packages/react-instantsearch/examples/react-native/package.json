@@ -21,7 +21,7 @@
   "jest": {
     "preset": "jest-expo",
     "transformIgnorePatterns": [
-      "node_modules/(?!react|@expo|expo|@ptomasroos|react-native-router-flux)"
+      "node_modules/(?!react|@expo|expo|@ptomasroos|react-native-router-flux|mobx-react)"
     ]
   },
   "dependencies": {
