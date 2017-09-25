@@ -29,7 +29,7 @@
     "@storybook/addon-options": "3.2.6",
     "@storybook/addons": "3.2.6",
     "@storybook/react": "3.2.8",
-    "@storybook/ui": "3.2.7",
+    "@storybook/ui": "3.2.10",
     "argos-cli": "0.0.9",
     "async": "2.5.0",
     "autoprefixer": "7.1.4",
