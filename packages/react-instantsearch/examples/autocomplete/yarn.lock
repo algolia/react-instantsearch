@@ -5689,8 +5689,8 @@ rc-trigger@1.x:
     rc-util "4.x"
 
 rc-upload@~2.4.0:
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/rc-upload/-/rc-upload-2.4.1.tgz#09a73da91580b67591b48c3baec1bb878a84b359"
+  version "2.4.2"
+  resolved "https://registry.yarnpkg.com/rc-upload/-/rc-upload-2.4.2.tgz#ae52c087587e3a8c9c4c39647ed18cb5f6c94aad"
   dependencies:
     attr-accept "^1.1.0"
     babel-runtime "6.x"
