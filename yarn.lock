@@ -3678,7 +3678,7 @@ entities@^1.1.1, entities@~1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/entities/-/entities-1.1.1.tgz#6e5c2d0a5621b5dadaecef80b90edfb5cd7772f0"
 
-enzyme-adapter-react-15@^1.0.0:
+enzyme-adapter-react-15@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/enzyme-adapter-react-15/-/enzyme-adapter-react-15-1.0.0.tgz#2f97f024324c585a6523034d4ba99bd6ca29ce56"
   dependencies:
@@ -3696,7 +3696,7 @@ enzyme-adapter-utils@^1.0.0:
     object.assign "^4.0.4"
     prop-types "^15.5.10"
 
-enzyme@^3.0.0:
+enzyme@3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/enzyme/-/enzyme-3.0.0.tgz#94ce364254dc654c4e619b25eecc644bf6481de7"
   dependencies:
