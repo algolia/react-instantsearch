@@ -5,7 +5,7 @@ import renderer from 'react-test-renderer';
 
 jest.mock('antd/lib/mention');
 
-describe('autocomplete recipe', () => {
+describe('autocomplete recipe3', () => {
   it('MultiIndex renders without crashing', () => {
     const component = renderer.create(<MultiIndex />);
 

@@ -22,7 +22,8 @@
     "preset": "jest-expo",
     "transformIgnorePatterns": [
       "node_modules/(?!react|@expo|expo|@ptomasroos|react-native-router-flux|mobx-react)"
-    ]
+    ],
+    "setupFiles": ["../../../../shim.js"]
   },
   "dependencies": {
     "@ptomasroos/react-native-multi-slider": "^0.0.11",
