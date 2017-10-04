@@ -10,7 +10,7 @@
     "lodash": "^4.16.6",
     "prop-types": "^15.5.8",
     "qs": "^6.3.0",
-    "react": "^15.5.4",
+    "react": "^16.0.0",
     "react-dom": "^15.5.4",
     "react-instantsearch": "4.1.2",
     "react-instantsearch-theme-algolia": "4.1.2",
