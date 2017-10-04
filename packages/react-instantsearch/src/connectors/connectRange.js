@@ -32,7 +32,7 @@ function getId(props) {
 const namespace = 'range';
 
 function getCurrentRefinement(props, searchState, context) {
-  return getCurrentRefinementValue(
+  const refinement = getCurrentRefinementValue(
     props,
     searchState,
     context,
@@ -49,6 +49,19 @@ function getCurrentRefinement(props, searchState, context) {
       return { min, max };
     }
   );
+
+  const hasMin = props.min !== undefined;
+  const hasMax = props.max !== undefined;
+
+  if (hasMin && refinement.min === undefined) {
+    refinement.min = props.min;
+  }
+
+  if (hasMax && refinement.max === undefined) {
+    refinement.max = props.max;
+  }
+
+  return refinement;
 }
 
 function refine(props, searchState, nextRefinement, context) {

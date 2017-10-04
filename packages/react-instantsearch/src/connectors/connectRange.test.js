@@ -13,7 +13,7 @@ describe('connectRange', () => {
     const context = { context: { ais: { mainTargetedIndex: 'index' } } };
     const getProvidedProps = connect.getProvidedProps.bind(context);
     const refine = connect.refine.bind(context);
-    const getSP = connect.getSearchParameters.bind(context);
+    const getSearchParameters = connect.getSearchParameters.bind(context);
     const getMetadata = connect.getMetadata.bind(context);
     const cleanUp = connect.cleanUp.bind(context);
 
@@ -140,11 +140,23 @@ describe('connectRange', () => {
     });
 
     it('refines the corresponding numeric facet', () => {
-      params = getSP(
+      params = getSearchParameters(
         new SearchParameters(),
         { attributeName: 'facet' },
         { range: { facet: { min: 10, max: 30 } } }
       );
+
+      expect(params.getNumericRefinements('facet')).toEqual({
+        '>=': [10],
+        '<=': [30],
+      });
+
+      params = getSearchParameters(
+        new SearchParameters(),
+        { attributeName: 'facet', min: 10, max: 30 },
+        {}
+      );
+
       expect(params.getNumericRefinements('facet')).toEqual({
         '>=': [10],
         '<=': [30],
@@ -251,7 +263,7 @@ describe('connectRange', () => {
       },
     };
     const getProvidedProps = connect.getProvidedProps.bind(context);
-    const getSP = connect.getSearchParameters.bind(context);
+    const getSearchParameters = connect.getSearchParameters.bind(context);
     const getMetadata = connect.getMetadata.bind(context);
     const cleanUp = connect.cleanUp.bind(context);
 
@@ -342,7 +354,7 @@ describe('connectRange', () => {
     });
 
     it('refines the corresponding numeric facet', () => {
-      params = getSP(
+      params = getSearchParameters(
         new SearchParameters(),
         { attributeName: 'facet' },
         { indices: { first: { range: { facet: { min: 10, max: 30 } } } } }
