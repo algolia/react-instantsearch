@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`autocomplete recipe Mentions renders without crashing 1`] = `
+exports[`autocomplete recipe3 Mentions renders without crashing 1`] = `
 <div
   className="ais-InstantSearch__root"
 />
 `;
 
-exports[`autocomplete recipe MultiIndex renders without crashing 1`] = `
+exports[`autocomplete recipe3 MultiIndex renders without crashing 1`] = `
 <div
   className="ais-InstantSearch__root"
 >
