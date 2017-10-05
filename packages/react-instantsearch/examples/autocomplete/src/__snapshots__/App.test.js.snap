@@ -6,7 +6,57 @@ exports[`autocomplete recipe Mentions renders without crashing 1`] = `
 />
 `;
 
+exports[`autocomplete recipe Mentions renders without crashing v 1`] = `
+<div
+  className="ais-InstantSearch__root"
+/>
+`;
+
 exports[`autocomplete recipe MultiIndex renders without crashing 1`] = `
+<div
+  className="ais-InstantSearch__root"
+>
+  <div
+    className="react-autosuggest__container"
+  >
+    <input
+      aria-activedescendant={null}
+      aria-autocomplete="list"
+      aria-expanded={false}
+      aria-haspopup={false}
+      aria-owns="react-autowhatever-1"
+      autoComplete="off"
+      className="react-autosuggest__input"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      placeholder="Type a product"
+      role="combobox"
+      type="text"
+      value=""
+    />
+    <div
+      className="react-autosuggest__suggestions-container"
+      id="react-autowhatever-1"
+    />
+  </div>
+</div>
+`;
+
+exports[`autocomplete recipe autocomplete recipe Mentions renders without crashing 1`] = `
+<div
+  className="ais-InstantSearch__root"
+/>
+`;
+
+exports[`autocomplete recipe3 Mentions renders without crashing 1`] = `
+<div
+  className="ais-InstantSearch__root"
+/>
+`;
+
+exports[`autocomplete recipe3 MultiIndex renders without crashing 1`] = `
 <div
   className="ais-InstantSearch__root"
 >
