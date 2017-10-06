@@ -3,7 +3,7 @@
   "devDependencies": {
     "identity-obj-proxy": "3.0.0",
     "react-scripts": "1.0.14",
-    "react-test-renderer": "15.6.2"
+    "react-test-renderer": "16.0.0"
   },
   "dependencies": {
     "antd": "^2.12.1",
