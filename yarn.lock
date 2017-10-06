@@ -42,21 +42,6 @@
 "@semantic-release/release-notes-generator@^4.0.0":
   version "4.0.5"
   resolved "https://registry.yarnpkg.com/@semantic-release/release-notes-generator/-/release-notes-generator-4.0.5.tgz#46cc2f16bdb60fe9674bbcd616bfe0f8bb35347c"
-<<<<<<< HEAD
-=======
-  dependencies:
-    "@semantic-release/error" "^2.0.0"
-    conventional-changelog-angular "^1.4.0"
-    conventional-changelog-core "^1.9.0"
-    get-stream "^3.0.0"
-    import-from "^2.1.0"
-    lodash "^4.17.4"
-    pify "^3.0.0"
-
-"@storybook/addon-actions@3.2.6", "@storybook/addon-actions@^3.2.6":
-  version "3.2.6"
-  resolved "https://registry.yarnpkg.com/@storybook/addon-actions/-/addon-actions-3.2.6.tgz#d8e476188a288f49f36a8482175bc2c1898dfc28"
->>>>>>> update yarn.lock
   dependencies:
     "@semantic-release/error" "^2.0.0"
     conventional-changelog-angular "^1.4.0"
@@ -94,11 +79,7 @@
     react-textarea-autosize "^4.3.0"
     util-deprecate "^1.0.2"
 
-<<<<<<< HEAD
 "@storybook/addon-links@^3.2.12":
-=======
-"@storybook/addon-links@^3.2.6":
->>>>>>> update yarn.lock
   version "3.2.12"
   resolved "https://registry.yarnpkg.com/@storybook/addon-links/-/addon-links-3.2.12.tgz#8b2f1d1496e1066d165d1e0615224a5e0a3e2db6"
   dependencies:
@@ -110,19 +91,11 @@
   dependencies:
     "@storybook/addons" "^3.2.12"
 
-<<<<<<< HEAD
 "@storybook/addons@3.2.12", "@storybook/addons@^3.2.12":
   version "3.2.12"
   resolved "https://registry.yarnpkg.com/@storybook/addons/-/addons-3.2.12.tgz#61adccaa8c0016f1439dc8934d8d61042b35e741"
 
 "@storybook/channel-postmessage@^3.2.12":
-=======
-"@storybook/addons@3.2.6", "@storybook/addons@^3.2.12", "@storybook/addons@^3.2.6":
-  version "3.2.6"
-  resolved "https://registry.yarnpkg.com/@storybook/addons/-/addons-3.2.6.tgz#c7974db36bd1b969d8ca3776f57fd955447dc7ed"
-
-"@storybook/channel-postmessage@^3.2.0":
->>>>>>> update yarn.lock
   version "3.2.12"
   resolved "https://registry.yarnpkg.com/@storybook/channel-postmessage/-/channel-postmessage-3.2.12.tgz#ca1cddfbda3324c8fc44a22b1c35682d80d73247"
   dependencies:
@@ -134,11 +107,7 @@
   version "3.2.12"
   resolved "https://registry.yarnpkg.com/@storybook/channels/-/channels-3.2.12.tgz#7920d0e5f84d718ccbb3925c5782cb5312500b6d"
 
-<<<<<<< HEAD
 "@storybook/components@^3.2.12":
-=======
-"@storybook/components@^3.2.12", "@storybook/components@^3.2.7":
->>>>>>> update yarn.lock
   version "3.2.12"
   resolved "https://registry.yarnpkg.com/@storybook/components/-/components-3.2.12.tgz#a9ddb6dd81d936139d742deea1a67de72907bde3"
   dependencies:
@@ -240,13 +209,10 @@
     react-treebeard "^2.0.3"
     redux "^3.7.2"
 
-<<<<<<< HEAD
 "@types/node@^6.0.46":
-  version "6.0.88"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-6.0.88.tgz#f618f11a944f6a18d92b5c472028728a3e3d4b66"
+  version "6.0.89"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-6.0.89.tgz#154be0e6a823760cd6083aa8c48f952e2e63e0b0"
 
-=======
->>>>>>> update yarn.lock
 CSSselect@~0.4.0:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/CSSselect/-/CSSselect-0.4.1.tgz#f8ab7e1f8418ce63cda6eb7bd778a85d7ec492b2"
@@ -340,11 +306,7 @@ agent-base@2:
     extend "~3.0.0"
     semver "~5.0.1"
 
-<<<<<<< HEAD
 airbnb-js-shims@^1.3.0:
-=======
-airbnb-js-shims@^1.1.1:
->>>>>>> update yarn.lock
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/airbnb-js-shims/-/airbnb-js-shims-1.3.0.tgz#aac46d80057fb0b414f70e06d07e362fd99ee2fa"
   dependencies:
@@ -359,35 +321,15 @@ airbnb-js-shims@^1.1.1:
     string.prototype.padend "^3.0.0"
     string.prototype.padstart "^3.0.0"
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-ajv-keywords@^2.0.0, ajv-keywords@^2.1.0:
-=======
-ajv-keywords@^1.0.0, ajv-keywords@^1.1.1:
-=======
-ajv-keywords@^1.0.0:
->>>>>>> Clean CSS
-=======
-ajv-keywords@^1.0.0, ajv-keywords@^1.1.1:
->>>>>>> Fix error for netlify
-  version "1.5.1"
-  resolved "https://registry.yarnpkg.com/ajv-keywords/-/ajv-keywords-1.5.1.tgz#314dd0a4b3368fad3dfcdc54ede6171b886daf3c"
-
-ajv-keywords@^2.0.0:
->>>>>>> New design
-=======
 ajv-keywords@^1.1.1:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/ajv-keywords/-/ajv-keywords-1.5.1.tgz#314dd0a4b3368fad3dfcdc54ede6171b886daf3c"
 
 ajv-keywords@^2.0.0, ajv-keywords@^2.1.0:
->>>>>>> update yarn.lock
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/ajv-keywords/-/ajv-keywords-2.1.0.tgz#a296e17f7bfae7c1ce4f7e0de53d29cb32162df0"
 
-ajv@^4.9.1:
+ajv@^4.7.0, ajv@^4.9.1:
   version "4.11.8"
   resolved "https://registry.yarnpkg.com/ajv/-/ajv-4.11.8.tgz#82ffb02b29e662ae53bdc20af15947706739c536"
   dependencies:
@@ -714,27 +656,7 @@ async@1.5.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/async/-/async-1.5.0.tgz#2796642723573859565633fc6274444bee2f8ce3"
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-async@1.5.2, async@^1.3.0, async@^1.4.0, async@~1.5.2:
-=======
-async@1.5.2, async@^1.4.0, async@^1.5.2:
->>>>>>> New design
-=======
-async@1.5.2, async@^1.3.0, async@^1.4.0:
->>>>>>> Clean CSS
-=======
-async@1.5.2, async@^1.4.0, async@^1.5.2:
->>>>>>> Fix error for netlify
-=======
-async@1.5.2, async@^1.3.0, async@^1.4.0, async@^1.5.2:
->>>>>>> Update yarn.lock
-=======
 async@1.5.2, async@^1.3.0, async@^1.4.0, async@^1.5.2, async@~1.5.2:
->>>>>>> update yarn.lock
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/async/-/async-1.5.2.tgz#ec6a61ae56480c0c3cb241c95618e20892f9672a"
 
@@ -829,11 +751,7 @@ babel-code-frame@^6.11.0, babel-code-frame@^6.22.0, babel-code-frame@^6.26.0:
     esutils "^2.0.2"
     js-tokens "^3.0.2"
 
-<<<<<<< HEAD
-babel-core@6.26.0, babel-core@^6.0.0, babel-core@^6.26.0:
-=======
-babel-core@6.26.0, babel-core@^6.0.0, babel-core@^6.23.1, babel-core@^6.25.0, babel-core@^6.26.0:
->>>>>>> Fix error for netlify
+babel-core@6.26.0, babel-core@^6.0.0, babel-core@^6.23.1, babel-core@^6.26.0:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-core/-/babel-core-6.26.0.tgz#af32f78b31a6fcef119c87b0fd8d9753f03a0bb8"
   dependencies:
@@ -1048,31 +966,14 @@ babel-helpers@^6.24.1:
     babel-runtime "^6.22.0"
     babel-template "^6.24.1"
 
-<<<<<<< HEAD
 babel-jest@21.2.0, babel-jest@^21.2.0:
   version "21.2.0"
   resolved "https://registry.yarnpkg.com/babel-jest/-/babel-jest-21.2.0.tgz#2ce059519a9374a2c46f2455b6fbef5ad75d863e"
-=======
-babel-jest@21.0.2:
-  version "21.0.2"
-  resolved "https://registry.yarnpkg.com/babel-jest/-/babel-jest-21.0.2.tgz#817ea52c23f1c6c4b684d6960968416b6a9e9c6c"
->>>>>>> update yarn.lock
   dependencies:
     babel-plugin-istanbul "^4.0.0"
     babel-preset-jest "^21.2.0"
 
-<<<<<<< HEAD
 babel-loader@7.1.2, babel-loader@^7.1.2:
-=======
-babel-jest@^21.2.0:
-  version "21.2.0"
-  resolved "https://registry.yarnpkg.com/babel-jest/-/babel-jest-21.2.0.tgz#2ce059519a9374a2c46f2455b6fbef5ad75d863e"
-  dependencies:
-    babel-plugin-istanbul "^4.0.0"
-    babel-preset-jest "^21.2.0"
-
-babel-loader@7.1.2, babel-loader@^7.0.0:
->>>>>>> update yarn.lock
   version "7.1.2"
   resolved "https://registry.yarnpkg.com/babel-loader/-/babel-loader-7.1.2.tgz#f6cbe122710f1aa2af4d881c6d5b54358ca24126"
   dependencies:
@@ -1194,11 +1095,7 @@ babel-plugin-minify-type-constructors@^0.2.0:
   dependencies:
     babel-helper-is-void-0 "^0.2.0"
 
-<<<<<<< HEAD
 babel-plugin-react-docgen@^1.8.0:
-=======
-babel-plugin-react-docgen@^1.6.0:
->>>>>>> update yarn.lock
   version "1.8.1"
   resolved "https://registry.yarnpkg.com/babel-plugin-react-docgen/-/babel-plugin-react-docgen-1.8.1.tgz#6e08e057f5dcd46b434e7553e971baa604dae377"
   dependencies:
@@ -1585,11 +1482,7 @@ babel-plugin-transform-regenerator@6.24.1:
   dependencies:
     regenerator-transform "0.9.11"
 
-<<<<<<< HEAD
-babel-plugin-transform-regenerator@^6.22.0, babel-plugin-transform-regenerator@^6.26.0:
-=======
-babel-plugin-transform-regenerator@^6.22.0, babel-plugin-transform-regenerator@^6.24.1:
->>>>>>> Fix error for netlify
+babel-plugin-transform-regenerator@^6.22.0, babel-plugin-transform-regenerator@^6.24.1, babel-plugin-transform-regenerator@^6.26.0:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-transform-regenerator/-/babel-plugin-transform-regenerator-6.26.0.tgz#e0703696fbde27f0a3efcacf8b4dca2f7b3a8f2f"
   dependencies:
@@ -1712,11 +1605,7 @@ babel-preset-flow@^6.23.0:
   dependencies:
     babel-plugin-transform-flow-strip-types "^6.22.0"
 
-<<<<<<< HEAD
 babel-preset-jest@^21.2.0:
-=======
-babel-preset-jest@^21.0.2, babel-preset-jest@^21.2.0:
->>>>>>> update yarn.lock
   version "21.2.0"
   resolved "https://registry.yarnpkg.com/babel-preset-jest/-/babel-preset-jest-21.2.0.tgz#ff9d2bce08abd98e8a36d9a8a5189b9173b85638"
   dependencies:
@@ -1751,11 +1640,7 @@ babel-preset-minify@^0.2.0:
     babel-plugin-transform-undefined-to-void "^6.8.3"
     lodash.isplainobject "^4.0.6"
 
-<<<<<<< HEAD
 babel-preset-react-app@^3.0.3:
-=======
-babel-preset-react-app@^3.0.0:
->>>>>>> update yarn.lock
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/babel-preset-react-app/-/babel-preset-react-app-3.0.3.tgz#5716d6a8c7354db0cc2707207ab6ceb3b2e0a825"
   dependencies:
@@ -2001,12 +1886,6 @@ bn.js@^4.0.0, bn.js@^4.1.0, bn.js@^4.1.1, bn.js@^4.4.0:
   version "4.11.8"
   resolved "https://registry.yarnpkg.com/bn.js/-/bn.js-4.11.8.tgz#2cde09eb5ee341f484746bb0309b3253b1b1442f"
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> update yarn.lock
 body-parser@1.18.2:
   version "1.18.2"
   resolved "https://registry.yarnpkg.com/body-parser/-/body-parser-1.18.2.tgz#87678a19d84b47d859b83199bd59bce222b10454"
@@ -2022,15 +1901,6 @@ body-parser@1.18.2:
     raw-body "2.3.2"
     type-is "~1.6.15"
 
-<<<<<<< HEAD
-boolbase@~1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/boolbase/-/boolbase-1.0.0.tgz#68dff5fbe60c51eb37725ea9e3ed310dcc1e776e"
-=======
-=======
->>>>>>> Fix error for netlify
-=======
->>>>>>> update yarn.lock
 bonjour@^3.5.0:
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/bonjour/-/bonjour-3.5.0.tgz#8e890a183d8ee9a2393b3844c691a42bcf7bc9f5"
@@ -2041,14 +1911,11 @@ bonjour@^3.5.0:
     dns-txt "^2.0.2"
     multicast-dns "^6.0.1"
     multicast-dns-service-types "^1.1.0"
-<<<<<<< HEAD
->>>>>>> New design
 
-=======
->>>>>>> Clean CSS
-=======
+boolbase@~1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/boolbase/-/boolbase-1.0.0.tgz#68dff5fbe60c51eb37725ea9e3ed310dcc1e776e"
 
->>>>>>> Fix error for netlify
 boom@2.x.x:
   version "2.10.1"
   resolved "https://registry.yarnpkg.com/boom/-/boom-2.10.1.tgz#39c8918ceff5799f83f9492a848f625add0c766f"
@@ -2280,16 +2147,6 @@ builtins@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/builtins/-/builtins-1.0.3.tgz#cb94faeb61c8696451db36534e1422f94f0aee88"
 
-<<<<<<< HEAD
-bytes@3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/bytes/-/bytes-3.0.0.tgz#d32815404d689699f85a4ea4fa8755dd13a96048"
-=======
-bytes@2.5.0:
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/bytes/-/bytes-2.5.0.tgz#4c9423ea2d252c270c41b2bdefeff9bb6b62c06a"
->>>>>>> update yarn.lock
-
 bytes@3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/bytes/-/bytes-3.0.0.tgz#d32815404d689699f85a4ea4fa8755dd13a96048"
@@ -2480,9 +2337,6 @@ cheerio@^0.14.0:
     htmlparser2 "~3.7.0"
     lodash "~2.4.1"
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 cheerio@^1.0.0-rc.2:
   version "1.0.0-rc.2"
   resolved "https://registry.yarnpkg.com/cheerio/-/cheerio-1.0.0-rc.2.tgz#4b9f53a81b27e4d5dac31c0ffd0cfa03cc6830db"
@@ -2494,16 +2348,7 @@ cheerio@^1.0.0-rc.2:
     lodash "^4.15.0"
     parse5 "^3.0.1"
 
-chokidar@1.7.0, chokidar@^1.6.1, chokidar@^1.7.0:
-=======
 chokidar@1.7.0, chokidar@^1.6.0, chokidar@^1.6.1, chokidar@^1.7.0:
->>>>>>> New design
-=======
-chokidar@1.7.0, chokidar@^1.6.1, chokidar@^1.7.0:
->>>>>>> Clean CSS
-=======
-chokidar@1.7.0, chokidar@^1.6.0, chokidar@^1.6.1, chokidar@^1.7.0:
->>>>>>> Fix error for netlify
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-1.7.0.tgz#798e689778151c8076b4b360e5edd28cda2bb468"
   dependencies:
@@ -2534,18 +2379,8 @@ circular-json@^0.3.1:
   resolved "https://registry.yarnpkg.com/circular-json/-/circular-json-0.3.3.tgz#815c99ea84f6809529d2f45791bdf82711352d66"
 
 clap@^1.0.9:
-<<<<<<< HEAD
-<<<<<<< HEAD
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/clap/-/clap-1.2.3.tgz#4f36745b32008492557f46412d66d50cb99bce51"
-=======
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/clap/-/clap-1.2.2.tgz#683f6f93a320794d129386d74b2a1d2d66fede7e"
->>>>>>> Update yarn.lock
-=======
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/clap/-/clap-1.2.3.tgz#4f36745b32008492557f46412d66d50cb99bce51"
->>>>>>> update yarn.lock
   dependencies:
     chalk "^1.1.3"
 
@@ -2887,33 +2722,15 @@ component-inherit@0.0.3:
   version "0.0.3"
   resolved "https://registry.yarnpkg.com/component-inherit/-/component-inherit-0.0.3.tgz#645fc4adf58b72b649d5cae65135619db26ff143"
 
-<<<<<<< HEAD
 compressible@~2.0.11:
-=======
-compressible@~2.0.10, compressible@~2.0.11:
->>>>>>> update yarn.lock
   version "2.0.11"
   resolved "https://registry.yarnpkg.com/compressible/-/compressible-2.0.11.tgz#16718a75de283ed8e604041625a2064586797d8a"
   dependencies:
     mime-db ">= 1.29.0 < 2"
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-compression@1.7.1:
+compression@1.7.1, compression@^1.5.2:
   version "1.7.1"
   resolved "https://registry.yarnpkg.com/compression/-/compression-1.7.1.tgz#eff2603efc2e22cf86f35d2eb93589f9875373db"
-=======
-<<<<<<< 8835d9e14f3e5b12cbc1e8fa5fcb0a2a5842d7af
-=======
->>>>>>> Clean CSS
-compression@1.7.0:
-=======
-compression@1.7.0, compression@^1.5.2:
->>>>>>> Fix error for netlify
-  version "1.7.0"
-  resolved "https://registry.yarnpkg.com/compression/-/compression-1.7.0.tgz#030c9f198f1643a057d776a738e922da4373012d"
->>>>>>> New design
   dependencies:
     accepts "~1.3.4"
     bytes "3.0.0"
@@ -3158,11 +2975,7 @@ conventional-changelog-writer@^2.0.1:
     split "^1.0.0"
     through2 "^2.0.0"
 
-<<<<<<< HEAD
 conventional-changelog@^1.1.6:
-=======
-conventional-changelog@^1.1.5:
->>>>>>> update yarn.lock
   version "1.1.6"
   resolved "https://registry.yarnpkg.com/conventional-changelog/-/conventional-changelog-1.1.6.tgz#ebd9b1ab63766c715f903f654626b6b1c0da7762"
   dependencies:
@@ -3349,11 +3162,7 @@ css-in-js-utils@^2.0.0:
   dependencies:
     hyphenate-style-name "^1.0.2"
 
-<<<<<<< HEAD
-css-loader@0.28.7, css-loader@^0.28.7:
-=======
-css-loader@0.28.7, css-loader@^0.28.1, css-loader@^0.28.4:
->>>>>>> Fix error for netlify
+css-loader@0.28.7, css-loader@^0.28.4, css-loader@^0.28.7:
   version "0.28.7"
   resolved "https://registry.yarnpkg.com/css-loader/-/css-loader-0.28.7.tgz#5f2ee989dd32edd907717f953317656160999c1b"
   dependencies:
@@ -3498,11 +3307,7 @@ dateformat@^1.0.11, dateformat@^1.0.12:
     get-stdin "^4.0.1"
     meow "^3.3.0"
 
-<<<<<<< HEAD
-debug@2, debug@2.6.9, debug@^2.1.3, debug@^2.2.0, debug@^2.6.3, debug@^2.6.8:
-=======
 debug@2, debug@2.6.9, debug@^2.1.3, debug@^2.2.0, debug@^2.6.3, debug@^2.6.6, debug@^2.6.8:
->>>>>>> update yarn.lock
   version "2.6.9"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.9.tgz#5d128515df134ff327e90a4c93f4e077a536341f"
   dependencies:
@@ -3526,41 +3331,15 @@ debug@2.6.4:
   dependencies:
     ms "0.7.3"
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 debug@2.6.8:
-=======
-debug@2.6.8, debug@^2.1.3, debug@^2.2.0, debug@^2.6.3, debug@^2.6.6, debug@^2.6.8:
->>>>>>> Fix error for netlify
-=======
-debug@2.6.8:
->>>>>>> update yarn.lock
   version "2.6.8"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.8.tgz#e731531ca2ede27d188222427da17821d68ff4fc"
   dependencies:
     ms "2.0.0"
 
 debug@^3.0.1:
-<<<<<<< HEAD
-<<<<<<< HEAD
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/debug/-/debug-3.1.0.tgz#5bb5a0672628b64149566ba16819e61518c67261"
-=======
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/debug/-/debug-3.0.1.tgz#0564c612b521dc92d9f2988f0549e34f9c98db64"
-<<<<<<< HEAD
-=======
-debug@2.6.8, debug@^2.1.1, debug@^2.1.3, debug@^2.2.0, debug@^2.6.3, debug@^2.6.6, debug@^2.6.8:
-  version "2.6.8"
-  resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.8.tgz#e731531ca2ede27d188222427da17821d68ff4fc"
->>>>>>> New design
->>>>>>> New design
-=======
->>>>>>> Clean CSS
-=======
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/debug/-/debug-3.1.0.tgz#5bb5a0672628b64149566ba16819e61518c67261"
->>>>>>> update yarn.lock
   dependencies:
     ms "2.0.0"
 
@@ -3721,19 +3500,10 @@ diffie-hellman@^5.0.0:
     miller-rabin "^4.0.0"
     randombytes "^2.0.0"
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 discontinuous-range@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/discontinuous-range/-/discontinuous-range-1.0.0.tgz#e38331f0844bba49b9a9cb71c771585aab1bc65a"
 
-=======
-<<<<<<< 8835d9e14f3e5b12cbc1e8fa5fcb0a2a5842d7af
->>>>>>> New design
-=======
->>>>>>> Clean CSS
-=======
 dns-equal@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/dns-equal/-/dns-equal-1.0.0.tgz#b39e7f1da6eb0a75ba9c17324b34753c47e0654d"
@@ -3751,7 +3521,6 @@ dns-txt@^2.0.2:
   dependencies:
     buffer-indexof "^1.0.0"
 
->>>>>>> Fix error for netlify
 doctoc@1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/doctoc/-/doctoc-1.3.0.tgz#7f0839851dd58c808a2cae55d9504e012d08ee30"
@@ -4256,15 +4025,9 @@ eslint-scope@^3.7.1:
     esrecurse "^4.1.0"
     estraverse "^4.1.1"
 
-<<<<<<< HEAD
 eslint@4.7.2:
   version "4.7.2"
   resolved "https://registry.yarnpkg.com/eslint/-/eslint-4.7.2.tgz#ff6f5f5193848a27ee9b627be3e73fb9cb5e662e"
-=======
-eslint@4.7.1:
-  version "4.7.1"
-  resolved "https://registry.yarnpkg.com/eslint/-/eslint-4.7.1.tgz#849804136953ebe366782f9f8611e2cbd1b54681"
->>>>>>> docs(examples): add source code links
   dependencies:
     ajv "^5.2.0"
     babel-code-frame "^6.22.0"
@@ -4467,36 +4230,9 @@ express@2.5.x:
     mkdirp "0.3.0"
     qs "0.4.x"
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-express@^4.14.0, express@^4.15.2, express@^4.15.5:
+express@^4.13.3, express@^4.14.0, express@^4.15.2, express@^4.15.5:
   version "4.16.1"
   resolved "https://registry.yarnpkg.com/express/-/express-4.16.1.tgz#6b33b560183c9b253b7b62144df33a4654ac9ed0"
-=======
-<<<<<<< 8835d9e14f3e5b12cbc1e8fa5fcb0a2a5842d7af
-express@^4.14.0, express@^4.15.2, express@^4.15.3:
-  version "4.15.4"
-  resolved "https://registry.yarnpkg.com/express/-/express-4.15.4.tgz#032e2253489cf8fce02666beca3d11ed7a2daed1"
-=======
-express@^4.13.3, express@^4.14.0, express@^4.15.2, express@^4.15.3:
-<<<<<<< HEAD
-  version "4.15.3"
-  resolved "https://registry.yarnpkg.com/express/-/express-4.15.3.tgz#bab65d0f03aa80c358408972fc700f916944b662"
->>>>>>> New design
->>>>>>> New design
-=======
-express@^4.14.0, express@^4.15.2, express@^4.15.3:
-=======
-express@^4.13.3, express@^4.14.0, express@^4.15.2, express@^4.15.3:
->>>>>>> Fix error for netlify
-  version "4.15.4"
-  resolved "https://registry.yarnpkg.com/express/-/express-4.15.4.tgz#032e2253489cf8fce02666beca3d11ed7a2daed1"
->>>>>>> Clean CSS
-=======
-  version "4.16.1"
-  resolved "https://registry.yarnpkg.com/express/-/express-4.16.1.tgz#6b33b560183c9b253b7b62144df33a4654ac9ed0"
->>>>>>> update yarn.lock
   dependencies:
     accepts "~1.3.4"
     array-flatten "1.1.1"
@@ -4637,11 +4373,7 @@ file-entry-cache@^2.0.0:
     flat-cache "^1.2.1"
     object-assign "^4.0.1"
 
-<<<<<<< HEAD
 file-loader@^0.11.2:
-=======
-file-loader@^0.11.1, file-loader@^0.11.2:
->>>>>>> Fix error for netlify
   version "0.11.2"
   resolved "https://registry.yarnpkg.com/file-loader/-/file-loader-0.11.2.tgz#4ff1df28af38719a6098093b88c82c71d1794a34"
   dependencies:
@@ -5094,21 +4826,9 @@ glamor@^2.20.40:
     prop-types "^15.5.10"
     through "^2.3.8"
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 glamorous@^4.9.7:
   version "4.9.7"
   resolved "https://registry.yarnpkg.com/glamorous/-/glamorous-4.9.7.tgz#78bb008d1404b5bd91ad4d043ec0dc6430ad2653"
-=======
-glamorous@^4.1.2:
-  version "4.9.2"
-  resolved "https://registry.yarnpkg.com/glamorous/-/glamorous-4.9.2.tgz#858c035633f53dfce3899110b79b8bf61794c0df"
->>>>>>> Update yarn.lock
-=======
-glamorous@^4.1.2, glamorous@^4.9.7:
-  version "4.9.7"
-  resolved "https://registry.yarnpkg.com/glamorous/-/glamorous-4.9.7.tgz#78bb008d1404b5bd91ad4d043ec0dc6430ad2653"
->>>>>>> update yarn.lock
   dependencies:
     brcast "^3.0.0"
     fast-memoize "^2.2.7"
@@ -5161,15 +4881,7 @@ glob2base@^0.0.12:
   dependencies:
     find-index "^0.1.1"
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-glob@7.1.2, glob@>=3.2.6, glob@^7.0.0, glob@^7.0.3, glob@^7.0.5, glob@^7.1.0, glob@^7.1.1, glob@^7.1.2, glob@~7.1.1:
-=======
-glob@7.1.2, glob@7.x, glob@>=3.2.6, glob@^7.0.0, glob@^7.0.3, glob@^7.0.5, glob@^7.1.0, glob@^7.1.1, glob@^7.1.2, glob@~7.1.1, glob@~7.1.2:
->>>>>>> Fix error for netlify
-=======
 glob@7.1.2, glob@7.x, glob@>=3.2.6, glob@^7.0.0, glob@^7.0.3, glob@^7.0.5, glob@^7.1.0, glob@^7.1.1, glob@^7.1.2, glob@~7.1.1:
->>>>>>> update yarn.lock
   version "7.1.2"
   resolved "https://registry.yarnpkg.com/glob/-/glob-7.1.2.tgz#c19c9df9a028702d678612384a6552404c636d15"
   dependencies:
@@ -5681,34 +5393,11 @@ htmlparser2@~3.7.0:
     entities "1.0"
     readable-stream "1.1"
 
-http-errors@1.6.2, http-errors@~1.6.1, http-errors@~1.6.2:
-  version "1.6.2"
-  resolved "https://registry.yarnpkg.com/http-errors/-/http-errors-1.6.2.tgz#0a002cc85707192a7e7946ceedc11155f60ec736"
-  dependencies:
-    depd "1.1.1"
-    inherits "2.0.3"
-    setprototypeof "1.0.3"
-    statuses ">= 1.3.1 < 2"
-
 http-deceiver@^1.2.7:
   version "1.2.7"
   resolved "https://registry.yarnpkg.com/http-deceiver/-/http-deceiver-1.2.7.tgz#fa7168944ab9a519d337cb0bec7284dc3e723d87"
 
-<<<<<<< HEAD
-http-errors@~1.5.0:
-  version "1.5.1"
-  resolved "https://registry.yarnpkg.com/http-errors/-/http-errors-1.5.1.tgz#788c0d2c1de2c81b9e6e8c01843b6b97eb920750"
-  dependencies:
-    inherits "2.0.3"
-    setprototypeof "1.0.2"
-    statuses ">= 1.3.1 < 2"
-
-<<<<<<< HEAD
-=======
-http-errors@~1.6.1, http-errors@~1.6.2:
-=======
 http-errors@1.6.2, http-errors@~1.6.1, http-errors@~1.6.2:
->>>>>>> update yarn.lock
   version "1.6.2"
   resolved "https://registry.yarnpkg.com/http-errors/-/http-errors-1.6.2.tgz#0a002cc85707192a7e7946ceedc11155f60ec736"
   dependencies:
@@ -5717,11 +5406,6 @@ http-errors@1.6.2, http-errors@~1.6.1, http-errors@~1.6.2:
     setprototypeof "1.0.3"
     statuses ">= 1.3.1 < 2"
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
 http-errors@~1.5.0:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/http-errors/-/http-errors-1.5.1.tgz#788c0d2c1de2c81b9e6e8c01843b6b97eb920750"
@@ -5730,12 +5414,10 @@ http-errors@~1.5.0:
     setprototypeof "1.0.2"
     statuses ">= 1.3.1 < 2"
 
->>>>>>> update yarn.lock
 http-parser-js@>=0.4.0:
   version "0.4.9"
   resolved "https://registry.yarnpkg.com/http-parser-js/-/http-parser-js-0.4.9.tgz#ea1a04fb64adff0242e9974f297dd4c3cad271e1"
 
->>>>>>> Fix error for netlify
 http-proxy-middleware@~0.17.4:
   version "0.17.4"
   resolved "https://registry.yarnpkg.com/http-proxy-middleware/-/http-proxy-middleware-0.17.4.tgz#642e8848851d66f09d4f124912846dbaeb41b833"
@@ -5745,12 +5427,6 @@ http-proxy-middleware@~0.17.4:
     lodash "^4.17.2"
     micromatch "^2.3.11"
 
-<<<<<<< HEAD
->>>>>>> New design
-=======
->>>>>>> Clean CSS
-=======
->>>>>>> Fix error for netlify
 http-proxy@1.15.2:
   version "1.15.2"
   resolved "https://registry.yarnpkg.com/http-proxy/-/http-proxy-1.15.2.tgz#642fdcaffe52d3448d2bda3b0079e9409064da31"
@@ -5987,41 +5663,11 @@ invert-kv@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/invert-kv/-/invert-kv-1.0.0.tgz#104a8e4aaca6d3d8cd157a8ef8bfab2d7a3ffdb6"
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-ipaddr.js@1.5.2:
-  version "1.5.2"
-  resolved "https://registry.yarnpkg.com/ipaddr.js/-/ipaddr.js-1.5.2.tgz#d4b505bde9946987ccf0fc58d9010ff9607e3fa0"
-=======
-=======
-ip-regex@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/ip-regex/-/ip-regex-2.1.0.tgz#fa78bf5d2e6913c911ce9f819ee5146bb6d844e9"
-
->>>>>>> Fix error for netlify
-=======
->>>>>>> update yarn.lock
 ip@^1.1.0, ip@^1.1.5:
   version "1.1.5"
   resolved "https://registry.yarnpkg.com/ip/-/ip-1.1.5.tgz#bdded70114290828c0a039e72ef25f5aaec4354a"
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> Clean CSS
-=======
->>>>>>> Fix error for netlify
-ipaddr.js@1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/ipaddr.js/-/ipaddr.js-1.4.0.tgz#296aca878a821816e5b85d0a285a99bcff4582f0"
->>>>>>> New design
-
-ipaddr.js@^1.5.2:
-=======
 ipaddr.js@1.5.2:
->>>>>>> update yarn.lock
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/ipaddr.js/-/ipaddr.js-1.5.2.tgz#d4b505bde9946987ccf0fc58d9010ff9607e3fa0"
 
@@ -6418,11 +6064,7 @@ istanbul-reports@^1.1.2:
   dependencies:
     handlebars "^4.0.3"
 
-<<<<<<< HEAD
 jest-changed-files@^21.2.0:
-=======
-jest-changed-files@^21.1.0:
->>>>>>> update yarn.lock
   version "21.2.0"
   resolved "https://registry.yarnpkg.com/jest-changed-files/-/jest-changed-files-21.2.0.tgz#5dbeecad42f5d88b482334902ce1cba6d9798d29"
   dependencies:
@@ -6462,11 +6104,7 @@ jest-cli@21.2.1:
     worker-farm "^1.3.1"
     yargs "^9.0.0"
 
-<<<<<<< HEAD
 jest-config@^21.2.1:
-=======
-jest-config@^21.1.0, jest-config@^21.2.1:
->>>>>>> update yarn.lock
   version "21.2.1"
   resolved "https://registry.yarnpkg.com/jest-config/-/jest-config-21.2.1.tgz#c7586c79ead0bcc1f38c401e55f964f13bf2a480"
   dependencies:
@@ -6488,34 +6126,14 @@ jest-diff@^21.2.1:
   dependencies:
     chalk "^2.0.1"
     diff "^3.2.0"
-<<<<<<< HEAD
-<<<<<<< HEAD
     jest-get-type "^21.2.0"
     pretty-format "^21.2.1"
 
 jest-docblock@^21.0.0, jest-docblock@^21.2.0:
   version "21.2.0"
   resolved "https://registry.yarnpkg.com/jest-docblock/-/jest-docblock-21.2.0.tgz#51529c3b30d5fd159da60c27ceedc195faf8d414"
-=======
-    jest-get-type "^21.0.2"
-    pretty-format "^21.1.0"
-
-jest-docblock@^21.0.0, jest-docblock@^21.1.0:
-  version "21.1.0"
-  resolved "https://registry.yarnpkg.com/jest-docblock/-/jest-docblock-21.1.0.tgz#43154be2441fb91403e36bb35cb791a5017cea81"
->>>>>>> docs(examples): add source code links
 
 jest-environment-jsdom@^21.2.1:
-=======
-    jest-get-type "^21.2.0"
-    pretty-format "^21.2.1"
-
-jest-docblock@^21.0.0, jest-docblock@^21.2.0:
-  version "21.2.0"
-  resolved "https://registry.yarnpkg.com/jest-docblock/-/jest-docblock-21.2.0.tgz#51529c3b30d5fd159da60c27ceedc195faf8d414"
-
-jest-environment-jsdom@^21.1.0, jest-environment-jsdom@^21.2.1:
->>>>>>> update yarn.lock
   version "21.2.1"
   resolved "https://registry.yarnpkg.com/jest-environment-jsdom/-/jest-environment-jsdom-21.2.1.tgz#38d9980c8259b2a608ec232deee6289a60d9d5b4"
   dependencies:
@@ -6534,11 +6152,7 @@ jest-get-type@^21.2.0:
   version "21.2.0"
   resolved "https://registry.yarnpkg.com/jest-get-type/-/jest-get-type-21.2.0.tgz#f6376ab9db4b60d81e39f30749c6c466f40d4a23"
 
-<<<<<<< HEAD
 jest-haste-map@^21.2.0:
-=======
-jest-haste-map@^21.1.0, jest-haste-map@^21.2.0:
->>>>>>> update yarn.lock
   version "21.2.0"
   resolved "https://registry.yarnpkg.com/jest-haste-map/-/jest-haste-map-21.2.0.tgz#1363f0a8bb4338f24f001806571eff7a4b2ff3d8"
   dependencies:
@@ -6570,11 +6184,7 @@ jest-matcher-utils@^21.2.1:
     jest-get-type "^21.2.0"
     pretty-format "^21.2.1"
 
-<<<<<<< HEAD
 jest-message-util@^21.2.1:
-=======
-jest-message-util@^21.1.0, jest-message-util@^21.2.1:
->>>>>>> update yarn.lock
   version "21.2.1"
   resolved "https://registry.yarnpkg.com/jest-message-util/-/jest-message-util-21.2.1.tgz#bfe5d4692c84c827d1dcf41823795558f0a1acbe"
   dependencies:
@@ -6586,19 +6196,11 @@ jest-mock@^21.2.0:
   version "21.2.0"
   resolved "https://registry.yarnpkg.com/jest-mock/-/jest-mock-21.2.0.tgz#7eb0770e7317968165f61ea2a7281131534b3c0f"
 
-<<<<<<< HEAD
 jest-regex-util@^21.2.0:
   version "21.2.0"
   resolved "https://registry.yarnpkg.com/jest-regex-util/-/jest-regex-util-21.2.0.tgz#1b1e33e63143babc3e0f2e6c9b5ba1eb34b2d530"
 
 jest-resolve-dependencies@^21.2.0:
-=======
-jest-regex-util@^21.1.0, jest-regex-util@^21.2.0:
-  version "21.2.0"
-  resolved "https://registry.yarnpkg.com/jest-regex-util/-/jest-regex-util-21.2.0.tgz#1b1e33e63143babc3e0f2e6c9b5ba1eb34b2d530"
-
-jest-resolve-dependencies@^21.1.0:
->>>>>>> update yarn.lock
   version "21.2.0"
   resolved "https://registry.yarnpkg.com/jest-resolve-dependencies/-/jest-resolve-dependencies-21.2.0.tgz#9e231e371e1a736a1ad4e4b9a843bc72bfe03d09"
   dependencies:
@@ -6612,11 +6214,7 @@ jest-resolve@^21.2.0:
     chalk "^2.0.1"
     is-builtin-module "^1.0.0"
 
-<<<<<<< HEAD
 jest-runner@^21.2.1:
-=======
-jest-runner@^21.1.0:
->>>>>>> update yarn.lock
   version "21.2.1"
   resolved "https://registry.yarnpkg.com/jest-runner/-/jest-runner-21.2.1.tgz#194732e3e518bfb3d7cbfc0fd5871246c7e1a467"
   dependencies:
@@ -6631,11 +6229,7 @@ jest-runner@^21.1.0:
     throat "^4.0.0"
     worker-farm "^1.3.1"
 
-<<<<<<< HEAD
 jest-runtime@^21.2.1:
-=======
-jest-runtime@^21.1.0, jest-runtime@^21.2.1:
->>>>>>> update yarn.lock
   version "21.2.1"
   resolved "https://registry.yarnpkg.com/jest-runtime/-/jest-runtime-21.2.1.tgz#99dce15309c670442eee2ebe1ff53a3cbdbbb73e"
   dependencies:
@@ -6657,11 +6251,7 @@ jest-runtime@^21.1.0, jest-runtime@^21.2.1:
     write-file-atomic "^2.1.0"
     yargs "^9.0.0"
 
-<<<<<<< HEAD
 jest-snapshot@^21.2.1:
-=======
-jest-snapshot@^21.1.0, jest-snapshot@^21.2.1:
->>>>>>> update yarn.lock
   version "21.2.1"
   resolved "https://registry.yarnpkg.com/jest-snapshot/-/jest-snapshot-21.2.1.tgz#29e49f16202416e47343e757e5eff948c07fd7b0"
   dependencies:
@@ -6672,11 +6262,7 @@ jest-snapshot@^21.1.0, jest-snapshot@^21.2.1:
     natural-compare "^1.4.0"
     pretty-format "^21.2.1"
 
-<<<<<<< HEAD
 jest-util@^21.2.1:
-=======
-jest-util@^21.1.0, jest-util@^21.2.1:
->>>>>>> update yarn.lock
   version "21.2.1"
   resolved "https://registry.yarnpkg.com/jest-util/-/jest-util-21.2.1.tgz#a274b2f726b0897494d694a6c3d6a61ab819bb78"
   dependencies:
@@ -6769,7 +6355,7 @@ jsdoc-api@^1.0.0:
     then-fs "^2.0.0"
     walk-back "^2.0.1"
 
-jsdoc-parse@^1.2.7:
+jsdoc-parse@1.2.7:
   version "1.2.7"
   resolved "https://registry.yarnpkg.com/jsdoc-parse/-/jsdoc-parse-1.2.7.tgz#54b7481b3cd6bcb7c173dc4fa69ee92735ea2525"
   dependencies:
@@ -7277,19 +6863,7 @@ lodash.uniq@^4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 lodash@4.17.4, "lodash@4.6.1 || ^4.16.1", lodash@4.x.x, lodash@^4.0.0, lodash@^4.0.1, lodash@^4.1.0, lodash@^4.14.0, lodash@^4.15.0, lodash@^4.17.2, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.3.0, lodash@^4.5.1, lodash@^4.6.1, lodash@^4.7.0, lodash@~4.17.4:
-=======
-<<<<<<< 8835d9e14f3e5b12cbc1e8fa5fcb0a2a5842d7af
-lodash@4.17.4, "lodash@4.6.1 || ^4.16.1", lodash@4.x.x, lodash@^4.0.0, lodash@^4.0.1, lodash@^4.1.0, lodash@^4.14.0, lodash@^4.17.2, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.3.0, lodash@^4.5.1, lodash@^4.6.1, lodash@^4.7.0, lodash@~4.17.4:
-=======
-"lodash@4.6.1 || ^4.16.1", lodash@4.x.x, lodash@^4.0.0, lodash@^4.0.1, lodash@^4.1.0, lodash@^4.14.0, lodash@^4.17.2, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.3.0, lodash@^4.5.1, lodash@^4.6.1, lodash@^4.7.0, lodash@~4.17.4:
->>>>>>> New design
->>>>>>> New design
-=======
-lodash@4.17.4, "lodash@4.6.1 || ^4.16.1", lodash@4.x.x, lodash@^4.0.0, lodash@^4.0.1, lodash@^4.1.0, lodash@^4.14.0, lodash@^4.17.2, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.3.0, lodash@^4.5.1, lodash@^4.6.1, lodash@^4.7.0, lodash@~4.17.4:
->>>>>>> Clean CSS
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
@@ -7428,15 +7002,9 @@ material-colors@^1.2.1:
   version "1.2.5"
   resolved "https://registry.yarnpkg.com/material-colors/-/material-colors-1.2.5.tgz#5292593e6754cb1bcc2b98030e4e0d6a3afc9ea1"
 
-<<<<<<< HEAD
 material-ui@0.19.3:
   version "0.19.3"
   resolved "https://registry.yarnpkg.com/material-ui/-/material-ui-0.19.3.tgz#34b96401499773bc0b1ebf923b293bbf1632d375"
-=======
-material-ui@0.19.2:
-  version "0.19.2"
-  resolved "https://registry.yarnpkg.com/material-ui/-/material-ui-0.19.2.tgz#98c8898c933279b12df879d7184306aceb364cb5"
->>>>>>> docs(examples): add source code links
   dependencies:
     babel-runtime "^6.23.0"
     inline-style-prefixer "^3.0.2"
@@ -7620,10 +7188,6 @@ mime@1.3.x:
   version "1.3.6"
   resolved "https://registry.yarnpkg.com/mime/-/mime-1.3.6.tgz#591d84d3653a6b0b4a3b9df8de5aa8108e72e5e0"
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> update yarn.lock
 mime@1.4.1, mime@^1.2.11, mime@^1.3.4:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/mime/-/mime-1.4.1.tgz#121f9ebc49e3766f311a76e1fa1c8003c4b03aa6"
@@ -7631,14 +7195,6 @@ mime@1.4.1, mime@^1.2.11, mime@^1.3.4:
 "mime@>= 0.0.1":
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/mime/-/mime-2.0.3.tgz#4353337854747c48ea498330dc034f9f4bbbcc0b"
-<<<<<<< HEAD
-=======
-"mime@>= 0.0.1", mime@^1.2.11, mime@^1.3.4:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/mime/-/mime-1.4.0.tgz#69e9e0db51d44f2a3b56e48b7817d7d137f1a343"
->>>>>>> Fix error for netlify
-=======
->>>>>>> update yarn.lock
 
 mimic-fn@^1.0.0:
   version "1.1.0"
@@ -8041,7 +7597,6 @@ node-uuid@~1.4.7:
   version "1.4.8"
   resolved "https://registry.yarnpkg.com/node-uuid/-/node-uuid-1.4.8.tgz#b040eb0923968afabf8d32fb1f17f1167fdab907"
 
-<<<<<<< HEAD
 nomnom@~1.6.2:
   version "1.6.2"
   resolved "https://registry.yarnpkg.com/nomnom/-/nomnom-1.6.2.tgz#84a66a260174408fc5b77a18f888eccc44fb6971"
@@ -8049,8 +7604,6 @@ nomnom@~1.6.2:
     colors "0.5.x"
     underscore "~1.4.4"
 
-=======
->>>>>>> update yarn.lock
 "nopt@2 || 3", nopt@3.0.x, nopt@~3.0.1:
   version "3.0.6"
   resolved "https://registry.yarnpkg.com/nopt/-/nopt-3.0.6.tgz#c6465dbf08abcd4db359317f79ac68a646b28ff9"
@@ -8229,23 +7782,10 @@ object-get@^2.0.0, object-get@^2.0.2, object-get@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/object-get/-/object-get-2.1.0.tgz#722bbdb60039efa47cad3c6dc2ce51a85c02c5ae"
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 object-is@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/object-is/-/object-is-1.0.1.tgz#0aa60ec9989a0b3ed795cf4d06f62cf1ad6539b6"
-=======
-<<<<<<< 8835d9e14f3e5b12cbc1e8fa5fcb0a2a5842d7af
-=======
->>>>>>> Clean CSS
-object-inspect@~1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/object-inspect/-/object-inspect-1.3.0.tgz#5b1eb8e6742e2ee83342a637034d844928ba2f6d"
->>>>>>> New design
 
-=======
->>>>>>> update yarn.lock
 object-keys@^1.0.10, object-keys@^1.0.8:
   version "1.0.11"
   resolved "https://registry.yarnpkg.com/object-keys/-/object-keys-1.0.11.tgz#c54601778ad560f1142ce0e01bcca8b56d13426d"
@@ -8469,27 +8009,9 @@ p-locate@^2.0.0:
   dependencies:
     p-limit "^1.1.0"
 
-<<<<<<< HEAD
-p-reduce@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/p-reduce/-/p-reduce-1.0.0.tgz#18c2b0dd936a4690a529f8231f58a0fdb6a47dfa"
-
-p-retry@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/p-retry/-/p-retry-1.0.0.tgz#3927332a4b7d70269b535515117fc547da1a6968"
-  dependencies:
-    retry "^0.10.0"
-
-p-series@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/p-series/-/p-series-1.0.0.tgz#7ec9e7b4406cc32066298a6f9860e55e91b36e07"
-  dependencies:
-    p-reduce "^1.0.0"
-=======
 p-map@^1.1.1:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/p-map/-/p-map-1.2.0.tgz#e4e94f311eabbc8633a1e79908165fca26241b6b"
->>>>>>> Fix error for netlify
 
 p-reduce@^1.0.0:
   version "1.0.0"
@@ -9047,15 +8569,9 @@ postcss-zindex@^2.0.1:
     postcss "^5.0.4"
     uniqs "^2.0.0"
 
-<<<<<<< HEAD
 postcss@6.0.13, postcss@^6.0.1, postcss@^6.0.11, postcss@^6.0.2, postcss@^6.0.3:
   version "6.0.13"
   resolved "https://registry.yarnpkg.com/postcss/-/postcss-6.0.13.tgz#b9ecab4ee00c89db3ec931145bd9590bbf3f125f"
-=======
-postcss@6.0.11:
-  version "6.0.11"
-  resolved "https://registry.yarnpkg.com/postcss/-/postcss-6.0.11.tgz#f48db210b1d37a7f7ab6499b7a54982997ab6f72"
->>>>>>> update yarn.lock
   dependencies:
     chalk "^2.1.0"
     source-map "^0.6.1"
@@ -9069,14 +8585,6 @@ postcss@^5.0.10, postcss@^5.0.11, postcss@^5.0.12, postcss@^5.0.13, postcss@^5.0
     js-base64 "^2.1.9"
     source-map "^0.5.6"
     supports-color "^3.2.3"
-
-postcss@^6.0.1, postcss@^6.0.11, postcss@^6.0.2, postcss@^6.0.3:
-  version "6.0.13"
-  resolved "https://registry.yarnpkg.com/postcss/-/postcss-6.0.13.tgz#b9ecab4ee00c89db3ec931145bd9590bbf3f125f"
-  dependencies:
-    chalk "^2.1.0"
-    source-map "^0.6.1"
-    supports-color "^4.4.0"
 
 prelude-ls@~1.1.2:
   version "1.1.2"
@@ -9165,15 +8673,9 @@ prompt@^0.2.14:
     utile "0.2.x"
     winston "0.8.x"
 
-<<<<<<< HEAD
 prop-types@15.6.0, prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.5.7, prop-types@^15.5.8, prop-types@^15.5.9, prop-types@^15.6.0:
   version "15.6.0"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.0.tgz#ceaf083022fc46b4a35f69e13ef75aed0d639856"
-=======
-prop-types@15.5.10, prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.5.7, prop-types@^15.5.8, prop-types@^15.5.9, prop-types@^15.6.0:
-  version "15.5.10"
-  resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.5.10.tgz#2797dfc3126182e3a95e3dfbb2e893ddd7456154"
->>>>>>> update yarn.lock
   dependencies:
     fbjs "^0.8.16"
     loose-envify "^1.3.1"
@@ -9327,23 +8829,7 @@ qs@6.2.1:
   version "6.2.1"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.2.1.tgz#ce03c5ff0935bc1d9d69a9f14cbd18e568d67625"
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 qs@6.5.1, "qs@>= 0.4.0", qs@^6.5.1, qs@~6.5.1:
-=======
-<<<<<<< 8835d9e14f3e5b12cbc1e8fa5fcb0a2a5842d7af
-=======
->>>>>>> Clean CSS
-qs@6.5.0:
-  version "6.5.0"
-  resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.0.tgz#8d04954d364def3efc55b5a0793e1e2c8b1e6e49"
-
-qs@6.5.1, "qs@>= 0.4.0", qs@^6.4.0:
->>>>>>> New design
-=======
-qs@6.5.1, "qs@>= 0.4.0", qs@^6.4.0, qs@^6.5.1, qs@~6.5.1:
->>>>>>> update yarn.lock
   version "6.5.1"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.1.tgz#349cdf6eef89ec45c12d7d5eb3fc0c870343a6d8"
 
@@ -9492,11 +8978,7 @@ react-color@^2.11.4:
     reactcss "^1.2.0"
     tinycolor2 "^1.4.1"
 
-<<<<<<< HEAD
 react-datetime@^2.10.3:
-=======
-react-datetime@^2.8.10:
->>>>>>> update yarn.lock
   version "2.10.3"
   resolved "https://registry.yarnpkg.com/react-datetime/-/react-datetime-2.10.3.tgz#9807a7d9be1dd4ee01b3466b0416614e3543378e"
   dependencies:
@@ -9574,11 +9056,7 @@ react-icons@^2.2.5:
   dependencies:
     react-icon-base "2.1.0"
 
-<<<<<<< HEAD
 react-inspector@^2.2.0:
-=======
-react-inspector@^2.1.1, react-inspector@^2.2.0:
->>>>>>> update yarn.lock
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/react-inspector/-/react-inspector-2.2.0.tgz#2aa0778c3512063f598d7a89a28a5d5c7733cad7"
   dependencies:
@@ -9605,13 +9083,9 @@ react-komposer@^2.0.0:
     react-stubber "^1.0.0"
     shallowequal "^0.2.2"
 
-<<<<<<< HEAD
 react-modal@^2.3.2:
-=======
-react-modal@^2.2.4, react-modal@^2.3.2:
->>>>>>> update yarn.lock
-  version "2.3.3"
-  resolved "https://registry.yarnpkg.com/react-modal/-/react-modal-2.3.3.tgz#bf4d100bbc426549b943e4294f7e9ea88e56e1a5"
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/react-modal/-/react-modal-2.4.1.tgz#cb09b26711b148eb9f59cb180e1b7d82980ded05"
   dependencies:
     exenv "^1.2.0"
     prop-types "^15.5.10"
@@ -9919,11 +9393,7 @@ reduce-without@^1.0.0:
   dependencies:
     test-value "^2.0.0"
 
-<<<<<<< HEAD
 redux@^3.7.2:
-=======
-redux@^3.6.0, redux@^3.7.2:
->>>>>>> update yarn.lock
   version "3.7.2"
   resolved "https://registry.yarnpkg.com/redux/-/redux-3.7.2.tgz#06b73123215901d25d065be342eb026bc1c8537b"
   dependencies:
@@ -10066,11 +9536,7 @@ replace-in-file@2.6.4:
     glob "^7.1.2"
     yargs "^8.0.2"
 
-<<<<<<< HEAD
 request@2, request@^2.74.0, request@^2.79.0, request@^2.83.0:
-=======
-request@2, request@^2.74.0, request@^2.79.0, request@^2.81.0:
->>>>>>> update yarn.lock
   version "2.83.0"
   resolved "https://registry.yarnpkg.com/request/-/request-2.83.0.tgz#ca0b65da02ed62935887808e6f510381034e3356"
   dependencies:
@@ -10251,13 +9717,10 @@ restore-cursor@^2.0.0:
     onetime "^2.0.0"
     signal-exit "^3.0.2"
 
-<<<<<<< HEAD
 ret@~0.1.10:
   version "0.1.15"
   resolved "https://registry.yarnpkg.com/ret/-/ret-0.1.15.tgz#b8a4825d5bdb1fc3f6f53c2bc33f81388681c7bc"
 
-=======
->>>>>>> update yarn.lock
 retry@^0.10.0:
   version "0.10.1"
   resolved "https://registry.yarnpkg.com/retry/-/retry-0.10.1.tgz#e76388d217992c252750241d3d3956fed98d8ff4"
@@ -10412,52 +9875,12 @@ selenium-webdriver@3.3.0:
     tmp "0.0.30"
     xml2js "^0.4.17"
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-semantic-release@^8.0.3:
-  version "8.1.1"
-  resolved "https://registry.yarnpkg.com/semantic-release/-/semantic-release-8.1.1.tgz#6d5d60acc101f9bba569ef53a36827e7d0fe4a04"
-  dependencies:
-    "@semantic-release/commit-analyzer" "^3.0.1"
-    "@semantic-release/condition-travis" "^6.0.0"
-    "@semantic-release/error" "^2.0.0"
-    "@semantic-release/last-release-npm" "^2.0.0"
-    "@semantic-release/release-notes-generator" "^4.0.0"
-    execa "^0.8.0"
-    fs-extra "^4.0.2"
-    git-head "^1.2.1"
-    github "^11.0.0"
-    lodash "^4.0.0"
-    nerf-dart "^1.0.0"
-    nopt "^4.0.0"
-    normalize-package-data "^2.3.4"
-    npmconf "^2.1.2"
-    npmlog "^4.0.0"
-    p-series "^1.0.0"
-    parse-github-repo-url "^1.3.0"
-    require-relative "^0.8.7"
-    semver "^5.4.1"
-=======
-selfsigned@^1.9.1:
-  version "1.9.1"
-  resolved "https://registry.yarnpkg.com/selfsigned/-/selfsigned-1.9.1.tgz#cdda4492d70d486570f87c65546023558e1dfa5a"
-  dependencies:
-    node-forge "0.6.33"
->>>>>>> New design
-
-=======
->>>>>>> Clean CSS
-=======
 selfsigned@^1.9.1:
   version "1.10.1"
   resolved "https://registry.yarnpkg.com/selfsigned/-/selfsigned-1.10.1.tgz#bf8cb7b83256c4551e31347c6311778db99eec52"
   dependencies:
     node-forge "0.6.33"
 
-<<<<<<< HEAD
->>>>>>> Fix error for netlify
-=======
 semantic-release@^8.0.3:
   version "8.1.1"
   resolved "https://registry.yarnpkg.com/semantic-release/-/semantic-release-8.1.1.tgz#6d5d60acc101f9bba569ef53a36827e7d0fe4a04"
@@ -10482,7 +9905,6 @@ semantic-release@^8.0.3:
     require-relative "^0.8.7"
     semver "^5.4.1"
 
->>>>>>> update yarn.lock
 semaphore@^1.0.5:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/semaphore/-/semaphore-1.1.0.tgz#aaad8b86b20fe8e9b32b16dc2ee682a8cd26a8aa"
@@ -10549,11 +9971,7 @@ serialize-error@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/serialize-error/-/serialize-error-2.1.0.tgz#50b679d5635cdf84667bdc8e59af4e5b81d5f60a"
 
-<<<<<<< HEAD
 serve-favicon@^2.4.5:
-=======
-serve-favicon@^2.4.3:
->>>>>>> update yarn.lock
   version "2.4.5"
   resolved "https://registry.yarnpkg.com/serve-favicon/-/serve-favicon-2.4.5.tgz#49d9a46863153a9240691c893d2b0e7d85d6d436"
   dependencies:
@@ -10815,11 +10233,7 @@ source-map@0.5.6:
   version "0.5.6"
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.5.6.tgz#75ce38f52bf0733c5a7f0c118d81334a2bb5f412"
 
-<<<<<<< HEAD
-source-map@^0.5.3, source-map@^0.5.6, source-map@~0.5.0, source-map@~0.5.1, source-map@~0.5.3, source-map@~0.5.6:
-=======
-source-map@0.5.x, source-map@^0.5.3, source-map@^0.5.6, source-map@^0.5.7, source-map@~0.5.0, source-map@~0.5.1, source-map@~0.5.3, source-map@~0.5.6:
->>>>>>> Fix error for netlify
+source-map@0.5.x, source-map@^0.5.3, source-map@^0.5.6, source-map@~0.5.0, source-map@~0.5.1, source-map@~0.5.3, source-map@~0.5.6:
   version "0.5.7"
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.5.7.tgz#8a039d2d1021d22d1ea14c80d8ea468ba2ef3fcc"
 
@@ -10900,10 +10314,6 @@ sshpk@^1.7.0:
     jsbn "~0.1.0"
     tweetnacl "~0.14.0"
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> update yarn.lock
 ssri@^4.1.2:
   version "4.1.6"
   resolved "https://registry.yarnpkg.com/ssri/-/ssri-4.1.6.tgz#0cb49b6ac84457e7bdd466cb730c3cb623e9a25b"
@@ -10911,12 +10321,6 @@ ssri@^4.1.2:
     safe-buffer "^5.1.0"
 
 stack-trace@0.0.9:
-<<<<<<< HEAD
-=======
-stack-trace@0.0.9, stack-trace@0.0.x:
->>>>>>> Fix error for netlify
-=======
->>>>>>> update yarn.lock
   version "0.0.9"
   resolved "https://registry.yarnpkg.com/stack-trace/-/stack-trace-0.0.9.tgz#a8f6eaeca90674c333e7c43953f275b451510695"
 
@@ -11122,15 +10526,9 @@ structured-source@^3.0.2:
   dependencies:
     boundary "^1.0.1"
 
-<<<<<<< HEAD
 style-loader@0.19.0:
   version "0.19.0"
   resolved "https://registry.yarnpkg.com/style-loader/-/style-loader-0.19.0.tgz#7258e788f0fee6a42d710eaf7d6c2412a4c50759"
-=======
-style-loader@0.18.2, style-loader@^0.18.2:
-  version "0.18.2"
-  resolved "https://registry.yarnpkg.com/style-loader/-/style-loader-0.18.2.tgz#cc31459afbcd6d80b7220ee54b291a9fd66ff5eb"
->>>>>>> Fix error for netlify
   dependencies:
     loader-utils "^1.0.2"
     schema-utils "^0.3.0"
@@ -11215,30 +10613,6 @@ tapable@^0.2.7, tapable@~0.2.5:
   version "0.2.8"
   resolved "https://registry.yarnpkg.com/tapable/-/tapable-0.2.8.tgz#99372a5c999bf2df160afc0d74bed4f47948cd22"
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-tape@^4.6.3:
-  version "4.8.0"
-  resolved "https://registry.yarnpkg.com/tape/-/tape-4.8.0.tgz#f6a9fec41cc50a1de50fa33603ab580991f6068e"
-  dependencies:
-    deep-equal "~1.0.1"
-    defined "~1.0.0"
-    for-each "~0.3.2"
-    function-bind "~1.1.0"
-    glob "~7.1.2"
-    has "~1.0.1"
-    inherits "~2.0.3"
-    minimist "~1.2.0"
-    object-inspect "~1.3.0"
-    resolve "~1.4.0"
-    resumer "~0.0.0"
-    string.prototype.trim "~1.1.2"
-    through "~2.3.8"
-
->>>>>>> New design
-=======
->>>>>>> update yarn.lock
 tar-pack@^3.4.0:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/tar-pack/-/tar-pack-3.4.0.tgz#23be2d7f671a8339376cbdb0b8fe3fdebf317984"
@@ -11572,25 +10946,9 @@ uc.micro@^1.0.1, uc.micro@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/uc.micro/-/uc.micro-1.0.3.tgz#7ed50d5e0f9a9fb0a573379259f2a77458d50192"
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 uglify-js@3.1.3:
   version "3.1.3"
   resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.1.3.tgz#d61f0453b4718cab01581f3162aa90bab7520b42"
-=======
-<<<<<<< 8835d9e14f3e5b12cbc1e8fa5fcb0a2a5842d7af
-=======
->>>>>>> Clean CSS
-uglify-js@3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.1.0.tgz#92fae17b88dfbc3c394175a935044cdbcf4085ae"
->>>>>>> New design
-=======
-uglify-js@3.1.1:
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.1.1.tgz#e7144307281a1bc38a9a20715090b546c9f44791"
->>>>>>> docs(examples): add source code links
   dependencies:
     commander "~2.11.0"
     source-map "~0.5.1"
@@ -11775,11 +11133,7 @@ update-section@^0.3.0:
   version "0.3.3"
   resolved "https://registry.yarnpkg.com/update-section/-/update-section-0.3.3.tgz#458f17820d37820dc60e20b86d94391b00123158"
 
-<<<<<<< HEAD
 url-loader@^0.5.9:
-=======
-url-loader@^0.5.8, url-loader@^0.5.9:
->>>>>>> Fix error for netlify
   version "0.5.9"
   resolved "https://registry.yarnpkg.com/url-loader/-/url-loader-0.5.9.tgz#cc8fea82c7b906e7777019250869e569e995c295"
   dependencies:
@@ -11888,11 +11242,7 @@ varify@0.2.0:
     redeyed "~1.0.1"
     through "~2.3.4"
 
-<<<<<<< HEAD
 vary@~1.1.2:
-=======
-vary@~1.1.1, vary@~1.1.2:
->>>>>>> update yarn.lock
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
 
@@ -12036,11 +11386,7 @@ webpack-bundle-analyzer@2.9.0:
     opener "^1.4.3"
     ws "^2.3.1"
 
-<<<<<<< HEAD
-webpack-dev-middleware@1.12.0, webpack-dev-middleware@^1.12.0:
-=======
-webpack-dev-middleware@1.12.0, webpack-dev-middleware@^1.10.2, webpack-dev-middleware@^1.11.0:
->>>>>>> Fix error for netlify
+webpack-dev-middleware@1.12.0, webpack-dev-middleware@^1.11.0, webpack-dev-middleware@^1.12.0:
   version "1.12.0"
   resolved "https://registry.yarnpkg.com/webpack-dev-middleware/-/webpack-dev-middleware-1.12.0.tgz#d34efefb2edda7e1d3b5dbe07289513219651709"
   dependencies:
@@ -12050,15 +11396,6 @@ webpack-dev-middleware@1.12.0, webpack-dev-middleware@^1.10.2, webpack-dev-middl
     range-parser "^1.0.3"
     time-stamp "^2.0.0"
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-webpack-hot-middleware@2.19.1, webpack-hot-middleware@^2.19.1:
-=======
-<<<<<<< 8835d9e14f3e5b12cbc1e8fa5fcb0a2a5842d7af
-=======
->>>>>>> Clean CSS
-=======
 webpack-dev-server@^2.4.1:
   version "2.9.1"
   resolved "https://registry.yarnpkg.com/webpack-dev-server/-/webpack-dev-server-2.9.1.tgz#7ac9320b61b00eb65b2109f15c82747fc5b93585"
@@ -12088,9 +11425,7 @@ webpack-dev-server@^2.4.1:
     webpack-dev-middleware "^1.11.0"
     yargs "^6.6.0"
 
->>>>>>> Fix error for netlify
-webpack-hot-middleware@2.19.1, webpack-hot-middleware@^2.18.0:
->>>>>>> New design
+webpack-hot-middleware@2.19.1, webpack-hot-middleware@^2.19.1:
   version "2.19.1"
   resolved "https://registry.yarnpkg.com/webpack-hot-middleware/-/webpack-hot-middleware-2.19.1.tgz#5db32c31c955c1ead114d37c7519ea554da0d405"
   dependencies:
@@ -12106,19 +11441,7 @@ webpack-sources@^1.0.1:
     source-list-map "^2.0.0"
     source-map "~0.5.3"
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 webpack@3.6.0, webpack@^3.6.0:
-=======
-<<<<<<< 8835d9e14f3e5b12cbc1e8fa5fcb0a2a5842d7af
-=======
->>>>>>> Clean CSS
-webpack@3.6.0, "webpack@^2.5.1 || ^3.0.0":
->>>>>>> New design
-=======
-webpack@3.6.0, webpack@^2.2.1, "webpack@^2.5.1 || ^3.0.0":
->>>>>>> update yarn.lock
   version "3.6.0"
   resolved "https://registry.yarnpkg.com/webpack/-/webpack-3.6.0.tgz#a89a929fbee205d35a4fa2cc487be9cbec8898bc"
   dependencies:
@@ -12144,6 +11467,32 @@ webpack@3.6.0, webpack@^2.2.1, "webpack@^2.5.1 || ^3.0.0":
     watchpack "^1.4.0"
     webpack-sources "^1.0.1"
     yargs "^8.0.2"
+
+webpack@^2.2.1:
+  version "2.7.0"
+  resolved "https://registry.yarnpkg.com/webpack/-/webpack-2.7.0.tgz#b2a1226804373ffd3d03ea9c6bd525067034f6b1"
+  dependencies:
+    acorn "^5.0.0"
+    acorn-dynamic-import "^2.0.0"
+    ajv "^4.7.0"
+    ajv-keywords "^1.1.1"
+    async "^2.1.2"
+    enhanced-resolve "^3.3.0"
+    interpret "^1.0.0"
+    json-loader "^0.5.4"
+    json5 "^0.5.1"
+    loader-runner "^2.3.0"
+    loader-utils "^0.2.16"
+    memory-fs "~0.4.1"
+    mkdirp "~0.5.0"
+    node-libs-browser "^2.0.0"
+    source-map "^0.5.3"
+    supports-color "^3.1.0"
+    tapable "~0.2.5"
+    uglify-js "^2.8.27"
+    watchpack "^1.3.1"
+    webpack-sources "^1.0.1"
+    yargs "^6.0.0"
 
 websocket-driver@>=0.5.1:
   version "0.7.0"
