@@ -50,14 +50,11 @@ function getCurrentRefinement(props, searchState, context) {
     }
   );
 
-  const hasMin = props.min !== undefined;
-  const hasMax = props.max !== undefined;
-
-  if (hasMin && refinement.min === undefined) {
+  if (props.min !== undefined && refinement.min === undefined) {
     refinement.min = props.min;
   }
 
-  if (hasMax && refinement.max === undefined) {
+  if (props.max !== undefined && refinement.max === undefined) {
     refinement.max = props.max;
   }
 
