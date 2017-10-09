@@ -32,6 +32,31 @@ function getId(props) {
 
 const namespace = 'range';
 
+function getCurrentRange(boundaries, stats) {
+  let min;
+  if (_isFinite(boundaries.min)) {
+    min = boundaries.min;
+  } else if (_isFinite(stats.min)) {
+    min = stats.min;
+  } else {
+    min = -Infinity;
+  }
+
+  let max;
+  if (_isFinite(boundaries.max)) {
+    max = boundaries.max;
+  } else if (_isFinite(stats.max)) {
+    max = stats.max;
+  } else {
+    max = Infinity;
+  }
+
+  return {
+    min,
+    max,
+  };
+}
+
 function getCurrentRefinement(props, searchState, context) {
   const refinement = getCurrentRefinementValue(
     props,
@@ -96,38 +121,9 @@ export default createConnector({
   },
 
   getProvidedProps(props, searchState, searchResults) {
-    const { attributeName } = props;
-    let { min, max } = props;
-
-    const hasMin = typeof min !== 'undefined';
-    const hasMax = typeof max !== 'undefined';
-
+    const { attributeName, min: minBound, max: maxBound } = props;
     const results = getResults(searchResults, this.context);
-
-    if (!hasMin || !hasMax) {
-      if (!results) {
-        return {
-          canRefine: false,
-        };
-      }
-
-      const stats = results.getFacetByName(attributeName)
-        ? results.getFacetStats(attributeName)
-        : null;
-      if (!stats) {
-        return {
-          canRefine: false,
-        };
-      }
-
-      if (!hasMin) {
-        min = stats.min;
-      }
-      if (!hasMax) {
-        max = stats.max;
-      }
-    }
-
+    const stats = results ? results.getFacetStats(attributeName) : {};
     const count = results
       ? results.getFacetValues(attributeName).map(v => ({
           value: v.name,
@@ -135,18 +131,35 @@ export default createConnector({
         }))
       : [];
 
-    const { min: valueMin = min, max: valueMax = max } = getCurrentRefinement(
+    const { min: rangeMin, max: rangeMax } = getCurrentRange(
+      { min: minBound, max: maxBound },
+      stats
+    );
+
+    const { min: valueMin, max: valueMax } = getCurrentRefinement(
       props,
       searchState,
       this.context
     );
 
+    // The searchState is not always in sync with the helper state. For example
+    // when we set boundaries on the first render the searchState don't have
+    // the correct refinement. If this behaviour change in the upcoming version
+    // we could store the range inside the searchState instead of rely on `this`.
+    this._currentRange = {
+      min: rangeMin,
+      max: rangeMax,
+    };
+
     return {
-      min,
-      max,
-      currentRefinement: { min: valueMin, max: valueMax },
-      count,
+      min: rangeMin,
+      max: rangeMax,
       canRefine: count.length > 0,
+      currentRefinement: {
+        min: valueMin === undefined ? rangeMin : valueMin,
+        max: valueMax === undefined ? rangeMax : valueMax,
+      },
+      count,
     };
   },
 

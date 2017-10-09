@@ -54,7 +54,16 @@ describe('connectRange', () => {
         { ok: { min: 6, max: 9 } },
         {}
       );
-      expect(props).toEqual({ canRefine: false });
+      expect(props).toEqual({
+        min: -Infinity,
+        max: Infinity,
+        currentRefinement: {
+          min: -Infinity,
+          max: Infinity,
+        },
+        count: [],
+        canRefine: false,
+      });
 
       props = getProvidedProps(
         {
