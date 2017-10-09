@@ -192,36 +192,41 @@ export default createConnector({
   },
 
   getMetadata(props, searchState) {
-    const id = getId(props);
-    const currentRefinement = getCurrentRefinement(
+    const { min: minRange, max: maxRange } = this._currentRange;
+    const { min: minValue, max: maxValue } = getCurrentRefinement(
       props,
       searchState,
       this.context
     );
-    let item;
-    const hasMin = typeof currentRefinement.min !== 'undefined';
-    const hasMax = typeof currentRefinement.max !== 'undefined';
-    if (hasMin || hasMax) {
-      let itemLabel = '';
-      if (hasMin) {
-        itemLabel += `${currentRefinement.min} <= `;
-      }
-      itemLabel += props.attributeName;
-      if (hasMax) {
-        itemLabel += ` <= ${currentRefinement.max}`;
-      }
-      item = {
-        label: itemLabel,
-        currentRefinement,
+
+    const items = [];
+    const hasMin = minValue !== undefined;
+    const hasMax = maxValue !== undefined;
+    const shouldDisplayMinLabel = hasMin && minValue !== minRange;
+    const shouldDisplayMaxLabel = hasMax && maxValue !== maxRange;
+
+    if (shouldDisplayMinLabel || shouldDisplayMaxLabel) {
+      const fragments = [
+        hasMin ? `${minValue} <= ` : '',
+        props.attributeName,
+        hasMax ? ` <= ${maxValue}` : '',
+      ];
+
+      items.push({
+        label: fragments.join(''),
         attributeName: props.attributeName,
         value: nextState => cleanUp(props, nextState, this.context),
-      };
+        currentRefinement: {
+          min: minValue,
+          max: maxValue,
+        },
+      });
     }
 
     return {
-      id,
+      id: getId(props),
       index: getIndex(this.context),
-      items: item ? [item] : [],
+      items,
     };
   },
 });

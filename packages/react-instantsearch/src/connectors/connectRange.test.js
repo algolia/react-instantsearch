@@ -262,6 +262,20 @@ describe('connectRange', () => {
           },
         ],
       });
+
+      metadata = connect.getMetadata.call(
+        {
+          ...context,
+          _currentRange: { min: 0, max: 100 },
+        },
+        { attributeName: 'wot' },
+        { range: { wot: { min: 0, max: 100 } } }
+      );
+      expect(metadata).toEqual({
+        id: 'wot',
+        index: 'index',
+        items: [],
+      });
     });
 
     it('items value function should clear it from the search state', () => {
@@ -457,6 +471,20 @@ describe('connectRange', () => {
             value: metadata.items[0].value,
           },
         ],
+      });
+
+      metadata = connect.getMetadata.call(
+        {
+          ...context,
+          _currentRange: { min: 0, max: 100 },
+        },
+        { attributeName: 'wot' },
+        { indices: { first: { range: { wot: { max: 100 } } } } }
+      );
+      expect(metadata).toEqual({
+        id: 'wot',
+        index: 'first',
+        items: [],
       });
     });
 
