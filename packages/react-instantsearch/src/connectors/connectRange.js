@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { isFinite as _isFinite } from 'lodash';
 import {
   cleanUpValue,
   getIndex,
@@ -62,7 +63,10 @@ function getCurrentRefinement(props, searchState, context) {
 }
 
 function refine(props, searchState, nextRefinement, context) {
-  if (!isFinite(nextRefinement.min) || !isFinite(nextRefinement.max)) {
+  if (
+    !_isFinite(parseFloat(nextRefinement.min)) ||
+    !_isFinite(parseFloat(nextRefinement.max))
+  ) {
     throw new Error(
       "You can't provide non finite values to the range connector"
     );

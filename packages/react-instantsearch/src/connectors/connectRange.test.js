@@ -127,14 +127,36 @@ describe('connectRange', () => {
     });
 
     it('calling refine with non finite values should fail', () => {
-      function shouldNotRefine() {
+      function shouldNotRefineWithNaN() {
         refine(
           { attributeName: 'ok' },
           { otherKey: 'val', range: { otherKey: { min: 1, max: 2 } } },
           { min: NaN, max: 5 }
         );
       }
-      expect(shouldNotRefine).toThrowError(
+      expect(shouldNotRefineWithNaN).toThrowError(
+        "You can't provide non finite values to the range connector"
+      );
+
+      function shouldNotRefineWithNull() {
+        refine(
+          { attributeName: 'ok' },
+          { otherKey: 'val', range: { otherKey: { min: 1, max: 2 } } },
+          { min: null, max: 5 }
+        );
+      }
+      expect(shouldNotRefineWithNull).toThrowError(
+        "You can't provide non finite values to the range connector"
+      );
+
+      function shouldNotRefineWithUndefined() {
+        refine(
+          { attributeName: 'ok' },
+          { otherKey: 'val', range: { otherKey: { min: 1, max: 2 } } },
+          { min: undefined, max: 5 }
+        );
+      }
+      expect(shouldNotRefineWithUndefined).toThrowError(
         "You can't provide non finite values to the range connector"
       );
     });
