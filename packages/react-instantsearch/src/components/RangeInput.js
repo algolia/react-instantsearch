@@ -46,7 +46,7 @@ class RangeInput extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    e.stopPropagation();
+
     if (
       !isNaN(parseFloat(this.state.from, 10)) &&
       !isNaN(parseFloat(this.state.to, 10))
