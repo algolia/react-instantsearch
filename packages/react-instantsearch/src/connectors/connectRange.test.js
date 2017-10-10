@@ -30,7 +30,7 @@ describe('connectRange', () => {
         canRefine: false,
       });
 
-      const results = {
+      let results = {
         getFacetStats: () => ({ min: 5, max: 10 }),
         getFacetValues: () => [
           { name: '5', count: 10 },
@@ -46,6 +46,29 @@ describe('connectRange', () => {
         currentRefinement: { min: 5, max: 10 },
         count: [{ value: '5', count: 10 }, { value: '2', count: 20 }],
         canRefine: true,
+      });
+
+      results = {
+        getFacetStats: () => {},
+        getFacetValues: () => [],
+        hits: [],
+      };
+      props = getProvidedProps(
+        {
+          attributeName: 'ok',
+        },
+        {},
+        { results }
+      );
+      expect(props).toEqual({
+        min: -Infinity,
+        max: Infinity,
+        currentRefinement: {
+          min: -Infinity,
+          max: Infinity,
+        },
+        count: [],
+        canRefine: false,
       });
 
       props = getProvidedProps(
