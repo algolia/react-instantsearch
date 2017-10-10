@@ -24,6 +24,7 @@
   border-radius: 4px;
   background-color: #ffffff;
   border: solid 1px #d4d8e3;
+  min-width: 180px;
 
   @include placeholder {
     font-size: 14px;

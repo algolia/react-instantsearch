@@ -14,6 +14,8 @@ exports[`RangeInput applies translations 1`] = `
     >
       <input
         className="ais-RangeInput__inputMin"
+        max={100}
+        min={0}
         onChange={[Function]}
         type="number"
         value={0}
@@ -29,6 +31,8 @@ exports[`RangeInput applies translations 1`] = `
     >
       <input
         className="ais-RangeInput__inputMax"
+        max={100}
+        min={0}
         onChange={[Function]}
         type="number"
         value={100}
@@ -58,6 +62,8 @@ exports[`RangeInput supports passing max/min values 1`] = `
     >
       <input
         className="ais-RangeInput__inputMin"
+        max={100}
+        min={0}
         onChange={[Function]}
         type="number"
         value={0}
@@ -73,6 +79,8 @@ exports[`RangeInput supports passing max/min values 1`] = `
     >
       <input
         className="ais-RangeInput__inputMax"
+        max={100}
+        min={0}
         onChange={[Function]}
         type="number"
         value={100}

@@ -10,12 +10,12 @@ class RangeInput extends Component {
   static propTypes = {
     translate: PropTypes.func.isRequired,
     refine: PropTypes.func.isRequired,
-    min: PropTypes.number,
-    max: PropTypes.number,
+    min: PropTypes.number.isRequired,
+    max: PropTypes.number.isRequired,
     currentRefinement: PropTypes.shape({
       min: PropTypes.number,
       max: PropTypes.number,
-    }),
+    }).isRequired,
     canRefine: PropTypes.bool.isRequired,
   };
 
@@ -56,7 +56,8 @@ class RangeInput extends Component {
   };
 
   render() {
-    const { translate, canRefine } = this.props;
+    const { translate, canRefine, min, max } = this.props;
+
     return (
       <form
         {...cx('root', !canRefine && 'noRefinement')}
@@ -67,6 +68,8 @@ class RangeInput extends Component {
             <input
               {...cx('inputMin')}
               type="number"
+              min={min}
+              max={max}
               value={this.state.from}
               onChange={e => this.setState({ from: e.target.value })}
             />
@@ -76,6 +79,8 @@ class RangeInput extends Component {
             <input
               {...cx('inputMax')}
               type="number"
+              min={min}
+              max={max}
               value={this.state.to}
               onChange={e => this.setState({ to: e.target.value })}
             />
