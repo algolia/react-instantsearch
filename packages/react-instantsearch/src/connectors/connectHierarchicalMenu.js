@@ -60,7 +60,6 @@ function getValue(path, props, searchState, context) {
 }
 
 function transformValue(value, props, searchState, context) {
-  // console.log('value from transformValue', value);
   return value.map(v => ({
     label: v.name,
     value: getValue(v.path, props, searchState, context),
@@ -188,12 +187,9 @@ export default createConnector({
 
   getProvidedProps(props, searchState, searchResults) {
     const { showMore, limitMin, limitMax } = props;
-    console.log(showMore);
-    console.log('limmin', limitMax);
     const id = getId(props);
 
     const results = getResults(searchResults, this.context);
-    console.log('results from chm', results);
     const isFacetPresent =
       Boolean(results) && Boolean(results.getFacetByName(id));
 
@@ -208,26 +204,15 @@ export default createConnector({
         canRefine: false,
       };
     }
-    console.log('limitMin by default', limitMin);
-    console.log('limitMax by defalt', limitMax);
     const limit = showMore ? limitMax : limitMin;
     const value = results.getFacetValues(id, { sortBy });
-    console.log('value', value);
     const items = value.data
       ? transformValue(value.data, props, searchState, this.context)
       : [];
-    console.log('items', items);
-    console.log('this,props', this.defaultProps);
     const transformedItems = props.transformItems
       ? props.transformItems(items)
       : items;
-    console.log('transformedItems', transformedItems);
-    // console.log('transformedItems', transformedItems);
-    // console.log(transformedItems.slice(0, limit));
-    console.log('limit', limit);
-    console.log('returnedItems', applyLimit(transformedItems, limit));
     return {
-      // items: transformedItems.slice(0, limit),
       items: applyLimit(transformedItems, limit),
       currentRefinement: getCurrentRefinement(props, searchState, this.context),
       canRefine: items.length > 0,

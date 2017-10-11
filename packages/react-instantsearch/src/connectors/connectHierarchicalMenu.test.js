@@ -17,75 +17,6 @@ describe('connectHierarchicalMenu', () => {
     const getMetadata = connect.getMetadata.bind(context);
     const cleanUp = connect.cleanUp.bind(context);
 
-    it.only(
-      'Isolating the test that is failing: provides the correct props to the component',
-      () => {
-        const results = {
-          getFacetValues: jest.fn(),
-          getFacetByName: () => true,
-          hits: [],
-        };
-        console.log(context);
-        results.getFacetValues.mockImplementation(() => ({
-          data: [
-            {
-              name: 'wat',
-              path: 'wat',
-              count: 20,
-              data: [
-                {
-                  name: 'wot',
-                  path: 'wat > wot',
-                  count: 15,
-                },
-                {
-                  name: 'wut',
-                  path: 'wat > wut',
-                  count: 5,
-                },
-              ],
-            },
-            {
-              name: 'oy',
-              path: 'oy',
-              count: 10,
-            },
-          ],
-        }));
-        // console.log('results : ', results);
-        props = getProvidedProps(
-          { attributes: ['ok'], limitMin: 2 },
-          {},
-          { results }
-        );
-        // console.log('props', props);
-        expect(props.items).toEqual([
-          {
-            label: 'wat',
-            value: 'wat',
-            count: 20,
-            items: [
-              {
-                label: 'wot',
-                value: 'wat > wot',
-                count: 15,
-              },
-              {
-                label: 'wut',
-                value: 'wat > wut',
-                count: 5,
-              },
-            ],
-          },
-          {
-            label: 'oy',
-            value: 'oy',
-            count: 10,
-          },
-        ]);
-      }
-    );
-
     it('provides the correct props to the component', () => {
       const results = {
         getFacetValues: jest.fn(),
@@ -100,7 +31,6 @@ describe('connectHierarchicalMenu', () => {
         { hierarchicalMenu: { ok: 'wat' } },
         { results }
       );
-      console.log(props);
 
       expect(props).toEqual({
         canRefine: false,
@@ -114,8 +44,6 @@ describe('connectHierarchicalMenu', () => {
         currentRefinement: null,
         items: [],
       });
-      console.log(props);
-      console.log(results.getFacetValues);
 
       results.getFacetValues.mockClear();
       results.getFacetValues.mockImplementation(() => ({
@@ -145,7 +73,6 @@ describe('connectHierarchicalMenu', () => {
         ],
       }));
       props = getProvidedProps({ attributes: ['ok'] }, {}, { results });
-      console.log('props', props);
       expect(props.items).toEqual([
         {
           label: 'wat',
@@ -362,21 +289,12 @@ describe('connectHierarchicalMenu', () => {
         if (a.label > b.label) return 1;
         return 0;
       }
-      // console.log('ITEMS AVANT >>>>>>>>', props.items);
       const transformItems = jest.fn(items => items.sort(compareItem));
-      // console.log(
-      //   'ITEMS FROM transformitems =========> ',
-      //   props.items.sort(compareItem)
-      // );
       props = getProvidedProps(
         { attributes: ['ok'], transformItems },
         {},
         { results }
       );
-      // console.log(
-      //   'items from props (after transformItems has happened) =======>',
-      //   props.items
-      // );
       expect(transformItems.mock.calls[0][0]).toEqual([
         {
           label: 'ay',
@@ -422,10 +340,6 @@ describe('connectHierarchicalMenu', () => {
         {},
         { results }
       );
-      console.log(
-        'items from props (after transformItems has happened (AFTER TRUNCATION))V2 =======>',
-        props.items
-      );
       expect(props.items).toEqual([
         {
           label: 'ay',
@@ -438,7 +352,6 @@ describe('connectHierarchicalMenu', () => {
           count: 10,
         },
       ]);
-      // expect(props.items).toEqual(['items']);
     });
 
     it("calling refine updates the widget's search state", () => {
@@ -600,65 +513,6 @@ describe('connectHierarchicalMenu', () => {
     const getSP = connect.getSearchParameters.bind(context);
     const getMetadata = connect.getMetadata.bind(context);
     const cleanUp = connect.cleanUp.bind(context);
-
-    // this test (with the limit) is working ok
-    it('provides the correct props to the component v2', () => {
-      const results = {
-        first: {
-          getFacetValues: jest.fn(),
-          getFacetByName: () => true,
-        },
-      };
-      console.log(context);
-      results.first.getFacetValues.mockImplementation(() => ({
-        data: [
-          {
-            name: 'wat',
-            path: 'wat',
-            count: 20,
-            data: [
-              {
-                name: 'wot',
-                path: 'wat > wot',
-                count: 15,
-              },
-              {
-                name: 'wut',
-                path: 'wat > wut',
-                count: 5,
-              },
-            ],
-          },
-          {
-            name: 'oy',
-            path: 'oy',
-            count: 10,
-          },
-        ],
-      }));
-
-      // console.log('results', results);
-
-      props = getProvidedProps(
-        { attributes: ['ok'], limitMin: 1 },
-        {},
-        { results }
-      );
-      expect(props.items).toEqual([
-        {
-          label: 'wat',
-          value: 'wat',
-          count: 20,
-          items: [
-            {
-              label: 'wot',
-              value: 'wat > wot',
-              count: 15,
-            },
-          ],
-        },
-      ]);
-    });
 
     it('provides the correct props to the component', () => {
       const results = {
