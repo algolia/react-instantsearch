@@ -29,7 +29,7 @@ describe('connectHierarchicalMenu', () => {
         results.getFacetValues.mockImplementation(() => ({
           data: [
             {
-              name: 'waAAAat',
+              name: 'wat',
               path: 'wat',
               count: 20,
               data: [
@@ -53,7 +53,11 @@ describe('connectHierarchicalMenu', () => {
           ],
         }));
         // console.log('results : ', results);
-        props = getProvidedProps({ attributes: ['ok'] }, {}, { results });
+        props = getProvidedProps(
+          { attributes: ['ok'], limitMin: 2 },
+          {},
+          { results }
+        );
         // console.log('props', props);
         expect(props.items).toEqual([
           {

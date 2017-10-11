@@ -70,16 +70,26 @@ function transformValue(value, props, searchState, context) {
   }));
 }
 
-function applyLimit(arr, n) {
-  return arr.reduce((acc, x, idx) => {
-    if (x.items) {
-      x.items = applyLimit(x.items, n);
+// function applyLimit(arr, n) {
+//   return arr.reduce((acc, x, idx) => {
+//     if (x.items) {
+//       x.items = applyLimit(x.items, n);
+//     }
+//     if (idx < n) {
+//       acc.push(x);
+//     }
+//     return acc;
+//   }, []);
+// }
+
+function applyLimit(array, limit) {
+  const firstLevel = array.slice(0, limit);
+  for (let i = 0; i < limit; i++) {
+    if (firstLevel[i].items) {
+      firstLevel[i].items = applyLimit(firstLevel[i].items, limit);
     }
-    if (idx < n) {
-      acc.push(x);
-    }
-    return acc;
-  }, []);
+  }
+  return firstLevel;
 }
 
 function refine(props, searchState, nextRefinement, context) {
