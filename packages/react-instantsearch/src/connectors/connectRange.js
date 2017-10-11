@@ -39,7 +39,7 @@ function getCurrentRange(boundaries, stats) {
   } else if (_isFinite(stats.min)) {
     min = stats.min;
   } else {
-    min = -Infinity;
+    min = undefined;
   }
 
   let max;
@@ -48,7 +48,7 @@ function getCurrentRange(boundaries, stats) {
   } else if (_isFinite(stats.max)) {
     max = stats.max;
   } else {
-    max = Infinity;
+    max = undefined;
   }
 
   return {

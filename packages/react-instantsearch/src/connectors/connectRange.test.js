@@ -61,11 +61,11 @@ describe('connectRange', () => {
         { results }
       );
       expect(props).toEqual({
-        min: -Infinity,
-        max: Infinity,
+        min: undefined,
+        max: undefined,
         currentRefinement: {
-          min: -Infinity,
-          max: Infinity,
+          min: undefined,
+          max: undefined,
         },
         count: [],
         canRefine: false,
@@ -77,11 +77,11 @@ describe('connectRange', () => {
         {}
       );
       expect(props).toEqual({
-        min: -Infinity,
-        max: Infinity,
+        min: undefined,
+        max: undefined,
         currentRefinement: {
-          min: -Infinity,
-          max: Infinity,
+          min: undefined,
+          max: undefined,
         },
         count: [],
         canRefine: false,
