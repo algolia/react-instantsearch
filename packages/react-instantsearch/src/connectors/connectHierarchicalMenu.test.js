@@ -17,6 +17,71 @@ describe('connectHierarchicalMenu', () => {
     const getMetadata = connect.getMetadata.bind(context);
     const cleanUp = connect.cleanUp.bind(context);
 
+    it.only(
+      'Isolating the test that is failing: provides the correct props to the component',
+      () => {
+        const results = {
+          getFacetValues: jest.fn(),
+          getFacetByName: () => true,
+          hits: [],
+        };
+        console.log(context);
+        results.getFacetValues.mockImplementation(() => ({
+          data: [
+            {
+              name: 'waAAAat',
+              path: 'wat',
+              count: 20,
+              data: [
+                {
+                  name: 'wot',
+                  path: 'wat > wot',
+                  count: 15,
+                },
+                {
+                  name: 'wut',
+                  path: 'wat > wut',
+                  count: 5,
+                },
+              ],
+            },
+            {
+              name: 'oy',
+              path: 'oy',
+              count: 10,
+            },
+          ],
+        }));
+        // console.log('results : ', results);
+        props = getProvidedProps({ attributes: ['ok'] }, {}, { results });
+        // console.log('props', props);
+        expect(props.items).toEqual([
+          {
+            label: 'wat',
+            value: 'wat',
+            count: 20,
+            items: [
+              {
+                label: 'wot',
+                value: 'wat > wot',
+                count: 15,
+              },
+              {
+                label: 'wut',
+                value: 'wat > wut',
+                count: 5,
+              },
+            ],
+          },
+          {
+            label: 'oy',
+            value: 'oy',
+            count: 10,
+          },
+        ]);
+      }
+    );
+
     it('provides the correct props to the component', () => {
       const results = {
         getFacetValues: jest.fn(),
@@ -25,11 +90,14 @@ describe('connectHierarchicalMenu', () => {
       };
 
       results.getFacetValues.mockImplementationOnce(() => ({}));
+      results.getFacetValues.mockImplementation(() => ({}));
       props = getProvidedProps(
         { attributes: ['ok'] },
         { hierarchicalMenu: { ok: 'wat' } },
         { results }
       );
+      console.log(props);
+
       expect(props).toEqual({
         canRefine: false,
         currentRefinement: 'wat',
@@ -42,6 +110,8 @@ describe('connectHierarchicalMenu', () => {
         currentRefinement: null,
         items: [],
       });
+      console.log(props);
+      console.log(results.getFacetValues);
 
       results.getFacetValues.mockClear();
       results.getFacetValues.mockImplementation(() => ({
@@ -71,6 +141,7 @@ describe('connectHierarchicalMenu', () => {
         ],
       }));
       props = getProvidedProps({ attributes: ['ok'] }, {}, { results });
+      console.log('props', props);
       expect(props.items).toEqual([
         {
           label: 'wat',
@@ -167,6 +238,203 @@ describe('connectHierarchicalMenu', () => {
         },
       ]);
       expect(props.items).toEqual(['items']);
+    });
+
+    it('is applying transformValue before applying transformItems', () => {
+      const results = {
+        getFacetValues: jest.fn(),
+        getFacetByName: () => true,
+        hits: [],
+      };
+      results.getFacetValues.mockClear();
+      results.getFacetValues.mockImplementation(() => ({
+        data: [
+          {
+            name: 'wat',
+            path: 'wat',
+            count: 20,
+            data: [
+              {
+                name: 'wot',
+                path: 'wat > wot',
+                count: 15,
+              },
+              {
+                name: 'wut',
+                path: 'wat > wut',
+                count: 3,
+              },
+              {
+                name: 'wit',
+                path: 'wat > wit',
+                count: 5,
+              },
+            ],
+          },
+          {
+            name: 'oy',
+            path: 'oy',
+            count: 10,
+          },
+          {
+            name: 'ay',
+            path: 'ay',
+            count: 3,
+          },
+        ],
+      }));
+      props = getProvidedProps(
+        { attributes: ['ok'], showMore: true, limitMin: 0, limitMax: 3 },
+        {},
+        { results }
+      );
+      expect(props.items).toEqual([
+        {
+          label: 'wat',
+          value: 'wat',
+          count: 20,
+          items: [
+            {
+              label: 'wot',
+              value: 'wat > wot',
+              count: 15,
+            },
+            {
+              label: 'wut',
+              value: 'wat > wut',
+              count: 3,
+            },
+            {
+              label: 'wit',
+              value: 'wat > wit',
+              count: 5,
+            },
+          ],
+        },
+        {
+          label: 'oy',
+          value: 'oy',
+          count: 10,
+        },
+        {
+          label: 'ay',
+          value: 'ay',
+          count: 3,
+        },
+      ]);
+      // shows the effect of limitMax without applying transformItems
+      props = getProvidedProps(
+        { attributes: ['ok'], showMore: true, limitMin: 0, limitMax: 2 },
+        {},
+        { results }
+      );
+      expect(props.items).toEqual([
+        {
+          label: 'wat',
+          value: 'wat',
+          count: 20,
+          items: [
+            {
+              label: 'wot',
+              value: 'wat > wot',
+              count: 15,
+            },
+            {
+              label: 'wut',
+              value: 'wat > wut',
+              count: 3,
+            },
+          ],
+        },
+        {
+          label: 'oy',
+          value: 'oy',
+          count: 10,
+        },
+      ]);
+
+      function compareItem(a, b) {
+        if (a.label < b.label) return -1;
+        if (a.label > b.label) return 1;
+        return 0;
+      }
+      // console.log('ITEMS AVANT >>>>>>>>', props.items);
+      const transformItems = jest.fn(items => items.sort(compareItem));
+      // console.log(
+      //   'ITEMS FROM transformitems =========> ',
+      //   props.items.sort(compareItem)
+      // );
+      props = getProvidedProps(
+        { attributes: ['ok'], transformItems },
+        {},
+        { results }
+      );
+      // console.log(
+      //   'items from props (after transformItems has happened) =======>',
+      //   props.items
+      // );
+      expect(transformItems.mock.calls[0][0]).toEqual([
+        {
+          label: 'ay',
+          value: 'ay',
+          count: 3,
+        },
+        {
+          label: 'oy',
+          value: 'oy',
+          count: 10,
+        },
+        {
+          label: 'wat',
+          value: 'wat',
+          count: 20,
+          items: [
+            {
+              label: 'wot',
+              value: 'wat > wot',
+              count: 15,
+            },
+            {
+              label: 'wut',
+              value: 'wat > wut',
+              count: 3,
+            },
+            {
+              label: 'wit',
+              value: 'wat > wit',
+              count: 5,
+            },
+          ],
+        },
+      ]);
+      props = getProvidedProps(
+        {
+          attributes: ['ok'],
+          transformItems,
+          showMore: true,
+          limitMin: 0,
+          limitMax: 2,
+        },
+        {},
+        { results }
+      );
+      console.log(
+        'items from props (after transformItems has happened (AFTER TRUNCATION))V2 =======>',
+        props.items
+      );
+      expect(props.items).toEqual([
+        {
+          label: 'ay',
+          value: 'ay',
+          count: 3,
+        },
+        {
+          label: 'oy',
+          value: 'oy',
+          count: 10,
+        },
+      ]);
+      // expect(props.items).toEqual(['items']);
     });
 
     it("calling refine updates the widget's search state", () => {
@@ -329,6 +597,65 @@ describe('connectHierarchicalMenu', () => {
     const getMetadata = connect.getMetadata.bind(context);
     const cleanUp = connect.cleanUp.bind(context);
 
+    // this test (with the limit) is working ok
+    it('provides the correct props to the component v2', () => {
+      const results = {
+        first: {
+          getFacetValues: jest.fn(),
+          getFacetByName: () => true,
+        },
+      };
+      console.log(context);
+      results.first.getFacetValues.mockImplementation(() => ({
+        data: [
+          {
+            name: 'wat',
+            path: 'wat',
+            count: 20,
+            data: [
+              {
+                name: 'wot',
+                path: 'wat > wot',
+                count: 15,
+              },
+              {
+                name: 'wut',
+                path: 'wat > wut',
+                count: 5,
+              },
+            ],
+          },
+          {
+            name: 'oy',
+            path: 'oy',
+            count: 10,
+          },
+        ],
+      }));
+
+      // console.log('results', results);
+
+      props = getProvidedProps(
+        { attributes: ['ok'], limitMin: 1 },
+        {},
+        { results }
+      );
+      expect(props.items).toEqual([
+        {
+          label: 'wat',
+          value: 'wat',
+          count: 20,
+          items: [
+            {
+              label: 'wot',
+              value: 'wat > wot',
+              count: 15,
+            },
+          ],
+        },
+      ]);
+    });
+
     it('provides the correct props to the component', () => {
       const results = {
         first: {
@@ -337,7 +664,8 @@ describe('connectHierarchicalMenu', () => {
         },
       };
 
-      results.first.getFacetValues.mockImplementationOnce(() => ({}));
+      // results.first.getFacetValues.mockImplementationOnce(() => ({}));
+      results.first.getFacetValues.mockImplementation(() => ({}));
       props = getProvidedProps(
         { attributes: ['ok'] },
         { indices: { first: { hierarchicalMenu: { ok: 'wat' } } } },
