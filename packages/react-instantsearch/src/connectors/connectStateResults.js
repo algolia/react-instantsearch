@@ -13,6 +13,7 @@ import { getResults } from '../core/indexUtils';
  * @providedPropType {string} error - If the search failed, the error will be logged here. 
  * @providedPropType {boolean} searching - If there is a search in progress. 
  * @providedPropType {boolean} searchingForFacetValues - If there is a search in a list in progress. 
+ * @providedPropType {boolean} props - component props.
  * @example
  * import React from 'react';
  *
@@ -26,12 +27,7 @@ import { getResults } from '../core/indexUtils';
  *          : <div>
  *              No results has been found for {searchState.query}
  *            </div>
- *    );
- *    return (
- *      <WrapWithHits linkedStoryGroup="Conditional">
- *        <Content />
- *      </WrapWithHits>
- *    );
+ * );
  *
  * export default function App() {
  *  return (
@@ -57,6 +53,7 @@ export default createConnector({
       searching: searchResults.searching,
       error: searchResults.error,
       searchingForFacetValues: searchResults.searchingForFacetValues,
+      props,
     };
   },
 });
