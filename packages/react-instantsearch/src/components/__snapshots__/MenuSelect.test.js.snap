@@ -4,11 +4,11 @@ exports[`MenuSelect applies translations 1`] = `
 <select
   className="ais-MenuSelect__select"
   onChange={[Function]}
-  value=""
+  value="ais__see__all__option"
 >
   <option
     className="ais-MenuSelect__option"
-    value=""
+    value="ais__see__all__option"
   >
     Everything
   </option>
@@ -64,11 +64,11 @@ exports[`MenuSelect default menu select 1`] = `
 <select
   className="ais-MenuSelect__select"
   onChange={[Function]}
-  value=""
+  value="ais__see__all__option"
 >
   <option
     className="ais-MenuSelect__option"
-    value=""
+    value="ais__see__all__option"
   >
     See all
   </option>
