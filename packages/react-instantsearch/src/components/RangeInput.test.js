@@ -1,153 +1,355 @@
-import PropTypes from 'prop-types';
 /* eslint-env jest, jasmine */
 
 import React from 'react';
-import renderer from 'react-test-renderer';
-import Enzyme, { mount } from 'enzyme';
+import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-Enzyme.configure({ adapter: new Adapter() });
+import serializer from 'enzyme-to-json/serializer';
+import RangeInput, { RawRangeInput } from './RangeInput';
 
-import RangeInput from './RangeInput';
+Enzyme.configure({ adapter: new Adapter() });
+expect.addSnapshotSerializer(serializer);
 
 describe('RangeInput', () => {
-  it('supports passing max/min values', () => {
-    const tree = renderer
-      .create(
-        <RangeInput
-          createURL={() => '#'}
-          refine={() => null}
-          min={0}
-          max={100}
-          currentRefinement={{ min: 0, max: 100 }}
-          canRefine={true}
-        />
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+  const shallowRender = (props = {}, context = {}) => {
+    const defaultProps = {
+      currentRefinement: {
+        min: undefined,
+        max: undefined,
+      },
+      canRefine: true,
+      refine: () => {},
+      min: undefined,
+      max: undefined,
+    };
+
+    return shallow(<RangeInput {...defaultProps} {...props} />, { context });
+  };
+
+  it('render with translations', () => {
+    const props = {
+      translations: {
+        submit: 'SUBMIT',
+        separator: 'SEPARATOR',
+      },
+    };
+
+    const component = shallowRender(props).shallow();
+
+    expect(component).toMatchSnapshot();
+  });
+});
+
+describe('RawRangeInput', () => {
+  const shallowRender = (props = {}, context = {}) => {
+    const defaultProps = {
+      currentRefinement: {
+        min: undefined,
+        max: undefined,
+      },
+      canRefine: true,
+      refine: () => {},
+      translate: x => x,
+      min: undefined,
+      max: undefined,
+    };
+
+    return shallow(<RawRangeInput {...defaultProps} {...props} />, { context });
+  };
+
+  it('render with empty values', () => {
+    const props = {};
+
+    const component = shallowRender(props);
+
+    expect(component).toMatchSnapshot();
   });
 
-  it('applies translations', () => {
-    const tree = renderer
-      .create(
-        <RangeInput
-          createURL={() => '#'}
-          refine={() => null}
-          translations={{
-            submit: 'SUBMIT',
-            separator: 'SEPARATOR',
-          }}
-          min={0}
-          max={100}
-          currentRefinement={{ min: 0, max: 100 }}
-          canRefine={true}
-        />
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+  it('render with empty values when refinement is equal to min / max', () => {
+    const props = {
+      currentRefinement: {
+        min: 0,
+        max: 500,
+      },
+      min: 0,
+      max: 500,
+    };
+
+    const component = shallowRender(props);
+
+    expect(component).toMatchSnapshot();
   });
 
-  it('refines its value on change', () => {
-    const refine = jest.fn();
-    const wrapper = mount(
-      <RangeInput
-        createURL={() => '#'}
-        refine={refine}
-        min={0}
-        max={100}
-        currentRefinement={{ min: 0, max: 100 }}
-        canRefine={true}
-      />
-    );
+  it('render with refinement', () => {
+    const props = {
+      currentRefinement: {
+        min: 10,
+        max: 490,
+      },
+    };
 
-    const formChildren = wrapper.find('.ais-RangeInput__submit');
-    wrapper
-      .find('.ais-RangeInput__root')
-      .simulate('submit', { target: { formChildren } });
+    const component = shallowRender(props);
 
-    expect(refine.mock.calls.length).toBe(1);
-    expect(refine.mock.calls[0][0]).toEqual({ min: 0, max: 100 });
-
-    refine.mockClear();
-
-    wrapper
-      .find('input')
-      .first()
-      .simulate('change', { target: { value: 89 } });
-    wrapper
-      .find('input')
-      .last()
-      .simulate('change', { target: { value: 99 } });
-
-    wrapper
-      .find('.ais-RangeInput__root')
-      .simulate('submit', { target: { formChildren } });
-
-    expect(refine.mock.calls.length).toBe(1);
-    expect(refine.mock.calls[0][0]).toEqual({ min: 89, max: 99 });
-
-    wrapper.unmount();
+    expect(component).toMatchSnapshot();
   });
 
-  it('do not refine where input value are empty string', () => {
-    const refine = jest.fn();
-    const wrapper = mount(
-      <RangeInput
-        createURL={() => '#'}
-        refine={refine}
-        min={0}
-        max={100}
-        currentRefinement={{ min: 0, max: 100 }}
-        canRefine={true}
-      />
-    );
+  it('render with min / max', () => {
+    const props = {
+      min: 0,
+      max: 500,
+    };
 
-    const formChildren = wrapper.find('.ais-RangeInput__submit');
+    const component = shallowRender(props);
 
-    wrapper
-      .find('input')
-      .first()
-      .simulate('change', { target: { value: '' } });
-    wrapper
-      .find('input')
-      .last()
-      .simulate('change', { target: { value: '' } });
-
-    wrapper
-      .find('.ais-RangeInput__root')
-      .simulate('submit', { target: { formChildren } });
-
-    expect(refine.mock.calls.length).toBe(0);
-
-    wrapper.unmount();
+    expect(component).toMatchSnapshot();
   });
 
-  describe('Panel compatibility', () => {
-    it('Should indicate when no more refinement', () => {
-      const canRefine = jest.fn();
-      const wrapper = mount(
-        <RangeInput
-          createURL={() => '#'}
-          refine={() => {}}
-          min={0}
-          max={100}
-          currentRefinement={{ min: 0, max: 100 }}
-          canRefine={true}
-        />,
-        {
-          context: { canRefine },
-          childContextTypes: { canRefine: PropTypes.func },
-        }
-      );
+  it('render with min only', () => {
+    const props = {
+      min: 0,
+    };
 
-      expect(canRefine.mock.calls.length).toBe(1);
-      expect(canRefine.mock.calls[0][0]).toEqual(true);
-      expect(wrapper.find('.ais-RangeInput__noRefinement').length).toBe(0);
+    const component = shallowRender(props);
 
-      wrapper.setProps({ canRefine: false });
+    expect(component).toMatchSnapshot();
+  });
 
-      expect(canRefine.mock.calls.length).toBe(2);
-      expect(canRefine.mock.calls[1][0]).toEqual(false);
-      expect(wrapper.find('.ais-RangeInput__noRefinement').length).toBe(1);
+  it('render with max only', () => {
+    const props = {
+      max: 500,
+    };
+
+    const component = shallowRender(props);
+
+    expect(component).toMatchSnapshot();
+  });
+
+  it("render when can't refine", () => {
+    const props = {
+      canRefine: false,
+    };
+
+    const component = shallowRender(props);
+
+    expect(component).toMatchSnapshot();
+  });
+
+  describe('willMount', () => {
+    it('expect to call canRefine from context when defined', () => {
+      const props = {};
+      const context = {
+        canRefine: jest.fn(),
+      };
+
+      shallowRender(props, context);
+
+      expect(context.canRefine).toHaveBeenCalledTimes(1);
+    });
+
+    it('expect to not throw when canRefine is not defined', () => {
+      const props = {};
+      const context = {};
+
+      expect(() => shallowRender(props, context)).not.toThrow();
+    });
+  });
+
+  describe('willReceiveProps', () => {
+    it('expect to update the state when can refine', () => {
+      const props = {};
+      const nextProps = {
+        canRefine: true,
+        currentRefinement: {
+          min: 10,
+          max: 490,
+        },
+      };
+
+      const component = shallowRender(props);
+
+      expect(component).toMatchSnapshot();
+
+      component.setProps(nextProps);
+
+      expect(component).toMatchSnapshot();
+      expect(component.state()).toEqual({
+        from: 10,
+        to: 490,
+      });
+    });
+
+    it('expect to update the state when can refine without refinement', () => {
+      const props = {};
+      const nextProps = {
+        canRefine: true,
+        currentRefinement: {},
+      };
+
+      const component = shallowRender(props);
+
+      expect(component).toMatchSnapshot();
+
+      component.setProps(nextProps);
+
+      expect(component).toMatchSnapshot();
+      expect(component.state()).toEqual({
+        from: '',
+        to: '',
+      });
+    });
+
+    it('expect to update the state when can refine and refinement is equal to min / max', () => {
+      const props = {};
+      const nextProps = {
+        canRefine: true,
+        min: 10,
+        max: 490,
+        currentRefinement: {
+          min: 10,
+          max: 490,
+        },
+      };
+
+      const component = shallowRender(props);
+
+      expect(component).toMatchSnapshot();
+
+      component.setProps(nextProps);
+
+      expect(component).toMatchSnapshot();
+      expect(component.state()).toEqual({
+        from: '',
+        to: '',
+      });
+    });
+
+    it("expect to not update the state when can't refine", () => {
+      const props = {};
+      const nextProps = {
+        canRefine: false,
+        currentRefinement: {
+          min: 10,
+          max: 490,
+        },
+      };
+
+      const component = shallowRender(props);
+
+      expect(component).toMatchSnapshot();
+
+      component.setProps(nextProps);
+
+      expect(component).toMatchSnapshot();
+      expect(component.state()).toEqual({
+        from: '',
+        to: '',
+      });
+    });
+
+    it('expect to call canRefine from context when defined', () => {
+      const props = {};
+      const context = {
+        canRefine: jest.fn(),
+      };
+
+      const nextProps = {
+        canRefine: true,
+      };
+
+      const component = shallowRender(props, context);
+
+      component.setProps(nextProps);
+
+      expect(context.canRefine).toHaveBeenCalledTimes(2);
+    });
+
+    it('expect to not throw when canRefine is not defined', () => {
+      const props = {};
+      const context = {};
+      const nextProps = {};
+
+      const component = shallowRender(props, context);
+
+      expect(() => component.setProps(nextProps)).not.toThrow();
+    });
+  });
+
+  describe('onChange', () => {
+    it('expect to update min onChange', () => {
+      const props = {};
+      const component = shallowRender(props);
+
+      component.find('.ais-RangeInput__inputMin').simulate('change', {
+        currentTarget: {
+          value: 10,
+        },
+      });
+
+      expect(component).toMatchSnapshot();
+      expect(component.state()).toEqual({
+        from: 10,
+        to: '',
+      });
+    });
+
+    it('expect to update max onChange', () => {
+      const props = {};
+      const component = shallowRender(props);
+
+      component.find('.ais-RangeInput__inputMax').simulate('change', {
+        currentTarget: {
+          value: 490,
+        },
+      });
+
+      expect(component).toMatchSnapshot();
+      expect(component.state()).toEqual({
+        from: '',
+        to: 490,
+      });
+    });
+  });
+
+  describe('onSubmit', () => {
+    it('expect to call refine onSubmit with values', () => {
+      const props = {
+        refine: jest.fn(),
+      };
+
+      const event = {
+        preventDefault: jest.fn(),
+      };
+
+      const component = shallowRender(props);
+
+      component.setState({
+        from: 10,
+        to: 490,
+      });
+
+      component.find('form').simulate('submit', event);
+
+      expect(event.preventDefault).toHaveBeenCalled();
+      expect(props.refine).toHaveBeenCalledWith({
+        min: 10,
+        max: 490,
+      });
+    });
+
+    it('expect to not call refine with empty string', () => {
+      const props = {
+        refine: jest.fn(),
+      };
+
+      const event = {
+        preventDefault: jest.fn(),
+      };
+
+      const component = shallowRender(props);
+
+      component.find('form').simulate('submit', event);
+
+      expect(event.preventDefault).toHaveBeenCalled();
+      expect(props.refine).not.toHaveBeenCalled();
     });
   });
 });

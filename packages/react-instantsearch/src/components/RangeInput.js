@@ -6,17 +6,17 @@ import classNames from './classNames.js';
 
 const cx = classNames('RangeInput');
 
-class RangeInput extends Component {
+export class RawRangeInput extends Component {
   static propTypes = {
-    translate: PropTypes.func.isRequired,
-    refine: PropTypes.func.isRequired,
-    min: PropTypes.number.isRequired,
-    max: PropTypes.number.isRequired,
     currentRefinement: PropTypes.shape({
       min: PropTypes.number,
       max: PropTypes.number,
     }).isRequired,
     canRefine: PropTypes.bool.isRequired,
+    translate: PropTypes.func.isRequired,
+    refine: PropTypes.func.isRequired,
+    min: PropTypes.number,
+    max: PropTypes.number,
   };
 
   static contextTypes = {
@@ -25,23 +25,24 @@ class RangeInput extends Component {
 
   constructor(props) {
     super(props);
-    this.state = this.props.canRefine
-      ? { from: props.currentRefinement.min, to: props.currentRefinement.max }
-      : { from: '', to: '' };
+
+    this.state = this.normalizeStateForRendering(props);
   }
 
   componentWillMount() {
-    if (this.context.canRefine) this.context.canRefine(this.props.canRefine);
+    if (this.context.canRefine) {
+      this.context.canRefine(this.props.canRefine);
+    }
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.canRefine) {
-      this.setState({
-        from: nextProps.currentRefinement.min,
-        to: nextProps.currentRefinement.max,
-      });
+      this.setState(this.normalizeStateForRendering(nextProps));
     }
-    if (this.context.canRefine) this.context.canRefine(nextProps.canRefine);
+
+    if (this.context.canRefine) {
+      this.context.canRefine(nextProps.canRefine);
+    }
   }
 
   onSubmit = e => {
@@ -55,8 +56,30 @@ class RangeInput extends Component {
     }
   };
 
+  normalizeStateForRendering(props) {
+    const { min: rangeMin, max: rangeMax } = props;
+    const { min: valueMin, max: valueMax } = props.currentRefinement;
+
+    return {
+      from: valueMin !== undefined && valueMin !== rangeMin ? valueMin : '',
+      to: valueMax !== undefined && valueMax !== rangeMax ? valueMax : '',
+    };
+  }
+
+  normalizeRangeForRendering({ min, max }) {
+    const hasMin = min !== undefined;
+    const hasMax = max !== undefined;
+
+    return {
+      min: hasMin && hasMax ? min : '',
+      max: hasMin && hasMax ? max : '',
+    };
+  }
+
   render() {
-    const { translate, canRefine, min, max } = this.props;
+    const { from, to } = this.state;
+    const { translate, canRefine } = this.props;
+    const { min, max } = this.normalizeRangeForRendering(this.props);
 
     return (
       <form
@@ -70,8 +93,9 @@ class RangeInput extends Component {
               type="number"
               min={min}
               max={max}
-              value={this.state.from}
-              onChange={e => this.setState({ from: e.target.value })}
+              value={from}
+              placeholder={min}
+              onChange={e => this.setState({ from: e.currentTarget.value })}
             />
           </label>
           <span {...cx('separator')}>{translate('separator')}</span>
@@ -81,8 +105,9 @@ class RangeInput extends Component {
               type="number"
               min={min}
               max={max}
-              value={this.state.to}
-              onChange={e => this.setState({ to: e.target.value })}
+              value={to}
+              placeholder={max}
+              onChange={e => this.setState({ to: e.currentTarget.value })}
             />
           </label>
           <button {...cx('submit')} type="submit">
@@ -97,4 +122,4 @@ class RangeInput extends Component {
 export default translatable({
   submit: 'ok',
   separator: 'to',
-})(RangeInput);
+})(RawRangeInput);
