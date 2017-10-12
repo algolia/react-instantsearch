@@ -71,12 +71,13 @@ function transformValue(value, props, searchState, context) {
 
 function applyLimit(array, limit) {
   const slicedArray = array.slice(0, limit);
-  for (let i = 0; i < limit; i++) {
+  for (let i = 0; i < slicedArray.length; i++) {
     if (slicedArray[i].items) {
       slicedArray[i].items = applyLimit(slicedArray[i].items, limit);
     }
   }
   return slicedArray;
+  // return array;
 }
 
 function refine(props, searchState, nextRefinement, context) {
