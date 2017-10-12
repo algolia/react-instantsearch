@@ -48,12 +48,10 @@ export class RawRangeInput extends Component {
   onSubmit = e => {
     e.preventDefault();
 
-    if (
-      !isNaN(parseFloat(this.state.from, 10)) &&
-      !isNaN(parseFloat(this.state.to, 10))
-    ) {
-      this.props.refine({ min: this.state.from, max: this.state.to });
-    }
+    this.props.refine({
+      min: this.state.from,
+      max: this.state.to,
+    });
   };
 
   normalizeStateForRendering(props) {

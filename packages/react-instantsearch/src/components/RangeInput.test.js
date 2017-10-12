@@ -349,7 +349,10 @@ describe('RawRangeInput', () => {
       component.find('form').simulate('submit', event);
 
       expect(event.preventDefault).toHaveBeenCalled();
-      expect(props.refine).not.toHaveBeenCalled();
+      expect(props.refine).toHaveBeenCalledWith({
+        min: '',
+        max: '',
+      });
     });
   });
 });
