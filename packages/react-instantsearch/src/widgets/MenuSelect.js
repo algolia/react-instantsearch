@@ -10,7 +10,6 @@ import MenuSelectComponent from '../components/MenuSelect.js';
  * @propType {string} attributeName - the name of the attribute in the record
  * @propType {string} [defaultRefinement] - the value of the item selected by default
  * @propType {function} [transformItems] - Function to modify the items being displayed, e.g. for filtering or sorting them. Takes an items as parameter and expects it back in return.
- * @themeKey ais-MenuSelect__root - the root of the component
  * @themeKey ais-MenuSelect__select - the select container of all items in the
  * @themeKey ais-MenuSelect__option - a single item
  * @translationkey seeAllOption - The label of the option to select to remove the refinement
