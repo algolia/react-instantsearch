@@ -28,7 +28,7 @@ class MenuSelect extends Component {
 
   get selectedValue() {
     const { value } = find(this.props.items, { isRefined: true }) || {
-      value: '',
+      value: 'ais__see__all__option',
     };
     return value;
   }
@@ -42,7 +42,7 @@ class MenuSelect extends Component {
   }
 
   handleSelectChange = ({ target: { value } }) => {
-    this.props.refine(value);
+    this.props.refine(value === 'ais__see__all__option' ? '' : value);
   };
 
   render() {
@@ -54,7 +54,7 @@ class MenuSelect extends Component {
         onChange={this.handleSelectChange}
         {...cx('select')}
       >
-        <option value="" {...cx('option')}>
+        <option value="ais__see__all__option" {...cx('option')}>
           {translate('seeAllOption')}
         </option>
 
