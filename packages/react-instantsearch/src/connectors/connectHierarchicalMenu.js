@@ -70,13 +70,13 @@ function transformValue(value, props, searchState, context) {
 }
 
 function applyLimit(array, limit) {
-  const firstLevel = array.slice(0, limit);
+  const slicedArray = array.slice(0, limit);
   for (let i = 0; i < limit; i++) {
-    if (firstLevel[i].items) {
-      firstLevel[i].items = applyLimit(firstLevel[i].items, limit);
+    if (slicedArray[i].items) {
+      slicedArray[i].items = applyLimit(slicedArray[i].items, limit);
     }
   }
-  return firstLevel;
+  return slicedArray;
 }
 
 function refine(props, searchState, nextRefinement, context) {

@@ -25,7 +25,6 @@ describe('connectHierarchicalMenu', () => {
       };
 
       results.getFacetValues.mockImplementationOnce(() => ({}));
-      results.getFacetValues.mockImplementation(() => ({}));
       props = getProvidedProps(
         { attributes: ['ok'] },
         { hierarchicalMenu: { ok: 'wat' } },
@@ -171,7 +170,81 @@ describe('connectHierarchicalMenu', () => {
       expect(props.items).toEqual(['items']);
     });
 
-    it('is applying transformValue before applying transformItems', () => {
+    it('shows the effect of limitMax when there is no transformItems', () => {
+      const results = {
+        getFacetValues: jest.fn(),
+        getFacetByName: () => true,
+        hits: [],
+      };
+      results.getFacetValues.mockImplementation(() => ({
+        data: [
+          {
+            name: 'wat',
+            path: 'wat',
+            count: 20,
+            data: [
+              {
+                name: 'wot',
+                path: 'wat > wot',
+                count: 15,
+              },
+              {
+                name: 'wut',
+                path: 'wat > wut',
+                count: 3,
+              },
+              {
+                name: 'wit',
+                path: 'wat > wit',
+                count: 5,
+              },
+            ],
+          },
+          {
+            name: 'oy',
+            path: 'oy',
+            count: 10,
+          },
+          {
+            name: 'ay',
+            path: 'ay',
+            count: 3,
+          },
+        ],
+      }));
+
+      props = getProvidedProps(
+        { attributes: ['ok'], showMore: true, limitMin: 0, limitMax: 2 },
+        {},
+        { results }
+      );
+      expect(props.items).toEqual([
+        {
+          label: 'wat',
+          value: 'wat',
+          count: 20,
+          items: [
+            {
+              label: 'wot',
+              value: 'wat > wot',
+              count: 15,
+            },
+            {
+              label: 'wut',
+              value: 'wat > wut',
+              count: 3,
+            },
+          ],
+        },
+        {
+          label: 'oy',
+          value: 'oy',
+          count: 10,
+        },
+      ]);
+    });
+
+    it('applies limit after transforming items', () => {
       const results = {
         getFacetValues: jest.fn(),
         getFacetByName: () => true,
@@ -251,36 +324,6 @@ describe('connectHierarchicalMenu', () => {
           label: 'ay',
           value: 'ay',
           count: 3,
-        },
-      ]);
-      // shows the effect of limitMax without applying transformItems
-      props = getProvidedProps(
-        { attributes: ['ok'], showMore: true, limitMin: 0, limitMax: 2 },
-        {},
-        { results }
-      );
-      expect(props.items).toEqual([
-        {
-          label: 'wat',
-          value: 'wat',
-          count: 20,
-          items: [
-            {
-              label: 'wot',
-              value: 'wat > wot',
-              count: 15,
-            },
-            {
-              label: 'wut',
-              value: 'wat > wut',
-              count: 3,
-            },
-          ],
-        },
-        {
-          label: 'oy',
-          value: 'oy',
-          count: 10,
         },
       ]);
 
@@ -522,8 +565,7 @@ describe('connectHierarchicalMenu', () => {
         },
       };
 
-      // results.first.getFacetValues.mockImplementationOnce(() => ({}));
-      results.first.getFacetValues.mockImplementation(() => ({}));
+      results.first.getFacetValues.mockImplementationOnce(() => ({}));
       props = getProvidedProps(
         { attributes: ['ok'] },
         { indices: { first: { hierarchicalMenu: { ok: 'wat' } } } },
