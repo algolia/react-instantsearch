@@ -50,9 +50,11 @@ export class RawRangeInput extends Component {
     // to avoid to override current state when values are not yet refined. In the react documentation,
     // they DON'T categorically say that setState never run componentWillReceiveProps.
     // see: https://reactjs.org/docs/react-component.html#componentwillreceiveprops
+
     if (
       nextProps.canRefine &&
-      (this.props.currentRefinement.min !== nextProps.currentRefinement.min ||
+      (this.props.canRefine !== nextProps.canRefine ||
+        this.props.currentRefinement.min !== nextProps.currentRefinement.min ||
         this.props.currentRefinement.max !== nextProps.currentRefinement.max)
     ) {
       this.setState({

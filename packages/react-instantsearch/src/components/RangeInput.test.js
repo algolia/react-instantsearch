@@ -54,12 +54,13 @@ describe('RangeInput', () => {
         min={0}
         max={100}
         currentRefinement={{ min: 0, max: 100 }}
-        canRefine={true}
+        canRefine={false}
         translate={x => x}
       />
     );
 
     wrapper.setProps({
+      canRefine: true,
       currentRefinement: {
         min: 10,
         max: 90,
@@ -93,6 +94,7 @@ describe('RangeInput', () => {
     });
 
     wrapper.setProps({
+      canRefine: true,
       currentRefinement: {
         min: 0,
         max: 100,
