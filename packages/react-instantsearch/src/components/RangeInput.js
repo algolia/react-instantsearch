@@ -6,8 +6,9 @@ import classNames from './classNames.js';
 
 const cx = classNames('RangeInput');
 
-class RangeInput extends Component {
+export class RawRangeInput extends Component {
   static propTypes = {
+    canRefine: PropTypes.bool.isRequired,
     translate: PropTypes.func.isRequired,
     refine: PropTypes.func.isRequired,
     min: PropTypes.number,
@@ -16,7 +17,10 @@ class RangeInput extends Component {
       min: PropTypes.number,
       max: PropTypes.number,
     }),
-    canRefine: PropTypes.bool.isRequired,
+  };
+
+  static defaultProps = {
+    currentRefinement: {},
   };
 
   static contextTypes = {
@@ -25,23 +29,37 @@ class RangeInput extends Component {
 
   constructor(props) {
     super(props);
-    this.state = this.props.canRefine
-      ? { from: props.currentRefinement.min, to: props.currentRefinement.max }
-      : { from: '', to: '' };
+
+    this.state = {
+      from: this.props.canRefine ? props.currentRefinement.min : '',
+      to: this.props.canRefine ? props.currentRefinement.max : '',
+    };
   }
 
   componentWillMount() {
-    if (this.context.canRefine) this.context.canRefine(this.props.canRefine);
+    if (this.context.canRefine) {
+      this.context.canRefine(this.props.canRefine);
+    }
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.canRefine) {
+    if (
+      nextProps.canRefine &&
+      (this.props.currentRefinement.min !== nextProps.currentRefinement.min ||
+        this.props.currentRefinement.max !== nextProps.currentRefinement.max)
+    ) {
       this.setState({
         from: nextProps.currentRefinement.min,
         to: nextProps.currentRefinement.max,
       });
     }
-    if (this.context.canRefine) this.context.canRefine(nextProps.canRefine);
+
+    if (
+      this.context.canRefine &&
+      this.props.canRefine !== nextProps.canRefine
+    ) {
+      this.context.canRefine(nextProps.canRefine);
+    }
   }
 
   onSubmit = e => {
@@ -92,4 +110,4 @@ class RangeInput extends Component {
 export default translatable({
   submit: 'ok',
   separator: 'to',
-})(RangeInput);
+})(RawRangeInput);
