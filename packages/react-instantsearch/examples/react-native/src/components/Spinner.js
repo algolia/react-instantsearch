@@ -1,27 +1,18 @@
 import React from 'react';
 import { ActivityIndicator, View, Dimensions } from 'react-native';
-import { createConnector } from 'react-instantsearch';
+import { connectStateResults } from 'react-instantsearch/connectors';
 
 const { width, height } = Dimensions.get('window');
 
-export default createConnector({
-  displayName: 'ConditionalQuery',
-  getProvidedProps(props, searchState, results) {
-    return {
-      loading: results.searching || results.searchingForFacetValues,
-      left: props.left ? props.left : 0,
-      bottom: props.bottom ? props.bottom : height - 20,
-    };
-  },
-})(({ loading, left, bottom }) => (
+export default connectStateResults(({ searching, props }) => (
   <View
     style={{
       position: 'absolute',
-      left: width - left,
-      bottom: height - bottom,
+      left: width - props.left,
+      bottom: height - props.bottom,
       zIndex: 2,
     }}
   >
-    <ActivityIndicator animating={loading} />
+    <ActivityIndicator animating={searching} />
   </View>
 ));
