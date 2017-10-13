@@ -184,6 +184,7 @@ export default createConnector({
     }
 
     const limit = showMore ? limitMax : limitMin;
+    console.log('limit', limit);
     const value = results.getFacetValues(id, { sortBy });
     const items = value.data
       ? transformValue(value.data, limit, props, searchState, this.context)
