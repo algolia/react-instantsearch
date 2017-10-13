@@ -1,6 +1,5 @@
 /* eslint-env jest, jasmine */
 
-import PropTypes from 'prop-types';
 import React from 'react';
 import renderer from 'react-test-renderer';
 import Enzyme, { mount } from 'enzyme';
