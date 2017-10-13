@@ -43,6 +43,13 @@ export class RawRangeInput extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    // In react@16.0.0 the call to setState on the inputs trigger this lifecycle hook
+    // because the context has changed (for react). I don't think that the bug is related
+    // to react because I failed to reproduce it with a simple hierarchy of components.
+    // The workaround here is to check the differences between previous & next props in order
+    // to avoid to override current state when values are not yet refined. In the react documentation,
+    // they DON'T categorically say that setState never run componentWillReceiveProps.
+    // see: https://reactjs.org/docs/react-component.html#componentwillreceiveprops
     if (
       nextProps.canRefine &&
       (this.props.currentRefinement.min !== nextProps.currentRefinement.min ||
