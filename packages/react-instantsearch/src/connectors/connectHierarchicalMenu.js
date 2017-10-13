@@ -274,13 +274,13 @@ export default createConnector({
       items: !currentRefinement
         ? []
         : [
-          {
-            label: `${rootAttribute}: ${currentRefinement}`,
-            attributeName: rootAttribute,
-            value: nextState => refine(props, nextState, '', this.context),
-            currentRefinement,
-          },
-        ],
+            {
+              label: `${rootAttribute}: ${currentRefinement}`,
+              attributeName: rootAttribute,
+              value: nextState => refine(props, nextState, '', this.context),
+              currentRefinement,
+            },
+          ],
     };
   },
 });
