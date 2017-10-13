@@ -1,7 +1,6 @@
 /* eslint react/prop-types: 0 */
 /* eslint react/prop-types: 0 */
 import React from 'react';
-import { connectStateResults } from 'react-instantsearch/connectors';
 import {
   InstantSearch,
   HierarchicalMenu,
@@ -20,6 +19,7 @@ import {
   connectSearchBox,
   connectRefinementList,
   connectHits,
+  connectStateResults,
 } from 'react-instantsearch/connectors';
 import { withUrlSync } from '../urlSync';
 import 'react-instantsearch-theme-algolia/style.scss';

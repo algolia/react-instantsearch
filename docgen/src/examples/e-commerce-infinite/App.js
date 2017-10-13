@@ -1,7 +1,6 @@
 /* eslint react/prop-types: 0 */
 
 import React from 'react';
-import { connectStateResults } from 'react-instantsearch/connectors';
 import {
   InstantSearch,
   HierarchicalMenu,
@@ -19,6 +18,7 @@ import {
   connectSearchBox,
   connectRefinementList,
   connectInfiniteHits,
+  connectStateResults,
 } from 'react-instantsearch/connectors';
 import 'react-instantsearch-theme-algolia/style.scss';
 
