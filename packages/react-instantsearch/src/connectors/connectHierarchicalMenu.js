@@ -69,15 +69,16 @@ function transformValue(value, props, searchState, context) {
   }));
 }
 
-function applyLimit(array, limit) {
-  const slicedArray = array.slice(0, limit);
-  for (let i = 0; i < slicedArray.length; i++) {
-    if (slicedArray[i].items) {
-      slicedArray[i].items = applyLimit(slicedArray[i].items, limit);
-    }
-  }
-  return slicedArray;
-}
+const truncate = (items = [], limit = 10) =>
+  items.slice(0, limit).map(
+    (item = {}) =>
+      Array.isArray(item.items)
+        ? {
+            ...item,
+            items: truncate(item.items, limit),
+          }
+        : item
+  );
 
 function refine(props, searchState, nextRefinement, context) {
   const id = getId(props);
@@ -201,7 +202,7 @@ export default createConnector({
       ? props.transformItems(items)
       : items;
     return {
-      items: applyLimit(transformedItems, limit),
+      items: truncate(transformedItems, limit),
       currentRefinement: getCurrentRefinement(props, searchState, this.context),
       canRefine: items.length > 0,
     };
