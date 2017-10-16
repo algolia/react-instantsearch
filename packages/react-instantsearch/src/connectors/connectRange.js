@@ -33,7 +33,7 @@ function getId(props) {
 
 const namespace = 'range';
 
-function getCurrentRange(boundaries, stats) {
+function getCurrentRange(boundaries, stats, precision) {
   let min;
   if (_isFinite(boundaries.min)) {
     min = boundaries.min;
@@ -53,8 +53,8 @@ function getCurrentRange(boundaries, stats) {
   }
 
   return {
-    min,
-    max,
+    min: min !== undefined && precision === 0 ? Math.floor(min) : min,
+    max: max !== undefined && precision === 0 ? Math.ceil(max) : max,
   };
 }
 
@@ -196,7 +196,8 @@ export default createConnector({
 
     const { min: rangeMin, max: rangeMax } = getCurrentRange(
       { min: minBound, max: maxBound },
-      stats
+      stats,
+      precision
     );
 
     const { min: valueMin, max: valueMax } = getCurrentRefinement(

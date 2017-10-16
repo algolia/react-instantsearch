@@ -53,6 +53,59 @@ describe('connectRange', () => {
         currentRefinement: { min: 5, max: 10 },
         count: [{ value: '5', count: 10 }, { value: '2', count: 20 }],
         canRefine: true,
+        precision: 0,
+      });
+
+      results = {
+        getFacetStats: () => ({ min: 0.1, max: 9.9 }),
+        getFacetValues: () => [
+          { name: '5', count: 10 },
+          { name: '2', count: 20 },
+        ],
+        getFacetByName: () => true,
+        hits: [],
+      };
+      props = getProvidedProps(
+        {
+          attributeName: 'ok',
+          precision: 0,
+        },
+        {},
+        { results }
+      );
+      expect(props).toEqual({
+        min: 0,
+        max: 10,
+        currentRefinement: { min: 0, max: 10 },
+        count: [{ value: '5', count: 10 }, { value: '2', count: 20 }],
+        canRefine: true,
+        precision: 0,
+      });
+
+      results = {
+        getFacetStats: () => ({ min: 0.1, max: 9.9 }),
+        getFacetValues: () => [
+          { name: '5', count: 10 },
+          { name: '2', count: 20 },
+        ],
+        getFacetByName: () => true,
+        hits: [],
+      };
+      props = getProvidedProps(
+        {
+          attributeName: 'ok',
+          precision: 2,
+        },
+        {},
+        { results }
+      );
+      expect(props).toEqual({
+        min: 0.1,
+        max: 9.9,
+        currentRefinement: { min: 0.1, max: 9.9 },
+        count: [{ value: '5', count: 10 }, { value: '2', count: 20 }],
+        canRefine: true,
+        precision: 2,
       });
 
       results = {
