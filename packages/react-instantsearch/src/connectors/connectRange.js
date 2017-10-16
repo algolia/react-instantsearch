@@ -105,19 +105,34 @@ function refine(props, searchState, nextRefinement, currentRange, context) {
   const { min: nextMin, max: nextMax } = nextRefinement;
   const { min: currentMinRange, max: currentMaxRange } = currentRange;
 
-  const isResetMin = nextMin === undefined || nextMin === '';
-  const isResetMax = nextMax === undefined || nextMax === '';
-
-  const nextMinAsNumber = !isResetMin ? parseFloat(nextMin) : undefined;
-  const nextMaxAsNumber = !isResetMax ? parseFloat(nextMax) : undefined;
-
   const hasMinBound = props.min !== undefined;
   const hasMaxBound = props.max !== undefined;
+
+  const isMinReset = nextMin === undefined || nextMin === '';
+  const isMaxReset = nextMax === undefined || nextMax === '';
+
+  const nextMinAsNumber = !isMinReset ? parseFloat(nextMin) : undefined;
+  const nextMaxAsNumber = !isMaxReset ? parseFloat(nextMax) : undefined;
+
+  const isNextMinValid = isMinReset || _isFinite(nextMinAsNumber);
+  const isNextMaxValid = isMaxReset || _isFinite(nextMaxAsNumber);
+
+  if (!isNextMinValid || !isNextMaxValid) {
+    throw Error("You can't provide non finite values to the range connector.");
+  }
+
+  if (nextMinAsNumber < currentMinRange) {
+    throw Error("You can't provide min value lower than range.");
+  }
+
+  if (nextMaxAsNumber > currentMaxRange) {
+    throw Error("You can't provide max value greater than range.");
+  }
 
   let newNextMin;
   if (!hasMinBound && currentMinRange === nextMinAsNumber) {
     newNextMin = undefined;
-  } else if (hasMinBound && isResetMin) {
+  } else if (hasMinBound && isMinReset) {
     newNextMin = currentMinRange;
   } else {
     newNextMin = nextMinAsNumber;
@@ -126,37 +141,10 @@ function refine(props, searchState, nextRefinement, currentRange, context) {
   let newNextMax;
   if (!hasMaxBound && currentMaxRange === nextMaxAsNumber) {
     newNextMax = undefined;
-  } else if (hasMaxBound && isResetMax) {
+  } else if (hasMaxBound && isMaxReset) {
     newNextMax = currentMaxRange;
   } else {
     newNextMax = nextMaxAsNumber;
-  }
-
-  const isResetNewNextMin = newNextMin === undefined;
-  const isValidNewNextMin = _isFinite(newNextMin);
-  const isGreatherThanCurrentRange = currentMinRange <= newNextMin;
-  const isMinValid =
-    isResetNewNextMin || (isValidNewNextMin && isGreatherThanCurrentRange);
-
-  const isResetNewNextMax = newNextMax === undefined;
-  const isValidNewNextMax = _isFinite(newNextMax);
-  const isLowerThanCurrentRange = currentMaxRange >= newNextMax;
-  const isMaxValid =
-    isResetNewNextMax || (isValidNewNextMax && isLowerThanCurrentRange);
-
-  if (
-    (!isMinValid && !isValidNewNextMin) ||
-    (!isMaxValid && !isValidNewNextMax)
-  ) {
-    throw Error("You can't provide non finite values to the range connector.");
-  }
-
-  if (!isMinValid && !isGreatherThanCurrentRange) {
-    throw Error("You can't provide min value lower than range.");
-  }
-
-  if (!isMaxValid && !isLowerThanCurrentRange) {
-    throw Error("You can't provide max value greater than range.");
   }
 
   const id = getId(props);
