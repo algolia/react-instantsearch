@@ -19,7 +19,6 @@
   padding: 6px 8px;
   font-size: 14px;
   outline: none;
-  color: #697782;
   margin: auto 8px;
   border-radius: 4px;
   background-color: #ffffff;
@@ -28,6 +27,7 @@
 
   @include placeholder {
     font-size: 14px;
+    color: lighten(#697782, 20%);
   }
 
   &:hover,
