@@ -8,6 +8,7 @@ const cx = classNames('RangeInput');
 export class RawRangeInput extends Component {
   static propTypes = {
     canRefine: PropTypes.bool.isRequired,
+    precision: PropTypes.number.isRequired,
     translate: PropTypes.func.isRequired,
     refine: PropTypes.func.isRequired,
     min: PropTypes.number,
@@ -95,8 +96,9 @@ export class RawRangeInput extends Component {
 
   render() {
     const { from, to } = this.state;
-    const { translate, canRefine } = this.props;
+    const { precision, translate, canRefine } = this.props;
     const { min, max } = this.normalizeRangeForRendering(this.props);
+    const step = 1 / Math.pow(10, precision);
 
     return (
       <form
@@ -111,6 +113,7 @@ export class RawRangeInput extends Component {
               min={min}
               max={max}
               value={from}
+              step={step}
               placeholder={min}
               onChange={e => this.setState({ from: e.currentTarget.value })}
             />
@@ -123,6 +126,7 @@ export class RawRangeInput extends Component {
               min={min}
               max={max}
               value={to}
+              step={step}
               placeholder={max}
               onChange={e => this.setState({ to: e.currentTarget.value })}
             />

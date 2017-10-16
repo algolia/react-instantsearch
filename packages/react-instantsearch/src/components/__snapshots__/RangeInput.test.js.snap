@@ -18,6 +18,7 @@ exports[`RangeInput render with translations 1`] = `
         min=""
         onChange={[Function]}
         placeholder=""
+        step={1}
         type="number"
         value=""
       />
@@ -36,6 +37,7 @@ exports[`RangeInput render with translations 1`] = `
         min=""
         onChange={[Function]}
         placeholder=""
+        step={1}
         type="number"
         value=""
       />
@@ -68,6 +70,7 @@ exports[`RawRangeInput onChange expect to update max onChange 1`] = `
         min=""
         onChange={[Function]}
         placeholder=""
+        step={1}
         type="number"
         value=""
       />
@@ -86,6 +89,7 @@ exports[`RawRangeInput onChange expect to update max onChange 1`] = `
         min=""
         onChange={[Function]}
         placeholder=""
+        step={1}
         type="number"
         value={490}
       />
@@ -118,6 +122,7 @@ exports[`RawRangeInput onChange expect to update min onChange 1`] = `
         min=""
         onChange={[Function]}
         placeholder=""
+        step={1}
         type="number"
         value={10}
       />
@@ -136,6 +141,7 @@ exports[`RawRangeInput onChange expect to update min onChange 1`] = `
         min=""
         onChange={[Function]}
         placeholder=""
+        step={1}
         type="number"
         value=""
       />
@@ -168,6 +174,7 @@ exports[`RawRangeInput render when can't refine 1`] = `
         min=""
         onChange={[Function]}
         placeholder=""
+        step={1}
         type="number"
         value=""
       />
@@ -186,6 +193,7 @@ exports[`RawRangeInput render when can't refine 1`] = `
         min=""
         onChange={[Function]}
         placeholder=""
+        step={1}
         type="number"
         value=""
       />
@@ -218,6 +226,7 @@ exports[`RawRangeInput render with empty values 1`] = `
         min=""
         onChange={[Function]}
         placeholder=""
+        step={1}
         type="number"
         value=""
       />
@@ -236,6 +245,7 @@ exports[`RawRangeInput render with empty values 1`] = `
         min=""
         onChange={[Function]}
         placeholder=""
+        step={1}
         type="number"
         value=""
       />
@@ -268,6 +278,7 @@ exports[`RawRangeInput render with empty values when refinement is equal to min 
         min={0}
         onChange={[Function]}
         placeholder={0}
+        step={1}
         type="number"
         value=""
       />
@@ -286,6 +297,7 @@ exports[`RawRangeInput render with empty values when refinement is equal to min 
         min={0}
         onChange={[Function]}
         placeholder={500}
+        step={1}
         type="number"
         value=""
       />
@@ -318,6 +330,7 @@ exports[`RawRangeInput render with max only 1`] = `
         min=""
         onChange={[Function]}
         placeholder=""
+        step={1}
         type="number"
         value=""
       />
@@ -336,6 +349,7 @@ exports[`RawRangeInput render with max only 1`] = `
         min=""
         onChange={[Function]}
         placeholder=""
+        step={1}
         type="number"
         value=""
       />
@@ -368,6 +382,7 @@ exports[`RawRangeInput render with min / max 1`] = `
         min={0}
         onChange={[Function]}
         placeholder={0}
+        step={1}
         type="number"
         value=""
       />
@@ -386,6 +401,7 @@ exports[`RawRangeInput render with min / max 1`] = `
         min={0}
         onChange={[Function]}
         placeholder={500}
+        step={1}
         type="number"
         value=""
       />
@@ -418,6 +434,7 @@ exports[`RawRangeInput render with min only 1`] = `
         min=""
         onChange={[Function]}
         placeholder=""
+        step={1}
         type="number"
         value=""
       />
@@ -436,6 +453,111 @@ exports[`RawRangeInput render with min only 1`] = `
         min=""
         onChange={[Function]}
         placeholder=""
+        step={1}
+        type="number"
+        value=""
+      />
+    </label>
+    <button
+      className="ais-RangeInput__submit"
+      type="submit"
+    >
+      submit
+    </button>
+  </fieldset>
+</form>
+`;
+
+exports[`RawRangeInput render with precision of 1 1`] = `
+<form
+  className="ais-RangeInput__root"
+  onSubmit={[Function]}
+>
+  <fieldset
+    className="ais-RangeInput__fieldset"
+    disabled={false}
+  >
+    <label
+      className="ais-RangeInput__labelMin"
+    >
+      <input
+        className="ais-RangeInput__inputMin"
+        max=""
+        min=""
+        onChange={[Function]}
+        placeholder=""
+        step={0.1}
+        type="number"
+        value=""
+      />
+    </label>
+    <span
+      className="ais-RangeInput__separator"
+    >
+      separator
+    </span>
+    <label
+      className="ais-RangeInput__labelMax"
+    >
+      <input
+        className="ais-RangeInput__inputMax"
+        max=""
+        min=""
+        onChange={[Function]}
+        placeholder=""
+        step={0.1}
+        type="number"
+        value=""
+      />
+    </label>
+    <button
+      className="ais-RangeInput__submit"
+      type="submit"
+    >
+      submit
+    </button>
+  </fieldset>
+</form>
+`;
+
+exports[`RawRangeInput render with precision of 2 1`] = `
+<form
+  className="ais-RangeInput__root"
+  onSubmit={[Function]}
+>
+  <fieldset
+    className="ais-RangeInput__fieldset"
+    disabled={false}
+  >
+    <label
+      className="ais-RangeInput__labelMin"
+    >
+      <input
+        className="ais-RangeInput__inputMin"
+        max=""
+        min=""
+        onChange={[Function]}
+        placeholder=""
+        step={0.01}
+        type="number"
+        value=""
+      />
+    </label>
+    <span
+      className="ais-RangeInput__separator"
+    >
+      separator
+    </span>
+    <label
+      className="ais-RangeInput__labelMax"
+    >
+      <input
+        className="ais-RangeInput__inputMax"
+        max=""
+        min=""
+        onChange={[Function]}
+        placeholder=""
+        step={0.01}
         type="number"
         value=""
       />
@@ -468,6 +590,7 @@ exports[`RawRangeInput render with refinement 1`] = `
         min=""
         onChange={[Function]}
         placeholder=""
+        step={1}
         type="number"
         value={10}
       />
@@ -486,6 +609,7 @@ exports[`RawRangeInput render with refinement 1`] = `
         min=""
         onChange={[Function]}
         placeholder=""
+        step={1}
         type="number"
         value={490}
       />

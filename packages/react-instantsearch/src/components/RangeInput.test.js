@@ -17,6 +17,7 @@ describe('RangeInput', () => {
         max: undefined,
       },
       canRefine: true,
+      precision: 0,
       refine: () => {},
       min: undefined,
       max: undefined,
@@ -47,6 +48,7 @@ describe('RawRangeInput', () => {
         max: undefined,
       },
       canRefine: true,
+      precision: 0,
       refine: () => {},
       translate: x => x,
       min: undefined,
@@ -116,6 +118,26 @@ describe('RawRangeInput', () => {
   it('render with max only', () => {
     const props = {
       max: 500,
+    };
+
+    const component = shallowRender(props);
+
+    expect(component).toMatchSnapshot();
+  });
+
+  it('render with precision of 1', () => {
+    const props = {
+      precision: 1,
+    };
+
+    const component = shallowRender(props);
+
+    expect(component).toMatchSnapshot();
+  });
+
+  it('render with precision of 2', () => {
+    const props = {
+      precision: 2,
     };
 
     const component = shallowRender(props);
