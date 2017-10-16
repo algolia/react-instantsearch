@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { isNaN } from 'lodash';
 import translatable from '../core/translatable';
 import classNames from './classNames.js';
 
