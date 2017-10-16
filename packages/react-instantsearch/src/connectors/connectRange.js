@@ -21,6 +21,7 @@ import createConnector from '../core/createConnector';
  * @propType {{min: number, max: number}} [defaultRefinement] - Default searchState of the widget containing the start and the end of the range.
  * @propType {number} [min] - Minimum value. When this isn't set, the minimum value will be automatically computed by Algolia using the data in the index.
  * @propType {number} [max] - Maximum value. When this isn't set, the maximum value will be automatically computed by Algolia using the data in the index.
+ * @propType {number} [precision=0] - Number of digits after decimal point to use.
  * @providedPropType {function} refine - a function to select a range.
  * @providedPropType {function} createURL - a function to generate a URL for the corresponding search state
  * @providedPropType {string} currentRefinement - the refinement currently applied
@@ -175,10 +176,15 @@ export default createConnector({
     }),
     min: PropTypes.number,
     max: PropTypes.number,
+    precision: PropTypes.number,
+  },
+
+  defaultProps: {
+    precision: 0,
   },
 
   getProvidedProps(props, searchState, searchResults) {
-    const { attributeName, min: minBound, max: maxBound } = props;
+    const { attributeName, precision, min: minBound, max: maxBound } = props;
     const results = getResults(searchResults, this.context);
     const stats = results ? results.getFacetStats(attributeName) || {} : {};
     const count = results
@@ -217,6 +223,7 @@ export default createConnector({
         max: valueMax === undefined ? rangeMax : valueMax,
       },
       count,
+      precision,
     };
   },
 

@@ -17,7 +17,7 @@ describe('connectRange', () => {
 
     it('provides the correct props to the component', () => {
       props = getProvidedProps(
-        { attributeName: 'ok', min: 5, max: 10 },
+        { attributeName: 'ok', min: 5, max: 10, precision: 0 },
         {},
         {}
       );
@@ -27,6 +27,7 @@ describe('connectRange', () => {
         currentRefinement: { min: 5, max: 10 },
         count: [],
         canRefine: false,
+        precision: 0,
       });
 
       let results = {
@@ -38,7 +39,14 @@ describe('connectRange', () => {
         getFacetByName: () => true,
         hits: [],
       };
-      props = getProvidedProps({ attributeName: 'ok' }, {}, { results });
+      props = getProvidedProps(
+        {
+          attributeName: 'ok',
+          precision: 0,
+        },
+        {},
+        { results }
+      );
       expect(props).toEqual({
         min: 5,
         max: 10,
@@ -55,6 +63,7 @@ describe('connectRange', () => {
       props = getProvidedProps(
         {
           attributeName: 'ok',
+          precision: 0,
         },
         {},
         { results }
@@ -68,10 +77,11 @@ describe('connectRange', () => {
         },
         count: [],
         canRefine: false,
+        precision: 0,
       });
 
       props = getProvidedProps(
-        { attributeName: 'ok' },
+        { attributeName: 'ok', precision: 0 },
         { ok: { min: 6, max: 9 } },
         {}
       );
@@ -84,6 +94,7 @@ describe('connectRange', () => {
         },
         count: [],
         canRefine: false,
+        precision: 0,
       });
 
       props = getProvidedProps(
@@ -91,6 +102,7 @@ describe('connectRange', () => {
           attributeName: 'ok',
           min: 5,
           max: 10,
+          precision: 0,
         },
         {
           range: { ok: { min: 6, max: 9 } },
@@ -103,6 +115,7 @@ describe('connectRange', () => {
         currentRefinement: { min: 6, max: 9 },
         count: [],
         canRefine: false,
+        precision: 0,
       });
 
       props = getProvidedProps(
@@ -110,6 +123,7 @@ describe('connectRange', () => {
           attributeName: 'ok',
           min: 5,
           max: 10,
+          precision: 0,
         },
         {
           range: { ok: { min: '6', max: '9' } },
@@ -122,6 +136,7 @@ describe('connectRange', () => {
         currentRefinement: { min: 6, max: 9 },
         count: [],
         canRefine: false,
+        precision: 0,
       });
 
       props = getProvidedProps(
@@ -130,6 +145,7 @@ describe('connectRange', () => {
           min: 5,
           max: 10,
           defaultRefinement: { min: 6, max: 9 },
+          precision: 0,
         },
         {},
         {}
@@ -140,6 +156,7 @@ describe('connectRange', () => {
         currentRefinement: { min: 6, max: 9 },
         count: [],
         canRefine: false,
+        precision: 0,
       });
 
       expect(() =>
@@ -149,6 +166,7 @@ describe('connectRange', () => {
             min: 5,
             max: 10,
             defaultRefinement: { min: 4, max: 9 },
+            precision: 0,
           },
           {},
           {}
@@ -162,6 +180,7 @@ describe('connectRange', () => {
             min: 5,
             max: 10,
             defaultRefinement: { min: 6, max: 11 },
+            precision: 0,
           },
           {},
           {}
