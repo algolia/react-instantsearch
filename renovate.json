@@ -1,6 +1,7 @@
 {
   "pinVersions": true,
   "semanticCommits": true,
+  "extends": [":library"],
   "depTypes": [
     {
       "depType": "dependencies",
@@ -8,6 +9,15 @@
       "semanticPrefix": "chore(deps): "
     }
   ],
-  "ignoreDeps": ["jsdoc-parse", "react-native"],
-  "schedule": ["after 7pm on thursday"]
+  "ignoreDeps": ["jsdoc-parse", "uglify-js"],
+  "packageRules": [
+    {
+      "packagePatterns": "^@storybook",
+      "groupName": ["@storybook packages"]
+    }
+  ],
+  "automerge": true,
+  "major": {
+    "automerge": false
+  }
 }

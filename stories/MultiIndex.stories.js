@@ -11,12 +11,14 @@ import {
 import {
   connectHits,
   connectAutoComplete,
+  connectStateResults,
 } from '../packages/react-instantsearch/connectors';
 import Autosuggest from 'react-autosuggest';
+
 const stories = storiesOf('<Index>', module);
 
 stories
-  .add('MultiHits', () =>
+  .add('MultiHits', () => (
     <InstantSearch
       appId="latency"
       apiKey="6be0576ff61c053d5f9a3225e2a90f76"
@@ -45,8 +47,8 @@ stories
         </div>
       </div>
     </InstantSearch>
-  )
-  .add('AutoComplete', () =>
+  ))
+  .add('AutoComplete', () => (
     <InstantSearch
       appId="latency"
       apiKey="6be0576ff61c053d5f9a3225e2a90f76"
@@ -59,10 +61,54 @@ stories
       </Index>
       <AutoComplete />
     </InstantSearch>
-  );
+  ))
+  .add('with conditional rendering', () => (
+    <InstantSearch
+      appId="latency"
+      apiKey="6be0576ff61c053d5f9a3225e2a90f76"
+      indexName="categories"
+    >
+      <SearchBox />
+      <Results>
+        <div className="multi-index_content">
+          <div className="multi-index_categories-or-brands">
+            <Index indexName="categories">
+              <Content>
+                <div>
+                  <div>Categories: </div>
+                  <Configure hitsPerPage={3} />
+                  <CustomCategoriesOrBrands />
+                </div>
+              </Content>
+            </Index>
+            <Index indexName="brands">
+              <Content>
+                <div>
+                  <div>Brand: </div>
+                  <Configure hitsPerPage={3} />
+                  <CustomCategoriesOrBrands />
+                </div>
+              </Content>
+            </Index>
+          </div>
+          <div className="multi-index_products">
+            <Index indexName="products">
+              <Content>
+                <div>
+                  <div>Products: </div>
+                  <Configure hitsPerPage={5} />
+                  <CustomProducts />
+                </div>
+              </Content>
+            </Index>
+          </div>
+        </div>
+      </Results>
+    </InstantSearch>
+  ));
 
 const AutoComplete = connectAutoComplete(
-  ({ hits, currentRefinement, refine }) =>
+  ({ hits, currentRefinement, refine }) => (
     <Autosuggest
       suggestions={hits}
       multiSection={true}
@@ -79,23 +125,21 @@ const AutoComplete = connectAutoComplete(
       renderSectionTitle={section => section.index}
       getSectionSuggestions={section => section.hits}
     />
+  )
 );
 
 const CustomCategoriesOrBrands = connectHits(({ hits }) => {
-  const categoryOrBrand = hits.map(hit =>
+  const categoryOrBrand = hits.map(hit => (
     <CategoryOrBrand hit={hit} key={hit.objectID} />
-  );
-  return (
-    <div className="multi-index_hits">
-      {categoryOrBrand}
-    </div>
-  );
+  ));
+  return <div className="multi-index_hits">{categoryOrBrand}</div>;
 });
 
-const CategoryOrBrand = ({ hit }) =>
+const CategoryOrBrand = ({ hit }) => (
   <div className="multi-index_hit">
     <Highlight attributeName="name" hit={hit} />
-  </div>;
+  </div>
+);
 
 CategoryOrBrand.propTypes = {
   hit: PropTypes.object.isRequired,
@@ -103,11 +147,7 @@ CategoryOrBrand.propTypes = {
 
 const CustomProducts = connectHits(({ hits }) => {
   const products = hits.map(hit => <Product hit={hit} key={hit.objectID} />);
-  return (
-    <div className="multi-index_hits">
-      {products}
-    </div>
-  );
+  return <div className="multi-index_hits">{products}</div>;
 });
 
 const Product = ({ hit }) => {
@@ -122,9 +162,7 @@ const Product = ({ hit }) => {
       <div className="multi-index_hit-content">
         <div>
           <Highlight attributeName="name" hit={hit} />
-          <span>
-            {' '}- ${hit.price}
-          </span>
+          <span> - ${hit.price}</span>
         </div>
         <div className="multi-index_hit-description">
           <Highlight attributeName="brand" hit={hit} />
@@ -137,3 +175,34 @@ const Product = ({ hit }) => {
 Product.propTypes = {
   hit: PropTypes.object.isRequired,
 };
+
+const Content = connectStateResults(
+  ({ searchState, searchResults, children }) =>
+    searchResults && searchResults.nbHits !== 0 ? (
+      children
+    ) : (
+      <div>
+        No results has been found for {searchState.query} and index{' '}
+        {searchResults ? searchResults.index : ''}
+      </div>
+    )
+);
+
+const Results = connectStateResults(({ allSearchResults, children }) => {
+  const noResults =
+    allSearchResults &&
+    Object.values(allSearchResults).reduce(
+      (acc, results) => results.nbHits === 0,
+      false
+    );
+  return noResults ? (
+    <div>
+      <div>No results in category, products or brand</div>
+      <Index indexName="categories" />
+      <Index indexName="brands" />
+      <Index indexName="products" />
+    </div>
+  ) : (
+    children
+  );
+});

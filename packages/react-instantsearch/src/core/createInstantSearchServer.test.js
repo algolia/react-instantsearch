@@ -3,7 +3,10 @@
 import { createInstantSearch } from './createInstantSearchServer';
 import createConnector from './createConnector';
 import React from 'react';
-import { shallow } from 'enzyme';
+import Enzyme, { shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+Enzyme.configure({ adapter: new Adapter() });
+
 import createIndex from './createIndex';
 import { isEmpty } from 'lodash';
 import { SearchParameters } from 'algoliasearch-helper';
@@ -61,10 +64,11 @@ describe('createInstantSearchServer', () => {
 
     describe('find results', () => {
       it('searchParameters should be cleaned each time', () => {
-        const App = () =>
+        const App = () => (
           <CustomInstantSearch appId="app" apiKey="key" indexName="indexName">
             <Connected />
-          </CustomInstantSearch>;
+          </CustomInstantSearch>
+        );
 
         expect.assertions(1);
         return findResultsState(App).then(() => {
@@ -76,10 +80,11 @@ describe('createInstantSearchServer', () => {
       });
 
       it('without search state', () => {
-        const App = () =>
+        const App = () => (
           <CustomInstantSearch appId="app" apiKey="key" indexName="indexName">
             <Connected />
-          </CustomInstantSearch>;
+          </CustomInstantSearch>
+        );
 
         expect.assertions(3);
 
@@ -91,7 +96,7 @@ describe('createInstantSearchServer', () => {
       });
 
       it('with search state', () => {
-        const App = props =>
+        const App = props => (
           <CustomInstantSearch
             appId="app"
             apiKey="key"
@@ -99,7 +104,8 @@ describe('createInstantSearchServer', () => {
             searchState={props.searchState}
           >
             <Connected />
-          </CustomInstantSearch>;
+          </CustomInstantSearch>
+        );
 
         expect.assertions(3);
 
@@ -145,10 +151,11 @@ describe('createInstantSearchServer', () => {
 
     describe('find results', () => {
       it('searchParameters should be cleaned each time', () => {
-        const App = () =>
+        const App = () => (
           <CustomInstantSearch appId="app" apiKey="key" indexName="indexName">
             <Connected />
-          </CustomInstantSearch>;
+          </CustomInstantSearch>
+        );
 
         expect.assertions(1);
 
@@ -160,8 +167,8 @@ describe('createInstantSearchServer', () => {
         });
       });
 
-      it('without search state', () => {
-        const App = () =>
+      it('without search state - first api', () => {
+        const App = () => (
           <CustomInstantSearch appId="app" apiKey="key" indexName="index1">
             <CustomIndex indexName="index2">
               <Connected />
@@ -169,7 +176,8 @@ describe('createInstantSearchServer', () => {
             <CustomIndex indexName="index1">
               <Connected />
             </CustomIndex>
-          </CustomInstantSearch>;
+          </CustomInstantSearch>
+        );
 
         expect.assertions(3);
 
@@ -180,8 +188,27 @@ describe('createInstantSearchServer', () => {
         });
       });
 
-      it('with search state', () => {
-        const App = props =>
+      it('without search state - second api', () => {
+        const App = () => (
+          <CustomInstantSearch appId="app" apiKey="key" indexName="index1">
+            <CustomIndex indexName="index2">
+              <Connected />
+            </CustomIndex>
+            <Connected />
+          </CustomInstantSearch>
+        );
+
+        expect.assertions(3);
+
+        return findResultsState(App).then(data => {
+          expect(data.length).toBe(2);
+          expect(data.find(d => d.state.index === 'index1')).toBeTruthy();
+          expect(data.find(d => d.state.index === 'index2')).toBeTruthy();
+        });
+      });
+
+      it('with search state - first api', () => {
+        const App = props => (
           <CustomInstantSearch
             appId="app"
             apiKey="key"
@@ -194,7 +221,43 @@ describe('createInstantSearchServer', () => {
             <CustomIndex indexName="index1">
               <Connected />
             </CustomIndex>
-          </CustomInstantSearch>;
+          </CustomInstantSearch>
+        );
+
+        expect.assertions(3);
+
+        return findResultsState(App, {
+          searchState: {
+            indices: {
+              index1: { index: 'index1 new name' },
+              index2: { index: 'index2 new name' },
+            },
+          },
+        }).then(data => {
+          expect(data.length).toBe(2);
+          expect(
+            data.find(d => d.state.index === 'index1 new name')
+          ).toBeTruthy();
+          expect(
+            data.find(d => d.state.index === 'index2 new name')
+          ).toBeTruthy();
+        });
+      });
+
+      it('with search state - second api', () => {
+        const App = props => (
+          <CustomInstantSearch
+            appId="app"
+            apiKey="key"
+            indexName="index1"
+            searchState={props.searchState}
+          >
+            <CustomIndex indexName="index2">
+              <Connected />
+            </CustomIndex>
+            <Connected />
+          </CustomInstantSearch>
+        );
 
         expect.assertions(3);
 

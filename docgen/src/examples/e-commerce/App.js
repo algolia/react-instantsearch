@@ -1,7 +1,6 @@
 /* eslint react/prop-types: 0 */
 /* eslint react/prop-types: 0 */
 import React from 'react';
-import { createConnector } from 'react-instantsearch';
 import {
   InstantSearch,
   HierarchicalMenu,
@@ -20,11 +19,12 @@ import {
   connectSearchBox,
   connectRefinementList,
   connectHits,
+  connectStateResults,
 } from 'react-instantsearch/connectors';
 import { withUrlSync } from '../urlSync';
 import 'react-instantsearch-theme-algolia/style.scss';
 
-const App = props =>
+const App = props => (
   <InstantSearch
     appId="latency"
     apiKey="6be0576ff61c053d5f9a3225e2a90f76"
@@ -39,9 +39,10 @@ const App = props =>
       <Facets />
       <CustomResults />
     </div>
-  </InstantSearch>;
+  </InstantSearch>
+);
 
-const Header = () =>
+const Header = () => (
   <header className="content-wrapper">
     <a
       href="https://community.algolia.com/react-instantsearch"
@@ -56,9 +57,10 @@ const Header = () =>
       aeki
     </a>
     <ConnectedSearchBox />
-  </header>;
+  </header>
+);
 
-const Facets = () =>
+const Facets = () => (
   <aside>
     <ClearAll
       translations={{
@@ -103,9 +105,10 @@ const Facets = () =>
     <div className="thank-you">
       Data courtesy of <a href="http://www.ikea.com/">ikea.com</a>
     </div>
-  </aside>;
+  </aside>
+);
 
-const CustomSearchBox = ({ currentRefinement, refine }) =>
+const CustomSearchBox = ({ currentRefinement, refine }) => (
   <div className="input-group">
     <input
       type="text"
@@ -120,7 +123,8 @@ const CustomSearchBox = ({ currentRefinement, refine }) =>
         <i className="fa fa-search" />
       </button>
     </span>
-  </div>;
+  </div>
+);
 
 const ColorItem = ({ item, createURL, refine }) => {
   const active = item.isRefined ? 'checked' : '';
@@ -138,19 +142,19 @@ const ColorItem = ({ item, createURL, refine }) => {
 };
 
 const CustomColorRefinementList = ({ items, refine, createURL }) =>
-  items.length > 0
-    ? <div>
-        <h5 className={'ais-Panel__Title'}>Colors</h5>
-        {items.map(item =>
-          <ColorItem
-            key={item.label}
-            item={item}
-            refine={refine}
-            createURL={createURL}
-          />
-        )}
-      </div>
-    : null;
+  items.length > 0 ? (
+    <div>
+      <h5 className={'ais-Panel__Title'}>Colors</h5>
+      {items.map(item => (
+        <ColorItem
+          key={item.label}
+          item={item}
+          refine={refine}
+          createURL={createURL}
+        />
+      ))}
+    </div>
+  ) : null;
 
 function CustomHits({ hits }) {
   return (
@@ -165,7 +169,7 @@ const Hit = ({ item }) => {
   for (let i = 0; i < 5; i++) {
     const suffix = i >= item.rating ? '_empty' : '';
     icons.push(
-      <label key={i} label className={`ais-StarRating__ratingIcon${suffix}`} />
+      <label key={i} className={`ais-StarRating__ratingIcon${suffix}`} />
     );
   }
   return (
@@ -186,30 +190,20 @@ const Hit = ({ item }) => {
         </div>
         <div className="ais-StarRating__ratingLink">
           {icons}
-          <div className="product-price">
-            ${item.price}
-          </div>
+          <div className="product-price">${item.price}</div>
         </div>
       </div>
     </article>
   );
 };
 
-const CustomResults = createConnector({
-  displayName: 'CustomResults',
-
-  getProvidedProps(props, searchState, searchResults) {
-    const noResults = searchResults.results
-      ? searchResults.results.nbHits === 0
-      : false;
-    return { query: searchState.query, noResults };
-  },
-})(({ noResults, query }) => {
-  if (noResults) {
+const CustomResults = connectStateResults(({ searchState, searchResult }) => {
+  if (searchResult && searchResult.nbHits === 0) {
     return (
       <div className="results-wrapper">
         <div className="no-results">
-          No results found matching <span className="query">{query}</span>
+          No results found matching{' '}
+          <span className="query">{searchState.query}</span>
         </div>
       </div>
     );

@@ -1,3 +1,39 @@
+<a name="4.1.3"></a>
+## [4.1.3](https://github.com/algolia/react-instantsearch/compare/v4.1.2...v4.1.3) (2017-10-09)
+
+
+### Bug Fixes
+
+* **List:** remove React16 warning ([#442](https://github.com/algolia/react-instantsearch/issues/442)) ([8d6cf18](https://github.com/algolia/react-instantsearch/commit/8d6cf18))
+
+
+### Features
+
+* **connectStateResults:** add component props ([#434](https://github.com/algolia/react-instantsearch/issues/434)) ([c629b97](https://github.com/algolia/react-instantsearch/commit/c629b97))
+
+
+
+<a name="4.1.2"></a>
+## [4.1.2](https://github.com/algolia/react-instantsearch/compare/v4.1.1...v4.1.2) (2017-09-26)
+
+
+### Features
+
+* **Conditional:** add connectStateResults connector ([#357](https://github.com/algolia/react-instantsearch/issues/357)) ([462df5f](https://github.com/algolia/react-instantsearch/commit/462df5f))
+
+
+
+<a name="4.1.1"></a>
+## [4.1.1](https://github.com/algolia/react-instantsearch/compare/v4.1.0...v4.1.1) (2017-09-13)
+
+
+### Bug Fixes
+
+* **MultiIndex:** reset page to 1 when share widgets refine (#312) ([c85a7bf](https://github.com/algolia/react-instantsearch/commit/c85a7bf))
+* **MultiIndex:** Trigger new search when `<Index>` props are updated (#318) ([bb11965](https://github.com/algolia/react-instantsearch/commit/bb11965))
+
+
+
 <a name="4.1.0"></a>
 # [4.1.0](https://github.com/algolia/react-instantsearch/compare/v4.1.0-beta.5...v4.1.0) (2017-08-28)
 

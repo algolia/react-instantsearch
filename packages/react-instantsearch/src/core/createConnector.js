@@ -61,7 +61,7 @@ export default function createConnector(connectorDesc) {
       constructor(props, context) {
         super(props, context);
 
-        const { ais: { store, widgetsManager }, multiIndexContext } = context;
+        const { ais: { store, widgetsManager } } = context;
         const canRender = false;
         this.state = {
           props: this.getProvidedProps({ ...props, canRender }),
@@ -78,37 +78,73 @@ export default function createConnector(connectorDesc) {
             });
           }
         });
-
-        const getSearchParameters = hasSearchParameters
-          ? searchParameters =>
-              connectorDesc.getSearchParameters.call(
-                this,
-                searchParameters,
-                this.props,
-                store.getState().widgets
-              )
-          : null;
-        const getMetadata = hasMetadata
-          ? nextWidgetsState =>
-              connectorDesc.getMetadata.call(this, this.props, nextWidgetsState)
-          : null;
-        const transitionState = hasTransitionState
-          ? (prevWidgetsState, nextWidgetsState) =>
-              connectorDesc.transitionState.call(
-                this,
-                this.props,
-                prevWidgetsState,
-                nextWidgetsState
-              )
-          : null;
         if (isWidget) {
-          this.unregisterWidget = widgetsManager.registerWidget({
-            getSearchParameters,
-            getMetadata,
-            transitionState,
-            multiIndexContext,
-          });
+          this.unregisterWidget = widgetsManager.registerWidget(this);
         }
+        if (process.env.NODE_ENV === 'development') {
+          const onlyGetProvidedPropsUsage = !Object.keys(connectorDesc).find(
+            key =>
+              [
+                'getMetadata',
+                'getSearchParameters',
+                'refine',
+                'cleanUp',
+              ].indexOf(key) > -1
+          );
+
+          if (
+            onlyGetProvidedPropsUsage &&
+            !connectorDesc.displayName.startsWith('Algolia')
+          ) {
+            // eslint-disable-next-line no-console
+            console.warn(
+              'react-instantsearch: it seems that you are using the `createConnector` api ' +
+                'only to access the `searchState` and the `searchResults` through `getProvidedProps`.' +
+                'We are now provided a dedicated API' +
+                ' the `connectStateResults` connector that you should use instead. The `createConnector` API will be ' +
+                'soon deprecated and will break in future next major versions.' +
+                '\n\n' +
+                'See more at https://community.algolia.com/react-instantsearch/connectors/connectStateResults.html' +
+                '\n' +
+                'and https://community.algolia.com/react-instantsearch/guide/Conditional_display.html'
+            );
+          }
+        }
+      }
+
+      getMetadata(nextWidgetsState) {
+        if (hasMetadata) {
+          return connectorDesc.getMetadata.call(
+            this,
+            this.props,
+            nextWidgetsState
+          );
+        }
+        return {};
+      }
+
+      getSearchParameters(searchParameters) {
+        if (hasSearchParameters) {
+          return connectorDesc.getSearchParameters.call(
+            this,
+            searchParameters,
+            this.props,
+            this.context.ais.store.getState().widgets
+          );
+        }
+        return null;
+      }
+
+      transitionState(prevWidgetsState, nextWidgetsState) {
+        if (hasTransitionState) {
+          return connectorDesc.transitionState.call(
+            this,
+            this.props,
+            prevWidgetsState,
+            nextWidgetsState
+          );
+        }
+        return nextWidgetsState;
       }
 
       componentDidMount() {

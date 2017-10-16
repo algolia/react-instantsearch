@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 
 import React from 'react';
 import renderer from 'react-test-renderer';
-import { mount } from 'enzyme';
+import Enzyme, { mount } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+Enzyme.configure({ adapter: new Adapter() });
 
 import StarRating from './StarRating';
 
@@ -122,7 +124,10 @@ describe('StarRating', () => {
 
   it('should display the right number of stars', () => {
     const wrapper = mount(starRating);
-    wrapper.find('.ais-StarRating__ratingLink').last().simulate('click');
+    wrapper
+      .find('.ais-StarRating__ratingLink')
+      .last()
+      .simulate('click');
 
     const selectedLink = wrapper.find('.ais-StarRating__ratingLinkSelected');
 

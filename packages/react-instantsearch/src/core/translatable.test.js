@@ -2,7 +2,9 @@
 /* eslint-disable no-console */
 
 import React from 'react';
-import { shallow } from 'enzyme';
+import Enzyme, { shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+Enzyme.configure({ adapter: new Adapter() });
 
 import translatable from './translatable';
 
@@ -14,7 +16,9 @@ describe('translatable', () => {
       thing: n => `${n} things`,
     };
     const Translated = translatable(defaultTranslations)(Dummy);
-    const { translate } = shallow(<Translated />).find(Dummy).props();
+    const { translate } = shallow(<Translated />)
+      .find(Dummy)
+      .props();
     expect(translate('sup')).toBe('hey');
     expect(translate('thing', 20)).toBe('20 things');
   });

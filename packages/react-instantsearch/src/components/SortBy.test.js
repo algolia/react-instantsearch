@@ -1,7 +1,9 @@
 /* eslint-env jest, jasmine */
 
 import React from 'react';
-import { mount } from 'enzyme';
+import Enzyme, { mount } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+Enzyme.configure({ adapter: new Adapter() });
 
 import SortBy from './SortBy';
 
@@ -24,7 +26,12 @@ describe('SortBy behavior', () => {
 
     const selectedValue = wrapper.find('.ais-SortBy__root');
     expect(selectedValue.find('option').length).toBe(4);
-    expect(selectedValue.find('option').first().text()).toBe('index name 1');
+    expect(
+      selectedValue
+        .find('option')
+        .first()
+        .text()
+    ).toBe('index name 1');
 
     selectedValue
       .find('select')
@@ -52,6 +59,11 @@ describe('SortBy behavior', () => {
 
     const selectedValue = wrapper.find('.ais-SortBy__root');
     expect(selectedValue.find('option').length).toBe(4);
-    expect(selectedValue.find('option').first().text()).toBe('index1');
+    expect(
+      selectedValue
+        .find('option')
+        .first()
+        .text()
+    ).toBe('index1');
   });
 });

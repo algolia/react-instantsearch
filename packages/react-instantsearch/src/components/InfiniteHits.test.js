@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 
 import React from 'react';
 import renderer from 'react-test-renderer';
-import { mount } from 'enzyme';
+import Enzyme, { mount } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+Enzyme.configure({ adapter: new Adapter() });
 
 import InfiniteHits from './InfiniteHits';
 
@@ -22,10 +24,7 @@ describe('Hits', () => {
     expect(tree.toJSON()).toMatchSnapshot();
   });
 
-  const Hit = ({ hit }) =>
-    <div>
-      {JSON.stringify(hit)}
-    </div>;
+  const Hit = ({ hit }) => <div>{JSON.stringify(hit)}</div>;
   Hit.propTypes = { hit: PropTypes.object };
 
   it('calls refine when the load more button is clicked', () => {

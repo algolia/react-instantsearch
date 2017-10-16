@@ -2,7 +2,9 @@
 
 import React from 'react';
 import renderer from 'react-test-renderer';
-import { mount } from 'enzyme';
+import Enzyme, { mount } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+Enzyme.configure({ adapter: new Adapter() });
 
 import HitsPerPage from './HitsPerPage';
 
@@ -47,7 +49,12 @@ describe('HitsPerPage', () => {
 
     const selectedValue = wrapper.find('.ais-HitsPerPage__root');
     expect(selectedValue.find('option').length).toBe(4);
-    expect(selectedValue.find('option').first().text()).toBe('2 hits per page');
+    expect(
+      selectedValue
+        .find('option')
+        .first()
+        .text()
+    ).toBe('2 hits per page');
 
     selectedValue.find('select').simulate('change', { target: { value: '6' } });
 
@@ -68,6 +75,11 @@ describe('HitsPerPage', () => {
 
     const selectedValue = wrapper.find('.ais-HitsPerPage__root');
     expect(selectedValue.find('option').length).toBe(4);
-    expect(selectedValue.find('option').first().text()).toBe('2');
+    expect(
+      selectedValue
+        .find('option')
+        .first()
+        .text()
+    ).toBe('2');
   });
 });

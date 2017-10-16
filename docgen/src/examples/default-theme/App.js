@@ -1,6 +1,5 @@
 /* eslint react/prop-types: 0 */
 import React from 'react';
-import { createConnector } from 'react-instantsearch';
 import {
   InstantSearch,
   Hits,
@@ -16,10 +15,11 @@ import {
   Highlight,
   Configure,
 } from 'react-instantsearch/dom';
+import { connectStateResults } from 'react-instantsearch/connectors';
 import { withUrlSync } from '../urlSync';
 import 'react-instantsearch-theme-algolia/style.scss';
 
-const App = props =>
+const App = props => (
   <InstantSearch
     appId="latency"
     apiKey="6be0576ff61c053d5f9a3225e2a90f76"
@@ -34,9 +34,10 @@ const App = props =>
       <Facets />
       <CustomResults />
     </div>
-  </InstantSearch>;
+  </InstantSearch>
+);
 
-const Header = () =>
+const Header = () => (
   <header className="content-wrapper header">
     <a
       href="https://community.algolia.com/react-instantsearch/"
@@ -48,9 +49,10 @@ const Header = () =>
       />
     </a>
     <SearchBox />
-  </header>;
+  </header>
+);
 
-const Facets = () =>
+const Facets = () => (
   <aside>
     <ClearAll
       translations={{
@@ -80,15 +82,15 @@ const Facets = () =>
     <div className="thank-you">
       Data courtesy of <a href="http://www.ikea.com/">ikea.com</a>
     </div>
-  </aside>;
+  </aside>
+);
 
-const SideBarSection = ({ title, children }) =>
+const SideBarSection = ({ title, children }) => (
   <section className="facet-wrapper">
-    <div className="facet-category-title facet">
-      {title}
-    </div>
+    <div className="facet-category-title facet">{title}</div>
     {children}
-  </section>;
+  </section>
+);
 
 const Hit = ({ hit }) => {
   const icons = [];
@@ -109,30 +111,20 @@ const Hit = ({ hit }) => {
         </div>
         <div className="ais-StarRating__ratingLink">
           {icons}
-          <div className="product-price">
-            ${hit.price}
-          </div>
+          <div className="product-price">${hit.price}</div>
         </div>
       </div>
     </article>
   );
 };
 
-const CustomResults = createConnector({
-  displayName: 'CustomResults',
-
-  getProvidedProps(props, searchState, searchResults) {
-    const noResults = searchResults.results
-      ? searchResults.results.nbHits === 0
-      : false;
-    return { query: searchState.query, noResults };
-  },
-})(({ noResults, query }) => {
-  if (noResults) {
+const CustomResults = connectStateResults(({ searchState, searchResult }) => {
+  if (searchResult && searchResult.nbHits === 0) {
     return (
       <div className="results-wrapper">
         <div className="no-results">
-          No results found matching <span className="query">{query}</span>
+          No results found matching{' '}
+          <span className="query">{searchState.query}</span>
         </div>
       </div>
     );

@@ -2,7 +2,9 @@
 /* eslint-disable max-len */
 
 import React from 'react';
-import { mount } from 'enzyme';
+import Enzyme, { mount } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+Enzyme.configure({ adapter: new Adapter() });
 
 import Index from './Index';
 
@@ -15,12 +17,14 @@ describe('Index', () => {
   };
 
   const registerWidget = jest.fn();
-  const widgetsManager = { registerWidget };
+  const update = jest.fn();
+  const widgetsManager = { registerWidget, update };
 
   let context = {
     ais: {
       widgetsManager,
       onSearchParameters: () => {},
+      update,
     },
   };
 
@@ -63,6 +67,19 @@ describe('Index', () => {
     expect(childContext.multiIndexContext.targetedIndex).toBe(
       DEFAULT_PROPS.indexName
     );
+  });
+
+  it('update search if indexName prop change', () => {
+    const wrapper = mount(
+      <Index {...DEFAULT_PROPS}>
+        <div />
+      </Index>,
+      { context }
+    );
+
+    wrapper.setProps({ indexName: 'newIndexName' });
+
+    expect(update.mock.calls.length).toBe(1);
   });
 
   it('calls onSearchParameters when mounted', () => {
