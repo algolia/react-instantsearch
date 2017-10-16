@@ -154,112 +154,115 @@ describe('RawRangeInput', () => {
   });
 
   describe('willReceiveProps', () => {
-    it('expect to update the state when can refine', () => {
-      const props = {};
-      const nextProps = {
-        canRefine: true,
-        currentRefinement: {
-          min: 10,
-          max: 490,
-        },
-      };
-
-      const component = shallowRender(props);
-
-      expect(component).toMatchSnapshot();
-
-      component.setProps(nextProps);
-
-      expect(component).toMatchSnapshot();
-      expect(component.state()).toEqual({
-        from: 10,
-        to: 490,
-      });
-    });
-
-    it('expect to update the state when can refine without refinement', () => {
-      const props = {};
-      const nextProps = {
-        canRefine: true,
-        currentRefinement: {},
-      };
-
-      const component = shallowRender(props);
-
-      expect(component).toMatchSnapshot();
-
-      component.setProps(nextProps);
-
-      expect(component).toMatchSnapshot();
-      expect(component.state()).toEqual({
-        from: '',
-        to: '',
-      });
-    });
-
-    it('expect to update the state when can refine and refinement is equal to min / max', () => {
-      const props = {};
-      const nextProps = {
-        canRefine: true,
-        min: 10,
-        max: 490,
-        currentRefinement: {
-          min: 10,
-          max: 490,
-        },
-      };
-
-      const component = shallowRender(props);
-
-      expect(component).toMatchSnapshot();
-
-      component.setProps(nextProps);
-
-      expect(component).toMatchSnapshot();
-      expect(component.state()).toEqual({
-        from: '',
-        to: '',
-      });
-    });
-
-    it("expect to not update the state when can't refine", () => {
-      const props = {};
-      const nextProps = {
+    it('expect to update state when props have changed ', () => {
+      const props = {
         canRefine: false,
         currentRefinement: {
-          min: 10,
-          max: 490,
+          min: 0,
+          max: 100,
         },
       };
 
-      const component = shallowRender(props);
-
-      expect(component).toMatchSnapshot();
-
-      component.setProps(nextProps);
-
-      expect(component).toMatchSnapshot();
-      expect(component.state()).toEqual({
-        from: '',
-        to: '',
-      });
-    });
-
-    it('expect to call canRefine from context when defined', () => {
-      const props = {};
       const context = {
         canRefine: jest.fn(),
       };
 
-      const nextProps = {
+      const wrapper = shallowRender(props, context);
+
+      wrapper.setProps({
         canRefine: true,
+        currentRefinement: {
+          min: 10,
+          max: 90,
+        },
+      });
+
+      wrapper.update();
+
+      expect(wrapper.state()).toEqual({
+        from: 10,
+        to: 90,
+      });
+    });
+
+    it("expect to not update state when props don't have changed", () => {
+      const props = {
+        canRefine: true,
+        currentRefinement: {
+          min: 0,
+          max: 100,
+        },
       };
 
-      const component = shallowRender(props, context);
+      const context = {
+        canRefine: jest.fn(),
+      };
 
-      component.setProps(nextProps);
+      const wrapper = shallowRender(props, context);
+
+      wrapper.setState({
+        from: 10,
+        to: 90,
+      });
+
+      wrapper.setProps({
+        canRefine: true,
+        currentRefinement: {
+          min: 0,
+          max: 100,
+        },
+      });
+
+      wrapper.update();
+
+      expect(wrapper.state()).toEqual({
+        from: 10,
+        to: 90,
+      });
+    });
+
+    it('expect to call context canRefine when props changed', () => {
+      const props = {
+        canRefine: true,
+        currentRefinement: {
+          min: 0,
+          max: 100,
+        },
+      };
+
+      const context = {
+        canRefine: jest.fn(),
+      };
+
+      const wrapper = shallowRender(props, context);
+
+      wrapper.setProps({
+        canRefine: false,
+      });
 
       expect(context.canRefine).toHaveBeenCalledTimes(2);
+    });
+
+    it("expect to not call context canRefine when props don't have changed", () => {
+      const props = {
+        canRefine: true,
+        currentRefinement: {
+          min: 0,
+          max: 100,
+        },
+      };
+
+      const context = {
+        canRefine: jest.fn(),
+      };
+
+      const wrapper = shallowRender(props, context);
+
+      wrapper.setProps({
+        canRefine: true,
+      });
+
+      expect(context.canRefine).toHaveBeenCalledTimes(1);
     });
 
     it('expect to not throw when canRefine is not defined', () => {

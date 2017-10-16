@@ -7,15 +7,19 @@ const cx = classNames('RangeInput');
 
 export class RawRangeInput extends Component {
   static propTypes = {
-    currentRefinement: PropTypes.shape({
-      min: PropTypes.number,
-      max: PropTypes.number,
-    }).isRequired,
     canRefine: PropTypes.bool.isRequired,
     translate: PropTypes.func.isRequired,
     refine: PropTypes.func.isRequired,
     min: PropTypes.number,
     max: PropTypes.number,
+    currentRefinement: PropTypes.shape({
+      min: PropTypes.number,
+      max: PropTypes.number,
+    }),
+  };
+
+  static defaultProps = {
+    currentRefinement: {},
   };
 
   static contextTypes = {
@@ -35,11 +39,27 @@ export class RawRangeInput extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.canRefine) {
+    // In react@16.0.0 the call to setState on the inputs trigger this lifecycle hook
+    // because the context has changed (for react). I don't think that the bug is related
+    // to react because I failed to reproduce it with a simple hierarchy of components.
+    // The workaround here is to check the differences between previous & next props in order
+    // to avoid to override current state when values are not yet refined. In the react documentation,
+    // they DON'T categorically say that setState never run componentWillReceiveProps.
+    // see: https://reactjs.org/docs/react-component.html#componentwillreceiveprops
+
+    if (
+      nextProps.canRefine &&
+      (this.props.canRefine !== nextProps.canRefine ||
+        this.props.currentRefinement.min !== nextProps.currentRefinement.min ||
+        this.props.currentRefinement.max !== nextProps.currentRefinement.max)
+    ) {
       this.setState(this.normalizeStateForRendering(nextProps));
     }
 
-    if (this.context.canRefine) {
+    if (
+      this.context.canRefine &&
+      this.props.canRefine !== nextProps.canRefine
+    ) {
       this.context.canRefine(nextProps.canRefine);
     }
   }
