@@ -132,7 +132,8 @@
     ],
     "setupFiles": [
       "./shim.js"
-    ]
+    ],
+    "snapshotSerializers": ["enzyme-to-json/serializer"]
   },
   "license": "MIT",
   "author": {
