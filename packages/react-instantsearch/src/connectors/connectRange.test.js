@@ -94,6 +94,34 @@ describe('connectRange', () => {
       props = getProvidedProps(
         {
           attributeName: 'ok',
+          precision: 0,
+          min: 0.1,
+          max: 9.9,
+        },
+        {},
+        { results }
+      );
+      expect(props).toEqual({
+        min: 0,
+        max: 10,
+        currentRefinement: { min: 0, max: 10 },
+        count: [{ value: '5', count: 10 }, { value: '2', count: 20 }],
+        canRefine: true,
+        precision: 0,
+      });
+
+      results = {
+        getFacetStats: () => ({ min: 0.1, max: 9.9 }),
+        getFacetValues: () => [
+          { name: '5', count: 10 },
+          { name: '2', count: 20 },
+        ],
+        getFacetByName: () => true,
+        hits: [],
+      };
+      props = getProvidedProps(
+        {
+          attributeName: 'ok',
           precision: 2,
         },
         {},
@@ -291,7 +319,14 @@ describe('connectRange', () => {
     });
 
     it('refines the corresponding numeric facet', () => {
-      params = getSearchParameters(
+      params = connect.getSearchParameters.call(
+        {
+          ...context,
+          _currentRange: {
+            min: 10,
+            max: 30,
+          },
+        },
         new SearchParameters(),
         { attributeName: 'facet' },
         { range: { facet: { min: 10, max: 30 } } }
@@ -302,7 +337,14 @@ describe('connectRange', () => {
         '<=': [30],
       });
 
-      params = getSearchParameters(
+      params = connect.getSearchParameters.call(
+        {
+          ...context,
+          _currentRange: {
+            min: 10,
+            max: 30,
+          },
+        },
         new SearchParameters(),
         { attributeName: 'facet', min: 10, max: 30 },
         {}

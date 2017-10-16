@@ -58,7 +58,7 @@ function getCurrentRange(boundaries, stats, precision) {
   };
 }
 
-function getCurrentRefinement(props, searchState, context) {
+function getCurrentRefinement(props, searchState, currentRange, context) {
   const refinement = getCurrentRefinementValue(
     props,
     searchState,
@@ -83,20 +83,20 @@ function getCurrentRefinement(props, searchState, context) {
   const hasMinRefinment = refinement.min !== undefined;
   const hasMaxRefinment = refinement.max !== undefined;
 
-  if (hasMinBound && hasMinRefinment && refinement.min < props.min) {
+  if (hasMinBound && hasMinRefinment && refinement.min < currentRange.min) {
     throw Error("You can't provide min value lower than range.");
   }
 
-  if (hasMaxBound && hasMaxRefinment && refinement.max > props.max) {
+  if (hasMaxBound && hasMaxRefinment && refinement.max > currentRange.max) {
     throw Error("You can't provide max value greater than range.");
   }
 
   if (hasMinBound && !hasMinRefinment) {
-    refinement.min = props.min;
+    refinement.min = currentRange.min;
   }
 
   if (hasMaxBound && !hasMaxRefinment) {
-    refinement.max = props.max;
+    refinement.max = currentRange.max;
   }
 
   return refinement;
@@ -200,12 +200,6 @@ export default createConnector({
       precision
     );
 
-    const { min: valueMin, max: valueMax } = getCurrentRefinement(
-      props,
-      searchState,
-      this.context
-    );
-
     // The searchState is not always in sync with the helper state. For example
     // when we set boundaries on the first render the searchState don't have
     // the correct refinement. If this behaviour change in the upcoming version
@@ -214,6 +208,13 @@ export default createConnector({
       min: rangeMin,
       max: rangeMax,
     };
+
+    const { min: valueMin, max: valueMax } = getCurrentRefinement(
+      props,
+      searchState,
+      this._currentRange,
+      this.context
+    );
 
     return {
       min: rangeMin,
@@ -247,6 +248,7 @@ export default createConnector({
     const currentRefinement = getCurrentRefinement(
       props,
       searchState,
+      this._currentRange,
       this.context
     );
     params = params.addDisjunctiveFacet(attributeName);
@@ -267,6 +269,7 @@ export default createConnector({
     const { min: minValue, max: maxValue } = getCurrentRefinement(
       props,
       searchState,
+      this._currentRange,
       this.context
     );
 
