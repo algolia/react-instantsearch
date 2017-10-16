@@ -12,7 +12,6 @@ describe('connectRange', () => {
   describe('single index', () => {
     const context = { context: { ais: { mainTargetedIndex: 'index' } } };
     const getProvidedProps = connect.getProvidedProps.bind(context);
-    const refine = connect.refine.bind(context);
     const getSearchParameters = connect.getSearchParameters.bind(context);
     const cleanUp = connect.cleanUp.bind(context);
 
@@ -145,7 +144,11 @@ describe('connectRange', () => {
     });
 
     it("calling refine updates the widget's search state", () => {
-      const nextState = refine(
+      const nextState = connect.refine.call(
+        {
+          ...context,
+          _currentRange: { min: 0, max: 100 },
+        },
         { attributeName: 'ok' },
         { otherKey: 'val', range: { otherKey: { min: 1, max: 2 } } },
         { min: 3, max: 5 }
@@ -159,7 +162,11 @@ describe('connectRange', () => {
 
     it('calling refine with non finite values should fail', () => {
       function shouldNotRefineWithNaN() {
-        refine(
+        connect.refine.call(
+          {
+            ...context,
+            _currentRange: { min: 0, max: 100 },
+          },
           { attributeName: 'ok' },
           { otherKey: 'val', range: { otherKey: { min: 1, max: 2 } } },
           { min: NaN, max: 5 }
@@ -170,24 +177,17 @@ describe('connectRange', () => {
       );
 
       function shouldNotRefineWithNull() {
-        refine(
+        connect.refine.call(
+          {
+            ...context,
+            _currentRange: { min: 0, max: 100 },
+          },
           { attributeName: 'ok' },
           { otherKey: 'val', range: { otherKey: { min: 1, max: 2 } } },
           { min: null, max: 5 }
         );
       }
       expect(shouldNotRefineWithNull).toThrowError(
-        "You can't provide non finite values to the range connector"
-      );
-
-      function shouldNotRefineWithUndefined() {
-        refine(
-          { attributeName: 'ok' },
-          { otherKey: 'val', range: { otherKey: { min: 1, max: 2 } } },
-          { min: undefined, max: 5 }
-        );
-      }
-      expect(shouldNotRefineWithUndefined).toThrowError(
         "You can't provide non finite values to the range connector"
       );
     });
@@ -394,6 +394,7 @@ describe('connectRange', () => {
       let nextState = connect.refine.call(
         {
           ...context,
+          _currentRange: { min: 0, max: 100 },
         },
         { attributeName: 'ok' },
         {
@@ -418,6 +419,7 @@ describe('connectRange', () => {
             ais: { mainTargetedIndex: 'first' },
             multiIndexContext: { targetedIndex: 'second' },
           },
+          _currentRange: { min: 0, max: 100 },
         },
         { attributeName: 'ok' },
         {
@@ -550,6 +552,796 @@ describe('connectRange', () => {
         another: { searchState: 'searchState' },
         indices: { first: { range: {} } },
       });
+    });
+  });
+
+  describe('refine', () => {
+    it('expect to refine when values are in range', () => {
+      const thisArgs = {
+        context: { ais: { mainTargetedIndex: 'index' } },
+        _currentRange: { min: 0, max: 100 },
+      };
+
+      const propsForRefine = {
+        attributeName: 'ok',
+      };
+
+      const searchState = {
+        otherKey: 'val',
+        range: {
+          otherKey: {
+            min: 1,
+            max: 2,
+          },
+        },
+      };
+
+      const nextRefinement = {
+        min: 10,
+        max: 90,
+      };
+
+      const actual = connect.refine.call(
+        thisArgs,
+        propsForRefine,
+        searchState,
+        nextRefinement
+      );
+
+      const expectation = {
+        page: 1,
+        otherKey: 'val',
+        range: {
+          ok: {
+            min: 10,
+            max: 90,
+          },
+          otherKey: {
+            min: 1,
+            max: 2,
+          },
+        },
+      };
+
+      expect(actual).toEqual(expectation);
+    });
+
+    it('expect to refine when values are parsable integer', () => {
+      const thisArgs = {
+        context: { ais: { mainTargetedIndex: 'index' } },
+        _currentRange: { min: 0, max: 100 },
+      };
+
+      const propsForRefine = {
+        attributeName: 'ok',
+      };
+
+      const searchState = {
+        otherKey: 'val',
+        range: {
+          otherKey: {
+            min: 1,
+            max: 2,
+          },
+        },
+      };
+
+      const nextRefinement = {
+        min: '10',
+        max: '90',
+      };
+
+      const actual = connect.refine.call(
+        thisArgs,
+        propsForRefine,
+        searchState,
+        nextRefinement
+      );
+
+      const expectation = {
+        page: 1,
+        otherKey: 'val',
+        range: {
+          ok: {
+            min: 10,
+            max: 90,
+          },
+          otherKey: {
+            min: 1,
+            max: 2,
+          },
+        },
+      };
+
+      expect(actual).toEqual(expectation);
+    });
+
+    it('expect to refine when values are parsable float', () => {
+      const thisArgs = {
+        context: { ais: { mainTargetedIndex: 'index' } },
+        _currentRange: { min: 0, max: 100 },
+      };
+
+      const propsForRefine = {
+        attributeName: 'ok',
+      };
+
+      const searchState = {
+        otherKey: 'val',
+        range: {
+          otherKey: {
+            min: 1,
+            max: 2,
+          },
+        },
+      };
+
+      const nextRefinement = {
+        min: '10.15',
+        max: '90.85',
+      };
+
+      const actual = connect.refine.call(
+        thisArgs,
+        propsForRefine,
+        searchState,
+        nextRefinement
+      );
+
+      const expectation = {
+        page: 1,
+        otherKey: 'val',
+        range: {
+          ok: {
+            min: 10.15,
+            max: 90.85,
+          },
+          otherKey: {
+            min: 1,
+            max: 2,
+          },
+        },
+      };
+
+      expect(actual).toEqual(expectation);
+    });
+
+    it('expect to refine min at range bound when defined', () => {
+      const thisArgs = {
+        context: { ais: { mainTargetedIndex: 'index' } },
+        _currentRange: { min: 10, max: 100 },
+      };
+
+      const propsForRefine = {
+        attributeName: 'ok',
+        min: 10,
+      };
+
+      const searchState = {
+        otherKey: 'val',
+        range: {
+          otherKey: {
+            min: 1,
+            max: 2,
+          },
+        },
+      };
+
+      const nextRefinement = {
+        min: 10,
+      };
+
+      const actual = connect.refine.call(
+        thisArgs,
+        propsForRefine,
+        searchState,
+        nextRefinement
+      );
+
+      const expectation = {
+        page: 1,
+        otherKey: 'val',
+        range: {
+          ok: {
+            min: 10,
+          },
+          otherKey: {
+            min: 1,
+            max: 2,
+          },
+        },
+      };
+
+      expect(actual).toEqual(expectation);
+    });
+
+    it('expect to refine max at range bound when defined', () => {
+      const thisArgs = {
+        context: { ais: { mainTargetedIndex: 'index' } },
+        _currentRange: { min: 0, max: 90 },
+      };
+
+      const propsForRefine = {
+        attributeName: 'ok',
+        max: 90,
+      };
+
+      const searchState = {
+        otherKey: 'val',
+        range: {
+          otherKey: {
+            min: 1,
+            max: 2,
+          },
+        },
+      };
+
+      const nextRefinement = {
+        max: 90,
+      };
+
+      const actual = connect.refine.call(
+        thisArgs,
+        propsForRefine,
+        searchState,
+        nextRefinement
+      );
+
+      const expectation = {
+        page: 1,
+        otherKey: 'val',
+        range: {
+          ok: {
+            max: 90,
+          },
+          otherKey: {
+            min: 1,
+            max: 2,
+          },
+        },
+      };
+
+      expect(actual).toEqual(expectation);
+    });
+
+    it('expect to refine min when user bound are set and value is nullable', () => {
+      const thisArgs = {
+        context: { ais: { mainTargetedIndex: 'index' } },
+        _currentRange: { min: 10, max: 100 },
+      };
+
+      const propsForRefine = {
+        attributeName: 'ok',
+        min: 10,
+      };
+
+      const searchState = {
+        otherKey: 'val',
+        range: {
+          otherKey: {
+            min: 1,
+            max: 2,
+          },
+          ok: {
+            min: 20,
+            max: 90,
+          },
+        },
+      };
+
+      const nextRefinement = {
+        min: undefined,
+        max: 90,
+      };
+
+      const actual = connect.refine.call(
+        thisArgs,
+        propsForRefine,
+        searchState,
+        nextRefinement
+      );
+
+      const expectation = {
+        page: 1,
+        otherKey: 'val',
+        range: {
+          ok: {
+            min: 10,
+            max: 90,
+          },
+          otherKey: {
+            min: 1,
+            max: 2,
+          },
+        },
+      };
+
+      expect(actual).toEqual(expectation);
+    });
+
+    it('expect to refine max when user bound are set and value is nullable', () => {
+      const thisArgs = {
+        context: { ais: { mainTargetedIndex: 'index' } },
+        _currentRange: { min: 0, max: 90 },
+      };
+
+      const propsForRefine = {
+        attributeName: 'ok',
+        max: 90,
+      };
+
+      const searchState = {
+        otherKey: 'val',
+        range: {
+          otherKey: {
+            min: 1,
+            max: 2,
+          },
+          ok: {
+            min: 10,
+            max: 90,
+          },
+        },
+      };
+
+      const nextRefinement = {
+        min: 10,
+        max: undefined,
+      };
+
+      const actual = connect.refine.call(
+        thisArgs,
+        propsForRefine,
+        searchState,
+        nextRefinement
+      );
+
+      const expectation = {
+        page: 1,
+        otherKey: 'val',
+        range: {
+          ok: {
+            min: 10,
+            max: 90,
+          },
+          otherKey: {
+            min: 1,
+            max: 2,
+          },
+        },
+      };
+
+      expect(actual).toEqual(expectation);
+    });
+
+    it('expect to reset min with undefined', () => {
+      const thisArgs = {
+        context: { ais: { mainTargetedIndex: 'index' } },
+        _currentRange: { min: 0, max: 100 },
+      };
+
+      const propsForRefine = {
+        attributeName: 'ok',
+      };
+
+      const searchState = {
+        otherKey: 'val',
+        range: {
+          otherKey: {
+            min: 1,
+            max: 2,
+          },
+          ok: {
+            min: 5,
+            max: 10,
+          },
+        },
+      };
+
+      const nextRefinement = {
+        min: undefined,
+        max: 10,
+      };
+
+      const actual = connect.refine.call(
+        thisArgs,
+        propsForRefine,
+        searchState,
+        nextRefinement
+      );
+
+      const expectation = {
+        page: 1,
+        otherKey: 'val',
+        range: {
+          ok: {
+            min: undefined,
+            max: 10,
+          },
+          otherKey: {
+            min: 1,
+            max: 2,
+          },
+        },
+      };
+
+      expect(actual).toEqual(expectation);
+    });
+
+    it('expect to reset max with undefined', () => {
+      const thisArgs = {
+        context: { ais: { mainTargetedIndex: 'index' } },
+        _currentRange: { min: 0, max: 100 },
+      };
+
+      const propsForRefine = {
+        attributeName: 'ok',
+      };
+
+      const searchState = {
+        otherKey: 'val',
+        range: {
+          otherKey: {
+            min: 1,
+            max: 2,
+          },
+          ok: {
+            min: 5,
+            max: 10,
+          },
+        },
+      };
+
+      const nextRefinement = {
+        min: undefined,
+        max: 10,
+      };
+
+      const actual = connect.refine.call(
+        thisArgs,
+        propsForRefine,
+        searchState,
+        nextRefinement
+      );
+
+      const expectation = {
+        page: 1,
+        otherKey: 'val',
+        range: {
+          ok: {
+            min: undefined,
+            max: 10,
+          },
+          otherKey: {
+            min: 1,
+            max: 2,
+          },
+        },
+      };
+
+      expect(actual).toEqual(expectation);
+    });
+
+    it('expect to reset min with empty string', () => {
+      const thisArgs = {
+        context: { ais: { mainTargetedIndex: 'index' } },
+        _currentRange: { min: 0, max: 100 },
+      };
+
+      const propsForRefine = {
+        attributeName: 'ok',
+      };
+
+      const searchState = {
+        otherKey: 'val',
+        range: {
+          otherKey: {
+            min: 1,
+            max: 2,
+          },
+          ok: {
+            min: 5,
+            max: 10,
+          },
+        },
+      };
+
+      const nextRefinement = {
+        min: '',
+        max: 10,
+      };
+
+      const actual = connect.refine.call(
+        thisArgs,
+        propsForRefine,
+        searchState,
+        nextRefinement
+      );
+
+      const expectation = {
+        page: 1,
+        otherKey: 'val',
+        range: {
+          ok: {
+            min: undefined,
+            max: 10,
+          },
+          otherKey: {
+            min: 1,
+            max: 2,
+          },
+        },
+      };
+
+      expect(actual).toEqual(expectation);
+    });
+
+    it('expect to reset max with empty string', () => {
+      const thisArgs = {
+        context: { ais: { mainTargetedIndex: 'index' } },
+        _currentRange: { min: 0, max: 100 },
+      };
+
+      const propsForRefine = {
+        attributeName: 'ok',
+      };
+
+      const searchState = {
+        otherKey: 'val',
+        range: {
+          otherKey: {
+            min: 1,
+            max: 2,
+          },
+          ok: {
+            min: 5,
+            max: 10,
+          },
+        },
+      };
+
+      const nextRefinement = {
+        min: 5,
+        max: '',
+      };
+
+      const actual = connect.refine.call(
+        thisArgs,
+        propsForRefine,
+        searchState,
+        nextRefinement
+      );
+
+      const expectation = {
+        page: 1,
+        otherKey: 'val',
+        range: {
+          ok: {
+            min: 5,
+            max: undefined,
+          },
+          otherKey: {
+            min: 1,
+            max: 2,
+          },
+        },
+      };
+
+      expect(actual).toEqual(expectation);
+    });
+
+    it('expect to reset min when value is at bound and no bound are defined', () => {
+      const thisArgs = {
+        context: { ais: { mainTargetedIndex: 'index' } },
+        _currentRange: { min: 10, max: 100 },
+      };
+
+      const propsForRefine = {
+        attributeName: 'ok',
+      };
+
+      const searchState = {
+        otherKey: 'val',
+        range: {
+          otherKey: {
+            min: 1,
+            max: 2,
+          },
+          ok: {
+            min: 20,
+            max: 90,
+          },
+        },
+      };
+
+      const nextRefinement = {
+        min: 10,
+        max: 90,
+      };
+
+      const actual = connect.refine.call(
+        thisArgs,
+        propsForRefine,
+        searchState,
+        nextRefinement
+      );
+
+      const expectation = {
+        page: 1,
+        otherKey: 'val',
+        range: {
+          ok: {
+            min: undefined,
+            max: 90,
+          },
+          otherKey: {
+            min: 1,
+            max: 2,
+          },
+        },
+      };
+
+      expect(actual).toEqual(expectation);
+    });
+
+    it('expect to reset max when value is at bound and no bound are defined', () => {
+      const thisArgs = {
+        context: { ais: { mainTargetedIndex: 'index' } },
+        _currentRange: { min: 0, max: 100 },
+      };
+
+      const propsForRefine = {
+        attributeName: 'ok',
+      };
+
+      const searchState = {
+        otherKey: 'val',
+        range: {
+          otherKey: {
+            min: 1,
+            max: 2,
+          },
+          ok: {
+            min: 10,
+            max: 90,
+          },
+        },
+      };
+
+      const nextRefinement = {
+        min: 10,
+        max: 100,
+      };
+
+      const actual = connect.refine.call(
+        thisArgs,
+        propsForRefine,
+        searchState,
+        nextRefinement
+      );
+
+      const expectation = {
+        page: 1,
+        otherKey: 'val',
+        range: {
+          ok: {
+            min: 10,
+            max: undefined,
+          },
+          otherKey: {
+            min: 1,
+            max: 2,
+          },
+        },
+      };
+
+      expect(actual).toEqual(expectation);
+    });
+
+    it('expect to throw an error when min is invalid', () => {
+      const thisArgs = {
+        context: { ais: { mainTargetedIndex: 'index' } },
+        _currentRange: { min: 0, max: 90 },
+      };
+
+      const propsForRefine = {
+        attributeName: 'ok',
+      };
+
+      const searchState = {};
+
+      const nextRefinement = {
+        min: 'kdsjhfkd',
+      };
+
+      expect(() =>
+        connect.refine.call(
+          thisArgs,
+          propsForRefine,
+          searchState,
+          nextRefinement
+        )
+      ).toThrow("You can't provide non finite values to the range connector");
+    });
+
+    it('expect to throw an error when max is invalid', () => {
+      const thisArgs = {
+        context: { ais: { mainTargetedIndex: 'index' } },
+        _currentRange: { min: 0, max: 90 },
+      };
+
+      const propsForRefine = {
+        attributeName: 'ok',
+      };
+
+      const searchState = {};
+
+      const nextRefinement = {
+        max: 'kdsjhfkd',
+      };
+
+      expect(() =>
+        connect.refine.call(
+          thisArgs,
+          propsForRefine,
+          searchState,
+          nextRefinement
+        )
+      ).toThrow("You can't provide non finite values to the range connector");
+    });
+
+    it('expect to throw an error when min is out of range', () => {
+      const thisArgs = {
+        context: { ais: { mainTargetedIndex: 'index' } },
+        _currentRange: { min: 10, max: 90 },
+      };
+
+      const propsForRefine = {
+        attributeName: 'ok',
+        min: 10,
+      };
+
+      const searchState = {};
+
+      const nextRefinement = {
+        min: 0,
+      };
+
+      expect(() =>
+        connect.refine.call(
+          thisArgs,
+          propsForRefine,
+          searchState,
+          nextRefinement
+        )
+      ).toThrow("You can't provide min value lower than range.");
+    });
+
+    it('expect to throw an error when max is out of range', () => {
+      const thisArgs = {
+        context: { ais: { mainTargetedIndex: 'index' } },
+        _currentRange: { min: 10, max: 90 },
+      };
+
+      const propsForRefine = {
+        attributeName: 'ok',
+        max: 100,
+      };
+
+      const searchState = {};
+
+      const nextRefinement = {
+        max: 110,
+      };
+
+      expect(() =>
+        connect.refine.call(
+          thisArgs,
+          propsForRefine,
+          searchState,
+          nextRefinement
+        )
+      ).toThrow("You can't provide max value greater than range.");
     });
   });
 });

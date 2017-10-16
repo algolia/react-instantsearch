@@ -87,18 +87,73 @@ function getCurrentRefinement(props, searchState, context) {
   return refinement;
 }
 
-function refine(props, searchState, nextRefinement, context) {
-  if (
-    !_isFinite(parseFloat(nextRefinement.min)) ||
-    !_isFinite(parseFloat(nextRefinement.max))
-  ) {
-    throw new Error(
-      "You can't provide non finite values to the range connector"
-    );
+function refine(props, searchState, nextRefinement, currentRange, context) {
+  const { min: nextMin, max: nextMax } = nextRefinement;
+  const { min: currentMinRange, max: currentMaxRange } = currentRange;
+
+  const isResetMin = nextMin === undefined || nextMin === '';
+  const isResetMax = nextMax === undefined || nextMax === '';
+
+  const nextMinAsNumber = !isResetMin ? parseFloat(nextMin) : undefined;
+  const nextMaxAsNumber = !isResetMax ? parseFloat(nextMax) : undefined;
+
+  const hasMinBound = props.min !== undefined;
+  const hasMaxBound = props.max !== undefined;
+
+  let newNextMin;
+  if (!hasMinBound && currentMinRange === nextMinAsNumber) {
+    newNextMin = undefined;
+  } else if (hasMinBound && isResetMin) {
+    newNextMin = currentMinRange;
+  } else {
+    newNextMin = nextMinAsNumber;
   }
+
+  let newNextMax;
+  if (!hasMaxBound && currentMaxRange === nextMaxAsNumber) {
+    newNextMax = undefined;
+  } else if (hasMaxBound && isResetMax) {
+    newNextMax = currentMaxRange;
+  } else {
+    newNextMax = nextMaxAsNumber;
+  }
+
+  const isResetNewNextMin = newNextMin === undefined;
+  const isValidNewNextMin = _isFinite(newNextMin);
+  const isGreatherThanCurrentRange = currentMinRange <= newNextMin;
+  const isMinValid =
+    isResetNewNextMin || (isValidNewNextMin && isGreatherThanCurrentRange);
+
+  const isResetNewNextMax = newNextMax === undefined;
+  const isValidNewNextMax = _isFinite(newNextMax);
+  const isLowerThanCurrentRange = currentMaxRange >= newNextMax;
+  const isMaxValid =
+    isResetNewNextMax || (isValidNewNextMax && isLowerThanCurrentRange);
+
+  if (
+    (!isMinValid && !isValidNewNextMin) ||
+    (!isMaxValid && !isValidNewNextMax)
+  ) {
+    throw Error("You can't provide non finite values to the range connector.");
+  }
+
+  if (!isMinValid && !isGreatherThanCurrentRange) {
+    throw Error("You can't provide min value lower than range.");
+  }
+
+  if (!isMaxValid && !isLowerThanCurrentRange) {
+    throw Error("You can't provide max value greater than range.");
+  }
+
   const id = getId(props);
-  const nextValue = { [id]: nextRefinement };
   const resetPage = true;
+  const nextValue = {
+    [id]: {
+      min: newNextMin,
+      max: newNextMax,
+    },
+  };
+
   return refineValue(searchState, nextValue, context, resetPage, namespace);
 }
 
@@ -164,7 +219,13 @@ export default createConnector({
   },
 
   refine(props, searchState, nextRefinement) {
-    return refine(props, searchState, nextRefinement, this.context);
+    return refine(
+      props,
+      searchState,
+      nextRefinement,
+      this._currentRange,
+      this.context
+    );
   },
 
   cleanUp(props, searchState) {
