@@ -12,7 +12,6 @@ describe('connectRange', () => {
   describe('single index', () => {
     const context = { context: { ais: { mainTargetedIndex: 'index' } } };
     const getProvidedProps = connect.getProvidedProps.bind(context);
-    const getSearchParameters = connect.getSearchParameters.bind(context);
     const cleanUp = connect.cleanUp.bind(context);
 
     it('provides the correct props to the component', () => {
