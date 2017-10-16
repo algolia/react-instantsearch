@@ -76,11 +76,25 @@ function getCurrentRefinement(props, searchState, context) {
     }
   );
 
-  if (props.min !== undefined && refinement.min === undefined) {
+  const hasMinBound = props.min !== undefined;
+  const hasMaxBound = props.max !== undefined;
+
+  const hasMinRefinment = refinement.min !== undefined;
+  const hasMaxRefinment = refinement.max !== undefined;
+
+  if (hasMinBound && hasMinRefinment && refinement.min < props.min) {
+    throw Error("You can't provide min value lower than range.");
+  }
+
+  if (hasMaxBound && hasMaxRefinment && refinement.max > props.max) {
+    throw Error("You can't provide max value greater than range.");
+  }
+
+  if (hasMinBound && !hasMinRefinment) {
     refinement.min = props.min;
   }
 
-  if (props.max !== undefined && refinement.max === undefined) {
+  if (hasMaxBound && !hasMaxRefinment) {
     refinement.max = props.max;
   }
 

@@ -141,6 +141,32 @@ describe('connectRange', () => {
         count: [],
         canRefine: false,
       });
+
+      expect(() =>
+        getProvidedProps(
+          {
+            attributeName: 'ok',
+            min: 5,
+            max: 10,
+            defaultRefinement: { min: 4, max: 9 },
+          },
+          {},
+          {}
+        )
+      ).toThrow("You can't provide min value lower than range.");
+
+      expect(() =>
+        getProvidedProps(
+          {
+            attributeName: 'ok',
+            min: 5,
+            max: 10,
+            defaultRefinement: { min: 6, max: 11 },
+          },
+          {},
+          {}
+        )
+      ).toThrow("You can't provide max value greater than range.");
     });
 
     it("calling refine updates the widget's search state", () => {
