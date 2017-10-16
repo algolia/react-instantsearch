@@ -245,19 +245,20 @@ export default createConnector({
 
   getSearchParameters(params, props, searchState) {
     const { attributeName } = props;
-    const currentRefinement = getCurrentRefinement(
+    const { min, max } = getCurrentRefinement(
       props,
       searchState,
       this._currentRange,
       this.context
     );
+
     params = params.addDisjunctiveFacet(attributeName);
 
-    const { min, max } = currentRefinement;
-    if (typeof min !== 'undefined') {
+    if (min !== undefined) {
       params = params.addNumericRefinement(attributeName, '>=', min);
     }
-    if (typeof max !== 'undefined') {
+
+    if (max !== undefined) {
       params = params.addNumericRefinement(attributeName, '<=', max);
     }
 
