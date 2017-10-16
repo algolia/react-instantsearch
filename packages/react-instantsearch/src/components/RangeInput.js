@@ -75,22 +75,28 @@ export class RawRangeInput extends Component {
   };
 
   normalizeStateForRendering(props) {
-    const { min: rangeMin, max: rangeMax } = props;
+    const { canRefine, min: rangeMin, max: rangeMax } = props;
     const { min: valueMin, max: valueMax } = props.currentRefinement;
 
     return {
-      from: valueMin !== undefined && valueMin !== rangeMin ? valueMin : '',
-      to: valueMax !== undefined && valueMax !== rangeMax ? valueMax : '',
+      from:
+        canRefine && valueMin !== undefined && valueMin !== rangeMin
+          ? valueMin
+          : '',
+      to:
+        canRefine && valueMax !== undefined && valueMax !== rangeMax
+          ? valueMax
+          : '',
     };
   }
 
-  normalizeRangeForRendering({ min, max }) {
+  normalizeRangeForRendering({ canRefine, min, max }) {
     const hasMin = min !== undefined;
     const hasMax = max !== undefined;
 
     return {
-      min: hasMin && hasMax ? min : '',
-      max: hasMin && hasMax ? max : '',
+      min: canRefine && hasMin && hasMax ? min : '',
+      max: canRefine && hasMin && hasMax ? max : '',
     };
   }
 

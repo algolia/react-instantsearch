@@ -146,6 +146,12 @@ describe('RawRangeInput', () => {
   it("render when can't refine", () => {
     const props = {
       canRefine: false,
+      min: 0,
+      max: 100,
+      currentRefinement: {
+        min: 10,
+        max: 90,
+      },
     };
 
     const component = shallowRender(props);
