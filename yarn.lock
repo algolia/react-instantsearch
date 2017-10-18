@@ -3817,15 +3817,16 @@ entities@^1.1.1, entities@~1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/entities/-/entities-1.1.1.tgz#6e5c2d0a5621b5dadaecef80b90edfb5cd7772f0"
 
-enzyme-adapter-react-16@1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/enzyme-adapter-react-16/-/enzyme-adapter-react-16-1.0.1.tgz#066cb1735e65d8d95841a023f94dab3ce6109e17"
+enzyme-adapter-react-16@1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/enzyme-adapter-react-16/-/enzyme-adapter-react-16-1.0.2.tgz#8c6f431f17c69e1e9eeb25ca4bd92f31971eb2dd"
   dependencies:
     enzyme-adapter-utils "^1.0.0"
     lodash "^4.17.4"
     object.assign "^4.0.4"
     object.values "^1.0.4"
     prop-types "^15.5.10"
+    react-test-renderer "^16.0.0-0"
 
 enzyme-adapter-utils@^1.0.0:
   version "1.0.1"
@@ -4066,9 +4067,9 @@ eslint-scope@^3.7.1:
     esrecurse "^4.1.0"
     estraverse "^4.1.1"
 
-eslint@4.7.2:
-  version "4.7.2"
-  resolved "https://registry.yarnpkg.com/eslint/-/eslint-4.7.2.tgz#ff6f5f5193848a27ee9b627be3e73fb9cb5e662e"
+eslint@4.9.0:
+  version "4.9.0"
+  resolved "https://registry.yarnpkg.com/eslint/-/eslint-4.9.0.tgz#76879d274068261b191fe0f2f56c74c2f4208e8b"
   dependencies:
     ajv "^5.2.0"
     babel-code-frame "^6.22.0"
@@ -8444,9 +8445,9 @@ postcss-load-plugins@^2.3.0:
     cosmiconfig "^2.1.1"
     object-assign "^4.1.0"
 
-postcss-loader@2.0.7:
-  version "2.0.7"
-  resolved "https://registry.yarnpkg.com/postcss-loader/-/postcss-loader-2.0.7.tgz#4d2da1489cee0a14f72c0d9440c9ee7eded34345"
+postcss-loader@2.0.8:
+  version "2.0.8"
+  resolved "https://registry.yarnpkg.com/postcss-loader/-/postcss-loader-2.0.8.tgz#8c67ddb029407dfafe684a406cfc16bad2ce0814"
   dependencies:
     loader-utils "^1.1.0"
     postcss "^6.0.0"
@@ -9199,6 +9200,13 @@ react-tap-event-plugin@3.0.2:
   resolved "https://registry.yarnpkg.com/react-tap-event-plugin/-/react-tap-event-plugin-3.0.2.tgz#280371677b881c31376e0027a0b86d2c6de039ee"
   dependencies:
     fbjs "^0.8.6"
+
+react-test-renderer@^16.0.0-0:
+  version "16.0.0"
+  resolved "https://registry.yarnpkg.com/react-test-renderer/-/react-test-renderer-16.0.0.tgz#9fe7b8308f2f71f29fc356d4102086f131c9cb15"
+  dependencies:
+    fbjs "^0.8.16"
+    object-assign "^4.1.1"
 
 react-textarea-autosize@^4.3.0:
   version "4.3.2"
@@ -11492,7 +11500,16 @@ webpack-dev-server@^2.4.1:
     webpack-dev-middleware "^1.11.0"
     yargs "^6.6.0"
 
-webpack-hot-middleware@2.19.1, webpack-hot-middleware@^2.19.1:
+webpack-hot-middleware@2.20.0:
+  version "2.20.0"
+  resolved "https://registry.yarnpkg.com/webpack-hot-middleware/-/webpack-hot-middleware-2.20.0.tgz#cb896d837758b6408fe0afeeafdc0e5316b15319"
+  dependencies:
+    ansi-html "0.0.7"
+    html-entities "^1.2.0"
+    querystring "^0.2.0"
+    strip-ansi "^3.0.0"
+
+webpack-hot-middleware@^2.19.1:
   version "2.19.1"
   resolved "https://registry.yarnpkg.com/webpack-hot-middleware/-/webpack-hot-middleware-2.19.1.tgz#5db32c31c955c1ead114d37c7519ea554da0d405"
   dependencies:
@@ -11508,9 +11525,9 @@ webpack-sources@^1.0.1:
     source-list-map "^2.0.0"
     source-map "~0.5.3"
 
-webpack@3.7.1:
-  version "3.7.1"
-  resolved "https://registry.yarnpkg.com/webpack/-/webpack-3.7.1.tgz#6046b5c415ff7df7a0dc54c5b6b86098e8b952da"
+webpack@3.8.0:
+  version "3.8.0"
+  resolved "https://registry.yarnpkg.com/webpack/-/webpack-3.8.0.tgz#36ed73aa62e86959fbc9b7b3a90f0f094e672708"
   dependencies:
     acorn "^5.0.0"
     acorn-dynamic-import "^2.0.0"
