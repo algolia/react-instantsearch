@@ -77,6 +77,7 @@ stories
         attributeName="price"
         min={number('min', 0)}
         max={number('max', 500)}
+        precision={number('precision', 0)}
         defaultRefinement={object('default value', { min: 100, max: 400 })}
         translations={object('translations', {
           submit: ' go',
