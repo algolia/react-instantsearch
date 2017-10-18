@@ -84,9 +84,11 @@ describe('createInstantSearchManager', () => {
       });
 
       ism.widgetsManager.registerWidget({
-        getMetadata: () => {},
-        getSearchParameters: () => {},
-        transitionState: () => {},
+        props: {},
+        context: {},
+        getMetadata: () => ({}),
+        getSearchParameters: () => ({}),
+        transitionState: () => ({}),
       });
 
       const storeT0 = ism.store.getState();
