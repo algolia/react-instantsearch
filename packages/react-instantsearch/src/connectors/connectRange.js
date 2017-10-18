@@ -34,6 +34,8 @@ function getId(props) {
 const namespace = 'range';
 
 function getCurrentRange(boundaries, stats, precision) {
+  const pow = Math.pow(10, precision);
+
   let min;
   if (_isFinite(boundaries.min)) {
     min = boundaries.min;
@@ -53,8 +55,8 @@ function getCurrentRange(boundaries, stats, precision) {
   }
 
   return {
-    min: min !== undefined && precision === 0 ? Math.floor(min) : min,
-    max: max !== undefined && precision === 0 ? Math.ceil(max) : max,
+    min: min !== undefined ? Math.floor(min * pow) / pow : min,
+    max: max !== undefined ? Math.ceil(max * pow) / pow : max,
   };
 }
 

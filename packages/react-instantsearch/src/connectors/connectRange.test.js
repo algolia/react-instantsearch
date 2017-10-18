@@ -110,7 +110,59 @@ describe('connectRange', () => {
       });
 
       results = {
-        getFacetStats: () => ({ min: 0.1, max: 9.9 }),
+        getFacetStats: () => ({ min: 0.1234, max: 9.5678 }),
+        getFacetValues: () => [
+          { name: '5', count: 10 },
+          { name: '2', count: 20 },
+        ],
+        getFacetByName: () => true,
+        hits: [],
+      };
+      props = getProvidedProps(
+        {
+          attributeName: 'ok',
+          precision: 0,
+        },
+        {},
+        { results }
+      );
+      expect(props).toEqual({
+        min: 0,
+        max: 10,
+        currentRefinement: { min: 0, max: 10 },
+        count: [{ value: '5', count: 10 }, { value: '2', count: 20 }],
+        canRefine: true,
+        precision: 0,
+      });
+
+      results = {
+        getFacetStats: () => ({ min: 0.1234, max: 9.5678 }),
+        getFacetValues: () => [
+          { name: '5', count: 10 },
+          { name: '2', count: 20 },
+        ],
+        getFacetByName: () => true,
+        hits: [],
+      };
+      props = getProvidedProps(
+        {
+          attributeName: 'ok',
+          precision: 1,
+        },
+        {},
+        { results }
+      );
+      expect(props).toEqual({
+        min: 0.1,
+        max: 9.6,
+        currentRefinement: { min: 0.1, max: 9.6 },
+        count: [{ value: '5', count: 10 }, { value: '2', count: 20 }],
+        canRefine: true,
+        precision: 1,
+      });
+
+      results = {
+        getFacetStats: () => ({ min: 0.1234, max: 9.5678 }),
         getFacetValues: () => [
           { name: '5', count: 10 },
           { name: '2', count: 20 },
@@ -127,12 +179,38 @@ describe('connectRange', () => {
         { results }
       );
       expect(props).toEqual({
-        min: 0.1,
-        max: 9.9,
-        currentRefinement: { min: 0.1, max: 9.9 },
+        min: 0.12,
+        max: 9.57,
+        currentRefinement: { min: 0.12, max: 9.57 },
         count: [{ value: '5', count: 10 }, { value: '2', count: 20 }],
         canRefine: true,
         precision: 2,
+      });
+
+      results = {
+        getFacetStats: () => ({ min: 0.1234, max: 9.5678 }),
+        getFacetValues: () => [
+          { name: '5', count: 10 },
+          { name: '2', count: 20 },
+        ],
+        getFacetByName: () => true,
+        hits: [],
+      };
+      props = getProvidedProps(
+        {
+          attributeName: 'ok',
+          precision: 3,
+        },
+        {},
+        { results }
+      );
+      expect(props).toEqual({
+        min: 0.123,
+        max: 9.568,
+        currentRefinement: { min: 0.123, max: 9.568 },
+        count: [{ value: '5', count: 10 }, { value: '2', count: 20 }],
+        canRefine: true,
+        precision: 3,
       });
 
       results = {
@@ -500,13 +578,18 @@ describe('connectRange', () => {
           getFacetByName: () => true,
         },
       };
-      props = getProvidedProps({ attributeName: 'ok' }, {}, { results });
+      props = getProvidedProps(
+        { attributeName: 'ok', precision: 0 },
+        {},
+        { results }
+      );
       expect(props).toEqual({
         min: 5,
         max: 10,
         currentRefinement: { min: 5, max: 10 },
         count: [{ value: '5', count: 10 }, { value: '2', count: 20 }],
         canRefine: true,
+        precision: 0,
       });
 
       props = getProvidedProps(
@@ -514,6 +597,7 @@ describe('connectRange', () => {
           attributeName: 'ok',
           min: 5,
           max: 10,
+          precision: 0,
         },
         {
           indices: { first: { range: { ok: { min: 6, max: 9 } } } },
@@ -526,6 +610,7 @@ describe('connectRange', () => {
         currentRefinement: { min: 6, max: 9 },
         count: [],
         canRefine: false,
+        precision: 0,
       });
     });
 
