@@ -102,12 +102,22 @@ function getCurrentRefinement(props, searchState, currentRange, context) {
   return refinement;
 }
 
+function nextValueForRefinement(hasBound, isReset, range, value) {
+  let next;
+  if (!hasBound && range === value) {
+    next = undefined;
+  } else if (hasBound && isReset) {
+    next = range;
+  } else {
+    next = value;
+  }
+
+  return next;
+}
+
 function refine(props, searchState, nextRefinement, currentRange, context) {
   const { min: nextMin, max: nextMax } = nextRefinement;
   const { min: currentMinRange, max: currentMaxRange } = currentRange;
-
-  const hasMinBound = props.min !== undefined;
-  const hasMaxBound = props.max !== undefined;
 
   const isMinReset = nextMin === undefined || nextMin === '';
   const isMaxReset = nextMax === undefined || nextMax === '';
@@ -130,30 +140,22 @@ function refine(props, searchState, nextRefinement, currentRange, context) {
     throw Error("You can't provide max value greater than range.");
   }
 
-  let newNextMin;
-  if (!hasMinBound && currentMinRange === nextMinAsNumber) {
-    newNextMin = undefined;
-  } else if (hasMinBound && isMinReset) {
-    newNextMin = currentMinRange;
-  } else {
-    newNextMin = nextMinAsNumber;
-  }
-
-  let newNextMax;
-  if (!hasMaxBound && currentMaxRange === nextMaxAsNumber) {
-    newNextMax = undefined;
-  } else if (hasMaxBound && isMaxReset) {
-    newNextMax = currentMaxRange;
-  } else {
-    newNextMax = nextMaxAsNumber;
-  }
-
   const id = getId(props);
   const resetPage = true;
   const nextValue = {
     [id]: {
-      min: newNextMin,
-      max: newNextMax,
+      min: nextValueForRefinement(
+        props.min !== undefined,
+        isMinReset,
+        currentMinRange,
+        nextMinAsNumber
+      ),
+      max: nextValueForRefinement(
+        props.max !== undefined,
+        isMaxReset,
+        currentMaxRange,
+        nextMaxAsNumber
+      ),
     },
   };
 
