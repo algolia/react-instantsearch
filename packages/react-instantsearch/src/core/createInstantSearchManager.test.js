@@ -75,7 +75,7 @@ describe('createInstantSearchManager', () => {
   });
 
   describe('Widget manager', () => {
-    it('triggers the search when a widget is added', () => {
+    it('triggers the search when a widget is added', done => {
       expect.assertions(2);
 
       const ism = createInstantSearchManager({
@@ -99,6 +99,7 @@ describe('createInstantSearchManager', () => {
       setImmediate(() => {
         const storeT1 = ism.store.getState();
         expect(storeT1.searching).toBe(true);
+        done();
       });
     });
   });
