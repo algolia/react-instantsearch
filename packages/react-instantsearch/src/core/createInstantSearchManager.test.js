@@ -76,6 +76,8 @@ describe('createInstantSearchManager', () => {
 
   describe('Widget manager', () => {
     it('triggers the search when a widget is added', () => {
+      expect.assertions(2);
+
       const ism = createInstantSearchManager({
         indexName: 'index',
         initialState: {},
