@@ -33,9 +33,9 @@ stories
       </div>
     </WrapWithHits>
   ))
-  .add('with precision of 2', () => (
+  .add('with precision of 0', () => (
     <WrapWithHits linkedStoryGroup="RangeInput">
-      <RangeInput attributeName="price" precision={2} />
+      <RangeInput attributeName="price" precision={0} />
     </WrapWithHits>
   ))
   .add('with default value', () => (
