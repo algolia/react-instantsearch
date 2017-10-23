@@ -16,7 +16,7 @@ describe('connectRange', () => {
 
     it('provides the correct props to the component', () => {
       props = getProvidedProps(
-        { attributeName: 'ok', min: 5, max: 10, precision: 0 },
+        { attributeName: 'ok', min: 5, max: 10, precision: 2 },
         {},
         {}
       );
@@ -26,7 +26,7 @@ describe('connectRange', () => {
         currentRefinement: { min: 5, max: 10 },
         count: [],
         canRefine: false,
-        precision: 0,
+        precision: 2,
       });
 
       let results = {
@@ -41,7 +41,7 @@ describe('connectRange', () => {
       props = getProvidedProps(
         {
           attributeName: 'ok',
-          precision: 0,
+          precision: 2,
         },
         {},
         { results }
@@ -52,7 +52,7 @@ describe('connectRange', () => {
         currentRefinement: { min: 5, max: 10 },
         count: [{ value: '5', count: 10 }, { value: '2', count: 20 }],
         canRefine: true,
-        precision: 0,
+        precision: 2,
       });
 
       results = {
@@ -93,7 +93,7 @@ describe('connectRange', () => {
       props = getProvidedProps(
         {
           attributeName: 'ok',
-          precision: 0,
+          precision: 2,
           min: 0.1,
           max: 9.9,
         },
@@ -101,12 +101,12 @@ describe('connectRange', () => {
         { results }
       );
       expect(props).toEqual({
-        min: 0,
-        max: 10,
-        currentRefinement: { min: 0, max: 10 },
+        min: 0.1,
+        max: 9.9,
+        currentRefinement: { min: 0.1, max: 9.9 },
         count: [{ value: '5', count: 10 }, { value: '2', count: 20 }],
         canRefine: true,
-        precision: 0,
+        precision: 2,
       });
 
       results = {
@@ -221,7 +221,7 @@ describe('connectRange', () => {
       props = getProvidedProps(
         {
           attributeName: 'ok',
-          precision: 0,
+          precision: 2,
         },
         {},
         { results }
@@ -235,11 +235,11 @@ describe('connectRange', () => {
         },
         count: [],
         canRefine: false,
-        precision: 0,
+        precision: 2,
       });
 
       props = getProvidedProps(
-        { attributeName: 'ok', precision: 0 },
+        { attributeName: 'ok', precision: 2 },
         { ok: { min: 6, max: 9 } },
         {}
       );
@@ -252,7 +252,7 @@ describe('connectRange', () => {
         },
         count: [],
         canRefine: false,
-        precision: 0,
+        precision: 2,
       });
 
       props = getProvidedProps(
@@ -260,7 +260,7 @@ describe('connectRange', () => {
           attributeName: 'ok',
           min: 5,
           max: 10,
-          precision: 0,
+          precision: 2,
         },
         {
           range: { ok: { min: 6, max: 9 } },
@@ -273,7 +273,7 @@ describe('connectRange', () => {
         currentRefinement: { min: 6, max: 9 },
         count: [],
         canRefine: false,
-        precision: 0,
+        precision: 2,
       });
 
       props = getProvidedProps(
@@ -281,7 +281,7 @@ describe('connectRange', () => {
           attributeName: 'ok',
           min: 5,
           max: 10,
-          precision: 0,
+          precision: 2,
         },
         {
           range: { ok: { min: '6', max: '9' } },
@@ -294,7 +294,7 @@ describe('connectRange', () => {
         currentRefinement: { min: 6, max: 9 },
         count: [],
         canRefine: false,
-        precision: 0,
+        precision: 2,
       });
 
       props = getProvidedProps(
@@ -303,7 +303,7 @@ describe('connectRange', () => {
           min: 5,
           max: 10,
           defaultRefinement: { min: 6, max: 9 },
-          precision: 0,
+          precision: 2,
         },
         {},
         {}
@@ -314,7 +314,7 @@ describe('connectRange', () => {
         currentRefinement: { min: 6, max: 9 },
         count: [],
         canRefine: false,
-        precision: 0,
+        precision: 2,
       });
 
       expect(() =>
@@ -324,7 +324,7 @@ describe('connectRange', () => {
             min: 5,
             max: 10,
             defaultRefinement: { min: 4, max: 9 },
-            precision: 0,
+            precision: 2,
           },
           {},
           {}
@@ -338,7 +338,7 @@ describe('connectRange', () => {
             min: 5,
             max: 10,
             defaultRefinement: { min: 6, max: 11 },
-            precision: 0,
+            precision: 2,
           },
           {},
           {}
@@ -579,7 +579,7 @@ describe('connectRange', () => {
         },
       };
       props = getProvidedProps(
-        { attributeName: 'ok', precision: 0 },
+        { attributeName: 'ok', precision: 2 },
         {},
         { results }
       );
@@ -589,7 +589,7 @@ describe('connectRange', () => {
         currentRefinement: { min: 5, max: 10 },
         count: [{ value: '5', count: 10 }, { value: '2', count: 20 }],
         canRefine: true,
-        precision: 0,
+        precision: 2,
       });
 
       props = getProvidedProps(
@@ -597,7 +597,7 @@ describe('connectRange', () => {
           attributeName: 'ok',
           min: 5,
           max: 10,
-          precision: 0,
+          precision: 2,
         },
         {
           indices: { first: { range: { ok: { min: 6, max: 9 } } } },
@@ -610,7 +610,7 @@ describe('connectRange', () => {
         currentRefinement: { min: 6, max: 9 },
         count: [],
         canRefine: false,
-        precision: 0,
+        precision: 2,
       });
     });
 
