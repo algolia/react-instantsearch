@@ -7,7 +7,7 @@ import {
   Configure,
 } from '../packages/react-instantsearch/dom';
 import { withKnobs, object, number } from '@storybook/addon-knobs';
-import { changeDisplayName, WrapWithHits } from './util';
+import { changeDisplayName, filteredProps, WrapWithHits } from './util';
 import JSXAddon from 'storybook-addon-jsx';
 
 setAddon(JSXAddon);
@@ -23,7 +23,7 @@ stories
         <StarRating attributeName="rating" max={6} min={1} />
       </WrapWithHits>
     ),
-    { displayName: changeDisplayName }
+    { displayName: changeDisplayName, filterProps: filteredProps }
   )
   .addWithJSX(
     'with panel',
@@ -34,7 +34,7 @@ stories
         </Panel>
       </WrapWithHits>
     ),
-    { displayName: changeDisplayName }
+    { displayName: changeDisplayName, filterProps: filteredProps }
   )
   .addWithJSX(
     'with some unavailable refinements',
@@ -46,7 +46,7 @@ stories
         </Panel>
       </WrapWithHits>
     ),
-    { displayName: changeDisplayName }
+    { displayName: changeDisplayName, filterProps: filteredProps }
   )
   .addWithJSX(
     'with panel but no refinement',
@@ -64,7 +64,7 @@ stories
         </Panel>
       </WrapWithHits>
     ),
-    { displayName: changeDisplayName }
+    { displayName: changeDisplayName, filterProps: filteredProps }
   )
   .addWithJSX(
     'with filter on rating',
@@ -74,7 +74,7 @@ stories
         <StarRating attributeName="rating" max={6} min={1} />
       </WrapWithHits>
     ),
-    { displayName: changeDisplayName }
+    { displayName: changeDisplayName, filterProps: filteredProps }
   )
   .addWithJSX(
     'playground',
@@ -87,5 +87,5 @@ stories
         />
       </WrapWithHits>
     ),
-    { displayName: changeDisplayName }
+    { displayName: changeDisplayName, filterProps: filteredProps }
   );

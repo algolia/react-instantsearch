@@ -2,7 +2,7 @@ import React from 'react';
 import { setAddon, storiesOf } from '@storybook/react';
 import { Menu, Panel, SearchBox } from '../packages/react-instantsearch/dom';
 import { withKnobs, text, boolean, number } from '@storybook/addon-knobs';
-import { changeDisplayName, WrapWithHits } from './util';
+import { changeDisplayName, filteredProps, WrapWithHits } from './util';
 import { orderBy } from 'lodash';
 import JSXAddon from 'storybook-addon-jsx';
 
@@ -19,7 +19,7 @@ stories
         <Menu attributeName="category" />
       </WrapWithHits>
     ),
-    { displayName: changeDisplayName }
+    { displayName: changeDisplayName, filterProps: filteredProps }
   )
   .addWithJSX(
     'with default selected item',
@@ -28,7 +28,7 @@ stories
         <Menu attributeName="category" defaultRefinement="Eating" />
       </WrapWithHits>
     ),
-    { displayName: changeDisplayName }
+    { displayName: changeDisplayName, filterProps: filteredProps }
   )
   .addWithJSX(
     'with show more',
@@ -42,7 +42,7 @@ stories
         />
       </WrapWithHits>
     ),
-    { displayName: changeDisplayName }
+    { displayName: changeDisplayName, filterProps: filteredProps }
   )
   .addWithJSX(
     'with search inside items',
@@ -60,7 +60,7 @@ stories
         />
       </WrapWithHits>
     ),
-    { displayName: changeDisplayName }
+    { displayName: changeDisplayName, filterProps: filteredProps }
   )
   .addWithJSX(
     'with the sort strategy changed',
@@ -73,7 +73,7 @@ stories
         />
       </WrapWithHits>
     ),
-    { displayName: changeDisplayName }
+    { displayName: changeDisplayName, filterProps: filteredProps }
   )
   .addWithJSX(
     'with panel',
@@ -84,7 +84,7 @@ stories
         </Panel>
       </WrapWithHits>
     ),
-    { displayName: changeDisplayName }
+    { displayName: changeDisplayName, filterProps: filteredProps }
   )
   .addWithJSX(
     'with panel but no available refinement',
@@ -102,7 +102,7 @@ stories
         </Panel>
       </WrapWithHits>
     ),
-    { displayName: changeDisplayName }
+    { displayName: changeDisplayName, filterProps: filteredProps }
   )
   .addWithJSX(
     'playground',
@@ -117,5 +117,5 @@ stories
         />
       </WrapWithHits>
     ),
-    { displayName: changeDisplayName }
+    { displayName: changeDisplayName, filterProps: filteredProps }
   );

@@ -2,7 +2,7 @@ import React from 'react';
 import { setAddon, storiesOf } from '@storybook/react';
 import { Toggle } from '../packages/react-instantsearch/dom';
 import { withKnobs } from '@storybook/addon-knobs';
-import { changeDisplayName, WrapWithHits } from './util';
+import { changeDisplayName, filteredProps, WrapWithHits } from './util';
 import JSXAddon from 'storybook-addon-jsx';
 
 setAddon(JSXAddon);
@@ -22,7 +22,7 @@ stories
         />
       </WrapWithHits>
     ),
-    { displayName: changeDisplayName }
+    { displayName: changeDisplayName, filterProps: filteredProps }
   )
   .addWithJSX(
     'checked by default',
@@ -36,5 +36,5 @@ stories
         />
       </WrapWithHits>
     ),
-    { displayName: changeDisplayName }
+    { displayName: changeDisplayName, filterProps: filteredProps }
   );

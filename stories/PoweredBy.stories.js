@@ -1,7 +1,7 @@
 import React from 'react';
 import { setAddon, storiesOf } from '@storybook/react';
 import { PoweredBy } from '../packages/react-instantsearch/dom';
-import { changeDisplayName, WrapWithHits } from './util';
+import { changeDisplayName, filteredProps, WrapWithHits } from './util';
 import JSXAddon from 'storybook-addon-jsx';
 
 setAddon(JSXAddon);
@@ -15,5 +15,5 @@ stories.addWithJSX(
       <PoweredBy />
     </WrapWithHits>
   ),
-  { displayName: changeDisplayName }
+  { displayName: changeDisplayName, filterProps: filteredProps }
 );

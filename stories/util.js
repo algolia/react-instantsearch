@@ -187,4 +187,5 @@ const changeDisplayName = element => {
   return getReactElementDisplayName(element);
 };
 
-export { changeDisplayName, Wrap, WrapWithHits };
+const filteredProps = ['linkedStoryGroup', 'hasPlayground'];
+export { changeDisplayName, filteredProps, Wrap, WrapWithHits };

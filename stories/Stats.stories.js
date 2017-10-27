@@ -2,7 +2,7 @@ import React from 'react';
 import { setAddon, storiesOf } from '@storybook/react';
 import { Stats } from '../packages/react-instantsearch/dom';
 import { withKnobs } from '@storybook/addon-knobs';
-import { changeDisplayName, WrapWithHits } from './util';
+import { changeDisplayName, filteredProps, WrapWithHits } from './util';
 
 import JSXAddon from 'storybook-addon-jsx';
 
@@ -18,4 +18,4 @@ stories.addDecorator(withKnobs).addWithJSX('default',
     </div>
   </WrapWithHits>
 ),
-{ displayName: changeDisplayName });
+{ displayName: changeDisplayName, filterProps: filteredProps });

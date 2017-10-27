@@ -6,7 +6,7 @@ import {
   SearchBox,
 } from '../packages/react-instantsearch/dom';
 import { withKnobs, object, number } from '@storybook/addon-knobs';
-import { changeDisplayName, WrapWithHits } from './util';
+import { changeDisplayName, filteredProps, WrapWithHits } from './util';
 
 import JSXAddon from 'storybook-addon-jsx';
 
@@ -23,7 +23,7 @@ stories
         <RangeInput attributeName="price" />
       </WrapWithHits>
     ),
-    { displayName: changeDisplayName }
+    { displayName: changeDisplayName, filterProps: filteredProps }
   )
   .addWithJSX(
     'with panel',
@@ -34,7 +34,7 @@ stories
         </Panel>
       </WrapWithHits>
     ),
-    { displayName: changeDisplayName }
+    { displayName: changeDisplayName, filterProps: filteredProps }
   )
   .addWithJSX(
     'with no refinement',
@@ -46,7 +46,7 @@ stories
         </div>
       </WrapWithHits>
     ),
-    { displayName: changeDisplayName }
+    { displayName: changeDisplayName, filterProps: filteredProps }
   )
   .addWithJSX(
     'with precision of 0',
@@ -55,7 +55,7 @@ stories
         <RangeInput attributeName="price" precision={0} />
       </WrapWithHits>
     ),
-    { displayName: changeDisplayName }
+    { displayName: changeDisplayName, filterProps: filteredProps }
   )
   .addWithJSX(
     'with default value',
@@ -67,7 +67,7 @@ stories
         />
       </WrapWithHits>
     ),
-    { displayName: changeDisplayName }
+    { displayName: changeDisplayName, filterProps: filteredProps }
   )
   .addWithJSX(
     'with min boundaries',
@@ -76,7 +76,7 @@ stories
         <RangeInput attributeName="price" min={30} />
       </WrapWithHits>
     ),
-    { displayName: changeDisplayName }
+    { displayName: changeDisplayName, filterProps: filteredProps }
   )
   .addWithJSX(
     'with max boundaries',
@@ -85,7 +85,7 @@ stories
         <RangeInput attributeName="price" max={500} />
       </WrapWithHits>
     ),
-    { displayName: changeDisplayName }
+    { displayName: changeDisplayName, filterProps: filteredProps }
   )
   .addWithJSX(
     'with min / max boundaries',
@@ -94,7 +94,7 @@ stories
         <RangeInput attributeName="price" min={30} max={500} />
       </WrapWithHits>
     ),
-    { displayName: changeDisplayName }
+    { displayName: changeDisplayName, filterProps: filteredProps }
   )
   .addWithJSX(
     'with boundaries and default value',
@@ -108,7 +108,7 @@ stories
         />
       </WrapWithHits>
     ),
-    { displayName: changeDisplayName }
+    { displayName: changeDisplayName, filterProps: filteredProps }
   )
   .addWithJSX(
     'with panel but no refinement',
@@ -122,7 +122,7 @@ stories
         </Panel>
       </WrapWithHits>
     ),
-    { displayName: changeDisplayName }
+    { displayName: changeDisplayName, filterProps: filteredProps }
   )
   .addWithJSX(
     'playground',
@@ -141,5 +141,5 @@ stories
         />
       </WrapWithHits>
     ),
-    { displayName: changeDisplayName }
+    { displayName: changeDisplayName, filterProps: filteredProps }
   );

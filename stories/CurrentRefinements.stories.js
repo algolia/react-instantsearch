@@ -7,7 +7,7 @@ import {
   Panel,
 } from '../packages/react-instantsearch/dom';
 import { withKnobs } from '@storybook/addon-knobs';
-import { changeDisplayName, WrapWithHits } from './util';
+import { changeDisplayName, filteredProps, WrapWithHits } from './util';
 import JSXAddon from 'storybook-addon-jsx';
 setAddon(JSXAddon);
 
@@ -31,7 +31,7 @@ stories
         </div>
       </WrapWithHits>
     ),
-    { displayName: changeDisplayName }
+    { displayName: changeDisplayName, filterProps: filteredProps }
   )
   .addWithJSX(
     'with toggle',
@@ -47,7 +47,7 @@ stories
         </div>
       </WrapWithHits>
     ),
-    { displayName: changeDisplayName }
+    { displayName: changeDisplayName, filterProps: filteredProps }
   )
   .addWithJSX(
     'with panel',
@@ -64,7 +64,7 @@ stories
         </Panel>
       </WrapWithHits>
     ),
-    { displayName: changeDisplayName }
+    { displayName: changeDisplayName, filterProps: filteredProps }
   )
   .addWithJSX(
     'with panel but no refinement',
@@ -75,5 +75,5 @@ stories
         </Panel>
       </WrapWithHits>
     ),
-    { displayName: changeDisplayName }
+    { displayName: changeDisplayName, filterProps: filteredProps }
   );
