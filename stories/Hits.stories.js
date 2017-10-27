@@ -1,19 +1,22 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { storiesOf } from '@storybook/react';
+import { setAddon, storiesOf } from '@storybook/react';
 import { Hits, Highlight, Snippet } from '../packages/react-instantsearch/dom';
 import { withKnobs } from '@storybook/addon-knobs';
-import { WrapWithHits } from './util';
+import { changeDisplayName, WrapWithHits } from './util';
+import JSXAddon from 'storybook-addon-jsx';
+
+setAddon(JSXAddon);
 
 const stories = storiesOf('Hits', module);
 
-stories.addDecorator(withKnobs);
-
-stories.add('default', () => (
+stories.addDecorator(withKnobs).addWithJSX('default',
+() => (
   <WrapWithHits linkedStoryGroup="Hits">
     <Hits />
   </WrapWithHits>
-));
+),
+{ displayName: changeDisplayName });
 
 stories.add('with custom rendering', () => (
   <WrapWithHits linkedStoryGroup="Hits">

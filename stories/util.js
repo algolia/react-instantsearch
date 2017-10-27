@@ -152,23 +152,39 @@ const getReactElementDisplayName = element =>
     : element.type);
 
 // displays the right name for the JSX addon in Storybook
-const transformDisplayName = element => {
+const changeDisplayName = element => {
   // display 'InstantSearch' instead of 'WrapWithHits'
   if (getReactElementDisplayName(element) === 'WrapWithHits') {
     const instantSearch = 'InstantSearch';
     return instantSearch;
   }
-
   // wrapped component: AlgoliaWidgetName(Translatable..)" => "WidgetName"
   if (
     React.Component.isPrototypeOf(element.type) &&
     getReactElementDisplayName(element).startsWith('Algolia')
   ) {
+    const innerComponentRegex = /\(([^()]+)\)/;
+    const match = innerComponentRegex.exec(element.type.displayName);
+    const innerComponentName = match[1];
     const rawName = element.type.displayName;
-    return rawName.split('(')[0].replace('Algolia', '');
+    const widgetName = rawName.split('(')[0].replace('Algolia', '');
+    if (match) {
+      // when a VirtualWidget is used, Algolia returns 'UnknownComponent' as the displayName
+      if (innerComponentName === 'UnknownComponent') {
+        return widgetName;
+      }
+      // when a Configure widget is used, Algolia returns '_default' as the displayName
+      if (innerComponentName === '_default') {
+        return widgetName;
+      }
+      // when a RangeInput widget is used, Algolia returns 'RawRangeInput' as the displayName
+      if (innerComponentName === 'RawRangeInput') {
+        return 'RangeInput';
+      }
+      return innerComponentName;
+    }
   }
-
   return getReactElementDisplayName(element);
 };
 
-export { transformDisplayName, Wrap, WrapWithHits };
+export { changeDisplayName, Wrap, WrapWithHits };
