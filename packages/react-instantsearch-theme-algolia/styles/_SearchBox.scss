@@ -22,3 +22,10 @@ $main-searchbox-config: (
 .ais-SearchBox {
   @include searchbox($main-searchbox-config...);
 }
+
+.ais-SearchBox__stalled-search .ais-SearchBox__submit {
+  background: red;
+  svg {
+    visibility: hidden;
+  }
+}

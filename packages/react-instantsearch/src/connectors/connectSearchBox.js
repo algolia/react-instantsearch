@@ -55,9 +55,10 @@ export default createConnector({
     defaultRefinement: PropTypes.string,
   },
 
-  getProvidedProps(props, searchState) {
+  getProvidedProps(props, searchState, searchResults) {
     return {
       currentRefinement: getCurrentRefinement(props, searchState, this.context),
+      isSearchStalled: searchResults.isSearchStalled,
     };
   },
 

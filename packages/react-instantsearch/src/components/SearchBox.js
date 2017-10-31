@@ -25,6 +25,8 @@ class SearchBox extends Component {
     onReset: PropTypes.func,
     onChange: PropTypes.func,
 
+    isSearchStalled: PropTypes.bool,
+
     // For testing purposes
     __inputRef: PropTypes.func,
   };
@@ -216,7 +218,10 @@ class SearchBox extends Component {
             />
           </symbol>
         </svg>
-        <div role="search" {...cx('wrapper')}>
+        <div
+          role="search"
+          {...cx('wrapper', this.props.isSearchStalled && 'stalled-search')}
+        >
           <input
             ref={this.onInputMount}
             type="search"

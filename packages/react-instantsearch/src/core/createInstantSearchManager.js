@@ -26,9 +26,13 @@ export default function createInstantSearchManager({
     ...highlightTags,
   });
 
+  let stalledSearchTimer = null;
+  let isSearchStalled = false;
+
   const helper = algoliasearchHelper(algoliaClient, indexName, baseSP);
   helper.on('result', handleSearchSuccess);
   helper.on('error', handleSearchError);
+  helper.on('search', handleNewSearch);
 
   let derivedHelpers = {};
   let indexMapping = {}; // keep track of the original index where the parameters applied when sortBy is used.
@@ -43,6 +47,7 @@ export default function createInstantSearchManager({
     results: resultsState || null,
     error: null,
     searching: false,
+    isSearchStalled,
     searchingForFacetValues: false,
   });
 
@@ -166,11 +171,18 @@ export default function createInstantSearchManager({
       results = content;
     }
 
+    if (!helper.hasPendingRequests()) {
+      clearTimeout(stalledSearchTimer);
+      stalledSearchTimer = null;
+      isSearchStalled = false;
+    }
+
     const nextState = omit(
       {
         ...store.getState(),
         results,
-        searching: false,
+        isSearchStalled,
+        searching: helper.hasPendingRequests(),
         error: null,
       },
       'resultsFacetValues'
@@ -179,15 +191,37 @@ export default function createInstantSearchManager({
   }
 
   function handleSearchError(error) {
+    if (!helper.hasPendingRequests()) {
+      clearTimeout(stalledSearchTimer);
+      isSearchStalled = false;
+    }
+
     const nextState = omit(
       {
         ...store.getState(),
+        isSearchStalled,
         error,
-        searching: false,
+        searching: helper.hasPendingRequests(),
       },
       'resultsFacetValues'
     );
     store.setState(nextState);
+  }
+
+  function handleNewSearch() {
+    if (!stalledSearchTimer) {
+      stalledSearchTimer = setTimeout(() => {
+        isSearchStalled = true;
+        const nextState = omit(
+          {
+            ...store.getState(),
+            isSearchStalled,
+          },
+          'resultsFacetValues'
+        );
+        store.setState(nextState);
+      }, 200);
+    }
   }
 
   // Called whenever a widget has been rendered with new props.
@@ -197,7 +231,8 @@ export default function createInstantSearchManager({
     store.setState({
       ...store.getState(),
       metadata,
-      searching: true,
+      isSearchStalled,
+      searching: helper.hasPendingRequests(),
     });
 
     // Since the `getSearchParameters` method of widgets also depends on props,
@@ -223,7 +258,8 @@ export default function createInstantSearchManager({
       ...store.getState(),
       widgets: nextSearchState,
       metadata,
-      searching: true,
+      isSearchStalled,
+      searching: helper.hasPendingRequests(),
     });
 
     search();
