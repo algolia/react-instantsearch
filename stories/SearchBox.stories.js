@@ -44,6 +44,11 @@ stories
       />
     </WrapWithHits>
   ))
+  .add('Display feedback when search is stalled', () => (
+    <WrapWithHits searchBox={false} linkedStoryGroup="SearchBox">
+      <SearchBox showLoading={true} />
+    </WrapWithHits>
+  ))
   .add('playground', () => (
     <WrapWithHits searchBox={false} linkedStoryGroup="SearchBox">
       <SearchBox

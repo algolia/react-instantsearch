@@ -14,6 +14,7 @@ import SearchBoxComponent from '../components/SearchBox.js';
  * @propType {React.Element} [submitComponent] - Change the apparence of the default submit button (magnifying glass).
  * @propType {React.Element} [resetComponent] - Change the apparence of the default reset button (cross).
  * @propType {string} [defaultRefinement] - Provide default refinement value when component is mounted.
+ * @propType {boolean} [showLoading=false] - Display that the search is loading. This only happens after a certain amount of time to avoid a blinking effect. This timer can be configured with `stalledSearchTimeout` props on <InstantSearch>
  * @themeKey ais-SearchBox__root - the root of the component
  * @themeKey ais-SearchBox__wrapper - the search box wrapper
  * @themeKey ais-SearchBox__input - the search box input

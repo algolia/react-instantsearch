@@ -26,6 +26,7 @@ class SearchBox extends Component {
     onChange: PropTypes.func,
 
     isSearchStalled: PropTypes.bool,
+    showLoading: PropTypes.bool,
 
     // For testing purposes
     __inputRef: PropTypes.func,
@@ -220,7 +221,12 @@ class SearchBox extends Component {
         </svg>
         <div
           role="search"
-          {...cx('wrapper', this.props.isSearchStalled && 'stalled-search')}
+          {...cx(
+            'wrapper',
+            this.props.showLoading &&
+              this.props.isSearchStalled &&
+              'stalled-search'
+          )}
         >
           <input
             ref={this.onInputMount}
