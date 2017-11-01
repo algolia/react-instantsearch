@@ -2,7 +2,7 @@ import React from 'react';
 import { setAddon, storiesOf } from '@storybook/react';
 import { SortBy } from '../packages/react-instantsearch/dom';
 import { withKnobs } from '@storybook/addon-knobs';
-import { changeDisplayName, filteredProps, WrapWithHits } from './util';
+import { displayName, filterProps, WrapWithHits } from './util';
 import JSXAddon from 'storybook-addon-jsx';
 
 setAddon(JSXAddon);
@@ -25,7 +25,10 @@ stories
         />
       </WrapWithHits>
     ),
-    { displayName: changeDisplayName, filterProps: filteredProps }
+    {
+      displayName,
+      filterProps,
+    }
   )
   .addWithJSX(
     'without label',
@@ -41,5 +44,8 @@ stories
         />
       </WrapWithHits>
     ),
-    { displayName: changeDisplayName, filterProps: filteredProps }
+    {
+      displayName,
+      filterProps,
+    }
   );

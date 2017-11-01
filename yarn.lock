@@ -10463,7 +10463,7 @@ stdout-stream@^1.4.0:
   dependencies:
     readable-stream "^2.0.1"
 
-storybook-addon-jsx@^5.0.0:
+storybook-addon-jsx@5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/storybook-addon-jsx/-/storybook-addon-jsx-5.0.0.tgz#412574c20a45eec5d70460cc7d25e23f614f9865"
   dependencies:

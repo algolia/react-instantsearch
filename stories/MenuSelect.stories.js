@@ -2,7 +2,7 @@ import React from 'react';
 import { orderBy } from 'lodash';
 import { setAddon, storiesOf } from '@storybook/react';
 import { withKnobs, text } from '@storybook/addon-knobs';
-import { changeDisplayName, filteredProps, WrapWithHits } from './util';
+import { displayName, filterProps, WrapWithHits } from './util';
 import {
   MenuSelect,
   Panel,
@@ -23,7 +23,10 @@ stories
         <MenuSelect attributeName="category" />
       </WrapWithHits>
     ),
-    { displayName: changeDisplayName, filterProps: filteredProps }
+    {
+      displayName,
+      filterProps,
+    }
   )
   .addWithJSX(
     'with default selected item',
@@ -32,7 +35,10 @@ stories
         <MenuSelect attributeName="category" defaultRefinement="Eating" />
       </WrapWithHits>
     ),
-    { displayName: changeDisplayName, filterProps: filteredProps }
+    {
+      displayName,
+      filterProps,
+    }
   )
   .addWithJSX(
     'with the sort strategy changed',
@@ -45,7 +51,10 @@ stories
         />
       </WrapWithHits>
     ),
-    { displayName: changeDisplayName, filterProps: filteredProps }
+    {
+      displayName,
+      filterProps,
+    }
   )
   .addWithJSX(
     'with panel',
@@ -56,7 +65,10 @@ stories
         </Panel>
       </WrapWithHits>
     ),
-    { displayName: changeDisplayName, filterProps: filteredProps }
+    {
+      displayName,
+      filterProps,
+    }
   )
   .addWithJSX(
     'with panel but no available refinement',
@@ -74,7 +86,10 @@ stories
         </Panel>
       </WrapWithHits>
     ),
-    { displayName: changeDisplayName, filterProps: filteredProps }
+    {
+      displayName,
+      filterProps,
+    }
   )
   .addWithJSX(
     'playground',
@@ -86,5 +101,8 @@ stories
         />
       </WrapWithHits>
     ),
-    { displayName: changeDisplayName, filterProps: filteredProps }
+    {
+      displayName,
+      filterProps,
+    }
   );

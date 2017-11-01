@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { setAddon, storiesOf } from '@storybook/react';
 import { SearchBox } from '../packages/react-instantsearch/dom';
 import { withKnobs, object } from '@storybook/addon-knobs';
-import { changeDisplayName, filteredProps, WrapWithHits } from './util';
+import { displayName, filterProps, WrapWithHits } from './util';
 import { action } from '@storybook/addon-actions';
 import JSXAddon from 'storybook-addon-jsx';
 
@@ -23,7 +23,10 @@ stories
         <SearchBox />
       </WrapWithHits>
     ),
-    { displayName: changeDisplayName, filterProps: filteredProps }
+    {
+      displayName,
+      filterProps,
+    }
   )
   .addWithJSX(
     'with a default query',
@@ -36,7 +39,10 @@ stories
         <SearchBox defaultRefinement="battery" />
       </WrapWithHits>
     ),
-    { displayName: changeDisplayName, filterProps: filteredProps }
+    {
+      displayName,
+      filterProps,
+    }
   )
   .addWithJSX(
     'with submit and reset components',
@@ -56,7 +62,10 @@ stories
         />
       </WrapWithHits>
     ),
-    { displayName: changeDisplayName, filterProps: filteredProps }
+    {
+      displayName,
+      filterProps,
+    }
   )
   .addWithJSX(
     'playground',
@@ -76,7 +85,10 @@ stories
         />
       </WrapWithHits>
     ),
-    { displayName: changeDisplayName, filterProps: filteredProps }
+    {
+      displayName,
+      filterProps,
+    }
   );
 
 // with event listeners

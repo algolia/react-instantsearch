@@ -152,7 +152,7 @@ const getReactElementDisplayName = element =>
     : element.type);
 
 // displays the right name for the JSX addon in Storybook
-const changeDisplayName = element => {
+const displayName = element => {
   // display 'InstantSearch' instead of 'WrapWithHits'
   if (getReactElementDisplayName(element) === 'WrapWithHits') {
     const instantSearch = 'InstantSearch';
@@ -187,5 +187,5 @@ const changeDisplayName = element => {
   return getReactElementDisplayName(element);
 };
 
-const filteredProps = ['linkedStoryGroup', 'hasPlayground'];
-export { changeDisplayName, filteredProps, Wrap, WrapWithHits };
+const filterProps = ['linkedStoryGroup', 'hasPlayground'];
+export { displayName, filterProps, Wrap, WrapWithHits };

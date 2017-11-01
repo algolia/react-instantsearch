@@ -6,7 +6,7 @@ import {
   SearchBox,
 } from '../packages/react-instantsearch/dom';
 import { withKnobs, boolean, number } from '@storybook/addon-knobs';
-import { changeDisplayName, filteredProps, WrapWithHits } from './util';
+import { displayName, filterProps, WrapWithHits } from './util';
 import JSXAddon from 'storybook-addon-jsx';
 
 setAddon(JSXAddon);
@@ -22,7 +22,10 @@ stories
         <Pagination />
       </WrapWithHits>
     ),
-    { displayName: changeDisplayName, filterProps: filteredProps }
+    {
+      displayName,
+      filterProps,
+    }
   )
   .addWithJSX(
     'with all props',
@@ -38,7 +41,10 @@ stories
         />
       </WrapWithHits>
     ),
-    { displayName: changeDisplayName, filterProps: filteredProps }
+    {
+      displayName,
+      filterProps,
+    }
   )
   .addWithJSX(
     'with panel',
@@ -49,7 +55,10 @@ stories
         </Panel>
       </WrapWithHits>
     ),
-    { displayName: changeDisplayName, filterProps: filteredProps }
+    {
+      displayName,
+      filterProps,
+    }
   )
   .addWithJSX(
     'with panel but no refinement',
@@ -67,7 +76,10 @@ stories
         </Panel>
       </WrapWithHits>
     ),
-    { displayName: changeDisplayName, filterProps: filteredProps }
+    {
+      displayName,
+      filterProps,
+    }
   )
   .addWithJSX(
     'playground',
@@ -83,5 +95,8 @@ stories
         />
       </WrapWithHits>
     ),
-    { displayName: changeDisplayName, filterProps: filteredProps }
+    {
+      displayName,
+      filterProps,
+    }
   );

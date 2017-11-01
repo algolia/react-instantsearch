@@ -7,7 +7,7 @@ import {
 } from '../packages/react-instantsearch/dom';
 import { connectHierarchicalMenu } from '../packages/react-instantsearch/connectors';
 import { withKnobs, object, text } from '@storybook/addon-knobs';
-import { changeDisplayName, filteredProps, WrapWithHits } from './util';
+import { displayName, filterProps, WrapWithHits } from './util';
 import JSXAddon from 'storybook-addon-jsx';
 
 setAddon(JSXAddon);
@@ -36,8 +36,8 @@ stories
       </div>
     ),
     {
-      displayName: changeDisplayName,
-      filterProps: filteredProps,
+      displayName,
+      filterProps,
     }
   )
   .addWithJSX(
@@ -57,7 +57,10 @@ stories
         />
       </WrapWithHits>
     ),
-    { displayName: changeDisplayName, filterProps: filteredProps }
+    {
+      displayName,
+      filterProps,
+    }
   );
 
 stories
