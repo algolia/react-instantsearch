@@ -30,6 +30,24 @@
         "transform-regenerator"
       ]
     },
+    "test": {
+      "presets": [
+        ["env", {
+          "targets": {
+            "browsers": [
+              "last 2 versions",
+              "ie >= 9",
+            ],
+          },
+        }],
+        "react",
+        "stage-2",
+      ],
+      "plugins": [
+        "lodash",
+        "inline-json-import",
+      ],
+    },
     "production": {
       "presets": [
         ["env", {
