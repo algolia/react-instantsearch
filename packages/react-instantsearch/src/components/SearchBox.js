@@ -227,7 +227,7 @@ class SearchBox extends Component {
             autoCapitalize="off"
             spellCheck="false"
             required
-            maxlength="512"
+            maxLength="512"
             value={query}
             onChange={this.onChange}
             {...searchInputEvents}
