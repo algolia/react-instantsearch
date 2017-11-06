@@ -49,7 +49,6 @@ StrongHits.propTypes = {
 };
 
 stories
-  .addDecorator(checkA11y)
   .add('default', () => (
     <WrapWithHits hasPlayground={true} linkedStoryGroup="Highlight">
       <Hits hitComponent={Default} />
