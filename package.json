@@ -72,7 +72,7 @@
     "google-map-react": "0.25.0",
     "happo": "5.0.0-rc.3",
     "happo-core": "5.0.0-rc.2",
-    "happo-target-firefox": "5.0.0-rc.8",
+    "happo-target-firefox": "5.0.0",
     "happypack": "4.0.0",
     "hasha": "3.0.0",
     "jest-cli": "21.2.1",
