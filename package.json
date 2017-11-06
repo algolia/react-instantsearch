@@ -71,7 +71,7 @@
     "glob": "7.1.2",
     "google-map-react": "0.25.0",
     "happo": "5.0.0-rc.3",
-    "happo-core": "5.0.0-rc.2",
+    "happo-core": "5.0.0",
     "happo-target-firefox": "5.0.0-rc.8",
     "happypack": "4.0.0",
     "hasha": "3.0.0",
