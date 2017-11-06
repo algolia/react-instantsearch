@@ -5088,7 +5088,14 @@ handlebars@^4.0.2, handlebars@^4.0.3:
   optionalDependencies:
     uglify-js "^2.6"
 
-happo-core@5.0.0-rc.2, happo-core@^5.0.0-rc.1, happo-core@^5.0.0-rc.2:
+happo-core@5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/happo-core/-/happo-core-5.0.0.tgz#254cbdaba12a7e66c09642f89dd1dda648b8aa9f"
+  dependencies:
+    parse-data-uri "^0.2.0"
+    pngjs "^3.0.0"
+
+happo-core@^5.0.0-rc.1, happo-core@^5.0.0-rc.2:
   version "5.0.0-rc.2"
   resolved "https://registry.yarnpkg.com/happo-core/-/happo-core-5.0.0-rc.2.tgz#3f1c2b7f2ef3d6c5620dc717b1fa5a262d87a9bb"
   dependencies:
