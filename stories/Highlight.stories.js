@@ -4,10 +4,11 @@ import { storiesOf } from '@storybook/react';
 import { Highlight, Hits } from '../packages/react-instantsearch/dom';
 import { withKnobs, text } from '@storybook/addon-knobs';
 import { WrapWithHits } from './util';
+import { checkA11y } from 'storybook-addon-a11y';
 
 const stories = storiesOf('Highlight', module);
 
-stories.addDecorator(withKnobs);
+stories.addDecorator(withKnobs).addDecorator(checkA11y);
 
 const Default = ({ hit }) => (
   <article>
@@ -48,6 +49,7 @@ StrongHits.propTypes = {
 };
 
 stories
+  .addDecorator(checkA11y)
   .add('default', () => (
     <WrapWithHits hasPlayground={true} linkedStoryGroup="Highlight">
       <Hits hitComponent={Default} />
