@@ -5095,6 +5095,13 @@ happo-core@5.0.0-rc.2, happo-core@^5.0.0-rc.1, happo-core@^5.0.0-rc.2:
     parse-data-uri "^0.2.0"
     pngjs "^3.0.0"
 
+happo-core@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/happo-core/-/happo-core-5.0.0.tgz#254cbdaba12a7e66c09642f89dd1dda648b8aa9f"
+  dependencies:
+    parse-data-uri "^0.2.0"
+    pngjs "^3.0.0"
+
 happo-target-firefox@5.0.0-rc.8:
   version "5.0.0-rc.8"
   resolved "https://registry.yarnpkg.com/happo-target-firefox/-/happo-target-firefox-5.0.0-rc.8.tgz#271a87db55d5fc52975821a33a0f9d43d71ef60a"
@@ -5108,7 +5115,20 @@ happo-target-firefox@5.0.0-rc.8:
     ps-node "^0.1.4"
     selenium-webdriver "3.3.0"
 
-happo-viewer@^5.0.0-rc.1, happo-viewer@^5.0.0-rc.3:
+happo-viewer@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/happo-viewer/-/happo-viewer-5.0.0.tgz#7866f5d5b6e16bcb00d610effd95ff93650cb6f4"
+  dependencies:
+    cssesc "^1.0.0"
+    ejs "^2.5.2"
+    express "^4.14.0"
+    happo-core "^5.0.0"
+    react "15.4.1"
+    react-dom "15.4.1"
+    react-waypoint "^4.1.0"
+    worker-loader "^1.0.0"
+
+happo-viewer@^5.0.0-rc.1:
   version "5.0.0-rc.3"
   resolved "https://registry.yarnpkg.com/happo-viewer/-/happo-viewer-5.0.0-rc.3.tgz#0de668228e7681324e138580c6d6da7ef8269d73"
   dependencies:
@@ -5121,14 +5141,14 @@ happo-viewer@^5.0.0-rc.1, happo-viewer@^5.0.0-rc.3:
     react-waypoint "^4.1.0"
     worker-loader "^0.7.1"
 
-happo@5.0.0-rc.3:
-  version "5.0.0-rc.3"
-  resolved "https://registry.yarnpkg.com/happo/-/happo-5.0.0-rc.3.tgz#32a6fb3ff2785971af290530e3dfbaddd952298b"
+happo@5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/happo/-/happo-5.0.0.tgz#ef1975ffa68a5001d977f447b59c6d332385168a"
   dependencies:
     commander "^2.9.0"
     ejs "^2.5.2"
-    happo-core "^5.0.0-rc.2"
-    happo-viewer "^5.0.0-rc.3"
+    happo-core "^5.0.0"
+    happo-viewer "^5.0.0"
 
 happypack@4.0.0:
   version "4.0.0"
@@ -6564,7 +6584,7 @@ loader-utils@0.2.x, loader-utils@^0.2.16:
     json5 "^0.5.0"
     object-assign "^4.0.1"
 
-loader-utils@1.1.0, loader-utils@^1.0.1, loader-utils@^1.0.2, loader-utils@^1.1.0:
+loader-utils@1.1.0, loader-utils@^1.0.0, loader-utils@^1.0.1, loader-utils@^1.0.2, loader-utils@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/loader-utils/-/loader-utils-1.1.0.tgz#c98aef488bcceda2ffb5e2de646d6a754429f5cd"
   dependencies:
@@ -11593,6 +11613,13 @@ worker-loader@^0.7.1:
   resolved "https://registry.yarnpkg.com/worker-loader/-/worker-loader-0.7.1.tgz#91ffd2e2fbf76921a43e8ca3766d12e9537f5d70"
   dependencies:
     loader-utils "0.2.x"
+
+worker-loader@^1.0.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/worker-loader/-/worker-loader-1.1.0.tgz#8cf21869a07add84d66f821d948d23c1eb98e809"
+  dependencies:
+    loader-utils "^1.0.0"
+    schema-utils "^0.3.0"
 
 wrap-ansi@^2.0.0:
   version "2.1.0"
