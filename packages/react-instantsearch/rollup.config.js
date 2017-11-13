@@ -26,9 +26,8 @@ const plugins = [
     preferBuiltins: false,
   }),
   commonjs({
-    // Rollup only support ES modules so we need to transform commonjs modules
-    // to ES one. Can be magically done sometimes, but sometimes Rollup needs
-    // a bit of help
+    // Rollup only support ES modules so we need to transform commonjs modules to ES one.
+    // Can be magically done sometimes, but Rollup needs a bit of help in some use cases.
     // see doc: https://github.com/rollup/rollup-plugin-commonjs#custom-named-exports
     // see API: https://github.com/algolia/algoliasearch-helper-js/blob/develop/index.js
     namedExports: {
@@ -41,8 +40,8 @@ const plugins = [
       ],
     },
   }),
-  // Usefull for define process.env variable, inside the AlgoliaSearchClient we
-  // have a hard dependency on it for RESET_APP_DATA_TIMER.
+  // Useful for define process.env variable, inside the AlgoliaSearchClient we
+  // have a dependency on it for RESET_APP_DATA_TIMER.
   // see: http://bit.ly/2zGLrsu (Permalink was too long)
   globals(),
   replace({
