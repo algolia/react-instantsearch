@@ -2,6 +2,7 @@
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import babel from 'rollup-plugin-babel';
+import globals from 'rollup-plugin-node-globals';
 import replace from 'rollup-plugin-replace';
 import uglify from 'rollup-plugin-uglify';
 import filesize from 'rollup-plugin-filesize';
@@ -19,9 +20,6 @@ const plugins = [
     exclude: 'node_modules/**',
     // see: https://github.com/rollup/rollup-plugin-babel#helpers
     plugins: ['external-helpers'],
-  }),
-  replace({
-    'process.env.NODE_ENV': JSON.stringify('production'),
   }),
   resolve({
     browser: true,
@@ -42,6 +40,13 @@ const plugins = [
         'url',
       ],
     },
+  }),
+  // Usefull for define process.env variable, inside the AlgoliaSearchClient we
+  // have a hard dependency on it for RESET_APP_DATA_TIMER.
+  // see: http://bit.ly/2zGLrsu (Permalink was too long)
+  globals(),
+  replace({
+    'process.env.NODE_ENV': JSON.stringify('production'),
   }),
   filesize(),
 ];
