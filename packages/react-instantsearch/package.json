@@ -35,8 +35,8 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "enzyme": "3.1.1",
-    "enzyme-adapter-react-16": "1.0.4",
+    "enzyme": "3.2.0",
+    "enzyme-adapter-react-16": "1.1.0",
     "react": "16.1.0",
     "react-dom": "16.1.0",
     "react-native": "0.46.4",
