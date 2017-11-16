@@ -42,7 +42,7 @@ const plugins = [
   }),
   // Useful for define process.env variable, inside the AlgoliaSearchClient we
   // have a dependency on it for RESET_APP_DATA_TIMER.
-  // see: http://bit.ly/2zGLrsu (Permalink was too long)
+  // see: https://github.com/algolia/algoliasearch-client-javascript/blob/bb5d2ce16cf4b5a6e6de8ebae2de2880f783d967/src/AlgoliaSearchCore.js#L13
   globals(),
   replace({
     'process.env.NODE_ENV': JSON.stringify('production'),
