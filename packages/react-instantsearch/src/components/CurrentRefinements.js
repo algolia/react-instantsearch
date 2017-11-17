@@ -2,13 +2,14 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 import translatable from '../core/translatable';
-import classNames from './classNames.js';
+import { classNamesNew } from './classNames.js';
+import BaseWidget from './BaseWidget';
 
-const cx = classNames('CurrentRefinements');
+const widgetClassName = 'CurrentRefinements';
+const cx = classNamesNew(widgetClassName);
 
 class CurrentRefinements extends Component {
   static propTypes = {
-    translate: PropTypes.func.isRequired,
     items: PropTypes.arrayOf(
       PropTypes.shape({
         label: PropTypes.string,
@@ -35,35 +36,41 @@ class CurrentRefinements extends Component {
     const { translate, items, refine, canRefine } = this.props;
 
     return (
-      <div {...cx('root', !canRefine && 'noRefinement')}>
-        <div {...cx('items')}>
+      <BaseWidget
+        widgetClassName={widgetClassName}
+        additionalClassNames={
+          !canRefine && `ais-${widgetClassName}--noRefinement`
+        }
+      >
+        <ul {...cx(['list'])}>
           {items.map(item => (
-            <div key={item.label} {...cx('item', item.items && 'itemParent')}>
-              <span {...cx('itemLabel')}>{item.label}</span>
+            <li key={item.label} {...cx(['item'])}>
+              <span {...cx(['label'])}>{item.label}</span>
               {item.items ? (
-                item.items.map(nestedItem => (
-                  <div key={nestedItem.label} {...cx('item')}>
-                    <span {...cx('itemLabel')}>{nestedItem.label}</span>
-                    <button
-                      {...cx('itemClear')}
-                      onClick={refine.bind(null, nestedItem.value)}
-                    >
-                      {translate('clearFilter', nestedItem)}
-                    </button>
-                  </div>
-                ))
+                item.items.map(nestedItem => [
+                  <span key={nestedItem.label} {...cx(['label'])}>
+                    {nestedItem.label}
+                  </span>,
+                  <button
+                    key={`${nestedItem.label}-delete`}
+                    {...cx(['delete'])}
+                    onClick={refine.bind(null, nestedItem.value)}
+                  >
+                    {translate('clearFilter', nestedItem)}
+                  </button>,
+                ])
               ) : (
                 <button
-                  {...cx('itemClear')}
+                  {...cx(['delete'])}
                   onClick={refine.bind(null, item.value)}
                 >
-                  {translate('clearFilter', item)}
+                  {translate('clearFilter', nestedItem)}
                 </button>
               )}
-            </div>
+            </li>
           ))}
-        </div>
-      </div>
+        </ul>
+      </BaseWidget>
     );
   }
 }
