@@ -1,10 +1,12 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import Link from './Link';
-import classNames from './classNames.js';
+import { classNamesNew } from './classNames.js';
 import translatable from '../core/translatable';
+import BaseWidget from './BaseWidget';
 
-const cx = classNames('Breadcrumb');
+const widgetClassName = 'Breadcrumb';
+const cx = classNamesNew(widgetClassName);
 
 const itemsPropType = PropTypes.arrayOf(
   PropTypes.shape({
@@ -47,44 +49,45 @@ class Breadcrumb extends Component {
       translate,
     } = this.props;
     const rootPath = canRefine ? (
-      <span {...cx('item')}>
+      <li {...cx(['item'])}>
         <Link
-          {...cx('itemLink', 'itemLinkRoot')}
+          {...cx(['link'])}
           onClick={() => (!rootURL ? refine() : null)}
           href={rootURL ? rootURL : createURL()}
         >
-          <span {...cx('rootLabel')}>{translate('rootLabel')}</span>
+          {translate('rootLabel')}
         </Link>
-        <span {...cx('separator')}>{separator}</span>
-      </span>
+      </li>
     ) : null;
 
     const breadcrumb = items.map((item, idx) => {
       const isLast = idx === items.length - 1;
-      return !isLast ? (
-        <span {...cx('item')} key={idx}>
-          <Link
-            {...cx('itemLink')}
-            onClick={() => refine(item.value)}
-            href={createURL(item.value)}
-            key={idx}
-          >
-            <span {...cx('itemLabel')}>{item.label}</span>
-          </Link>
-          <span {...cx('separator')}>{isLast ? '' : separator}</span>
-        </span>
-      ) : (
-        <span {...cx('itemLink', 'itemDisabled', 'item')} key={idx}>
-          <span {...cx('itemLabel')}>{item.label}</span>
-        </span>
-      );
+      return [
+        <li key="separator">{separator}</li>,
+        <li {...cx(['item', isLast && 'item--selected'])} key={idx}>
+          {!isLast ? (
+            <Link
+              {...cx(['link'])}
+              onClick={() => refine(item.value)}
+              href={createURL(item.value)}
+              key={idx}
+            >
+              {item.label}
+            </Link>
+          ) : (
+            item.label
+          )}
+        </li>,
+      ];
     });
 
     return (
-      <div {...cx('root', !canRefine && 'noRefinement')}>
-        {rootPath}
-        {breadcrumb}
-      </div>
+      <BaseWidget widgetClassName={widgetClassName}>
+        <ul {...cx(['list'])}>
+          {rootPath}
+          {breadcrumb}
+        </ul>
+      </BaseWidget>
     );
   }
 }

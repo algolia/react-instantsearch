@@ -2,9 +2,11 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 import translatable from '../core/translatable';
-import classNames from './classNames.js';
+import { classNamesNew } from './classNames.js';
+import BaseWidget from './BaseWidget';
 
-const cx = classNames('ClearAll');
+const widgetClassName = 'ClearRefinements';
+const cx = classNamesNew(widgetClassName);
 
 class ClearAll extends Component {
   static propTypes = {
@@ -16,18 +18,22 @@ class ClearAll extends Component {
   render() {
     const { translate, items, refine } = this.props;
     const isDisabled = items.length === 0;
-    if (isDisabled) {
-      return (
-        <button {...cx('root')} disabled>
-          {translate('reset')}
-        </button>
-      );
-    }
 
     return (
-      <button {...cx('root')} onClick={refine.bind(null, items)}>
-        {translate('reset')}
-      </button>
+      <BaseWidget widgetClassName={widgetClassName}>
+        {isDisabled ? (
+          <button {...cx(['button'])} disabled>
+            {translate(['reset'])}
+          </button>
+        ) : (
+          <button
+            {...cx(['button', 'button--disabled'])}
+            onClick={refine.bind(null, items)}
+          >
+            {translate('reset')}
+          </button>
+        )}
+      </BaseWidget>
     );
   }
 }
