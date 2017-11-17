@@ -3,7 +3,7 @@
 // anymore and so the polyfills are not applied in Jest environment.
 // In the example we use expo, so the preset used by the test environment is
 // not the default one provided by react native. We use `jest-expo` instead of
-// the `react-native-preset`. If you are using the later you also probably need
+// the `react-native-preset`. If you are using the latter you also probably need
 // to polyfill the `window` object too.
 // see issue: https://github.com/algolia/react-instantsearch/issues/609#issuecomment-344989490
 // see on 0.48.4: https://github.com/facebook/react-native/blob/v0.48.4/jest/setup.js#L37
