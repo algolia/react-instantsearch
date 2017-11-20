@@ -1,10 +1,12 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import List from './List';
-import classNames from './classNames.js';
+import BaseWidget from './BaseWidget';
+import { classNamesNew } from './classNames.js';
 import translatable from '../core/translatable';
 
-const cx = classNames('MultiRange');
+const widgetClassName = 'NumericMenu';
+const cx = classNamesNew(widgetClassName);
 
 class MultiRange extends Component {
   static propTypes = {
@@ -38,26 +40,15 @@ class MultiRange extends Component {
     const { refine, translate } = this.props;
     const label = item.value === '' ? translate('all') : item.label;
     return (
-      <label {...cx(item.value === '' && 'itemAll')}>
+      <label {...cx(['label'])}>
         <input
-          {...cx('itemRadio', item.isRefined && 'itemRadioSelected')}
+          {...cx(['radio'])}
           type="radio"
           checked={item.isRefined}
           disabled={item.noRefinement}
           onChange={refine.bind(null, item.value)}
         />
-        <span
-          {...cx('itemBox', 'itemBox', item.isRefined && 'itemBoxSelected')}
-        />
-        <span
-          {...cx(
-            'itemLabel',
-            'itemLabel',
-            item.isRefined && 'itemLabelSelected'
-          )}
-        >
-          {label}
-        </span>
+        <span {...cx(['labelText'])}>{label}</span>
       </label>
     );
   };
@@ -66,13 +57,15 @@ class MultiRange extends Component {
     const { items, canRefine } = this.props;
 
     return (
-      <List
-        renderItem={this.renderItem}
-        showMore={false}
-        canRefine={canRefine}
-        cx={cx}
-        items={items.map(item => ({ ...item, key: item.value }))}
-      />
+      <BaseWidget widgetClassName={widgetClassName}>
+        <List
+          renderItem={this.renderItem}
+          showMore={false}
+          canRefine={canRefine}
+          cx={cx}
+          items={items.map(item => ({ ...item, key: item.value }))}
+        />
+      </BaseWidget>
     );
   }
 }
