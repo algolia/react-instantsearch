@@ -82,7 +82,10 @@ class Breadcrumb extends Component {
     });
 
     return (
-      <BaseWidget widgetClassName={widgetClassName}>
+      <BaseWidget
+        widgetClassName={widgetClassName}
+        otherWidgetClassNames={[!canRefine && `-noRefinement`]}
+      >
         <ul {...cx(['list'])}>
           {rootPath}
           {breadcrumb}

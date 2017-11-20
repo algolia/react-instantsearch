@@ -5,9 +5,11 @@ import translatable from '../core/translatable';
 import List from './List';
 import Link from './Link';
 import Highlight from '../widgets/Highlight';
-import classNames from './classNames.js';
+import BaseWidget from './BaseWidget';
+import { classNamesNew } from './classNames.js';
 
-const cx = classNames('Menu');
+const widgetClassName = 'Menu';
+const cx = classNamesNew(widgetClassName);
 
 class Menu extends Component {
   static propTypes = {
@@ -53,16 +55,12 @@ class Menu extends Component {
     );
     return (
       <Link
-        {...cx('itemLink', item.isRefined && 'itemLinkSelected')}
+        {...cx(['link', item.isRefined && 'item--selected'])}
         onClick={() => this.selectItem(item, resetQuery)}
         href={createURL(item.value)}
       >
-        <span {...cx('itemLabel', item.isRefined && 'itemLabelSelected')}>
-          {label}
-        </span>{' '}
-        <span {...cx('itemCount', item.isRefined && 'itemCountSelected')}>
-          {item.count}
-        </span>
+        <span {...cx(['label'])}>{label}</span>{' '}
+        <span {...cx(['count'])}>{item.count}</span>
       </Link>
     );
   };
@@ -74,22 +72,24 @@ class Menu extends Component {
 
   render() {
     return (
-      <List
-        renderItem={this.renderItem}
-        selectItem={this.selectItem}
-        cx={cx}
-        {...pick(this.props, [
-          'translate',
-          'items',
-          'showMore',
-          'limitMin',
-          'limitMax',
-          'isFromSearch',
-          'searchForItems',
-          'withSearchBox',
-          'canRefine',
-        ])}
-      />
+      <BaseWidget widgetClassName={widgetClassName}>
+        <List
+          renderItem={this.renderItem}
+          selectItem={this.selectItem}
+          cx={cx}
+          {...pick(this.props, [
+            'translate',
+            'items',
+            'showMore',
+            'limitMin',
+            'limitMax',
+            'isFromSearch',
+            'searchForItems',
+            'withSearchBox',
+            'canRefine',
+          ])}
+        />
+      </BaseWidget>
     );
   }
 }

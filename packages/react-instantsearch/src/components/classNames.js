@@ -16,18 +16,23 @@ export default function classNames(block) {
   });
 }
 
-// Updated classNames function that takes an array as first parameter for BEMified class names and a string for other class names
+// Updated classNames function that takes two parameters:
+// 1. an array for BEMified class names
+// 2. a string for other class names
 export function classNamesNew(block) {
   return (bemElements, otherElements) => ({
     className: `${cx(
       bemElements
-        .filter(element => element !== undefined && element !== false)
+        .filter(
+          element =>
+            element !== undefined && element !== false && element !== null
+        )
         .map(
           element =>
             element === ''
               ? `${prefix}-${block}`
               : `${prefix}-${block}-${element}`
         )
-    )} ${otherElements || ''}`,
+    )}${otherElements ? ` ${otherElements}` : ''}`,
   });
 }

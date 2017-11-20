@@ -60,27 +60,27 @@ class List extends Component {
 
   renderItem = (item, resetQuery) => {
     const items = item.items && (
-      <div {...this.props.cx('itemItems')}>
+      <ul {...this.props.cx(['list'])}>
         {item.items
           .slice(0, this.getLimit())
           .map(child => this.renderItem(child, item))}
-      </div>
+      </ul>
     );
 
     return (
-      <div
+      <li
         key={item.key || item.label}
-        {...this.props.cx(
+        {...this.props.cx([
           'item',
-          item.isRefined && 'itemSelected',
-          item.noRefinement && 'itemNoRefinement',
-          items && 'itemParent',
-          items && item.isRefined && 'itemSelectedParent'
-        )}
+          item.isRefined && 'item--selected',
+          item.noRefinement && 'item--noRefinement',
+          items && 'item--parent',
+          items && item.isRefined && 'item--selectedParent',
+        ])}
       >
         {this.props.renderItem(item, resetQuery)}
         {items}
-      </div>
+      </li>
     );
   };
 
@@ -95,7 +95,7 @@ class List extends Component {
     return (
       <button
         disabled={disabled}
-        {...cx('showMore', disabled && 'showMoreDisabled')}
+        {...cx(['showMore', disabled && 'showMore--disabled'])}
         onClick={this.onShowMoreClick}
       >
         {translate('showMore', extended)}
@@ -115,7 +115,7 @@ class List extends Component {
 
     const noResults =
       items.length === 0 && this.state.query !== '' ? (
-        <div {...cx('noResults')}>{translate('noResults')}</div>
+        <div {...cx(['noResults'])}>{translate('noResults')}</div>
       ) : null;
     return (
       <div {...cx('SearchBox')}>
@@ -145,7 +145,7 @@ class List extends Component {
     const searchBox = withSearchBox ? this.renderSearchBox() : null;
     if (items.length === 0) {
       return (
-        <div {...cx('root', !canRefine && 'noRefinement')}>{searchBox}</div>
+        <ul {...cx(['list', !canRefine && 'noRefinement'])}>{searchBox}</ul>
       );
     }
 
@@ -154,15 +154,13 @@ class List extends Component {
     // option.
     const limit = this.getLimit();
     return (
-      <div {...cx('root', !this.props.canRefine && 'noRefinement')}>
+      <ul {...cx(['list', !this.props.canRefine && 'noRefinement'])}>
         {searchBox}
-        <div {...cx('items')}>
-          {items
-            .slice(0, limit)
-            .map(item => this.renderItem(item, this.resetQuery))}
-        </div>
+        {items
+          .slice(0, limit)
+          .map(item => this.renderItem(item, this.resetQuery))}
         {this.renderShowMore()}
-      </div>
+      </ul>
     );
   }
 }

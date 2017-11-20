@@ -1,10 +1,12 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
-import classNames from './classNames.js';
+import BaseWidget from './BaseWidget';
+import { classNamesNew } from './classNames.js';
 import translatable from '../core/translatable';
 
-const cx = classNames('InfiniteHits');
+const widgetClassName = 'InfiniteResults';
+const cx = classNamesNew(widgetClassName);
 
 class InfiniteHits extends Component {
   render() {
@@ -19,20 +21,20 @@ class InfiniteHits extends Component {
       <ItemComponent key={hit.objectID} hit={hit} />
     ));
     const loadMoreButton = hasMore ? (
-      <button {...cx('loadMore')} onClick={() => refine()}>
+      <button {...cx(['loadMore'])} onClick={() => refine()}>
         {translate('loadMore')}
       </button>
     ) : (
-      <button {...cx('loadMore')} disabled>
+      <button {...cx(['loadMore', 'loadMore--disabled'])} disabled>
         {translate('loadMore')}
       </button>
     );
 
     return (
-      <div {...cx('root')}>
-        {renderedHits}
+      <BaseWidget widgetClassName={widgetClassName}>
+        <ul {...cx(['list'])}>{renderedHits}</ul>
         {loadMoreButton}
-      </div>
+      </BaseWidget>
     );
   }
 }
@@ -49,7 +51,8 @@ InfiniteHits.propTypes = {
 /* eslint-disable react/display-name */
 InfiniteHits.defaultProps = {
   hitComponent: hit => (
-    <div
+    <li
+      {...cx(['item'])}
       style={{
         borderBottom: '1px solid #bbb',
         paddingBottom: '5px',
@@ -57,7 +60,7 @@ InfiniteHits.defaultProps = {
       }}
     >
       {JSON.stringify(hit).slice(0, 100)}...
-    </div>
+    </li>
   ),
 };
 /* eslint-enable react/display-name */

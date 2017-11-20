@@ -38,9 +38,7 @@ class CurrentRefinements extends Component {
     return (
       <BaseWidget
         widgetClassName={widgetClassName}
-        additionalClassNames={
-          !canRefine && `ais-${widgetClassName}--noRefinement`
-        }
+        otherWidgetClassNames={[!canRefine && `-noRefinement`]}
       >
         <ul {...cx(['list'])}>
           {items.map(item => (

@@ -1,6 +1,10 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import { classNamesNew } from './classNames.js';
+
+const cx = classNamesNew('Highlight');
+
 export default function Highlighter({
   hit,
   attributeName,
@@ -17,19 +21,19 @@ export default function Highlighter({
     const key = `split-${i}-${v.value}`;
     if (!v.isHighlighted) {
       return (
-        <span key={key} className="ais-Highlight__nonHighlighted">
+        <span key={key} {...cx(['nonHighlighted'])}>
           {v.value}
         </span>
       );
     }
     const HighlightedTag = tagName ? tagName : 'em';
     return (
-      <HighlightedTag key={key} className="ais-Highlight__highlighted">
+      <HighlightedTag key={key} {...cx(['highlighted'])}>
         {v.value}
       </HighlightedTag>
     );
   });
-  return <span className="ais-Highlight">{reactHighlighted}</span>;
+  return <span {...cx([''])}>{reactHighlighted}</span>;
 }
 
 Highlighter.propTypes = {

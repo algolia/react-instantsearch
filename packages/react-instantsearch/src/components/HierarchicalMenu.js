@@ -1,12 +1,15 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { pick } from 'lodash';
+
 import translatable from '../core/translatable';
+import { classNamesNew } from './classNames.js';
 import List from './List';
 import Link from './Link';
-import classNames from './classNames.js';
+import BaseWidget from './BaseWidget';
 
-const cx = classNames('HierarchicalMenu');
+const widgetClassName = 'HierarchicalMenu';
+const cx = classNamesNew(widgetClassName);
 
 const itemsPropType = PropTypes.arrayOf(
   PropTypes.shape({
@@ -47,31 +50,33 @@ class HierarchicalMenu extends Component {
 
     return (
       <Link
-        {...cx('itemLink')}
+        {...cx(['link'])}
         onClick={() => refine(item.value)}
         href={createURL(item.value)}
       >
-        <span {...cx('itemLabel')}>{item.label}</span>{' '}
-        <span {...cx('itemCount')}>{item.count}</span>
+        <span {...cx(['label'])}>{item.label}</span>{' '}
+        <span {...cx(['count'])}>{item.count}</span>
       </Link>
     );
   };
 
   render() {
     return (
-      <List
-        renderItem={this.renderItem}
-        cx={cx}
-        {...pick(this.props, [
-          'translate',
-          'items',
-          'showMore',
-          'limitMin',
-          'limitMax',
-          'isEmpty',
-          'canRefine',
-        ])}
-      />
+      <BaseWidget widgetClassName={widgetClassName}>
+        <List
+          renderItem={this.renderItem}
+          cx={cx}
+          {...pick(this.props, [
+            'translate',
+            'items',
+            'showMore',
+            'limitMin',
+            'limitMax',
+            'isEmpty',
+            'canRefine',
+          ])}
+        />
+      </BaseWidget>
     );
   }
 }
