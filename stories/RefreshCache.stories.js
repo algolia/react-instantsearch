@@ -4,26 +4,6 @@ import { InstantSearch, SearchBox } from '../packages/react-instantsearch/dom';
 import { CustomHits } from './util';
 
 const stories = storiesOf('RefreshCache', module);
-const buttonStyle = {
-  borderRadius: '4px',
-  padding: '10px',
-  border: 'none',
-  fontSize: '12px',
-  cursor: 'pointer',
-  color: '#fff',
-  background: '#3369e7',
-};
-
-const divStyle = {
-  borderRadius: '2px',
-  padding: '10px',
-  marginTop: '15px',
-  border: 'none',
-  fontSize: '12px',
-  color: '#999999',
-  background: '#F3F3F3',
-  display: 'block',
-};
 
 class AppWithRefresh extends Component {
   constructor(props) {
@@ -31,14 +11,13 @@ class AppWithRefresh extends Component {
     this.state = {
       refresh: false,
     };
-    this.refresh = this.refresh.bind(this);
   }
 
-  refresh() {
+  refresh = () => {
     this.setState(prevState => ({
       refresh: !prevState.refresh,
     }));
-  }
+  };
 
   onSearchStateChange = () => {
     this.setState({ refresh: false });
@@ -112,10 +91,33 @@ class AppWithRefresh extends Component {
             placeholder: 'Search our furnitures: chairs, tables etc.',
           }}
         />
-        <button onClick={this.refresh} style={buttonStyle}>
+        <button
+          onClick={this.refresh}
+          style={{
+            borderRadius: '4px',
+            padding: '10px',
+            border: 'none',
+            fontSize: '12px',
+            cursor: 'pointer',
+            color: '#fff',
+            background: '#3369e7',
+          }}
+        >
           Refresh cache
         </button>
-        <button style={divStyle} disabled>
+        <button
+          style={{
+            borderRadius: '2px',
+            padding: '10px',
+            marginTop: '15px',
+            border: 'none',
+            fontSize: '12px',
+            color: '#999999',
+            background: '#F3F3F3',
+            display: 'block',
+          }}
+          disabled
+        >
           Refresh is set to: <em>{displayRefresh}</em>
         </button>
 

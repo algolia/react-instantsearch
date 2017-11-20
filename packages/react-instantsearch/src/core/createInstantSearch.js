@@ -24,7 +24,7 @@ export default function createInstantSearch(defaultAlgoliaClient, root) {
       searchParameters: PropTypes.object,
       createURL: PropTypes.func,
       searchState: PropTypes.object,
-      refresh: PropTypes.bool,
+      refresh: PropTypes.bool.isRequired,
       onSearchStateChange: PropTypes.func,
       onSearchParameters: PropTypes.func,
       resultsState: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),

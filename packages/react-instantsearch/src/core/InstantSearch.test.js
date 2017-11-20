@@ -25,6 +25,7 @@ const DEFAULT_PROPS = {
   root: {
     Root: 'div',
   },
+  refresh: false,
 };
 
 describe('InstantSearch', () => {
@@ -265,7 +266,7 @@ describe('InstantSearch', () => {
 
     createInstantSearchManager.mockImplementation(() => ism);
 
-    const wrapper = mount(
+    const wrapper = shallow(
       <InstantSearch {...DEFAULT_PROPS}>
         <div />
       </InstantSearch>
@@ -295,7 +296,7 @@ describe('InstantSearch', () => {
 
     createInstantSearchManager.mockImplementation(() => ism);
 
-    const wrapper = mount(
+    const wrapper = shallow(
       <InstantSearch {...DEFAULT_PROPS}>
         <div />
       </InstantSearch>

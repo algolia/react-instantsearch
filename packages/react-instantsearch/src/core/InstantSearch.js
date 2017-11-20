@@ -177,7 +177,7 @@ InstantSearch.propTypes = {
 
   createURL: PropTypes.func,
 
-  refresh: PropTypes.bool,
+  refresh: PropTypes.bool.isRequired,
 
   searchState: PropTypes.object,
   onSearchStateChange: PropTypes.func,
