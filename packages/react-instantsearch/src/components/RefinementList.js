@@ -1,11 +1,15 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { pick } from 'lodash';
+
 import translatable from '../core/translatable';
+import { classNamesNew } from './classNames.js';
 import List from './List';
-import classNames from './classNames.js';
 import Highlight from '../widgets/Highlight';
-const cx = classNames('RefinementList');
+import BaseWidget from './BaseWidget';
+
+const widgetClassName = 'RefinementList';
+const cx = classNamesNew(widgetClassName);
 
 class RefinementList extends Component {
   constructor(props) {
@@ -60,35 +64,22 @@ class RefinementList extends Component {
     );
 
     return (
-      <label>
+      <label {...cx(['label'])}>
         <input
-          {...cx('itemCheckbox', item.isRefined && 'itemCheckboxSelected')}
+          {...cx(['checkbox'])}
           type="checkbox"
           checked={item.isRefined}
           onChange={() => this.selectItem(item, resetQuery)}
         />
-        <span
-          {...cx('itemBox', 'itemBox', item.isRefined && 'itemBoxSelected')}
-        />
-        <span
-          {...cx(
-            'itemLabel',
-            'itemLabel',
-            item.isRefined && 'itemLabelSelected'
-          )}
-        >
-          {label}
-        </span>{' '}
-        <span {...cx('itemCount', item.isRefined && 'itemCountSelected')}>
-          {item.count.toLocaleString()}
-        </span>
+        <span {...cx(['labelText'])}>{label}</span>{' '}
+        <span {...cx(['count'])}>{item.count.toLocaleString()}</span>
       </label>
     );
   };
 
   render() {
     return (
-      <div>
+      <BaseWidget widgetClassName={widgetClassName}>
         <List
           renderItem={this.renderItem}
           selectItem={this.selectItem}
@@ -106,7 +97,7 @@ class RefinementList extends Component {
           ])}
           query={this.state.query}
         />
-      </div>
+      </BaseWidget>
     );
   }
 }

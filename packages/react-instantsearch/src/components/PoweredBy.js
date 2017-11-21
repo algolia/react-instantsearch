@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import translatable from '../core/translatable';
-import classNames from './classNames.js';
+import { classNamesNew } from './classNames.js';
 
-const cx = classNames('PoweredBy');
+const cx = classNamesNew('PoweredBy');
 
 /* eslint-disable max-len */
 const AlgoliaLogo = () => (
@@ -11,6 +11,8 @@ const AlgoliaLogo = () => (
     xmlns="http://www.w3.org/2000/svg"
     baseProfile="basic"
     viewBox="0 0 1366 362"
+    width="100"
+    height="27"
   >
     <linearGradient
       id="g"
@@ -49,15 +51,10 @@ class PoweredBy extends Component {
   render() {
     const { translate, url } = this.props;
     return (
-      <div {...cx('root')}>
-        <span {...cx('searchBy')}>{translate('searchBy')} </span>
-        <a
-          href={url}
-          target="_blank"
-          {...cx('algoliaLink')}
-          aria-label="Algolia"
-        >
-          <AlgoliaLogo />
+      <div {...cx([''])}>
+        <span {...cx(['text'])}>{translate('searchBy')} </span>
+        <a href={url} target="_blank" {...cx(['link'])} aria-label="Algolia">
+          <AlgoliaLogo {...cx(['logo'])} />
         </a>
       </div>
     );

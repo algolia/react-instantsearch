@@ -1,12 +1,15 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { range } from 'lodash';
+
 import { capitalize } from '../core/utils';
 import translatable from '../core/translatable';
 import LinkList from './LinkList';
-import classNames from './classNames.js';
+import BaseWidget from './BaseWidget';
+import { classNamesNew } from './classNames.js';
 
-const cx = classNames('Pagination');
+const widgetClassName = 'Pagination';
+const cx = classNamesNew(widgetClassName);
 
 // Determines the size of the widget (the number of pages displayed - that the user can directly click on)
 function calculateSize(padding, maxPages) {
@@ -120,7 +123,7 @@ class Pagination extends Component {
     if (showFirst) {
       items.push({
         key: 'first',
-        modifier: 'itemFirst',
+        modifier: '-firstPage',
         disabled: currentRefinement === 1,
         label: translate('first'),
         value: 1,
@@ -130,7 +133,7 @@ class Pagination extends Component {
     if (showPrevious) {
       items.push({
         key: 'previous',
-        modifier: 'itemPrevious',
+        modifier: '-previousPage',
         disabled: currentRefinement === 1,
         label: translate('previous'),
         value: currentRefinement - 1,
@@ -141,7 +144,7 @@ class Pagination extends Component {
     items = items.concat(
       getPages(currentRefinement, totalPages, pagesPadding).map(value => ({
         key: value,
-        modifier: 'itemPage',
+        modifier: '-page',
         label: translate('page', value),
         value,
         selected: value === currentRefinement,
@@ -151,7 +154,7 @@ class Pagination extends Component {
     if (showNext) {
       items.push({
         key: 'next',
-        modifier: 'itemNext',
+        modifier: '-nextPage',
         disabled: currentRefinement === lastPage || lastPage <= 1,
         label: translate('next'),
         value: currentRefinement + 1,
@@ -161,7 +164,7 @@ class Pagination extends Component {
     if (showLast) {
       items.push({
         key: 'last',
-        modifier: 'itemLast',
+        modifier: '-lastPage',
         disabled: currentRefinement === lastPage || lastPage <= 1,
         label: translate('last'),
         value: lastPage,
@@ -170,13 +173,15 @@ class Pagination extends Component {
     }
 
     return (
-      <ListComponent
-        {...otherProps}
-        cx={cx}
-        items={items}
-        onSelect={refine}
-        createURL={createURL}
-      />
+      <BaseWidget widgetClassName={widgetClassName}>
+        <ListComponent
+          {...otherProps}
+          cx={cx}
+          items={items}
+          onSelect={refine}
+          createURL={createURL}
+        />
+      </BaseWidget>
     );
   }
 }

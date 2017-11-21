@@ -1,9 +1,13 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import translatable from '../core/translatable';
-import classNames from './classNames.js';
 import { isEmpty } from 'lodash';
-const cx = classNames('StarRating');
+
+import translatable from '../core/translatable';
+import { classNamesNew } from './classNames.js';
+import BaseWidget from './BaseWidget';
+
+const widgetClassName = 'RatingMenu';
+const cx = classNamesNew(widgetClassName);
 
 class StarRating extends Component {
   static propTypes = {
@@ -67,24 +71,32 @@ class StarRating extends Component {
         max === this.props.currentRefinement.max);
 
     const icons = [];
+    let rating = 0;
     for (let icon = 0; icon < max; icon++) {
-      const iconTheme = icon >= lowerBound ? 'ratingIconEmpty' : 'ratingIcon';
+      if (icon < lowerBound) {
+        rating++;
+      }
       icons.push(
-        <span
+        <svg
           key={icon}
-          {...cx(
-            iconTheme,
-            selected && `${iconTheme}Selected`,
-            disabled && `${iconTheme}Disabled`
-          )}
-        />
+          {...cx(['starIcon'])}
+          aria-hidden="true"
+          width="24"
+          height="24"
+        >
+          <use
+            xlinkHref={`#ais-${widgetClassName}-${
+              icon >= lowerBound ? 'starEmptySymbol' : 'starSymbol'
+            }`}
+          />
+        </svg>
       );
     }
 
     // The last item of the list (the default item), should not
     // be clickable if it is selected.
     const isLastAndSelect = isLastSelectableItem && selected;
-    const StarsWrapper = isLastAndSelect ? 'div' : 'a';
+    const StarsWrapper = isLastAndSelect ? 'div' : 'button';
     const onClickHandler = isLastAndSelect
       ? {}
       : {
@@ -93,37 +105,27 @@ class StarRating extends Component {
         };
 
     return (
-      <StarsWrapper
-        {...cx(
-          'ratingLink',
-          selected && 'ratingLinkSelected',
-          disabled && 'ratingLinkDisabled'
-        )}
-        disabled={disabled}
+      <li
         key={lowerBound}
-        {...onClickHandler}
+        {...cx([
+          'item',
+          selected && 'item--selected',
+          disabled && 'item--disabled',
+        ])}
       >
-        {icons}
-        <span
-          {...cx(
-            'ratingLabel',
-            selected && 'ratingLabelSelected',
-            disabled && 'ratingLabelDisabled'
-          )}
+        <StarsWrapper
+          aria-label={`${rating}${translate('ratingLabel')}`}
+          {...cx(['button'])}
+          disabled={disabled}
+          {...onClickHandler}
         >
-          {translate('ratingLabel')}
-        </span>
-        <span> </span>
-        <span
-          {...cx(
-            'ratingCount',
-            selected && 'ratingCountSelected',
-            disabled && 'ratingCountDisabled'
-          )}
-        >
-          {count}
-        </span>
-      </StarsWrapper>
+          {icons}
+          <span {...cx(['label'])} aria-hidden="true">
+            {translate('ratingLabel')}
+          </span>{' '}
+          <span {...cx(['count'])}>{count}</span>
+        </StarsWrapper>
+      </li>
     );
   }
 
@@ -161,7 +163,27 @@ class StarRating extends Component {
         })
       );
     }
-    return <div {...cx('root', !canRefine && 'noRefinement')}>{items}</div>;
+    return (
+      <BaseWidget
+        widgetClassName={widgetClassName}
+        otherWidgetClassNames={[!canRefine && `-noRefinement`]}
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" style={{ display: 'none' }}>
+          <symbol id="ais-RatingMenu-starSymbol" viewBox="0 0 24 24">
+            <path d="M12 .288l2.833 8.718h9.167l-7.417 5.389 2.833 8.718-7.416-5.388-7.417 5.388 2.833-8.718-7.416-5.389h9.167z" />
+          </symbol>
+          <symbol
+            id="ais-RatingMenu-starEmptySymbol"
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+          >
+            <path d="M12 6.76l1.379 4.246h4.465l-3.612 2.625 1.379 4.246-3.611-2.625-3.612 2.625 1.379-4.246-3.612-2.625h4.465l1.38-4.246zm0-6.472l-2.833 8.718h-9.167l7.416 5.389-2.833 8.718 7.417-5.388 7.416 5.388-2.833-8.718 7.417-5.389h-9.167l-2.833-8.718z" />
+          </symbol>
+        </svg>
+        <ul {...cx(['list'])}>{items}</ul>
+      </BaseWidget>
+    );
   }
 }
 

@@ -118,7 +118,7 @@ class List extends Component {
         <div {...cx(['noResults'])}>{translate('noResults')}</div>
       ) : null;
     return (
-      <div {...cx('SearchBox')}>
+      <div {...cx(['SearchBox'])}>
         <SearchBox
           currentRefinement={this.state.query}
           refine={value => {
@@ -154,7 +154,7 @@ class List extends Component {
     // option.
     const limit = this.getLimit();
     return (
-      <ul {...cx(['list', !this.props.canRefine && 'noRefinement'])}>
+      <ul {...cx(['list', !this.props.canRefine && 'list--noRefinement'])}>
         {searchBox}
         {items
           .slice(0, limit)

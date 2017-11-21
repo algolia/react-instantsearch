@@ -33,25 +33,24 @@ export default class LinkList extends Component {
   render() {
     const { cx, createURL, items, onSelect, canRefine } = this.props;
     return (
-      <ul {...cx('root', !canRefine && 'noRefinement')}>
+      <ul {...cx(['list', !canRefine && 'list--noRefinement'])}>
         {items.map(item => (
           <li
             key={has(item, 'key') ? item.key : item.value}
-            {...cx(
+            {...cx([
               'item',
-              item.selected && !item.disabled && 'itemSelected',
-              item.disabled && 'itemDisabled',
-              item.modifier
-            )}
-            disabled={item.disabled}
+              item.selected && !item.disabled && 'item--selected',
+              item.disabled && 'item--disabled',
+              item.modifier,
+            ])}
           >
             {item.disabled ? (
-              <span {...cx('itemLink', 'itemLinkDisabled')}>
+              <span {...cx(['link'])}>
                 {has(item, 'label') ? item.label : item.value}
               </span>
             ) : (
               <Link
-                {...cx('itemLink', item.selected && 'itemLinkSelected')}
+                {...cx(['link', item.selected && 'link--selected'])}
                 aria-label={item.ariaLabel}
                 href={createURL(item.value)}
                 onClick={onSelect.bind(null, item.value)}
