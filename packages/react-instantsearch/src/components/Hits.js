@@ -1,16 +1,21 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import classNames from './classNames.js';
 
-const cx = classNames('Hits');
+import BaseWidget from './BaseWidget';
+import { classNamesNew } from './classNames.js';
+
+const widgetClassName = 'Results';
+const cx = classNamesNew(widgetClassName);
 
 class Hits extends Component {
   render() {
     const { hitComponent: ItemComponent, hits } = this.props;
     return (
-      <div {...cx('root')}>
-        {hits.map(hit => <ItemComponent key={hit.objectID} hit={hit} />)}
-      </div>
+      <BaseWidget widgetClassName={widgetClassName}>
+        <ul {...cx(['list'])}>
+          {hits.map(hit => <ItemComponent key={hit.objectID} hit={hit} />)}
+        </ul>
+      </BaseWidget>
     );
   }
 }
@@ -23,7 +28,8 @@ Hits.propTypes = {
 /* eslint-disable react/display-name */
 Hits.defaultProps = {
   hitComponent: hit => (
-    <div
+    <li
+      {...cx(['item'])}
       style={{
         borderBottom: '1px solid #bbb',
         paddingBottom: '5px',
@@ -31,7 +37,7 @@ Hits.defaultProps = {
       }}
     >
       {JSON.stringify(hit).slice(0, 100)}...
-    </div>
+    </li>
   ),
 };
 /* eslint-enable react/display-name */

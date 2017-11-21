@@ -1,9 +1,12 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import Select from './Select';
-import classNames from './classNames.js';
 
-const cx = classNames('HitsPerPage');
+import Select from './Select';
+import BaseWidget from './BaseWidget';
+import { classNamesNew } from './classNames.js';
+
+const widgetClassName = 'ResultsPerPage';
+const cx = classNamesNew(widgetClassName);
 
 class HitsPerPage extends Component {
   static propTypes = {
@@ -28,12 +31,14 @@ class HitsPerPage extends Component {
   render() {
     const { currentRefinement, refine, items } = this.props;
     return (
-      <Select
-        onSelect={refine}
-        selectedItem={currentRefinement}
-        items={items}
-        cx={cx}
-      />
+      <BaseWidget widgetClassName={widgetClassName}>
+        <Select
+          onSelect={refine}
+          selectedItem={currentRefinement}
+          items={items}
+          cx={cx}
+        />
+      </BaseWidget>
     );
   }
 }

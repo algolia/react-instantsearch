@@ -118,7 +118,7 @@ class List extends Component {
         <div {...cx(['noResults'])}>{translate('noResults')}</div>
       ) : null;
     return (
-      <div {...cx(['SearchBox'])}>
+      <div {...cx(['searchbox'])}>
         <SearchBox
           currentRefinement={this.state.query}
           refine={value => {

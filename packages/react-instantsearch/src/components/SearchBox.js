@@ -1,9 +1,12 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import translatable from '../core/translatable';
-import classNames from './classNames.js';
 
-const cx = classNames('SearchBox');
+import translatable from '../core/translatable';
+import { classNamesNew } from './classNames.js';
+import BaseWidget from './BaseWidget';
+
+const widgetClassName = 'Searchbox';
+const cx = classNamesNew(widgetClassName);
 
 class SearchBox extends Component {
   static propTypes = {
@@ -159,16 +162,28 @@ class SearchBox extends Component {
     const submitComponent = this.props.submitComponent ? (
       this.props.submitComponent
     ) : (
-      <svg role="img" width="1em" height="1em">
-        <use xlinkHref="#sbx-icon-search-13" />
+      <svg
+        {...cx(['submitIcon'])}
+        xmlns="http://www.w3.org/2000/svg"
+        width="10"
+        height="10"
+        viewBox="0 0 40 40"
+      >
+        <path d="M26.804 29.01c-2.832 2.34-6.465 3.746-10.426 3.746C7.333 32.756 0 25.424 0 16.378 0 7.333 7.333 0 16.378 0c9.046 0 16.378 7.333 16.378 16.378 0 3.96-1.406 7.594-3.746 10.426l10.534 10.534c.607.607.61 1.59-.004 2.202-.61.61-1.597.61-2.202.004L26.804 29.01zm-10.426.627c7.323 0 13.26-5.936 13.26-13.26 0-7.32-5.937-13.257-13.26-13.257C9.056 3.12 3.12 9.056 3.12 16.378c0 7.323 5.936 13.26 13.258 13.26z" />
       </svg>
     );
 
     const resetComponent = this.props.resetComponent ? (
       this.props.resetComponent
     ) : (
-      <svg role="img" width="1em" height="1em">
-        <use xlinkHref="#sbx-icon-clear-3" />
+      <svg
+        {...cx(['resetIcon'])}
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 20 20"
+        width="10"
+        height="10"
+      >
+        <path d="M8.114 10L.944 2.83 0 1.885 1.886 0l.943.943L10 8.113l7.17-7.17.944-.943L20 1.886l-.943.943-7.17 7.17 7.17 7.17.943.944L18.114 20l-.943-.943-7.17-7.17-7.17 7.17-.944.943L0 18.114l.943-.943L8.113 10z" />
       </svg>
     );
 
@@ -186,37 +201,15 @@ class SearchBox extends Component {
 
     /* eslint-disable max-len */
     return (
-      <form
-        noValidate
-        onSubmit={this.props.onSubmit ? this.props.onSubmit : this.onSubmit}
-        onReset={this.onReset}
-        {...cx('root')}
-        action=""
-        role="search"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" style={{ display: 'none' }}>
-          <symbol
-            xmlns="http://www.w3.org/2000/svg"
-            id="sbx-icon-search-13"
-            viewBox="0 0 40 40"
-          >
-            <path
-              d="M26.804 29.01c-2.832 2.34-6.465 3.746-10.426 3.746C7.333 32.756 0 25.424 0 16.378 0 7.333 7.333 0 16.378 0c9.046 0 16.378 7.333 16.378 16.378 0 3.96-1.406 7.594-3.746 10.426l10.534 10.534c.607.607.61 1.59-.004 2.202-.61.61-1.597.61-2.202.004L26.804 29.01zm-10.426.627c7.323 0 13.26-5.936 13.26-13.26 0-7.32-5.937-13.257-13.26-13.257C9.056 3.12 3.12 9.056 3.12 16.378c0 7.323 5.936 13.26 13.258 13.26z"
-              fillRule="evenodd"
-            />
-          </symbol>
-          <symbol
-            xmlns="http://www.w3.org/2000/svg"
-            id="sbx-icon-clear-3"
-            viewBox="0 0 20 20"
-          >
-            <path
-              d="M8.114 10L.944 2.83 0 1.885 1.886 0l.943.943L10 8.113l7.17-7.17.944-.943L20 1.886l-.943.943-7.17 7.17 7.17 7.17.943.944L18.114 20l-.943-.943-7.17-7.17-7.17 7.17-.944.943L0 18.114l.943-.943L8.113 10z"
-              fillRule="evenodd"
-            />
-          </symbol>
-        </svg>
-        <div role="search" {...cx('wrapper')}>
+      <BaseWidget widgetClassName={widgetClassName}>
+        <form
+          noValidate
+          onSubmit={this.props.onSubmit ? this.props.onSubmit : this.onSubmit}
+          onReset={this.onReset}
+          {...cx(['form'])}
+          action=""
+          role="search"
+        >
           <input
             ref={this.onInputMount}
             type="search"
@@ -231,25 +224,25 @@ class SearchBox extends Component {
             value={query}
             onChange={this.onChange}
             {...searchInputEvents}
-            {...cx('input')}
+            {...cx(['input'])}
           />
           <button
             type="submit"
             title={translate('submitTitle')}
-            {...cx('submit')}
+            {...cx(['submit'])}
           >
             {submitComponent}
           </button>
           <button
             type="reset"
             title={translate('resetTitle')}
-            {...cx('reset')}
+            {...cx(['reset'])}
             onClick={this.onReset}
           >
             {resetComponent}
           </button>
-        </div>
-      </form>
+        </form>
+      </BaseWidget>
     );
     /* eslint-enable */
   }
