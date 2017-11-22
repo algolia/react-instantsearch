@@ -17,6 +17,7 @@
     "test:recipes": "./scripts/test:recipes.sh",
     "test:build": "NODE_ENV=production ./scripts/test:build.sh",
     "test:regressions": "webpack --config test/regressions/webpack.config.js && rm -rf test/screenshots && happo run && babel-node ./test/regressions/normalize.js",
+    "test:size": "bundlesize",
     "argos": "argos upload test/screenshots --token $ARGOS_TOKEN || true",
     "dev": "jest --watch --bail",
     "docs:storybook-start": "start-storybook -p 6006 -c ./storybook -s ./storybook/public",
