@@ -27,6 +27,18 @@ stories
     }
   )
   .addWithJSX(
+    'with header and footer',
+    () => (
+      <WrapWithHits hasPlayground={true} linkedStoryGroup="Pagination">
+        <Pagination header="Header" footer="Footer" />
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
     'with all props',
     () => (
       <WrapWithHits hasPlayground={true} linkedStoryGroup="Pagination">

@@ -13,14 +13,20 @@ class ClearAll extends Component {
     translate: PropTypes.func.isRequired,
     items: PropTypes.arrayOf(PropTypes.object).isRequired,
     refine: PropTypes.func.isRequired,
+    header: PropTypes.node,
+    footer: PropTypes.node,
   };
 
   render() {
-    const { translate, items, refine } = this.props;
+    const { translate, items, refine, header, footer } = this.props;
     const isDisabled = items.length === 0;
 
     return (
-      <BaseWidget widgetClassName={widgetClassName}>
+      <BaseWidget
+        widgetClassName={widgetClassName}
+        header={header}
+        footer={footer}
+      >
         {isDisabled ? (
           <button {...cx(['button'])} disabled>
             {translate(['reset'])}

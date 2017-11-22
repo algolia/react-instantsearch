@@ -31,6 +31,28 @@ stories
     }
   )
   .addWithJSX(
+    'with header and footer',
+    () => (
+      <WrapWithHits hasPlayground={true} linkedStoryGroup="HitsPerPage">
+        <HitsPerPage
+          defaultRefinement={4}
+          items={[
+            { value: 2, label: '2 hits per page' },
+            { value: 4, label: '4 hits per page' },
+            { value: 6, label: '6 hits per page' },
+            { value: 8, label: '8 hits per page' },
+          ]}
+          header="Header"
+          footer="Footer"
+        />
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
     'without label',
     () => (
       <WrapWithHits hasPlayground={true} linkedStoryGroup="HitsPerPage">

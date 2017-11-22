@@ -9,18 +9,31 @@ setAddon(JSXAddon);
 
 const stories = storiesOf('Hits', module);
 
-stories.addWithJSX(
-  'default',
-  () => (
-    <WrapWithHits linkedStoryGroup="Hits">
-      <Hits />
-    </WrapWithHits>
-  ),
-  {
-    displayName,
-    filterProps,
-  }
-);
+stories
+  .addWithJSX(
+    'default',
+    () => (
+      <WrapWithHits linkedStoryGroup="Hits">
+        <Hits />
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
+    'with header and footer',
+    () => (
+      <WrapWithHits linkedStoryGroup="Hits">
+        <Hits header="Header" footer="Footer" />
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  );
 
 stories.add('with custom rendering', () => (
   <WrapWithHits linkedStoryGroup="Hits">

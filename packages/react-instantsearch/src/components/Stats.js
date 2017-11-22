@@ -13,12 +13,18 @@ class Stats extends Component {
     translate: PropTypes.func.isRequired,
     nbHits: PropTypes.number.isRequired,
     processingTimeMS: PropTypes.number.isRequired,
+    header: PropTypes.node,
+    footer: PropTypes.node,
   };
 
   render() {
-    const { translate, nbHits, processingTimeMS } = this.props;
+    const { translate, nbHits, processingTimeMS, header, footer } = this.props;
     return (
-      <BaseWidget widgetClassName={widgetClassName}>
+      <BaseWidget
+        widgetClassName={widgetClassName}
+        header={header}
+        footer={footer}
+      >
         <span {...cx(['text'])}>
           {translate('stats', nbHits, processingTimeMS)}
         </span>

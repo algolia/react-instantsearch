@@ -8,15 +8,28 @@ setAddon(JSXAddon);
 
 const stories = storiesOf('InfiniteHits', module);
 
-stories.addWithJSX(
-  'default',
-  () => (
-    <WrapWithHits linkedStoryGroup="Hits" pagination={false}>
-      <InfiniteHits />
-    </WrapWithHits>
-  ),
-  {
-    displayName,
-    filterProps,
-  }
-);
+stories
+  .addWithJSX(
+    'default',
+    () => (
+      <WrapWithHits linkedStoryGroup="Hits" pagination={false}>
+        <InfiniteHits />
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
+    'with header and footer',
+    () => (
+      <WrapWithHits linkedStoryGroup="Hits" pagination={false}>
+        <InfiniteHits header="Header" footer="Footer" />
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  );

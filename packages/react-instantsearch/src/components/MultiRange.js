@@ -22,6 +22,8 @@ class MultiRange extends Component {
     transformItems: PropTypes.func,
     canRefine: PropTypes.bool.isRequired,
     translate: PropTypes.func.isRequired,
+    header: PropTypes.node,
+    footer: PropTypes.node,
   };
 
   static contextTypes = {
@@ -54,10 +56,14 @@ class MultiRange extends Component {
   };
 
   render() {
-    const { items, canRefine } = this.props;
+    const { items, canRefine, header, footer } = this.props;
 
     return (
-      <BaseWidget widgetClassName={widgetClassName}>
+      <BaseWidget
+        widgetClassName={widgetClassName}
+        header={header}
+        footer={footer}
+      >
         <List
           renderItem={this.renderItem}
           showMore={false}

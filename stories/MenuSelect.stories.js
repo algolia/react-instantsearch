@@ -28,6 +28,18 @@ stories
     }
   )
   .addWithJSX(
+    'with header and footer',
+    () => (
+      <WrapWithHits hasPlayground={true} linkedStoryGroup="MenuSelect">
+        <MenuSelect attributeName="category" header="Header" footer="Footer" />
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
     'with default selected item',
     () => (
       <WrapWithHits hasPlayground={true} linkedStoryGroup="MenuSelect">

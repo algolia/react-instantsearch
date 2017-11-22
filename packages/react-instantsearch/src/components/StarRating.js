@@ -27,6 +27,8 @@ class StarRating extends Component {
       })
     ),
     canRefine: PropTypes.bool.isRequired,
+    header: PropTypes.node,
+    footer: PropTypes.node,
   };
 
   static contextTypes = {
@@ -138,6 +140,8 @@ class StarRating extends Component {
       count,
       createURL,
       canRefine,
+      header,
+      footer,
     } = this.props;
     const items = [];
     for (let i = max; i >= min; i--) {
@@ -167,6 +171,8 @@ class StarRating extends Component {
       <BaseWidget
         widgetClassName={widgetClassName}
         otherWidgetClassNames={[!canRefine && `-noRefinement`]}
+        header={header}
+        footer={footer}
       >
         <svg xmlns="http://www.w3.org/2000/svg" style={{ display: 'none' }}>
           <symbol id="ais-RatingMenu-starSymbol" viewBox="0 0 24 24">

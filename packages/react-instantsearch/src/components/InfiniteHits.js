@@ -16,6 +16,8 @@ class InfiniteHits extends Component {
       hasMore,
       refine,
       translate,
+      header,
+      footer,
     } = this.props;
     const renderedHits = hits.map(hit => (
       <ItemComponent key={hit.objectID} hit={hit} />
@@ -31,7 +33,11 @@ class InfiniteHits extends Component {
     );
 
     return (
-      <BaseWidget widgetClassName={widgetClassName}>
+      <BaseWidget
+        widgetClassName={widgetClassName}
+        header={header}
+        footer={footer}
+      >
         <ul {...cx(['list'])}>{renderedHits}</ul>
         {loadMoreButton}
       </BaseWidget>
@@ -46,6 +52,8 @@ InfiniteHits.propTypes = {
   hasMore: PropTypes.bool.isRequired,
   refine: PropTypes.func.isRequired,
   translate: PropTypes.func.isRequired,
+  header: PropTypes.node,
+  footer: PropTypes.node,
 };
 
 /* eslint-disable react/display-name */

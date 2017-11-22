@@ -22,6 +22,8 @@ class MenuSelect extends Component {
         isRefined: PropTypes.bool.isRequired,
       })
     ),
+    header: PropTypes.node,
+    footer: PropTypes.node,
   };
 
   static contextTypes = {
@@ -48,10 +50,14 @@ class MenuSelect extends Component {
   };
 
   render() {
-    const { items, translate } = this.props;
+    const { items, translate, header, footer } = this.props;
 
     return (
-      <BaseWidget widgetClassName={widgetClassName}>
+      <BaseWidget
+        widgetClassName={widgetClassName}
+        header={header}
+        footer={footer}
+      >
         <select
           value={this.selectedValue}
           onChange={this.handleSelectChange}

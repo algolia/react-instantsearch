@@ -28,6 +28,18 @@ stories
     }
   )
   .addWithJSX(
+    'with header and footer',
+    () => (
+      <WrapWithHits linkedStoryGroup="RangeInput">
+        <RangeInput attributeName="price" header="Header" footer="Footer" />
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
     'with panel',
     () => (
       <WrapWithHits linkedStoryGroup="RangeInput">

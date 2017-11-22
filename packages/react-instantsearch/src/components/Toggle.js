@@ -12,6 +12,8 @@ class Toggle extends Component {
     currentRefinement: PropTypes.bool.isRequired,
     refine: PropTypes.func.isRequired,
     label: PropTypes.string.isRequired,
+    header: PropTypes.node,
+    footer: PropTypes.node,
   };
 
   onChange = e => {
@@ -19,10 +21,14 @@ class Toggle extends Component {
   };
 
   render() {
-    const { currentRefinement, label } = this.props;
+    const { currentRefinement, label, header, footer } = this.props;
 
     return (
-      <BaseWidget widgetClassName={widgetClassName}>
+      <BaseWidget
+        widgetClassName={widgetClassName}
+        header={header}
+        footer={footer}
+      >
         <label {...cx(['label'])}>
           <input
             {...cx(['checkbox'])}

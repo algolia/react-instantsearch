@@ -24,6 +24,8 @@ class Breadcrumb extends Component {
     rootURL: PropTypes.string,
     separator: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
     translate: PropTypes.func.isRequired,
+    header: PropTypes.node,
+    footer: PropTypes.node,
   };
 
   static contextTypes = {
@@ -47,6 +49,8 @@ class Breadcrumb extends Component {
       rootURL,
       separator,
       translate,
+      header,
+      footer,
     } = this.props;
     const rootPath = canRefine ? (
       <li {...cx(['item'])}>
@@ -85,6 +89,8 @@ class Breadcrumb extends Component {
       <BaseWidget
         widgetClassName={widgetClassName}
         otherWidgetClassNames={[!canRefine && `-noRefinement`]}
+        header={header}
+        footer={footer}
       >
         <ul {...cx(['list'])}>
           {rootPath}

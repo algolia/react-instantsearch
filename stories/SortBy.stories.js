@@ -29,6 +29,27 @@ stories
     }
   )
   .addWithJSX(
+    'with header and footer',
+    () => (
+      <WrapWithHits linkedStoryGroup="SortBy">
+        <SortBy
+          items={[
+            { value: 'ikea', label: 'Featured' },
+            { value: 'ikea_price_asc', label: 'Price asc.' },
+            { value: 'ikea_price_desc', label: 'Price desc.' },
+          ]}
+          defaultRefinement="ikea"
+          header="Header"
+          footer="Footer"
+        />
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
     'without label',
     () => (
       <WrapWithHits linkedStoryGroup="SortBy">

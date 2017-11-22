@@ -30,6 +30,26 @@ stories
     }
   )
   .addWithJSX(
+    'with header and footer',
+    () => (
+      <WrapWithHits linkedStoryGroup="ClearAll">
+        <div>
+          <ClearAll header="Header" footer="Footer" />
+          <div style={{ display: 'none' }}>
+            <RefinementList
+              attributeName="category"
+              defaultRefinement={['Dining']}
+            />
+          </div>
+        </div>
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
     'nothing to clear',
     () => (
       <WrapWithHits linkedStoryGroup="ClearAll">

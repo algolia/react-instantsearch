@@ -40,15 +40,15 @@ stories
     }
   )
   .addWithJSX(
-    'with panel',
+    'with header and footer',
     () => (
       <WrapWithHits hasPlayground={true} linkedStoryGroup="Breadcrumb">
-        <Panel title="Category">
-          <Breadcrumb
-            attributes={['category', 'sub_category', 'sub_sub_category']}
-            separator=" / "
-          />
-        </Panel>
+        <Breadcrumb
+          header="Header"
+          footer="Footer"
+          attributes={['category', 'sub_category', 'sub_sub_category']}
+          separator=" / "
+        />
         <hr />
         <HierarchicalMenu
           attributes={['category', 'sub_category', 'sub_sub_category']}

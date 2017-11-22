@@ -32,6 +32,8 @@ class Menu extends Component {
     limitMin: PropTypes.number,
     limitMax: PropTypes.number,
     transformItems: PropTypes.func,
+    header: PropTypes.node,
+    footer: PropTypes.node,
   };
 
   static contextTypes = {
@@ -71,8 +73,13 @@ class Menu extends Component {
   };
 
   render() {
+    const { header, footer } = this.props;
     return (
-      <BaseWidget widgetClassName={widgetClassName}>
+      <BaseWidget
+        widgetClassName={widgetClassName}
+        header={header}
+        footer={footer}
+      >
         <List
           renderItem={this.renderItem}
           selectItem={this.selectItem}

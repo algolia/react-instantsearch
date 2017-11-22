@@ -19,6 +19,8 @@ export class RawRangeInput extends Component {
       min: PropTypes.number,
       max: PropTypes.number,
     }),
+    header: PropTypes.node,
+    footer: PropTypes.node,
   };
 
   static defaultProps = {
@@ -104,7 +106,7 @@ export class RawRangeInput extends Component {
 
   render() {
     const { from, to } = this.state;
-    const { precision, translate, canRefine } = this.props;
+    const { precision, translate, canRefine, header, footer } = this.props;
     const { min, max } = this.normalizeRangeForRendering(this.props);
     const step = 1 / Math.pow(10, precision);
 
@@ -112,6 +114,8 @@ export class RawRangeInput extends Component {
       <BaseWidget
         widgetClassName={widgetClassName}
         otherWidgetClassNames={[!canRefine && `-noRefinement`]}
+        header={header}
+        footer={footer}
       >
         <form {...cx(['form'])} onSubmit={this.onSubmit}>
           <input

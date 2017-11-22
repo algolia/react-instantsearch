@@ -26,12 +26,18 @@ class HitsPerPage extends Component {
         label: PropTypes.string,
       })
     ),
+    header: PropTypes.node,
+    footer: PropTypes.node,
   };
 
   render() {
-    const { currentRefinement, refine, items } = this.props;
+    const { currentRefinement, refine, items, header, footer } = this.props;
     return (
-      <BaseWidget widgetClassName={widgetClassName}>
+      <BaseWidget
+        widgetClassName={widgetClassName}
+        header={header}
+        footer={footer}
+      >
         <Select
           onSelect={refine}
           selectedItem={currentRefinement}

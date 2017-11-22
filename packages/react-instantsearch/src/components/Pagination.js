@@ -64,6 +64,8 @@ class Pagination extends Component {
     showLast: PropTypes.bool,
     pagesPadding: PropTypes.number,
     maxPages: PropTypes.number,
+    header: PropTypes.node,
+    footer: PropTypes.node,
   };
 
   static defaultProps = {
@@ -113,6 +115,8 @@ class Pagination extends Component {
       refine,
       createURL,
       translate,
+      header,
+      footer,
       listComponent: ListComponent,
       ...otherProps
     } = this.props;
@@ -173,7 +177,11 @@ class Pagination extends Component {
     }
 
     return (
-      <BaseWidget widgetClassName={widgetClassName}>
+      <BaseWidget
+        widgetClassName={widgetClassName}
+        header={header}
+        footer={footer}
+      >
         <ListComponent
           {...otherProps}
           cx={cx}

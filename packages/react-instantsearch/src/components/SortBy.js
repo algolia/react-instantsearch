@@ -21,12 +21,18 @@ class SortBy extends Component {
 
     currentRefinement: PropTypes.string.isRequired,
     transformItems: PropTypes.func,
+    header: PropTypes.node,
+    footer: PropTypes.node,
   };
 
   render() {
-    const { refine, items, currentRefinement } = this.props;
+    const { refine, items, currentRefinement, header, footer } = this.props;
     return (
-      <BaseWidget widgetClassName={widgetClassName}>
+      <BaseWidget
+        widgetClassName={widgetClassName}
+        header={header}
+        footer={footer}
+      >
         <Select
           cx={cx}
           selectedItem={currentRefinement}

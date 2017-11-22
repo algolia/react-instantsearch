@@ -34,6 +34,28 @@ stories
     }
   )
   .addWithJSX(
+    'with header and footer',
+    () => (
+      <WrapWithHits linkedStoryGroup="MultiRange">
+        <MultiRange
+          attributeName="price"
+          items={[
+            { end: 10, label: '<$10' },
+            { start: 10, end: 100, label: '$10-$100' },
+            { start: 100, end: 500, label: '$100-$500' },
+            { start: 500, label: '>$500' },
+          ]}
+          header="Header"
+          footer="Footer"
+        />
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
     'with a default range selected',
     () => (
       <WrapWithHits linkedStoryGroup="MultiRange">

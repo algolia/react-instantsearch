@@ -28,6 +28,24 @@ stories
     }
   )
   .addWithJSX(
+    'with header and footer',
+    () => (
+      <WrapWithHits hasPlayground={true} linkedStoryGroup="StarRating">
+        <StarRating
+          attributeName="rating"
+          max={6}
+          min={1}
+          header="Header"
+          footer="Footer"
+        />
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
     'with panel',
     () => (
       <WrapWithHits hasPlayground={true} linkedStoryGroup="StarRating">

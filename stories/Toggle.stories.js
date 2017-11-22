@@ -26,6 +26,24 @@ stories
     }
   )
   .addWithJSX(
+    'with header and footer',
+    () => (
+      <WrapWithHits linkedStoryGroup="Toggle">
+        <Toggle
+          attributeName="materials"
+          label="Made with solid pine"
+          value={'Solid pine'}
+          header="Header"
+          footer="Footer"
+        />
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
     'checked by default',
     () => (
       <WrapWithHits linkedStoryGroup="Toggle">

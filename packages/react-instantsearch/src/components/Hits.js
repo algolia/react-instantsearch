@@ -9,9 +9,13 @@ const cx = classNames(widgetClassName);
 
 class Hits extends Component {
   render() {
-    const { hitComponent: ItemComponent, hits } = this.props;
+    const { hitComponent: ItemComponent, hits, header, footer } = this.props;
     return (
-      <BaseWidget widgetClassName={widgetClassName}>
+      <BaseWidget
+        widgetClassName={widgetClassName}
+        header={header}
+        footer={footer}
+      >
         <ul {...cx(['list'])}>
           {hits.map(hit => <ItemComponent key={hit.objectID} hit={hit} />)}
         </ul>
@@ -23,6 +27,8 @@ class Hits extends Component {
 Hits.propTypes = {
   hits: PropTypes.array,
   hitComponent: PropTypes.func.isRequired,
+  header: PropTypes.node,
+  footer: PropTypes.node,
 };
 
 /* eslint-disable react/display-name */

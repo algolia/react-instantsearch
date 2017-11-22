@@ -28,6 +28,9 @@ class SearchBox extends Component {
     onReset: PropTypes.func,
     onChange: PropTypes.func,
 
+    header: PropTypes.node,
+    footer: PropTypes.node,
+
     // For testing purposes
     __inputRef: PropTypes.func,
   };
@@ -156,7 +159,7 @@ class SearchBox extends Component {
   };
 
   render() {
-    const { translate, autoFocus } = this.props;
+    const { translate, autoFocus, header, footer } = this.props;
     const query = this.getQuery();
 
     const submitComponent = this.props.submitComponent ? (
@@ -201,7 +204,11 @@ class SearchBox extends Component {
 
     /* eslint-disable max-len */
     return (
-      <BaseWidget widgetClassName={widgetClassName}>
+      <BaseWidget
+        widgetClassName={widgetClassName}
+        header={header}
+        footer={footer}
+      >
         <form
           noValidate
           onSubmit={this.props.onSubmit ? this.props.onSubmit : this.onSubmit}

@@ -28,6 +28,22 @@ stories
     }
   )
   .addWithJSX(
+    'with header and footer',
+    () => (
+      <WrapWithHits linkedStoryGroup="RefinementList" hasPlayground={true}>
+        <RefinementList
+          attributeName="category"
+          header="Header"
+          footer="Footer"
+        />
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
     'with selected item',
     () => (
       <WrapWithHits linkedStoryGroup="RefinementList" hasPlayground={true}>

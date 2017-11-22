@@ -29,6 +29,22 @@ stories
     }
   )
   .addWithJSX(
+    'with header and footer',
+    () => (
+      <WrapWithHits hasPlayground={true} linkedStoryGroup="HierarchicalMenu">
+        <HierarchicalMenu
+          header="Header"
+          footer="Footer"
+          attributes={['category', 'sub_category', 'sub_sub_category']}
+        />
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
     'with default selected item',
     () => (
       <WrapWithHits hasPlayground={true} linkedStoryGroup="HierarchicalMenu">
