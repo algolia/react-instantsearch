@@ -2,10 +2,10 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 import BaseWidget from './BaseWidget';
-import classNames from './classNames.js';
+import { classNamesNew } from './classNames.js';
 
 const widgetClassName = 'Toggle';
-const cx = classNames(widgetClassName);
+const cx = classNamesNew(widgetClassName);
 
 class Toggle extends Component {
   static propTypes = {

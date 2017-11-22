@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import classNames from './classNames.js';
+import { classNamesNew } from './classNames.js';
 
-const cx = classNames('ScrollTo');
+const cx = classNamesNew('ScrollTo');
 
 class ScrollTo extends Component {
   static propTypes = {
@@ -20,7 +20,7 @@ class ScrollTo extends Component {
 
   render() {
     return (
-      <div ref={ref => (this.el = ref)} {...cx('root')}>
+      <div ref={ref => (this.el = ref)} {...cx([''])}>
         {this.props.children}
       </div>
     );

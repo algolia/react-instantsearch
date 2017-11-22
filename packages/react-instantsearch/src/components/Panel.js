@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import classNames from './classNames.js';
+import { classNamesNew } from './classNames.js';
 
-const cx = classNames('Panel');
+const cx = classNamesNew('Panel');
 
 class Panel extends Component {
   static propTypes = {
@@ -32,8 +32,8 @@ class Panel extends Component {
 
   render() {
     return (
-      <div {...cx('root', !this.state.canRefine && 'noRefinement')}>
-        <h5 {...cx('title')}>{this.props.title}</h5>
+      <div {...cx(['', !this.state.canRefine && '-noRefinement'])}>
+        <h5 {...cx(['title'])}>{this.props.title}</h5>
         {this.props.children}
       </div>
     );
