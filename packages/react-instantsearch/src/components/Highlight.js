@@ -3,7 +3,13 @@ import React from 'react';
 import Highlighter from './Highlighter';
 
 export default function Highlight(props) {
-  return <Highlighter highlightProperty="_highlightResult" {...props} />;
+  return (
+    <Highlighter
+      highlightProperty="_highlightResult"
+      widgetClassName="Highlight"
+      {...props}
+    />
+  );
 }
 
 Highlight.propTypes = {

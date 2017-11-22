@@ -4,7 +4,13 @@ import React from 'react';
 import Highlighter from './Highlighter';
 
 export default function Snippet(props) {
-  return <Highlighter highlightProperty="_snippetResult" {...props} />;
+  return (
+    <Highlighter
+      highlightProperty="_snippetResult"
+      widgetClassName="Snippet"
+      {...props}
+    />
+  );
 }
 
 Snippet.propTypes = {

@@ -1,9 +1,12 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import Select from './Select';
-import classNames from './classNames.js';
 
-const cx = classNames('SortBy');
+import Select from './Select';
+import BaseWidget from './BaseWidget';
+import { classNamesNew } from './classNames.js';
+
+const widgetClassName = 'SortBy';
+const cx = classNamesNew(widgetClassName);
 
 class SortBy extends Component {
   static propTypes = {
@@ -23,12 +26,14 @@ class SortBy extends Component {
   render() {
     const { refine, items, currentRefinement } = this.props;
     return (
-      <Select
-        cx={cx}
-        selectedItem={currentRefinement}
-        onSelect={refine}
-        items={items}
-      />
+      <BaseWidget widgetClassName={widgetClassName}>
+        <Select
+          cx={cx}
+          selectedItem={currentRefinement}
+          onSelect={refine}
+          items={items}
+        />
+      </BaseWidget>
     );
   }
 }

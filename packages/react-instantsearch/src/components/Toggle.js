@@ -1,8 +1,11 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+
+import BaseWidget from './BaseWidget';
 import classNames from './classNames.js';
 
-const cx = classNames('Toggle');
+const widgetClassName = 'Toggle';
+const cx = classNames(widgetClassName);
 
 class Toggle extends Component {
   static propTypes = {
@@ -19,15 +22,17 @@ class Toggle extends Component {
     const { currentRefinement, label } = this.props;
 
     return (
-      <label {...cx('root')}>
-        <input
-          {...cx('checkbox')}
-          type="checkbox"
-          checked={currentRefinement}
-          onChange={this.onChange}
-        />
-        <span {...cx('label')}>{label}</span>
-      </label>
+      <BaseWidget widgetClassName={widgetClassName}>
+        <label {...cx(['label'])}>
+          <input
+            {...cx(['checkbox'])}
+            type="checkbox"
+            checked={currentRefinement}
+            onChange={this.onChange}
+          />
+          <span {...cx(['labelText'])}>{label}</span>
+        </label>
+      </BaseWidget>
     );
   }
 }

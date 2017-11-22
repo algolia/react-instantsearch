@@ -1,9 +1,12 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+
+import BaseWidget from './BaseWidget';
 import translatable from '../core/translatable';
 import classNames from './classNames.js';
 
-const cx = classNames('Stats');
+const widgetClassName = 'Stats';
+const cx = classNames(widgetClassName);
 
 class Stats extends Component {
   static propTypes = {
@@ -15,9 +18,11 @@ class Stats extends Component {
   render() {
     const { translate, nbHits, processingTimeMS } = this.props;
     return (
-      <span {...cx('root')}>
-        {translate('stats', nbHits, processingTimeMS)}
-      </span>
+      <BaseWidget widgetClassName={widgetClassName}>
+        <span {...cx(['text'])}>
+          {translate('stats', nbHits, processingTimeMS)}
+        </span>
+      </BaseWidget>
     );
   }
 }
