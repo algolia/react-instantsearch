@@ -3,11 +3,11 @@ import React, { Component } from 'react';
 import { isEmpty } from 'lodash';
 
 import translatable from '../core/translatable';
-import { classNamesNew } from './classNames.js';
+import classNames from './classNames.js';
 import BaseWidget from './BaseWidget';
 
 const widgetClassName = 'RatingMenu';
-const cx = classNamesNew(widgetClassName);
+const cx = classNames(widgetClassName);
 
 class StarRating extends Component {
   static propTypes = {

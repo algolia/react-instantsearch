@@ -6,10 +6,10 @@ import List from './List';
 import Link from './Link';
 import Highlight from '../widgets/Highlight';
 import BaseWidget from './BaseWidget';
-import { classNamesNew } from './classNames.js';
+import classNames from './classNames.js';
 
 const widgetClassName = 'Menu';
-const cx = classNamesNew(widgetClassName);
+const cx = classNames(widgetClassName);
 
 class Menu extends Component {
   static propTypes = {

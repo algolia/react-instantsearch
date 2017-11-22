@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import Link from './Link';
-import { classNamesNew } from './classNames.js';
+import classNames from './classNames.js';
 import translatable from '../core/translatable';
 import BaseWidget from './BaseWidget';
 
 const widgetClassName = 'Breadcrumb';
-const cx = classNamesNew(widgetClassName);
+const cx = classNames(widgetClassName);
 
 const itemsPropType = PropTypes.arrayOf(
   PropTypes.shape({

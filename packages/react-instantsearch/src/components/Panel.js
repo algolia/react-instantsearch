@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { classNamesNew } from './classNames.js';
+import classNames from './classNames.js';
 
-const cx = classNamesNew('Panel');
+const cx = classNames('Panel');
 
 class Panel extends Component {
   static propTypes = {

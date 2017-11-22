@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { find } from 'lodash';
 
 import BaseWidget from './BaseWidget';
-import { classNamesNew } from './classNames.js';
+import classNames from './classNames.js';
 import translatable from '../core/translatable';
 
 const widgetClassName = 'MenuSelect';
-const cx = classNamesNew(widgetClassName);
+const cx = classNames(widgetClassName);
 
 class MenuSelect extends Component {
   static propTypes = {

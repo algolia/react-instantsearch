@@ -2,11 +2,11 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import List from './List';
 import BaseWidget from './BaseWidget';
-import { classNamesNew } from './classNames.js';
+import classNames from './classNames.js';
 import translatable from '../core/translatable';
 
 const widgetClassName = 'NumericMenu';
-const cx = classNamesNew(widgetClassName);
+const cx = classNames(widgetClassName);
 
 class MultiRange extends Component {
   static propTypes = {

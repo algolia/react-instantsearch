@@ -3,10 +3,10 @@ import React, { Component } from 'react';
 
 import BaseWidget from './BaseWidget';
 import translatable from '../core/translatable';
-import { classNamesNew } from './classNames.js';
+import classNames from './classNames.js';
 
 const widgetClassName = 'Stats';
-const cx = classNamesNew(widgetClassName);
+const cx = classNames(widgetClassName);
 
 class Stats extends Component {
   static propTypes = {

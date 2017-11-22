@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { classNamesNew } from './classNames.js';
+import classNames from './classNames.js';
 
 class BaseWidget extends Component {
   static propTypes = {
@@ -19,7 +19,7 @@ class BaseWidget extends Component {
       header,
       footer,
     } = this.props;
-    const cx = classNamesNew(widgetClassName);
+    const cx = classNames(widgetClassName);
 
     return (
       <div {...cx(['', ...(otherWidgetClassNames || [])])}>

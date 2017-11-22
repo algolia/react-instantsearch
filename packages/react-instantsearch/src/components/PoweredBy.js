@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import translatable from '../core/translatable';
-import { classNamesNew } from './classNames.js';
+import classNames from './classNames.js';
 
-const cx = classNamesNew('PoweredBy');
+const cx = classNames('PoweredBy');
 
 /* eslint-disable max-len */
 const AlgoliaLogo = () => (

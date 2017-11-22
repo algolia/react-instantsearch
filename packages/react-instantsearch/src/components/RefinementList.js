@@ -3,13 +3,13 @@ import React, { Component } from 'react';
 import { pick } from 'lodash';
 
 import translatable from '../core/translatable';
-import { classNamesNew } from './classNames.js';
+import classNames from './classNames.js';
 import List from './List';
 import Highlight from '../widgets/Highlight';
 import BaseWidget from './BaseWidget';
 
 const widgetClassName = 'RefinementList';
-const cx = classNamesNew(widgetClassName);
+const cx = classNames(widgetClassName);
 
 class RefinementList extends Component {
   constructor(props) {

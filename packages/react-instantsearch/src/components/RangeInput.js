@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import translatable from '../core/translatable';
-import { classNamesNew } from './classNames.js';
+import classNames from './classNames.js';
 import BaseWidget from './BaseWidget';
 
 const widgetClassName = 'RangeInput';
-const cx = classNamesNew(widgetClassName);
+const cx = classNames(widgetClassName);
 
 export class RawRangeInput extends Component {
   static propTypes = {

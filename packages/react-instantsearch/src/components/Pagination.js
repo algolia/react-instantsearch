@@ -6,10 +6,10 @@ import { capitalize } from '../core/utils';
 import translatable from '../core/translatable';
 import LinkList from './LinkList';
 import BaseWidget from './BaseWidget';
-import { classNamesNew } from './classNames.js';
+import classNames from './classNames.js';
 
 const widgetClassName = 'Pagination';
-const cx = classNamesNew(widgetClassName);
+const cx = classNames(widgetClassName);
 
 // Determines the size of the widget (the number of pages displayed - that the user can directly click on)
 function calculateSize(padding, maxPages) {

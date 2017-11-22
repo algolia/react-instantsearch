@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { classNamesNew } from './classNames.js';
+import classNames from './classNames.js';
 
 export default function Highlighter({
   hit,
@@ -11,7 +11,7 @@ export default function Highlighter({
   tagName,
   widgetClassName,
 }) {
-  const cx = classNamesNew(widgetClassName);
+  const cx = classNames(widgetClassName);
   const parsedHighlightedValue = highlight({
     hit,
     attributeName,

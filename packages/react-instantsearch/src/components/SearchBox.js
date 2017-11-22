@@ -2,11 +2,11 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 import translatable from '../core/translatable';
-import { classNamesNew } from './classNames.js';
+import classNames from './classNames.js';
 import BaseWidget from './BaseWidget';
 
 const widgetClassName = 'Searchbox';
-const cx = classNamesNew(widgetClassName);
+const cx = classNames(widgetClassName);
 
 class SearchBox extends Component {
   static propTypes = {

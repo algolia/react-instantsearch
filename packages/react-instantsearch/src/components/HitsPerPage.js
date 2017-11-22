@@ -3,10 +3,10 @@ import React, { Component } from 'react';
 
 import Select from './Select';
 import BaseWidget from './BaseWidget';
-import { classNamesNew } from './classNames.js';
+import classNames from './classNames.js';
 
 const widgetClassName = 'ResultsPerPage';
-const cx = classNamesNew(widgetClassName);
+const cx = classNames(widgetClassName);
 
 class HitsPerPage extends Component {
   static propTypes = {

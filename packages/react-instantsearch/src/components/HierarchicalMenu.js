@@ -3,13 +3,13 @@ import React, { Component } from 'react';
 import { pick } from 'lodash';
 
 import translatable from '../core/translatable';
-import { classNamesNew } from './classNames.js';
+import classNames from './classNames.js';
 import List from './List';
 import Link from './Link';
 import BaseWidget from './BaseWidget';
 
 const widgetClassName = 'HierarchicalMenu';
-const cx = classNamesNew(widgetClassName);
+const cx = classNames(widgetClassName);
 
 const itemsPropType = PropTypes.arrayOf(
   PropTypes.shape({

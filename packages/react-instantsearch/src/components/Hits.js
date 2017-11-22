@@ -2,10 +2,10 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 import BaseWidget from './BaseWidget';
-import { classNamesNew } from './classNames.js';
+import classNames from './classNames.js';
 
 const widgetClassName = 'Results';
-const cx = classNamesNew(widgetClassName);
+const cx = classNames(widgetClassName);
 
 class Hits extends Component {
   render() {
