@@ -150,15 +150,15 @@
   "bundlesize": [
     {
       "path": "packages/react-instantsearch/dist/umd/Core.min.js",
-      "maxSize": "10 kB"
+      "maxSize": "8 kB"
     },
     {
       "path": "packages/react-instantsearch/dist/umd/Connectors.min.js",
-      "maxSize": "40 kB"
+      "maxSize": "38 kB"
     },
     {
       "path": "packages/react-instantsearch/dist/umd/Dom.min.js",
-      "maxSize": "65 kB"
+      "maxSize": "60 kB"
     }
   ],
   "license": "MIT",
