@@ -75,7 +75,6 @@ class List extends Component {
           item.isRefined && 'item--selected',
           item.noRefinement && 'item--noRefinement',
           items && 'item--parent',
-          items && item.isRefined && 'item--selectedParent',
         ])}
       >
         {this.props.renderItem(item, resetQuery)}
