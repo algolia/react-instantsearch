@@ -20,7 +20,6 @@ Hits.propTypes = {
   hitComponent: PropTypes.func.isRequired,
 };
 
-/* eslint-disable react/display-name */
 Hits.defaultProps = {
   hitComponent: hit => (
     <div
@@ -34,6 +33,5 @@ Hits.defaultProps = {
     </div>
   ),
 };
-/* eslint-enable react/display-name */
 
 export default Hits;
