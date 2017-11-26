@@ -21,7 +21,7 @@ Hits.propTypes = {
 };
 
 Hits.defaultProps = {
-  hitComponent: hit => (
+  hitComponent: props => (
     <div
       style={{
         borderBottom: '1px solid #bbb',
@@ -29,7 +29,7 @@ Hits.defaultProps = {
         marginBottom: '5px',
       }}
     >
-      {JSON.stringify(hit).slice(0, 100)}...
+      {JSON.stringify(props).slice(0, 100)}...
     </div>
   ),
 };
