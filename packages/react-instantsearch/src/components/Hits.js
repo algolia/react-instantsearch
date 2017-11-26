@@ -1,19 +1,14 @@
+import React from 'react';
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
 import classNames from './classNames.js';
 
 const cx = classNames('Hits');
 
-class Hits extends Component {
-  render() {
-    const { hitComponent: ItemComponent, hits } = this.props;
-    return (
-      <div {...cx('root')}>
-        {hits.map(hit => <ItemComponent key={hit.objectID} hit={hit} />)}
-      </div>
-    );
-  }
-}
+const Hits = ({ hits, hitComponent: HitComponent }) => (
+  <div {...cx('root')}>
+    {hits.map(hit => <HitComponent key={hit.objectID} hit={hit} />)}
+  </div>
+);
 
 Hits.propTypes = {
   hits: PropTypes.array,
