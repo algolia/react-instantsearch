@@ -30,8 +30,8 @@ function validateNextProps(props, nextProps) {
  * @propType {func} [onSearchStateChange] - Function to be called everytime a new search is done. Useful for [URL Routing](guide/Routing.html).
  * @propType {object} [searchState] - Object to inject some search state. Switches the InstantSearch component in controlled mode. Useful for [URL Routing](guide/Routing.html).
  * @propType {func} [createURL] - Function to call when creating links, useful for [URL Routing](guide/Routing.html).
- * @propType {SearchResults|SearchResults[]} [resultsState] - Use this to inject the results that will be used at first rendering. Those results are found by using the `findResultsState` function. Useful for [Server Side Rendering](guide/Server-side_rendering.html). 
- * @propType {number} [stalledSearchTimeout=200] The amount of time before considering that the search takes too much time. The time is expressed in milliseconds.
+ * @propType {SearchResults|SearchResults[]} [resultsState] - Use this to inject the results that will be used at first rendering. Those results are found by using the `findResultsState` function. Useful for [Server Side Rendering](guide/Server-side_rendering.html).
+ * @propType {number} [stalledSearchDelay=200] The amount of time before considering that the search takes too much time. The time is expressed in milliseconds.
  * @example
  * import {InstantSearch, SearchBox, Hits} from 'react-instantsearch/dom';
  *
@@ -55,11 +55,11 @@ class InstantSearch extends Component {
     const initialState = this.isControlled ? props.searchState : {};
     this.isUnmounting = false;
 
-    const stalledSearchTimeout =
-      props.stalledSearchTimeout === undefined ||
-      props.stalledSearchTimeout === null
+    const stalledSearchDelay =
+      props.stalledSearchDelay === undefined ||
+      props.stalledSearchDelay === null
         ? 200
-        : props.stalledSearchTimeout;
+        : props.stalledSearchDelay;
 
     this.aisManager = createInstantSearchManager({
       indexName: props.indexName,
@@ -67,7 +67,7 @@ class InstantSearch extends Component {
       algoliaClient: props.algoliaClient,
       initialState,
       resultsState: props.resultsState,
-      stalledSearchTimeout,
+      stalledSearchDelay,
     });
   }
 
@@ -191,7 +191,7 @@ InstantSearch.propTypes = {
     props: PropTypes.object,
   }).isRequired,
 
-  stalledSearchTimeout: PropTypes.number,
+  stalledSearchDelay: PropTypes.number,
 };
 
 InstantSearch.childContextTypes = {

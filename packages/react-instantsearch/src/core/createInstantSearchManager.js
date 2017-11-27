@@ -19,7 +19,7 @@ export default function createInstantSearchManager({
   algoliaClient,
   searchParameters = {},
   resultsState,
-  stalledSearchTimeout,
+  stalledSearchDelay,
 }) {
   const baseSP = new SearchParameters({
     ...searchParameters,
@@ -221,7 +221,7 @@ export default function createInstantSearchManager({
           'resultsFacetValues'
         );
         store.setState(nextState);
-      }, stalledSearchTimeout);
+      }, stalledSearchDelay);
     }
   }
 
