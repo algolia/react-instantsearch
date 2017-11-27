@@ -181,6 +181,8 @@ export default createConnector({
     min: PropTypes.number,
     max: PropTypes.number,
     precision: PropTypes.number,
+    header: PropTypes.node,
+    footer: PropTypes.node,
   },
 
   defaultProps: {

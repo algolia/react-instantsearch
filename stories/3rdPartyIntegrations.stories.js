@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { storiesOf } from '@storybook/react';
 import { connectRange } from '../packages/react-instantsearch/connectors';
 import { WrapWithHits } from './util';
+import BaseWidget from '../packages/react-instantsearch/src/components/BaseWidget';
 import Rheostat from 'rheostat';
 
 const stories = storiesOf('Integration With Other Libraries', module);
@@ -54,10 +55,10 @@ class Range extends Component {
   };
 
   render() {
-    const { min, max, currentRefinement } = this.props;
+    const { min, max, currentRefinement, header, footer } = this.props;
     const { currentValues } = this.state;
     return min !== max ? (
-      <div>
+      <BaseWidget widgetClassName="RangeSlider" header={header} footer={footer}>
         <Rheostat
           min={min}
           max={max}
@@ -69,7 +70,7 @@ class Range extends Component {
           <div>{currentValues.min}</div>
           <div>{currentValues.max}</div>
         </div>
-      </div>
+      </BaseWidget>
     ) : null;
   }
 }

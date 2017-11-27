@@ -1,4 +1,5 @@
-import connectRange from '../connectors/connectRange.js';
+import connectRange from '../connectors/connectRange';
+import BaseWidget from '../components/BaseWidget';
 import React from 'react';
 /**
  * Since a lot of sliders already exist, we did not include one by default.
@@ -46,10 +47,10 @@ class Range extends React.Component {
   };
 
   render() {
-    const {min, max, currentRefinement} = this.props;
+    const {min, max, currentRefinement, header, footer} = this.props;
     const {currentValues} = this.state;
     return min !== max ?
-      <div>
+      <BaseWidget widgetClassName="RangeSlider" header={header} footer={footer}>
         <Rheostat
           min={min}
           max={max}
@@ -61,15 +62,15 @@ class Range extends React.Component {
           <div>{currentValues.min}</div>
           <div>{currentValues.max}</div>
         </div>
-      </div> : null;
+      </BaseWidget> : null;
   }
 }
 
 const ConnectedRange = connectRange(Range);
 
  */
-export default connectRange(() => (
-  <div>
+export default connectRange(({ header, footer }) => (
+  <BaseWidget widgetClassName="RangeSlider" header={header} footer={footer}>
     We do not provide any Slider, see the documentation to learn how to connect
     one easily:
     <a
@@ -79,5 +80,5 @@ export default connectRange(() => (
     >
       https://community.algolia.com/react-instantsearch/widgets/RangeSlider.html
     </a>
-  </div>
+  </BaseWidget>
 ));
