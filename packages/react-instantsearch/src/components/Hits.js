@@ -16,7 +16,8 @@ Hits.propTypes = {
 };
 
 Hits.defaultProps = {
-  hitComponent: props => (
+  // eslint-disable-next-line react/prop-types
+  hitComponent: ({ hit }) => (
     <div
       style={{
         borderBottom: '1px solid #bbb',
@@ -24,7 +25,7 @@ Hits.defaultProps = {
         marginBottom: '5px',
       }}
     >
-      {JSON.stringify(props).slice(0, 100)}...
+      {JSON.stringify(hit).slice(0, 100)}...
     </div>
   ),
 };
