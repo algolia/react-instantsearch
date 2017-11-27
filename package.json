@@ -1,6 +1,6 @@
 {
   "private": true,
-  "version": "4.2.0",
+  "version": "4.3.0-beta.0",
   "scripts": {
     "boot": "./scripts/boot.sh",
     "changelog": "conventional-changelog --preset angular --output-unreleased",
@@ -17,6 +17,7 @@
     "test:recipes": "./scripts/test:recipes.sh",
     "test:build": "NODE_ENV=production ./scripts/test:build.sh",
     "test:regressions": "webpack --config test/regressions/webpack.config.js && rm -rf test/screenshots && happo run && babel-node ./test/regressions/normalize.js",
+    "test:size": "bundlesize",
     "argos": "argos upload test/screenshots --token $ARGOS_TOKEN || true",
     "dev": "jest --watch --bail",
     "docs:storybook-start": "start-storybook -p 6006 -c ./storybook -s ./storybook/public",
@@ -46,6 +47,7 @@
     "babel-preset-react": "6.24.1",
     "babel-preset-stage-2": "6.24.1",
     "browser-sync": "2.18.13",
+    "bundlesize": "0.15.3",
     "chokidar": "1.7.0",
     "clipboard": "1.7.1",
     "codemirror": "5.32.0",
@@ -58,9 +60,9 @@
     "enzyme-adapter-react-16": "1.1.0",
     "enzyme-to-json": "3.2.2",
     "escape-html": "1.0.3",
-    "eslint": "4.11.0",
+    "eslint": "4.12.0",
     "eslint-config-algolia": "12.0.0",
-    "eslint-config-prettier": "2.8.0",
+    "eslint-config-prettier": "2.9.0",
     "eslint-import-resolver-webpack": "0.8.3",
     "eslint-plugin-import": "2.8.0",
     "eslint-plugin-jasmine": "2.9.1",
@@ -94,7 +96,7 @@
     "netlify-cli": "1.2.2",
     "node-sass": "4.7.2",
     "postcss": "6.0.14",
-    "postcss-loader": "2.0.8",
+    "postcss-loader": "2.0.9",
     "postcss-scss": "1.0.2",
     "prettier": "1.8.2",
     "pretty-bytes-cli": "2.0.0",
@@ -110,7 +112,7 @@
     "recursive-readdir": "2.2.1",
     "replace-in-file": "3.0.0",
     "rheostat": "2.1.1",
-    "rollup": "0.51.8",
+    "rollup": "0.52.0",
     "rollup-plugin-babel": "3.0.2",
     "rollup-plugin-commonjs": "8.2.6",
     "rollup-plugin-filesize": "1.5.0",
@@ -126,8 +128,8 @@
     "style-loader": "0.19.0",
     "webpack": "3.8.1",
     "webpack-bundle-analyzer": "2.9.1",
-    "webpack-dev-middleware": "1.12.0",
-    "webpack-hot-middleware": "2.20.0"
+    "webpack-dev-middleware": "1.12.1",
+    "webpack-hot-middleware": "2.21.0"
   },
   "engines": {
     "node": "8.6.0",
@@ -145,6 +147,20 @@
       "enzyme-to-json/serializer"
     ]
   },
+  "bundlesize": [
+    {
+      "path": "packages/react-instantsearch/dist/umd/Core.min.js",
+      "maxSize": "8 kB"
+    },
+    {
+      "path": "packages/react-instantsearch/dist/umd/Connectors.min.js",
+      "maxSize": "38 kB"
+    },
+    {
+      "path": "packages/react-instantsearch/dist/umd/Dom.min.js",
+      "maxSize": "60 kB"
+    }
+  ],
   "license": "MIT",
   "author": {
     "name": "Algolia, Inc.",

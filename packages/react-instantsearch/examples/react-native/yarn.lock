@@ -1965,9 +1965,9 @@ expect@^21.2.1:
     jest-message-util "^21.2.1"
     jest-regex-util "^21.2.0"
 
-expo@23.0.1:
-  version "23.0.1"
-  resolved "https://registry.yarnpkg.com/expo/-/expo-23.0.1.tgz#e622f3782c39d17652ef62a531bcb7b8c2226c26"
+expo@23.0.2:
+  version "23.0.2"
+  resolved "https://registry.yarnpkg.com/expo/-/expo-23.0.2.tgz#2f804c747d1745e9403524b9c7b86c89ef06594b"
   dependencies:
     "@expo/vector-icons" "^6.2.0"
     babel-preset-expo "^4.0.0"
@@ -4492,13 +4492,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@15.5.8:
-  version "15.5.8"
-  resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.5.8.tgz#6b7b2e141083be38c8595aa51fc55775c7199394"
-  dependencies:
-    fbjs "^0.8.9"
-
-prop-types@^15.5.10, prop-types@^15.5.8, prop-types@^15.6.0:
+prop-types@15.6.0, prop-types@^15.5.10, prop-types@^15.5.8, prop-types@^15.6.0:
   version "15.6.0"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.0.tgz#ceaf083022fc46b4a35f69e13ef75aed0d639856"
   dependencies:
@@ -4662,13 +4656,13 @@ react-dom@16.1.1:
     object-assign "^4.1.1"
     prop-types "^15.6.0"
 
-react-instantsearch-theme-algolia@4.2.0:
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/react-instantsearch-theme-algolia/-/react-instantsearch-theme-algolia-4.2.0.tgz#86c43ad28e1681890d1b78d3e3f33e4a41db8185"
+react-instantsearch-theme-algolia@4.3.0-beta.0:
+  version "4.3.0-beta.0"
+  resolved "https://registry.yarnpkg.com/react-instantsearch-theme-algolia/-/react-instantsearch-theme-algolia-4.3.0-beta.0.tgz#5006f778ee66c1bb2a68008328fbdc9885bca013"
 
-react-instantsearch@4.2.0:
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/react-instantsearch/-/react-instantsearch-4.2.0.tgz#96c11f6e0c6e343c93ed63648f4bd9a993429460"
+react-instantsearch@4.3.0-beta.0:
+  version "4.3.0-beta.0"
+  resolved "https://registry.yarnpkg.com/react-instantsearch/-/react-instantsearch-4.3.0-beta.0.tgz#b8d601d4c20e1f405cd484a315b65c2e78adea01"
   dependencies:
     algoliasearch "^3.24.0"
     algoliasearch-helper "^2.21.0"
@@ -4805,9 +4799,9 @@ react-native-vector-icons@4.4.2, react-native-vector-icons@^4.2.0, react-native-
     prop-types "^15.5.10"
     yargs "^8.0.2"
 
-react-native@0.50.3:
-  version "0.50.3"
-  resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.50.3.tgz#91282bd5356cc7d794969cdc443cc764389b9af4"
+react-native@0.50.4:
+  version "0.50.4"
+  resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.50.4.tgz#194f5da4939087b3acee712a503475f4942dca7e"
   dependencies:
     absolute-path "^0.0.0"
     art "^0.10.0"

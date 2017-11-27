@@ -1,28 +1,20 @@
+import React from 'react';
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-
-import BaseWidget from './BaseWidget';
 import classNames from './classNames.js';
+import BaseWidget from './BaseWidget';
 
 const widgetClassName = 'Results';
 const cx = classNames(widgetClassName);
 
-class Hits extends Component {
-  render() {
-    const { hitComponent: ItemComponent, hits, header, footer } = this.props;
-    return (
-      <BaseWidget
-        widgetClassName={widgetClassName}
-        header={header}
-        footer={footer}
-      >
-        <ul {...cx(['list'])}>
-          {hits.map(hit => <ItemComponent key={hit.objectID} hit={hit} />)}
-        </ul>
-      </BaseWidget>
-    );
-  }
-}
+const Hits = ({ hits, hitComponent: HitComponent, header, footer }) => (
+  // Spread the hit on HitComponent instead of passing the full object. BC.
+  // ex: <HitComponent {...hit} key={hit.objectID} />
+  <BaseWidget widgetClassName={widgetClassName} header={header} footer={footer}>
+    <ul {...cx(['list'])}>
+      {hits.map(hit => <HitComponent key={hit.objectID} hit={hit} />)}
+    </ul>
+  </BaseWidget>
+);
 
 Hits.propTypes = {
   hits: PropTypes.array,
@@ -31,9 +23,8 @@ Hits.propTypes = {
   footer: PropTypes.node,
 };
 
-/* eslint-disable react/display-name */
 Hits.defaultProps = {
-  hitComponent: hit => (
+  hitComponent: props => (
     <li
       {...cx(['item'])}
       style={{
@@ -42,10 +33,9 @@ Hits.defaultProps = {
         marginBottom: '5px',
       }}
     >
-      {JSON.stringify(hit).slice(0, 100)}...
+      {JSON.stringify(props).slice(0, 100)}...
     </li>
   ),
 };
-/* eslint-enable react/display-name */
 
 export default Hits;

@@ -117,4 +117,25 @@ stories
       displayName,
       filterProps,
     }
+  )
+  .addWithJSX(
+    'with localized count',
+    () => (
+      <WrapWithHits linkedStoryGroup="MenuSelect">
+        <MenuSelect
+          attributeName="category"
+          defaultRefinement={text('defaultSelectedItem', 'Bathroom')}
+          transformItems={items =>
+            items.map(({ count, ...item }) => ({
+              ...item,
+              count: (count + 1000).toLocaleString(),
+            }))
+          }
+        />
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
   );
