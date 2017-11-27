@@ -27,6 +27,12 @@ import MenuSelectComponent from '../components/MenuSelect.js';
  *     >
  *       <MenuSelect
  *         attributeName="category"
+ *         transformItems={items =>
+ *           items.map(item => {
+ *             item.count = (item.count + 1000).toLocaleString();
+ *             return item;
+ *           })
+ *         }
  *       />
  *     </InstantSearch>
  *   );
