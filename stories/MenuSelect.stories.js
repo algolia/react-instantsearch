@@ -114,10 +114,10 @@ stories
           attributeName="category"
           defaultRefinement={text('defaultSelectedItem', 'Bathroom')}
           transformItems={items =>
-            items.map(item => {
-              item.count = (item.count + 1000).toLocaleString();
-              return item;
-            })
+            items.map(({ count, ...item }) => ({
+              ...item,
+              count: (count + 1000).toLocaleString(),
+            }))
           }
         />
       </WrapWithHits>
