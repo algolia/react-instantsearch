@@ -5,6 +5,8 @@ import classNames from './classNames.js';
 const cx = classNames('Hits');
 
 const Hits = ({ hits, hitComponent: HitComponent }) => (
+  // Spread the hit on HitComponent instead of passing the full object. BC.
+  // ex: <HitComponent {...hit} key={hit.objectID} />
   <div {...cx('root')}>
     {hits.map(hit => <HitComponent key={hit.objectID} hit={hit} />)}
   </div>
@@ -16,8 +18,7 @@ Hits.propTypes = {
 };
 
 Hits.defaultProps = {
-  // eslint-disable-next-line react/prop-types
-  hitComponent: ({ hit }) => (
+  hitComponent: props => (
     <div
       style={{
         borderBottom: '1px solid #bbb',
@@ -25,7 +26,7 @@ Hits.defaultProps = {
         marginBottom: '5px',
       }}
     >
-      {JSON.stringify(hit).slice(0, 100)}...
+      {JSON.stringify(props).slice(0, 100)}...
     </div>
   ),
 };
