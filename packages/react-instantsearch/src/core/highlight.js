@@ -14,7 +14,7 @@ import { get } from 'lodash';
  * @param {string} highlightProperty - the property that contains the highlight structure in the results
  * @param {string} attributeName - the highlighted attribute to look for
  * @param {object} hit - the actual hit returned by Algolia.
- * @return {object[]} - An array of {value: string, isDefined: boolean}.
+ * @return {object[]} - An array of {value: string,  isDefined: boolean}.
  */
 export default function parseAlgoliaHit({
   preTag = '<em>',
@@ -25,10 +25,21 @@ export default function parseAlgoliaHit({
 }) {
   if (!hit) throw new Error('`hit`, the matching record, must be provided');
 
-  const highlightObject = get(hit[highlightProperty], attributeName);
-  const highlightedValue = !highlightObject ? '' : highlightObject.value;
+  const highlightObject = get(hit[highlightProperty], attributeName, {});
 
-  return parseHighlightedAttribute({ preTag, postTag, highlightedValue });
+  return !Array.isArray(highlightObject)
+    ? parseHighlightedAttribute({
+        preTag,
+        postTag,
+        highlightedValue: highlightObject.value,
+      })
+    : highlightObject.map(item =>
+        parseHighlightedAttribute({
+          preTag,
+          postTag,
+          highlightedValue: item.value,
+        })
+      );
 }
 
 /**
@@ -40,7 +51,7 @@ export default function parseAlgoliaHit({
  * @param {string} highlightedValue - highlighted attribute as returned by Algolia highlight feature
  * @return {object[]} - An array of {value: string, isDefined: boolean}.
  */
-function parseHighlightedAttribute({ preTag, postTag, highlightedValue }) {
+function parseHighlightedAttribute({ preTag, postTag, highlightedValue = '' }) {
   const splitByPreTag = highlightedValue.split(preTag);
   const firstValue = splitByPreTag.shift();
   const elements =
@@ -55,6 +66,7 @@ function parseHighlightedAttribute({ preTag, postTag, highlightedValue }) {
   } else {
     splitByPreTag.forEach(split => {
       const splitByPostTag = split.split(postTag);
+
       elements.push({
         value: splitByPostTag[0],
         isHighlighted: true,
