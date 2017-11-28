@@ -35,8 +35,8 @@ class App extends Component {
     this.setState(prevState => ({
       ...prevState,
       searchState: {
-        ...prevState.searchState, 
-        query: '' 
+        ...prevState.searchState,
+        query: '',
       },
       aroundLatLng: `${lat},${lng}`,
     }));
