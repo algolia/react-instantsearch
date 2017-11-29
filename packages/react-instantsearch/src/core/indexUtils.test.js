@@ -517,18 +517,46 @@ describe('utility method for manipulating the search state', () => {
       expect(results).toEqual({ some: 'results' });
     });
 
-    it('refine shared widgets should reset indices page to 1', () => {
+    it('refine shared widgets should reset indices page to 1 with resetPage', () => {
       context = {};
       let searchState = {
         indices: { first: { page: 3 }, second: { page: 3 } },
       };
       const nextRefinement = { query: 'new' };
+      const resetPage = true;
 
-      searchState = refineValue(searchState, nextRefinement, context);
+      searchState = refineValue(
+        searchState,
+        nextRefinement,
+        context,
+        resetPage
+      );
 
       expect(searchState).toEqual({
         query: 'new',
+        page: 1,
         indices: { first: { page: 1 }, second: { page: 1 } },
+      });
+    });
+
+    it('refine shared widgets should not reset indices page to 1 without resetPage', () => {
+      context = {};
+      let searchState = {
+        indices: { first: { page: 3 }, second: { page: 3 } },
+      };
+      const nextRefinement = { query: 'new' };
+      const resetPage = false;
+
+      searchState = refineValue(
+        searchState,
+        nextRefinement,
+        context,
+        resetPage
+      );
+
+      expect(searchState).toEqual({
+        query: 'new',
+        indices: { first: { page: 3 }, second: { page: 3 } },
       });
     });
   });
