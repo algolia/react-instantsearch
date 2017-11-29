@@ -34,6 +34,26 @@ stories
     }
   )
   .addWithJSX(
+    'with header and footer',
+    () => (
+      <WrapWithHits linkedStoryGroup="CurrentRefinements">
+        <div>
+          <CurrentRefinements header="Header" footer="Footer" />
+          <div style={{ display: 'none' }}>
+            <RefinementList
+              attributeName="category"
+              defaultRefinement={['Dining']}
+            />
+          </div>
+        </div>
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
     'with toggle',
     () => (
       <WrapWithHits linkedStoryGroup="CurrentRefinements">

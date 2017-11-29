@@ -78,7 +78,7 @@ class StarRating extends Component {
       if (icon < lowerBound) {
         rating++;
       }
-      icons.push(
+      icons.push([
         <svg
           key={icon}
           {...cx(['starIcon'])}
@@ -91,8 +91,9 @@ class StarRating extends Component {
               icon >= lowerBound ? 'starEmptySymbol' : 'starSymbol'
             }`}
           />
-        </svg>
-      );
+        </svg>,
+        ' ',
+      ]);
     }
 
     // The last item of the list (the default item), should not

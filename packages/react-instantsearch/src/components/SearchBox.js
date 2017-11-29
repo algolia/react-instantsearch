@@ -5,7 +5,7 @@ import translatable from '../core/translatable';
 import classNames from './classNames.js';
 import BaseWidget from './BaseWidget';
 
-const widgetClassName = 'Searchbox';
+const widgetClassName = 'SearchBox';
 const cx = classNames(widgetClassName);
 
 class SearchBox extends Component {
@@ -219,12 +219,10 @@ class SearchBox extends Component {
         >
           <input
             ref={this.onInputMount}
-            type="search"
+            type="text"
             placeholder={translate('placeholder')}
             autoFocus={autoFocus}
             autoComplete="off"
-            autoCorrect="off"
-            autoCapitalize="off"
             spellCheck="false"
             required
             maxLength="512"
@@ -245,6 +243,7 @@ class SearchBox extends Component {
             title={translate('resetTitle')}
             {...cx(['reset'])}
             onClick={this.onReset}
+            style={query ? { display: 'block' } : { display: 'none' }}
           >
             {resetComponent}
           </button>

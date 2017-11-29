@@ -28,14 +28,11 @@ class ClearAll extends Component {
         footer={footer}
       >
         {isDisabled ? (
-          <button {...cx(['button'])} disabled>
+          <button {...cx(['button', 'button--disabled'])} disabled>
             {translate(['reset'])}
           </button>
         ) : (
-          <button
-            {...cx(['button', 'button--disabled'])}
-            onClick={refine.bind(null, items)}
-          >
+          <button {...cx(['button'])} onClick={refine.bind(null, items)}>
             {translate('reset')}
           </button>
         )}

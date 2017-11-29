@@ -33,30 +33,34 @@ class CurrentRefinements extends Component {
   }
 
   render() {
-    const { translate, items, refine, canRefine } = this.props;
+    const { translate, items, refine, canRefine, header, footer } = this.props;
 
     return (
       <BaseWidget
         widgetClassName={widgetClassName}
         otherWidgetClassNames={[!canRefine && `-noRefinement`]}
+        header={header}
+        footer={footer}
       >
         <ul {...cx(['list'])}>
           {items.map(item => (
             <li key={item.label} {...cx(['item'])}>
-              <span {...cx(['label'])}>{item.label}</span>
+              <span {...cx(['label'])}>
+                <span {...cx(['labelText'])}>{item.label}</span>
+              </span>
               {item.items ? (
-                item.items.map(nestedItem => [
+                item.items.map(nestedItem => (
                   <span key={nestedItem.label} {...cx(['label'])}>
-                    {nestedItem.label}
-                  </span>,
-                  <button
-                    key={`${nestedItem.label}-delete`}
-                    {...cx(['delete'])}
-                    onClick={refine.bind(null, nestedItem.value)}
-                  >
-                    {translate('clearFilter', nestedItem)}
-                  </button>,
-                ])
+                    <span {...cx(['labelText'])}>{nestedItem.label}</span>
+                    <button
+                      key={`${nestedItem.label}-delete`}
+                      {...cx(['delete'])}
+                      onClick={refine.bind(null, nestedItem.value)}
+                    >
+                      {translate('clearFilter', nestedItem)}
+                    </button>
+                  </span>
+                ))
               ) : (
                 <button
                   {...cx(['delete'])}

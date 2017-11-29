@@ -67,7 +67,11 @@ class Breadcrumb extends Component {
     const breadcrumb = items.map((item, idx) => {
       const isLast = idx === items.length - 1;
       return [
-        <li key="separator">{separator}</li>,
+        ' ',
+        <li {...cx(['item'])} key="separator">
+          {separator}
+        </li>,
+        ' ',
         <li {...cx(['item', isLast && 'item--selected'])} key={idx}>
           {!isLast ? (
             <Link

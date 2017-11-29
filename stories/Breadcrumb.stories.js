@@ -47,7 +47,7 @@ stories
           header="Header"
           footer="Footer"
           attributes={['category', 'sub_category', 'sub_sub_category']}
-          separator=" / "
+          separator=" > "
         />
         <hr />
         <HierarchicalMenu

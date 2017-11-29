@@ -65,11 +65,20 @@ class Range extends Component {
           values={[currentRefinement.min, currentRefinement.max]}
           onChange={this.onChange}
           onValuesUpdated={this.onValuesUpdated}
-        />
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <div>{currentValues.min}</div>
-          <div>{currentValues.max}</div>
-        </div>
+        >
+          <div
+            className="rheostat-marker rheostat-marker--large"
+            style={{ left: '0%', position: 'absolute', marginLeft: '0px' }}
+          >
+            <div className="rheostat-value">{currentValues.min}</div>
+          </div>
+          <div
+            className="rheostat-marker rheostat-marker--large"
+            style={{ left: '100%', position: 'absolute', marginLeft: '-1px' }}
+          >
+            <div className="rheostat-value">{currentValues.max}</div>
+          </div>
+        </Rheostat>
       </BaseWidget>
     ) : null;
   }
