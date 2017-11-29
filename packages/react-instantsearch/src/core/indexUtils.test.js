@@ -519,45 +519,61 @@ describe('utility method for manipulating the search state', () => {
 
     it('refine shared widgets should reset indices page to 1 with resetPage', () => {
       context = {};
-      let searchState = {
-        indices: { first: { page: 3 }, second: { page: 3 } },
-      };
-      const nextRefinement = { query: 'new' };
       const resetPage = true;
+      const nextRefinement = { query: 'new' };
+      const searchState = {
+        indices: {
+          first: { page: 3 },
+          second: { page: 3 },
+        },
+      };
 
-      searchState = refineValue(
+      const actual = refineValue(
         searchState,
         nextRefinement,
         context,
         resetPage
       );
 
-      expect(searchState).toEqual({
+      const expectation = {
         query: 'new',
         page: 1,
-        indices: { first: { page: 1 }, second: { page: 1 } },
-      });
+        indices: {
+          first: { page: 1 },
+          second: { page: 1 },
+        },
+      };
+
+      expect(actual).toEqual(expectation);
     });
 
     it('refine shared widgets should not reset indices page to 1 without resetPage', () => {
       context = {};
-      let searchState = {
-        indices: { first: { page: 3 }, second: { page: 3 } },
-      };
-      const nextRefinement = { query: 'new' };
       const resetPage = false;
+      const nextRefinement = { query: 'new' };
+      const searchState = {
+        indices: {
+          first: { page: 3 },
+          second: { page: 3 },
+        },
+      };
 
-      searchState = refineValue(
+      const actual = refineValue(
         searchState,
         nextRefinement,
         context,
         resetPage
       );
 
-      expect(searchState).toEqual({
+      const expectation = {
         query: 'new',
-        indices: { first: { page: 3 }, second: { page: 3 } },
-      });
+        indices: {
+          first: { page: 3 },
+          second: { page: 3 },
+        },
+      };
+
+      expect(actual).toEqual(expectation);
     });
   });
 });
