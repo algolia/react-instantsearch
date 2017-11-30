@@ -55,17 +55,14 @@ class CurrentRefinements extends Component {
                     <button
                       key={`${nestedItem.label}-delete`}
                       {...cx(['delete'])}
-                      onClick={refine.bind(null, nestedItem.value)}
+                      onClick={() => refine(nestedItem.value)}
                     >
                       {translate('clearFilter', nestedItem)}
                     </button>
                   </span>
                 ))
               ) : (
-                <button
-                  {...cx(['delete'])}
-                  onClick={refine.bind(null, item.value)}
-                >
+                <button {...cx(['delete'])} onClick={() => refine(item.value)}>
                   {translate('clearFilter', nestedItem)}
                 </button>
               )}
