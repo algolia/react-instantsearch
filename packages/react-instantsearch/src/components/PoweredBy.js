@@ -55,7 +55,7 @@ class PoweredBy extends Component {
       <div {...cx([''])}>
         <span {...cx(['text'])}>{translate('searchBy')}</span>{' '}
         <a href={url} target="_blank" {...cx(['link'])} aria-label="Algolia">
-          <AlgoliaLogo {...cx(['logo'])} />
+          <AlgoliaLogo />
         </a>
       </div>
     );
