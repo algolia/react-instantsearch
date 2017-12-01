@@ -43,31 +43,24 @@ class CurrentRefinements extends Component {
         footer={footer}
       >
         <ul {...cx(['list'])}>
-          {items.map(item => (
-            <li key={item.label} {...cx(['item'])}>
-              <span {...cx(['label'])}>
-                <span {...cx(['labelText'])}>{item.label}</span>
-              </span>
-              {item.items ? (
-                item.items.map(nestedItem => (
-                  <span key={nestedItem.label} {...cx(['label'])}>
-                    <span {...cx(['labelText'])}>{nestedItem.label}</span>
-                    <button
-                      key={`${nestedItem.label}-delete`}
-                      {...cx(['delete'])}
-                      onClick={() => refine(nestedItem.value)}
-                    >
-                      {translate('clearFilter', nestedItem)}
-                    </button>
-                  </span>
-                ))
-              ) : (
-                <button {...cx(['delete'])} onClick={() => refine(item.value)}>
-                  {translate('clearFilter', nestedItem)}
-                </button>
-              )}
-            </li>
-          ))}
+          {items.map(
+            item =>
+              item.items
+                ? item.items.map(nestedItem => (
+                    <li key={nestedItem.label} {...cx(['item'])}>
+                      <button
+                        {...cx(['button'])}
+                        onClick={() => refine(nestedItem.value)}
+                      >
+                        <span {...cx(['label'])}>{nestedItem.label}</span>
+                        <span {...cx(['delete'])}>
+                          {translate('clearFilter', nestedItem)}
+                        </span>
+                      </button>
+                    </li>
+                  ))
+                : null
+          )}
         </ul>
       </BaseWidget>
     );

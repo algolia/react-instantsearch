@@ -22,7 +22,7 @@ stories
           <div style={{ display: 'none' }}>
             <RefinementList
               attributeName="category"
-              defaultRefinement={['Dining']}
+              defaultRefinement={['Dining', 'Other']}
             />
           </div>
         </div>

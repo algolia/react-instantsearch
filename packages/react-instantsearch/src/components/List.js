@@ -144,7 +144,9 @@ class List extends Component {
     const searchBox = withSearchBox ? this.renderSearchBox() : null;
     if (items.length === 0) {
       return (
-        <ul {...cx(['list', !canRefine && 'noRefinement'])}>{searchBox}</ul>
+        <ul {...cx(['list', !canRefine && 'list--noRefinement'])}>
+          {searchBox}
+        </ul>
       );
     }
 
