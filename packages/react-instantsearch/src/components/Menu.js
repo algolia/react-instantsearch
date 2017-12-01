@@ -57,7 +57,7 @@ class Menu extends Component {
     );
     return (
       <Link
-        {...cx(['link', item.isRefined && 'item--selected'])}
+        {...cx(['link'])}
         onClick={() => this.selectItem(item, resetQuery)}
         href={createURL(item.value)}
       >
