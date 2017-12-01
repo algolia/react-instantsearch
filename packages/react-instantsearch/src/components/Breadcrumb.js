@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import Link from './Link';
 import classNames from './classNames.js';
 import translatable from '../core/translatable';
@@ -66,27 +66,27 @@ class Breadcrumb extends Component {
 
     const breadcrumb = items.map((item, idx) => {
       const isLast = idx === items.length - 1;
-      return [
-        ' ',
-        <li {...cx(['item'])} key="separator">
-          {separator}
-        </li>,
-        ' ',
-        <li {...cx(['item', isLast && 'item--selected'])} key={idx}>
-          {!isLast ? (
-            <Link
-              {...cx(['link'])}
-              onClick={() => refine(item.value)}
-              href={createURL(item.value)}
-              key={idx}
-            >
-              {item.label}
-            </Link>
-          ) : (
-            item.label
-          )}
-        </li>,
-      ];
+      return (
+        <Fragment key={idx}>
+          <li {...cx(['item'])} key="separator">
+            {separator}
+          </li>
+          <li {...cx(['item', isLast && 'item--selected'])} key={idx}>
+            {!isLast ? (
+              <Link
+                {...cx(['link'])}
+                onClick={() => refine(item.value)}
+                href={createURL(item.value)}
+                key={idx}
+              >
+                {item.label}
+              </Link>
+            ) : (
+              item.label
+            )}
+          </li>
+        </Fragment>
+      )
     });
 
     return (
