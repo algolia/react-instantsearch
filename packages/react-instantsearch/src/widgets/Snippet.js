@@ -16,7 +16,7 @@ import SnippetComponent from '../components/Snippet.js';
  * @example
  * import React from 'react';
  * import { Snippet, InstantSearch, Hits } from 'react-instantsearch/dom';
- * 
+ *
  * export default function App() {
  *   return (
  *     <InstantSearch
