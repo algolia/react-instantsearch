@@ -16,7 +16,8 @@ import SnippetComponent from '../components/Snippet.js';
  * @example
  * import React from 'react';
  *
- * import { connectHits, Snippet, InstantSearch } from 'react-instantsearch/dom';
+ * import { Snippet, InstantSearch } from 'react-instantsearch/dom';
+ * import { connectHits } from 'react-instantsearch/connectors';
  *
  * const CustomHits = connectHits(({ hits }) =>
  * <div>
