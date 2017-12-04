@@ -11,6 +11,7 @@ import { omit, isEmpty } from 'lodash';
  * @param {string} indexName - the main index name
  * @param {object} initialState - initial widget state
  * @param {object} SearchParameters - optional additional parameters to send to the algolia API
+ * @param {number} stalledSearchDelay - time (in ms) after the search is stalled
  * @return {InstantSearchManager} a new instance of InstantSearchManager
  */
 export default function createInstantSearchManager({
