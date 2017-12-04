@@ -34,7 +34,6 @@ class SearchBox extends Component {
   };
 
   static defaultProps = {
-    loadingIndicatorComponent: DefaultLoadingIndicator,
     currentRefinement: '',
     focusShortcuts: ['s', '/'],
     autoFocus: false,
@@ -177,6 +176,10 @@ class SearchBox extends Component {
       </svg>
     );
 
+    const loadingIndicatorComponent = this.props.loadingIndicatorComponent ? (
+      this.props.loadingIndicatorComponent
+    ) : <DefaultLoadingIndicator />;
+
     const searchInputEvents = Object.keys(this.props).reduce((props, prop) => {
       if (
         ['onsubmit', 'onreset', 'onchange'].indexOf(prop.toLowerCase()) ===
@@ -255,7 +258,7 @@ class SearchBox extends Component {
             }}
             {...cx('loading-indicator')}
           >
-            {}
+            {loadingIndicatorComponent}
           </div>
           <button
             type="submit"
@@ -287,8 +290,8 @@ class SearchBox extends Component {
 
 const DefaultLoadingIndicator = () => (
   <svg
-    width="38"
-    height="38"
+    width="18"
+    height="18"
     viewBox="0 0 38 38"
     xmlns="http://www.w3.org/2000/svg"
     stroke="#BFC7D8"
