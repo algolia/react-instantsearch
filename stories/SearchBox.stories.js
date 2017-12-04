@@ -79,6 +79,18 @@ stories
     }
   )
   .addWithJSX(
+    'Display feedback when search is stalled (custom component)',
+    () => (
+      <WrapWithHits searchBox={false} linkedStoryGroup="SearchBox">
+        <SearchBox showLoadingIndicator={true} loadingIndicatorComponent={<span>✨</span>}/>
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
     'playground',
     () => (
       <WrapWithHits searchBox={false} linkedStoryGroup="SearchBox">
