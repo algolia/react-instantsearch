@@ -15,7 +15,7 @@ import SnippetComponent from '../components/Snippet.js';
  * @propType {string} [tagName='em'] - the tag to be used for highlighted parts of the attribute
  * @example
  * import React from 'react';
- * import { Snippet, InstantSearch, Hits } from "react-instantsearch/dom";
+ * import { Snippet, InstantSearch, Hits } from 'react-instantsearch/dom';
  * 
  * export default function App() {
  *   return (
@@ -25,7 +25,7 @@ import SnippetComponent from '../components/Snippet.js';
  *       indexName="ikea"
  *     >
  *       <Hits
- *         hitComponent={hit => (
+ *         hitComponent={({ hit }) => (
  *           <p key={hit.objectID}>
  *             <Snippet attributeName="description" hit={hit} />
  *           </p>
