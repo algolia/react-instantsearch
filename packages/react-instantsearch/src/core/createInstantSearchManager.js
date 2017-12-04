@@ -162,7 +162,7 @@ export default function createInstantSearchManager({
     const state = store.getState();
     let results = state.results ? state.results : {};
 
-    /* if switching from mono index to multi index and vice versa, 
+    /* if switching from mono index to multi index and vice versa,
     results needs to reset to {}*/
     results = !isEmpty(derivedHelpers) && results.getFacetByName ? {} : results;
 

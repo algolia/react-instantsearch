@@ -36,6 +36,7 @@ describe('createInstantSearchManager', () => {
     const store = ism.store.getState();
     expect(store).toEqual({
       error: null,
+      isSearchStalled: false,
       metadata: [],
       results: null,
       searching: false,
@@ -71,6 +72,7 @@ describe('createInstantSearchManager', () => {
       searching: false,
       searchingForFacetValues: false,
       widgets: {},
+      isSearchStalled: false,
     });
   });
 

@@ -61,8 +61,21 @@ exports[`Menu Menu with search inside items but no search results 1`] = `
           type="search"
           value=""
         />
+        <div
+          className="ais-SearchBox__loading-indicator"
+          style={
+            Object {
+              "display": "none",
+            }
+          }
+        />
         <button
           className="ais-SearchBox__submit"
+          style={
+            Object {
+              "display": "block",
+            }
+          }
           title="Submit your search query."
           type="submit"
         >
@@ -226,8 +239,21 @@ exports[`Menu Menu with search inside items with search results 1`] = `
           type="search"
           value=""
         />
+        <div
+          className="ais-SearchBox__loading-indicator"
+          style={
+            Object {
+              "display": "none",
+            }
+          }
+        />
         <button
           className="ais-SearchBox__submit"
+          style={
+            Object {
+              "display": "block",
+            }
+          }
           title="Submit your search query."
           type="submit"
         >
@@ -347,8 +373,21 @@ exports[`Menu applies translations 1`] = `
           type="search"
           value=""
         />
+        <div
+          className="ais-SearchBox__loading-indicator"
+          style={
+            Object {
+              "display": "none",
+            }
+          }
+        />
         <button
           className="ais-SearchBox__submit"
+          style={
+            Object {
+              "display": "block",
+            }
+          }
           title="Submit your search query."
           type="submit"
         >

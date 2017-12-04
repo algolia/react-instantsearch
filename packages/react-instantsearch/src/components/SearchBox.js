@@ -11,6 +11,7 @@ class SearchBox extends Component {
     refine: PropTypes.func.isRequired,
     translate: PropTypes.func.isRequired,
 
+    loadingIndicatorComponent: PropTypes.element,
     resetComponent: PropTypes.element,
     submitComponent: PropTypes.element,
 
@@ -26,13 +27,14 @@ class SearchBox extends Component {
     onChange: PropTypes.func,
 
     isSearchStalled: PropTypes.bool,
-    showLoading: PropTypes.bool,
+    showLoadingIndicator: PropTypes.bool,
 
     // For testing purposes
     __inputRef: PropTypes.func,
   };
 
   static defaultProps = {
+    loadingIndicatorComponent: DefaultLoadingIndicator,
     currentRefinement: '',
     focusShortcuts: ['s', '/'],
     autoFocus: false,
@@ -223,7 +225,7 @@ class SearchBox extends Component {
           role="search"
           {...cx(
             'wrapper',
-            this.props.showLoading &&
+            this.props.showLoadingIndicator &&
               this.props.isSearchStalled &&
               'stalled-search'
           )}
@@ -243,9 +245,26 @@ class SearchBox extends Component {
             {...searchInputEvents}
             {...cx('input')}
           />
+          <div
+            style={{
+              display:
+                this.props.showLoadingIndicator && this.props.isSearchStalled
+                  ? 'block'
+                  : 'none',
+            }}
+            {...cx('loading-indicator')}
+          >
+            {}
+          </div>
           <button
             type="submit"
             title={translate('submitTitle')}
+            style={{
+              display:
+                this.props.showLoadingIndicator && this.props.isSearchStalled
+                  ? 'none'
+                  : 'block',
+            }}
             {...cx('submit')}
           >
             {submitComponent}
@@ -264,6 +283,32 @@ class SearchBox extends Component {
     /* eslint-enable */
   }
 }
+
+const DefaultLoadingIndicator = () => (
+  <svg
+    width="38"
+    height="38"
+    viewBox="0 0 38 38"
+    xmlns="http://www.w3.org/2000/svg"
+    stroke="#BFC7D8"
+  >
+    <g fill="none" fillRule="evenodd">
+      <g transform="translate(1 1)" strokeWidth="2">
+        <circle strokeOpacity=".5" cx="18" cy="18" r="18" />
+        <path d="M36 18c0-9.94-8.06-18-18-18">
+          <animateTransform
+            attributeName="transform"
+            type="rotate"
+            from="0 18 18"
+            to="360 18 18"
+            dur="1s"
+            repeatCount="indefinite"
+          />
+        </path>
+      </g>
+    </g>
+  </svg>
+);
 
 export default translatable({
   resetTitle: 'Clear the search query.',

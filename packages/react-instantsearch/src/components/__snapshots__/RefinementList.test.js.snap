@@ -62,8 +62,21 @@ exports[`RefinementList applies translations 1`] = `
             type="search"
             value=""
           />
+          <div
+            className="ais-SearchBox__loading-indicator"
+            style={
+              Object {
+                "display": "none",
+              }
+            }
+          />
           <button
             className="ais-SearchBox__submit"
+            style={
+              Object {
+                "display": "block",
+              }
+            }
             title="Submit your search query."
             type="submit"
           >
@@ -316,8 +329,21 @@ exports[`RefinementList refinement list with search inside items but no search r
             type="search"
             value=""
           />
+          <div
+            className="ais-SearchBox__loading-indicator"
+            style={
+              Object {
+                "display": "none",
+              }
+            }
+          />
           <button
             className="ais-SearchBox__submit"
+            style={
+              Object {
+                "display": "block",
+              }
+            }
             title="Submit your search query."
             type="submit"
           >
@@ -498,8 +524,21 @@ exports[`RefinementList refinement list with search inside items with search res
             type="search"
             value=""
           />
+          <div
+            className="ais-SearchBox__loading-indicator"
+            style={
+              Object {
+                "display": "none",
+              }
+            }
+          />
           <button
             className="ais-SearchBox__submit"
+            style={
+              Object {
+                "display": "block",
+              }
+            }
             title="Submit your search query."
             type="submit"
           >
