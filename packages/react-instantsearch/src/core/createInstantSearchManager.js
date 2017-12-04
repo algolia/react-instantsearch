@@ -183,7 +183,7 @@ export default function createInstantSearchManager({
         ...store.getState(),
         results,
         isSearchStalled,
-        searching: helper.hasPendingRequests(),
+        searching: false,
         error: null,
       },
       'resultsFacetValues'
@@ -202,7 +202,7 @@ export default function createInstantSearchManager({
         ...store.getState(),
         isSearchStalled,
         error,
-        searching: helper.hasPendingRequests(),
+        searching: false,
       },
       'resultsFacetValues'
     );
@@ -233,7 +233,7 @@ export default function createInstantSearchManager({
       ...store.getState(),
       metadata,
       isSearchStalled,
-      searching: helper.hasPendingRequests(),
+      searching: true,
     });
 
     // Since the `getSearchParameters` method of widgets also depends on props,
@@ -260,7 +260,7 @@ export default function createInstantSearchManager({
       widgets: nextSearchState,
       metadata,
       isSearchStalled,
-      searching: helper.hasPendingRequests(),
+      searching: true,
     });
 
     search();
