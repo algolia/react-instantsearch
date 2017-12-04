@@ -1,65 +1,129 @@
 import React from 'react';
 import { orderBy } from 'lodash';
-import { storiesOf } from '@storybook/react';
-import { withKnobs, text } from '@storybook/addon-knobs';
-
-import { WrapWithHits } from './util';
+import { setAddon, storiesOf } from '@storybook/react';
+import { text } from '@storybook/addon-knobs';
+import { displayName, filterProps, WrapWithHits } from './util';
 import {
   MenuSelect,
   Panel,
   SearchBox,
 } from '../packages/react-instantsearch/dom';
+import JSXAddon from 'storybook-addon-jsx';
+
+setAddon(JSXAddon);
 
 const stories = storiesOf('MenuSelect', module);
 
-stories.addDecorator(withKnobs);
-
 stories
-  .add('default', () => (
-    <WrapWithHits hasPlayground={true} linkedStoryGroup="MenuSelect">
-      <MenuSelect attributeName="category" />
-    </WrapWithHits>
-  ))
-  .add('with default selected item', () => (
-    <WrapWithHits hasPlayground={true} linkedStoryGroup="MenuSelect">
-      <MenuSelect attributeName="category" defaultRefinement="Eating" />
-    </WrapWithHits>
-  ))
-  .add('with the sort strategy changed', () => (
-    <WrapWithHits hasPlayground={true} linkedStoryGroup="MenuSelect">
-      <MenuSelect
-        attributeName="category"
-        transformItems={items =>
-          orderBy(items, ['label', 'count'], ['asc', 'desc'])}
-      />
-    </WrapWithHits>
-  ))
-  .add('with panel', () => (
-    <WrapWithHits hasPlayground={true} linkedStoryGroup="MenuSelect">
-      <Panel title="Category">
+  .addWithJSX(
+    'default',
+    () => (
+      <WrapWithHits hasPlayground={true} linkedStoryGroup="MenuSelect">
         <MenuSelect attributeName="category" />
-      </Panel>
-    </WrapWithHits>
-  ))
-  .add('with panel but no available refinement', () => (
-    <WrapWithHits
-      searchBox={false}
-      hasPlayground={true}
-      linkedStoryGroup="MenuSelect"
-    >
-      <Panel title="Category">
-        <MenuSelect attributeName="category" />
-        <div style={{ display: 'none' }}>
-          <SearchBox defaultRefinement="dkjsakdjskajdksjakdjaskj" />
-        </div>
-      </Panel>
-    </WrapWithHits>
-  ))
-  .add('playground', () => (
-    <WrapWithHits linkedStoryGroup="MenuSelect">
-      <MenuSelect
-        attributeName="category"
-        defaultRefinement={text('defaultSelectedItem', 'Bathroom')}
-      />
-    </WrapWithHits>
-  ));
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
+    'with default selected item',
+    () => (
+      <WrapWithHits hasPlayground={true} linkedStoryGroup="MenuSelect">
+        <MenuSelect attributeName="category" defaultRefinement="Eating" />
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
+    'with the sort strategy changed',
+    () => (
+      <WrapWithHits hasPlayground={true} linkedStoryGroup="MenuSelect">
+        <MenuSelect
+          attributeName="category"
+          transformItems={items =>
+            orderBy(items, ['label', 'count'], ['asc', 'desc'])
+          }
+        />
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
+    'with panel',
+    () => (
+      <WrapWithHits hasPlayground={true} linkedStoryGroup="MenuSelect">
+        <Panel title="Category">
+          <MenuSelect attributeName="category" />
+        </Panel>
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
+    'with panel but no available refinement',
+    () => (
+      <WrapWithHits
+        searchBox={false}
+        hasPlayground={true}
+        linkedStoryGroup="MenuSelect"
+      >
+        <Panel title="Category">
+          <MenuSelect attributeName="category" />
+          <div style={{ display: 'none' }}>
+            <SearchBox defaultRefinement="dkjsakdjskajdksjakdjaskj" />
+          </div>
+        </Panel>
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
+    'playground',
+    () => (
+      <WrapWithHits linkedStoryGroup="MenuSelect">
+        <MenuSelect
+          attributeName="category"
+          defaultRefinement={text('defaultSelectedItem', 'Bathroom')}
+        />
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
+    'with localized count',
+    () => (
+      <WrapWithHits linkedStoryGroup="MenuSelect">
+        <MenuSelect
+          attributeName="category"
+          defaultRefinement={text('defaultSelectedItem', 'Bathroom')}
+          transformItems={items =>
+            items.map(({ count, ...item }) => ({
+              ...item,
+              count: (count + 1000).toLocaleString(),
+            }))
+          }
+        />
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  );

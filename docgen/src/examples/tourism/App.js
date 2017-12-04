@@ -28,8 +28,8 @@ const App = props => (
     apiKey="6be0576ff61c053d5f9a3225e2a90f76"
     indexName="airbnb"
     searchState={props.searchState}
-    createURL={props.createURL.bind(this)}
-    onSearchStateChange={props.onSearchStateChange.bind(this)}
+    createURL={props.createURL}
+    onSearchStateChange={props.onSearchStateChange}
   >
     <Configure aroundLatLngViaIP={true} aroundRadius="all" />
     <Header />
@@ -233,7 +233,9 @@ const RoomType = connectRefinementList(({ items, refine }) => {
     const selectedClassName = item.isRefined
       ? ' ais-refinement-list--item__active'
       : '';
-    const itemClassName = `ais-refinement-list--item col-sm-3 ${selectedClassName}`;
+    const itemClassName = `ais-refinement-list--item col-sm-3 ${
+      selectedClassName
+    }`;
     return (
       <div className={itemClassName} key={item.label}>
         <div>

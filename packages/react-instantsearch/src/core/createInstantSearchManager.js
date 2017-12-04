@@ -63,6 +63,11 @@ export default function createInstantSearchManager({
     search();
   }
 
+  function clearCache() {
+    helper.clearCache();
+    search();
+  }
+
   function getMetadata(state) {
     return widgetsManager
       .getWidgets()
@@ -121,6 +126,8 @@ export default function createInstantSearchManager({
         (res, widget) => widget.getSearchParameters(res),
         sharedParameters
       );
+
+    indexMapping[mainIndexParameters.index] = indexName;
 
     return { sharedParameters, mainIndexParameters, derivatedWidgets };
   }
@@ -329,6 +336,7 @@ export default function createInstantSearchManager({
     onSearchForFacetValues,
     updateClient,
     updateIndex,
+    clearCache,
     skipSearch,
   };
 }

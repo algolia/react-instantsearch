@@ -8,7 +8,6 @@ exports[`renders correctly 1`] = `
       Object {
         "flex": 1,
       },
-      undefined,
     ]
   }
 >
@@ -109,6 +108,7 @@ exports[`renders correctly 1`] = `
                 />
               </View>
               <TextInput
+                allowFontScaling={true}
                 autoCapitalize="none"
                 autoCorrect={false}
                 clearButtonMode="always"
@@ -215,7 +215,6 @@ exports[`renders correctly 1`] = `
                       <Text
                         accessible={true}
                         allowFontScaling={true}
-                        disabled={false}
                         ellipsizeMode="tail"
                         numberOfLines={1}
                         style={
@@ -237,7 +236,6 @@ exports[`renders correctly 1`] = `
                 <Text
                   accessible={true}
                   allowFontScaling={true}
-                  disabled={false}
                   ellipsizeMode="tail"
                 />
               </View>
@@ -279,7 +277,7 @@ exports[`renders correctly 1`] = `
                   <Text
                     accessible={true}
                     allowFontScaling={true}
-                    disabled={false}
+                    disabled={undefined}
                     ellipsizeMode="tail"
                     style={
                       Array [
@@ -334,7 +332,6 @@ exports[`renders correctly 1`] = `
                 "params": Object {
                   "hideBackImage": false,
                   "init": true,
-                  "initial": true,
                   "navigationBarStyle": Object {
                     "backgroundColor": "#162331",
                     "borderBottomColor": "transparent",
@@ -362,84 +359,90 @@ exports[`renders correctly 1`] = `
           "getStateForAction": [Function],
         }
       }
-      style={
-        Object {
-          "backgroundColor": "#162331",
-          "borderBottomColor": "transparent",
-          "borderBottomWidth": 0.5,
-          "borderColor": "#162331",
-          "height": 64,
-          "paddingTop": 20,
-        }
-      }
       transitionConfig={undefined}
     >
       <View
+        onLayout={[Function]}
         style={
           Object {
-            "flex": 1,
+            "backgroundColor": "#162331",
+            "borderBottomColor": "transparent",
+            "borderBottomWidth": 0.5,
+            "borderColor": "#162331",
+            "height": 64,
+            "paddingBottom": 0,
+            "paddingLeft": 0,
+            "paddingRight": 0,
+            "paddingTop": 20,
           }
         }
       >
         <View
           style={
-            Array [
-              Object {
-                "bottom": 0,
-                "left": 0,
-                "position": "absolute",
-                "right": 0,
-                "top": 0,
-              },
-              Object {
-                "flexDirection": "row",
-              },
-            ]
+            Object {
+              "flex": 1,
+            }
           }
         >
           <View
-            collapsable={undefined}
-            pointerEvents="box-none"
             style={
-              Object {
-                "alignItems": "center",
-                "backgroundColor": "transparent",
-                "bottom": 0,
-                "justifyContent": "center",
-                "left": 70,
-                "opacity": 1,
-                "position": "absolute",
-                "right": 70,
-                "top": 0,
-                "transform": Array [
-                  Object {
-                    "translateX": 0,
-                  },
-                ],
-              }
+              Array [
+                Object {
+                  "bottom": 0,
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                },
+                Object {
+                  "flexDirection": "row",
+                },
+              ]
             }
           >
-            <Text
-              accessibilityTraits="header"
-              accessible={true}
-              allowFontScaling={true}
+            <View
               collapsable={undefined}
-              disabled={false}
-              ellipsizeMode="tail"
-              numberOfLines={1}
-              onLayout={[Function]}
+              pointerEvents="box-none"
               style={
                 Object {
-                  "color": "white",
-                  "fontSize": 17,
-                  "fontWeight": "600",
-                  "marginHorizontal": 16,
-                  "textAlign": "center",
+                  "alignItems": "center",
+                  "backgroundColor": "transparent",
+                  "bottom": 0,
+                  "justifyContent": "center",
+                  "left": 0,
+                  "opacity": 1,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                  "transform": Array [
+                    Object {
+                      "translateX": 0,
+                    },
+                  ],
                 }
               }
             >
-              AEKI
-            </Text>
+              <Text
+                accessibilityTraits="header"
+                accessible={true}
+                allowFontScaling={true}
+                collapsable={undefined}
+                ellipsizeMode="tail"
+                numberOfLines={1}
+                onLayout={[Function]}
+                style={
+                  Object {
+                    "color": "white",
+                    "fontSize": 17,
+                    "fontWeight": "600",
+                    "marginHorizontal": 16,
+                    "textAlign": "center",
+                  }
+                }
+              >
+                AEKI
+              </Text>
+            </View>
           </View>
         </View>
       </View>

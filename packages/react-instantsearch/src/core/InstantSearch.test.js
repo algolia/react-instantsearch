@@ -9,6 +9,7 @@ Enzyme.configure({ adapter: new Adapter() });
 import InstantSearch from './InstantSearch';
 
 import createInstantSearchManager from './createInstantSearchManager';
+
 jest.mock('./createInstantSearchManager', () =>
   jest.fn(() => ({
     context: {},
@@ -24,6 +25,7 @@ const DEFAULT_PROPS = {
   root: {
     Root: 'div',
   },
+  refresh: false,
 };
 
 describe('InstantSearch', () => {
@@ -60,6 +62,7 @@ describe('InstantSearch', () => {
           searchState={{}}
           onSearchStateChange={() => null}
           createURL={() => null}
+          refresh={false}
         >
           <div />
         </InstantSearch>
@@ -135,12 +138,13 @@ describe('InstantSearch', () => {
       </InstantSearch>
     );
 
-    expect(ism.updateClient.mock.calls.length).toBe(0);
+    expect(ism.updateClient.mock.calls).toHaveLength(0);
     wrapper.setProps({
       ...DEFAULT_PROPS,
       algoliaClient: {},
     });
-    expect(ism.updateClient.mock.calls.length).toBe(1);
+
+    expect(ism.updateClient.mock.calls).toHaveLength(1);
   });
 
   it('works as a controlled input', () => {
@@ -252,8 +256,66 @@ describe('InstantSearch', () => {
     wrapper.unmount();
     onSearchStateChange({});
 
-    expect(onSearchStateChangeMock.mock.calls.length).toBe(0);
-    expect(ism.skipSearch.mock.calls.length).toBe(1);
+    expect(onSearchStateChangeMock.mock.calls).toHaveLength(0);
+    expect(ism.skipSearch.mock.calls).toHaveLength(1);
+  });
+
+  it('refreshes the cache when the refresh prop is set to true', () => {
+    const ism = {
+      clearCache: jest.fn(),
+    };
+
+    createInstantSearchManager.mockImplementation(() => ism);
+
+    const wrapper = shallow(
+      <InstantSearch {...DEFAULT_PROPS}>
+        <div />
+      </InstantSearch>
+    );
+
+    expect(ism.clearCache).not.toHaveBeenCalled();
+
+    wrapper.setProps({
+      ...DEFAULT_PROPS,
+      refresh: false,
+    });
+
+    expect(ism.clearCache).not.toHaveBeenCalled();
+
+    wrapper.setProps({
+      ...DEFAULT_PROPS,
+      refresh: true,
+    });
+
+    expect(ism.clearCache).toHaveBeenCalledTimes(1);
+  });
+
+  it('updates the index when the the index changes', () => {
+    const ism = {
+      updateIndex: jest.fn(),
+    };
+
+    createInstantSearchManager.mockImplementation(() => ism);
+
+    const wrapper = shallow(
+      <InstantSearch {...DEFAULT_PROPS}>
+        <div />
+      </InstantSearch>
+    );
+
+    expect(ism.updateIndex).not.toHaveBeenCalled();
+
+    wrapper.setProps({
+      indexName: 'foobar',
+    });
+
+    expect(ism.updateIndex).not.toHaveBeenCalled();
+
+    wrapper.setProps({
+      indexName: 'newindexname',
+    });
+
+    expect(ism.updateIndex).toHaveBeenCalledTimes(1);
   });
 
   it('calls onSearchParameters with the right values if function provided', () => {
@@ -278,7 +340,7 @@ describe('InstantSearch', () => {
 
     childContext.ais.onSearchParameters(getSearchParameters, context, props);
 
-    expect(onSearchParametersMock.mock.calls.length).toBe(1);
+    expect(onSearchParametersMock.mock.calls).toHaveLength(1);
     expect(onSearchParametersMock.mock.calls[0][0]).toBe(getSearchParameters);
     expect(onSearchParametersMock.mock.calls[0][1]).toEqual(context);
     expect(onSearchParametersMock.mock.calls[0][2]).toEqual(props);
@@ -298,7 +360,7 @@ describe('InstantSearch', () => {
 
     childContext.ais.onSearchParameters(getSearchParameters, context, props);
 
-    expect(onSearchParametersMock.mock.calls.length).toBe(2);
+    expect(onSearchParametersMock.mock.calls).toHaveLength(2);
     expect(onSearchParametersMock.mock.calls[1][3]).toEqual({
       search: 'state',
     });
@@ -313,7 +375,7 @@ describe('InstantSearch', () => {
 
     childContext.ais.onSearchParameters(getSearchParameters, context, props);
 
-    expect(onSearchParametersMock.mock.calls.length).toBe(2);
+    expect(onSearchParametersMock.mock.calls).toHaveLength(2);
   });
 
   describe('createHrefForState', () => {
