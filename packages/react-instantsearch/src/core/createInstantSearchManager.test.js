@@ -7,7 +7,7 @@ import algoliaClient from 'algoliasearch/lite';
 
 jest.useFakeTimers();
 
-const defaultResponse = {
+const defaultResponse = () => ({
   results: [
     {
       params: 'query=&hitsPerPage=10&page=0&facets=%5B%5D&tagFilters=',
@@ -21,8 +21,7 @@ const defaultResponse = {
       index: 'index',
     },
   ],
-};
-const client = makeClient(defaultResponse);
+});
 
 describe('createInstantSearchManager', () => {
   it('initializes the manager with an empty state', () => {
@@ -30,7 +29,7 @@ describe('createInstantSearchManager', () => {
       indexName: 'index',
       initialState: {},
       searchParameters: {},
-      algoliaClient: client,
+      algoliaClient: makeClient(defaultResponse()),
     });
 
     const store = ism.store.getState();
@@ -60,7 +59,7 @@ describe('createInstantSearchManager', () => {
       indexName: 'index',
       initialState: {},
       searchParameters: {},
-      algoliaClient: client,
+      algoliaClient: makeClient(defaultResponse()),
       resultsState: { some: 'results' },
     });
 
@@ -84,7 +83,7 @@ describe('createInstantSearchManager', () => {
         indexName: 'index',
         initialState: {},
         searchParameters: {},
-        algoliaClient: client,
+        algoliaClient: makeClient(defaultResponse()),
       });
 
       ism.widgetsManager.registerWidget({
@@ -112,7 +111,7 @@ describe('createInstantSearchManager', () => {
         indexName: 'index',
         initialState: {},
         searchParameters: {},
-        algoliaClient: client,
+        algoliaClient: makeClient(defaultResponse()),
       });
 
       const nextSearchState = {};
@@ -142,7 +141,7 @@ describe('createInstantSearchManager', () => {
         indexName: 'index',
         initialState: {},
         searchParameters: {},
-        algoliaClient: client,
+        algoliaClient: makeClient(defaultResponse()),
       });
 
       const widgetIDsT0 = ism.getWidgetsIds().sort();
@@ -161,9 +160,52 @@ describe('createInstantSearchManager', () => {
     });
   });
 
+  describe('Loading state', () => {
+    it('should be updated if search is stalled', () => {
+      const algoliaClient = makeManagedClient();
+      const ism = createInstantSearchManager({
+        indexName: 'index',
+        initialState: {},
+        searchParameters: {},
+        algoliaClient,
+      });
+
+      ism.widgetsManager.registerWidget({
+        getMetadata: () => {},
+        transitionState: () => {},
+      });
+
+      expect(algoliaClient.search).not.toHaveBeenCalled();
+      expect(ism.store.getState()).toMatchObject({
+        isSearchStalled: false,
+      });
+
+      return Promise.resolve().then(() => {
+        expect(algoliaClient.search).toHaveBeenCalledTimes(1);
+
+        expect(ism.store.getState()).toMatchObject({
+          isSearchStalled: false,
+        });
+
+        jest.runAllTimers();
+
+        expect(ism.store.getState()).toMatchObject({
+          isSearchStalled: true,
+        });
+
+        algoliaClient.searchResultsResolvers[0]();
+        return algoliaClient.searchResultsPromises[0]
+      }).then(() => {
+        expect(ism.store.getState()).toMatchObject({
+          isSearchStalled: false,
+        });
+      });
+    });
+  });
+
   describe('client.search', () => {
     it('should be called when there is a new widget', () => {
-      const client0 = makeClient(defaultResponse);
+      const client0 = makeClient(defaultResponse());
       expect(client0.search).toHaveBeenCalledTimes(0);
       const ism = createInstantSearchManager({
         indexName: 'index',
@@ -183,7 +225,7 @@ describe('createInstantSearchManager', () => {
     });
 
     it('should be called when there is a new client', () => {
-      const client0 = makeClient(defaultResponse);
+      const client0 = makeClient(defaultResponse());
       expect(client0.search).toHaveBeenCalledTimes(0);
 
       const ism = createInstantSearchManager({
@@ -193,7 +235,7 @@ describe('createInstantSearchManager', () => {
         algoliaClient: client0,
       });
 
-      const client1 = makeClient(defaultResponse);
+      const client1 = makeClient(defaultResponse());
       expect(client1.search).toHaveBeenCalledTimes(0);
 
       ism.updateClient(client1);
@@ -204,7 +246,7 @@ describe('createInstantSearchManager', () => {
       });
     });
     it('should not be called when the search is skipped', () => {
-      const client0 = makeClient(defaultResponse);
+      const client0 = makeClient(defaultResponse());
       expect(client0.search).toHaveBeenCalledTimes(0);
       const ism = createInstantSearchManager({
         indexName: 'index',
@@ -248,4 +290,25 @@ function makeClient(response) {
   });
 
   return clientInstance;
+}
+
+function makeManagedClient() {
+  const clonedResponse = defaultResponse();
+  const searchResultsResolvers = [];
+  const searchResultsPromises = [];
+  const fakeClient = {
+    search: jest.fn((qs, cb) => {
+      const p = new Promise(resolve =>
+        searchResultsResolvers.push(resolve)
+      ).then(() => {
+        cb(null, clonedResponse);
+      });
+      searchResultsPromises.push(p);
+    }),
+    addAlgoliaAgent: () => {},
+    searchResultsPromises,
+    searchResultsResolvers,
+  };
+
+  return fakeClient;
 }
