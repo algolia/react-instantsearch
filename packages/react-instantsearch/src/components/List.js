@@ -134,6 +134,7 @@ class List extends Component {
               selectItem(items[0], this.resetQuery);
             }
           }}
+          showLoadingIndicator={false}
         />
         {noResults}
       </div>

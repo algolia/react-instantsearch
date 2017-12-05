@@ -249,17 +249,19 @@ class SearchBox extends Component {
             {...searchInputEvents}
             {...cx('input')}
           />
-          <div
-            style={{
-              display:
-                this.props.showLoadingIndicator && this.props.isSearchStalled
-                  ? 'block'
-                  : 'none',
-            }}
-            {...cx('loading-indicator')}
-          >
-            {loadingIndicatorComponent}
-          </div>
+          { this.props.showLoadingIndicator && (
+            <div
+              style={{
+                display:
+                  this.props.showLoadingIndicator && this.props.isSearchStalled
+                    ? 'block'
+                    : 'none',
+              }}
+              {...cx('loading-indicator')}
+            >
+              {loadingIndicatorComponent}
+            </div>
+          )}
           <button
             type="submit"
             title={translate('submitTitle')}

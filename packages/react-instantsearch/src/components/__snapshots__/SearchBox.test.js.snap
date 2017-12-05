@@ -56,14 +56,6 @@ exports[`SearchBox applies its default props 1`] = `
       type="search"
       value=""
     />
-    <div
-      className="ais-SearchBox__loading-indicator"
-      style={
-        Object {
-          "display": "none",
-        }
-      }
-    />
     <button
       className="ais-SearchBox__submit"
       style={
@@ -159,14 +151,6 @@ exports[`SearchBox lets you customize its theme 1`] = `
       spellCheck="false"
       type="search"
       value=""
-    />
-    <div
-      className="ais-SearchBox__loading-indicator"
-      style={
-        Object {
-          "display": "none",
-        }
-      }
     />
     <button
       className="ais-SearchBox__submit"
@@ -264,14 +248,6 @@ exports[`SearchBox lets you customize its translations 1`] = `
       type="search"
       value=""
     />
-    <div
-      className="ais-SearchBox__loading-indicator"
-      style={
-        Object {
-          "display": "none",
-        }
-      }
-    />
     <button
       className="ais-SearchBox__submit"
       style={
@@ -368,14 +344,6 @@ exports[`SearchBox lets you give custom components for reset and submit 1`] = `
       type="search"
       value=""
     />
-    <div
-      className="ais-SearchBox__loading-indicator"
-      style={
-        Object {
-          "display": "none",
-        }
-      }
-    />
     <button
       className="ais-SearchBox__submit"
       style={
@@ -463,14 +431,6 @@ exports[`SearchBox transfers the autoFocus prop to the underlying input element 
       spellCheck="false"
       type="search"
       value=""
-    />
-    <div
-      className="ais-SearchBox__loading-indicator"
-      style={
-        Object {
-          "display": "none",
-        }
-      }
     />
     <button
       className="ais-SearchBox__submit"
@@ -568,14 +528,6 @@ exports[`SearchBox treats its query prop as its input value 1`] = `
       type="search"
       value="QUERY1"
     />
-    <div
-      className="ais-SearchBox__loading-indicator"
-      style={
-        Object {
-          "display": "none",
-        }
-      }
-    />
     <button
       className="ais-SearchBox__submit"
       style={
@@ -671,14 +623,6 @@ exports[`SearchBox treats its query prop as its input value 2`] = `
       spellCheck="false"
       type="search"
       value="QUERY2"
-    />
-    <div
-      className="ais-SearchBox__loading-indicator"
-      style={
-        Object {
-          "display": "none",
-        }
-      }
     />
     <button
       className="ais-SearchBox__submit"
