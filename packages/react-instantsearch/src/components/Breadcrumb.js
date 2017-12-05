@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import Link from './Link';
 import classNames from './classNames.js';
 import translatable from '../core/translatable';
@@ -67,7 +67,7 @@ class Breadcrumb extends Component {
     const breadcrumb = items.map((item, idx) => {
       const isLast = idx === items.length - 1;
       return (
-        <Fragment key={idx}>
+        <span key={idx}>
           <li {...cx(['item'])} key="separator">
             {separator}
           </li>
@@ -85,7 +85,7 @@ class Breadcrumb extends Component {
               item.label
             )}
           </li>
-        </Fragment>
+        </span>
       )
     });
 
