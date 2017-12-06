@@ -1,31 +1,19 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const Highlight = ({ tagName, highlights }) => (
-  <span className="ais-Highlight">
-    {highlights.map(({ value, isHighlighted }, i) => {
-      const TagName = isHighlighted ? tagName : 'span';
-      const className = isHighlighted
-        ? 'ais-Highlight__highlighted'
-        : 'ais-Highlight__nonHighlighted';
+const Highlight = ({ value, tagName, isHighlighted }) => {
+  const TagName = isHighlighted ? tagName : 'span';
+  const className = isHighlighted
+    ? 'ais-Highlight__highlighted'
+    : 'ais-Highlight__nonHighlighted';
 
-      return (
-        <TagName key={`split-${i}-${value}`} className={className}>
-          {value}
-        </TagName>
-      );
-    })}
-  </span>
-);
+  return <TagName className={className}>{value}</TagName>;
+};
 
 Highlight.propTypes = {
-  highlights: PropTypes.arrayOf(
-    PropTypes.shape({
-      value: PropTypes.string.isRequired,
-      isHighlighted: PropTypes.bool.isRequired,
-    })
-  ).isRequired,
-  tagName: PropTypes.string,
+  value: PropTypes.string.isRequired,
+  isHighlighted: PropTypes.bool.isRequired,
+  tagName: PropTypes.string.isRequired,
 };
 
 export default function Highlighter({
@@ -34,8 +22,9 @@ export default function Highlighter({
   highlight,
   highlightProperty,
   tagName,
+  separator,
 }) {
-  const HighlightedTag = tagName || 'em';
+  const defaultTagName = 'span';
   const parsedHighlightedValue = highlight({
     hit,
     attributeName,
@@ -43,7 +32,35 @@ export default function Highlighter({
   });
 
   return (
-    <Highlight tagName={HighlightedTag} highlights={parsedHighlightedValue} />
+    <span className="ais-Highlight">
+      {parsedHighlightedValue.map((item, i) => {
+        if (Array.isArray(item)) {
+          const isLast = parsedHighlightedValue.length - 1 === i;
+          return (
+            <span>
+              {item.map((element, index) => (
+                <Highlight
+                  key={`split-${index}-${element.value}`}
+                  value={element.value}
+                  tagName={tagName}
+                  isHighlighted={element.isHighlighted}
+                />
+              ))}
+              {!isLast && separator}
+            </span>
+          );
+        }
+
+        return (
+          <Highlight
+            key={`split-${i}-${item.value}`}
+            value={item.value}
+            tagName={tagName}
+            isHighlighted={item.isHighlighted}
+          />
+        );
+      })}
+    </span>
   );
 }
 
@@ -52,5 +69,11 @@ Highlighter.propTypes = {
   attributeName: PropTypes.string.isRequired,
   highlight: PropTypes.func.isRequired,
   highlightProperty: PropTypes.string.isRequired,
+  separator: PropTypes.node,
   tagName: PropTypes.string,
+};
+
+Highlighter.defaultProps = {
+  tagName: 'em',
+  separator: ', ',
 };
