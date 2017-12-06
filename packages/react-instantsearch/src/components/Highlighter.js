@@ -35,9 +35,9 @@ export default function Highlighter({
     <span className="ais-Highlight">
       {parsedHighlightedValue.map((item, i) => {
         if (Array.isArray(item)) {
-          const isLast = parsedHighlightedValue.length - 1 === i;
-          return (
-            <span>
+          const isLast = i === parsedHighlightedValue.length - 1;
+          return !isLast ? (
+            <span key={`split-${i}-${item.value}`}>
               {item.map((element, index) => (
                 <Highlight
                   key={`split-${index}-${element.value}`}
@@ -46,7 +46,18 @@ export default function Highlighter({
                   isHighlighted={element.isHighlighted}
                 />
               ))}
-              {!isLast && separator}
+              <span>{separator}</span>
+            </span>
+          ) : (
+            <span key={`split-${i}-${item.value}`}>
+              {item.map((element, index) => (
+                <Highlight
+                  key={`split-${index}-${element.value}`}
+                  value={element.value}
+                  tagName={tagName}
+                  isHighlighted={element.isHighlighted}
+                />
+              ))}
             </span>
           );
         }
