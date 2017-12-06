@@ -1,22 +1,32 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`HitsPerPage renders 1`] = `
-<select
-  className="ais-HitsPerPage__root"
-  onChange={[Function]}
-  value={5}
+<div
+  className="ais-ResultsPerPage"
 >
-  <option
-    disabled={undefined}
-    value={5}
+  <div
+    className="ais-ResultsPerPage-body ais-body"
   >
-    show 5 hits
-  </option>
-  <option
-    disabled={undefined}
-    value={10}
-  >
-    show 10 hits
-  </option>
-</select>
+    <select
+      className="ais-ResultsPerPage-select"
+      onChange={[Function]}
+      value={5}
+    >
+      <option
+        className="ais-ResultsPerPage-option"
+        disabled={undefined}
+        value={5}
+      >
+        show 5 hits
+      </option>
+      <option
+        className="ais-ResultsPerPage-option"
+        disabled={undefined}
+        value={10}
+      >
+        show 10 hits
+      </option>
+    </select>
+  </div>
+</div>
 `;

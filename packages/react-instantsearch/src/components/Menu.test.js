@@ -131,7 +131,7 @@ describe('Menu', () => {
       />
     );
 
-    const items = wrapper.find('.ais-Menu__item');
+    const items = wrapper.find('.ais-Menu-item');
 
     expect(items).toHaveLength(3);
 
@@ -167,13 +167,13 @@ describe('Menu', () => {
       />
     );
 
-    const items = wrapper.find('.ais-Menu__item');
+    const items = wrapper.find('.ais-Menu-item');
 
     expect(items).toHaveLength(2);
 
-    wrapper.find('.ais-Menu__showMore').simulate('click');
+    wrapper.find('.ais-Menu-showMore').simulate('click');
 
-    expect(wrapper.find('.ais-Menu__item')).toHaveLength(4);
+    expect(wrapper.find('.ais-Menu-item')).toHaveLength(4);
 
     wrapper.unmount();
   });
@@ -197,11 +197,11 @@ describe('Menu', () => {
       />
     );
 
-    const items = wrapper.find('.ais-Menu__item');
+    const items = wrapper.find('.ais-Menu-item');
 
     expect(items).toHaveLength(2);
 
-    expect(wrapper.find('.ais-Menu__showMoreDisabled')).toBeDefined();
+    expect(wrapper.find('.ais-Menu-showMore--disabled')).toBeDefined();
 
     wrapper.unmount();
   });
@@ -239,7 +239,7 @@ describe('Menu', () => {
     it('a searchbox should be displayed if the feature is activated', () => {
       const wrapper = mount(menu);
 
-      const searchBox = wrapper.find('.ais-Menu__SearchBox');
+      const searchBox = wrapper.find('.ais-Menu-searchBox');
 
       expect(searchBox).toBeDefined();
 
@@ -250,7 +250,7 @@ describe('Menu', () => {
       const wrapper = mount(menu);
 
       wrapper
-        .find('.ais-Menu__SearchBox input')
+        .find('.ais-Menu-searchBox input')
         .simulate('change', { target: { value: 'query' } });
 
       expect(searchForItems.mock.calls).toHaveLength(1);
@@ -263,16 +263,16 @@ describe('Menu', () => {
       const wrapper = mount(menu);
 
       const firstItem = wrapper
-        .find('.ais-Menu__item')
+        .find('.ais-Menu-item')
         .first()
         .find(Link);
       firstItem.simulate('click');
 
       expect(refine.mock.calls).toHaveLength(1);
       expect(refine.mock.calls[0][0]).toEqual('white');
-      expect(wrapper.find('.ais-Menu__SearchBox input').props().value).toBe('');
+      expect(wrapper.find('.ais-Menu-searchBox input').props().value).toBe('');
 
-      const selectedRefinements = wrapper.find('.ais-Menu__item');
+      const selectedRefinements = wrapper.find('.ais-Menu-item');
       expect(selectedRefinements).toHaveLength(2);
 
       wrapper.unmount();
@@ -286,9 +286,9 @@ describe('Menu', () => {
 
       expect(refine.mock.calls).toHaveLength(1);
       expect(refine.mock.calls[0][0]).toEqual('white');
-      expect(wrapper.find('.ais-Menu__SearchBox input').props().value).toBe('');
+      expect(wrapper.find('.ais-Menu-searchBox input').props().value).toBe('');
 
-      const selectedRefinements = wrapper.find('.ais-Menu__item');
+      const selectedRefinements = wrapper.find('.ais-Menu-item');
       expect(selectedRefinements).toHaveLength(2);
 
       wrapper.unmount();
@@ -323,13 +323,13 @@ describe('Menu', () => {
 
       expect(canRefine.mock.calls).toHaveLength(1);
       expect(canRefine.mock.calls[0][0]).toEqual(true);
-      expect(wrapper.find('.ais-Menu__noRefinement')).toHaveLength(0);
+      expect(wrapper.find('.ais-Menu-list--noRefinement')).toHaveLength(0);
 
       wrapper.setProps({ canRefine: false });
 
       expect(canRefine.mock.calls).toHaveLength(2);
       expect(canRefine.mock.calls[1][0]).toEqual(false);
-      expect(wrapper.find('.ais-Menu__noRefinement')).toHaveLength(1);
+      expect(wrapper.find('.ais-Menu-list--noRefinement')).toHaveLength(1);
     });
   });
 });

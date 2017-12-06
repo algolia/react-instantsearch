@@ -2,222 +2,216 @@
 
 exports[`Breadcrumb has a separator prop that can be a custom component 1`] = `
 <div
-  className="ais-Breadcrumb__root"
+  className="ais-Breadcrumb"
 >
-  <span
-    className="ais-Breadcrumb__item"
+  <div
+    className="ais-Breadcrumb-body ais-body"
   >
-    <a
-      className="ais-Breadcrumb__itemLink ais-Breadcrumb__itemLinkRoot"
-      href="#"
-      onClick={[Function]}
+    <ul
+      className="ais-Breadcrumb-list"
     >
-      <span
-        className="ais-Breadcrumb__rootLabel"
+      <li
+        className="ais-Breadcrumb-item"
       >
-        Home
-      </span>
-    </a>
-    <span
-      className="ais-Breadcrumb__separator"
-    >
+        <a
+          className="ais-Breadcrumb-link"
+          href="#"
+          onClick={[Function]}
+        >
+          Home
+        </a>
+      </li>
       <span>
-        🔍
+        <li
+          className="ais-Breadcrumb-item"
+        >
+          <span>
+            🔍
+          </span>
+        </li>
+        <li
+          className="ais-Breadcrumb-item"
+        >
+          <a
+            className="ais-Breadcrumb-link"
+            href="#"
+            onClick={[Function]}
+          >
+            white
+          </a>
+        </li>
       </span>
-    </span>
-  </span>
-  <span
-    className="ais-Breadcrumb__item"
-  >
-    <a
-      className="ais-Breadcrumb__itemLink"
-      href="#"
-      onClick={[Function]}
-    >
-      <span
-        className="ais-Breadcrumb__itemLabel"
-      >
-        white
-      </span>
-    </a>
-    <span
-      className="ais-Breadcrumb__separator"
-    >
       <span>
-        🔍
+        <li
+          className="ais-Breadcrumb-item"
+        >
+          <span>
+            🔍
+          </span>
+        </li>
+        <li
+          className="ais-Breadcrumb-item"
+        >
+          <a
+            className="ais-Breadcrumb-link"
+            href="#"
+            onClick={[Function]}
+          >
+            white1
+          </a>
+        </li>
       </span>
-    </span>
-  </span>
-  <span
-    className="ais-Breadcrumb__item"
-  >
-    <a
-      className="ais-Breadcrumb__itemLink"
-      href="#"
-      onClick={[Function]}
-    >
-      <span
-        className="ais-Breadcrumb__itemLabel"
-      >
-        white1
-      </span>
-    </a>
-    <span
-      className="ais-Breadcrumb__separator"
-    >
       <span>
-        🔍
+        <li
+          className="ais-Breadcrumb-item"
+        >
+          <span>
+            🔍
+          </span>
+        </li>
+        <li
+          className="ais-Breadcrumb-item ais-Breadcrumb-item--selected"
+        >
+          white1.1
+        </li>
       </span>
-    </span>
-  </span>
-  <span
-    className="ais-Breadcrumb__itemLink ais-Breadcrumb__itemDisabled ais-Breadcrumb__item"
-  >
-    <span
-      className="ais-Breadcrumb__itemLabel"
-    >
-      white1.1
-    </span>
-  </span>
+    </ul>
+  </div>
 </div>
 `;
 
 exports[`Breadcrumb has customizable translations 1`] = `
 <div
-  className="ais-Breadcrumb__root"
+  className="ais-Breadcrumb"
 >
-  <span
-    className="ais-Breadcrumb__item"
+  <div
+    className="ais-Breadcrumb-body ais-body"
   >
-    <a
-      className="ais-Breadcrumb__itemLink ais-Breadcrumb__itemLinkRoot"
-      href="#"
-      onClick={[Function]}
+    <ul
+      className="ais-Breadcrumb-list"
     >
-      <span
-        className="ais-Breadcrumb__rootLabel"
+      <li
+        className="ais-Breadcrumb-item"
       >
-        ROOT_LABEL
+        <a
+          className="ais-Breadcrumb-link"
+          href="#"
+          onClick={[Function]}
+        >
+          ROOT_LABEL
+        </a>
+      </li>
+      <span>
+        <li
+          className="ais-Breadcrumb-item"
+        />
+        <li
+          className="ais-Breadcrumb-item"
+        >
+          <a
+            className="ais-Breadcrumb-link"
+            href="#"
+            onClick={[Function]}
+          >
+            white
+          </a>
+        </li>
       </span>
-    </a>
-    <span
-      className="ais-Breadcrumb__separator"
-    />
-  </span>
-  <span
-    className="ais-Breadcrumb__item"
-  >
-    <a
-      className="ais-Breadcrumb__itemLink"
-      href="#"
-      onClick={[Function]}
-    >
-      <span
-        className="ais-Breadcrumb__itemLabel"
-      >
-        white
+      <span>
+        <li
+          className="ais-Breadcrumb-item"
+        />
+        <li
+          className="ais-Breadcrumb-item"
+        >
+          <a
+            className="ais-Breadcrumb-link"
+            href="#"
+            onClick={[Function]}
+          >
+            white1
+          </a>
+        </li>
       </span>
-    </a>
-    <span
-      className="ais-Breadcrumb__separator"
-    />
-  </span>
-  <span
-    className="ais-Breadcrumb__item"
-  >
-    <a
-      className="ais-Breadcrumb__itemLink"
-      href="#"
-      onClick={[Function]}
-    >
-      <span
-        className="ais-Breadcrumb__itemLabel"
-      >
-        white1
+      <span>
+        <li
+          className="ais-Breadcrumb-item"
+        />
+        <li
+          className="ais-Breadcrumb-item ais-Breadcrumb-item--selected"
+        >
+          white1.1
+        </li>
       </span>
-    </a>
-    <span
-      className="ais-Breadcrumb__separator"
-    />
-  </span>
-  <span
-    className="ais-Breadcrumb__itemLink ais-Breadcrumb__itemDisabled ais-Breadcrumb__item"
-  >
-    <span
-      className="ais-Breadcrumb__itemLabel"
-    >
-      white1.1
-    </span>
-  </span>
+    </ul>
+  </div>
 </div>
 `;
 
 exports[`Breadcrumb outputs the default breadcrumb 1`] = `
 <div
-  className="ais-Breadcrumb__root"
+  className="ais-Breadcrumb"
 >
-  <span
-    className="ais-Breadcrumb__item"
+  <div
+    className="ais-Breadcrumb-body ais-body"
   >
-    <a
-      className="ais-Breadcrumb__itemLink ais-Breadcrumb__itemLinkRoot"
-      href="#"
-      onClick={[Function]}
+    <ul
+      className="ais-Breadcrumb-list"
     >
-      <span
-        className="ais-Breadcrumb__rootLabel"
+      <li
+        className="ais-Breadcrumb-item"
       >
-        Home
+        <a
+          className="ais-Breadcrumb-link"
+          href="#"
+          onClick={[Function]}
+        >
+          Home
+        </a>
+      </li>
+      <span>
+        <li
+          className="ais-Breadcrumb-item"
+        />
+        <li
+          className="ais-Breadcrumb-item"
+        >
+          <a
+            className="ais-Breadcrumb-link"
+            href="#"
+            onClick={[Function]}
+          >
+            white
+          </a>
+        </li>
       </span>
-    </a>
-    <span
-      className="ais-Breadcrumb__separator"
-    />
-  </span>
-  <span
-    className="ais-Breadcrumb__item"
-  >
-    <a
-      className="ais-Breadcrumb__itemLink"
-      href="#"
-      onClick={[Function]}
-    >
-      <span
-        className="ais-Breadcrumb__itemLabel"
-      >
-        white
+      <span>
+        <li
+          className="ais-Breadcrumb-item"
+        />
+        <li
+          className="ais-Breadcrumb-item"
+        >
+          <a
+            className="ais-Breadcrumb-link"
+            href="#"
+            onClick={[Function]}
+          >
+            white1
+          </a>
+        </li>
       </span>
-    </a>
-    <span
-      className="ais-Breadcrumb__separator"
-    />
-  </span>
-  <span
-    className="ais-Breadcrumb__item"
-  >
-    <a
-      className="ais-Breadcrumb__itemLink"
-      href="#"
-      onClick={[Function]}
-    >
-      <span
-        className="ais-Breadcrumb__itemLabel"
-      >
-        white1
+      <span>
+        <li
+          className="ais-Breadcrumb-item"
+        />
+        <li
+          className="ais-Breadcrumb-item ais-Breadcrumb-item--selected"
+        >
+          white1.1
+        </li>
       </span>
-    </a>
-    <span
-      className="ais-Breadcrumb__separator"
-    />
-  </span>
-  <span
-    className="ais-Breadcrumb__itemLink ais-Breadcrumb__itemDisabled ais-Breadcrumb__item"
-  >
-    <span
-      className="ais-Breadcrumb__itemLabel"
-    >
-      white1.1
-    </span>
-  </span>
+    </ul>
+  </div>
 </div>
 `;

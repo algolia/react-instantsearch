@@ -307,7 +307,7 @@ describe('RawRangeInput', () => {
       const props = {};
       const component = shallowRender(props);
 
-      component.find('.ais-RangeInput__inputMin').simulate('change', {
+      component.find('.ais-RangeInput-input--min').simulate('change', {
         currentTarget: {
           value: 10,
         },
@@ -324,7 +324,7 @@ describe('RawRangeInput', () => {
       const props = {};
       const component = shallowRender(props);
 
-      component.find('.ais-RangeInput__inputMax').simulate('change', {
+      component.find('.ais-RangeInput-input--max').simulate('change', {
         currentTarget: {
           value: 490,
         },

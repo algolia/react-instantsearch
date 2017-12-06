@@ -127,7 +127,7 @@ class Pagination extends Component {
     if (showFirst) {
       items.push({
         key: 'first',
-        modifier: '-firstPage',
+        modifier: 'item--firstPage',
         disabled: currentRefinement === 1,
         label: translate('first'),
         value: 1,
@@ -137,7 +137,7 @@ class Pagination extends Component {
     if (showPrevious) {
       items.push({
         key: 'previous',
-        modifier: '-previousPage',
+        modifier: 'item--previousPage',
         disabled: currentRefinement === 1,
         label: translate('previous'),
         value: currentRefinement - 1,
@@ -148,7 +148,7 @@ class Pagination extends Component {
     items = items.concat(
       getPages(currentRefinement, totalPages, pagesPadding).map(value => ({
         key: value,
-        modifier: '-page',
+        modifier: 'item--page',
         label: translate('page', value),
         value,
         selected: value === currentRefinement,
@@ -158,7 +158,7 @@ class Pagination extends Component {
     if (showNext) {
       items.push({
         key: 'next',
-        modifier: '-nextPage',
+        modifier: 'item--nextPage',
         disabled: currentRefinement === lastPage || lastPage <= 1,
         label: translate('next'),
         value: currentRefinement + 1,
@@ -168,7 +168,7 @@ class Pagination extends Component {
     if (showLast) {
       items.push({
         key: 'last',
-        modifier: '-lastPage',
+        modifier: 'item--lastPage',
         disabled: currentRefinement === lastPage || lastPage <= 1,
         label: translate('last'),
         value: lastPage,

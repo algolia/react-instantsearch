@@ -1,625 +1,4392 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`RangeInput render with translations 1`] = `
-<form
-  className="ais-RangeInput__root"
-  onSubmit={[Function]}
->
-  <fieldset
-    className="ais-RangeInput__fieldset"
-    disabled={false}
-  >
-    <label
-      className="ais-RangeInput__labelMin"
-    >
-      <input
-        className="ais-RangeInput__inputMin"
-        max=""
-        min=""
-        onChange={[Function]}
-        placeholder=""
-        step={1}
-        type="number"
-        value=""
-      />
-    </label>
-    <span
-      className="ais-RangeInput__separator"
-    >
-      SEPARATOR
-    </span>
-    <label
-      className="ais-RangeInput__labelMax"
-    >
-      <input
-        className="ais-RangeInput__inputMax"
-        max=""
-        min=""
-        onChange={[Function]}
-        placeholder=""
-        step={1}
-        type="number"
-        value=""
-      />
-    </label>
-    <button
-      className="ais-RangeInput__submit"
-      type="submit"
-    >
-      SUBMIT
-    </button>
-  </fieldset>
-</form>
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <RawRangeInput
+    canRefine={true}
+    currentRefinement={
+      Object {
+        "max": undefined,
+        "min": undefined,
+      }
+    }
+    max={undefined}
+    min={undefined}
+    precision={0}
+    refine={[Function]}
+    translate={[Function]}
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": null,
+    "nodeType": "class",
+    "props": Object {
+      "children": <form
+        className="ais-RangeInput-form"
+        onSubmit={[Function]}
+      >
+        <input
+          className="ais-RangeInput-input ais-RangeInput-input--min"
+          disabled={false}
+          max=""
+          min=""
+          onChange={[Function]}
+          placeholder=""
+          step={1}
+          type="number"
+          value=""
+        />
+        <span
+          className="ais-RangeInput-separator"
+        >
+          SEPARATOR
+        </span>
+        <input
+          className="ais-RangeInput-input ais-RangeInput-input--max"
+          disabled={false}
+          max=""
+          min=""
+          onChange={[Function]}
+          placeholder=""
+          step={1}
+          type="number"
+          value=""
+        />
+        <button
+          className="ais-RangeInput-submit"
+          type="submit"
+        >
+          SUBMIT
+        </button>
+      </form>,
+      "footer": undefined,
+      "header": undefined,
+      "otherWidgetClassNames": Array [
+        false,
+      ],
+      "widgetClassName": "RangeInput",
+    },
+    "ref": null,
+    "rendered": Object {
+      "instance": null,
+      "key": null,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <input
+            className="ais-RangeInput-input ais-RangeInput-input--min"
+            disabled={false}
+            max=""
+            min=""
+            onChange={[Function]}
+            placeholder=""
+            step={1}
+            type="number"
+            value=""
+          />,
+          <span
+            className="ais-RangeInput-separator"
+          >
+            SEPARATOR
+          </span>,
+          <input
+            className="ais-RangeInput-input ais-RangeInput-input--max"
+            disabled={false}
+            max=""
+            min=""
+            onChange={[Function]}
+            placeholder=""
+            step={1}
+            type="number"
+            value=""
+          />,
+          <button
+            className="ais-RangeInput-submit"
+            type="submit"
+          >
+            SUBMIT
+          </button>,
+        ],
+        "className": "ais-RangeInput-form",
+        "onSubmit": [Function],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "host",
+          "props": Object {
+            "className": "ais-RangeInput-input ais-RangeInput-input--min",
+            "disabled": false,
+            "max": "",
+            "min": "",
+            "onChange": [Function],
+            "placeholder": "",
+            "step": 1,
+            "type": "number",
+            "value": "",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "input",
+        },
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "host",
+          "props": Object {
+            "children": "SEPARATOR",
+            "className": "ais-RangeInput-separator",
+          },
+          "ref": null,
+          "rendered": "SEPARATOR",
+          "type": "span",
+        },
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "host",
+          "props": Object {
+            "className": "ais-RangeInput-input ais-RangeInput-input--max",
+            "disabled": false,
+            "max": "",
+            "min": "",
+            "onChange": [Function],
+            "placeholder": "",
+            "step": 1,
+            "type": "number",
+            "value": "",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "input",
+        },
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "host",
+          "props": Object {
+            "children": "SUBMIT",
+            "className": "ais-RangeInput-submit",
+            "type": "submit",
+          },
+          "ref": null,
+          "rendered": "SUBMIT",
+          "type": "button",
+        },
+      ],
+      "type": "form",
+    },
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": null,
+      "nodeType": "class",
+      "props": Object {
+        "children": <form
+          className="ais-RangeInput-form"
+          onSubmit={[Function]}
+        >
+          <input
+            className="ais-RangeInput-input ais-RangeInput-input--min"
+            disabled={false}
+            max=""
+            min=""
+            onChange={[Function]}
+            placeholder=""
+            step={1}
+            type="number"
+            value=""
+          />
+          <span
+            className="ais-RangeInput-separator"
+          >
+            SEPARATOR
+          </span>
+          <input
+            className="ais-RangeInput-input ais-RangeInput-input--max"
+            disabled={false}
+            max=""
+            min=""
+            onChange={[Function]}
+            placeholder=""
+            step={1}
+            type="number"
+            value=""
+          />
+          <button
+            className="ais-RangeInput-submit"
+            type="submit"
+          >
+            SUBMIT
+          </button>
+        </form>,
+        "footer": undefined,
+        "header": undefined,
+        "otherWidgetClassNames": Array [
+          false,
+        ],
+        "widgetClassName": "RangeInput",
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": null,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <input
+              className="ais-RangeInput-input ais-RangeInput-input--min"
+              disabled={false}
+              max=""
+              min=""
+              onChange={[Function]}
+              placeholder=""
+              step={1}
+              type="number"
+              value=""
+            />,
+            <span
+              className="ais-RangeInput-separator"
+            >
+              SEPARATOR
+            </span>,
+            <input
+              className="ais-RangeInput-input ais-RangeInput-input--max"
+              disabled={false}
+              max=""
+              min=""
+              onChange={[Function]}
+              placeholder=""
+              step={1}
+              type="number"
+              value=""
+            />,
+            <button
+              className="ais-RangeInput-submit"
+              type="submit"
+            >
+              SUBMIT
+            </button>,
+          ],
+          "className": "ais-RangeInput-form",
+          "onSubmit": [Function],
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": null,
+            "nodeType": "host",
+            "props": Object {
+              "className": "ais-RangeInput-input ais-RangeInput-input--min",
+              "disabled": false,
+              "max": "",
+              "min": "",
+              "onChange": [Function],
+              "placeholder": "",
+              "step": 1,
+              "type": "number",
+              "value": "",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "input",
+          },
+          Object {
+            "instance": null,
+            "key": null,
+            "nodeType": "host",
+            "props": Object {
+              "children": "SEPARATOR",
+              "className": "ais-RangeInput-separator",
+            },
+            "ref": null,
+            "rendered": "SEPARATOR",
+            "type": "span",
+          },
+          Object {
+            "instance": null,
+            "key": null,
+            "nodeType": "host",
+            "props": Object {
+              "className": "ais-RangeInput-input ais-RangeInput-input--max",
+              "disabled": false,
+              "max": "",
+              "min": "",
+              "onChange": [Function],
+              "placeholder": "",
+              "step": 1,
+              "type": "number",
+              "value": "",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "input",
+          },
+          Object {
+            "instance": null,
+            "key": null,
+            "nodeType": "host",
+            "props": Object {
+              "children": "SUBMIT",
+              "className": "ais-RangeInput-submit",
+              "type": "submit",
+            },
+            "ref": null,
+            "rendered": "SUBMIT",
+            "type": "button",
+          },
+        ],
+        "type": "form",
+      },
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
 `;
 
 exports[`RawRangeInput onChange expect to update max onChange 1`] = `
-<form
-  className="ais-RangeInput__root"
-  onSubmit={[Function]}
->
-  <fieldset
-    className="ais-RangeInput__fieldset"
-    disabled={false}
-  >
-    <label
-      className="ais-RangeInput__labelMin"
-    >
-      <input
-        className="ais-RangeInput__inputMin"
-        max=""
-        min=""
-        onChange={[Function]}
-        placeholder=""
-        step={1}
-        type="number"
-        value=""
-      />
-    </label>
-    <span
-      className="ais-RangeInput__separator"
-    >
-      separator
-    </span>
-    <label
-      className="ais-RangeInput__labelMax"
-    >
-      <input
-        className="ais-RangeInput__inputMax"
-        max=""
-        min=""
-        onChange={[Function]}
-        placeholder=""
-        step={1}
-        type="number"
-        value={490}
-      />
-    </label>
-    <button
-      className="ais-RangeInput__submit"
-      type="submit"
-    >
-      submit
-    </button>
-  </fieldset>
-</form>
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <RawRangeInput
+    canRefine={true}
+    currentRefinement={
+      Object {
+        "max": undefined,
+        "min": undefined,
+      }
+    }
+    max={undefined}
+    min={undefined}
+    precision={0}
+    refine={[Function]}
+    translate={[Function]}
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": null,
+    "nodeType": "class",
+    "props": Object {
+      "children": <form
+        className="ais-RangeInput-form"
+        onSubmit={[Function]}
+      >
+        <input
+          className="ais-RangeInput-input ais-RangeInput-input--min"
+          disabled={false}
+          max=""
+          min=""
+          onChange={[Function]}
+          placeholder=""
+          step={1}
+          type="number"
+          value=""
+        />
+        <span
+          className="ais-RangeInput-separator"
+        >
+          separator
+        </span>
+        <input
+          className="ais-RangeInput-input ais-RangeInput-input--max"
+          disabled={false}
+          max=""
+          min=""
+          onChange={[Function]}
+          placeholder=""
+          step={1}
+          type="number"
+          value={490}
+        />
+        <button
+          className="ais-RangeInput-submit"
+          type="submit"
+        >
+          submit
+        </button>
+      </form>,
+      "footer": undefined,
+      "header": undefined,
+      "otherWidgetClassNames": Array [
+        false,
+      ],
+      "widgetClassName": "RangeInput",
+    },
+    "ref": null,
+    "rendered": Object {
+      "instance": null,
+      "key": null,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <input
+            className="ais-RangeInput-input ais-RangeInput-input--min"
+            disabled={false}
+            max=""
+            min=""
+            onChange={[Function]}
+            placeholder=""
+            step={1}
+            type="number"
+            value=""
+          />,
+          <span
+            className="ais-RangeInput-separator"
+          >
+            separator
+          </span>,
+          <input
+            className="ais-RangeInput-input ais-RangeInput-input--max"
+            disabled={false}
+            max=""
+            min=""
+            onChange={[Function]}
+            placeholder=""
+            step={1}
+            type="number"
+            value={490}
+          />,
+          <button
+            className="ais-RangeInput-submit"
+            type="submit"
+          >
+            submit
+          </button>,
+        ],
+        "className": "ais-RangeInput-form",
+        "onSubmit": [Function],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "host",
+          "props": Object {
+            "className": "ais-RangeInput-input ais-RangeInput-input--min",
+            "disabled": false,
+            "max": "",
+            "min": "",
+            "onChange": [Function],
+            "placeholder": "",
+            "step": 1,
+            "type": "number",
+            "value": "",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "input",
+        },
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "host",
+          "props": Object {
+            "children": "separator",
+            "className": "ais-RangeInput-separator",
+          },
+          "ref": null,
+          "rendered": "separator",
+          "type": "span",
+        },
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "host",
+          "props": Object {
+            "className": "ais-RangeInput-input ais-RangeInput-input--max",
+            "disabled": false,
+            "max": "",
+            "min": "",
+            "onChange": [Function],
+            "placeholder": "",
+            "step": 1,
+            "type": "number",
+            "value": 490,
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "input",
+        },
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "host",
+          "props": Object {
+            "children": "submit",
+            "className": "ais-RangeInput-submit",
+            "type": "submit",
+          },
+          "ref": null,
+          "rendered": "submit",
+          "type": "button",
+        },
+      ],
+      "type": "form",
+    },
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": null,
+      "nodeType": "class",
+      "props": Object {
+        "children": <form
+          className="ais-RangeInput-form"
+          onSubmit={[Function]}
+        >
+          <input
+            className="ais-RangeInput-input ais-RangeInput-input--min"
+            disabled={false}
+            max=""
+            min=""
+            onChange={[Function]}
+            placeholder=""
+            step={1}
+            type="number"
+            value=""
+          />
+          <span
+            className="ais-RangeInput-separator"
+          >
+            separator
+          </span>
+          <input
+            className="ais-RangeInput-input ais-RangeInput-input--max"
+            disabled={false}
+            max=""
+            min=""
+            onChange={[Function]}
+            placeholder=""
+            step={1}
+            type="number"
+            value={490}
+          />
+          <button
+            className="ais-RangeInput-submit"
+            type="submit"
+          >
+            submit
+          </button>
+        </form>,
+        "footer": undefined,
+        "header": undefined,
+        "otherWidgetClassNames": Array [
+          false,
+        ],
+        "widgetClassName": "RangeInput",
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": null,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <input
+              className="ais-RangeInput-input ais-RangeInput-input--min"
+              disabled={false}
+              max=""
+              min=""
+              onChange={[Function]}
+              placeholder=""
+              step={1}
+              type="number"
+              value=""
+            />,
+            <span
+              className="ais-RangeInput-separator"
+            >
+              separator
+            </span>,
+            <input
+              className="ais-RangeInput-input ais-RangeInput-input--max"
+              disabled={false}
+              max=""
+              min=""
+              onChange={[Function]}
+              placeholder=""
+              step={1}
+              type="number"
+              value={490}
+            />,
+            <button
+              className="ais-RangeInput-submit"
+              type="submit"
+            >
+              submit
+            </button>,
+          ],
+          "className": "ais-RangeInput-form",
+          "onSubmit": [Function],
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": null,
+            "nodeType": "host",
+            "props": Object {
+              "className": "ais-RangeInput-input ais-RangeInput-input--min",
+              "disabled": false,
+              "max": "",
+              "min": "",
+              "onChange": [Function],
+              "placeholder": "",
+              "step": 1,
+              "type": "number",
+              "value": "",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "input",
+          },
+          Object {
+            "instance": null,
+            "key": null,
+            "nodeType": "host",
+            "props": Object {
+              "children": "separator",
+              "className": "ais-RangeInput-separator",
+            },
+            "ref": null,
+            "rendered": "separator",
+            "type": "span",
+          },
+          Object {
+            "instance": null,
+            "key": null,
+            "nodeType": "host",
+            "props": Object {
+              "className": "ais-RangeInput-input ais-RangeInput-input--max",
+              "disabled": false,
+              "max": "",
+              "min": "",
+              "onChange": [Function],
+              "placeholder": "",
+              "step": 1,
+              "type": "number",
+              "value": 490,
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "input",
+          },
+          Object {
+            "instance": null,
+            "key": null,
+            "nodeType": "host",
+            "props": Object {
+              "children": "submit",
+              "className": "ais-RangeInput-submit",
+              "type": "submit",
+            },
+            "ref": null,
+            "rendered": "submit",
+            "type": "button",
+          },
+        ],
+        "type": "form",
+      },
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+    "context": Object {},
+  },
+}
 `;
 
 exports[`RawRangeInput onChange expect to update min onChange 1`] = `
-<form
-  className="ais-RangeInput__root"
-  onSubmit={[Function]}
->
-  <fieldset
-    className="ais-RangeInput__fieldset"
-    disabled={false}
-  >
-    <label
-      className="ais-RangeInput__labelMin"
-    >
-      <input
-        className="ais-RangeInput__inputMin"
-        max=""
-        min=""
-        onChange={[Function]}
-        placeholder=""
-        step={1}
-        type="number"
-        value={10}
-      />
-    </label>
-    <span
-      className="ais-RangeInput__separator"
-    >
-      separator
-    </span>
-    <label
-      className="ais-RangeInput__labelMax"
-    >
-      <input
-        className="ais-RangeInput__inputMax"
-        max=""
-        min=""
-        onChange={[Function]}
-        placeholder=""
-        step={1}
-        type="number"
-        value=""
-      />
-    </label>
-    <button
-      className="ais-RangeInput__submit"
-      type="submit"
-    >
-      submit
-    </button>
-  </fieldset>
-</form>
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <RawRangeInput
+    canRefine={true}
+    currentRefinement={
+      Object {
+        "max": undefined,
+        "min": undefined,
+      }
+    }
+    max={undefined}
+    min={undefined}
+    precision={0}
+    refine={[Function]}
+    translate={[Function]}
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": null,
+    "nodeType": "class",
+    "props": Object {
+      "children": <form
+        className="ais-RangeInput-form"
+        onSubmit={[Function]}
+      >
+        <input
+          className="ais-RangeInput-input ais-RangeInput-input--min"
+          disabled={false}
+          max=""
+          min=""
+          onChange={[Function]}
+          placeholder=""
+          step={1}
+          type="number"
+          value={10}
+        />
+        <span
+          className="ais-RangeInput-separator"
+        >
+          separator
+        </span>
+        <input
+          className="ais-RangeInput-input ais-RangeInput-input--max"
+          disabled={false}
+          max=""
+          min=""
+          onChange={[Function]}
+          placeholder=""
+          step={1}
+          type="number"
+          value=""
+        />
+        <button
+          className="ais-RangeInput-submit"
+          type="submit"
+        >
+          submit
+        </button>
+      </form>,
+      "footer": undefined,
+      "header": undefined,
+      "otherWidgetClassNames": Array [
+        false,
+      ],
+      "widgetClassName": "RangeInput",
+    },
+    "ref": null,
+    "rendered": Object {
+      "instance": null,
+      "key": null,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <input
+            className="ais-RangeInput-input ais-RangeInput-input--min"
+            disabled={false}
+            max=""
+            min=""
+            onChange={[Function]}
+            placeholder=""
+            step={1}
+            type="number"
+            value={10}
+          />,
+          <span
+            className="ais-RangeInput-separator"
+          >
+            separator
+          </span>,
+          <input
+            className="ais-RangeInput-input ais-RangeInput-input--max"
+            disabled={false}
+            max=""
+            min=""
+            onChange={[Function]}
+            placeholder=""
+            step={1}
+            type="number"
+            value=""
+          />,
+          <button
+            className="ais-RangeInput-submit"
+            type="submit"
+          >
+            submit
+          </button>,
+        ],
+        "className": "ais-RangeInput-form",
+        "onSubmit": [Function],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "host",
+          "props": Object {
+            "className": "ais-RangeInput-input ais-RangeInput-input--min",
+            "disabled": false,
+            "max": "",
+            "min": "",
+            "onChange": [Function],
+            "placeholder": "",
+            "step": 1,
+            "type": "number",
+            "value": 10,
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "input",
+        },
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "host",
+          "props": Object {
+            "children": "separator",
+            "className": "ais-RangeInput-separator",
+          },
+          "ref": null,
+          "rendered": "separator",
+          "type": "span",
+        },
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "host",
+          "props": Object {
+            "className": "ais-RangeInput-input ais-RangeInput-input--max",
+            "disabled": false,
+            "max": "",
+            "min": "",
+            "onChange": [Function],
+            "placeholder": "",
+            "step": 1,
+            "type": "number",
+            "value": "",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "input",
+        },
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "host",
+          "props": Object {
+            "children": "submit",
+            "className": "ais-RangeInput-submit",
+            "type": "submit",
+          },
+          "ref": null,
+          "rendered": "submit",
+          "type": "button",
+        },
+      ],
+      "type": "form",
+    },
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": null,
+      "nodeType": "class",
+      "props": Object {
+        "children": <form
+          className="ais-RangeInput-form"
+          onSubmit={[Function]}
+        >
+          <input
+            className="ais-RangeInput-input ais-RangeInput-input--min"
+            disabled={false}
+            max=""
+            min=""
+            onChange={[Function]}
+            placeholder=""
+            step={1}
+            type="number"
+            value={10}
+          />
+          <span
+            className="ais-RangeInput-separator"
+          >
+            separator
+          </span>
+          <input
+            className="ais-RangeInput-input ais-RangeInput-input--max"
+            disabled={false}
+            max=""
+            min=""
+            onChange={[Function]}
+            placeholder=""
+            step={1}
+            type="number"
+            value=""
+          />
+          <button
+            className="ais-RangeInput-submit"
+            type="submit"
+          >
+            submit
+          </button>
+        </form>,
+        "footer": undefined,
+        "header": undefined,
+        "otherWidgetClassNames": Array [
+          false,
+        ],
+        "widgetClassName": "RangeInput",
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": null,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <input
+              className="ais-RangeInput-input ais-RangeInput-input--min"
+              disabled={false}
+              max=""
+              min=""
+              onChange={[Function]}
+              placeholder=""
+              step={1}
+              type="number"
+              value={10}
+            />,
+            <span
+              className="ais-RangeInput-separator"
+            >
+              separator
+            </span>,
+            <input
+              className="ais-RangeInput-input ais-RangeInput-input--max"
+              disabled={false}
+              max=""
+              min=""
+              onChange={[Function]}
+              placeholder=""
+              step={1}
+              type="number"
+              value=""
+            />,
+            <button
+              className="ais-RangeInput-submit"
+              type="submit"
+            >
+              submit
+            </button>,
+          ],
+          "className": "ais-RangeInput-form",
+          "onSubmit": [Function],
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": null,
+            "nodeType": "host",
+            "props": Object {
+              "className": "ais-RangeInput-input ais-RangeInput-input--min",
+              "disabled": false,
+              "max": "",
+              "min": "",
+              "onChange": [Function],
+              "placeholder": "",
+              "step": 1,
+              "type": "number",
+              "value": 10,
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "input",
+          },
+          Object {
+            "instance": null,
+            "key": null,
+            "nodeType": "host",
+            "props": Object {
+              "children": "separator",
+              "className": "ais-RangeInput-separator",
+            },
+            "ref": null,
+            "rendered": "separator",
+            "type": "span",
+          },
+          Object {
+            "instance": null,
+            "key": null,
+            "nodeType": "host",
+            "props": Object {
+              "className": "ais-RangeInput-input ais-RangeInput-input--max",
+              "disabled": false,
+              "max": "",
+              "min": "",
+              "onChange": [Function],
+              "placeholder": "",
+              "step": 1,
+              "type": "number",
+              "value": "",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "input",
+          },
+          Object {
+            "instance": null,
+            "key": null,
+            "nodeType": "host",
+            "props": Object {
+              "children": "submit",
+              "className": "ais-RangeInput-submit",
+              "type": "submit",
+            },
+            "ref": null,
+            "rendered": "submit",
+            "type": "button",
+          },
+        ],
+        "type": "form",
+      },
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+    "context": Object {},
+  },
+}
 `;
 
 exports[`RawRangeInput render when can't refine 1`] = `
-<form
-  className="ais-RangeInput__root ais-RangeInput__noRefinement"
-  onSubmit={[Function]}
->
-  <fieldset
-    className="ais-RangeInput__fieldset"
-    disabled={true}
-  >
-    <label
-      className="ais-RangeInput__labelMin"
-    >
-      <input
-        className="ais-RangeInput__inputMin"
-        max=""
-        min=""
-        onChange={[Function]}
-        placeholder=""
-        step={1}
-        type="number"
-        value=""
-      />
-    </label>
-    <span
-      className="ais-RangeInput__separator"
-    >
-      separator
-    </span>
-    <label
-      className="ais-RangeInput__labelMax"
-    >
-      <input
-        className="ais-RangeInput__inputMax"
-        max=""
-        min=""
-        onChange={[Function]}
-        placeholder=""
-        step={1}
-        type="number"
-        value=""
-      />
-    </label>
-    <button
-      className="ais-RangeInput__submit"
-      type="submit"
-    >
-      submit
-    </button>
-  </fieldset>
-</form>
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <RawRangeInput
+    canRefine={false}
+    currentRefinement={
+      Object {
+        "max": 90,
+        "min": 10,
+      }
+    }
+    max={100}
+    min={0}
+    precision={0}
+    refine={[Function]}
+    translate={[Function]}
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": null,
+    "nodeType": "class",
+    "props": Object {
+      "children": <form
+        className="ais-RangeInput-form"
+        onSubmit={[Function]}
+      >
+        <input
+          className="ais-RangeInput-input ais-RangeInput-input--min"
+          disabled={true}
+          max=""
+          min=""
+          onChange={[Function]}
+          placeholder=""
+          step={1}
+          type="number"
+          value=""
+        />
+        <span
+          className="ais-RangeInput-separator"
+        >
+          separator
+        </span>
+        <input
+          className="ais-RangeInput-input ais-RangeInput-input--max"
+          disabled={true}
+          max=""
+          min=""
+          onChange={[Function]}
+          placeholder=""
+          step={1}
+          type="number"
+          value=""
+        />
+        <button
+          className="ais-RangeInput-submit"
+          type="submit"
+        >
+          submit
+        </button>
+      </form>,
+      "footer": undefined,
+      "header": undefined,
+      "otherWidgetClassNames": Array [
+        "-noRefinement",
+      ],
+      "widgetClassName": "RangeInput",
+    },
+    "ref": null,
+    "rendered": Object {
+      "instance": null,
+      "key": null,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <input
+            className="ais-RangeInput-input ais-RangeInput-input--min"
+            disabled={true}
+            max=""
+            min=""
+            onChange={[Function]}
+            placeholder=""
+            step={1}
+            type="number"
+            value=""
+          />,
+          <span
+            className="ais-RangeInput-separator"
+          >
+            separator
+          </span>,
+          <input
+            className="ais-RangeInput-input ais-RangeInput-input--max"
+            disabled={true}
+            max=""
+            min=""
+            onChange={[Function]}
+            placeholder=""
+            step={1}
+            type="number"
+            value=""
+          />,
+          <button
+            className="ais-RangeInput-submit"
+            type="submit"
+          >
+            submit
+          </button>,
+        ],
+        "className": "ais-RangeInput-form",
+        "onSubmit": [Function],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "host",
+          "props": Object {
+            "className": "ais-RangeInput-input ais-RangeInput-input--min",
+            "disabled": true,
+            "max": "",
+            "min": "",
+            "onChange": [Function],
+            "placeholder": "",
+            "step": 1,
+            "type": "number",
+            "value": "",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "input",
+        },
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "host",
+          "props": Object {
+            "children": "separator",
+            "className": "ais-RangeInput-separator",
+          },
+          "ref": null,
+          "rendered": "separator",
+          "type": "span",
+        },
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "host",
+          "props": Object {
+            "className": "ais-RangeInput-input ais-RangeInput-input--max",
+            "disabled": true,
+            "max": "",
+            "min": "",
+            "onChange": [Function],
+            "placeholder": "",
+            "step": 1,
+            "type": "number",
+            "value": "",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "input",
+        },
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "host",
+          "props": Object {
+            "children": "submit",
+            "className": "ais-RangeInput-submit",
+            "type": "submit",
+          },
+          "ref": null,
+          "rendered": "submit",
+          "type": "button",
+        },
+      ],
+      "type": "form",
+    },
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": null,
+      "nodeType": "class",
+      "props": Object {
+        "children": <form
+          className="ais-RangeInput-form"
+          onSubmit={[Function]}
+        >
+          <input
+            className="ais-RangeInput-input ais-RangeInput-input--min"
+            disabled={true}
+            max=""
+            min=""
+            onChange={[Function]}
+            placeholder=""
+            step={1}
+            type="number"
+            value=""
+          />
+          <span
+            className="ais-RangeInput-separator"
+          >
+            separator
+          </span>
+          <input
+            className="ais-RangeInput-input ais-RangeInput-input--max"
+            disabled={true}
+            max=""
+            min=""
+            onChange={[Function]}
+            placeholder=""
+            step={1}
+            type="number"
+            value=""
+          />
+          <button
+            className="ais-RangeInput-submit"
+            type="submit"
+          >
+            submit
+          </button>
+        </form>,
+        "footer": undefined,
+        "header": undefined,
+        "otherWidgetClassNames": Array [
+          "-noRefinement",
+        ],
+        "widgetClassName": "RangeInput",
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": null,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <input
+              className="ais-RangeInput-input ais-RangeInput-input--min"
+              disabled={true}
+              max=""
+              min=""
+              onChange={[Function]}
+              placeholder=""
+              step={1}
+              type="number"
+              value=""
+            />,
+            <span
+              className="ais-RangeInput-separator"
+            >
+              separator
+            </span>,
+            <input
+              className="ais-RangeInput-input ais-RangeInput-input--max"
+              disabled={true}
+              max=""
+              min=""
+              onChange={[Function]}
+              placeholder=""
+              step={1}
+              type="number"
+              value=""
+            />,
+            <button
+              className="ais-RangeInput-submit"
+              type="submit"
+            >
+              submit
+            </button>,
+          ],
+          "className": "ais-RangeInput-form",
+          "onSubmit": [Function],
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": null,
+            "nodeType": "host",
+            "props": Object {
+              "className": "ais-RangeInput-input ais-RangeInput-input--min",
+              "disabled": true,
+              "max": "",
+              "min": "",
+              "onChange": [Function],
+              "placeholder": "",
+              "step": 1,
+              "type": "number",
+              "value": "",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "input",
+          },
+          Object {
+            "instance": null,
+            "key": null,
+            "nodeType": "host",
+            "props": Object {
+              "children": "separator",
+              "className": "ais-RangeInput-separator",
+            },
+            "ref": null,
+            "rendered": "separator",
+            "type": "span",
+          },
+          Object {
+            "instance": null,
+            "key": null,
+            "nodeType": "host",
+            "props": Object {
+              "className": "ais-RangeInput-input ais-RangeInput-input--max",
+              "disabled": true,
+              "max": "",
+              "min": "",
+              "onChange": [Function],
+              "placeholder": "",
+              "step": 1,
+              "type": "number",
+              "value": "",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "input",
+          },
+          Object {
+            "instance": null,
+            "key": null,
+            "nodeType": "host",
+            "props": Object {
+              "children": "submit",
+              "className": "ais-RangeInput-submit",
+              "type": "submit",
+            },
+            "ref": null,
+            "rendered": "submit",
+            "type": "button",
+          },
+        ],
+        "type": "form",
+      },
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+    "context": Object {},
+  },
+}
 `;
 
 exports[`RawRangeInput render with empty values 1`] = `
-<form
-  className="ais-RangeInput__root"
-  onSubmit={[Function]}
->
-  <fieldset
-    className="ais-RangeInput__fieldset"
-    disabled={false}
-  >
-    <label
-      className="ais-RangeInput__labelMin"
-    >
-      <input
-        className="ais-RangeInput__inputMin"
-        max=""
-        min=""
-        onChange={[Function]}
-        placeholder=""
-        step={1}
-        type="number"
-        value=""
-      />
-    </label>
-    <span
-      className="ais-RangeInput__separator"
-    >
-      separator
-    </span>
-    <label
-      className="ais-RangeInput__labelMax"
-    >
-      <input
-        className="ais-RangeInput__inputMax"
-        max=""
-        min=""
-        onChange={[Function]}
-        placeholder=""
-        step={1}
-        type="number"
-        value=""
-      />
-    </label>
-    <button
-      className="ais-RangeInput__submit"
-      type="submit"
-    >
-      submit
-    </button>
-  </fieldset>
-</form>
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <RawRangeInput
+    canRefine={true}
+    currentRefinement={
+      Object {
+        "max": undefined,
+        "min": undefined,
+      }
+    }
+    max={undefined}
+    min={undefined}
+    precision={0}
+    refine={[Function]}
+    translate={[Function]}
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": null,
+    "nodeType": "class",
+    "props": Object {
+      "children": <form
+        className="ais-RangeInput-form"
+        onSubmit={[Function]}
+      >
+        <input
+          className="ais-RangeInput-input ais-RangeInput-input--min"
+          disabled={false}
+          max=""
+          min=""
+          onChange={[Function]}
+          placeholder=""
+          step={1}
+          type="number"
+          value=""
+        />
+        <span
+          className="ais-RangeInput-separator"
+        >
+          separator
+        </span>
+        <input
+          className="ais-RangeInput-input ais-RangeInput-input--max"
+          disabled={false}
+          max=""
+          min=""
+          onChange={[Function]}
+          placeholder=""
+          step={1}
+          type="number"
+          value=""
+        />
+        <button
+          className="ais-RangeInput-submit"
+          type="submit"
+        >
+          submit
+        </button>
+      </form>,
+      "footer": undefined,
+      "header": undefined,
+      "otherWidgetClassNames": Array [
+        false,
+      ],
+      "widgetClassName": "RangeInput",
+    },
+    "ref": null,
+    "rendered": Object {
+      "instance": null,
+      "key": null,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <input
+            className="ais-RangeInput-input ais-RangeInput-input--min"
+            disabled={false}
+            max=""
+            min=""
+            onChange={[Function]}
+            placeholder=""
+            step={1}
+            type="number"
+            value=""
+          />,
+          <span
+            className="ais-RangeInput-separator"
+          >
+            separator
+          </span>,
+          <input
+            className="ais-RangeInput-input ais-RangeInput-input--max"
+            disabled={false}
+            max=""
+            min=""
+            onChange={[Function]}
+            placeholder=""
+            step={1}
+            type="number"
+            value=""
+          />,
+          <button
+            className="ais-RangeInput-submit"
+            type="submit"
+          >
+            submit
+          </button>,
+        ],
+        "className": "ais-RangeInput-form",
+        "onSubmit": [Function],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "host",
+          "props": Object {
+            "className": "ais-RangeInput-input ais-RangeInput-input--min",
+            "disabled": false,
+            "max": "",
+            "min": "",
+            "onChange": [Function],
+            "placeholder": "",
+            "step": 1,
+            "type": "number",
+            "value": "",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "input",
+        },
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "host",
+          "props": Object {
+            "children": "separator",
+            "className": "ais-RangeInput-separator",
+          },
+          "ref": null,
+          "rendered": "separator",
+          "type": "span",
+        },
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "host",
+          "props": Object {
+            "className": "ais-RangeInput-input ais-RangeInput-input--max",
+            "disabled": false,
+            "max": "",
+            "min": "",
+            "onChange": [Function],
+            "placeholder": "",
+            "step": 1,
+            "type": "number",
+            "value": "",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "input",
+        },
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "host",
+          "props": Object {
+            "children": "submit",
+            "className": "ais-RangeInput-submit",
+            "type": "submit",
+          },
+          "ref": null,
+          "rendered": "submit",
+          "type": "button",
+        },
+      ],
+      "type": "form",
+    },
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": null,
+      "nodeType": "class",
+      "props": Object {
+        "children": <form
+          className="ais-RangeInput-form"
+          onSubmit={[Function]}
+        >
+          <input
+            className="ais-RangeInput-input ais-RangeInput-input--min"
+            disabled={false}
+            max=""
+            min=""
+            onChange={[Function]}
+            placeholder=""
+            step={1}
+            type="number"
+            value=""
+          />
+          <span
+            className="ais-RangeInput-separator"
+          >
+            separator
+          </span>
+          <input
+            className="ais-RangeInput-input ais-RangeInput-input--max"
+            disabled={false}
+            max=""
+            min=""
+            onChange={[Function]}
+            placeholder=""
+            step={1}
+            type="number"
+            value=""
+          />
+          <button
+            className="ais-RangeInput-submit"
+            type="submit"
+          >
+            submit
+          </button>
+        </form>,
+        "footer": undefined,
+        "header": undefined,
+        "otherWidgetClassNames": Array [
+          false,
+        ],
+        "widgetClassName": "RangeInput",
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": null,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <input
+              className="ais-RangeInput-input ais-RangeInput-input--min"
+              disabled={false}
+              max=""
+              min=""
+              onChange={[Function]}
+              placeholder=""
+              step={1}
+              type="number"
+              value=""
+            />,
+            <span
+              className="ais-RangeInput-separator"
+            >
+              separator
+            </span>,
+            <input
+              className="ais-RangeInput-input ais-RangeInput-input--max"
+              disabled={false}
+              max=""
+              min=""
+              onChange={[Function]}
+              placeholder=""
+              step={1}
+              type="number"
+              value=""
+            />,
+            <button
+              className="ais-RangeInput-submit"
+              type="submit"
+            >
+              submit
+            </button>,
+          ],
+          "className": "ais-RangeInput-form",
+          "onSubmit": [Function],
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": null,
+            "nodeType": "host",
+            "props": Object {
+              "className": "ais-RangeInput-input ais-RangeInput-input--min",
+              "disabled": false,
+              "max": "",
+              "min": "",
+              "onChange": [Function],
+              "placeholder": "",
+              "step": 1,
+              "type": "number",
+              "value": "",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "input",
+          },
+          Object {
+            "instance": null,
+            "key": null,
+            "nodeType": "host",
+            "props": Object {
+              "children": "separator",
+              "className": "ais-RangeInput-separator",
+            },
+            "ref": null,
+            "rendered": "separator",
+            "type": "span",
+          },
+          Object {
+            "instance": null,
+            "key": null,
+            "nodeType": "host",
+            "props": Object {
+              "className": "ais-RangeInput-input ais-RangeInput-input--max",
+              "disabled": false,
+              "max": "",
+              "min": "",
+              "onChange": [Function],
+              "placeholder": "",
+              "step": 1,
+              "type": "number",
+              "value": "",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "input",
+          },
+          Object {
+            "instance": null,
+            "key": null,
+            "nodeType": "host",
+            "props": Object {
+              "children": "submit",
+              "className": "ais-RangeInput-submit",
+              "type": "submit",
+            },
+            "ref": null,
+            "rendered": "submit",
+            "type": "button",
+          },
+        ],
+        "type": "form",
+      },
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+    "context": Object {},
+  },
+}
 `;
 
 exports[`RawRangeInput render with empty values when refinement is equal to min / max 1`] = `
-<form
-  className="ais-RangeInput__root"
-  onSubmit={[Function]}
->
-  <fieldset
-    className="ais-RangeInput__fieldset"
-    disabled={false}
-  >
-    <label
-      className="ais-RangeInput__labelMin"
-    >
-      <input
-        className="ais-RangeInput__inputMin"
-        max={500}
-        min={0}
-        onChange={[Function]}
-        placeholder={0}
-        step={1}
-        type="number"
-        value=""
-      />
-    </label>
-    <span
-      className="ais-RangeInput__separator"
-    >
-      separator
-    </span>
-    <label
-      className="ais-RangeInput__labelMax"
-    >
-      <input
-        className="ais-RangeInput__inputMax"
-        max={500}
-        min={0}
-        onChange={[Function]}
-        placeholder={500}
-        step={1}
-        type="number"
-        value=""
-      />
-    </label>
-    <button
-      className="ais-RangeInput__submit"
-      type="submit"
-    >
-      submit
-    </button>
-  </fieldset>
-</form>
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <RawRangeInput
+    canRefine={true}
+    currentRefinement={
+      Object {
+        "max": 500,
+        "min": 0,
+      }
+    }
+    max={500}
+    min={0}
+    precision={0}
+    refine={[Function]}
+    translate={[Function]}
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": null,
+    "nodeType": "class",
+    "props": Object {
+      "children": <form
+        className="ais-RangeInput-form"
+        onSubmit={[Function]}
+      >
+        <input
+          className="ais-RangeInput-input ais-RangeInput-input--min"
+          disabled={false}
+          max={500}
+          min={0}
+          onChange={[Function]}
+          placeholder={0}
+          step={1}
+          type="number"
+          value=""
+        />
+        <span
+          className="ais-RangeInput-separator"
+        >
+          separator
+        </span>
+        <input
+          className="ais-RangeInput-input ais-RangeInput-input--max"
+          disabled={false}
+          max={500}
+          min={0}
+          onChange={[Function]}
+          placeholder={500}
+          step={1}
+          type="number"
+          value=""
+        />
+        <button
+          className="ais-RangeInput-submit"
+          type="submit"
+        >
+          submit
+        </button>
+      </form>,
+      "footer": undefined,
+      "header": undefined,
+      "otherWidgetClassNames": Array [
+        false,
+      ],
+      "widgetClassName": "RangeInput",
+    },
+    "ref": null,
+    "rendered": Object {
+      "instance": null,
+      "key": null,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <input
+            className="ais-RangeInput-input ais-RangeInput-input--min"
+            disabled={false}
+            max={500}
+            min={0}
+            onChange={[Function]}
+            placeholder={0}
+            step={1}
+            type="number"
+            value=""
+          />,
+          <span
+            className="ais-RangeInput-separator"
+          >
+            separator
+          </span>,
+          <input
+            className="ais-RangeInput-input ais-RangeInput-input--max"
+            disabled={false}
+            max={500}
+            min={0}
+            onChange={[Function]}
+            placeholder={500}
+            step={1}
+            type="number"
+            value=""
+          />,
+          <button
+            className="ais-RangeInput-submit"
+            type="submit"
+          >
+            submit
+          </button>,
+        ],
+        "className": "ais-RangeInput-form",
+        "onSubmit": [Function],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "host",
+          "props": Object {
+            "className": "ais-RangeInput-input ais-RangeInput-input--min",
+            "disabled": false,
+            "max": 500,
+            "min": 0,
+            "onChange": [Function],
+            "placeholder": 0,
+            "step": 1,
+            "type": "number",
+            "value": "",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "input",
+        },
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "host",
+          "props": Object {
+            "children": "separator",
+            "className": "ais-RangeInput-separator",
+          },
+          "ref": null,
+          "rendered": "separator",
+          "type": "span",
+        },
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "host",
+          "props": Object {
+            "className": "ais-RangeInput-input ais-RangeInput-input--max",
+            "disabled": false,
+            "max": 500,
+            "min": 0,
+            "onChange": [Function],
+            "placeholder": 500,
+            "step": 1,
+            "type": "number",
+            "value": "",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "input",
+        },
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "host",
+          "props": Object {
+            "children": "submit",
+            "className": "ais-RangeInput-submit",
+            "type": "submit",
+          },
+          "ref": null,
+          "rendered": "submit",
+          "type": "button",
+        },
+      ],
+      "type": "form",
+    },
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": null,
+      "nodeType": "class",
+      "props": Object {
+        "children": <form
+          className="ais-RangeInput-form"
+          onSubmit={[Function]}
+        >
+          <input
+            className="ais-RangeInput-input ais-RangeInput-input--min"
+            disabled={false}
+            max={500}
+            min={0}
+            onChange={[Function]}
+            placeholder={0}
+            step={1}
+            type="number"
+            value=""
+          />
+          <span
+            className="ais-RangeInput-separator"
+          >
+            separator
+          </span>
+          <input
+            className="ais-RangeInput-input ais-RangeInput-input--max"
+            disabled={false}
+            max={500}
+            min={0}
+            onChange={[Function]}
+            placeholder={500}
+            step={1}
+            type="number"
+            value=""
+          />
+          <button
+            className="ais-RangeInput-submit"
+            type="submit"
+          >
+            submit
+          </button>
+        </form>,
+        "footer": undefined,
+        "header": undefined,
+        "otherWidgetClassNames": Array [
+          false,
+        ],
+        "widgetClassName": "RangeInput",
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": null,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <input
+              className="ais-RangeInput-input ais-RangeInput-input--min"
+              disabled={false}
+              max={500}
+              min={0}
+              onChange={[Function]}
+              placeholder={0}
+              step={1}
+              type="number"
+              value=""
+            />,
+            <span
+              className="ais-RangeInput-separator"
+            >
+              separator
+            </span>,
+            <input
+              className="ais-RangeInput-input ais-RangeInput-input--max"
+              disabled={false}
+              max={500}
+              min={0}
+              onChange={[Function]}
+              placeholder={500}
+              step={1}
+              type="number"
+              value=""
+            />,
+            <button
+              className="ais-RangeInput-submit"
+              type="submit"
+            >
+              submit
+            </button>,
+          ],
+          "className": "ais-RangeInput-form",
+          "onSubmit": [Function],
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": null,
+            "nodeType": "host",
+            "props": Object {
+              "className": "ais-RangeInput-input ais-RangeInput-input--min",
+              "disabled": false,
+              "max": 500,
+              "min": 0,
+              "onChange": [Function],
+              "placeholder": 0,
+              "step": 1,
+              "type": "number",
+              "value": "",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "input",
+          },
+          Object {
+            "instance": null,
+            "key": null,
+            "nodeType": "host",
+            "props": Object {
+              "children": "separator",
+              "className": "ais-RangeInput-separator",
+            },
+            "ref": null,
+            "rendered": "separator",
+            "type": "span",
+          },
+          Object {
+            "instance": null,
+            "key": null,
+            "nodeType": "host",
+            "props": Object {
+              "className": "ais-RangeInput-input ais-RangeInput-input--max",
+              "disabled": false,
+              "max": 500,
+              "min": 0,
+              "onChange": [Function],
+              "placeholder": 500,
+              "step": 1,
+              "type": "number",
+              "value": "",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "input",
+          },
+          Object {
+            "instance": null,
+            "key": null,
+            "nodeType": "host",
+            "props": Object {
+              "children": "submit",
+              "className": "ais-RangeInput-submit",
+              "type": "submit",
+            },
+            "ref": null,
+            "rendered": "submit",
+            "type": "button",
+          },
+        ],
+        "type": "form",
+      },
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+    "context": Object {},
+  },
+}
 `;
 
 exports[`RawRangeInput render with max only 1`] = `
-<form
-  className="ais-RangeInput__root"
-  onSubmit={[Function]}
->
-  <fieldset
-    className="ais-RangeInput__fieldset"
-    disabled={false}
-  >
-    <label
-      className="ais-RangeInput__labelMin"
-    >
-      <input
-        className="ais-RangeInput__inputMin"
-        max=""
-        min=""
-        onChange={[Function]}
-        placeholder=""
-        step={1}
-        type="number"
-        value=""
-      />
-    </label>
-    <span
-      className="ais-RangeInput__separator"
-    >
-      separator
-    </span>
-    <label
-      className="ais-RangeInput__labelMax"
-    >
-      <input
-        className="ais-RangeInput__inputMax"
-        max=""
-        min=""
-        onChange={[Function]}
-        placeholder=""
-        step={1}
-        type="number"
-        value=""
-      />
-    </label>
-    <button
-      className="ais-RangeInput__submit"
-      type="submit"
-    >
-      submit
-    </button>
-  </fieldset>
-</form>
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <RawRangeInput
+    canRefine={true}
+    currentRefinement={
+      Object {
+        "max": undefined,
+        "min": undefined,
+      }
+    }
+    max={500}
+    min={undefined}
+    precision={0}
+    refine={[Function]}
+    translate={[Function]}
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": null,
+    "nodeType": "class",
+    "props": Object {
+      "children": <form
+        className="ais-RangeInput-form"
+        onSubmit={[Function]}
+      >
+        <input
+          className="ais-RangeInput-input ais-RangeInput-input--min"
+          disabled={false}
+          max=""
+          min=""
+          onChange={[Function]}
+          placeholder=""
+          step={1}
+          type="number"
+          value=""
+        />
+        <span
+          className="ais-RangeInput-separator"
+        >
+          separator
+        </span>
+        <input
+          className="ais-RangeInput-input ais-RangeInput-input--max"
+          disabled={false}
+          max=""
+          min=""
+          onChange={[Function]}
+          placeholder=""
+          step={1}
+          type="number"
+          value=""
+        />
+        <button
+          className="ais-RangeInput-submit"
+          type="submit"
+        >
+          submit
+        </button>
+      </form>,
+      "footer": undefined,
+      "header": undefined,
+      "otherWidgetClassNames": Array [
+        false,
+      ],
+      "widgetClassName": "RangeInput",
+    },
+    "ref": null,
+    "rendered": Object {
+      "instance": null,
+      "key": null,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <input
+            className="ais-RangeInput-input ais-RangeInput-input--min"
+            disabled={false}
+            max=""
+            min=""
+            onChange={[Function]}
+            placeholder=""
+            step={1}
+            type="number"
+            value=""
+          />,
+          <span
+            className="ais-RangeInput-separator"
+          >
+            separator
+          </span>,
+          <input
+            className="ais-RangeInput-input ais-RangeInput-input--max"
+            disabled={false}
+            max=""
+            min=""
+            onChange={[Function]}
+            placeholder=""
+            step={1}
+            type="number"
+            value=""
+          />,
+          <button
+            className="ais-RangeInput-submit"
+            type="submit"
+          >
+            submit
+          </button>,
+        ],
+        "className": "ais-RangeInput-form",
+        "onSubmit": [Function],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "host",
+          "props": Object {
+            "className": "ais-RangeInput-input ais-RangeInput-input--min",
+            "disabled": false,
+            "max": "",
+            "min": "",
+            "onChange": [Function],
+            "placeholder": "",
+            "step": 1,
+            "type": "number",
+            "value": "",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "input",
+        },
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "host",
+          "props": Object {
+            "children": "separator",
+            "className": "ais-RangeInput-separator",
+          },
+          "ref": null,
+          "rendered": "separator",
+          "type": "span",
+        },
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "host",
+          "props": Object {
+            "className": "ais-RangeInput-input ais-RangeInput-input--max",
+            "disabled": false,
+            "max": "",
+            "min": "",
+            "onChange": [Function],
+            "placeholder": "",
+            "step": 1,
+            "type": "number",
+            "value": "",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "input",
+        },
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "host",
+          "props": Object {
+            "children": "submit",
+            "className": "ais-RangeInput-submit",
+            "type": "submit",
+          },
+          "ref": null,
+          "rendered": "submit",
+          "type": "button",
+        },
+      ],
+      "type": "form",
+    },
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": null,
+      "nodeType": "class",
+      "props": Object {
+        "children": <form
+          className="ais-RangeInput-form"
+          onSubmit={[Function]}
+        >
+          <input
+            className="ais-RangeInput-input ais-RangeInput-input--min"
+            disabled={false}
+            max=""
+            min=""
+            onChange={[Function]}
+            placeholder=""
+            step={1}
+            type="number"
+            value=""
+          />
+          <span
+            className="ais-RangeInput-separator"
+          >
+            separator
+          </span>
+          <input
+            className="ais-RangeInput-input ais-RangeInput-input--max"
+            disabled={false}
+            max=""
+            min=""
+            onChange={[Function]}
+            placeholder=""
+            step={1}
+            type="number"
+            value=""
+          />
+          <button
+            className="ais-RangeInput-submit"
+            type="submit"
+          >
+            submit
+          </button>
+        </form>,
+        "footer": undefined,
+        "header": undefined,
+        "otherWidgetClassNames": Array [
+          false,
+        ],
+        "widgetClassName": "RangeInput",
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": null,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <input
+              className="ais-RangeInput-input ais-RangeInput-input--min"
+              disabled={false}
+              max=""
+              min=""
+              onChange={[Function]}
+              placeholder=""
+              step={1}
+              type="number"
+              value=""
+            />,
+            <span
+              className="ais-RangeInput-separator"
+            >
+              separator
+            </span>,
+            <input
+              className="ais-RangeInput-input ais-RangeInput-input--max"
+              disabled={false}
+              max=""
+              min=""
+              onChange={[Function]}
+              placeholder=""
+              step={1}
+              type="number"
+              value=""
+            />,
+            <button
+              className="ais-RangeInput-submit"
+              type="submit"
+            >
+              submit
+            </button>,
+          ],
+          "className": "ais-RangeInput-form",
+          "onSubmit": [Function],
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": null,
+            "nodeType": "host",
+            "props": Object {
+              "className": "ais-RangeInput-input ais-RangeInput-input--min",
+              "disabled": false,
+              "max": "",
+              "min": "",
+              "onChange": [Function],
+              "placeholder": "",
+              "step": 1,
+              "type": "number",
+              "value": "",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "input",
+          },
+          Object {
+            "instance": null,
+            "key": null,
+            "nodeType": "host",
+            "props": Object {
+              "children": "separator",
+              "className": "ais-RangeInput-separator",
+            },
+            "ref": null,
+            "rendered": "separator",
+            "type": "span",
+          },
+          Object {
+            "instance": null,
+            "key": null,
+            "nodeType": "host",
+            "props": Object {
+              "className": "ais-RangeInput-input ais-RangeInput-input--max",
+              "disabled": false,
+              "max": "",
+              "min": "",
+              "onChange": [Function],
+              "placeholder": "",
+              "step": 1,
+              "type": "number",
+              "value": "",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "input",
+          },
+          Object {
+            "instance": null,
+            "key": null,
+            "nodeType": "host",
+            "props": Object {
+              "children": "submit",
+              "className": "ais-RangeInput-submit",
+              "type": "submit",
+            },
+            "ref": null,
+            "rendered": "submit",
+            "type": "button",
+          },
+        ],
+        "type": "form",
+      },
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+    "context": Object {},
+  },
+}
 `;
 
 exports[`RawRangeInput render with min / max 1`] = `
-<form
-  className="ais-RangeInput__root"
-  onSubmit={[Function]}
->
-  <fieldset
-    className="ais-RangeInput__fieldset"
-    disabled={false}
-  >
-    <label
-      className="ais-RangeInput__labelMin"
-    >
-      <input
-        className="ais-RangeInput__inputMin"
-        max={500}
-        min={0}
-        onChange={[Function]}
-        placeholder={0}
-        step={1}
-        type="number"
-        value=""
-      />
-    </label>
-    <span
-      className="ais-RangeInput__separator"
-    >
-      separator
-    </span>
-    <label
-      className="ais-RangeInput__labelMax"
-    >
-      <input
-        className="ais-RangeInput__inputMax"
-        max={500}
-        min={0}
-        onChange={[Function]}
-        placeholder={500}
-        step={1}
-        type="number"
-        value=""
-      />
-    </label>
-    <button
-      className="ais-RangeInput__submit"
-      type="submit"
-    >
-      submit
-    </button>
-  </fieldset>
-</form>
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <RawRangeInput
+    canRefine={true}
+    currentRefinement={
+      Object {
+        "max": undefined,
+        "min": undefined,
+      }
+    }
+    max={500}
+    min={0}
+    precision={0}
+    refine={[Function]}
+    translate={[Function]}
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": null,
+    "nodeType": "class",
+    "props": Object {
+      "children": <form
+        className="ais-RangeInput-form"
+        onSubmit={[Function]}
+      >
+        <input
+          className="ais-RangeInput-input ais-RangeInput-input--min"
+          disabled={false}
+          max={500}
+          min={0}
+          onChange={[Function]}
+          placeholder={0}
+          step={1}
+          type="number"
+          value=""
+        />
+        <span
+          className="ais-RangeInput-separator"
+        >
+          separator
+        </span>
+        <input
+          className="ais-RangeInput-input ais-RangeInput-input--max"
+          disabled={false}
+          max={500}
+          min={0}
+          onChange={[Function]}
+          placeholder={500}
+          step={1}
+          type="number"
+          value=""
+        />
+        <button
+          className="ais-RangeInput-submit"
+          type="submit"
+        >
+          submit
+        </button>
+      </form>,
+      "footer": undefined,
+      "header": undefined,
+      "otherWidgetClassNames": Array [
+        false,
+      ],
+      "widgetClassName": "RangeInput",
+    },
+    "ref": null,
+    "rendered": Object {
+      "instance": null,
+      "key": null,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <input
+            className="ais-RangeInput-input ais-RangeInput-input--min"
+            disabled={false}
+            max={500}
+            min={0}
+            onChange={[Function]}
+            placeholder={0}
+            step={1}
+            type="number"
+            value=""
+          />,
+          <span
+            className="ais-RangeInput-separator"
+          >
+            separator
+          </span>,
+          <input
+            className="ais-RangeInput-input ais-RangeInput-input--max"
+            disabled={false}
+            max={500}
+            min={0}
+            onChange={[Function]}
+            placeholder={500}
+            step={1}
+            type="number"
+            value=""
+          />,
+          <button
+            className="ais-RangeInput-submit"
+            type="submit"
+          >
+            submit
+          </button>,
+        ],
+        "className": "ais-RangeInput-form",
+        "onSubmit": [Function],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "host",
+          "props": Object {
+            "className": "ais-RangeInput-input ais-RangeInput-input--min",
+            "disabled": false,
+            "max": 500,
+            "min": 0,
+            "onChange": [Function],
+            "placeholder": 0,
+            "step": 1,
+            "type": "number",
+            "value": "",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "input",
+        },
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "host",
+          "props": Object {
+            "children": "separator",
+            "className": "ais-RangeInput-separator",
+          },
+          "ref": null,
+          "rendered": "separator",
+          "type": "span",
+        },
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "host",
+          "props": Object {
+            "className": "ais-RangeInput-input ais-RangeInput-input--max",
+            "disabled": false,
+            "max": 500,
+            "min": 0,
+            "onChange": [Function],
+            "placeholder": 500,
+            "step": 1,
+            "type": "number",
+            "value": "",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "input",
+        },
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "host",
+          "props": Object {
+            "children": "submit",
+            "className": "ais-RangeInput-submit",
+            "type": "submit",
+          },
+          "ref": null,
+          "rendered": "submit",
+          "type": "button",
+        },
+      ],
+      "type": "form",
+    },
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": null,
+      "nodeType": "class",
+      "props": Object {
+        "children": <form
+          className="ais-RangeInput-form"
+          onSubmit={[Function]}
+        >
+          <input
+            className="ais-RangeInput-input ais-RangeInput-input--min"
+            disabled={false}
+            max={500}
+            min={0}
+            onChange={[Function]}
+            placeholder={0}
+            step={1}
+            type="number"
+            value=""
+          />
+          <span
+            className="ais-RangeInput-separator"
+          >
+            separator
+          </span>
+          <input
+            className="ais-RangeInput-input ais-RangeInput-input--max"
+            disabled={false}
+            max={500}
+            min={0}
+            onChange={[Function]}
+            placeholder={500}
+            step={1}
+            type="number"
+            value=""
+          />
+          <button
+            className="ais-RangeInput-submit"
+            type="submit"
+          >
+            submit
+          </button>
+        </form>,
+        "footer": undefined,
+        "header": undefined,
+        "otherWidgetClassNames": Array [
+          false,
+        ],
+        "widgetClassName": "RangeInput",
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": null,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <input
+              className="ais-RangeInput-input ais-RangeInput-input--min"
+              disabled={false}
+              max={500}
+              min={0}
+              onChange={[Function]}
+              placeholder={0}
+              step={1}
+              type="number"
+              value=""
+            />,
+            <span
+              className="ais-RangeInput-separator"
+            >
+              separator
+            </span>,
+            <input
+              className="ais-RangeInput-input ais-RangeInput-input--max"
+              disabled={false}
+              max={500}
+              min={0}
+              onChange={[Function]}
+              placeholder={500}
+              step={1}
+              type="number"
+              value=""
+            />,
+            <button
+              className="ais-RangeInput-submit"
+              type="submit"
+            >
+              submit
+            </button>,
+          ],
+          "className": "ais-RangeInput-form",
+          "onSubmit": [Function],
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": null,
+            "nodeType": "host",
+            "props": Object {
+              "className": "ais-RangeInput-input ais-RangeInput-input--min",
+              "disabled": false,
+              "max": 500,
+              "min": 0,
+              "onChange": [Function],
+              "placeholder": 0,
+              "step": 1,
+              "type": "number",
+              "value": "",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "input",
+          },
+          Object {
+            "instance": null,
+            "key": null,
+            "nodeType": "host",
+            "props": Object {
+              "children": "separator",
+              "className": "ais-RangeInput-separator",
+            },
+            "ref": null,
+            "rendered": "separator",
+            "type": "span",
+          },
+          Object {
+            "instance": null,
+            "key": null,
+            "nodeType": "host",
+            "props": Object {
+              "className": "ais-RangeInput-input ais-RangeInput-input--max",
+              "disabled": false,
+              "max": 500,
+              "min": 0,
+              "onChange": [Function],
+              "placeholder": 500,
+              "step": 1,
+              "type": "number",
+              "value": "",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "input",
+          },
+          Object {
+            "instance": null,
+            "key": null,
+            "nodeType": "host",
+            "props": Object {
+              "children": "submit",
+              "className": "ais-RangeInput-submit",
+              "type": "submit",
+            },
+            "ref": null,
+            "rendered": "submit",
+            "type": "button",
+          },
+        ],
+        "type": "form",
+      },
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+    "context": Object {},
+  },
+}
 `;
 
 exports[`RawRangeInput render with min only 1`] = `
-<form
-  className="ais-RangeInput__root"
-  onSubmit={[Function]}
->
-  <fieldset
-    className="ais-RangeInput__fieldset"
-    disabled={false}
-  >
-    <label
-      className="ais-RangeInput__labelMin"
-    >
-      <input
-        className="ais-RangeInput__inputMin"
-        max=""
-        min=""
-        onChange={[Function]}
-        placeholder=""
-        step={1}
-        type="number"
-        value=""
-      />
-    </label>
-    <span
-      className="ais-RangeInput__separator"
-    >
-      separator
-    </span>
-    <label
-      className="ais-RangeInput__labelMax"
-    >
-      <input
-        className="ais-RangeInput__inputMax"
-        max=""
-        min=""
-        onChange={[Function]}
-        placeholder=""
-        step={1}
-        type="number"
-        value=""
-      />
-    </label>
-    <button
-      className="ais-RangeInput__submit"
-      type="submit"
-    >
-      submit
-    </button>
-  </fieldset>
-</form>
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <RawRangeInput
+    canRefine={true}
+    currentRefinement={
+      Object {
+        "max": undefined,
+        "min": undefined,
+      }
+    }
+    max={undefined}
+    min={0}
+    precision={0}
+    refine={[Function]}
+    translate={[Function]}
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": null,
+    "nodeType": "class",
+    "props": Object {
+      "children": <form
+        className="ais-RangeInput-form"
+        onSubmit={[Function]}
+      >
+        <input
+          className="ais-RangeInput-input ais-RangeInput-input--min"
+          disabled={false}
+          max=""
+          min=""
+          onChange={[Function]}
+          placeholder=""
+          step={1}
+          type="number"
+          value=""
+        />
+        <span
+          className="ais-RangeInput-separator"
+        >
+          separator
+        </span>
+        <input
+          className="ais-RangeInput-input ais-RangeInput-input--max"
+          disabled={false}
+          max=""
+          min=""
+          onChange={[Function]}
+          placeholder=""
+          step={1}
+          type="number"
+          value=""
+        />
+        <button
+          className="ais-RangeInput-submit"
+          type="submit"
+        >
+          submit
+        </button>
+      </form>,
+      "footer": undefined,
+      "header": undefined,
+      "otherWidgetClassNames": Array [
+        false,
+      ],
+      "widgetClassName": "RangeInput",
+    },
+    "ref": null,
+    "rendered": Object {
+      "instance": null,
+      "key": null,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <input
+            className="ais-RangeInput-input ais-RangeInput-input--min"
+            disabled={false}
+            max=""
+            min=""
+            onChange={[Function]}
+            placeholder=""
+            step={1}
+            type="number"
+            value=""
+          />,
+          <span
+            className="ais-RangeInput-separator"
+          >
+            separator
+          </span>,
+          <input
+            className="ais-RangeInput-input ais-RangeInput-input--max"
+            disabled={false}
+            max=""
+            min=""
+            onChange={[Function]}
+            placeholder=""
+            step={1}
+            type="number"
+            value=""
+          />,
+          <button
+            className="ais-RangeInput-submit"
+            type="submit"
+          >
+            submit
+          </button>,
+        ],
+        "className": "ais-RangeInput-form",
+        "onSubmit": [Function],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "host",
+          "props": Object {
+            "className": "ais-RangeInput-input ais-RangeInput-input--min",
+            "disabled": false,
+            "max": "",
+            "min": "",
+            "onChange": [Function],
+            "placeholder": "",
+            "step": 1,
+            "type": "number",
+            "value": "",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "input",
+        },
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "host",
+          "props": Object {
+            "children": "separator",
+            "className": "ais-RangeInput-separator",
+          },
+          "ref": null,
+          "rendered": "separator",
+          "type": "span",
+        },
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "host",
+          "props": Object {
+            "className": "ais-RangeInput-input ais-RangeInput-input--max",
+            "disabled": false,
+            "max": "",
+            "min": "",
+            "onChange": [Function],
+            "placeholder": "",
+            "step": 1,
+            "type": "number",
+            "value": "",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "input",
+        },
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "host",
+          "props": Object {
+            "children": "submit",
+            "className": "ais-RangeInput-submit",
+            "type": "submit",
+          },
+          "ref": null,
+          "rendered": "submit",
+          "type": "button",
+        },
+      ],
+      "type": "form",
+    },
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": null,
+      "nodeType": "class",
+      "props": Object {
+        "children": <form
+          className="ais-RangeInput-form"
+          onSubmit={[Function]}
+        >
+          <input
+            className="ais-RangeInput-input ais-RangeInput-input--min"
+            disabled={false}
+            max=""
+            min=""
+            onChange={[Function]}
+            placeholder=""
+            step={1}
+            type="number"
+            value=""
+          />
+          <span
+            className="ais-RangeInput-separator"
+          >
+            separator
+          </span>
+          <input
+            className="ais-RangeInput-input ais-RangeInput-input--max"
+            disabled={false}
+            max=""
+            min=""
+            onChange={[Function]}
+            placeholder=""
+            step={1}
+            type="number"
+            value=""
+          />
+          <button
+            className="ais-RangeInput-submit"
+            type="submit"
+          >
+            submit
+          </button>
+        </form>,
+        "footer": undefined,
+        "header": undefined,
+        "otherWidgetClassNames": Array [
+          false,
+        ],
+        "widgetClassName": "RangeInput",
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": null,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <input
+              className="ais-RangeInput-input ais-RangeInput-input--min"
+              disabled={false}
+              max=""
+              min=""
+              onChange={[Function]}
+              placeholder=""
+              step={1}
+              type="number"
+              value=""
+            />,
+            <span
+              className="ais-RangeInput-separator"
+            >
+              separator
+            </span>,
+            <input
+              className="ais-RangeInput-input ais-RangeInput-input--max"
+              disabled={false}
+              max=""
+              min=""
+              onChange={[Function]}
+              placeholder=""
+              step={1}
+              type="number"
+              value=""
+            />,
+            <button
+              className="ais-RangeInput-submit"
+              type="submit"
+            >
+              submit
+            </button>,
+          ],
+          "className": "ais-RangeInput-form",
+          "onSubmit": [Function],
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": null,
+            "nodeType": "host",
+            "props": Object {
+              "className": "ais-RangeInput-input ais-RangeInput-input--min",
+              "disabled": false,
+              "max": "",
+              "min": "",
+              "onChange": [Function],
+              "placeholder": "",
+              "step": 1,
+              "type": "number",
+              "value": "",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "input",
+          },
+          Object {
+            "instance": null,
+            "key": null,
+            "nodeType": "host",
+            "props": Object {
+              "children": "separator",
+              "className": "ais-RangeInput-separator",
+            },
+            "ref": null,
+            "rendered": "separator",
+            "type": "span",
+          },
+          Object {
+            "instance": null,
+            "key": null,
+            "nodeType": "host",
+            "props": Object {
+              "className": "ais-RangeInput-input ais-RangeInput-input--max",
+              "disabled": false,
+              "max": "",
+              "min": "",
+              "onChange": [Function],
+              "placeholder": "",
+              "step": 1,
+              "type": "number",
+              "value": "",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "input",
+          },
+          Object {
+            "instance": null,
+            "key": null,
+            "nodeType": "host",
+            "props": Object {
+              "children": "submit",
+              "className": "ais-RangeInput-submit",
+              "type": "submit",
+            },
+            "ref": null,
+            "rendered": "submit",
+            "type": "button",
+          },
+        ],
+        "type": "form",
+      },
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+    "context": Object {},
+  },
+}
 `;
 
 exports[`RawRangeInput render with precision of 1 1`] = `
-<form
-  className="ais-RangeInput__root"
-  onSubmit={[Function]}
->
-  <fieldset
-    className="ais-RangeInput__fieldset"
-    disabled={false}
-  >
-    <label
-      className="ais-RangeInput__labelMin"
-    >
-      <input
-        className="ais-RangeInput__inputMin"
-        max=""
-        min=""
-        onChange={[Function]}
-        placeholder=""
-        step={0.1}
-        type="number"
-        value=""
-      />
-    </label>
-    <span
-      className="ais-RangeInput__separator"
-    >
-      separator
-    </span>
-    <label
-      className="ais-RangeInput__labelMax"
-    >
-      <input
-        className="ais-RangeInput__inputMax"
-        max=""
-        min=""
-        onChange={[Function]}
-        placeholder=""
-        step={0.1}
-        type="number"
-        value=""
-      />
-    </label>
-    <button
-      className="ais-RangeInput__submit"
-      type="submit"
-    >
-      submit
-    </button>
-  </fieldset>
-</form>
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <RawRangeInput
+    canRefine={true}
+    currentRefinement={
+      Object {
+        "max": undefined,
+        "min": undefined,
+      }
+    }
+    max={undefined}
+    min={undefined}
+    precision={1}
+    refine={[Function]}
+    translate={[Function]}
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": null,
+    "nodeType": "class",
+    "props": Object {
+      "children": <form
+        className="ais-RangeInput-form"
+        onSubmit={[Function]}
+      >
+        <input
+          className="ais-RangeInput-input ais-RangeInput-input--min"
+          disabled={false}
+          max=""
+          min=""
+          onChange={[Function]}
+          placeholder=""
+          step={0.1}
+          type="number"
+          value=""
+        />
+        <span
+          className="ais-RangeInput-separator"
+        >
+          separator
+        </span>
+        <input
+          className="ais-RangeInput-input ais-RangeInput-input--max"
+          disabled={false}
+          max=""
+          min=""
+          onChange={[Function]}
+          placeholder=""
+          step={0.1}
+          type="number"
+          value=""
+        />
+        <button
+          className="ais-RangeInput-submit"
+          type="submit"
+        >
+          submit
+        </button>
+      </form>,
+      "footer": undefined,
+      "header": undefined,
+      "otherWidgetClassNames": Array [
+        false,
+      ],
+      "widgetClassName": "RangeInput",
+    },
+    "ref": null,
+    "rendered": Object {
+      "instance": null,
+      "key": null,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <input
+            className="ais-RangeInput-input ais-RangeInput-input--min"
+            disabled={false}
+            max=""
+            min=""
+            onChange={[Function]}
+            placeholder=""
+            step={0.1}
+            type="number"
+            value=""
+          />,
+          <span
+            className="ais-RangeInput-separator"
+          >
+            separator
+          </span>,
+          <input
+            className="ais-RangeInput-input ais-RangeInput-input--max"
+            disabled={false}
+            max=""
+            min=""
+            onChange={[Function]}
+            placeholder=""
+            step={0.1}
+            type="number"
+            value=""
+          />,
+          <button
+            className="ais-RangeInput-submit"
+            type="submit"
+          >
+            submit
+          </button>,
+        ],
+        "className": "ais-RangeInput-form",
+        "onSubmit": [Function],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "host",
+          "props": Object {
+            "className": "ais-RangeInput-input ais-RangeInput-input--min",
+            "disabled": false,
+            "max": "",
+            "min": "",
+            "onChange": [Function],
+            "placeholder": "",
+            "step": 0.1,
+            "type": "number",
+            "value": "",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "input",
+        },
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "host",
+          "props": Object {
+            "children": "separator",
+            "className": "ais-RangeInput-separator",
+          },
+          "ref": null,
+          "rendered": "separator",
+          "type": "span",
+        },
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "host",
+          "props": Object {
+            "className": "ais-RangeInput-input ais-RangeInput-input--max",
+            "disabled": false,
+            "max": "",
+            "min": "",
+            "onChange": [Function],
+            "placeholder": "",
+            "step": 0.1,
+            "type": "number",
+            "value": "",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "input",
+        },
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "host",
+          "props": Object {
+            "children": "submit",
+            "className": "ais-RangeInput-submit",
+            "type": "submit",
+          },
+          "ref": null,
+          "rendered": "submit",
+          "type": "button",
+        },
+      ],
+      "type": "form",
+    },
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": null,
+      "nodeType": "class",
+      "props": Object {
+        "children": <form
+          className="ais-RangeInput-form"
+          onSubmit={[Function]}
+        >
+          <input
+            className="ais-RangeInput-input ais-RangeInput-input--min"
+            disabled={false}
+            max=""
+            min=""
+            onChange={[Function]}
+            placeholder=""
+            step={0.1}
+            type="number"
+            value=""
+          />
+          <span
+            className="ais-RangeInput-separator"
+          >
+            separator
+          </span>
+          <input
+            className="ais-RangeInput-input ais-RangeInput-input--max"
+            disabled={false}
+            max=""
+            min=""
+            onChange={[Function]}
+            placeholder=""
+            step={0.1}
+            type="number"
+            value=""
+          />
+          <button
+            className="ais-RangeInput-submit"
+            type="submit"
+          >
+            submit
+          </button>
+        </form>,
+        "footer": undefined,
+        "header": undefined,
+        "otherWidgetClassNames": Array [
+          false,
+        ],
+        "widgetClassName": "RangeInput",
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": null,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <input
+              className="ais-RangeInput-input ais-RangeInput-input--min"
+              disabled={false}
+              max=""
+              min=""
+              onChange={[Function]}
+              placeholder=""
+              step={0.1}
+              type="number"
+              value=""
+            />,
+            <span
+              className="ais-RangeInput-separator"
+            >
+              separator
+            </span>,
+            <input
+              className="ais-RangeInput-input ais-RangeInput-input--max"
+              disabled={false}
+              max=""
+              min=""
+              onChange={[Function]}
+              placeholder=""
+              step={0.1}
+              type="number"
+              value=""
+            />,
+            <button
+              className="ais-RangeInput-submit"
+              type="submit"
+            >
+              submit
+            </button>,
+          ],
+          "className": "ais-RangeInput-form",
+          "onSubmit": [Function],
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": null,
+            "nodeType": "host",
+            "props": Object {
+              "className": "ais-RangeInput-input ais-RangeInput-input--min",
+              "disabled": false,
+              "max": "",
+              "min": "",
+              "onChange": [Function],
+              "placeholder": "",
+              "step": 0.1,
+              "type": "number",
+              "value": "",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "input",
+          },
+          Object {
+            "instance": null,
+            "key": null,
+            "nodeType": "host",
+            "props": Object {
+              "children": "separator",
+              "className": "ais-RangeInput-separator",
+            },
+            "ref": null,
+            "rendered": "separator",
+            "type": "span",
+          },
+          Object {
+            "instance": null,
+            "key": null,
+            "nodeType": "host",
+            "props": Object {
+              "className": "ais-RangeInput-input ais-RangeInput-input--max",
+              "disabled": false,
+              "max": "",
+              "min": "",
+              "onChange": [Function],
+              "placeholder": "",
+              "step": 0.1,
+              "type": "number",
+              "value": "",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "input",
+          },
+          Object {
+            "instance": null,
+            "key": null,
+            "nodeType": "host",
+            "props": Object {
+              "children": "submit",
+              "className": "ais-RangeInput-submit",
+              "type": "submit",
+            },
+            "ref": null,
+            "rendered": "submit",
+            "type": "button",
+          },
+        ],
+        "type": "form",
+      },
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+    "context": Object {},
+  },
+}
 `;
 
 exports[`RawRangeInput render with precision of 2 1`] = `
-<form
-  className="ais-RangeInput__root"
-  onSubmit={[Function]}
->
-  <fieldset
-    className="ais-RangeInput__fieldset"
-    disabled={false}
-  >
-    <label
-      className="ais-RangeInput__labelMin"
-    >
-      <input
-        className="ais-RangeInput__inputMin"
-        max=""
-        min=""
-        onChange={[Function]}
-        placeholder=""
-        step={0.01}
-        type="number"
-        value=""
-      />
-    </label>
-    <span
-      className="ais-RangeInput__separator"
-    >
-      separator
-    </span>
-    <label
-      className="ais-RangeInput__labelMax"
-    >
-      <input
-        className="ais-RangeInput__inputMax"
-        max=""
-        min=""
-        onChange={[Function]}
-        placeholder=""
-        step={0.01}
-        type="number"
-        value=""
-      />
-    </label>
-    <button
-      className="ais-RangeInput__submit"
-      type="submit"
-    >
-      submit
-    </button>
-  </fieldset>
-</form>
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <RawRangeInput
+    canRefine={true}
+    currentRefinement={
+      Object {
+        "max": undefined,
+        "min": undefined,
+      }
+    }
+    max={undefined}
+    min={undefined}
+    precision={2}
+    refine={[Function]}
+    translate={[Function]}
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": null,
+    "nodeType": "class",
+    "props": Object {
+      "children": <form
+        className="ais-RangeInput-form"
+        onSubmit={[Function]}
+      >
+        <input
+          className="ais-RangeInput-input ais-RangeInput-input--min"
+          disabled={false}
+          max=""
+          min=""
+          onChange={[Function]}
+          placeholder=""
+          step={0.01}
+          type="number"
+          value=""
+        />
+        <span
+          className="ais-RangeInput-separator"
+        >
+          separator
+        </span>
+        <input
+          className="ais-RangeInput-input ais-RangeInput-input--max"
+          disabled={false}
+          max=""
+          min=""
+          onChange={[Function]}
+          placeholder=""
+          step={0.01}
+          type="number"
+          value=""
+        />
+        <button
+          className="ais-RangeInput-submit"
+          type="submit"
+        >
+          submit
+        </button>
+      </form>,
+      "footer": undefined,
+      "header": undefined,
+      "otherWidgetClassNames": Array [
+        false,
+      ],
+      "widgetClassName": "RangeInput",
+    },
+    "ref": null,
+    "rendered": Object {
+      "instance": null,
+      "key": null,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <input
+            className="ais-RangeInput-input ais-RangeInput-input--min"
+            disabled={false}
+            max=""
+            min=""
+            onChange={[Function]}
+            placeholder=""
+            step={0.01}
+            type="number"
+            value=""
+          />,
+          <span
+            className="ais-RangeInput-separator"
+          >
+            separator
+          </span>,
+          <input
+            className="ais-RangeInput-input ais-RangeInput-input--max"
+            disabled={false}
+            max=""
+            min=""
+            onChange={[Function]}
+            placeholder=""
+            step={0.01}
+            type="number"
+            value=""
+          />,
+          <button
+            className="ais-RangeInput-submit"
+            type="submit"
+          >
+            submit
+          </button>,
+        ],
+        "className": "ais-RangeInput-form",
+        "onSubmit": [Function],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "host",
+          "props": Object {
+            "className": "ais-RangeInput-input ais-RangeInput-input--min",
+            "disabled": false,
+            "max": "",
+            "min": "",
+            "onChange": [Function],
+            "placeholder": "",
+            "step": 0.01,
+            "type": "number",
+            "value": "",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "input",
+        },
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "host",
+          "props": Object {
+            "children": "separator",
+            "className": "ais-RangeInput-separator",
+          },
+          "ref": null,
+          "rendered": "separator",
+          "type": "span",
+        },
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "host",
+          "props": Object {
+            "className": "ais-RangeInput-input ais-RangeInput-input--max",
+            "disabled": false,
+            "max": "",
+            "min": "",
+            "onChange": [Function],
+            "placeholder": "",
+            "step": 0.01,
+            "type": "number",
+            "value": "",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "input",
+        },
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "host",
+          "props": Object {
+            "children": "submit",
+            "className": "ais-RangeInput-submit",
+            "type": "submit",
+          },
+          "ref": null,
+          "rendered": "submit",
+          "type": "button",
+        },
+      ],
+      "type": "form",
+    },
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": null,
+      "nodeType": "class",
+      "props": Object {
+        "children": <form
+          className="ais-RangeInput-form"
+          onSubmit={[Function]}
+        >
+          <input
+            className="ais-RangeInput-input ais-RangeInput-input--min"
+            disabled={false}
+            max=""
+            min=""
+            onChange={[Function]}
+            placeholder=""
+            step={0.01}
+            type="number"
+            value=""
+          />
+          <span
+            className="ais-RangeInput-separator"
+          >
+            separator
+          </span>
+          <input
+            className="ais-RangeInput-input ais-RangeInput-input--max"
+            disabled={false}
+            max=""
+            min=""
+            onChange={[Function]}
+            placeholder=""
+            step={0.01}
+            type="number"
+            value=""
+          />
+          <button
+            className="ais-RangeInput-submit"
+            type="submit"
+          >
+            submit
+          </button>
+        </form>,
+        "footer": undefined,
+        "header": undefined,
+        "otherWidgetClassNames": Array [
+          false,
+        ],
+        "widgetClassName": "RangeInput",
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": null,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <input
+              className="ais-RangeInput-input ais-RangeInput-input--min"
+              disabled={false}
+              max=""
+              min=""
+              onChange={[Function]}
+              placeholder=""
+              step={0.01}
+              type="number"
+              value=""
+            />,
+            <span
+              className="ais-RangeInput-separator"
+            >
+              separator
+            </span>,
+            <input
+              className="ais-RangeInput-input ais-RangeInput-input--max"
+              disabled={false}
+              max=""
+              min=""
+              onChange={[Function]}
+              placeholder=""
+              step={0.01}
+              type="number"
+              value=""
+            />,
+            <button
+              className="ais-RangeInput-submit"
+              type="submit"
+            >
+              submit
+            </button>,
+          ],
+          "className": "ais-RangeInput-form",
+          "onSubmit": [Function],
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": null,
+            "nodeType": "host",
+            "props": Object {
+              "className": "ais-RangeInput-input ais-RangeInput-input--min",
+              "disabled": false,
+              "max": "",
+              "min": "",
+              "onChange": [Function],
+              "placeholder": "",
+              "step": 0.01,
+              "type": "number",
+              "value": "",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "input",
+          },
+          Object {
+            "instance": null,
+            "key": null,
+            "nodeType": "host",
+            "props": Object {
+              "children": "separator",
+              "className": "ais-RangeInput-separator",
+            },
+            "ref": null,
+            "rendered": "separator",
+            "type": "span",
+          },
+          Object {
+            "instance": null,
+            "key": null,
+            "nodeType": "host",
+            "props": Object {
+              "className": "ais-RangeInput-input ais-RangeInput-input--max",
+              "disabled": false,
+              "max": "",
+              "min": "",
+              "onChange": [Function],
+              "placeholder": "",
+              "step": 0.01,
+              "type": "number",
+              "value": "",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "input",
+          },
+          Object {
+            "instance": null,
+            "key": null,
+            "nodeType": "host",
+            "props": Object {
+              "children": "submit",
+              "className": "ais-RangeInput-submit",
+              "type": "submit",
+            },
+            "ref": null,
+            "rendered": "submit",
+            "type": "button",
+          },
+        ],
+        "type": "form",
+      },
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+    "context": Object {},
+  },
+}
 `;
 
 exports[`RawRangeInput render with refinement 1`] = `
-<form
-  className="ais-RangeInput__root"
-  onSubmit={[Function]}
->
-  <fieldset
-    className="ais-RangeInput__fieldset"
-    disabled={false}
-  >
-    <label
-      className="ais-RangeInput__labelMin"
-    >
-      <input
-        className="ais-RangeInput__inputMin"
-        max=""
-        min=""
-        onChange={[Function]}
-        placeholder=""
-        step={1}
-        type="number"
-        value={10}
-      />
-    </label>
-    <span
-      className="ais-RangeInput__separator"
-    >
-      separator
-    </span>
-    <label
-      className="ais-RangeInput__labelMax"
-    >
-      <input
-        className="ais-RangeInput__inputMax"
-        max=""
-        min=""
-        onChange={[Function]}
-        placeholder=""
-        step={1}
-        type="number"
-        value={490}
-      />
-    </label>
-    <button
-      className="ais-RangeInput__submit"
-      type="submit"
-    >
-      submit
-    </button>
-  </fieldset>
-</form>
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <RawRangeInput
+    canRefine={true}
+    currentRefinement={
+      Object {
+        "max": 490,
+        "min": 10,
+      }
+    }
+    max={undefined}
+    min={undefined}
+    precision={0}
+    refine={[Function]}
+    translate={[Function]}
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": null,
+    "nodeType": "class",
+    "props": Object {
+      "children": <form
+        className="ais-RangeInput-form"
+        onSubmit={[Function]}
+      >
+        <input
+          className="ais-RangeInput-input ais-RangeInput-input--min"
+          disabled={false}
+          max=""
+          min=""
+          onChange={[Function]}
+          placeholder=""
+          step={1}
+          type="number"
+          value={10}
+        />
+        <span
+          className="ais-RangeInput-separator"
+        >
+          separator
+        </span>
+        <input
+          className="ais-RangeInput-input ais-RangeInput-input--max"
+          disabled={false}
+          max=""
+          min=""
+          onChange={[Function]}
+          placeholder=""
+          step={1}
+          type="number"
+          value={490}
+        />
+        <button
+          className="ais-RangeInput-submit"
+          type="submit"
+        >
+          submit
+        </button>
+      </form>,
+      "footer": undefined,
+      "header": undefined,
+      "otherWidgetClassNames": Array [
+        false,
+      ],
+      "widgetClassName": "RangeInput",
+    },
+    "ref": null,
+    "rendered": Object {
+      "instance": null,
+      "key": null,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <input
+            className="ais-RangeInput-input ais-RangeInput-input--min"
+            disabled={false}
+            max=""
+            min=""
+            onChange={[Function]}
+            placeholder=""
+            step={1}
+            type="number"
+            value={10}
+          />,
+          <span
+            className="ais-RangeInput-separator"
+          >
+            separator
+          </span>,
+          <input
+            className="ais-RangeInput-input ais-RangeInput-input--max"
+            disabled={false}
+            max=""
+            min=""
+            onChange={[Function]}
+            placeholder=""
+            step={1}
+            type="number"
+            value={490}
+          />,
+          <button
+            className="ais-RangeInput-submit"
+            type="submit"
+          >
+            submit
+          </button>,
+        ],
+        "className": "ais-RangeInput-form",
+        "onSubmit": [Function],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "host",
+          "props": Object {
+            "className": "ais-RangeInput-input ais-RangeInput-input--min",
+            "disabled": false,
+            "max": "",
+            "min": "",
+            "onChange": [Function],
+            "placeholder": "",
+            "step": 1,
+            "type": "number",
+            "value": 10,
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "input",
+        },
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "host",
+          "props": Object {
+            "children": "separator",
+            "className": "ais-RangeInput-separator",
+          },
+          "ref": null,
+          "rendered": "separator",
+          "type": "span",
+        },
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "host",
+          "props": Object {
+            "className": "ais-RangeInput-input ais-RangeInput-input--max",
+            "disabled": false,
+            "max": "",
+            "min": "",
+            "onChange": [Function],
+            "placeholder": "",
+            "step": 1,
+            "type": "number",
+            "value": 490,
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "input",
+        },
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "host",
+          "props": Object {
+            "children": "submit",
+            "className": "ais-RangeInput-submit",
+            "type": "submit",
+          },
+          "ref": null,
+          "rendered": "submit",
+          "type": "button",
+        },
+      ],
+      "type": "form",
+    },
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": null,
+      "nodeType": "class",
+      "props": Object {
+        "children": <form
+          className="ais-RangeInput-form"
+          onSubmit={[Function]}
+        >
+          <input
+            className="ais-RangeInput-input ais-RangeInput-input--min"
+            disabled={false}
+            max=""
+            min=""
+            onChange={[Function]}
+            placeholder=""
+            step={1}
+            type="number"
+            value={10}
+          />
+          <span
+            className="ais-RangeInput-separator"
+          >
+            separator
+          </span>
+          <input
+            className="ais-RangeInput-input ais-RangeInput-input--max"
+            disabled={false}
+            max=""
+            min=""
+            onChange={[Function]}
+            placeholder=""
+            step={1}
+            type="number"
+            value={490}
+          />
+          <button
+            className="ais-RangeInput-submit"
+            type="submit"
+          >
+            submit
+          </button>
+        </form>,
+        "footer": undefined,
+        "header": undefined,
+        "otherWidgetClassNames": Array [
+          false,
+        ],
+        "widgetClassName": "RangeInput",
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": null,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <input
+              className="ais-RangeInput-input ais-RangeInput-input--min"
+              disabled={false}
+              max=""
+              min=""
+              onChange={[Function]}
+              placeholder=""
+              step={1}
+              type="number"
+              value={10}
+            />,
+            <span
+              className="ais-RangeInput-separator"
+            >
+              separator
+            </span>,
+            <input
+              className="ais-RangeInput-input ais-RangeInput-input--max"
+              disabled={false}
+              max=""
+              min=""
+              onChange={[Function]}
+              placeholder=""
+              step={1}
+              type="number"
+              value={490}
+            />,
+            <button
+              className="ais-RangeInput-submit"
+              type="submit"
+            >
+              submit
+            </button>,
+          ],
+          "className": "ais-RangeInput-form",
+          "onSubmit": [Function],
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": null,
+            "nodeType": "host",
+            "props": Object {
+              "className": "ais-RangeInput-input ais-RangeInput-input--min",
+              "disabled": false,
+              "max": "",
+              "min": "",
+              "onChange": [Function],
+              "placeholder": "",
+              "step": 1,
+              "type": "number",
+              "value": 10,
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "input",
+          },
+          Object {
+            "instance": null,
+            "key": null,
+            "nodeType": "host",
+            "props": Object {
+              "children": "separator",
+              "className": "ais-RangeInput-separator",
+            },
+            "ref": null,
+            "rendered": "separator",
+            "type": "span",
+          },
+          Object {
+            "instance": null,
+            "key": null,
+            "nodeType": "host",
+            "props": Object {
+              "className": "ais-RangeInput-input ais-RangeInput-input--max",
+              "disabled": false,
+              "max": "",
+              "min": "",
+              "onChange": [Function],
+              "placeholder": "",
+              "step": 1,
+              "type": "number",
+              "value": 490,
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "input",
+          },
+          Object {
+            "instance": null,
+            "key": null,
+            "nodeType": "host",
+            "props": Object {
+              "children": "submit",
+              "className": "ais-RangeInput-submit",
+              "type": "submit",
+            },
+            "ref": null,
+            "rendered": "submit",
+            "type": "button",
+          },
+        ],
+        "type": "form",
+      },
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+    "context": Object {},
+  },
+}
 `;

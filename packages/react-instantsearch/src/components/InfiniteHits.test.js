@@ -39,7 +39,7 @@ describe('Hits', () => {
       />
     );
     expect(mockedRefine.mock.calls).toHaveLength(0);
-    wrapped.find('.ais-InfiniteHits__loadMore').simulate('click');
+    wrapped.find('.ais-InfiniteResults-loadMore').simulate('click');
     expect(mockedRefine.mock.calls).toHaveLength(1);
   });
 
@@ -53,7 +53,7 @@ describe('Hits', () => {
         hasMore={false}
       />
     );
-    expect(wrapped.find('.ais-InfiniteHits__loadMore').props().disabled).toBe(
+    expect(wrapped.find('.ais-InfiniteResults-loadMore').props().disabled).toBe(
       true
     );
   });

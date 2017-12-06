@@ -2,61 +2,48 @@
 
 exports[`CurrentRefinements allows clearing unique items of a refinement 1`] = `
 <div
-  className="ais-CurrentRefinements__root"
+  className="ais-CurrentRefinements"
 >
   <div
-    className="ais-CurrentRefinements__items"
+    className="ais-CurrentRefinements-body ais-body"
   >
-    <div
-      className="ais-CurrentRefinements__item ais-CurrentRefinements__itemParent"
+    <ul
+      className="ais-CurrentRefinements-list"
     >
-      <span
-        className="ais-CurrentRefinements__itemLabel"
+      <li
+        className="ais-CurrentRefinements-item"
       >
-        Genre
-      </span>
-      <div
-        className="ais-CurrentRefinements__item"
-      >
-        <span
-          className="ais-CurrentRefinements__itemLabel"
-        >
-          Sci-fi
-        </span>
         <button
-          className="ais-CurrentRefinements__itemClear"
+          className="ais-CurrentRefinements-button"
           onClick={[Function]}
         >
-          ✕
+          <span
+            className="ais-CurrentRefinements-label"
+          >
+            Sci-fi
+          </span>
+          <span
+            className="ais-CurrentRefinements-delete"
+          >
+            ✕
+          </span>
         </button>
-      </div>
-    </div>
+      </li>
+    </ul>
   </div>
 </div>
 `;
 
 exports[`CurrentRefinements renders a list of current refinements 1`] = `
 <div
-  className="ais-CurrentRefinements__root"
+  className="ais-CurrentRefinements"
 >
   <div
-    className="ais-CurrentRefinements__items"
+    className="ais-CurrentRefinements-body ais-body"
   >
-    <div
-      className="ais-CurrentRefinements__item"
-    >
-      <span
-        className="ais-CurrentRefinements__itemLabel"
-      >
-        Genre
-      </span>
-      <button
-        className="ais-CurrentRefinements__itemClear"
-        onClick={[Function]}
-      >
-        ✕
-      </button>
-    </div>
+    <ul
+      className="ais-CurrentRefinements-list"
+    />
   </div>
 </div>
 `;

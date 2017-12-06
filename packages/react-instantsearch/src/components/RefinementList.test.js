@@ -124,11 +124,11 @@ describe('RefinementList', () => {
       />
     );
 
-    const items = wrapper.find('.ais-RefinementList__item');
+    const items = wrapper.find('.ais-RefinementList-item');
 
     expect(items).toHaveLength(3);
 
-    const firstItem = items.first().find('.ais-RefinementList__itemCheckbox');
+    const firstItem = items.first().find('.ais-RefinementList-checkbox');
 
     firstItem.simulate('change', { target: { checked: true } });
 
@@ -160,13 +160,13 @@ describe('RefinementList', () => {
       />
     );
 
-    const items = wrapper.find('.ais-RefinementList__item');
+    const items = wrapper.find('.ais-RefinementList-item');
 
     expect(items).toHaveLength(2);
 
-    wrapper.find('.ais-RefinementList__showMore').simulate('click');
+    wrapper.find('.ais-RefinementList-showMore').simulate('click');
 
-    expect(wrapper.find('.ais-RefinementList__item')).toHaveLength(4);
+    expect(wrapper.find('.ais-RefinementList-item')).toHaveLength(4);
 
     wrapper.unmount();
   });
@@ -190,11 +190,11 @@ describe('RefinementList', () => {
       />
     );
 
-    const items = wrapper.find('.ais-RefinementList__item');
+    const items = wrapper.find('.ais-RefinementList-item');
 
     expect(items).toHaveLength(2);
 
-    expect(wrapper.find('.ais-RefinementList__showMoreDisabled')).toBeDefined();
+    expect(wrapper.find('.ais-RefinementList-showMore--disabled')).toBeDefined();
 
     wrapper.unmount();
   });
@@ -232,7 +232,7 @@ describe('RefinementList', () => {
     it('a searchbox should be displayed if the feature is activated', () => {
       const wrapper = mount(refinementList);
 
-      const searchBox = wrapper.find('.ais-RefinementList__SearchBox');
+      const searchBox = wrapper.find('.ais-RefinementList-searchBox');
 
       expect(searchBox).toBeDefined();
 
@@ -243,7 +243,7 @@ describe('RefinementList', () => {
       const wrapper = mount(refinementList);
 
       wrapper
-        .find('.ais-RefinementList__SearchBox input')
+        .find('.ais-RefinementList-searchBox input')
         .simulate('change', { target: { value: 'query' } });
 
       expect(searchForItems.mock.calls).toHaveLength(1);
@@ -256,18 +256,18 @@ describe('RefinementList', () => {
       const wrapper = mount(refinementList);
 
       const firstItem = wrapper
-        .find('.ais-RefinementList__item')
+        .find('.ais-RefinementList-item')
         .first()
-        .find('.ais-RefinementList__itemCheckbox');
+        .find('.ais-RefinementList-checkbox');
       firstItem.simulate('change', { target: { checked: true } });
 
       expect(refine.mock.calls).toHaveLength(1);
       expect(refine.mock.calls[0][0]).toEqual(['white']);
       expect(
-        wrapper.find('.ais-RefinementList__SearchBox input').props().value
+        wrapper.find('.ais-RefinementList-searchBox input').props().value
       ).toBe('');
 
-      const selectedRefinements = wrapper.find('.ais-RefinementList__item');
+      const selectedRefinements = wrapper.find('.ais-RefinementList-item');
       expect(selectedRefinements).toHaveLength(2);
 
       wrapper.unmount();
@@ -282,10 +282,10 @@ describe('RefinementList', () => {
       expect(refine.mock.calls).toHaveLength(1);
       expect(refine.mock.calls[0][0]).toEqual(['white']);
       expect(
-        wrapper.find('.ais-RefinementList__SearchBox input').props().value
+        wrapper.find('.ais-RefinementList-searchBox input').props().value
       ).toBe('');
 
-      const selectedRefinements = wrapper.find('.ais-RefinementList__item');
+      const selectedRefinements = wrapper.find('.ais-RefinementList-item');
       expect(selectedRefinements).toHaveLength(2);
 
       wrapper.unmount();
@@ -314,13 +314,13 @@ describe('RefinementList', () => {
 
       expect(canRefine.mock.calls).toHaveLength(1);
       expect(canRefine.mock.calls[0][0]).toEqual(true);
-      expect(wrapper.find('.ais-RefinementList__noRefinement')).toHaveLength(0);
+      expect(wrapper.find('.ais-RefinementList-list--noRefinement')).toHaveLength(0);
 
       wrapper.setProps({ canRefine: false });
 
       expect(canRefine.mock.calls).toHaveLength(2);
       expect(canRefine.mock.calls[1][0]).toEqual(false);
-      expect(wrapper.find('.ais-RefinementList__noRefinement')).toHaveLength(1);
+      expect(wrapper.find('.ais-RefinementList-list--noRefinement')).toHaveLength(1);
     });
   });
 });

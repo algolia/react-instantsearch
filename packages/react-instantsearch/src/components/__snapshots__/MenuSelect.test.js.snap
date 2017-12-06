@@ -1,121 +1,137 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MenuSelect applies translations 1`] = `
-<select
-  className="ais-MenuSelect__select"
-  onChange={[Function]}
-  value="ais__see__all__option"
+<div
+  className="ais-MenuSelect"
 >
-  <option
-    className="ais-MenuSelect__option"
-    value="ais__see__all__option"
+  <div
+    className="ais-MenuSelect-body ais-body"
   >
-    Everything
-  </option>
-  <option
-    className="ais-MenuSelect__option"
-    value="white"
-  >
-    white
-     (
-    10
-    )
-  </option>
-  <option
-    className="ais-MenuSelect__option"
-    value="black"
-  >
-    black
-     (
-    20
-    )
-  </option>
-  <option
-    className="ais-MenuSelect__option"
-    value="blue"
-  >
-    blue
-     (
-    30
-    )
-  </option>
-  <option
-    className="ais-MenuSelect__option"
-    value="green"
-  >
-    green
-     (
-    30
-    )
-  </option>
-  <option
-    className="ais-MenuSelect__option"
-    value="red"
-  >
-    red
-     (
-    30
-    )
-  </option>
-</select>
+    <select
+      className="ais-MenuSelect-select"
+      onChange={[Function]}
+      value="ais__see__all__option"
+    >
+      <option
+        className="ais-MenuSelect-option"
+        value="ais__see__all__option"
+      >
+        Everything
+      </option>
+      <option
+        className="ais-MenuSelect-option"
+        value="white"
+      >
+        white
+         (
+        10
+        )
+      </option>
+      <option
+        className="ais-MenuSelect-option"
+        value="black"
+      >
+        black
+         (
+        20
+        )
+      </option>
+      <option
+        className="ais-MenuSelect-option"
+        value="blue"
+      >
+        blue
+         (
+        30
+        )
+      </option>
+      <option
+        className="ais-MenuSelect-option"
+        value="green"
+      >
+        green
+         (
+        30
+        )
+      </option>
+      <option
+        className="ais-MenuSelect-option"
+        value="red"
+      >
+        red
+         (
+        30
+        )
+      </option>
+    </select>
+  </div>
+</div>
 `;
 
 exports[`MenuSelect default menu select 1`] = `
-<select
-  className="ais-MenuSelect__select"
-  onChange={[Function]}
-  value="ais__see__all__option"
+<div
+  className="ais-MenuSelect"
 >
-  <option
-    className="ais-MenuSelect__option"
-    value="ais__see__all__option"
+  <div
+    className="ais-MenuSelect-body ais-body"
   >
-    See all
-  </option>
-  <option
-    className="ais-MenuSelect__option"
-    value="white"
-  >
-    white
-     (
-    10
-    )
-  </option>
-  <option
-    className="ais-MenuSelect__option"
-    value="black"
-  >
-    black
-     (
-    20
-    )
-  </option>
-  <option
-    className="ais-MenuSelect__option"
-    value="blue"
-  >
-    blue
-     (
-    30
-    )
-  </option>
-  <option
-    className="ais-MenuSelect__option"
-    value="green"
-  >
-    green
-     (
-    30
-    )
-  </option>
-  <option
-    className="ais-MenuSelect__option"
-    value="red"
-  >
-    red
-     (
-    30
-    )
-  </option>
-</select>
+    <select
+      className="ais-MenuSelect-select"
+      onChange={[Function]}
+      value="ais__see__all__option"
+    >
+      <option
+        className="ais-MenuSelect-option"
+        value="ais__see__all__option"
+      >
+        See all
+      </option>
+      <option
+        className="ais-MenuSelect-option"
+        value="white"
+      >
+        white
+         (
+        10
+        )
+      </option>
+      <option
+        className="ais-MenuSelect-option"
+        value="black"
+      >
+        black
+         (
+        20
+        )
+      </option>
+      <option
+        className="ais-MenuSelect-option"
+        value="blue"
+      >
+        blue
+         (
+        30
+        )
+      </option>
+      <option
+        className="ais-MenuSelect-option"
+        value="green"
+      >
+        green
+         (
+        30
+        )
+      </option>
+      <option
+        className="ais-MenuSelect-option"
+        value="red"
+      >
+        red
+         (
+        30
+        )
+      </option>
+    </select>
+  </div>
+</div>
 `;

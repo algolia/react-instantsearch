@@ -2,23 +2,26 @@
 
 exports[`PoweredBy applies translations 1`] = `
 <div
-  className="ais-PoweredBy__root"
+  className="ais-PoweredBy"
 >
   <span
-    className="ais-PoweredBy__searchBy"
+    className="ais-PoweredBy-text"
   >
      Search By
-     
   </span>
+   
   <a
     aria-label="Algolia"
-    className="ais-PoweredBy__algoliaLink"
+    className="ais-PoweredBy-link"
     href="url"
     target="_blank"
   >
     <svg
       baseProfile="basic"
+      className="ais-PoweredBy-logo"
+      height="27"
       viewBox="0 0 1366 362"
+      width="100"
       xmlns="http://www.w3.org/2000/svg"
     >
       <linearGradient
@@ -58,23 +61,26 @@ exports[`PoweredBy applies translations 1`] = `
 
 exports[`PoweredBy default 1`] = `
 <div
-  className="ais-PoweredBy__root"
+  className="ais-PoweredBy"
 >
   <span
-    className="ais-PoweredBy__searchBy"
+    className="ais-PoweredBy-text"
   >
     Search by
-     
   </span>
+   
   <a
     aria-label="Algolia"
-    className="ais-PoweredBy__algoliaLink"
+    className="ais-PoweredBy-link"
     href="url"
     target="_blank"
   >
     <svg
       baseProfile="basic"
+      className="ais-PoweredBy-logo"
+      height="27"
       viewBox="0 0 1366 362"
+      width="100"
       xmlns="http://www.w3.org/2000/svg"
     >
       <linearGradient

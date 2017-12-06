@@ -61,7 +61,7 @@ describe('Breadcrumb', () => {
       />
     );
 
-    const breadcrumb = wrapper.find('.ais-Breadcrumb__root');
+    const breadcrumb = wrapper.find('.ais-Breadcrumb-list');
 
     expect(breadcrumb.children()).toHaveLength(4);
 
@@ -126,7 +126,7 @@ describe('Breadcrumb', () => {
       />
     );
 
-    const breadcrumb = wrapper.find('.ais-Breadcrumb__root');
+    const breadcrumb = wrapper.find('.ais-Breadcrumb-list');
 
     expect(breadcrumb.children()).toHaveLength(4);
 
@@ -231,13 +231,13 @@ describe('Breadcrumb', () => {
 
       expect(canRefine.mock.calls).toHaveLength(1);
       expect(canRefine.mock.calls[0][0]).toEqual(true);
-      expect(wrapper.find('.ais-Breadcrumb__noRefinement')).toHaveLength(0);
+      expect(wrapper.find('.ais-Breadcrumb--noRefinement')).toHaveLength(0);
 
       wrapper.setProps({ canRefine: false });
 
       expect(canRefine.mock.calls).toHaveLength(2);
       expect(canRefine.mock.calls[1][0]).toEqual(false);
-      expect(wrapper.find('.ais-Breadcrumb__noRefinement')).toHaveLength(1);
+      expect(wrapper.find('.ais-Breadcrumb--noRefinement')).toHaveLength(1);
     });
   });
 });

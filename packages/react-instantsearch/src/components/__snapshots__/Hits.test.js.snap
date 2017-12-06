@@ -2,16 +2,24 @@
 
 exports[`Hits accepts a hitComponent prop 1`] = `
 <div
-  className="ais-Hits__root"
+  className="ais-Results"
 >
   <div
-    id={0}
-  />
-  <div
-    id={1}
-  />
-  <div
-    id={2}
-  />
+    className="ais-Results-body ais-body"
+  >
+    <ul
+      className="ais-Results-list"
+    >
+      <div
+        id={0}
+      />
+      <div
+        id={1}
+      />
+      <div
+        id={2}
+      />
+    </ul>
+  </div>
 </div>
 `;

@@ -24,7 +24,7 @@ describe('SortBy behavior', () => {
       />
     );
 
-    const selectedValue = wrapper.find('.ais-SortBy__root');
+    const selectedValue = wrapper.find('.ais-SortBy');
     expect(selectedValue.find('option')).toHaveLength(4);
     expect(
       selectedValue
@@ -57,7 +57,7 @@ describe('SortBy behavior', () => {
       />
     );
 
-    const selectedValue = wrapper.find('.ais-SortBy__root');
+    const selectedValue = wrapper.find('.ais-SortBy');
     expect(selectedValue.find('option')).toHaveLength(4);
     expect(
       selectedValue

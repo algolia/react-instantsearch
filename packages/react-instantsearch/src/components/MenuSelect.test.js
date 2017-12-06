@@ -64,11 +64,11 @@ describe('MenuSelect', () => {
       />
     );
 
-    const items = wrapper.find('.ais-MenuSelect__option');
+    const items = wrapper.find('.ais-MenuSelect-option');
     expect(items).toHaveLength(4); // +1 from "see all option"
 
     wrapper
-      .find('.ais-MenuSelect__select')
+      .find('.ais-MenuSelect-select')
       .simulate('change', { target: { value: 'blue' } });
 
     expect(refine).toHaveBeenCalledTimes(1);

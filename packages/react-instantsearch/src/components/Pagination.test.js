@@ -265,25 +265,25 @@ describe('Pagination', () => {
     const parameters = refine.mock.calls[1][0];
     expect(parameters.valueOf()).toBe(9);
     wrapper
-      .find('.ais-Pagination__itemPrevious')
+      .find('.ais-Pagination-item--previousPage')
       .find(Link)
       .simulate('click');
     expect(refine.mock.calls).toHaveLength(3);
     expect(refine.mock.calls[2][0]).toEqual(8);
     wrapper
-      .find('.ais-Pagination__itemNext')
+      .find('.ais-Pagination-item--nextPage')
       .find(Link)
       .simulate('click');
     expect(refine.mock.calls).toHaveLength(4);
     expect(refine.mock.calls[3][0]).toEqual(10);
     wrapper
-      .find('.ais-Pagination__itemFirst')
+      .find('.ais-Pagination-item--firstPage')
       .find(Link)
       .simulate('click');
     expect(refine.mock.calls).toHaveLength(5);
     expect(refine.mock.calls[4][0]).toEqual(1);
     wrapper
-      .find('.ais-Pagination__itemLast')
+      .find('.ais-Pagination-item--lastPage')
       .find(Link)
       .simulate('click');
     expect(refine.mock.calls).toHaveLength(6);
@@ -314,13 +314,13 @@ describe('Pagination', () => {
 
     expect(canRefine.mock.calls).toHaveLength(1);
     expect(canRefine.mock.calls[0][0]).toEqual(true);
-    expect(wrapper.find('.ais-Pagination__noRefinement')).toHaveLength(0);
+    expect(wrapper.find('.ais-Pagination-list--noRefinement')).toHaveLength(0);
 
     wrapper.setProps({ canRefine: false });
 
     expect(canRefine.mock.calls).toHaveLength(2);
     expect(canRefine.mock.calls[1][0]).toEqual(false);
-    expect(wrapper.find('.ais-Pagination__noRefinement')).toHaveLength(1);
+    expect(wrapper.find('.ais-Pagination-list--noRefinement')).toHaveLength(1);
   });
 
   describe('pagesPadding behaviour', () => {
@@ -336,8 +336,8 @@ describe('Pagination', () => {
           refine={refine}
         />
       );
-      const pages = wrapper.find('.ais-Pagination__itemPage');
-      const pageSelected = wrapper.find('.ais-Pagination__itemLinkSelected');
+      const pages = wrapper.find('.ais-Pagination-item--page');
+      const pageSelected = wrapper.find('.ais-Pagination-item--selected');
       // Since pagesPadding = 2, the Pagination widget's size should be 5
       expect(pages).toHaveLength(5);
 
@@ -362,8 +362,8 @@ describe('Pagination', () => {
           refine={refine}
         />
       );
-      const pages = wrapper.find('.ais-Pagination__itemPage');
-      const pageSelected = wrapper.find('.ais-Pagination__itemLinkSelected');
+      const pages = wrapper.find('.ais-Pagination-item--page');
+      const pageSelected = wrapper.find('.ais-Pagination-item--selected');
       // Since pagesPadding = 2, the Pagination widget's size should be 5
       expect(pages).toHaveLength(5);
 
@@ -387,8 +387,8 @@ describe('Pagination', () => {
           refine={refine}
         />
       );
-      const pages = wrapper.find('.ais-Pagination__itemPage');
-      const pageSelected = wrapper.find('.ais-Pagination__itemLinkSelected');
+      const pages = wrapper.find('.ais-Pagination-item--page');
+      const pageSelected = wrapper.find('.ais-Pagination-item--selected');
       // Since pagesPadding = 2, the Pagination widget's size should be 5
       expect(pages).toHaveLength(5);
 

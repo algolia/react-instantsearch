@@ -47,7 +47,7 @@ describe('HitsPerPage', () => {
       />
     );
 
-    const selectedValue = wrapper.find('.ais-HitsPerPage__root');
+    const selectedValue = wrapper.find('.ais-ResultsPerPage');
     expect(selectedValue.find('option')).toHaveLength(4);
     expect(
       selectedValue
@@ -73,7 +73,7 @@ describe('HitsPerPage', () => {
       />
     );
 
-    const selectedValue = wrapper.find('.ais-HitsPerPage__root');
+    const selectedValue = wrapper.find('.ais-ResultsPerPage');
     expect(selectedValue.find('option')).toHaveLength(4);
     expect(
       selectedValue

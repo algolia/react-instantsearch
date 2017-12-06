@@ -164,11 +164,11 @@ describe('MultiRange', () => {
       />
     );
 
-    const items = wrapper.find('.ais-MultiRange__item');
+    const items = wrapper.find('.ais-NumericMenu-item');
 
     expect(items).toHaveLength(4);
 
-    const firstItem = items.first().find('.ais-MultiRange__itemRadio');
+    const firstItem = items.first().find('.ais-NumericMenu-radio');
 
     firstItem.simulate('change', { target: { checked: true } });
 
@@ -213,10 +213,10 @@ describe('MultiRange', () => {
       />
     );
 
-    const itemWrapper = wrapper.find('.ais-MultiRange__noRefinement');
+    const itemWrapper = wrapper.find('.ais-NumericMenu-list--noRefinement');
     expect(itemWrapper).toHaveLength(1);
 
-    const items = wrapper.find('.ais-MultiRange__itemNoRefinement');
+    const items = wrapper.find('.ais-NumericMenu-item--noRefinement');
     expect(items).toHaveLength(4);
 
     wrapper.unmount();

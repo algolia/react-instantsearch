@@ -81,7 +81,7 @@ describe('CurrentRefinements', () => {
       expect(canRefine.mock.calls).toHaveLength(1);
       expect(canRefine.mock.calls[0][0]).toEqual(true);
       expect(
-        wrapper.find('.ais-CurrentRefinements__noRefinement')
+        wrapper.find('.ais-CurrentRefinements--noRefinement')
       ).toHaveLength(0);
 
       wrapper.setProps({ canRefine: false });
@@ -89,7 +89,7 @@ describe('CurrentRefinements', () => {
       expect(canRefine.mock.calls).toHaveLength(2);
       expect(canRefine.mock.calls[1][0]).toEqual(false);
       expect(
-        wrapper.find('.ais-CurrentRefinements__noRefinement')
+        wrapper.find('.ais-CurrentRefinements--noRefinement')
       ).toHaveLength(1);
     });
   });

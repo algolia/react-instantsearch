@@ -119,7 +119,7 @@ export class RawRangeInput extends Component {
       >
         <form {...cx(['form'])} onSubmit={this.onSubmit}>
           <input
-            {...cx(['input'])}
+            {...cx(['input', 'input--min'])}
             type="number"
             min={min}
             max={max}
@@ -131,7 +131,7 @@ export class RawRangeInput extends Component {
           />
           <span {...cx(['separator'])}>{translate('separator')}</span>
           <input
-            {...cx(['input'])}
+            {...cx(['input', 'input--max'])}
             type="number"
             min={min}
             max={max}

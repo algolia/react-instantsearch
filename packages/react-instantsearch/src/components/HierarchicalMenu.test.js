@@ -92,13 +92,13 @@ describe('HierarchicalMenu', () => {
     );
 
     const itemParent = wrapper.find(
-      '.ais-HierarchicalMenu__item .ais-HierarchicalMenu__itemParent'
+      '.ais-HierarchicalMenu-item .ais-HierarchicalMenu-item--parent'
     );
 
     expect(itemParent).toHaveLength(1);
 
     itemParent
-      .find('.ais-HierarchicalMenu__itemLink')
+      .find('.ais-HierarchicalMenu-link')
       .first()
       .simulate('click');
     expect(refine.mock.calls).toHaveLength(1);
@@ -127,13 +127,13 @@ describe('HierarchicalMenu', () => {
       />
     );
 
-    const items = wrapper.find('.ais-HierarchicalMenu__item');
+    const items = wrapper.find('.ais-HierarchicalMenu-item');
 
     expect(items).toHaveLength(2);
 
-    wrapper.find('.ais-HierarchicalMenu__showMore').simulate('click');
+    wrapper.find('.ais-HierarchicalMenu-showMore').simulate('click');
 
-    expect(wrapper.find('.ais-HierarchicalMenu__item')).toHaveLength(4);
+    expect(wrapper.find('.ais-HierarchicalMenu-item')).toHaveLength(4);
 
     wrapper.unmount();
   });
@@ -155,12 +155,12 @@ describe('HierarchicalMenu', () => {
       />
     );
 
-    const items = wrapper.find('.ais-HierarchicalMenu__item');
+    const items = wrapper.find('.ais-HierarchicalMenu-item');
 
     expect(items).toHaveLength(2);
 
     expect(
-      wrapper.find('.ais-HierarchicalMenu__showMoreDisabled')
+      wrapper.find('.ais-HierarchicalMenu-showMore--disabled')
     ).toBeDefined();
 
     wrapper.unmount();
@@ -196,7 +196,7 @@ describe('HierarchicalMenu', () => {
 
       expect(canRefine.mock.calls).toHaveLength(1);
       expect(canRefine.mock.calls[0][0]).toEqual(true);
-      expect(wrapper.find('.ais-HierarchicalMenu__noRefinement')).toHaveLength(
+      expect(wrapper.find('.ais-HierarchicalMenu-list--noRefinement')).toHaveLength(
         0
       );
 
@@ -204,7 +204,7 @@ describe('HierarchicalMenu', () => {
 
       expect(canRefine.mock.calls).toHaveLength(2);
       expect(canRefine.mock.calls[1][0]).toEqual(false);
-      expect(wrapper.find('.ais-HierarchicalMenu__noRefinement')).toHaveLength(
+      expect(wrapper.find('.ais-HierarchicalMenu-list--noRefinement')).toHaveLength(
         1
       );
     });
