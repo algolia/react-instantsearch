@@ -1,8 +1,16 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+// import cx from
 
-const Highlight = ({ value, tagName, isHighlighted }) => {
-  const TagName = isHighlighted ? tagName : 'span';
+const Highlight = ({
+  value,
+  highlightedTagName,
+  isHighlighted,
+  nonHighlightedTagName,
+}) => {
+  console.log('highlightedtagname', highlightedTagName);
+  console.log('nonhighlight', nonHighlightedTagName);
+  const TagName = isHighlighted ? highlightedTagName : nonHighlightedTagName;
   const className = isHighlighted
     ? 'ais-Highlight__highlighted'
     : 'ais-Highlight__nonHighlighted';
@@ -13,7 +21,8 @@ const Highlight = ({ value, tagName, isHighlighted }) => {
 Highlight.propTypes = {
   value: PropTypes.string.isRequired,
   isHighlighted: PropTypes.bool.isRequired,
-  tagName: PropTypes.string.isRequired,
+  highlightedTagName: PropTypes.string,
+  nonHighlightedTagName: PropTypes.string,
 };
 
 export default function Highlighter({
@@ -21,10 +30,10 @@ export default function Highlighter({
   attributeName,
   highlight,
   highlightProperty,
-  tagName,
+  highlightedTagName,
+  nonHighlightedTagName,
   separator,
 }) {
-  const defaultTagName = 'span';
   const parsedHighlightedValue = highlight({
     hit,
     attributeName,
@@ -36,28 +45,18 @@ export default function Highlighter({
       {parsedHighlightedValue.map((item, i) => {
         if (Array.isArray(item)) {
           const isLast = i === parsedHighlightedValue.length - 1;
-          return !isLast ? (
+          return (
             <span key={`split-${i}-${item.value}`}>
               {item.map((element, index) => (
                 <Highlight
                   key={`split-${index}-${element.value}`}
                   value={element.value}
-                  tagName={tagName}
+                  highlightedTagName={highlightedTagName}
+                  nonHighlightedTagName={nonHighlightedTagName}
                   isHighlighted={element.isHighlighted}
                 />
               ))}
-              <span>{separator}</span>
-            </span>
-          ) : (
-            <span key={`split-${i}-${item.value}`}>
-              {item.map((element, index) => (
-                <Highlight
-                  key={`split-${index}-${element.value}`}
-                  value={element.value}
-                  tagName={tagName}
-                  isHighlighted={element.isHighlighted}
-                />
-              ))}
+              {!isLast && <span className="">{separator}</span>}
             </span>
           );
         }
@@ -66,7 +65,8 @@ export default function Highlighter({
           <Highlight
             key={`split-${i}-${item.value}`}
             value={item.value}
-            tagName={tagName}
+            highlightedTagName={highlightedTagName}
+            nonHighlightedTagName={nonHighlightedTagName}
             isHighlighted={item.isHighlighted}
           />
         );
@@ -81,10 +81,12 @@ Highlighter.propTypes = {
   highlight: PropTypes.func.isRequired,
   highlightProperty: PropTypes.string.isRequired,
   separator: PropTypes.node,
-  tagName: PropTypes.string,
+  highlightedTagName: PropTypes.string,
+  nonHighlightedTagName: PropTypes.string.isRequired,
 };
 
 Highlighter.defaultProps = {
-  tagName: 'em',
+  highlightedTagName: 'em',
+  nonHighlightedTagName: 'span',
   separator: ', ',
 };
