@@ -33,6 +33,9 @@ const WrapWithHits = ({
   hasPlayground = false,
   linkedStoryGroup,
   pagination = true,
+  appId = 'latency',
+  apiKey = '6be0576ff61c053d5f9a3225e2a90f76',
+  indexName = 'ikea',
 }) => {
   const sourceCodeUrl = `https://github.com/algolia/react-instantsearch/tree/master/stories/${linkedStoryGroup}.stories.js`;
   const playgroundLink = hasPlayground ? (
@@ -59,11 +62,7 @@ const WrapWithHits = ({
   };
 
   return (
-    <InstantSearch
-      appId="latency"
-      apiKey="6be0576ff61c053d5f9a3225e2a90f76"
-      indexName="ikea"
-    >
+    <InstantSearch appId={appId} apiKey={apiKey} indexName={indexName}>
       <Configure {...searchParameters} />
       <div>
         <div className="container widget-container">{children}</div>
@@ -102,7 +101,9 @@ const CustomHits = connectHits(({ hits }) => (
         <div>
           <div className="hit-picture">
             <img
-              src={`https://res.cloudinary.com/hilnmyskv/image/fetch/h_100,q_100,f_auto/${hit.image}`}
+              src={`https://res.cloudinary.com/hilnmyskv/image/fetch/h_100,q_100,f_auto/${
+                hit.image
+              }`}
             />
           </div>
         </div>
@@ -125,6 +126,9 @@ const CustomHits = connectHits(({ hits }) => (
 ));
 
 WrapWithHits.propTypes = {
+  appId: PropTypes.string,
+  apiKey: PropTypes.string,
+  indexName: PropTypes.string,
   children: PropTypes.node,
   searchBox: PropTypes.bool,
   linkedStoryGroup: PropTypes.string,
@@ -133,4 +137,57 @@ WrapWithHits.propTypes = {
   searchParameters: PropTypes.object,
 };
 
-export { Wrap, WrapWithHits };
+// defaultProps added so that they're displayed in the JSX addon
+WrapWithHits.defaultProps = {
+  appId: 'latency',
+  apiKey: '6be0576ff61c053d5f9a3225e2a90f76',
+  indexName: 'ikea',
+};
+
+// retrieves the displayName of the React Component
+const getReactElementDisplayName = element =>
+  element.type.displayName ||
+  element.type.name ||
+  (typeof element.type === 'function' // function without a name, provide one
+    ? 'No Display Name'
+    : element.type);
+
+// displays the right name for the JSX addon in Storybook
+const displayName = element => {
+  // display 'InstantSearch' instead of 'WrapWithHits'
+  if (getReactElementDisplayName(element) === 'WrapWithHits') {
+    const instantSearch = 'InstantSearch';
+    return instantSearch;
+  }
+  // wrapped component: AlgoliaWidgetName(Translatable..)" => "WidgetName"
+  if (
+    React.Component.isPrototypeOf(element.type) &&
+    getReactElementDisplayName(element).startsWith('Algolia')
+  ) {
+    const innerComponentRegex = /\(([^()]+)\)/;
+    const match = innerComponentRegex.exec(element.type.displayName);
+    const innerComponentName = match[1];
+    const rawName = element.type.displayName;
+    const widgetName = rawName.split('(')[0].replace('Algolia', '');
+    if (match) {
+      // when a VirtualWidget is used, Algolia returns 'UnknownComponent' as the displayName
+      if (innerComponentName === 'UnknownComponent') {
+        return widgetName;
+      }
+      // when a Configure widget is used, Algolia returns '_default' as the displayName
+      if (innerComponentName === '_default') {
+        return widgetName;
+      }
+      // when a RangeInput widget is used, Algolia returns 'RawRangeInput' as the displayName
+      if (innerComponentName === 'RawRangeInput') {
+        return 'RangeInput';
+      }
+      return innerComponentName;
+    }
+  }
+  return getReactElementDisplayName(element);
+};
+
+const filterProps = ['linkedStoryGroup', 'hasPlayground'];
+
+export { CustomHits, displayName, filterProps, Wrap, WrapWithHits };

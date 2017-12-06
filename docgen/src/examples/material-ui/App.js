@@ -50,8 +50,8 @@ const MaterialUiExample = props => (
     apiKey="6be0576ff61c053d5f9a3225e2a90f76"
     indexName="ikea"
     searchState={props.searchState}
-    createURL={props.createURL.bind(this)}
-    onSearchStateChange={props.onSearchStateChange.bind(this)}
+    createURL={props.createURL}
+    onSearchStateChange={props.onSearchStateChange}
   >
     <Configure hitsPerPage={20} />
     <Content />
@@ -325,7 +325,9 @@ function CustomHits({ hits, marginLeft, hasMore, refine }) {
             />
             <div style={imageHolderStyle}>
               <img
-                src={`https://res.cloudinary.com/hilnmyskv/image/fetch/h_300,q_100,f_auto/${hit.image}`}
+                src={`https://res.cloudinary.com/hilnmyskv/image/fetch/h_300,q_100,f_auto/${
+                  hit.image
+                }`}
                 style={{ maxWidth: 120, maxHeight: 120 }}
               />
             </div>

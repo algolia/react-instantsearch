@@ -21,15 +21,24 @@ const createURL = state => `?${qs.stringify(state)}`;
 
 const searchStateToUrl = (props, searchState) =>
   searchState ? `${props.location.pathname}${createURL(searchState)}` : '';
+const urlToSearchState = location => qs.parse(location.search.slice(1));
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { searchState: qs.parse(props.location.search.slice(1)) };
-    this.onSearchStateChange = this.onSearchStateChange.bind(this);
+
+    this.state = {
+      searchState: urlToSearchState(props.location),
+    };
   }
 
-  onSearchStateChange(searchState) {
+  componentWillReceiveProps(props) {
+    if (props.location !== this.props.location) {
+      this.setState({ searchState: urlToSearchState(props.location) });
+    }
+  }
+
+  onSearchStateChange = searchState => {
     clearTimeout(this.debouncedSetState);
     this.debouncedSetState = setTimeout(() => {
       this.props.history.push(
@@ -38,7 +47,7 @@ class App extends Component {
       );
     }, updateAfter);
     this.setState({ searchState });
-  }
+  };
 
   render() {
     return (
@@ -47,7 +56,7 @@ class App extends Component {
         apiKey="6be0576ff61c053d5f9a3225e2a90f76"
         indexName="ikea"
         searchState={this.state.searchState}
-        onSearchStateChange={this.onSearchStateChange.bind(this)}
+        onSearchStateChange={this.onSearchStateChange}
         createURL={createURL}
       >
         <div>

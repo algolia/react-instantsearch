@@ -1,6 +1,6 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { Configure } from '../packages/react-instantsearch/dom';
+import { storiesOf } from '@storybook/react';
 import { WrapWithHits } from './util';
 
 const stories = storiesOf('Configure', module);
@@ -13,16 +13,16 @@ class ConfigureExample extends React.Component {
     this.state = { hitsPerPage: 3 };
   }
 
-  onClick() {
+  onClick = () => {
     const hitsPerPage = this.state.hitsPerPage === 3 ? 1 : 3;
     this.setState({ hitsPerPage });
-  }
+  };
 
   render() {
     return (
       <WrapWithHits linkedStoryGroup="Configure">
         <Configure hitsPerPage={this.state.hitsPerPage} />
-        <button onClick={this.onClick.bind(this)}>Toggle HitsPerPage</button>
+        <button onClick={this.onClick}>Toggle HitsPerPage</button>
       </WrapWithHits>
     );
   }

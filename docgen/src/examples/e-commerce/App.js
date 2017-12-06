@@ -30,8 +30,8 @@ const App = props => (
     apiKey="6be0576ff61c053d5f9a3225e2a90f76"
     indexName="ikea"
     searchState={props.searchState}
-    createURL={props.createURL.bind(this)}
-    onSearchStateChange={props.onSearchStateChange.bind(this)}
+    createURL={props.createURL}
+    onSearchStateChange={props.onSearchStateChange}
   >
     <Configure hitsPerPage={16} />
     <Header />
@@ -177,7 +177,9 @@ const Hit = ({ item }) => {
       <div className="product-picture-wrapper">
         <div className="product-picture">
           <img
-            src={`https://res.cloudinary.com/hilnmyskv/image/fetch/h_300,q_100,f_auto/${item.image}`}
+            src={`https://res.cloudinary.com/hilnmyskv/image/fetch/h_300,q_100,f_auto/${
+              item.image
+            }`}
           />
         </div>
       </div>
