@@ -22,7 +22,7 @@ const CustomHits = connectHits(({ hits }) => (
       <div key={hit.objectID} className="hit">
         <div className="hit-content">
           <div>
-            <div>{hit.name}</div>
+            <Highlight attributeName="name" hit={hit} />
           </div>
 
           <div className="hit-tags">
