@@ -77,6 +77,7 @@ class SearchBox extends Component {
     autoFocus: false,
     searchAsYouType: true,
     showLoadingIndicator: false,
+    isSearchStalled: false,
     loadingIndicatorComponent: <DefaultLoadingIndicator />,
     submitComponent: <DefaultSubmit />,
     resetComponent: <DefaultReset />,
