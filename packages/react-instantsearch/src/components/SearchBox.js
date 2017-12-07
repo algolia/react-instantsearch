@@ -192,6 +192,9 @@ class SearchBox extends Component {
       return props;
     }, {});
 
+    const isSearchStalled =
+      this.props.showLoadingIndicator && this.props.isSearchStalled;
+
     /* eslint-disable max-len */
     return (
       <form
@@ -226,12 +229,7 @@ class SearchBox extends Component {
         </svg>
         <div
           role="search"
-          {...cx(
-            'wrapper',
-            this.props.showLoadingIndicator &&
-              this.props.isSearchStalled &&
-              'stalled-search'
-          )}
+          {...cx('wrapper', isSearchStalled && 'stalled-search')}
         >
           <input
             ref={this.onInputMount}
@@ -249,13 +247,10 @@ class SearchBox extends Component {
             {...searchInputEvents}
             {...cx('input')}
           />
-          { this.props.showLoadingIndicator && (
+          {this.props.showLoadingIndicator && (
             <div
               style={{
-                display:
-                  this.props.showLoadingIndicator && this.props.isSearchStalled
-                    ? 'block'
-                    : 'none',
+                display: isSearchStalled ? 'block' : 'none',
               }}
               {...cx('loading-indicator')}
             >
@@ -266,10 +261,7 @@ class SearchBox extends Component {
             type="submit"
             title={translate('submitTitle')}
             style={{
-              display:
-                this.props.showLoadingIndicator && this.props.isSearchStalled
-                  ? 'none'
-                  : 'block',
+              display: isSearchStalled ? 'none' : 'block',
             }}
             {...cx('submit')}
           >
