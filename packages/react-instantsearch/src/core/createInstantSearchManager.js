@@ -29,7 +29,6 @@ export default function createInstantSearchManager({
   });
 
   let stalledSearchTimer = null;
-  let isSearchStalled = false;
 
   const helper = algoliasearchHelper(algoliaClient, indexName, baseSP);
   helper.on('result', handleSearchSuccess);
@@ -49,7 +48,7 @@ export default function createInstantSearchManager({
     results: resultsState || null,
     error: null,
     searching: false,
-    isSearchStalled,
+    isSearchStalled: false,
     searchingForFacetValues: false,
   });
 
@@ -180,17 +179,19 @@ export default function createInstantSearchManager({
       results = content;
     }
 
+    const currentState = store.getState();
+    let nextIsSearchStalled = currentState.isSearchStalled;
     if (!helper.hasPendingRequests()) {
       clearTimeout(stalledSearchTimer);
       stalledSearchTimer = null;
-      isSearchStalled = false;
+      nextIsSearchStalled = false;
     }
 
     const nextState = omit(
       {
-        ...store.getState(),
+        ...currentState,
         results,
-        isSearchStalled,
+        isSearchStalled: nextIsSearchStalled,
         searching: false,
         error: null,
       },
@@ -200,15 +201,17 @@ export default function createInstantSearchManager({
   }
 
   function handleSearchError(error) {
+    const currentState = store.getState();
+    let nextIsSearchStalled = currentState.isSearchStalled;
     if (!helper.hasPendingRequests()) {
       clearTimeout(stalledSearchTimer);
-      isSearchStalled = false;
+      nextIsSearchStalled = false;
     }
 
     const nextState = omit(
       {
-        ...store.getState(),
-        isSearchStalled,
+        ...currentState,
+        isSearchStalled: nextIsSearchStalled,
         error,
         searching: false,
       },
@@ -220,11 +223,10 @@ export default function createInstantSearchManager({
   function handleNewSearch() {
     if (!stalledSearchTimer) {
       stalledSearchTimer = setTimeout(() => {
-        isSearchStalled = true;
         const nextState = omit(
           {
             ...store.getState(),
-            isSearchStalled,
+            isSearchStalled: true,
           },
           'resultsFacetValues'
         );
@@ -240,7 +242,6 @@ export default function createInstantSearchManager({
     store.setState({
       ...store.getState(),
       metadata,
-      isSearchStalled,
       searching: true,
     });
 
@@ -267,7 +268,6 @@ export default function createInstantSearchManager({
       ...store.getState(),
       widgets: nextSearchState,
       metadata,
-      isSearchStalled,
       searching: true,
     });
 
