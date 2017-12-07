@@ -4221,9 +4221,9 @@ eslint-plugin-jasmine@2.9.1:
   version "2.9.1"
   resolved "https://registry.yarnpkg.com/eslint-plugin-jasmine/-/eslint-plugin-jasmine-2.9.1.tgz#22e19a59f16f3a5f643a04aba04438d0e3047030"
 
-eslint-plugin-jest@21.3.2:
-  version "21.3.2"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-21.3.2.tgz#b1cefc05f0fed700eb40185a94d16f6d575d1ef9"
+eslint-plugin-jest@21.4.1:
+  version "21.4.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-21.4.1.tgz#7fcc407924d44f78cb7197eb0d5f65152f81fcf9"
 
 eslint-plugin-prettier@2.3.1:
   version "2.3.1"
@@ -4847,7 +4847,15 @@ fs-extra@3.0.1:
     jsonfile "^3.0.0"
     universalify "^0.1.0"
 
-fs-extra@4.0.2, fs-extra@^4.0.2:
+fs-extra@4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-4.0.3.tgz#0d852122e5bc5beb453fb028e9c0c9bf36340c94"
+  dependencies:
+    graceful-fs "^4.1.2"
+    jsonfile "^4.0.0"
+    universalify "^0.1.0"
+
+fs-extra@^4.0.2:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-4.0.2.tgz#f91704c53d1b461f893452b0c307d9997647ab6b"
   dependencies:
@@ -10220,9 +10228,9 @@ rollup-pluginutils@^2.0.1:
     estree-walker "^0.3.0"
     micromatch "^2.3.11"
 
-rollup@0.52.0:
-  version "0.52.0"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-0.52.0.tgz#cdb6927f53bf7b7fb09af3a936b9c8ee49b161e2"
+rollup@0.52.1:
+  version "0.52.1"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-0.52.1.tgz#610e8e1be432f18fcfbfa865408a1cd7618cd707"
 
 rst-selector-parser@^2.2.3:
   version "2.2.3"
@@ -11973,9 +11981,9 @@ webpack-sources@^1.0.1:
     source-list-map "^2.0.0"
     source-map "~0.5.3"
 
-webpack@3.9.1:
-  version "3.9.1"
-  resolved "https://registry.yarnpkg.com/webpack/-/webpack-3.9.1.tgz#9a60aa544ed5d4d454c069e3f521aa007e02643c"
+webpack@3.10.0:
+  version "3.10.0"
+  resolved "https://registry.yarnpkg.com/webpack/-/webpack-3.10.0.tgz#5291b875078cf2abf42bdd23afe3f8f96c17d725"
   dependencies:
     acorn "^5.0.0"
     acorn-dynamic-import "^2.0.0"
