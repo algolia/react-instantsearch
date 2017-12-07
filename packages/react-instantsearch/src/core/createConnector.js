@@ -229,7 +229,7 @@ export default function createConnector(connectorDesc) {
           searchingForFacetValues,
           isSearchStalled,
         } = store.getState();
-        const searchState = {
+        const searchResults = {
           results,
           searching,
           error,
@@ -240,7 +240,7 @@ export default function createConnector(connectorDesc) {
           this,
           props,
           widgets,
-          searchState,
+          searchResults,
           metadata,
           resultsFacetValues
         );
