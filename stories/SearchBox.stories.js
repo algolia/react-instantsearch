@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { setAddon, storiesOf } from '@storybook/react';
 import { SearchBox } from '../packages/react-instantsearch/dom';
-import { object } from '@storybook/addon-knobs';
+import { object, boolean } from '@storybook/addon-knobs';
 import { displayName, filterProps, WrapWithHits } from './util';
 import { action } from '@storybook/addon-actions';
 import JSXAddon from 'storybook-addon-jsx';
@@ -19,7 +19,8 @@ stories
         hasPlayground={true}
         linkedStoryGroup="SearchBox"
       >
-        <SearchBox />
+        <SearchBox showLoadingIndicator={boolean('showLoadingIndicator', true)}
+        />
       </WrapWithHits>
     ),
     {
@@ -59,18 +60,6 @@ stories
             </svg>
           }
         />
-      </WrapWithHits>
-    ),
-    {
-      displayName,
-      filterProps,
-    }
-  )
-  .addWithJSX(
-    'Display feedback when search is stalled',
-    () => (
-      <WrapWithHits searchBox={false} linkedStoryGroup="SearchBox">
-        <SearchBox showLoadingIndicator={true} />
       </WrapWithHits>
     ),
     {
