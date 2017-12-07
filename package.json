@@ -109,6 +109,7 @@
     "react-dom": "16.2.0",
     "react-hot-loader": "3.1.3",
     "react-tap-event-plugin": "3.0.2",
+    "react-to-typescript-definitions": "^0.23.0",
     "recursive-readdir": "2.2.1",
     "replace-in-file": "3.0.0",
     "rheostat": "2.1.1",
