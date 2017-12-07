@@ -6,11 +6,11 @@ const cx = classNames('Highlight');
 
 const Highlight = ({
   value,
-  highlightedTagName,
+  tagName,
   isHighlighted,
   nonHighlightedTagName,
 }) => {
-  const TagName = isHighlighted ? highlightedTagName : nonHighlightedTagName;
+  const TagName = isHighlighted ? tagName : nonHighlightedTagName;
   const className = isHighlighted ? 'highlighted' : 'nonHighlighted';
   return <TagName {...cx(className)}>{value}</TagName>;
 };
@@ -18,7 +18,7 @@ const Highlight = ({
 Highlight.propTypes = {
   value: PropTypes.string.isRequired,
   isHighlighted: PropTypes.bool.isRequired,
-  highlightedTagName: PropTypes.string,
+  tagName: PropTypes.string,
   nonHighlightedTagName: PropTypes.string,
 };
 
@@ -27,7 +27,7 @@ export default function Highlighter({
   attributeName,
   highlight,
   highlightProperty,
-  highlightedTagName,
+  tagName,
   nonHighlightedTagName,
   separator,
 }) {
@@ -48,7 +48,7 @@ export default function Highlighter({
                 <Highlight
                   key={`split-${index}-${element.value}`}
                   value={element.value}
-                  highlightedTagName={highlightedTagName}
+                  tagName={tagName}
                   nonHighlightedTagName={nonHighlightedTagName}
                   isHighlighted={element.isHighlighted}
                 />
@@ -62,7 +62,7 @@ export default function Highlighter({
           <Highlight
             key={`split-${i}-${item.value}`}
             value={item.value}
-            highlightedTagName={highlightedTagName}
+            tagName={tagName}
             nonHighlightedTagName={nonHighlightedTagName}
             isHighlighted={item.isHighlighted}
           />
@@ -78,12 +78,12 @@ Highlighter.propTypes = {
   highlight: PropTypes.func.isRequired,
   highlightProperty: PropTypes.string.isRequired,
   separator: PropTypes.node,
-  highlightedTagName: PropTypes.string,
+  tagName: PropTypes.string,
   nonHighlightedTagName: PropTypes.string.isRequired,
 };
 
 Highlighter.defaultProps = {
-  highlightedTagName: 'em',
+  tagName: 'em',
   nonHighlightedTagName: 'span',
   separator: ', ',
 };
