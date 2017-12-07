@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-// import cx from
+import classNames from './classNames.js';
+
+const cx = classNames('Highlight');
 
 const Highlight = ({
   value,
@@ -8,14 +10,9 @@ const Highlight = ({
   isHighlighted,
   nonHighlightedTagName,
 }) => {
-  console.log('highlightedtagname', highlightedTagName);
-  console.log('nonhighlight', nonHighlightedTagName);
   const TagName = isHighlighted ? highlightedTagName : nonHighlightedTagName;
-  const className = isHighlighted
-    ? 'ais-Highlight__highlighted'
-    : 'ais-Highlight__nonHighlighted';
-
-  return <TagName className={className}>{value}</TagName>;
+  const className = isHighlighted ? 'highlighted' : 'nonHighlighted';
+  return <TagName {...cx(className)}>{value}</TagName>;
 };
 
 Highlight.propTypes = {
@@ -41,7 +38,7 @@ export default function Highlighter({
   });
 
   return (
-    <span className="ais-Highlight">
+    <span {...cx('root')}>
       {parsedHighlightedValue.map((item, i) => {
         if (Array.isArray(item)) {
           const isLast = i === parsedHighlightedValue.length - 1;
@@ -56,7 +53,7 @@ export default function Highlighter({
                   isHighlighted={element.isHighlighted}
                 />
               ))}
-              {!isLast && <span className="">{separator}</span>}
+              {!isLast && <span {...cx('separator')}>{separator}</span>}
             </span>
           );
         }
