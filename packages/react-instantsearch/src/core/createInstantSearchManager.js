@@ -48,7 +48,7 @@ export default function createInstantSearchManager({
     results: resultsState || null,
     error: null,
     searching: false,
-    isSearchStalled: false,
+    isSearchStalled: true,
     searchingForFacetValues: false,
   });
 

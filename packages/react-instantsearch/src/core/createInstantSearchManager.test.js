@@ -35,7 +35,7 @@ describe('createInstantSearchManager', () => {
     const store = ism.store.getState();
     expect(store).toEqual({
       error: null,
-      isSearchStalled: false,
+      isSearchStalled: true,
       metadata: [],
       results: null,
       searching: false,
@@ -71,7 +71,7 @@ describe('createInstantSearchManager', () => {
       searching: false,
       searchingForFacetValues: false,
       widgets: {},
-      isSearchStalled: false,
+      isSearchStalled: true,
     });
   });
 
@@ -177,7 +177,7 @@ describe('createInstantSearchManager', () => {
 
       expect(managedClient.search).not.toHaveBeenCalled();
       expect(ism.store.getState()).toMatchObject({
-        isSearchStalled: false,
+        isSearchStalled: true,
       });
 
       return Promise.resolve()
@@ -185,7 +185,7 @@ describe('createInstantSearchManager', () => {
           expect(managedClient.search).toHaveBeenCalledTimes(1);
 
           expect(ism.store.getState()).toMatchObject({
-            isSearchStalled: false,
+            isSearchStalled: true,
           });
 
           jest.runAllTimers();
@@ -196,6 +196,33 @@ describe('createInstantSearchManager', () => {
 
           managedClient.searchResultsResolvers[0]();
           return managedClient.searchResultsPromises[0];
+        })
+        .then(() => {
+          expect(ism.store.getState()).toMatchObject({
+            isSearchStalled: false,
+          });
+
+          ism.widgetsManager.update();
+
+          expect(ism.store.getState()).toMatchObject({
+            isSearchStalled: false,
+          });
+
+          return Promise.resolve();
+        })
+        .then(() => {
+          expect(ism.store.getState()).toMatchObject({
+            isSearchStalled: false,
+          });
+
+          jest.runAllTimers();
+
+          expect(ism.store.getState()).toMatchObject({
+            isSearchStalled: true,
+          });
+
+          managedClient.searchResultsResolvers[1]();
+          return managedClient.searchResultsPromises[1];
         })
         .then(() => {
           expect(ism.store.getState()).toMatchObject({
@@ -276,9 +303,9 @@ function makeClient(response) {
     'latency',
     '249078a3d4337a8231f1665ec5a44966'
   );
-  const clonedResponse = JSON.parse(JSON.stringify(response));
   clientInstance.addAlgoliaAgent = () => {};
   clientInstance.search = jest.fn((queries, cb) => {
+    const clonedResponse = JSON.parse(JSON.stringify(response));
     if (cb) {
       setTimeout(() => {
         cb(null, clonedResponse);
@@ -295,7 +322,6 @@ function makeClient(response) {
 }
 
 function makeManagedClient() {
-  const clonedResponse = defaultResponse();
   const searchResultsResolvers = [];
   const searchResultsPromises = [];
   const fakeClient = {
@@ -303,7 +329,7 @@ function makeManagedClient() {
       const p = new Promise(resolve =>
         searchResultsResolvers.push(resolve)
       ).then(() => {
-        cb(null, clonedResponse);
+        cb(null, defaultResponse());
       });
       searchResultsPromises.push(p);
     }),
