@@ -162,12 +162,12 @@ describe('createInstantSearchManager', () => {
 
   describe('Loading state', () => {
     it('should be updated if search is stalled', () => {
-      const algoliaClient = makeManagedClient();
+      const managedClient = makeManagedClient();
       const ism = createInstantSearchManager({
         indexName: 'index',
         initialState: {},
         searchParameters: {},
-        algoliaClient,
+        algoliaClient: managedClient,
       });
 
       ism.widgetsManager.registerWidget({
@@ -175,31 +175,33 @@ describe('createInstantSearchManager', () => {
         transitionState: () => {},
       });
 
-      expect(algoliaClient.search).not.toHaveBeenCalled();
+      expect(managedClient.search).not.toHaveBeenCalled();
       expect(ism.store.getState()).toMatchObject({
         isSearchStalled: false,
       });
 
-      return Promise.resolve().then(() => {
-        expect(algoliaClient.search).toHaveBeenCalledTimes(1);
+      return Promise.resolve()
+        .then(() => {
+          expect(managedClient.search).toHaveBeenCalledTimes(1);
 
-        expect(ism.store.getState()).toMatchObject({
-          isSearchStalled: false,
+          expect(ism.store.getState()).toMatchObject({
+            isSearchStalled: false,
+          });
+
+          jest.runAllTimers();
+
+          expect(ism.store.getState()).toMatchObject({
+            isSearchStalled: true,
+          });
+
+          managedClient.searchResultsResolvers[0]();
+          return managedClient.searchResultsPromises[0];
+        })
+        .then(() => {
+          expect(ism.store.getState()).toMatchObject({
+            isSearchStalled: false,
+          });
         });
-
-        jest.runAllTimers();
-
-        expect(ism.store.getState()).toMatchObject({
-          isSearchStalled: true,
-        });
-
-        algoliaClient.searchResultsResolvers[0]();
-        return algoliaClient.searchResultsPromises[0]
-      }).then(() => {
-        expect(ism.store.getState()).toMatchObject({
-          isSearchStalled: false,
-        });
-      });
     });
   });
 

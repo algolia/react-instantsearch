@@ -82,7 +82,10 @@ stories
     'Display feedback when search is stalled (custom component)',
     () => (
       <WrapWithHits searchBox={false} linkedStoryGroup="SearchBox">
-        <SearchBox showLoadingIndicator={true} loadingIndicatorComponent={<span>✨</span>}/>
+        <SearchBox
+          showLoadingIndicator={true}
+          loadingIndicatorComponent={<span>✨</span>}
+        />
       </WrapWithHits>
     ),
     {

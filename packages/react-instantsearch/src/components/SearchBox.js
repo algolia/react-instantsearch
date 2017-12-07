@@ -178,7 +178,9 @@ class SearchBox extends Component {
 
     const loadingIndicatorComponent = this.props.loadingIndicatorComponent ? (
       this.props.loadingIndicatorComponent
-    ) : <DefaultLoadingIndicator />;
+    ) : (
+      <DefaultLoadingIndicator />
+    );
 
     const searchInputEvents = Object.keys(this.props).reduce((props, prop) => {
       if (
