@@ -19,7 +19,8 @@ stories
         hasPlayground={true}
         linkedStoryGroup="SearchBox"
       >
-        <SearchBox showLoadingIndicator={boolean('showLoadingIndicator', true)}
+        <SearchBox
+          showLoadingIndicator={boolean('showLoadingIndicator', true)}
         />
       </WrapWithHits>
     ),
