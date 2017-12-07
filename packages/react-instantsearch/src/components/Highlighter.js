@@ -38,7 +38,7 @@ export default function Highlighter({
   });
 
   return (
-    <span {...cx('root')}>
+    <span className="ais-Highlight">
       {parsedHighlightedValue.map((item, i) => {
         if (Array.isArray(item)) {
           const isLast = i === parsedHighlightedValue.length - 1;
