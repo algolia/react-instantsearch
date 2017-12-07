@@ -56,19 +56,13 @@ class InstantSearch extends Component {
     const initialState = this.isControlled ? props.searchState : {};
     this.isUnmounting = false;
 
-    const stalledSearchDelay =
-      props.stalledSearchDelay === undefined ||
-      props.stalledSearchDelay === null
-        ? 200
-        : props.stalledSearchDelay;
-
     this.aisManager = createInstantSearchManager({
       indexName: props.indexName,
       searchParameters: props.searchParameters,
       algoliaClient: props.algoliaClient,
       initialState,
       resultsState: props.resultsState,
-      stalledSearchDelay,
+      stalledSearchDelay: props.stalledSearchDelay,
     });
   }
 
@@ -174,6 +168,10 @@ class InstantSearch extends Component {
     else return <Root {...props}>{this.props.children}</Root>;
   }
 }
+
+InstantSearch.defaultProps = {
+  stalledSearchDelay: 200,
+};
 
 InstantSearch.propTypes = {
   // @TODO: These props are currently constant.
