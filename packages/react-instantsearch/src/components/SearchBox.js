@@ -200,14 +200,14 @@ class SearchBox extends Component {
   };
 
   render() {
-    const { translate, autoFocus } = this.props;
-    const query = this.getQuery();
-
     const {
+      translate,
+      autoFocus,
       loadingIndicatorComponent,
       resetComponent,
       submitComponent,
     } = this.props;
+    const query = this.getQuery();
 
     const searchInputEvents = Object.keys(this.props).reduce((props, prop) => {
       if (
