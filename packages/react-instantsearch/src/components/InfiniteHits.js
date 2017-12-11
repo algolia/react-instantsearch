@@ -1,16 +1,12 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
-import BaseWidget from './BaseWidget';
-import classNames from './classNames.js';
 import translatable from '../core/translatable';
-
-const widgetClassName = 'InfiniteResults';
-const cx = classNames(widgetClassName);
 
 class InfiniteHits extends Component {
   render() {
     const {
+      cx,
       hitComponent: ItemComponent,
       hits,
       hasMore,
@@ -20,32 +16,28 @@ class InfiniteHits extends Component {
       footer,
     } = this.props;
     const renderedHits = hits.map(hit => (
-      <ItemComponent key={hit.objectID} hit={hit} />
+      <li key={hit.objectID} className={cx('item')}>
+        <ItemComponent hit={hit} />
+      </li>
     ));
-    const loadMoreButton = hasMore ? (
-      <button {...cx(['loadMore'])} onClick={() => refine()}>
-        {translate('loadMore')}
-      </button>
-    ) : (
-      <button {...cx(['loadMore', 'loadMore--disabled'])} disabled>
-        {translate('loadMore')}
-      </button>
-    );
 
     return (
-      <BaseWidget
-        widgetClassName={widgetClassName}
-        header={header}
-        footer={footer}
-      >
-        <ul {...cx(['list'])}>{renderedHits}</ul>
-        {loadMoreButton}
-      </BaseWidget>
+      <div>
+        <ul className={cx('list')}>{renderedHits}</ul>
+        <button
+          className={cx('loadMore', !hasMore && 'loadMore--disabled')}
+          onClick={() => refine()}
+          disabled={!hasMore}
+        >
+          {translate('loadMore')}
+        </button>
+      </div>
     );
   }
 }
 
 InfiniteHits.propTypes = {
+  cx: PropTypes.func.isRequired,
   hits: PropTypes.array,
   hitComponent: PropTypes.oneOfType([PropTypes.string, PropTypes.func])
     .isRequired,
@@ -59,8 +51,7 @@ InfiniteHits.propTypes = {
 /* eslint-disable react/display-name */
 InfiniteHits.defaultProps = {
   hitComponent: hit => (
-    <li
-      {...cx(['item'])}
+    <div
       style={{
         borderBottom: '1px solid #bbb',
         paddingBottom: '5px',
@@ -68,7 +59,7 @@ InfiniteHits.defaultProps = {
       }}
     >
       {JSON.stringify(hit).slice(0, 100)}...
-    </li>
+    </div>
   ),
 };
 /* eslint-enable react/display-name */

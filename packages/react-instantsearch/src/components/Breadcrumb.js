@@ -1,12 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import Link from './Link';
-import classNames from './classNames.js';
 import translatable from '../core/translatable';
-import BaseWidget from './BaseWidget';
-
-const widgetClassName = 'Breadcrumb';
-const cx = classNames(widgetClassName);
 
 const itemsPropType = PropTypes.arrayOf(
   PropTypes.shape({
@@ -17,6 +12,7 @@ const itemsPropType = PropTypes.arrayOf(
 
 class Breadcrumb extends Component {
   static propTypes = {
+    cx: PropTypes.func.isRequired,
     canRefine: PropTypes.bool.isRequired,
     createURL: PropTypes.func.isRequired,
     items: itemsPropType,
@@ -42,6 +38,7 @@ class Breadcrumb extends Component {
 
   render() {
     const {
+      cx,
       canRefine,
       createURL,
       items,
@@ -53,9 +50,9 @@ class Breadcrumb extends Component {
       footer,
     } = this.props;
     const rootPath = canRefine ? (
-      <li {...cx(['item'])}>
+      <li className={cx('item')}>
         <Link
-          {...cx(['link'])}
+          className={cx('link')}
           onClick={() => (!rootURL ? refine() : null)}
           href={rootURL ? rootURL : createURL()}
         >
@@ -67,40 +64,28 @@ class Breadcrumb extends Component {
     const breadcrumb = items.map((item, idx) => {
       const isLast = idx === items.length - 1;
       return (
-        <span key={idx}>
-          <li {...cx(['item'])} key="separator">
-            {separator}
-          </li>
-          <li {...cx(['item', isLast && 'item--selected'])} key={idx}>
-            {!isLast ? (
-              <Link
-                {...cx(['link'])}
-                onClick={() => refine(item.value)}
-                href={createURL(item.value)}
-                key={idx}
-              >
-                {item.label}
-              </Link>
-            ) : (
-              item.label
-            )}
-          </li>
-        </span>
-      )
+        <li className={cx('item', isLast && 'item--selected')} key={idx}>
+          <span className={cx('separator')}>{separator}</span>
+          {!isLast ? (
+            <Link
+              className={cx('link')}
+              onClick={() => refine(item.value)}
+              href={createURL(item.value)}
+            >
+              {item.label}
+            </Link>
+          ) : (
+            item.label
+          )}
+        </li>
+      );
     });
 
     return (
-      <BaseWidget
-        widgetClassName={widgetClassName}
-        otherWidgetClassNames={[!canRefine && `-noRefinement`]}
-        header={header}
-        footer={footer}
-      >
-        <ul {...cx(['list'])}>
-          {rootPath}
-          {breadcrumb}
-        </ul>
-      </BaseWidget>
+      <ul className={cx('list')}>
+        {rootPath}
+        {breadcrumb}
+      </ul>
     );
   }
 }

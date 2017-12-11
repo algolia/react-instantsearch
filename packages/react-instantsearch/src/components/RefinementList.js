@@ -3,13 +3,8 @@ import React, { Component } from 'react';
 import { pick } from 'lodash';
 
 import translatable from '../core/translatable';
-import classNames from './classNames.js';
 import List from './List';
 import Highlight from '../widgets/Highlight';
-import BaseWidget from './BaseWidget';
-
-const widgetClassName = 'RefinementList';
-const cx = classNames(widgetClassName);
 
 class RefinementList extends Component {
   constructor(props) {
@@ -18,6 +13,7 @@ class RefinementList extends Component {
   }
 
   static propTypes = {
+    cx: PropTypes.func.isRequired,
     translate: PropTypes.func.isRequired,
     refine: PropTypes.func.isRequired,
     searchForItems: PropTypes.func.isRequired,
@@ -66,45 +62,41 @@ class RefinementList extends Component {
     );
 
     return (
-      <label {...cx(['label'])}>
+      <label className={this.props.cx('label')}>
         <input
-          {...cx(['checkbox'])}
+          className={this.props.cx('checkbox')}
           type="checkbox"
           checked={item.isRefined}
           onChange={() => this.selectItem(item, resetQuery)}
         />
-        <span {...cx(['labelText'])}>{label}</span>{' '}
-        <span {...cx(['count'])}>{item.count.toLocaleString()}</span>
+        <span className={this.props.cx('labelText')}>{label}</span>{' '}
+        <span className={this.props.cx('count')}>
+          {item.count.toLocaleString()}
+        </span>
       </label>
     );
   };
 
   render() {
-    const { header, footer } = this.props;
+    const { cx, header, footer } = this.props;
     return (
-      <BaseWidget
-        widgetClassName={widgetClassName}
-        header={header}
-        footer={footer}
-      >
-        <List
-          renderItem={this.renderItem}
-          selectItem={this.selectItem}
-          cx={cx}
-          {...pick(this.props, [
-            'translate',
-            'items',
-            'showMore',
-            'limitMin',
-            'limitMax',
-            'isFromSearch',
-            'searchForItems',
-            'withSearchBox',
-            'canRefine',
-          ])}
-          query={this.state.query}
-        />
-      </BaseWidget>
+      <List
+        renderItem={this.renderItem}
+        selectItem={this.selectItem}
+        cx={cx}
+        {...pick(this.props, [
+          'translate',
+          'items',
+          'showMore',
+          'limitMin',
+          'limitMax',
+          'isFromSearch',
+          'searchForItems',
+          'withSearchBox',
+          'canRefine',
+        ])}
+        query={this.state.query}
+      />
     );
   }
 }

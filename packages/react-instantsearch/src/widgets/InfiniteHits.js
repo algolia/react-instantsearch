@@ -1,5 +1,10 @@
+import React from 'react';
+import BaseWidget from './BaseWidget';
 import connectInfiniteHits from '../connectors/connectInfiniteHits.js';
 import InfiniteHitsComponent from '../components/InfiniteHits.js';
+import classNames from '../components/classNames';
+
+const cx = classNames('InfiniteResults');
 
 /**
  * Displays an infinite list of hits along with a **load more** button.
@@ -31,4 +36,11 @@ import InfiniteHitsComponent from '../components/InfiniteHits.js';
  *   );
  * }
  */
-export default connectInfiniteHits(InfiniteHitsComponent);
+
+const Widget = props => (
+  <BaseWidget cx={cx} header={props.header} footer={props.footer}>
+    <InfiniteHitsComponent cx={cx} {...props} />
+  </BaseWidget>
+);
+
+export default connectInfiniteHits(Widget);

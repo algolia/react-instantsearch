@@ -1,5 +1,10 @@
+import React from 'react';
+import BaseWidget from './BaseWidget';
 import connectSortBy from '../connectors/connectSortBy.js';
 import SortByComponent from '../components/SortBy.js';
+import classNames from '../components/classNames';
+
+const cx = classNames('SortBy');
 
 /**
  * The SortBy component displays a list of indexes allowing a user to change the hits are sorting.
@@ -35,4 +40,11 @@ import SortByComponent from '../components/SortBy.js';
  *   );
  * }
  */
-export default connectSortBy(SortByComponent);
+
+const Widget = props => (
+  <BaseWidget cx={cx} header={props.header} footer={props.footer}>
+    <SortByComponent cx={cx} {...props} />
+  </BaseWidget>
+);
+
+export default connectSortBy(Widget);

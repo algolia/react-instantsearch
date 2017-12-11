@@ -21,19 +21,19 @@ export default function Highlighter({
     const key = `split-${i}-${v.value}`;
     if (!v.isHighlighted) {
       return (
-        <span key={key} {...cx(['nonHighlighted'])}>
+        <span key={key} className={cx('nonHighlighted')}>
           {v.value}
         </span>
       );
     }
     const HighlightedTag = tagName ? tagName : 'em';
     return (
-      <HighlightedTag key={key} {...cx(['highlighted'])}>
+      <HighlightedTag key={key} className={cx('highlighted')}>
         {v.value}
       </HighlightedTag>
     );
   });
-  return <span {...cx([''])}>{reactHighlighted}</span>;
+  return <span className={cx('')}>{reactHighlighted}</span>;
 }
 
 Highlighter.propTypes = {

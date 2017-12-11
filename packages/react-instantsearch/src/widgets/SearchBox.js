@@ -1,5 +1,10 @@
+import React from 'react';
+import BaseWidget from './BaseWidget';
 import connectSearchBox from '../connectors/connectSearchBox.js';
 import SearchBoxComponent from '../components/SearchBox.js';
+import classNames from '../components/classNames';
+
+const cx = classNames('SearchBox');
 
 /**
  * The SearchBox component displays a search box that lets the user search for a specific query.
@@ -39,4 +44,11 @@ import SearchBoxComponent from '../components/SearchBox.js';
  *   );
  * }
  */
-export default connectSearchBox(SearchBoxComponent);
+
+const Widget = props => (
+  <BaseWidget cx={cx} header={props.header} footer={props.footer}>
+    <SearchBoxComponent cx={cx} {...props} />
+  </BaseWidget>
+);
+
+export default connectSearchBox(Widget);

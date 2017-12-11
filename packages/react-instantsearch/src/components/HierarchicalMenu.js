@@ -3,13 +3,8 @@ import React, { Component } from 'react';
 import { pick } from 'lodash';
 
 import translatable from '../core/translatable';
-import classNames from './classNames.js';
 import List from './List';
 import Link from './Link';
-import BaseWidget from './BaseWidget';
-
-const widgetClassName = 'HierarchicalMenu';
-const cx = classNames(widgetClassName);
 
 const itemsPropType = PropTypes.arrayOf(
   PropTypes.shape({
@@ -22,6 +17,7 @@ const itemsPropType = PropTypes.arrayOf(
 
 class HierarchicalMenu extends Component {
   static propTypes = {
+    cx: PropTypes.func.isRequired,
     translate: PropTypes.func.isRequired,
     refine: PropTypes.func.isRequired,
     createURL: PropTypes.func.isRequired,
@@ -48,43 +44,37 @@ class HierarchicalMenu extends Component {
   }
 
   renderItem = item => {
-    const { createURL, refine } = this.props;
+    const { cx, createURL, refine } = this.props;
 
     return (
       <Link
-        {...cx(['link'])}
+        className={cx('link')}
         onClick={() => refine(item.value)}
         href={createURL(item.value)}
       >
-        <span {...cx(['label'])}>{item.label}</span>{' '}
-        <span {...cx(['count'])}>{item.count}</span>
+        <span className={cx('label')}>{item.label}</span>{' '}
+        <span className={cx('count')}>{item.count}</span>
       </Link>
     );
   };
 
   render() {
-    const { header, footer } = this.props;
+    const { cx, header, footer } = this.props;
 
     return (
-      <BaseWidget
-        widgetClassName={widgetClassName}
-        header={header}
-        footer={footer}
-      >
-        <List
-          renderItem={this.renderItem}
-          cx={cx}
-          {...pick(this.props, [
-            'translate',
-            'items',
-            'showMore',
-            'limitMin',
-            'limitMax',
-            'isEmpty',
-            'canRefine',
-          ])}
-        />
-      </BaseWidget>
+      <List
+        renderItem={this.renderItem}
+        cx={cx}
+        {...pick(this.props, [
+          'translate',
+          'items',
+          'showMore',
+          'limitMin',
+          'limitMax',
+          'isEmpty',
+          'canRefine',
+        ])}
+      />
     );
   }
 }

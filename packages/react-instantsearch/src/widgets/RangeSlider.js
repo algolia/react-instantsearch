@@ -1,6 +1,10 @@
 import connectRange from '../connectors/connectRange';
-import BaseWidget from '../components/BaseWidget';
+import BaseWidget from './BaseWidget';
 import React from 'react';
+import classNames from '../components/classNames';
+
+const cx = classNames('RangeSlider');
+
 /**
  * Since a lot of sliders already exist, we did not include one by default.
  * However you can easily connect React InstantSearch to an existing one
@@ -47,30 +51,39 @@ class Range extends React.Component {
   };
 
   render() {
-    const {min, max, currentRefinement, header, footer} = this.props;
+    const {min, max, currentRefinement} = this.props;
     const {currentValues} = this.state;
     return min !== max ?
-      <BaseWidget widgetClassName="RangeSlider" header={header} footer={footer}>
-        <Rheostat
-          min={min}
-          max={max}
-          values={[currentRefinement.min, currentRefinement.max]}
-          onChange={this.onChange}
-          onValuesUpdated={this.onValuesUpdated}
-        />
-        <div style={{display: 'flex', justifyContent: 'space-between'}}>
-          <div>{currentValues.min}</div>
-          <div>{currentValues.max}</div>
+      <div className="ais-RangeSlider">
+        <div className="ais-RangeSlider-header ais-header">
+          Header
         </div>
-      </BaseWidget> : null;
+        <div className="ais-RangeSlider-body ais-body">
+          <Rheostat
+            min={min}
+            max={max}
+            values={[currentRefinement.min, currentRefinement.max]}
+            onChange={this.onChange}
+            onValuesUpdated={this.onValuesUpdated}
+          />
+          <div style={{display: 'flex', justifyContent: 'space-between'}}>
+            <div>{currentValues.min}</div>
+            <div>{currentValues.max}</div>
+          </div>
+        </div>
+        <div className="ais-RangeSlider-footer ais-footer">
+          Footer
+        </div>
+      </div> : null;
   }
 }
 
 const ConnectedRange = connectRange(Range);
 
  */
+
 export default connectRange(({ header, footer }) => (
-  <BaseWidget widgetClassName="RangeSlider" header={header} footer={footer}>
+  <BaseWidget cx={cx} header={header} footer={footer}>
     We do not provide any Slider, see the documentation to learn how to connect
     one easily:
     <a

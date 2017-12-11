@@ -2,14 +2,10 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 import Select from './Select';
-import BaseWidget from './BaseWidget';
-import classNames from './classNames.js';
-
-const widgetClassName = 'ResultsPerPage';
-const cx = classNames(widgetClassName);
 
 class HitsPerPage extends Component {
   static propTypes = {
+    cx: PropTypes.func.isRequired,
     refine: PropTypes.func.isRequired,
     currentRefinement: PropTypes.number.isRequired,
     transformItems: PropTypes.func,
@@ -31,20 +27,14 @@ class HitsPerPage extends Component {
   };
 
   render() {
-    const { currentRefinement, refine, items, header, footer } = this.props;
+    const { cx, currentRefinement, refine, items, header, footer } = this.props;
     return (
-      <BaseWidget
-        widgetClassName={widgetClassName}
-        header={header}
-        footer={footer}
-      >
-        <Select
-          onSelect={refine}
-          selectedItem={currentRefinement}
-          items={items}
-          cx={cx}
-        />
-      </BaseWidget>
+      <Select
+        onSelect={refine}
+        selectedItem={currentRefinement}
+        items={items}
+        cx={cx}
+      />
     );
   }
 }

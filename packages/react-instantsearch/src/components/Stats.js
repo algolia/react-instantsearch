@@ -1,15 +1,11 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
-import BaseWidget from './BaseWidget';
 import translatable from '../core/translatable';
-import classNames from './classNames.js';
-
-const widgetClassName = 'Stats';
-const cx = classNames(widgetClassName);
 
 class Stats extends Component {
   static propTypes = {
+    cx: PropTypes.func.isRequired,
     translate: PropTypes.func.isRequired,
     nbHits: PropTypes.number.isRequired,
     processingTimeMS: PropTypes.number.isRequired,
@@ -18,17 +14,18 @@ class Stats extends Component {
   };
 
   render() {
-    const { translate, nbHits, processingTimeMS, header, footer } = this.props;
+    const {
+      cx,
+      translate,
+      nbHits,
+      processingTimeMS,
+      header,
+      footer,
+    } = this.props;
     return (
-      <BaseWidget
-        widgetClassName={widgetClassName}
-        header={header}
-        footer={footer}
-      >
-        <span {...cx(['text'])}>
-          {translate('stats', nbHits, processingTimeMS)}
-        </span>
-      </BaseWidget>
+      <span className={cx('text')}>
+        {translate('stats', nbHits, processingTimeMS)}
+      </span>
     );
   }
 }

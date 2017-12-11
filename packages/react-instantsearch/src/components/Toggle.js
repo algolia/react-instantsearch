@@ -1,14 +1,9 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
-import BaseWidget from './BaseWidget';
-import classNames from './classNames.js';
-
-const widgetClassName = 'Toggle';
-const cx = classNames(widgetClassName);
-
 class Toggle extends Component {
   static propTypes = {
+    cx: PropTypes.func.isRequired,
     currentRefinement: PropTypes.bool.isRequired,
     refine: PropTypes.func.isRequired,
     label: PropTypes.string.isRequired,
@@ -21,24 +16,18 @@ class Toggle extends Component {
   };
 
   render() {
-    const { currentRefinement, label, header, footer } = this.props;
+    const { cx, currentRefinement, label, header, footer } = this.props;
 
     return (
-      <BaseWidget
-        widgetClassName={widgetClassName}
-        header={header}
-        footer={footer}
-      >
-        <label {...cx(['label'])}>
-          <input
-            {...cx(['checkbox'])}
-            type="checkbox"
-            checked={currentRefinement}
-            onChange={this.onChange}
-          />
-          <span {...cx(['labelText'])}>{label}</span>
-        </label>
-      </BaseWidget>
+      <label className={cx('label')}>
+        <input
+          className={cx('checkbox')}
+          type="checkbox"
+          checked={currentRefinement}
+          onChange={this.onChange}
+        />
+        <span className={cx('labelText')}>{label}</span>
+      </label>
     );
   }
 }

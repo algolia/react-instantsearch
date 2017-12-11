@@ -5,14 +5,10 @@ import translatable from '../core/translatable';
 import List from './List';
 import Link from './Link';
 import Highlight from '../widgets/Highlight';
-import BaseWidget from './BaseWidget';
-import classNames from './classNames.js';
-
-const widgetClassName = 'Menu';
-const cx = classNames(widgetClassName);
 
 class Menu extends Component {
   static propTypes = {
+    cx: PropTypes.func.isRequired,
     translate: PropTypes.func.isRequired,
     refine: PropTypes.func.isRequired,
     searchForItems: PropTypes.func.isRequired,
@@ -49,7 +45,7 @@ class Menu extends Component {
   }
 
   renderItem = (item, resetQuery) => {
-    const { createURL } = this.props;
+    const { createURL, cx } = this.props;
     const label = this.props.isFromSearch ? (
       <Highlight attributeName="label" hit={item} />
     ) : (
@@ -57,12 +53,12 @@ class Menu extends Component {
     );
     return (
       <Link
-        {...cx(['link'])}
+        className={cx('link')}
         onClick={() => this.selectItem(item, resetQuery)}
         href={createURL(item.value)}
       >
-        <span {...cx(['label'])}>{label}</span>{' '}
-        <span {...cx(['count'])}>{item.count}</span>
+        <span className={cx('label')}>{label}</span>{' '}
+        <span className={cx('count')}>{item.count}</span>
       </Link>
     );
   };
@@ -73,30 +69,24 @@ class Menu extends Component {
   };
 
   render() {
-    const { header, footer } = this.props;
+    const { cx, header, footer } = this.props;
     return (
-      <BaseWidget
-        widgetClassName={widgetClassName}
-        header={header}
-        footer={footer}
-      >
-        <List
-          renderItem={this.renderItem}
-          selectItem={this.selectItem}
-          cx={cx}
-          {...pick(this.props, [
-            'translate',
-            'items',
-            'showMore',
-            'limitMin',
-            'limitMax',
-            'isFromSearch',
-            'searchForItems',
-            'withSearchBox',
-            'canRefine',
-          ])}
-        />
-      </BaseWidget>
+      <List
+        renderItem={this.renderItem}
+        selectItem={this.selectItem}
+        cx={cx}
+        {...pick(this.props, [
+          'translate',
+          'items',
+          'showMore',
+          'limitMin',
+          'limitMax',
+          'isFromSearch',
+          'searchForItems',
+          'withSearchBox',
+          'canRefine',
+        ])}
+      />
     );
   }
 }

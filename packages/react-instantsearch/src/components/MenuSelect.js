@@ -2,15 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { find } from 'lodash';
 
-import BaseWidget from './BaseWidget';
-import classNames from './classNames.js';
 import translatable from '../core/translatable';
-
-const widgetClassName = 'MenuSelect';
-const cx = classNames(widgetClassName);
 
 class MenuSelect extends Component {
   static propTypes = {
+    cx: PropTypes.func.isRequired,
     canRefine: PropTypes.bool.isRequired,
     refine: PropTypes.func.isRequired,
     translate: PropTypes.func.isRequired,
@@ -53,30 +49,24 @@ class MenuSelect extends Component {
   };
 
   render() {
-    const { items, translate, header, footer } = this.props;
+    const { cx, items, translate, header, footer } = this.props;
 
     return (
-      <BaseWidget
-        widgetClassName={widgetClassName}
-        header={header}
-        footer={footer}
+      <select
+        value={this.selectedValue}
+        onChange={this.handleSelectChange}
+        className={cx('select')}
       >
-        <select
-          value={this.selectedValue}
-          onChange={this.handleSelectChange}
-          {...cx(['select'])}
-        >
-          <option value="ais__see__all__option" {...cx(['option'])}>
-            {translate('seeAllOption')}
-          </option>
+        <option value="ais__see__all__option" className={cx('option')}>
+          {translate('seeAllOption')}
+        </option>
 
-          {items.map(item => (
-            <option key={item.value} value={item.value} {...cx(['option'])}>
-              {item.label} ({item.count})
-            </option>
-          ))}
-        </select>
-      </BaseWidget>
+        {items.map(item => (
+          <option key={item.value} value={item.value} className={cx('option')}>
+            {item.label} ({item.count})
+          </option>
+        ))}
+      </select>
     );
   }
 }

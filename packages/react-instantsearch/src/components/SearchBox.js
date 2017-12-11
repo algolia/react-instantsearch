@@ -2,14 +2,10 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 import translatable from '../core/translatable';
-import classNames from './classNames.js';
-import BaseWidget from './BaseWidget';
-
-const widgetClassName = 'SearchBox';
-const cx = classNames(widgetClassName);
 
 class SearchBox extends Component {
   static propTypes = {
+    cx: PropTypes.func.isRequired,
     currentRefinement: PropTypes.string,
     refine: PropTypes.func.isRequired,
     translate: PropTypes.func.isRequired,
@@ -159,14 +155,14 @@ class SearchBox extends Component {
   };
 
   render() {
-    const { translate, autoFocus, header, footer } = this.props;
+    const { cx, translate, autoFocus, header, footer } = this.props;
     const query = this.getQuery();
 
     const submitComponent = this.props.submitComponent ? (
       this.props.submitComponent
     ) : (
       <svg
-        {...cx(['submitIcon'])}
+        className={cx('submitIcon')}
         xmlns="http://www.w3.org/2000/svg"
         width="10"
         height="10"
@@ -180,7 +176,7 @@ class SearchBox extends Component {
       this.props.resetComponent
     ) : (
       <svg
-        {...cx(['resetIcon'])}
+        className={cx('resetIcon')}
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 20 20"
         width="10"
@@ -204,51 +200,47 @@ class SearchBox extends Component {
 
     /* eslint-disable max-len */
     return (
-      <BaseWidget
-        widgetClassName={widgetClassName}
-        header={header}
-        footer={footer}
+      <form
+        noValidate
+        onSubmit={this.props.onSubmit ? this.props.onSubmit : this.onSubmit}
+        onReset={this.onReset}
+        className={cx('form')}
+        action=""
+        role="search"
       >
-        <form
-          noValidate
-          onSubmit={this.props.onSubmit ? this.props.onSubmit : this.onSubmit}
-          onReset={this.onReset}
-          {...cx(['form'])}
-          action=""
-          role="search"
+        <input
+          ref={this.onInputMount}
+          type="search"
+          placeholder={translate('placeholder')}
+          autoFocus={autoFocus}
+          autoComplete="off"
+          autoCorrect="off"
+          autoCapitalize="off"
+          spellCheck="false"
+          required
+          maxLength="512"
+          value={query}
+          onChange={this.onChange}
+          {...searchInputEvents}
+          className={cx('input')}
+        />
+        <button
+          type="submit"
+          title={translate('submitTitle')}
+          className={cx('submit')}
         >
-          <input
-            ref={this.onInputMount}
-            type="text"
-            placeholder={translate('placeholder')}
-            autoFocus={autoFocus}
-            autoComplete="off"
-            spellCheck="false"
-            required
-            maxLength="512"
-            value={query}
-            onChange={this.onChange}
-            {...searchInputEvents}
-            {...cx(['input'])}
-          />
-          <button
-            type="submit"
-            title={translate('submitTitle')}
-            {...cx(['submit'])}
-          >
-            {submitComponent}
-          </button>
-          <button
-            type="reset"
-            title={translate('resetTitle')}
-            {...cx(['reset'])}
-            onClick={this.onReset}
-            style={query ? { display: 'block' } : { display: 'none' }}
-          >
-            {resetComponent}
-          </button>
-        </form>
-      </BaseWidget>
+          {submitComponent}
+        </button>
+        <button
+          type="reset"
+          title={translate('resetTitle')}
+          className={cx('reset')}
+          onClick={this.onReset}
+          style={query ? { display: 'block' } : { display: 'none' }}
+        >
+          {resetComponent}
+        </button>
+      </form>
     );
     /* eslint-enable */
   }

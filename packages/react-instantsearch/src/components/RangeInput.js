@@ -1,14 +1,10 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import translatable from '../core/translatable';
-import classNames from './classNames.js';
-import BaseWidget from './BaseWidget';
-
-const widgetClassName = 'RangeInput';
-const cx = classNames(widgetClassName);
 
 export class RawRangeInput extends Component {
   static propTypes = {
+    cx: PropTypes.func.isRequired,
     canRefine: PropTypes.bool.isRequired,
     precision: PropTypes.number.isRequired,
     translate: PropTypes.func.isRequired,
@@ -106,46 +102,39 @@ export class RawRangeInput extends Component {
 
   render() {
     const { from, to } = this.state;
-    const { precision, translate, canRefine, header, footer } = this.props;
+    const { cx, precision, translate, canRefine, header, footer } = this.props;
     const { min, max } = this.normalizeRangeForRendering(this.props);
     const step = 1 / Math.pow(10, precision);
 
     return (
-      <BaseWidget
-        widgetClassName={widgetClassName}
-        otherWidgetClassNames={[!canRefine && `-noRefinement`]}
-        header={header}
-        footer={footer}
-      >
-        <form {...cx(['form'])} onSubmit={this.onSubmit}>
-          <input
-            {...cx(['input'])}
-            type="number"
-            min={min}
-            max={max}
-            value={from}
-            step={step}
-            placeholder={min}
-            disabled={!canRefine}
-            onChange={e => this.setState({ from: e.currentTarget.value })}
-          />
-          <span {...cx(['separator'])}>{translate('separator')}</span>
-          <input
-            {...cx(['input'])}
-            type="number"
-            min={min}
-            max={max}
-            value={to}
-            step={step}
-            placeholder={max}
-            disabled={!canRefine}
-            onChange={e => this.setState({ to: e.currentTarget.value })}
-          />
-          <button {...cx(['submit'])} type="submit">
-            {translate('submit')}
-          </button>
-        </form>
-      </BaseWidget>
+      <form className={cx('form')} onSubmit={this.onSubmit}>
+        <input
+          className={cx('input')}
+          type="number"
+          min={min}
+          max={max}
+          value={from}
+          step={step}
+          placeholder={min}
+          disabled={!canRefine}
+          onChange={e => this.setState({ from: e.currentTarget.value })}
+        />
+        <span className={cx('separator')}>{translate('separator')}</span>
+        <input
+          className={cx('input')}
+          type="number"
+          min={min}
+          max={max}
+          value={to}
+          step={step}
+          placeholder={max}
+          disabled={!canRefine}
+          onChange={e => this.setState({ to: e.currentTarget.value })}
+        />
+        <button className={cx('submit')} type="submit">
+          {translate('submit')}
+        </button>
+      </form>
     );
   }
 }

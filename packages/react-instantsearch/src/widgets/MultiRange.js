@@ -1,5 +1,10 @@
+import React from 'react';
+import BaseWidget from './BaseWidget';
 import connectMultiRange from '../connectors/connectMultiRange.js';
 import MultiRangeComponent from '../components/MultiRange.js';
+import classNames from '../components/classNames';
+
+const cx = classNames('NumericMenu');
 
 /**
  * MultiRange is a widget used for selecting the range value of a numeric attribute.
@@ -47,4 +52,11 @@ import MultiRangeComponent from '../components/MultiRange.js';
  *   );
  * }
  */
-export default connectMultiRange(MultiRangeComponent);
+
+const Widget = props => (
+  <BaseWidget cx={cx} header={props.header} footer={props.footer}>
+    <MultiRangeComponent cx={cx} {...props} />
+  </BaseWidget>
+);
+
+export default connectMultiRange(Widget);

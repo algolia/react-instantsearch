@@ -1,5 +1,10 @@
+import React from 'react';
+import BaseWidget from './BaseWidget';
 import connectHierarchicalMenu from '../connectors/connectHierarchicalMenu.js';
 import HierarchicalMenuComponent from '../components/HierarchicalMenu.js';
+import classNames from '../components/classNames';
+
+const cx = classNames('HierarchicalMenu');
 
 /**
  * The hierarchical menu lets the user browse attributes using a tree-like structure.
@@ -89,4 +94,11 @@ import HierarchicalMenuComponent from '../components/HierarchicalMenu.js';
  *   );
  * }
  */
-export default connectHierarchicalMenu(HierarchicalMenuComponent);
+
+const Widget = props => (
+  <BaseWidget cx={cx} header={props.header} footer={props.footer}>
+    <HierarchicalMenuComponent cx={cx} {...props} />
+  </BaseWidget>
+);
+
+export default connectHierarchicalMenu(Widget);

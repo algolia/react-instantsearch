@@ -1,5 +1,10 @@
+import React from 'react';
+import BaseWidget from './BaseWidget';
 import connectPagination from '../connectors/connectPagination.js';
 import PaginationComponent from '../components/Pagination.js';
+import classNames from '../components/classNames';
+
+const cx = classNames('Pagination');
 
 /**
  * The Pagination widget displays a simple pagination system allowing the user to
@@ -49,4 +54,11 @@ import PaginationComponent from '../components/Pagination.js';
  *   );
  * }
  */
-export default connectPagination(PaginationComponent);
+
+const Widget = props => (
+  <BaseWidget cx={cx} header={props.header} footer={props.footer}>
+    <PaginationComponent cx={cx} {...props} />
+  </BaseWidget>
+);
+
+export default connectPagination(Widget);
