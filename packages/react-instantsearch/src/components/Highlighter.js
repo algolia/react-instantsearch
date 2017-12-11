@@ -4,13 +4,13 @@ import classNames from './classNames.js';
 
 const cx = classNames('Highlight');
 
-const Highlight = ({
+export const Highlight = ({
   value,
-  tagName,
+  highlightedTagName,
   isHighlighted,
   nonHighlightedTagName,
 }) => {
-  const TagName = isHighlighted ? tagName : nonHighlightedTagName;
+  const TagName = isHighlighted ? highlightedTagName : nonHighlightedTagName;
   const className = isHighlighted ? 'highlighted' : 'nonHighlighted';
   return <TagName {...cx(className)}>{value}</TagName>;
 };
@@ -18,8 +18,8 @@ const Highlight = ({
 Highlight.propTypes = {
   value: PropTypes.string.isRequired,
   isHighlighted: PropTypes.bool.isRequired,
-  tagName: PropTypes.string,
-  nonHighlightedTagName: PropTypes.string,
+  highlightedTagName: PropTypes.string.isRequired,
+  nonHighlightedTagName: PropTypes.string.isRequired,
 };
 
 export default function Highlighter({
@@ -43,12 +43,12 @@ export default function Highlighter({
         if (Array.isArray(item)) {
           const isLast = i === parsedHighlightedValue.length - 1;
           return (
-            <span key={`split-${i}-${item.value}`}>
+            <span key={`split-${i}-${hit[attributeName][i]}`}>
               {item.map((element, index) => (
                 <Highlight
                   key={`split-${index}-${element.value}`}
                   value={element.value}
-                  tagName={tagName}
+                  highlightedTagName={tagName}
                   nonHighlightedTagName={nonHighlightedTagName}
                   isHighlighted={element.isHighlighted}
                 />
@@ -62,7 +62,7 @@ export default function Highlighter({
           <Highlight
             key={`split-${i}-${item.value}`}
             value={item.value}
-            tagName={tagName}
+            highlightedTagName={tagName}
             nonHighlightedTagName={nonHighlightedTagName}
             isHighlighted={item.isHighlighted}
           />
@@ -77,13 +77,13 @@ Highlighter.propTypes = {
   attributeName: PropTypes.string.isRequired,
   highlight: PropTypes.func.isRequired,
   highlightProperty: PropTypes.string.isRequired,
-  separator: PropTypes.node,
   tagName: PropTypes.string,
-  nonHighlightedTagName: PropTypes.string.isRequired,
+  nonHighlightedTagName: PropTypes.string,
+  separator: PropTypes.node,
 };
 
 Highlighter.defaultProps = {
   tagName: 'em',
   nonHighlightedTagName: 'span',
-  separator: ', ',
+  separator: ',',
 };
