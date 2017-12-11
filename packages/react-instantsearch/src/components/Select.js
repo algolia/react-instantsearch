@@ -28,10 +28,14 @@ export default class Select extends Component {
     const { cx, items, selectedItem } = this.props;
 
     return (
-      <select {...cx(['select'])} value={selectedItem} onChange={this.onChange}>
+      <select
+        className={cx('select')}
+        value={selectedItem}
+        onChange={this.onChange}
+      >
         {items.map(item => (
           <option
-            {...cx(['option'])}
+            className={cx('option')}
             key={has(item, 'key') ? item.key : item.value}
             disabled={item.disabled}
             value={item.value}

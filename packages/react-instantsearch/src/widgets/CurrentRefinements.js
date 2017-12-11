@@ -1,5 +1,10 @@
+import React from 'react';
+import BaseWidget from './BaseWidget';
 import connectCurrentRefinements from '../connectors/connectCurrentRefinements.js';
 import CurrentRefinementsComponent from '../components/CurrentRefinements.js';
+import classNames from '../components/classNames';
+
+const cx = classNames('CurrentRefinements');
 
 /**
  * The CurrentRefinements widget displays the list of currently applied filters.
@@ -36,4 +41,16 @@ import CurrentRefinementsComponent from '../components/CurrentRefinements.js';
  *   );
  * }
  */
-export default connectCurrentRefinements(CurrentRefinementsComponent);
+
+const Widget = props => (
+  <BaseWidget
+    cx={cx}
+    header={props.header}
+    footer={props.footer}
+    cantRefine={!props.canRefine}
+  >
+    <CurrentRefinementsComponent cx={cx} {...props} />
+  </BaseWidget>
+);
+
+export default connectCurrentRefinements(Widget);

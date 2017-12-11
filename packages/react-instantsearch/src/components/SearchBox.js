@@ -2,18 +2,53 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 import translatable from '../core/translatable';
-import classNames from './classNames.js';
-import BaseWidget from './BaseWidget';
 
-const widgetClassName = 'SearchBox';
-const cx = classNames(widgetClassName);
+const DefaultLoadingIndicator = () => (
+  <svg
+    width="18"
+    height="18"
+    viewBox="0 0 38 38"
+    xmlns="http://www.w3.org/2000/svg"
+    stroke="#BFC7D8"
+  >
+    <g fill="none" fillRule="evenodd">
+      <g transform="translate(1 1)" strokeWidth="2">
+        <circle strokeOpacity=".5" cx="18" cy="18" r="18" />
+        <path d="M36 18c0-9.94-8.06-18-18-18">
+          <animateTransform
+            attributeName="transform"
+            type="rotate"
+            from="0 18 18"
+            to="360 18 18"
+            dur="1s"
+            repeatCount="indefinite"
+          />
+        </path>
+      </g>
+    </g>
+  </svg>
+);
+
+const DefaultReset = () => (
+  <svg role="img" width="1em" height="1em">
+    <use xlinkHref="#sbx-icon-clear-3" />
+  </svg>
+);
+
+const DefaultSubmit = () => (
+  <svg role="img" width="1em" height="1em">
+    <use xlinkHref="#sbx-icon-search-13" />
+  </svg>
+);
 
 class SearchBox extends Component {
   static propTypes = {
+    cx: PropTypes.func.isRequired,
     currentRefinement: PropTypes.string,
     refine: PropTypes.func.isRequired,
     translate: PropTypes.func.isRequired,
 
+    loadingIndicatorComponent: PropTypes.element,
     resetComponent: PropTypes.element,
     submitComponent: PropTypes.element,
 
@@ -31,6 +66,9 @@ class SearchBox extends Component {
     header: PropTypes.node,
     footer: PropTypes.node,
 
+    isSearchStalled: PropTypes.bool,
+    showLoadingIndicator: PropTypes.bool,
+
     // For testing purposes
     __inputRef: PropTypes.func,
   };
@@ -40,6 +78,11 @@ class SearchBox extends Component {
     focusShortcuts: ['s', '/'],
     autoFocus: false,
     searchAsYouType: true,
+    showLoadingIndicator: false,
+    isSearchStalled: false,
+    loadingIndicatorComponent: <DefaultLoadingIndicator />,
+    submitComponent: <DefaultSubmit />,
+    resetComponent: <DefaultReset />,
   };
 
   constructor(props) {
@@ -159,14 +202,21 @@ class SearchBox extends Component {
   };
 
   render() {
-    const { translate, autoFocus, header, footer } = this.props;
+    const {
+      cx,
+      translate,
+      autoFocus,
+      header,
+      footer,
+      loadingIndicatorComponent,
+    } = this.props;
     const query = this.getQuery();
 
     const submitComponent = this.props.submitComponent ? (
       this.props.submitComponent
     ) : (
       <svg
-        {...cx(['submitIcon'])}
+        className={cx('submitIcon')}
         xmlns="http://www.w3.org/2000/svg"
         width="10"
         height="10"
@@ -180,7 +230,7 @@ class SearchBox extends Component {
       this.props.resetComponent
     ) : (
       <svg
-        {...cx(['resetIcon'])}
+        className={cx('resetIcon')}
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 20 20"
         width="10"
@@ -202,53 +252,65 @@ class SearchBox extends Component {
       return props;
     }, {});
 
+    const isSearchStalled =
+      this.props.showLoadingIndicator && this.props.isSearchStalled;
+
     /* eslint-disable max-len */
     return (
-      <BaseWidget
-        widgetClassName={widgetClassName}
-        header={header}
-        footer={footer}
+      <form
+        noValidate
+        onSubmit={this.props.onSubmit ? this.props.onSubmit : this.onSubmit}
+        onReset={this.onReset}
+        className={cx('form', isSearchStalled && 'form--stalledSearch')}
+        action=""
+        role="search"
       >
-        <form
-          noValidate
-          onSubmit={this.props.onSubmit ? this.props.onSubmit : this.onSubmit}
-          onReset={this.onReset}
-          {...cx(['form'])}
-          action=""
-          role="search"
+        <input
+          ref={this.onInputMount}
+          type="search"
+          placeholder={translate('placeholder')}
+          autoFocus={autoFocus}
+          autoComplete="off"
+          autoCorrect="off"
+          autoCapitalize="off"
+          spellCheck="false"
+          required
+          maxLength="512"
+          value={query}
+          onChange={this.onChange}
+          {...searchInputEvents}
+          className={cx('input')}
+        />
+        {this.props.showLoadingIndicator && (
+          <div
+            style={{
+              display: isSearchStalled ? 'block' : 'none',
+            }}
+            className={cx('loadingIndicator')}
+          >
+            {loadingIndicatorComponent}
+          </div>
+        )}
+        <button
+          type="submit"
+          title={translate('submitTitle')}
+          className={cx('submit')}
+          style={{
+            display: isSearchStalled ? 'none' : 'block',
+          }}
         >
-          <input
-            ref={this.onInputMount}
-            type="text"
-            placeholder={translate('placeholder')}
-            autoFocus={autoFocus}
-            autoComplete="off"
-            spellCheck="false"
-            required
-            maxLength="512"
-            value={query}
-            onChange={this.onChange}
-            {...searchInputEvents}
-            {...cx(['input'])}
-          />
-          <button
-            type="submit"
-            title={translate('submitTitle')}
-            {...cx(['submit'])}
-          >
-            {submitComponent}
-          </button>
-          <button
-            type="reset"
-            title={translate('resetTitle')}
-            {...cx(['reset'])}
-            onClick={this.onReset}
-            style={query ? { display: 'block' } : { display: 'none' }}
-          >
-            {resetComponent}
-          </button>
-        </form>
-      </BaseWidget>
+          {submitComponent}
+        </button>
+        <button
+          type="reset"
+          title={translate('resetTitle')}
+          className={cx('reset')}
+          onClick={this.onReset}
+          style={query ? { display: 'block' } : { display: 'none' }}
+        >
+          {resetComponent}
+        </button>
+      </form>
     );
     /* eslint-enable */
   }

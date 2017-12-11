@@ -1,25 +1,30 @@
-import connectBreadcrumb from '../connectors/connectBreadcrumb.js';
-import BreadcrumbComponent from '../components/Breadcrumb.js';
+import React from 'react';
+import BaseWidget from './BaseWidget';
+import connectBreadcrumb from '../connectors/connectBreadcrumb';
+import BreadcrumbComponent from '../components/Breadcrumb';
+import classNames from '../components/classNames';
+
+const cx = classNames('Breadcrumb');
 
 /**
- * A breadcrumb is a secondary navigation scheme that allows the user to see where the current page 
+ * A breadcrumb is a secondary navigation scheme that allows the user to see where the current page
  * is in relation to the website or web application’s hierarchy.
- * In terms of usability, using a breadcrumb reduces the number of actions a visitor needs to take in 
+ * In terms of usability, using a breadcrumb reduces the number of actions a visitor needs to take in
  * order to get to a higher-level page.
- * 
- * If you want to select a specific refinement for your Breadcrumb component, you will need to use a Virtual Hierarchical Menu 
+ *
+ * If you want to select a specific refinement for your Breadcrumb component, you will need to use a Virtual Hierarchical Menu
  * (https://community.algolia.com/react-instantsearch/guide/Virtual_widgets.html) and set its
  * defaultRefinement that will be then used by the Breadcrumb.
  *
  * @name Breadcrumb
  * @kind widget
- * @requirements Breadcrumbs are used for websites with a large amount of content organised in a hierarchical manner. 
- * The typical example is an e-commerce website which has a large variety of products grouped into logical categories 
+ * @requirements Breadcrumbs are used for websites with a large amount of content organised in a hierarchical manner.
+ * The typical example is an e-commerce website which has a large variety of products grouped into logical categories
  * (with categories, subcategories which also have subcategories).To use this widget, your attributes must be formatted in a specific way.
- * 
- * Keep in mind that breadcrumbs shouldn’t replace effective primary navigation menus: 
+ *
+ * Keep in mind that breadcrumbs shouldn’t replace effective primary navigation menus:
  * it is only an alternative way to navigate around the website.
- * 
+ *
  * If, for instance, you would like to have a breadcrumb of categories, objects in your index
  * should be formatted this way:
  *
@@ -82,4 +87,16 @@ import BreadcrumbComponent from '../components/Breadcrumb.js';
  *   );
  * }
  */
-export default connectBreadcrumb(BreadcrumbComponent);
+
+const Widget = props => (
+  <BaseWidget
+    cx={cx}
+    header={props.header}
+    footer={props.footer}
+    cantRefine={!props.canRefine}
+  >
+    <BreadcrumbComponent cx={cx} {...props} />
+  </BaseWidget>
+);
+
+export default connectBreadcrumb(Widget);

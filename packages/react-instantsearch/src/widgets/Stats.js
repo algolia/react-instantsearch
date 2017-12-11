@@ -1,5 +1,10 @@
+import React from 'react';
+import BaseWidget from './BaseWidget';
 import connectStats from '../connectors/connectStats.js';
 import StatsComponent from '../components/Stats.js';
+import classNames from '../components/classNames';
+
+const cx = classNames('Stats');
 
 /**
  * The Stats component displays the total number of matching hits and the time it took to get them (time spent in the Algolia server).
@@ -24,4 +29,11 @@ import StatsComponent from '../components/Stats.js';
  *   );
  * }
  */
-export default connectStats(StatsComponent);
+
+const Widget = props => (
+  <BaseWidget cx={cx} header={props.header} footer={props.footer}>
+    <StatsComponent cx={cx} {...props} />
+  </BaseWidget>
+);
+
+export default connectStats(Widget);

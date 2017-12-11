@@ -96,7 +96,7 @@ export default createConnector({
 
   defaultProps: {
     rootURL: null,
-    separator: ' > ',
+    separator: '>',
   },
 
   getProvidedProps(props, searchState, searchResults) {

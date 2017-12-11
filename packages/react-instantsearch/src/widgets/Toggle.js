@@ -1,5 +1,10 @@
+import React from 'react';
+import BaseWidget from './BaseWidget';
 import connectToggle from '../connectors/connectToggle.js';
 import ToggleComponent from '../components/Toggle.js';
+import classNames from '../components/classNames';
+
+const cx = classNames('Toggle');
 
 /**
  * The Toggle provides an on/off filtering feature based on an attribute value. Note that if you provide an “off” option, it will be refined at initialization.
@@ -38,4 +43,11 @@ import ToggleComponent from '../components/Toggle.js';
  *   );
  * }
  */
-export default connectToggle(ToggleComponent);
+
+const Widget = props => (
+  <BaseWidget cx={cx} header={props.header} footer={props.footer}>
+    <ToggleComponent cx={cx} {...props} />
+  </BaseWidget>
+);
+
+export default connectToggle(Widget);

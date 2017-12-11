@@ -1,5 +1,10 @@
+import React from 'react';
+import BaseWidget from './BaseWidget';
 import connectHierarchicalMenu from '../connectors/connectHierarchicalMenu.js';
 import HierarchicalMenuComponent from '../components/HierarchicalMenu.js';
+import classNames from '../components/classNames';
+
+const cx = classNames('HierarchicalMenu');
 
 /**
  * The hierarchical menu lets the user browse attributes using a tree-like structure.
@@ -14,17 +19,26 @@ import HierarchicalMenuComponent from '../components/HierarchicalMenu.js';
  * should be formatted this way:
  *
  * ```json
- * {
+ * [{
+ *   "objectID": "321432",
+ *   "name": "lemon",
  *   "categories.lvl0": "products",
  *   "categories.lvl1": "products > fruits",
- *   "categories.lvl2": "products > fruits > citrus"
- * }
+ * },
+ * {
+ *   "objectID": "8976987",
+ *   "name": "orange",
+ *   "categories.lvl0": "products",
+ *   "categories.lvl1": "products > fruits",
+ * }]
  * ```
  *
  * It's also possible to provide more than one path for each level:
  *
  * ```json
  * {
+ *   "objectID": "321432",
+ *   "name": "lemon",
  *   "categories.lvl0": ["products", "goods"],
  *   "categories.lvl1": ["products > fruits", "goods > to eat"]
  * }
@@ -80,4 +94,11 @@ import HierarchicalMenuComponent from '../components/HierarchicalMenu.js';
  *   );
  * }
  */
-export default connectHierarchicalMenu(HierarchicalMenuComponent);
+
+const Widget = props => (
+  <BaseWidget cx={cx} header={props.header} footer={props.footer}>
+    <HierarchicalMenuComponent cx={cx} {...props} />
+  </BaseWidget>
+);
+
+export default connectHierarchicalMenu(Widget);

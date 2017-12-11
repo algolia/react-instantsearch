@@ -1,5 +1,10 @@
+import React from 'react';
+import BaseWidget from './BaseWidget';
 import connectRange from '../connectors/connectRange.js';
 import StarRatingComponent from '../components/StarRating.js';
+import classNames from '../components/classNames';
+
+const cx = classNames('RatingMenu');
 
 /**
  * StarRating lets the user refine search results by clicking on stars.
@@ -47,4 +52,16 @@ import StarRatingComponent from '../components/StarRating.js';
  *   );
  * }
  */
-export default connectRange(StarRatingComponent);
+
+const Widget = props => (
+  <BaseWidget
+    cx={cx}
+    header={props.header}
+    footer={props.footer}
+    cantRefine={!props.canRefine}
+  >
+    <StarRatingComponent cx={cx} {...props} />
+  </BaseWidget>
+);
+
+export default connectRange(Widget);

@@ -1,5 +1,10 @@
+import React from 'react';
+import BaseWidget from './BaseWidget';
 import connectRefinementList from '../connectors/connectRefinementList.js';
 import RefinementListComponent from '../components/RefinementList.js';
+import classNames from '../components/classNames';
+
+const cx = classNames('RefinementList');
 
 /**
  * The RefinementList component displays a list that let the end user choose multiple values for a specific facet.
@@ -49,4 +54,11 @@ import RefinementListComponent from '../components/RefinementList.js';
  *   );
  * }
  */
-export default connectRefinementList(RefinementListComponent);
+
+const Widget = props => (
+  <BaseWidget cx={cx} header={props.header} footer={props.footer}>
+    <RefinementListComponent cx={cx} {...props} />
+  </BaseWidget>
+);
+
+export default connectRefinementList(Widget);

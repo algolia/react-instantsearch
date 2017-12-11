@@ -13,7 +13,7 @@ const AlgoliaLogo = () => (
     viewBox="0 0 1366 362"
     width="100"
     height="27"
-    {...cx(['logo'])}
+    className={cx('logo')}
   >
     <linearGradient
       id="g"
@@ -52,9 +52,14 @@ class PoweredBy extends Component {
   render() {
     const { translate, url } = this.props;
     return (
-      <div {...cx([''])}>
-        <span {...cx(['text'])}>{translate('searchBy')}</span>{' '}
-        <a href={url} target="_blank" {...cx(['link'])} aria-label="Algolia">
+      <div className={cx('')}>
+        <span className={cx('text')}>{translate('searchBy')}</span>{' '}
+        <a
+          href={url}
+          target="_blank"
+          className={cx('link')}
+          aria-label="Algolia"
+        >
           <AlgoliaLogo />
         </a>
       </div>

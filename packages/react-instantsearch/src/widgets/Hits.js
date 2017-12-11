@@ -1,5 +1,10 @@
+import React from 'react';
+import BaseWidget from './BaseWidget';
 import connectHits from '../connectors/connectHits.js';
 import HitsComponent from '../components/Hits.js';
+import classNames from '../components/classNames';
+
+const cx = classNames('Results');
 
 /**
  * Displays a list of hits.
@@ -30,4 +35,11 @@ import HitsComponent from '../components/Hits.js';
  *   );
  * }
  */
-export default connectHits(HitsComponent);
+
+const Widget = props => (
+  <BaseWidget cx={cx} header={props.header} footer={props.footer}>
+    <HitsComponent cx={cx} {...props} />
+  </BaseWidget>
+);
+
+export default connectHits(Widget);

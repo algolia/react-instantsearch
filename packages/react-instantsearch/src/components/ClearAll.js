@@ -2,14 +2,10 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 import translatable from '../core/translatable';
-import classNames from './classNames.js';
-import BaseWidget from './BaseWidget';
-
-const widgetClassName = 'ClearRefinements';
-const cx = classNames(widgetClassName);
 
 class ClearAll extends Component {
   static propTypes = {
+    cx: PropTypes.func.isRequired,
     translate: PropTypes.func.isRequired,
     items: PropTypes.arrayOf(PropTypes.object).isRequired,
     refine: PropTypes.func.isRequired,
@@ -18,25 +14,17 @@ class ClearAll extends Component {
   };
 
   render() {
-    const { translate, items, refine, header, footer } = this.props;
+    const { cx, translate, items, refine, header, footer } = this.props;
     const isDisabled = items.length === 0;
 
     return (
-      <BaseWidget
-        widgetClassName={widgetClassName}
-        header={header}
-        footer={footer}
+      <button
+        className={cx('button', isDisabled && 'button--disabled')}
+        onClick={() => refine(items)}
+        disabled={isDisabled}
       >
-        {isDisabled ? (
-          <button {...cx(['button', 'button--disabled'])} disabled>
-            {translate(['reset'])}
-          </button>
-        ) : (
-          <button {...cx(['button'])} onClick={() => refine(items)}>
-            {translate('reset')}
-          </button>
-        )}
-      </BaseWidget>
+        {translate('reset')}
+      </button>
     );
   }
 }

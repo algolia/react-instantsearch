@@ -1,5 +1,10 @@
+import React from 'react';
+import BaseWidget from './BaseWidget';
 import connectCurrentRefinements from '../connectors/connectCurrentRefinements.js';
 import ClearAllComponent from '../components/ClearAll.js';
+import classNames from '../components/classNames';
+
+const cx = classNames('ClearRefinements');
 
 /**
  * The ClearAll widget displays a button that lets the user clean every refinement applied
@@ -31,4 +36,11 @@ import ClearAllComponent from '../components/ClearAll.js';
  *   );
  * }
  */
-export default connectCurrentRefinements(ClearAllComponent);
+
+const Widget = props => (
+  <BaseWidget cx={cx} header={props.header} footer={props.footer}>
+    <ClearAllComponent cx={cx} {...props} />
+  </BaseWidget>
+);
+
+export default connectCurrentRefinements(Widget);

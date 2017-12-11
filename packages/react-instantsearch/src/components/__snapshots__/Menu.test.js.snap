@@ -96,7 +96,7 @@ exports[`Menu Menu with search inside items but no search results 1`] = `
           >
             white
           </span>
-           
+
           <span
             className="ais-Menu-count"
           >
@@ -117,7 +117,7 @@ exports[`Menu Menu with search inside items but no search results 1`] = `
           >
             black
           </span>
-           
+
           <span
             className="ais-Menu-count"
           >
@@ -138,7 +138,7 @@ exports[`Menu Menu with search inside items but no search results 1`] = `
           >
             blue
           </span>
-           
+
           <span
             className="ais-Menu-count"
           >
@@ -245,7 +245,7 @@ exports[`Menu Menu with search inside items with search results 1`] = `
           <span
             className="ais-Menu-label"
           />
-           
+
           <span
             className="ais-Menu-count"
           >
@@ -354,7 +354,7 @@ exports[`Menu applies translations 1`] = `
           >
             white
           </span>
-           
+
           <span
             className="ais-Menu-count"
           >
@@ -375,7 +375,7 @@ exports[`Menu applies translations 1`] = `
           >
             black
           </span>
-           
+
           <span
             className="ais-Menu-count"
           >
@@ -418,7 +418,7 @@ exports[`Menu default menu 1`] = `
           >
             white
           </span>
-           
+
           <span
             className="ais-Menu-count"
           >
@@ -439,7 +439,7 @@ exports[`Menu default menu 1`] = `
           >
             black
           </span>
-           
+
           <span
             className="ais-Menu-count"
           >

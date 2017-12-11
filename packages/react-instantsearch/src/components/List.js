@@ -60,7 +60,7 @@ class List extends Component {
 
   renderItem = (item, resetQuery) => {
     const items = item.items && (
-      <ul {...this.props.cx(['list'])}>
+      <ul className={this.props.cx('list')}>
         {item.items
           .slice(0, this.getLimit())
           .map(child => this.renderItem(child, item))}
@@ -70,12 +70,12 @@ class List extends Component {
     return (
       <li
         key={item.key || item.label}
-        {...this.props.cx([
+        className={this.props.cx(
           'item',
           item.isRefined && 'item--selected',
           item.noRefinement && 'item--noRefinement',
-          items && 'item--parent',
-        ])}
+          items && 'item--parent'
+        )}
       >
         {this.props.renderItem(item, resetQuery)}
         {items}
@@ -94,7 +94,7 @@ class List extends Component {
     return (
       <button
         disabled={disabled}
-        {...cx(['showMore', disabled && 'showMore--disabled'])}
+        className={cx('showMore', disabled && 'showMore--disabled')}
         onClick={this.onShowMoreClick}
       >
         {translate('showMore', extended)}
@@ -114,10 +114,10 @@ class List extends Component {
 
     const noResults =
       items.length === 0 && this.state.query !== '' ? (
-        <div {...cx(['noResults'])}>{translate('noResults')}</div>
+        <div className={cx('noResults')}>{translate('noResults')}</div>
       ) : null;
     return (
-      <div {...cx(['searchBox'])}>
+      <div className={cx('searchBox')}>
         <SearchBox
           currentRefinement={this.state.query}
           refine={value => {
@@ -144,7 +144,7 @@ class List extends Component {
     const searchBox = withSearchBox ? this.renderSearchBox() : null;
     if (items.length === 0) {
       return (
-        <ul {...cx(['list', !canRefine && 'list--noRefinement'])}>
+        <ul className={cx('list', !canRefine && 'list--noRefinement')}>
           {searchBox}
         </ul>
       );
@@ -155,7 +155,7 @@ class List extends Component {
     // option.
     const limit = this.getLimit();
     return (
-      <ul {...cx(['list', !this.props.canRefine && 'list--noRefinement'])}>
+      <ul className={cx('list', !this.props.canRefine && 'list--noRefinement')}>
         {searchBox}
         {items
           .slice(0, limit)

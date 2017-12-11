@@ -1,5 +1,10 @@
+import React from 'react';
+import BaseWidget from './BaseWidget';
 import connectMenu from '../connectors/connectMenu.js';
 import MenuComponent from '../components/Menu.js';
+import classNames from '../components/classNames';
+
+const cx = classNames('Menu');
 
 /**
  * The Menu component displays a menu that lets the user choose a single value for a specific attribute.
@@ -50,4 +55,11 @@ import MenuComponent from '../components/Menu.js';
  *   );
  * }
  */
-export default connectMenu(MenuComponent);
+
+const Widget = props => (
+  <BaseWidget cx={cx} header={props.header} footer={props.footer}>
+    <MenuComponent cx={cx} {...props} />
+  </BaseWidget>
+);
+
+export default connectMenu(Widget);

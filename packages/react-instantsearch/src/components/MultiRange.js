@@ -1,15 +1,11 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import List from './List';
-import BaseWidget from './BaseWidget';
-import classNames from './classNames.js';
 import translatable from '../core/translatable';
-
-const widgetClassName = 'NumericMenu';
-const cx = classNames(widgetClassName);
 
 class MultiRange extends Component {
   static propTypes = {
+    cx: PropTypes.func.isRequired,
     items: PropTypes.arrayOf(
       PropTypes.shape({
         label: PropTypes.node.isRequired,
@@ -39,39 +35,33 @@ class MultiRange extends Component {
   }
 
   renderItem = item => {
-    const { refine, translate } = this.props;
+    const { cx, refine, translate } = this.props;
     const label = item.value === '' ? translate('all') : item.label;
     return (
-      <label {...cx(['label'])}>
+      <label className={cx('label')}>
         <input
-          {...cx(['radio'])}
+          className={cx('radio')}
           type="radio"
           checked={item.isRefined}
           disabled={item.noRefinement}
           onChange={() => refine(item.value)}
         />
-        <span {...cx(['labelText'])}>{label}</span>
+        <span className={cx('labelText')}>{label}</span>
       </label>
     );
   };
 
   render() {
-    const { items, canRefine, header, footer } = this.props;
+    const { cx, items, canRefine, header, footer } = this.props;
 
     return (
-      <BaseWidget
-        widgetClassName={widgetClassName}
-        header={header}
-        footer={footer}
-      >
-        <List
-          renderItem={this.renderItem}
-          showMore={false}
-          canRefine={canRefine}
-          cx={cx}
-          items={items.map(item => ({ ...item, key: item.value }))}
-        />
-      </BaseWidget>
+      <List
+        renderItem={this.renderItem}
+        showMore={false}
+        canRefine={canRefine}
+        cx={cx}
+        items={items.map(item => ({ ...item, key: item.value }))}
+      />
     );
   }
 }

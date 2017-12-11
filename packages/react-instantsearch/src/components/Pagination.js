@@ -5,11 +5,6 @@ import { range } from 'lodash';
 import { capitalize } from '../core/utils';
 import translatable from '../core/translatable';
 import LinkList from './LinkList';
-import BaseWidget from './BaseWidget';
-import classNames from './classNames.js';
-
-const widgetClassName = 'Pagination';
-const cx = classNames(widgetClassName);
 
 // Determines the size of the widget (the number of pages displayed - that the user can directly click on)
 function calculateSize(padding, maxPages) {
@@ -49,6 +44,7 @@ function getPages(currentPage, maxPages, padding) {
 
 class Pagination extends Component {
   static propTypes = {
+    cx: PropTypes.func.isRequired,
     nbPages: PropTypes.number.isRequired,
     currentRefinement: PropTypes.number.isRequired,
     refine: PropTypes.func.isRequired,
@@ -104,6 +100,7 @@ class Pagination extends Component {
 
   render() {
     const {
+      cx,
       nbPages,
       maxPages,
       currentRefinement,
@@ -177,19 +174,13 @@ class Pagination extends Component {
     }
 
     return (
-      <BaseWidget
-        widgetClassName={widgetClassName}
-        header={header}
-        footer={footer}
-      >
-        <ListComponent
-          {...otherProps}
-          cx={cx}
-          items={items}
-          onSelect={refine}
-          createURL={createURL}
-        />
-      </BaseWidget>
+      <ListComponent
+        {...otherProps}
+        cx={cx}
+        items={items}
+        onSelect={refine}
+        createURL={createURL}
+      />
     );
   }
 }

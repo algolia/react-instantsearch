@@ -1,5 +1,10 @@
+import React from 'react';
+import BaseWidget from './BaseWidget';
 import connectRange from '../connectors/connectRange.js';
 import RangeInputComponent from '../components/RangeInput.js';
+import classNames from '../components/classNames';
+
+const cx = classNames('RangeInput');
 
 /**
  * RangeInput allows a user to select a numeric range using a minimum and maximum input.
@@ -38,4 +43,16 @@ import RangeInputComponent from '../components/RangeInput.js';
  *   );
  * }
  */
-export default connectRange(RangeInputComponent);
+
+const Widget = props => (
+  <BaseWidget
+    cx={cx}
+    header={props.header}
+    footer={props.footer}
+    cantRefine={!props.canRefine}
+  >
+    <RangeInputComponent cx={cx} {...props} />
+  </BaseWidget>
+);
+
+export default connectRange(Widget);

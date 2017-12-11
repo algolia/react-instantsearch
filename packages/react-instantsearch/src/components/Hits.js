@@ -1,22 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from './classNames.js';
-import BaseWidget from './BaseWidget';
 
-const widgetClassName = 'Results';
-const cx = classNames(widgetClassName);
-
-const Hits = ({ hits, hitComponent: HitComponent, header, footer }) => (
+const Hits = ({ cx, hits, hitComponent: HitComponent, header, footer }) => (
   // Spread the hit on HitComponent instead of passing the full object. BC.
   // ex: <HitComponent {...hit} key={hit.objectID} />
-  <BaseWidget widgetClassName={widgetClassName} header={header} footer={footer}>
-    <ul {...cx(['list'])}>
-      {hits.map(hit => <HitComponent key={hit.objectID} hit={hit} />)}
-    </ul>
-  </BaseWidget>
+
+  <ul className={cx('list')}>
+    {hits.map(hit => (
+      <li className={cx('item')} key={hit.objectID}>
+        <HitComponent hit={hit} />
+      </li>
+    ))}
+  </ul>
 );
 
 Hits.propTypes = {
+  cx: PropTypes.func.isRequired,
   hits: PropTypes.array,
   hitComponent: PropTypes.func.isRequired,
   header: PropTypes.node,
@@ -25,8 +24,7 @@ Hits.propTypes = {
 
 Hits.defaultProps = {
   hitComponent: props => (
-    <li
-      {...cx(['item'])}
+    <div
       style={{
         borderBottom: '1px solid #bbb',
         paddingBottom: '5px',
@@ -34,7 +32,7 @@ Hits.defaultProps = {
       }}
     >
       {JSON.stringify(props).slice(0, 100)}...
-    </li>
+    </div>
   ),
 };
 

@@ -1,5 +1,10 @@
+import React from 'react';
+import BaseWidget from './BaseWidget';
 import connectHitsPerPage from '../connectors/connectHitsPerPage.js';
 import HitsPerPageSelectComponent from '../components/HitsPerPage.js';
+import classNames from '../components/classNames';
+
+const cx = classNames('ResultsPerPage');
 
 /**
  * The HitsPerPage widget displays a dropdown menu to let the user change the number
@@ -34,4 +39,11 @@ import HitsPerPageSelectComponent from '../components/HitsPerPage.js';
  *   );
  * }
  */
-export default connectHitsPerPage(HitsPerPageSelectComponent);
+
+const Widget = props => (
+  <BaseWidget cx={cx} header={props.header} footer={props.footer}>
+    <HitsPerPageSelectComponent cx={cx} {...props} />
+  </BaseWidget>
+);
+
+export default connectHitsPerPage(Widget);
