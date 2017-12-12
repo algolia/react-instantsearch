@@ -26,4 +26,14 @@ babel -q server.js -o dist/server.js &&
 babel -q --ignore test.js,__mocks__ --out-dir dist/src src
 
 # finally a UMD build
-BABEL_ENV=es rollup -c rollup.config.js
+BABEL_ENV=es rollup -c rollup.config.js &&
+
+# then build type definitions
+moduleName=`cat package.json | json name`
+
+cat index.js | react2dts --module-name ${moduleName} > dist/index.d.ts &&
+cat dom.js | react2dts --module-name ${moduleName}/dom > dist/dom.d.ts &&
+cat connectors.js | react2dts --module-name ${moduleName}/connectors > dist/connectors.d.ts &&
+cat native.js | react2dts --module-name ${moduleName}/native > dist/native.d.ts &&
+cat server.js | react2dts --module-name ${moduleName}/server > dist/server.d.ts &&
+find "dist/es" -name "*.js" -exec ./scripts/types.sh {} ${moduleName} "dist/es" \;
