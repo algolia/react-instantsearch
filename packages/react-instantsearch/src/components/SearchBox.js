@@ -61,9 +61,9 @@ class SearchBox extends Component {
     refine: PropTypes.func.isRequired,
     translate: PropTypes.func.isRequired,
 
-    renderLoadingIndicatorComponent: PropTypes.element,
-    renderResetComponent: PropTypes.element,
-    renderSubmitComponent: PropTypes.element,
+    renderLoadingIndicatorComponent: PropTypes.func,
+    renderResetComponent: PropTypes.func,
+    renderSubmitComponent: PropTypes.func,
 
     focusShortcuts: PropTypes.arrayOf(
       PropTypes.oneOfType([PropTypes.string, PropTypes.number])
