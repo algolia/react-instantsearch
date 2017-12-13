@@ -21,7 +21,10 @@ describe('RangeInput', () => {
       max: undefined,
     };
 
-    return shallow(<RangeInput {...defaultProps} {...props} />, { context });
+    return shallow(
+      <RangeInput cx={(...x) => x.join(' ')} {...defaultProps} {...props} />,
+      { context }
+    );
   };
 
   it('render with translations', () => {
@@ -53,7 +56,10 @@ describe('RawRangeInput', () => {
       max: undefined,
     };
 
-    return shallow(<RawRangeInput {...defaultProps} {...props} />, { context });
+    return shallow(
+      <RawRangeInput cx={(...x) => x.join(' ')} {...defaultProps} {...props} />,
+      { context }
+    );
   };
 
   it('render with empty values', () => {
@@ -307,7 +313,7 @@ describe('RawRangeInput', () => {
       const props = {};
       const component = shallowRender(props);
 
-      component.find('.ais-RangeInput-input--min').simulate('change', {
+      component.find('.input--min').simulate('change', {
         currentTarget: {
           value: 10,
         },
@@ -324,7 +330,7 @@ describe('RawRangeInput', () => {
       const props = {};
       const component = shallowRender(props);
 
-      component.find('.ais-RangeInput-input--max').simulate('change', {
+      component.find('.input--max').simulate('change', {
         currentTarget: {
           value: 490,
         },

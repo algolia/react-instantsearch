@@ -13,6 +13,7 @@ describe('MenuSelect', () => {
     const tree = renderer
       .create(
         <MenuSelect
+          cx={(...x) => x.join(' ')}
           refine={() => {}}
           items={[
             { label: 'white', value: 'white', count: 10, isRefined: false },
@@ -32,6 +33,7 @@ describe('MenuSelect', () => {
     const tree = renderer
       .create(
         <MenuSelect
+          cx={(...x) => x.join(' ')}
           refine={() => {}}
           items={[
             { label: 'white', value: 'white', count: 10, isRefined: false },
@@ -54,6 +56,7 @@ describe('MenuSelect', () => {
     const refine = jest.fn();
     const wrapper = mount(
       <MenuSelect
+        cx={(...x) => x.join(' ')}
         refine={refine}
         items={[
           { label: 'white', value: 'white', count: 10, isRefined: false },
@@ -64,12 +67,10 @@ describe('MenuSelect', () => {
       />
     );
 
-    const items = wrapper.find('.ais-MenuSelect-option');
+    const items = wrapper.find('.option');
     expect(items).toHaveLength(4); // +1 from "see all option"
 
-    wrapper
-      .find('.ais-MenuSelect-select')
-      .simulate('change', { target: { value: 'blue' } });
+    wrapper.find('.select').simulate('change', { target: { value: 'blue' } });
 
     expect(refine).toHaveBeenCalledTimes(1);
     expect(refine).toHaveBeenCalledWith('blue');

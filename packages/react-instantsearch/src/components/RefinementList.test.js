@@ -16,6 +16,7 @@ describe('RefinementList', () => {
     const tree = renderer
       .create(
         <RefinementList
+          cx={(...x) => x.join(' ')}
           refine={() => null}
           createURL={() => '#'}
           searchForItems={() => null}
@@ -39,6 +40,7 @@ describe('RefinementList', () => {
     const tree = renderer
       .create(
         <RefinementList
+          cx={(...x) => x.join(' ')}
           refine={() => null}
           searchForItems={() => null}
           withSearchBox
@@ -60,6 +62,7 @@ describe('RefinementList', () => {
     const tree = renderer
       .create(
         <RefinementList
+          cx={(...x) => x.join(' ')}
           refine={() => null}
           withSearchBox
           searchForItems={() => null}
@@ -85,6 +88,7 @@ describe('RefinementList', () => {
     const tree = renderer
       .create(
         <RefinementList
+          cx={(...x) => x.join(' ')}
           refine={() => null}
           searchForItems={() => null}
           withSearchBox
@@ -111,6 +115,7 @@ describe('RefinementList', () => {
     const refine = jest.fn();
     const wrapper = mount(
       <RefinementList
+        cx={(...x) => x.join(' ')}
         refine={refine}
         searchForItems={() => null}
         createURL={() => '#'}
@@ -124,11 +129,11 @@ describe('RefinementList', () => {
       />
     );
 
-    const items = wrapper.find('.ais-RefinementList-item');
+    const items = wrapper.find('.item');
 
     expect(items).toHaveLength(3);
 
-    const firstItem = items.first().find('.ais-RefinementList-checkbox');
+    const firstItem = items.first().find('.checkbox');
 
     firstItem.simulate('change', { target: { checked: true } });
 
@@ -142,6 +147,7 @@ describe('RefinementList', () => {
     const refine = jest.fn();
     const wrapper = mount(
       <RefinementList
+        cx={(...x) => x.join(' ')}
         refine={refine}
         searchForItems={() => null}
         createURL={() => '#'}
@@ -160,13 +166,13 @@ describe('RefinementList', () => {
       />
     );
 
-    const items = wrapper.find('.ais-RefinementList-item');
+    const items = wrapper.find('.item');
 
     expect(items).toHaveLength(2);
 
-    wrapper.find('.ais-RefinementList-showMore').simulate('click');
+    wrapper.find('.showMore').simulate('click');
 
-    expect(wrapper.find('.ais-RefinementList-item')).toHaveLength(4);
+    expect(wrapper.find('.item')).toHaveLength(4);
 
     wrapper.unmount();
   });
@@ -175,6 +181,7 @@ describe('RefinementList', () => {
     const refine = jest.fn();
     const wrapper = mount(
       <RefinementList
+        cx={(...x) => x.join(' ')}
         refine={refine}
         searchForItems={() => null}
         createURL={() => '#'}
@@ -190,11 +197,11 @@ describe('RefinementList', () => {
       />
     );
 
-    const items = wrapper.find('.ais-RefinementList-item');
+    const items = wrapper.find('.item');
 
     expect(items).toHaveLength(2);
 
-    expect(wrapper.find('.ais-RefinementList-showMore--disabled')).toBeDefined();
+    expect(wrapper.find('.showMore--disabled')).toBeDefined();
 
     wrapper.unmount();
   });
@@ -204,6 +211,7 @@ describe('RefinementList', () => {
     const searchForItems = jest.fn();
     const refinementList = (
       <RefinementList
+        cx={(...x) => x.join(' ')}
         refine={refine}
         withSearchBox
         searchForItems={searchForItems}
@@ -232,7 +240,7 @@ describe('RefinementList', () => {
     it('a searchbox should be displayed if the feature is activated', () => {
       const wrapper = mount(refinementList);
 
-      const searchBox = wrapper.find('.ais-RefinementList-searchBox');
+      const searchBox = wrapper.find('.searchBox');
 
       expect(searchBox).toBeDefined();
 
@@ -243,7 +251,7 @@ describe('RefinementList', () => {
       const wrapper = mount(refinementList);
 
       wrapper
-        .find('.ais-RefinementList-searchBox input')
+        .find('.searchBox input')
         .simulate('change', { target: { value: 'query' } });
 
       expect(searchForItems.mock.calls).toHaveLength(1);
@@ -256,18 +264,16 @@ describe('RefinementList', () => {
       const wrapper = mount(refinementList);
 
       const firstItem = wrapper
-        .find('.ais-RefinementList-item')
+        .find('.item')
         .first()
-        .find('.ais-RefinementList-checkbox');
+        .find('.checkbox');
       firstItem.simulate('change', { target: { checked: true } });
 
       expect(refine.mock.calls).toHaveLength(1);
       expect(refine.mock.calls[0][0]).toEqual(['white']);
-      expect(
-        wrapper.find('.ais-RefinementList-searchBox input').props().value
-      ).toBe('');
+      expect(wrapper.find('.searchBox input').props().value).toBe('');
 
-      const selectedRefinements = wrapper.find('.ais-RefinementList-item');
+      const selectedRefinements = wrapper.find('.item');
       expect(selectedRefinements).toHaveLength(2);
 
       wrapper.unmount();
@@ -281,11 +287,9 @@ describe('RefinementList', () => {
 
       expect(refine.mock.calls).toHaveLength(1);
       expect(refine.mock.calls[0][0]).toEqual(['white']);
-      expect(
-        wrapper.find('.ais-RefinementList-searchBox input').props().value
-      ).toBe('');
+      expect(wrapper.find('.searchBox input').props().value).toBe('');
 
-      const selectedRefinements = wrapper.find('.ais-RefinementList-item');
+      const selectedRefinements = wrapper.find('.item');
       expect(selectedRefinements).toHaveLength(2);
 
       wrapper.unmount();
@@ -297,6 +301,7 @@ describe('RefinementList', () => {
       const canRefine = jest.fn();
       const wrapper = mount(
         <RefinementList
+          cx={(...x) => x.join(' ')}
           refine={() => null}
           searchForItems={() => null}
           createURL={() => '#'}
@@ -314,13 +319,13 @@ describe('RefinementList', () => {
 
       expect(canRefine.mock.calls).toHaveLength(1);
       expect(canRefine.mock.calls[0][0]).toEqual(true);
-      expect(wrapper.find('.ais-RefinementList-list--noRefinement')).toHaveLength(0);
+      expect(wrapper.find('.list--noRefinement')).toHaveLength(0);
 
       wrapper.setProps({ canRefine: false });
 
       expect(canRefine.mock.calls).toHaveLength(2);
       expect(canRefine.mock.calls[1][0]).toEqual(false);
-      expect(wrapper.find('.ais-RefinementList-list--noRefinement')).toHaveLength(1);
+      expect(wrapper.find('.list--noRefinement')).toHaveLength(1);
     });
   });
 });

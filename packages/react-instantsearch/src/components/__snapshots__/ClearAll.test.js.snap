@@ -1,35 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ClearAll has a disabled mode 1`] = `
-<div
-  className="ais-ClearRefinements"
+<button
+  className="button button--disabled"
+  disabled={true}
+  onClick={[Function]}
 >
-  <div
-    className="ais-ClearRefinements-body ais-body"
-  >
-    <button
-      className="ais-ClearRefinements-button ais-ClearRefinements-button--disabled"
-      disabled={true}
-    >
-      Clear all filters
-    </button>
-  </div>
-</div>
+  Clear all filters
+</button>
 `;
 
 exports[`ClearAll renders a clickable button 1`] = `
-<div
-  className="ais-ClearRefinements"
+<button
+  className="button false"
+  disabled={false}
+  onClick={[Function]}
 >
-  <div
-    className="ais-ClearRefinements-body ais-body"
-  >
-    <button
-      className="ais-ClearRefinements-button"
-      onClick={[Function]}
-    >
-      Clear all filters
-    </button>
-  </div>
-</div>
+  Clear all filters
+</button>
 `;

@@ -15,6 +15,7 @@ describe('CurrentRefinements', () => {
       renderer
         .create(
           <CurrentRefinements
+            cx={(...x) => x.join(' ')}
             refine={() => null}
             items={[
               {
@@ -33,6 +34,7 @@ describe('CurrentRefinements', () => {
       renderer
         .create(
           <CurrentRefinements
+            cx={(...x) => x.join(' ')}
             refine={() => null}
             items={[
               {
@@ -51,46 +53,4 @@ describe('CurrentRefinements', () => {
         )
         .toJSON()
     ).toMatchSnapshot());
-
-  describe('Panel compatibility', () => {
-    it('Should indicate when no more refinement', () => {
-      const canRefine = jest.fn();
-      const wrapper = mount(
-        <CurrentRefinements
-          refine={() => null}
-          items={[
-            {
-              label: 'Genre',
-              value: 'clear all genres',
-              items: [
-                {
-                  label: 'Sci-fi',
-                  value: 'clear sci-fi',
-                },
-              ],
-            },
-          ]}
-          canRefine={true}
-        />,
-        {
-          context: { canRefine },
-          childContextTypes: { canRefine: PropTypes.func },
-        }
-      );
-
-      expect(canRefine.mock.calls).toHaveLength(1);
-      expect(canRefine.mock.calls[0][0]).toEqual(true);
-      expect(
-        wrapper.find('.ais-CurrentRefinements--noRefinement')
-      ).toHaveLength(0);
-
-      wrapper.setProps({ canRefine: false });
-
-      expect(canRefine.mock.calls).toHaveLength(2);
-      expect(canRefine.mock.calls[1][0]).toEqual(false);
-      expect(
-        wrapper.find('.ais-CurrentRefinements--noRefinement')
-      ).toHaveLength(1);
-    });
-  });
 });

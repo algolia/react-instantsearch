@@ -1,346 +1,322 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MultiRange no refinements 1`] = `
-<div
-  className="ais-NumericMenu"
+<ul
+  className="list false"
 >
-  <div
-    className="ais-NumericMenu-body ais-body"
+  <li
+    className="item false item--noRefinement "
   >
-    <ul
-      className="ais-NumericMenu-list"
+    <label
+      className="label"
     >
-      <li
-        className="ais-NumericMenu-item ais-NumericMenu-item--noRefinement"
+      <input
+        checked={false}
+        className="radio"
+        disabled={true}
+        onChange={[Function]}
+        type="radio"
+      />
+      <span
+        className="labelText"
       >
-        <label
-          className="ais-NumericMenu-label"
-        >
-          <input
-            checked={false}
-            className="ais-NumericMenu-radio"
-            disabled={true}
-            onChange={[Function]}
-            type="radio"
-          />
-          <span
-            className="ais-NumericMenu-labelText"
-          >
-            label1
-          </span>
-        </label>
-      </li>
-      <li
-        className="ais-NumericMenu-item ais-NumericMenu-item--noRefinement"
+        label1
+      </span>
+    </label>
+  </li>
+  <li
+    className="item false item--noRefinement "
+  >
+    <label
+      className="label"
+    >
+      <input
+        checked={false}
+        className="radio"
+        disabled={true}
+        onChange={[Function]}
+        type="radio"
+      />
+      <span
+        className="labelText"
       >
-        <label
-          className="ais-NumericMenu-label"
-        >
-          <input
-            checked={false}
-            className="ais-NumericMenu-radio"
-            disabled={true}
-            onChange={[Function]}
-            type="radio"
-          />
-          <span
-            className="ais-NumericMenu-labelText"
-          >
-            label2
-          </span>
-        </label>
-      </li>
-      <li
-        className="ais-NumericMenu-item ais-NumericMenu-item--noRefinement"
+        label2
+      </span>
+    </label>
+  </li>
+  <li
+    className="item false item--noRefinement "
+  >
+    <label
+      className="label"
+    >
+      <input
+        checked={false}
+        className="radio"
+        disabled={true}
+        onChange={[Function]}
+        type="radio"
+      />
+      <span
+        className="labelText"
       >
-        <label
-          className="ais-NumericMenu-label"
-        >
-          <input
-            checked={false}
-            className="ais-NumericMenu-radio"
-            disabled={true}
-            onChange={[Function]}
-            type="radio"
-          />
-          <span
-            className="ais-NumericMenu-labelText"
-          >
-            label3
-          </span>
-        </label>
-      </li>
-      <li
-        className="ais-NumericMenu-item ais-NumericMenu-item--noRefinement"
+        label3
+      </span>
+    </label>
+  </li>
+  <li
+    className="item false item--noRefinement "
+  >
+    <label
+      className="label"
+    >
+      <input
+        checked={false}
+        className="radio"
+        disabled={true}
+        onChange={[Function]}
+        type="radio"
+      />
+      <span
+        className="labelText"
       >
-        <label
-          className="ais-NumericMenu-label"
-        >
-          <input
-            checked={false}
-            className="ais-NumericMenu-radio"
-            disabled={true}
-            onChange={[Function]}
-            type="radio"
-          />
-          <span
-            className="ais-NumericMenu-labelText"
-          >
-            label4
-          </span>
-        </label>
-      </li>
-      <li
-        className="ais-NumericMenu-item ais-NumericMenu-item--selected"
+        label4
+      </span>
+    </label>
+  </li>
+  <li
+    className="item item--selected false "
+  >
+    <label
+      className="label"
+    >
+      <input
+        checked={true}
+        className="radio"
+        disabled={false}
+        onChange={[Function]}
+        type="radio"
+      />
+      <span
+        className="labelText"
       >
-        <label
-          className="ais-NumericMenu-label"
-        >
-          <input
-            checked={true}
-            className="ais-NumericMenu-radio"
-            disabled={false}
-            onChange={[Function]}
-            type="radio"
-          />
-          <span
-            className="ais-NumericMenu-labelText"
-          >
-            All
-          </span>
-        </label>
-      </li>
-    </ul>
-  </div>
-</div>
+        All
+      </span>
+    </label>
+  </li>
+</ul>
 `;
 
 exports[`MultiRange supports having a selected item 1`] = `
-<div
-  className="ais-NumericMenu"
+<ul
+  className="list false"
 >
-  <div
-    className="ais-NumericMenu-body ais-body"
+  <li
+    className="item false false "
   >
-    <ul
-      className="ais-NumericMenu-list"
+    <label
+      className="label"
     >
-      <li
-        className="ais-NumericMenu-item"
+      <input
+        checked={false}
+        className="radio"
+        disabled={false}
+        onChange={[Function]}
+        type="radio"
+      />
+      <span
+        className="labelText"
       >
-        <label
-          className="ais-NumericMenu-label"
-        >
-          <input
-            checked={false}
-            className="ais-NumericMenu-radio"
-            disabled={false}
-            onChange={[Function]}
-            type="radio"
-          />
-          <span
-            className="ais-NumericMenu-labelText"
-          >
-            label1
-          </span>
-        </label>
-      </li>
-      <li
-        className="ais-NumericMenu-item ais-NumericMenu-item--selected"
+        label1
+      </span>
+    </label>
+  </li>
+  <li
+    className="item item--selected false "
+  >
+    <label
+      className="label"
+    >
+      <input
+        checked={true}
+        className="radio"
+        disabled={false}
+        onChange={[Function]}
+        type="radio"
+      />
+      <span
+        className="labelText"
       >
-        <label
-          className="ais-NumericMenu-label"
-        >
-          <input
-            checked={true}
-            className="ais-NumericMenu-radio"
-            disabled={false}
-            onChange={[Function]}
-            type="radio"
-          />
-          <span
-            className="ais-NumericMenu-labelText"
-          >
-            label2
-          </span>
-        </label>
-      </li>
-      <li
-        className="ais-NumericMenu-item"
+        label2
+      </span>
+    </label>
+  </li>
+  <li
+    className="item false false "
+  >
+    <label
+      className="label"
+    >
+      <input
+        checked={false}
+        className="radio"
+        disabled={false}
+        onChange={[Function]}
+        type="radio"
+      />
+      <span
+        className="labelText"
       >
-        <label
-          className="ais-NumericMenu-label"
-        >
-          <input
-            checked={false}
-            className="ais-NumericMenu-radio"
-            disabled={false}
-            onChange={[Function]}
-            type="radio"
-          />
-          <span
-            className="ais-NumericMenu-labelText"
-          >
-            label3
-          </span>
-        </label>
-      </li>
-      <li
-        className="ais-NumericMenu-item"
+        label3
+      </span>
+    </label>
+  </li>
+  <li
+    className="item false false "
+  >
+    <label
+      className="label"
+    >
+      <input
+        checked={false}
+        className="radio"
+        disabled={false}
+        onChange={[Function]}
+        type="radio"
+      />
+      <span
+        className="labelText"
       >
-        <label
-          className="ais-NumericMenu-label"
-        >
-          <input
-            checked={false}
-            className="ais-NumericMenu-radio"
-            disabled={false}
-            onChange={[Function]}
-            type="radio"
-          />
-          <span
-            className="ais-NumericMenu-labelText"
-          >
-            label4
-          </span>
-        </label>
-      </li>
-      <li
-        className="ais-NumericMenu-item"
+        label4
+      </span>
+    </label>
+  </li>
+  <li
+    className="item false false "
+  >
+    <label
+      className="label"
+    >
+      <input
+        checked={false}
+        className="radio"
+        disabled={false}
+        onChange={[Function]}
+        type="radio"
+      />
+      <span
+        className="labelText"
       >
-        <label
-          className="ais-NumericMenu-label"
-        >
-          <input
-            checked={false}
-            className="ais-NumericMenu-radio"
-            disabled={false}
-            onChange={[Function]}
-            type="radio"
-          />
-          <span
-            className="ais-NumericMenu-labelText"
-          >
-            All
-          </span>
-        </label>
-      </li>
-    </ul>
-  </div>
-</div>
+        All
+      </span>
+    </label>
+  </li>
+</ul>
 `;
 
 exports[`MultiRange supports passing items values 1`] = `
-<div
-  className="ais-NumericMenu"
+<ul
+  className="list false"
 >
-  <div
-    className="ais-NumericMenu-body ais-body"
+  <li
+    className="item false false "
   >
-    <ul
-      className="ais-NumericMenu-list"
+    <label
+      className="label"
     >
-      <li
-        className="ais-NumericMenu-item"
+      <input
+        checked={false}
+        className="radio"
+        disabled={false}
+        onChange={[Function]}
+        type="radio"
+      />
+      <span
+        className="labelText"
       >
-        <label
-          className="ais-NumericMenu-label"
-        >
-          <input
-            checked={false}
-            className="ais-NumericMenu-radio"
-            disabled={false}
-            onChange={[Function]}
-            type="radio"
-          />
-          <span
-            className="ais-NumericMenu-labelText"
-          >
-            label1
-          </span>
-        </label>
-      </li>
-      <li
-        className="ais-NumericMenu-item"
+        label1
+      </span>
+    </label>
+  </li>
+  <li
+    className="item false false "
+  >
+    <label
+      className="label"
+    >
+      <input
+        checked={false}
+        className="radio"
+        disabled={false}
+        onChange={[Function]}
+        type="radio"
+      />
+      <span
+        className="labelText"
       >
-        <label
-          className="ais-NumericMenu-label"
-        >
-          <input
-            checked={false}
-            className="ais-NumericMenu-radio"
-            disabled={false}
-            onChange={[Function]}
-            type="radio"
-          />
-          <span
-            className="ais-NumericMenu-labelText"
-          >
-            label2
-          </span>
-        </label>
-      </li>
-      <li
-        className="ais-NumericMenu-item"
+        label2
+      </span>
+    </label>
+  </li>
+  <li
+    className="item false false "
+  >
+    <label
+      className="label"
+    >
+      <input
+        checked={false}
+        className="radio"
+        disabled={false}
+        onChange={[Function]}
+        type="radio"
+      />
+      <span
+        className="labelText"
       >
-        <label
-          className="ais-NumericMenu-label"
-        >
-          <input
-            checked={false}
-            className="ais-NumericMenu-radio"
-            disabled={false}
-            onChange={[Function]}
-            type="radio"
-          />
-          <span
-            className="ais-NumericMenu-labelText"
-          >
-            label3
-          </span>
-        </label>
-      </li>
-      <li
-        className="ais-NumericMenu-item"
+        label3
+      </span>
+    </label>
+  </li>
+  <li
+    className="item false false "
+  >
+    <label
+      className="label"
+    >
+      <input
+        checked={false}
+        className="radio"
+        disabled={false}
+        onChange={[Function]}
+        type="radio"
+      />
+      <span
+        className="labelText"
       >
-        <label
-          className="ais-NumericMenu-label"
-        >
-          <input
-            checked={false}
-            className="ais-NumericMenu-radio"
-            disabled={false}
-            onChange={[Function]}
-            type="radio"
-          />
-          <span
-            className="ais-NumericMenu-labelText"
-          >
-            label4
-          </span>
-        </label>
-      </li>
-      <li
-        className="ais-NumericMenu-item ais-NumericMenu-item--selected"
+        label4
+      </span>
+    </label>
+  </li>
+  <li
+    className="item item--selected false "
+  >
+    <label
+      className="label"
+    >
+      <input
+        checked={true}
+        className="radio"
+        disabled={false}
+        onChange={[Function]}
+        type="radio"
+      />
+      <span
+        className="labelText"
       >
-        <label
-          className="ais-NumericMenu-label"
-        >
-          <input
-            checked={true}
-            className="ais-NumericMenu-radio"
-            disabled={false}
-            onChange={[Function]}
-            type="radio"
-          />
-          <span
-            className="ais-NumericMenu-labelText"
-          >
-            All
-          </span>
-        </label>
-      </li>
-    </ul>
-  </div>
-</div>
+        All
+      </span>
+    </label>
+  </li>
+</ul>
 `;

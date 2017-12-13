@@ -1,2737 +1,2577 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Pagination allows toggling display of the first page button on and off 1`] = `
-<div
-  className="ais-Pagination"
+<ul
+  className="list false"
 >
-  <div
-    className="ais-Pagination-body ais-body"
+  <li
+    className="item  false item--firstPage"
   >
-    <ul
-      className="ais-Pagination-list"
+    <a
+      aria-label="First page"
+      className="link "
+      href="#"
+      onClick={[Function]}
     >
-      <li
-        className="ais-Pagination-item ais-Pagination-item--firstPage"
-      >
-        <a
-          aria-label="First page"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          «
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--previousPage"
-      >
-        <a
-          aria-label="Previous page"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          ‹
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 6"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          6
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 7"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          7
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 8"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          8
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--selected ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 9"
-          className="ais-Pagination-link ais-Pagination-link--selected"
-          href="#"
-          onClick={[Function]}
-        >
-          9
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 10"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          10
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 11"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          11
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 12"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          12
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--nextPage"
-      >
-        <a
-          aria-label="Next page"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          ›
-        </a>
-      </li>
-    </ul>
-  </div>
-</div>
+      «
+    </a>
+  </li>
+  <li
+    className="item  false item--previousPage"
+  >
+    <a
+      aria-label="Previous page"
+      className="link "
+      href="#"
+      onClick={[Function]}
+    >
+      ‹
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 6"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      6
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 7"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      7
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 8"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      8
+    </a>
+  </li>
+  <li
+    className="item item--selected  item--page"
+  >
+    <a
+      aria-label="Page 9"
+      className="link link--selected"
+      href="#"
+      onClick={[Function]}
+    >
+      9
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 10"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      10
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 11"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      11
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 12"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      12
+    </a>
+  </li>
+  <li
+    className="item  false item--nextPage"
+  >
+    <a
+      aria-label="Next page"
+      className="link "
+      href="#"
+      onClick={[Function]}
+    >
+      ›
+    </a>
+  </li>
+</ul>
 `;
 
 exports[`Pagination allows toggling display of the first page button on and off 2`] = `
-<div
-  className="ais-Pagination"
+<ul
+  className="list false"
 >
-  <div
-    className="ais-Pagination-body ais-body"
+  <li
+    className="item  false item--previousPage"
   >
-    <ul
-      className="ais-Pagination-list"
+    <a
+      aria-label="Previous page"
+      className="link "
+      href="#"
+      onClick={[Function]}
     >
-      <li
-        className="ais-Pagination-item ais-Pagination-item--previousPage"
-      >
-        <a
-          aria-label="Previous page"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          ‹
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 6"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          6
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 7"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          7
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 8"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          8
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--selected ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 9"
-          className="ais-Pagination-link ais-Pagination-link--selected"
-          href="#"
-          onClick={[Function]}
-        >
-          9
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 10"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          10
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 11"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          11
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 12"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          12
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--nextPage"
-      >
-        <a
-          aria-label="Next page"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          ›
-        </a>
-      </li>
-    </ul>
-  </div>
-</div>
+      ‹
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 6"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      6
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 7"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      7
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 8"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      8
+    </a>
+  </li>
+  <li
+    className="item item--selected  item--page"
+  >
+    <a
+      aria-label="Page 9"
+      className="link link--selected"
+      href="#"
+      onClick={[Function]}
+    >
+      9
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 10"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      10
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 11"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      11
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 12"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      12
+    </a>
+  </li>
+  <li
+    className="item  false item--nextPage"
+  >
+    <a
+      aria-label="Next page"
+      className="link "
+      href="#"
+      onClick={[Function]}
+    >
+      ›
+    </a>
+  </li>
+</ul>
 `;
 
 exports[`Pagination allows toggling display of the last page button on and off 1`] = `
-<div
-  className="ais-Pagination"
+<ul
+  className="list false"
 >
-  <div
-    className="ais-Pagination-body ais-body"
+  <li
+    className="item  false item--firstPage"
   >
-    <ul
-      className="ais-Pagination-list"
+    <a
+      aria-label="First page"
+      className="link "
+      href="#"
+      onClick={[Function]}
     >
-      <li
-        className="ais-Pagination-item ais-Pagination-item--firstPage"
-      >
-        <a
-          aria-label="First page"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          «
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--previousPage"
-      >
-        <a
-          aria-label="Previous page"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          ‹
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 6"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          6
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 7"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          7
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 8"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          8
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--selected ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 9"
-          className="ais-Pagination-link ais-Pagination-link--selected"
-          href="#"
-          onClick={[Function]}
-        >
-          9
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 10"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          10
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 11"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          11
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 12"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          12
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--nextPage"
-      >
-        <a
-          aria-label="Next page"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          ›
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--lastPage"
-      >
-        <a
-          aria-label="Last page"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          »
-        </a>
-      </li>
-    </ul>
-  </div>
-</div>
+      «
+    </a>
+  </li>
+  <li
+    className="item  false item--previousPage"
+  >
+    <a
+      aria-label="Previous page"
+      className="link "
+      href="#"
+      onClick={[Function]}
+    >
+      ‹
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 6"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      6
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 7"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      7
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 8"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      8
+    </a>
+  </li>
+  <li
+    className="item item--selected  item--page"
+  >
+    <a
+      aria-label="Page 9"
+      className="link link--selected"
+      href="#"
+      onClick={[Function]}
+    >
+      9
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 10"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      10
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 11"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      11
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 12"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      12
+    </a>
+  </li>
+  <li
+    className="item  false item--nextPage"
+  >
+    <a
+      aria-label="Next page"
+      className="link "
+      href="#"
+      onClick={[Function]}
+    >
+      ›
+    </a>
+  </li>
+  <li
+    className="item  false item--lastPage"
+  >
+    <a
+      aria-label="Last page"
+      className="link "
+      href="#"
+      onClick={[Function]}
+    >
+      »
+    </a>
+  </li>
+</ul>
 `;
 
 exports[`Pagination allows toggling display of the last page button on and off 2`] = `
-<div
-  className="ais-Pagination"
+<ul
+  className="list false"
 >
-  <div
-    className="ais-Pagination-body ais-body"
+  <li
+    className="item  false item--firstPage"
   >
-    <ul
-      className="ais-Pagination-list"
+    <a
+      aria-label="First page"
+      className="link "
+      href="#"
+      onClick={[Function]}
     >
-      <li
-        className="ais-Pagination-item ais-Pagination-item--firstPage"
-      >
-        <a
-          aria-label="First page"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          «
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--previousPage"
-      >
-        <a
-          aria-label="Previous page"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          ‹
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 6"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          6
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 7"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          7
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 8"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          8
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--selected ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 9"
-          className="ais-Pagination-link ais-Pagination-link--selected"
-          href="#"
-          onClick={[Function]}
-        >
-          9
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 10"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          10
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 11"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          11
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 12"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          12
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--nextPage"
-      >
-        <a
-          aria-label="Next page"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          ›
-        </a>
-      </li>
-    </ul>
-  </div>
-</div>
+      «
+    </a>
+  </li>
+  <li
+    className="item  false item--previousPage"
+  >
+    <a
+      aria-label="Previous page"
+      className="link "
+      href="#"
+      onClick={[Function]}
+    >
+      ‹
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 6"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      6
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 7"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      7
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 8"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      8
+    </a>
+  </li>
+  <li
+    className="item item--selected  item--page"
+  >
+    <a
+      aria-label="Page 9"
+      className="link link--selected"
+      href="#"
+      onClick={[Function]}
+    >
+      9
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 10"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      10
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 11"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      11
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 12"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      12
+    </a>
+  </li>
+  <li
+    className="item  false item--nextPage"
+  >
+    <a
+      aria-label="Next page"
+      className="link "
+      href="#"
+      onClick={[Function]}
+    >
+      ›
+    </a>
+  </li>
+</ul>
 `;
 
 exports[`Pagination allows toggling display of the next page button on and off 1`] = `
-<div
-  className="ais-Pagination"
+<ul
+  className="list false"
 >
-  <div
-    className="ais-Pagination-body ais-body"
+  <li
+    className="item  false item--firstPage"
   >
-    <ul
-      className="ais-Pagination-list"
+    <a
+      aria-label="First page"
+      className="link "
+      href="#"
+      onClick={[Function]}
     >
-      <li
-        className="ais-Pagination-item ais-Pagination-item--firstPage"
-      >
-        <a
-          aria-label="First page"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          «
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--previousPage"
-      >
-        <a
-          aria-label="Previous page"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          ‹
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 6"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          6
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 7"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          7
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 8"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          8
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--selected ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 9"
-          className="ais-Pagination-link ais-Pagination-link--selected"
-          href="#"
-          onClick={[Function]}
-        >
-          9
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 10"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          10
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 11"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          11
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 12"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          12
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--nextPage"
-      >
-        <a
-          aria-label="Next page"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          ›
-        </a>
-      </li>
-    </ul>
-  </div>
-</div>
+      «
+    </a>
+  </li>
+  <li
+    className="item  false item--previousPage"
+  >
+    <a
+      aria-label="Previous page"
+      className="link "
+      href="#"
+      onClick={[Function]}
+    >
+      ‹
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 6"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      6
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 7"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      7
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 8"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      8
+    </a>
+  </li>
+  <li
+    className="item item--selected  item--page"
+  >
+    <a
+      aria-label="Page 9"
+      className="link link--selected"
+      href="#"
+      onClick={[Function]}
+    >
+      9
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 10"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      10
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 11"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      11
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 12"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      12
+    </a>
+  </li>
+  <li
+    className="item  false item--nextPage"
+  >
+    <a
+      aria-label="Next page"
+      className="link "
+      href="#"
+      onClick={[Function]}
+    >
+      ›
+    </a>
+  </li>
+</ul>
 `;
 
 exports[`Pagination allows toggling display of the next page button on and off 2`] = `
-<div
-  className="ais-Pagination"
+<ul
+  className="list false"
 >
-  <div
-    className="ais-Pagination-body ais-body"
+  <li
+    className="item  false item--firstPage"
   >
-    <ul
-      className="ais-Pagination-list"
+    <a
+      aria-label="First page"
+      className="link "
+      href="#"
+      onClick={[Function]}
     >
-      <li
-        className="ais-Pagination-item ais-Pagination-item--firstPage"
-      >
-        <a
-          aria-label="First page"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          «
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--previousPage"
-      >
-        <a
-          aria-label="Previous page"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          ‹
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 6"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          6
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 7"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          7
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 8"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          8
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--selected ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 9"
-          className="ais-Pagination-link ais-Pagination-link--selected"
-          href="#"
-          onClick={[Function]}
-        >
-          9
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 10"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          10
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 11"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          11
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 12"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          12
-        </a>
-      </li>
-    </ul>
-  </div>
-</div>
+      «
+    </a>
+  </li>
+  <li
+    className="item  false item--previousPage"
+  >
+    <a
+      aria-label="Previous page"
+      className="link "
+      href="#"
+      onClick={[Function]}
+    >
+      ‹
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 6"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      6
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 7"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      7
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 8"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      8
+    </a>
+  </li>
+  <li
+    className="item item--selected  item--page"
+  >
+    <a
+      aria-label="Page 9"
+      className="link link--selected"
+      href="#"
+      onClick={[Function]}
+    >
+      9
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 10"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      10
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 11"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      11
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 12"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      12
+    </a>
+  </li>
+</ul>
 `;
 
 exports[`Pagination allows toggling display of the previous page button on and off 1`] = `
-<div
-  className="ais-Pagination"
+<ul
+  className="list false"
 >
-  <div
-    className="ais-Pagination-body ais-body"
+  <li
+    className="item  false item--firstPage"
   >
-    <ul
-      className="ais-Pagination-list"
+    <a
+      aria-label="First page"
+      className="link "
+      href="#"
+      onClick={[Function]}
     >
-      <li
-        className="ais-Pagination-item ais-Pagination-item--firstPage"
-      >
-        <a
-          aria-label="First page"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          «
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--previousPage"
-      >
-        <a
-          aria-label="Previous page"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          ‹
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 6"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          6
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 7"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          7
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 8"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          8
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--selected ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 9"
-          className="ais-Pagination-link ais-Pagination-link--selected"
-          href="#"
-          onClick={[Function]}
-        >
-          9
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 10"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          10
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 11"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          11
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 12"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          12
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--nextPage"
-      >
-        <a
-          aria-label="Next page"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          ›
-        </a>
-      </li>
-    </ul>
-  </div>
-</div>
+      «
+    </a>
+  </li>
+  <li
+    className="item  false item--previousPage"
+  >
+    <a
+      aria-label="Previous page"
+      className="link "
+      href="#"
+      onClick={[Function]}
+    >
+      ‹
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 6"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      6
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 7"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      7
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 8"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      8
+    </a>
+  </li>
+  <li
+    className="item item--selected  item--page"
+  >
+    <a
+      aria-label="Page 9"
+      className="link link--selected"
+      href="#"
+      onClick={[Function]}
+    >
+      9
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 10"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      10
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 11"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      11
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 12"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      12
+    </a>
+  </li>
+  <li
+    className="item  false item--nextPage"
+  >
+    <a
+      aria-label="Next page"
+      className="link "
+      href="#"
+      onClick={[Function]}
+    >
+      ›
+    </a>
+  </li>
+</ul>
 `;
 
 exports[`Pagination allows toggling display of the previous page button on and off 2`] = `
-<div
-  className="ais-Pagination"
+<ul
+  className="list false"
 >
-  <div
-    className="ais-Pagination-body ais-body"
+  <li
+    className="item  false item--firstPage"
   >
-    <ul
-      className="ais-Pagination-list"
+    <a
+      aria-label="First page"
+      className="link "
+      href="#"
+      onClick={[Function]}
     >
-      <li
-        className="ais-Pagination-item ais-Pagination-item--firstPage"
-      >
-        <a
-          aria-label="First page"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          «
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 6"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          6
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 7"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          7
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 8"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          8
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--selected ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 9"
-          className="ais-Pagination-link ais-Pagination-link--selected"
-          href="#"
-          onClick={[Function]}
-        >
-          9
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 10"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          10
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 11"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          11
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 12"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          12
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--nextPage"
-      >
-        <a
-          aria-label="Next page"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          ›
-        </a>
-      </li>
-    </ul>
-  </div>
-</div>
+      «
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 6"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      6
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 7"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      7
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 8"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      8
+    </a>
+  </li>
+  <li
+    className="item item--selected  item--page"
+  >
+    <a
+      aria-label="Page 9"
+      className="link link--selected"
+      href="#"
+      onClick={[Function]}
+    >
+      9
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 10"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      10
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 11"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      11
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 12"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      12
+    </a>
+  </li>
+  <li
+    className="item  false item--nextPage"
+  >
+    <a
+      aria-label="Next page"
+      className="link "
+      href="#"
+      onClick={[Function]}
+    >
+      ›
+    </a>
+  </li>
+</ul>
 `;
 
 exports[`Pagination applies its default props 1`] = `
-<div
-  className="ais-Pagination"
+<ul
+  className="list false"
 >
-  <div
-    className="ais-Pagination-body ais-body"
+  <li
+    className="item  false item--firstPage"
   >
-    <ul
-      className="ais-Pagination-list"
+    <a
+      aria-label="First page"
+      className="link "
+      href="#"
+      onClick={[Function]}
     >
-      <li
-        className="ais-Pagination-item ais-Pagination-item--firstPage"
-      >
-        <a
-          aria-label="First page"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          «
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--previousPage"
-      >
-        <a
-          aria-label="Previous page"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          ‹
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 6"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          6
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 7"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          7
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 8"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          8
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--selected ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 9"
-          className="ais-Pagination-link ais-Pagination-link--selected"
-          href="#"
-          onClick={[Function]}
-        >
-          9
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 10"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          10
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 11"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          11
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 12"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          12
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--nextPage"
-      >
-        <a
-          aria-label="Next page"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          ›
-        </a>
-      </li>
-    </ul>
-  </div>
-</div>
+      «
+    </a>
+  </li>
+  <li
+    className="item  false item--previousPage"
+  >
+    <a
+      aria-label="Previous page"
+      className="link "
+      href="#"
+      onClick={[Function]}
+    >
+      ‹
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 6"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      6
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 7"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      7
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 8"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      8
+    </a>
+  </li>
+  <li
+    className="item item--selected  item--page"
+  >
+    <a
+      aria-label="Page 9"
+      className="link link--selected"
+      href="#"
+      onClick={[Function]}
+    >
+      9
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 10"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      10
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 11"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      11
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 12"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      12
+    </a>
+  </li>
+  <li
+    className="item  false item--nextPage"
+  >
+    <a
+      aria-label="Next page"
+      className="link "
+      href="#"
+      onClick={[Function]}
+    >
+      ›
+    </a>
+  </li>
+</ul>
 `;
 
 exports[`Pagination disabled all button if no results 1`] = `
-<div
-  className="ais-Pagination"
+<ul
+  className="list false"
 >
-  <div
-    className="ais-Pagination-body ais-body"
+  <li
+    className="item  item--disabled item--firstPage"
   >
-    <ul
-      className="ais-Pagination-list"
+    <span
+      className="link"
     >
-      <li
-        className="ais-Pagination-item ais-Pagination-item--disabled ais-Pagination-item--firstPage"
-      >
-        <span
-          className="ais-Pagination-link"
-        >
-          «
-        </span>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--disabled ais-Pagination-item--previousPage"
-      >
-        <span
-          className="ais-Pagination-link"
-        >
-          ‹
-        </span>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--disabled ais-Pagination-item--nextPage"
-      >
-        <span
-          className="ais-Pagination-link"
-        >
-          ›
-        </span>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--disabled ais-Pagination-item--lastPage"
-      >
-        <span
-          className="ais-Pagination-link"
-        >
-          »
-        </span>
-      </li>
-    </ul>
-  </div>
-</div>
+      «
+    </span>
+  </li>
+  <li
+    className="item  item--disabled item--previousPage"
+  >
+    <span
+      className="link"
+    >
+      ‹
+    </span>
+  </li>
+  <li
+    className="item  item--disabled item--nextPage"
+  >
+    <span
+      className="link"
+    >
+      ›
+    </span>
+  </li>
+  <li
+    className="item  item--disabled item--lastPage"
+  >
+    <span
+      className="link"
+    >
+      »
+    </span>
+  </li>
+</ul>
 `;
 
 exports[`Pagination displays the correct padding of links 1`] = `
-<div
-  className="ais-Pagination"
+<ul
+  className="list false"
 >
-  <div
-    className="ais-Pagination-body ais-body"
+  <li
+    className="item  false item--firstPage"
   >
-    <ul
-      className="ais-Pagination-list"
+    <a
+      aria-label="First page"
+      className="link "
+      href="#"
+      onClick={[Function]}
     >
-      <li
-        className="ais-Pagination-item ais-Pagination-item--firstPage"
-      >
-        <a
-          aria-label="First page"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          «
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--previousPage"
-      >
-        <a
-          aria-label="Previous page"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          ‹
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 1"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          1
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 2"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          2
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 3"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          3
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 4"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          4
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 5"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          5
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 6"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          6
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 7"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          7
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 8"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          8
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 9"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          9
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 10"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          10
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 11"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          11
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--nextPage"
-      >
-        <a
-          aria-label="Next page"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          ›
-        </a>
-      </li>
-    </ul>
-  </div>
-</div>
+      «
+    </a>
+  </li>
+  <li
+    className="item  false item--previousPage"
+  >
+    <a
+      aria-label="Previous page"
+      className="link "
+      href="#"
+      onClick={[Function]}
+    >
+      ‹
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 1"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      1
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 2"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      2
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 3"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      3
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 4"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      4
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 5"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      5
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 6"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      6
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 7"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      7
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 8"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      8
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 9"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      9
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 10"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      10
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 11"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      11
+    </a>
+  </li>
+  <li
+    className="item  false item--nextPage"
+  >
+    <a
+      aria-label="Next page"
+      className="link "
+      href="#"
+      onClick={[Function]}
+    >
+      ›
+    </a>
+  </li>
+</ul>
 `;
 
 exports[`Pagination displays the correct padding of links 2`] = `
-<div
-  className="ais-Pagination"
+<ul
+  className="list false"
 >
-  <div
-    className="ais-Pagination-body ais-body"
+  <li
+    className="item  false item--firstPage"
   >
-    <ul
-      className="ais-Pagination-list"
+    <a
+      aria-label="First page"
+      className="link "
+      href="#"
+      onClick={[Function]}
     >
-      <li
-        className="ais-Pagination-item ais-Pagination-item--firstPage"
-      >
-        <a
-          aria-label="First page"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          «
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--previousPage"
-      >
-        <a
-          aria-label="Previous page"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          ‹
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 5"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          5
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 6"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          6
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 7"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          7
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 8"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          8
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--selected ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 9"
-          className="ais-Pagination-link ais-Pagination-link--selected"
-          href="#"
-          onClick={[Function]}
-        >
-          9
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 10"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          10
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 11"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          11
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 12"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          12
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 13"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          13
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--nextPage"
-      >
-        <a
-          aria-label="Next page"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          ›
-        </a>
-      </li>
-    </ul>
-  </div>
-</div>
+      «
+    </a>
+  </li>
+  <li
+    className="item  false item--previousPage"
+  >
+    <a
+      aria-label="Previous page"
+      className="link "
+      href="#"
+      onClick={[Function]}
+    >
+      ‹
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 5"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      5
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 6"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      6
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 7"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      7
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 8"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      8
+    </a>
+  </li>
+  <li
+    className="item item--selected  item--page"
+  >
+    <a
+      aria-label="Page 9"
+      className="link link--selected"
+      href="#"
+      onClick={[Function]}
+    >
+      9
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 10"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      10
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 11"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      11
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 12"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      12
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 13"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      13
+    </a>
+  </li>
+  <li
+    className="item  false item--nextPage"
+  >
+    <a
+      aria-label="Next page"
+      className="link "
+      href="#"
+      onClick={[Function]}
+    >
+      ›
+    </a>
+  </li>
+</ul>
 `;
 
 exports[`Pagination displays the correct padding of links 3`] = `
-<div
-  className="ais-Pagination"
+<ul
+  className="list false"
 >
-  <div
-    className="ais-Pagination-body ais-body"
+  <li
+    className="item  false item--firstPage"
   >
-    <ul
-      className="ais-Pagination-list"
+    <a
+      aria-label="First page"
+      className="link "
+      href="#"
+      onClick={[Function]}
     >
-      <li
-        className="ais-Pagination-item ais-Pagination-item--firstPage"
-      >
-        <a
-          aria-label="First page"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          «
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--previousPage"
-      >
-        <a
-          aria-label="Previous page"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          ‹
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 14"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          14
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 15"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          15
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 16"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          16
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 17"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          17
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 18"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          18
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--selected ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 19"
-          className="ais-Pagination-link ais-Pagination-link--selected"
-          href="#"
-          onClick={[Function]}
-        >
-          19
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 20"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          20
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--nextPage"
-      >
-        <a
-          aria-label="Next page"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          ›
-        </a>
-      </li>
-    </ul>
-  </div>
-</div>
+      «
+    </a>
+  </li>
+  <li
+    className="item  false item--previousPage"
+  >
+    <a
+      aria-label="Previous page"
+      className="link "
+      href="#"
+      onClick={[Function]}
+    >
+      ‹
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 14"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      14
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 15"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      15
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 16"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      16
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 17"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      17
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 18"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      18
+    </a>
+  </li>
+  <li
+    className="item item--selected  item--page"
+  >
+    <a
+      aria-label="Page 19"
+      className="link link--selected"
+      href="#"
+      onClick={[Function]}
+    >
+      19
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 20"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      20
+    </a>
+  </li>
+  <li
+    className="item  false item--nextPage"
+  >
+    <a
+      aria-label="Next page"
+      className="link "
+      href="#"
+      onClick={[Function]}
+    >
+      ›
+    </a>
+  </li>
+</ul>
 `;
 
 exports[`Pagination displays the correct padding of links 4`] = `
-<div
-  className="ais-Pagination"
+<ul
+  className="list false"
 >
-  <div
-    className="ais-Pagination-body ais-body"
+  <li
+    className="item  false item--firstPage"
   >
-    <ul
-      className="ais-Pagination-list"
+    <a
+      aria-label="First page"
+      className="link "
+      href="#"
+      onClick={[Function]}
     >
-      <li
-        className="ais-Pagination-item ais-Pagination-item--firstPage"
-      >
-        <a
-          aria-label="First page"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          «
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--previousPage"
-      >
-        <a
-          aria-label="Previous page"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          ‹
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 1"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          1
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 2"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          2
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--selected ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 3"
-          className="ais-Pagination-link ais-Pagination-link--selected"
-          href="#"
-          onClick={[Function]}
-        >
-          3
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 4"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          4
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 5"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          5
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--nextPage"
-      >
-        <a
-          aria-label="Next page"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          ›
-        </a>
-      </li>
-    </ul>
-  </div>
-</div>
+      «
+    </a>
+  </li>
+  <li
+    className="item  false item--previousPage"
+  >
+    <a
+      aria-label="Previous page"
+      className="link "
+      href="#"
+      onClick={[Function]}
+    >
+      ‹
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 1"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      1
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 2"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      2
+    </a>
+  </li>
+  <li
+    className="item item--selected  item--page"
+  >
+    <a
+      aria-label="Page 3"
+      className="link link--selected"
+      href="#"
+      onClick={[Function]}
+    >
+      3
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 4"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      4
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 5"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      5
+    </a>
+  </li>
+  <li
+    className="item  false item--nextPage"
+  >
+    <a
+      aria-label="Next page"
+      className="link "
+      href="#"
+      onClick={[Function]}
+    >
+      ›
+    </a>
+  </li>
+</ul>
 `;
 
 exports[`Pagination indicates when first button is relevant 1`] = `
-<div
-  className="ais-Pagination"
+<ul
+  className="list false"
 >
-  <div
-    className="ais-Pagination-body ais-body"
+  <li
+    className="item  item--disabled item--firstPage"
   >
-    <ul
-      className="ais-Pagination-list"
+    <span
+      className="link"
     >
-      <li
-        className="ais-Pagination-item ais-Pagination-item--disabled ais-Pagination-item--firstPage"
-      >
-        <span
-          className="ais-Pagination-link"
-        >
-          «
-        </span>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--disabled ais-Pagination-item--previousPage"
-      >
-        <span
-          className="ais-Pagination-link"
-        >
-          ‹
-        </span>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--selected ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 1"
-          className="ais-Pagination-link ais-Pagination-link--selected"
-          href="#"
-          onClick={[Function]}
-        >
-          1
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 2"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          2
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 3"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          3
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 4"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          4
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 5"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          5
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 6"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          6
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 7"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          7
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--nextPage"
-      >
-        <a
-          aria-label="Next page"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          ›
-        </a>
-      </li>
-    </ul>
-  </div>
-</div>
+      «
+    </span>
+  </li>
+  <li
+    className="item  item--disabled item--previousPage"
+  >
+    <span
+      className="link"
+    >
+      ‹
+    </span>
+  </li>
+  <li
+    className="item item--selected  item--page"
+  >
+    <a
+      aria-label="Page 1"
+      className="link link--selected"
+      href="#"
+      onClick={[Function]}
+    >
+      1
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 2"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      2
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 3"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      3
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 4"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      4
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 5"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      5
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 6"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      6
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 7"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      7
+    </a>
+  </li>
+  <li
+    className="item  false item--nextPage"
+  >
+    <a
+      aria-label="Next page"
+      className="link "
+      href="#"
+      onClick={[Function]}
+    >
+      ›
+    </a>
+  </li>
+</ul>
 `;
 
 exports[`Pagination indicates when first button is relevant 2`] = `
-<div
-  className="ais-Pagination"
+<ul
+  className="list false"
 >
-  <div
-    className="ais-Pagination-body ais-body"
+  <li
+    className="item  false item--firstPage"
   >
-    <ul
-      className="ais-Pagination-list"
+    <a
+      aria-label="First page"
+      className="link "
+      href="#"
+      onClick={[Function]}
     >
-      <li
-        className="ais-Pagination-item ais-Pagination-item--firstPage"
-      >
-        <a
-          aria-label="First page"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          «
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--previousPage"
-      >
-        <a
-          aria-label="Previous page"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          ‹
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 14"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          14
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 15"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          15
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 16"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          16
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 17"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          17
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 18"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          18
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 19"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          19
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--selected ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 20"
-          className="ais-Pagination-link ais-Pagination-link--selected"
-          href="#"
-          onClick={[Function]}
-        >
-          20
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--disabled ais-Pagination-item--nextPage"
-      >
-        <span
-          className="ais-Pagination-link"
-        >
-          ›
-        </span>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--disabled ais-Pagination-item--lastPage"
-      >
-        <span
-          className="ais-Pagination-link"
-        >
-          »
-        </span>
-      </li>
-    </ul>
-  </div>
-</div>
+      «
+    </a>
+  </li>
+  <li
+    className="item  false item--previousPage"
+  >
+    <a
+      aria-label="Previous page"
+      className="link "
+      href="#"
+      onClick={[Function]}
+    >
+      ‹
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 14"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      14
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 15"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      15
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 16"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      16
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 17"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      17
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 18"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      18
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 19"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      19
+    </a>
+  </li>
+  <li
+    className="item item--selected  item--page"
+  >
+    <a
+      aria-label="Page 20"
+      className="link link--selected"
+      href="#"
+      onClick={[Function]}
+    >
+      20
+    </a>
+  </li>
+  <li
+    className="item  item--disabled item--nextPage"
+  >
+    <span
+      className="link"
+    >
+      ›
+    </span>
+  </li>
+  <li
+    className="item  item--disabled item--lastPage"
+  >
+    <span
+      className="link"
+    >
+      »
+    </span>
+  </li>
+</ul>
 `;
 
 exports[`Pagination lets you customize its theme 1`] = `
-<div
-  className="ais-Pagination"
+<ul
+  className="list false"
 >
-  <div
-    className="ais-Pagination-body ais-body"
+  <li
+    className="item  false item--firstPage"
   >
-    <ul
-      className="ais-Pagination-list"
+    <a
+      aria-label="First page"
+      className="link "
+      href="#"
+      onClick={[Function]}
     >
-      <li
-        className="ais-Pagination-item ais-Pagination-item--firstPage"
-      >
-        <a
-          aria-label="First page"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          «
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--previousPage"
-      >
-        <a
-          aria-label="Previous page"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          ‹
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 2"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          2
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 3"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          3
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 4"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          4
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 5"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          5
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 6"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          6
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 7"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          7
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--selected ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 8"
-          className="ais-Pagination-link ais-Pagination-link--selected"
-          href="#"
-          onClick={[Function]}
-        >
-          8
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 9"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          9
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 10"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          10
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--nextPage"
-      >
-        <a
-          aria-label="Next page"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          ›
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--lastPage"
-      >
-        <a
-          aria-label="Last page"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          »
-        </a>
-      </li>
-    </ul>
-  </div>
-</div>
+      «
+    </a>
+  </li>
+  <li
+    className="item  false item--previousPage"
+  >
+    <a
+      aria-label="Previous page"
+      className="link "
+      href="#"
+      onClick={[Function]}
+    >
+      ‹
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 2"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      2
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 3"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      3
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 4"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      4
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 5"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      5
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 6"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      6
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 7"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      7
+    </a>
+  </li>
+  <li
+    className="item item--selected  item--page"
+  >
+    <a
+      aria-label="Page 8"
+      className="link link--selected"
+      href="#"
+      onClick={[Function]}
+    >
+      8
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 9"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      9
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 10"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      10
+    </a>
+  </li>
+  <li
+    className="item  false item--nextPage"
+  >
+    <a
+      aria-label="Next page"
+      className="link "
+      href="#"
+      onClick={[Function]}
+    >
+      ›
+    </a>
+  </li>
+  <li
+    className="item  false item--lastPage"
+  >
+    <a
+      aria-label="Last page"
+      className="link "
+      href="#"
+      onClick={[Function]}
+    >
+      »
+    </a>
+  </li>
+</ul>
 `;
 
 exports[`Pagination lets you customize its translations 1`] = `
-<div
-  className="ais-Pagination"
+<ul
+  className="list false"
 >
-  <div
-    className="ais-Pagination-body ais-body"
+  <li
+    className="item  false item--firstPage"
   >
-    <ul
-      className="ais-Pagination-list"
+    <a
+      aria-label="ARIA_FIRST"
+      className="link "
+      href="#"
+      onClick={[Function]}
     >
-      <li
-        className="ais-Pagination-item ais-Pagination-item--firstPage"
-      >
-        <a
-          aria-label="ARIA_FIRST"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          FIRST
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--previousPage"
-      >
-        <a
-          aria-label="ARIA_PREVIOUS"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          PREVIOUS
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="ARIA_PAGE_3"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          PAGE_3
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="ARIA_PAGE_4"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          PAGE_4
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="ARIA_PAGE_5"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          PAGE_5
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="ARIA_PAGE_6"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          PAGE_6
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="ARIA_PAGE_7"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          PAGE_7
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="ARIA_PAGE_8"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          PAGE_8
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--selected ais-Pagination-item--page"
-      >
-        <a
-          aria-label="ARIA_PAGE_9"
-          className="ais-Pagination-link ais-Pagination-link--selected"
-          href="#"
-          onClick={[Function]}
-        >
-          PAGE_9
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="ARIA_PAGE_10"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          PAGE_10
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="ARIA_PAGE_11"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          PAGE_11
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--nextPage"
-      >
-        <a
-          aria-label="ARIA_NEXT"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          NEXT
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--lastPage"
-      >
-        <a
-          aria-label="ARIA_LAST"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          LAST
-        </a>
-      </li>
-    </ul>
-  </div>
-</div>
+      FIRST
+    </a>
+  </li>
+  <li
+    className="item  false item--previousPage"
+  >
+    <a
+      aria-label="ARIA_PREVIOUS"
+      className="link "
+      href="#"
+      onClick={[Function]}
+    >
+      PREVIOUS
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="ARIA_PAGE_3"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      PAGE_3
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="ARIA_PAGE_4"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      PAGE_4
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="ARIA_PAGE_5"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      PAGE_5
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="ARIA_PAGE_6"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      PAGE_6
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="ARIA_PAGE_7"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      PAGE_7
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="ARIA_PAGE_8"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      PAGE_8
+    </a>
+  </li>
+  <li
+    className="item item--selected  item--page"
+  >
+    <a
+      aria-label="ARIA_PAGE_9"
+      className="link link--selected"
+      href="#"
+      onClick={[Function]}
+    >
+      PAGE_9
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="ARIA_PAGE_10"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      PAGE_10
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="ARIA_PAGE_11"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      PAGE_11
+    </a>
+  </li>
+  <li
+    className="item  false item--nextPage"
+  >
+    <a
+      aria-label="ARIA_NEXT"
+      className="link "
+      href="#"
+      onClick={[Function]}
+    >
+      NEXT
+    </a>
+  </li>
+  <li
+    className="item  false item--lastPage"
+  >
+    <a
+      aria-label="ARIA_LAST"
+      className="link "
+      href="#"
+      onClick={[Function]}
+    >
+      LAST
+    </a>
+  </li>
+</ul>
 `;
 
 exports[`Pagination lets you force a maximum of pages 1`] = `
-<div
-  className="ais-Pagination"
+<ul
+  className="list false"
 >
-  <div
-    className="ais-Pagination-body ais-body"
+  <li
+    className="item  false item--firstPage"
   >
-    <ul
-      className="ais-Pagination-list"
+    <a
+      aria-label="First page"
+      className="link "
+      href="#"
+      onClick={[Function]}
     >
-      <li
-        className="ais-Pagination-item ais-Pagination-item--firstPage"
-      >
-        <a
-          aria-label="First page"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          «
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--previousPage"
-      >
-        <a
-          aria-label="Previous page"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          ‹
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 4"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          4
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 5"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          5
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 6"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          6
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 7"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          7
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 8"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          8
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--selected ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 9"
-          className="ais-Pagination-link ais-Pagination-link--selected"
-          href="#"
-          onClick={[Function]}
-        >
-          9
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 10"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          10
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--nextPage"
-      >
-        <a
-          aria-label="Next page"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          ›
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--lastPage"
-      >
-        <a
-          aria-label="Last page"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          »
-        </a>
-      </li>
-    </ul>
-  </div>
-</div>
+      «
+    </a>
+  </li>
+  <li
+    className="item  false item--previousPage"
+  >
+    <a
+      aria-label="Previous page"
+      className="link "
+      href="#"
+      onClick={[Function]}
+    >
+      ‹
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 4"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      4
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 5"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      5
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 6"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      6
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 7"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      7
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 8"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      8
+    </a>
+  </li>
+  <li
+    className="item item--selected  item--page"
+  >
+    <a
+      aria-label="Page 9"
+      className="link link--selected"
+      href="#"
+      onClick={[Function]}
+    >
+      9
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 10"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      10
+    </a>
+  </li>
+  <li
+    className="item  false item--nextPage"
+  >
+    <a
+      aria-label="Next page"
+      className="link "
+      href="#"
+      onClick={[Function]}
+    >
+      ›
+    </a>
+  </li>
+  <li
+    className="item  false item--lastPage"
+  >
+    <a
+      aria-label="Last page"
+      className="link "
+      href="#"
+      onClick={[Function]}
+    >
+      »
+    </a>
+  </li>
+</ul>
 `;
 
 exports[`Pagination lets you force a maximum of pages 2`] = `
-<div
-  className="ais-Pagination"
+<ul
+  className="list false"
 >
-  <div
-    className="ais-Pagination-body ais-body"
+  <li
+    className="item  false item--firstPage"
   >
-    <ul
-      className="ais-Pagination-list"
+    <a
+      aria-label="First page"
+      className="link "
+      href="#"
+      onClick={[Function]}
     >
-      <li
-        className="ais-Pagination-item ais-Pagination-item--firstPage"
-      >
-        <a
-          aria-label="First page"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          «
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--previousPage"
-      >
-        <a
-          aria-label="Previous page"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          ‹
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 3"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          3
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 4"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          4
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 5"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          5
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 6"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          6
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 7"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          7
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--selected ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 8"
-          className="ais-Pagination-link ais-Pagination-link--selected"
-          href="#"
-          onClick={[Function]}
-        >
-          8
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--page"
-      >
-        <a
-          aria-label="Page 9"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          9
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--nextPage"
-      >
-        <a
-          aria-label="Next page"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          ›
-        </a>
-      </li>
-      <li
-        className="ais-Pagination-item ais-Pagination-item--lastPage"
-      >
-        <a
-          aria-label="Last page"
-          className="ais-Pagination-link"
-          href="#"
-          onClick={[Function]}
-        >
-          »
-        </a>
-      </li>
-    </ul>
-  </div>
-</div>
+      «
+    </a>
+  </li>
+  <li
+    className="item  false item--previousPage"
+  >
+    <a
+      aria-label="Previous page"
+      className="link "
+      href="#"
+      onClick={[Function]}
+    >
+      ‹
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 3"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      3
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 4"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      4
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 5"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      5
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 6"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      6
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 7"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      7
+    </a>
+  </li>
+  <li
+    className="item item--selected  item--page"
+  >
+    <a
+      aria-label="Page 8"
+      className="link link--selected"
+      href="#"
+      onClick={[Function]}
+    >
+      8
+    </a>
+  </li>
+  <li
+    className="item false  item--page"
+  >
+    <a
+      aria-label="Page 9"
+      className="link false"
+      href="#"
+      onClick={[Function]}
+    >
+      9
+    </a>
+  </li>
+  <li
+    className="item  false item--nextPage"
+  >
+    <a
+      aria-label="Next page"
+      className="link "
+      href="#"
+      onClick={[Function]}
+    >
+      ›
+    </a>
+  </li>
+  <li
+    className="item  false item--lastPage"
+  >
+    <a
+      aria-label="Last page"
+      className="link "
+      href="#"
+      onClick={[Function]}
+    >
+      »
+    </a>
+  </li>
+</ul>
 `;

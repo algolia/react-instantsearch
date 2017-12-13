@@ -14,6 +14,7 @@ describe('StarRating', () => {
     const tree = renderer
       .create(
         <StarRating
+          cx={(...x) => x.join(' ')}
           createURL={() => '#'}
           refine={() => null}
           min={1}
@@ -37,6 +38,7 @@ describe('StarRating', () => {
     const tree = renderer
       .create(
         <StarRating
+          cx={(...x) => x.join(' ')}
           createURL={() => '#'}
           refine={() => null}
           translations={{
@@ -63,6 +65,7 @@ describe('StarRating', () => {
   const createURL = jest.fn();
   const starRating = (
     <StarRating
+      cx={(...x) => x.join(' ')}
       createURL={createURL}
       refine={refine}
       min={1}
@@ -98,10 +101,10 @@ describe('StarRating', () => {
 
   it('refines its value on change', () => {
     const wrapper = mount(starRating);
-    const links = wrapper.find('.ais-RatingMenu-link');
+    const links = wrapper.find('.link');
     expect(links).toHaveLength(5);
 
-    let selectedItem = wrapper.find('.ais-RatingMenu-item--selected');
+    let selectedItem = wrapper.find('.item--selected');
     expect(selectedItem).toHaveLength(1);
 
     links.first().simulate('click');
@@ -109,14 +112,12 @@ describe('StarRating', () => {
     expect(refine.mock.calls).toHaveLength(1);
     expect(refine.mock.calls[0][0]).toEqual({ min: 5, max: 5 });
 
-    selectedItem = wrapper.find('.ais-RatingMenu-item--selected');
+    selectedItem = wrapper.find('.item--selected');
     expect(selectedItem).toBeDefined();
 
     refine.mockClear();
 
-    const disabledIcon = wrapper
-      .find('.ais-RatingMenu-item--disabled')
-      .find('.ais-RatingMenu-starIcon');
+    const disabledIcon = wrapper.find('.item--disabled').find('.starIcon');
 
     expect(disabledIcon).toHaveLength(5);
     wrapper.unmount();
@@ -125,14 +126,14 @@ describe('StarRating', () => {
   it('should display the right number of stars', () => {
     const wrapper = mount(starRating);
     wrapper
-      .find('.ais-RatingMenu-link')
+      .find('.link')
       .last()
       .simulate('click');
 
-    const selectedItem = wrapper.find('.ais-RatingMenu-item--selected');
+    const selectedItem = wrapper.find('.item--selected');
 
-    const fullIcon = selectedItem.find('.ais-RatingMenu-starIcon--full');
-    const emptyIcon = selectedItem.find('.ais-RatingMenu-starIcon--empty');
+    const fullIcon = selectedItem.find('.starIcon--full');
+    const emptyIcon = selectedItem.find('.starIcon--empty');
 
     expect(fullIcon).toHaveLength(1);
     expect(emptyIcon).toHaveLength(4);
@@ -143,7 +144,7 @@ describe('StarRating', () => {
     const wrapper = mount(starRating);
     wrapper.setProps({ currentRefinement: { min: 5, max: 5 } });
 
-    const links = wrapper.find('.ais-RatingMenu-link');
+    const links = wrapper.find('.link');
     links.first().simulate('click');
 
     expect(refine.mock.calls).toHaveLength(1);
@@ -161,14 +162,12 @@ describe('StarRating', () => {
       ],
     });
 
-    const items = wrapper.find('.ais-RatingMenu-item');
-    expect(items.first().hasClass('ais-RatingMenu-item--selected')).toBe(
-      false
-    );
+    const items = wrapper.find('.item');
+    expect(items.first().hasClass('item--selected')).toBe(false);
 
-    const selected = wrapper.find('.ais-RatingMenu-item--selected');
-    expect(selected.find('.ais-RatingMenu-starIcon--empty')).toHaveLength(3);
-    expect(selected.find('.ais-RatingMenu-starIcon--full')).toHaveLength(2);
+    const selected = wrapper.find('.item--selected');
+    expect(selected.find('.starIcon--empty')).toHaveLength(3);
+    expect(selected.find('.starIcon--full')).toHaveLength(2);
     expect(selected.text()).toContain('8');
 
     wrapper.unmount();
@@ -184,13 +183,13 @@ describe('StarRating', () => {
 
       expect(canRefine.mock.calls).toHaveLength(1);
       expect(canRefine.mock.calls[0][0]).toEqual(true);
-      expect(wrapper.find('.ais-RatingMenu-list--noRefinement')).toHaveLength(0);
+      expect(wrapper.find('.list--noRefinement')).toHaveLength(0);
 
       wrapper.setProps({ canRefine: false });
 
       expect(canRefine.mock.calls).toHaveLength(2);
       expect(canRefine.mock.calls[1][0]).toEqual(false);
-      expect(wrapper.find('.ais-RatingMenu-list--noRefinement')).toHaveLength(1);
+      expect(wrapper.find('.list--noRefinement')).toHaveLength(1);
     });
   });
 });

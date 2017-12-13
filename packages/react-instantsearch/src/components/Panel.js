@@ -32,8 +32,8 @@ class Panel extends Component {
 
   render() {
     return (
-      <div {...cx(['', !this.state.canRefine && '-noRefinement'])}>
-        <h5 {...cx(['title'])}>{this.props.title}</h5>
+      <div className={cx('', !this.state.canRefine && '-noRefinement')}>
+        <h5 className={cx('title')}>{this.props.title}</h5>
         {this.props.children}
       </div>
     );

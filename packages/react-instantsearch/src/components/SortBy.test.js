@@ -12,6 +12,7 @@ describe('SortBy behavior', () => {
     const refine = jest.fn();
     const wrapper = mount(
       <SortBy
+        cx={(...x) => x.join(' ')}
         createURL={() => '#'}
         items={[
           { value: 'index1', label: 'index name 1' },
@@ -24,7 +25,7 @@ describe('SortBy behavior', () => {
       />
     );
 
-    const selectedValue = wrapper.find('.ais-SortBy');
+    const selectedValue = wrapper.find('.select');
     expect(selectedValue.find('option')).toHaveLength(4);
     expect(
       selectedValue
@@ -45,6 +46,7 @@ describe('SortBy behavior', () => {
     const refine = jest.fn();
     const wrapper = mount(
       <SortBy
+        cx={(...x) => x.join(' ')}
         createURL={() => '#'}
         items={[
           { value: 'index1' },
@@ -57,7 +59,7 @@ describe('SortBy behavior', () => {
       />
     );
 
-    const selectedValue = wrapper.find('.ais-SortBy');
+    const selectedValue = wrapper.find('.select');
     expect(selectedValue.find('option')).toHaveLength(4);
     expect(
       selectedValue

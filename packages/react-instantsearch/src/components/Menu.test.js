@@ -17,6 +17,7 @@ describe('Menu', () => {
     const tree = renderer
       .create(
         <Menu
+          cx={(...x) => x.join(' ')}
           refine={() => null}
           searchForItems={() => null}
           createURL={() => '#'}
@@ -42,6 +43,7 @@ describe('Menu', () => {
     const tree = renderer
       .create(
         <Menu
+          cx={(...x) => x.join(' ')}
           refine={() => null}
           searchForItems={() => null}
           withSearchBox
@@ -63,6 +65,7 @@ describe('Menu', () => {
     const tree = renderer
       .create(
         <Menu
+          cx={(...x) => x.join(' ')}
           refine={() => null}
           searchForItems={() => null}
           withSearchBox
@@ -88,6 +91,7 @@ describe('Menu', () => {
     const tree = renderer
       .create(
         <Menu
+          cx={(...x) => x.join(' ')}
           refine={() => null}
           createURL={() => '#'}
           searchForItems={() => null}
@@ -118,6 +122,7 @@ describe('Menu', () => {
     const refine = jest.fn();
     const wrapper = mount(
       <Menu
+        cx={(...x) => x.join(' ')}
         refine={refine}
         searchForItems={() => null}
         createURL={() => '#'}
@@ -131,7 +136,7 @@ describe('Menu', () => {
       />
     );
 
-    const items = wrapper.find('.ais-Menu-item');
+    const items = wrapper.find('.item');
 
     expect(items).toHaveLength(3);
 
@@ -149,6 +154,7 @@ describe('Menu', () => {
     const refine = jest.fn();
     const wrapper = mount(
       <Menu
+        cx={(...x) => x.join(' ')}
         refine={refine}
         createURL={() => '#'}
         items={[
@@ -167,13 +173,13 @@ describe('Menu', () => {
       />
     );
 
-    const items = wrapper.find('.ais-Menu-item');
+    const items = wrapper.find('.item');
 
     expect(items).toHaveLength(2);
 
-    wrapper.find('.ais-Menu-showMore').simulate('click');
+    wrapper.find('.showMore').simulate('click');
 
-    expect(wrapper.find('.ais-Menu-item')).toHaveLength(4);
+    expect(wrapper.find('.item')).toHaveLength(4);
 
     wrapper.unmount();
   });
@@ -182,6 +188,7 @@ describe('Menu', () => {
     const refine = jest.fn();
     const wrapper = mount(
       <Menu
+        cx={(...x) => x.join(' ')}
         refine={refine}
         createURL={() => '#'}
         items={[
@@ -197,11 +204,11 @@ describe('Menu', () => {
       />
     );
 
-    const items = wrapper.find('.ais-Menu-item');
+    const items = wrapper.find('.item');
 
     expect(items).toHaveLength(2);
 
-    expect(wrapper.find('.ais-Menu-showMore--disabled')).toBeDefined();
+    expect(wrapper.find('.showMore--disabled')).toBeDefined();
 
     wrapper.unmount();
   });
@@ -211,6 +218,7 @@ describe('Menu', () => {
     const searchForItems = jest.fn();
     const menu = (
       <Menu
+        cx={(...x) => x.join(' ')}
         refine={refine}
         withSearchBox={true}
         searchForItems={searchForItems}
@@ -239,7 +247,7 @@ describe('Menu', () => {
     it('a searchbox should be displayed if the feature is activated', () => {
       const wrapper = mount(menu);
 
-      const searchBox = wrapper.find('.ais-Menu-searchBox');
+      const searchBox = wrapper.find('.searchBox');
 
       expect(searchBox).toBeDefined();
 
@@ -250,7 +258,7 @@ describe('Menu', () => {
       const wrapper = mount(menu);
 
       wrapper
-        .find('.ais-Menu-searchBox input')
+        .find('.searchBox input')
         .simulate('change', { target: { value: 'query' } });
 
       expect(searchForItems.mock.calls).toHaveLength(1);
@@ -263,16 +271,16 @@ describe('Menu', () => {
       const wrapper = mount(menu);
 
       const firstItem = wrapper
-        .find('.ais-Menu-item')
+        .find('.item')
         .first()
         .find(Link);
       firstItem.simulate('click');
 
       expect(refine.mock.calls).toHaveLength(1);
       expect(refine.mock.calls[0][0]).toEqual('white');
-      expect(wrapper.find('.ais-Menu-searchBox input').props().value).toBe('');
+      expect(wrapper.find('.searchBox input').props().value).toBe('');
 
-      const selectedRefinements = wrapper.find('.ais-Menu-item');
+      const selectedRefinements = wrapper.find('.item');
       expect(selectedRefinements).toHaveLength(2);
 
       wrapper.unmount();
@@ -286,50 +294,12 @@ describe('Menu', () => {
 
       expect(refine.mock.calls).toHaveLength(1);
       expect(refine.mock.calls[0][0]).toEqual('white');
-      expect(wrapper.find('.ais-Menu-searchBox input').props().value).toBe('');
+      expect(wrapper.find('.searchBox input').props().value).toBe('');
 
-      const selectedRefinements = wrapper.find('.ais-Menu-item');
+      const selectedRefinements = wrapper.find('.item');
       expect(selectedRefinements).toHaveLength(2);
 
       wrapper.unmount();
-    });
-  });
-
-  describe('Panel compatibility', () => {
-    it('Should indicate when no more refinement', () => {
-      const canRefine = jest.fn();
-      const wrapper = mount(
-        <Menu
-          refine={() => null}
-          searchForItems={() => null}
-          createURL={() => '#'}
-          items={[
-            {
-              label: 'white',
-              value: 'white',
-              count: 10,
-              isRefined: true,
-              _highlightResult: { label: 'white' },
-            },
-          ]}
-          isFromSearch={true}
-          canRefine={true}
-        />,
-        {
-          context: { canRefine },
-          childContextTypes: { canRefine: PropTypes.func },
-        }
-      );
-
-      expect(canRefine.mock.calls).toHaveLength(1);
-      expect(canRefine.mock.calls[0][0]).toEqual(true);
-      expect(wrapper.find('.ais-Menu-list--noRefinement')).toHaveLength(0);
-
-      wrapper.setProps({ canRefine: false });
-
-      expect(canRefine.mock.calls).toHaveLength(2);
-      expect(canRefine.mock.calls[1][0]).toEqual(false);
-      expect(wrapper.find('.ais-Menu-list--noRefinement')).toHaveLength(1);
     });
   });
 });

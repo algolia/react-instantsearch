@@ -1,14 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Hits accepts a hitComponent prop 1`] = `
-<div
-  className="ais-InfiniteResults"
->
-  <div
-    className="ais-InfiniteResults-body ais-body"
+<div>
+  <ul
+    className="list"
   >
-    <ul
-      className="ais-InfiniteResults-list"
+    <li
+      className="item"
     >
       <Hit
         hit={
@@ -17,6 +15,10 @@ exports[`Hits accepts a hitComponent prop 1`] = `
           }
         }
       />
+    </li>
+    <li
+      className="item"
+    >
       <Hit
         hit={
           Object {
@@ -24,6 +26,10 @@ exports[`Hits accepts a hitComponent prop 1`] = `
           }
         }
       />
+    </li>
+    <li
+      className="item"
+    >
       <Hit
         hit={
           Object {
@@ -31,13 +37,14 @@ exports[`Hits accepts a hitComponent prop 1`] = `
           }
         }
       />
-    </ul>
-    <button
-      className="ais-InfiniteResults-loadMore ais-InfiniteResults-loadMore--disabled"
-      disabled={true}
-    >
-      Load more
-    </button>
-  </div>
+    </li>
+  </ul>
+  <button
+    className="loadMore loadMore--disabled"
+    disabled={true}
+    onClick={[Function]}
+  >
+    Load more
+  </button>
 </div>
 `;
