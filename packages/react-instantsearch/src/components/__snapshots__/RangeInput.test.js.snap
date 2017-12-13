@@ -2,624 +2,492 @@
 
 exports[`RangeInput render with translations 1`] = `
 <form
-  className="ais-RangeInput__root"
+  className="form"
   onSubmit={[Function]}
 >
-  <fieldset
-    className="ais-RangeInput__fieldset"
+  <input
+    className="input input--min"
     disabled={false}
+    max=""
+    min=""
+    onChange={[Function]}
+    placeholder=""
+    step={1}
+    type="number"
+    value=""
+  />
+  <span
+    className="separator"
   >
-    <label
-      className="ais-RangeInput__labelMin"
-    >
-      <input
-        className="ais-RangeInput__inputMin"
-        max=""
-        min=""
-        onChange={[Function]}
-        placeholder=""
-        step={1}
-        type="number"
-        value=""
-      />
-    </label>
-    <span
-      className="ais-RangeInput__separator"
-    >
-      SEPARATOR
-    </span>
-    <label
-      className="ais-RangeInput__labelMax"
-    >
-      <input
-        className="ais-RangeInput__inputMax"
-        max=""
-        min=""
-        onChange={[Function]}
-        placeholder=""
-        step={1}
-        type="number"
-        value=""
-      />
-    </label>
-    <button
-      className="ais-RangeInput__submit"
-      type="submit"
-    >
-      SUBMIT
-    </button>
-  </fieldset>
+    SEPARATOR
+  </span>
+  <input
+    className="input input--max"
+    disabled={false}
+    max=""
+    min=""
+    onChange={[Function]}
+    placeholder=""
+    step={1}
+    type="number"
+    value=""
+  />
+  <button
+    className="submit"
+    type="submit"
+  >
+    SUBMIT
+  </button>
 </form>
 `;
 
 exports[`RawRangeInput onChange expect to update max onChange 1`] = `
 <form
-  className="ais-RangeInput__root"
+  className="form"
   onSubmit={[Function]}
 >
-  <fieldset
-    className="ais-RangeInput__fieldset"
+  <input
+    className="input input--min"
     disabled={false}
+    max=""
+    min=""
+    onChange={[Function]}
+    placeholder=""
+    step={1}
+    type="number"
+    value=""
+  />
+  <span
+    className="separator"
   >
-    <label
-      className="ais-RangeInput__labelMin"
-    >
-      <input
-        className="ais-RangeInput__inputMin"
-        max=""
-        min=""
-        onChange={[Function]}
-        placeholder=""
-        step={1}
-        type="number"
-        value=""
-      />
-    </label>
-    <span
-      className="ais-RangeInput__separator"
-    >
-      separator
-    </span>
-    <label
-      className="ais-RangeInput__labelMax"
-    >
-      <input
-        className="ais-RangeInput__inputMax"
-        max=""
-        min=""
-        onChange={[Function]}
-        placeholder=""
-        step={1}
-        type="number"
-        value={490}
-      />
-    </label>
-    <button
-      className="ais-RangeInput__submit"
-      type="submit"
-    >
-      submit
-    </button>
-  </fieldset>
+    separator
+  </span>
+  <input
+    className="input input--max"
+    disabled={false}
+    max=""
+    min=""
+    onChange={[Function]}
+    placeholder=""
+    step={1}
+    type="number"
+    value={490}
+  />
+  <button
+    className="submit"
+    type="submit"
+  >
+    submit
+  </button>
 </form>
 `;
 
 exports[`RawRangeInput onChange expect to update min onChange 1`] = `
 <form
-  className="ais-RangeInput__root"
+  className="form"
   onSubmit={[Function]}
 >
-  <fieldset
-    className="ais-RangeInput__fieldset"
+  <input
+    className="input input--min"
     disabled={false}
+    max=""
+    min=""
+    onChange={[Function]}
+    placeholder=""
+    step={1}
+    type="number"
+    value={10}
+  />
+  <span
+    className="separator"
   >
-    <label
-      className="ais-RangeInput__labelMin"
-    >
-      <input
-        className="ais-RangeInput__inputMin"
-        max=""
-        min=""
-        onChange={[Function]}
-        placeholder=""
-        step={1}
-        type="number"
-        value={10}
-      />
-    </label>
-    <span
-      className="ais-RangeInput__separator"
-    >
-      separator
-    </span>
-    <label
-      className="ais-RangeInput__labelMax"
-    >
-      <input
-        className="ais-RangeInput__inputMax"
-        max=""
-        min=""
-        onChange={[Function]}
-        placeholder=""
-        step={1}
-        type="number"
-        value=""
-      />
-    </label>
-    <button
-      className="ais-RangeInput__submit"
-      type="submit"
-    >
-      submit
-    </button>
-  </fieldset>
+    separator
+  </span>
+  <input
+    className="input input--max"
+    disabled={false}
+    max=""
+    min=""
+    onChange={[Function]}
+    placeholder=""
+    step={1}
+    type="number"
+    value=""
+  />
+  <button
+    className="submit"
+    type="submit"
+  >
+    submit
+  </button>
 </form>
 `;
 
 exports[`RawRangeInput render when can't refine 1`] = `
 <form
-  className="ais-RangeInput__root ais-RangeInput__noRefinement"
+  className="form"
   onSubmit={[Function]}
 >
-  <fieldset
-    className="ais-RangeInput__fieldset"
+  <input
+    className="input input--min"
     disabled={true}
+    max=""
+    min=""
+    onChange={[Function]}
+    placeholder=""
+    step={1}
+    type="number"
+    value=""
+  />
+  <span
+    className="separator"
   >
-    <label
-      className="ais-RangeInput__labelMin"
-    >
-      <input
-        className="ais-RangeInput__inputMin"
-        max=""
-        min=""
-        onChange={[Function]}
-        placeholder=""
-        step={1}
-        type="number"
-        value=""
-      />
-    </label>
-    <span
-      className="ais-RangeInput__separator"
-    >
-      separator
-    </span>
-    <label
-      className="ais-RangeInput__labelMax"
-    >
-      <input
-        className="ais-RangeInput__inputMax"
-        max=""
-        min=""
-        onChange={[Function]}
-        placeholder=""
-        step={1}
-        type="number"
-        value=""
-      />
-    </label>
-    <button
-      className="ais-RangeInput__submit"
-      type="submit"
-    >
-      submit
-    </button>
-  </fieldset>
+    separator
+  </span>
+  <input
+    className="input input--max"
+    disabled={true}
+    max=""
+    min=""
+    onChange={[Function]}
+    placeholder=""
+    step={1}
+    type="number"
+    value=""
+  />
+  <button
+    className="submit"
+    type="submit"
+  >
+    submit
+  </button>
 </form>
 `;
 
 exports[`RawRangeInput render with empty values 1`] = `
 <form
-  className="ais-RangeInput__root"
+  className="form"
   onSubmit={[Function]}
 >
-  <fieldset
-    className="ais-RangeInput__fieldset"
+  <input
+    className="input input--min"
     disabled={false}
+    max=""
+    min=""
+    onChange={[Function]}
+    placeholder=""
+    step={1}
+    type="number"
+    value=""
+  />
+  <span
+    className="separator"
   >
-    <label
-      className="ais-RangeInput__labelMin"
-    >
-      <input
-        className="ais-RangeInput__inputMin"
-        max=""
-        min=""
-        onChange={[Function]}
-        placeholder=""
-        step={1}
-        type="number"
-        value=""
-      />
-    </label>
-    <span
-      className="ais-RangeInput__separator"
-    >
-      separator
-    </span>
-    <label
-      className="ais-RangeInput__labelMax"
-    >
-      <input
-        className="ais-RangeInput__inputMax"
-        max=""
-        min=""
-        onChange={[Function]}
-        placeholder=""
-        step={1}
-        type="number"
-        value=""
-      />
-    </label>
-    <button
-      className="ais-RangeInput__submit"
-      type="submit"
-    >
-      submit
-    </button>
-  </fieldset>
+    separator
+  </span>
+  <input
+    className="input input--max"
+    disabled={false}
+    max=""
+    min=""
+    onChange={[Function]}
+    placeholder=""
+    step={1}
+    type="number"
+    value=""
+  />
+  <button
+    className="submit"
+    type="submit"
+  >
+    submit
+  </button>
 </form>
 `;
 
 exports[`RawRangeInput render with empty values when refinement is equal to min / max 1`] = `
 <form
-  className="ais-RangeInput__root"
+  className="form"
   onSubmit={[Function]}
 >
-  <fieldset
-    className="ais-RangeInput__fieldset"
+  <input
+    className="input input--min"
     disabled={false}
+    max={500}
+    min={0}
+    onChange={[Function]}
+    placeholder={0}
+    step={1}
+    type="number"
+    value=""
+  />
+  <span
+    className="separator"
   >
-    <label
-      className="ais-RangeInput__labelMin"
-    >
-      <input
-        className="ais-RangeInput__inputMin"
-        max={500}
-        min={0}
-        onChange={[Function]}
-        placeholder={0}
-        step={1}
-        type="number"
-        value=""
-      />
-    </label>
-    <span
-      className="ais-RangeInput__separator"
-    >
-      separator
-    </span>
-    <label
-      className="ais-RangeInput__labelMax"
-    >
-      <input
-        className="ais-RangeInput__inputMax"
-        max={500}
-        min={0}
-        onChange={[Function]}
-        placeholder={500}
-        step={1}
-        type="number"
-        value=""
-      />
-    </label>
-    <button
-      className="ais-RangeInput__submit"
-      type="submit"
-    >
-      submit
-    </button>
-  </fieldset>
+    separator
+  </span>
+  <input
+    className="input input--max"
+    disabled={false}
+    max={500}
+    min={0}
+    onChange={[Function]}
+    placeholder={500}
+    step={1}
+    type="number"
+    value=""
+  />
+  <button
+    className="submit"
+    type="submit"
+  >
+    submit
+  </button>
 </form>
 `;
 
 exports[`RawRangeInput render with max only 1`] = `
 <form
-  className="ais-RangeInput__root"
+  className="form"
   onSubmit={[Function]}
 >
-  <fieldset
-    className="ais-RangeInput__fieldset"
+  <input
+    className="input input--min"
     disabled={false}
+    max=""
+    min=""
+    onChange={[Function]}
+    placeholder=""
+    step={1}
+    type="number"
+    value=""
+  />
+  <span
+    className="separator"
   >
-    <label
-      className="ais-RangeInput__labelMin"
-    >
-      <input
-        className="ais-RangeInput__inputMin"
-        max=""
-        min=""
-        onChange={[Function]}
-        placeholder=""
-        step={1}
-        type="number"
-        value=""
-      />
-    </label>
-    <span
-      className="ais-RangeInput__separator"
-    >
-      separator
-    </span>
-    <label
-      className="ais-RangeInput__labelMax"
-    >
-      <input
-        className="ais-RangeInput__inputMax"
-        max=""
-        min=""
-        onChange={[Function]}
-        placeholder=""
-        step={1}
-        type="number"
-        value=""
-      />
-    </label>
-    <button
-      className="ais-RangeInput__submit"
-      type="submit"
-    >
-      submit
-    </button>
-  </fieldset>
+    separator
+  </span>
+  <input
+    className="input input--max"
+    disabled={false}
+    max=""
+    min=""
+    onChange={[Function]}
+    placeholder=""
+    step={1}
+    type="number"
+    value=""
+  />
+  <button
+    className="submit"
+    type="submit"
+  >
+    submit
+  </button>
 </form>
 `;
 
 exports[`RawRangeInput render with min / max 1`] = `
 <form
-  className="ais-RangeInput__root"
+  className="form"
   onSubmit={[Function]}
 >
-  <fieldset
-    className="ais-RangeInput__fieldset"
+  <input
+    className="input input--min"
     disabled={false}
+    max={500}
+    min={0}
+    onChange={[Function]}
+    placeholder={0}
+    step={1}
+    type="number"
+    value=""
+  />
+  <span
+    className="separator"
   >
-    <label
-      className="ais-RangeInput__labelMin"
-    >
-      <input
-        className="ais-RangeInput__inputMin"
-        max={500}
-        min={0}
-        onChange={[Function]}
-        placeholder={0}
-        step={1}
-        type="number"
-        value=""
-      />
-    </label>
-    <span
-      className="ais-RangeInput__separator"
-    >
-      separator
-    </span>
-    <label
-      className="ais-RangeInput__labelMax"
-    >
-      <input
-        className="ais-RangeInput__inputMax"
-        max={500}
-        min={0}
-        onChange={[Function]}
-        placeholder={500}
-        step={1}
-        type="number"
-        value=""
-      />
-    </label>
-    <button
-      className="ais-RangeInput__submit"
-      type="submit"
-    >
-      submit
-    </button>
-  </fieldset>
+    separator
+  </span>
+  <input
+    className="input input--max"
+    disabled={false}
+    max={500}
+    min={0}
+    onChange={[Function]}
+    placeholder={500}
+    step={1}
+    type="number"
+    value=""
+  />
+  <button
+    className="submit"
+    type="submit"
+  >
+    submit
+  </button>
 </form>
 `;
 
 exports[`RawRangeInput render with min only 1`] = `
 <form
-  className="ais-RangeInput__root"
+  className="form"
   onSubmit={[Function]}
 >
-  <fieldset
-    className="ais-RangeInput__fieldset"
+  <input
+    className="input input--min"
     disabled={false}
+    max=""
+    min=""
+    onChange={[Function]}
+    placeholder=""
+    step={1}
+    type="number"
+    value=""
+  />
+  <span
+    className="separator"
   >
-    <label
-      className="ais-RangeInput__labelMin"
-    >
-      <input
-        className="ais-RangeInput__inputMin"
-        max=""
-        min=""
-        onChange={[Function]}
-        placeholder=""
-        step={1}
-        type="number"
-        value=""
-      />
-    </label>
-    <span
-      className="ais-RangeInput__separator"
-    >
-      separator
-    </span>
-    <label
-      className="ais-RangeInput__labelMax"
-    >
-      <input
-        className="ais-RangeInput__inputMax"
-        max=""
-        min=""
-        onChange={[Function]}
-        placeholder=""
-        step={1}
-        type="number"
-        value=""
-      />
-    </label>
-    <button
-      className="ais-RangeInput__submit"
-      type="submit"
-    >
-      submit
-    </button>
-  </fieldset>
+    separator
+  </span>
+  <input
+    className="input input--max"
+    disabled={false}
+    max=""
+    min=""
+    onChange={[Function]}
+    placeholder=""
+    step={1}
+    type="number"
+    value=""
+  />
+  <button
+    className="submit"
+    type="submit"
+  >
+    submit
+  </button>
 </form>
 `;
 
 exports[`RawRangeInput render with precision of 1 1`] = `
 <form
-  className="ais-RangeInput__root"
+  className="form"
   onSubmit={[Function]}
 >
-  <fieldset
-    className="ais-RangeInput__fieldset"
+  <input
+    className="input input--min"
     disabled={false}
+    max=""
+    min=""
+    onChange={[Function]}
+    placeholder=""
+    step={0.1}
+    type="number"
+    value=""
+  />
+  <span
+    className="separator"
   >
-    <label
-      className="ais-RangeInput__labelMin"
-    >
-      <input
-        className="ais-RangeInput__inputMin"
-        max=""
-        min=""
-        onChange={[Function]}
-        placeholder=""
-        step={0.1}
-        type="number"
-        value=""
-      />
-    </label>
-    <span
-      className="ais-RangeInput__separator"
-    >
-      separator
-    </span>
-    <label
-      className="ais-RangeInput__labelMax"
-    >
-      <input
-        className="ais-RangeInput__inputMax"
-        max=""
-        min=""
-        onChange={[Function]}
-        placeholder=""
-        step={0.1}
-        type="number"
-        value=""
-      />
-    </label>
-    <button
-      className="ais-RangeInput__submit"
-      type="submit"
-    >
-      submit
-    </button>
-  </fieldset>
+    separator
+  </span>
+  <input
+    className="input input--max"
+    disabled={false}
+    max=""
+    min=""
+    onChange={[Function]}
+    placeholder=""
+    step={0.1}
+    type="number"
+    value=""
+  />
+  <button
+    className="submit"
+    type="submit"
+  >
+    submit
+  </button>
 </form>
 `;
 
 exports[`RawRangeInput render with precision of 2 1`] = `
 <form
-  className="ais-RangeInput__root"
+  className="form"
   onSubmit={[Function]}
 >
-  <fieldset
-    className="ais-RangeInput__fieldset"
+  <input
+    className="input input--min"
     disabled={false}
+    max=""
+    min=""
+    onChange={[Function]}
+    placeholder=""
+    step={0.01}
+    type="number"
+    value=""
+  />
+  <span
+    className="separator"
   >
-    <label
-      className="ais-RangeInput__labelMin"
-    >
-      <input
-        className="ais-RangeInput__inputMin"
-        max=""
-        min=""
-        onChange={[Function]}
-        placeholder=""
-        step={0.01}
-        type="number"
-        value=""
-      />
-    </label>
-    <span
-      className="ais-RangeInput__separator"
-    >
-      separator
-    </span>
-    <label
-      className="ais-RangeInput__labelMax"
-    >
-      <input
-        className="ais-RangeInput__inputMax"
-        max=""
-        min=""
-        onChange={[Function]}
-        placeholder=""
-        step={0.01}
-        type="number"
-        value=""
-      />
-    </label>
-    <button
-      className="ais-RangeInput__submit"
-      type="submit"
-    >
-      submit
-    </button>
-  </fieldset>
+    separator
+  </span>
+  <input
+    className="input input--max"
+    disabled={false}
+    max=""
+    min=""
+    onChange={[Function]}
+    placeholder=""
+    step={0.01}
+    type="number"
+    value=""
+  />
+  <button
+    className="submit"
+    type="submit"
+  >
+    submit
+  </button>
 </form>
 `;
 
 exports[`RawRangeInput render with refinement 1`] = `
 <form
-  className="ais-RangeInput__root"
+  className="form"
   onSubmit={[Function]}
 >
-  <fieldset
-    className="ais-RangeInput__fieldset"
+  <input
+    className="input input--min"
     disabled={false}
+    max=""
+    min=""
+    onChange={[Function]}
+    placeholder=""
+    step={1}
+    type="number"
+    value={10}
+  />
+  <span
+    className="separator"
   >
-    <label
-      className="ais-RangeInput__labelMin"
-    >
-      <input
-        className="ais-RangeInput__inputMin"
-        max=""
-        min=""
-        onChange={[Function]}
-        placeholder=""
-        step={1}
-        type="number"
-        value={10}
-      />
-    </label>
-    <span
-      className="ais-RangeInput__separator"
-    >
-      separator
-    </span>
-    <label
-      className="ais-RangeInput__labelMax"
-    >
-      <input
-        className="ais-RangeInput__inputMax"
-        max=""
-        min=""
-        onChange={[Function]}
-        placeholder=""
-        step={1}
-        type="number"
-        value={490}
-      />
-    </label>
-    <button
-      className="ais-RangeInput__submit"
-      type="submit"
-    >
-      submit
-    </button>
-  </fieldset>
+    separator
+  </span>
+  <input
+    className="input input--max"
+    disabled={false}
+    max=""
+    min=""
+    onChange={[Function]}
+    placeholder=""
+    step={1}
+    type="number"
+    value={490}
+  />
+  <button
+    className="submit"
+    type="submit"
+  >
+    submit
+  </button>
 </form>
 `;

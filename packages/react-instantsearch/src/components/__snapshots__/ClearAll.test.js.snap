@@ -2,8 +2,9 @@
 
 exports[`ClearAll has a disabled mode 1`] = `
 <button
-  className="ais-ClearAll__root"
+  className="button button--disabled"
   disabled={true}
+  onClick={[Function]}
 >
   Clear all filters
 </button>
@@ -11,7 +12,8 @@ exports[`ClearAll has a disabled mode 1`] = `
 
 exports[`ClearAll renders a clickable button 1`] = `
 <button
-  className="ais-ClearAll__root"
+  className="button false"
+  disabled={false}
   onClick={[Function]}
 >
   Clear all filters

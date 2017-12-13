@@ -14,6 +14,7 @@ describe('HierarchicalMenu', () => {
     const tree = renderer
       .create(
         <HierarchicalMenu
+          cx={(...x) => x.join(' ')}
           refine={() => null}
           createURL={() => '#'}
           items={[
@@ -43,6 +44,7 @@ describe('HierarchicalMenu', () => {
     const tree = renderer
       .create(
         <HierarchicalMenu
+          cx={(...x) => x.join(' ')}
           refine={() => null}
           createURL={() => '#'}
           items={[
@@ -72,6 +74,7 @@ describe('HierarchicalMenu', () => {
     const refine = jest.fn();
     const wrapper = mount(
       <HierarchicalMenu
+        cx={(...x) => x.join(' ')}
         refine={refine}
         createURL={() => '#'}
         items={[
@@ -91,14 +94,12 @@ describe('HierarchicalMenu', () => {
       />
     );
 
-    const itemParent = wrapper.find(
-      '.ais-HierarchicalMenu__item .ais-HierarchicalMenu__itemParent'
-    );
+    const itemParent = wrapper.find('.item .item--parent');
 
     expect(itemParent).toHaveLength(1);
 
     itemParent
-      .find('.ais-HierarchicalMenu__itemLink')
+      .find('.link')
       .first()
       .simulate('click');
     expect(refine.mock.calls).toHaveLength(1);
@@ -111,6 +112,7 @@ describe('HierarchicalMenu', () => {
     const refine = jest.fn();
     const wrapper = mount(
       <HierarchicalMenu
+        cx={(...x) => x.join(' ')}
         refine={refine}
         createURL={() => '#'}
         items={[
@@ -127,13 +129,13 @@ describe('HierarchicalMenu', () => {
       />
     );
 
-    const items = wrapper.find('.ais-HierarchicalMenu__item');
+    const items = wrapper.find('.item');
 
     expect(items).toHaveLength(2);
 
-    wrapper.find('.ais-HierarchicalMenu__showMore').simulate('click');
+    wrapper.find('.showMore').simulate('click');
 
-    expect(wrapper.find('.ais-HierarchicalMenu__item')).toHaveLength(4);
+    expect(wrapper.find('.item')).toHaveLength(4);
 
     wrapper.unmount();
   });
@@ -142,6 +144,7 @@ describe('HierarchicalMenu', () => {
     const refine = jest.fn();
     const wrapper = mount(
       <HierarchicalMenu
+        cx={(...x) => x.join(' ')}
         refine={refine}
         createURL={() => '#'}
         items={[
@@ -155,58 +158,12 @@ describe('HierarchicalMenu', () => {
       />
     );
 
-    const items = wrapper.find('.ais-HierarchicalMenu__item');
+    const items = wrapper.find('.item');
 
     expect(items).toHaveLength(2);
 
-    expect(
-      wrapper.find('.ais-HierarchicalMenu__showMoreDisabled')
-    ).toBeDefined();
+    expect(wrapper.find('.showMore--disabled')).toBeDefined();
 
     wrapper.unmount();
-  });
-
-  describe('Panel compatibility', () => {
-    it('Should indicate when no more refinement', () => {
-      const canRefine = jest.fn();
-      const wrapper = mount(
-        <HierarchicalMenu
-          refine={() => null}
-          createURL={() => '#'}
-          items={[
-            {
-              value: 'white',
-              count: 10,
-              label: 'white',
-              items: [
-                { value: 'white1', label: 'white1', count: 3 },
-                { value: 'white2', label: 'white2', count: 4 },
-              ],
-            },
-            { value: 'black', count: 20, label: 'black' },
-            { value: 'blue', count: 30, label: 'blue' },
-          ]}
-          canRefine={true}
-        />,
-        {
-          context: { canRefine },
-          childContextTypes: { canRefine: PropTypes.func },
-        }
-      );
-
-      expect(canRefine.mock.calls).toHaveLength(1);
-      expect(canRefine.mock.calls[0][0]).toEqual(true);
-      expect(wrapper.find('.ais-HierarchicalMenu__noRefinement')).toHaveLength(
-        0
-      );
-
-      wrapper.setProps({ canRefine: false });
-
-      expect(canRefine.mock.calls).toHaveLength(2);
-      expect(canRefine.mock.calls[1][0]).toEqual(false);
-      expect(wrapper.find('.ais-HierarchicalMenu__noRefinement')).toHaveLength(
-        1
-      );
-    });
   });
 });

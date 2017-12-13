@@ -2,6 +2,8 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import SearchBox from '../components/SearchBox';
 
+import classNames from './classNames';
+
 const itemsPropType = PropTypes.arrayOf(
   PropTypes.shape({
     value: PropTypes.any,
@@ -119,6 +121,7 @@ class List extends Component {
     return (
       <div className={cx('searchBox')}>
         <SearchBox
+          cx={classNames('SearchBox')}
           currentRefinement={this.state.query}
           refine={value => {
             this.setState({ query: value });

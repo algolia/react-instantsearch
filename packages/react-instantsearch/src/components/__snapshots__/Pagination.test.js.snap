@@ -2,15 +2,14 @@
 
 exports[`Pagination allows toggling display of the first page button on and off 1`] = `
 <ul
-  className="ais-Pagination__root"
+  className="list false"
 >
   <li
-    className="ais-Pagination__item ais-Pagination__itemFirst"
-    disabled={false}
+    className="item  false item--firstPage"
   >
     <a
       aria-label="First page"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -18,12 +17,11 @@ exports[`Pagination allows toggling display of the first page button on and off 
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPrevious"
-    disabled={false}
+    className="item  false item--previousPage"
   >
     <a
       aria-label="Previous page"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -31,12 +29,11 @@ exports[`Pagination allows toggling display of the first page button on and off 
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 6"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -44,12 +41,11 @@ exports[`Pagination allows toggling display of the first page button on and off 
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 7"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -57,12 +53,11 @@ exports[`Pagination allows toggling display of the first page button on and off 
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 8"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -70,12 +65,11 @@ exports[`Pagination allows toggling display of the first page button on and off 
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemSelected ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item item--selected  item--page"
   >
     <a
       aria-label="Page 9"
-      className="ais-Pagination__itemLink ais-Pagination__itemLinkSelected"
+      className="link link--selected"
       href="#"
       onClick={[Function]}
     >
@@ -83,12 +77,11 @@ exports[`Pagination allows toggling display of the first page button on and off 
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 10"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -96,12 +89,11 @@ exports[`Pagination allows toggling display of the first page button on and off 
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 11"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -109,12 +101,11 @@ exports[`Pagination allows toggling display of the first page button on and off 
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 12"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -122,12 +113,11 @@ exports[`Pagination allows toggling display of the first page button on and off 
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemNext"
-    disabled={false}
+    className="item  false item--nextPage"
   >
     <a
       aria-label="Next page"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -139,15 +129,14 @@ exports[`Pagination allows toggling display of the first page button on and off 
 
 exports[`Pagination allows toggling display of the first page button on and off 2`] = `
 <ul
-  className="ais-Pagination__root"
+  className="list false"
 >
   <li
-    className="ais-Pagination__item ais-Pagination__itemPrevious"
-    disabled={false}
+    className="item  false item--previousPage"
   >
     <a
       aria-label="Previous page"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -155,12 +144,11 @@ exports[`Pagination allows toggling display of the first page button on and off 
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 6"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -168,12 +156,11 @@ exports[`Pagination allows toggling display of the first page button on and off 
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 7"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -181,12 +168,11 @@ exports[`Pagination allows toggling display of the first page button on and off 
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 8"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -194,12 +180,11 @@ exports[`Pagination allows toggling display of the first page button on and off 
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemSelected ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item item--selected  item--page"
   >
     <a
       aria-label="Page 9"
-      className="ais-Pagination__itemLink ais-Pagination__itemLinkSelected"
+      className="link link--selected"
       href="#"
       onClick={[Function]}
     >
@@ -207,12 +192,11 @@ exports[`Pagination allows toggling display of the first page button on and off 
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 10"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -220,12 +204,11 @@ exports[`Pagination allows toggling display of the first page button on and off 
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 11"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -233,12 +216,11 @@ exports[`Pagination allows toggling display of the first page button on and off 
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 12"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -246,12 +228,11 @@ exports[`Pagination allows toggling display of the first page button on and off 
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemNext"
-    disabled={false}
+    className="item  false item--nextPage"
   >
     <a
       aria-label="Next page"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -263,15 +244,14 @@ exports[`Pagination allows toggling display of the first page button on and off 
 
 exports[`Pagination allows toggling display of the last page button on and off 1`] = `
 <ul
-  className="ais-Pagination__root"
+  className="list false"
 >
   <li
-    className="ais-Pagination__item ais-Pagination__itemFirst"
-    disabled={false}
+    className="item  false item--firstPage"
   >
     <a
       aria-label="First page"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -279,12 +259,11 @@ exports[`Pagination allows toggling display of the last page button on and off 1
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPrevious"
-    disabled={false}
+    className="item  false item--previousPage"
   >
     <a
       aria-label="Previous page"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -292,12 +271,11 @@ exports[`Pagination allows toggling display of the last page button on and off 1
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 6"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -305,12 +283,11 @@ exports[`Pagination allows toggling display of the last page button on and off 1
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 7"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -318,12 +295,11 @@ exports[`Pagination allows toggling display of the last page button on and off 1
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 8"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -331,12 +307,11 @@ exports[`Pagination allows toggling display of the last page button on and off 1
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemSelected ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item item--selected  item--page"
   >
     <a
       aria-label="Page 9"
-      className="ais-Pagination__itemLink ais-Pagination__itemLinkSelected"
+      className="link link--selected"
       href="#"
       onClick={[Function]}
     >
@@ -344,12 +319,11 @@ exports[`Pagination allows toggling display of the last page button on and off 1
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 10"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -357,12 +331,11 @@ exports[`Pagination allows toggling display of the last page button on and off 1
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 11"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -370,12 +343,11 @@ exports[`Pagination allows toggling display of the last page button on and off 1
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 12"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -383,12 +355,11 @@ exports[`Pagination allows toggling display of the last page button on and off 1
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemNext"
-    disabled={false}
+    className="item  false item--nextPage"
   >
     <a
       aria-label="Next page"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -396,12 +367,11 @@ exports[`Pagination allows toggling display of the last page button on and off 1
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemLast"
-    disabled={false}
+    className="item  false item--lastPage"
   >
     <a
       aria-label="Last page"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -413,15 +383,14 @@ exports[`Pagination allows toggling display of the last page button on and off 1
 
 exports[`Pagination allows toggling display of the last page button on and off 2`] = `
 <ul
-  className="ais-Pagination__root"
+  className="list false"
 >
   <li
-    className="ais-Pagination__item ais-Pagination__itemFirst"
-    disabled={false}
+    className="item  false item--firstPage"
   >
     <a
       aria-label="First page"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -429,12 +398,11 @@ exports[`Pagination allows toggling display of the last page button on and off 2
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPrevious"
-    disabled={false}
+    className="item  false item--previousPage"
   >
     <a
       aria-label="Previous page"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -442,12 +410,11 @@ exports[`Pagination allows toggling display of the last page button on and off 2
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 6"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -455,12 +422,11 @@ exports[`Pagination allows toggling display of the last page button on and off 2
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 7"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -468,12 +434,11 @@ exports[`Pagination allows toggling display of the last page button on and off 2
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 8"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -481,12 +446,11 @@ exports[`Pagination allows toggling display of the last page button on and off 2
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemSelected ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item item--selected  item--page"
   >
     <a
       aria-label="Page 9"
-      className="ais-Pagination__itemLink ais-Pagination__itemLinkSelected"
+      className="link link--selected"
       href="#"
       onClick={[Function]}
     >
@@ -494,12 +458,11 @@ exports[`Pagination allows toggling display of the last page button on and off 2
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 10"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -507,12 +470,11 @@ exports[`Pagination allows toggling display of the last page button on and off 2
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 11"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -520,12 +482,11 @@ exports[`Pagination allows toggling display of the last page button on and off 2
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 12"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -533,12 +494,11 @@ exports[`Pagination allows toggling display of the last page button on and off 2
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemNext"
-    disabled={false}
+    className="item  false item--nextPage"
   >
     <a
       aria-label="Next page"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -550,15 +510,14 @@ exports[`Pagination allows toggling display of the last page button on and off 2
 
 exports[`Pagination allows toggling display of the next page button on and off 1`] = `
 <ul
-  className="ais-Pagination__root"
+  className="list false"
 >
   <li
-    className="ais-Pagination__item ais-Pagination__itemFirst"
-    disabled={false}
+    className="item  false item--firstPage"
   >
     <a
       aria-label="First page"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -566,12 +525,11 @@ exports[`Pagination allows toggling display of the next page button on and off 1
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPrevious"
-    disabled={false}
+    className="item  false item--previousPage"
   >
     <a
       aria-label="Previous page"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -579,12 +537,11 @@ exports[`Pagination allows toggling display of the next page button on and off 1
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 6"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -592,12 +549,11 @@ exports[`Pagination allows toggling display of the next page button on and off 1
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 7"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -605,12 +561,11 @@ exports[`Pagination allows toggling display of the next page button on and off 1
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 8"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -618,12 +573,11 @@ exports[`Pagination allows toggling display of the next page button on and off 1
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemSelected ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item item--selected  item--page"
   >
     <a
       aria-label="Page 9"
-      className="ais-Pagination__itemLink ais-Pagination__itemLinkSelected"
+      className="link link--selected"
       href="#"
       onClick={[Function]}
     >
@@ -631,12 +585,11 @@ exports[`Pagination allows toggling display of the next page button on and off 1
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 10"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -644,12 +597,11 @@ exports[`Pagination allows toggling display of the next page button on and off 1
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 11"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -657,12 +609,11 @@ exports[`Pagination allows toggling display of the next page button on and off 1
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 12"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -670,12 +621,11 @@ exports[`Pagination allows toggling display of the next page button on and off 1
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemNext"
-    disabled={false}
+    className="item  false item--nextPage"
   >
     <a
       aria-label="Next page"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -687,15 +637,14 @@ exports[`Pagination allows toggling display of the next page button on and off 1
 
 exports[`Pagination allows toggling display of the next page button on and off 2`] = `
 <ul
-  className="ais-Pagination__root"
+  className="list false"
 >
   <li
-    className="ais-Pagination__item ais-Pagination__itemFirst"
-    disabled={false}
+    className="item  false item--firstPage"
   >
     <a
       aria-label="First page"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -703,12 +652,11 @@ exports[`Pagination allows toggling display of the next page button on and off 2
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPrevious"
-    disabled={false}
+    className="item  false item--previousPage"
   >
     <a
       aria-label="Previous page"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -716,12 +664,11 @@ exports[`Pagination allows toggling display of the next page button on and off 2
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 6"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -729,12 +676,11 @@ exports[`Pagination allows toggling display of the next page button on and off 2
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 7"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -742,12 +688,11 @@ exports[`Pagination allows toggling display of the next page button on and off 2
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 8"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -755,12 +700,11 @@ exports[`Pagination allows toggling display of the next page button on and off 2
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemSelected ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item item--selected  item--page"
   >
     <a
       aria-label="Page 9"
-      className="ais-Pagination__itemLink ais-Pagination__itemLinkSelected"
+      className="link link--selected"
       href="#"
       onClick={[Function]}
     >
@@ -768,12 +712,11 @@ exports[`Pagination allows toggling display of the next page button on and off 2
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 10"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -781,12 +724,11 @@ exports[`Pagination allows toggling display of the next page button on and off 2
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 11"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -794,12 +736,11 @@ exports[`Pagination allows toggling display of the next page button on and off 2
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 12"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -811,15 +752,14 @@ exports[`Pagination allows toggling display of the next page button on and off 2
 
 exports[`Pagination allows toggling display of the previous page button on and off 1`] = `
 <ul
-  className="ais-Pagination__root"
+  className="list false"
 >
   <li
-    className="ais-Pagination__item ais-Pagination__itemFirst"
-    disabled={false}
+    className="item  false item--firstPage"
   >
     <a
       aria-label="First page"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -827,12 +767,11 @@ exports[`Pagination allows toggling display of the previous page button on and o
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPrevious"
-    disabled={false}
+    className="item  false item--previousPage"
   >
     <a
       aria-label="Previous page"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -840,12 +779,11 @@ exports[`Pagination allows toggling display of the previous page button on and o
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 6"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -853,12 +791,11 @@ exports[`Pagination allows toggling display of the previous page button on and o
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 7"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -866,12 +803,11 @@ exports[`Pagination allows toggling display of the previous page button on and o
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 8"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -879,12 +815,11 @@ exports[`Pagination allows toggling display of the previous page button on and o
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemSelected ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item item--selected  item--page"
   >
     <a
       aria-label="Page 9"
-      className="ais-Pagination__itemLink ais-Pagination__itemLinkSelected"
+      className="link link--selected"
       href="#"
       onClick={[Function]}
     >
@@ -892,12 +827,11 @@ exports[`Pagination allows toggling display of the previous page button on and o
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 10"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -905,12 +839,11 @@ exports[`Pagination allows toggling display of the previous page button on and o
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 11"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -918,12 +851,11 @@ exports[`Pagination allows toggling display of the previous page button on and o
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 12"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -931,12 +863,11 @@ exports[`Pagination allows toggling display of the previous page button on and o
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemNext"
-    disabled={false}
+    className="item  false item--nextPage"
   >
     <a
       aria-label="Next page"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -948,15 +879,14 @@ exports[`Pagination allows toggling display of the previous page button on and o
 
 exports[`Pagination allows toggling display of the previous page button on and off 2`] = `
 <ul
-  className="ais-Pagination__root"
+  className="list false"
 >
   <li
-    className="ais-Pagination__item ais-Pagination__itemFirst"
-    disabled={false}
+    className="item  false item--firstPage"
   >
     <a
       aria-label="First page"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -964,12 +894,11 @@ exports[`Pagination allows toggling display of the previous page button on and o
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 6"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -977,12 +906,11 @@ exports[`Pagination allows toggling display of the previous page button on and o
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 7"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -990,12 +918,11 @@ exports[`Pagination allows toggling display of the previous page button on and o
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 8"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -1003,12 +930,11 @@ exports[`Pagination allows toggling display of the previous page button on and o
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemSelected ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item item--selected  item--page"
   >
     <a
       aria-label="Page 9"
-      className="ais-Pagination__itemLink ais-Pagination__itemLinkSelected"
+      className="link link--selected"
       href="#"
       onClick={[Function]}
     >
@@ -1016,12 +942,11 @@ exports[`Pagination allows toggling display of the previous page button on and o
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 10"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -1029,12 +954,11 @@ exports[`Pagination allows toggling display of the previous page button on and o
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 11"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -1042,12 +966,11 @@ exports[`Pagination allows toggling display of the previous page button on and o
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 12"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -1055,12 +978,11 @@ exports[`Pagination allows toggling display of the previous page button on and o
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemNext"
-    disabled={false}
+    className="item  false item--nextPage"
   >
     <a
       aria-label="Next page"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -1072,15 +994,14 @@ exports[`Pagination allows toggling display of the previous page button on and o
 
 exports[`Pagination applies its default props 1`] = `
 <ul
-  className="ais-Pagination__root"
+  className="list false"
 >
   <li
-    className="ais-Pagination__item ais-Pagination__itemFirst"
-    disabled={false}
+    className="item  false item--firstPage"
   >
     <a
       aria-label="First page"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -1088,12 +1009,11 @@ exports[`Pagination applies its default props 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPrevious"
-    disabled={false}
+    className="item  false item--previousPage"
   >
     <a
       aria-label="Previous page"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -1101,12 +1021,11 @@ exports[`Pagination applies its default props 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 6"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -1114,12 +1033,11 @@ exports[`Pagination applies its default props 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 7"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -1127,12 +1045,11 @@ exports[`Pagination applies its default props 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 8"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -1140,12 +1057,11 @@ exports[`Pagination applies its default props 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemSelected ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item item--selected  item--page"
   >
     <a
       aria-label="Page 9"
-      className="ais-Pagination__itemLink ais-Pagination__itemLinkSelected"
+      className="link link--selected"
       href="#"
       onClick={[Function]}
     >
@@ -1153,12 +1069,11 @@ exports[`Pagination applies its default props 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 10"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -1166,12 +1081,11 @@ exports[`Pagination applies its default props 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 11"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -1179,12 +1093,11 @@ exports[`Pagination applies its default props 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 12"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -1192,12 +1105,11 @@ exports[`Pagination applies its default props 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemNext"
-    disabled={false}
+    className="item  false item--nextPage"
   >
     <a
       aria-label="Next page"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -1209,44 +1121,40 @@ exports[`Pagination applies its default props 1`] = `
 
 exports[`Pagination disabled all button if no results 1`] = `
 <ul
-  className="ais-Pagination__root"
+  className="list false"
 >
   <li
-    className="ais-Pagination__item ais-Pagination__itemDisabled ais-Pagination__itemFirst"
-    disabled={true}
+    className="item  item--disabled item--firstPage"
   >
     <span
-      className="ais-Pagination__itemLink ais-Pagination__itemLinkDisabled"
+      className="link"
     >
       «
     </span>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemDisabled ais-Pagination__itemPrevious"
-    disabled={true}
+    className="item  item--disabled item--previousPage"
   >
     <span
-      className="ais-Pagination__itemLink ais-Pagination__itemLinkDisabled"
+      className="link"
     >
       ‹
     </span>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemDisabled ais-Pagination__itemNext"
-    disabled={true}
+    className="item  item--disabled item--nextPage"
   >
     <span
-      className="ais-Pagination__itemLink ais-Pagination__itemLinkDisabled"
+      className="link"
     >
       ›
     </span>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemDisabled ais-Pagination__itemLast"
-    disabled={true}
+    className="item  item--disabled item--lastPage"
   >
     <span
-      className="ais-Pagination__itemLink ais-Pagination__itemLinkDisabled"
+      className="link"
     >
       »
     </span>
@@ -1256,15 +1164,14 @@ exports[`Pagination disabled all button if no results 1`] = `
 
 exports[`Pagination displays the correct padding of links 1`] = `
 <ul
-  className="ais-Pagination__root"
+  className="list false"
 >
   <li
-    className="ais-Pagination__item ais-Pagination__itemFirst"
-    disabled={false}
+    className="item  false item--firstPage"
   >
     <a
       aria-label="First page"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -1272,12 +1179,11 @@ exports[`Pagination displays the correct padding of links 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPrevious"
-    disabled={false}
+    className="item  false item--previousPage"
   >
     <a
       aria-label="Previous page"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -1285,12 +1191,11 @@ exports[`Pagination displays the correct padding of links 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 1"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -1298,12 +1203,11 @@ exports[`Pagination displays the correct padding of links 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 2"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -1311,12 +1215,11 @@ exports[`Pagination displays the correct padding of links 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 3"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -1324,12 +1227,11 @@ exports[`Pagination displays the correct padding of links 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 4"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -1337,12 +1239,11 @@ exports[`Pagination displays the correct padding of links 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 5"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -1350,12 +1251,11 @@ exports[`Pagination displays the correct padding of links 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 6"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -1363,12 +1263,11 @@ exports[`Pagination displays the correct padding of links 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 7"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -1376,12 +1275,11 @@ exports[`Pagination displays the correct padding of links 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 8"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -1389,12 +1287,11 @@ exports[`Pagination displays the correct padding of links 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 9"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -1402,12 +1299,11 @@ exports[`Pagination displays the correct padding of links 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 10"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -1415,12 +1311,11 @@ exports[`Pagination displays the correct padding of links 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 11"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -1428,12 +1323,11 @@ exports[`Pagination displays the correct padding of links 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemNext"
-    disabled={false}
+    className="item  false item--nextPage"
   >
     <a
       aria-label="Next page"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -1445,15 +1339,14 @@ exports[`Pagination displays the correct padding of links 1`] = `
 
 exports[`Pagination displays the correct padding of links 2`] = `
 <ul
-  className="ais-Pagination__root"
+  className="list false"
 >
   <li
-    className="ais-Pagination__item ais-Pagination__itemFirst"
-    disabled={false}
+    className="item  false item--firstPage"
   >
     <a
       aria-label="First page"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -1461,12 +1354,11 @@ exports[`Pagination displays the correct padding of links 2`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPrevious"
-    disabled={false}
+    className="item  false item--previousPage"
   >
     <a
       aria-label="Previous page"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -1474,12 +1366,11 @@ exports[`Pagination displays the correct padding of links 2`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 5"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -1487,12 +1378,11 @@ exports[`Pagination displays the correct padding of links 2`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 6"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -1500,12 +1390,11 @@ exports[`Pagination displays the correct padding of links 2`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 7"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -1513,12 +1402,11 @@ exports[`Pagination displays the correct padding of links 2`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 8"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -1526,12 +1414,11 @@ exports[`Pagination displays the correct padding of links 2`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemSelected ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item item--selected  item--page"
   >
     <a
       aria-label="Page 9"
-      className="ais-Pagination__itemLink ais-Pagination__itemLinkSelected"
+      className="link link--selected"
       href="#"
       onClick={[Function]}
     >
@@ -1539,12 +1426,11 @@ exports[`Pagination displays the correct padding of links 2`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 10"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -1552,12 +1438,11 @@ exports[`Pagination displays the correct padding of links 2`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 11"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -1565,12 +1450,11 @@ exports[`Pagination displays the correct padding of links 2`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 12"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -1578,12 +1462,11 @@ exports[`Pagination displays the correct padding of links 2`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 13"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -1591,12 +1474,11 @@ exports[`Pagination displays the correct padding of links 2`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemNext"
-    disabled={false}
+    className="item  false item--nextPage"
   >
     <a
       aria-label="Next page"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -1608,15 +1490,14 @@ exports[`Pagination displays the correct padding of links 2`] = `
 
 exports[`Pagination displays the correct padding of links 3`] = `
 <ul
-  className="ais-Pagination__root"
+  className="list false"
 >
   <li
-    className="ais-Pagination__item ais-Pagination__itemFirst"
-    disabled={false}
+    className="item  false item--firstPage"
   >
     <a
       aria-label="First page"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -1624,12 +1505,11 @@ exports[`Pagination displays the correct padding of links 3`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPrevious"
-    disabled={false}
+    className="item  false item--previousPage"
   >
     <a
       aria-label="Previous page"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -1637,12 +1517,11 @@ exports[`Pagination displays the correct padding of links 3`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 14"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -1650,12 +1529,11 @@ exports[`Pagination displays the correct padding of links 3`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 15"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -1663,12 +1541,11 @@ exports[`Pagination displays the correct padding of links 3`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 16"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -1676,12 +1553,11 @@ exports[`Pagination displays the correct padding of links 3`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 17"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -1689,12 +1565,11 @@ exports[`Pagination displays the correct padding of links 3`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 18"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -1702,12 +1577,11 @@ exports[`Pagination displays the correct padding of links 3`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemSelected ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item item--selected  item--page"
   >
     <a
       aria-label="Page 19"
-      className="ais-Pagination__itemLink ais-Pagination__itemLinkSelected"
+      className="link link--selected"
       href="#"
       onClick={[Function]}
     >
@@ -1715,12 +1589,11 @@ exports[`Pagination displays the correct padding of links 3`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 20"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -1728,12 +1601,11 @@ exports[`Pagination displays the correct padding of links 3`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemNext"
-    disabled={false}
+    className="item  false item--nextPage"
   >
     <a
       aria-label="Next page"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -1745,15 +1617,14 @@ exports[`Pagination displays the correct padding of links 3`] = `
 
 exports[`Pagination displays the correct padding of links 4`] = `
 <ul
-  className="ais-Pagination__root"
+  className="list false"
 >
   <li
-    className="ais-Pagination__item ais-Pagination__itemFirst"
-    disabled={false}
+    className="item  false item--firstPage"
   >
     <a
       aria-label="First page"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -1761,12 +1632,11 @@ exports[`Pagination displays the correct padding of links 4`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPrevious"
-    disabled={false}
+    className="item  false item--previousPage"
   >
     <a
       aria-label="Previous page"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -1774,12 +1644,11 @@ exports[`Pagination displays the correct padding of links 4`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 1"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -1787,12 +1656,11 @@ exports[`Pagination displays the correct padding of links 4`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 2"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -1800,12 +1668,11 @@ exports[`Pagination displays the correct padding of links 4`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemSelected ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item item--selected  item--page"
   >
     <a
       aria-label="Page 3"
-      className="ais-Pagination__itemLink ais-Pagination__itemLinkSelected"
+      className="link link--selected"
       href="#"
       onClick={[Function]}
     >
@@ -1813,12 +1680,11 @@ exports[`Pagination displays the correct padding of links 4`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 4"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -1826,12 +1692,11 @@ exports[`Pagination displays the correct padding of links 4`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 5"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -1839,12 +1704,11 @@ exports[`Pagination displays the correct padding of links 4`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemNext"
-    disabled={false}
+    className="item  false item--nextPage"
   >
     <a
       aria-label="Next page"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -1856,35 +1720,32 @@ exports[`Pagination displays the correct padding of links 4`] = `
 
 exports[`Pagination indicates when first button is relevant 1`] = `
 <ul
-  className="ais-Pagination__root"
+  className="list false"
 >
   <li
-    className="ais-Pagination__item ais-Pagination__itemDisabled ais-Pagination__itemFirst"
-    disabled={true}
+    className="item  item--disabled item--firstPage"
   >
     <span
-      className="ais-Pagination__itemLink ais-Pagination__itemLinkDisabled"
+      className="link"
     >
       «
     </span>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemDisabled ais-Pagination__itemPrevious"
-    disabled={true}
+    className="item  item--disabled item--previousPage"
   >
     <span
-      className="ais-Pagination__itemLink ais-Pagination__itemLinkDisabled"
+      className="link"
     >
       ‹
     </span>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemSelected ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item item--selected  item--page"
   >
     <a
       aria-label="Page 1"
-      className="ais-Pagination__itemLink ais-Pagination__itemLinkSelected"
+      className="link link--selected"
       href="#"
       onClick={[Function]}
     >
@@ -1892,12 +1753,11 @@ exports[`Pagination indicates when first button is relevant 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 2"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -1905,12 +1765,11 @@ exports[`Pagination indicates when first button is relevant 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 3"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -1918,12 +1777,11 @@ exports[`Pagination indicates when first button is relevant 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 4"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -1931,12 +1789,11 @@ exports[`Pagination indicates when first button is relevant 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 5"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -1944,12 +1801,11 @@ exports[`Pagination indicates when first button is relevant 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 6"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -1957,12 +1813,11 @@ exports[`Pagination indicates when first button is relevant 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 7"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -1970,12 +1825,11 @@ exports[`Pagination indicates when first button is relevant 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemNext"
-    disabled={false}
+    className="item  false item--nextPage"
   >
     <a
       aria-label="Next page"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -1987,15 +1841,14 @@ exports[`Pagination indicates when first button is relevant 1`] = `
 
 exports[`Pagination indicates when first button is relevant 2`] = `
 <ul
-  className="ais-Pagination__root"
+  className="list false"
 >
   <li
-    className="ais-Pagination__item ais-Pagination__itemFirst"
-    disabled={false}
+    className="item  false item--firstPage"
   >
     <a
       aria-label="First page"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -2003,12 +1856,11 @@ exports[`Pagination indicates when first button is relevant 2`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPrevious"
-    disabled={false}
+    className="item  false item--previousPage"
   >
     <a
       aria-label="Previous page"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -2016,12 +1868,11 @@ exports[`Pagination indicates when first button is relevant 2`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 14"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -2029,12 +1880,11 @@ exports[`Pagination indicates when first button is relevant 2`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 15"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -2042,12 +1892,11 @@ exports[`Pagination indicates when first button is relevant 2`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 16"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -2055,12 +1904,11 @@ exports[`Pagination indicates when first button is relevant 2`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 17"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -2068,12 +1916,11 @@ exports[`Pagination indicates when first button is relevant 2`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 18"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -2081,12 +1928,11 @@ exports[`Pagination indicates when first button is relevant 2`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 19"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -2094,12 +1940,11 @@ exports[`Pagination indicates when first button is relevant 2`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemSelected ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item item--selected  item--page"
   >
     <a
       aria-label="Page 20"
-      className="ais-Pagination__itemLink ais-Pagination__itemLinkSelected"
+      className="link link--selected"
       href="#"
       onClick={[Function]}
     >
@@ -2107,21 +1952,19 @@ exports[`Pagination indicates when first button is relevant 2`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemDisabled ais-Pagination__itemNext"
-    disabled={true}
+    className="item  item--disabled item--nextPage"
   >
     <span
-      className="ais-Pagination__itemLink ais-Pagination__itemLinkDisabled"
+      className="link"
     >
       ›
     </span>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemDisabled ais-Pagination__itemLast"
-    disabled={true}
+    className="item  item--disabled item--lastPage"
   >
     <span
-      className="ais-Pagination__itemLink ais-Pagination__itemLinkDisabled"
+      className="link"
     >
       »
     </span>
@@ -2131,15 +1974,14 @@ exports[`Pagination indicates when first button is relevant 2`] = `
 
 exports[`Pagination lets you customize its theme 1`] = `
 <ul
-  className="ais-Pagination__root"
+  className="list false"
 >
   <li
-    className="ais-Pagination__item ais-Pagination__itemFirst"
-    disabled={false}
+    className="item  false item--firstPage"
   >
     <a
       aria-label="First page"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -2147,12 +1989,11 @@ exports[`Pagination lets you customize its theme 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPrevious"
-    disabled={false}
+    className="item  false item--previousPage"
   >
     <a
       aria-label="Previous page"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -2160,12 +2001,11 @@ exports[`Pagination lets you customize its theme 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 2"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -2173,12 +2013,11 @@ exports[`Pagination lets you customize its theme 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 3"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -2186,12 +2025,11 @@ exports[`Pagination lets you customize its theme 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 4"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -2199,12 +2037,11 @@ exports[`Pagination lets you customize its theme 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 5"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -2212,12 +2049,11 @@ exports[`Pagination lets you customize its theme 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 6"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -2225,12 +2061,11 @@ exports[`Pagination lets you customize its theme 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 7"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -2238,12 +2073,11 @@ exports[`Pagination lets you customize its theme 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemSelected ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item item--selected  item--page"
   >
     <a
       aria-label="Page 8"
-      className="ais-Pagination__itemLink ais-Pagination__itemLinkSelected"
+      className="link link--selected"
       href="#"
       onClick={[Function]}
     >
@@ -2251,12 +2085,11 @@ exports[`Pagination lets you customize its theme 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 9"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -2264,12 +2097,11 @@ exports[`Pagination lets you customize its theme 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 10"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -2277,12 +2109,11 @@ exports[`Pagination lets you customize its theme 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemNext"
-    disabled={false}
+    className="item  false item--nextPage"
   >
     <a
       aria-label="Next page"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -2290,12 +2121,11 @@ exports[`Pagination lets you customize its theme 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemLast"
-    disabled={false}
+    className="item  false item--lastPage"
   >
     <a
       aria-label="Last page"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -2307,15 +2137,14 @@ exports[`Pagination lets you customize its theme 1`] = `
 
 exports[`Pagination lets you customize its translations 1`] = `
 <ul
-  className="ais-Pagination__root"
+  className="list false"
 >
   <li
-    className="ais-Pagination__item ais-Pagination__itemFirst"
-    disabled={false}
+    className="item  false item--firstPage"
   >
     <a
       aria-label="ARIA_FIRST"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -2323,12 +2152,11 @@ exports[`Pagination lets you customize its translations 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPrevious"
-    disabled={false}
+    className="item  false item--previousPage"
   >
     <a
       aria-label="ARIA_PREVIOUS"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -2336,12 +2164,11 @@ exports[`Pagination lets you customize its translations 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="ARIA_PAGE_3"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -2349,12 +2176,11 @@ exports[`Pagination lets you customize its translations 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="ARIA_PAGE_4"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -2362,12 +2188,11 @@ exports[`Pagination lets you customize its translations 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="ARIA_PAGE_5"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -2375,12 +2200,11 @@ exports[`Pagination lets you customize its translations 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="ARIA_PAGE_6"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -2388,12 +2212,11 @@ exports[`Pagination lets you customize its translations 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="ARIA_PAGE_7"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -2401,12 +2224,11 @@ exports[`Pagination lets you customize its translations 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="ARIA_PAGE_8"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -2414,12 +2236,11 @@ exports[`Pagination lets you customize its translations 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemSelected ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item item--selected  item--page"
   >
     <a
       aria-label="ARIA_PAGE_9"
-      className="ais-Pagination__itemLink ais-Pagination__itemLinkSelected"
+      className="link link--selected"
       href="#"
       onClick={[Function]}
     >
@@ -2427,12 +2248,11 @@ exports[`Pagination lets you customize its translations 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="ARIA_PAGE_10"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -2440,12 +2260,11 @@ exports[`Pagination lets you customize its translations 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="ARIA_PAGE_11"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -2453,12 +2272,11 @@ exports[`Pagination lets you customize its translations 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemNext"
-    disabled={false}
+    className="item  false item--nextPage"
   >
     <a
       aria-label="ARIA_NEXT"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -2466,12 +2284,11 @@ exports[`Pagination lets you customize its translations 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemLast"
-    disabled={false}
+    className="item  false item--lastPage"
   >
     <a
       aria-label="ARIA_LAST"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -2483,15 +2300,14 @@ exports[`Pagination lets you customize its translations 1`] = `
 
 exports[`Pagination lets you force a maximum of pages 1`] = `
 <ul
-  className="ais-Pagination__root"
+  className="list false"
 >
   <li
-    className="ais-Pagination__item ais-Pagination__itemFirst"
-    disabled={false}
+    className="item  false item--firstPage"
   >
     <a
       aria-label="First page"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -2499,12 +2315,11 @@ exports[`Pagination lets you force a maximum of pages 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPrevious"
-    disabled={false}
+    className="item  false item--previousPage"
   >
     <a
       aria-label="Previous page"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -2512,12 +2327,11 @@ exports[`Pagination lets you force a maximum of pages 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 4"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -2525,12 +2339,11 @@ exports[`Pagination lets you force a maximum of pages 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 5"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -2538,12 +2351,11 @@ exports[`Pagination lets you force a maximum of pages 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 6"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -2551,12 +2363,11 @@ exports[`Pagination lets you force a maximum of pages 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 7"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -2564,12 +2375,11 @@ exports[`Pagination lets you force a maximum of pages 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 8"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -2577,12 +2387,11 @@ exports[`Pagination lets you force a maximum of pages 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemSelected ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item item--selected  item--page"
   >
     <a
       aria-label="Page 9"
-      className="ais-Pagination__itemLink ais-Pagination__itemLinkSelected"
+      className="link link--selected"
       href="#"
       onClick={[Function]}
     >
@@ -2590,12 +2399,11 @@ exports[`Pagination lets you force a maximum of pages 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 10"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -2603,12 +2411,11 @@ exports[`Pagination lets you force a maximum of pages 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemNext"
-    disabled={false}
+    className="item  false item--nextPage"
   >
     <a
       aria-label="Next page"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -2616,12 +2423,11 @@ exports[`Pagination lets you force a maximum of pages 1`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemLast"
-    disabled={false}
+    className="item  false item--lastPage"
   >
     <a
       aria-label="Last page"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -2633,15 +2439,14 @@ exports[`Pagination lets you force a maximum of pages 1`] = `
 
 exports[`Pagination lets you force a maximum of pages 2`] = `
 <ul
-  className="ais-Pagination__root"
+  className="list false"
 >
   <li
-    className="ais-Pagination__item ais-Pagination__itemFirst"
-    disabled={false}
+    className="item  false item--firstPage"
   >
     <a
       aria-label="First page"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -2649,12 +2454,11 @@ exports[`Pagination lets you force a maximum of pages 2`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPrevious"
-    disabled={false}
+    className="item  false item--previousPage"
   >
     <a
       aria-label="Previous page"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -2662,12 +2466,11 @@ exports[`Pagination lets you force a maximum of pages 2`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 3"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -2675,12 +2478,11 @@ exports[`Pagination lets you force a maximum of pages 2`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 4"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -2688,12 +2490,11 @@ exports[`Pagination lets you force a maximum of pages 2`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 5"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -2701,12 +2502,11 @@ exports[`Pagination lets you force a maximum of pages 2`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 6"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -2714,12 +2514,11 @@ exports[`Pagination lets you force a maximum of pages 2`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 7"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -2727,12 +2526,11 @@ exports[`Pagination lets you force a maximum of pages 2`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemSelected ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item item--selected  item--page"
   >
     <a
       aria-label="Page 8"
-      className="ais-Pagination__itemLink ais-Pagination__itemLinkSelected"
+      className="link link--selected"
       href="#"
       onClick={[Function]}
     >
@@ -2740,12 +2538,11 @@ exports[`Pagination lets you force a maximum of pages 2`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemPage"
-    disabled={undefined}
+    className="item false  item--page"
   >
     <a
       aria-label="Page 9"
-      className="ais-Pagination__itemLink"
+      className="link false"
       href="#"
       onClick={[Function]}
     >
@@ -2753,12 +2550,11 @@ exports[`Pagination lets you force a maximum of pages 2`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemNext"
-    disabled={false}
+    className="item  false item--nextPage"
   >
     <a
       aria-label="Next page"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >
@@ -2766,12 +2562,11 @@ exports[`Pagination lets you force a maximum of pages 2`] = `
     </a>
   </li>
   <li
-    className="ais-Pagination__item ais-Pagination__itemLast"
-    disabled={false}
+    className="item  false item--lastPage"
   >
     <a
       aria-label="Last page"
-      className="ais-Pagination__itemLink"
+      className="link "
       href="#"
       onClick={[Function]}
     >

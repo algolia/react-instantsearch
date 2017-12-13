@@ -15,6 +15,7 @@ describe('Hits', () => {
     const Hit = 'Hit';
     const tree = renderer.create(
       <InfiniteHits
+        cx={(...x) => x.join(' ')}
         hitComponent={Hit}
         hits={hits}
         hasMore={false}
@@ -32,6 +33,7 @@ describe('Hits', () => {
     const hits = [{ objectID: 0 }, { objectID: 1 }, { objectID: 2 }];
     const wrapped = mount(
       <InfiniteHits
+        cx={(...x) => x.join(' ')}
         refine={mockedRefine}
         hitComponent={Hit}
         hits={hits}
@@ -39,7 +41,7 @@ describe('Hits', () => {
       />
     );
     expect(mockedRefine.mock.calls).toHaveLength(0);
-    wrapped.find('.ais-InfiniteHits__loadMore').simulate('click');
+    wrapped.find('.loadMore').simulate('click');
     expect(mockedRefine.mock.calls).toHaveLength(1);
   });
 
@@ -47,14 +49,13 @@ describe('Hits', () => {
     const hits = [{ objectID: 0 }, { objectID: 1 }, { objectID: 2 }];
     const wrapped = mount(
       <InfiniteHits
+        cx={(...x) => x.join(' ')}
         refine={() => undefined}
         hitComponent={Hit}
         hits={hits}
         hasMore={false}
       />
     );
-    expect(wrapped.find('.ais-InfiniteHits__loadMore').props().disabled).toBe(
-      true
-    );
+    expect(wrapped.find('.loadMore').props().disabled).toBe(true);
   });
 });

@@ -1,227 +1,219 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`HierarchicalMenu applies translations 1`] = `
-<div
-  className="ais-HierarchicalMenu__root"
+<ul
+  className="list false"
 >
-  <div
-    className="ais-HierarchicalMenu__items"
+  <li
+    className="item   item--parent"
   >
-    <div
-      className="ais-HierarchicalMenu__item ais-HierarchicalMenu__itemParent"
+    <a
+      className="link"
+      href="#"
+      onClick={[Function]}
     >
-      <a
-        className="ais-HierarchicalMenu__itemLink"
-        href="#"
-        onClick={[Function]}
+      <span
+        className="label"
       >
-        <span
-          className="ais-HierarchicalMenu__itemLabel"
-        >
-          white
-        </span>
-         
-        <span
-          className="ais-HierarchicalMenu__itemCount"
-        >
-          10
-        </span>
-      </a>
-      <div
-        className="ais-HierarchicalMenu__itemItems"
+        white
+      </span>
+       
+      <span
+        className="count"
       >
-        <div
-          className="ais-HierarchicalMenu__item"
+        10
+      </span>
+    </a>
+    <ul
+      className="list"
+    >
+      <li
+        className="item   "
+      >
+        <a
+          className="link"
+          href="#"
+          onClick={[Function]}
         >
-          <a
-            className="ais-HierarchicalMenu__itemLink"
-            href="#"
-            onClick={[Function]}
+          <span
+            className="label"
           >
-            <span
-              className="ais-HierarchicalMenu__itemLabel"
-            >
-              white1
-            </span>
-             
-            <span
-              className="ais-HierarchicalMenu__itemCount"
-            >
-              3
-            </span>
-          </a>
-        </div>
-        <div
-          className="ais-HierarchicalMenu__item"
-        >
-          <a
-            className="ais-HierarchicalMenu__itemLink"
-            href="#"
-            onClick={[Function]}
+            white1
+          </span>
+           
+          <span
+            className="count"
           >
-            <span
-              className="ais-HierarchicalMenu__itemLabel"
-            >
-              white2
-            </span>
-             
-            <span
-              className="ais-HierarchicalMenu__itemCount"
-            >
-              4
-            </span>
-          </a>
-        </div>
-      </div>
-    </div>
-    <div
-      className="ais-HierarchicalMenu__item"
-    >
-      <a
-        className="ais-HierarchicalMenu__itemLink"
-        href="#"
-        onClick={[Function]}
+            3
+          </span>
+        </a>
+      </li>
+      <li
+        className="item   "
       >
-        <span
-          className="ais-HierarchicalMenu__itemLabel"
+        <a
+          className="link"
+          href="#"
+          onClick={[Function]}
         >
-          black
-        </span>
-         
-        <span
-          className="ais-HierarchicalMenu__itemCount"
-        >
-          20
-        </span>
-      </a>
-    </div>
-    <div
-      className="ais-HierarchicalMenu__item"
+          <span
+            className="label"
+          >
+            white2
+          </span>
+           
+          <span
+            className="count"
+          >
+            4
+          </span>
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li
+    className="item   "
+  >
+    <a
+      className="link"
+      href="#"
+      onClick={[Function]}
     >
-      <a
-        className="ais-HierarchicalMenu__itemLink"
-        href="#"
-        onClick={[Function]}
+      <span
+        className="label"
       >
-        <span
-          className="ais-HierarchicalMenu__itemLabel"
-        >
-          blue
-        </span>
-         
-        <span
-          className="ais-HierarchicalMenu__itemCount"
-        >
-          30
-        </span>
-      </a>
-    </div>
-  </div>
-</div>
+        black
+      </span>
+       
+      <span
+        className="count"
+      >
+        20
+      </span>
+    </a>
+  </li>
+  <li
+    className="item   "
+  >
+    <a
+      className="link"
+      href="#"
+      onClick={[Function]}
+    >
+      <span
+        className="label"
+      >
+        blue
+      </span>
+       
+      <span
+        className="count"
+      >
+        30
+      </span>
+    </a>
+  </li>
+</ul>
 `;
 
 exports[`HierarchicalMenu default hierarchical menu 1`] = `
-<div
-  className="ais-HierarchicalMenu__root"
+<ul
+  className="list false"
 >
-  <div
-    className="ais-HierarchicalMenu__items"
+  <li
+    className="item   item--parent"
   >
-    <div
-      className="ais-HierarchicalMenu__item ais-HierarchicalMenu__itemParent"
+    <a
+      className="link"
+      href="#"
+      onClick={[Function]}
     >
-      <a
-        className="ais-HierarchicalMenu__itemLink"
-        href="#"
-        onClick={[Function]}
+      <span
+        className="label"
       >
-        <span
-          className="ais-HierarchicalMenu__itemLabel"
-        >
-          white
-        </span>
-         
-        <span
-          className="ais-HierarchicalMenu__itemCount"
-        >
-          10
-        </span>
-      </a>
-      <div
-        className="ais-HierarchicalMenu__itemItems"
+        white
+      </span>
+       
+      <span
+        className="count"
       >
-        <div
-          className="ais-HierarchicalMenu__item"
-        >
-          <a
-            className="ais-HierarchicalMenu__itemLink"
-            href="#"
-            onClick={[Function]}
-          >
-            <span
-              className="ais-HierarchicalMenu__itemLabel"
-            >
-              white1
-            </span>
-             
-            <span
-              className="ais-HierarchicalMenu__itemCount"
-            >
-              3
-            </span>
-          </a>
-        </div>
-        <div
-          className="ais-HierarchicalMenu__item"
-        >
-          <a
-            className="ais-HierarchicalMenu__itemLink"
-            href="#"
-            onClick={[Function]}
-          >
-            <span
-              className="ais-HierarchicalMenu__itemLabel"
-            >
-              white2
-            </span>
-             
-            <span
-              className="ais-HierarchicalMenu__itemCount"
-            >
-              4
-            </span>
-          </a>
-        </div>
-      </div>
-    </div>
-    <div
-      className="ais-HierarchicalMenu__item"
+        10
+      </span>
+    </a>
+    <ul
+      className="list"
     >
-      <a
-        className="ais-HierarchicalMenu__itemLink"
-        href="#"
-        onClick={[Function]}
+      <li
+        className="item   "
       >
-        <span
-          className="ais-HierarchicalMenu__itemLabel"
+        <a
+          className="link"
+          href="#"
+          onClick={[Function]}
         >
-          black
-        </span>
-         
-        <span
-          className="ais-HierarchicalMenu__itemCount"
+          <span
+            className="label"
+          >
+            white1
+          </span>
+           
+          <span
+            className="count"
+          >
+            3
+          </span>
+        </a>
+      </li>
+      <li
+        className="item   "
+      >
+        <a
+          className="link"
+          href="#"
+          onClick={[Function]}
         >
-          20
-        </span>
-      </a>
-    </div>
-  </div>
+          <span
+            className="label"
+          >
+            white2
+          </span>
+           
+          <span
+            className="count"
+          >
+            4
+          </span>
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li
+    className="item   "
+  >
+    <a
+      className="link"
+      href="#"
+      onClick={[Function]}
+    >
+      <span
+        className="label"
+      >
+        black
+      </span>
+       
+      <span
+        className="count"
+      >
+        20
+      </span>
+    </a>
+  </li>
   <button
-    className="ais-HierarchicalMenu__showMore"
+    className="showMore false"
     disabled={false}
     onClick={[Function]}
   >
     Show more
   </button>
-</div>
+</ul>
 `;

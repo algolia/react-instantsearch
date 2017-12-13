@@ -10,24 +10,38 @@ import SearchBox from './SearchBox';
 
 describe('SearchBox', () => {
   it('applies its default props', () => {
-    const tree = renderer.create(<SearchBox refine={() => null} />).toJSON();
+    const tree = renderer
+      .create(<SearchBox cx={(...x) => x.join(' ')} refine={() => null} />)
+      .toJSON();
     expect(tree).toMatchSnapshot();
   });
 
   it('transfers the autoFocus prop to the underlying input element', () => {
     const tree = renderer
-      .create(<SearchBox refine={() => null} autoFocus />)
+      .create(
+        <SearchBox cx={(...x) => x.join(' ')} refine={() => null} autoFocus />
+      )
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
 
   it('treats its query prop as its input value', () => {
     const inst = renderer.create(
-      <SearchBox refine={() => null} currentRefinement="QUERY1" />
+      <SearchBox
+        cx={(...x) => x.join(' ')}
+        refine={() => null}
+        currentRefinement="QUERY1"
+      />
     );
     expect(inst.toJSON()).toMatchSnapshot();
 
-    inst.update(<SearchBox refine={() => null} currentRefinement="QUERY2" />);
+    inst.update(
+      <SearchBox
+        cx={(...x) => x.join(' ')}
+        refine={() => null}
+        currentRefinement="QUERY2"
+      />
+    );
     expect(inst.toJSON()).toMatchSnapshot();
   });
 
@@ -35,6 +49,7 @@ describe('SearchBox', () => {
     const tree = renderer
       .create(
         <SearchBox
+          cx={(...x) => x.join(' ')}
           refine={() => null}
           theme={{
             root: 'ROOT',
@@ -53,6 +68,7 @@ describe('SearchBox', () => {
     const tree = renderer
       .create(
         <SearchBox
+          cx={(...x) => x.join(' ')}
           refine={() => null}
           submitComponent={<span>🔍</span>}
           resetComponent={
@@ -70,6 +86,7 @@ describe('SearchBox', () => {
     const tree = renderer
       .create(
         <SearchBox
+          cx={(...x) => x.join(' ')}
           refine={() => null}
           translations={{
             resetTitle: 'RESET_TITLE',
@@ -84,6 +101,7 @@ describe('SearchBox', () => {
   it('treats query as a default value when searchAsYouType=false', () => {
     const wrapper = mount(
       <SearchBox
+        cx={(...x) => x.join(' ')}
         refine={() => null}
         currentRefinement="QUERY1"
         searchAsYouType={false}
@@ -97,7 +115,9 @@ describe('SearchBox', () => {
 
   it('refines its value on change when searchAsYouType=true', () => {
     const refine = jest.fn();
-    const wrapper = mount(<SearchBox searchAsYouType refine={refine} />);
+    const wrapper = mount(
+      <SearchBox cx={(...x) => x.join(' ')} searchAsYouType refine={refine} />
+    );
     wrapper.find('input').simulate('change', { target: { value: 'hello' } });
     expect(refine.mock.calls).toHaveLength(1);
     expect(refine.mock.calls[0][0]).toBe('hello');
@@ -107,7 +127,11 @@ describe('SearchBox', () => {
   it('only refines its query on submit when searchAsYouType=false', () => {
     const refine = jest.fn();
     const wrapper = mount(
-      <SearchBox searchAsYouType={false} refine={refine} />
+      <SearchBox
+        cx={(...x) => x.join(' ')}
+        searchAsYouType={false}
+        refine={refine}
+      />
     );
     wrapper.find('input').simulate('change', { target: { value: 'hello' } });
     expect(refine.mock.calls).toHaveLength(0);
@@ -121,7 +145,12 @@ describe('SearchBox', () => {
     const onSubmit = jest.fn();
     const refine = jest.fn();
     const wrapper = mount(
-      <SearchBox searchAsYouType={false} onSubmit={onSubmit} refine={refine} />
+      <SearchBox
+        cx={(...x) => x.join(' ')}
+        searchAsYouType={false}
+        onSubmit={onSubmit}
+        refine={refine}
+      />
     );
     wrapper.find('form').simulate('submit');
     expect(onSubmit.mock.calls).toHaveLength(1);
@@ -133,6 +162,7 @@ describe('SearchBox', () => {
     let input;
     mount(
       <SearchBox
+        cx={(...x) => x.join(' ')}
         refine={() => null}
         focusShortcuts={['s', 84]}
         __inputRef={node => {
@@ -172,6 +202,7 @@ describe('SearchBox', () => {
 
     const wrapper = mount(
       <SearchBox
+        cx={(...x) => x.join(' ')}
         refine={() => null}
         onSubmit={onSubmit}
         onReset={onReset}
@@ -197,13 +228,24 @@ describe('SearchBox', () => {
 
   it('should render the loader if showLoadingIndicator is true', () => {
     const treeWithoutLoadingIndicator = renderer
-      .create(<SearchBox refine={() => null} showLoadingIndicator />)
+      .create(
+        <SearchBox
+          cx={(...x) => x.join(' ')}
+          refine={() => null}
+          showLoadingIndicator
+        />
+      )
       .toJSON();
     expect(treeWithoutLoadingIndicator).toMatchSnapshot();
 
     const treeWithLoadingIndicator = renderer
       .create(
-        <SearchBox refine={() => null} showLoadingIndicator isSearchStalled />
+        <SearchBox
+          cx={(...x) => x.join(' ')}
+          refine={() => null}
+          showLoadingIndicator
+          isSearchStalled
+        />
       )
       .toJSON();
     expect(treeWithLoadingIndicator).toMatchSnapshot();

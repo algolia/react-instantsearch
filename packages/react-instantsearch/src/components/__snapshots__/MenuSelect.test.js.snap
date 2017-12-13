@@ -2,18 +2,18 @@
 
 exports[`MenuSelect applies translations 1`] = `
 <select
-  className="ais-MenuSelect__select"
+  className="select"
   onChange={[Function]}
   value="ais__see__all__option"
 >
   <option
-    className="ais-MenuSelect__option"
+    className="option"
     value="ais__see__all__option"
   >
     Everything
   </option>
   <option
-    className="ais-MenuSelect__option"
+    className="option"
     value="white"
   >
     white
@@ -22,7 +22,7 @@ exports[`MenuSelect applies translations 1`] = `
     )
   </option>
   <option
-    className="ais-MenuSelect__option"
+    className="option"
     value="black"
   >
     black
@@ -31,7 +31,7 @@ exports[`MenuSelect applies translations 1`] = `
     )
   </option>
   <option
-    className="ais-MenuSelect__option"
+    className="option"
     value="blue"
   >
     blue
@@ -40,7 +40,7 @@ exports[`MenuSelect applies translations 1`] = `
     )
   </option>
   <option
-    className="ais-MenuSelect__option"
+    className="option"
     value="green"
   >
     green
@@ -49,7 +49,7 @@ exports[`MenuSelect applies translations 1`] = `
     )
   </option>
   <option
-    className="ais-MenuSelect__option"
+    className="option"
     value="red"
   >
     red
@@ -62,18 +62,18 @@ exports[`MenuSelect applies translations 1`] = `
 
 exports[`MenuSelect default menu select 1`] = `
 <select
-  className="ais-MenuSelect__select"
+  className="select"
   onChange={[Function]}
   value="ais__see__all__option"
 >
   <option
-    className="ais-MenuSelect__option"
+    className="option"
     value="ais__see__all__option"
   >
     See all
   </option>
   <option
-    className="ais-MenuSelect__option"
+    className="option"
     value="white"
   >
     white
@@ -82,7 +82,7 @@ exports[`MenuSelect default menu select 1`] = `
     )
   </option>
   <option
-    className="ais-MenuSelect__option"
+    className="option"
     value="black"
   >
     black
@@ -91,7 +91,7 @@ exports[`MenuSelect default menu select 1`] = `
     )
   </option>
   <option
-    className="ais-MenuSelect__option"
+    className="option"
     value="blue"
   >
     blue
@@ -100,7 +100,7 @@ exports[`MenuSelect default menu select 1`] = `
     )
   </option>
   <option
-    className="ais-MenuSelect__option"
+    className="option"
     value="green"
   >
     green
@@ -109,7 +109,7 @@ exports[`MenuSelect default menu select 1`] = `
     )
   </option>
   <option
-    className="ais-MenuSelect__option"
+    className="option"
     value="red"
   >
     red
