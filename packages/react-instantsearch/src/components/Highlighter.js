@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import classNames from './classNames.js';
+import classNames from './classNames';
 
 const cx = classNames('Highlight');
 
@@ -85,5 +85,5 @@ Highlighter.propTypes = {
 Highlighter.defaultProps = {
   tagName: 'em',
   nonHighlightedTagName: 'span',
-  separator: ',',
+  separator: ', ',
 };

@@ -33,7 +33,7 @@ exports[`Highlighter - multi renders a highlighted value 1`] = `
     <span
       className="ais-Highlight__separator"
     >
-      ,
+      , 
     </span>
   </span>
   <span
@@ -56,7 +56,7 @@ exports[`Highlighter - multi renders a highlighted value 1`] = `
     <span
       className="ais-Highlight__separator"
     >
-      ,
+      , 
     </span>
   </span>
   <span
@@ -90,7 +90,7 @@ exports[`Highlighter - multi renders a highlighted value with a custom nonHighli
     <span
       className="ais-Highlight__separator"
     >
-      ,
+      , 
     </span>
   </span>
   <span
@@ -113,7 +113,7 @@ exports[`Highlighter - multi renders a highlighted value with a custom nonHighli
     <span
       className="ais-Highlight__separator"
     >
-      ,
+      , 
     </span>
   </span>
   <span
@@ -204,7 +204,7 @@ exports[`Highlighter - multi renders a highlighted value with a custom tagName 1
     <span
       className="ais-Highlight__separator"
     >
-      ,
+      , 
     </span>
   </span>
   <span
@@ -227,7 +227,7 @@ exports[`Highlighter - multi renders a highlighted value with a custom tagName 1
     <span
       className="ais-Highlight__separator"
     >
-      ,
+      , 
     </span>
   </span>
   <span
@@ -261,7 +261,7 @@ exports[`Highlighter - multi renders a non highlighted value 1`] = `
     <span
       className="ais-Highlight__separator"
     >
-      ,
+      , 
     </span>
   </span>
   <span
@@ -277,7 +277,7 @@ exports[`Highlighter - multi renders a non highlighted value 1`] = `
     <span
       className="ais-Highlight__separator"
     >
-      ,
+      , 
     </span>
   </span>
   <span
