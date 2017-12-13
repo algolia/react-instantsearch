@@ -14,6 +14,7 @@ describe('Breadcrumb', () => {
     const tree = renderer
       .create(
         <Breadcrumb
+          cx={(...x) => x.join(' ')}
           refine={() => null}
           createURL={() => '#'}
           items={[
@@ -41,6 +42,7 @@ describe('Breadcrumb', () => {
     const refine = jest.fn();
     const wrapper = mount(
       <Breadcrumb
+        cx={(...x) => x.join(' ')}
         refine={refine}
         createURL={() => '#'}
         items={[
@@ -61,7 +63,7 @@ describe('Breadcrumb', () => {
       />
     );
 
-    const breadcrumb = wrapper.find('.ais-Breadcrumb__root');
+    const breadcrumb = wrapper.find('.list');
 
     expect(breadcrumb.children()).toHaveLength(4);
 
@@ -105,6 +107,7 @@ describe('Breadcrumb', () => {
 
     const wrapper = mount(
       <Breadcrumb
+        cx={(...x) => x.join(' ')}
         refine={refine}
         createURL={() => '#'}
         rootURL={rootLink}
@@ -126,7 +129,7 @@ describe('Breadcrumb', () => {
       />
     );
 
-    const breadcrumb = wrapper.find('.ais-Breadcrumb__root');
+    const breadcrumb = wrapper.find('.list');
 
     expect(breadcrumb.children()).toHaveLength(4);
 
@@ -150,6 +153,7 @@ describe('Breadcrumb', () => {
     const tree = renderer
       .create(
         <Breadcrumb
+          cx={(...x) => x.join(' ')}
           refine={() => null}
           createURL={() => '#'}
           separator={<span>🔍</span>}
@@ -178,6 +182,7 @@ describe('Breadcrumb', () => {
     const tree = renderer
       .create(
         <Breadcrumb
+          cx={(...x) => x.join(' ')}
           refine={() => null}
           createURL={() => '#'}
           translations={{
@@ -202,42 +207,5 @@ describe('Breadcrumb', () => {
       )
       .toJSON();
     expect(tree).toMatchSnapshot();
-  });
-
-  describe('Panel compatibility', () => {
-    it('Should indicate when there is no more refinement', () => {
-      const canRefine = jest.fn();
-      const wrapper = mount(
-        <Breadcrumb
-          refine={() => null}
-          createURL={() => '#'}
-          items={[
-            {
-              value: 'white',
-              label: 'white',
-            },
-            {
-              value: 'white > white1',
-              label: 'white1',
-            },
-          ]}
-          canRefine={true}
-        />,
-        {
-          context: { canRefine },
-          childContextTypes: { canRefine: PropTypes.func },
-        }
-      );
-
-      expect(canRefine.mock.calls).toHaveLength(1);
-      expect(canRefine.mock.calls[0][0]).toEqual(true);
-      expect(wrapper.find('.ais-Breadcrumb__noRefinement')).toHaveLength(0);
-
-      wrapper.setProps({ canRefine: false });
-
-      expect(canRefine.mock.calls).toHaveLength(2);
-      expect(canRefine.mock.calls[1][0]).toEqual(false);
-      expect(wrapper.find('.ais-Breadcrumb__noRefinement')).toHaveLength(1);
-    });
   });
 });

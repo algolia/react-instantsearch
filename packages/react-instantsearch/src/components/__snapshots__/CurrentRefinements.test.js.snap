@@ -1,62 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`CurrentRefinements allows clearing unique items of a refinement 1`] = `
-<div
-  className="ais-CurrentRefinements__root"
+<ul
+  className="list"
 >
-  <div
-    className="ais-CurrentRefinements__items"
+  <li
+    className="item"
   >
-    <div
-      className="ais-CurrentRefinements__item ais-CurrentRefinements__itemParent"
+    <button
+      className="button"
+      onClick={[Function]}
     >
       <span
-        className="ais-CurrentRefinements__itemLabel"
+        className="label"
       >
-        Genre
+        Sci-fi
       </span>
-      <div
-        className="ais-CurrentRefinements__item"
+      <span
+        className="delete"
       >
-        <span
-          className="ais-CurrentRefinements__itemLabel"
-        >
-          Sci-fi
-        </span>
-        <button
-          className="ais-CurrentRefinements__itemClear"
-          onClick={[Function]}
-        >
-          ✕
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
+        ✕
+      </span>
+    </button>
+  </li>
+</ul>
 `;
 
 exports[`CurrentRefinements renders a list of current refinements 1`] = `
-<div
-  className="ais-CurrentRefinements__root"
->
-  <div
-    className="ais-CurrentRefinements__items"
-  >
-    <div
-      className="ais-CurrentRefinements__item"
-    >
-      <span
-        className="ais-CurrentRefinements__itemLabel"
-      >
-        Genre
-      </span>
-      <button
-        className="ais-CurrentRefinements__itemClear"
-        onClick={[Function]}
-      >
-        ✕
-      </button>
-    </div>
-  </div>
-</div>
+<ul
+  className="list"
+/>
 `;

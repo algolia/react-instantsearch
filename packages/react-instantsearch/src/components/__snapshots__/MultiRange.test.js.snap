@@ -1,379 +1,322 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MultiRange no refinements 1`] = `
-<div
-  className="ais-MultiRange__root"
+<ul
+  className="list false"
 >
-  <div
-    className="ais-MultiRange__items"
+  <li
+    className="item false item--noRefinement "
   >
-    <div
-      className="ais-MultiRange__item ais-MultiRange__itemNoRefinement"
+    <label
+      className="label"
     >
-      <label
-        className=""
+      <input
+        checked={false}
+        className="radio"
+        disabled={true}
+        onChange={[Function]}
+        type="radio"
+      />
+      <span
+        className="labelText"
       >
-        <input
-          checked={false}
-          className="ais-MultiRange__itemRadio"
-          disabled={true}
-          onChange={[Function]}
-          type="radio"
-        />
-        <span
-          className="ais-MultiRange__itemBox ais-MultiRange__itemBox"
-        />
-        <span
-          className="ais-MultiRange__itemLabel ais-MultiRange__itemLabel"
-        >
-          label1
-        </span>
-      </label>
-    </div>
-    <div
-      className="ais-MultiRange__item ais-MultiRange__itemNoRefinement"
+        label1
+      </span>
+    </label>
+  </li>
+  <li
+    className="item false item--noRefinement "
+  >
+    <label
+      className="label"
     >
-      <label
-        className=""
+      <input
+        checked={false}
+        className="radio"
+        disabled={true}
+        onChange={[Function]}
+        type="radio"
+      />
+      <span
+        className="labelText"
       >
-        <input
-          checked={false}
-          className="ais-MultiRange__itemRadio"
-          disabled={true}
-          onChange={[Function]}
-          type="radio"
-        />
-        <span
-          className="ais-MultiRange__itemBox ais-MultiRange__itemBox"
-        />
-        <span
-          className="ais-MultiRange__itemLabel ais-MultiRange__itemLabel"
-        >
-          label2
-        </span>
-      </label>
-    </div>
-    <div
-      className="ais-MultiRange__item ais-MultiRange__itemNoRefinement"
+        label2
+      </span>
+    </label>
+  </li>
+  <li
+    className="item false item--noRefinement "
+  >
+    <label
+      className="label"
     >
-      <label
-        className=""
+      <input
+        checked={false}
+        className="radio"
+        disabled={true}
+        onChange={[Function]}
+        type="radio"
+      />
+      <span
+        className="labelText"
       >
-        <input
-          checked={false}
-          className="ais-MultiRange__itemRadio"
-          disabled={true}
-          onChange={[Function]}
-          type="radio"
-        />
-        <span
-          className="ais-MultiRange__itemBox ais-MultiRange__itemBox"
-        />
-        <span
-          className="ais-MultiRange__itemLabel ais-MultiRange__itemLabel"
-        >
-          label3
-        </span>
-      </label>
-    </div>
-    <div
-      className="ais-MultiRange__item ais-MultiRange__itemNoRefinement"
+        label3
+      </span>
+    </label>
+  </li>
+  <li
+    className="item false item--noRefinement "
+  >
+    <label
+      className="label"
     >
-      <label
-        className=""
+      <input
+        checked={false}
+        className="radio"
+        disabled={true}
+        onChange={[Function]}
+        type="radio"
+      />
+      <span
+        className="labelText"
       >
-        <input
-          checked={false}
-          className="ais-MultiRange__itemRadio"
-          disabled={true}
-          onChange={[Function]}
-          type="radio"
-        />
-        <span
-          className="ais-MultiRange__itemBox ais-MultiRange__itemBox"
-        />
-        <span
-          className="ais-MultiRange__itemLabel ais-MultiRange__itemLabel"
-        >
-          label4
-        </span>
-      </label>
-    </div>
-    <div
-      className="ais-MultiRange__item ais-MultiRange__itemSelected"
+        label4
+      </span>
+    </label>
+  </li>
+  <li
+    className="item item--selected false "
+  >
+    <label
+      className="label"
     >
-      <label
-        className="ais-MultiRange__itemAll"
+      <input
+        checked={true}
+        className="radio"
+        disabled={false}
+        onChange={[Function]}
+        type="radio"
+      />
+      <span
+        className="labelText"
       >
-        <input
-          checked={true}
-          className="ais-MultiRange__itemRadio ais-MultiRange__itemRadioSelected"
-          disabled={false}
-          onChange={[Function]}
-          type="radio"
-        />
-        <span
-          className="ais-MultiRange__itemBox ais-MultiRange__itemBox ais-MultiRange__itemBoxSelected"
-        />
-        <span
-          className="ais-MultiRange__itemLabel ais-MultiRange__itemLabel ais-MultiRange__itemLabelSelected"
-        >
-          All
-        </span>
-      </label>
-    </div>
-  </div>
-</div>
+        All
+      </span>
+    </label>
+  </li>
+</ul>
 `;
 
 exports[`MultiRange supports having a selected item 1`] = `
-<div
-  className="ais-MultiRange__root"
+<ul
+  className="list false"
 >
-  <div
-    className="ais-MultiRange__items"
+  <li
+    className="item false false "
   >
-    <div
-      className="ais-MultiRange__item"
+    <label
+      className="label"
     >
-      <label
-        className=""
+      <input
+        checked={false}
+        className="radio"
+        disabled={false}
+        onChange={[Function]}
+        type="radio"
+      />
+      <span
+        className="labelText"
       >
-        <input
-          checked={false}
-          className="ais-MultiRange__itemRadio"
-          disabled={false}
-          onChange={[Function]}
-          type="radio"
-        />
-        <span
-          className="ais-MultiRange__itemBox ais-MultiRange__itemBox"
-        />
-        <span
-          className="ais-MultiRange__itemLabel ais-MultiRange__itemLabel"
-        >
-          label1
-        </span>
-      </label>
-    </div>
-    <div
-      className="ais-MultiRange__item ais-MultiRange__itemSelected"
+        label1
+      </span>
+    </label>
+  </li>
+  <li
+    className="item item--selected false "
+  >
+    <label
+      className="label"
     >
-      <label
-        className=""
+      <input
+        checked={true}
+        className="radio"
+        disabled={false}
+        onChange={[Function]}
+        type="radio"
+      />
+      <span
+        className="labelText"
       >
-        <input
-          checked={true}
-          className="ais-MultiRange__itemRadio ais-MultiRange__itemRadioSelected"
-          disabled={false}
-          onChange={[Function]}
-          type="radio"
-        />
-        <span
-          className="ais-MultiRange__itemBox ais-MultiRange__itemBox ais-MultiRange__itemBoxSelected"
-        />
-        <span
-          className="ais-MultiRange__itemLabel ais-MultiRange__itemLabel ais-MultiRange__itemLabelSelected"
-        >
-          label2
-        </span>
-      </label>
-    </div>
-    <div
-      className="ais-MultiRange__item"
+        label2
+      </span>
+    </label>
+  </li>
+  <li
+    className="item false false "
+  >
+    <label
+      className="label"
     >
-      <label
-        className=""
+      <input
+        checked={false}
+        className="radio"
+        disabled={false}
+        onChange={[Function]}
+        type="radio"
+      />
+      <span
+        className="labelText"
       >
-        <input
-          checked={false}
-          className="ais-MultiRange__itemRadio"
-          disabled={false}
-          onChange={[Function]}
-          type="radio"
-        />
-        <span
-          className="ais-MultiRange__itemBox ais-MultiRange__itemBox"
-        />
-        <span
-          className="ais-MultiRange__itemLabel ais-MultiRange__itemLabel"
-        >
-          label3
-        </span>
-      </label>
-    </div>
-    <div
-      className="ais-MultiRange__item"
+        label3
+      </span>
+    </label>
+  </li>
+  <li
+    className="item false false "
+  >
+    <label
+      className="label"
     >
-      <label
-        className=""
+      <input
+        checked={false}
+        className="radio"
+        disabled={false}
+        onChange={[Function]}
+        type="radio"
+      />
+      <span
+        className="labelText"
       >
-        <input
-          checked={false}
-          className="ais-MultiRange__itemRadio"
-          disabled={false}
-          onChange={[Function]}
-          type="radio"
-        />
-        <span
-          className="ais-MultiRange__itemBox ais-MultiRange__itemBox"
-        />
-        <span
-          className="ais-MultiRange__itemLabel ais-MultiRange__itemLabel"
-        >
-          label4
-        </span>
-      </label>
-    </div>
-    <div
-      className="ais-MultiRange__item"
+        label4
+      </span>
+    </label>
+  </li>
+  <li
+    className="item false false "
+  >
+    <label
+      className="label"
     >
-      <label
-        className="ais-MultiRange__itemAll"
+      <input
+        checked={false}
+        className="radio"
+        disabled={false}
+        onChange={[Function]}
+        type="radio"
+      />
+      <span
+        className="labelText"
       >
-        <input
-          checked={false}
-          className="ais-MultiRange__itemRadio"
-          disabled={false}
-          onChange={[Function]}
-          type="radio"
-        />
-        <span
-          className="ais-MultiRange__itemBox ais-MultiRange__itemBox"
-        />
-        <span
-          className="ais-MultiRange__itemLabel ais-MultiRange__itemLabel"
-        >
-          All
-        </span>
-      </label>
-    </div>
-  </div>
-</div>
+        All
+      </span>
+    </label>
+  </li>
+</ul>
 `;
 
 exports[`MultiRange supports passing items values 1`] = `
-<div
-  className="ais-MultiRange__root"
+<ul
+  className="list false"
 >
-  <div
-    className="ais-MultiRange__items"
+  <li
+    className="item false false "
   >
-    <div
-      className="ais-MultiRange__item"
+    <label
+      className="label"
     >
-      <label
-        className=""
+      <input
+        checked={false}
+        className="radio"
+        disabled={false}
+        onChange={[Function]}
+        type="radio"
+      />
+      <span
+        className="labelText"
       >
-        <input
-          checked={false}
-          className="ais-MultiRange__itemRadio"
-          disabled={false}
-          onChange={[Function]}
-          type="radio"
-        />
-        <span
-          className="ais-MultiRange__itemBox ais-MultiRange__itemBox"
-        />
-        <span
-          className="ais-MultiRange__itemLabel ais-MultiRange__itemLabel"
-        >
-          label1
-        </span>
-      </label>
-    </div>
-    <div
-      className="ais-MultiRange__item"
+        label1
+      </span>
+    </label>
+  </li>
+  <li
+    className="item false false "
+  >
+    <label
+      className="label"
     >
-      <label
-        className=""
+      <input
+        checked={false}
+        className="radio"
+        disabled={false}
+        onChange={[Function]}
+        type="radio"
+      />
+      <span
+        className="labelText"
       >
-        <input
-          checked={false}
-          className="ais-MultiRange__itemRadio"
-          disabled={false}
-          onChange={[Function]}
-          type="radio"
-        />
-        <span
-          className="ais-MultiRange__itemBox ais-MultiRange__itemBox"
-        />
-        <span
-          className="ais-MultiRange__itemLabel ais-MultiRange__itemLabel"
-        >
-          label2
-        </span>
-      </label>
-    </div>
-    <div
-      className="ais-MultiRange__item"
+        label2
+      </span>
+    </label>
+  </li>
+  <li
+    className="item false false "
+  >
+    <label
+      className="label"
     >
-      <label
-        className=""
+      <input
+        checked={false}
+        className="radio"
+        disabled={false}
+        onChange={[Function]}
+        type="radio"
+      />
+      <span
+        className="labelText"
       >
-        <input
-          checked={false}
-          className="ais-MultiRange__itemRadio"
-          disabled={false}
-          onChange={[Function]}
-          type="radio"
-        />
-        <span
-          className="ais-MultiRange__itemBox ais-MultiRange__itemBox"
-        />
-        <span
-          className="ais-MultiRange__itemLabel ais-MultiRange__itemLabel"
-        >
-          label3
-        </span>
-      </label>
-    </div>
-    <div
-      className="ais-MultiRange__item"
+        label3
+      </span>
+    </label>
+  </li>
+  <li
+    className="item false false "
+  >
+    <label
+      className="label"
     >
-      <label
-        className=""
+      <input
+        checked={false}
+        className="radio"
+        disabled={false}
+        onChange={[Function]}
+        type="radio"
+      />
+      <span
+        className="labelText"
       >
-        <input
-          checked={false}
-          className="ais-MultiRange__itemRadio"
-          disabled={false}
-          onChange={[Function]}
-          type="radio"
-        />
-        <span
-          className="ais-MultiRange__itemBox ais-MultiRange__itemBox"
-        />
-        <span
-          className="ais-MultiRange__itemLabel ais-MultiRange__itemLabel"
-        >
-          label4
-        </span>
-      </label>
-    </div>
-    <div
-      className="ais-MultiRange__item ais-MultiRange__itemSelected"
+        label4
+      </span>
+    </label>
+  </li>
+  <li
+    className="item item--selected false "
+  >
+    <label
+      className="label"
     >
-      <label
-        className="ais-MultiRange__itemAll"
+      <input
+        checked={true}
+        className="radio"
+        disabled={false}
+        onChange={[Function]}
+        type="radio"
+      />
+      <span
+        className="labelText"
       >
-        <input
-          checked={true}
-          className="ais-MultiRange__itemRadio ais-MultiRange__itemRadioSelected"
-          disabled={false}
-          onChange={[Function]}
-          type="radio"
-        />
-        <span
-          className="ais-MultiRange__itemBox ais-MultiRange__itemBox ais-MultiRange__itemBoxSelected"
-        />
-        <span
-          className="ais-MultiRange__itemLabel ais-MultiRange__itemLabel ais-MultiRange__itemLabelSelected"
-        >
-          All
-        </span>
-      </label>
-    </div>
-  </div>
-</div>
+        All
+      </span>
+    </label>
+  </li>
+</ul>
 `;

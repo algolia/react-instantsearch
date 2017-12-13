@@ -1,33 +1,48 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Hits accepts a hitComponent prop 1`] = `
-<div
-  className="ais-InfiniteHits__root"
->
-  <Hit
-    hit={
-      Object {
-        "objectID": 0,
-      }
-    }
-  />
-  <Hit
-    hit={
-      Object {
-        "objectID": 1,
-      }
-    }
-  />
-  <Hit
-    hit={
-      Object {
-        "objectID": 2,
-      }
-    }
-  />
+<div>
+  <ul
+    className="list"
+  >
+    <li
+      className="item"
+    >
+      <Hit
+        hit={
+          Object {
+            "objectID": 0,
+          }
+        }
+      />
+    </li>
+    <li
+      className="item"
+    >
+      <Hit
+        hit={
+          Object {
+            "objectID": 1,
+          }
+        }
+      />
+    </li>
+    <li
+      className="item"
+    >
+      <Hit
+        hit={
+          Object {
+            "objectID": 2,
+          }
+        }
+      />
+    </li>
+  </ul>
   <button
-    className="ais-InfiniteHits__loadMore"
+    className="loadMore loadMore--disabled"
     disabled={true}
+    onClick={[Function]}
   >
     Load more
   </button>

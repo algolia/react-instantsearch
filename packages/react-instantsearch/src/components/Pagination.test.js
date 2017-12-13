@@ -24,7 +24,9 @@ const DEFAULT_PROPS = {
 
 describe('Pagination', () => {
   it('applies its default props', () => {
-    const tree = renderer.create(<Pagination {...DEFAULT_PROPS} />).toJSON();
+    const tree = renderer
+      .create(<Pagination cx={(...x) => x.join(' ')} {...DEFAULT_PROPS} />)
+      .toJSON();
     expect(tree).toMatchSnapshot();
   });
 
@@ -32,6 +34,7 @@ describe('Pagination', () => {
     let tree = renderer
       .create(
         <Pagination
+          cx={(...x) => x.join(' ')}
           {...REQ_PROPS}
           pagesPadding={5}
           nbPages={20}
@@ -44,6 +47,7 @@ describe('Pagination', () => {
     tree = renderer
       .create(
         <Pagination
+          cx={(...x) => x.join(' ')}
           {...REQ_PROPS}
           pagesPadding={4}
           nbPages={20}
@@ -56,6 +60,7 @@ describe('Pagination', () => {
     tree = renderer
       .create(
         <Pagination
+          cx={(...x) => x.join(' ')}
           {...REQ_PROPS}
           pagesPadding={3}
           nbPages={20}
@@ -68,6 +73,7 @@ describe('Pagination', () => {
     tree = renderer
       .create(
         <Pagination
+          cx={(...x) => x.join(' ')}
           {...REQ_PROPS}
           pagesPadding={2}
           nbPages={5}
@@ -80,25 +86,41 @@ describe('Pagination', () => {
 
   it('allows toggling display of the first page button on and off', () => {
     let tree = renderer
-      .create(<Pagination showFirst {...DEFAULT_PROPS} />)
-      .toJSON();
-    expect(tree).toMatchSnapshot();
-
-    tree = renderer
-      .create(<Pagination showFirst={false} {...DEFAULT_PROPS} />)
-      .toJSON();
-    expect(tree).toMatchSnapshot();
-  });
-
-  it('indicates when first button is relevant', () => {
-    let tree = renderer
-      .create(<Pagination {...DEFAULT_PROPS} showFirst currentRefinement={1} />)
+      .create(
+        <Pagination cx={(...x) => x.join(' ')} showFirst {...DEFAULT_PROPS} />
+      )
       .toJSON();
     expect(tree).toMatchSnapshot();
 
     tree = renderer
       .create(
         <Pagination
+          cx={(...x) => x.join(' ')}
+          showFirst={false}
+          {...DEFAULT_PROPS}
+        />
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('indicates when first button is relevant', () => {
+    let tree = renderer
+      .create(
+        <Pagination
+          cx={(...x) => x.join(' ')}
+          {...DEFAULT_PROPS}
+          showFirst
+          currentRefinement={1}
+        />
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+
+    tree = renderer
+      .create(
+        <Pagination
+          cx={(...x) => x.join(' ')}
           {...DEFAULT_PROPS}
           showLast
           currentRefinement={DEFAULT_PROPS.nbPages}
@@ -110,36 +132,64 @@ describe('Pagination', () => {
 
   it('allows toggling display of the last page button on and off', () => {
     let tree = renderer
-      .create(<Pagination showLast {...DEFAULT_PROPS} />)
+      .create(
+        <Pagination cx={(...x) => x.join(' ')} showLast {...DEFAULT_PROPS} />
+      )
       .toJSON();
     expect(tree).toMatchSnapshot();
 
     tree = renderer
-      .create(<Pagination showLast={false} {...DEFAULT_PROPS} />)
+      .create(
+        <Pagination
+          cx={(...x) => x.join(' ')}
+          showLast={false}
+          {...DEFAULT_PROPS}
+        />
+      )
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
 
   it('allows toggling display of the previous page button on and off', () => {
     let tree = renderer
-      .create(<Pagination showPrevious {...DEFAULT_PROPS} />)
+      .create(
+        <Pagination
+          cx={(...x) => x.join(' ')}
+          showPrevious
+          {...DEFAULT_PROPS}
+        />
+      )
       .toJSON();
     expect(tree).toMatchSnapshot();
 
     tree = renderer
-      .create(<Pagination showPrevious={false} {...DEFAULT_PROPS} />)
+      .create(
+        <Pagination
+          cx={(...x) => x.join(' ')}
+          showPrevious={false}
+          {...DEFAULT_PROPS}
+        />
+      )
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
 
   it('allows toggling display of the next page button on and off', () => {
     let tree = renderer
-      .create(<Pagination showNext {...DEFAULT_PROPS} />)
+      .create(
+        <Pagination cx={(...x) => x.join(' ')} showNext {...DEFAULT_PROPS} />
+      )
       .toJSON();
     expect(tree).toMatchSnapshot();
 
     tree = renderer
-      .create(<Pagination showNext={false} {...DEFAULT_PROPS} />)
+      .create(
+        <Pagination
+          cx={(...x) => x.join(' ')}
+          showNext={false}
+          {...DEFAULT_PROPS}
+        />
+      )
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
@@ -148,6 +198,7 @@ describe('Pagination', () => {
     let tree = renderer
       .create(
         <Pagination
+          cx={(...x) => x.join(' ')}
           {...REQ_PROPS}
           maxPages={10}
           showLast
@@ -161,6 +212,7 @@ describe('Pagination', () => {
     tree = renderer
       .create(
         <Pagination
+          cx={(...x) => x.join(' ')}
           {...REQ_PROPS}
           maxPages={10}
           showLast
@@ -176,6 +228,7 @@ describe('Pagination', () => {
     const tree = renderer
       .create(
         <Pagination
+          cx={(...x) => x.join(' ')}
           {...REQ_PROPS}
           theme={{
             root: 'ROOT',
@@ -203,6 +256,7 @@ describe('Pagination', () => {
     const tree = renderer
       .create(
         <Pagination
+          cx={(...x) => x.join(' ')}
           {...REQ_PROPS}
           translations={{
             previous: 'PREVIOUS',
@@ -230,6 +284,7 @@ describe('Pagination', () => {
     const tree = renderer
       .create(
         <Pagination
+          cx={(...x) => x.join(' ')}
           {...REQ_PROPS}
           maxPages={Number.POSITIVE_INFINITY}
           showLast
@@ -247,7 +302,12 @@ describe('Pagination', () => {
   it('refines its value when clicking on a page link', () => {
     const refine = jest.fn();
     const wrapper = mount(
-      <Pagination {...DEFAULT_PROPS} refine={refine} showLast />
+      <Pagination
+        cx={(...x) => x.join(' ')}
+        {...DEFAULT_PROPS}
+        refine={refine}
+        showLast
+      />
     );
 
     wrapper
@@ -265,25 +325,25 @@ describe('Pagination', () => {
     const parameters = refine.mock.calls[1][0];
     expect(parameters.valueOf()).toBe(9);
     wrapper
-      .find('.ais-Pagination__itemPrevious')
+      .find('.item--previousPage')
       .find(Link)
       .simulate('click');
     expect(refine.mock.calls).toHaveLength(3);
     expect(refine.mock.calls[2][0]).toEqual(8);
     wrapper
-      .find('.ais-Pagination__itemNext')
+      .find('.item--nextPage')
       .find(Link)
       .simulate('click');
     expect(refine.mock.calls).toHaveLength(4);
     expect(refine.mock.calls[3][0]).toEqual(10);
     wrapper
-      .find('.ais-Pagination__itemFirst')
+      .find('.item--firstPage')
       .find(Link)
       .simulate('click');
     expect(refine.mock.calls).toHaveLength(5);
     expect(refine.mock.calls[4][0]).toEqual(1);
     wrapper
-      .find('.ais-Pagination__itemLast')
+      .find('.item--lastPage')
       .find(Link)
       .simulate('click');
     expect(refine.mock.calls).toHaveLength(6);
@@ -292,7 +352,13 @@ describe('Pagination', () => {
 
   it('ignores special clicks', () => {
     const refine = jest.fn();
-    const wrapper = mount(<Pagination {...DEFAULT_PROPS} refine={refine} />);
+    const wrapper = mount(
+      <Pagination
+        cx={(...x) => x.join(' ')}
+        {...DEFAULT_PROPS}
+        refine={refine}
+      />
+    );
     const el = wrapper.find(Link).filterWhere(e => e.text() === '8');
     el.simulate('click', { button: 1 });
     el.simulate('click', { altKey: true });
@@ -305,7 +371,12 @@ describe('Pagination', () => {
     const refine = jest.fn();
     const canRefine = jest.fn();
     const wrapper = mount(
-      <Pagination {...DEFAULT_PROPS} refine={refine} canRefine={true} />,
+      <Pagination
+        cx={(...x) => x.join(' ')}
+        {...DEFAULT_PROPS}
+        refine={refine}
+        canRefine={true}
+      />,
       {
         context: { canRefine },
         childContextTypes: { canRefine: PropTypes.func },
@@ -314,13 +385,13 @@ describe('Pagination', () => {
 
     expect(canRefine.mock.calls).toHaveLength(1);
     expect(canRefine.mock.calls[0][0]).toEqual(true);
-    expect(wrapper.find('.ais-Pagination__noRefinement')).toHaveLength(0);
+    expect(wrapper.find('.list--noRefinement')).toHaveLength(0);
 
     wrapper.setProps({ canRefine: false });
 
     expect(canRefine.mock.calls).toHaveLength(2);
     expect(canRefine.mock.calls[1][0]).toEqual(false);
-    expect(wrapper.find('.ais-Pagination__noRefinement')).toHaveLength(1);
+    expect(wrapper.find('.list--noRefinement')).toHaveLength(1);
   });
 
   describe('pagesPadding behaviour', () => {
@@ -328,6 +399,7 @@ describe('Pagination', () => {
       const refine = jest.fn();
       const wrapper = mount(
         <Pagination
+          cx={(...x) => x.join(' ')}
           {...REQ_PROPS}
           nbPages={18}
           showLast
@@ -336,8 +408,8 @@ describe('Pagination', () => {
           refine={refine}
         />
       );
-      const pages = wrapper.find('.ais-Pagination__itemPage');
-      const pageSelected = wrapper.find('.ais-Pagination__itemLinkSelected');
+      const pages = wrapper.find('.item--page');
+      const pageSelected = wrapper.find('.item--selected');
       // Since pagesPadding = 2, the Pagination widget's size should be 5
       expect(pages).toHaveLength(5);
 
@@ -354,6 +426,7 @@ describe('Pagination', () => {
       const refine = jest.fn();
       const wrapper = mount(
         <Pagination
+          cx={(...x) => x.join(' ')}
           {...REQ_PROPS}
           nbPages={18}
           showLast
@@ -362,8 +435,8 @@ describe('Pagination', () => {
           refine={refine}
         />
       );
-      const pages = wrapper.find('.ais-Pagination__itemPage');
-      const pageSelected = wrapper.find('.ais-Pagination__itemLinkSelected');
+      const pages = wrapper.find('.item--page');
+      const pageSelected = wrapper.find('.item--selected');
       // Since pagesPadding = 2, the Pagination widget's size should be 5
       expect(pages).toHaveLength(5);
 
@@ -379,6 +452,7 @@ describe('Pagination', () => {
       const refine = jest.fn();
       const wrapper = mount(
         <Pagination
+          cx={(...x) => x.join(' ')}
           {...REQ_PROPS}
           nbPages={18}
           showLast
@@ -387,8 +461,8 @@ describe('Pagination', () => {
           refine={refine}
         />
       );
-      const pages = wrapper.find('.ais-Pagination__itemPage');
-      const pageSelected = wrapper.find('.ais-Pagination__itemLinkSelected');
+      const pages = wrapper.find('.item--page');
+      const pageSelected = wrapper.find('.item--selected');
       // Since pagesPadding = 2, the Pagination widget's size should be 5
       expect(pages).toHaveLength(5);
 

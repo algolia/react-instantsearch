@@ -12,18 +12,30 @@ describe('ClearAll', () => {
   it('renders a clickable button', () =>
     expect(
       renderer
-        .create(<ClearAll refine={() => null} items={[{ filter: 1 }]} />)
+        .create(
+          <ClearAll
+            refine={() => null}
+            items={[{ filter: 1 }]}
+            cx={(...x) => x.join(' ')}
+          />
+        )
         .toJSON()
     ).toMatchSnapshot());
 
   it('has a disabled mode', () =>
     expect(
-      renderer.create(<ClearAll refine={() => null} items={[]} />).toJSON()
+      renderer
+        .create(
+          <ClearAll refine={() => null} items={[]} cx={(...x) => x.join(' ')} />
+        )
+        .toJSON()
     ).toMatchSnapshot());
 
   it('is disabled when there is no filters', () => {
     const refine = jest.fn();
-    const wrapper = mount(<ClearAll refine={refine} items={[]} />);
+    const wrapper = mount(
+      <ClearAll refine={refine} items={[]} cx={(...x) => x.join(' ')} />
+    );
 
     const btn = wrapper.find('button');
     expect(refine.mock.calls).toHaveLength(0);
@@ -37,6 +49,7 @@ describe('ClearAll', () => {
       <ClearAll
         refine={refine}
         items={[{ value: 'test', label: 'test: test' }]}
+        cx={(...x) => x.join(' ')}
       />
     );
 

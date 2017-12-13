@@ -13,6 +13,7 @@ describe('MultiRange', () => {
     const tree = renderer
       .create(
         <MultiRange
+          cx={(...x) => x.join(' ')}
           createURL={() => '#'}
           refine={() => null}
           items={[
@@ -53,6 +54,7 @@ describe('MultiRange', () => {
     const tree = renderer
       .create(
         <MultiRange
+          cx={(...x) => x.join(' ')}
           createURL={() => '#'}
           refine={() => null}
           items={[
@@ -93,6 +95,7 @@ describe('MultiRange', () => {
     const tree = renderer
       .create(
         <MultiRange
+          cx={(...x) => x.join(' ')}
           createURL={() => '#'}
           refine={() => null}
           items={[
@@ -133,6 +136,7 @@ describe('MultiRange', () => {
     const refine = jest.fn();
     const wrapper = mount(
       <MultiRange
+        cx={(...x) => x.join(' ')}
         refine={refine}
         items={[
           {
@@ -164,11 +168,11 @@ describe('MultiRange', () => {
       />
     );
 
-    const items = wrapper.find('.ais-MultiRange__item');
+    const items = wrapper.find('.item');
 
     expect(items).toHaveLength(4);
 
-    const firstItem = items.first().find('.ais-MultiRange__itemRadio');
+    const firstItem = items.first().find('.radio');
 
     firstItem.simulate('change', { target: { checked: true } });
 
@@ -182,6 +186,7 @@ describe('MultiRange', () => {
     const refine = jest.fn();
     const wrapper = mount(
       <MultiRange
+        cx={(...x) => x.join(' ')}
         refine={refine}
         items={[
           {
@@ -213,10 +218,10 @@ describe('MultiRange', () => {
       />
     );
 
-    const itemWrapper = wrapper.find('.ais-MultiRange__noRefinement');
+    const itemWrapper = wrapper.find('.list--noRefinement');
     expect(itemWrapper).toHaveLength(1);
 
-    const items = wrapper.find('.ais-MultiRange__itemNoRefinement');
+    const items = wrapper.find('.item--noRefinement');
     expect(items).toHaveLength(4);
 
     wrapper.unmount();

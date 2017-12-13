@@ -1,361 +1,855 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`StarRating applies translations 1`] = `
-<div
-  className="ais-StarRating__root"
->
-  <a
-    className="ais-StarRating__ratingLink"
-    disabled={false}
-    href="#"
-    onClick={[Function]}
+<div>
+  <svg
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+    xmlns="http://www.w3.org/2000/svg"
   >
-    <span
-      className="ais-StarRating__ratingIcon"
-    />
-    <span
-      className="ais-StarRating__ratingIcon"
-    />
-    <span
-      className="ais-StarRating__ratingIcon"
-    />
-    <span
-      className="ais-StarRating__ratingIcon"
-    />
-    <span
-      className="ais-StarRating__ratingIcon"
-    />
-    <span
-      className="ais-StarRating__ratingLabel"
+    <symbol
+      id="starSymbol"
+      viewBox="0 0 24 24"
     >
-       & Up
-    </span>
-    <span>
-       
-    </span>
-    <span
-      className="ais-StarRating__ratingCount"
+      <path
+        d="M12 .288l2.833 8.718h9.167l-7.417 5.389 2.833 8.718-7.416-5.388-7.417 5.388 2.833-8.718-7.416-5.389h9.167z"
+      />
+    </symbol>
+    <symbol
+      id="starEmptySymbol"
+      viewBox="0 0 24 24"
     >
-      5
-    </span>
-  </a>
-  <a
-    className="ais-StarRating__ratingLink"
-    disabled={false}
-    href="#"
-    onClick={[Function]}
+      <path
+        d="M12 6.76l1.379 4.246h4.465l-3.612 2.625 1.379 4.246-3.611-2.625-3.612 2.625 1.379-4.246-3.612-2.625h4.465l1.38-4.246zm0-6.472l-2.833 8.718h-9.167l7.416 5.389-2.833 8.718 7.417-5.388 7.416 5.388-2.833-8.718 7.417-5.389h-9.167l-2.833-8.718z"
+      />
+    </symbol>
+  </svg>
+  <ul
+    className="list false"
   >
-    <span
-      className="ais-StarRating__ratingIcon"
-    />
-    <span
-      className="ais-StarRating__ratingIcon"
-    />
-    <span
-      className="ais-StarRating__ratingIcon"
-    />
-    <span
-      className="ais-StarRating__ratingIcon"
-    />
-    <span
-      className="ais-StarRating__ratingIconEmpty"
-    />
-    <span
-      className="ais-StarRating__ratingLabel"
+    <li
+      className="item false false"
     >
-       & Up
-    </span>
-    <span>
-       
-    </span>
-    <span
-      className="ais-StarRating__ratingCount"
+      <a
+        aria-label="5 & Up"
+        className="link"
+        disabled={false}
+        href="#"
+        onClick={[Function]}
+      >
+        <svg
+          aria-hidden="true"
+          className="starIcon starIcon--full"
+          height="24"
+          width="24"
+        >
+          <use
+            xlinkHref="#starSymbol"
+          />
+        </svg>
+         
+        <svg
+          aria-hidden="true"
+          className="starIcon starIcon--full"
+          height="24"
+          width="24"
+        >
+          <use
+            xlinkHref="#starSymbol"
+          />
+        </svg>
+         
+        <svg
+          aria-hidden="true"
+          className="starIcon starIcon--full"
+          height="24"
+          width="24"
+        >
+          <use
+            xlinkHref="#starSymbol"
+          />
+        </svg>
+         
+        <svg
+          aria-hidden="true"
+          className="starIcon starIcon--full"
+          height="24"
+          width="24"
+        >
+          <use
+            xlinkHref="#starSymbol"
+          />
+        </svg>
+         
+        <svg
+          aria-hidden="true"
+          className="starIcon starIcon--full"
+          height="24"
+          width="24"
+        >
+          <use
+            xlinkHref="#starSymbol"
+          />
+        </svg>
+         
+        <span
+          aria-hidden="true"
+          className="label"
+        >
+           & Up
+        </span>
+         
+        <span
+          className="count"
+        >
+          5
+        </span>
+      </a>
+    </li>
+    <li
+      className="item false false"
     >
-      9
-    </span>
-  </a>
-  <a
-    className="ais-StarRating__ratingLink"
-    disabled={false}
-    href="#"
-    onClick={[Function]}
-  >
-    <span
-      className="ais-StarRating__ratingIcon"
-    />
-    <span
-      className="ais-StarRating__ratingIcon"
-    />
-    <span
-      className="ais-StarRating__ratingIcon"
-    />
-    <span
-      className="ais-StarRating__ratingIconEmpty"
-    />
-    <span
-      className="ais-StarRating__ratingIconEmpty"
-    />
-    <span
-      className="ais-StarRating__ratingLabel"
+      <a
+        aria-label="4 & Up"
+        className="link"
+        disabled={false}
+        href="#"
+        onClick={[Function]}
+      >
+        <svg
+          aria-hidden="true"
+          className="starIcon starIcon--full"
+          height="24"
+          width="24"
+        >
+          <use
+            xlinkHref="#starSymbol"
+          />
+        </svg>
+         
+        <svg
+          aria-hidden="true"
+          className="starIcon starIcon--full"
+          height="24"
+          width="24"
+        >
+          <use
+            xlinkHref="#starSymbol"
+          />
+        </svg>
+         
+        <svg
+          aria-hidden="true"
+          className="starIcon starIcon--full"
+          height="24"
+          width="24"
+        >
+          <use
+            xlinkHref="#starSymbol"
+          />
+        </svg>
+         
+        <svg
+          aria-hidden="true"
+          className="starIcon starIcon--full"
+          height="24"
+          width="24"
+        >
+          <use
+            xlinkHref="#starSymbol"
+          />
+        </svg>
+         
+        <svg
+          aria-hidden="true"
+          className="starIcon starIcon--empty"
+          height="24"
+          width="24"
+        >
+          <use
+            xlinkHref="#starEmptySymbol"
+          />
+        </svg>
+         
+        <span
+          aria-hidden="true"
+          className="label"
+        >
+           & Up
+        </span>
+         
+        <span
+          className="count"
+        >
+          9
+        </span>
+      </a>
+    </li>
+    <li
+      className="item false false"
     >
-       & Up
-    </span>
-    <span>
-       
-    </span>
-    <span
-      className="ais-StarRating__ratingCount"
+      <a
+        aria-label="3 & Up"
+        className="link"
+        disabled={false}
+        href="#"
+        onClick={[Function]}
+      >
+        <svg
+          aria-hidden="true"
+          className="starIcon starIcon--full"
+          height="24"
+          width="24"
+        >
+          <use
+            xlinkHref="#starSymbol"
+          />
+        </svg>
+         
+        <svg
+          aria-hidden="true"
+          className="starIcon starIcon--full"
+          height="24"
+          width="24"
+        >
+          <use
+            xlinkHref="#starSymbol"
+          />
+        </svg>
+         
+        <svg
+          aria-hidden="true"
+          className="starIcon starIcon--full"
+          height="24"
+          width="24"
+        >
+          <use
+            xlinkHref="#starSymbol"
+          />
+        </svg>
+         
+        <svg
+          aria-hidden="true"
+          className="starIcon starIcon--empty"
+          height="24"
+          width="24"
+        >
+          <use
+            xlinkHref="#starEmptySymbol"
+          />
+        </svg>
+         
+        <svg
+          aria-hidden="true"
+          className="starIcon starIcon--empty"
+          height="24"
+          width="24"
+        >
+          <use
+            xlinkHref="#starEmptySymbol"
+          />
+        </svg>
+         
+        <span
+          aria-hidden="true"
+          className="label"
+        >
+           & Up
+        </span>
+         
+        <span
+          className="count"
+        >
+          12
+        </span>
+      </a>
+    </li>
+    <li
+      className="item false false"
     >
-      12
-    </span>
-  </a>
-  <a
-    className="ais-StarRating__ratingLink"
-    disabled={false}
-    href="#"
-    onClick={[Function]}
-  >
-    <span
-      className="ais-StarRating__ratingIcon"
-    />
-    <span
-      className="ais-StarRating__ratingIcon"
-    />
-    <span
-      className="ais-StarRating__ratingIconEmpty"
-    />
-    <span
-      className="ais-StarRating__ratingIconEmpty"
-    />
-    <span
-      className="ais-StarRating__ratingIconEmpty"
-    />
-    <span
-      className="ais-StarRating__ratingLabel"
+      <a
+        aria-label="2 & Up"
+        className="link"
+        disabled={false}
+        href="#"
+        onClick={[Function]}
+      >
+        <svg
+          aria-hidden="true"
+          className="starIcon starIcon--full"
+          height="24"
+          width="24"
+        >
+          <use
+            xlinkHref="#starSymbol"
+          />
+        </svg>
+         
+        <svg
+          aria-hidden="true"
+          className="starIcon starIcon--full"
+          height="24"
+          width="24"
+        >
+          <use
+            xlinkHref="#starSymbol"
+          />
+        </svg>
+         
+        <svg
+          aria-hidden="true"
+          className="starIcon starIcon--empty"
+          height="24"
+          width="24"
+        >
+          <use
+            xlinkHref="#starEmptySymbol"
+          />
+        </svg>
+         
+        <svg
+          aria-hidden="true"
+          className="starIcon starIcon--empty"
+          height="24"
+          width="24"
+        >
+          <use
+            xlinkHref="#starEmptySymbol"
+          />
+        </svg>
+         
+        <svg
+          aria-hidden="true"
+          className="starIcon starIcon--empty"
+          height="24"
+          width="24"
+        >
+          <use
+            xlinkHref="#starEmptySymbol"
+          />
+        </svg>
+         
+        <span
+          aria-hidden="true"
+          className="label"
+        >
+           & Up
+        </span>
+         
+        <span
+          className="count"
+        >
+          14
+        </span>
+      </a>
+    </li>
+    <li
+      className="item item--selected false"
     >
-       & Up
-    </span>
-    <span>
-       
-    </span>
-    <span
-      className="ais-StarRating__ratingCount"
-    >
-      14
-    </span>
-  </a>
-  <div
-    className="ais-StarRating__ratingLink ais-StarRating__ratingLinkSelected"
-    disabled={false}
-  >
-    <span
-      className="ais-StarRating__ratingIcon ais-StarRating__ratingIconSelected"
-    />
-    <span
-      className="ais-StarRating__ratingIconEmpty ais-StarRating__ratingIconEmptySelected"
-    />
-    <span
-      className="ais-StarRating__ratingIconEmpty ais-StarRating__ratingIconEmptySelected"
-    />
-    <span
-      className="ais-StarRating__ratingIconEmpty ais-StarRating__ratingIconEmptySelected"
-    />
-    <span
-      className="ais-StarRating__ratingIconEmpty ais-StarRating__ratingIconEmptySelected"
-    />
-    <span
-      className="ais-StarRating__ratingLabel ais-StarRating__ratingLabelSelected"
-    >
-       & Up
-    </span>
-    <span>
-       
-    </span>
-    <span
-      className="ais-StarRating__ratingCount ais-StarRating__ratingCountSelected"
-    >
-      15
-    </span>
-  </div>
+      <div
+        aria-label="1 & Up"
+        className="link"
+        disabled={false}
+      >
+        <svg
+          aria-hidden="true"
+          className="starIcon starIcon--full"
+          height="24"
+          width="24"
+        >
+          <use
+            xlinkHref="#starSymbol"
+          />
+        </svg>
+         
+        <svg
+          aria-hidden="true"
+          className="starIcon starIcon--empty"
+          height="24"
+          width="24"
+        >
+          <use
+            xlinkHref="#starEmptySymbol"
+          />
+        </svg>
+         
+        <svg
+          aria-hidden="true"
+          className="starIcon starIcon--empty"
+          height="24"
+          width="24"
+        >
+          <use
+            xlinkHref="#starEmptySymbol"
+          />
+        </svg>
+         
+        <svg
+          aria-hidden="true"
+          className="starIcon starIcon--empty"
+          height="24"
+          width="24"
+        >
+          <use
+            xlinkHref="#starEmptySymbol"
+          />
+        </svg>
+         
+        <svg
+          aria-hidden="true"
+          className="starIcon starIcon--empty"
+          height="24"
+          width="24"
+        >
+          <use
+            xlinkHref="#starEmptySymbol"
+          />
+        </svg>
+         
+        <span
+          aria-hidden="true"
+          className="label"
+        >
+           & Up
+        </span>
+         
+        <span
+          className="count"
+        >
+          15
+        </span>
+      </div>
+    </li>
+  </ul>
 </div>
 `;
 
 exports[`StarRating supports passing max/min values 1`] = `
-<div
-  className="ais-StarRating__root"
->
-  <a
-    className="ais-StarRating__ratingLink"
-    disabled={false}
-    href="#"
-    onClick={[Function]}
+<div>
+  <svg
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+    xmlns="http://www.w3.org/2000/svg"
   >
-    <span
-      className="ais-StarRating__ratingIcon"
-    />
-    <span
-      className="ais-StarRating__ratingIcon"
-    />
-    <span
-      className="ais-StarRating__ratingIcon"
-    />
-    <span
-      className="ais-StarRating__ratingIcon"
-    />
-    <span
-      className="ais-StarRating__ratingIcon"
-    />
-    <span
-      className="ais-StarRating__ratingLabel"
+    <symbol
+      id="starSymbol"
+      viewBox="0 0 24 24"
     >
-       & Up
-    </span>
-    <span>
-       
-    </span>
-    <span
-      className="ais-StarRating__ratingCount"
+      <path
+        d="M12 .288l2.833 8.718h9.167l-7.417 5.389 2.833 8.718-7.416-5.388-7.417 5.388 2.833-8.718-7.416-5.389h9.167z"
+      />
+    </symbol>
+    <symbol
+      id="starEmptySymbol"
+      viewBox="0 0 24 24"
     >
-      5
-    </span>
-  </a>
-  <a
-    className="ais-StarRating__ratingLink"
-    disabled={false}
-    href="#"
-    onClick={[Function]}
+      <path
+        d="M12 6.76l1.379 4.246h4.465l-3.612 2.625 1.379 4.246-3.611-2.625-3.612 2.625 1.379-4.246-3.612-2.625h4.465l1.38-4.246zm0-6.472l-2.833 8.718h-9.167l7.416 5.389-2.833 8.718 7.417-5.388 7.416 5.388-2.833-8.718 7.417-5.389h-9.167l-2.833-8.718z"
+      />
+    </symbol>
+  </svg>
+  <ul
+    className="list false"
   >
-    <span
-      className="ais-StarRating__ratingIcon"
-    />
-    <span
-      className="ais-StarRating__ratingIcon"
-    />
-    <span
-      className="ais-StarRating__ratingIcon"
-    />
-    <span
-      className="ais-StarRating__ratingIcon"
-    />
-    <span
-      className="ais-StarRating__ratingIconEmpty"
-    />
-    <span
-      className="ais-StarRating__ratingLabel"
+    <li
+      className="item false false"
     >
-       & Up
-    </span>
-    <span>
-       
-    </span>
-    <span
-      className="ais-StarRating__ratingCount"
+      <a
+        aria-label="5 & Up"
+        className="link"
+        disabled={false}
+        href="#"
+        onClick={[Function]}
+      >
+        <svg
+          aria-hidden="true"
+          className="starIcon starIcon--full"
+          height="24"
+          width="24"
+        >
+          <use
+            xlinkHref="#starSymbol"
+          />
+        </svg>
+         
+        <svg
+          aria-hidden="true"
+          className="starIcon starIcon--full"
+          height="24"
+          width="24"
+        >
+          <use
+            xlinkHref="#starSymbol"
+          />
+        </svg>
+         
+        <svg
+          aria-hidden="true"
+          className="starIcon starIcon--full"
+          height="24"
+          width="24"
+        >
+          <use
+            xlinkHref="#starSymbol"
+          />
+        </svg>
+         
+        <svg
+          aria-hidden="true"
+          className="starIcon starIcon--full"
+          height="24"
+          width="24"
+        >
+          <use
+            xlinkHref="#starSymbol"
+          />
+        </svg>
+         
+        <svg
+          aria-hidden="true"
+          className="starIcon starIcon--full"
+          height="24"
+          width="24"
+        >
+          <use
+            xlinkHref="#starSymbol"
+          />
+        </svg>
+         
+        <span
+          aria-hidden="true"
+          className="label"
+        >
+           & Up
+        </span>
+         
+        <span
+          className="count"
+        >
+          5
+        </span>
+      </a>
+    </li>
+    <li
+      className="item false false"
     >
-      9
-    </span>
-  </a>
-  <a
-    className="ais-StarRating__ratingLink"
-    disabled={false}
-    href="#"
-    onClick={[Function]}
-  >
-    <span
-      className="ais-StarRating__ratingIcon"
-    />
-    <span
-      className="ais-StarRating__ratingIcon"
-    />
-    <span
-      className="ais-StarRating__ratingIcon"
-    />
-    <span
-      className="ais-StarRating__ratingIconEmpty"
-    />
-    <span
-      className="ais-StarRating__ratingIconEmpty"
-    />
-    <span
-      className="ais-StarRating__ratingLabel"
+      <a
+        aria-label="4 & Up"
+        className="link"
+        disabled={false}
+        href="#"
+        onClick={[Function]}
+      >
+        <svg
+          aria-hidden="true"
+          className="starIcon starIcon--full"
+          height="24"
+          width="24"
+        >
+          <use
+            xlinkHref="#starSymbol"
+          />
+        </svg>
+         
+        <svg
+          aria-hidden="true"
+          className="starIcon starIcon--full"
+          height="24"
+          width="24"
+        >
+          <use
+            xlinkHref="#starSymbol"
+          />
+        </svg>
+         
+        <svg
+          aria-hidden="true"
+          className="starIcon starIcon--full"
+          height="24"
+          width="24"
+        >
+          <use
+            xlinkHref="#starSymbol"
+          />
+        </svg>
+         
+        <svg
+          aria-hidden="true"
+          className="starIcon starIcon--full"
+          height="24"
+          width="24"
+        >
+          <use
+            xlinkHref="#starSymbol"
+          />
+        </svg>
+         
+        <svg
+          aria-hidden="true"
+          className="starIcon starIcon--empty"
+          height="24"
+          width="24"
+        >
+          <use
+            xlinkHref="#starEmptySymbol"
+          />
+        </svg>
+         
+        <span
+          aria-hidden="true"
+          className="label"
+        >
+           & Up
+        </span>
+         
+        <span
+          className="count"
+        >
+          9
+        </span>
+      </a>
+    </li>
+    <li
+      className="item false false"
     >
-       & Up
-    </span>
-    <span>
-       
-    </span>
-    <span
-      className="ais-StarRating__ratingCount"
+      <a
+        aria-label="3 & Up"
+        className="link"
+        disabled={false}
+        href="#"
+        onClick={[Function]}
+      >
+        <svg
+          aria-hidden="true"
+          className="starIcon starIcon--full"
+          height="24"
+          width="24"
+        >
+          <use
+            xlinkHref="#starSymbol"
+          />
+        </svg>
+         
+        <svg
+          aria-hidden="true"
+          className="starIcon starIcon--full"
+          height="24"
+          width="24"
+        >
+          <use
+            xlinkHref="#starSymbol"
+          />
+        </svg>
+         
+        <svg
+          aria-hidden="true"
+          className="starIcon starIcon--full"
+          height="24"
+          width="24"
+        >
+          <use
+            xlinkHref="#starSymbol"
+          />
+        </svg>
+         
+        <svg
+          aria-hidden="true"
+          className="starIcon starIcon--empty"
+          height="24"
+          width="24"
+        >
+          <use
+            xlinkHref="#starEmptySymbol"
+          />
+        </svg>
+         
+        <svg
+          aria-hidden="true"
+          className="starIcon starIcon--empty"
+          height="24"
+          width="24"
+        >
+          <use
+            xlinkHref="#starEmptySymbol"
+          />
+        </svg>
+         
+        <span
+          aria-hidden="true"
+          className="label"
+        >
+           & Up
+        </span>
+         
+        <span
+          className="count"
+        >
+          12
+        </span>
+      </a>
+    </li>
+    <li
+      className="item false false"
     >
-      12
-    </span>
-  </a>
-  <a
-    className="ais-StarRating__ratingLink"
-    disabled={false}
-    href="#"
-    onClick={[Function]}
-  >
-    <span
-      className="ais-StarRating__ratingIcon"
-    />
-    <span
-      className="ais-StarRating__ratingIcon"
-    />
-    <span
-      className="ais-StarRating__ratingIconEmpty"
-    />
-    <span
-      className="ais-StarRating__ratingIconEmpty"
-    />
-    <span
-      className="ais-StarRating__ratingIconEmpty"
-    />
-    <span
-      className="ais-StarRating__ratingLabel"
+      <a
+        aria-label="2 & Up"
+        className="link"
+        disabled={false}
+        href="#"
+        onClick={[Function]}
+      >
+        <svg
+          aria-hidden="true"
+          className="starIcon starIcon--full"
+          height="24"
+          width="24"
+        >
+          <use
+            xlinkHref="#starSymbol"
+          />
+        </svg>
+         
+        <svg
+          aria-hidden="true"
+          className="starIcon starIcon--full"
+          height="24"
+          width="24"
+        >
+          <use
+            xlinkHref="#starSymbol"
+          />
+        </svg>
+         
+        <svg
+          aria-hidden="true"
+          className="starIcon starIcon--empty"
+          height="24"
+          width="24"
+        >
+          <use
+            xlinkHref="#starEmptySymbol"
+          />
+        </svg>
+         
+        <svg
+          aria-hidden="true"
+          className="starIcon starIcon--empty"
+          height="24"
+          width="24"
+        >
+          <use
+            xlinkHref="#starEmptySymbol"
+          />
+        </svg>
+         
+        <svg
+          aria-hidden="true"
+          className="starIcon starIcon--empty"
+          height="24"
+          width="24"
+        >
+          <use
+            xlinkHref="#starEmptySymbol"
+          />
+        </svg>
+         
+        <span
+          aria-hidden="true"
+          className="label"
+        >
+           & Up
+        </span>
+         
+        <span
+          className="count"
+        >
+          14
+        </span>
+      </a>
+    </li>
+    <li
+      className="item item--selected false"
     >
-       & Up
-    </span>
-    <span>
-       
-    </span>
-    <span
-      className="ais-StarRating__ratingCount"
-    >
-      14
-    </span>
-  </a>
-  <div
-    className="ais-StarRating__ratingLink ais-StarRating__ratingLinkSelected"
-    disabled={false}
-  >
-    <span
-      className="ais-StarRating__ratingIcon ais-StarRating__ratingIconSelected"
-    />
-    <span
-      className="ais-StarRating__ratingIconEmpty ais-StarRating__ratingIconEmptySelected"
-    />
-    <span
-      className="ais-StarRating__ratingIconEmpty ais-StarRating__ratingIconEmptySelected"
-    />
-    <span
-      className="ais-StarRating__ratingIconEmpty ais-StarRating__ratingIconEmptySelected"
-    />
-    <span
-      className="ais-StarRating__ratingIconEmpty ais-StarRating__ratingIconEmptySelected"
-    />
-    <span
-      className="ais-StarRating__ratingLabel ais-StarRating__ratingLabelSelected"
-    >
-       & Up
-    </span>
-    <span>
-       
-    </span>
-    <span
-      className="ais-StarRating__ratingCount ais-StarRating__ratingCountSelected"
-    >
-      15
-    </span>
-  </div>
+      <div
+        aria-label="1 & Up"
+        className="link"
+        disabled={false}
+      >
+        <svg
+          aria-hidden="true"
+          className="starIcon starIcon--full"
+          height="24"
+          width="24"
+        >
+          <use
+            xlinkHref="#starSymbol"
+          />
+        </svg>
+         
+        <svg
+          aria-hidden="true"
+          className="starIcon starIcon--empty"
+          height="24"
+          width="24"
+        >
+          <use
+            xlinkHref="#starEmptySymbol"
+          />
+        </svg>
+         
+        <svg
+          aria-hidden="true"
+          className="starIcon starIcon--empty"
+          height="24"
+          width="24"
+        >
+          <use
+            xlinkHref="#starEmptySymbol"
+          />
+        </svg>
+         
+        <svg
+          aria-hidden="true"
+          className="starIcon starIcon--empty"
+          height="24"
+          width="24"
+        >
+          <use
+            xlinkHref="#starEmptySymbol"
+          />
+        </svg>
+         
+        <svg
+          aria-hidden="true"
+          className="starIcon starIcon--empty"
+          height="24"
+          width="24"
+        >
+          <use
+            xlinkHref="#starEmptySymbol"
+          />
+        </svg>
+         
+        <span
+          aria-hidden="true"
+          className="label"
+        >
+           & Up
+        </span>
+         
+        <span
+          className="count"
+        >
+          15
+        </span>
+      </div>
+    </li>
+  </ul>
 </div>
 `;
