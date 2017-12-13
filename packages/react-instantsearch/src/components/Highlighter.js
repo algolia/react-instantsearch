@@ -4,6 +4,10 @@ import classNames from './classNames';
 
 const cx = classNames('Highlight');
 
+function generateKey(i, value) {
+  return `split-${i}-${value}`;
+}
+
 export const Highlight = ({
   value,
   highlightedTagName,
@@ -43,10 +47,10 @@ export default function Highlighter({
         if (Array.isArray(item)) {
           const isLast = i === parsedHighlightedValue.length - 1;
           return (
-            <span key={`split-${i}-${hit[attributeName][i]}`}>
+            <span key={generateKey(i, hit[attributeName][i])}>
               {item.map((element, index) => (
                 <Highlight
-                  key={`split-${index}-${element.value}`}
+                  key={generateKey(index, element.value)}
                   value={element.value}
                   highlightedTagName={tagName}
                   nonHighlightedTagName={nonHighlightedTagName}
@@ -60,7 +64,7 @@ export default function Highlighter({
 
         return (
           <Highlight
-            key={`split-${i}-${item.value}`}
+            key={generateKey(i, item.value)}
             value={item.value}
             highlightedTagName={tagName}
             nonHighlightedTagName={nonHighlightedTagName}
