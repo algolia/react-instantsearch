@@ -283,6 +283,7 @@ class SearchBox extends Component {
         />
         {this.props.showLoadingIndicator && (
           <div
+            hidden={!isSearchStalled}
             style={{
               display: isSearchStalled ? 'block' : 'none',
             }}
@@ -295,9 +296,7 @@ class SearchBox extends Component {
           type="submit"
           title={translate('submitTitle')}
           className={cx('submit')}
-          style={{
-            display: isSearchStalled ? 'none' : 'block',
-          }}
+          hidden={isSearchStalled}
         >
           {submitComponent}
         </button>
