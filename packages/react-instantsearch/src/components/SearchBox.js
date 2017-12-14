@@ -76,9 +76,6 @@ class SearchBox extends Component {
     onReset: PropTypes.func,
     onChange: PropTypes.func,
 
-    header: PropTypes.node,
-    footer: PropTypes.node,
-
     isSearchStalled: PropTypes.bool,
     showLoadingIndicator: PropTypes.bool,
 
@@ -219,8 +216,6 @@ class SearchBox extends Component {
       cx,
       translate,
       autoFocus,
-      header,
-      footer,
       renderLoadingIndicatorComponent,
       renderSubmitComponent,
       renderResetComponent,

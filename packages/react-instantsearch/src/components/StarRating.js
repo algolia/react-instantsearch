@@ -23,21 +23,7 @@ class StarRating extends Component {
       })
     ),
     canRefine: PropTypes.bool.isRequired,
-    header: PropTypes.node,
-    footer: PropTypes.node,
   };
-
-  static contextTypes = {
-    canRefine: PropTypes.func,
-  };
-
-  componentWillMount() {
-    if (this.context.canRefine) this.context.canRefine(this.props.canRefine);
-  }
-
-  componentWillReceiveProps(props) {
-    if (this.context.canRefine) this.context.canRefine(props.canRefine);
-  }
 
   onClick(min, max, e) {
     e.preventDefault();
@@ -142,8 +128,6 @@ class StarRating extends Component {
       count,
       createURL,
       canRefine,
-      header,
-      footer,
     } = this.props;
     const items = [];
     for (let i = max; i >= min; i--) {

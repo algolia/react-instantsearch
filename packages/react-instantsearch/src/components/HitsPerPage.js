@@ -22,12 +22,10 @@ class HitsPerPage extends Component {
         label: PropTypes.string,
       })
     ),
-    header: PropTypes.node,
-    footer: PropTypes.node,
   };
 
   render() {
-    const { cx, currentRefinement, refine, items, header, footer } = this.props;
+    const { cx, currentRefinement, refine, items } = this.props;
     return (
       <Select
         onSelect={refine}

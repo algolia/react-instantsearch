@@ -9,12 +9,10 @@ class ClearAll extends Component {
     translate: PropTypes.func.isRequired,
     items: PropTypes.arrayOf(PropTypes.object).isRequired,
     refine: PropTypes.func.isRequired,
-    header: PropTypes.node,
-    footer: PropTypes.node,
   };
 
   render() {
-    const { cx, translate, items, refine, header, footer } = this.props;
+    const { cx, translate, items, refine } = this.props;
     const isDisabled = items.length === 0;
 
     return (

@@ -27,8 +27,6 @@ class HierarchicalMenu extends Component {
     limitMin: PropTypes.number,
     limitMax: PropTypes.number,
     transformItems: PropTypes.func,
-    header: PropTypes.node,
-    footer: PropTypes.node,
   };
 
   static contextTypes = {
@@ -59,7 +57,7 @@ class HierarchicalMenu extends Component {
   };
 
   render() {
-    const { cx, header, footer } = this.props;
+    const { cx } = this.props;
 
     return (
       <List

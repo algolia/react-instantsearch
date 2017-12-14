@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import BaseWidget from './BaseWidget';
 import connectMenu from '../connectors/connectMenu.js';
@@ -43,5 +44,10 @@ const Widget = props => (
     <MenuSelectComponent cx={cx} {...props} />
   </BaseWidget>
 );
+
+Widget.propTypes = {
+  header: PropTypes.node,
+  footer: PropTypes.node,
+};
 
 export default connectMenu(Widget);

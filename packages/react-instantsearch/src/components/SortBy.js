@@ -17,12 +17,10 @@ class SortBy extends Component {
 
     currentRefinement: PropTypes.string.isRequired,
     transformItems: PropTypes.func,
-    header: PropTypes.node,
-    footer: PropTypes.node,
   };
 
   render() {
-    const { cx, refine, items, currentRefinement, header, footer } = this.props;
+    const { cx, refine, items, currentRefinement } = this.props;
     return (
       <Select
         cx={cx}

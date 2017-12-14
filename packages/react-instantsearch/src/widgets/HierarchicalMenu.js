@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import BaseWidget from './BaseWidget';
 import connectHierarchicalMenu from '../connectors/connectHierarchicalMenu.js';
@@ -100,5 +101,10 @@ const Widget = props => (
     <HierarchicalMenuComponent cx={cx} {...props} />
   </BaseWidget>
 );
+
+Widget.propTypes = {
+  header: PropTypes.node,
+  footer: PropTypes.node,
+};
 
 export default connectHierarchicalMenu(Widget);

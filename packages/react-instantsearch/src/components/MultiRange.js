@@ -18,8 +18,6 @@ class MultiRange extends Component {
     transformItems: PropTypes.func,
     canRefine: PropTypes.bool.isRequired,
     translate: PropTypes.func.isRequired,
-    header: PropTypes.node,
-    footer: PropTypes.node,
   };
 
   static contextTypes = {
@@ -52,7 +50,7 @@ class MultiRange extends Component {
   };
 
   render() {
-    const { cx, items, canRefine, header, footer } = this.props;
+    const { cx, items, canRefine } = this.props;
 
     return (
       <List

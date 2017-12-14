@@ -1,9 +1,8 @@
-import PropTypes from 'prop-types';
 /* eslint-env jest, jasmine */
 
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Enzyme, { mount } from 'enzyme';
+import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 Enzyme.configure({ adapter: new Adapter() });
 

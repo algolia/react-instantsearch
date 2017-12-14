@@ -15,28 +15,16 @@ export class RawRangeInput extends Component {
       min: PropTypes.number,
       max: PropTypes.number,
     }),
-    header: PropTypes.node,
-    footer: PropTypes.node,
   };
 
   static defaultProps = {
     currentRefinement: {},
   };
 
-  static contextTypes = {
-    canRefine: PropTypes.func,
-  };
-
   constructor(props) {
     super(props);
 
     this.state = this.normalizeStateForRendering(props);
-  }
-
-  componentWillMount() {
-    if (this.context.canRefine) {
-      this.context.canRefine(this.props.canRefine);
-    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -102,7 +90,7 @@ export class RawRangeInput extends Component {
 
   render() {
     const { from, to } = this.state;
-    const { cx, precision, translate, canRefine, header, footer } = this.props;
+    const { cx, precision, translate, canRefine } = this.props;
     const { min, max } = this.normalizeRangeForRendering(this.props);
     const step = 1 / Math.pow(10, precision);
 

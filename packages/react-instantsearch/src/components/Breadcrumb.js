@@ -24,18 +24,6 @@ class Breadcrumb extends Component {
     footer: PropTypes.node,
   };
 
-  static contextTypes = {
-    canRefine: PropTypes.func,
-  };
-
-  componentWillMount() {
-    if (this.context.canRefine) this.context.canRefine(this.props.canRefine);
-  }
-
-  componentWillReceiveProps(props) {
-    if (this.context.canRefine) this.context.canRefine(props.canRefine);
-  }
-
   render() {
     const {
       cx,
@@ -46,8 +34,6 @@ class Breadcrumb extends Component {
       rootURL,
       separator,
       translate,
-      header,
-      footer,
     } = this.props;
     const rootPath = canRefine ? (
       <li className={cx('item')}>

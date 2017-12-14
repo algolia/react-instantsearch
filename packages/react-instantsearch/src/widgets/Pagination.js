@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import BaseWidget from './BaseWidget';
 import connectPagination from '../connectors/connectPagination.js';
@@ -60,5 +61,10 @@ const Widget = props => (
     <PaginationComponent cx={cx} {...props} />
   </BaseWidget>
 );
+
+Widget.propTypes = {
+  header: PropTypes.node,
+  footer: PropTypes.node,
+};
 
 export default connectPagination(Widget);

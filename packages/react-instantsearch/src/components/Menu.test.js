@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 /* eslint-env jest, jasmine */
 
 import React from 'react';

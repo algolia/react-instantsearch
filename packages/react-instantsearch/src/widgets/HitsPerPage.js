@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import BaseWidget from './BaseWidget';
 import connectHitsPerPage from '../connectors/connectHitsPerPage.js';
@@ -45,5 +46,10 @@ const Widget = props => (
     <HitsPerPageSelectComponent cx={cx} {...props} />
   </BaseWidget>
 );
+
+Widget.propTypes = {
+  header: PropTypes.node,
+  footer: PropTypes.node,
+};
 
 export default connectHitsPerPage(Widget);

@@ -24,6 +24,8 @@ class Range extends Component {
     currentRefinement: PropTypes.object,
     refine: PropTypes.func.isRequired,
     canRefine: PropTypes.bool.isRequired,
+    header: PropTypes.node,
+    footer: PropTypes.node,
   };
 
   state = { currentValues: { min: this.props.min, max: this.props.max } };

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import BaseWidget from './BaseWidget';
 import connectMultiRange from '../connectors/connectMultiRange.js';
@@ -58,5 +59,10 @@ const Widget = props => (
     <MultiRangeComponent cx={cx} {...props} />
   </BaseWidget>
 );
+
+Widget.propTypes = {
+  header: PropTypes.node,
+  footer: PropTypes.node,
+};
 
 export default connectMultiRange(Widget);

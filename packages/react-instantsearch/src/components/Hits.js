@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Hits = ({ cx, hits, hitComponent: HitComponent, header, footer }) => (
+const Hits = ({ cx, hits, hitComponent: HitComponent }) => (
   // Spread the hit on HitComponent instead of passing the full object. BC.
   // ex: <HitComponent {...hit} key={hit.objectID} />
 
@@ -18,8 +18,6 @@ Hits.propTypes = {
   cx: PropTypes.func.isRequired,
   hits: PropTypes.array,
   hitComponent: PropTypes.func.isRequired,
-  header: PropTypes.node,
-  footer: PropTypes.node,
 };
 
 Hits.defaultProps = {

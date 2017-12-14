@@ -7,8 +7,6 @@ class Toggle extends Component {
     currentRefinement: PropTypes.bool.isRequired,
     refine: PropTypes.func.isRequired,
     label: PropTypes.string.isRequired,
-    header: PropTypes.node,
-    footer: PropTypes.node,
   };
 
   onChange = e => {
@@ -16,7 +14,7 @@ class Toggle extends Component {
   };
 
   render() {
-    const { cx, currentRefinement, label, header, footer } = this.props;
+    const { cx, currentRefinement, label } = this.props;
 
     return (
       <label className={cx('label')}>

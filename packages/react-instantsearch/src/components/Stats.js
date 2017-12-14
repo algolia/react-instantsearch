@@ -9,19 +9,10 @@ class Stats extends Component {
     translate: PropTypes.func.isRequired,
     nbHits: PropTypes.number.isRequired,
     processingTimeMS: PropTypes.number.isRequired,
-    header: PropTypes.node,
-    footer: PropTypes.node,
   };
 
   render() {
-    const {
-      cx,
-      translate,
-      nbHits,
-      processingTimeMS,
-      header,
-      footer,
-    } = this.props;
+    const { cx, translate, nbHits, processingTimeMS } = this.props;
     return (
       <span className={cx('text')}>
         {translate('stats', nbHits, processingTimeMS)}

@@ -28,8 +28,6 @@ class Menu extends Component {
     limitMin: PropTypes.number,
     limitMax: PropTypes.number,
     transformItems: PropTypes.func,
-    header: PropTypes.node,
-    footer: PropTypes.node,
   };
 
   static contextTypes = {
@@ -69,7 +67,7 @@ class Menu extends Component {
   };
 
   render() {
-    const { cx, header, footer } = this.props;
+    const { cx } = this.props;
     return (
       <List
         renderItem={this.renderItem}

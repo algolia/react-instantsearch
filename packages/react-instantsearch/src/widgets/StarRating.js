@@ -1,4 +1,5 @@
-import React from 'react';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import BaseWidget from './BaseWidget';
 import connectRange from '../connectors/connectRange.js';
 import StarRatingComponent from '../components/StarRating.js';
@@ -53,15 +54,38 @@ const cx = classNames('RatingMenu');
  * }
  */
 
-const Widget = props => (
-  <BaseWidget
-    cx={cx}
-    header={props.header}
-    footer={props.footer}
-    cantRefine={!props.canRefine}
-  >
-    <StarRatingComponent cx={cx} {...props} />
-  </BaseWidget>
-);
+class Widget extends Component {
+  static propTypes = {
+    canRefine: PropTypes.bool.isRequired,
+    header: PropTypes.node,
+    footer: PropTypes.node,
+  };
+
+  static contextTypes = {
+    canRefine: PropTypes.func,
+  };
+
+  componentWillMount() {
+    if (this.context.canRefine) this.context.canRefine(this.props.canRefine);
+  }
+
+  componentWillReceiveProps(props) {
+    if (this.context.canRefine) this.context.canRefine(props.canRefine);
+  }
+
+  render() {
+    const { header, footer, canRefine } = this.props;
+    return (
+      <BaseWidget
+        cx={cx}
+        header={header}
+        footer={footer}
+        cantRefine={!canRefine}
+      >
+        <StarRatingComponent cx={cx} {...this.props} />
+      </BaseWidget>
+    );
+  }
+}
 
 export default connectRange(Widget);

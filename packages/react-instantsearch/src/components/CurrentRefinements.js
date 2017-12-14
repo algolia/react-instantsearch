@@ -14,30 +14,11 @@ class CurrentRefinements extends Component {
     refine: PropTypes.func.isRequired,
     canRefine: PropTypes.bool.isRequired,
     transformItems: PropTypes.func,
+    translate: PropTypes.func.isRequired,
   };
-
-  static contextTypes = {
-    canRefine: PropTypes.func,
-  };
-
-  componentWillMount() {
-    if (this.context.canRefine) this.context.canRefine(this.props.canRefine);
-  }
-
-  componentWillReceiveProps(props) {
-    if (this.context.canRefine) this.context.canRefine(props.canRefine);
-  }
 
   render() {
-    const {
-      cx,
-      translate,
-      items,
-      refine,
-      canRefine,
-      header,
-      footer,
-    } = this.props;
+    const { cx, translate, items, refine } = this.props;
 
     return (
       <ul className={cx('list')}>

@@ -21,8 +21,6 @@ class MenuSelect extends Component {
         isRefined: PropTypes.bool.isRequired,
       })
     ),
-    header: PropTypes.node,
-    footer: PropTypes.node,
   };
 
   static contextTypes = {
@@ -49,7 +47,7 @@ class MenuSelect extends Component {
   };
 
   render() {
-    const { cx, items, translate, header, footer } = this.props;
+    const { cx, items, translate } = this.props;
 
     return (
       <select

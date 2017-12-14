@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import BaseWidget from './BaseWidget';
 import connectRefinementList from '../connectors/connectRefinementList.js';
@@ -60,5 +61,10 @@ const Widget = props => (
     <RefinementListComponent cx={cx} {...props} />
   </BaseWidget>
 );
+
+Widget.propTypes = {
+  header: PropTypes.node,
+  footer: PropTypes.node,
+};
 
 export default connectRefinementList(Widget);

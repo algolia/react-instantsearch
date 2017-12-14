@@ -12,8 +12,6 @@ class InfiniteHits extends Component {
       hasMore,
       refine,
       translate,
-      header,
-      footer,
     } = this.props;
     const renderedHits = hits.map(hit => (
       <li key={hit.objectID} className={cx('item')}>

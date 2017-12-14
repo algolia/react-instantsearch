@@ -1,4 +1,5 @@
-import React from 'react';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import BaseWidget from './BaseWidget';
 import connectRange from '../connectors/connectRange.js';
 import RangeInputComponent from '../components/RangeInput.js';
@@ -44,15 +45,32 @@ const cx = classNames('RangeInput');
  * }
  */
 
-const Widget = props => (
-  <BaseWidget
-    cx={cx}
-    header={props.header}
-    footer={props.footer}
-    cantRefine={!props.canRefine}
-  >
-    <RangeInputComponent cx={cx} {...props} />
-  </BaseWidget>
-);
+class Widget extends Component {
+  static propTypes = {
+    canRefine: PropTypes.bool.isRequired,
+    header: PropTypes.node,
+    footer: PropTypes.node,
+  };
+
+  componentWillMount() {
+    if (this.context.canRefine) {
+      this.context.canRefine(this.props.canRefine);
+    }
+  }
+
+  render() {
+    const { header, footer, canRefine } = this.props;
+    return (
+      <BaseWidget
+        cx={cx}
+        header={header}
+        footer={footer}
+        cantRefine={!canRefine}
+      >
+        <RangeInputComponent cx={cx} {...this.props} />
+      </BaseWidget>
+    );
+  }
+}
 
 export default connectRange(Widget);
