@@ -5,10 +5,7 @@ export default function classNames(block) {
   return (...bemElements) =>
     cx(
       bemElements
-        .filter(
-          element =>
-            element !== undefined && element !== false && element !== null
-        )
+        .filter(element => element !== undefined && element !== null)
         .map(
           element =>
             element === ''

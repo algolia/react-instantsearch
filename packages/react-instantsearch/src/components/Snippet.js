@@ -1,16 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-
 import Highlighter from './Highlighter';
 
 export default function Snippet(props) {
-  return (
-    <Highlighter
-      highlightProperty="_snippetResult"
-      widgetClassName="Snippet"
-      {...props}
-    />
-  );
+  return <Highlighter highlightProperty="_snippetResult" {...props} />;
 }
 
 Snippet.propTypes = {

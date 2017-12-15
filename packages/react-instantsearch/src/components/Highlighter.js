@@ -4,14 +4,13 @@ import React from 'react';
 import classNames from './classNames.js';
 
 export default function Highlighter({
+  cx,
   hit,
   attributeName,
   highlight,
   highlightProperty,
   tagName,
-  widgetClassName,
 }) {
-  const cx = classNames(widgetClassName);
   const parsedHighlightedValue = highlight({
     hit,
     attributeName,
@@ -37,10 +36,10 @@ export default function Highlighter({
 }
 
 Highlighter.propTypes = {
+  cx: PropTypes.func.isRequired,
   hit: PropTypes.object.isRequired,
   attributeName: PropTypes.string.isRequired,
   highlight: PropTypes.func.isRequired,
   highlightProperty: PropTypes.string.isRequired,
   tagName: PropTypes.string,
-  widgetClassName: PropTypes.string.isRequired,
 };

@@ -13,15 +13,16 @@ class InfiniteHits extends Component {
       refine,
       translate,
     } = this.props;
-    const renderedHits = hits.map(hit => (
-      <li key={hit.objectID} className={cx('item')}>
-        <ItemComponent hit={hit} />
-      </li>
-    ));
 
     return (
       <div>
-        <ul className={cx('list')}>{renderedHits}</ul>
+        <ul className={cx('list')}>
+          {hits.map(hit => (
+            <li key={hit.objectID} className={cx('item')}>
+              <ItemComponent hit={hit} />
+            </li>
+          ))}
+        </ul>
         <button
           className={cx('loadMore', !hasMore && 'loadMore--disabled')}
           onClick={() => refine()}

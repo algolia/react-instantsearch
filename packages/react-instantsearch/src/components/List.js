@@ -146,11 +146,7 @@ class List extends Component {
     const { cx, items, withSearchBox, canRefine } = this.props;
     const searchBox = withSearchBox ? this.renderSearchBox() : null;
     if (items.length === 0) {
-      return (
-        <ul className={cx('list', !canRefine && 'list--noRefinement')}>
-          {searchBox}
-        </ul>
-      );
+      return searchBox;
     }
 
     // Always limit the number of items we show on screen, since the actual
@@ -158,13 +154,17 @@ class List extends Component {
     // option.
     const limit = this.getLimit();
     return (
-      <ul className={cx('list', !this.props.canRefine && 'list--noRefinement')}>
+      <div>
         {searchBox}
-        {items
-          .slice(0, limit)
-          .map(item => this.renderItem(item, this.resetQuery))}
-        {this.renderShowMore()}
-      </ul>
+        <ul
+          className={cx('list', !this.props.canRefine && 'list--noRefinement')}
+        >
+          {items
+            .slice(0, limit)
+            .map(item => this.renderItem(item, this.resetQuery))}
+          {this.renderShowMore()}
+        </ul>
+      </div>
     );
   }
 }

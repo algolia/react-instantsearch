@@ -22,23 +22,20 @@ class CurrentRefinements extends Component {
 
     return (
       <ul className={cx('list')}>
-        {items.map(
-          item =>
-            item.items
-              ? item.items.map(nestedItem => (
-                  <li key={nestedItem.label} className={cx('item')}>
-                    <button
-                      className={cx('button')}
-                      onClick={() => refine(nestedItem.value)}
-                    >
-                      <span className={cx('label')}>{nestedItem.label}</span>
-                      <span className={cx('delete')}>
-                        {translate('clearFilter', nestedItem)}
-                      </span>
-                    </button>
-                  </li>
-                ))
-              : null
+        {items.filter(item => item.items).map(item =>
+          item.items.map(nestedItem => (
+            <li key={nestedItem.label} className={cx('item')}>
+              <button
+                className={cx('button')}
+                onClick={() => refine(nestedItem.value)}
+              >
+                <span className={cx('label')}>{nestedItem.label}</span>
+                <span className={cx('delete')}>
+                  {translate('clearFilter', nestedItem)}
+                </span>
+              </button>
+            </li>
+          ))
         )}
       </ul>
     );

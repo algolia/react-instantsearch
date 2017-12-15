@@ -1,5 +1,10 @@
+import React from 'react';
+
 import connectHighlight from '../connectors/connectHighlight.js';
 import SnippetComponent from '../components/Snippet.js';
+import classNames from '../components/classNames';
+
+const cx = classNames('Snippet');
 
 /**
  * Renders any attribute from an hit into its highlighted snippet form when relevant.
@@ -35,4 +40,7 @@ import SnippetComponent from '../components/Snippet.js';
  *   );
  * }
  */
-export default connectHighlight(SnippetComponent);
+
+const Widget = props => <SnippetComponent cx={cx} {...props} />;
+
+export default connectHighlight(Widget);

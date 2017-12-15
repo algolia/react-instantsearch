@@ -1,5 +1,9 @@
+import React from 'react';
 import connectHighlight from '../connectors/connectHighlight.js';
 import HighlightComponent from '../components/Highlight.js';
+import classNames from '../components/classNames';
+
+const cx = classNames('Highlight');
 
 /**
  * Renders any attribute from an hit into its highlighted form when relevant.
@@ -40,4 +44,7 @@ import HighlightComponent from '../components/Highlight.js';
  *  );
  * }
  */
-export default connectHighlight(HighlightComponent);
+
+const Widget = props => <HighlightComponent cx={cx} {...props} />;
+
+export default connectHighlight(Widget);
