@@ -166,17 +166,6 @@ describe('RawRangeInput', () => {
   });
 
   describe('willMount', () => {
-    it('expect to call canRefine from context when defined', () => {
-      const props = {};
-      const context = {
-        canRefine: jest.fn(),
-      };
-
-      shallowRender(props, context);
-
-      expect(context.canRefine).toHaveBeenCalledTimes(1);
-    });
-
     it('expect to not throw when canRefine is not defined', () => {
       const props = {};
       const context = {};
@@ -251,50 +240,6 @@ describe('RawRangeInput', () => {
         from: 10,
         to: 90,
       });
-    });
-
-    it('expect to call context canRefine when props changed', () => {
-      const props = {
-        canRefine: true,
-        currentRefinement: {
-          min: 0,
-          max: 100,
-        },
-      };
-
-      const context = {
-        canRefine: jest.fn(),
-      };
-
-      const wrapper = shallowRender(props, context);
-
-      wrapper.setProps({
-        canRefine: false,
-      });
-
-      expect(context.canRefine).toHaveBeenCalledTimes(2);
-    });
-
-    it("expect to not call context canRefine when props don't have changed", () => {
-      const props = {
-        canRefine: true,
-        currentRefinement: {
-          min: 0,
-          max: 100,
-        },
-      };
-
-      const context = {
-        canRefine: jest.fn(),
-      };
-
-      const wrapper = shallowRender(props, context);
-
-      wrapper.setProps({
-        canRefine: true,
-      });
-
-      expect(context.canRefine).toHaveBeenCalledTimes(1);
     });
 
     it('expect to not throw when canRefine is not defined', () => {
