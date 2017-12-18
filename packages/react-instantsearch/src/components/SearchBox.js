@@ -9,7 +9,7 @@ const DefaultLoadingIndicator = cx => (
     height="18"
     viewBox="0 0 38 38"
     xmlns="http://www.w3.org/2000/svg"
-    stroke="#BFC7D8"
+    stroke="#444"
     className={cx('loadingIcon')}
   >
     <g fill="none" fillRule="evenodd">
@@ -263,22 +263,10 @@ class SearchBox extends Component {
           {...searchInputEvents}
           className={cx('input')}
         />
-        {this.props.showLoadingIndicator && (
-          <div
-            hidden={!isSearchStalled}
-            style={{
-              display: isSearchStalled ? 'block' : 'none',
-            }}
-            className={cx('loadingIndicator')}
-          >
-            {renderLoadingIndicatorComponent(cx)}
-          </div>
-        )}
         <button
           type="submit"
           title={translate('submitTitle')}
           className={cx('submit')}
-          hidden={isSearchStalled}
         >
           {renderSubmitComponent(cx)}
         </button>
@@ -287,10 +275,15 @@ class SearchBox extends Component {
           title={translate('resetTitle')}
           className={cx('reset')}
           onClick={this.onReset}
-          style={{ display: `${query ? 'block' : 'none'}` }}
+          hidden={!query || isSearchStalled}
         >
           {renderResetComponent(cx)}
         </button>
+        {this.props.showLoadingIndicator && (
+          <span hidden={!isSearchStalled} className={cx('loadingIndicator')}>
+            {renderLoadingIndicatorComponent(cx)}
+          </span>
+        )}
       </form>
     );
     /* eslint-enable */
