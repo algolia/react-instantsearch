@@ -29,7 +29,6 @@ exports[`Menu Menu with search inside items but no search results 1`] = `
       />
       <button
         className="ais-SearchBox-submit"
-        hidden={false}
         title="Submit your search query."
         type="submit"
       >
@@ -47,12 +46,8 @@ exports[`Menu Menu with search inside items but no search results 1`] = `
       </button>
       <button
         className="ais-SearchBox-reset"
+        hidden={true}
         onClick={[Function]}
-        style={
-          Object {
-            "display": "none",
-          }
-        }
         title="Clear the search query."
         type="reset"
       >
@@ -169,7 +164,6 @@ exports[`Menu Menu with search inside items with search results 1`] = `
       />
       <button
         className="ais-SearchBox-submit"
-        hidden={false}
         title="Submit your search query."
         type="submit"
       >
@@ -187,12 +181,8 @@ exports[`Menu Menu with search inside items with search results 1`] = `
       </button>
       <button
         className="ais-SearchBox-reset"
+        hidden={true}
         onClick={[Function]}
-        style={
-          Object {
-            "display": "none",
-          }
-        }
         title="Clear the search query."
         type="reset"
       >
@@ -265,7 +255,6 @@ exports[`Menu applies translations 1`] = `
       />
       <button
         className="ais-SearchBox-submit"
-        hidden={false}
         title="Submit your search query."
         type="submit"
       >
@@ -283,12 +272,8 @@ exports[`Menu applies translations 1`] = `
       </button>
       <button
         className="ais-SearchBox-reset"
+        hidden={true}
         onClick={[Function]}
-        style={
-          Object {
-            "display": "none",
-          }
-        }
         title="Clear the search query."
         type="reset"
       >

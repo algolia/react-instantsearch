@@ -29,7 +29,6 @@ exports[`RefinementList applies translations 1`] = `
       />
       <button
         className="ais-SearchBox-submit"
-        hidden={false}
         title="Submit your search query."
         type="submit"
       >
@@ -47,12 +46,8 @@ exports[`RefinementList applies translations 1`] = `
       </button>
       <button
         className="ais-SearchBox-reset"
+        hidden={true}
         onClick={[Function]}
-        style={
-          Object {
-            "display": "none",
-          }
-        }
         title="Clear the search query."
         type="reset"
       >
@@ -247,7 +242,6 @@ exports[`RefinementList refinement list with search inside items but no search r
       />
       <button
         className="ais-SearchBox-submit"
-        hidden={false}
         title="Submit your search query."
         type="submit"
       >
@@ -265,12 +259,8 @@ exports[`RefinementList refinement list with search inside items but no search r
       </button>
       <button
         className="ais-SearchBox-reset"
+        hidden={true}
         onClick={[Function]}
-        style={
-          Object {
-            "display": "none",
-          }
-        }
         title="Clear the search query."
         type="reset"
       >
@@ -399,7 +389,6 @@ exports[`RefinementList refinement list with search inside items with search res
       />
       <button
         className="ais-SearchBox-submit"
-        hidden={false}
         title="Submit your search query."
         type="submit"
       >
@@ -417,12 +406,8 @@ exports[`RefinementList refinement list with search inside items with search res
       </button>
       <button
         className="ais-SearchBox-reset"
+        hidden={true}
         onClick={[Function]}
-        style={
-          Object {
-            "display": "none",
-          }
-        }
         title="Clear the search query."
         type="reset"
       >
