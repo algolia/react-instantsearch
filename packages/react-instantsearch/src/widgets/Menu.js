@@ -23,18 +23,19 @@ const cx = classNames('Menu');
  * @propType {string} [defaultRefinement] - the value of the item selected by default
  * @propType {function} [transformItems] - Function to modify the items being displayed, e.g. for filtering or sorting them. Takes an items as parameter and expects it back in return.
  * @propType {boolean} [withSearchBox=false] - true if the component should display an input to search for facet values. <br> In order to make this feature work, you need to make the attribute searchable [using the API](https://www.algolia.com/doc/guides/searching/faceting/?language=js#declaring-a-searchable-attribute-for-faceting) or [the dashboard](https://www.algolia.com/explorer/display/).
- * @themeKey ais-Menu__root - the root of the component
- * @themeKey ais-Menu__items - the container of all items in the menu
- * @themeKey ais-Menu__item - a single item
- * @themeKey ais-Menu__itemLinkSelected - the selected menu item
- * @themeKey ais-Menu__itemLink - the item link
- * @themeKey ais-Menu__itemLabelSelected - the selected item label
- * @themeKey ais-Menu__itemLabel - the item label
- * @themeKey ais-Menu__itemCount - the item count
- * @themeKey ais-Menu__itemCountSelected - the selected item count
- * @themeKey ais-Menu__noRefinement - present when there is no refinement
- * @themeKey ais-Menu__showMore - the button that let the user toggle more results
- * @themeKey ais-Menu__SearchBox - the container of the search for facet values searchbox. See [the SearchBox documentation](widgets/SearchBox.html#classnames) for the classnames and translation keys of the SearchBox.
+ * @themeKey ais-Menu - the root div of the widget
+ * @themeKey ais-Menu-header - the header of the widget (optional)
+ * @themeKey ais-Menu-body - the body of the widget
+ * @themeKey ais-Menu-searchBox - the search box of the widget. See [the SearchBox documentation](widgets/SearchBox.html#classnames) for the classnames and translation keys of the SearchBox.
+ * @themeKey ais-Menu-list - the list of all menu items
+ * @themeKey ais-Menu-item - the menu list item
+ * @themeKey ais-Menu-item--selected - the selected menu list item
+ * @themeKey ais-Menu-link - the clickable menu element
+ * @themeKey ais-Menu-label - the label of each item
+ * @themeKey ais-Menu-count - the count of values for each item
+ * @themeKey ais-Menu-showMore - the button used to display more categories
+ * @themeKey ais-Menu-showMore--disabled - the disabled button used to display more categories
+ * @themeKey ais-Menu-footer - the footer of the widget (optional)
  * @translationkey showMore - The label of the show more button. Accepts one parameters, a boolean that is true if the values are expanded
  * @translationkey noResults - The label of the no results text when no search for facet values results are found.
  * @example

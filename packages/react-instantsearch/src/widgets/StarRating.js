@@ -18,23 +18,20 @@ const cx = classNames('RatingMenu');
  * @propType {number} [min] - Minimum value for the rating. When this isn't set, the minimum value will be automatically computed by Algolia using the data in the index.
  * @propType {number} [max] - Maximum value for the rating. When this isn't set, the maximum value will be automatically computed by Algolia using the data in the index.
  * @propType {{min: number, max: number}} [defaultRefinement] - Default state of the widget containing the lower bound (end) and the max for the rating.
- * @themeKey ais-StarRating__root - The root component of the widget
- * @themeKey ais-StarRating__ratingLink - The item link
- * @themeKey ais-StarRating__ratingLinkSelected - The selected link item
- * @themeKey ais-StarRating__ratingLinkDisabled - The disabled link item
- * @themeKey ais-StarRating__ratingIcon - The rating icon
- * @themeKey ais-StarRating__ratingIconSelected - The selected rating icon
- * @themeKey ais-StarRating__ratingIconDisabled - The disabled rating icon
- * @themeKey ais-StarRating__ratingIconEmpty - The rating empty icon
- * @themeKey ais-StarRating__ratingIconEmptySelected - The selected rating empty icon
- * @themeKey ais-StarRating__ratingIconEmptyDisabled - The disabled rating empty icon
- * @themeKey ais-StarRating__ratingLabel - The link label
- * @themeKey ais-StarRating__ratingLabelSelected - The selected link label
- * @themeKey ais-StarRating__ratingLabelDisabled - The disabled link label
- * @themeKey ais-StarRating__ratingCount - The link count
- * @themeKey ais-StarRating__ratingCountSelected - The selected link count
- * @themeKey ais-StarRating__ratingCountDisabled - The disabled link count
- * @themeKey ais-StarRating__noRefinement - present when there is no refinement
+ * @themeKey ais-RatingMenu - the root div of the widget
+ * @themeKey ais-RatingMenu-header - the header of the widget (optional)
+ * @themeKey ais-RatingMenu-body - the body of the widget
+ * @themeKey ais-RatingMenu-list - the list of ratings
+ * @themeKey ais-RatingMenu-item - the rating list item
+ * @themeKey ais-RatingMenu-item--selected - the selected rating list item
+ * @themeKey ais-RatingMenu-item--disabled - the disabled rating list item
+ * @themeKey ais-RatingMenu-link - the rating clickable item
+ * @themeKey ais-RatingMenu-starIcon--full - the filled star icon
+ * @themeKey ais-RatingMenu-starIcon--empty - the empty star icon
+ * @themeKey ais-RatingMenu-starIcon - the star icon
+ * @themeKey ais-RatingMenu-label - the label used after the stars
+ * @themeKey ais-RatingMenu-count - the count of ratings for a specific item
+ * @themeKey ais-RatingMenu-footer - the footer of the widget (optional)
  * @translationKey ratingLabel - Label value for the rating link
  * @example
  * import React from 'react';

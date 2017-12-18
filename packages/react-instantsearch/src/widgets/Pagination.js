@@ -18,16 +18,18 @@ const cx = classNames('Pagination');
  * @propType {boolean} [showNext=true] - Display the next page link.
  * @propType {number} [pagesPadding=3] - How many page links to display around the current page.
  * @propType {number} [maxPages=Infinity] - Maximum number of pages to display.
- * @themeKey ais-Pagination__root - The root component of the widget
- * @themeKey ais-Pagination__itemFirst - The first page link item
- * @themeKey ais-Pagination__itemPrevious - The previous page link item
- * @themeKey ais-Pagination__itemPage - The page link item
- * @themeKey ais-Pagination__itemNext - The next page link item
- * @themeKey ais-Pagination__itemLast - The last page link item
- * @themeKey ais-Pagination__itemDisabled - a disabled item
- * @themeKey ais-Pagination__itemSelected - a selected item
- * @themeKey ais-Pagination__itemLink - The link of an item
- * @themeKey ais-Pagination__noRefinement - present when there is no refinement
+ * @themeKey ais-Pagination - the root div of the widget
+ * @themeKey ais-Pagination-header - the header of the widget (optional)
+ * @themeKey ais-Pagination-body - the body of the widget
+ * @themeKey ais-Pagination-list - the list of all pagination items
+ * @themeKey ais-Pagination-item - the pagination list item
+ * @themeKey ais-Pagination-item--previousPage - the "previous" pagination list item
+ * @themeKey ais-Pagination-item--nextPage - the "next" pagination list item
+ * @themeKey ais-Pagination-item--page - the "page" pagination list item
+ * @themeKey ais-Pagination-item--selected - the selected pagination list item
+ * @themeKey ais-Pagination-item--disabled - the disabled pagination list item
+ * @themeKey ais-Pagination-item--link - the pagination clickable element
+ * @themeKey ais-Pagination-footer - the footer of the widget (optional)
  * @translationKey previous - Label value for the previous page link
  * @translationKey next - Label value for the next page link
  * @translationKey first - Label value for the first page link

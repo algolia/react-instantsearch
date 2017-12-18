@@ -11,7 +11,11 @@ const cx = classNames('Stats');
  * The Stats component displays the total number of matching hits and the time it took to get them (time spent in the Algolia server).
  * @name Stats
  * @kind widget
- * @themeKey ais-Stats__root - the root of the component
+ * @themeKey ais-Stats - the root div of the widget
+ * @themeKey ais-Stats-header - the header of the widget (optional)
+ * @themeKey ais-Stats-body - the body of the widget
+ * @themeKey ais-Stats-text - the text of the widget - the count of items for each item
+ * @themeKey ais-Stats-footer - the footer of the widget (optional)
  * @translationkey stats - The string displayed by the stats widget. You get function(n, ms) and you need to return a string. n is a number of hits retrieved, ms is a processed time.
  * @example
  * import React from 'react';

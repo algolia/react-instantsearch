@@ -53,15 +53,15 @@ const cx = classNames('Breadcrumb');
  * @propType {string} [separator='>'] -  Symbol used for separating hyperlinks
  * @propType {string} [rootURL=null] - The originating page (homepage)
  * @propType {function} [transformItems] - Function to modify the items being displayed, e.g. for filtering or sorting them. Takes an items as parameter and expects it back in return
- * @themeKey .ais-Breadcrumb - the root div of the widget
- * @themeKey .ais-Breadcrumb-header - the header of the widget (optional)
- * @themeKey .ais-Breadcrumb-body - the body of the widget
- * @themeKey .ais-Breadcrumb-list - the list of all breadcrumb items
- * @themeKey .ais-Breadcrumb-item - the breadcrumb navigation item
- * @themeKey .ais-Breadcrumb-item--selected - the selected breadcrumb item
- * @themeKey .ais-Breadcrumb-separator - the separator of each breadcrumb item
- * @themeKey .ais-Breadcrumb-link - the clickable breadcrumb element
- * @themeKey .ais-Breadcrumb-footer - the footer of the widget (optional)
+ * @themeKey ais-Breadcrumb - the root div of the widget
+ * @themeKey ais-Breadcrumb-header - the header of the widget (optional)
+ * @themeKey ais-Breadcrumb-body - the body of the widget
+ * @themeKey ais-Breadcrumb-list - the list of all breadcrumb items
+ * @themeKey ais-Breadcrumb-item - the breadcrumb navigation item
+ * @themeKey ais-Breadcrumb-item--selected - the selected breadcrumb item
+ * @themeKey ais-Breadcrumb-separator - the separator of each breadcrumb item
+ * @themeKey ais-Breadcrumb-link - the clickable breadcrumb element
+ * @themeKey ais-Breadcrumb-footer - the footer of the widget (optional)
  * @translationKey rootLabel - The root's label. Accepts a string
  * @example
  * import React from 'react';

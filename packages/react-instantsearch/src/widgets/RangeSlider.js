@@ -13,6 +13,10 @@ const cx = classNames('RangeSlider');
  * @name RangeSlider
  * @requirements To connect any slider to Algolia, the underlying attribute used must be holding numerical values.
  * @kind widget
+ * @themeKey ais-RangeSlider - the root div of the widget
+ * @themeKey ais-RangeSlider-header - the header of the widget (optional)
+ * @themeKey ais-RangeSlider-body - the body of the widget
+ * @themeKey ais-RangeSlider-footer - the footer of the widget (optional)
  * @example
  *
  * // Here's an example showing how to connect the airbnb rheostat slider to React InstantSearch using the

@@ -19,7 +19,12 @@ const cx = classNames('ResultsPerPage');
  * @propType {{value: number, label: string}[]} items - List of available options.
  * @propType {number} defaultRefinement - The number of items selected by default
  * @propType {function} [transformItems] - Function to modify the items being displayed, e.g. for filtering or sorting them. Takes an items as parameter and expects it back in return.
- * @themeKey ais-HitsPerPage__root - the root of the component.
+ * @themeKey ais-ResultsPerPage - the root div of the widget
+ * @themeKey ais-ResultsPerPage-header - the header of the widget (optional)
+ * @themeKey ais-ResultsPerPage-body - the body of the widget
+ * @themeKey ais-ResultsPerPage-select - the select
+ * @themeKey ais-ResultsPerPage-option - the select option
+ * @themeKey ais-ResultsPerPage-footer - the footer of the widget (optional)
  * @example
  * import React from 'react';
 

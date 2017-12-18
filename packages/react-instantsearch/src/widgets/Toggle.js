@@ -20,9 +20,16 @@ const cx = classNames('Toggle');
  * @propType {string} label - Label for the toggle.
  * @propType {any} value - Value of the refinement to apply on `attributeName` when checked.
  * @propType {boolean} [defaultRefinement=false] - Default state of the widget. Should the toggle be checked by default?
- * @themeKey ais-Toggle__root - the root of the component
- * @themeKey ais-Toggle__checkbox - the toggle checkbox
- * @themeKey ais-Toggle__label - the toggle label
+ * @themeKey ais-Toggle - the root div of the widget
+ * @themeKey ais-Toggle-header - the header of the widget (optional)
+ * @themeKey ais-Toggle-body - the body of the widget
+ * @themeKey ais-Toggle-list - the list of toggles
+ * @themeKey ais-Toggle-item - the toggle list item
+ * @themeKey ais-Toggle-label - the label of each toggle item
+ * @themeKey ais-Toggle-checkbox - the checkbox input of each toggle item
+ * @themeKey ais-Toggle-labelText - the label text of each toggle item
+ * @themeKey ais-Toggle-count - the count of items for each item
+ * @themeKey ais-Toggle-footer - the footer of the widget (optional)
  * @example
  * import React from 'react';
  *

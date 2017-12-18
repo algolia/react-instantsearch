@@ -22,12 +22,18 @@ const cx = classNames('SearchBox');
  * @propType {React.Element} [loadingIndicatorComponent] - Change the apparence of the default loading indicator (spinning circle).
  * @propType {string} [defaultRefinement] - Provide default refinement value when component is mounted.
  * @propType {boolean} [showLoadingIndicator=false] - Display that the search is loading. This only happens after a certain amount of time to avoid a blinking effect. This timer can be configured with `stalledSearchDelay` props on <InstantSearch>. By default, the value is 200ms.
- * @themeKey ais-SearchBox__root - the root of the component
- * @themeKey ais-SearchBox__wrapper - the search box wrapper
- * @themeKey ais-SearchBox__input - the search box input
- * @themeKey ais-SearchBox__submit - the submit button
- * @themeKey ais-SearchBox__reset - the reset button
- * @themeKey ais-SearchBox__loading-indicator - the loading indicator
+ * @themeKey ais-SearchBox - the root div of the widget
+ * @themeKey ais-SearchBox-header - the header of the widget (optional)
+ * @themeKey ais-SearchBox-body - the body of the widget
+ * @themeKey ais-SearchBox-form - the wrapping form
+ * @themeKey ais-SearchBox-input - the search input
+ * @themeKey ais-SearchBox-submit - the submit button
+ * @themeKey ais-SearchBox-submitIcon - the default magnifier icon used with the search input
+ * @themeKey ais-SearchBox-reset - the reset button used to clear the content of the input
+ * @themeKey ais-SearchBox-resetIcon - the default reset icon used inside the reset button
+ * @themeKey ais-SearchBox-loadingIndicator - the loading indicator container
+ * @themeKey ais-SearchBox-loadingIcon - the default loading icon
+ * @themeKey ais-SearchBox-footer - the footer of the widget (optional)
  * @translationkey submitTitle - The submit button title
  * @translationkey resetTitle - The reset button title
  * @translationkey placeholder - The label of the input placeholder

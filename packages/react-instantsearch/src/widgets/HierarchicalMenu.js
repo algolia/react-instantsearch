@@ -57,18 +57,20 @@ const cx = classNames('HierarchicalMenu');
  * @propType {boolean} [showParentLevel=true] - Flag to set if the parent level should be displayed.
  * @propType {string} [defaultRefinement] - the item value selected by default
  * @propType {function} [transformItems] - Function to modify the items being displayed, e.g. for filtering or sorting them. Takes an items as parameter and expects it back in return.
- * @themeKey ais-HierarchicalMenu__root - Container of the widget
- * @themeKey ais-HierarchicalMenu__items - Container of the items
- * @themeKey ais-HierarchicalMenu__item - Id for a single list item
- * @themeKey ais-HierarchicalMenu__itemSelected - Id for the selected items in the list
- * @themeKey ais-HierarchicalMenu__itemParent - Id for the elements that have a sub list displayed
- * @themeKey ais-HierarchicalMenu__itemSelectedParent - Id for parents that have currently a child selected
- * @themeKey ais-HierarchicalMenu__itemLink - the link containing the label and the count
- * @themeKey ais-HierarchicalMenu__itemLabel - the label of the entry
- * @themeKey ais-HierarchicalMenu__itemCount - the count of the entry
- * @themeKey ais-HierarchicalMenu__itemItems - id representing a children
- * @themeKey ais-HierarchicalMenu__showMore - container for the show more button
- * @themeKey ais-HierarchicalMenu__noRefinement - present when there is no refinement
+ * @themeKey ais-HierarchicalMenu - the root div of the widget
+ * @themeKey ais-HierarchicalMenu-header - the header of the widget (optional)
+ * @themeKey ais-HierarchicalMenu-body - the body of the widget
+* @themeKey ais-Menu-searchBox - the search box of the widget. See [the SearchBox documentation](widgets/SearchBox.html#classnames) for the classnames and translation keys of the SearchBox.
+ * @themeKey ais-HierarchicalMenu-list - the list of menu items
+ * @themeKey ais-HierarchicalMenu-list--lvl0 - the level 0 list of menu items
+ * @themeKey ais-HierarchicalMenu-list--lvl1 - the level 1 list of menu items (and so on)
+ * @themeKey ais-HierarchicalMenu-item - the menu list item
+ * @themeKey ais-HierarchicalMenu-item--selected - the selected menu list item
+ * @themeKey ais-HierarchicalMenu-item--parent - the menu list item containing children
+ * @themeKey ais-HierarchicalMenu-link - the clickable menu element
+ * @themeKey ais-HierarchicalMenu-label - the label of each item
+ * @themeKey ais-HierarchicalMenu-count - the count of values for each item
+ * @themeKey ais-HierarchicalMenu-footer - the footer of the widget (optional)
  * @translationKey showMore - The label of the show more button. Accepts one parameter, a boolean that is true if the values are expanded
  * @example
  * import React from 'react';

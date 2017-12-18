@@ -17,14 +17,17 @@ const cx = classNames('RangeInput');
  * @propType {number} [min] - Minimum value. When this isn't set, the minimum value will be automatically computed by Algolia using the data in the index.
  * @propType {number} [max] - Maximum value. When this isn't set, the maximum value will be automatically computed by Algolia using the data in the index.
  * @propType {number} [precision=2] - Number of digits after decimal point to use.
- * @themeKey ais-RangeInput__root - The root component of the widget
- * @themeKey ais-RangeInput__labelMin - The label for the min input
- * @themeKey ais-RangeInput__inputMin - The min input
- * @themeKey ais-RangeInput__separator - The separator between input
- * @themeKey ais-RangeInput__labelMax - The label for the max input
- * @themeKey ais-RangeInput__inputMax - The max input
- * @themeKey ais-RangeInput__submit - The submit button
- * @themeKey ais-RangeInput__noRefinement - present when there is no refinement
+ * @themeKey ais-RangeInput - the root div of the widget
+ * @themeKey ais-RangeInput-header - the header of the widget (optional)
+ * @themeKey ais-RangeInput-body - the body of the widget
+ * @themeKey ais-RangeInput-form - the wrapping form
+ * @themeKey ais-RangeInput-label - the label wrapping inputs
+ * @themeKey ais-RangeInput-input - the input (number)
+ * @themeKey ais-RangeInput-input--min - the minimum input
+ * @themeKey ais-RangeInput-input--max - the maximum input
+ * @themeKey ais-RangeInput-separator - the separator word used between the two inputs
+ * @themeKey ais-RangeInput-button - the submit button
+ * @themeKey ais-RangeInput-footer - the footer of the widget (optional)
  * @translationKey submit - Label value for the submit button
  * @translationKey separator - Label value for the input separator
  * @example

@@ -16,17 +16,16 @@ const cx = classNames('NumericMenu');
  * @propType {{label: string, start: number, end: number}[]} items - List of options. With a text label, and upper and lower bounds.
  * @propType {string} [defaultRefinement] - the value of the item selected by default, follow the format "min:max".
  * @propType {function} [transformItems] - Function to modify the items being displayed, e.g. for filtering or sorting them. Takes an items as parameter and expects it back in return.
- * @themeKey ais-MultiRange__root - The root component of the widget
- * @themeKey ais-MultiRange__items - The container of the items
- * @themeKey ais-MultiRange__item - A single item
- * @themeKey ais-MultiRange__itemSelected - The selected item
- * @themeKey ais-MultiRange__itemLabel - The label of an item
- * @themeKey ais-MultiRange__itemLabelSelected - The selected label item
- * @themeKey ais-MultiRange__itemRadio - The radio of an item
- * @themeKey ais-MultiRange__itemRadioSelected - The selected radio item
- * @themeKey ais-MultiRange__noRefinement - present when there is no refinement for all ranges
- * @themeKey ais-MultiRange__itemNoRefinement - present when there is no refinement for one range
- * @themeKey ais-MultiRange__itemAll - indicate the range that will contain all the results
+ * @themeKey ais-NumericMenu - the root div of the widget
+ * @themeKey ais-NumericMenu-header - the header of the widget (optional)
+ * @themeKey ais-NumericMenu-body - the body of the widget
+ * @themeKey ais-NumericMenu-list - the list of all refinement items
+ * @themeKey ais-NumericMenu-item - the refinement list item
+ * @themeKey ais-NumericMenu-item--selected - the selected refinement list item
+ * @themeKey ais-NumericMenu-label - the label of each refinement item
+ * @themeKey ais-NumericMenu-radio - the radio input of each refinement item
+ * @themeKey ais-NumericMenu-labelText - the label text of each refinement item
+ * @themeKey ais-NumericMenu-footer - the footer of the widget (optional)
  * @translationkey all - The label of the largest range added automatically by react instantsearch
  * @example
  * import React from 'react';

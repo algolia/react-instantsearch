@@ -16,8 +16,12 @@ const cx = classNames('MenuSelect');
  * @propType {string} attributeName - the name of the attribute in the record
  * @propType {string} [defaultRefinement] - the value of the item selected by default
  * @propType {function} [transformItems] - Function to modify the items being displayed, e.g. for filtering or sorting them. Takes an items as parameter and expects it back in return.
- * @themeKey ais-MenuSelect__select - the `<select>` DOM element.
- * @themeKey ais-MenuSelect__option - the `<option>` DOM element for a single item
+ * @themeKey ais-MenuSelect - the root div of the widget
+ * @themeKey ais-MenuSelect-header - the header of the widget (optional)
+ * @themeKey ais-MenuSelect-body - the body of the widget
+ * @themeKey ais-MenuSelect-select - the select
+ * @themeKey ais-MenuSelect-option - the select option
+ * @themeKey ais-MenuSelect-footer - the footer of the widget (optional)
  * @translationkey seeAllOption - The label of the option to select to remove the refinement
  * @example
  * import React from 'react';

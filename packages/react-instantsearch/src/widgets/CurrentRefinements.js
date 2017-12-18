@@ -14,12 +14,17 @@ const cx = classNames('CurrentRefinements');
  * @name CurrentRefinements
  * @kind widget
  * @propType {function} [transformItems] - Function to modify the items being displayed, e.g. for filtering or sorting them. Takes an items as parameter and expects it back in return.
- * @themeKey ais-CurrentRefinements__root - the root div of the widget
- * @themeKey ais-CurrentRefinements__items - the container of the filters
- * @themeKey ais-CurrentRefinements__item - a single filter
- * @themeKey ais-CurrentRefinements__itemLabel - the label of a filter
- * @themeKey ais-CurrentRefinements__itemClear - the trigger to remove the filter
- * @themeKey ais-CurrentRefinements__noRefinement - present when there is no refinement
+ * @themeKey ais-CurrentRefinements - the root div of the widget
+ * @themeKey ais-CurrentRefinements-header - the header of the widget (optional)
+ * @themeKey ais-CurrentRefinements-body - the body of the widget
+ * @themeKey ais-CurrentRefinements-list - the list of all refined items
+ * @themeKey ais-CurrentRefinements-item - the refined list item
+ * @themeKey ais-CurrentRefinements-button - the button of each refined list item
+ * @themeKey ais-CurrentRefinements-label - the refined list label
+ * @themeKey ais-CurrentRefinements-count - the count of refined values for each item
+ * @themeKey ais-CurrentRefinements-delete - the delete button of each label
+ * @themeKey ais-CurrentRefinements-reset - the reset button for current selected values
+ * @themeKey ais-CurrentRefinements-footer - the footer of the widget (optional)
  * @translationKey clearFilter - the remove filter button label
  * @example
  * import React from 'react';

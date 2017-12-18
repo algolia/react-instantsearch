@@ -18,7 +18,14 @@ const cx = classNames('InfiniteResults');
  * @propType {Component} hitComponent - Component used for rendering each hit from
  *   the results. If it is not provided the rendering defaults to displaying the
  *   hit in its JSON form. The component will be called with a `hit` prop.
- * @themeKey ais-InfiniteHits__root - the root of the component
+ * @themeKey ais-InfiniteResults - the root div of the widget
+ * @themeKey ais-InfiniteResults-header - the header of the widget (optional)
+ * @themeKey ais-InfiniteResults-body - the body of the widget
+ * @themeKey ais-InfiniteResults-list - the list of hits
+ * @themeKey ais-InfiniteResults-item - the hit list item
+ * @themeKey ais-InfiniteResults-loadMore - the button used to display more results
+ * @themeKey ais-InfiniteResults-loadMore--disabled - the disabled button used to display more results
+ * @themeKey ais-InfiniteResults-footer - the footer of the widget (optional)
  * @translationKey loadMore - the label of load more button
  * @example
  * import React from 'react';

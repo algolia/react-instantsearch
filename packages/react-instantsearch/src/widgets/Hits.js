@@ -18,7 +18,12 @@ const cx = classNames('Results');
  * @propType {Component} [hitComponent] - Component used for rendering each hit from
  *   the results. If it is not provided the rendering defaults to displaying the
  *   hit in its JSON form. The component will be called with a `hit` prop.
- * @themeKey ais-Hits__root - the root of the component
+ * @themeKey ais-Results - the root div of the widget
+ * @themeKey ais-Results-header - the header of the widget (optional)
+ * @themeKey ais-Results-body - the body of the widget
+ * @themeKey ais-Results-list - the list of results
+ * @themeKey ais-Results-item - the hit list item
+ * @themeKey ais-Results-footer - the footer of the widget (optional)
  * @example
  * import React from 'react';
 

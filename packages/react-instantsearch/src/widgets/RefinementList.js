@@ -19,18 +19,18 @@ const cx = classNames('RefinementList');
  * @propType {number} [limitMax=20] - the maximum number of displayed items. Only used when showMore is set to `true`
  * @propType {string[]} [defaultRefinement] - the values of the items selected by default
  * @propType {function} [transformItems] - Function to modify the items being displayed, e.g. for filtering or sorting them. Takes an items as parameter and expects it back in return.
- * @themeKey ais-RefinementList__root - the root of the component
- * @themeKey ais-RefinementList__items - the container of all items in the list
- * @themeKey ais-RefinementList__itemSelected - the selected list item
- * @themeKey ais-RefinementList__itemCheckbox - the item checkbox
- * @themeKey ais-RefinementList__itemCheckboxSelected - the selected item checkbox
- * @themeKey ais-RefinementList__itemLabel - the item label
- * @themeKey ais-RefinementList__itemLabelSelected - the selected item label
- * @themeKey ais-RefinementList__itemCount - the item count
- * @themeKey ais-RefinementList__itemCountSelected - the selected item count
- * @themeKey ais-RefinementList__showMore - the button that let the user toggle more results
- * @themeKey ais-RefinementList__noRefinement - present when there is no refinement
- * @themeKey ais-RefinementList__SearchBox - the container of the search for facet values searchbox. See [the SearchBox documentation](widgets/SearchBox.html#classnames) for the classnames and translation keys of the SearchBox.
+ * @themeKey ais-RefinementList - the root div of the widget
+ * @themeKey ais-RefinementList-header - the header of the widget (optional)
+ * @themeKey ais-RefinementList-body - the body of the widget
+ * @themeKey ais-RefinementList-searchBox - the search box of the widget
+ * @themeKey ais-RefinementList-list - the list of refinement items
+ * @themeKey ais-RefinementList-item - the refinement list item
+ * @themeKey ais-RefinementList-item--selected - the refinement selected list item
+ * @themeKey ais-RefinementList-label - the label of each refinement item
+ * @themeKey ais-RefinementList-checkbox - the checkbox input of each refinement item
+ * @themeKey ais-RefinementList-labelText - the label text of each refinement item
+ * @themeKey ais-RefinementList-count - the count of values for each item
+ * @themeKey ais-RefinementList-footer - the footer of the widget (optional)
  * @translationkey showMore - The label of the show more button. Accepts one parameters, a boolean that is true if the values are expanded
  * @translationkey noResults - The label of the no results text when no search for facet values results are found.
  * @requirements The attribute passed to the `attributeName` prop must be present in "attributes for faceting"

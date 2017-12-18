@@ -14,9 +14,9 @@ const cx = classNames('Highlight');
  * @propType {string} attributeName - the location of the highlighted attribute in the hit
  * @propType {object} hit - the hit object containing the highlighted attribute
  * @propType {string} [tagName='em'] - the tag to be used for highlighted parts of the hit
- * @themeKey ais-Highlight - the root of the component
- * @themeKey ais-Highlight__highlighted - part of the text that is highlighted
- * @themeKey ais-Highlight__nonHighlighted - part of the text that is non highlighted
+ * @themeKey ais-Highlight - the root span of the widget
+ * @themeKey ais-Highlight-highlighted - the highlighted text
+ * @themeKey ais-Highlight-nonHighlighted - the normal text
  * @example
  * import React from 'react';
  *
