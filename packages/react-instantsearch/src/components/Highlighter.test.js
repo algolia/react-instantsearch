@@ -37,7 +37,7 @@ describe('Highlighter', () => {
 
     const tree = renderer.create(
       <Highlighter
-        widgetClassName="Highlighter"
+        cx={(...x) => x.join(' ')}
         attributeName="deep.attribute.value"
         hit={hitFromAPI}
         highlight={highlight}
@@ -77,7 +77,7 @@ describe('Highlighter', () => {
 
     const tree = renderer.create(
       <Highlighter
-        widgetClassName="Highlighter"
+        cx={(...x) => x.join(' ')}
         attributeName="deep.attribute.value"
         hit={hitFromAPI}
         highlight={highlight}

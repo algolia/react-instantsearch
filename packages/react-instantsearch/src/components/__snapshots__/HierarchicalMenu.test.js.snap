@@ -1,219 +1,223 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`HierarchicalMenu applies translations 1`] = `
-<ul
-  className="list false"
->
-  <li
-    className="item   item--parent"
+<div>
+  <ul
+    className="list false"
   >
-    <a
-      className="link"
-      href="#"
-      onClick={[Function]}
+    <li
+      className="item   item--parent"
     >
-      <span
-        className="label"
+      <a
+        className="link"
+        href="#"
+        onClick={[Function]}
       >
-        white
-      </span>
-       
-      <span
-        className="count"
-      >
-        10
-      </span>
-    </a>
-    <ul
-      className="list"
-    >
-      <li
-        className="item   "
-      >
-        <a
-          className="link"
-          href="#"
-          onClick={[Function]}
+        <span
+          className="label"
         >
-          <span
-            className="label"
-          >
-            white1
-          </span>
-           
-          <span
-            className="count"
-          >
-            3
-          </span>
-        </a>
-      </li>
-      <li
-        className="item   "
-      >
-        <a
-          className="link"
-          href="#"
-          onClick={[Function]}
+          white
+        </span>
+         
+        <span
+          className="count"
         >
-          <span
-            className="label"
+          10
+        </span>
+      </a>
+      <ul
+        className="list"
+      >
+        <li
+          className="item   "
+        >
+          <a
+            className="link"
+            href="#"
+            onClick={[Function]}
           >
-            white2
-          </span>
-           
-          <span
-            className="count"
+            <span
+              className="label"
+            >
+              white1
+            </span>
+             
+            <span
+              className="count"
+            >
+              3
+            </span>
+          </a>
+        </li>
+        <li
+          className="item   "
+        >
+          <a
+            className="link"
+            href="#"
+            onClick={[Function]}
           >
-            4
-          </span>
-        </a>
-      </li>
-    </ul>
-  </li>
-  <li
-    className="item   "
-  >
-    <a
-      className="link"
-      href="#"
-      onClick={[Function]}
+            <span
+              className="label"
+            >
+              white2
+            </span>
+             
+            <span
+              className="count"
+            >
+              4
+            </span>
+          </a>
+        </li>
+      </ul>
+    </li>
+    <li
+      className="item   "
     >
-      <span
-        className="label"
+      <a
+        className="link"
+        href="#"
+        onClick={[Function]}
       >
-        black
-      </span>
-       
-      <span
-        className="count"
-      >
-        20
-      </span>
-    </a>
-  </li>
-  <li
-    className="item   "
-  >
-    <a
-      className="link"
-      href="#"
-      onClick={[Function]}
+        <span
+          className="label"
+        >
+          black
+        </span>
+         
+        <span
+          className="count"
+        >
+          20
+        </span>
+      </a>
+    </li>
+    <li
+      className="item   "
     >
-      <span
-        className="label"
+      <a
+        className="link"
+        href="#"
+        onClick={[Function]}
       >
-        blue
-      </span>
-       
-      <span
-        className="count"
-      >
-        30
-      </span>
-    </a>
-  </li>
-</ul>
+        <span
+          className="label"
+        >
+          blue
+        </span>
+         
+        <span
+          className="count"
+        >
+          30
+        </span>
+      </a>
+    </li>
+  </ul>
+</div>
 `;
 
 exports[`HierarchicalMenu default hierarchical menu 1`] = `
-<ul
-  className="list false"
->
-  <li
-    className="item   item--parent"
+<div>
+  <ul
+    className="list false"
   >
-    <a
-      className="link"
-      href="#"
+    <li
+      className="item   item--parent"
+    >
+      <a
+        className="link"
+        href="#"
+        onClick={[Function]}
+      >
+        <span
+          className="label"
+        >
+          white
+        </span>
+         
+        <span
+          className="count"
+        >
+          10
+        </span>
+      </a>
+      <ul
+        className="list"
+      >
+        <li
+          className="item   "
+        >
+          <a
+            className="link"
+            href="#"
+            onClick={[Function]}
+          >
+            <span
+              className="label"
+            >
+              white1
+            </span>
+             
+            <span
+              className="count"
+            >
+              3
+            </span>
+          </a>
+        </li>
+        <li
+          className="item   "
+        >
+          <a
+            className="link"
+            href="#"
+            onClick={[Function]}
+          >
+            <span
+              className="label"
+            >
+              white2
+            </span>
+             
+            <span
+              className="count"
+            >
+              4
+            </span>
+          </a>
+        </li>
+      </ul>
+    </li>
+    <li
+      className="item   "
+    >
+      <a
+        className="link"
+        href="#"
+        onClick={[Function]}
+      >
+        <span
+          className="label"
+        >
+          black
+        </span>
+         
+        <span
+          className="count"
+        >
+          20
+        </span>
+      </a>
+    </li>
+    <button
+      className="showMore false"
+      disabled={false}
       onClick={[Function]}
     >
-      <span
-        className="label"
-      >
-        white
-      </span>
-       
-      <span
-        className="count"
-      >
-        10
-      </span>
-    </a>
-    <ul
-      className="list"
-    >
-      <li
-        className="item   "
-      >
-        <a
-          className="link"
-          href="#"
-          onClick={[Function]}
-        >
-          <span
-            className="label"
-          >
-            white1
-          </span>
-           
-          <span
-            className="count"
-          >
-            3
-          </span>
-        </a>
-      </li>
-      <li
-        className="item   "
-      >
-        <a
-          className="link"
-          href="#"
-          onClick={[Function]}
-        >
-          <span
-            className="label"
-          >
-            white2
-          </span>
-           
-          <span
-            className="count"
-          >
-            4
-          </span>
-        </a>
-      </li>
-    </ul>
-  </li>
-  <li
-    className="item   "
-  >
-    <a
-      className="link"
-      href="#"
-      onClick={[Function]}
-    >
-      <span
-        className="label"
-      >
-        black
-      </span>
-       
-      <span
-        className="count"
-      >
-        20
-      </span>
-    </a>
-  </li>
-  <button
-    className="showMore false"
-    disabled={false}
-    onClick={[Function]}
-  >
-    Show more
-  </button>
-</ul>
+      Show more
+    </button>
+  </ul>
+</div>
 `;

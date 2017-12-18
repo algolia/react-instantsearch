@@ -1,15 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`RefinementList applies translations 1`] = `
-<ul
-  className="list false"
->
+<div>
   <div
     className="searchBox"
   >
     <form
       action=""
-      className="ais-SearchBox-form"
+      className="ais-SearchBox-form ais-SearchBox-false"
       noValidate={true}
       onReset={[Function]}
       onSubmit={[Function]}
@@ -72,158 +70,162 @@ exports[`RefinementList applies translations 1`] = `
       </button>
     </form>
   </div>
-  <li
-    className="item false  "
+  <ul
+    className="list false"
   >
-    <label
-      className="label"
+    <li
+      className="item false  "
     >
-      <input
-        checked={false}
-        className="checkbox"
-        onChange={[Function]}
-        type="checkbox"
-      />
-      <span
-        className="labelText"
+      <label
+        className="label"
       >
-        white
-      </span>
-       
-      <span
-        className="count"
-      >
-        10
-      </span>
-    </label>
-  </li>
-  <li
-    className="item false  "
-  >
-    <label
-      className="label"
+        <input
+          checked={false}
+          className="checkbox"
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <span
+          className="labelText"
+        >
+          white
+        </span>
+         
+        <span
+          className="count"
+        >
+          10
+        </span>
+      </label>
+    </li>
+    <li
+      className="item false  "
     >
-      <input
-        checked={false}
-        className="checkbox"
-        onChange={[Function]}
-        type="checkbox"
-      />
-      <span
-        className="labelText"
+      <label
+        className="label"
       >
-        black
-      </span>
-       
-      <span
-        className="count"
-      >
-        20
-      </span>
-    </label>
-  </li>
-  <li
-    className="item false  "
-  >
-    <label
-      className="label"
+        <input
+          checked={false}
+          className="checkbox"
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <span
+          className="labelText"
+        >
+          black
+        </span>
+         
+        <span
+          className="count"
+        >
+          20
+        </span>
+      </label>
+    </li>
+    <li
+      className="item false  "
     >
-      <input
-        checked={false}
-        className="checkbox"
-        onChange={[Function]}
-        type="checkbox"
-      />
-      <span
-        className="labelText"
+      <label
+        className="label"
       >
-        blue
-      </span>
-       
-      <span
-        className="count"
-      >
-        30
-      </span>
-    </label>
-  </li>
-</ul>
+        <input
+          checked={false}
+          className="checkbox"
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <span
+          className="labelText"
+        >
+          blue
+        </span>
+         
+        <span
+          className="count"
+        >
+          30
+        </span>
+      </label>
+    </li>
+  </ul>
+</div>
 `;
 
 exports[`RefinementList default refinement list 1`] = `
-<ul
-  className="list false"
->
-  <li
-    className="item item--selected  "
+<div>
+  <ul
+    className="list false"
   >
-    <label
-      className="label"
+    <li
+      className="item item--selected  "
     >
-      <input
-        checked={true}
-        className="checkbox"
-        onChange={[Function]}
-        type="checkbox"
-      />
-      <span
-        className="labelText"
+      <label
+        className="label"
       >
-        white
-      </span>
-       
-      <span
-        className="count"
-      >
-        10
-      </span>
-    </label>
-  </li>
-  <li
-    className="item false  "
-  >
-    <label
-      className="label"
+        <input
+          checked={true}
+          className="checkbox"
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <span
+          className="labelText"
+        >
+          white
+        </span>
+         
+        <span
+          className="count"
+        >
+          10
+        </span>
+      </label>
+    </li>
+    <li
+      className="item false  "
     >
-      <input
-        checked={false}
-        className="checkbox"
-        onChange={[Function]}
-        type="checkbox"
-      />
-      <span
-        className="labelText"
+      <label
+        className="label"
       >
-        black
-      </span>
-       
-      <span
-        className="count"
-      >
-        20
-      </span>
-    </label>
-  </li>
-  <button
-    className="showMore false"
-    disabled={false}
-    onClick={[Function]}
-  >
-    Show more
-  </button>
-</ul>
+        <input
+          checked={false}
+          className="checkbox"
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <span
+          className="labelText"
+        >
+          black
+        </span>
+         
+        <span
+          className="count"
+        >
+          20
+        </span>
+      </label>
+    </li>
+    <button
+      className="showMore false"
+      disabled={false}
+      onClick={[Function]}
+    >
+      Show more
+    </button>
+  </ul>
+</div>
 `;
 
 exports[`RefinementList refinement list with search inside items but no search results 1`] = `
-<ul
-  className="list false"
->
+<div>
   <div
     className="searchBox"
   >
     <form
       action=""
-      className="ais-SearchBox-form"
+      className="ais-SearchBox-form ais-SearchBox-false"
       noValidate={true}
       onReset={[Function]}
       onSubmit={[Function]}
@@ -286,94 +288,96 @@ exports[`RefinementList refinement list with search inside items but no search r
       </button>
     </form>
   </div>
-  <li
-    className="item item--selected  "
+  <ul
+    className="list false"
   >
-    <label
-      className="label"
+    <li
+      className="item item--selected  "
     >
-      <input
-        checked={true}
-        className="checkbox"
-        onChange={[Function]}
-        type="checkbox"
-      />
-      <span
-        className="labelText"
+      <label
+        className="label"
       >
-        white
-      </span>
-       
-      <span
-        className="count"
-      >
-        10
-      </span>
-    </label>
-  </li>
-  <li
-    className="item false  "
-  >
-    <label
-      className="label"
+        <input
+          checked={true}
+          className="checkbox"
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <span
+          className="labelText"
+        >
+          white
+        </span>
+         
+        <span
+          className="count"
+        >
+          10
+        </span>
+      </label>
+    </li>
+    <li
+      className="item false  "
     >
-      <input
-        checked={false}
-        className="checkbox"
-        onChange={[Function]}
-        type="checkbox"
-      />
-      <span
-        className="labelText"
+      <label
+        className="label"
       >
-        black
-      </span>
-       
-      <span
-        className="count"
-      >
-        20
-      </span>
-    </label>
-  </li>
-  <li
-    className="item false  "
-  >
-    <label
-      className="label"
+        <input
+          checked={false}
+          className="checkbox"
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <span
+          className="labelText"
+        >
+          black
+        </span>
+         
+        <span
+          className="count"
+        >
+          20
+        </span>
+      </label>
+    </li>
+    <li
+      className="item false  "
     >
-      <input
-        checked={false}
-        className="checkbox"
-        onChange={[Function]}
-        type="checkbox"
-      />
-      <span
-        className="labelText"
+      <label
+        className="label"
       >
-        blue
-      </span>
-       
-      <span
-        className="count"
-      >
-        30
-      </span>
-    </label>
-  </li>
-</ul>
+        <input
+          checked={false}
+          className="checkbox"
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <span
+          className="labelText"
+        >
+          blue
+        </span>
+         
+        <span
+          className="count"
+        >
+          30
+        </span>
+      </label>
+    </li>
+  </ul>
+</div>
 `;
 
 exports[`RefinementList refinement list with search inside items with search results 1`] = `
-<ul
-  className="list false"
->
+<div>
   <div
     className="searchBox"
   >
     <form
       action=""
-      className="ais-SearchBox-form"
+      className="ais-SearchBox-form ais-SearchBox-false"
       noValidate={true}
       onReset={[Function]}
       onSubmit={[Function]}
@@ -436,28 +440,32 @@ exports[`RefinementList refinement list with search inside items with search res
       </button>
     </form>
   </div>
-  <li
-    className="item item--selected  "
+  <ul
+    className="list false"
   >
-    <label
-      className="label"
+    <li
+      className="item item--selected  "
     >
-      <input
-        checked={true}
-        className="checkbox"
-        onChange={[Function]}
-        type="checkbox"
-      />
-      <span
-        className="labelText"
-      />
-       
-      <span
-        className="count"
+      <label
+        className="label"
       >
-        10
-      </span>
-    </label>
-  </li>
-</ul>
+        <input
+          checked={true}
+          className="checkbox"
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <span
+          className="labelText"
+        />
+         
+        <span
+          className="count"
+        >
+          10
+        </span>
+      </label>
+    </li>
+  </ul>
+</div>
 `;

@@ -1,322 +1,328 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MultiRange no refinements 1`] = `
-<ul
-  className="list false"
->
-  <li
-    className="item false item--noRefinement "
+<div>
+  <ul
+    className="list false"
   >
-    <label
-      className="label"
+    <li
+      className="item false item--noRefinement "
     >
-      <input
-        checked={false}
-        className="radio"
-        disabled={true}
-        onChange={[Function]}
-        type="radio"
-      />
-      <span
-        className="labelText"
+      <label
+        className="label"
       >
-        label1
-      </span>
-    </label>
-  </li>
-  <li
-    className="item false item--noRefinement "
-  >
-    <label
-      className="label"
+        <input
+          checked={false}
+          className="radio"
+          disabled={true}
+          onChange={[Function]}
+          type="radio"
+        />
+        <span
+          className="labelText"
+        >
+          label1
+        </span>
+      </label>
+    </li>
+    <li
+      className="item false item--noRefinement "
     >
-      <input
-        checked={false}
-        className="radio"
-        disabled={true}
-        onChange={[Function]}
-        type="radio"
-      />
-      <span
-        className="labelText"
+      <label
+        className="label"
       >
-        label2
-      </span>
-    </label>
-  </li>
-  <li
-    className="item false item--noRefinement "
-  >
-    <label
-      className="label"
+        <input
+          checked={false}
+          className="radio"
+          disabled={true}
+          onChange={[Function]}
+          type="radio"
+        />
+        <span
+          className="labelText"
+        >
+          label2
+        </span>
+      </label>
+    </li>
+    <li
+      className="item false item--noRefinement "
     >
-      <input
-        checked={false}
-        className="radio"
-        disabled={true}
-        onChange={[Function]}
-        type="radio"
-      />
-      <span
-        className="labelText"
+      <label
+        className="label"
       >
-        label3
-      </span>
-    </label>
-  </li>
-  <li
-    className="item false item--noRefinement "
-  >
-    <label
-      className="label"
+        <input
+          checked={false}
+          className="radio"
+          disabled={true}
+          onChange={[Function]}
+          type="radio"
+        />
+        <span
+          className="labelText"
+        >
+          label3
+        </span>
+      </label>
+    </li>
+    <li
+      className="item false item--noRefinement "
     >
-      <input
-        checked={false}
-        className="radio"
-        disabled={true}
-        onChange={[Function]}
-        type="radio"
-      />
-      <span
-        className="labelText"
+      <label
+        className="label"
       >
-        label4
-      </span>
-    </label>
-  </li>
-  <li
-    className="item item--selected false "
-  >
-    <label
-      className="label"
+        <input
+          checked={false}
+          className="radio"
+          disabled={true}
+          onChange={[Function]}
+          type="radio"
+        />
+        <span
+          className="labelText"
+        >
+          label4
+        </span>
+      </label>
+    </li>
+    <li
+      className="item item--selected false "
     >
-      <input
-        checked={true}
-        className="radio"
-        disabled={false}
-        onChange={[Function]}
-        type="radio"
-      />
-      <span
-        className="labelText"
+      <label
+        className="label"
       >
-        All
-      </span>
-    </label>
-  </li>
-</ul>
+        <input
+          checked={true}
+          className="radio"
+          disabled={false}
+          onChange={[Function]}
+          type="radio"
+        />
+        <span
+          className="labelText"
+        >
+          All
+        </span>
+      </label>
+    </li>
+  </ul>
+</div>
 `;
 
 exports[`MultiRange supports having a selected item 1`] = `
-<ul
-  className="list false"
->
-  <li
-    className="item false false "
+<div>
+  <ul
+    className="list false"
   >
-    <label
-      className="label"
+    <li
+      className="item false false "
     >
-      <input
-        checked={false}
-        className="radio"
-        disabled={false}
-        onChange={[Function]}
-        type="radio"
-      />
-      <span
-        className="labelText"
+      <label
+        className="label"
       >
-        label1
-      </span>
-    </label>
-  </li>
-  <li
-    className="item item--selected false "
-  >
-    <label
-      className="label"
+        <input
+          checked={false}
+          className="radio"
+          disabled={false}
+          onChange={[Function]}
+          type="radio"
+        />
+        <span
+          className="labelText"
+        >
+          label1
+        </span>
+      </label>
+    </li>
+    <li
+      className="item item--selected false "
     >
-      <input
-        checked={true}
-        className="radio"
-        disabled={false}
-        onChange={[Function]}
-        type="radio"
-      />
-      <span
-        className="labelText"
+      <label
+        className="label"
       >
-        label2
-      </span>
-    </label>
-  </li>
-  <li
-    className="item false false "
-  >
-    <label
-      className="label"
+        <input
+          checked={true}
+          className="radio"
+          disabled={false}
+          onChange={[Function]}
+          type="radio"
+        />
+        <span
+          className="labelText"
+        >
+          label2
+        </span>
+      </label>
+    </li>
+    <li
+      className="item false false "
     >
-      <input
-        checked={false}
-        className="radio"
-        disabled={false}
-        onChange={[Function]}
-        type="radio"
-      />
-      <span
-        className="labelText"
+      <label
+        className="label"
       >
-        label3
-      </span>
-    </label>
-  </li>
-  <li
-    className="item false false "
-  >
-    <label
-      className="label"
+        <input
+          checked={false}
+          className="radio"
+          disabled={false}
+          onChange={[Function]}
+          type="radio"
+        />
+        <span
+          className="labelText"
+        >
+          label3
+        </span>
+      </label>
+    </li>
+    <li
+      className="item false false "
     >
-      <input
-        checked={false}
-        className="radio"
-        disabled={false}
-        onChange={[Function]}
-        type="radio"
-      />
-      <span
-        className="labelText"
+      <label
+        className="label"
       >
-        label4
-      </span>
-    </label>
-  </li>
-  <li
-    className="item false false "
-  >
-    <label
-      className="label"
+        <input
+          checked={false}
+          className="radio"
+          disabled={false}
+          onChange={[Function]}
+          type="radio"
+        />
+        <span
+          className="labelText"
+        >
+          label4
+        </span>
+      </label>
+    </li>
+    <li
+      className="item false false "
     >
-      <input
-        checked={false}
-        className="radio"
-        disabled={false}
-        onChange={[Function]}
-        type="radio"
-      />
-      <span
-        className="labelText"
+      <label
+        className="label"
       >
-        All
-      </span>
-    </label>
-  </li>
-</ul>
+        <input
+          checked={false}
+          className="radio"
+          disabled={false}
+          onChange={[Function]}
+          type="radio"
+        />
+        <span
+          className="labelText"
+        >
+          All
+        </span>
+      </label>
+    </li>
+  </ul>
+</div>
 `;
 
 exports[`MultiRange supports passing items values 1`] = `
-<ul
-  className="list false"
->
-  <li
-    className="item false false "
+<div>
+  <ul
+    className="list false"
   >
-    <label
-      className="label"
+    <li
+      className="item false false "
     >
-      <input
-        checked={false}
-        className="radio"
-        disabled={false}
-        onChange={[Function]}
-        type="radio"
-      />
-      <span
-        className="labelText"
+      <label
+        className="label"
       >
-        label1
-      </span>
-    </label>
-  </li>
-  <li
-    className="item false false "
-  >
-    <label
-      className="label"
+        <input
+          checked={false}
+          className="radio"
+          disabled={false}
+          onChange={[Function]}
+          type="radio"
+        />
+        <span
+          className="labelText"
+        >
+          label1
+        </span>
+      </label>
+    </li>
+    <li
+      className="item false false "
     >
-      <input
-        checked={false}
-        className="radio"
-        disabled={false}
-        onChange={[Function]}
-        type="radio"
-      />
-      <span
-        className="labelText"
+      <label
+        className="label"
       >
-        label2
-      </span>
-    </label>
-  </li>
-  <li
-    className="item false false "
-  >
-    <label
-      className="label"
+        <input
+          checked={false}
+          className="radio"
+          disabled={false}
+          onChange={[Function]}
+          type="radio"
+        />
+        <span
+          className="labelText"
+        >
+          label2
+        </span>
+      </label>
+    </li>
+    <li
+      className="item false false "
     >
-      <input
-        checked={false}
-        className="radio"
-        disabled={false}
-        onChange={[Function]}
-        type="radio"
-      />
-      <span
-        className="labelText"
+      <label
+        className="label"
       >
-        label3
-      </span>
-    </label>
-  </li>
-  <li
-    className="item false false "
-  >
-    <label
-      className="label"
+        <input
+          checked={false}
+          className="radio"
+          disabled={false}
+          onChange={[Function]}
+          type="radio"
+        />
+        <span
+          className="labelText"
+        >
+          label3
+        </span>
+      </label>
+    </li>
+    <li
+      className="item false false "
     >
-      <input
-        checked={false}
-        className="radio"
-        disabled={false}
-        onChange={[Function]}
-        type="radio"
-      />
-      <span
-        className="labelText"
+      <label
+        className="label"
       >
-        label4
-      </span>
-    </label>
-  </li>
-  <li
-    className="item item--selected false "
-  >
-    <label
-      className="label"
+        <input
+          checked={false}
+          className="radio"
+          disabled={false}
+          onChange={[Function]}
+          type="radio"
+        />
+        <span
+          className="labelText"
+        >
+          label4
+        </span>
+      </label>
+    </li>
+    <li
+      className="item item--selected false "
     >
-      <input
-        checked={true}
-        className="radio"
-        disabled={false}
-        onChange={[Function]}
-        type="radio"
-      />
-      <span
-        className="labelText"
+      <label
+        className="label"
       >
-        All
-      </span>
-    </label>
-  </li>
-</ul>
+        <input
+          checked={true}
+          className="radio"
+          disabled={false}
+          onChange={[Function]}
+          type="radio"
+        />
+        <span
+          className="labelText"
+        >
+          All
+        </span>
+      </label>
+    </li>
+  </ul>
+</div>
 `;

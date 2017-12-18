@@ -2,30 +2,30 @@
 
 exports[`Highlighter parses an highlighted attribute of hit object 1`] = `
 <span
-  className="ais-Highlighter"
+  className=""
 >
   <span
-    className="ais-Highlighter-nonHighlighted"
+    className="nonHighlighted"
   >
     awesome 
   </span>
   <em
-    className="ais-Highlighter-highlighted"
+    className="highlighted"
   >
     hi
   </em>
   <span
-    className="ais-Highlighter-nonHighlighted"
+    className="nonHighlighted"
   >
     ghlighted 
   </span>
   <em
-    className="ais-Highlighter-highlighted"
+    className="highlighted"
   >
     hi
   </em>
   <span
-    className="ais-Highlighter-nonHighlighted"
+    className="nonHighlighted"
   >
     t!
   </span>
@@ -34,30 +34,30 @@ exports[`Highlighter parses an highlighted attribute of hit object 1`] = `
 
 exports[`Highlighter renders a hit with a custom tag correctly 1`] = `
 <span
-  className="ais-Highlighter"
+  className=""
 >
   <span
-    className="ais-Highlighter-nonHighlighted"
+    className="nonHighlighted"
   >
     awesome 
   </span>
   <mark
-    className="ais-Highlighter-highlighted"
+    className="highlighted"
   >
     hi
   </mark>
   <span
-    className="ais-Highlighter-nonHighlighted"
+    className="nonHighlighted"
   >
     ghlighted 
   </span>
   <mark
-    className="ais-Highlighter-highlighted"
+    className="highlighted"
   >
     hi
   </mark>
   <span
-    className="ais-Highlighter-nonHighlighted"
+    className="nonHighlighted"
   >
     t!
   </span>

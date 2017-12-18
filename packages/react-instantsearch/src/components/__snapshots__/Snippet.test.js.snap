@@ -2,30 +2,30 @@
 
 exports[`Snippet parses an highlighted snippet attribute of hit object 1`] = `
 <span
-  className="ais-Snippet"
+  className=""
 >
   <span
-    className="ais-Snippet-nonHighlighted"
+    className="nonHighlighted"
   >
     awesome 
   </span>
   <em
-    className="ais-Snippet-highlighted"
+    className="highlighted"
   >
     hi
   </em>
   <span
-    className="ais-Snippet-nonHighlighted"
+    className="nonHighlighted"
   >
     ghlighted 
   </span>
   <em
-    className="ais-Snippet-highlighted"
+    className="highlighted"
   >
     hi
   </em>
   <span
-    className="ais-Snippet-nonHighlighted"
+    className="nonHighlighted"
   >
     t!
   </span>
@@ -34,30 +34,30 @@ exports[`Snippet parses an highlighted snippet attribute of hit object 1`] = `
 
 exports[`Snippet renders a hit with a custom tag correctly 1`] = `
 <span
-  className="ais-Snippet"
+  className=""
 >
   <span
-    className="ais-Snippet-nonHighlighted"
+    className="nonHighlighted"
   >
     awesome 
   </span>
   <strong
-    className="ais-Snippet-highlighted"
+    className="highlighted"
   >
     hi
   </strong>
   <span
-    className="ais-Snippet-nonHighlighted"
+    className="nonHighlighted"
   >
     ghlighted 
   </span>
   <strong
-    className="ais-Snippet-highlighted"
+    className="highlighted"
   >
     hi
   </strong>
   <span
-    className="ais-Snippet-nonHighlighted"
+    className="nonHighlighted"
   >
     t!
   </span>

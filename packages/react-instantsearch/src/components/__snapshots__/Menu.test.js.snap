@@ -1,15 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Menu Menu with search inside items but no search results 1`] = `
-<ul
-  className="list false"
->
+<div>
   <div
     className="searchBox"
   >
     <form
       action=""
-      className="ais-SearchBox-form"
+      className="ais-SearchBox-form ais-SearchBox-false"
       noValidate={true}
       onReset={[Function]}
       onSubmit={[Function]}
@@ -72,82 +70,84 @@ exports[`Menu Menu with search inside items but no search results 1`] = `
       </button>
     </form>
   </div>
-  <li
-    className="item item--selected  "
+  <ul
+    className="list false"
   >
-    <a
-      className="link"
-      href="#"
-      onClick={[Function]}
+    <li
+      className="item item--selected  "
     >
-      <span
-        className="label"
+      <a
+        className="link"
+        href="#"
+        onClick={[Function]}
       >
-        white
-      </span>
-       
-      <span
-        className="count"
-      >
-        10
-      </span>
-    </a>
-  </li>
-  <li
-    className="item false  "
-  >
-    <a
-      className="link"
-      href="#"
-      onClick={[Function]}
+        <span
+          className="label"
+        >
+          white
+        </span>
+         
+        <span
+          className="count"
+        >
+          10
+        </span>
+      </a>
+    </li>
+    <li
+      className="item false  "
     >
-      <span
-        className="label"
+      <a
+        className="link"
+        href="#"
+        onClick={[Function]}
       >
-        black
-      </span>
-       
-      <span
-        className="count"
-      >
-        20
-      </span>
-    </a>
-  </li>
-  <li
-    className="item false  "
-  >
-    <a
-      className="link"
-      href="#"
-      onClick={[Function]}
+        <span
+          className="label"
+        >
+          black
+        </span>
+         
+        <span
+          className="count"
+        >
+          20
+        </span>
+      </a>
+    </li>
+    <li
+      className="item false  "
     >
-      <span
-        className="label"
+      <a
+        className="link"
+        href="#"
+        onClick={[Function]}
       >
-        blue
-      </span>
-       
-      <span
-        className="count"
-      >
-        30
-      </span>
-    </a>
-  </li>
-</ul>
+        <span
+          className="label"
+        >
+          blue
+        </span>
+         
+        <span
+          className="count"
+        >
+          30
+        </span>
+      </a>
+    </li>
+  </ul>
+</div>
 `;
 
 exports[`Menu Menu with search inside items with search results 1`] = `
-<ul
-  className="list false"
->
+<div>
   <div
     className="searchBox"
   >
     <form
       action=""
-      className="ais-SearchBox-form"
+      className="ais-SearchBox-form ais-SearchBox-false"
       noValidate={true}
       onReset={[Function]}
       onSubmit={[Function]}
@@ -210,38 +210,40 @@ exports[`Menu Menu with search inside items with search results 1`] = `
       </button>
     </form>
   </div>
-  <li
-    className="item item--selected  "
+  <ul
+    className="list false"
   >
-    <a
-      className="link"
-      href="#"
-      onClick={[Function]}
+    <li
+      className="item item--selected  "
     >
-      <span
-        className="label"
-      />
-       
-      <span
-        className="count"
+      <a
+        className="link"
+        href="#"
+        onClick={[Function]}
       >
-        10
-      </span>
-    </a>
-  </li>
-</ul>
+        <span
+          className="label"
+        />
+         
+        <span
+          className="count"
+        >
+          10
+        </span>
+      </a>
+    </li>
+  </ul>
+</div>
 `;
 
 exports[`Menu applies translations 1`] = `
-<ul
-  className="list false"
->
+<div>
   <div
     className="searchBox"
   >
     <form
       action=""
-      className="ais-SearchBox-form"
+      className="ais-SearchBox-form ais-SearchBox-false"
       noValidate={true}
       onReset={[Function]}
       onSubmit={[Function]}
@@ -304,110 +306,116 @@ exports[`Menu applies translations 1`] = `
       </button>
     </form>
   </div>
-  <li
-    className="item false  "
+  <ul
+    className="list false"
   >
-    <a
-      className="link"
-      href="#"
+    <li
+      className="item false  "
+    >
+      <a
+        className="link"
+        href="#"
+        onClick={[Function]}
+      >
+        <span
+          className="label"
+        >
+          white
+        </span>
+         
+        <span
+          className="count"
+        >
+          10
+        </span>
+      </a>
+    </li>
+    <li
+      className="item false  "
+    >
+      <a
+        className="link"
+        href="#"
+        onClick={[Function]}
+      >
+        <span
+          className="label"
+        >
+          black
+        </span>
+         
+        <span
+          className="count"
+        >
+          20
+        </span>
+      </a>
+    </li>
+    <button
+      className="showMore false"
+      disabled={false}
       onClick={[Function]}
     >
-      <span
-        className="label"
-      >
-        white
-      </span>
-       
-      <span
-        className="count"
-      >
-        10
-      </span>
-    </a>
-  </li>
-  <li
-    className="item false  "
-  >
-    <a
-      className="link"
-      href="#"
-      onClick={[Function]}
-    >
-      <span
-        className="label"
-      >
-        black
-      </span>
-       
-      <span
-        className="count"
-      >
-        20
-      </span>
-    </a>
-  </li>
-  <button
-    className="showMore false"
-    disabled={false}
-    onClick={[Function]}
-  >
-     display more
-  </button>
-</ul>
+       display more
+    </button>
+  </ul>
+</div>
 `;
 
 exports[`Menu default menu 1`] = `
-<ul
-  className="list false"
->
-  <li
-    className="item false  "
+<div>
+  <ul
+    className="list false"
   >
-    <a
-      className="link"
-      href="#"
+    <li
+      className="item false  "
+    >
+      <a
+        className="link"
+        href="#"
+        onClick={[Function]}
+      >
+        <span
+          className="label"
+        >
+          white
+        </span>
+         
+        <span
+          className="count"
+        >
+          10
+        </span>
+      </a>
+    </li>
+    <li
+      className="item false  "
+    >
+      <a
+        className="link"
+        href="#"
+        onClick={[Function]}
+      >
+        <span
+          className="label"
+        >
+          black
+        </span>
+         
+        <span
+          className="count"
+        >
+          20
+        </span>
+      </a>
+    </li>
+    <button
+      className="showMore false"
+      disabled={false}
       onClick={[Function]}
     >
-      <span
-        className="label"
-      >
-        white
-      </span>
-       
-      <span
-        className="count"
-      >
-        10
-      </span>
-    </a>
-  </li>
-  <li
-    className="item false  "
-  >
-    <a
-      className="link"
-      href="#"
-      onClick={[Function]}
-    >
-      <span
-        className="label"
-      >
-        black
-      </span>
-       
-      <span
-        className="count"
-      >
-        20
-      </span>
-    </a>
-  </li>
-  <button
-    className="showMore false"
-    disabled={false}
-    onClick={[Function]}
-  >
-    Show more
-  </button>
-</ul>
+      Show more
+    </button>
+  </ul>
+</div>
 `;
