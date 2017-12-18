@@ -22,7 +22,7 @@ const cx = classNames('RefinementList');
  * @themeKey ais-RefinementList - the root div of the widget
  * @themeKey ais-RefinementList-header - the header of the widget (optional)
  * @themeKey ais-RefinementList-body - the body of the widget
- * @themeKey ais-RefinementList-searchBox - the search box of the widget
+ * @themeKey ais-RefinementList-searchBox - the search box of the widget. See [the SearchBox documentation](widgets/SearchBox.html#classnames) for the classnames and translation keys of the SearchBox.
  * @themeKey ais-RefinementList-list - the list of refinement items
  * @themeKey ais-RefinementList-item - the refinement list item
  * @themeKey ais-RefinementList-item--selected - the refinement selected list item

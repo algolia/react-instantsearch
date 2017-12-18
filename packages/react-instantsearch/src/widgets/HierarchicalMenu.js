@@ -60,7 +60,7 @@ const cx = classNames('HierarchicalMenu');
  * @themeKey ais-HierarchicalMenu - the root div of the widget
  * @themeKey ais-HierarchicalMenu-header - the header of the widget (optional)
  * @themeKey ais-HierarchicalMenu-body - the body of the widget
-* @themeKey ais-Menu-searchBox - the search box of the widget. See [the SearchBox documentation](widgets/SearchBox.html#classnames) for the classnames and translation keys of the SearchBox.
+ * @themeKey ais-HierarchicalMenu-searchBox - the search box of the widget. See [the SearchBox documentation](widgets/SearchBox.html#classnames) for the classnames and translation keys of the SearchBox.
  * @themeKey ais-HierarchicalMenu-list - the list of menu items
  * @themeKey ais-HierarchicalMenu-list--lvl0 - the level 0 list of menu items
  * @themeKey ais-HierarchicalMenu-list--lvl1 - the level 1 list of menu items (and so on)

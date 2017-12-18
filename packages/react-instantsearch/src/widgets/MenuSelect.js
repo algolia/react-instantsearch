@@ -19,8 +19,8 @@ const cx = classNames('MenuSelect');
  * @themeKey ais-MenuSelect - the root div of the widget
  * @themeKey ais-MenuSelect-header - the header of the widget (optional)
  * @themeKey ais-MenuSelect-body - the body of the widget
- * @themeKey ais-MenuSelect-select - the select
- * @themeKey ais-MenuSelect-option - the select option
+ * @themeKey ais-MenuSelect-select - the `<select>`
+ * @themeKey ais-MenuSelect-option - the select `<option>`
  * @themeKey ais-MenuSelect-footer - the footer of the widget (optional)
  * @translationkey seeAllOption - The label of the option to select to remove the refinement
  * @example
