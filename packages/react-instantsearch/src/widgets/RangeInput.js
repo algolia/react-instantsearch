@@ -46,15 +46,18 @@ const cx = classNames('RangeInput');
  */
 
 class Widget extends Component {
-  static propTypes = {
-    canRefine: PropTypes.bool.isRequired,
-    header: PropTypes.node,
-    footer: PropTypes.node,
-  };
-
   componentWillMount() {
     if (this.context.canRefine) {
       this.context.canRefine(this.props.canRefine);
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (
+      this.context.canRefine &&
+      this.props.canRefine !== nextProps.canRefine
+    ) {
+      this.context.canRefine(nextProps.canRefine);
     }
   }
 
@@ -72,5 +75,11 @@ class Widget extends Component {
     );
   }
 }
+
+Widget.propTypes = {
+  canRefine: PropTypes.bool.isRequired,
+  header: PropTypes.node,
+  footer: PropTypes.node,
+};
 
 export default connectRange(Widget);

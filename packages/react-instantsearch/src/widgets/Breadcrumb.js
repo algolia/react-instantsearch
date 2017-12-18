@@ -53,15 +53,15 @@ const cx = classNames('Breadcrumb');
  * @propType {string} [separator='>'] -  Symbol used for separating hyperlinks
  * @propType {string} [rootURL=null] - The originating page (homepage)
  * @propType {function} [transformItems] - Function to modify the items being displayed, e.g. for filtering or sorting them. Takes an items as parameter and expects it back in return
- * @themeKey ais-Breadcrumb__root - The widget container
- * @themeKey ais-Breadcrumb__itemLinkRoot - The root link (originating page)
- * @themeKey ais-Breadcrumb__rootLabel - The root label
- * @themeKey ais-Breadcrumb__item - Contains the link, the label and the separator
- * @themeKey ais-Breadcrumb__itemLink - The link containing the label
- * @themeKey ais-Breadcrumb__itemLabel - The link's label
- * @themeKey ais-Breadcrumb__itemDisabled - For the last item of the breadcrumb which is not clickable
- * @themeKey ais-Breadcrumb__separator - The separator
- * @themeKey ais-Breadcrumb__noRefinement - present when there is no refinement
+ * @themeKey .ais-Breadcrumb - the root div of the widget
+ * @themeKey .ais-Breadcrumb-header - the header of the widget (optional)
+ * @themeKey .ais-Breadcrumb-body - the body of the widget
+ * @themeKey .ais-Breadcrumb-list - the list of all breadcrumb items
+ * @themeKey .ais-Breadcrumb-item - the breadcrumb navigation item
+ * @themeKey .ais-Breadcrumb-item--selected - the selected breadcrumb item
+ * @themeKey .ais-Breadcrumb-separator - the separator of each breadcrumb item
+ * @themeKey .ais-Breadcrumb-link - the clickable breadcrumb element
+ * @themeKey .ais-Breadcrumb-footer - the footer of the widget (optional)
  * @translationKey rootLabel - The root's label. Accepts a string
  * @example
  * import React from 'react';
@@ -90,16 +90,6 @@ const cx = classNames('Breadcrumb');
  */
 
 class Widget extends Component {
-  static propTypes = {
-    canRefine: PropTypes.bool.isRequired,
-    header: PropTypes.node,
-    footer: PropTypes.node,
-  };
-
-  static contextTypes = {
-    canRefine: PropTypes.func,
-  };
-
   componentWillMount() {
     if (this.context.canRefine) this.context.canRefine(this.props.canRefine);
   }
@@ -122,5 +112,15 @@ class Widget extends Component {
     );
   }
 }
+
+Widget.propTypes = {
+  canRefine: PropTypes.bool.isRequired,
+  header: PropTypes.node,
+  footer: PropTypes.node,
+};
+
+Widget.contextTypes = {
+  canRefine: PropTypes.func,
+};
 
 export default connectBreadcrumb(Widget);

@@ -44,13 +44,6 @@ export class RawRangeInput extends Component {
     ) {
       this.setState(this.normalizeStateForRendering(nextProps));
     }
-
-    if (
-      this.context.canRefine &&
-      this.props.canRefine !== nextProps.canRefine
-    ) {
-      this.context.canRefine(nextProps.canRefine);
-    }
   }
 
   onSubmit = e => {
