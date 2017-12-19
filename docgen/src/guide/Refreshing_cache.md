@@ -6,21 +6,19 @@ category: guide
 navWeight: 15
 ---
 
-
 By default, Algolia caches the search results of the queries, storing them locally in the cache. If the user ends up entering a search (or part of it) that has already been entered previously, the results will be retrieved from the cache, instead of requesting them from Algolia, making the application much faster.
 
 While it is a very convenient feature, in some cases, it is useful to have the ability to clear the cache and make a new request to Algolia. For instance, when changes are made on some records on your index, you might want the frontend side of your application to be updated to reflect that change (in order to avoid displaying stale results retrieved from the cache).
 
 To do so, there is a prop on the `<InstantSearch>` component called `refresh` that, when set to `true`, clears the cache and triggers a new search.
 
-
 There are two different use cases where you would want to discard the cache:
-- your application data is being directly updated by your users (for example, in a dashboard). In this use case you would want to refresh the cache based on some application state such as the last modification from the user
-- your application data is being updated by another process that you don't manage (for example a CRON job updates users inside Algolia). For this you might want to periodically refresh the cache of your application
 
+* your application data is being directly updated by your users (for example, in a dashboard). In this use case you would want to refresh the cache based on some application state such as the last modification from the user
+* your application data is being updated by another process that you don't manage (for example a CRON job updates users inside Algolia). For this you might want to periodically refresh the cache of your application
 
- 
- ## Have the refresh of the cache triggered by an action from the user
+## Have the refresh of the cache triggered by an action from the user
+
 If you know that the cache needs to be refreshed conditionally of a specific event, then you can trigger the refresh based on an user action (adding a new product, clicking on a button for instance).
 
 ```jsx
@@ -36,7 +34,7 @@ class App extends Component {
   }
 
   refresh = () => {
-    this.setState({refresh: true});
+    this.setState({ refresh: true });
   };
 
   onSearchStateChange = () => {
@@ -53,11 +51,7 @@ class App extends Component {
         onSearchStateChange={this.onSearchStateChange}
       >
         <SearchBox />
-        <button
-          onClick={this.refresh}
-        >
-          Refresh cache
-        </button>
+        <button onClick={this.refresh}>Refresh cache</button>
         <CustomHits />
       </InstantSearch>
     );
@@ -65,10 +59,11 @@ class App extends Component {
 }
 ```
 
-See a live example on our [Storybook](https://community.algolia.com/react-instantsearch/storybook/?selectedKind=RefreshCache&selectedStory=with%20a%20refresh%20button&full=0&down=1&left=1&panelRight=1&downPanel=storybooks%2Fstorybook-addon-knobs). 
+See a live example on our [Storybook](https://community.algolia.com/react-instantsearch/storybook/?selectedKind=RefreshCache&selectedStory=with%20a%20refresh%20button&full=0&down=1&left=1&panelRight=1&downPanel=storybooks%2Fstorybook-addon-knobs).
 
- ## Refresh the cache periodically
-You also have the option to setup an given period of time that will determine how often the cache will be cleared. 
+## Refresh the cache periodically
+
+You also have the option to setup an given period of time that will determine how often the cache will be cleared.
 This method will ensure that the cache is cleared on a regular basis.
 You should use this approach if you cannot use a user action as a specific event to trigger the clearing of the cache.
 
@@ -84,13 +79,11 @@ class App extends Component {
     };
   }
 
-  componentDidMount = () => {
-    setInterval(
-      () =>
-        this.setState({ refresh: true }), 5000 );
-  };
+  componentDidMount() {
+    setInterval(() => this.setState({ refresh: true }), 5000);
+  }
 
-   onSearchStateChange = () => {
+  onSearchStateChange = () => {
     this.setState({ refresh: false });
   };
   render() {
