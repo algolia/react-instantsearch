@@ -1,4 +1,5 @@
 export { default as Index } from './src/widgets/Index.js';
+export { default as InstantSearch } from './src/widgets/InstantSearch.js';
 export { default as Configure } from './src/widgets/Configure.js';
 export {
   default as CurrentRefinements,
