@@ -1,19 +1,19 @@
 import React from 'react';
 import { setAddon, storiesOf } from '@storybook/react';
-import { InfiniteHits } from '../packages/react-instantsearch/dom';
+import { InfiniteResults } from '../packages/react-instantsearch/dom';
 import { displayName, filterProps, WrapWithHits } from './util';
 import JSXAddon from 'storybook-addon-jsx';
 
 setAddon(JSXAddon);
 
-const stories = storiesOf('InfiniteHits', module);
+const stories = storiesOf('InfiniteResults', module);
 
 stories
   .addWithJSX(
     'default',
     () => (
       <WrapWithHits linkedStoryGroup="Hits" pagination={false}>
-        <InfiniteHits />
+        <InfiniteResults />
       </WrapWithHits>
     ),
     {
@@ -25,7 +25,7 @@ stories
     'with header and footer',
     () => (
       <WrapWithHits linkedStoryGroup="Hits" pagination={false}>
-        <InfiniteHits header="Header" footer="Footer" />
+        <InfiniteResults header="Header" footer="Footer" />
       </WrapWithHits>
     ),
     {

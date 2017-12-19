@@ -18,8 +18,8 @@ export {
   default as connectHitsPerPage,
 } from './src/connectors/connectHitsPerPage.js';
 export {
-  default as connectInfiniteHits,
-} from './src/connectors/connectInfiniteHits.js';
+  default as connectInfiniteResults,
+} from './src/connectors/connectInfiniteResults.js';
 export { default as connectMenu } from './src/connectors/connectMenu.js';
 export {
   default as connectMultiRange,

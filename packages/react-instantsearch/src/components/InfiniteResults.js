@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 import translatable from '../core/translatable';
 
-class InfiniteHits extends Component {
+class InfiniteResults extends Component {
   render() {
     const {
       cx,
@@ -35,7 +35,7 @@ class InfiniteHits extends Component {
   }
 }
 
-InfiniteHits.propTypes = {
+InfiniteResults.propTypes = {
   cx: PropTypes.func.isRequired,
   hits: PropTypes.array,
   hitComponent: PropTypes.oneOfType([PropTypes.string, PropTypes.func])
@@ -48,7 +48,7 @@ InfiniteHits.propTypes = {
 };
 
 /* eslint-disable react/display-name */
-InfiniteHits.defaultProps = {
+InfiniteResults.defaultProps = {
   hitComponent: hit => (
     <div
       style={{
@@ -65,4 +65,4 @@ InfiniteHits.defaultProps = {
 
 export default translatable({
   loadMore: 'Load more',
-})(InfiniteHits);
+})(InfiniteResults);
