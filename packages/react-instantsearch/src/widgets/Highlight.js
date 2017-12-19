@@ -15,7 +15,7 @@ const cx = classNames('Highlight');
  * @propType {object} hit - hit object containing the highlighted attribute
  * @propType {string} [tagName='em'] - tag to be used for highlighted parts of the hit
  * @propType {string} [nonHighlightedTagName='span'] - tag to be used for the parts of the hit that are not highlighted
- * @propType {React.Element} [separatorComponent=','] - symbol used to separate the elements of the array in case the attributeName points to an array of strings.
+ * @propType {React.Element} [separatorComponent=',<space>'] - symbol used to separate the elements of the array in case the attributeName points to an array of strings.
  * @themeKey ais-Highlight - the root span of the widget
  * @themeKey ais-Highlight-highlighted - the highlighted text
  * @themeKey ais-Highlight-nonHighlighted - the normal text
