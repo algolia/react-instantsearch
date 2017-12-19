@@ -28,17 +28,17 @@ function getCurrentRefinement(props, searchState, context) {
 }
 
 /**
- * InfiniteResults connector provides the logic to create connected
+ * InfiniteHits connector provides the logic to create connected
  * components that will render an continuous list of results retrieved from
  * Algolia. This connector provides a function to load more results.
- * @name connectInfiniteResults
+ * @name connectInfiniteHits
  * @kind connector
  * @providedPropType {array.<object>} hits - the records that matched the search state
  * @providedPropType {boolean} hasMore - indicates if there are more pages to load
  * @providedPropType {function} refine - call to load more results
  */
 export default createConnector({
-  displayName: 'AlgoliaInfiniteResults',
+  displayName: 'AlgoliaInfiniteHits',
 
   getProvidedProps(props, searchState, searchResults) {
     const results = getResults(searchResults, this.context);

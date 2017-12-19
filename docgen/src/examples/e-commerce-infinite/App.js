@@ -17,7 +17,7 @@ import {
 import {
   connectSearchBox,
   connectRefinementList,
-  connectInfiniteResults,
+  connectInfiniteHits,
   connectStateResults,
 } from 'react-instantsearch/connectors';
 import 'react-instantsearch-theme-algolia/style.scss';
@@ -243,4 +243,4 @@ const ConnectedSearchBox = connectSearchBox(CustomSearchBox);
 const ConnectedColorRefinementList = connectRefinementList(
   CustomColorRefinementList
 );
-const ConnectedHits = connectInfiniteResults(CustomHits);
+const ConnectedHits = connectInfiniteHits(CustomHits);

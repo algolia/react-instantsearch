@@ -15,7 +15,7 @@ import {
 import { InstantSearch } from 'react-instantsearch/native';
 import {
   connectSearchBox,
-  connectInfiniteResults,
+  connectInfiniteHits,
   connectRefinementList,
   connectStats,
   connectMenu,
@@ -272,7 +272,7 @@ Hits.propTypes = {
   hasMore: PropTypes.bool.isRequired,
 };
 
-const ConnectedHits = connectInfiniteResults(Hits);
+const ConnectedHits = connectInfiniteHits(Hits);
 const ConnectedStats = connectStats(({ nbHits }) => (
   <Text style={{ paddingLeft: 8 }}>{nbHits} products found</Text>
 ));

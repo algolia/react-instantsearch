@@ -7,14 +7,14 @@ import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 Enzyme.configure({ adapter: new Adapter() });
 
-import InfiniteResults from './InfiniteResults';
+import InfiniteHits from './InfiniteHits';
 
 describe('Hits', () => {
   it('accepts a hitComponent prop', () => {
     const hits = [{ objectID: 0 }, { objectID: 1 }, { objectID: 2 }];
     const Hit = 'Hit';
     const tree = renderer.create(
-      <InfiniteResults
+      <InfiniteHits
         cx={(...x) => x.join(' ')}
         hitComponent={Hit}
         hits={hits}
@@ -32,7 +32,7 @@ describe('Hits', () => {
     const mockedRefine = jest.fn();
     const hits = [{ objectID: 0 }, { objectID: 1 }, { objectID: 2 }];
     const wrapped = mount(
-      <InfiniteResults
+      <InfiniteHits
         cx={(...x) => x.join(' ')}
         refine={mockedRefine}
         hitComponent={Hit}
@@ -48,7 +48,7 @@ describe('Hits', () => {
   it('Button is disabled when it is the last page', () => {
     const hits = [{ objectID: 0 }, { objectID: 1 }, { objectID: 2 }];
     const wrapped = mount(
-      <InfiniteResults
+      <InfiniteHits
         cx={(...x) => x.join(' ')}
         refine={() => undefined}
         hitComponent={Hit}

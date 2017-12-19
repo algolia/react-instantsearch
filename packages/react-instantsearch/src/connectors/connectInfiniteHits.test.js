@@ -1,9 +1,9 @@
 /* eslint-env jest, jasmine */
 
-import connect from './connectInfiniteResults.js';
+import connect from './connectInfiniteHits.js';
 jest.mock('../core/createConnector');
 
-describe('connectInfiniteResults', () => {
+describe('connectInfiniteHits', () => {
   describe('single index', () => {
     const context = { context: { ais: { mainTargetedIndex: 'index' } } };
     const getProvidedProps = connect.getProvidedProps.bind(context);

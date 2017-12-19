@@ -7,7 +7,7 @@ import {
   connectRefinementList,
   connectHierarchicalMenu,
   connectSortBy,
-  connectInfiniteResults,
+  connectInfiniteHits,
   connectCurrentRefinements,
 } from 'react-instantsearch/connectors';
 import { InstantSearch, Highlight, Configure } from 'react-instantsearch/dom';
@@ -389,7 +389,7 @@ const ConnectedNestedList = connectHierarchicalMenu(MaterialUiNestedList);
 
 const ConnectedSortBy = connectSortBy(MaterialUiSortBy);
 
-const ConnectedHits = connectInfiniteResults(CustomHits);
+const ConnectedHits = connectInfiniteHits(CustomHits);
 
 const ConnectedCurrentRefinements = connectCurrentRefinements(
   MaterialUiClearAllFilters
