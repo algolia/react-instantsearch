@@ -2,17 +2,17 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import BaseWidget from './BaseWidget';
 import connectRange from '../connectors/connectRange.js';
-import StarRatingComponent from '../components/StarRating.js';
+import RatingMenuComponent from '../components/RatingMenu.js';
 import classNames from '../components/classNames';
 
 const cx = classNames('RatingMenu');
 
 /**
- * StarRating lets the user refine search results by clicking on stars.
+ * RatingMenu lets the user refine search results by clicking on stars.
  *
  * The stars are based on the selected `attributeName`.
  * @requirements The attribute passed to the `attributeName` prop must be holding numerical values.
- * @name StarRating
+ * @name RatingMenu
  * @kind widget
  * @propType {string} attributeName - the name of the attribute in the record
  * @propType {number} [min] - Minimum value for the rating. When this isn't set, the minimum value will be automatically computed by Algolia using the data in the index.
@@ -36,7 +36,7 @@ const cx = classNames('RatingMenu');
  * @example
  * import React from 'react';
  *
- * import { StarRating, InstantSearch } from 'react-instantsearch/dom';
+ * import { RatingMenu, InstantSearch } from 'react-instantsearch/dom';
  *
  * export default function App() {
  *   return (
@@ -45,7 +45,7 @@ const cx = classNames('RatingMenu');
  *       apiKey="6be0576ff61c053d5f9a3225e2a90f76"
  *       indexName="ikea"
  *     >
- *       <StarRating attributeName="rating" />
+ *       <RatingMenu attributeName="rating" />
  *     </InstantSearch>
  *   );
  * }
@@ -69,7 +69,7 @@ class Widget extends Component {
         footer={footer}
         cantRefine={!canRefine}
       >
-        <StarRatingComponent cx={cx} {...this.props} />
+        <RatingMenuComponent cx={cx} {...this.props} />
       </BaseWidget>
     );
   }

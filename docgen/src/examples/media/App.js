@@ -8,7 +8,7 @@ import {
   Hits,
   Stats,
   Pagination,
-  StarRating,
+  RatingMenu,
   Highlight,
   Configure,
 } from 'react-instantsearch/dom';
@@ -88,7 +88,7 @@ const Facets = () => (
       <RefinementListLinks attributeName="genre" />
     </Panel>
     <Panel title="Rating" id="ratings">
-      <StarRating attributeName="rating" max={5} />
+      <RatingMenu attributeName="rating" max={5} />
     </Panel>
     <div className="thank-you">
       {' '}

@@ -4,7 +4,7 @@ import { isEmpty } from 'lodash';
 
 import translatable from '../core/translatable';
 
-class StarRating extends Component {
+class RatingMenu extends Component {
   static propTypes = {
     cx: PropTypes.func.isRequired,
     translate: PropTypes.func.isRequired,
@@ -174,4 +174,4 @@ class StarRating extends Component {
 
 export default translatable({
   ratingLabel: ' & Up',
-})(StarRating);
+})(RatingMenu);

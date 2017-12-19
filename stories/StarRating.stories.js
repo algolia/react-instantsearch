@@ -1,7 +1,7 @@
 import React from 'react';
 import { setAddon, storiesOf } from '@storybook/react';
 import {
-  StarRating,
+  RatingMenu,
   Panel,
   SearchBox,
   Configure,
@@ -12,14 +12,14 @@ import JSXAddon from 'storybook-addon-jsx';
 
 setAddon(JSXAddon);
 
-const stories = storiesOf('StarRating', module);
+const stories = storiesOf('RatingMenu', module);
 
 stories
   .addWithJSX(
     'default',
     () => (
-      <WrapWithHits hasPlayground={true} linkedStoryGroup="StarRating">
-        <StarRating attributeName="rating" max={6} min={1} />
+      <WrapWithHits hasPlayground={true} linkedStoryGroup="RatingMenu">
+        <RatingMenu attributeName="rating" max={6} min={1} />
       </WrapWithHits>
     ),
     {
@@ -30,8 +30,8 @@ stories
   .addWithJSX(
     'with header and footer',
     () => (
-      <WrapWithHits hasPlayground={true} linkedStoryGroup="StarRating">
-        <StarRating
+      <WrapWithHits hasPlayground={true} linkedStoryGroup="RatingMenu">
+        <RatingMenu
           attributeName="rating"
           max={6}
           min={1}
@@ -48,9 +48,9 @@ stories
   .addWithJSX(
     'with panel',
     () => (
-      <WrapWithHits hasPlayground={true} linkedStoryGroup="StarRating">
+      <WrapWithHits hasPlayground={true} linkedStoryGroup="RatingMenu">
         <Panel title="Ratings">
-          <StarRating attributeName="rating" max={6} min={1} />
+          <RatingMenu attributeName="rating" max={6} min={1} />
         </Panel>
       </WrapWithHits>
     ),
@@ -62,10 +62,10 @@ stories
   .addWithJSX(
     'with some unavailable refinements',
     () => (
-      <WrapWithHits hasPlayground={true} linkedStoryGroup="StarRating">
+      <WrapWithHits hasPlayground={true} linkedStoryGroup="RatingMenu">
         <Configure filters="rating>=4" />
         <Panel title="Ratings">
-          <StarRating attributeName="rating" max={6} min={1} />
+          <RatingMenu attributeName="rating" max={6} min={1} />
         </Panel>
       </WrapWithHits>
     ),
@@ -80,10 +80,10 @@ stories
       <WrapWithHits
         searchBox={false}
         hasPlayground={true}
-        linkedStoryGroup="StarRating"
+        linkedStoryGroup="RatingMenu"
       >
         <Panel title="Ratings">
-          <StarRating attributeName="rating" max={6} min={1} />
+          <RatingMenu attributeName="rating" max={6} min={1} />
           <div style={{ display: 'none' }}>
             <SearchBox defaultRefinement="ds" />
           </div>
@@ -98,9 +98,9 @@ stories
   .addWithJSX(
     'with filter on rating',
     () => (
-      <WrapWithHits hasPlayground={true} linkedStoryGroup="StarRating">
+      <WrapWithHits hasPlayground={true} linkedStoryGroup="RatingMenu">
         <Configure filters="rating>2" />
-        <StarRating attributeName="rating" max={6} min={1} />
+        <RatingMenu attributeName="rating" max={6} min={1} />
       </WrapWithHits>
     ),
     {
@@ -111,8 +111,8 @@ stories
   .addWithJSX(
     'playground',
     () => (
-      <WrapWithHits linkedStoryGroup="StarRating">
-        <StarRating
+      <WrapWithHits linkedStoryGroup="RatingMenu">
+        <RatingMenu
           attributeName="rating"
           max={number('max', 6)}
           translations={object('translations', { ratingLabel: ' & Up' })}

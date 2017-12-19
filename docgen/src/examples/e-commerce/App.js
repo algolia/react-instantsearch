@@ -9,7 +9,7 @@ import {
   Stats,
   Pagination,
   ClearRefinements,
-  StarRating,
+  RatingMenu,
   RangeInput,
   Highlight,
   Panel,
@@ -96,7 +96,7 @@ const Facets = () => (
       </Panel>
       <ConnectedColorRefinementList attributeName="colors" operator="or" />
       <Panel title="Rating">
-        <StarRating attributeName="rating" max={5} />
+        <RatingMenu attributeName="rating" max={5} />
       </Panel>
       <Panel title="Price">
         <RangeInput key="price_input" attributeName="price" />
@@ -169,7 +169,7 @@ const Hit = ({ item }) => {
   for (let i = 0; i < 5; i++) {
     const suffix = i >= item.rating ? '_empty' : '';
     icons.push(
-      <label key={i} className={`ais-StarRating__ratingIcon${suffix}`} />
+      <label key={i} className={`ais-RatingMenu__ratingIcon${suffix}`} />
     );
   }
   return (
@@ -190,7 +190,7 @@ const Hit = ({ item }) => {
         <div className="product-type">
           <Highlight attributeName="type" hit={item} />
         </div>
-        <div className="ais-StarRating__ratingLink">
+        <div className="ais-RatingMenu__ratingLink">
           {icons}
           <div className="product-price">${item.price}</div>
         </div>

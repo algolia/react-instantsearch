@@ -6,13 +6,13 @@ import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 Enzyme.configure({ adapter: new Adapter() });
 
-import StarRating from './StarRating';
+import RatingMenu from './RatingMenu';
 
-describe('StarRating', () => {
+describe('RatingMenu', () => {
   it('supports passing max/min values', () => {
     const tree = renderer
       .create(
-        <StarRating
+        <RatingMenu
           cx={(...x) => x.join(' ')}
           createURL={() => '#'}
           refine={() => null}
@@ -36,7 +36,7 @@ describe('StarRating', () => {
   it('applies translations', () => {
     const tree = renderer
       .create(
-        <StarRating
+        <RatingMenu
           cx={(...x) => x.join(' ')}
           createURL={() => '#'}
           refine={() => null}
@@ -63,7 +63,7 @@ describe('StarRating', () => {
   const refine = jest.fn();
   const createURL = jest.fn();
   const starRating = (
-    <StarRating
+    <RatingMenu
       cx={(...x) => x.join(' ')}
       createURL={createURL}
       refine={refine}

@@ -29,7 +29,7 @@ export { default as Pagination } from './src/widgets/Pagination.js';
 export { default as PoweredBy } from './src/widgets/PoweredBy.js';
 export { default as RangeInput } from './src/widgets/RangeInput.js';
 export { default as RangeSlider } from './src/widgets/RangeSlider.js';
-export { default as StarRating } from './src/widgets/StarRating.js';
+export { default as RatingMenu } from './src/widgets/RatingMenu.js';
 export { default as RefinementList } from './src/widgets/RefinementList.js';
 export { default as ClearRefinements } from './src/widgets/ClearRefinements.js';
 export { default as ScrollTo } from './src/widgets/ScrollTo.js';

@@ -7,7 +7,7 @@ import {
   Menu,
   Pagination,
   PoweredBy,
-  StarRating,
+  RatingMenu,
   RefinementList,
   SearchBox,
   ClearRefinements,
@@ -87,7 +87,7 @@ class App extends Component {
               <p>Refinement List</p>
               <RefinementList attributeName="colors" />
               <p>Range Ratings</p>
-              <StarRating attributeName="rating" max={6} />
+              <RatingMenu attributeName="rating" max={6} />
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
               <div style={{ display: 'flex', justifyContent: 'space-around' }}>

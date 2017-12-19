@@ -7,7 +7,7 @@ export { default as NumericMenu } from './NumericMenu.js';
 export { default as Pagination } from './Pagination.js';
 export { default as PoweredBy } from './PoweredBy.js';
 export { default as RangeInput } from './RangeInput.js';
-export { default as StarRating } from './StarRating.js';
+export { default as RatingMenu } from './RatingMenu.js';
 export { default as RefinementList } from './RefinementList.js';
 export { default as ClearRefinements } from './ClearRefinements.js';
 export { default as ScrollTo } from './ScrollTo.js';

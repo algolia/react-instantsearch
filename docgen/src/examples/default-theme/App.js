@@ -10,7 +10,7 @@ import {
   Stats,
   Pagination,
   ClearRefinements,
-  StarRating,
+  RatingMenu,
   RangeInput,
   Highlight,
   Configure,
@@ -72,7 +72,7 @@ const Facets = () => (
     </SideBarSection>
 
     <SideBarSection title="Rating">
-      <StarRating attributeName="rating" max={5} />
+      <RatingMenu attributeName="rating" max={5} />
     </SideBarSection>
 
     <SideBarSection title="Price">
@@ -97,7 +97,7 @@ const Hit = ({ hit }) => {
   for (let i = 0; i < 5; i++) {
     const suffix = i >= hit.rating ? '_empty' : '';
     icons.push(
-      <label key={i} label className={`ais-StarRating__ratingIcon${suffix}`} />
+      <label key={i} label className={`ais-RatingMenu__ratingIcon${suffix}`} />
     );
   }
   return (
@@ -109,7 +109,7 @@ const Hit = ({ hit }) => {
         <div className="product-type">
           <Highlight attributeName="type" hit={hit} />
         </div>
-        <div className="ais-StarRating__ratingLink">
+        <div className="ais-RatingMenu__ratingLink">
           {icons}
           <div className="product-price">${hit.price}</div>
         </div>
