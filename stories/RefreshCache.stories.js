@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { storiesOf } from '@storybook/react';
 import { InstantSearch, SearchBox } from '../packages/react-instantsearch/dom';
 import { CustomHits } from './util';
@@ -15,9 +14,7 @@ class AppWithRefresh extends Component {
   }
 
   refresh = () => {
-    this.setState(prevState => ({
-      refresh: !prevState.refresh,
-    }));
+    this.setState({ refresh: true });
   };
 
   onSearchStateChange = () => {
@@ -130,52 +127,25 @@ class AppWithRefresh extends Component {
 
 stories.add('with a refresh button', () => <AppWithRefresh />);
 
-class StopWatch extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { count: 0 };
-  }
-
-  componentWillReceiveProps = nextProps => {
-    if (nextProps.refresh) {
-      this.setState({ count: 0 });
-    }
-  };
-
-  componentDidMount = () => {
-    setInterval(
-      () =>
-        this.setState(prevState => ({
-          count: prevState.count + 1,
-        })),
-      1000
-    );
-  };
-
-  render = () => <span>{this.state.count}s elasped since refresh</span>;
-}
-
-StopWatch.propTypes = {
-  refresh: PropTypes.bool,
-};
-
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       refresh: false,
+      count: 0,
     };
   }
 
-  componentDidMount = () => {
+  componentDidMount() {
     setInterval(
       () =>
-        this.setState({ refresh: true }, () =>
-          this.setState({ refresh: false })
-        ),
-      5000
+        this.setState(prevState => ({
+          refresh: prevState.count === 5,
+          count: prevState.count === 5 ? 0 : prevState.count + 1,
+        })),
+      1000
     );
-  };
+  }
 
   render() {
     return (
@@ -184,9 +154,9 @@ class App extends Component {
         apiKey="6be0576ff61c053d5f9a3225e2a90f76"
         indexName="ikea"
         refresh={this.state.refresh}
-        onSearchStateChange={this.onSearchStateChange}
       >
-        <StopWatch refresh={this.state.refresh} />
+        <span>{this.state.count}s elasped since refresh</span>
+
         <SearchBox
           translations={{
             placeholder: 'Search our furnitures: chairs, tables etc.',
