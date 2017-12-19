@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ClearAll has a disabled mode 1`] = `
+exports[`ClearRefinements has a disabled mode 1`] = `
 <button
   className="button button--disabled"
   disabled={true}
@@ -10,7 +10,7 @@ exports[`ClearAll has a disabled mode 1`] = `
 </button>
 `;
 
-exports[`ClearAll renders a clickable button 1`] = `
+exports[`ClearRefinements renders a clickable button 1`] = `
 <button
   className="button false"
   disabled={false}

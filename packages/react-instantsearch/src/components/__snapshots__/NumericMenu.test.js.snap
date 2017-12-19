@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MultiRange no refinements 1`] = `
+exports[`NumericMenu no refinements 1`] = `
 <div>
   <ul
     className="list false"
@@ -109,7 +109,7 @@ exports[`MultiRange no refinements 1`] = `
 </div>
 `;
 
-exports[`MultiRange supports having a selected item 1`] = `
+exports[`NumericMenu supports having a selected item 1`] = `
 <div>
   <ul
     className="list false"
@@ -218,7 +218,7 @@ exports[`MultiRange supports having a selected item 1`] = `
 </div>
 `;
 
-exports[`MultiRange supports passing items values 1`] = `
+exports[`NumericMenu supports passing items values 1`] = `
 <div>
   <ul
     className="list false"
