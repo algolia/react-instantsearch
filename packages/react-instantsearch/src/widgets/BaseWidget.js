@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React from 'react';
 
 const BaseWidget = ({ cx, children, header, footer, cantRefine }) => (
   <div className={cx('', cantRefine && `-noRefinement`)}>

@@ -15,9 +15,11 @@ const cx = classNames('Snippet');
  * @requirements To use this widget, the attribute name passed to the `attributeName` prop must be
  * present in "Attributes to snippet" on the Algolia dashboard or configured as `attributesToSnippet`
  * via a set settings call to the Algolia API.
- * @propType {string} attributeName - the location of the highlighted snippet attribute in the hit
- * @propType {object} hit - the hit object containing the highlighted snippet attribute
- * @propType {string} [tagName='em'] - the tag to be used for highlighted parts of the attribute
+ * @propType {string} attributeName - location of the highlighted snippet attribute in the hit (the corresponding element can be either a string or an array of strings)
+ * @propType {object} hit - hit object containing the highlighted snippet attribute
+ * @propType {string} [tagName='em'] - tag to be used for highlighted parts of the attribute
+ * @propType {string} [nonHighlightedTagName='span'] - tag to be used for the parts of the hit that are not highlighted
+ * @propType {React.Element} [separatorComponent=','] - symbol used to separate the elements of the array in case the attributeName points to an array of strings.
  * @themeKey ais-Snippet - the root span of the widget
  * @themeKey ais-Snippet-highlighted - the highlighted text
  * @themeKey ais-Snippet-nonHighlighted - the normal text

@@ -156,9 +156,7 @@ class List extends Component {
     return (
       <div>
         {searchBox}
-        <ul
-          className={cx('list', !this.props.canRefine && 'list--noRefinement')}
-        >
+        <ul className={cx('list', !canRefine && 'list--noRefinement')}>
           {items
             .slice(0, limit)
             .map(item => this.renderItem(item, this.resetQuery))}

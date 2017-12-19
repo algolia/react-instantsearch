@@ -1,7 +1,29 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import classNames from './classNames.js';
+function generateKey(i, value) {
+  return `split-${i}-${value}`;
+}
+
+export const Highlight = ({
+  cx,
+  value,
+  highlightedTagName,
+  isHighlighted,
+  nonHighlightedTagName,
+}) => {
+  const TagName = isHighlighted ? highlightedTagName : nonHighlightedTagName;
+  const className = isHighlighted ? 'highlighted' : 'nonHighlighted';
+  return <TagName className={cx(className)}>{value}</TagName>;
+};
+
+Highlight.propTypes = {
+  cx: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
+  isHighlighted: PropTypes.bool.isRequired,
+  highlightedTagName: PropTypes.string.isRequired,
+  nonHighlightedTagName: PropTypes.string.isRequired,
+};
 
 export default function Highlighter({
   cx,
@@ -10,29 +32,50 @@ export default function Highlighter({
   highlight,
   highlightProperty,
   tagName,
+  nonHighlightedTagName,
+  separator,
 }) {
   const parsedHighlightedValue = highlight({
     hit,
     attributeName,
     highlightProperty,
   });
-  const reactHighlighted = parsedHighlightedValue.map((v, i) => {
-    const key = `split-${i}-${v.value}`;
-    if (!v.isHighlighted) {
-      return (
-        <span key={key} className={cx('nonHighlighted')}>
-          {v.value}
-        </span>
-      );
-    }
-    const HighlightedTag = tagName ? tagName : 'em';
-    return (
-      <HighlightedTag key={key} className={cx('highlighted')}>
-        {v.value}
-      </HighlightedTag>
-    );
-  });
-  return <span className={cx('')}>{reactHighlighted}</span>;
+
+  return (
+    <span className={cx('')}>
+      {parsedHighlightedValue.map((item, i) => {
+        if (Array.isArray(item)) {
+          const isLast = i === parsedHighlightedValue.length - 1;
+          return (
+            <span key={generateKey(i, hit[attributeName][i])}>
+              {item.map((element, index) => (
+                <Highlight
+                  cx={cx}
+                  key={generateKey(index, element.value)}
+                  value={element.value}
+                  highlightedTagName={tagName}
+                  nonHighlightedTagName={nonHighlightedTagName}
+                  isHighlighted={element.isHighlighted}
+                />
+              ))}
+              {!isLast && <span className={cx('separator')}>{separator}</span>}
+            </span>
+          );
+        }
+
+        return (
+          <Highlight
+            cx={cx}
+            key={generateKey(i, item.value)}
+            value={item.value}
+            highlightedTagName={tagName}
+            nonHighlightedTagName={nonHighlightedTagName}
+            isHighlighted={item.isHighlighted}
+          />
+        );
+      })}
+    </span>
+  );
 }
 
 Highlighter.propTypes = {
@@ -42,4 +85,12 @@ Highlighter.propTypes = {
   highlight: PropTypes.func.isRequired,
   highlightProperty: PropTypes.string.isRequired,
   tagName: PropTypes.string,
+  nonHighlightedTagName: PropTypes.string,
+  separator: PropTypes.node,
+};
+
+Highlighter.defaultProps = {
+  tagName: 'em',
+  nonHighlightedTagName: 'span',
+  separator: ', ',
 };

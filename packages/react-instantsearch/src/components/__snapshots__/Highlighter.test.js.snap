@@ -1,65 +1,398 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Highlighter parses an highlighted attribute of hit object 1`] = `
+exports[`Highlighter - Highlight renders a highlight 1`] = `
+<em
+  className="highlighted"
+>
+  test
+</em>
+`;
+
+exports[`Highlighter - Highlight renders a nonhighlight 1`] = `
+<div
+  className="nonHighlighted"
+>
+  test
+</div>
+`;
+
+exports[`Highlighter - multi renders a highlighted value 1`] = `
 <span
   className=""
 >
   <span
-    className="nonHighlighted"
+    key="split-0-Apple"
   >
-    awesome 
+    <Highlight
+      cx={[Function]}
+      highlightedTagName="em"
+      isHighlighted={false}
+      key="split-0-Apple"
+      nonHighlightedTagName="span"
+      value="Apple"
+    />
+    <span
+      className="separator"
+    >
+      , 
+    </span>
   </span>
-  <em
-    className="highlighted"
-  >
-    hi
-  </em>
   <span
-    className="nonHighlighted"
+    key="split-1-Samsung"
   >
-    ghlighted 
+    <Highlight
+      cx={[Function]}
+      highlightedTagName="em"
+      isHighlighted={true}
+      key="split-0-Sam"
+      nonHighlightedTagName="span"
+      value="Sam"
+    />
+    <Highlight
+      cx={[Function]}
+      highlightedTagName="em"
+      isHighlighted={false}
+      key="split-1-sung"
+      nonHighlightedTagName="span"
+      value="sung"
+    />
+    <span
+      className="separator"
+    >
+      , 
+    </span>
   </span>
-  <em
-    className="highlighted"
-  >
-    hi
-  </em>
   <span
-    className="nonHighlighted"
+    key="split-2-Philips"
   >
-    t!
+    <Highlight
+      cx={[Function]}
+      highlightedTagName="em"
+      isHighlighted={false}
+      key="split-0-Philips"
+      nonHighlightedTagName="span"
+      value="Philips"
+    />
   </span>
 </span>
 `;
 
-exports[`Highlighter renders a hit with a custom tag correctly 1`] = `
+exports[`Highlighter - multi renders a highlighted value with a custom nonHighlightedTagName 1`] = `
 <span
   className=""
 >
   <span
-    className="nonHighlighted"
+    key="split-0-Apple"
   >
-    awesome 
+    <Highlight
+      cx={[Function]}
+      highlightedTagName="em"
+      isHighlighted={false}
+      key="split-0-Apple"
+      nonHighlightedTagName="p"
+      value="Apple"
+    />
+    <span
+      className="separator"
+    >
+      , 
+    </span>
   </span>
-  <mark
-    className="highlighted"
-  >
-    hi
-  </mark>
   <span
-    className="nonHighlighted"
+    key="split-1-Samsung"
   >
-    ghlighted 
+    <Highlight
+      cx={[Function]}
+      highlightedTagName="em"
+      isHighlighted={true}
+      key="split-0-Sam"
+      nonHighlightedTagName="p"
+      value="Sam"
+    />
+    <Highlight
+      cx={[Function]}
+      highlightedTagName="em"
+      isHighlighted={false}
+      key="split-1-sung"
+      nonHighlightedTagName="p"
+      value="sung"
+    />
+    <span
+      className="separator"
+    >
+      , 
+    </span>
   </span>
-  <mark
-    className="highlighted"
-  >
-    hi
-  </mark>
   <span
-    className="nonHighlighted"
+    key="split-2-Philips"
   >
-    t!
+    <Highlight
+      cx={[Function]}
+      highlightedTagName="em"
+      isHighlighted={false}
+      key="split-0-Philips"
+      nonHighlightedTagName="p"
+      value="Philips"
+    />
   </span>
+</span>
+`;
+
+exports[`Highlighter - multi renders a highlighted value with a custom separator 1`] = `
+<span
+  className=""
+>
+  <span
+    key="split-0-Apple"
+  >
+    <Highlight
+      cx={[Function]}
+      highlightedTagName="em"
+      isHighlighted={false}
+      key="split-0-Apple"
+      nonHighlightedTagName="span"
+      value="Apple"
+    />
+    <span
+      className="separator"
+    >
+      -
+    </span>
+  </span>
+  <span
+    key="split-1-Samsung"
+  >
+    <Highlight
+      cx={[Function]}
+      highlightedTagName="em"
+      isHighlighted={true}
+      key="split-0-Sam"
+      nonHighlightedTagName="span"
+      value="Sam"
+    />
+    <Highlight
+      cx={[Function]}
+      highlightedTagName="em"
+      isHighlighted={false}
+      key="split-1-sung"
+      nonHighlightedTagName="span"
+      value="sung"
+    />
+    <span
+      className="separator"
+    >
+      -
+    </span>
+  </span>
+  <span
+    key="split-2-Philips"
+  >
+    <Highlight
+      cx={[Function]}
+      highlightedTagName="em"
+      isHighlighted={false}
+      key="split-0-Philips"
+      nonHighlightedTagName="span"
+      value="Philips"
+    />
+  </span>
+</span>
+`;
+
+exports[`Highlighter - multi renders a highlighted value with a custom tagName 1`] = `
+<span
+  className=""
+>
+  <span
+    key="split-0-Apple"
+  >
+    <Highlight
+      cx={[Function]}
+      highlightedTagName="strong"
+      isHighlighted={false}
+      key="split-0-Apple"
+      nonHighlightedTagName="span"
+      value="Apple"
+    />
+    <span
+      className="separator"
+    >
+      , 
+    </span>
+  </span>
+  <span
+    key="split-1-Samsung"
+  >
+    <Highlight
+      cx={[Function]}
+      highlightedTagName="strong"
+      isHighlighted={true}
+      key="split-0-Sam"
+      nonHighlightedTagName="span"
+      value="Sam"
+    />
+    <Highlight
+      cx={[Function]}
+      highlightedTagName="strong"
+      isHighlighted={false}
+      key="split-1-sung"
+      nonHighlightedTagName="span"
+      value="sung"
+    />
+    <span
+      className="separator"
+    >
+      , 
+    </span>
+  </span>
+  <span
+    key="split-2-Philips"
+  >
+    <Highlight
+      cx={[Function]}
+      highlightedTagName="strong"
+      isHighlighted={false}
+      key="split-0-Philips"
+      nonHighlightedTagName="span"
+      value="Philips"
+    />
+  </span>
+</span>
+`;
+
+exports[`Highlighter - multi renders a non highlighted value 1`] = `
+<span
+  className=""
+>
+  <span
+    key="split-0-Apple"
+  >
+    <Highlight
+      cx={[Function]}
+      highlightedTagName="em"
+      isHighlighted={false}
+      key="split-0-Apple"
+      nonHighlightedTagName="span"
+      value="Apple"
+    />
+    <span
+      className="separator"
+    >
+      , 
+    </span>
+  </span>
+  <span
+    key="split-1-Samsung"
+  >
+    <Highlight
+      cx={[Function]}
+      highlightedTagName="em"
+      isHighlighted={false}
+      key="split-0-Samsung"
+      nonHighlightedTagName="span"
+      value="Samsung"
+    />
+    <span
+      className="separator"
+    >
+      , 
+    </span>
+  </span>
+  <span
+    key="split-2-Philips"
+  >
+    <Highlight
+      cx={[Function]}
+      highlightedTagName="em"
+      isHighlighted={false}
+      key="split-0-Philips"
+      nonHighlightedTagName="span"
+      value="Philips"
+    />
+  </span>
+</span>
+`;
+
+exports[`Highlighter - simple renders a highlighted value 1`] = `
+<span
+  className=""
+>
+  <Highlight
+    cx={[Function]}
+    highlightedTagName="em"
+    isHighlighted={true}
+    key="split-0-Ap"
+    nonHighlightedTagName="span"
+    value="Ap"
+  />
+  <Highlight
+    cx={[Function]}
+    highlightedTagName="em"
+    isHighlighted={false}
+    key="split-1-ple"
+    nonHighlightedTagName="span"
+    value="ple"
+  />
+</span>
+`;
+
+exports[`Highlighter - simple renders a highlighted value with a custom nonHighlightedTagName 1`] = `
+<span
+  className=""
+>
+  <Highlight
+    cx={[Function]}
+    highlightedTagName="em"
+    isHighlighted={true}
+    key="split-0-Ap"
+    nonHighlightedTagName="p"
+    value="Ap"
+  />
+  <Highlight
+    cx={[Function]}
+    highlightedTagName="em"
+    isHighlighted={false}
+    key="split-1-ple"
+    nonHighlightedTagName="p"
+    value="ple"
+  />
+</span>
+`;
+
+exports[`Highlighter - simple renders a highlighted value with a custom tagName 1`] = `
+<span
+  className=""
+>
+  <Highlight
+    cx={[Function]}
+    highlightedTagName="strong"
+    isHighlighted={true}
+    key="split-0-Ap"
+    nonHighlightedTagName="span"
+    value="Ap"
+  />
+  <Highlight
+    cx={[Function]}
+    highlightedTagName="strong"
+    isHighlighted={false}
+    key="split-1-ple"
+    nonHighlightedTagName="span"
+    value="ple"
+  />
+</span>
+`;
+
+exports[`Highlighter - simple renders a non highlighted value 1`] = `
+<span
+  className=""
+>
+  <Highlight
+    cx={[Function]}
+    highlightedTagName="em"
+    isHighlighted={false}
+    key="split-0-Apple"
+    nonHighlightedTagName="span"
+    value="Apple"
+  />
 </span>
 `;
