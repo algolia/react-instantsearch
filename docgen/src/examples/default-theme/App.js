@@ -9,7 +9,7 @@ import {
   SortBy,
   Stats,
   Pagination,
-  ClearAll,
+  ClearRefinements,
   StarRating,
   RangeInput,
   Highlight,
@@ -54,7 +54,7 @@ const Header = () => (
 
 const Facets = () => (
   <aside>
-    <ClearAll
+    <ClearRefinements
       translations={{
         reset: 'Clear all filters',
       }}

@@ -2,15 +2,15 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import BaseWidget from './BaseWidget';
 import connectCurrentRefinements from '../connectors/connectCurrentRefinements.js';
-import ClearAllComponent from '../components/ClearAll.js';
+import ClearRefinementsComponent from '../components/ClearRefinements.js';
 import classNames from '../components/classNames';
 
 const cx = classNames('ClearRefinements');
 
 /**
- * The ClearAll widget displays a button that lets the user clean every refinement applied
+ * The ClearRefinements widget displays a button that lets the user clean every refinement applied
  * to the search.
- * @name ClearAll
+ * @name ClearRefinements
  * @kind widget
  * @propType {function} [transformItems] - Function to modify the items being displayed, e.g. for filtering or sorting them. Takes an items as parameter and expects it back in return.
  * @propType {boolean} [clearsQuery=false] - Pass true to also clear the search query
@@ -24,7 +24,7 @@ const cx = classNames('ClearRefinements');
  * @example
  * import React from 'react';
  *
- * import { ClearAll, RefinementList, InstantSearch } from 'react-instantsearch/dom';
+ * import { ClearRefinements, RefinementList, InstantSearch } from 'react-instantsearch/dom';
  *
  * export default function App() {
  *   return (
@@ -33,7 +33,7 @@ const cx = classNames('ClearRefinements');
  *       apiKey="6be0576ff61c053d5f9a3225e2a90f76"
  *       indexName="ikea"
  *     >
- *       <ClearAll />
+ *       <ClearRefinements />
  *       <RefinementList
           attributeName="colors"
           defaultRefinement={['Black']}
@@ -45,7 +45,7 @@ const cx = classNames('ClearRefinements');
 
 const Widget = props => (
   <BaseWidget cx={cx} header={props.header} footer={props.footer}>
-    <ClearAllComponent cx={cx} {...props} />
+    <ClearRefinementsComponent cx={cx} {...props} />
   </BaseWidget>
 );
 

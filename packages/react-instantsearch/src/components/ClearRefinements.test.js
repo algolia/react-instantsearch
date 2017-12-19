@@ -6,14 +6,14 @@ import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 Enzyme.configure({ adapter: new Adapter() });
 
-import ClearAll from './ClearAll';
+import ClearRefinements from './ClearRefinements';
 
-describe('ClearAll', () => {
+describe('ClearRefinements', () => {
   it('renders a clickable button', () =>
     expect(
       renderer
         .create(
-          <ClearAll
+          <ClearRefinements
             refine={() => null}
             items={[{ filter: 1 }]}
             cx={(...x) => x.join(' ')}
@@ -26,7 +26,11 @@ describe('ClearAll', () => {
     expect(
       renderer
         .create(
-          <ClearAll refine={() => null} items={[]} cx={(...x) => x.join(' ')} />
+          <ClearRefinements
+            refine={() => null}
+            items={[]}
+            cx={(...x) => x.join(' ')}
+          />
         )
         .toJSON()
     ).toMatchSnapshot());
@@ -34,7 +38,7 @@ describe('ClearAll', () => {
   it('is disabled when there is no filters', () => {
     const refine = jest.fn();
     const wrapper = mount(
-      <ClearAll refine={refine} items={[]} cx={(...x) => x.join(' ')} />
+      <ClearRefinements refine={refine} items={[]} cx={(...x) => x.join(' ')} />
     );
 
     const btn = wrapper.find('button');
@@ -46,7 +50,7 @@ describe('ClearAll', () => {
   it('is not disabled when there are filters', () => {
     const refine = jest.fn();
     const wrapper = mount(
-      <ClearAll
+      <ClearRefinements
         refine={refine}
         items={[{ value: 'test', label: 'test: test' }]}
         cx={(...x) => x.join(' ')}

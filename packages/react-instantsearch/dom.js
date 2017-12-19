@@ -31,7 +31,7 @@ export { default as RangeInput } from './src/widgets/RangeInput.js';
 export { default as RangeSlider } from './src/widgets/RangeSlider.js';
 export { default as StarRating } from './src/widgets/StarRating.js';
 export { default as RefinementList } from './src/widgets/RefinementList.js';
-export { default as ClearAll } from './src/widgets/ClearAll.js';
+export { default as ClearRefinements } from './src/widgets/ClearRefinements.js';
 export { default as ScrollTo } from './src/widgets/ScrollTo.js';
 export { default as SearchBox } from './src/widgets/SearchBox.js';
 export { default as SortBy } from './src/widgets/SortBy.js';

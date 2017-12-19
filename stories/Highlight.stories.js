@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import {
-  ClearAll,
+  ClearRefinements,
   Highlight,
   Hits,
   InstantSearch,
@@ -96,7 +96,7 @@ class AppWithArray extends Component {
             placeholder: 'Search into our furnitures: chair, table, tv unit...',
           }}
         />
-        <ClearAll translations={{ reset: 'Clear all filters' }} />
+        <ClearRefinements translations={{ reset: 'Clear all filters' }} />
         <CustomHits />
         <Pagination />
       </InstantSearch>

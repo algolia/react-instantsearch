@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 import translatable from '../core/translatable';
 
-class ClearAll extends Component {
+class ClearRefinements extends Component {
   static propTypes = {
     cx: PropTypes.func.isRequired,
     translate: PropTypes.func.isRequired,
@@ -29,4 +29,4 @@ class ClearAll extends Component {
 
 export default translatable({
   reset: 'Clear all filters',
-})(ClearAll);
+})(ClearRefinements);

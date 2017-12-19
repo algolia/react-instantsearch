@@ -10,7 +10,7 @@ import {
   StarRating,
   RefinementList,
   SearchBox,
-  ClearAll,
+  ClearRefinements,
 } from 'react-instantsearch/dom';
 import { withRouter } from 'react-router';
 import 'react-instantsearch-theme-algolia/style.css';
@@ -91,7 +91,7 @@ class App extends Component {
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
               <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-                <ClearAll />
+                <ClearRefinements />
               </div>
               <div>
                 <Hits />

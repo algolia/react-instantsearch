@@ -1,20 +1,23 @@
 import React from 'react';
 import { setAddon, storiesOf } from '@storybook/react';
-import { ClearAll, RefinementList } from '../packages/react-instantsearch/dom';
+import {
+  ClearRefinements,
+  RefinementList,
+} from '../packages/react-instantsearch/dom';
 import { displayName, filterProps, WrapWithHits } from './util';
 import JSXAddon from 'storybook-addon-jsx';
 
 setAddon(JSXAddon);
 
-const stories = storiesOf('ClearAll', module);
+const stories = storiesOf('ClearRefinements', module);
 
 stories
   .addWithJSX(
     'with refinements to clear',
     () => (
-      <WrapWithHits linkedStoryGroup="ClearAll">
+      <WrapWithHits linkedStoryGroup="ClearRefinements">
         <div>
-          <ClearAll />
+          <ClearRefinements />
           <div style={{ display: 'none' }}>
             <RefinementList
               attributeName="category"
@@ -32,9 +35,9 @@ stories
   .addWithJSX(
     'with header and footer',
     () => (
-      <WrapWithHits linkedStoryGroup="ClearAll">
+      <WrapWithHits linkedStoryGroup="ClearRefinements">
         <div>
-          <ClearAll header="Header" footer="Footer" />
+          <ClearRefinements header="Header" footer="Footer" />
           <div style={{ display: 'none' }}>
             <RefinementList
               attributeName="category"
@@ -52,8 +55,8 @@ stories
   .addWithJSX(
     'nothing to clear',
     () => (
-      <WrapWithHits linkedStoryGroup="ClearAll">
-        <ClearAll />
+      <WrapWithHits linkedStoryGroup="ClearRefinements">
+        <ClearRefinements />
       </WrapWithHits>
     ),
     {
@@ -64,8 +67,8 @@ stories
   .addWithJSX(
     'clear all refinements and the query',
     () => (
-      <WrapWithHits linkedStoryGroup="ClearAll">
-        <ClearAll
+      <WrapWithHits linkedStoryGroup="ClearRefinements">
+        <ClearRefinements
           clearsQuery
           translations={{ reset: 'Clear refinements and query' }}
         />

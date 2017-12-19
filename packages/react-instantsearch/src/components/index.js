@@ -9,7 +9,7 @@ export { default as PoweredBy } from './PoweredBy.js';
 export { default as RangeInput } from './RangeInput.js';
 export { default as StarRating } from './StarRating.js';
 export { default as RefinementList } from './RefinementList.js';
-export { default as ClearAll } from './ClearAll.js';
+export { default as ClearRefinements } from './ClearRefinements.js';
 export { default as ScrollTo } from './ScrollTo.js';
 export { default as SearchBox } from './SearchBox.js';
 export { default as SortBy } from './SortBy.js';

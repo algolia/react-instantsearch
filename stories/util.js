@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {
   InstantSearch,
-  ClearAll,
+  ClearRefinements,
   SearchBox,
   Pagination,
   Highlight,
@@ -80,7 +80,7 @@ const WrapWithHits = ({
                   }}
                 />
               ) : null}
-              <ClearAll translations={{ reset: 'Clear all filters' }} />
+              <ClearRefinements translations={{ reset: 'Clear all filters' }} />
             </div>
             <CustomHits />
             <div className="hit-pagination">
