@@ -2,13 +2,13 @@
 
 import { SearchParameters } from 'algoliasearch-helper';
 
-import connect from './connectMultiRange';
+import connect from './connectNumericMenu';
 jest.mock('../core/createConnector');
 
 let props;
 let params;
 
-describe('connectMultiRange', () => {
+describe('connectNumericMenu', () => {
   describe('single index', () => {
     const context = { context: { ais: { mainTargetedIndex: 'index' } } };
     const getProvidedProps = connect.getProvidedProps.bind(context);

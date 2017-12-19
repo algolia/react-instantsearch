@@ -95,10 +95,10 @@ function cleanUp(props, searchState, context) {
 }
 
 /**
- * connectMultiRange connector provides the logic to build a widget that will
+ * connectNumericMenu connector provides the logic to build a widget that will
  * give the user the ability to select a range value for a numeric attribute.
  * Ranges are defined statically.
- * @name connectMultiRange
+ * @name connectNumericMenu
  * @requirements The attribute passed to the `attributeName` prop must be holding numerical values.
  * @kind connector
  * @propType {string} attributeName - the name of the attribute in the records
@@ -108,10 +108,10 @@ function cleanUp(props, searchState, context) {
  * @providedPropType {function} refine - a function to select a range.
  * @providedPropType {function} createURL - a function to generate a URL for the corresponding search state
  * @providedPropType {string} currentRefinement - the refinement currently applied.  follow the shape of a `string` with a pattern of `'{start}:{end}'` which corresponds to the current selected item. For instance, when the selected item is `{start: 10, end: 20}`, the searchState of the widget is `'10:20'`. When `start` isn't defined, the searchState of the widget is `':{end}'`, and the same way around when `end` isn't defined. However, when neither `start` nor `end` are defined, the searchState is an empty string.
- * @providedPropType {array.<{isRefined: boolean, label: string, value: string, isRefined: boolean, noRefinement: boolean}>} items - the list of ranges the MultiRange can display.
+ * @providedPropType {array.<{isRefined: boolean, label: string, value: string, isRefined: boolean, noRefinement: boolean}>} items - the list of ranges the NumericMenu can display.
  */
 export default createConnector({
-  displayName: 'AlgoliaMultiRange',
+  displayName: 'AlgoliaNumericMenu',
 
   propTypes: {
     id: PropTypes.string,

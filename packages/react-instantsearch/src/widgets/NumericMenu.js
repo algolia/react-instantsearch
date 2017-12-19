@@ -1,15 +1,15 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import BaseWidget from './BaseWidget';
-import connectMultiRange from '../connectors/connectMultiRange.js';
-import MultiRangeComponent from '../components/MultiRange.js';
+import connectNumericMenu from '../connectors/connectNumericMenu.js';
+import NumericMenuComponent from '../components/NumericMenu.js';
 import classNames from '../components/classNames';
 
 const cx = classNames('NumericMenu');
 
 /**
- * MultiRange is a widget used for selecting the range value of a numeric attribute.
- * @name MultiRange
+ * NumericMenu is a widget used for selecting the range value of a numeric attribute.
+ * @name NumericMenu
  * @kind widget
  * @requirements The attribute passed to the `attributeName` prop must be holding numerical values.
  * @propType {string} attributeName - the name of the attribute in the records
@@ -30,7 +30,7 @@ const cx = classNames('NumericMenu');
  * @example
  * import React from 'react';
  *
- * import { MultiRange, InstantSearch } from 'react-instantsearch/dom';
+ * import { NumericMenu, InstantSearch } from 'react-instantsearch/dom';
  *
  * export default function App() {
  *   return (
@@ -39,7 +39,7 @@ const cx = classNames('NumericMenu');
  *       apiKey="6be0576ff61c053d5f9a3225e2a90f76"
  *       indexName="ikea"
  *     >
- *       <MultiRange
+ *       <NumericMenu
  *         attributeName="price"
  *         items={[
  *           { end: 10, label: '<$10' },
@@ -55,7 +55,7 @@ const cx = classNames('NumericMenu');
 
 const Widget = props => (
   <BaseWidget cx={cx} header={props.header} footer={props.footer}>
-    <MultiRangeComponent cx={cx} {...props} />
+    <NumericMenuComponent cx={cx} {...props} />
   </BaseWidget>
 );
 
@@ -64,4 +64,4 @@ Widget.propTypes = {
   footer: PropTypes.node,
 };
 
-export default connectMultiRange(Widget);
+export default connectNumericMenu(Widget);

@@ -22,8 +22,8 @@ export {
 } from './src/connectors/connectInfiniteResults.js';
 export { default as connectMenu } from './src/connectors/connectMenu.js';
 export {
-  default as connectMultiRange,
-} from './src/connectors/connectMultiRange.js';
+  default as connectNumericMenu,
+} from './src/connectors/connectNumericMenu.js';
 export {
   default as connectPagination,
 } from './src/connectors/connectPagination.js';

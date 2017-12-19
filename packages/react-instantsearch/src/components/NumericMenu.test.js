@@ -6,13 +6,13 @@ import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 Enzyme.configure({ adapter: new Adapter() });
 
-import MultiRange from './MultiRange';
+import NumericMenu from './NumericMenu';
 
-describe('MultiRange', () => {
+describe('NumericMenu', () => {
   it('supports passing items values', () => {
     const tree = renderer
       .create(
-        <MultiRange
+        <NumericMenu
           cx={(...x) => x.join(' ')}
           createURL={() => '#'}
           refine={() => null}
@@ -53,7 +53,7 @@ describe('MultiRange', () => {
   it('supports having a selected item', () => {
     const tree = renderer
       .create(
-        <MultiRange
+        <NumericMenu
           cx={(...x) => x.join(' ')}
           createURL={() => '#'}
           refine={() => null}
@@ -94,7 +94,7 @@ describe('MultiRange', () => {
   it('no refinements', () => {
     const tree = renderer
       .create(
-        <MultiRange
+        <NumericMenu
           cx={(...x) => x.join(' ')}
           createURL={() => '#'}
           refine={() => null}
@@ -135,7 +135,7 @@ describe('MultiRange', () => {
   it('refines its value on change', () => {
     const refine = jest.fn();
     const wrapper = mount(
-      <MultiRange
+      <NumericMenu
         cx={(...x) => x.join(' ')}
         refine={refine}
         items={[
@@ -185,7 +185,7 @@ describe('MultiRange', () => {
   it('indicate when there is no refinement', () => {
     const refine = jest.fn();
     const wrapper = mount(
-      <MultiRange
+      <NumericMenu
         cx={(...x) => x.join(' ')}
         refine={refine}
         items={[

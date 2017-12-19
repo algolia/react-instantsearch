@@ -24,7 +24,7 @@ export { default as HitsPerPage } from './src/widgets/HitsPerPage.js';
 export { default as InfiniteResults } from './src/widgets/InfiniteResults.js';
 export { default as Menu } from './src/widgets/Menu.js';
 export { default as MenuSelect } from './src/widgets/MenuSelect.js';
-export { default as MultiRange } from './src/widgets/MultiRange.js';
+export { default as NumericMenu } from './src/widgets/NumericMenu.js';
 export { default as Pagination } from './src/widgets/Pagination.js';
 export { default as PoweredBy } from './src/widgets/PoweredBy.js';
 export { default as RangeInput } from './src/widgets/RangeInput.js';

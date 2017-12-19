@@ -8,7 +8,7 @@ import {
 } from 'react-instantsearch/dom';
 import {
   connectHits,
-  connectMultiRange,
+  connectNumericMenu,
   connectRefinementList,
   connectRange,
 } from 'react-instantsearch/connectors';
@@ -190,7 +190,7 @@ OptionCapacity.propTypes = {
   value: PropTypes.string,
 };
 
-const CapacitySelector = connectMultiRange(
+const CapacitySelector = connectNumericMenu(
   ({ items, currentRefinement, refine }) => {
     const selectValue = e => refine(e.target.value);
     const options = items.map(item => (

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import List from './List';
 import translatable from '../core/translatable';
 
-class MultiRange extends Component {
+class NumericMenu extends Component {
   static propTypes = {
     cx: PropTypes.func.isRequired,
     items: PropTypes.arrayOf(
@@ -66,4 +66,4 @@ class MultiRange extends Component {
 
 export default translatable({
   all: 'All',
-})(MultiRange);
+})(NumericMenu);

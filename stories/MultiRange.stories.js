@@ -1,7 +1,7 @@
 import React from 'react';
 import { setAddon, storiesOf } from '@storybook/react';
 import {
-  MultiRange,
+  NumericMenu,
   Panel,
   Configure,
 } from '../packages/react-instantsearch/dom';
@@ -10,14 +10,14 @@ import JSXAddon from 'storybook-addon-jsx';
 
 setAddon(JSXAddon);
 
-const stories = storiesOf('MultiRange', module);
+const stories = storiesOf('NumericMenu', module);
 
 stories
   .addWithJSX(
     'default',
     () => (
-      <WrapWithHits linkedStoryGroup="MultiRange">
-        <MultiRange
+      <WrapWithHits linkedStoryGroup="NumericMenu">
+        <NumericMenu
           attributeName="price"
           items={[
             { end: 10, label: '<$10' },
@@ -36,8 +36,8 @@ stories
   .addWithJSX(
     'with header and footer',
     () => (
-      <WrapWithHits linkedStoryGroup="MultiRange">
-        <MultiRange
+      <WrapWithHits linkedStoryGroup="NumericMenu">
+        <NumericMenu
           attributeName="price"
           items={[
             { end: 10, label: '<$10' },
@@ -58,8 +58,8 @@ stories
   .addWithJSX(
     'with a default range selected',
     () => (
-      <WrapWithHits linkedStoryGroup="MultiRange">
-        <MultiRange
+      <WrapWithHits linkedStoryGroup="NumericMenu">
+        <NumericMenu
           attributeName="price"
           items={[
             { end: 10, label: '<$10' },
@@ -79,8 +79,8 @@ stories
   .addWithJSX(
     'with some non selectable ranges',
     () => (
-      <WrapWithHits searchBox={false} linkedStoryGroup="MultiRange">
-        <MultiRange
+      <WrapWithHits searchBox={false} linkedStoryGroup="NumericMenu">
+        <NumericMenu
           attributeName="price"
           items={[
             { end: 10, label: '<$10' },
@@ -99,9 +99,9 @@ stories
   .addWithJSX(
     'with panel',
     () => (
-      <WrapWithHits linkedStoryGroup="MultiRange">
+      <WrapWithHits linkedStoryGroup="NumericMenu">
         <Panel title="Price">
-          <MultiRange
+          <NumericMenu
             attributeName="price"
             items={[
               { end: 10, label: '<$10' },
@@ -121,10 +121,10 @@ stories
   .addWithJSX(
     'with panel but no available refinements',
     () => (
-      <WrapWithHits searchBox={false} linkedStoryGroup="MultiRange">
+      <WrapWithHits searchBox={false} linkedStoryGroup="NumericMenu">
         <Panel title="Price">
           <Configure filters="price>200000" />
-          <MultiRange
+          <NumericMenu
             attributeName="price"
             items={[
               { end: 10, label: '<$10' },

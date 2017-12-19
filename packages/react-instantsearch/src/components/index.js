@@ -3,7 +3,7 @@ export { default as HierarchicalMenu } from './HierarchicalMenu.js';
 export { default as Hits } from './Hits.js';
 export { default as HitsPerPage } from './HitsPerPage.js';
 export { default as Menu } from './Menu.js';
-export { default as MultiRange } from './MultiRange.js';
+export { default as NumericMenu } from './NumericMenu.js';
 export { default as Pagination } from './Pagination.js';
 export { default as PoweredBy } from './PoweredBy.js';
 export { default as RangeInput } from './RangeInput.js';
