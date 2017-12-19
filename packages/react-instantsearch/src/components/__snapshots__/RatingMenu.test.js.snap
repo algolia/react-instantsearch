@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`StarRating applies translations 1`] = `
+exports[`RatingMenu applies translations 1`] = `
 <div>
   <svg
     style={
@@ -427,7 +427,7 @@ exports[`StarRating applies translations 1`] = `
 </div>
 `;
 
-exports[`StarRating supports passing max/min values 1`] = `
+exports[`RatingMenu supports passing max/min values 1`] = `
 <div>
   <svg
     style={
