@@ -28,8 +28,9 @@ import { InstantSearch, SearchBox, Hits } from 'react-instantsearch/dom';
 class App extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      refresh: false,
+      refresh: false
     };
   }
 
@@ -74,8 +75,9 @@ import { InstantSearch, SearchBox, Hits } from 'react-instantsearch/dom';
 class App extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      refresh: false,
+      refresh: false
     };
   }
 
@@ -86,6 +88,7 @@ class App extends Component {
   onSearchStateChange = () => {
     this.setState({ refresh: false });
   };
+
   render() {
     return (
       <InstantSearch
