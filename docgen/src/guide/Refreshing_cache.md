@@ -30,7 +30,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-      refresh: false
+      refresh: false,
     };
   }
 
@@ -77,7 +77,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-      refresh: false
+      refresh: false,
     };
   }
 
