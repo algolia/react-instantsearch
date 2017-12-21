@@ -202,14 +202,14 @@ exports[`RefinementList default refinement list 1`] = `
         </span>
       </label>
     </li>
-    <button
-      className="showMore false"
-      disabled={false}
-      onClick={[Function]}
-    >
-      Show more
-    </button>
   </ul>
+  <button
+    className="showMore false"
+    disabled={false}
+    onClick={[Function]}
+  >
+    Show more
+  </button>
 </div>
 `;
 

@@ -26,7 +26,7 @@ exports[`HierarchicalMenu applies translations 1`] = `
         </span>
       </a>
       <ul
-        className="list"
+        className="list list--child"
       >
         <li
           className="item   "
@@ -144,7 +144,7 @@ exports[`HierarchicalMenu default hierarchical menu 1`] = `
         </span>
       </a>
       <ul
-        className="list"
+        className="list list--child"
       >
         <li
           className="item   "
@@ -211,13 +211,13 @@ exports[`HierarchicalMenu default hierarchical menu 1`] = `
         </span>
       </a>
     </li>
-    <button
-      className="showMore false"
-      disabled={false}
-      onClick={[Function]}
-    >
-      Show more
-    </button>
   </ul>
+  <button
+    className="showMore false"
+    disabled={false}
+    onClick={[Function]}
+  >
+    Show more
+  </button>
 </div>
 `;

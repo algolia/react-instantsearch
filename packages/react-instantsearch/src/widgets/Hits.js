@@ -5,7 +5,7 @@ import connectHits from '../connectors/connectHits.js';
 import HitsComponent from '../components/Hits.js';
 import classNames from '../components/classNames';
 
-const cx = classNames('Results');
+const cx = classNames('Hits');
 
 /**
  * Displays a list of hits.
@@ -20,12 +20,12 @@ const cx = classNames('Results');
  *   hit in its JSON form. The component will be called with a `hit` prop.
  * @propType {node} [header] - Adds a header to the widget.
  * @propType {node} [footer] - Adds a footer to the widget.
- * @themeKey ais-Results - the root div of the widget
- * @themeKey ais-Results-header - the header of the widget (optional)
- * @themeKey ais-Results-body - the body of the widget
- * @themeKey ais-Results-list - the list of results
- * @themeKey ais-Results-item - the hit list item
- * @themeKey ais-Results-footer - the footer of the widget (optional)
+ * @themeKey ais-Hits - the root div of the widget
+ * @themeKey ais-Hits-header - the header of the widget (optional)
+ * @themeKey ais-Hits-body - the body of the widget
+ * @themeKey ais-Hits-list - the list of results
+ * @themeKey ais-Hits-item - the hit list item
+ * @themeKey ais-Hits-footer - the footer of the widget (optional)
  * @example
  * import React from 'react';
 

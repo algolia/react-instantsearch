@@ -5,7 +5,7 @@ import connectInfiniteHits from '../connectors/connectInfiniteHits.js';
 import InfiniteHitsComponent from '../components/InfiniteHits.js';
 import classNames from '../components/classNames';
 
-const cx = classNames('InfiniteResults');
+const cx = classNames('InfiniteHits');
 
 /**
  * Displays an infinite list of hits along with a **load more** button.
@@ -20,14 +20,14 @@ const cx = classNames('InfiniteResults');
  *   hit in its JSON form. The component will be called with a `hit` prop.
  * @propType {node} [header] - Adds a header to the widget.
  * @propType {node} [footer] - Adds a footer to the widget.
- * @themeKey ais-InfiniteResults - the root div of the widget
- * @themeKey ais-InfiniteResults-header - the header of the widget (optional)
- * @themeKey ais-InfiniteResults-body - the body of the widget
- * @themeKey ais-InfiniteResults-list - the list of hits
- * @themeKey ais-InfiniteResults-item - the hit list item
- * @themeKey ais-InfiniteResults-loadMore - the button used to display more results
- * @themeKey ais-InfiniteResults-loadMore--disabled - the disabled button used to display more results
- * @themeKey ais-InfiniteResults-footer - the footer of the widget (optional)
+ * @themeKey ais-InfiniteHits - the root div of the widget
+ * @themeKey ais-InfiniteHits-header - the header of the widget (optional)
+ * @themeKey ais-InfiniteHits-body - the body of the widget
+ * @themeKey ais-InfiniteHits-list - the list of hits
+ * @themeKey ais-InfiniteHits-item - the hit list item
+ * @themeKey ais-InfiniteHits-loadMore - the button used to display more results
+ * @themeKey ais-InfiniteHits-loadMore--disabled - the disabled button used to display more results
+ * @themeKey ais-InfiniteHits-footer - the footer of the widget (optional)
  * @translationKey loadMore - the label of load more button
  * @example
  * import React from 'react';

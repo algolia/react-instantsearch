@@ -336,14 +336,14 @@ exports[`Menu applies translations 1`] = `
         </span>
       </a>
     </li>
-    <button
-      className="showMore false"
-      disabled={false}
-      onClick={[Function]}
-    >
-       display more
-    </button>
   </ul>
+  <button
+    className="showMore false"
+    disabled={false}
+    onClick={[Function]}
+  >
+     display more
+  </button>
 </div>
 `;
 
@@ -394,13 +394,13 @@ exports[`Menu default menu 1`] = `
         </span>
       </a>
     </li>
-    <button
-      className="showMore false"
-      disabled={false}
-      onClick={[Function]}
-    >
-      Show more
-    </button>
   </ul>
+  <button
+    className="showMore false"
+    disabled={false}
+    onClick={[Function]}
+  >
+    Show more
+  </button>
 </div>
 `;

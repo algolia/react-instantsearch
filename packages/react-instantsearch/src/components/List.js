@@ -62,7 +62,7 @@ class List extends Component {
 
   renderItem = (item, resetQuery) => {
     const items = item.items && (
-      <ul className={this.props.cx('list')}>
+      <ul className={this.props.cx('list', 'list--child')}>
         {item.items
           .slice(0, this.getLimit())
           .map(child => this.renderItem(child, item))}
@@ -160,8 +160,8 @@ class List extends Component {
           {items
             .slice(0, limit)
             .map(item => this.renderItem(item, this.resetQuery))}
-          {this.renderShowMore()}
         </ul>
+        {this.renderShowMore()}
       </div>
     );
   }

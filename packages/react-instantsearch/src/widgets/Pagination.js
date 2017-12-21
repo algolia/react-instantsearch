@@ -25,12 +25,14 @@ const cx = classNames('Pagination');
  * @themeKey ais-Pagination-body - the body of the widget
  * @themeKey ais-Pagination-list - the list of all pagination items
  * @themeKey ais-Pagination-item - the pagination list item
+ * @themeKey ais-Pagination-item--firstPage - the "first" pagination list item
+ * @themeKey ais-Pagination-item--lastPage - the "last" pagination list item
  * @themeKey ais-Pagination-item--previousPage - the "previous" pagination list item
  * @themeKey ais-Pagination-item--nextPage - the "next" pagination list item
  * @themeKey ais-Pagination-item--page - the "page" pagination list item
  * @themeKey ais-Pagination-item--selected - the selected pagination list item
  * @themeKey ais-Pagination-item--disabled - the disabled pagination list item
- * @themeKey ais-Pagination-item--link - the pagination clickable element
+ * @themeKey ais-Pagination-link - the pagination clickable element
  * @themeKey ais-Pagination-footer - the footer of the widget (optional)
  * @translationKey previous - Label value for the previous page link
  * @translationKey next - Label value for the next page link

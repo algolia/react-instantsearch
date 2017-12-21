@@ -20,7 +20,7 @@ You can style icons colors too, for example the `SearchBox` ones:
 ```css
 .ais-SearchBox__reset svg,
 .ais-SearchBox__button svg {
-  fill: red
+  fill: red;
 }
 ```
 
@@ -32,8 +32,9 @@ manually.
 ### Via CDN
 
 The theme is available on unpkg.com:
-- unminified: https://unpkg.com/react-instantsearch-theme-algolia@4.0.0/style.css
-- minified: https://unpkg.com/react-instantsearch-theme-algolia@4.0.0/style.min.css
+
+* unminified: https://unpkg.com/react-instantsearch-theme-algolia@4.0.0/style.css
+* minified: https://unpkg.com/react-instantsearch-theme-algolia@4.0.0/style.min.css
 
 You can either copy paste the content in your own app or use a direct link to unpkg.com:
 
@@ -49,6 +50,7 @@ npm install sass-loader style-loader css-loader autoprefixer postcss-loader --sa
 ```
 
 App.js:
+
 ```jsx
 import 'react-instantsearch-theme-algolia/style.scss';
 // import 'react-instantsearch-theme-algolia/style.css'
@@ -56,6 +58,7 @@ import 'react-instantsearch-theme-algolia/style.scss';
 ```
 
 webpack.config.babel.js:
+
 ```jsx
 import autoprefixer from 'autoprefixer';
 
@@ -64,12 +67,12 @@ export default {
     loaders: [
       {
         test: /\.scss$/,
-        loaders: ['style?insertAt=top', 'css', 'postcss', 'sass'],
-      },
-    ],
+        loaders: ['style?insertAt=top', 'css', 'postcss', 'sass']
+      }
+    ]
   },
-  postcss: [autoprefixer()],
-}
+  postcss: [autoprefixer()]
+};
 ```
 
 ### Other bundlers
