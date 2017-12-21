@@ -7,7 +7,7 @@ exports[`RefinementList applies translations 1`] = `
   >
     <form
       action=""
-      className="ais-SearchBox-form ais-SearchBox-false"
+      className="ais-SearchBox-form"
       noValidate={true}
       onReset={[Function]}
       onSubmit={[Function]}
@@ -220,7 +220,7 @@ exports[`RefinementList refinement list with search inside items but no search r
   >
     <form
       action=""
-      className="ais-SearchBox-form ais-SearchBox-false"
+      className="ais-SearchBox-form"
       noValidate={true}
       onReset={[Function]}
       onSubmit={[Function]}
@@ -367,7 +367,7 @@ exports[`RefinementList refinement list with search inside items with search res
   >
     <form
       action=""
-      className="ais-SearchBox-form ais-SearchBox-false"
+      className="ais-SearchBox-form"
       noValidate={true}
       onReset={[Function]}
       onSubmit={[Function]}

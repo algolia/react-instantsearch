@@ -7,7 +7,7 @@ exports[`Menu Menu with search inside items but no search results 1`] = `
   >
     <form
       action=""
-      className="ais-SearchBox-form ais-SearchBox-false"
+      className="ais-SearchBox-form"
       noValidate={true}
       onReset={[Function]}
       onSubmit={[Function]}
@@ -142,7 +142,7 @@ exports[`Menu Menu with search inside items with search results 1`] = `
   >
     <form
       action=""
-      className="ais-SearchBox-form ais-SearchBox-false"
+      className="ais-SearchBox-form"
       noValidate={true}
       onReset={[Function]}
       onSubmit={[Function]}
@@ -233,7 +233,7 @@ exports[`Menu applies translations 1`] = `
   >
     <form
       action=""
-      className="ais-SearchBox-form ais-SearchBox-false"
+      className="ais-SearchBox-form"
       noValidate={true}
       onReset={[Function]}
       onSubmit={[Function]}
