@@ -16,6 +16,8 @@ const cx = classNames('MenuSelect');
  * @propType {string} attributeName - the name of the attribute in the record
  * @propType {string} [defaultRefinement] - the value of the item selected by default
  * @propType {function} [transformItems] - Function to modify the items being displayed, e.g. for filtering or sorting them. Takes an items as parameter and expects it back in return.
+ * @propType {node} [header] - Adds a header to the widget.
+ * @propType {node} [footer] - Adds a footer to the widget.
  * @themeKey ais-MenuSelect - the root div of the widget
  * @themeKey ais-MenuSelect-header - the header of the widget (optional)
  * @themeKey ais-MenuSelect-body - the body of the widget

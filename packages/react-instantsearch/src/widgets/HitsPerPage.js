@@ -19,6 +19,8 @@ const cx = classNames('ResultsPerPage');
  * @propType {{value: number, label: string}[]} items - List of available options.
  * @propType {number} defaultRefinement - The number of items selected by default
  * @propType {function} [transformItems] - Function to modify the items being displayed, e.g. for filtering or sorting them. Takes an items as parameter and expects it back in return.
+ * @propType {node} [header] - Adds a header to the widget.
+ * @propType {node} [footer] - Adds a footer to the widget.
  * @themeKey ais-ResultsPerPage - the root div of the widget
  * @themeKey ais-ResultsPerPage-header - the header of the widget (optional)
  * @themeKey ais-ResultsPerPage-body - the body of the widget

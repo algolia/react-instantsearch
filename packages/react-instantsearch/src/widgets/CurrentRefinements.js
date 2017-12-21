@@ -14,6 +14,8 @@ const cx = classNames('CurrentRefinements');
  * @name CurrentRefinements
  * @kind widget
  * @propType {function} [transformItems] - Function to modify the items being displayed, e.g. for filtering or sorting them. Takes an items as parameter and expects it back in return.
+ * @propType {node} [header] - Adds a header to the widget.
+ * @propType {node} [footer] - Adds a footer to the widget.
  * @themeKey ais-CurrentRefinements - the root div of the widget
  * @themeKey ais-CurrentRefinements-header - the header of the widget (optional)
  * @themeKey ais-CurrentRefinements-body - the body of the widget

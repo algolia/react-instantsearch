@@ -20,6 +20,8 @@ const cx = classNames('Toggle');
  * @propType {string} label - Label for the toggle.
  * @propType {any} value - Value of the refinement to apply on `attributeName` when checked.
  * @propType {boolean} [defaultRefinement=false] - Default state of the widget. Should the toggle be checked by default?
+ * @propType {node} [header] - Adds a header to the widget.
+ * @propType {node} [footer] - Adds a footer to the widget.
  * @themeKey ais-Toggle - the root div of the widget
  * @themeKey ais-Toggle-header - the header of the widget (optional)
  * @themeKey ais-Toggle-body - the body of the widget

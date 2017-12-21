@@ -18,6 +18,8 @@ const cx = classNames('RatingMenu');
  * @propType {number} [min] - Minimum value for the rating. When this isn't set, the minimum value will be automatically computed by Algolia using the data in the index.
  * @propType {number} [max] - Maximum value for the rating. When this isn't set, the maximum value will be automatically computed by Algolia using the data in the index.
  * @propType {{min: number, max: number}} [defaultRefinement] - Default state of the widget containing the lower bound (end) and the max for the rating.
+ * @propType {node} [header] - Adds a header to the widget.
+ * @propType {node} [footer] - Adds a footer to the widget.
  * @themeKey ais-RatingMenu - the root div of the widget
  * @themeKey ais-RatingMenu-header - the header of the widget (optional)
  * @themeKey ais-RatingMenu-body - the body of the widget

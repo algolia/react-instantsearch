@@ -19,6 +19,8 @@ const cx = classNames('RefinementList');
  * @propType {number} [limitMax=20] - the maximum number of displayed items. Only used when showMore is set to `true`
  * @propType {string[]} [defaultRefinement] - the values of the items selected by default
  * @propType {function} [transformItems] - Function to modify the items being displayed, e.g. for filtering or sorting them. Takes an items as parameter and expects it back in return.
+ * @propType {node} [header] - Adds a header to the widget.
+ * @propType {node} [footer] - Adds a footer to the widget.
  * @themeKey ais-RefinementList - the root div of the widget
  * @themeKey ais-RefinementList-header - the header of the widget (optional)
  * @themeKey ais-RefinementList-body - the body of the widget

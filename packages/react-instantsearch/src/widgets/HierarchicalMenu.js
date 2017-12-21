@@ -57,6 +57,8 @@ const cx = classNames('HierarchicalMenu');
  * @propType {boolean} [showParentLevel=true] - Flag to set if the parent level should be displayed.
  * @propType {string} [defaultRefinement] - the item value selected by default
  * @propType {function} [transformItems] - Function to modify the items being displayed, e.g. for filtering or sorting them. Takes an items as parameter and expects it back in return.
+ * @propType {node} [header] - Adds a header to the widget.
+ * @propType {node} [footer] - Adds a footer to the widget.
  * @themeKey ais-HierarchicalMenu - the root div of the widget
  * @themeKey ais-HierarchicalMenu-header - the header of the widget (optional)
  * @themeKey ais-HierarchicalMenu-body - the body of the widget

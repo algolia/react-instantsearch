@@ -18,6 +18,8 @@ const cx = classNames('Pagination');
  * @propType {boolean} [showNext=true] - Display the next page link.
  * @propType {number} [pagesPadding=3] - How many page links to display around the current page.
  * @propType {number} [maxPages=Infinity] - Maximum number of pages to display.
+ * @propType {node} [header] - Adds a header to the widget.
+ * @propType {node} [footer] - Adds a footer to the widget.
  * @themeKey ais-Pagination - the root div of the widget
  * @themeKey ais-Pagination-header - the header of the widget (optional)
  * @themeKey ais-Pagination-body - the body of the widget

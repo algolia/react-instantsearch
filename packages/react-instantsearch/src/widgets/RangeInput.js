@@ -17,6 +17,8 @@ const cx = classNames('RangeInput');
  * @propType {number} [min] - Minimum value. When this isn't set, the minimum value will be automatically computed by Algolia using the data in the index.
  * @propType {number} [max] - Maximum value. When this isn't set, the maximum value will be automatically computed by Algolia using the data in the index.
  * @propType {number} [precision=2] - Number of digits after decimal point to use.
+ * @propType {node} [header] - Adds a header to the widget.
+ * @propType {node} [footer] - Adds a footer to the widget.
  * @themeKey ais-RangeInput - the root div of the widget
  * @themeKey ais-RangeInput-header - the header of the widget (optional)
  * @themeKey ais-RangeInput-body - the body of the widget

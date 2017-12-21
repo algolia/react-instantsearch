@@ -18,6 +18,8 @@ const cx = classNames('Results');
  * @propType {Component} [hitComponent] - Component used for rendering each hit from
  *   the results. If it is not provided the rendering defaults to displaying the
  *   hit in its JSON form. The component will be called with a `hit` prop.
+ * @propType {node} [header] - Adds a header to the widget.
+ * @propType {node} [footer] - Adds a footer to the widget.
  * @themeKey ais-Results - the root div of the widget
  * @themeKey ais-Results-header - the header of the widget (optional)
  * @themeKey ais-Results-body - the body of the widget

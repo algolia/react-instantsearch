@@ -16,6 +16,8 @@ const cx = classNames('SortBy');
  * @propType {{value: string, label: string}[]} items - The list of indexes to search in.
  * @propType {string} defaultRefinement - The default selected index.
  * @propType {function} [transformItems] - Function to modify the items being displayed, e.g. for filtering or sorting them. Takes an items as parameter and expects it back in return.
+ * @propType {node} [header] - Adds a header to the widget.
+ * @propType {node} [footer] - Adds a footer to the widget.
  * @themeKey ais-SortBy - the root div of the widget
  * @themeKey ais-SortBy-header - the header of the widget (optional)
  * @themeKey ais-SortBy-body - the body of the widget

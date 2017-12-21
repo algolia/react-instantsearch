@@ -14,6 +14,8 @@ const cx = classNames('ClearRefinements');
  * @kind widget
  * @propType {function} [transformItems] - Function to modify the items being displayed, e.g. for filtering or sorting them. Takes an items as parameter and expects it back in return.
  * @propType {boolean} [clearsQuery=false] - Pass true to also clear the search query
+ * @propType {node} [header] - Adds a header to the widget.
+ * @propType {node} [footer] - Adds a footer to the widget.
  * @themeKey ais-ClearRefinements - the root div of the widget
  * @themeKey ais-ClearRefinements-header - the header of the widget (optional)
  * @themeKey ais-ClearRefinements-body - the body of the widget

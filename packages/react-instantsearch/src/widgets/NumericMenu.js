@@ -16,6 +16,8 @@ const cx = classNames('NumericMenu');
  * @propType {{label: string, start: number, end: number}[]} items - List of options. With a text label, and upper and lower bounds.
  * @propType {string} [defaultRefinement] - the value of the item selected by default, follow the format "min:max".
  * @propType {function} [transformItems] - Function to modify the items being displayed, e.g. for filtering or sorting them. Takes an items as parameter and expects it back in return.
+ * @propType {node} [header] - Adds a header to the widget.
+ * @propType {node} [footer] - Adds a footer to the widget.
  * @themeKey ais-NumericMenu - the root div of the widget
  * @themeKey ais-NumericMenu-header - the header of the widget (optional)
  * @themeKey ais-NumericMenu-body - the body of the widget

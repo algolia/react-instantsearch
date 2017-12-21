@@ -11,6 +11,8 @@ const cx = classNames('Stats');
  * The Stats component displays the total number of matching hits and the time it took to get them (time spent in the Algolia server).
  * @name Stats
  * @kind widget
+ * @propType {node} [header] - Adds a header to the widget.
+ * @propType {node} [footer] - Adds a footer to the widget.
  * @themeKey ais-Stats - the root div of the widget
  * @themeKey ais-Stats-header - the header of the widget (optional)
  * @themeKey ais-Stats-body - the body of the widget
