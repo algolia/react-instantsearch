@@ -29,5 +29,25 @@ exports[`CurrentRefinements allows clearing unique items of a refinement 1`] = `
 exports[`CurrentRefinements renders a list of current refinements 1`] = `
 <ul
   className="list"
-/>
+>
+  <li
+    className="item"
+  >
+    <button
+      className="button"
+      onClick={[Function]}
+    >
+      <span
+        className="label"
+      >
+        Genre
+      </span>
+      <span
+        className="delete"
+      >
+        ✕
+      </span>
+    </button>
+  </li>
+</ul>
 `;
