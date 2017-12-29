@@ -89,11 +89,10 @@ describe('RatingMenu', () => {
   it('should create an URL for each row except for the largest: the default selected one', () => {
     const wrapper = mount(starRating);
 
-    expect(createURL.mock.calls).toHaveLength(4);
-    expect(createURL.mock.calls[0][0]).toEqual({ min: 5, max: 5 });
-    expect(createURL.mock.calls[1][0]).toEqual({ min: 4, max: 5 });
-    expect(createURL.mock.calls[2][0]).toEqual({ min: 3, max: 5 });
-    expect(createURL.mock.calls[3][0]).toEqual({ min: 2, max: 5 });
+    expect(createURL.mock.calls).toHaveLength(3);
+    expect(createURL.mock.calls[0][0]).toEqual({ min: 4, max: 5 });
+    expect(createURL.mock.calls[1][0]).toEqual({ min: 3, max: 5 });
+    expect(createURL.mock.calls[2][0]).toEqual({ min: 2, max: 5 });
 
     wrapper.unmount();
   });
@@ -108,13 +107,10 @@ describe('RatingMenu', () => {
 
     links.first().simulate('click');
 
-    expect(refine.mock.calls).toHaveLength(1);
-    expect(refine.mock.calls[0][0]).toEqual({ min: 5, max: 5 });
+    expect(refine.mock.calls).toHaveLength(0);
 
     selectedItem = wrapper.find('.item--selected');
     expect(selectedItem).toBeDefined();
-
-    refine.mockClear();
 
     const disabledIcon = wrapper.find('.item--disabled').find('.starIcon');
 
@@ -141,10 +137,10 @@ describe('RatingMenu', () => {
 
   it('clicking on the selected refinement should select the largest range', () => {
     const wrapper = mount(starRating);
-    wrapper.setProps({ currentRefinement: { min: 5, max: 5 } });
+    wrapper.setProps({ currentRefinement: { min: 4, max: 5 } });
 
     const links = wrapper.find('.link');
-    links.first().simulate('click');
+    links.at(1).simulate('click');
 
     expect(refine.mock.calls).toHaveLength(1);
     expect(refine.mock.calls[0][0]).toEqual({ min: 1, max: 5 });

@@ -86,12 +86,13 @@ class RatingMenu extends Component {
     // be clickable if it is selected.
     const isLastAndSelect = isLastSelectableItem && selected;
     const StarsWrapper = isLastAndSelect ? 'div' : 'a';
-    const onClickHandler = isLastAndSelect
-      ? {}
-      : {
-          href: createURL({ min: lowerBound, max }),
-          onClick: this.onClick.bind(this, lowerBound, max),
-        };
+    const onClickHandler =
+      disabled || isLastAndSelect
+        ? {}
+        : {
+            href: createURL({ min: lowerBound, max }),
+            onClick: this.onClick.bind(this, lowerBound, max),
+          };
 
     return (
       <li
@@ -105,7 +106,6 @@ class RatingMenu extends Component {
         <StarsWrapper
           aria-label={`${rating}${translate('ratingLabel')}`}
           className={cx('link')}
-          disabled={disabled}
           {...onClickHandler}
         >
           {icons}
