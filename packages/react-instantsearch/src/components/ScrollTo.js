@@ -20,7 +20,7 @@ class ScrollTo extends Component {
 
   render() {
     return (
-      <div ref={ref => (this.el = ref)} classNames={cx('')}>
+      <div ref={ref => (this.el = ref)} className={cx('')}>
         {this.props.children}
       </div>
     );
