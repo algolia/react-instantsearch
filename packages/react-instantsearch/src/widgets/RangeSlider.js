@@ -1,9 +1,4 @@
-import connectRange from '../connectors/connectRange';
-import BaseWidget from './BaseWidget';
 import React from 'react';
-import classNames from '../components/classNames';
-
-const cx = classNames('RangeSlider');
 
 /**
  * Since a lot of sliders already exist, we did not include one by default.
@@ -86,8 +81,8 @@ const ConnectedRange = connectRange(Range);
 
  */
 
-export default connectRange(({ header, footer }) => (
-  <BaseWidget cx={cx} header={header} footer={footer}>
+export default () => (
+  <div>
     We do not provide any Slider, see the documentation to learn how to connect
     one easily:
     <a
@@ -97,5 +92,5 @@ export default connectRange(({ header, footer }) => (
     >
       https://community.algolia.com/react-instantsearch/widgets/RangeSlider.html
     </a>
-  </BaseWidget>
-));
+  </div>
+);
