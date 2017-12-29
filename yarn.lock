@@ -6176,6 +6176,10 @@ insert-css@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/insert-css/-/insert-css-2.0.0.tgz#eb5d1097b7542f4c79ea3060d3aee07d053880f4"
 
+instantsearch.css@5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/instantsearch.css/-/instantsearch.css-5.0.0.tgz#af7db854e84a9b815f0228c0632b1764139a1fc6"
+
 internal-ip@1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/internal-ip/-/internal-ip-1.2.0.tgz#ae9fbf93b984878785d50a8de1b356956058cf5c"
