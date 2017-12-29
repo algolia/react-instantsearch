@@ -145,8 +145,9 @@ class List extends Component {
   render() {
     const { cx, items, withSearchBox, canRefine } = this.props;
     const searchBox = withSearchBox ? this.renderSearchBox() : null;
+
     if (items.length === 0) {
-      return searchBox;
+      return <div>{searchBox}</div>;
     }
 
     // Always limit the number of items we show on screen, since the actual
