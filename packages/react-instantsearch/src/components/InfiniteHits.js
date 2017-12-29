@@ -55,6 +55,7 @@ InfiniteHits.defaultProps = {
         borderBottom: '1px solid #bbb',
         paddingBottom: '5px',
         marginBottom: '5px',
+        wordBreak: 'break-all',
       }}
     >
       {JSON.stringify(hit).slice(0, 100)}...
