@@ -36,7 +36,7 @@ We **strongly** recommend that you use at least **reset.css** in order to neglec
 
 ### Via CDN
 
-The themes are available on jsdeliver:
+The themes are available on jsdelivr:
 
 unminified:
 
@@ -48,41 +48,39 @@ minified:
 * https://cdn.jsdelivr.net/npm/instantsearch.css@latest/themes/reset-min.css
 * https://cdn.jsdelivr.net/npm/instantsearch.css@latest/themes/algolia-min.css
 
-You can either copy paste the content in your own app or use a direct link to jsdeliver:
+You can either copy paste the content in your own app or use a direct link to jsdelivr:
 
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@latest/themes/reset-min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@latest/themes/algolia-min.css">
 ```
 
 ### Via npm, Webpack
 
 ```shell
 npm install instantsearch.css --save
-npm install sass-loader style-loader css-loader autoprefixer postcss-loader --save-dev
+npm install style-loader css-loader --save-dev
 ```
 
 App.js:
 
-```jsx
-// import 'instantsearch.css/themes/reset.css'
-// import 'instantsearch.css/themes/algolia.css'
+```js
+import 'instantsearch.css/themes/reset.css';
+import 'instantsearch.css/themes/algolia.css';
 ```
 
 webpack.config.babel.js:
 
-```jsx
-import autoprefixer from 'autoprefixer';
-
+```js
 export default {
   module: {
     loaders: [
       {
         test: /\.css$/,
-        loaders: ['style?insertAt=top', 'css', 'postcss', 'sass']
+        loaders: ['style?insertAt=top', 'css']
       }
     ]
-  },
-  postcss: [autoprefixer()]
+  }
 };
 ```
 
