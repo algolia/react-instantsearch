@@ -1,8 +1,8 @@
-import PropTypes from 'prop-types';
 import React from 'react';
-import BaseWidget from './BaseWidget';
-import connectNumericMenu from '../connectors/connectNumericMenu.js';
-import NumericMenuComponent from '../components/NumericMenu.js';
+import connectNumericMenu from '../connectors/connectNumericMenu';
+import AutoHideContainer from '../components/AutoHideContainer';
+import Panel from '../components/Panel';
+import NumericMenuComponent from '../components/NumericMenu';
 import classNames from '../components/classNames';
 
 const cx = classNames('NumericMenu');
@@ -15,6 +15,7 @@ const cx = classNames('NumericMenu');
  * @propType {string} attributeName - the name of the attribute in the records
  * @propType {{label: string, start: number, end: number}[]} items - List of options. With a text label, and upper and lower bounds.
  * @propType {string} [defaultRefinement] - the value of the item selected by default, follow the format "min:max".
+ * @propType {boolean} [autoHideContainer=false] - Hide the container when no results match.
  * @propType {function} [transformItems] - Function to modify the items being displayed, e.g. for filtering or sorting them. Takes an items as parameter and expects it back in return.
  * @propType {node} [header] - Adds a header to the widget.
  * @propType {node} [footer] - Adds a footer to the widget.
@@ -55,15 +56,12 @@ const cx = classNames('NumericMenu');
  * }
  */
 
-const Widget = props => (
-  <BaseWidget cx={cx} header={props.header} footer={props.footer}>
-    <NumericMenuComponent cx={cx} {...props} />
-  </BaseWidget>
-);
+const NumericMenu = connectNumericMenu(props => (
+  <AutoHideContainer {...props}>
+    <Panel {...props} cx={cx}>
+      <NumericMenuComponent {...props} cx={cx} />
+    </Panel>
+  </AutoHideContainer>
+));
 
-Widget.propTypes = {
-  header: PropTypes.node,
-  footer: PropTypes.node,
-};
-
-export default connectNumericMenu(Widget);
+export default NumericMenu;

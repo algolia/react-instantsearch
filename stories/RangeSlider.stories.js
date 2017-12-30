@@ -26,7 +26,7 @@ stories
     'with header and footer',
     () => (
       <WrapWithHits hasPlayground={true} linkedStoryGroup="RangeSlider">
-        <Range attributeName="price" header="Header" footer="Footer" />
+        <Range attributeName="price" header="Range Slider" footer="Footer" />
       </WrapWithHits>
     ),
     {

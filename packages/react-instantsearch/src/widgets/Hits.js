@@ -1,8 +1,7 @@
-import PropTypes from 'prop-types';
 import React from 'react';
-import BaseWidget from './BaseWidget';
-import connectHits from '../connectors/connectHits.js';
-import HitsComponent from '../components/Hits.js';
+import connectHits from '../connectors/connectHits';
+import Panel from '../components/Panel';
+import HitsComponent from '../components/Hits';
 import classNames from '../components/classNames';
 
 const cx = classNames('Hits');
@@ -44,15 +43,10 @@ const cx = classNames('Hits');
  * }
  */
 
-const Widget = props => (
-  <BaseWidget cx={cx} header={props.header} footer={props.footer}>
-    <HitsComponent cx={cx} {...props} />
-  </BaseWidget>
-);
+const Hits = connectHits(props => (
+  <Panel {...props} cx={cx}>
+    <HitsComponent {...props} cx={cx} />
+  </Panel>
+));
 
-Widget.propTypes = {
-  header: PropTypes.node,
-  footer: PropTypes.node,
-};
-
-export default connectHits(Widget);
+export default Hits;

@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { storiesOf } from '@storybook/react';
 import { connectRange } from '../packages/react-instantsearch/connectors';
+import { Panel } from '../packages/react-instantsearch/dom';
 import { WrapWithHits } from './util';
-import BaseWidget from '../packages/react-instantsearch/src/widgets/BaseWidget';
 import classNames from '../packages/react-instantsearch/src/components/classNames';
 import Rheostat from 'rheostat';
 
@@ -60,10 +60,18 @@ class Range extends Component {
   };
 
   render() {
-    const { min, max, currentRefinement, header, footer } = this.props;
+    const {
+      min,
+      max,
+      currentRefinement,
+      canRefine,
+      header,
+      footer,
+    } = this.props;
     const { currentValues } = this.state;
+
     return min !== max ? (
-      <BaseWidget cx={cx} header={header} footer={footer}>
+      <Panel cx={cx} canRefine={canRefine} header={header} footer={footer}>
         <Rheostat
           min={min}
           max={max}
@@ -84,7 +92,7 @@ class Range extends Component {
             <div className="rheostat-value">{currentValues.max}</div>
           </div>
         </Rheostat>
-      </BaseWidget>
+      </Panel>
     ) : null;
   }
 }

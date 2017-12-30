@@ -39,7 +39,7 @@ stories
             { value: 'ikea_price_desc', label: 'Price desc.' },
           ]}
           defaultRefinement="ikea"
-          header="Header"
+          header="Sort By"
           footer="Footer"
         />
       </WrapWithHits>

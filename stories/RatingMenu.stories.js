@@ -2,7 +2,6 @@ import React from 'react';
 import { setAddon, storiesOf } from '@storybook/react';
 import {
   RatingMenu,
-  Panel,
   SearchBox,
   Configure,
 } from '../packages/react-instantsearch/dom';
@@ -35,7 +34,7 @@ stories
           attributeName="rating"
           max={6}
           min={1}
-          header="Header"
+          header="Rating Menu"
           footer="Footer"
         />
       </WrapWithHits>
@@ -46,12 +45,49 @@ stories
     }
   )
   .addWithJSX(
-    'with panel',
+    'hidden without refinement',
     () => (
-      <WrapWithHits hasPlayground={true} linkedStoryGroup="RatingMenu">
-        <Panel title="Ratings">
-          <RatingMenu attributeName="rating" max={6} min={1} />
-        </Panel>
+      <WrapWithHits
+        searchBox={false}
+        hasPlayground={true}
+        linkedStoryGroup="RatingMenu"
+      >
+        <RatingMenu
+          attributeName="rating"
+          max={6}
+          min={1}
+          header="Rating Menu"
+          autoHideContainer
+        />
+
+        <div style={{ display: 'none' }}>
+          <SearchBox defaultRefinement="ds" />
+        </div>
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
+    'visible without refinement',
+    () => (
+      <WrapWithHits
+        searchBox={false}
+        hasPlayground={true}
+        linkedStoryGroup="RatingMenu"
+      >
+        <RatingMenu
+          attributeName="rating"
+          max={6}
+          min={1}
+          header="Rating Menu"
+        />
+
+        <div style={{ display: 'none' }}>
+          <SearchBox defaultRefinement="ds" />
+        </div>
       </WrapWithHits>
     ),
     {
@@ -64,30 +100,7 @@ stories
     () => (
       <WrapWithHits hasPlayground={true} linkedStoryGroup="RatingMenu">
         <Configure filters="rating>=4" />
-        <Panel title="Ratings">
-          <RatingMenu attributeName="rating" max={6} min={1} />
-        </Panel>
-      </WrapWithHits>
-    ),
-    {
-      displayName,
-      filterProps,
-    }
-  )
-  .addWithJSX(
-    'with panel but no refinement',
-    () => (
-      <WrapWithHits
-        searchBox={false}
-        hasPlayground={true}
-        linkedStoryGroup="RatingMenu"
-      >
-        <Panel title="Ratings">
-          <RatingMenu attributeName="rating" max={6} min={1} />
-          <div style={{ display: 'none' }}>
-            <SearchBox defaultRefinement="ds" />
-          </div>
-        </Panel>
+        <RatingMenu attributeName="rating" max={6} min={1} />
       </WrapWithHits>
     ),
     {

@@ -37,7 +37,7 @@ stories
         hasPlayground={true}
         linkedStoryGroup="SearchBox"
       >
-        <SearchBox header="Header" footer="Footer" />
+        <SearchBox header="SearchBox" footer="Footer" />
       </WrapWithHits>
     ),
     {

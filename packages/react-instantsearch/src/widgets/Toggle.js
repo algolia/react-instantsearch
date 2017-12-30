@@ -1,8 +1,7 @@
-import PropTypes from 'prop-types';
 import React from 'react';
-import BaseWidget from './BaseWidget';
-import connectToggle from '../connectors/connectToggle.js';
-import ToggleComponent from '../components/Toggle.js';
+import connectToggle from '../connectors/connectToggle';
+import Panel from '../components/Panel';
+import ToggleComponent from '../components/Toggle';
 import classNames from '../components/classNames';
 
 const cx = classNames('Toggle');
@@ -54,15 +53,10 @@ const cx = classNames('Toggle');
  * }
  */
 
-const Widget = props => (
-  <BaseWidget cx={cx} header={props.header} footer={props.footer}>
-    <ToggleComponent cx={cx} {...props} />
-  </BaseWidget>
-);
+const Toggle = connectToggle(props => (
+  <Panel {...props} cx={cx}>
+    <ToggleComponent {...props} cx={cx} />
+  </Panel>
+));
 
-Widget.propTypes = {
-  header: PropTypes.node,
-  footer: PropTypes.node,
-};
-
-export default connectToggle(Widget);
+export default Toggle;

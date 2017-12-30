@@ -35,18 +35,6 @@ class RefinementList extends Component {
     transformItems: PropTypes.func,
   };
 
-  static contextTypes = {
-    canRefine: PropTypes.func,
-  };
-
-  componentWillMount() {
-    if (this.context.canRefine) this.context.canRefine(this.props.canRefine);
-  }
-
-  componentWillReceiveProps(props) {
-    if (this.context.canRefine) this.context.canRefine(props.canRefine);
-  }
-
   selectItem = (item, resetQuery) => {
     resetQuery();
     this.props.refine(item.value);

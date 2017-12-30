@@ -1,8 +1,7 @@
-import PropTypes from 'prop-types';
 import React from 'react';
-import BaseWidget from './BaseWidget';
-import connectSearchBox from '../connectors/connectSearchBox.js';
-import SearchBoxComponent from '../components/SearchBox.js';
+import connectSearchBox from '../connectors/connectSearchBox';
+import Panel from '../components/Panel';
+import SearchBoxComponent from '../components/SearchBox';
 import classNames from '../components/classNames';
 
 const cx = classNames('SearchBox');
@@ -57,15 +56,10 @@ const cx = classNames('SearchBox');
  * }
  */
 
-const Widget = props => (
-  <BaseWidget cx={cx} header={props.header} footer={props.footer}>
-    <SearchBoxComponent cx={cx} {...props} />
-  </BaseWidget>
-);
+const SearchBox = connectSearchBox(props => (
+  <Panel {...props} cx={cx}>
+    <SearchBoxComponent {...props} cx={cx} />
+  </Panel>
+));
 
-Widget.propTypes = {
-  header: PropTypes.node,
-  footer: PropTypes.node,
-};
-
-export default connectSearchBox(Widget);
+export default SearchBox;

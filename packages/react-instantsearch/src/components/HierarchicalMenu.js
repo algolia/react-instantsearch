@@ -29,18 +29,6 @@ class HierarchicalMenu extends Component {
     transformItems: PropTypes.func,
   };
 
-  static contextTypes = {
-    canRefine: PropTypes.func,
-  };
-
-  componentWillMount() {
-    if (this.context.canRefine) this.context.canRefine(this.props.canRefine);
-  }
-
-  componentWillReceiveProps(props) {
-    if (this.context.canRefine) this.context.canRefine(props.canRefine);
-  }
-
   renderItem = item => {
     const { cx, createURL, refine } = this.props;
 

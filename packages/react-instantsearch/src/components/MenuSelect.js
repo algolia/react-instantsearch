@@ -23,23 +23,11 @@ class MenuSelect extends Component {
     ),
   };
 
-  static contextTypes = {
-    canRefine: PropTypes.func,
-  };
-
   get selectedValue() {
     const { value } = find(this.props.items, { isRefined: true }) || {
       value: 'ais__see__all__option',
     };
     return value;
-  }
-
-  componentWillMount() {
-    if (this.context.canRefine) this.context.canRefine(this.props.canRefine);
-  }
-
-  componentWillReceiveProps(props) {
-    if (this.context.canRefine) this.context.canRefine(props.canRefine);
   }
 
   handleSelectChange = ({ target: { value } }) => {

@@ -1,8 +1,8 @@
-import PropTypes from 'prop-types';
 import React from 'react';
-import BaseWidget from './BaseWidget';
-import connectMenu from '../connectors/connectMenu.js';
-import MenuComponent from '../components/Menu.js';
+import connectMenu from '../connectors/connectMenu';
+import AutoHideContainer from '../components/AutoHideContainer';
+import Panel from '../components/Panel';
+import MenuComponent from '../components/Menu';
 import classNames from '../components/classNames';
 
 const cx = classNames('Menu');
@@ -22,6 +22,7 @@ const cx = classNames('Menu');
  * @propType {number} [limitMax=20] - the maximun number of displayed items. Only used when showMore is set to `true`
  * @propType {string} [defaultRefinement] - the value of the item selected by default
  * @propType {function} [transformItems] - Function to modify the items being displayed, e.g. for filtering or sorting them. Takes an items as parameter and expects it back in return.
+ * @propType {boolean} [autoHideContainer=false] - Hide the container when there are no items in the menu.
  * @propType {node} [header] - Adds a header to the widget.
  * @propType {node} [footer] - Adds a footer to the widget.
  * @propType {boolean} [withSearchBox=false] - true if the component should display an input to search for facet values. <br> In order to make this feature work, you need to make the attribute searchable [using the API](https://www.algolia.com/doc/guides/searching/faceting/?language=js#declaring-a-searchable-attribute-for-faceting) or [the dashboard](https://www.algolia.com/explorer/display/).
@@ -60,15 +61,12 @@ const cx = classNames('Menu');
  * }
  */
 
-const Widget = props => (
-  <BaseWidget cx={cx} header={props.header} footer={props.footer}>
-    <MenuComponent cx={cx} {...props} />
-  </BaseWidget>
-);
+const Menu = connectMenu(props => (
+  <AutoHideContainer {...props}>
+    <Panel {...props} cx={cx}>
+      <MenuComponent {...props} cx={cx} />
+    </Panel>
+  </AutoHideContainer>
+));
 
-Widget.propTypes = {
-  header: PropTypes.node,
-  footer: PropTypes.node,
-};
-
-export default connectMenu(Widget);
+export default Menu;

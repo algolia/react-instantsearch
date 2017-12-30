@@ -20,18 +20,6 @@ class NumericMenu extends Component {
     translate: PropTypes.func.isRequired,
   };
 
-  static contextTypes = {
-    canRefine: PropTypes.func,
-  };
-
-  componentWillMount() {
-    if (this.context.canRefine) this.context.canRefine(this.props.canRefine);
-  }
-
-  componentWillReceiveProps(props) {
-    if (this.context.canRefine) this.context.canRefine(props.canRefine);
-  }
-
   renderItem = item => {
     const { cx, refine, translate } = this.props;
     const label = item.value === '' ? translate('all') : item.label;

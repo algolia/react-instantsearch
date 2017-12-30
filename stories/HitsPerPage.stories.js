@@ -1,6 +1,6 @@
 import React from 'react';
 import { setAddon, storiesOf } from '@storybook/react';
-import { HitsPerPage, Panel } from '../packages/react-instantsearch/dom';
+import { HitsPerPage } from '../packages/react-instantsearch/dom';
 import { number } from '@storybook/addon-knobs';
 import { displayName, filterProps, WrapWithHits } from './util';
 import JSXAddon from 'storybook-addon-jsx';
@@ -42,7 +42,7 @@ stories
             { value: 6, label: '6 hits per page' },
             { value: 8, label: '8 hits per page' },
           ]}
-          header="Header"
+          header="Hits per page"
           footer="Footer"
         />
       </WrapWithHits>
@@ -60,28 +60,6 @@ stories
           defaultRefinement={4}
           items={[{ value: 2 }, { value: 4 }, { value: 6 }, { value: 8 }]}
         />
-      </WrapWithHits>
-    ),
-    {
-      displayName,
-      filterProps,
-    }
-  )
-  .addWithJSX(
-    'inside a panel',
-    () => (
-      <WrapWithHits hasPlayground={true} linkedStoryGroup="HitsPerPage">
-        <Panel title="Hits to display">
-          <HitsPerPage
-            defaultRefinement={number('default hits per page', 4)}
-            items={[
-              { value: 2, label: '2 hits per page' },
-              { value: 4, label: '4 hits per page' },
-              { value: 6, label: '6 hits per page' },
-              { value: 8, label: '8 hits per page' },
-            ]}
-          />
-        </Panel>
       </WrapWithHits>
     ),
     {

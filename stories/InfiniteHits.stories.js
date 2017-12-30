@@ -1,20 +1,24 @@
-import PropTypes from 'prop-types';
 import React from 'react';
+import PropTypes from 'prop-types';
 import { setAddon, storiesOf } from '@storybook/react';
-import { Hits, Highlight, Snippet } from '../packages/react-instantsearch/dom';
+import {
+  InfiniteHits,
+  Highlight,
+  Snippet,
+} from '../packages/react-instantsearch/dom';
 import { displayName, filterProps, WrapWithHits } from './util';
 import JSXAddon from 'storybook-addon-jsx';
 
 setAddon(JSXAddon);
 
-const stories = storiesOf('Hits', module);
+const stories = storiesOf('InfiniteHits', module);
 
 stories
   .addWithJSX(
     'default',
     () => (
-      <WrapWithHits linkedStoryGroup="Hits">
-        <Hits />
+      <WrapWithHits linkedStoryGroup="InfiniteHits" pagination={false}>
+        <InfiniteHits />
       </WrapWithHits>
     ),
     {
@@ -25,8 +29,8 @@ stories
   .addWithJSX(
     'with header and footer',
     () => (
-      <WrapWithHits linkedStoryGroup="Hits">
-        <Hits header="Hits" footer="Footer" />
+      <WrapWithHits linkedStoryGroup="InfiniteHits" pagination={false}>
+        <InfiniteHits header="Infinite hits" footer="Footer" />
       </WrapWithHits>
     ),
     {
@@ -35,8 +39,8 @@ stories
     }
   )
   .add('with custom rendering', () => (
-    <WrapWithHits linkedStoryGroup="Hits">
-      <Hits hitComponent={Product} />
+    <WrapWithHits linkedStoryGroup="InfiniteHits">
+      <InfiniteHits hitComponent={Product} />
     </WrapWithHits>
   ));
 

@@ -1,8 +1,7 @@
-import PropTypes from 'prop-types';
 import React from 'react';
-import BaseWidget from './BaseWidget';
-import connectStats from '../connectors/connectStats.js';
-import StatsComponent from '../components/Stats.js';
+import connectStats from '../connectors/connectStats';
+import Panel from '../components/Panel';
+import StatsComponent from '../components/Stats';
 import classNames from '../components/classNames';
 
 const cx = classNames('Stats');
@@ -37,15 +36,10 @@ const cx = classNames('Stats');
  * }
  */
 
-const Widget = props => (
-  <BaseWidget cx={cx} header={props.header} footer={props.footer}>
-    <StatsComponent cx={cx} {...props} />
-  </BaseWidget>
-);
+const Stats = connectStats(props => (
+  <Panel {...props} cx={cx}>
+    <StatsComponent {...props} cx={cx} />
+  </Panel>
+));
 
-Widget.propTypes = {
-  header: PropTypes.node,
-  footer: PropTypes.node,
-};
-
-export default connectStats(Widget);
+export default Stats;

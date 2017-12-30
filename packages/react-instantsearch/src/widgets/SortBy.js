@@ -1,8 +1,7 @@
-import PropTypes from 'prop-types';
 import React from 'react';
-import BaseWidget from './BaseWidget';
-import connectSortBy from '../connectors/connectSortBy.js';
-import SortByComponent from '../components/SortBy.js';
+import connectSortBy from '../connectors/connectSortBy';
+import Panel from '../components/Panel';
+import SortByComponent from '../components/SortBy';
 import classNames from '../components/classNames';
 
 const cx = classNames('SortBy');
@@ -49,15 +48,10 @@ const cx = classNames('SortBy');
  * }
  */
 
-const Widget = props => (
-  <BaseWidget cx={cx} header={props.header} footer={props.footer}>
-    <SortByComponent cx={cx} {...props} />
-  </BaseWidget>
-);
+const SortBy = connectSortBy(props => (
+  <Panel {...props} cx={cx}>
+    <SortByComponent {...props} cx={cx} />
+  </Panel>
+));
 
-Widget.propTypes = {
-  header: PropTypes.node,
-  footer: PropTypes.node,
-};
-
-export default connectSortBy(Widget);
+export default SortBy;

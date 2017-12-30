@@ -1,7 +1,6 @@
 import React from 'react';
-
-import connectHighlight from '../connectors/connectHighlight.js';
-import SnippetComponent from '../components/Snippet.js';
+import connectHighlight from '../connectors/connectHighlight';
+import SnippetComponent from '../components/Snippet';
 import classNames from '../components/classNames';
 
 const cx = classNames('Snippet');
@@ -46,6 +45,8 @@ const cx = classNames('Snippet');
  * }
  */
 
-const Widget = props => <SnippetComponent cx={cx} {...props} />;
+const Snippet = connectHighlight(props => (
+  <SnippetComponent {...props} cx={cx} />
+));
 
-export default connectHighlight(Widget);
+export default Snippet;

@@ -2,7 +2,6 @@ import React from 'react';
 import { setAddon, storiesOf } from '@storybook/react';
 import {
   Breadcrumb,
-  Panel,
   HierarchicalMenu,
 } from '../packages/react-instantsearch/dom';
 import { connectHierarchicalMenu } from '../packages/react-instantsearch/connectors';
@@ -44,15 +43,46 @@ stories
     () => (
       <WrapWithHits hasPlayground={true} linkedStoryGroup="Breadcrumb">
         <Breadcrumb
-          header="Header"
-          footer="Footer"
           attributes={['category', 'sub_category', 'sub_sub_category']}
           separator=">"
+          header="Breadcrumb"
+          footer="Footer"
         />
         <hr />
         <HierarchicalMenu
           attributes={['category', 'sub_category', 'sub_sub_category']}
           defaultRefinement="Cooking > Bakeware"
+        />
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
+    'hidden without refinement',
+    () => (
+      <WrapWithHits hasPlayground={true} linkedStoryGroup="Breadcrumb">
+        <Breadcrumb
+          header="Breadcrumb"
+          attributes={['category', 'sub_category', 'sub_sub_category']}
+          autoHideContainer
+        />
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
+    'visible without refinement',
+    () => (
+      <WrapWithHits hasPlayground={true} linkedStoryGroup="Breadcrumb">
+        <Breadcrumb
+          header="Breadcrumb"
+          attributes={['category', 'sub_category', 'sub_sub_category']}
         />
       </WrapWithHits>
     ),
@@ -78,15 +108,13 @@ stories
   ))
   .add('playground', () => (
     <WrapWithHits hasPlayground={true} linkedStoryGroup="Breadcrumb">
-      <Panel title="Category">
-        <Breadcrumb
-          attributes={['category', 'sub_category', 'sub_sub_category']}
-          separator={text('separator', ' / ')}
-          translations={object('translations', {
-            rootLabel: 'Home',
-          })}
-        />
-      </Panel>
+      <Breadcrumb
+        attributes={['category', 'sub_category', 'sub_sub_category']}
+        separator={text('separator', ' / ')}
+        translations={object('translations', {
+          rootLabel: 'Home',
+        })}
+      />
       <VirtualHierarchicalMenu
         attributes={['category', 'sub_category', 'sub_sub_category']}
         defaultRefinement="Cooking > Bakeware"

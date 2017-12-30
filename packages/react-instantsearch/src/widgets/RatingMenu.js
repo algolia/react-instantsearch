@@ -1,8 +1,8 @@
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import BaseWidget from './BaseWidget';
-import connectRange from '../connectors/connectRange.js';
-import RatingMenuComponent from '../components/RatingMenu.js';
+import React from 'react';
+import connectRange from '../connectors/connectRange';
+import AutoHideContainer from '../components/AutoHideContainer';
+import Panel from '../components/Panel';
+import RatingMenuComponent from '../components/RatingMenu';
 import classNames from '../components/classNames';
 
 const cx = classNames('RatingMenu');
@@ -18,6 +18,7 @@ const cx = classNames('RatingMenu');
  * @propType {number} [min] - Minimum value for the rating. When this isn't set, the minimum value will be automatically computed by Algolia using the data in the index.
  * @propType {number} [max] - Maximum value for the rating. When this isn't set, the maximum value will be automatically computed by Algolia using the data in the index.
  * @propType {{min: number, max: number}} [defaultRefinement] - Default state of the widget containing the lower bound (end) and the max for the rating.
+ * @propType {boolean} [autoHideContainer=false] - Hide the container when there are no refinements available.
  * @propType {node} [header] - Adds a header to the widget.
  * @propType {node} [footer] - Adds a footer to the widget.
  * @themeKey ais-RatingMenu - the root div of the widget
@@ -53,38 +54,12 @@ const cx = classNames('RatingMenu');
  * }
  */
 
-class Widget extends Component {
-  componentWillMount() {
-    if (this.context.canRefine) this.context.canRefine(this.props.canRefine);
-  }
+const RatingMenu = connectRange(props => (
+  <AutoHideContainer {...props}>
+    <Panel {...props} cx={cx}>
+      <RatingMenuComponent {...props} cx={cx} />
+    </Panel>
+  </AutoHideContainer>
+));
 
-  componentWillReceiveProps(props) {
-    if (this.context.canRefine) this.context.canRefine(props.canRefine);
-  }
-
-  render() {
-    const { header, footer, canRefine } = this.props;
-    return (
-      <BaseWidget
-        cx={cx}
-        header={header}
-        footer={footer}
-        cantRefine={!canRefine}
-      >
-        <RatingMenuComponent cx={cx} {...this.props} />
-      </BaseWidget>
-    );
-  }
-}
-
-Widget.propTypes = {
-  canRefine: PropTypes.bool.isRequired,
-  header: PropTypes.node,
-  footer: PropTypes.node,
-};
-
-Widget.contextTypes = {
-  canRefine: PropTypes.func,
-};
-
-export default connectRange(Widget);
+export default RatingMenu;

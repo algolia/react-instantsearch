@@ -1,6 +1,3 @@
-import PropTypes from 'prop-types';
-/* eslint-env jest, jasmine */
-
 import React from 'react';
 import renderer from 'react-test-renderer';
 import Enzyme, { mount } from 'enzyme';
@@ -293,39 +290,6 @@ describe('RefinementList', () => {
       expect(selectedRefinements).toHaveLength(2);
 
       wrapper.unmount();
-    });
-  });
-
-  describe('Panel compatibility', () => {
-    it('Should indicate when no more refinement', () => {
-      const canRefine = jest.fn();
-      const wrapper = mount(
-        <RefinementList
-          cx={(...x) => x.join(' ')}
-          refine={() => null}
-          searchForItems={() => null}
-          createURL={() => '#'}
-          items={[
-            { label: 'blue', value: ['blue'], count: 30, isRefined: false },
-          ]}
-          isFromSearch={false}
-          canRefine={true}
-        />,
-        {
-          context: { canRefine },
-          childContextTypes: { canRefine: PropTypes.func },
-        }
-      );
-
-      expect(canRefine.mock.calls).toHaveLength(1);
-      expect(canRefine.mock.calls[0][0]).toEqual(true);
-      expect(wrapper.find('.list--noRefinement')).toHaveLength(0);
-
-      wrapper.setProps({ canRefine: false });
-
-      expect(canRefine.mock.calls).toHaveLength(2);
-      expect(canRefine.mock.calls[1][0]).toEqual(false);
-      expect(wrapper.find('.list--noRefinement')).toHaveLength(1);
     });
   });
 });

@@ -1,8 +1,8 @@
-import PropTypes from 'prop-types';
 import React from 'react';
-import BaseWidget from './BaseWidget';
-import connectRefinementList from '../connectors/connectRefinementList.js';
-import RefinementListComponent from '../components/RefinementList.js';
+import connectRefinementList from '../connectors/connectRefinementList';
+import AutoHideContainer from '../components/AutoHideContainer';
+import Panel from '../components/Panel';
+import RefinementListComponent from '../components/RefinementList';
 import classNames from '../components/classNames';
 
 const cx = classNames('RefinementList');
@@ -18,6 +18,7 @@ const cx = classNames('RefinementList');
  * @propType {number} [limitMin=10] - the minimum number of displayed items
  * @propType {number} [limitMax=20] - the maximum number of displayed items. Only used when showMore is set to `true`
  * @propType {string[]} [defaultRefinement] - the values of the items selected by default
+ * @propType {boolean} [autoHideContainer=false] - Hide the container when no items in the refinement list.
  * @propType {function} [transformItems] - Function to modify the items being displayed, e.g. for filtering or sorting them. Takes an items as parameter and expects it back in return.
  * @propType {node} [header] - Adds a header to the widget.
  * @propType {node} [footer] - Adds a footer to the widget.
@@ -58,15 +59,12 @@ const cx = classNames('RefinementList');
  * }
  */
 
-const Widget = props => (
-  <BaseWidget cx={cx} header={props.header} footer={props.footer}>
-    <RefinementListComponent cx={cx} {...props} />
-  </BaseWidget>
-);
+const RefinementList = connectRefinementList(props => (
+  <AutoHideContainer {...props}>
+    <Panel {...props} cx={cx}>
+      <RefinementListComponent {...props} cx={cx} />
+    </Panel>
+  </AutoHideContainer>
+));
 
-Widget.propTypes = {
-  header: PropTypes.node,
-  footer: PropTypes.node,
-};
-
-export default connectRefinementList(Widget);
+export default RefinementList;

@@ -32,8 +32,8 @@ stories
         <Toggle
           attributeName="materials"
           label="Made with solid pine"
-          value={'Solid pine'}
-          header="Header"
+          value="Solid pine"
+          header="Toggle"
           footer="Footer"
         />
       </WrapWithHits>
@@ -50,7 +50,7 @@ stories
         <Toggle
           attributeName="materials"
           label="Made with solid pine"
-          value={'Solid pine'}
+          value="Solid pine"
           defaultRefinement={true}
         />
       </WrapWithHits>

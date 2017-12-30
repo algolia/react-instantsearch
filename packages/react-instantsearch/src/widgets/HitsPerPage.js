@@ -1,8 +1,7 @@
-import PropTypes from 'prop-types';
 import React from 'react';
-import BaseWidget from './BaseWidget';
-import connectHitsPerPage from '../connectors/connectHitsPerPage.js';
-import HitsPerPageSelectComponent from '../components/HitsPerPage.js';
+import connectHitsPerPage from '../connectors/connectHitsPerPage';
+import Panel from '../components/Panel';
+import HitsPerPageSelectComponent from '../components/HitsPerPage';
 import classNames from '../components/classNames';
 
 const cx = classNames('HitsPerPage');
@@ -48,15 +47,10 @@ const cx = classNames('HitsPerPage');
  * }
  */
 
-const Widget = props => (
-  <BaseWidget cx={cx} header={props.header} footer={props.footer}>
-    <HitsPerPageSelectComponent cx={cx} {...props} />
-  </BaseWidget>
-);
+const HitsPerPage = connectHitsPerPage(props => (
+  <Panel {...props} cx={cx}>
+    <HitsPerPageSelectComponent {...props} cx={cx} />
+  </Panel>
+));
 
-Widget.propTypes = {
-  header: PropTypes.node,
-  footer: PropTypes.node,
-};
-
-export default connectHitsPerPage(Widget);
+export default HitsPerPage;

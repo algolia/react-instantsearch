@@ -1,7 +1,7 @@
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import BaseWidget from './BaseWidget';
+import React from 'react';
 import connectBreadcrumb from '../connectors/connectBreadcrumb';
+import AutoHideContainer from '../components/AutoHideContainer';
+import Panel from '../components/Panel';
 import BreadcrumbComponent from '../components/Breadcrumb';
 import classNames from '../components/classNames';
 
@@ -52,6 +52,7 @@ const cx = classNames('Breadcrumb');
  * @propType {string} attributes - List of attributes to use to generate the hierarchy of the menu. See the example for the convention to follow
  * @propType {string} [separator='>'] -  Symbol used for separating hyperlinks
  * @propType {string} [rootURL=null] - The originating page (homepage)
+ * @propType {boolean} [autoHideContainer=false] - Hides the container when there are no items in the breadcrumb.
  * @propType {function} [transformItems] - Function to modify the items being displayed, e.g. for filtering or sorting them. Takes an items as parameter and expects it back in return
  * @propType {node} [header] - Adds a header to the widget.
  * @propType {node} [footer] - Adds a footer to the widget.
@@ -91,38 +92,12 @@ const cx = classNames('Breadcrumb');
  * }
  */
 
-class Widget extends Component {
-  componentWillMount() {
-    if (this.context.canRefine) this.context.canRefine(this.props.canRefine);
-  }
+const Breadcrumb = connectBreadcrumb(props => (
+  <AutoHideContainer {...props}>
+    <Panel {...props} cx={cx}>
+      <BreadcrumbComponent {...props} cx={cx} />
+    </Panel>
+  </AutoHideContainer>
+));
 
-  componentWillReceiveProps(props) {
-    if (this.context.canRefine) this.context.canRefine(props.canRefine);
-  }
-
-  render() {
-    const { header, footer, canRefine } = this.props;
-    return (
-      <BaseWidget
-        cx={cx}
-        header={header}
-        footer={footer}
-        cantRefine={!canRefine}
-      >
-        <BreadcrumbComponent cx={cx} {...this.props} />
-      </BaseWidget>
-    );
-  }
-}
-
-Widget.propTypes = {
-  canRefine: PropTypes.bool.isRequired,
-  header: PropTypes.node,
-  footer: PropTypes.node,
-};
-
-Widget.contextTypes = {
-  canRefine: PropTypes.func,
-};
-
-export default connectBreadcrumb(Widget);
+export default Breadcrumb;

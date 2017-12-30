@@ -1,10 +1,6 @@
 import React from 'react';
 import { setAddon, storiesOf } from '@storybook/react';
-import {
-  Pagination,
-  Panel,
-  SearchBox,
-} from '../packages/react-instantsearch/dom';
+import { Pagination, SearchBox } from '../packages/react-instantsearch/dom';
 import { boolean, number } from '@storybook/addon-knobs';
 import { displayName, filterProps, WrapWithHits } from './util';
 import JSXAddon from 'storybook-addon-jsx';
@@ -30,7 +26,47 @@ stories
     'with header and footer',
     () => (
       <WrapWithHits hasPlayground={true} linkedStoryGroup="Pagination">
-        <Pagination header="Header" footer="Footer" />
+        <Pagination header="Pagination" footer="Footer" />
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
+    'hidden with no results',
+    () => (
+      <WrapWithHits
+        searchBox={false}
+        hasPlayground={true}
+        linkedStoryGroup="Pagination"
+      >
+        <Pagination header="Pagination" autoHideContainer />
+
+        <div style={{ display: 'none' }}>
+          <SearchBox defaultRefinement="ds" />
+        </div>
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
+    'visible with no results',
+    () => (
+      <WrapWithHits
+        searchBox={false}
+        hasPlayground={true}
+        linkedStoryGroup="Pagination"
+      >
+        <Pagination header="Pagination" />
+
+        <div style={{ display: 'none' }}>
+          <SearchBox defaultRefinement="ds" />
+        </div>
       </WrapWithHits>
     ),
     {
@@ -50,41 +86,6 @@ stories
           pagesPadding={2}
           maxPages={3}
         />
-      </WrapWithHits>
-    ),
-    {
-      displayName,
-      filterProps,
-    }
-  )
-  .addWithJSX(
-    'with panel',
-    () => (
-      <WrapWithHits hasPlayground={true} linkedStoryGroup="Pagination">
-        <Panel title="Pages">
-          <Pagination />
-        </Panel>
-      </WrapWithHits>
-    ),
-    {
-      displayName,
-      filterProps,
-    }
-  )
-  .addWithJSX(
-    'with panel but no refinement',
-    () => (
-      <WrapWithHits
-        searchBox={false}
-        hasPlayground={true}
-        linkedStoryGroup="Pagination"
-      >
-        <Panel title="Pages">
-          <Pagination />
-          <div style={{ display: 'none' }}>
-            <SearchBox defaultRefinement="ds" />
-          </div>
-        </Panel>
       </WrapWithHits>
     ),
     {

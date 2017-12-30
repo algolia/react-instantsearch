@@ -1,8 +1,8 @@
-import PropTypes from 'prop-types';
 import React from 'react';
-import BaseWidget from './BaseWidget';
-import connectPagination from '../connectors/connectPagination.js';
-import PaginationComponent from '../components/Pagination.js';
+import connectPagination from '../connectors/connectPagination';
+import AutoHideContainer from '../components/AutoHideContainer';
+import Panel from '../components/Panel';
+import PaginationComponent from '../components/Pagination';
 import classNames from '../components/classNames';
 
 const cx = classNames('Pagination');
@@ -16,6 +16,7 @@ const cx = classNames('Pagination');
  * @propType {boolean} [showLast=false] - Display the last page link.
  * @propType {boolean} [showPrevious=true] - Display the previous page link.
  * @propType {boolean} [showNext=true] - Display the next page link.
+ * @propType {boolean} [autoHideContainer=false] - Hide the container when no results match.
  * @propType {number} [pagesPadding=3] - How many page links to display around the current page.
  * @propType {number} [maxPages=Infinity] - Maximum number of pages to display.
  * @propType {node} [header] - Adds a header to the widget.
@@ -62,15 +63,12 @@ const cx = classNames('Pagination');
  * }
  */
 
-const Widget = props => (
-  <BaseWidget cx={cx} header={props.header} footer={props.footer}>
-    <PaginationComponent cx={cx} {...props} />
-  </BaseWidget>
-);
+const Pagination = connectPagination(props => (
+  <AutoHideContainer {...props}>
+    <Panel {...props} cx={cx}>
+      <PaginationComponent {...props} cx={cx} />
+    </Panel>
+  </AutoHideContainer>
+));
 
-Widget.propTypes = {
-  header: PropTypes.node,
-  footer: PropTypes.node,
-};
-
-export default connectPagination(Widget);
+export default Pagination;

@@ -1,6 +1,6 @@
 import React from 'react';
-import connectHighlight from '../connectors/connectHighlight.js';
-import HighlightComponent from '../components/Highlight.js';
+import connectHighlight from '../connectors/connectHighlight';
+import HighlightComponent from '../components/Highlight';
 import classNames from '../components/classNames';
 
 const cx = classNames('Highlight');
@@ -47,6 +47,8 @@ const cx = classNames('Highlight');
  * }
  */
 
-const Widget = props => <HighlightComponent cx={cx} {...props} />;
+const Highlight = connectHighlight(props => (
+  <HighlightComponent {...props} cx={cx} />
+));
 
-export default connectHighlight(Widget);
+export default Highlight;

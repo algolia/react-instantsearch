@@ -1,10 +1,6 @@
 import React from 'react';
 import { setAddon, storiesOf } from '@storybook/react';
-import {
-  RefinementList,
-  Panel,
-  SearchBox,
-} from '../packages/react-instantsearch/dom';
+import { RefinementList, SearchBox } from '../packages/react-instantsearch/dom';
 import { boolean, number, array } from '@storybook/addon-knobs';
 import { displayName, filterProps, WrapWithHits } from './util';
 import { orderBy } from 'lodash';
@@ -33,9 +29,53 @@ stories
       <WrapWithHits linkedStoryGroup="RefinementList" hasPlayground={true}>
         <RefinementList
           attributeName="category"
-          header="Header"
+          header="Refinement List"
           footer="Footer"
         />
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
+    'hidden with no items to refine',
+    () => (
+      <WrapWithHits
+        searchBox={false}
+        linkedStoryGroup="RefinementList"
+        hasPlayground={true}
+      >
+        <RefinementList
+          attributeName="category"
+          header="Refinement List"
+          autoHideContainer
+        />
+
+        <div style={{ display: 'none' }}>
+          <SearchBox defaultRefinement="ds" />
+        </div>
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
+    'visible with no items to refine',
+    () => (
+      <WrapWithHits
+        searchBox={false}
+        linkedStoryGroup="RefinementList"
+        hasPlayground={true}
+      >
+        <RefinementList attributeName="category" header="Refinement List" />
+
+        <div style={{ display: 'none' }}>
+          <SearchBox defaultRefinement="ds" />
+        </div>
       </WrapWithHits>
     ),
     {
@@ -97,41 +137,6 @@ stories
             orderBy(items, ['label', 'count'], ['asc', 'desc'])
           }
         />
-      </WrapWithHits>
-    ),
-    {
-      displayName,
-      filterProps,
-    }
-  )
-  .addWithJSX(
-    'with panel',
-    () => (
-      <WrapWithHits linkedStoryGroup="RefinementList" hasPlayground={true}>
-        <Panel title="Category">
-          <RefinementList attributeName="category" />
-        </Panel>
-      </WrapWithHits>
-    ),
-    {
-      displayName,
-      filterProps,
-    }
-  )
-  .addWithJSX(
-    'with panel but no refinement',
-    () => (
-      <WrapWithHits
-        searchBox={false}
-        linkedStoryGroup="RefinementList"
-        hasPlayground={true}
-      >
-        <Panel title="Category">
-          <RefinementList attributeName="category" />
-          <div style={{ display: 'none' }}>
-            <SearchBox defaultRefinement="ds" />
-          </div>
-        </Panel>
       </WrapWithHits>
     ),
     {

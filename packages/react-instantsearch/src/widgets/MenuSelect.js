@@ -1,7 +1,7 @@
-import PropTypes from 'prop-types';
 import React from 'react';
-import BaseWidget from './BaseWidget';
-import connectMenu from '../connectors/connectMenu.js';
+import connectMenu from '../connectors/connectMenu';
+import AutoHideContainer from '../components/AutoHideContainer';
+import Panel from '../components/Panel';
 import MenuSelectComponent from '../components/MenuSelect.js';
 import classNames from '../components/classNames';
 
@@ -15,6 +15,7 @@ const cx = classNames('MenuSelect');
  * on the Algolia dashboard or configured as `attributesForFaceting` via a set settings call to the Algolia API.
  * @propType {string} attributeName - the name of the attribute in the record
  * @propType {string} [defaultRefinement] - the value of the item selected by default
+ * @propType {boolean} [autoHideContainer=false] - Hide the container when there are no items in the menu.
  * @propType {function} [transformItems] - Function to modify the items being displayed, e.g. for filtering or sorting them. Takes an items as parameter and expects it back in return.
  * @propType {node} [header] - Adds a header to the widget.
  * @propType {node} [footer] - Adds a footer to the widget.
@@ -45,15 +46,12 @@ const cx = classNames('MenuSelect');
  * }
  */
 
-const Widget = props => (
-  <BaseWidget cx={cx} header={props.header} footer={props.footer}>
-    <MenuSelectComponent cx={cx} {...props} />
-  </BaseWidget>
-);
+const MenuSelect = connectMenu(props => (
+  <AutoHideContainer {...props}>
+    <Panel {...props} cx={cx}>
+      <MenuSelectComponent {...props} cx={cx} />
+    </Panel>
+  </AutoHideContainer>
+));
 
-Widget.propTypes = {
-  header: PropTypes.node,
-  footer: PropTypes.node,
-};
-
-export default connectMenu(Widget);
+export default MenuSelect;

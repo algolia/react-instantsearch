@@ -1,8 +1,8 @@
-import PropTypes from 'prop-types';
 import React from 'react';
-import BaseWidget from './BaseWidget';
-import connectHierarchicalMenu from '../connectors/connectHierarchicalMenu.js';
-import HierarchicalMenuComponent from '../components/HierarchicalMenu.js';
+import connectHierarchicalMenu from '../connectors/connectHierarchicalMenu';
+import AutoHideContainer from '../components/AutoHideContainer';
+import Panel from '../components/Panel';
+import HierarchicalMenuComponent from '../components/HierarchicalMenu';
 import classNames from '../components/classNames';
 
 const cx = classNames('HierarchicalMenu');
@@ -55,6 +55,7 @@ const cx = classNames('HierarchicalMenu');
  * @propType {string} [separator='>'] -  Specifies the level separator used in the data.
  * @propType {string[]} [rootPath=null] - The already selected and hidden path.
  * @propType {boolean} [showParentLevel=true] - Flag to set if the parent level should be displayed.
+ * @propType {boolean} [autoHideContainer=false] - Hide the container when there are no items in the menu.
  * @propType {string} [defaultRefinement] - the item value selected by default
  * @propType {function} [transformItems] - Function to modify the items being displayed, e.g. for filtering or sorting them. Takes an items as parameter and expects it back in return.
  * @propType {node} [header] - Adds a header to the widget.
@@ -101,15 +102,12 @@ const cx = classNames('HierarchicalMenu');
  * }
  */
 
-const Widget = props => (
-  <BaseWidget cx={cx} header={props.header} footer={props.footer}>
-    <HierarchicalMenuComponent cx={cx} {...props} />
-  </BaseWidget>
-);
+const HierarchicalMenu = connectHierarchicalMenu(props => (
+  <AutoHideContainer {...props}>
+    <Panel {...props} cx={cx}>
+      <HierarchicalMenuComponent {...props} cx={cx} />
+    </Panel>
+  </AutoHideContainer>
+));
 
-Widget.propTypes = {
-  header: PropTypes.node,
-  footer: PropTypes.node,
-};
-
-export default connectHierarchicalMenu(Widget);
+export default HierarchicalMenu;

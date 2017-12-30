@@ -1,8 +1,8 @@
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import BaseWidget from './BaseWidget';
-import connectRange from '../connectors/connectRange.js';
-import RangeInputComponent from '../components/RangeInput.js';
+import React from 'react';
+import connectRange from '../connectors/connectRange';
+import AutoHideContainer from '../components/AutoHideContainer';
+import Panel from '../components/Panel';
+import RangeInputComponent from '../components/RangeInput';
 import classNames from '../components/classNames';
 
 const cx = classNames('RangeInput');
@@ -17,6 +17,7 @@ const cx = classNames('RangeInput');
  * @propType {number} [min] - Minimum value. When this isn't set, the minimum value will be automatically computed by Algolia using the data in the index.
  * @propType {number} [max] - Maximum value. When this isn't set, the maximum value will be automatically computed by Algolia using the data in the index.
  * @propType {number} [precision=2] - Number of digits after decimal point to use.
+ * @propType {boolean} [autoHideContainer=false] - Hide the container when there are no refinements available.
  * @propType {node} [header] - Adds a header to the widget.
  * @propType {node} [footer] - Adds a footer to the widget.
  * @themeKey ais-RangeInput - the root div of the widget
@@ -50,41 +51,12 @@ const cx = classNames('RangeInput');
  * }
  */
 
-class Widget extends Component {
-  componentWillMount() {
-    if (this.context.canRefine) {
-      this.context.canRefine(this.props.canRefine);
-    }
-  }
+const RangeInput = connectRange(props => (
+  <AutoHideContainer {...props}>
+    <Panel {...props} cx={cx}>
+      <RangeInputComponent {...props} cx={cx} />
+    </Panel>
+  </AutoHideContainer>
+));
 
-  componentWillReceiveProps(nextProps) {
-    if (
-      this.context.canRefine &&
-      this.props.canRefine !== nextProps.canRefine
-    ) {
-      this.context.canRefine(nextProps.canRefine);
-    }
-  }
-
-  render() {
-    const { header, footer, canRefine } = this.props;
-    return (
-      <BaseWidget
-        cx={cx}
-        header={header}
-        footer={footer}
-        cantRefine={!canRefine}
-      >
-        <RangeInputComponent cx={cx} {...this.props} />
-      </BaseWidget>
-    );
-  }
-}
-
-Widget.propTypes = {
-  canRefine: PropTypes.bool.isRequired,
-  header: PropTypes.node,
-  footer: PropTypes.node,
-};
-
-export default connectRange(Widget);
+export default RangeInput;

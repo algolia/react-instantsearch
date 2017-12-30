@@ -72,18 +72,6 @@ class Pagination extends Component {
     maxPages: Infinity,
   };
 
-  static contextTypes = {
-    canRefine: PropTypes.func,
-  };
-
-  componentWillMount() {
-    if (this.context.canRefine) this.context.canRefine(this.props.canRefine);
-  }
-
-  componentWillReceiveProps(props) {
-    if (this.context.canRefine) this.context.canRefine(props.canRefine);
-  }
-
   getItem(modifier, translationKey, value) {
     const { nbPages, maxPages, translate } = this.props;
     return {
