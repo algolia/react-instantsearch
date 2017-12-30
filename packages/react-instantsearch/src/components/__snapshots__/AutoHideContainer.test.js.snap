@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AutoHideContainer expect to not render when canRefine is false & autoHideContainer is true 1`] = `""`;
+
+exports[`AutoHideContainer expect to render when canRefine is false & autoHideContainer is false 1`] = `
+<p>
+  Hello from content
+</p>
+`;
+
+exports[`AutoHideContainer expect to render when canRefine is true & autoHideContainer is false 1`] = `
+<p>
+  Hello from content
+</p>
+`;
+
+exports[`AutoHideContainer expect to render when canRefine is true & autoHideContainer is true 1`] = `
+<p>
+  Hello from content
+</p>
+`;
