@@ -17,7 +17,8 @@ import {
 } from 'react-instantsearch/dom';
 import { connectStateResults } from 'react-instantsearch/connectors';
 import { withUrlSync } from '../urlSync';
-import 'react-instantsearch-theme-algolia/style.scss';
+import 'instantsearch.css/themes/reset.css';
+import 'instantsearch.css/themes/algolia.css';
 
 const App = props => (
   <InstantSearch
@@ -44,6 +45,7 @@ const Header = () => (
       className="is-logo"
     >
       <img
+        className="logo"
         src="https://res.cloudinary.com/hilnmyskv/image/upload/w_100,h_100,dpr_2.0//v1461180087/logo-instantsearchjs-avatar.png"
         width={40}
       />
@@ -60,24 +62,22 @@ const Facets = () => (
       }}
     />
 
-    <SideBarSection title="Categories">
-      <HierarchicalMenu
-        key="categories"
-        attributes={['category', 'sub_category', 'sub_sub_category']}
-      />
-    </SideBarSection>
+    <HierarchicalMenu
+      key="categories"
+      attributes={['category', 'sub_category', 'sub_sub_category']}
+      header="Categories"
+    />
 
-    <SideBarSection title="Materials">
-      <RefinementList attributeName="materials" operator="or" limitMin={10} />
-    </SideBarSection>
+    <RefinementList
+      attributeName="materials"
+      operator="or"
+      limitMin={10}
+      header="Materials"
+    />
 
-    <SideBarSection title="Rating">
-      <RatingMenu attributeName="rating" max={5} />
-    </SideBarSection>
+    <RatingMenu attributeName="rating" max={5} header="Rating" />
 
-    <SideBarSection title="Price">
-      <RangeInput key="price_input" attributeName="price" />
-    </SideBarSection>
+    <RangeInput key="price_input" attributeName="price" header="Price" />
 
     <div className="thank-you">
       Data courtesy of <a href="http://www.ikea.com/">ikea.com</a>
@@ -85,21 +85,25 @@ const Facets = () => (
   </aside>
 );
 
-const SideBarSection = ({ title, children }) => (
-  <section className="facet-wrapper">
-    <div className="facet-category-title facet">{title}</div>
-    {children}
-  </section>
-);
-
 const Hit = ({ hit }) => {
   const icons = [];
   for (let i = 0; i < 5; i++) {
-    const suffix = i >= hit.rating ? '_empty' : '';
+    const suffixClassName = i >= hit.rating ? '--empty' : '';
+    const suffixXlink = i >= hit.rating ? 'Empty' : '';
+
     icons.push(
-      <label key={i} label className={`ais-RatingMenu__ratingIcon${suffix}`} />
+      <svg
+        key={i}
+        className={`ais-RatingMenu-starIcon ais-RatingMenu-starIcon${suffixClassName}`}
+        aria-hidden="true"
+        width="24"
+        height="24"
+      >
+        <use xlinkHref={`#ais-RatingMenu-star${suffixXlink}Symbol`} />
+      </svg>
     );
   }
+
   return (
     <article className="hit">
       <div className="product-desc-wrapper">
@@ -109,8 +113,8 @@ const Hit = ({ hit }) => {
         <div className="product-type">
           <Highlight attributeName="type" hit={hit} />
         </div>
-        <div className="ais-RatingMenu__ratingLink">
-          {icons}
+        <div className="product-footer">
+          <div className="ais-RatingMenu-link">{icons}</div>
           <div className="product-price">${hit.price}</div>
         </div>
       </div>
@@ -118,40 +122,38 @@ const Hit = ({ hit }) => {
   );
 };
 
-const CustomResults = connectStateResults(({ searchState, searchResult }) => {
-  if (searchResult && searchResult.nbHits === 0) {
-    return (
-      <div className="results-wrapper">
-        <div className="no-results">
-          No results found matching{' '}
-          <span className="query">{searchState.query}</span>
-        </div>
+const CustomResults = connectStateResults(({ searchState, searchResults }) => (
+  <div className="results-wrapper">
+    <section className="results-topbar">
+      <Stats />
+      <div className="sort-by">
+        <label>Sort by</label>
+        <SortBy
+          items={[
+            { value: 'ikea', label: 'Featured' },
+            { value: 'ikea_price_asc', label: 'Price asc.' },
+            { value: 'ikea_price_desc', label: 'Price desc.' },
+          ]}
+          defaultRefinement="ikea"
+        />
       </div>
-    );
-  } else {
-    return (
-      <div className="results-wrapper">
-        <section id="results-topbar">
-          <div className="sort-by">
-            <label>Sort by</label>
-            <SortBy
-              items={[
-                { value: 'ikea', label: 'Featured' },
-                { value: 'ikea_price_asc', label: 'Price asc.' },
-                { value: 'ikea_price_desc', label: 'Price desc.' },
-              ]}
-              defaultRefinement="ikea"
-            />
-          </div>
-          <Stats />
-        </section>
-        <Hits itemComponent={Hit} />
+    </section>
+
+    {searchResults && searchResults.nbHits ? (
+      <div>
+        <Hits hitComponent={Hit} />
         <footer>
           <Pagination showLast={true} />
         </footer>
       </div>
-    );
-  }
-});
+    ) : (
+      <div className="no-results">
+        No results found matching &quot;<span className="query">
+          {searchState.query}
+        </span>&quot;
+      </div>
+    )}
+  </div>
+));
 
 export default withUrlSync(App);
