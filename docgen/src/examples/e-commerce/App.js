@@ -1,5 +1,5 @@
 /* eslint react/prop-types: 0 */
-/* eslint react/prop-types: 0 */
+
 import React from 'react';
 import {
   InstantSearch,
@@ -22,7 +22,8 @@ import {
   connectStateResults,
 } from 'react-instantsearch/connectors';
 import { withUrlSync } from '../urlSync';
-import 'react-instantsearch-theme-algolia/style.scss';
+import 'instantsearch.css/themes/reset.css';
+import 'instantsearch.css/themes/algolia.css';
 
 const App = props => (
   <InstantSearch
@@ -78,30 +79,37 @@ const Facets = () => (
 
     <section className="facet-wrapper">
       <div className="facet-category-title facet">Refine By</div>
-      <Panel title="Type">
-        <RefinementList
-          attributeName="type"
-          operator="or"
-          limitMin={5}
-          withSearchBox
-        />
-      </Panel>
-      <Panel title="Materials">
-        <RefinementList
-          attributeName="materials"
-          operator="or"
-          limitMin={5}
-          withSearchBox
-        />
-      </Panel>
-      <ConnectedColorRefinementList attributeName="colors" operator="or" />
-      <Panel title="Rating">
-        <RatingMenu attributeName="rating" max={5} />
-      </Panel>
-      <Panel title="Price">
-        <RangeInput key="price_input" attributeName="price" />
-      </Panel>
+      <RefinementList
+        attributeName="type"
+        operator="or"
+        limitMin={5}
+        withSearchBox
+        header={<h5>Type</h5>}
+      />
+
+      <RefinementList
+        attributeName="materials"
+        operator="or"
+        limitMin={5}
+        withSearchBox
+        header={<h5>Materials</h5>}
+      />
+
+      <ConnectedColorRefinementList
+        attributeName="colors"
+        operator="or"
+        header={<h5>Colors</h5>}
+      />
+
+      <RatingMenu attributeName="rating" max={5} header={<h5>Rating</h5>} />
+
+      <RangeInput
+        key="price_input"
+        attributeName="price"
+        header={<h5>Price</h5>}
+      />
     </section>
+
     <div className="thank-you">
       Data courtesy of <a href="http://www.ikea.com/">ikea.com</a>
     </div>
@@ -141,20 +149,18 @@ const ColorItem = ({ item, createURL, refine }) => {
   );
 };
 
-const CustomColorRefinementList = ({ items, refine, createURL }) =>
-  items.length > 0 ? (
-    <div>
-      <h5 className={'ais-Panel__Title'}>Colors</h5>
-      {items.map(item => (
-        <ColorItem
-          key={item.label}
-          item={item}
-          refine={refine}
-          createURL={createURL}
-        />
-      ))}
-    </div>
-  ) : null;
+const CustomColorRefinementList = ({ items, refine, createURL, header }) => (
+  <Panel header={header}>
+    {items.map(item => (
+      <ColorItem
+        key={item.label}
+        item={item}
+        refine={refine}
+        createURL={createURL}
+      />
+    ))}
+  </Panel>
+);
 
 function CustomHits({ hits }) {
   return (
@@ -167,9 +173,19 @@ function CustomHits({ hits }) {
 const Hit = ({ item }) => {
   const icons = [];
   for (let i = 0; i < 5; i++) {
-    const suffix = i >= item.rating ? '_empty' : '';
+    const suffixClassName = i >= item.rating ? '--empty' : '';
+    const suffixXlink = i >= item.rating ? 'Empty' : '';
+
     icons.push(
-      <label key={i} className={`ais-RatingMenu__ratingIcon${suffix}`} />
+      <svg
+        key={i}
+        className={`ais-RatingMenu-starIcon ais-RatingMenu-starIcon${suffixClassName}`}
+        aria-hidden="true"
+        width="24"
+        height="24"
+      >
+        <use xlinkHref={`#ais-RatingMenu-star${suffixXlink}Symbol`} />
+      </svg>
     );
   }
   return (
@@ -190,8 +206,8 @@ const Hit = ({ item }) => {
         <div className="product-type">
           <Highlight attributeName="type" hit={item} />
         </div>
-        <div className="ais-RatingMenu__ratingLink">
-          {icons}
+        <div className="product-footer">
+          <div className="ais-RatingMenu-link">{icons}</div>
           <div className="product-price">${item.price}</div>
         </div>
       </div>
