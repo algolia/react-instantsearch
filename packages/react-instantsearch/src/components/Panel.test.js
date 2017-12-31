@@ -1,27 +1,60 @@
-/* eslint-env jest, jasmine */
-
 import React from 'react';
-import Enzyme, { mount } from 'enzyme';
+import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-Enzyme.configure({ adapter: new Adapter() });
-
 import Panel from './Panel';
 
+Enzyme.configure({ adapter: new Adapter() });
+
 describe('Panel', () => {
-  it('panel should add a classname when no refinement', () => {
-    const wrapper = mount(
-      <Panel title="category">
-        <div className="content" />
+  it('expect to render', () => {
+    const wrapper = shallow(
+      <Panel>
+        <div>Hello content</div>
       </Panel>
     );
 
-    const title = wrapper.find('.ais-Panel-title');
+    expect(wrapper).toMatchSnapshot();
+  });
 
-    expect(title.text()).toEqual('category');
-    expect(wrapper.find('.ais-Panel--noRefinement')).toHaveLength(0);
+  it('expect to render without refinement', () => {
+    const props = {
+      canRefine: false,
+    };
 
-    wrapper.setState({ canRefine: false });
+    const wrapper = shallow(
+      <Panel {...props}>
+        <div>Hello content</div>
+      </Panel>
+    );
 
-    expect(wrapper.find('.ais-Panel--noRefinement')).toHaveLength(1);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('expect to render with header', () => {
+    const props = {
+      header: <p>Header</p>,
+    };
+
+    const wrapper = shallow(
+      <Panel {...props}>
+        <div>Hello content</div>
+      </Panel>
+    );
+
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('expect to render with footer', () => {
+    const props = {
+      footer: <p>Footer</p>,
+    };
+
+    const wrapper = shallow(
+      <Panel {...props}>
+        <div>Hello content</div>
+      </Panel>
+    );
+
+    expect(wrapper).toMatchSnapshot();
   });
 });

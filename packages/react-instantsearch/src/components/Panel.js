@@ -1,43 +1,34 @@
+import React from 'react';
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import classNames from './classNames.js';
+import classNames from './classNames';
 
 const cx = classNames('Panel');
 
-class Panel extends Component {
-  static propTypes = {
-    title: PropTypes.string.isRequired,
-    children: PropTypes.node,
-  };
+const Panel = ({ children, canRefine, cx, header, footer }) => (
+  <div className={cx('', !canRefine && '-noRefinement')}>
+    {header && (
+      <div className={`${cx('header')} ais-header`}>{header}</div>
+    )}
 
-  static childContextTypes = {
-    canRefine: PropTypes.func,
-  };
+    <div className={`${cx('body')} ais-body`}>{children}</div>
 
-  getChildContext() {
-    return { canRefine: this.canRefine };
-  }
+    {footer && (
+      <div className={`${cx('footer')} ais-footer`}>{footer}</div>
+    )}
+  </div>
+);
 
-  constructor(props) {
-    super(props);
+Panel.propTypes = {
+  children: PropTypes.node.isRequired,
+  canRefine: PropTypes.bool,
+  cx: PropTypes.func,
+  header: PropTypes.node,
+  footer: PropTypes.node,
+};
 
-    this.state = {
-      canRefine: true,
-    };
-  }
-
-  canRefine = canRefine => {
-    this.setState({ canRefine });
-  };
-
-  render() {
-    return (
-      <div className={cx('', !this.state.canRefine && '-noRefinement')}>
-        <h5 className={cx('title')}>{this.props.title}</h5>
-        {this.props.children}
-      </div>
-    );
-  }
-}
+Panel.defaultProps = {
+  canRefine: true,
+  cx,
+};
 
 export default Panel;
