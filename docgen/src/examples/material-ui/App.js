@@ -63,9 +63,7 @@ class Content extends React.Component {
     super();
     this.state = { drawer: !isMobile };
   }
-  drawerAction() {
-    this.setState({ drawer: !this.state.drawer });
-  }
+
   render() {
     const baseDrawerStyle = {
       transition: 'none',
@@ -89,8 +87,10 @@ class Content extends React.Component {
       <div>
         <AppBar
           title={isMobile ? '' : 'SHOP'}
-          onLeftIconButtonTouchTap={this.drawerAction}
           className="Header__appBar"
+          onLeftIconButtonClick={() => {
+            this.setState({ drawer: !this.state.drawer });
+          }}
         >
           <div style={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}>
             <ConnectedSearchBox />
