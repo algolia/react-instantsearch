@@ -8,6 +8,7 @@ import Panel from '../components/Panel.js';
  *
  * @name Panel
  * @kind widget
+ * @propType {boolean} [canRefine=true] - If `false` the class `ais-Panel--noRefinement` will be added on the root element.
  * @propType {node} [header] - Adds a header to the widget.
  * @propType {node} [footer] - Adds a footer to the widget.
  * @themeKey ais-Panel - the root div of the Panel
