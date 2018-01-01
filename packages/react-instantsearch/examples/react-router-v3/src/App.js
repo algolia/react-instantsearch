@@ -7,10 +7,10 @@ import {
   Menu,
   Pagination,
   PoweredBy,
-  RatingMenu,
+  StarRating,
   RefinementList,
   SearchBox,
-  ClearRefinements,
+  ClearAll,
 } from 'react-instantsearch/dom';
 import { withRouter } from 'react-router';
 import 'react-instantsearch-theme-algolia/style.css';
@@ -87,11 +87,11 @@ class App extends Component {
               <p>Refinement List</p>
               <RefinementList attributeName="colors" />
               <p>Range Ratings</p>
-              <RatingMenu attributeName="rating" max={6} />
+              <StarRating attributeName="rating" max={6} />
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
               <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-                <ClearRefinements />
+                <ClearAll />
               </div>
               <div>
                 <Hits />
