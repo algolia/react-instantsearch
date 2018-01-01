@@ -2,9 +2,6 @@
 
 exports[`createInstantSearch wraps InstantSearch 1`] = `
 Object {
-  "algoliaClient": Object {
-    "addAlgoliaAgent": [Function],
-  },
   "children": undefined,
   "createURL": undefined,
   "indexName": "name",
