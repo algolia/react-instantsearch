@@ -1,0 +1,14 @@
+{
+  "main": "node_modules/expo/AppEntry.js",
+  "private": true,
+  "dependencies": {
+    "expo": "^24.0.0",
+    "lodash": "^4.17.4",
+    "prop-types": "^15.6.0",
+    "react": "16.0.0",
+    "react-instantsearch": "4.3.0",
+    "react-native":
+      "https://github.com/expo/react-native/archive/sdk-24.0.0.tar.gz",
+    "react-native-animatable": "^1.2.4"
+  }
+}
