@@ -11,16 +11,22 @@ import Index from './Index';
 export default function createIndex(root) {
   return class CreateIndex extends Component {
     static propTypes = {
-      children: PropTypes.oneOfType([
-        PropTypes.arrayOf(PropTypes.node),
-        PropTypes.node,
-      ]),
       indexName: PropTypes.string.isRequired,
+      root: PropTypes.shape({
+        Root: PropTypes.oneOfType([PropTypes.string, PropTypes.func])
+          .isRequired,
+        props: PropTypes.object,
+      }),
+      children: PropTypes.node,
+    };
+
+    static defaultProps = {
+      root,
     };
 
     render() {
       return (
-        <Index indexName={this.props.indexName} root={root}>
+        <Index indexName={this.props.indexName} root={this.props.root}>
           {this.props.children}
         </Index>
       );
