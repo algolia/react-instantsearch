@@ -1,7 +1,9 @@
 {
   "expo": {
     "name": "Algolia Query Suggestions with React InstantSearch",
-    "description": "This project is really great.",
+    "description":
+      "Showcase the Algolia Search Experience with Query Suggestions inside a React Native application. \n\n => Code can be found at https://github.com/algolia/react-instantsearch/tree/master/packages/react-instantsearch/examples/query-suggestions-rn \n\n => See React InstantSearch documentation website at https://community.algolia.com/react-instantsearch/",
+
     "slug": "algolia-query-suggestions-ris",
     "privacy": "unlisted",
     "sdkVersion": "24.0.0",
