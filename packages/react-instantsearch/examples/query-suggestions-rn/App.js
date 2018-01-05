@@ -7,6 +7,7 @@ import {
   TextInput,
   FlatList,
   Image,
+  Keyboard,
   TouchableHighlight,
 } from 'react-native';
 import {
@@ -17,6 +18,7 @@ import {
 import { InstantSearch, Configure, Index } from 'react-instantsearch/native';
 import Highlight from './Highlight';
 import { omit } from 'lodash';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const styles = StyleSheet.create({
   container: {
@@ -48,10 +50,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     margin: 10,
   },
-  hits: {
-    height: 30,
+  suggestions: {
+    flexDirection: 'row',
+    alignItems: 'center',
     padding: 10,
-    marginBottom: 10,
+  },
+  suggestionsIcon: {
+    marginRight: 10,
   },
   hitsPicture: { width: 40, height: 40 },
   hitsText: {
@@ -73,6 +78,7 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       displaySuggestions: false,
+      isFirstKeystroke: true,
       searchState: {},
       query: '',
     };
@@ -80,13 +86,19 @@ export default class App extends React.Component {
     this.removeSuggestions = this.removeSuggestions.bind(this);
     this.setQuery = this.setQuery.bind(this);
     this.onSearchStateChange = this.onSearchStateChange.bind(this);
+    this.firstKeystroke = this.firstKeystroke.bind(this);
   }
+
+  firstKeystroke() {
+    this.setState({ isFirstKeystroke: false });
+  }
+
   displaySuggestions() {
     this.setState({ displaySuggestions: true });
   }
 
   removeSuggestions() {
-    this.setState({ displaySuggestions: false });
+    this.setState({ displaySuggestions: false, isFirstKeystroke: true });
   }
 
   setQuery(query) {
@@ -123,6 +135,8 @@ export default class App extends React.Component {
         >
           <ConnectedSearchBox
             displaySuggestions={this.displaySuggestions}
+            firstKeystroke={this.firstKeystroke}
+            isFirstKeystroke={this.state.isFirstKeystroke}
             defaultRefinement={this.state.query}
           />
           <Index indexName="instantsearch_query_suggestions">
@@ -163,6 +177,12 @@ class SearchBox extends Component {
           autoCorrect={false}
           autoCapitalize={'none'}
           onFocus={this.props.displaySuggestions}
+          onChange={() => {
+            if (this.props.isFirstKeystroke) {
+              this.props.displaySuggestions();
+              this.props.firstKeystroke();
+            }
+          }}
         />
       </View>
     );
@@ -174,7 +194,9 @@ const ConnectedSearchBox = connectSearchBox(SearchBox);
 SearchBox.propTypes = {
   currentRefinement: PropTypes.string,
   displaySuggestions: PropTypes.func,
+  firstKeystroke: PropTypes.func,
   refine: PropTypes.func,
+  isFirstKeystroke: PropTypes.bool,
 };
 
 const HitsList = ({ hits, removeSuggestions, onEndReached }) => (
@@ -211,20 +233,17 @@ HitsList.propTypes = {
 };
 
 const ResultsInfiniteHits = connectInfiniteHits(
-  ({ hits, hasMore, refine, removeSuggestions }) => {
-    const onEndReached = function() {
-      if (hasMore) {
-        refine();
-      }
-    };
-    return (
-      <HitsList
-        removeSuggestions={removeSuggestions}
-        hits={hits}
-        onEndReached={onEndReached}
-      />
-    );
-  }
+  ({ hits, hasMore, refine, removeSuggestions }) => (
+    <HitsList
+      removeSuggestions={removeSuggestions}
+      hits={hits}
+      onEndReached={() => {
+        if (hasMore) {
+          refine();
+        }
+      }}
+    />
+  )
 );
 
 const ResultsHits = connectHits(({ hits, removeSuggestions }) => (
@@ -234,8 +253,20 @@ const ResultsHits = connectHits(({ hits, removeSuggestions }) => (
 const SuggestionsHits = connectHits(({ hits, onPressItem }) => (
   <FlatList
     renderItem={({ item }) => (
-      <TouchableHighlight onPress={() => onPressItem(item.query)}>
-        <View style={styles.hits}>
+      <TouchableHighlight
+        onPress={() => {
+          Keyboard.dismiss();
+          onPressItem(item.query);
+        }}
+        underlayColor="white"
+      >
+        <View style={styles.suggestions}>
+          <Icon
+            size={13}
+            name="search"
+            color="#000"
+            style={styles.suggestionsIcon}
+          />
           <Highlight
             attributeName="query"
             hit={item}
@@ -247,5 +278,6 @@ const SuggestionsHits = connectHits(({ hits, onPressItem }) => (
     )}
     keyExtractor={item => item.objectID}
     data={hits}
+    keyboardShouldPersistTaps="always"
   />
 ));
