@@ -59,7 +59,7 @@
     "enzyme-adapter-react-16": "1.1.1",
     "enzyme-to-json": "3.3.0",
     "escape-html": "1.0.3",
-    "eslint": "4.14.0",
+    "eslint": "4.15.0",
     "eslint-config-algolia": "13.0.1",
     "eslint-config-prettier": "2.9.0",
     "eslint-import-resolver-webpack": "0.8.4",
@@ -94,7 +94,7 @@
     "mversion": "1.10.1",
     "netlify-cli": "1.2.2",
     "node-sass": "4.7.2",
-    "postcss": "6.0.15",
+    "postcss": "6.0.16",
     "postcss-loader": "2.0.10",
     "postcss-scss": "1.0.3",
     "prettier": "1.9.2",
@@ -127,7 +127,7 @@
     "style-loader": "0.19.1",
     "webpack": "3.10.0",
     "webpack-bundle-analyzer": "2.9.1",
-    "webpack-dev-middleware": "2.0.3",
+    "webpack-dev-middleware": "2.0.4",
     "webpack-hot-middleware": "2.21.0"
   },
   "engines": {
