@@ -192,12 +192,12 @@ export default createConnector({
     const results = getResults(searchResults, this.context);
     const hasFacet = results && results.getFacetByName(attributeName);
     const stats = hasFacet ? results.getFacetStats(attributeName) || {} : {};
-    const count = hasFacet
-      ? results.getFacetValues(attributeName).map(v => ({
-          value: v.name,
-          count: v.count,
-        }))
-      : [];
+    const facetValues = hasFacet ? results.getFacetValues(attributeName) : [];
+
+    const count = facetValues.map(v => ({
+      value: v.name,
+      count: v.count,
+    }));
 
     const { min: rangeMin, max: rangeMax } = getCurrentRange(
       { min: minBound, max: maxBound },
