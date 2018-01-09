@@ -187,6 +187,7 @@ exports[`renders correctly 1`] = `
                     accessibilityTraits={undefined}
                     accessible={true}
                     collapsable={undefined}
+                    hasTVPreferredFocus={undefined}
                     hitSlop={undefined}
                     isTVSelectable={true}
                     nativeID={undefined}
@@ -249,6 +250,7 @@ exports[`renders correctly 1`] = `
                 }
                 accessible={true}
                 collapsable={undefined}
+                hasTVPreferredFocus={undefined}
                 hitSlop={undefined}
                 isTVSelectable={true}
                 nativeID={undefined}
@@ -317,6 +319,7 @@ exports[`renders correctly 1`] = `
           "width": 0,
         }
       }
+      leftInterpolator={[Function]}
       mode="float"
       navigation={
         Object {
@@ -348,6 +351,7 @@ exports[`renders correctly 1`] = `
           },
         }
       }
+      rightInterpolator={[Function]}
       router={
         Object {
           "getActionForPathAndParams": [Function],
@@ -359,9 +363,11 @@ exports[`renders correctly 1`] = `
           "getStateForAction": [Function],
         }
       }
+      titleInterpolator={[Function]}
       transitionConfig={undefined}
     >
       <View
+        collapsable={undefined}
         onLayout={[Function]}
         style={
           Object {

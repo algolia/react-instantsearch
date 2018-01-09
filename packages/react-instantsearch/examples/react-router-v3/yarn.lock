@@ -3642,9 +3642,9 @@ jest-docblock@^20.0.3:
   version "20.0.3"
   resolved "https://registry.yarnpkg.com/jest-docblock/-/jest-docblock-20.0.3.tgz#17bea984342cc33d83c50fbe1545ea0efaa44712"
 
-jest-environment-jsdom-11.0.0@20.0.9:
-  version "20.0.9"
-  resolved "https://registry.yarnpkg.com/jest-environment-jsdom-11.0.0/-/jest-environment-jsdom-11.0.0-20.0.9.tgz#0cdba3103d33570b3b7b8f62b671a05b485adbcf"
+jest-environment-jsdom-11.0.0@20.1.9:
+  version "20.1.9"
+  resolved "https://registry.yarnpkg.com/jest-environment-jsdom-11.0.0/-/jest-environment-jsdom-11.0.0-20.1.9.tgz#4436d7c5ae3a623f9f170297d61b57713686a8de"
   dependencies:
     jest-mock "^20.0.3"
     jest-util "^20.0.3"
@@ -5305,13 +5305,13 @@ react-error-overlay@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-3.0.0.tgz#c2bc8f4d91f1375b3dad6d75265d51cd5eeaf655"
 
-react-instantsearch-theme-algolia@4.3.0-beta.0:
-  version "4.3.0-beta.0"
-  resolved "https://registry.yarnpkg.com/react-instantsearch-theme-algolia/-/react-instantsearch-theme-algolia-4.3.0-beta.0.tgz#5006f778ee66c1bb2a68008328fbdc9885bca013"
+react-instantsearch-theme-algolia@4.4.0:
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/react-instantsearch-theme-algolia/-/react-instantsearch-theme-algolia-4.4.0.tgz#9112f97ae2e2af98e4125e75b1b83d228c4458d2"
 
-react-instantsearch@4.3.0-beta.0:
-  version "4.3.0-beta.0"
-  resolved "https://registry.yarnpkg.com/react-instantsearch/-/react-instantsearch-4.3.0-beta.0.tgz#b8d601d4c20e1f405cd484a315b65c2e78adea01"
+react-instantsearch@4.4.0:
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/react-instantsearch/-/react-instantsearch-4.4.0.tgz#dd30dec6f71dd5aaaba68d4204e09aee47956196"
   dependencies:
     algoliasearch "^3.24.0"
     algoliasearch-helper "^2.21.0"

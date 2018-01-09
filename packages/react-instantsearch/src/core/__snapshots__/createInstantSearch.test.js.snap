@@ -1,10 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`createInstantSearch expect to create InstantSearch with a custom root props 1`] = `
+Object {
+  "children": undefined,
+  "createURL": undefined,
+  "indexName": "name",
+  "onSearchParameters": undefined,
+  "onSearchStateChange": undefined,
+  "refresh": false,
+  "resultsState": undefined,
+  "root": Object {
+    "Root": "span",
+    "props": Object {
+      "style": Object {
+        "flex": 1,
+      },
+    },
+  },
+  "searchParameters": undefined,
+  "searchState": undefined,
+  "stalledSearchDelay": 200,
+}
+`;
+
 exports[`createInstantSearch wraps InstantSearch 1`] = `
 Object {
-  "algoliaClient": Object {
-    "addAlgoliaAgent": [Function],
-  },
   "children": undefined,
   "createURL": undefined,
   "indexName": "name",
@@ -17,5 +37,6 @@ Object {
   },
   "searchParameters": undefined,
   "searchState": undefined,
+  "stalledSearchDelay": 200,
 }
 `;

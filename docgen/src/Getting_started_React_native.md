@@ -41,7 +41,7 @@ Note: we use `yarn add` to install dependencies but React InstantSearch is also 
 
 ## Add the `<InstantSearch>` component
 
-[`<InstantSearch>`](widgets/InstantSearch.html) is the component that will connect to Algolia
+[`<InstantSearch>`](widgets/<InstantSearch>.html) is the component that will connect to Algolia
 and will synchronise all the widgets together.
 
 It maintains the state of the search, does the queries, and provides the results to the widgets so that they can update themselves when needed.
@@ -113,7 +113,7 @@ This connector gives you three interesting properties:
 * `hasMore`, a boolean that indicates if there are more pages to load
 * `refine`, the function to call when the end of the page is reached to load more results.
 
-On the React Native side we are going to take advantage of the [FlatList](https://facebook.github.io/react-native/docs/flatlist.html) to render this infinite scroll.
+On the React Native side we are going to take advantage of the [FlatList](https://facebook.github.io/react-native/docs/flatlist.html) to render this infinite scroll. The FlatList component is available since the v0.43 of React Native. If you're using a previous version, you can use the [ListView](https://facebook.github.io/react-native/docs/listview.html) component instead. 
 
 Let’s create our own React Native Infinite Hits widget:
 

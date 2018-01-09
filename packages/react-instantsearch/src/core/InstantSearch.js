@@ -21,6 +21,7 @@ function validateNextProps(props, nextProps) {
  * It provides all the connected components (aka widgets) a means to interact
  * with the searchState.
  * @kind widget
+ * @name <InstantSearch>
  * @requirements You will need to have an Algolia account to be able to use this widget.
  * [Create one now](https://www.algolia.com/users/sign_up).
  * @propType {string} appId - Your Algolia application id.
@@ -32,6 +33,8 @@ function validateNextProps(props, nextProps) {
  * @propType {object} [searchState] - Object to inject some search state. Switches the InstantSearch component in controlled mode. Useful for [URL Routing](guide/Routing.html).
  * @propType {func} [createURL] - Function to call when creating links, useful for [URL Routing](guide/Routing.html).
  * @propType {SearchResults|SearchResults[]} [resultsState] - Use this to inject the results that will be used at first rendering. Those results are found by using the `findResultsState` function. Useful for [Server Side Rendering](guide/Server-side_rendering.html).
+ * @propType {number} [stalledSearchDelay=200] - The amount of time before considering that the search takes too much time. The time is expressed in milliseconds.
+ * @propType {{ Root: string|function, props: object }} [root] - Use this to customize the root element. Default value: `{ Root: 'div' }`
  * @example
  * import {InstantSearch, SearchBox, Hits} from 'react-instantsearch/dom';
  *
@@ -61,6 +64,7 @@ class InstantSearch extends Component {
       algoliaClient: props.algoliaClient,
       initialState,
       resultsState: props.resultsState,
+      stalledSearchDelay: props.stalledSearchDelay,
     });
   }
 
@@ -167,6 +171,10 @@ class InstantSearch extends Component {
   }
 }
 
+InstantSearch.defaultProps = {
+  stalledSearchDelay: 200,
+};
+
 InstantSearch.propTypes = {
   // @TODO: These props are currently constant.
   indexName: PropTypes.string.isRequired,
@@ -191,6 +199,8 @@ InstantSearch.propTypes = {
     Root: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
     props: PropTypes.object,
   }).isRequired,
+
+  stalledSearchDelay: PropTypes.number,
 };
 
 InstantSearch.childContextTypes = {
