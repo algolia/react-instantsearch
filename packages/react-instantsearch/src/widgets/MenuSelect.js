@@ -3,9 +3,9 @@ import connectMenu from '../connectors/connectMenu';
 import AutoHideContainer from '../components/AutoHideContainer';
 import Panel from '../components/Panel';
 import MenuSelectComponent from '../components/MenuSelect.js';
-import classNames from '../components/classNames';
+import createClassNames from '../components/createClassNames';
 
-const cx = classNames('MenuSelect');
+const cx = createClassNames('MenuSelect');
 
 /**
  * The MenuSelect component displays a select that lets the user choose a single value for a specific attribute.

@@ -2,9 +2,9 @@ import React from 'react';
 import connectSortBy from '../connectors/connectSortBy';
 import Panel from '../components/Panel';
 import SortByComponent from '../components/SortBy';
-import classNames from '../components/classNames';
+import createClassNames from '../components/createClassNames';
 
-const cx = classNames('SortBy');
+const cx = createClassNames('SortBy');
 
 /**
  * The SortBy component displays a list of indexes allowing a user to change the hits are sorting.

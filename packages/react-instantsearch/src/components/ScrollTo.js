@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import classNames from './classNames.js';
+import createClassNames from './createClassNames';
 
-const cx = classNames('ScrollTo');
+const cx = createClassNames('ScrollTo');
 
 class ScrollTo extends Component {
   static propTypes = {

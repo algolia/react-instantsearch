@@ -2,9 +2,9 @@ import React from 'react';
 import connectSearchBox from '../connectors/connectSearchBox';
 import Panel from '../components/Panel';
 import SearchBoxComponent from '../components/SearchBox';
-import classNames from '../components/classNames';
+import createClassNames from '../components/createClassNames';
 
-const cx = classNames('SearchBox');
+const cx = createClassNames('SearchBox');
 
 /**
  * The SearchBox component displays a search box that lets the user search for a specific query.

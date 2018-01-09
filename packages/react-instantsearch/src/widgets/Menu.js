@@ -3,9 +3,9 @@ import connectMenu from '../connectors/connectMenu';
 import AutoHideContainer from '../components/AutoHideContainer';
 import Panel from '../components/Panel';
 import MenuComponent from '../components/Menu';
-import classNames from '../components/classNames';
+import createClassNames from '../components/createClassNames';
 
-const cx = classNames('Menu');
+const cx = createClassNames('Menu');
 
 /**
  * The Menu component displays a menu that lets the user choose a single value for a specific attribute.

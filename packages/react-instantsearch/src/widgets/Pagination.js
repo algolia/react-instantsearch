@@ -3,9 +3,9 @@ import connectPagination from '../connectors/connectPagination';
 import AutoHideContainer from '../components/AutoHideContainer';
 import Panel from '../components/Panel';
 import PaginationComponent from '../components/Pagination';
-import classNames from '../components/classNames';
+import createClassNames from '../components/createClassNames';
 
-const cx = classNames('Pagination');
+const cx = createClassNames('Pagination');
 
 /**
  * The Pagination widget displays a simple pagination system allowing the user to

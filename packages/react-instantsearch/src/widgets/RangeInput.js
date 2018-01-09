@@ -3,9 +3,9 @@ import connectRange from '../connectors/connectRange';
 import AutoHideContainer from '../components/AutoHideContainer';
 import Panel from '../components/Panel';
 import RangeInputComponent from '../components/RangeInput';
-import classNames from '../components/classNames';
+import createClassNames from '../components/createClassNames';
 
-const cx = classNames('RangeInput');
+const cx = createClassNames('RangeInput');
 
 /**
  * RangeInput allows a user to select a numeric range using a minimum and maximum input.

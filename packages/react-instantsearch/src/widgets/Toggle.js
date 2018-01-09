@@ -2,9 +2,9 @@ import React from 'react';
 import connectToggle from '../connectors/connectToggle';
 import Panel from '../components/Panel';
 import ToggleComponent from '../components/Toggle';
-import classNames from '../components/classNames';
+import createClassNames from '../components/createClassNames';
 
-const cx = classNames('Toggle');
+const cx = createClassNames('Toggle');
 
 /**
  * The Toggle provides an on/off filtering feature based on an attribute value. Note that if you provide an “off” option, it will be refined at initialization.

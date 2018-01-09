@@ -1,9 +1,9 @@
 import React from 'react';
 import connectHighlight from '../connectors/connectHighlight';
 import HighlightComponent from '../components/Highlight';
-import classNames from '../components/classNames';
+import createClassNames from '../components/createClassNames';
 
-const cx = classNames('Highlight');
+const cx = createClassNames('Highlight');
 
 /**
  * Renders any attribute from a hit into its highlighted form when relevant.

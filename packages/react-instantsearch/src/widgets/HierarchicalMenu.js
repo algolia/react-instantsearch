@@ -3,9 +3,9 @@ import connectHierarchicalMenu from '../connectors/connectHierarchicalMenu';
 import AutoHideContainer from '../components/AutoHideContainer';
 import Panel from '../components/Panel';
 import HierarchicalMenuComponent from '../components/HierarchicalMenu';
-import classNames from '../components/classNames';
+import createClassNames from '../components/createClassNames';
 
-const cx = classNames('HierarchicalMenu');
+const cx = createClassNames('HierarchicalMenu');
 
 /**
  * The hierarchical menu lets the user browse attributes using a tree-like structure.

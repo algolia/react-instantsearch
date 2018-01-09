@@ -2,9 +2,9 @@ import React from 'react';
 import connectInfiniteHits from '../connectors/connectInfiniteHits';
 import Panel from '../components/Panel';
 import InfiniteHitsComponent from '../components/InfiniteHits';
-import classNames from '../components/classNames';
+import createClassNames from '../components/createClassNames';
 
-const cx = classNames('InfiniteHits');
+const cx = createClassNames('InfiniteHits');
 
 /**
  * Displays an infinite list of hits along with a **load more** button.

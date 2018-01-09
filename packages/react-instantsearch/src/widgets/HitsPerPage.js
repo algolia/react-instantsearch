@@ -2,9 +2,9 @@ import React from 'react';
 import connectHitsPerPage from '../connectors/connectHitsPerPage';
 import Panel from '../components/Panel';
 import HitsPerPageSelectComponent from '../components/HitsPerPage';
-import classNames from '../components/classNames';
+import createClassNames from '../components/createClassNames';
 
-const cx = classNames('HitsPerPage');
+const cx = createClassNames('HitsPerPage');
 
 /**
  * The HitsPerPage widget displays a dropdown menu to let the user change the number

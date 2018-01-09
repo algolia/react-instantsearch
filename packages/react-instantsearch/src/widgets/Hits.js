@@ -2,9 +2,9 @@ import React from 'react';
 import connectHits from '../connectors/connectHits';
 import Panel from '../components/Panel';
 import HitsComponent from '../components/Hits';
-import classNames from '../components/classNames';
+import createClassNames from '../components/createClassNames';
 
-const cx = classNames('Hits');
+const cx = createClassNames('Hits');
 
 /**
  * Displays a list of hits.

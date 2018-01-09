@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from './classNames';
+import createClassNames from './createClassNames';
 
 const Panel = ({ children, canRefine, cx, header, footer }) => (
   <div className={cx('', !canRefine && '-noRefinement')}>
@@ -22,7 +22,7 @@ Panel.propTypes = {
 
 Panel.defaultProps = {
   canRefine: true,
-  cx: classNames('Panel'),
+  cx: createClassNames('Panel'),
 };
 
 export default Panel;

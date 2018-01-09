@@ -3,9 +3,9 @@ import connectRange from '../connectors/connectRange';
 import AutoHideContainer from '../components/AutoHideContainer';
 import Panel from '../components/Panel';
 import RatingMenuComponent from '../components/RatingMenu';
-import classNames from '../components/classNames';
+import createClassNames from '../components/createClassNames';
 
-const cx = classNames('RatingMenu');
+const cx = createClassNames('RatingMenu');
 
 /**
  * RatingMenu lets the user refine search results by clicking on stars.

@@ -3,9 +3,9 @@ import connectNumericMenu from '../connectors/connectNumericMenu';
 import AutoHideContainer from '../components/AutoHideContainer';
 import Panel from '../components/Panel';
 import NumericMenuComponent from '../components/NumericMenu';
-import classNames from '../components/classNames';
+import createClassNames from '../components/createClassNames';
 
-const cx = classNames('NumericMenu');
+const cx = createClassNames('NumericMenu');
 
 /**
  * NumericMenu is a widget used for selecting the range value of a numeric attribute.

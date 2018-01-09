@@ -1,9 +1,9 @@
 import React from 'react';
 import connectHighlight from '../connectors/connectHighlight';
 import SnippetComponent from '../components/Snippet';
-import classNames from '../components/classNames';
+import createClassNames from '../components/createClassNames';
 
-const cx = classNames('Snippet');
+const cx = createClassNames('Snippet');
 
 /**
  * Renders any attribute from an hit into its highlighted snippet form when relevant.

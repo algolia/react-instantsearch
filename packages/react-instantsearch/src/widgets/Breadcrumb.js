@@ -3,9 +3,9 @@ import connectBreadcrumb from '../connectors/connectBreadcrumb';
 import AutoHideContainer from '../components/AutoHideContainer';
 import Panel from '../components/Panel';
 import BreadcrumbComponent from '../components/Breadcrumb';
-import classNames from '../components/classNames';
+import createClassNames from '../components/createClassNames';
 
-const cx = classNames('Breadcrumb');
+const cx = createClassNames('Breadcrumb');
 
 /**
  * A breadcrumb is a secondary navigation scheme that allows the user to see where the current page

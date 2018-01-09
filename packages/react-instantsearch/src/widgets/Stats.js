@@ -2,9 +2,9 @@ import React from 'react';
 import connectStats from '../connectors/connectStats';
 import Panel from '../components/Panel';
 import StatsComponent from '../components/Stats';
-import classNames from '../components/classNames';
+import createClassNames from '../components/createClassNames';
 
-const cx = classNames('Stats');
+const cx = createClassNames('Stats');
 
 /**
  * The Stats component displays the total number of matching hits and the time it took to get them (time spent in the Algolia server).

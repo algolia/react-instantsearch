@@ -3,9 +3,9 @@ import connectRefinementList from '../connectors/connectRefinementList';
 import AutoHideContainer from '../components/AutoHideContainer';
 import Panel from '../components/Panel';
 import RefinementListComponent from '../components/RefinementList';
-import classNames from '../components/classNames';
+import createClassNames from '../components/createClassNames';
 
-const cx = classNames('RefinementList');
+const cx = createClassNames('RefinementList');
 
 /**
  * The RefinementList component displays a list that let the end user choose multiple values for a specific facet.

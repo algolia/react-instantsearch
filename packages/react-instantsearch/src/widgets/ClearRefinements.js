@@ -3,9 +3,9 @@ import connectCurrentRefinements from '../connectors/connectCurrentRefinements';
 import AutoHideContainer from '../components/AutoHideContainer';
 import Panel from '../components/Panel';
 import ClearRefinementsComponent from '../components/ClearRefinements';
-import classNames from '../components/classNames';
+import createClassNames from '../components/createClassNames';
 
-const cx = classNames('ClearRefinements');
+const cx = createClassNames('ClearRefinements');
 
 /**
  * The ClearRefinements widget displays a button that lets the user clean every refinement applied

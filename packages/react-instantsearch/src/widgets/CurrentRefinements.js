@@ -3,9 +3,9 @@ import connectCurrentRefinements from '../connectors/connectCurrentRefinements';
 import AutoHideContainer from '../components/AutoHideContainer';
 import Panel from '../components/Panel';
 import CurrentRefinementsComponent from '../components/CurrentRefinements';
-import classNames from '../components/classNames';
+import createClassNames from '../components/createClassNames';
 
-const cx = classNames('CurrentRefinements');
+const cx = createClassNames('CurrentRefinements');
 
 /**
  * The CurrentRefinements widget displays the list of currently applied filters.

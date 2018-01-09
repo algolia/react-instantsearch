@@ -3,11 +3,11 @@ import React, { Component } from 'react';
 import { storiesOf } from '@storybook/react';
 import { connectRange } from '../packages/react-instantsearch/connectors';
 import { Panel } from '../packages/react-instantsearch/dom';
+import createClassNames from '../packages/react-instantsearch/src/components/createClassNames';
 import { WrapWithHits } from './util';
-import classNames from '../packages/react-instantsearch/src/components/classNames';
 import Rheostat from 'rheostat';
 
-const cx = classNames('RangeSlider');
+const cx = createClassNames('RangeSlider');
 
 const stories = storiesOf('Integration With Other Libraries', module);
 
