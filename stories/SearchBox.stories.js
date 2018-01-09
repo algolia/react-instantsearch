@@ -100,6 +100,18 @@ stories
     }
   )
   .addWithJSX(
+    'without search as you type',
+    () => (
+      <WrapWithHits searchBox={false} linkedStoryGroup="SearchBox">
+        <SearchBox searchAsYouType={false} />
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
     'playground',
     () => (
       <WrapWithHits searchBox={false} linkedStoryGroup="SearchBox">

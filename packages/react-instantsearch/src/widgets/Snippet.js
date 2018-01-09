@@ -18,7 +18,7 @@ const cx = createClassNames('Snippet');
  * @propType {object} hit - hit object containing the highlighted snippet attribute
  * @propType {string} [tagName='em'] - tag to be used for highlighted parts of the attribute
  * @propType {string} [nonHighlightedTagName='span'] - tag to be used for the parts of the hit that are not highlighted
- * @propType {React.Element} [separatorComponent=',<space>'] - symbol used to separate the elements of the array in case the attributeName points to an array of strings.
+ * @propType {React.Element} [separator=',<space>'] - symbol used to separate the elements of the array in case the attributeName points to an array of strings.
  * @themeKey ais-Snippet - the root span of the widget
  * @themeKey ais-Snippet-highlighted - the highlighted text
  * @themeKey ais-Snippet-nonHighlighted - the normal text

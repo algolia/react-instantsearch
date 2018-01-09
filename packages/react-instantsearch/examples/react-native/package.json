@@ -35,12 +35,12 @@
     "prop-types": "15.6.0",
     "react": "16.2.0",
     "react-dom": "16.2.0",
-    "react-instantsearch": "4.3.0",
-    "react-instantsearch-theme-algolia": "4.3.0",
+    "react-instantsearch": "4.4.0",
+    "react-instantsearch-theme-algolia": "4.4.0",
     "react-native": "0.51.0",
     "react-native-modal-dropdown": "0.5.0",
-    "react-native-router-flux": "4.0.0-beta.25",
+    "react-native-router-flux": "4.0.0-beta.27",
     "react-native-star-rating": "1.0.8",
-    "react-native-vector-icons": "4.4.3"
+    "react-native-vector-icons": "4.5.0"
   }
 }
