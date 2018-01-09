@@ -16,6 +16,20 @@ describe('Panel', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('expect to render with custom className', () => {
+    const props = {
+      className: 'ais-Panel-Breadcrumb',
+    };
+
+    const wrapper = shallow(
+      <Panel {...props}>
+        <div>Hello content</div>
+      </Panel>
+    );
+
+    expect(wrapper).toMatchSnapshot();
+  });
+
   it('expect to render without refinement', () => {
     const props = {
       canRefine: false,

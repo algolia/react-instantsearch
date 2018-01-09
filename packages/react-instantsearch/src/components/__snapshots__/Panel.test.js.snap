@@ -5,7 +5,21 @@ exports[`Panel expect to render 1`] = `
   className="ais-Panel"
 >
   <div
-    className="ais-Panel-body ais-body"
+    className="ais-Panel-body"
+  >
+    <div>
+      Hello content
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Panel expect to render with custom className 1`] = `
+<div
+  className="ais-Panel ais-Panel-Breadcrumb"
+>
+  <div
+    className="ais-Panel-body"
   >
     <div>
       Hello content
@@ -19,14 +33,14 @@ exports[`Panel expect to render with footer 1`] = `
   className="ais-Panel"
 >
   <div
-    className="ais-Panel-body ais-body"
+    className="ais-Panel-body"
   >
     <div>
       Hello content
     </div>
   </div>
   <div
-    className="ais-Panel-footer ais-footer"
+    className="ais-Panel-footer"
   >
     <p>
       Footer
@@ -40,14 +54,14 @@ exports[`Panel expect to render with header 1`] = `
   className="ais-Panel"
 >
   <div
-    className="ais-Panel-header ais-header"
+    className="ais-Panel-header"
   >
     <p>
       Header
     </p>
   </div>
   <div
-    className="ais-Panel-body ais-body"
+    className="ais-Panel-body"
   >
     <div>
       Hello content
@@ -61,7 +75,7 @@ exports[`Panel expect to render without refinement 1`] = `
   className="ais-Panel ais-Panel--noRefinement"
 >
   <div
-    className="ais-Panel-body ais-body"
+    className="ais-Panel-body"
   >
     <div>
       Hello content
