@@ -3,12 +3,14 @@ title: Refining within hits
 mainTitle: Guides
 layout: main.pug
 category: guide
-navWeight: # idk what to put here 🚨
+navWeight: 63
 ---
 
 ## Introduction
 
-In some interfaces, you want to have buttons _inside_ your Hits that will change the refinement of the current search, rather than as standalone components. Since we can't replicate this pattern with widgets, we will need to go with Refinementlists that don't render anything. Please note that this is an advanced tutorial and requires moderate knowledge of how React and React InstantSearch work. Our final result will look something like this, let's get started!
+In some interfaces, you want to have buttons _inside_ your Hits that will change the refinement of the current search, rather than as standalone components. For example, each of your items has some tags you want to refine upon.
+
+Since we can't replicate this pattern with widgets, we will need to go with RefinementLists that don't render anything (see also [virtual widgets](guide/Virtual_widgets.html)). Please note that this is an advanced tutorial and requires moderate knowledge of how React and React InstantSearch work. Our final result will look something like this, let's get started!
 
 <iframe src="https://codesandbox.io/embed/oY1klpZYB" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 
@@ -16,7 +18,7 @@ In some interfaces, you want to have buttons _inside_ your Hits that will change
 
 First, we'll set up a regular project with create-react-app and react-instantsearch.
 
-```sh
+```shell
 $ yarn create react-app refining-hits # or npm install -g create-react-app && create-react-app refining-hits
 $ cd refining-hits
 $ yarn add react-instantsearch # or npm install --save react-instantsearch
