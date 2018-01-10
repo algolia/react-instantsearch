@@ -22,7 +22,7 @@ $ cd refining-hits
 $ yarn add react-instantsearch # or npm install --save react-instantsearch
 ```
 
-The index that we will use in this example needs to be set up with: 
+The index that we will use in this example needs to be set up with:
 
 ```jsx
 index.setSettings({
@@ -30,8 +30,7 @@ index.setSettings({
 });
 ```
 
-In this guide we will use the search index we use on the [Yarn](https://yarn.fyi) website. It already has the mandatory `attributesForFaceting ` configured.
-We will get started in `App.js` and set up a regular React InstantSearch app:
+In this guide we will use the search index we use on the [Yarn](https://yarn.pm) website. It already has the mandatory `attributesForFaceting` configured. We will get started in `App.js` and set up a regular React InstantSearch app:
 
 ```jsx
 import React, { Component } from 'react';
@@ -69,45 +68,40 @@ class App extends Component {
 export default App;
 ```
 
-We will also set up a separate file called `Hit.js` for the component that renders the hits: 
+We will also set up a separate file called `Hit.js` for the component that renders the hits:
 
 ```jsx
 import React from 'react';
 
-const Tags = ({ keywords = [] }) =>
+const Tags = ({ keywords = [] }) => (
   <div>
-    {keywords.map((keyword, i) =>
+    {keywords.map((keyword, i) => (
       <span key={keyword}>
         {i > 0 && ', '}
-        <button>
-          {keyword}
-        </button>
+        <button>{keyword}</button>
       </span>
-    )}
-  </div>;
+    ))}
+  </div>
+);
 
-const Hit = ({ hit: { name, description, keywords, owner } }) =>
+const Hit = ({ hit: { name, description, keywords, owner } }) => (
   <article>
     <h1>
       <a
-        href={`https://yarn.fyi/${name}`}
+        href={`https://yarn.pm/${name}`}
         target="_blank"
         rel="noopener noreferrer"
       >
         {name}
       </a>
     </h1>
+    <p>{description}</p>
     <p>
-      {description}
-    </p>
-    <p>
-      by{' '}
-      <button>
-        {owner.name}
-      </button>
+      by <button>{owner.name}</button>
     </p>
     <Tags keywords={keywords} />
-  </article>;
+  </article>
+);
 
 export default Hit;
 ```
@@ -122,7 +116,7 @@ import {
   SearchBox,
   Hits,
 } from 'react-instantsearch/dom';
-import Hit from './Hit'
+import Hit from './Hit';
 
 class App extends Component {
   render() {
@@ -134,7 +128,7 @@ class App extends Component {
       >
         <SearchBox />
         <CurrentRefinements />
-        <Hits hitComponent={({hit}) => <Hit hit={hit} />}/>
+        <Hits hitComponent={Hit} />
         <Configure
           attributesToRetrieve={[
             'name',
@@ -151,15 +145,16 @@ class App extends Component {
 export default App;
 ```
 
-We manually render the `hitComponent` as a function, because we want to add extra functions to the `Hit` component later. Now we will also set up two `RefinementList`s for `keywords` and `owner.name`. We do this in a container so that the difference is clear, but you can change the rendering of this however you prefer:
+Now we will also set up two `RefinementList`s for `keywords` and `owner.name`. We do this in a container so that the difference is clear, but you can change the rendering of this however you prefer:
 
 ```jsx
+import React, { Component } from 'react';
 import {
   Configure,
   InstantSearch,
   SearchBox,
   Hits,
-  RefinementList
+  RefinementList,
 } from 'react-instantsearch/dom';
 import Hit from './Hit';
 
@@ -176,7 +171,7 @@ class App extends Component {
           <RefinementList attributeName="keywords" withSearchBox />
           <RefinementList attributeName="owner.name" withSearchBox />
         </div>
-        <Hits hitComponent={({hit}) => <Hit hit={hit} />}/>
+        <Hits hitComponent={Hit} />
         <Configure
           attributesToRetrieve={[
             'name',
@@ -199,7 +194,7 @@ If we look at what we have now, then we see that we can select any keyword, or a
 
 ## Adding virtual RefinementLists
 
-A "virtual" RefinementList is a RefinementList, just like the ones that are using the regular widgets, but with the exception that they won't render anything. We will make a virtual RefinementList here that will take `defaultRefinement` into account when rendering. We will make a `VirtualRefinementList` component, which uses a `connectRefinementList`: 
+A "virtual" RefinementList is a RefinementList, just like the ones that are using the regular widgets, but with the exception that they won't render anything. We will make a virtual RefinementList here that will take `defaultRefinement` into account when rendering. We will make a `VirtualRefinementList` component, which uses a `connectRefinementList`:
 
 ```jsx
 import { connectRefinementList } from 'react-instantsearch/connectors';
@@ -218,7 +213,7 @@ const VirtualRefinementList = connectRefinementList(RefinementList);
 export default VirtualRefinementList;
 ```
 
-Now this seems pretty useless, except that this component will get the correct props from its connector, each time something in its props change. The props we get from this connector are: `currentRefinement` and `defaultRefinement`. `defaultRefinement` is what we will manually set from within our Hit, `currentRefinement` is the current state of the search, relevant to that refinement, but maybe we should first implement it in our `App.js`: 
+Now this seems pretty useless, except that this component will get the correct props from its connector, each time something in its props change. The props we get from this connector are: `currentRefinement` and `defaultRefinement`. `defaultRefinement` is what we will manually set from within our Hit, `currentRefinement` is the current state of the search, relevant to that refinement, but maybe we should first implement it in our `App.js`:
 
 ```jsx
 import {
@@ -226,7 +221,7 @@ import {
   InstantSearch,
   SearchBox,
   Hits,
-  RefinementList
+  RefinementList,
 } from 'react-instantsearch/dom';
 import Hit from './Hit';
 import VirtualRefinementList from './VirtualRefinementList';
@@ -236,10 +231,11 @@ class App extends Component {
     refinements: {
       keywords: [],
       'owner.name': [],
-    }
-  }
+    },
+  };
 
   render() {
+    const { refinements } = this.state;
     return (
       <InstantSearch
         appId="OFCNCOG2CU"
@@ -253,13 +249,13 @@ class App extends Component {
         </div>
         <VirtualRefinementList
           attributeName="keywords"
-          defaultRefinement={[...this.state.refinements.keywords]}
+          defaultRefinement={refinements.keywords}
         />
         <VirtualRefinementList
           attributeName="owner.name"
-          defaultRefinement={[...this.state.refinements['owner.name']]}
+          defaultRefinement={refinements['owner.name']}
         />
-        <Hits hitComponent={({hit}) => <Hit hit={hit} />}/>
+        <Hits hitComponent={Hit} />
         <Configure
           attributesToRetrieve={[
             'name',
@@ -308,9 +304,9 @@ class RefinementList extends Component {
 }
 ```
 
-We compare the current refinement with the previous current refinement. If they aren't the same, then we will call the  `onRefine` callback from our props with the current `attributeName` and with the new value. We do the same for the `defaultRefinement` so that the correct refinement is always chosen.
+We compare the current refinement with the previous current refinement. If they aren't the same, then we will call the `onRefine` callback from our props with the current `attributeName` and with the new value. We do the same for the `defaultRefinement` so that the correct refinement is always chosen.
 
-We made this callback, but now we also need to do something with it in `App.js`: 
+We made this callback, but now we also need to do something with it in `App.js`:
 
 ```jsx
 class App extends Component {
@@ -318,19 +314,19 @@ class App extends Component {
     refinements: {
       keywords: [],
       'owner.name': [],
-    }
-  }
+    },
+  };
 
   onRefine = ({ attributeName, value }) =>
-    this.setState(state => ({
-      ...state,
+    this.setState(({ refinements }) => ({
       refinements: {
-        ...state.refinements,
+        ...refinements,
         [attributeName]: [...value],
       },
     }));
 
   render() {
+    const { refinements } = this.state;
     return (
       <InstantSearch
         appId="OFCNCOG2CU"
@@ -339,12 +335,12 @@ class App extends Component {
       >
         <VirtualRefinementList
           attributeName="keywords"
-          defaultRefinement={[...this.state.refinements.keywords]}
+          defaultRefinement={[...refinements.keywords]}
           onRefine={this.onRefine}
         />
         <VirtualRefinementList
           attributeName="owner.name"
-          defaultRefinement={[...this.state.refinements['owner.name']]}
+          defaultRefinement={[...refinements['owner.name']]}
           onRefine={this.onRefine}
         />
         {/* the rest of our interface */}
@@ -358,49 +354,52 @@ This function will take the value that our refinementList says is relevant for t
 
 ## Refining from within hits
 
-To be able to refine from a hit, we need to change the state in `App`. We add a function to this class to do that cleanly: 
+To be able to refine from a hit, we need to change the state in `App`. We add a function to this class to do that cleanly:
 
 ```jsx
 class App extends Component {
-  refine = ({ attributeName, value }) => {
-    this.setState(state => {
-      const index = state.refinements[attributeName].indexOf(value);
+  // …
 
+  refine = ({ attributeName, value }) =>
+    this.setState(({ refinements }) => {
+      const index = refinements[attributeName].indexOf(value);
+
+      // if it's not yet refined, add it to the refinements
       if (index === -1) {
-        const oldValue = state.refinements[attributeName];
+        const oldValue = refinements[attributeName];
         return {
-          ...state,
           refinements: {
-            ...state.refinements,
+            ...refinements,
             [attributeName]: [...oldValue, value],
           },
         };
       }
 
-      const newValue = state.refinements[attributeName].slice();
+      // if it's already refined, remove it from the refinements
+      const newValue = refinements[attributeName].slice();
       newValue.splice(index, 1);
       return {
-        ...state,
         refinements: {
-          ...state.refinements,
+          ...refinements,
           [attributeName]: newValue,
         },
       };
     });
-  };
+
+  // …
 }
 ```
 
-This function works as follows: it has an `attributeName` and a `value`, the value is what we want to add to the `VirtualRefinementList`, a string, for example `nodejs` or `react`. We will first check if our array for this attribute already contains that value. If it doesn't contain it, we simply add it to the array, if the array already contains the value we want, we remove it. Finally this value is set as the new state. Correspondingly, that change in state will trigger a change in `defaultRefinement` of the `VirtualRefinementList` for that attribute, and update the search interface. 
+This function works as follows: it has an `attributeName` and a `value`, the value is what we want to add to the `VirtualRefinementList`, a string, for example `nodejs` or `react`. We will first check if our array for this attribute already contains that value. If it doesn't contain it, we simply add it to the array, if the array already contains the value we want, we remove it. Finally this value is set as the new state. Correspondingly, that change in state will trigger a change in `defaultRefinement` of the `VirtualRefinementList` for that attribute, and update the search interface.
 
-But we still need to call this function. What we do is add `this.refine` as a prop to the `Hit` component, and call it there when needed. The implementation of the `Hit` component now looks like this: 
+But we still need to call this function. What we do is add `this.refine` as a prop to the `Hit` component, and call it there when needed. The implementation of the `Hit` component now looks like this:
 
 ```jsx
 import React from 'react';
 
-const Tags = ({ keywords = [], onClick }) =>
+const Tags = ({ keywords = [], onClick }) => (
   <div>
-    {keywords.map((keyword, i) =>
+    {keywords.map((keyword, i) => (
       <span key={keyword}>
         {i > 0 && ', '}
         <button
@@ -409,23 +408,22 @@ const Tags = ({ keywords = [], onClick }) =>
           {keyword}
         </button>
       </span>
-    )}
-  </div>;
+    ))}
+  </div>
+);
 
-const Hit = ({ hit: { name, description, keywords, owner }, refine }) =>
+const Hit = ({ hit: { name, description, keywords, owner }, refine }) => (
   <article>
     <h1>
       <a
-        href={`https://yarn.fyi/${name}`}
+        href={`https://yarn.pm/${name}`}
         target="_blank"
         rel="noopener noreferrer"
       >
         {name}
       </a>
     </h1>
-    <p>
-      {description}
-    </p>
+    <p>{description}</p>
     <p>
       by{' '}
       <button
@@ -433,35 +431,40 @@ const Hit = ({ hit: { name, description, keywords, owner }, refine }) =>
           refine({
             attributeName: 'owner.name',
             value: owner.name,
-          })}
+          })
+        }
       >
         {owner.name}
       </button>
     </p>
     <Tags keywords={keywords} onClick={refine} />
-  </article>;
+  </article>
+);
 
 export default Hit;
 ```
 
-Our final `App.js` looks like this: 
+We also need to use `connectHits` to pass the custom prop (`refine`) to each `Hit`. This finishes the integration and our final `App.js` looks like this:
 
 ```jsx
 import React, { Component } from 'react';
-import { render } from 'react-dom';
 import {
   Configure,
   InstantSearch,
   SearchBox,
-  Hits,
   CurrentRefinements,
   RefinementList,
 } from 'react-instantsearch/dom';
+import { connectHits } from 'react-instantsearch/connectors';
 
 import Hit from './Hit';
 import VirtualRefinementList from './VirtualRefinementList';
 
-export default class Search extends Component {
+const Hits = connectHits(({ onRefine, hits }) =>
+  hits.map(hit => <Hit refine={onRefine} hit={hit} key={hit.objectID} />)
+);
+
+class App extends Component {
   state = {
     refinements: {
       keywords: [],
@@ -469,43 +472,42 @@ export default class Search extends Component {
     },
   };
 
-  refine = ({ attributeName, value }) => {
-    this.setState(state => {
-      const index = state.refinements[attributeName].indexOf(value);
+  onRefine = ({ attributeName, value }) =>
+    this.setState(({ refinements }) => ({
+      refinements: {
+        ...refinements,
+        [attributeName]: [...value],
+      },
+    }));
 
+  refine = ({ attributeName, value }) =>
+    this.setState(({ refinements }) => {
+      const index = refinements[attributeName].indexOf(value);
+
+      // if it's not yet refined, add it to the refinements
       if (index === -1) {
-        const oldValue = state.refinements[attributeName];
+        const oldValue = refinements[attributeName];
         return {
-          ...state,
           refinements: {
-            ...state.refinements,
+            ...refinements,
             [attributeName]: [...oldValue, value],
           },
         };
       }
 
-      const newValue = state.refinements[attributeName].slice();
+      // if it's already refined, remove it from the refinements
+      const newValue = refinements[attributeName].slice();
       newValue.splice(index, 1);
       return {
-        ...state,
         refinements: {
-          ...state.refinements,
+          ...refinements,
           [attributeName]: newValue,
         },
       };
     });
-  };
-
-  onRefine = ({ attributeName, value }) =>
-    this.setState(state => ({
-      ...state,
-      refinements: {
-        ...state.refinements,
-        [attributeName]: value,
-      },
-    }));
 
   render() {
+    const { refinements } = this.state;
     return (
       <InstantSearch
         appId="OFCNCOG2CU"
@@ -528,24 +530,24 @@ export default class Search extends Component {
         </div>
         <VirtualRefinementList
           attributeName="keywords"
-          defaultRefinement={[...this.state.refinements.keywords]}
+          defaultRefinement={refinements.keywords}
           onRefine={this.onRefine}
         />
         <VirtualRefinementList
           attributeName="owner.name"
-          defaultRefinement={[...this.state.refinements['owner.name']]}
+          defaultRefinement={refinements['owner.name']}
           onRefine={this.onRefine}
         />
-        <Hits
-          hitComponent={({ hit }) => <Hit hit={hit} refine={this.refine} />}
-        />
+        <Hits onRefine={this.refine} />
       </InstantSearch>
     );
   }
 }
+
+export default App;
 ```
 
-This then gets us our result, as seen in the beginning: 
+This then gets us our result, as seen in the beginning:
 
 <iframe src="https://codesandbox.io/embed/oY1klpZYB" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 
