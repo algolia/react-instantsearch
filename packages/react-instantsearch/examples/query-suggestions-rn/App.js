@@ -25,6 +25,9 @@ const styles = StyleSheet.create({
     marginTop: 30,
     flex: 1,
   },
+  suggestionsContainer: {
+    flex: 1,
+  },
   algoliaLogo: {
     width: 40,
     height: 40,
@@ -102,7 +105,10 @@ export default class App extends React.Component {
   }
 
   setQuery(query) {
-    const searchState = omit(this.state.searchState, ['query']);
+    const searchState = omit(this.state.searchState, ['query', 'page']);
+    if (searchState.indices && searchState.indices.instant_search) {
+      searchState.indices.instant_search.page = 0;
+    }
     this.setState({
       query,
       searchState,
@@ -132,6 +138,10 @@ export default class App extends React.Component {
           indexName="instant_search"
           onSearchStateChange={this.onSearchStateChange}
           searchState={this.state.searchState}
+          root={{
+            Root: View,
+            props: { flex: 1 },
+          }}
         >
           <ConnectedSearchBox
             displaySuggestions={this.displaySuggestions}
@@ -143,10 +153,16 @@ export default class App extends React.Component {
             <Configure hitsPerPage={5} />
             {suggestions}
           </Index>
-          <Index indexName="instant_search">
+          <Index
+            indexName="instant_search"
+            root={{
+              Root: View,
+              props: { flex: 1 },
+            }}
+          >
             <Configure hitsPerPage={15} />
             <Text style={styles.bestResults}>Best results</Text>
-            <View>{results}</View>
+            <View style={styles.suggestionsContainer}>{results}</View>
           </Index>
         </InstantSearch>
       </View>
