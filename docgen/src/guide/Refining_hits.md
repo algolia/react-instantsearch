@@ -28,20 +28,20 @@ The index that we will use in this example needs to be set up with:
 
 ```jsx
 index.setSettings({
-  attributesForFaceting: ['searchable(keywords)', 'searchable(owner.name)'],
+  attributesForFaceting: ["searchable(keywords)", "searchable(owner.name)"],
 });
 ```
 
 In this guide we will use the search index we use on the [Yarn](https://yarn.pm) website. It already has the mandatory `attributesForFaceting` configured. We will get started in `App.js` and set up a regular React InstantSearch app:
 
 ```jsx
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   Configure,
   InstantSearch,
   SearchBox,
   Hits,
-} from 'react-instantsearch/dom';
+} from "react-instantsearch/dom";
 
 class App extends Component {
   render() {
@@ -56,10 +56,10 @@ class App extends Component {
         <Hits />
         <Configure
           attributesToRetrieve={[
-            'name',
-            'description',
-            'keywords',
-            'owner.name',
+            "name",
+            "description",
+            "keywords",
+            "owner.name",
           ]}
         />
       </InstantSearch>
@@ -73,13 +73,13 @@ export default App;
 We will also set up a separate file called `Hit.js` for the component that renders the hits:
 
 ```jsx
-import React from 'react';
+import React from "react";
 
 const Tags = ({ keywords = [] }) => (
   <div>
     {keywords.map((keyword, i) => (
       <span key={keyword}>
-        {i > 0 && ', '}
+        {i > 0 && ", "}
         <button>{keyword}</button>
       </span>
     ))}
@@ -111,14 +111,14 @@ export default Hit;
 In this component we took the name, description and owner of a certain package, and render these as hits. To enable this as `hitComponent`, we will change the line in `App.js` that renders the `Hit` component:
 
 ```jsx
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   Configure,
   InstantSearch,
   SearchBox,
   Hits,
-} from 'react-instantsearch/dom';
-import Hit from './Hit';
+} from "react-instantsearch/dom";
+import Hit from "./Hit";
 
 class App extends Component {
   render() {
@@ -133,10 +133,10 @@ class App extends Component {
         <Hits hitComponent={Hit} />
         <Configure
           attributesToRetrieve={[
-            'name',
-            'description',
-            'keywords',
-            'owner.name',
+            "name",
+            "description",
+            "keywords",
+            "owner.name",
           ]}
         />
       </InstantSearch>
@@ -150,15 +150,15 @@ export default App;
 Now we will also set up two `RefinementList`s for `keywords` and `owner.name`. We do this in a container so that the difference is clear, but you can change the rendering of this however you prefer:
 
 ```jsx
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   Configure,
   InstantSearch,
   SearchBox,
   Hits,
   RefinementList,
-} from 'react-instantsearch/dom';
-import Hit from './Hit';
+} from "react-instantsearch/dom";
+import Hit from "./Hit";
 
 class App extends Component {
   render() {
@@ -169,17 +169,17 @@ class App extends Component {
         indexName="npm-search"
       >
         <SearchBox />
-        <div style={{ display: 'flex', border: '1px solid black' }}>
+        <div style={{ display: "flex", border: "1px solid black" }}>
           <RefinementList attributeName="keywords" withSearchBox />
           <RefinementList attributeName="owner.name" withSearchBox />
         </div>
         <Hits hitComponent={Hit} />
         <Configure
           attributesToRetrieve={[
-            'name',
-            'description',
-            'keywords',
-            'owner.name',
+            "name",
+            "description",
+            "keywords",
+            "owner.name",
           ]}
         />
       </InstantSearch>
@@ -199,7 +199,7 @@ If we look at what we have now, then we see that we can select any keyword, or a
 A "virtual" RefinementList is a RefinementList, just like the ones that are using the regular widgets, but with the exception that they won't render anything. We will make a virtual RefinementList here that will take `defaultRefinement` into account when rendering. We will make a `VirtualRefinementList` component, which uses a `connectRefinementList`:
 
 ```jsx
-import { connectRefinementList } from 'react-instantsearch/connectors';
+import { connectRefinementList } from "react-instantsearch/connectors";
 ```
 
 We will make a Component that renders nothing, and that's what we export from the `VirtualRefinementList.js` file:
@@ -224,15 +224,15 @@ import {
   SearchBox,
   Hits,
   RefinementList,
-} from 'react-instantsearch/dom';
-import Hit from './Hit';
-import VirtualRefinementList from './VirtualRefinementList';
+} from "react-instantsearch/dom";
+import Hit from "./Hit";
+import VirtualRefinementList from "./VirtualRefinementList";
 
 class App extends Component {
   state = {
     refinements: {
       keywords: [],
-      'owner.name': [],
+      "owner.name": [],
     },
   };
 
@@ -245,7 +245,7 @@ class App extends Component {
         indexName="npm-search"
       >
         <SearchBox />
-        <div style={{ display: 'flex', border: '1px solid black' }}>
+        <div style={{ display: "flex", border: "1px solid black" }}>
           <RefinementList attributeName="keywords" withSearchBox />
           <RefinementList attributeName="owner.name" withSearchBox />
         </div>
@@ -255,15 +255,15 @@ class App extends Component {
         />
         <VirtualRefinementList
           attributeName="owner.name"
-          defaultRefinement={refinements['owner.name']}
+          defaultRefinement={refinements["owner.name"]}
         />
         <Hits hitComponent={Hit} />
         <Configure
           attributesToRetrieve={[
-            'name',
-            'description',
-            'keywords',
-            'owner.name',
+            "name",
+            "description",
+            "keywords",
+            "owner.name",
           ]}
         />
       </InstantSearch>
@@ -315,7 +315,7 @@ class App extends Component {
   state = {
     refinements: {
       keywords: [],
-      'owner.name': [],
+      "owner.name": [],
     },
   };
 
@@ -342,7 +342,7 @@ class App extends Component {
         />
         <VirtualRefinementList
           attributeName="owner.name"
-          defaultRefinement={[...refinements['owner.name']]}
+          defaultRefinement={[...refinements["owner.name"]]}
           onRefine={this.onRefine}
         />
         {/* the rest of our interface */}
@@ -397,15 +397,15 @@ This function works as follows: it has an `attributeName` and a `value`, the val
 But we still need to call this function. What we do is add `this.refine` as a prop to the `Hit` component, and call it there when needed. The implementation of the `Hit` component now looks like this:
 
 ```jsx
-import React from 'react';
+import React from "react";
 
 const Tags = ({ keywords = [], onClick }) => (
   <div>
     {keywords.map((keyword, i) => (
       <span key={keyword}>
-        {i > 0 && ', '}
+        {i > 0 && ", "}
         <button
-          onClick={() => onClick({ attributeName: 'keywords', value: keyword })}
+          onClick={() => onClick({ attributeName: "keywords", value: keyword })}
         >
           {keyword}
         </button>
@@ -427,11 +427,11 @@ const Hit = ({ hit: { name, description, keywords, owner }, refine }) => (
     </h1>
     <p>{description}</p>
     <p>
-      by{' '}
+      by{" "}
       <button
         onClick={() =>
           refine({
-            attributeName: 'owner.name',
+            attributeName: "owner.name",
             value: owner.name,
           })
         }
@@ -449,18 +449,18 @@ export default Hit;
 We also need to use `connectHits` to pass the custom prop (`refine`) to each `Hit`. This finishes the integration and our final `App.js` looks like this:
 
 ```jsx
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   Configure,
   InstantSearch,
   SearchBox,
   CurrentRefinements,
   RefinementList,
-} from 'react-instantsearch/dom';
-import { connectHits } from 'react-instantsearch/connectors';
+} from "react-instantsearch/dom";
+import { connectHits } from "react-instantsearch/connectors";
 
-import Hit from './Hit';
-import VirtualRefinementList from './VirtualRefinementList';
+import Hit from "./Hit";
+import VirtualRefinementList from "./VirtualRefinementList";
 
 const Hits = connectHits(({ onRefine, hits }) =>
   hits.map(hit => <Hit refine={onRefine} hit={hit} key={hit.objectID} />)
@@ -470,7 +470,7 @@ class App extends Component {
   state = {
     refinements: {
       keywords: [],
-      'owner.name': [],
+      "owner.name": [],
     },
   };
 
@@ -518,15 +518,15 @@ class App extends Component {
       >
         <Configure
           attributesToRetrieve={[
-            'name',
-            'description',
-            'keywords',
-            'owner.name',
+            "name",
+            "description",
+            "keywords",
+            "owner.name",
           ]}
         />
         <SearchBox />
         <CurrentRefinements />
-        <div style={{ display: 'flex', border: '1px solid black' }}>
+        <div style={{ display: "flex", border: "1px solid black" }}>
           <RefinementList attributeName="keywords" withSearchBox />
           <RefinementList attributeName="owner.name" withSearchBox />
         </div>
@@ -537,7 +537,7 @@ class App extends Component {
         />
         <VirtualRefinementList
           attributeName="owner.name"
-          defaultRefinement={refinements['owner.name']}
+          defaultRefinement={refinements["owner.name"]}
           onRefine={this.onRefine}
         />
         <Hits onRefine={this.refine} />
@@ -547,6 +547,39 @@ class App extends Component {
 }
 
 export default App;
+```
+
+We notice that in `CurrentRefinements`, each list show up twice. This is because the default current refinements widget will render each widget's refinements by default, and we have both a `RefinementList` and a `VirtualRefinementList` for the same attribute. As you might see in the console, this causes "duplicate key" errors by React. To prevent those, we can use `transformData` on `CurrentRefinements`. Each `item` of the current refinements has an `index` and `id`. These two properties explain which index the widget works on (see [multi index](guide/Multi_index.html)) and which the identifier of the widget has (this can be `'query'`, `attributeName`, `'page'` and some others). We can deduplicate the current refinements using those two properties like this:
+
+```jsx
+// ...
+const deleteDuplicates = items =>
+  items
+    .map(({ id, index, ...rest }) => ({
+      // make a temporary key for deduplication
+      __dedupe: `${index}.${id}`,
+      id,
+      index,
+      ...rest,
+    }))
+    // sort based on that key
+    .sort((a, b) => a.id > b.__dedupe)
+    .filter(
+      (current, index, array) =>
+        // filter out each time the key has already been in the array
+        index === 0 || current.__dedupe !== array[index - 1].__dedupe
+    )
+    // eslint-disable-next-line no-unused-vars
+    .map(({ __dedupe, ...item }) => item);
+
+class App extends Component {
+  render() {
+    return (
+      // the rest of the app
+      <CurrentRefinements transformData={deleteDuplicates} />
+    );
+  }
+}
 ```
 
 This then gets us our result, as seen in the beginning:
