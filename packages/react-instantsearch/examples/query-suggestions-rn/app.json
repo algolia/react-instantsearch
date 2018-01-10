@@ -12,11 +12,6 @@
     "orientation": "portrait",
     "icon":
       "https://www.algolia.com/static_assets/images/press/downloads/algolia-mark-blue.png",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
     "ios": {
       "supportsTablet": true
     }
