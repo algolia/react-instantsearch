@@ -1,14 +1,13 @@
-import Panel from '../components/Panel.js';
+import Panel from '../components/Panel';
 
 /**
- * The Panel widget wraps other widgets in a consistent panel design. This component wrap by default
- * all the built in widgets. It act as a skeleton for each widget by providing to them header, body and footer.
- * Since it wraps all the built in widgets by default you should rarely use it directly, but we still
- * provide it as a standaone widget to enable the possibility to wrap you custom widget with it.
+ * The Panel widget wraps other widgets in a consistent panel design.
+ * It also reacts, indicates and set CSS classes when widgets are no more relevant for refining.
+ * E.g. when a RefinementList becomes empty because of the current search results.
  *
  * @name Panel
  * @kind widget
- * @propType {boolean} [canRefine=true] - If `false` the class `ais-Panel--noRefinement` will be added on the root element.
+ * @propType {string} [className] - Adds a className on the root element.
  * @propType {node} [header] - Adds a header to the widget.
  * @propType {node} [footer] - Adds a footer to the widget.
  * @themeKey ais-Panel - the root div of the Panel
@@ -22,10 +21,8 @@ import Panel from '../components/Panel.js';
  * import { Panel, InstantSearch } from 'react-instantsearch/dom';
  * import { connectRefinementList } from 'react-instantsearch/connectors';
  *
- * const CustomRefinementList = connectRefinementList(({ header }) => (
- *   <Panel header={header}>
- *     <div>My custom refinement list</div>
- *   </Panel>
+ * const CustomRefinementList = connectRefinementList(() => (
+ *   <div>My custom refinement list</div>
  * ));
  *
  * export default function App() {
@@ -35,12 +32,12 @@ import Panel from '../components/Panel.js';
  *       apiKey="6be0576ff61c053d5f9a3225e2a90f76"
  *       indexName="ikea"
  *     >
- *      <CustomRefinementList
- *        attributeName="category"
- *        header="Category"
- *      />
+ *       <Panel heade="Category">
+ *         <CustomRefinementList attributeName="category" />
+ *       </Panel>
  *     </InstantSearch>
  *   );
  * }
  */
+
 export default Panel;
