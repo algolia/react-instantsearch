@@ -31,15 +31,13 @@ describe('Panel', () => {
   });
 
   it('expect to render without refinement', () => {
-    const props = {
-      canRefine: false,
-    };
-
     const wrapper = shallow(
-      <Panel {...props}>
+      <Panel>
         <div>Hello content</div>
       </Panel>
     );
+
+    wrapper.setState({ canRefine: false });
 
     expect(wrapper).toMatchSnapshot();
   });
@@ -69,6 +67,40 @@ describe('Panel', () => {
       </Panel>
     );
 
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('expect to expose context to his children', () => {
+    const wrapper = shallow(
+      <Panel>
+        <div>Hello content</div>
+      </Panel>
+    );
+
+    expect(wrapper.instance().getChildContext()).toEqual({
+      setCanRefine: wrapper.instance().setCanRefine,
+    });
+  });
+
+  it('expect to render when setCanRefine is called', () => {
+    const wrapper = shallow(
+      <Panel>
+        <div>Hello content</div>
+      </Panel>
+    );
+
+    expect(wrapper.state('canRefine')).toBe(true);
+    expect(wrapper).toMatchSnapshot();
+
+    // Simulate context call
+    wrapper
+      .instance()
+      .getChildContext()
+      .setCanRefine(false);
+
+    wrapper.update();
+
+    expect(wrapper.state('canRefine')).toBe(false);
     expect(wrapper).toMatchSnapshot();
   });
 });

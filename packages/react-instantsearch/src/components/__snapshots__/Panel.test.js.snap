@@ -14,6 +14,34 @@ exports[`Panel expect to render 1`] = `
 </div>
 `;
 
+exports[`Panel expect to render when setCanRefine is called 1`] = `
+<div
+  className="ais-Panel"
+>
+  <div
+    className="ais-Panel-body"
+  >
+    <div>
+      Hello content
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Panel expect to render when setCanRefine is called 2`] = `
+<div
+  className="ais-Panel ais-Panel--noRefinement"
+>
+  <div
+    className="ais-Panel-body"
+  >
+    <div>
+      Hello content
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Panel expect to render with custom className 1`] = `
 <div
   className="ais-Panel ais-Panel-Breadcrumb"
