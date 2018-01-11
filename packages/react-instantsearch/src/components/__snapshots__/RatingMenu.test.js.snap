@@ -347,7 +347,7 @@ exports[`RatingMenu applies translations 1`] = `
     <li
       className="ais-RatingMenu-item ais-RatingMenu-item--selected"
     >
-      <div
+      <a
         aria-label="1 & Up"
         className="ais-RatingMenu-link"
       >
@@ -418,7 +418,7 @@ exports[`RatingMenu applies translations 1`] = `
         >
           15
         </span>
-      </div>
+      </a>
     </li>
   </ul>
 </div>
@@ -771,7 +771,7 @@ exports[`RatingMenu expect to render without refinement 1`] = `
     <li
       className="ais-RatingMenu-item ais-RatingMenu-item--selected"
     >
-      <div
+      <a
         aria-label="1 & Up"
         className="ais-RatingMenu-link"
       >
@@ -842,7 +842,7 @@ exports[`RatingMenu expect to render without refinement 1`] = `
         >
           15
         </span>
-      </div>
+      </a>
     </li>
   </ul>
 </div>
@@ -1195,7 +1195,7 @@ exports[`RatingMenu supports passing custom className 1`] = `
     <li
       className="ais-RatingMenu-item ais-RatingMenu-item--selected"
     >
-      <div
+      <a
         aria-label="1 & Up"
         className="ais-RatingMenu-link"
       >
@@ -1266,7 +1266,7 @@ exports[`RatingMenu supports passing custom className 1`] = `
         >
           15
         </span>
-      </div>
+      </a>
     </li>
   </ul>
 </div>
