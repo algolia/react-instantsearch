@@ -31,6 +31,29 @@ describe('HitsPerPage', () => {
         .toJSON()
     ).toMatchSnapshot());
 
+  it('renders with a custom className', () =>
+    expect(
+      renderer
+        .create(
+          <HitsPerPage
+            className="MyCusomHitsPerPage"
+            refine={() => null}
+            currentRefinement={5}
+            items={[
+              {
+                value: 5,
+                label: 'show 5 hits',
+              },
+              {
+                value: 10,
+                label: 'show 10 hits',
+              },
+            ]}
+          />
+        )
+        .toJSON()
+    ).toMatchSnapshot());
+
   it('refines its value on change', () => {
     const refine = jest.fn();
     const wrapper = mount(

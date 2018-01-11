@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import { find } from 'lodash';
 import translatable from '../core/translatable';
 import createClassNames from './createClassNames';
@@ -18,10 +19,15 @@ class MenuSelect extends Component {
         ]),
         isRefined: PropTypes.bool.isRequired,
       })
-    ),
+    ).isRequired,
     canRefine: PropTypes.bool.isRequired,
     refine: PropTypes.func.isRequired,
     translate: PropTypes.func.isRequired,
+    className: PropTypes.string,
+  };
+
+  static defaultProps = {
+    className: '',
   };
 
   get selectedValue() {
@@ -36,10 +42,12 @@ class MenuSelect extends Component {
   };
 
   render() {
-    const { items, canRefine, translate } = this.props;
+    const { items, canRefine, translate, className } = this.props;
 
     return (
-      <div className={cx('', !canRefine && '-noRefinement')}>
+      <div
+        className={classNames(cx('', !canRefine && '-noRefinement'), className)}
+      >
         <select
           value={this.selectedValue}
           onChange={this.handleSelectChange}

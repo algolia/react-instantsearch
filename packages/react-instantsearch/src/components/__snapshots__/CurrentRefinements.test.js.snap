@@ -69,3 +69,33 @@ exports[`CurrentRefinements renders a list of current refinements 1`] = `
   </ul>
 </div>
 `;
+
+exports[`CurrentRefinements renders a list of current refinements with a custom className 1`] = `
+<div
+  className="ais-CurrentRefinements MyCustomCurrentRefinements"
+>
+  <ul
+    className="ais-CurrentRefinements-list"
+  >
+    <li
+      className="ais-CurrentRefinements-item"
+    >
+      <button
+        className="ais-CurrentRefinements-button"
+        onClick={[Function]}
+      >
+        <span
+          className="ais-CurrentRefinements-label"
+        >
+          Genre
+        </span>
+        <span
+          className="ais-CurrentRefinements-delete"
+        >
+          ✕
+        </span>
+      </button>
+    </li>
+  </ul>
+</div>
+`;

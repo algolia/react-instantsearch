@@ -26,3 +26,30 @@ exports[`HitsPerPage renders 1`] = `
   </select>
 </div>
 `;
+
+exports[`HitsPerPage renders with a custom className 1`] = `
+<div
+  className="ais-HitsPerPage MyCusomHitsPerPage"
+>
+  <select
+    className="ais-HitsPerPage-select"
+    onChange={[Function]}
+    value={5}
+  >
+    <option
+      className="ais-HitsPerPage-option"
+      disabled={undefined}
+      value={5}
+    >
+      show 5 hits
+    </option>
+    <option
+      className="ais-HitsPerPage-option"
+      disabled={undefined}
+      value={10}
+    >
+      show 10 hits
+    </option>
+  </select>
+</div>
+`;

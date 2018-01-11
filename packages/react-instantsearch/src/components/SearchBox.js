@@ -1,5 +1,6 @@
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import translatable from '../core/translatable';
 import createClassNames from './createClassNames';
 
@@ -59,6 +60,7 @@ const DefaultSubmitComponent = () => (
 class SearchBox extends Component {
   static propTypes = {
     currentRefinement: PropTypes.string,
+    className: PropTypes.string,
     refine: PropTypes.func.isRequired,
     translate: PropTypes.func.isRequired,
 
@@ -86,6 +88,7 @@ class SearchBox extends Component {
 
   static defaultProps = {
     currentRefinement: '',
+    className: '',
     focusShortcuts: ['s', '/'],
     autoFocus: false,
     searchAsYouType: true,
@@ -216,6 +219,7 @@ class SearchBox extends Component {
 
   render() {
     const {
+      className,
       translate,
       autoFocus,
       loadingIndicatorComponent,
@@ -241,7 +245,7 @@ class SearchBox extends Component {
 
     /* eslint-disable max-len */
     return (
-      <div className={cx('')}>
+      <div className={classNames(cx(''), className)}>
         <form
           noValidate
           onSubmit={this.props.onSubmit ? this.props.onSubmit : this.onSubmit}

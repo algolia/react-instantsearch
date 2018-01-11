@@ -2,9 +2,9 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-Enzyme.configure({ adapter: new Adapter() });
-
 import RefinementList from './RefinementList';
+
+Enzyme.configure({ adapter: new Adapter() });
 
 jest.mock('../widgets/Highlight', () => () => null);
 
@@ -13,6 +13,30 @@ describe('RefinementList', () => {
     const tree = renderer
       .create(
         <RefinementList
+          refine={() => null}
+          createURL={() => '#'}
+          searchForItems={() => null}
+          items={[
+            { label: 'white', value: ['white'], count: 10, isRefined: true },
+            { label: 'black', value: ['black'], count: 20, isRefined: false },
+            { label: 'blue', value: ['blue'], count: 30, isRefined: false },
+          ]}
+          limitMin={2}
+          limitMax={4}
+          showMore={true}
+          isFromSearch={false}
+          canRefine={true}
+        />
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('default refinement list with custom className', () => {
+    const tree = renderer
+      .create(
+        <RefinementList
+          className="MyCustomRefinementList"
           refine={() => null}
           createURL={() => '#'}
           searchForItems={() => null}

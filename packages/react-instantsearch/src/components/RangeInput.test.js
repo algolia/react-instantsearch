@@ -1,5 +1,3 @@
-/* eslint-env jest, jasmine */
-
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
@@ -8,7 +6,7 @@ import RangeInput, { RawRangeInput } from './RangeInput';
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('RangeInput', () => {
-  const shallowRender = (props = {}, context = {}) => {
+  const shallowRender = (props = {}) => {
     const defaultProps = {
       currentRefinement: {
         min: undefined,
@@ -21,10 +19,7 @@ describe('RangeInput', () => {
       max: undefined,
     };
 
-    return shallow(
-      <RangeInput cx={(...x) => x.join(' ')} {...defaultProps} {...props} />,
-      { context }
-    );
+    return shallow(<RangeInput {...defaultProps} {...props} />);
   };
 
   it('render with translations', () => {
@@ -42,7 +37,7 @@ describe('RangeInput', () => {
 });
 
 describe('RawRangeInput', () => {
-  const shallowRender = (props = {}, context = {}) => {
+  const shallowRender = (props = {}) => {
     const defaultProps = {
       currentRefinement: {
         min: undefined,
@@ -56,10 +51,7 @@ describe('RawRangeInput', () => {
       max: undefined,
     };
 
-    return shallow(
-      <RawRangeInput cx={(...x) => x.join(' ')} {...defaultProps} {...props} />,
-      { context }
-    );
+    return shallow(<RawRangeInput {...defaultProps} {...props} />);
   };
 
   it('render with empty values', () => {
@@ -165,13 +157,14 @@ describe('RawRangeInput', () => {
     expect(component).toMatchSnapshot();
   });
 
-  describe('willMount', () => {
-    it('expect to not throw when canRefine is not defined', () => {
-      const props = {};
-      const context = {};
+  it('render with custom className', () => {
+    const props = {
+      className: 'MyCustomRangeInput',
+    };
 
-      expect(() => shallowRender(props, context)).not.toThrow();
-    });
+    const component = shallowRender(props);
+
+    expect(component).toMatchSnapshot();
   });
 
   describe('willReceiveProps', () => {
@@ -184,11 +177,7 @@ describe('RawRangeInput', () => {
         },
       };
 
-      const context = {
-        canRefine: jest.fn(),
-      };
-
-      const wrapper = shallowRender(props, context);
+      const wrapper = shallowRender(props);
 
       wrapper.setProps({
         canRefine: true,
@@ -215,11 +204,7 @@ describe('RawRangeInput', () => {
         },
       };
 
-      const context = {
-        canRefine: jest.fn(),
-      };
-
-      const wrapper = shallowRender(props, context);
+      const wrapper = shallowRender(props);
 
       wrapper.setState({
         from: 10,
@@ -240,16 +225,6 @@ describe('RawRangeInput', () => {
         from: 10,
         to: 90,
       });
-    });
-
-    it('expect to not throw when canRefine is not defined', () => {
-      const props = {};
-      const context = {};
-      const nextProps = {};
-
-      const component = shallowRender(props, context);
-
-      expect(() => component.setProps(nextProps)).not.toThrow();
     });
   });
 

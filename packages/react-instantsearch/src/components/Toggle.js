@@ -1,5 +1,6 @@
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import createClassNames from './createClassNames';
 
 const cx = createClassNames('Toggle');
@@ -9,6 +10,11 @@ class Toggle extends Component {
     currentRefinement: PropTypes.bool.isRequired,
     refine: PropTypes.func.isRequired,
     label: PropTypes.string.isRequired,
+    className: PropTypes.string,
+  };
+
+  static defaultProps = {
+    className: '',
   };
 
   onChange = e => {
@@ -16,10 +22,10 @@ class Toggle extends Component {
   };
 
   render() {
-    const { currentRefinement, label } = this.props;
+    const { currentRefinement, label, className } = this.props;
 
     return (
-      <div className={cx('')}>
+      <div className={classNames(cx(''), className)}>
         <label className={cx('label')}>
           <input
             className={cx('checkbox')}

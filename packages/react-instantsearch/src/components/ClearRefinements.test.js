@@ -22,6 +22,20 @@ describe('ClearRefinements', () => {
         .toJSON()
     ).toMatchSnapshot());
 
+  it('renders a clickable button with a custom className', () =>
+    expect(
+      renderer
+        .create(
+          <ClearRefinements
+            className="MyCustomClearRefinements"
+            items={[{ filter: 1 }]}
+            canRefine={true}
+            refine={() => null}
+          />
+        )
+        .toJSON()
+    ).toMatchSnapshot());
+
   it('has a disabled mode', () =>
     expect(
       renderer

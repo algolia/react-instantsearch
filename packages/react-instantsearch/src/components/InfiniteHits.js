@@ -1,5 +1,6 @@
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import translatable from '../core/translatable';
 import createClassNames from './createClassNames';
 
@@ -13,10 +14,11 @@ class InfiniteHits extends Component {
       hasMore,
       refine,
       translate,
+      className,
     } = this.props;
 
     return (
-      <div className={cx('')}>
+      <div className={classNames(cx(''), className)}>
         <ul className={cx('list')}>
           {hits.map(hit => (
             <li key={hit.objectID} className={cx('item')}>
@@ -37,17 +39,16 @@ class InfiniteHits extends Component {
 }
 
 InfiniteHits.propTypes = {
-  hits: PropTypes.array,
-  hitComponent: PropTypes.oneOfType([PropTypes.string, PropTypes.func])
-    .isRequired,
+  hits: PropTypes.arrayOf(PropTypes.object).isRequired,
   hasMore: PropTypes.bool.isRequired,
   refine: PropTypes.func.isRequired,
   translate: PropTypes.func.isRequired,
-  header: PropTypes.node,
-  footer: PropTypes.node,
+  className: PropTypes.string,
+  hitComponent: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
 };
 
 InfiniteHits.defaultProps = {
+  className: '',
   hitComponent: hit => (
     <div
       style={{

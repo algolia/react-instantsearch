@@ -28,6 +28,26 @@ describe('MenuSelect', () => {
     expect(tree).toMatchSnapshot();
   });
 
+  it('default menu select with custom className', () => {
+    const tree = renderer
+      .create(
+        <MenuSelect
+          className="MyCustomMenuSelect"
+          refine={() => {}}
+          items={[
+            { label: 'white', value: 'white', count: 10, isRefined: false },
+            { label: 'black', value: 'black', count: 20, isRefined: false },
+            { label: 'blue', value: 'blue', count: 30, isRefined: false },
+            { label: 'green', value: 'green', count: 30, isRefined: false },
+            { label: 'red', value: 'red', count: 30, isRefined: false },
+          ]}
+          canRefine={true}
+        />
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
   it('default menu select with no refinement', () => {
     const tree = renderer
       .create(<MenuSelect refine={() => {}} items={[]} canRefine={false} />)

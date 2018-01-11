@@ -19,6 +19,11 @@ class NumericMenu extends Component {
     canRefine: PropTypes.bool.isRequired,
     refine: PropTypes.func.isRequired,
     translate: PropTypes.func.isRequired,
+    className: PropTypes.string,
+  };
+
+  static defaultProps = {
+    className: '',
   };
 
   renderItem = item => {
@@ -41,7 +46,7 @@ class NumericMenu extends Component {
   };
 
   render() {
-    const { items, canRefine } = this.props;
+    const { items, canRefine, className } = this.props;
 
     return (
       <List
@@ -50,6 +55,7 @@ class NumericMenu extends Component {
         canRefine={canRefine}
         cx={cx}
         items={items.map(item => ({ ...item, key: item.value }))}
+        className={className}
       />
     );
   }

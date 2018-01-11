@@ -25,9 +25,14 @@ class HierarchicalMenu extends Component {
     canRefine: PropTypes.bool.isRequired,
     items: itemsPropType,
     showMore: PropTypes.bool,
+    className: PropTypes.string,
     limitMin: PropTypes.number,
     limitMax: PropTypes.number,
     transformItems: PropTypes.func,
+  };
+
+  static defaultProps = {
+    className: '',
   };
 
   renderItem = item => {
@@ -58,6 +63,7 @@ class HierarchicalMenu extends Component {
           'limitMax',
           'isEmpty',
           'canRefine',
+          'className',
         ])}
       />
     );

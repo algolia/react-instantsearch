@@ -27,3 +27,17 @@ exports[`ClearRefinements renders a clickable button 1`] = `
   </button>
 </div>
 `;
+
+exports[`ClearRefinements renders a clickable button with a custom className 1`] = `
+<div
+  className="ais-ClearRefinements MyCustomClearRefinements"
+>
+  <button
+    className="ais-ClearRefinements-button"
+    disabled={false}
+    onClick={[Function]}
+  >
+    Clear all filters
+  </button>
+</div>
+`;

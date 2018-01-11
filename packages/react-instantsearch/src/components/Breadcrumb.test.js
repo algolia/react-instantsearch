@@ -64,6 +64,33 @@ describe('Breadcrumb', () => {
     expect(tree).toMatchSnapshot();
   });
 
+  it('outputs the default breadcrumb with a custom className', () => {
+    const tree = renderer.create(
+      <Breadcrumb
+        className="MyCustomBreadcrumb"
+        refine={() => null}
+        createURL={() => '#'}
+        items={[
+          {
+            value: 'white',
+            label: 'white',
+          },
+          {
+            value: 'white > white1',
+            label: 'white1',
+          },
+          {
+            value: 'white > white1 > white1.1',
+            label: 'white1.1',
+          },
+        ]}
+        canRefine={true}
+      />
+    );
+
+    expect(tree.toJSON()).toMatchSnapshot();
+  });
+
   it('refines its value on change', () => {
     const refine = jest.fn();
     const wrapper = mount(

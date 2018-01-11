@@ -127,6 +127,19 @@ describe('Highlighter - simple', () => {
 
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('renders with a custom className', () => {
+    const props = {
+      ...defaultProps,
+      className: 'MyCustomHighlighter',
+    };
+
+    const wrapper = shallow(
+      <Highlighter cx={(...x) => x.join(' ')} {...props} />
+    );
+
+    expect(wrapper).toMatchSnapshot();
+  });
 });
 
 describe('Highlighter - multi', () => {
@@ -235,6 +248,19 @@ describe('Highlighter - multi', () => {
     const props = {
       ...defaultProps,
       separator: '-',
+    };
+
+    const wrapper = shallow(
+      <Highlighter cx={(...x) => x.join(' ')} {...props} />
+    );
+
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders a custom className', () => {
+    const props = {
+      ...defaultProps,
+      className: 'MyCustomHighlighter',
     };
 
     const wrapper = shallow(

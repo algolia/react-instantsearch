@@ -1,5 +1,6 @@
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import translatable from '../core/translatable';
 import createClassNames from '../components/createClassNames';
 
@@ -17,10 +18,12 @@ export class RawRangeInput extends Component {
       min: PropTypes.number,
       max: PropTypes.number,
     }),
+    className: PropTypes.string,
   };
 
   static defaultProps = {
     currentRefinement: {},
+    className: '',
   };
 
   constructor(props) {
@@ -85,12 +88,14 @@ export class RawRangeInput extends Component {
 
   render() {
     const { from, to } = this.state;
-    const { precision, translate, canRefine } = this.props;
+    const { precision, translate, canRefine, className } = this.props;
     const { min, max } = this.normalizeRangeForRendering(this.props);
     const step = 1 / Math.pow(10, precision);
 
     return (
-      <div className={cx('', !canRefine && '-noRefinement')}>
+      <div
+        className={classNames(cx('', !canRefine && '-noRefinement'), className)}
+      >
         <form className={cx('form')} onSubmit={this.onSubmit}>
           <input
             className={cx('input', 'input--min')}

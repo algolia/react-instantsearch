@@ -1,5 +1,6 @@
-import PropTypes from 'prop-types';
 import React from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 function generateKey(i, value) {
   return `split-${i}-${value}`;
@@ -25,7 +26,7 @@ Highlight.propTypes = {
   nonHighlightedTagName: PropTypes.string.isRequired,
 };
 
-export default function Highlighter({
+const Highlighter = ({
   cx,
   hit,
   attributeName,
@@ -34,7 +35,8 @@ export default function Highlighter({
   tagName,
   nonHighlightedTagName,
   separator,
-}) {
+  className,
+}) => {
   const parsedHighlightedValue = highlight({
     hit,
     attributeName,
@@ -42,7 +44,7 @@ export default function Highlighter({
   });
 
   return (
-    <span className={cx('')}>
+    <span className={classNames(cx(''), className)}>
       {parsedHighlightedValue.map((item, i) => {
         if (Array.isArray(item)) {
           const isLast = i === parsedHighlightedValue.length - 1;
@@ -76,7 +78,7 @@ export default function Highlighter({
       })}
     </span>
   );
-}
+};
 
 Highlighter.propTypes = {
   cx: PropTypes.func.isRequired,
@@ -86,11 +88,15 @@ Highlighter.propTypes = {
   highlightProperty: PropTypes.string.isRequired,
   tagName: PropTypes.string,
   nonHighlightedTagName: PropTypes.string,
+  className: PropTypes.string,
   separator: PropTypes.node,
 };
 
 Highlighter.defaultProps = {
   tagName: 'em',
   nonHighlightedTagName: 'span',
+  className: '',
   separator: ', ',
 };
+
+export default Highlighter;

@@ -1,5 +1,6 @@
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import createClassNames from './createClassNames';
 import Select from './Select';
 
@@ -15,13 +16,18 @@ class SortBy extends Component {
     ).isRequired,
     currentRefinement: PropTypes.string.isRequired,
     refine: PropTypes.func.isRequired,
+    className: PropTypes.string,
+  };
+
+  static defaultProps = {
+    className: '',
   };
 
   render() {
-    const { items, currentRefinement, refine } = this.props;
+    const { items, currentRefinement, refine, className } = this.props;
 
     return (
-      <div className={cx('')}>
+      <div className={classNames(cx(''), className)}>
         <Select
           cx={cx}
           items={items}

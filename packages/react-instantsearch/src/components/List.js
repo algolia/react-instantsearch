@@ -1,5 +1,6 @@
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import SearchBox from '../components/SearchBox';
 
 const itemsPropType = PropTypes.arrayOf(
@@ -18,6 +19,7 @@ class List extends Component {
     items: itemsPropType,
     renderItem: PropTypes.func.isRequired,
     selectItem: PropTypes.func,
+    className: PropTypes.string,
     showMore: PropTypes.bool,
     limitMin: PropTypes.number,
     limitMax: PropTypes.number,
@@ -30,6 +32,7 @@ class List extends Component {
   };
 
   static defaultProps = {
+    className: '',
     isFromSearch: false,
   };
 
@@ -140,9 +143,12 @@ class List extends Component {
   }
 
   render() {
-    const { cx, items, withSearchBox, canRefine } = this.props;
+    const { cx, items, className, withSearchBox, canRefine } = this.props;
     const searchBox = withSearchBox ? this.renderSearchBox() : null;
-    const rootClassName = cx('', !canRefine && '-noRefinement');
+    const rootClassName = classNames(
+      cx('', !canRefine && '-noRefinement'),
+      className
+    );
 
     if (items.length === 0) {
       return <div className={rootClassName}>{searchBox}</div>;

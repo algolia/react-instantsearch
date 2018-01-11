@@ -1,5 +1,6 @@
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import translatable from '../core/translatable';
 import createClassNames from './createClassNames';
 import Link from './Link';
@@ -22,8 +23,11 @@ class Breadcrumb extends Component {
     rootURL: PropTypes.string,
     separator: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
     translate: PropTypes.func.isRequired,
-    header: PropTypes.node,
-    footer: PropTypes.node,
+    className: PropTypes.string,
+  };
+
+  static defaultProps = {
+    className: '',
   };
 
   render() {
@@ -35,6 +39,7 @@ class Breadcrumb extends Component {
       rootURL,
       separator,
       translate,
+      className,
     } = this.props;
     const rootPath = canRefine ? (
       <li className={cx('item')}>
@@ -69,7 +74,9 @@ class Breadcrumb extends Component {
     });
 
     return (
-      <div className={cx('', !canRefine && '-noRefinement')}>
+      <div
+        className={classNames(cx('', !canRefine && '-noRefinement'), className)}
+      >
         <ul className={cx('list')}>
           {rootPath}
           {breadcrumb}

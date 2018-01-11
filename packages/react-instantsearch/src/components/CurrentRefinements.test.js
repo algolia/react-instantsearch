@@ -27,6 +27,25 @@ describe('CurrentRefinements', () => {
         .toJSON()
     ).toMatchSnapshot());
 
+  it('renders a list of current refinements with a custom className', () =>
+    expect(
+      renderer
+        .create(
+          <CurrentRefinements
+            className="MyCustomCurrentRefinements"
+            refine={() => null}
+            items={[
+              {
+                label: 'Genre',
+                value: 'clear all genres',
+              },
+            ]}
+            canRefine={true}
+          />
+        )
+        .toJSON()
+    ).toMatchSnapshot());
+
   it('renders a empty list with no current refinements', () =>
     expect(
       renderer

@@ -32,6 +32,14 @@ describe('Pagination', () => {
     expect(tree).toMatchSnapshot();
   });
 
+  it('applies its default props with custom className', () => {
+    const tree = renderer
+      .create(<Pagination {...DEFAULT_PROPS} className="MyCustomPagination" />)
+      .toJSON();
+
+    expect(tree).toMatchSnapshot();
+  });
+
   it('displays the correct padding of links', () => {
     let tree = renderer
       .create(

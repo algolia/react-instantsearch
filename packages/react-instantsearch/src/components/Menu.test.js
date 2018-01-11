@@ -1,5 +1,3 @@
-/* eslint-env jest, jasmine */
-
 import React from 'react';
 import renderer from 'react-test-renderer';
 import Enzyme, { mount } from 'enzyme';
@@ -16,6 +14,32 @@ describe('Menu', () => {
     const tree = renderer
       .create(
         <Menu
+          refine={() => null}
+          searchForItems={() => null}
+          createURL={() => '#'}
+          items={[
+            { label: 'white', value: 'white', count: 10, isRefined: false },
+            { label: 'black', value: 'black', count: 20, isRefined: false },
+            { label: 'blue', value: 'blue', count: 30, isRefined: false },
+            { label: 'green', value: 'green', count: 30, isRefined: false },
+            { label: 'red', value: 'red', count: 30, isRefined: false },
+          ]}
+          limitMin={2}
+          limitMax={4}
+          showMore={true}
+          isFromSearch={false}
+          canRefine={true}
+        />
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('default menu with custom className', () => {
+    const tree = renderer
+      .create(
+        <Menu
+          className="MyCustomMenu"
           refine={() => null}
           searchForItems={() => null}
           createURL={() => '#'}

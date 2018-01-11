@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { pick } from 'lodash';
 import translatable from '../core/translatable';
 import createClassNames from './createClassNames';
@@ -9,11 +9,6 @@ import Highlight from '../widgets/Highlight';
 const cx = createClassNames('RefinementList');
 
 class RefinementList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { query: '' };
-  }
-
   static propTypes = {
     translate: PropTypes.func.isRequired,
     refine: PropTypes.func.isRequired,
@@ -34,7 +29,18 @@ class RefinementList extends Component {
     limitMin: PropTypes.number,
     limitMax: PropTypes.number,
     transformItems: PropTypes.func,
+    className: PropTypes.string,
   };
+
+  static defaultProps = {
+    className: '',
+  };
+
+  constructor(props) {
+    super(props);
+
+    this.state = { query: '' };
+  }
 
   selectItem = (item, resetQuery) => {
     resetQuery();
@@ -78,6 +84,7 @@ class RefinementList extends Component {
           'searchForItems',
           'withSearchBox',
           'canRefine',
+          'className',
         ])}
         query={this.state.query}
       />

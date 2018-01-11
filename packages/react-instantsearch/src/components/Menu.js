@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { pick } from 'lodash';
 import translatable from '../core/translatable';
 import List from './List';
@@ -30,6 +30,11 @@ class Menu extends Component {
     limitMin: PropTypes.number,
     limitMax: PropTypes.number,
     transformItems: PropTypes.func,
+    className: PropTypes.string,
+  };
+
+  static defaultProps = {
+    className: '',
   };
 
   renderItem = (item, resetQuery) => {
@@ -72,6 +77,7 @@ class Menu extends Component {
           'searchForItems',
           'withSearchBox',
           'canRefine',
+          'className',
         ])}
       />
     );

@@ -221,6 +221,74 @@ exports[`RefinementList default refinement list 1`] = `
 </div>
 `;
 
+exports[`RefinementList default refinement list with custom className 1`] = `
+<div
+  className="ais-RefinementList MyCustomRefinementList"
+>
+  <ul
+    className="ais-RefinementList-list"
+  >
+    <li
+      className="ais-RefinementList-item ais-RefinementList-item--selected"
+    >
+      <label
+        className="ais-RefinementList-label"
+      >
+        <input
+          checked={true}
+          className="ais-RefinementList-checkbox"
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <span
+          className="ais-RefinementList-labelText"
+        >
+          white
+        </span>
+         
+        <span
+          className="ais-RefinementList-count"
+        >
+          10
+        </span>
+      </label>
+    </li>
+    <li
+      className="ais-RefinementList-item"
+    >
+      <label
+        className="ais-RefinementList-label"
+      >
+        <input
+          checked={false}
+          className="ais-RefinementList-checkbox"
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <span
+          className="ais-RefinementList-labelText"
+        >
+          black
+        </span>
+         
+        <span
+          className="ais-RefinementList-count"
+        >
+          20
+        </span>
+      </label>
+    </li>
+  </ul>
+  <button
+    className="ais-RefinementList-showMore"
+    disabled={false}
+    onClick={[Function]}
+  >
+    Show more
+  </button>
+</div>
+`;
+
 exports[`RefinementList default refinement list with no refinement 1`] = `
 <div
   className="ais-RefinementList ais-RefinementList--noRefinement"

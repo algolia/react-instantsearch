@@ -180,6 +180,51 @@ exports[`RawRangeInput render when can't refine 1`] = `
 </div>
 `;
 
+exports[`RawRangeInput render with custom className 1`] = `
+<div
+  className="ais-RangeInput MyCustomRangeInput"
+>
+  <form
+    className="ais-RangeInput-form"
+    onSubmit={[Function]}
+  >
+    <input
+      className="ais-RangeInput-input ais-RangeInput-input--min"
+      disabled={false}
+      max=""
+      min=""
+      onChange={[Function]}
+      placeholder=""
+      step={1}
+      type="number"
+      value=""
+    />
+    <span
+      className="ais-RangeInput-separator"
+    >
+      separator
+    </span>
+    <input
+      className="ais-RangeInput-input ais-RangeInput-input--max"
+      disabled={false}
+      max=""
+      min=""
+      onChange={[Function]}
+      placeholder=""
+      step={1}
+      type="number"
+      value=""
+    />
+    <button
+      className="ais-RangeInput-submit"
+      type="submit"
+    >
+      submit
+    </button>
+  </form>
+</div>
+`;
+
 exports[`RawRangeInput render with empty values 1`] = `
 <div
   className="ais-RangeInput"

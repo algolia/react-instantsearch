@@ -1,5 +1,6 @@
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import { isEmpty } from 'lodash';
 import translatable from '../core/translatable';
 import createClassNames from './createClassNames';
@@ -24,6 +25,11 @@ class RatingMenu extends Component {
       })
     ),
     canRefine: PropTypes.bool.isRequired,
+    className: PropTypes.string,
+  };
+
+  static defaultProps = {
+    className: '',
   };
 
   onClick(min, max, e) {
@@ -127,6 +133,7 @@ class RatingMenu extends Component {
       count,
       createURL,
       canRefine,
+      className,
     } = this.props;
     const items = [];
     for (let i = max; i >= min; i--) {
@@ -154,7 +161,9 @@ class RatingMenu extends Component {
       );
     }
     return (
-      <div className={cx('', !canRefine && '-noRefinement')}>
+      <div
+        className={classNames(cx('', !canRefine && '-noRefinement'), className)}
+      >
         <svg xmlns="http://www.w3.org/2000/svg" style={{ display: 'none' }}>
           <symbol id={cx('starSymbol')} viewBox="0 0 24 24">
             <path d="M12 .288l2.833 8.718h9.167l-7.417 5.389 2.833 8.718-7.416-5.388-7.417 5.388 2.833-8.718-7.416-5.389h9.167z" />

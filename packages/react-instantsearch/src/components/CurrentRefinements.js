@@ -1,5 +1,6 @@
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import translatable from '../core/translatable';
 import createClassNames from '../components/createClassNames';
 
@@ -15,10 +16,15 @@ class CurrentRefinements extends Component {
     canRefine: PropTypes.bool.isRequired,
     refine: PropTypes.func.isRequired,
     translate: PropTypes.func.isRequired,
+    className: PropTypes.string,
+  };
+
+  static defaultProps = {
+    className: '',
   };
 
   render() {
-    const { items, canRefine, refine, translate } = this.props;
+    const { items, canRefine, refine, translate, className } = this.props;
 
     const flatten = items.reduce(
       (acc, item) => acc.concat(item.items ? item.items : item),
@@ -26,7 +32,9 @@ class CurrentRefinements extends Component {
     );
 
     return (
-      <div className={cx('', !canRefine && '-noRefinement')}>
+      <div
+        className={classNames(cx('', !canRefine && '-noRefinement'), className)}
+      >
         <ul className={cx('list', !canRefine && 'list--noRefinement')}>
           {flatten.map(item => (
             <li key={item.label} className={cx('item')}>

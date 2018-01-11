@@ -1155,6 +1155,137 @@ exports[`Pagination applies its default props 1`] = `
 </div>
 `;
 
+exports[`Pagination applies its default props with custom className 1`] = `
+<div
+  className="ais-Pagination MyCustomPagination"
+>
+  <ul
+    className="ais-Pagination-list"
+  >
+    <li
+      className="ais-Pagination-item ais-Pagination-item--firstPage"
+    >
+      <a
+        aria-label="First page"
+        className="ais-Pagination-link"
+        href="#"
+        onClick={[Function]}
+      >
+        «
+      </a>
+    </li>
+    <li
+      className="ais-Pagination-item ais-Pagination-item--previousPage"
+    >
+      <a
+        aria-label="Previous page"
+        className="ais-Pagination-link"
+        href="#"
+        onClick={[Function]}
+      >
+        ‹
+      </a>
+    </li>
+    <li
+      className="ais-Pagination-item ais-Pagination-item--page"
+    >
+      <a
+        aria-label="Page 6"
+        className="ais-Pagination-link"
+        href="#"
+        onClick={[Function]}
+      >
+        6
+      </a>
+    </li>
+    <li
+      className="ais-Pagination-item ais-Pagination-item--page"
+    >
+      <a
+        aria-label="Page 7"
+        className="ais-Pagination-link"
+        href="#"
+        onClick={[Function]}
+      >
+        7
+      </a>
+    </li>
+    <li
+      className="ais-Pagination-item ais-Pagination-item--page"
+    >
+      <a
+        aria-label="Page 8"
+        className="ais-Pagination-link"
+        href="#"
+        onClick={[Function]}
+      >
+        8
+      </a>
+    </li>
+    <li
+      className="ais-Pagination-item ais-Pagination-item--selected ais-Pagination-item--page"
+    >
+      <a
+        aria-label="Page 9"
+        className="ais-Pagination-link ais-Pagination-link--selected"
+        href="#"
+        onClick={[Function]}
+      >
+        9
+      </a>
+    </li>
+    <li
+      className="ais-Pagination-item ais-Pagination-item--page"
+    >
+      <a
+        aria-label="Page 10"
+        className="ais-Pagination-link"
+        href="#"
+        onClick={[Function]}
+      >
+        10
+      </a>
+    </li>
+    <li
+      className="ais-Pagination-item ais-Pagination-item--page"
+    >
+      <a
+        aria-label="Page 11"
+        className="ais-Pagination-link"
+        href="#"
+        onClick={[Function]}
+      >
+        11
+      </a>
+    </li>
+    <li
+      className="ais-Pagination-item ais-Pagination-item--page"
+    >
+      <a
+        aria-label="Page 12"
+        className="ais-Pagination-link"
+        href="#"
+        onClick={[Function]}
+      >
+        12
+      </a>
+    </li>
+    <li
+      className="ais-Pagination-item ais-Pagination-item--nextPage"
+    >
+      <a
+        aria-label="Next page"
+        className="ais-Pagination-link"
+        href="#"
+        onClick={[Function]}
+      >
+        ›
+      </a>
+    </li>
+  </ul>
+</div>
+`;
+
 exports[`Pagination applies its default props without refinement 1`] = `
 <div
   className="ais-Pagination ais-Pagination--noRefinement"

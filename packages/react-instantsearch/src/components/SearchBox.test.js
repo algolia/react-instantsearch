@@ -15,6 +15,16 @@ describe('SearchBox', () => {
     instance.unmount();
   });
 
+  it('applies its default props with custom className', () => {
+    const instance = renderer.create(
+      <SearchBox className="MyCustomSearchBox" refine={() => null} />
+    );
+
+    expect(instance.toJSON()).toMatchSnapshot();
+
+    instance.unmount();
+  });
+
   it('transfers the autoFocus prop to the underlying input element', () => {
     const instance = renderer.create(
       <SearchBox refine={() => null} autoFocus />

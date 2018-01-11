@@ -47,6 +47,47 @@ describe('NumericMenu', () => {
     expect(tree).toMatchSnapshot();
   });
 
+  it('supports passing custom className', () => {
+    const tree = renderer
+      .create(
+        <NumericMenu
+          className="MyCustomNumericMenu"
+          createURL={() => '#'}
+          refine={() => null}
+          items={[
+            {
+              label: 'label1',
+              value: '10:',
+              isRefined: false,
+              noRefinement: false,
+            },
+            {
+              label: 'label2',
+              value: '10:20',
+              isRefined: false,
+              noRefinement: false,
+            },
+            {
+              label: 'label3',
+              value: '20:30',
+              isRefined: false,
+              noRefinement: false,
+            },
+            {
+              label: 'label4',
+              value: '30:',
+              isRefined: false,
+              noRefinement: false,
+            },
+            { label: 'All', value: '', isRefined: true, noRefinement: false },
+          ]}
+          canRefine={true}
+        />
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
   it('supports having a selected item', () => {
     const tree = renderer
       .create(

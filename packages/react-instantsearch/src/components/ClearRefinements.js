@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import classNames from 'classnames';
 import translatable from '../core/translatable';
 import createClassNames from './createClassNames';
 
@@ -11,13 +12,18 @@ class ClearRefinements extends Component {
     canRefine: PropTypes.bool.isRequired,
     refine: PropTypes.func.isRequired,
     translate: PropTypes.func.isRequired,
+    className: PropTypes.string,
+  };
+
+  static defaultProps = {
+    className: '',
   };
 
   render() {
-    const { items, canRefine, refine, translate } = this.props;
+    const { items, canRefine, refine, translate, className } = this.props;
 
     return (
-      <div className={cx('')}>
+      <div className={classNames(cx(''), className)}>
         <button
           className={cx('button', !canRefine && 'button--disabled')}
           onClick={() => refine(items)}

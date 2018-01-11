@@ -1,5 +1,6 @@
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import { range } from 'lodash';
 import { capitalize } from '../core/utils';
 import translatable from '../core/translatable';
@@ -61,6 +62,7 @@ class Pagination extends Component {
     showLast: PropTypes.bool,
     pagesPadding: PropTypes.number,
     maxPages: PropTypes.number,
+    className: PropTypes.string,
   };
 
   static defaultProps = {
@@ -71,6 +73,7 @@ class Pagination extends Component {
     showLast: false,
     pagesPadding: 3,
     maxPages: Infinity,
+    className: '',
   };
 
   getItem(modifier, translationKey, value) {
@@ -87,6 +90,7 @@ class Pagination extends Component {
 
   render() {
     const {
+      listComponent: ListComponent,
       nbPages,
       maxPages,
       currentRefinement,
@@ -99,7 +103,7 @@ class Pagination extends Component {
       createURL,
       canRefine,
       translate,
-      listComponent: ListComponent,
+      className,
       ...otherProps
     } = this.props;
 
@@ -160,7 +164,9 @@ class Pagination extends Component {
     }
 
     return (
-      <div className={cx('', !canRefine && '-noRefinement')}>
+      <div
+        className={classNames(cx('', !canRefine && '-noRefinement'), className)}
+      >
         <ListComponent
           {...otherProps}
           cx={cx}

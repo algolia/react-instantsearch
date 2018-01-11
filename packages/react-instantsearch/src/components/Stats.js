@@ -1,5 +1,6 @@
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import translatable from '../core/translatable';
 import createClassNames from './createClassNames';
 
@@ -10,13 +11,18 @@ class Stats extends Component {
     translate: PropTypes.func.isRequired,
     nbHits: PropTypes.number.isRequired,
     processingTimeMS: PropTypes.number.isRequired,
+    className: PropTypes.string,
+  };
+
+  static defaultProps = {
+    className: '',
   };
 
   render() {
-    const { translate, nbHits, processingTimeMS } = this.props;
+    const { translate, nbHits, processingTimeMS, className } = this.props;
 
     return (
-      <div className={cx('')}>
+      <div className={classNames(cx(''), className)}>
         <span className={cx('text')}>
           {translate('stats', nbHits, processingTimeMS)}
         </span>

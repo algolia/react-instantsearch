@@ -186,6 +186,64 @@ exports[`Breadcrumb outputs the default breadcrumb 1`] = `
 </div>
 `;
 
+exports[`Breadcrumb outputs the default breadcrumb with a custom className 1`] = `
+<div
+  className="ais-Breadcrumb MyCustomBreadcrumb"
+>
+  <ul
+    className="ais-Breadcrumb-list"
+  >
+    <li
+      className="ais-Breadcrumb-item"
+    >
+      <a
+        className="ais-Breadcrumb-link"
+        href="#"
+        onClick={[Function]}
+      >
+        Home
+      </a>
+    </li>
+    <li
+      className="ais-Breadcrumb-item"
+    >
+      <span
+        className="ais-Breadcrumb-separator"
+      />
+      <a
+        className="ais-Breadcrumb-link"
+        href="#"
+        onClick={[Function]}
+      >
+        white
+      </a>
+    </li>
+    <li
+      className="ais-Breadcrumb-item"
+    >
+      <span
+        className="ais-Breadcrumb-separator"
+      />
+      <a
+        className="ais-Breadcrumb-link"
+        href="#"
+        onClick={[Function]}
+      >
+        white1
+      </a>
+    </li>
+    <li
+      className="ais-Breadcrumb-item ais-Breadcrumb-item--selected"
+    >
+      <span
+        className="ais-Breadcrumb-separator"
+      />
+      white1.1
+    </li>
+  </ul>
+</div>
+`;
+
 exports[`Breadcrumb outputs the default breadcrumb with no refinement 1`] = `
 <div
   className="ais-Breadcrumb ais-Breadcrumb--noRefinement"

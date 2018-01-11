@@ -32,6 +32,30 @@ describe('RatingMenu', () => {
     expect(tree).toMatchSnapshot();
   });
 
+  it('supports passing custom className', () => {
+    const tree = renderer
+      .create(
+        <RatingMenu
+          className="MyCustomRatingMenu"
+          createURL={() => '#'}
+          refine={() => null}
+          min={1}
+          max={5}
+          currentRefinement={{ min: 1, max: 5 }}
+          count={[
+            { value: '1', count: 1 },
+            { value: '2', count: 2 },
+            { value: '3', count: 3 },
+            { value: '4', count: 4 },
+            { value: '5', count: 5 },
+          ]}
+          canRefine={true}
+        />
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
   it('expect to render without refinement', () => {
     const tree = renderer
       .create(

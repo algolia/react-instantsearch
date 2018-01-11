@@ -1,5 +1,6 @@
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import translatable from '../core/translatable';
 import createClassNames from './createClassNames';
 
@@ -47,12 +48,14 @@ class PoweredBy extends Component {
   static propTypes = {
     url: PropTypes.string.isRequired,
     translate: PropTypes.func.isRequired,
+    className: PropTypes.string,
   };
 
   render() {
-    const { translate, url } = this.props;
+    const { url, translate, className } = this.props;
+
     return (
-      <div className={cx('')}>
+      <div className={classNames(cx(''), className)}>
         <span className={cx('text')}>{translate('searchBy')}</span>{' '}
         <a
           href={url}
