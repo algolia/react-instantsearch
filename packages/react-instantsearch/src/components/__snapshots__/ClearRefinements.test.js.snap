@@ -1,21 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ClearRefinements has a disabled mode 1`] = `
-<button
-  className="button button--disabled"
-  disabled={true}
-  onClick={[Function]}
+<div
+  className="ais-ClearRefinements"
 >
-  Clear all filters
-</button>
+  <button
+    className="ais-ClearRefinements-button ais-ClearRefinements-button--disabled"
+    disabled={true}
+    onClick={[Function]}
+  >
+    Clear all filters
+  </button>
+</div>
 `;
 
 exports[`ClearRefinements renders a clickable button 1`] = `
-<button
-  className="button false"
-  disabled={false}
-  onClick={[Function]}
+<div
+  className="ais-ClearRefinements"
 >
-  Clear all filters
-</button>
+  <button
+    className="ais-ClearRefinements-button"
+    disabled={false}
+    onClick={[Function]}
+  >
+    Clear all filters
+  </button>
+</div>
 `;

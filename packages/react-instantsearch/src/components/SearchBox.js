@@ -1,9 +1,11 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-
 import translatable from '../core/translatable';
+import createClassNames from './createClassNames';
 
-const renderDefaultLoadingIndicator = cx => (
+const cx = createClassNames('SearchBox');
+
+const DefaultLoadingIndicatorComponent = () => (
   <svg
     width="18"
     height="18"
@@ -30,7 +32,7 @@ const renderDefaultLoadingIndicator = cx => (
   </svg>
 );
 
-const renderDefaultReset = cx => (
+const DefaultResetComponent = () => (
   <svg
     className={cx('resetIcon')}
     xmlns="http://www.w3.org/2000/svg"
@@ -42,7 +44,7 @@ const renderDefaultReset = cx => (
   </svg>
 );
 
-const renderDefaultSubmit = cx => (
+const DefaultSubmitComponent = () => (
   <svg
     className={cx('submitIcon')}
     xmlns="http://www.w3.org/2000/svg"
@@ -56,7 +58,6 @@ const renderDefaultSubmit = cx => (
 
 class SearchBox extends Component {
   static propTypes = {
-    cx: PropTypes.func.isRequired,
     currentRefinement: PropTypes.string,
     refine: PropTypes.func.isRequired,
     translate: PropTypes.func.isRequired,
@@ -90,6 +91,9 @@ class SearchBox extends Component {
     searchAsYouType: true,
     showLoadingIndicator: false,
     isSearchStalled: false,
+    loadingIndicatorComponent: <DefaultLoadingIndicatorComponent />,
+    resetComponent: <DefaultResetComponent />,
+    submitComponent: <DefaultSubmitComponent />,
   };
 
   constructor(props) {
@@ -212,7 +216,6 @@ class SearchBox extends Component {
 
   render() {
     const {
-      cx,
       translate,
       autoFocus,
       loadingIndicatorComponent,
@@ -238,52 +241,54 @@ class SearchBox extends Component {
 
     /* eslint-disable max-len */
     return (
-      <form
-        noValidate
-        onSubmit={this.props.onSubmit ? this.props.onSubmit : this.onSubmit}
-        onReset={this.onReset}
-        className={cx('form', isSearchStalled && 'form--stalledSearch')}
-        action=""
-        role="search"
-      >
-        <input
-          ref={this.onInputMount}
-          type="search"
-          placeholder={translate('placeholder')}
-          autoFocus={autoFocus}
-          autoComplete="off"
-          autoCorrect="off"
-          autoCapitalize="off"
-          spellCheck="false"
-          required
-          maxLength="512"
-          value={query}
-          onChange={this.onChange}
-          {...searchInputEvents}
-          className={cx('input')}
-        />
-        <button
-          type="submit"
-          title={translate('submitTitle')}
-          className={cx('submit')}
+      <div className={cx('')}>
+        <form
+          noValidate
+          onSubmit={this.props.onSubmit ? this.props.onSubmit : this.onSubmit}
+          onReset={this.onReset}
+          className={cx('form', isSearchStalled && 'form--stalledSearch')}
+          action=""
+          role="search"
         >
-          {submitComponent || renderDefaultSubmit(cx)}
-        </button>
-        <button
-          type="reset"
-          title={translate('resetTitle')}
-          className={cx('reset')}
-          onClick={this.onReset}
-          hidden={!query || isSearchStalled}
-        >
-          {resetComponent || renderDefaultReset(cx)}
-        </button>
-        {this.props.showLoadingIndicator && (
-          <span hidden={!isSearchStalled} className={cx('loadingIndicator')}>
-            {loadingIndicatorComponent || renderDefaultLoadingIndicator(cx)}
-          </span>
-        )}
-      </form>
+          <input
+            ref={this.onInputMount}
+            type="search"
+            placeholder={translate('placeholder')}
+            autoFocus={autoFocus}
+            autoComplete="off"
+            autoCorrect="off"
+            autoCapitalize="off"
+            spellCheck="false"
+            required
+            maxLength="512"
+            value={query}
+            onChange={this.onChange}
+            {...searchInputEvents}
+            className={cx('input')}
+          />
+          <button
+            type="submit"
+            title={translate('submitTitle')}
+            className={cx('submit')}
+          >
+            {submitComponent}
+          </button>
+          <button
+            type="reset"
+            title={translate('resetTitle')}
+            className={cx('reset')}
+            onClick={this.onReset}
+            hidden={!query || isSearchStalled}
+          >
+            {resetComponent}
+          </button>
+          {this.props.showLoadingIndicator && (
+            <span hidden={!isSearchStalled} className={cx('loadingIndicator')}>
+              {loadingIndicatorComponent}
+            </span>
+          )}
+        </form>
+      </div>
     );
     /* eslint-enable */
   }

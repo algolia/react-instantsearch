@@ -13,7 +13,6 @@ describe('MenuSelect', () => {
     const tree = renderer
       .create(
         <MenuSelect
-          cx={(...x) => x.join(' ')}
           refine={() => {}}
           items={[
             { label: 'white', value: 'white', count: 10, isRefined: false },
@@ -29,11 +28,17 @@ describe('MenuSelect', () => {
     expect(tree).toMatchSnapshot();
   });
 
+  it('default menu select with no refinement', () => {
+    const tree = renderer
+      .create(<MenuSelect refine={() => {}} items={[]} canRefine={false} />)
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
   it('applies translations', () => {
     const tree = renderer
       .create(
         <MenuSelect
-          cx={(...x) => x.join(' ')}
           refine={() => {}}
           items={[
             { label: 'white', value: 'white', count: 10, isRefined: false },
@@ -56,7 +61,6 @@ describe('MenuSelect', () => {
     const refine = jest.fn();
     const wrapper = mount(
       <MenuSelect
-        cx={(...x) => x.join(' ')}
         refine={refine}
         items={[
           { label: 'white', value: 'white', count: 10, isRefined: false },
@@ -67,10 +71,10 @@ describe('MenuSelect', () => {
       />
     );
 
-    const items = wrapper.find('.option');
+    const items = wrapper.find('option');
     expect(items).toHaveLength(4); // +1 from "see all option"
 
-    wrapper.find('.select').simulate('change', { target: { value: 'blue' } });
+    wrapper.find('select').simulate('change', { target: { value: 'blue' } });
 
     expect(refine).toHaveBeenCalledTimes(1);
     expect(refine).toHaveBeenCalledWith('blue');

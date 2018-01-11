@@ -1,10 +1,5 @@
-import React from 'react';
 import connectInfiniteHits from '../connectors/connectInfiniteHits';
-import Panel from '../components/Panel';
-import InfiniteHitsComponent from '../components/InfiniteHits';
-import createClassNames from '../components/createClassNames';
-
-const cx = createClassNames('InfiniteHits');
+import InfiniteHits from '../components/InfiniteHits';
 
 /**
  * Displays an infinite list of hits along with a **load more** button.
@@ -17,16 +12,11 @@ const cx = createClassNames('InfiniteHits');
  * @propType {Component} [hitComponent] - Component used for rendering each hit from
  *   the results. If it is not provided the rendering defaults to displaying the
  *   hit in its JSON form. The component will be called with a `hit` prop.
- * @propType {node} [header] - Adds a header to the widget.
- * @propType {node} [footer] - Adds a footer to the widget.
  * @themeKey ais-InfiniteHits - the root div of the widget
- * @themeKey ais-InfiniteHits-header - the header of the widget (optional)
- * @themeKey ais-InfiniteHits-body - the body of the widget
  * @themeKey ais-InfiniteHits-list - the list of hits
  * @themeKey ais-InfiniteHits-item - the hit list item
  * @themeKey ais-InfiniteHits-loadMore - the button used to display more results
  * @themeKey ais-InfiniteHits-loadMore--disabled - the disabled button used to display more results
- * @themeKey ais-InfiniteHits-footer - the footer of the widget (optional)
  * @translationKey loadMore - the label of load more button
  * @example
  * import React from 'react';
@@ -46,10 +36,4 @@ const cx = createClassNames('InfiniteHits');
  * }
  */
 
-const InfiniteHits = connectInfiniteHits(props => (
-  <Panel {...props} cx={cx}>
-    <InfiniteHitsComponent {...props} cx={cx} />
-  </Panel>
-));
-
-export default InfiniteHits;
+export default connectInfiniteHits(InfiniteHits);

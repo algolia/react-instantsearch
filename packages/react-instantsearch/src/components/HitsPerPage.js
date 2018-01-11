@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-
+import createClassNames from './createClassNames';
 import Select from './Select';
+
+const cx = createClassNames('HitsPerPage');
 
 class HitsPerPage extends Component {
   static propTypes = {
-    cx: PropTypes.func.isRequired,
     refine: PropTypes.func.isRequired,
     currentRefinement: PropTypes.number.isRequired,
     transformItems: PropTypes.func,
@@ -25,14 +26,17 @@ class HitsPerPage extends Component {
   };
 
   render() {
-    const { cx, currentRefinement, refine, items } = this.props;
+    const { currentRefinement, refine, items } = this.props;
+
     return (
-      <Select
-        onSelect={refine}
-        selectedItem={currentRefinement}
-        items={items}
-        cx={cx}
-      />
+      <div className={cx('')}>
+        <Select
+          onSelect={refine}
+          selectedItem={currentRefinement}
+          items={items}
+          cx={cx}
+        />
+      </div>
     );
   }
 }

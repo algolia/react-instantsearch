@@ -1,7 +1,10 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import Link from './Link';
 import translatable from '../core/translatable';
+import createClassNames from './createClassNames';
+import Link from './Link';
+
+const cx = createClassNames('Breadcrumb');
 
 const itemsPropType = PropTypes.arrayOf(
   PropTypes.shape({
@@ -12,7 +15,6 @@ const itemsPropType = PropTypes.arrayOf(
 
 class Breadcrumb extends Component {
   static propTypes = {
-    cx: PropTypes.func.isRequired,
     canRefine: PropTypes.bool.isRequired,
     createURL: PropTypes.func.isRequired,
     items: itemsPropType,
@@ -26,7 +28,6 @@ class Breadcrumb extends Component {
 
   render() {
     const {
-      cx,
       canRefine,
       createURL,
       items,
@@ -68,10 +69,12 @@ class Breadcrumb extends Component {
     });
 
     return (
-      <ul className={cx('list')}>
-        {rootPath}
-        {breadcrumb}
-      </ul>
+      <div className={cx('', !canRefine && '-noRefinement')}>
+        <ul className={cx('list')}>
+          {rootPath}
+          {breadcrumb}
+        </ul>
+      </div>
     );
   }
 }

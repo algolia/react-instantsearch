@@ -1,10 +1,5 @@
-import React from 'react';
 import connectSearchBox from '../connectors/connectSearchBox';
-import Panel from '../components/Panel';
-import SearchBoxComponent from '../components/SearchBox';
-import createClassNames from '../components/createClassNames';
-
-const cx = createClassNames('SearchBox');
+import SearchBox from '../components/SearchBox';
 
 /**
  * The SearchBox component displays a search box that lets the user search for a specific query.
@@ -21,11 +16,7 @@ const cx = createClassNames('SearchBox');
  * @propType {React.Element} [loadingIndicatorComponent] - Change the apparence of the default loading indicator (spinning circle).
  * @propType {string} [defaultRefinement] - Provide default refinement value when component is mounted.
  * @propType {boolean} [showLoadingIndicator=false] - Display that the search is loading. This only happens after a certain amount of time to avoid a blinking effect. This timer can be configured with `stalledSearchDelay` props on <InstantSearch>. By default, the value is 200ms.
- * @propType {node} [header] - Adds a header to the widget.
- * @propType {node} [footer] - Adds a footer to the widget.
  * @themeKey ais-SearchBox - the root div of the widget
- * @themeKey ais-SearchBox-header - the header of the widget (optional)
- * @themeKey ais-SearchBox-body - the body of the widget
  * @themeKey ais-SearchBox-form - the wrapping form
  * @themeKey ais-SearchBox-input - the search input
  * @themeKey ais-SearchBox-submit - the submit button
@@ -34,7 +25,6 @@ const cx = createClassNames('SearchBox');
  * @themeKey ais-SearchBox-resetIcon - the default reset icon used inside the reset button
  * @themeKey ais-SearchBox-loadingIndicator - the loading indicator container
  * @themeKey ais-SearchBox-loadingIcon - the default loading icon
- * @themeKey ais-SearchBox-footer - the footer of the widget (optional)
  * @translationkey submitTitle - The submit button title
  * @translationkey resetTitle - The reset button title
  * @translationkey placeholder - The label of the input placeholder
@@ -56,10 +46,4 @@ const cx = createClassNames('SearchBox');
  * }
  */
 
-const SearchBox = connectSearchBox(props => (
-  <Panel {...props} cx={cx}>
-    <SearchBoxComponent {...props} cx={cx} />
-  </Panel>
-));
-
-export default SearchBox;
+export default connectSearchBox(SearchBox);

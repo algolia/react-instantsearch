@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import SearchBox from '../components/SearchBox';
-import createClassNames from './createClassNames';
 
 const itemsPropType = PropTypes.arrayOf(
   PropTypes.shape({
@@ -120,7 +119,6 @@ class List extends Component {
     return (
       <div className={cx('searchBox')}>
         <SearchBox
-          cx={createClassNames('SearchBox')}
           currentRefinement={this.state.query}
           refine={value => {
             this.setState({ query: value });
@@ -144,9 +142,10 @@ class List extends Component {
   render() {
     const { cx, items, withSearchBox, canRefine } = this.props;
     const searchBox = withSearchBox ? this.renderSearchBox() : null;
+    const rootClassName = cx('', !canRefine && '-noRefinement');
 
     if (items.length === 0) {
-      return <div>{searchBox}</div>;
+      return <div className={rootClassName}>{searchBox}</div>;
     }
 
     // Always limit the number of items we show on screen, since the actual
@@ -154,7 +153,7 @@ class List extends Component {
     // option.
     const limit = this.getLimit();
     return (
-      <div>
+      <div className={rootClassName}>
         {searchBox}
         <ul className={cx('list', !canRefine && 'list--noRefinement')}>
           {items

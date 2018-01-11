@@ -1,12 +1,13 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { isEmpty } from 'lodash';
-
 import translatable from '../core/translatable';
+import createClassNames from './createClassNames';
+
+const cx = createClassNames('RatingMenu');
 
 class RatingMenu extends Component {
   static propTypes = {
-    cx: PropTypes.func.isRequired,
     translate: PropTypes.func.isRequired,
     refine: PropTypes.func.isRequired,
     createURL: PropTypes.func.isRequired,
@@ -39,7 +40,6 @@ class RatingMenu extends Component {
   }
 
   buildItem({
-    cx,
     max,
     lowerBound,
     count,
@@ -120,7 +120,6 @@ class RatingMenu extends Component {
 
   render() {
     const {
-      cx,
       translate,
       refine,
       min,
@@ -155,7 +154,7 @@ class RatingMenu extends Component {
       );
     }
     return (
-      <div>
+      <div className={cx('', !canRefine && '-noRefinement')}>
         <svg xmlns="http://www.w3.org/2000/svg" style={{ display: 'none' }}>
           <symbol id={cx('starSymbol')} viewBox="0 0 24 24">
             <path d="M12 .288l2.833 8.718h9.167l-7.417 5.389 2.833 8.718-7.416-5.388-7.417 5.388 2.833-8.718-7.416-5.389h9.167z" />

@@ -1,6 +1,6 @@
 import React from 'react';
 import { setAddon, storiesOf } from '@storybook/react';
-import { Toggle } from '../packages/react-instantsearch/dom';
+import { Panel, Toggle } from '../packages/react-instantsearch/dom';
 import { displayName, filterProps, WrapWithHits } from './util';
 import JSXAddon from 'storybook-addon-jsx';
 
@@ -26,24 +26,6 @@ stories
     }
   )
   .addWithJSX(
-    'with header and footer',
-    () => (
-      <WrapWithHits linkedStoryGroup="Toggle">
-        <Toggle
-          attributeName="materials"
-          label="Made with solid pine"
-          value="Solid pine"
-          header="Toggle"
-          footer="Footer"
-        />
-      </WrapWithHits>
-    ),
-    {
-      displayName,
-      filterProps,
-    }
-  )
-  .addWithJSX(
     'checked by default',
     () => (
       <WrapWithHits linkedStoryGroup="Toggle">
@@ -53,6 +35,24 @@ stories
           value="Solid pine"
           defaultRefinement={true}
         />
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
+    'with Panel',
+    () => (
+      <WrapWithHits linkedStoryGroup="Toggle">
+        <Panel header="Toggle" footer="Footer">
+          <Toggle
+            attributeName="materials"
+            label="Made with solid pine"
+            value="Solid pine"
+          />
+        </Panel>
       </WrapWithHits>
     ),
     {

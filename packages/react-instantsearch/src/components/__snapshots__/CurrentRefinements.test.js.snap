@@ -1,53 +1,71 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`CurrentRefinements allows clearing unique items of a refinement 1`] = `
-<ul
-  className="list"
+<div
+  className="ais-CurrentRefinements"
 >
-  <li
-    className="item"
+  <ul
+    className="ais-CurrentRefinements-list"
   >
-    <button
-      className="button"
-      onClick={[Function]}
+    <li
+      className="ais-CurrentRefinements-item"
     >
-      <span
-        className="label"
+      <button
+        className="ais-CurrentRefinements-button"
+        onClick={[Function]}
       >
-        Sci-fi
-      </span>
-      <span
-        className="delete"
-      >
-        ✕
-      </span>
-    </button>
-  </li>
-</ul>
+        <span
+          className="ais-CurrentRefinements-label"
+        >
+          Sci-fi
+        </span>
+        <span
+          className="ais-CurrentRefinements-delete"
+        >
+          ✕
+        </span>
+      </button>
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`CurrentRefinements renders a empty list with no current refinements 1`] = `
+<div
+  className="ais-CurrentRefinements ais-CurrentRefinements--noRefinement"
+>
+  <ul
+    className="ais-CurrentRefinements-list ais-CurrentRefinements-list--noRefinement"
+  />
+</div>
 `;
 
 exports[`CurrentRefinements renders a list of current refinements 1`] = `
-<ul
-  className="list"
+<div
+  className="ais-CurrentRefinements"
 >
-  <li
-    className="item"
+  <ul
+    className="ais-CurrentRefinements-list"
   >
-    <button
-      className="button"
-      onClick={[Function]}
+    <li
+      className="ais-CurrentRefinements-item"
     >
-      <span
-        className="label"
+      <button
+        className="ais-CurrentRefinements-button"
+        onClick={[Function]}
       >
-        Genre
-      </span>
-      <span
-        className="delete"
-      >
-        ✕
-      </span>
-    </button>
-  </li>
-</ul>
+        <span
+          className="ais-CurrentRefinements-label"
+        >
+          Genre
+        </span>
+        <span
+          className="ais-CurrentRefinements-delete"
+        >
+          ✕
+        </span>
+      </button>
+    </li>
+  </ul>
+</div>
 `;

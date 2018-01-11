@@ -1,11 +1,7 @@
 import React from 'react';
 import connectPagination from '../connectors/connectPagination';
-import AutoHideContainer from '../components/AutoHideContainer';
-import Panel from '../components/Panel';
-import PaginationComponent from '../components/Pagination';
-import createClassNames from '../components/createClassNames';
-
-const cx = createClassNames('Pagination');
+import PanelCallbackHandler from '../components/PanelCallbackHandler';
+import Pagination from '../components/Pagination';
 
 /**
  * The Pagination widget displays a simple pagination system allowing the user to
@@ -16,15 +12,12 @@ const cx = createClassNames('Pagination');
  * @propType {boolean} [showLast=false] - Display the last page link.
  * @propType {boolean} [showPrevious=true] - Display the previous page link.
  * @propType {boolean} [showNext=true] - Display the next page link.
- * @propType {boolean} [autoHideContainer=false] - Hide the container when no results match.
  * @propType {number} [pagesPadding=3] - How many page links to display around the current page.
  * @propType {number} [maxPages=Infinity] - Maximum number of pages to display.
- * @propType {node} [header] - Adds a header to the widget.
- * @propType {node} [footer] - Adds a footer to the widget.
  * @themeKey ais-Pagination - the root div of the widget
- * @themeKey ais-Pagination-header - the header of the widget (optional)
- * @themeKey ais-Pagination-body - the body of the widget
+ * @themeKey ais-Pagination--noRefinement - the root div of the widget when there is no refinement
  * @themeKey ais-Pagination-list - the list of all pagination items
+ * @themeKey ais-Pagination-list--noRefinement - the list of all pagination items when there is no refinement
  * @themeKey ais-Pagination-item - the pagination list item
  * @themeKey ais-Pagination-item--firstPage - the "first" pagination list item
  * @themeKey ais-Pagination-item--lastPage - the "last" pagination list item
@@ -34,7 +27,6 @@ const cx = createClassNames('Pagination');
  * @themeKey ais-Pagination-item--selected - the selected pagination list item
  * @themeKey ais-Pagination-item--disabled - the disabled pagination list item
  * @themeKey ais-Pagination-link - the pagination clickable element
- * @themeKey ais-Pagination-footer - the footer of the widget (optional)
  * @translationKey previous - Label value for the previous page link
  * @translationKey next - Label value for the next page link
  * @translationKey first - Label value for the first page link
@@ -63,12 +55,10 @@ const cx = createClassNames('Pagination');
  * }
  */
 
-const Pagination = connectPagination(props => (
-  <AutoHideContainer {...props}>
-    <Panel {...props} cx={cx}>
-      <PaginationComponent {...props} cx={cx} />
-    </Panel>
-  </AutoHideContainer>
-));
+const PaginationWidget = props => (
+  <PanelCallbackHandler {...props}>
+    <Pagination {...props} />
+  </PanelCallbackHandler>
+);
 
-export default Pagination;
+export default connectPagination(PaginationWidget);

@@ -1,10 +1,5 @@
-import React from 'react';
 import connectToggle from '../connectors/connectToggle';
-import Panel from '../components/Panel';
-import ToggleComponent from '../components/Toggle';
-import createClassNames from '../components/createClassNames';
-
-const cx = createClassNames('Toggle');
+import Toggle from '../components/Toggle';
 
 /**
  * The Toggle provides an on/off filtering feature based on an attribute value. Note that if you provide an “off” option, it will be refined at initialization.
@@ -19,18 +14,13 @@ const cx = createClassNames('Toggle');
  * @propType {string} label - Label for the toggle.
  * @propType {any} value - Value of the refinement to apply on `attributeName` when checked.
  * @propType {boolean} [defaultRefinement=false] - Default state of the widget. Should the toggle be checked by default?
- * @propType {node} [header] - Adds a header to the widget.
- * @propType {node} [footer] - Adds a footer to the widget.
  * @themeKey ais-Toggle - the root div of the widget
- * @themeKey ais-Toggle-header - the header of the widget (optional)
- * @themeKey ais-Toggle-body - the body of the widget
  * @themeKey ais-Toggle-list - the list of toggles
  * @themeKey ais-Toggle-item - the toggle list item
  * @themeKey ais-Toggle-label - the label of each toggle item
  * @themeKey ais-Toggle-checkbox - the checkbox input of each toggle item
  * @themeKey ais-Toggle-labelText - the label text of each toggle item
  * @themeKey ais-Toggle-count - the count of items for each item
- * @themeKey ais-Toggle-footer - the footer of the widget (optional)
  * @example
  * import React from 'react';
  *
@@ -53,10 +43,4 @@ const cx = createClassNames('Toggle');
  * }
  */
 
-const Toggle = connectToggle(props => (
-  <Panel {...props} cx={cx}>
-    <ToggleComponent {...props} cx={cx} />
-  </Panel>
-));
-
-export default Toggle;
+export default connectToggle(Toggle);

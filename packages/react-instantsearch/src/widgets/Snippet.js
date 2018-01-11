@@ -1,9 +1,5 @@
-import React from 'react';
 import connectHighlight from '../connectors/connectHighlight';
-import SnippetComponent from '../components/Snippet';
-import createClassNames from '../components/createClassNames';
-
-const cx = createClassNames('Snippet');
+import Snippet from '../components/Snippet';
 
 /**
  * Renders any attribute from an hit into its highlighted snippet form when relevant.
@@ -45,8 +41,4 @@ const cx = createClassNames('Snippet');
  * }
  */
 
-const Snippet = connectHighlight(props => (
-  <SnippetComponent {...props} cx={cx} />
-));
-
-export default Snippet;
+export default connectHighlight(Snippet);

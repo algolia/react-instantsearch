@@ -1,6 +1,10 @@
 import React from 'react';
 import { setAddon, storiesOf } from '@storybook/react';
-import { RangeInput, SearchBox } from '../packages/react-instantsearch/dom';
+import {
+  Panel,
+  RangeInput,
+  SearchBox,
+} from '../packages/react-instantsearch/dom';
 import { object, number } from '@storybook/addon-knobs';
 import { displayName, filterProps, WrapWithHits } from './util';
 
@@ -16,42 +20,6 @@ stories
     () => (
       <WrapWithHits linkedStoryGroup="RangeInput">
         <RangeInput attributeName="price" />
-      </WrapWithHits>
-    ),
-    {
-      displayName,
-      filterProps,
-    }
-  )
-  .addWithJSX(
-    'with header and footer',
-    () => (
-      <WrapWithHits linkedStoryGroup="RangeInput">
-        <RangeInput
-          attributeName="price"
-          header="Range Input"
-          footer="Footer"
-        />
-      </WrapWithHits>
-    ),
-    {
-      displayName,
-      filterProps,
-    }
-  )
-  .addWithJSX(
-    'hidden without refinement',
-    () => (
-      <WrapWithHits searchBox={false} linkedStoryGroup="RangeInput">
-        <RangeInput
-          attributeName="price"
-          header="Range Input"
-          autoHideContainer
-        />
-
-        <div style={{ display: 'none' }}>
-          <SearchBox defaultRefinement="ds" />
-        </div>
       </WrapWithHits>
     ),
     {
@@ -185,6 +153,38 @@ stories
             separator: 'to',
           })}
         />
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
+    'with Panel',
+    () => (
+      <WrapWithHits linkedStoryGroup="RangeInput">
+        <Panel header="Range Input" footer="Footer">
+          <RangeInput attributeName="price" />
+        </Panel>
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
+    'with Panel but no refinement',
+    () => (
+      <WrapWithHits searchBox={false} linkedStoryGroup="RangeInput">
+        <Panel header="Range Input" footer="Footer">
+          <RangeInput attributeName="price" />
+        </Panel>
+
+        <div style={{ display: 'none' }}>
+          <SearchBox defaultRefinement="ds" />
+        </div>
       </WrapWithHits>
     ),
     {

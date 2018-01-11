@@ -4,6 +4,7 @@ import { setAddon, storiesOf } from '@storybook/react';
 import {
   InfiniteHits,
   Highlight,
+  Panel,
   Snippet,
 } from '../packages/react-instantsearch/dom';
 import { displayName, filterProps, WrapWithHits } from './util';
@@ -26,23 +27,25 @@ stories
       filterProps,
     }
   )
+  .add('with custom rendering', () => (
+    <WrapWithHits linkedStoryGroup="InfiniteHits">
+      <InfiniteHits hitComponent={Product} />
+    </WrapWithHits>
+  ))
   .addWithJSX(
-    'with header and footer',
+    'with Panel',
     () => (
       <WrapWithHits linkedStoryGroup="InfiniteHits" pagination={false}>
-        <InfiniteHits header="Infinite hits" footer="Footer" />
+        <Panel header="Infinite hits" footer="Footer">
+          <InfiniteHits />
+        </Panel>
       </WrapWithHits>
     ),
     {
       displayName,
       filterProps,
     }
-  )
-  .add('with custom rendering', () => (
-    <WrapWithHits linkedStoryGroup="InfiniteHits">
-      <InfiniteHits hitComponent={Product} />
-    </WrapWithHits>
-  ));
+  );
 
 function Product({ hit }) {
   return (

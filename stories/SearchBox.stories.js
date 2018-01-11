@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { setAddon, storiesOf } from '@storybook/react';
-import { SearchBox } from '../packages/react-instantsearch/dom';
+import { Panel, SearchBox } from '../packages/react-instantsearch/dom';
 import { object, boolean } from '@storybook/addon-knobs';
 import { displayName, filterProps, WrapWithHits } from './util';
 import { action } from '@storybook/addon-actions';
@@ -22,22 +22,6 @@ stories
         <SearchBox
           showLoadingIndicator={boolean('showLoadingIndicator', true)}
         />
-      </WrapWithHits>
-    ),
-    {
-      displayName,
-      filterProps,
-    }
-  )
-  .addWithJSX(
-    'with header and footer',
-    () => (
-      <WrapWithHits
-        searchBox={false}
-        hasPlayground={true}
-        linkedStoryGroup="SearchBox"
-      >
-        <SearchBox header="SearchBox" footer="Footer" />
       </WrapWithHits>
     ),
     {
@@ -112,6 +96,24 @@ stories
     }
   )
   .addWithJSX(
+    'with Panel',
+    () => (
+      <WrapWithHits
+        searchBox={false}
+        hasPlayground={true}
+        linkedStoryGroup="SearchBox"
+      >
+        <Panel header="SearchBox" footer="Footer">
+          <SearchBox />
+        </Panel>
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
     'playground',
     () => (
       <WrapWithHits searchBox={false} linkedStoryGroup="SearchBox">
@@ -120,8 +122,6 @@ stories
           searchAsYouType={true}
           autoFocus={true}
           translations={object('translations', {
-            submit: null,
-            reset: null,
             submitTitle: 'Submit your search query.',
             resetTitle: 'Clear your search query.',
             placeholder: 'Search your website.',

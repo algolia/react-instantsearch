@@ -13,9 +13,7 @@ describe('Hits', () => {
     Hit.propTypes = {
       hit: PropTypes.object,
     };
-    const tree = renderer.create(
-      <Hits hitComponent={Hit} hits={hits} cx={(...x) => x.join(' ')} />
-    );
+    const tree = renderer.create(<Hits hitComponent={Hit} hits={hits} />);
     expect(tree.toJSON()).toMatchSnapshot();
   });
 });

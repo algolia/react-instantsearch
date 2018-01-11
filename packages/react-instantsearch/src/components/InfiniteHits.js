@@ -1,13 +1,14 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-
 import translatable from '../core/translatable';
+import createClassNames from './createClassNames';
+
+const cx = createClassNames('InfiniteHits');
 
 class InfiniteHits extends Component {
   render() {
     const {
-      cx,
-      hitComponent: ItemComponent,
+      hitComponent: HitComponent,
       hits,
       hasMore,
       refine,
@@ -15,11 +16,11 @@ class InfiniteHits extends Component {
     } = this.props;
 
     return (
-      <div>
+      <div className={cx('')}>
         <ul className={cx('list')}>
           {hits.map(hit => (
             <li key={hit.objectID} className={cx('item')}>
-              <ItemComponent hit={hit} />
+              <HitComponent hit={hit} />
             </li>
           ))}
         </ul>
@@ -36,7 +37,6 @@ class InfiniteHits extends Component {
 }
 
 InfiniteHits.propTypes = {
-  cx: PropTypes.func.isRequired,
   hits: PropTypes.array,
   hitComponent: PropTypes.oneOfType([PropTypes.string, PropTypes.func])
     .isRequired,
@@ -47,7 +47,6 @@ InfiniteHits.propTypes = {
   footer: PropTypes.node,
 };
 
-/* eslint-disable react/display-name */
 InfiniteHits.defaultProps = {
   hitComponent: hit => (
     <div
@@ -62,7 +61,6 @@ InfiniteHits.defaultProps = {
     </div>
   ),
 };
-/* eslint-enable react/display-name */
 
 export default translatable({
   loadMore: 'Load more',

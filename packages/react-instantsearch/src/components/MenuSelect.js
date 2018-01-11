@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { find } from 'lodash';
-
 import translatable from '../core/translatable';
+import createClassNames from './createClassNames';
+
+const cx = createClassNames('MenuSelect');
 
 class MenuSelect extends Component {
   static propTypes = {
-    cx: PropTypes.func.isRequired,
-    canRefine: PropTypes.bool.isRequired,
-    refine: PropTypes.func.isRequired,
-    translate: PropTypes.func.isRequired,
     items: PropTypes.arrayOf(
       PropTypes.shape({
         label: PropTypes.string.isRequired,
@@ -21,6 +19,9 @@ class MenuSelect extends Component {
         isRefined: PropTypes.bool.isRequired,
       })
     ),
+    canRefine: PropTypes.bool.isRequired,
+    refine: PropTypes.func.isRequired,
+    translate: PropTypes.func.isRequired,
   };
 
   get selectedValue() {
@@ -35,24 +36,30 @@ class MenuSelect extends Component {
   };
 
   render() {
-    const { cx, items, translate } = this.props;
+    const { items, canRefine, translate } = this.props;
 
     return (
-      <select
-        value={this.selectedValue}
-        onChange={this.handleSelectChange}
-        className={cx('select')}
-      >
-        <option value="ais__see__all__option" className={cx('option')}>
-          {translate('seeAllOption')}
-        </option>
-
-        {items.map(item => (
-          <option key={item.value} value={item.value} className={cx('option')}>
-            {item.label} ({item.count})
+      <div className={cx('', !canRefine && '-noRefinement')}>
+        <select
+          value={this.selectedValue}
+          onChange={this.handleSelectChange}
+          className={cx('select')}
+        >
+          <option value="ais__see__all__option" className={cx('option')}>
+            {translate('seeAllOption')}
           </option>
-        ))}
-      </select>
+
+          {items.map(item => (
+            <option
+              key={item.value}
+              value={item.value}
+              className={cx('option')}
+            >
+              {item.label} ({item.count})
+            </option>
+          ))}
+        </select>
+      </div>
     );
   }
 }

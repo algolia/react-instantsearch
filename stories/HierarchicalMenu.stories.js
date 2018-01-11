@@ -2,6 +2,7 @@ import React from 'react';
 import { setAddon, storiesOf } from '@storybook/react';
 import {
   HierarchicalMenu,
+  Panel,
   SearchBox,
 } from '../packages/react-instantsearch/dom';
 import { text, boolean, number } from '@storybook/addon-knobs';
@@ -20,69 +21,6 @@ stories
         <HierarchicalMenu
           attributes={['category', 'sub_category', 'sub_sub_category']}
         />
-      </WrapWithHits>
-    ),
-    {
-      displayName,
-      filterProps,
-    }
-  )
-  .addWithJSX(
-    'with header and footer',
-    () => (
-      <WrapWithHits hasPlayground={true} linkedStoryGroup="HierarchicalMenu">
-        <HierarchicalMenu
-          attributes={['category', 'sub_category', 'sub_sub_category']}
-          header="Hierarchical Menu"
-          footer="Footer"
-        />
-      </WrapWithHits>
-    ),
-    {
-      displayName,
-      filterProps,
-    }
-  )
-  .addWithJSX(
-    'hidden without items to refine',
-    () => (
-      <WrapWithHits
-        searchBox={false}
-        hasPlayground={true}
-        linkedStoryGroup="HierarchicalMenu"
-      >
-        <HierarchicalMenu
-          attributes={['category', 'sub_category', 'sub_sub_category']}
-          header="Hierarchical Menu"
-          autoHideContainer
-        />
-
-        <div style={{ display: 'none' }}>
-          <SearchBox defaultRefinement="ds" />
-        </div>
-      </WrapWithHits>
-    ),
-    {
-      displayName,
-      filterProps,
-    }
-  )
-  .addWithJSX(
-    'visible without items to refine',
-    () => (
-      <WrapWithHits
-        searchBox={false}
-        hasPlayground={true}
-        linkedStoryGroup="HierarchicalMenu"
-      >
-        <HierarchicalMenu
-          attributes={['category', 'sub_category', 'sub_sub_category']}
-          header="Hierarchical Menu"
-        />
-
-        <div style={{ display: 'none' }}>
-          <SearchBox defaultRefinement="ds" />
-        </div>
       </WrapWithHits>
     ),
     {
@@ -133,6 +71,46 @@ stories
           limitMax={number('limitMax', 20)}
           showMore={boolean('showMore', true)}
         />
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
+    'with Panel',
+    () => (
+      <WrapWithHits hasPlayground={true} linkedStoryGroup="HierarchicalMenu">
+        <Panel header="Hierarchical Menu" footer="Footer">
+          <HierarchicalMenu
+            attributes={['category', 'sub_category', 'sub_sub_category']}
+          />
+        </Panel>
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
+    'with Panel but no refinement',
+    () => (
+      <WrapWithHits
+        searchBox={false}
+        hasPlayground={true}
+        linkedStoryGroup="HierarchicalMenu"
+      >
+        <Panel header="Hierarchical Menu" footer="Footer">
+          <HierarchicalMenu
+            attributes={['category', 'sub_category', 'sub_sub_category']}
+          />
+        </Panel>
+
+        <div style={{ display: 'none' }}>
+          <SearchBox defaultRefinement="ds" />
+        </div>
       </WrapWithHits>
     ),
     {

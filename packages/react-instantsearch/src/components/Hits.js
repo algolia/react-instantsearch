@@ -1,21 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import createClassNames from '../components/createClassNames';
 
-const Hits = ({ cx, hits, hitComponent: HitComponent }) => (
+const cx = createClassNames('Hits');
+
+const Hits = ({ hits, hitComponent: HitComponent }) => (
   // Spread the hit on HitComponent instead of passing the full object. BC.
   // ex: <HitComponent {...hit} key={hit.objectID} />
-
-  <ul className={cx('list')}>
-    {hits.map(hit => (
-      <li className={cx('item')} key={hit.objectID}>
-        <HitComponent hit={hit} />
-      </li>
-    ))}
-  </ul>
+  <div className={cx('')}>
+    <ul className={cx('list')}>
+      {hits.map(hit => (
+        <li className={cx('item')} key={hit.objectID}>
+          <HitComponent hit={hit} />
+        </li>
+      ))}
+    </ul>
+  </div>
 );
 
 Hits.propTypes = {
-  cx: PropTypes.func.isRequired,
   hits: PropTypes.array,
   hitComponent: PropTypes.func.isRequired,
 };

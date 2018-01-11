@@ -2,6 +2,7 @@ import React from 'react';
 import { setAddon, storiesOf } from '@storybook/react';
 import {
   CurrentRefinements,
+  Panel,
   RefinementList,
   Toggle,
 } from '../packages/react-instantsearch/dom';
@@ -33,10 +34,30 @@ stories
     }
   )
   .addWithJSX(
-    'with header and footer',
+    'with toggle',
     () => (
       <WrapWithHits linkedStoryGroup="CurrentRefinements">
-        <CurrentRefinements header="Current refinements" footer="Footer" />
+        <CurrentRefinements />
+        <Toggle
+          attributeName="materials"
+          label="Made with solid pine"
+          value={'Solid pine'}
+        />
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
+    'with Panel',
+    () => (
+      <WrapWithHits linkedStoryGroup="CurrentRefinements">
+        <Panel header="Current refinements" footer="Footer">
+          <CurrentRefinements />
+        </Panel>
+
         <div style={{ display: 'none' }}>
           <RefinementList
             attributeName="category"
@@ -51,39 +72,12 @@ stories
     }
   )
   .addWithJSX(
-    'hidden without refinement',
+    'with Panel but no refinements',
     () => (
       <WrapWithHits linkedStoryGroup="CurrentRefinements">
-        <CurrentRefinements header="Current refinements" autoHideContainer />
-      </WrapWithHits>
-    ),
-    {
-      displayName,
-      filterProps,
-    }
-  )
-  .addWithJSX(
-    'visible without refinement',
-    () => (
-      <WrapWithHits linkedStoryGroup="CurrentRefinements">
-        <CurrentRefinements header="Current refinements" />
-      </WrapWithHits>
-    ),
-    {
-      displayName,
-      filterProps,
-    }
-  )
-  .addWithJSX(
-    'with toggle',
-    () => (
-      <WrapWithHits linkedStoryGroup="CurrentRefinements">
-        <CurrentRefinements />
-        <Toggle
-          attributeName="materials"
-          label="Made with solid pine"
-          value={'Solid pine'}
-        />
+        <Panel header="Current refinements" footer="Footer">
+          <CurrentRefinements />
+        </Panel>
       </WrapWithHits>
     ),
     {

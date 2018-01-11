@@ -1,11 +1,7 @@
 import React from 'react';
 import connectMenu from '../connectors/connectMenu';
-import AutoHideContainer from '../components/AutoHideContainer';
-import Panel from '../components/Panel';
-import MenuComponent from '../components/Menu';
-import createClassNames from '../components/createClassNames';
-
-const cx = createClassNames('Menu');
+import PanelCallbackHandler from '../components/PanelCallbackHandler';
+import Menu from '../components/Menu';
 
 /**
  * The Menu component displays a menu that lets the user choose a single value for a specific attribute.
@@ -22,13 +18,8 @@ const cx = createClassNames('Menu');
  * @propType {number} [limitMax=20] - the maximun number of displayed items. Only used when showMore is set to `true`
  * @propType {string} [defaultRefinement] - the value of the item selected by default
  * @propType {function} [transformItems] - Function to modify the items being displayed, e.g. for filtering or sorting them. Takes an items as parameter and expects it back in return.
- * @propType {boolean} [autoHideContainer=false] - Hide the container when there are no items in the menu.
- * @propType {node} [header] - Adds a header to the widget.
- * @propType {node} [footer] - Adds a footer to the widget.
  * @propType {boolean} [withSearchBox=false] - true if the component should display an input to search for facet values. <br> In order to make this feature work, you need to make the attribute searchable [using the API](https://www.algolia.com/doc/guides/searching/faceting/?language=js#declaring-a-searchable-attribute-for-faceting) or [the dashboard](https://www.algolia.com/explorer/display/).
  * @themeKey ais-Menu - the root div of the widget
- * @themeKey ais-Menu-header - the header of the widget (optional)
- * @themeKey ais-Menu-body - the body of the widget
  * @themeKey ais-Menu-searchBox - the search box of the widget. See [the SearchBox documentation](widgets/SearchBox.html#classnames) for the classnames and translation keys of the SearchBox.
  * @themeKey ais-Menu-list - the list of all menu items
  * @themeKey ais-Menu-item - the menu list item
@@ -36,9 +27,9 @@ const cx = createClassNames('Menu');
  * @themeKey ais-Menu-link - the clickable menu element
  * @themeKey ais-Menu-label - the label of each item
  * @themeKey ais-Menu-count - the count of values for each item
+ * @themeKey ais-Menu-noResults - the div displayed when there are no results
  * @themeKey ais-Menu-showMore - the button used to display more categories
  * @themeKey ais-Menu-showMore--disabled - the disabled button used to display more categories
- * @themeKey ais-Menu-footer - the footer of the widget (optional)
  * @translationkey showMore - The label of the show more button. Accepts one parameters, a boolean that is true if the values are expanded
  * @translationkey noResults - The label of the no results text when no search for facet values results are found.
  * @example
@@ -61,12 +52,10 @@ const cx = createClassNames('Menu');
  * }
  */
 
-const Menu = connectMenu(props => (
-  <AutoHideContainer {...props}>
-    <Panel {...props} cx={cx}>
-      <MenuComponent {...props} cx={cx} />
-    </Panel>
-  </AutoHideContainer>
-));
+const MenuWidget = props => (
+  <PanelCallbackHandler {...props}>
+    <Menu {...props} />
+  </PanelCallbackHandler>
+);
 
-export default Menu;
+export default connectMenu(MenuWidget);

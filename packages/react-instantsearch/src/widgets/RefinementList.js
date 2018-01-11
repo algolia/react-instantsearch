@@ -1,11 +1,7 @@
 import React from 'react';
 import connectRefinementList from '../connectors/connectRefinementList';
-import AutoHideContainer from '../components/AutoHideContainer';
-import Panel from '../components/Panel';
-import RefinementListComponent from '../components/RefinementList';
-import createClassNames from '../components/createClassNames';
-
-const cx = createClassNames('RefinementList');
+import PanelCallbackHandler from '../components/PanelCallbackHandler';
+import RefinementList from '../components/RefinementList';
 
 /**
  * The RefinementList component displays a list that let the end user choose multiple values for a specific facet.
@@ -18,13 +14,9 @@ const cx = createClassNames('RefinementList');
  * @propType {number} [limitMin=10] - the minimum number of displayed items
  * @propType {number} [limitMax=20] - the maximum number of displayed items. Only used when showMore is set to `true`
  * @propType {string[]} [defaultRefinement] - the values of the items selected by default
- * @propType {boolean} [autoHideContainer=false] - Hide the container when no items in the refinement list.
  * @propType {function} [transformItems] - Function to modify the items being displayed, e.g. for filtering or sorting them. Takes an items as parameter and expects it back in return.
- * @propType {node} [header] - Adds a header to the widget.
- * @propType {node} [footer] - Adds a footer to the widget.
  * @themeKey ais-RefinementList - the root div of the widget
- * @themeKey ais-RefinementList-header - the header of the widget (optional)
- * @themeKey ais-RefinementList-body - the body of the widget
+ * @themeKey ais-RefinementList--noRefinement - the root div of the widget when there is no refinement
  * @themeKey ais-RefinementList-searchBox - the search box of the widget. See [the SearchBox documentation](widgets/SearchBox.html#classnames) for the classnames and translation keys of the SearchBox.
  * @themeKey ais-RefinementList-list - the list of refinement items
  * @themeKey ais-RefinementList-item - the refinement list item
@@ -33,7 +25,9 @@ const cx = createClassNames('RefinementList');
  * @themeKey ais-RefinementList-checkbox - the checkbox input of each refinement item
  * @themeKey ais-RefinementList-labelText - the label text of each refinement item
  * @themeKey ais-RefinementList-count - the count of values for each item
- * @themeKey ais-RefinementList-footer - the footer of the widget (optional)
+ * @themeKey ais-RefinementList-noResults - the div displayed when there are no results
+ * @themeKey ais-RefinementList-showMore - the button used to display more categories
+ * @themeKey ais-RefinementList-showMore--disabled - the disabled button used to display more categories
  * @translationkey showMore - The label of the show more button. Accepts one parameters, a boolean that is true if the values are expanded
  * @translationkey noResults - The label of the no results text when no search for facet values results are found.
  * @requirements The attribute passed to the `attributeName` prop must be present in "attributes for faceting"
@@ -59,12 +53,10 @@ const cx = createClassNames('RefinementList');
  * }
  */
 
-const RefinementList = connectRefinementList(props => (
-  <AutoHideContainer {...props}>
-    <Panel {...props} cx={cx}>
-      <RefinementListComponent {...props} cx={cx} />
-    </Panel>
-  </AutoHideContainer>
-));
+const RefinementListWidget = props => (
+  <PanelCallbackHandler {...props}>
+    <RefinementList {...props} />
+  </PanelCallbackHandler>
+);
 
-export default RefinementList;
+export default connectRefinementList(RefinementListWidget);

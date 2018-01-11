@@ -5,10 +5,12 @@ import translatable from '../core/translatable';
 import List from './List';
 import Link from './Link';
 import Highlight from '../widgets/Highlight';
+import createClassNames from './createClassNames';
+
+const cx = createClassNames('Menu');
 
 class Menu extends Component {
   static propTypes = {
-    cx: PropTypes.func.isRequired,
     translate: PropTypes.func.isRequired,
     refine: PropTypes.func.isRequired,
     searchForItems: PropTypes.func.isRequired,
@@ -31,7 +33,7 @@ class Menu extends Component {
   };
 
   renderItem = (item, resetQuery) => {
-    const { createURL, cx } = this.props;
+    const { createURL } = this.props;
     const label = this.props.isFromSearch ? (
       <Highlight attributeName="label" hit={item} />
     ) : (
@@ -55,7 +57,6 @@ class Menu extends Component {
   };
 
   render() {
-    const { cx } = this.props;
     return (
       <List
         renderItem={this.renderItem}

@@ -1,11 +1,7 @@
 import React from 'react';
 import connectHierarchicalMenu from '../connectors/connectHierarchicalMenu';
-import AutoHideContainer from '../components/AutoHideContainer';
-import Panel from '../components/Panel';
-import HierarchicalMenuComponent from '../components/HierarchicalMenu';
-import createClassNames from '../components/createClassNames';
-
-const cx = createClassNames('HierarchicalMenu');
+import PanelCallbackHandler from '../components/PanelCallbackHandler';
+import HierarchicalMenu from '../components/HierarchicalMenu';
 
 /**
  * The hierarchical menu lets the user browse attributes using a tree-like structure.
@@ -55,26 +51,21 @@ const cx = createClassNames('HierarchicalMenu');
  * @propType {string} [separator='>'] -  Specifies the level separator used in the data.
  * @propType {string[]} [rootPath=null] - The already selected and hidden path.
  * @propType {boolean} [showParentLevel=true] - Flag to set if the parent level should be displayed.
- * @propType {boolean} [autoHideContainer=false] - Hide the container when there are no items in the menu.
  * @propType {string} [defaultRefinement] - the item value selected by default
  * @propType {function} [transformItems] - Function to modify the items being displayed, e.g. for filtering or sorting them. Takes an items as parameter and expects it back in return.
- * @propType {node} [header] - Adds a header to the widget.
- * @propType {node} [footer] - Adds a footer to the widget.
  * @themeKey ais-HierarchicalMenu - the root div of the widget
- * @themeKey ais-HierarchicalMenu-header - the header of the widget (optional)
- * @themeKey ais-HierarchicalMenu-body - the body of the widget
+ * @themeKey ais-HierarchicalMenu-noRefinement - the root div of the widget when there is no refinement
  * @themeKey ais-HierarchicalMenu-searchBox - the search box of the widget. See [the SearchBox documentation](widgets/SearchBox.html#classnames) for the classnames and translation keys of the SearchBox.
  * @themeKey ais-HierarchicalMenu-list - the list of menu items
  * @themeKey ais-HierarchicalMenu-list--child - the child list of menu items
- * @themeKey ais-HierarchicalMenu-list--lvl0 - the level 0 list of menu items
- * @themeKey ais-HierarchicalMenu-list--lvl1 - the level 1 list of menu items (and so on)
  * @themeKey ais-HierarchicalMenu-item - the menu list item
  * @themeKey ais-HierarchicalMenu-item--selected - the selected menu list item
  * @themeKey ais-HierarchicalMenu-item--parent - the menu list item containing children
  * @themeKey ais-HierarchicalMenu-link - the clickable menu element
  * @themeKey ais-HierarchicalMenu-label - the label of each item
  * @themeKey ais-HierarchicalMenu-count - the count of values for each item
- * @themeKey ais-HierarchicalMenu-footer - the footer of the widget (optional)
+ * @themeKey ais-HierarchicalMenu-showMore - the button used to display more categories
+ * @themeKey ais-HierarchicalMenu-showMore--disabled - the disabled button used to display more categories
  * @translationKey showMore - The label of the show more button. Accepts one parameter, a boolean that is true if the values are expanded
  * @example
  * import React from 'react';
@@ -102,12 +93,10 @@ const cx = createClassNames('HierarchicalMenu');
  * }
  */
 
-const HierarchicalMenu = connectHierarchicalMenu(props => (
-  <AutoHideContainer {...props}>
-    <Panel {...props} cx={cx}>
-      <HierarchicalMenuComponent {...props} cx={cx} />
-    </Panel>
-  </AutoHideContainer>
-));
+const HierarchicalMenuWidget = props => (
+  <PanelCallbackHandler {...props}>
+    <HierarchicalMenu {...props} />
+  </PanelCallbackHandler>
+);
 
-export default HierarchicalMenu;
+export default connectHierarchicalMenu(HierarchicalMenuWidget);

@@ -1,5 +1,3 @@
-/* eslint-env jest, jasmine */
-
 import React from 'react';
 import renderer from 'react-test-renderer';
 import Enzyme, { shallow, mount } from 'enzyme';
@@ -10,9 +8,7 @@ Enzyme.configure({ adapter: new Adapter() });
 
 describe('SearchBox', () => {
   it('applies its default props', () => {
-    const instance = renderer.create(
-      <SearchBox cx={(...x) => x.join(' ')} refine={() => null} />
-    );
+    const instance = renderer.create(<SearchBox refine={() => null} />);
 
     expect(instance.toJSON()).toMatchSnapshot();
 
@@ -21,7 +17,7 @@ describe('SearchBox', () => {
 
   it('transfers the autoFocus prop to the underlying input element', () => {
     const instance = renderer.create(
-      <SearchBox cx={(...x) => x.join(' ')} refine={() => null} autoFocus />
+      <SearchBox refine={() => null} autoFocus />
     );
 
     expect(instance.toJSON()).toMatchSnapshot();
@@ -31,21 +27,13 @@ describe('SearchBox', () => {
 
   it('treats its query prop as its input value', () => {
     const instance = renderer.create(
-      <SearchBox
-        cx={(...x) => x.join(' ')}
-        refine={() => null}
-        currentRefinement="QUERY1"
-      />
+      <SearchBox refine={() => null} currentRefinement="QUERY1" />
     );
 
     expect(instance.toJSON()).toMatchSnapshot();
 
     instance.update(
-      <SearchBox
-        cx={(...x) => x.join(' ')}
-        refine={() => null}
-        currentRefinement="QUERY2"
-      />
+      <SearchBox refine={() => null} currentRefinement="QUERY2" />
     );
 
     expect(instance.toJSON()).toMatchSnapshot();
@@ -56,7 +44,6 @@ describe('SearchBox', () => {
   it('lets you customize its theme', () => {
     const instance = renderer.create(
       <SearchBox
-        cx={(...x) => x.join(' ')}
         refine={() => null}
         theme={{
           root: 'ROOT',
@@ -76,7 +63,6 @@ describe('SearchBox', () => {
   it('lets you give custom components for reset and submit', () => {
     const instance = renderer.create(
       <SearchBox
-        cx={(...x) => x.join(' ')}
         refine={() => null}
         submitComponent={<span>🔍</span>}
         resetComponent={
@@ -95,7 +81,6 @@ describe('SearchBox', () => {
   it('lets you customize its translations', () => {
     const instance = renderer.create(
       <SearchBox
-        cx={(...x) => x.join(' ')}
         refine={() => null}
         translations={{
           resetTitle: 'RESET_TITLE',
@@ -112,7 +97,6 @@ describe('SearchBox', () => {
   it('treats query as a default value when searchAsYouType=false', () => {
     const wrapper = mount(
       <SearchBox
-        cx={(...x) => x.join(' ')}
         refine={() => null}
         currentRefinement="QUERY1"
         searchAsYouType={false}
@@ -130,9 +114,7 @@ describe('SearchBox', () => {
 
   it('refines its value on change when searchAsYouType=true', () => {
     const refine = jest.fn();
-    const wrapper = mount(
-      <SearchBox cx={(...x) => x.join(' ')} searchAsYouType refine={refine} />
-    );
+    const wrapper = mount(<SearchBox searchAsYouType refine={refine} />);
 
     wrapper.find('input').simulate('change', { target: { value: 'hello' } });
 
@@ -145,11 +127,7 @@ describe('SearchBox', () => {
   it('only refines its query on submit when searchAsYouType=false', () => {
     const refine = jest.fn();
     const wrapper = mount(
-      <SearchBox
-        cx={(...x) => x.join(' ')}
-        searchAsYouType={false}
-        refine={refine}
-      />
+      <SearchBox searchAsYouType={false} refine={refine} />
     );
 
     wrapper.find('input').simulate('change', { target: { value: 'hello' } });
@@ -168,12 +146,7 @@ describe('SearchBox', () => {
     const onSubmit = jest.fn();
     const refine = jest.fn();
     const wrapper = mount(
-      <SearchBox
-        cx={(...x) => x.join(' ')}
-        searchAsYouType={false}
-        onSubmit={onSubmit}
-        refine={refine}
-      />
+      <SearchBox searchAsYouType={false} onSubmit={onSubmit} refine={refine} />
     );
 
     wrapper.find('form').simulate('submit');
@@ -189,7 +162,6 @@ describe('SearchBox', () => {
 
     const wrapper = mount(
       <SearchBox
-        cx={(...x) => x.join(' ')}
         refine={() => null}
         focusShortcuts={['s', 84]}
         __inputRef={node => {
@@ -235,7 +207,6 @@ describe('SearchBox', () => {
 
     const wrapper = mount(
       <SearchBox
-        cx={(...x) => x.join(' ')}
         refine={() => null}
         onSubmit={onSubmit}
         onReset={onReset}
@@ -264,22 +235,13 @@ describe('SearchBox', () => {
 
   it('should render the loader if showLoadingIndicator is true', () => {
     const instanceWithoutLoadingIndicator = renderer.create(
-      <SearchBox
-        cx={(...x) => x.join(' ')}
-        refine={() => null}
-        showLoadingIndicator
-      />
+      <SearchBox refine={() => null} showLoadingIndicator />
     );
 
     expect(instanceWithoutLoadingIndicator.toJSON()).toMatchSnapshot();
 
     const instanceWithLoadingIndicator = renderer.create(
-      <SearchBox
-        cx={(...x) => x.join(' ')}
-        refine={() => null}
-        showLoadingIndicator
-        isSearchStalled
-      />
+      <SearchBox refine={() => null} showLoadingIndicator isSearchStalled />
     );
 
     expect(instanceWithLoadingIndicator.toJSON()).toMatchSnapshot();

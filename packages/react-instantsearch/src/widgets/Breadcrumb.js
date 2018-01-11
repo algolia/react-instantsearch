@@ -1,11 +1,7 @@
 import React from 'react';
 import connectBreadcrumb from '../connectors/connectBreadcrumb';
-import AutoHideContainer from '../components/AutoHideContainer';
-import Panel from '../components/Panel';
-import BreadcrumbComponent from '../components/Breadcrumb';
-import createClassNames from '../components/createClassNames';
-
-const cx = createClassNames('Breadcrumb');
+import PanelCallbackHandler from '../components/PanelCallbackHandler';
+import Breadcrumb from '../components/Breadcrumb';
 
 /**
  * A breadcrumb is a secondary navigation scheme that allows the user to see where the current page
@@ -13,9 +9,9 @@ const cx = createClassNames('Breadcrumb');
  * In terms of usability, using a breadcrumb reduces the number of actions a visitor needs to take in
  * order to get to a higher-level page.
  *
- * If you want to select a specific refinement for your Breadcrumb component, you will need to use a Virtual Hierarchical Menu
- * (https://community.algolia.com/react-instantsearch/guide/Virtual_widgets.html) and set its
- * defaultRefinement that will be then used by the Breadcrumb.
+ * If you want to select a specific refinement for your Breadcrumb component, you will need to
+ * use a [Virtual Hierarchical Menu](https://community.algolia.com/react-instantsearch/guide/Virtual_widgets.html)
+ * and set its defaultRefinement that will be then used by the Breadcrumb.
  *
  * @name Breadcrumb
  * @kind widget
@@ -52,19 +48,14 @@ const cx = createClassNames('Breadcrumb');
  * @propType {string} attributes - List of attributes to use to generate the hierarchy of the menu. See the example for the convention to follow
  * @propType {string} [separator='>'] -  Symbol used for separating hyperlinks
  * @propType {string} [rootURL=null] - The originating page (homepage)
- * @propType {boolean} [autoHideContainer=false] - Hides the container when there are no items in the breadcrumb.
  * @propType {function} [transformItems] - Function to modify the items being displayed, e.g. for filtering or sorting them. Takes an items as parameter and expects it back in return
- * @propType {node} [header] - Adds a header to the widget.
- * @propType {node} [footer] - Adds a footer to the widget.
  * @themeKey ais-Breadcrumb - the root div of the widget
- * @themeKey ais-Breadcrumb-header - the header of the widget (optional)
- * @themeKey ais-Breadcrumb-body - the body of the widget
+ * @themeKey ais-Breadcrumb--noRefinement - the root div of the widget when there is no refinement
  * @themeKey ais-Breadcrumb-list - the list of all breadcrumb items
  * @themeKey ais-Breadcrumb-item - the breadcrumb navigation item
  * @themeKey ais-Breadcrumb-item--selected - the selected breadcrumb item
  * @themeKey ais-Breadcrumb-separator - the separator of each breadcrumb item
  * @themeKey ais-Breadcrumb-link - the clickable breadcrumb element
- * @themeKey ais-Breadcrumb-footer - the footer of the widget (optional)
  * @translationKey rootLabel - The root's label. Accepts a string
  * @example
  * import React from 'react';
@@ -92,12 +83,10 @@ const cx = createClassNames('Breadcrumb');
  * }
  */
 
-const Breadcrumb = connectBreadcrumb(props => (
-  <AutoHideContainer {...props}>
-    <Panel {...props} cx={cx}>
-      <BreadcrumbComponent {...props} cx={cx} />
-    </Panel>
-  </AutoHideContainer>
-));
+const BreadcrumbWidget = props => (
+  <PanelCallbackHandler {...props}>
+    <Breadcrumb {...props} />
+  </PanelCallbackHandler>
+);
 
-export default Breadcrumb;
+export default connectBreadcrumb(BreadcrumbWidget);

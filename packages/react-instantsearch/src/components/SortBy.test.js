@@ -1,18 +1,15 @@
-/* eslint-env jest, jasmine */
-
 import React from 'react';
 import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-Enzyme.configure({ adapter: new Adapter() });
-
 import SortBy from './SortBy';
+
+Enzyme.configure({ adapter: new Adapter() });
 
 describe('SortBy behavior', () => {
   it('refines its value on change', () => {
     const refine = jest.fn();
     const wrapper = mount(
       <SortBy
-        cx={(...x) => x.join(' ')}
         createURL={() => '#'}
         items={[
           { value: 'index1', label: 'index name 1' },
@@ -25,7 +22,7 @@ describe('SortBy behavior', () => {
       />
     );
 
-    const selectedValue = wrapper.find('.select');
+    const selectedValue = wrapper.find('select');
     expect(selectedValue.find('option')).toHaveLength(4);
     expect(
       selectedValue
@@ -46,7 +43,6 @@ describe('SortBy behavior', () => {
     const refine = jest.fn();
     const wrapper = mount(
       <SortBy
-        cx={(...x) => x.join(' ')}
         createURL={() => '#'}
         items={[
           { value: 'index1' },
@@ -59,7 +55,7 @@ describe('SortBy behavior', () => {
       />
     );
 
-    const selectedValue = wrapper.find('.select');
+    const selectedValue = wrapper.find('select');
     expect(selectedValue.find('option')).toHaveLength(4);
     expect(
       selectedValue

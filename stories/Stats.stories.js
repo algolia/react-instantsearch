@@ -1,6 +1,6 @@
 import React from 'react';
 import { setAddon, storiesOf } from '@storybook/react';
-import { Stats } from '../packages/react-instantsearch/dom';
+import { Panel, Stats } from '../packages/react-instantsearch/dom';
 import { displayName, filterProps, WrapWithHits } from './util';
 
 import JSXAddon from 'storybook-addon-jsx';
@@ -25,10 +25,12 @@ stories
     }
   )
   .addWithJSX(
-    'with header and footer',
+    'with Panel',
     () => (
       <WrapWithHits linkedStoryGroup="Stats">
-        <Stats header="Stats" footer="Footer" />
+        <Panel header="Stats" footer="Footer">
+          <Stats />
+        </Panel>
       </WrapWithHits>
     ),
     {

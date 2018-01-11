@@ -4,10 +4,10 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-Enzyme.configure({ adapter: new Adapter() });
-
 import Menu from './Menu';
 import Link from './Link';
+
+Enzyme.configure({ adapter: new Adapter() });
 
 jest.mock('../widgets/Highlight', () => () => null);
 
@@ -16,7 +16,6 @@ describe('Menu', () => {
     const tree = renderer
       .create(
         <Menu
-          cx={(...x) => x.join(' ')}
           refine={() => null}
           searchForItems={() => null}
           createURL={() => '#'}
@@ -42,7 +41,6 @@ describe('Menu', () => {
     const tree = renderer
       .create(
         <Menu
-          cx={(...x) => x.join(' ')}
           refine={() => null}
           searchForItems={() => null}
           withSearchBox
@@ -64,7 +62,6 @@ describe('Menu', () => {
     const tree = renderer
       .create(
         <Menu
-          cx={(...x) => x.join(' ')}
           refine={() => null}
           searchForItems={() => null}
           withSearchBox
@@ -90,7 +87,6 @@ describe('Menu', () => {
     const tree = renderer
       .create(
         <Menu
-          cx={(...x) => x.join(' ')}
           refine={() => null}
           createURL={() => '#'}
           searchForItems={() => null}
@@ -121,7 +117,6 @@ describe('Menu', () => {
     const refine = jest.fn();
     const wrapper = mount(
       <Menu
-        cx={(...x) => x.join(' ')}
         refine={refine}
         searchForItems={() => null}
         createURL={() => '#'}
@@ -135,7 +130,7 @@ describe('Menu', () => {
       />
     );
 
-    const items = wrapper.find('.item');
+    const items = wrapper.find('li');
 
     expect(items).toHaveLength(3);
 
@@ -153,7 +148,6 @@ describe('Menu', () => {
     const refine = jest.fn();
     const wrapper = mount(
       <Menu
-        cx={(...x) => x.join(' ')}
         refine={refine}
         createURL={() => '#'}
         items={[
@@ -172,13 +166,13 @@ describe('Menu', () => {
       />
     );
 
-    const items = wrapper.find('.item');
+    const items = wrapper.find('li');
 
     expect(items).toHaveLength(2);
 
-    wrapper.find('.showMore').simulate('click');
+    wrapper.find('button').simulate('click');
 
-    expect(wrapper.find('.item')).toHaveLength(4);
+    expect(wrapper.find('li')).toHaveLength(4);
 
     wrapper.unmount();
   });
@@ -187,7 +181,6 @@ describe('Menu', () => {
     const refine = jest.fn();
     const wrapper = mount(
       <Menu
-        cx={(...x) => x.join(' ')}
         refine={refine}
         createURL={() => '#'}
         items={[
@@ -203,11 +196,11 @@ describe('Menu', () => {
       />
     );
 
-    const items = wrapper.find('.item');
+    const items = wrapper.find('li');
 
     expect(items).toHaveLength(2);
 
-    expect(wrapper.find('.showMore--disabled')).toBeDefined();
+    expect(wrapper.find('button[disabled]')).toBeDefined();
 
     wrapper.unmount();
   });
@@ -217,7 +210,6 @@ describe('Menu', () => {
     const searchForItems = jest.fn();
     const menu = (
       <Menu
-        cx={(...x) => x.join(' ')}
         refine={refine}
         withSearchBox={true}
         searchForItems={searchForItems}
@@ -256,9 +248,7 @@ describe('Menu', () => {
     it('searching for a value should call searchForItems', () => {
       const wrapper = mount(menu);
 
-      wrapper
-        .find('.searchBox input')
-        .simulate('change', { target: { value: 'query' } });
+      wrapper.find('input').simulate('change', { target: { value: 'query' } });
 
       expect(searchForItems.mock.calls).toHaveLength(1);
       expect(searchForItems.mock.calls[0][0]).toBe('query');
@@ -270,16 +260,16 @@ describe('Menu', () => {
       const wrapper = mount(menu);
 
       const firstItem = wrapper
-        .find('.item')
+        .find('li')
         .first()
         .find(Link);
       firstItem.simulate('click');
 
       expect(refine.mock.calls).toHaveLength(1);
       expect(refine.mock.calls[0][0]).toEqual('white');
-      expect(wrapper.find('.searchBox input').props().value).toBe('');
+      expect(wrapper.find('input').props().value).toBe('');
 
-      const selectedRefinements = wrapper.find('.item');
+      const selectedRefinements = wrapper.find('li');
       expect(selectedRefinements).toHaveLength(2);
 
       wrapper.unmount();
@@ -293,9 +283,9 @@ describe('Menu', () => {
 
       expect(refine.mock.calls).toHaveLength(1);
       expect(refine.mock.calls[0][0]).toEqual('white');
-      expect(wrapper.find('.searchBox input').props().value).toBe('');
+      expect(wrapper.find('input').props().value).toBe('');
 
-      const selectedRefinements = wrapper.find('.item');
+      const selectedRefinements = wrapper.find('li');
       expect(selectedRefinements).toHaveLength(2);
 
       wrapper.unmount();

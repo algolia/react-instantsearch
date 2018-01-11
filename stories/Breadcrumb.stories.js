@@ -3,6 +3,7 @@ import { setAddon, storiesOf } from '@storybook/react';
 import {
   Breadcrumb,
   HierarchicalMenu,
+  Panel,
 } from '../packages/react-instantsearch/dom';
 import { connectHierarchicalMenu } from '../packages/react-instantsearch/connectors';
 import { object, text } from '@storybook/addon-knobs';
@@ -38,61 +39,6 @@ stories
       filterProps,
     }
   )
-  .addWithJSX(
-    'with header and footer',
-    () => (
-      <WrapWithHits hasPlayground={true} linkedStoryGroup="Breadcrumb">
-        <Breadcrumb
-          attributes={['category', 'sub_category', 'sub_sub_category']}
-          separator=">"
-          header="Breadcrumb"
-          footer="Footer"
-        />
-        <hr />
-        <HierarchicalMenu
-          attributes={['category', 'sub_category', 'sub_sub_category']}
-          defaultRefinement="Cooking > Bakeware"
-        />
-      </WrapWithHits>
-    ),
-    {
-      displayName,
-      filterProps,
-    }
-  )
-  .addWithJSX(
-    'hidden without refinement',
-    () => (
-      <WrapWithHits hasPlayground={true} linkedStoryGroup="Breadcrumb">
-        <Breadcrumb
-          header="Breadcrumb"
-          attributes={['category', 'sub_category', 'sub_sub_category']}
-          autoHideContainer
-        />
-      </WrapWithHits>
-    ),
-    {
-      displayName,
-      filterProps,
-    }
-  )
-  .addWithJSX(
-    'visible without refinement',
-    () => (
-      <WrapWithHits hasPlayground={true} linkedStoryGroup="Breadcrumb">
-        <Breadcrumb
-          header="Breadcrumb"
-          attributes={['category', 'sub_category', 'sub_sub_category']}
-        />
-      </WrapWithHits>
-    ),
-    {
-      displayName,
-      filterProps,
-    }
-  );
-
-stories
   .add('with custom component', () => (
     <WrapWithHits hasPlayground={true} linkedStoryGroup="Breadcrumb">
       <Breadcrumb
@@ -120,4 +66,42 @@ stories
         defaultRefinement="Cooking > Bakeware"
       />
     </WrapWithHits>
-  ));
+  ))
+  .addWithJSX(
+    'with Panel',
+    () => (
+      <WrapWithHits hasPlayground={true} linkedStoryGroup="Breadcrumb">
+        <Panel header="Breadcrumb" footer="footer">
+          <Breadcrumb
+            attributes={['category', 'sub_category', 'sub_sub_category']}
+            separator=">"
+          />
+        </Panel>
+        <hr />
+        <HierarchicalMenu
+          attributes={['category', 'sub_category', 'sub_sub_category']}
+          defaultRefinement="Cooking > Bakeware"
+        />
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
+    'with Panel but no refinement',
+    () => (
+      <WrapWithHits hasPlayground={true} linkedStoryGroup="Breadcrumb">
+        <Panel header="Breadcrumb" footer="footer">
+          <Breadcrumb
+            attributes={['category', 'sub_category', 'sub_sub_category']}
+          />
+        </Panel>
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  );

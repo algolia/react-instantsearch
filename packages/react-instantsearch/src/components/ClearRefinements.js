@@ -1,28 +1,31 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-
 import translatable from '../core/translatable';
+import createClassNames from './createClassNames';
+
+const cx = createClassNames('ClearRefinements');
 
 class ClearRefinements extends Component {
   static propTypes = {
-    cx: PropTypes.func.isRequired,
-    translate: PropTypes.func.isRequired,
     items: PropTypes.arrayOf(PropTypes.object).isRequired,
+    canRefine: PropTypes.bool.isRequired,
     refine: PropTypes.func.isRequired,
+    translate: PropTypes.func.isRequired,
   };
 
   render() {
-    const { cx, translate, items, refine } = this.props;
-    const isDisabled = items.length === 0;
+    const { items, canRefine, refine, translate } = this.props;
 
     return (
-      <button
-        className={cx('button', isDisabled && 'button--disabled')}
-        onClick={() => refine(items)}
-        disabled={isDisabled}
-      >
-        {translate('reset')}
-      </button>
+      <div className={cx('')}>
+        <button
+          className={cx('button', !canRefine && 'button--disabled')}
+          onClick={() => refine(items)}
+          disabled={!canRefine}
+        >
+          {translate('reset')}
+        </button>
+      </div>
     );
   }
 }

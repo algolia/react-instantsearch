@@ -1,10 +1,12 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { range } from 'lodash';
-
 import { capitalize } from '../core/utils';
 import translatable from '../core/translatable';
+import createClassNames from '../components/createClassNames';
 import LinkList from './LinkList';
+
+const cx = createClassNames('Pagination');
 
 // Determines the size of the widget (the number of pages displayed - that the user can directly click on)
 function calculateSize(padding, maxPages) {
@@ -44,7 +46,6 @@ function getPages(currentPage, maxPages, padding) {
 
 class Pagination extends Component {
   static propTypes = {
-    cx: PropTypes.func.isRequired,
     nbPages: PropTypes.number.isRequired,
     currentRefinement: PropTypes.number.isRequired,
     refine: PropTypes.func.isRequired,
@@ -86,7 +87,6 @@ class Pagination extends Component {
 
   render() {
     const {
-      cx,
       nbPages,
       maxPages,
       currentRefinement,
@@ -97,10 +97,12 @@ class Pagination extends Component {
       showLast,
       refine,
       createURL,
+      canRefine,
       translate,
       listComponent: ListComponent,
       ...otherProps
     } = this.props;
+
     const totalPages = Math.min(nbPages, maxPages);
     const lastPage = totalPages;
 
@@ -158,13 +160,16 @@ class Pagination extends Component {
     }
 
     return (
-      <ListComponent
-        {...otherProps}
-        cx={cx}
-        items={items}
-        onSelect={refine}
-        createURL={createURL}
-      />
+      <div className={cx('', !canRefine && '-noRefinement')}>
+        <ListComponent
+          {...otherProps}
+          cx={cx}
+          items={items}
+          onSelect={refine}
+          createURL={createURL}
+          canRefine={canRefine}
+        />
+      </div>
     );
   }
 }

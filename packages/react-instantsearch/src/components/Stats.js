@@ -1,22 +1,26 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-
 import translatable from '../core/translatable';
+import createClassNames from './createClassNames';
+
+const cx = createClassNames('Stats');
 
 class Stats extends Component {
   static propTypes = {
-    cx: PropTypes.func.isRequired,
     translate: PropTypes.func.isRequired,
     nbHits: PropTypes.number.isRequired,
     processingTimeMS: PropTypes.number.isRequired,
   };
 
   render() {
-    const { cx, translate, nbHits, processingTimeMS } = this.props;
+    const { translate, nbHits, processingTimeMS } = this.props;
+
     return (
-      <span className={cx('text')}>
-        {translate('stats', nbHits, processingTimeMS)}
-      </span>
+      <div className={cx('')}>
+        <span className={cx('text')}>
+          {translate('stats', nbHits, processingTimeMS)}
+        </span>
+      </div>
     );
   }
 }

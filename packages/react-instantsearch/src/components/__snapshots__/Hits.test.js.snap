@@ -1,29 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Hits accepts a hitComponent prop 1`] = `
-<ul
-  className="list"
+<div
+  className="ais-Hits"
 >
-  <li
-    className="item"
+  <ul
+    className="ais-Hits-list"
   >
-    <div
-      id={0}
-    />
-  </li>
-  <li
-    className="item"
-  >
-    <div
-      id={1}
-    />
-  </li>
-  <li
-    className="item"
-  >
-    <div
-      id={2}
-    />
-  </li>
-</ul>
+    <li
+      className="ais-Hits-item"
+    >
+      <div
+        id={0}
+      />
+    </li>
+    <li
+      className="ais-Hits-item"
+    >
+      <div
+        id={1}
+      />
+    </li>
+    <li
+      className="ais-Hits-item"
+    >
+      <div
+        id={2}
+      />
+    </li>
+  </ul>
+</div>
 `;

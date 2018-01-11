@@ -1,7 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { setAddon, storiesOf } from '@storybook/react';
-import { Hits, Highlight, Snippet } from '../packages/react-instantsearch/dom';
+import {
+  Hits,
+  Highlight,
+  Panel,
+  Snippet,
+} from '../packages/react-instantsearch/dom';
 import { displayName, filterProps, WrapWithHits } from './util';
 import JSXAddon from 'storybook-addon-jsx';
 
@@ -22,23 +27,25 @@ stories
       filterProps,
     }
   )
+  .add('with custom rendering', () => (
+    <WrapWithHits linkedStoryGroup="Hits">
+      <Hits hitComponent={Product} />
+    </WrapWithHits>
+  ))
   .addWithJSX(
-    'with header and footer',
+    'with Panel',
     () => (
       <WrapWithHits linkedStoryGroup="Hits">
-        <Hits header="Hits" footer="Footer" />
+        <Panel header="Hits" footer="Footer">
+          <Hits />
+        </Panel>
       </WrapWithHits>
     ),
     {
       displayName,
       filterProps,
     }
-  )
-  .add('with custom rendering', () => (
-    <WrapWithHits linkedStoryGroup="Hits">
-      <Hits hitComponent={Product} />
-    </WrapWithHits>
-  ));
+  );
 
 function Product({ hit }) {
   return (

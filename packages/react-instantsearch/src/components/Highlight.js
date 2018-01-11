@@ -1,10 +1,13 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import createClassNames from './createClassNames';
 import Highlighter from './Highlighter';
 
-export default function Highlight(props) {
-  return <Highlighter highlightProperty="_highlightResult" {...props} />;
-}
+const cx = createClassNames('Highlight');
+
+const Highlight = props => (
+  <Highlighter {...props} highlightProperty="_highlightResult" cx={cx} />
+);
 
 Highlight.propTypes = {
   hit: PropTypes.object.isRequired,
@@ -14,3 +17,5 @@ Highlight.propTypes = {
   nonHighlightedTagName: PropTypes.string,
   separator: PropTypes.node,
 };
+
+export default Highlight;

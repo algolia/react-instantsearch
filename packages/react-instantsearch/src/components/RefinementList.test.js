@@ -13,7 +13,6 @@ describe('RefinementList', () => {
     const tree = renderer
       .create(
         <RefinementList
-          cx={(...x) => x.join(' ')}
           refine={() => null}
           createURL={() => '#'}
           searchForItems={() => null}
@@ -33,11 +32,33 @@ describe('RefinementList', () => {
     expect(tree).toMatchSnapshot();
   });
 
+  it('default refinement list with no refinement', () => {
+    const tree = renderer
+      .create(
+        <RefinementList
+          refine={() => null}
+          createURL={() => '#'}
+          searchForItems={() => null}
+          items={[
+            { label: 'white', value: ['white'], count: 10, isRefined: true },
+            { label: 'black', value: ['black'], count: 20, isRefined: false },
+            { label: 'blue', value: ['blue'], count: 30, isRefined: false },
+          ]}
+          limitMin={2}
+          limitMax={4}
+          showMore={true}
+          isFromSearch={false}
+          canRefine={false}
+        />
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
   it('refinement list with search inside items but no search results', () => {
     const tree = renderer
       .create(
         <RefinementList
-          cx={(...x) => x.join(' ')}
           refine={() => null}
           searchForItems={() => null}
           withSearchBox
@@ -59,7 +80,6 @@ describe('RefinementList', () => {
     const tree = renderer
       .create(
         <RefinementList
-          cx={(...x) => x.join(' ')}
           refine={() => null}
           withSearchBox
           searchForItems={() => null}
@@ -85,7 +105,6 @@ describe('RefinementList', () => {
     const tree = renderer
       .create(
         <RefinementList
-          cx={(...x) => x.join(' ')}
           refine={() => null}
           searchForItems={() => null}
           withSearchBox
@@ -112,7 +131,6 @@ describe('RefinementList', () => {
     const refine = jest.fn();
     const wrapper = mount(
       <RefinementList
-        cx={(...x) => x.join(' ')}
         refine={refine}
         searchForItems={() => null}
         createURL={() => '#'}
@@ -126,11 +144,11 @@ describe('RefinementList', () => {
       />
     );
 
-    const items = wrapper.find('.item');
+    const items = wrapper.find('li');
 
     expect(items).toHaveLength(3);
 
-    const firstItem = items.first().find('.checkbox');
+    const firstItem = items.first().find('input[type="checkbox"]');
 
     firstItem.simulate('change', { target: { checked: true } });
 
@@ -144,7 +162,6 @@ describe('RefinementList', () => {
     const refine = jest.fn();
     const wrapper = mount(
       <RefinementList
-        cx={(...x) => x.join(' ')}
         refine={refine}
         searchForItems={() => null}
         createURL={() => '#'}
@@ -163,13 +180,13 @@ describe('RefinementList', () => {
       />
     );
 
-    const items = wrapper.find('.item');
+    const items = wrapper.find('li');
 
     expect(items).toHaveLength(2);
 
-    wrapper.find('.showMore').simulate('click');
+    wrapper.find('button').simulate('click');
 
-    expect(wrapper.find('.item')).toHaveLength(4);
+    expect(wrapper.find('li')).toHaveLength(4);
 
     wrapper.unmount();
   });
@@ -178,7 +195,6 @@ describe('RefinementList', () => {
     const refine = jest.fn();
     const wrapper = mount(
       <RefinementList
-        cx={(...x) => x.join(' ')}
         refine={refine}
         searchForItems={() => null}
         createURL={() => '#'}
@@ -194,11 +210,11 @@ describe('RefinementList', () => {
       />
     );
 
-    const items = wrapper.find('.item');
+    const items = wrapper.find('li');
 
     expect(items).toHaveLength(2);
 
-    expect(wrapper.find('.showMore--disabled')).toBeDefined();
+    expect(wrapper.find('button[disabled]')).toBeDefined();
 
     wrapper.unmount();
   });
@@ -208,7 +224,6 @@ describe('RefinementList', () => {
     const searchForItems = jest.fn();
     const refinementList = (
       <RefinementList
-        cx={(...x) => x.join(' ')}
         refine={refine}
         withSearchBox
         searchForItems={searchForItems}
@@ -237,7 +252,7 @@ describe('RefinementList', () => {
     it('a searchbox should be displayed if the feature is activated', () => {
       const wrapper = mount(refinementList);
 
-      const searchBox = wrapper.find('.searchBox');
+      const searchBox = wrapper.find('input[type="search"]');
 
       expect(searchBox).toBeDefined();
 
@@ -248,7 +263,7 @@ describe('RefinementList', () => {
       const wrapper = mount(refinementList);
 
       wrapper
-        .find('.searchBox input')
+        .find('input[type="search"]')
         .simulate('change', { target: { value: 'query' } });
 
       expect(searchForItems.mock.calls).toHaveLength(1);
@@ -261,16 +276,16 @@ describe('RefinementList', () => {
       const wrapper = mount(refinementList);
 
       const firstItem = wrapper
-        .find('.item')
+        .find('li')
         .first()
-        .find('.checkbox');
+        .find('input[type="checkbox"]');
       firstItem.simulate('change', { target: { checked: true } });
 
       expect(refine.mock.calls).toHaveLength(1);
       expect(refine.mock.calls[0][0]).toEqual(['white']);
-      expect(wrapper.find('.searchBox input').props().value).toBe('');
+      expect(wrapper.find('input[type="search"]').props().value).toBe('');
 
-      const selectedRefinements = wrapper.find('.item');
+      const selectedRefinements = wrapper.find('li');
       expect(selectedRefinements).toHaveLength(2);
 
       wrapper.unmount();
@@ -284,9 +299,9 @@ describe('RefinementList', () => {
 
       expect(refine.mock.calls).toHaveLength(1);
       expect(refine.mock.calls[0][0]).toEqual(['white']);
-      expect(wrapper.find('.searchBox input').props().value).toBe('');
+      expect(wrapper.find('input[type="search"]').props().value).toBe('');
 
-      const selectedRefinements = wrapper.find('.item');
+      const selectedRefinements = wrapper.find('li');
       expect(selectedRefinements).toHaveLength(2);
 
       wrapper.unmount();

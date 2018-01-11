@@ -2,8 +2,12 @@ import React from 'react';
 import { orderBy } from 'lodash';
 import { setAddon, storiesOf } from '@storybook/react';
 import { text } from '@storybook/addon-knobs';
+import {
+  MenuSelect,
+  Panel,
+  SearchBox,
+} from '../packages/react-instantsearch/dom';
 import { displayName, filterProps, WrapWithHits } from './util';
-import { MenuSelect, SearchBox } from '../packages/react-instantsearch/dom';
 import JSXAddon from 'storybook-addon-jsx';
 
 setAddon(JSXAddon);
@@ -16,66 +20,6 @@ stories
     () => (
       <WrapWithHits hasPlayground={true} linkedStoryGroup="MenuSelect">
         <MenuSelect attributeName="category" />
-      </WrapWithHits>
-    ),
-    {
-      displayName,
-      filterProps,
-    }
-  )
-  .addWithJSX(
-    'with header and footer',
-    () => (
-      <WrapWithHits hasPlayground={true} linkedStoryGroup="MenuSelect">
-        <MenuSelect
-          attributeName="category"
-          header="Menu select"
-          footer="Footer"
-        />
-      </WrapWithHits>
-    ),
-    {
-      displayName,
-      filterProps,
-    }
-  )
-  .addWithJSX(
-    'hidden without items to refine',
-    () => (
-      <WrapWithHits
-        searchBox={false}
-        hasPlayground={true}
-        linkedStoryGroup="MenuSelect"
-      >
-        <MenuSelect
-          attributeName="category"
-          header="Menu select"
-          autoHideContainer
-        />
-
-        <div style={{ display: 'none' }}>
-          <SearchBox defaultRefinement="dkjsakdjskajdksjakdjaskj" />
-        </div>
-      </WrapWithHits>
-    ),
-    {
-      displayName,
-      filterProps,
-    }
-  )
-  .addWithJSX(
-    'visible without items to refine',
-    () => (
-      <WrapWithHits
-        searchBox={false}
-        hasPlayground={true}
-        linkedStoryGroup="MenuSelect"
-      >
-        <MenuSelect attributeName="category" header="Menu select" />
-
-        <div style={{ display: 'none' }}>
-          <SearchBox defaultRefinement="dkjsakdjskajdksjakdjaskj" />
-        </div>
       </WrapWithHits>
     ),
     {
@@ -141,6 +85,42 @@ stories
             }))
           }
         />
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
+    'with Panel',
+    () => (
+      <WrapWithHits hasPlayground={true} linkedStoryGroup="MenuSelect">
+        <Panel header="Menu select" footer="Footer">
+          <MenuSelect attributeName="category" />
+        </Panel>
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
+    'with Panel but no refinement',
+    () => (
+      <WrapWithHits
+        searchBox={false}
+        hasPlayground={true}
+        linkedStoryGroup="MenuSelect"
+      >
+        <Panel header="Menu select" footer="Footer">
+          <MenuSelect attributeName="category" />
+        </Panel>
+
+        <div style={{ display: 'none' }}>
+          <SearchBox defaultRefinement="dkjsakdjskajdksjakdjaskj" />
+        </div>
       </WrapWithHits>
     ),
     {

@@ -1,11 +1,7 @@
 import React from 'react';
 import connectRange from '../connectors/connectRange';
-import AutoHideContainer from '../components/AutoHideContainer';
-import Panel from '../components/Panel';
-import RangeInputComponent from '../components/RangeInput';
-import createClassNames from '../components/createClassNames';
-
-const cx = createClassNames('RangeInput');
+import PanelCallbackHandler from '../components/PanelCallbackHandler';
+import RangeInput from '../components/RangeInput';
 
 /**
  * RangeInput allows a user to select a numeric range using a minimum and maximum input.
@@ -17,12 +13,7 @@ const cx = createClassNames('RangeInput');
  * @propType {number} [min] - Minimum value. When this isn't set, the minimum value will be automatically computed by Algolia using the data in the index.
  * @propType {number} [max] - Maximum value. When this isn't set, the maximum value will be automatically computed by Algolia using the data in the index.
  * @propType {number} [precision=2] - Number of digits after decimal point to use.
- * @propType {boolean} [autoHideContainer=false] - Hide the container when there are no refinements available.
- * @propType {node} [header] - Adds a header to the widget.
- * @propType {node} [footer] - Adds a footer to the widget.
  * @themeKey ais-RangeInput - the root div of the widget
- * @themeKey ais-RangeInput-header - the header of the widget (optional)
- * @themeKey ais-RangeInput-body - the body of the widget
  * @themeKey ais-RangeInput-form - the wrapping form
  * @themeKey ais-RangeInput-label - the label wrapping inputs
  * @themeKey ais-RangeInput-input - the input (number)
@@ -30,7 +21,6 @@ const cx = createClassNames('RangeInput');
  * @themeKey ais-RangeInput-input--max - the maximum input
  * @themeKey ais-RangeInput-separator - the separator word used between the two inputs
  * @themeKey ais-RangeInput-button - the submit button
- * @themeKey ais-RangeInput-footer - the footer of the widget (optional)
  * @translationKey submit - Label value for the submit button
  * @translationKey separator - Label value for the input separator
  * @example
@@ -51,12 +41,10 @@ const cx = createClassNames('RangeInput');
  * }
  */
 
-const RangeInput = connectRange(props => (
-  <AutoHideContainer {...props}>
-    <Panel {...props} cx={cx}>
-      <RangeInputComponent {...props} cx={cx} />
-    </Panel>
-  </AutoHideContainer>
-));
+const RangeInputWidget = props => (
+  <PanelCallbackHandler {...props}>
+    <RangeInput {...props} />
+  </PanelCallbackHandler>
+);
 
-export default RangeInput;
+export default connectRange(RangeInputWidget);

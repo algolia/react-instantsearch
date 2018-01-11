@@ -1,12 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Hits accepts a hitComponent prop 1`] = `
-<div>
+exports[`InfiniteHits accepts a hitComponent prop 1`] = `
+<div
+  className="ais-InfiniteHits"
+>
   <ul
-    className="list"
+    className="ais-InfiniteHits-list"
   >
     <li
-      className="item"
+      className="ais-InfiniteHits-item"
     >
       <Hit
         hit={
@@ -17,7 +19,7 @@ exports[`Hits accepts a hitComponent prop 1`] = `
       />
     </li>
     <li
-      className="item"
+      className="ais-InfiniteHits-item"
     >
       <Hit
         hit={
@@ -28,7 +30,7 @@ exports[`Hits accepts a hitComponent prop 1`] = `
       />
     </li>
     <li
-      className="item"
+      className="ais-InfiniteHits-item"
     >
       <Hit
         hit={
@@ -40,7 +42,7 @@ exports[`Hits accepts a hitComponent prop 1`] = `
     </li>
   </ul>
   <button
-    className="loadMore loadMore--disabled"
+    className="ais-InfiniteHits-loadMore ais-InfiniteHits-loadMore--disabled"
     disabled={true}
     onClick={[Function]}
   >

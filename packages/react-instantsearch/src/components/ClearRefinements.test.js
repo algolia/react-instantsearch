@@ -4,9 +4,9 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-Enzyme.configure({ adapter: new Adapter() });
-
 import ClearRefinements from './ClearRefinements';
+
+Enzyme.configure({ adapter: new Adapter() });
 
 describe('ClearRefinements', () => {
   it('renders a clickable button', () =>
@@ -14,9 +14,9 @@ describe('ClearRefinements', () => {
       renderer
         .create(
           <ClearRefinements
-            refine={() => null}
             items={[{ filter: 1 }]}
-            cx={(...x) => x.join(' ')}
+            canRefine={true}
+            refine={() => null}
           />
         )
         .toJSON()
@@ -26,11 +26,7 @@ describe('ClearRefinements', () => {
     expect(
       renderer
         .create(
-          <ClearRefinements
-            refine={() => null}
-            items={[]}
-            cx={(...x) => x.join(' ')}
-          />
+          <ClearRefinements items={[]} canRefine={false} refine={() => null} />
         )
         .toJSON()
     ).toMatchSnapshot());
@@ -38,12 +34,11 @@ describe('ClearRefinements', () => {
   it('is disabled when there is no filters', () => {
     const refine = jest.fn();
     const wrapper = mount(
-      <ClearRefinements refine={refine} items={[]} cx={(...x) => x.join(' ')} />
+      <ClearRefinements items={[]} canRefine={false} refine={refine} />
     );
 
-    const btn = wrapper.find('button');
     expect(refine.mock.calls).toHaveLength(0);
-    btn.simulate('click');
+    wrapper.find('button').simulate('click');
     expect(refine.mock.calls).toHaveLength(0);
   });
 
@@ -51,15 +46,14 @@ describe('ClearRefinements', () => {
     const refine = jest.fn();
     const wrapper = mount(
       <ClearRefinements
-        refine={refine}
         items={[{ value: 'test', label: 'test: test' }]}
-        cx={(...x) => x.join(' ')}
+        canRefine={true}
+        refine={refine}
       />
     );
 
-    const btn = wrapper.find('button');
     expect(refine.mock.calls).toHaveLength(0);
-    btn.simulate('click');
+    wrapper.find('button').simulate('click');
     expect(refine.mock.calls).toHaveLength(1);
   });
 });

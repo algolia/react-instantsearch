@@ -2,10 +2,12 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import List from './List';
 import translatable from '../core/translatable';
+import createClassNames from './createClassNames';
+
+const cx = createClassNames('NumericMenu');
 
 class NumericMenu extends Component {
   static propTypes = {
-    cx: PropTypes.func.isRequired,
     items: PropTypes.arrayOf(
       PropTypes.shape({
         label: PropTypes.node.isRequired,
@@ -14,15 +16,14 @@ class NumericMenu extends Component {
         noRefinement: PropTypes.bool.isRequired,
       })
     ).isRequired,
-    refine: PropTypes.func.isRequired,
-    transformItems: PropTypes.func,
     canRefine: PropTypes.bool.isRequired,
+    refine: PropTypes.func.isRequired,
     translate: PropTypes.func.isRequired,
   };
 
   renderItem = item => {
-    const { cx, refine, translate } = this.props;
-    const label = item.value === '' ? translate('all') : item.label;
+    const { refine, translate } = this.props;
+
     return (
       <label className={cx('label')}>
         <input
@@ -32,13 +33,15 @@ class NumericMenu extends Component {
           disabled={item.noRefinement}
           onChange={() => refine(item.value)}
         />
-        <span className={cx('labelText')}>{label}</span>
+        <span className={cx('labelText')}>
+          {item.value === '' ? translate('all') : item.label}
+        </span>
       </label>
     );
   };
 
   render() {
-    const { cx, items, canRefine } = this.props;
+    const { items, canRefine } = this.props;
 
     return (
       <List

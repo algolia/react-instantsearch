@@ -1,6 +1,7 @@
 import React from 'react';
 import { setAddon, storiesOf } from '@storybook/react';
 import { object, number } from '@storybook/addon-knobs';
+import { Panel } from '../packages/react-instantsearch/dom';
 import { displayName, filterProps, WrapWithHits } from './util';
 import Range from './3rdPartyIntegrations.stories';
 import JSXAddon from 'storybook-addon-jsx';
@@ -15,18 +16,6 @@ stories
     () => (
       <WrapWithHits hasPlayground={true} linkedStoryGroup="RangeSlider">
         <Range attributeName="price" />
-      </WrapWithHits>
-    ),
-    {
-      displayName,
-      filterProps,
-    }
-  )
-  .addWithJSX(
-    'with header and footer',
-    () => (
-      <WrapWithHits hasPlayground={true} linkedStoryGroup="RangeSlider">
-        <Range attributeName="price" header="Range Slider" footer="Footer" />
       </WrapWithHits>
     ),
     {
@@ -54,6 +43,20 @@ stories
     () => (
       <WrapWithHits hasPlayground={true} linkedStoryGroup="RangeSlider">
         <Range attributeName="price" min={30} max={100} />
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
+    'with Panel',
+    () => (
+      <WrapWithHits hasPlayground={true} linkedStoryGroup="RangeSlider">
+        <Panel header="Range Slider" footer="Footer">
+          <Range attributeName="price" />
+        </Panel>
       </WrapWithHits>
     ),
     {

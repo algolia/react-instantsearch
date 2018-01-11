@@ -13,7 +13,6 @@ describe('HierarchicalMenu', () => {
     const tree = renderer
       .create(
         <HierarchicalMenu
-          cx={(...x) => x.join(' ')}
           refine={() => null}
           createURL={() => '#'}
           items={[
@@ -43,7 +42,6 @@ describe('HierarchicalMenu', () => {
     const tree = renderer
       .create(
         <HierarchicalMenu
-          cx={(...x) => x.join(' ')}
           refine={() => null}
           createURL={() => '#'}
           items={[
@@ -73,7 +71,6 @@ describe('HierarchicalMenu', () => {
     const refine = jest.fn();
     const wrapper = mount(
       <HierarchicalMenu
-        cx={(...x) => x.join(' ')}
         refine={refine}
         createURL={() => '#'}
         items={[
@@ -93,12 +90,12 @@ describe('HierarchicalMenu', () => {
       />
     );
 
-    const itemParent = wrapper.find('.item .item--parent');
+    const itemParent = wrapper.find('.ais-HierarchicalMenu-item--parent');
 
     expect(itemParent).toHaveLength(1);
 
     itemParent
-      .find('.link')
+      .find('Link')
       .first()
       .simulate('click');
     expect(refine.mock.calls).toHaveLength(1);
@@ -111,7 +108,6 @@ describe('HierarchicalMenu', () => {
     const refine = jest.fn();
     const wrapper = mount(
       <HierarchicalMenu
-        cx={(...x) => x.join(' ')}
         refine={refine}
         createURL={() => '#'}
         items={[
@@ -128,13 +124,13 @@ describe('HierarchicalMenu', () => {
       />
     );
 
-    const items = wrapper.find('.item');
+    const items = wrapper.find('li');
 
     expect(items).toHaveLength(2);
 
-    wrapper.find('.showMore').simulate('click');
+    wrapper.find('button').simulate('click');
 
-    expect(wrapper.find('.item')).toHaveLength(4);
+    expect(wrapper.find('li')).toHaveLength(4);
 
     wrapper.unmount();
   });
@@ -143,7 +139,6 @@ describe('HierarchicalMenu', () => {
     const refine = jest.fn();
     const wrapper = mount(
       <HierarchicalMenu
-        cx={(...x) => x.join(' ')}
         refine={refine}
         createURL={() => '#'}
         items={[
@@ -157,11 +152,11 @@ describe('HierarchicalMenu', () => {
       />
     );
 
-    const items = wrapper.find('.item');
+    const items = wrapper.find('li');
 
     expect(items).toHaveLength(2);
 
-    expect(wrapper.find('.showMore--disabled')).toBeDefined();
+    expect(wrapper.find('button')).toBeDefined();
 
     wrapper.unmount();
   });

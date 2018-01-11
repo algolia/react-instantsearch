@@ -4,16 +4,16 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-Enzyme.configure({ adapter: new Adapter() });
-
 import Breadcrumb from './Breadcrumb';
 import Link from './Link';
+
+Enzyme.configure({ adapter: new Adapter() });
+
 describe('Breadcrumb', () => {
   it('outputs the default breadcrumb', () => {
     const tree = renderer
       .create(
         <Breadcrumb
-          cx={(...x) => x.join(' ')}
           refine={() => null}
           createURL={() => '#'}
           items={[
@@ -37,11 +37,37 @@ describe('Breadcrumb', () => {
     expect(tree).toMatchSnapshot();
   });
 
+  it('outputs the default breadcrumb with no refinement', () => {
+    const tree = renderer
+      .create(
+        <Breadcrumb
+          refine={() => null}
+          createURL={() => '#'}
+          items={[
+            {
+              value: 'white',
+              label: 'white',
+            },
+            {
+              value: 'white > white1',
+              label: 'white1',
+            },
+            {
+              value: 'white > white1 > white1.1',
+              label: 'white1.1',
+            },
+          ]}
+          canRefine={false}
+        />
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
   it('refines its value on change', () => {
     const refine = jest.fn();
     const wrapper = mount(
       <Breadcrumb
-        cx={(...x) => x.join(' ')}
         refine={refine}
         createURL={() => '#'}
         items={[
@@ -62,7 +88,7 @@ describe('Breadcrumb', () => {
       />
     );
 
-    const breadcrumb = wrapper.find('.list');
+    const breadcrumb = wrapper.find('ul');
 
     expect(breadcrumb.children()).toHaveLength(4);
 
@@ -106,7 +132,6 @@ describe('Breadcrumb', () => {
 
     const wrapper = mount(
       <Breadcrumb
-        cx={(...x) => x.join(' ')}
         refine={refine}
         createURL={() => '#'}
         rootURL={rootLink}
@@ -128,7 +153,7 @@ describe('Breadcrumb', () => {
       />
     );
 
-    const breadcrumb = wrapper.find('.list');
+    const breadcrumb = wrapper.find('ul');
 
     expect(breadcrumb.children()).toHaveLength(4);
 
@@ -152,7 +177,6 @@ describe('Breadcrumb', () => {
     const tree = renderer
       .create(
         <Breadcrumb
-          cx={(...x) => x.join(' ')}
           refine={() => null}
           createURL={() => '#'}
           separator={<span>🔍</span>}
@@ -181,7 +205,6 @@ describe('Breadcrumb', () => {
     const tree = renderer
       .create(
         <Breadcrumb
-          cx={(...x) => x.join(' ')}
           refine={() => null}
           createURL={() => '#'}
           translations={{

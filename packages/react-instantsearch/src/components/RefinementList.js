@@ -1,10 +1,12 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { pick } from 'lodash';
-
 import translatable from '../core/translatable';
+import createClassNames from './createClassNames';
 import List from './List';
 import Highlight from '../widgets/Highlight';
+
+const cx = createClassNames('RefinementList');
 
 class RefinementList extends Component {
   constructor(props) {
@@ -13,7 +15,6 @@ class RefinementList extends Component {
   }
 
   static propTypes = {
-    cx: PropTypes.func.isRequired,
     translate: PropTypes.func.isRequired,
     refine: PropTypes.func.isRequired,
     searchForItems: PropTypes.func.isRequired,
@@ -48,23 +49,20 @@ class RefinementList extends Component {
     );
 
     return (
-      <label className={this.props.cx('label')}>
+      <label className={cx('label')}>
         <input
-          className={this.props.cx('checkbox')}
+          className={cx('checkbox')}
           type="checkbox"
           checked={item.isRefined}
           onChange={() => this.selectItem(item, resetQuery)}
         />
-        <span className={this.props.cx('labelText')}>{label}</span>{' '}
-        <span className={this.props.cx('count')}>
-          {item.count.toLocaleString()}
-        </span>
+        <span className={cx('labelText')}>{label}</span>{' '}
+        <span className={cx('count')}>{item.count.toLocaleString()}</span>
       </label>
     );
   };
 
   render() {
-    const { cx } = this.props;
     return (
       <List
         renderItem={this.renderItem}

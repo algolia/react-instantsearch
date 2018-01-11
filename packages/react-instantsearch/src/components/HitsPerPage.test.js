@@ -14,7 +14,6 @@ describe('HitsPerPage', () => {
       renderer
         .create(
           <HitsPerPage
-            cx={(...x) => x.join(' ')}
             refine={() => null}
             currentRefinement={5}
             items={[
@@ -36,7 +35,6 @@ describe('HitsPerPage', () => {
     const refine = jest.fn();
     const wrapper = mount(
       <HitsPerPage
-        cx={(...x) => x.join(' ')}
         createURL={() => '#'}
         items={[
           { value: 2, label: '2 hits per page' },
@@ -49,7 +47,7 @@ describe('HitsPerPage', () => {
       />
     );
 
-    const selectedValue = wrapper.find('.select');
+    const selectedValue = wrapper.find('select');
     expect(selectedValue.find('option')).toHaveLength(4);
     expect(
       selectedValue
@@ -68,7 +66,6 @@ describe('HitsPerPage', () => {
     const refine = jest.fn();
     const wrapper = mount(
       <HitsPerPage
-        cx={(...x) => x.join(' ')}
         createURL={() => '#'}
         items={[{ value: 2 }, { value: 4 }, { value: 6 }, { value: 8 }]}
         refine={refine}
@@ -76,7 +73,7 @@ describe('HitsPerPage', () => {
       />
     );
 
-    const selectedValue = wrapper.find('.select');
+    const selectedValue = wrapper.find('select');
     expect(selectedValue.find('option')).toHaveLength(4);
     expect(
       selectedValue

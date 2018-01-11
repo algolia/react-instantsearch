@@ -1,19 +1,16 @@
-/* eslint-env jest, jasmine */
-
 import React from 'react';
 import renderer from 'react-test-renderer';
 import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-Enzyme.configure({ adapter: new Adapter() });
-
 import NumericMenu from './NumericMenu';
+
+Enzyme.configure({ adapter: new Adapter() });
 
 describe('NumericMenu', () => {
   it('supports passing items values', () => {
     const tree = renderer
       .create(
         <NumericMenu
-          cx={(...x) => x.join(' ')}
           createURL={() => '#'}
           refine={() => null}
           items={[
@@ -54,7 +51,6 @@ describe('NumericMenu', () => {
     const tree = renderer
       .create(
         <NumericMenu
-          cx={(...x) => x.join(' ')}
           createURL={() => '#'}
           refine={() => null}
           items={[
@@ -95,7 +91,6 @@ describe('NumericMenu', () => {
     const tree = renderer
       .create(
         <NumericMenu
-          cx={(...x) => x.join(' ')}
           createURL={() => '#'}
           refine={() => null}
           items={[
@@ -136,7 +131,6 @@ describe('NumericMenu', () => {
     const refine = jest.fn();
     const wrapper = mount(
       <NumericMenu
-        cx={(...x) => x.join(' ')}
         refine={refine}
         items={[
           {
@@ -168,11 +162,11 @@ describe('NumericMenu', () => {
       />
     );
 
-    const items = wrapper.find('.item');
+    const items = wrapper.find('li');
 
     expect(items).toHaveLength(4);
 
-    const firstItem = items.first().find('.radio');
+    const firstItem = items.first().find('input');
 
     firstItem.simulate('change', { target: { checked: true } });
 
@@ -186,7 +180,6 @@ describe('NumericMenu', () => {
     const refine = jest.fn();
     const wrapper = mount(
       <NumericMenu
-        cx={(...x) => x.join(' ')}
         refine={refine}
         items={[
           {
@@ -218,10 +211,10 @@ describe('NumericMenu', () => {
       />
     );
 
-    const itemWrapper = wrapper.find('.list--noRefinement');
+    const itemWrapper = wrapper.find('.ais-NumericMenu-list--noRefinement');
     expect(itemWrapper).toHaveLength(1);
 
-    const items = wrapper.find('.item--noRefinement');
+    const items = wrapper.find('.ais-NumericMenu-item--noRefinement');
     expect(items).toHaveLength(4);
 
     wrapper.unmount();

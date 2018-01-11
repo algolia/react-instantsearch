@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { storiesOf } from '@storybook/react';
 import { connectRange } from '../packages/react-instantsearch/connectors';
-import { Panel } from '../packages/react-instantsearch/dom';
 import createClassNames from '../packages/react-instantsearch/src/components/createClassNames';
 import { WrapWithHits } from './util';
 import Rheostat from 'rheostat';
@@ -60,39 +59,31 @@ class Range extends Component {
   };
 
   render() {
-    const {
-      min,
-      max,
-      currentRefinement,
-      canRefine,
-      header,
-      footer,
-    } = this.props;
+    const { min, max, currentRefinement } = this.props;
     const { currentValues } = this.state;
 
     return min !== max ? (
-      <Panel cx={cx} canRefine={canRefine} header={header} footer={footer}>
-        <Rheostat
-          min={min}
-          max={max}
-          values={[currentRefinement.min, currentRefinement.max]}
-          onChange={this.onChange}
-          onValuesUpdated={this.onValuesUpdated}
+      <Rheostat
+        className={cx('')}
+        min={min}
+        max={max}
+        values={[currentRefinement.min, currentRefinement.max]}
+        onChange={this.onChange}
+        onValuesUpdated={this.onValuesUpdated}
+      >
+        <div
+          className="rheostat-marker rheostat-marker--large"
+          style={{ left: '0%', position: 'absolute', marginLeft: '0px' }}
         >
-          <div
-            className="rheostat-marker rheostat-marker--large"
-            style={{ left: '0%', position: 'absolute', marginLeft: '0px' }}
-          >
-            <div className="rheostat-value">{currentValues.min}</div>
-          </div>
-          <div
-            className="rheostat-marker rheostat-marker--large"
-            style={{ left: '100%', position: 'absolute', marginLeft: '-1px' }}
-          >
-            <div className="rheostat-value">{currentValues.max}</div>
-          </div>
-        </Rheostat>
-      </Panel>
+          <div className="rheostat-value">{currentValues.min}</div>
+        </div>
+        <div
+          className="rheostat-marker rheostat-marker--large"
+          style={{ left: '100%', position: 'absolute', marginLeft: '-1px' }}
+        >
+          <div className="rheostat-value">{currentValues.max}</div>
+        </div>
+      </Rheostat>
     ) : null;
   }
 }

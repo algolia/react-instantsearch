@@ -258,11 +258,14 @@ describe('RawRangeInput', () => {
       const props = {};
       const component = shallowRender(props);
 
-      component.find('.input--min').simulate('change', {
-        currentTarget: {
-          value: 10,
-        },
-      });
+      component
+        .find('input')
+        .first()
+        .simulate('change', {
+          currentTarget: {
+            value: 10,
+          },
+        });
 
       expect(component).toMatchSnapshot();
       expect(component.state()).toEqual({
@@ -275,11 +278,14 @@ describe('RawRangeInput', () => {
       const props = {};
       const component = shallowRender(props);
 
-      component.find('.input--max').simulate('change', {
-        currentTarget: {
-          value: 490,
-        },
-      });
+      component
+        .find('input')
+        .last()
+        .simulate('change', {
+          currentTarget: {
+            value: 490,
+          },
+        });
 
       expect(component).toMatchSnapshot();
       expect(component.state()).toEqual({

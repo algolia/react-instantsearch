@@ -1,10 +1,5 @@
-import React from 'react';
 import connectHits from '../connectors/connectHits';
-import Panel from '../components/Panel';
-import HitsComponent from '../components/Hits';
-import createClassNames from '../components/createClassNames';
-
-const cx = createClassNames('Hits');
+import Hits from '../components/Hits';
 
 /**
  * Displays a list of hits.
@@ -17,14 +12,9 @@ const cx = createClassNames('Hits');
  * @propType {Component} [hitComponent] - Component used for rendering each hit from
  *   the results. If it is not provided the rendering defaults to displaying the
  *   hit in its JSON form. The component will be called with a `hit` prop.
- * @propType {node} [header] - Adds a header to the widget.
- * @propType {node} [footer] - Adds a footer to the widget.
  * @themeKey ais-Hits - the root div of the widget
- * @themeKey ais-Hits-header - the header of the widget (optional)
- * @themeKey ais-Hits-body - the body of the widget
  * @themeKey ais-Hits-list - the list of results
  * @themeKey ais-Hits-item - the hit list item
- * @themeKey ais-Hits-footer - the footer of the widget (optional)
  * @example
  * import React from 'react';
 
@@ -43,10 +33,4 @@ const cx = createClassNames('Hits');
  * }
  */
 
-const Hits = connectHits(props => (
-  <Panel {...props} cx={cx}>
-    <HitsComponent {...props} cx={cx} />
-  </Panel>
-));
-
-export default Hits;
+export default connectHits(Hits);

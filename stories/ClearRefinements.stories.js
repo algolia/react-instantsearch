@@ -2,6 +2,7 @@ import React from 'react';
 import { setAddon, storiesOf } from '@storybook/react';
 import {
   ClearRefinements,
+  Panel,
   RefinementList,
 } from '../packages/react-instantsearch/dom';
 import { displayName, filterProps, WrapWithHits } from './util';
@@ -33,48 +34,6 @@ stories
     }
   )
   .addWithJSX(
-    'with header and footer',
-    () => (
-      <WrapWithHits linkedStoryGroup="ClearRefinements">
-        <ClearRefinements header="Clear refinements" footer="Footer" />
-        <div style={{ display: 'none' }}>
-          <RefinementList
-            attributeName="category"
-            defaultRefinement={['Dining']}
-          />
-        </div>
-      </WrapWithHits>
-    ),
-    {
-      displayName,
-      filterProps,
-    }
-  )
-  .addWithJSX(
-    'hidden without refinement',
-    () => (
-      <WrapWithHits linkedStoryGroup="ClearRefinements">
-        <ClearRefinements header="Clear refinements" autoHideContainer />
-      </WrapWithHits>
-    ),
-    {
-      displayName,
-      filterProps,
-    }
-  )
-  .addWithJSX(
-    'visible without refinement',
-    () => (
-      <WrapWithHits linkedStoryGroup="ClearRefinements">
-        <ClearRefinements header="Clear refinements" />
-      </WrapWithHits>
-    ),
-    {
-      displayName,
-      filterProps,
-    }
-  )
-  .addWithJSX(
     'nothing to clear',
     () => (
       <WrapWithHits linkedStoryGroup="ClearRefinements">
@@ -98,6 +57,41 @@ stories
           attributeName="category"
           defaultRefinement={['Dining']}
         />
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
+    'with Panel',
+    () => (
+      <WrapWithHits linkedStoryGroup="ClearRefinements">
+        <Panel header="Clear refinements" footer="Footer">
+          <ClearRefinements />
+        </Panel>
+
+        <div style={{ display: 'none' }}>
+          <RefinementList
+            attributeName="category"
+            defaultRefinement={['Dining']}
+          />
+        </div>
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
+    'with Panel but no refinement',
+    () => (
+      <WrapWithHits linkedStoryGroup="ClearRefinements">
+        <Panel header="Clear refinements" footer="Footer">
+          <ClearRefinements />
+        </Panel>
       </WrapWithHits>
     ),
     {
