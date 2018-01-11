@@ -7637,6 +7637,12 @@ jstransformer-markdown-it@2.0.0:
   dependencies:
     markdown-it "^8.0.0"
 
+jstransformer-pug@0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/jstransformer-pug/-/jstransformer-pug-0.3.0.tgz#13544eb0174d1bf168799ae4aff9f102a1dcbcb3"
+  dependencies:
+    pug "^2.0.0-rc.4"
+
 jstransformer@1.0.0, jstransformer@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/jstransformer/-/jstransformer-1.0.0.tgz#ed8bf0921e2f3f1ed4d5c1a44f68709ed24722c3"
@@ -10227,7 +10233,7 @@ pug-walk@^1.1.5:
   version "1.1.5"
   resolved "https://registry.yarnpkg.com/pug-walk/-/pug-walk-1.1.5.tgz#90e943acbcf7021e6454cf1b32245891cba6f851"
 
-pug@2.0.0-rc.4:
+pug@2.0.0-rc.4, pug@^2.0.0-rc.4:
   version "2.0.0-rc.4"
   resolved "https://registry.yarnpkg.com/pug/-/pug-2.0.0-rc.4.tgz#b7b08f6599bd5302568042b7436984fb28c80a13"
   dependencies:
