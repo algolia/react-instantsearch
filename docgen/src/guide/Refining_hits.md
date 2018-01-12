@@ -569,8 +569,10 @@ const deleteDuplicates = items =>
         // filter out each time the key has already been in the array
         index === 0 || current.__dedupe !== array[index - 1].__dedupe
     )
-    // eslint-disable-next-line no-unused-vars
-    .map(({ __dedupe, ...item }) => item);
+    .map(item => {
+      delete item.__dedupe;
+      return item;
+    });
 
 class App extends Component {
   render() {
