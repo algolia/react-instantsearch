@@ -93,7 +93,9 @@ exports[`Breadcrumb has customizable translations 1`] = `
     >
       <span
         className="ais-Breadcrumb-separator"
-      />
+      >
+        &gt;
+      </span>
       <a
         className="ais-Breadcrumb-link"
         href="#"
@@ -107,7 +109,9 @@ exports[`Breadcrumb has customizable translations 1`] = `
     >
       <span
         className="ais-Breadcrumb-separator"
-      />
+      >
+        &gt;
+      </span>
       <a
         className="ais-Breadcrumb-link"
         href="#"
@@ -121,7 +125,9 @@ exports[`Breadcrumb has customizable translations 1`] = `
     >
       <span
         className="ais-Breadcrumb-separator"
-      />
+      >
+        &gt;
+      </span>
       white1.1
     </li>
   </ul>
@@ -151,7 +157,9 @@ exports[`Breadcrumb outputs the default breadcrumb 1`] = `
     >
       <span
         className="ais-Breadcrumb-separator"
-      />
+      >
+        &gt;
+      </span>
       <a
         className="ais-Breadcrumb-link"
         href="#"
@@ -165,7 +173,9 @@ exports[`Breadcrumb outputs the default breadcrumb 1`] = `
     >
       <span
         className="ais-Breadcrumb-separator"
-      />
+      >
+        &gt;
+      </span>
       <a
         className="ais-Breadcrumb-link"
         href="#"
@@ -179,7 +189,9 @@ exports[`Breadcrumb outputs the default breadcrumb 1`] = `
     >
       <span
         className="ais-Breadcrumb-separator"
-      />
+      >
+        &gt;
+      </span>
       white1.1
     </li>
   </ul>
@@ -209,7 +221,9 @@ exports[`Breadcrumb outputs the default breadcrumb with a custom className 1`] =
     >
       <span
         className="ais-Breadcrumb-separator"
-      />
+      >
+        &gt;
+      </span>
       <a
         className="ais-Breadcrumb-link"
         href="#"
@@ -223,7 +237,9 @@ exports[`Breadcrumb outputs the default breadcrumb with a custom className 1`] =
     >
       <span
         className="ais-Breadcrumb-separator"
-      />
+      >
+        &gt;
+      </span>
       <a
         className="ais-Breadcrumb-link"
         href="#"
@@ -237,7 +253,9 @@ exports[`Breadcrumb outputs the default breadcrumb with a custom className 1`] =
     >
       <span
         className="ais-Breadcrumb-separator"
-      />
+      >
+        &gt;
+      </span>
       white1.1
     </li>
   </ul>
@@ -256,7 +274,9 @@ exports[`Breadcrumb outputs the default breadcrumb with no refinement 1`] = `
     >
       <span
         className="ais-Breadcrumb-separator"
-      />
+      >
+        &gt;
+      </span>
       <a
         className="ais-Breadcrumb-link"
         href="#"
@@ -270,7 +290,9 @@ exports[`Breadcrumb outputs the default breadcrumb with no refinement 1`] = `
     >
       <span
         className="ais-Breadcrumb-separator"
-      />
+      >
+        &gt;
+      </span>
       <a
         className="ais-Breadcrumb-link"
         href="#"
@@ -284,7 +306,9 @@ exports[`Breadcrumb outputs the default breadcrumb with no refinement 1`] = `
     >
       <span
         className="ais-Breadcrumb-separator"
-      />
+      >
+        &gt;
+      </span>
       white1.1
     </li>
   </ul>

@@ -21,12 +21,14 @@ class Breadcrumb extends Component {
     items: itemsPropType,
     refine: PropTypes.func.isRequired,
     rootURL: PropTypes.string,
-    separator: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+    separator: PropTypes.node,
     translate: PropTypes.func.isRequired,
     className: PropTypes.string,
   };
 
   static defaultProps = {
+    rootURL: null,
+    separator: '>',
     className: '',
   };
 

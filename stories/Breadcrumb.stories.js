@@ -74,7 +74,6 @@ stories
         <Panel header="Breadcrumb" footer="footer">
           <Breadcrumb
             attributes={['category', 'sub_category', 'sub_sub_category']}
-            separator=">"
           />
         </Panel>
         <hr />
