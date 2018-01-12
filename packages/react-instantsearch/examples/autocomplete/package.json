@@ -7,14 +7,14 @@
     "react-test-renderer": "16.2.0"
   },
   "dependencies": {
-    "antd": "3.1.0",
+    "antd": "3.1.1",
     "lodash": "4.17.4",
     "prop-types": "15.6.0",
     "react": "16.2.0",
     "react-autosuggest": "9.3.2",
     "react-dom": "16.2.0",
-    "react-instantsearch": "4.3.0",
-    "react-instantsearch-theme-algolia": "4.3.0"
+    "react-instantsearch": "4.4.1",
+    "react-instantsearch-theme-algolia": "4.4.1"
   },
   "scripts": {
     "start": "react-scripts start",
