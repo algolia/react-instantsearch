@@ -135,14 +135,14 @@ body {
   margin-bottom: 16px;
 }
 
-.content .ais-header {
+.content .ais-Panel-header {
   margin: 4px 0;
   clear: both;
   padding: initial;
   border-bottom: none;
 }
 
-.content .ais-header h5 {
+.content .ais-Panel-header h5 {
   font-weight: bold;
   text-transform: none;
 }
