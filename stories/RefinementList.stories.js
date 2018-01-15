@@ -19,7 +19,7 @@ stories
     'default',
     () => (
       <WrapWithHits linkedStoryGroup="RefinementList" hasPlayground={true}>
-        <RefinementList attributeName="category" />
+        <RefinementList attribute="category" />
       </WrapWithHits>
     ),
     {
@@ -32,7 +32,7 @@ stories
     () => (
       <WrapWithHits linkedStoryGroup="RefinementList" hasPlayground={true}>
         <RefinementList
-          attributeName="category"
+          attribute="category"
           defaultRefinement={['Dining']}
         />
       </WrapWithHits>
@@ -47,7 +47,7 @@ stories
     () => (
       <WrapWithHits linkedStoryGroup="RefinementList" hasPlayground={true}>
         <RefinementList
-          attributeName="category"
+          attribute="category"
           limitMin={2}
           limitMax={5}
           showMore={true}
@@ -63,7 +63,7 @@ stories
     'with search inside items',
     () => (
       <WrapWithHits linkedStoryGroup="RefinementList" hasPlayground={true}>
-        <RefinementList attributeName="category" withSearchBox />
+        <RefinementList attribute="category" withSearchBox />
       </WrapWithHits>
     ),
     {
@@ -76,7 +76,7 @@ stories
     () => (
       <WrapWithHits linkedStoryGroup="RefinementList" hasPlayground={true}>
         <RefinementList
-          attributeName="category"
+          attribute="category"
           transformItems={items =>
             orderBy(items, ['label', 'count'], ['asc', 'desc'])
           }
@@ -93,7 +93,7 @@ stories
     () => (
       <WrapWithHits linkedStoryGroup="RefinementList" hasPlayground={true}>
         <Panel header="Refinement List" footer="Footer">
-          <RefinementList attributeName="category" />
+          <RefinementList attribute="category" />
         </Panel>
       </WrapWithHits>
     ),
@@ -111,7 +111,7 @@ stories
         hasPlayground={true}
       >
         <Panel header="Refinement List" footer="Footer">
-          <RefinementList attributeName="category" />
+          <RefinementList attribute="category" />
         </Panel>
 
         <div style={{ display: 'none' }}>
@@ -129,7 +129,7 @@ stories
     () => (
       <WrapWithHits linkedStoryGroup="RefinementList">
         <RefinementList
-          attributeName="category"
+          attribute="category"
           defaultRefinement={array('defaultSelectedItem', [
             'Decoration',
             'Lighting',

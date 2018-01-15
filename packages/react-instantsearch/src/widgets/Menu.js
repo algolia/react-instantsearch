@@ -7,12 +7,12 @@ import Menu from '../components/Menu';
  * The Menu component displays a menu that lets the user choose a single value for a specific attribute.
  * @name Menu
  * @kind widget
- * @requirements The attribute passed to the `attributeName` prop must be present in "attributes for faceting"
+ * @requirements The attribute passed to the `attribute` prop must be present in "attributes for faceting"
  * on the Algolia dashboard or configured as `attributesForFaceting` via a set settings call to the Algolia API.
  *
  * If you are using the `withSearchBox` prop, you'll also need to make the attribute searchable using
  * the [dashboard](https://www.algolia.com/explorer/display/) or using the [API](https://www.algolia.com/doc/guides/searching/faceting/#search-for-facet-values).
- * @propType {string} attributeName - the name of the attribute in the record
+ * @propType {string} attribute - the name of the attribute in the record
  * @propType {boolean} [showMore=false] - true if the component should display a button that will expand the number of items
  * @propType {number} [limitMin=10] - the minimum number of diplayed items
  * @propType {number} [limitMax=20] - the maximun number of displayed items. Only used when showMore is set to `true`
@@ -44,9 +44,7 @@ import Menu from '../components/Menu';
  *       apiKey="6be0576ff61c053d5f9a3225e2a90f76"
  *       indexName="ikea"
  *     >
- *       <Menu
- *         attributeName="category"
- *       />
+ *       <Menu attribute="category" />
  *     </InstantSearch>
  *   );
  * }

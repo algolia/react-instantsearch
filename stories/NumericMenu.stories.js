@@ -18,7 +18,7 @@ stories
     () => (
       <WrapWithHits linkedStoryGroup="NumericMenu">
         <NumericMenu
-          attributeName="price"
+          attribute="price"
           items={[
             { end: 10, label: '<$10' },
             { start: 10, end: 100, label: '$10-$100' },
@@ -38,7 +38,7 @@ stories
     () => (
       <WrapWithHits linkedStoryGroup="NumericMenu">
         <NumericMenu
-          attributeName="price"
+          attribute="price"
           items={[
             { end: 10, label: '<$10' },
             { start: 10, end: 100, label: '$10-$100' },
@@ -59,7 +59,7 @@ stories
     () => (
       <WrapWithHits searchBox={false} linkedStoryGroup="NumericMenu">
         <NumericMenu
-          attributeName="price"
+          attribute="price"
           items={[
             { end: 10, label: '<$10' },
             { start: 10, end: 100, label: '$10-$100' },
@@ -80,7 +80,7 @@ stories
       <WrapWithHits linkedStoryGroup="NumericMenu">
         <Panel header="Numeric Menu" footer="Footer">
           <NumericMenu
-            attributeName="price"
+            attribute="price"
             items={[
               { end: 10, label: '<$10' },
               { start: 10, end: 100, label: '$10-$100' },
@@ -104,7 +104,7 @@ stories
 
         <Panel header="Numeric Menu" footer="Footer">
           <NumericMenu
-            attributeName="price"
+            attribute="price"
             items={[
               { end: 10, label: '<$10' },
               { start: 10, end: 100, label: '$10-$100' },

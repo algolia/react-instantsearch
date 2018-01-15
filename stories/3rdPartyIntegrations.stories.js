@@ -12,7 +12,7 @@ const stories = storiesOf('Integration With Other Libraries', module);
 
 stories.add('Airbnb Rheostat', () => (
   <WrapWithHits linkedStoryGroup="3rdPartyIntegrations">
-    <ConnectedRange attributeName="price" />
+    <ConnectedRange attribute="price" />
   </WrapWithHits>
 ));
 

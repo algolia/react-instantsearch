@@ -28,7 +28,7 @@ import ClearRefinements from '../components/ClearRefinements';
  *     >
  *       <ClearRefinements />
  *       <RefinementList
-          attributeName="colors"
+          attribute="colors"
           defaultRefinement={['Black']}
         />
  *     </InstantSearch>

@@ -13,7 +13,7 @@ import {
 const namespace = 'menu';
 
 function getId(props) {
-  return props.attributeName;
+  return props.attribute;
 }
 
 function getCurrentRefinement(props, searchState, context) {
@@ -54,10 +54,10 @@ const sortBy = ['count:desc', 'name:asc'];
  * connectMenu connector provides the logic to build a widget that will
  * give the user the ability to choose a single value for a specific facet.
  * @name connectMenu
- * @requirements The attribute passed to the `attributeName` prop must be present in "attributes for faceting"
+ * @requirements The attribute passed to the `attribute` prop must be present in "attributes for faceting"
  * on the Algolia dashboard or configured as `attributesForFaceting` via a set settings call to the Algolia API.
  * @kind connector
- * @propType {string} attributeName - the name of the attribute in the record
+ * @propType {string} attribute - the name of the attribute in the record
  * @propType {boolean} [showMore=false] - true if the component should display a button that will expand the number of items
  * @propType {number} [limitMin=10] - the minimum number of diplayed items
  * @propType {number} [limitMax=20] - the maximun number of displayed items. Only used when showMore is set to `true`
@@ -74,7 +74,7 @@ export default createConnector({
   displayName: 'AlgoliaMenu',
 
   propTypes: {
-    attributeName: PropTypes.string.isRequired,
+    attribute: PropTypes.string.isRequired,
     showMore: PropTypes.bool,
     limitMin: PropTypes.number,
     limitMax: PropTypes.number,
@@ -97,16 +97,16 @@ export default createConnector({
     meta,
     searchForFacetValuesResults
   ) {
-    const { attributeName, showMore, limitMin, limitMax } = props;
+    const { attribute, showMore, limitMin, limitMax } = props;
     const limit = showMore ? limitMax : limitMin;
     const results = getResults(searchResults, this.context);
 
     const canRefine =
-      Boolean(results) && Boolean(results.getFacetByName(attributeName));
+      Boolean(results) && Boolean(results.getFacetByName(attribute));
 
     const isFromSearch = Boolean(
       searchForFacetValuesResults &&
-        searchForFacetValuesResults[attributeName] &&
+        searchForFacetValuesResults[attribute] &&
         searchForFacetValuesResults.query !== ''
     );
     const withSearchBox = props.withSearchBox || props.searchForFacetValues;
@@ -140,14 +140,14 @@ export default createConnector({
     }
 
     const items = isFromSearch
-      ? searchForFacetValuesResults[attributeName].map(v => ({
+      ? searchForFacetValuesResults[attribute].map(v => ({
           label: v.value,
           value: getValue(v.value, props, searchState, this.context),
           _highlightResult: { label: { value: v.highlighted } },
           count: v.count,
           isRefined: v.isRefined,
         }))
-      : results.getFacetValues(attributeName, { sortBy }).map(v => ({
+      : results.getFacetValues(attribute, { sortBy }).map(v => ({
           label: v.name,
           value: getValue(v.name, props, searchState, this.context),
           count: v.count,
@@ -179,7 +179,7 @@ export default createConnector({
   },
 
   searchForFacetValues(props, searchState, nextRefinement) {
-    return { facetName: props.attributeName, query: nextRefinement };
+    return { facetName: props.attribute, query: nextRefinement };
   },
 
   cleanUp(props, searchState) {
@@ -187,7 +187,7 @@ export default createConnector({
   },
 
   getSearchParameters(searchParameters, props, searchState) {
-    const { attributeName, showMore, limitMin, limitMax } = props;
+    const { attribute, showMore, limitMin, limitMax } = props;
     const limit = showMore ? limitMax : limitMin;
 
     searchParameters = searchParameters.setQueryParameters({
@@ -197,7 +197,7 @@ export default createConnector({
       ),
     });
 
-    searchParameters = searchParameters.addDisjunctiveFacet(attributeName);
+    searchParameters = searchParameters.addDisjunctiveFacet(attribute);
 
     const currentRefinement = getCurrentRefinement(
       props,
@@ -206,7 +206,7 @@ export default createConnector({
     );
     if (currentRefinement !== null) {
       searchParameters = searchParameters.addDisjunctiveFacetRefinement(
-        attributeName,
+        attribute,
         currentRefinement
       );
     }
@@ -229,8 +229,8 @@ export default createConnector({
           ? []
           : [
               {
-                label: `${props.attributeName}: ${currentRefinement}`,
-                attributeName: props.attributeName,
+                label: `${props.attribute}: ${currentRefinement}`,
+                attribute: props.attribute,
                 value: nextState => refine(props, nextState, '', this.context),
                 currentRefinement,
               },

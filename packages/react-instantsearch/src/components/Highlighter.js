@@ -29,7 +29,7 @@ Highlight.propTypes = {
 const Highlighter = ({
   cx,
   hit,
-  attributeName,
+  attribute,
   highlight,
   highlightProperty,
   tagName,
@@ -39,7 +39,7 @@ const Highlighter = ({
 }) => {
   const parsedHighlightedValue = highlight({
     hit,
-    attributeName,
+    attribute,
     highlightProperty,
   });
 
@@ -49,7 +49,7 @@ const Highlighter = ({
         if (Array.isArray(item)) {
           const isLast = i === parsedHighlightedValue.length - 1;
           return (
-            <span key={generateKey(i, hit[attributeName][i])}>
+            <span key={generateKey(i, hit[attribute][i])}>
               {item.map((element, index) => (
                 <Highlight
                   cx={cx}
@@ -83,7 +83,7 @@ const Highlighter = ({
 Highlighter.propTypes = {
   cx: PropTypes.func.isRequired,
   hit: PropTypes.object.isRequired,
-  attributeName: PropTypes.string.isRequired,
+  attribute: PropTypes.string.isRequired,
   highlight: PropTypes.func.isRequired,
   highlightProperty: PropTypes.string.isRequired,
   tagName: PropTypes.string,

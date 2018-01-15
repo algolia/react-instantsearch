@@ -33,7 +33,7 @@ import CurrentRefinements from '../components/CurrentRefinements';
  *     >
  *       <CurrentRefinements />
  *       <RefinementList
-          attributeName="colors"
+          attribute="colors"
           defaultRefinement={['Black']}
         />
  *     </InstantSearch>

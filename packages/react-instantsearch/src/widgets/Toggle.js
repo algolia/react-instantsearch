@@ -10,9 +10,9 @@ import Toggle from '../components/Toggle';
  * You can't toggle on null or not-null values. If you want to address this particular use-case you'll need to compute an
  * extra boolean attribute saying if the value exists or not. See this [thread](https://discourse.algolia.com/t/how-to-create-a-toggle-for-the-absence-of-a-string-attribute/2460) for more details.
  *
- * @propType {string} attributeName - Name of the attribute on which to apply the `value` refinement. Required when `value` is present.
+ * @propType {string} attribute - Name of the attribute on which to apply the `value` refinement. Required when `value` is present.
  * @propType {string} label - Label for the toggle.
- * @propType {any} value - Value of the refinement to apply on `attributeName` when checked.
+ * @propType {any} value - Value of the refinement to apply on `attribute` when checked.
  * @propType {boolean} [defaultRefinement=false] - Default state of the widget. Should the toggle be checked by default?
  * @themeKey ais-Toggle - the root div of the widget
  * @themeKey ais-Toggle-list - the list of toggles
@@ -34,9 +34,9 @@ import Toggle from '../components/Toggle';
  *       indexName="ikea"
  *     >
  *       <Toggle
- *         attributeName="materials"
+ *         attribute="materials"
  *         label="Made with solid pine"
- *         value={'Solid pine'}
+ *         value="Solid pine"
  *       />
  *     </InstantSearch>
  *   );

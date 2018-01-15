@@ -21,7 +21,7 @@ stories
           <ClearRefinements />
           <div style={{ display: 'none' }}>
             <RefinementList
-              attributeName="category"
+              attribute="category"
               defaultRefinement={['Dining']}
             />
           </div>
@@ -54,7 +54,7 @@ stories
           translations={{ reset: 'Clear refinements and query' }}
         />
         <RefinementList
-          attributeName="category"
+          attribute="category"
           defaultRefinement={['Dining']}
         />
       </WrapWithHits>
@@ -74,7 +74,7 @@ stories
 
         <div style={{ display: 'none' }}>
           <RefinementList
-            attributeName="category"
+            attribute="category"
             defaultRefinement={['Dining']}
           />
         </div>

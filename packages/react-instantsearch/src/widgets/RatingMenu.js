@@ -6,11 +6,11 @@ import RatingMenu from '../components/RatingMenu';
 /**
  * RatingMenu lets the user refine search results by clicking on stars.
  *
- * The stars are based on the selected `attributeName`.
- * @requirements The attribute passed to the `attributeName` prop must be holding numerical values.
+ * The stars are based on the selected `attribute`.
+ * @requirements The attribute passed to the `attribute` prop must be holding numerical values.
  * @name RatingMenu
  * @kind widget
- * @propType {string} attributeName - the name of the attribute in the record
+ * @propType {string} attribute - the name of the attribute in the record
  * @propType {number} [min] - Minimum value for the rating. When this isn't set, the minimum value will be automatically computed by Algolia using the data in the index.
  * @propType {number} [max] - Maximum value for the rating. When this isn't set, the maximum value will be automatically computed by Algolia using the data in the index.
  * @propType {{min: number, max: number}} [defaultRefinement] - Default state of the widget containing the lower bound (end) and the max for the rating.
@@ -40,7 +40,7 @@ import RatingMenu from '../components/RatingMenu';
  *       apiKey="6be0576ff61c053d5f9a3225e2a90f76"
  *       indexName="ikea"
  *     >
- *       <RatingMenu attributeName="rating" />
+ *       <RatingMenu attribute="rating" />
  *     </InstantSearch>
  *   );
  * }

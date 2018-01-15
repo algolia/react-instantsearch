@@ -33,7 +33,7 @@ import Panel from '../components/Panel';
  *       indexName="ikea"
  *     >
  *       <Panel heade="Category">
- *         <CustomRefinementList attributeName="category" />
+ *         <CustomRefinementList attribute="category" />
  *       </Panel>
  *     </InstantSearch>
  *   );

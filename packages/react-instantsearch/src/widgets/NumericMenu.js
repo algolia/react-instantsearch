@@ -7,8 +7,8 @@ import NumericMenu from '../components/NumericMenu';
  * NumericMenu is a widget used for selecting the range value of a numeric attribute.
  * @name NumericMenu
  * @kind widget
- * @requirements The attribute passed to the `attributeName` prop must be holding numerical values.
- * @propType {string} attributeName - the name of the attribute in the records
+ * @requirements The attribute passed to the `attribute` prop must be holding numerical values.
+ * @propType {string} attribute - the name of the attribute in the records
  * @propType {{label: string, start: number, end: number}[]} items - List of options. With a text label, and upper and lower bounds.
  * @propType {string} [defaultRefinement] - the value of the item selected by default, follow the format "min:max".
  * @propType {function} [transformItems] - Function to modify the items being displayed, e.g. for filtering or sorting them. Takes an items as parameter and expects it back in return.
@@ -34,7 +34,7 @@ import NumericMenu from '../components/NumericMenu';
  *       indexName="ikea"
  *     >
  *       <NumericMenu
- *         attributeName="price"
+ *         attribute="price"
  *         items={[
  *           { end: 10, label: '<$10' },
  *           { start: 10, end: 100, label: '$10-$100' },

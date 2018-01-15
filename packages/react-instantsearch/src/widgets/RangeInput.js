@@ -7,8 +7,8 @@ import RangeInput from '../components/RangeInput';
  * RangeInput allows a user to select a numeric range using a minimum and maximum input.
  * @name RangeInput
  * @kind widget
- * @requirements The attribute passed to the `attributeName` prop must be holding numerical values.
- * @propType {string} attributeName - the name of the attribute in the record
+ * @requirements The attribute passed to the `attribute` prop must be holding numerical values.
+ * @propType {string} attribute - the name of the attribute in the record
  * @propType {{min: number, max: number}} [defaultRefinement] - Default state of the widget containing the start and the end of the range.
  * @propType {number} [min] - Minimum value. When this isn't set, the minimum value will be automatically computed by Algolia using the data in the index.
  * @propType {number} [max] - Maximum value. When this isn't set, the maximum value will be automatically computed by Algolia using the data in the index.
@@ -35,7 +35,7 @@ import RangeInput from '../components/RangeInput';
  *       apiKey="6be0576ff61c053d5f9a3225e2a90f76"
  *       indexName="ikea"
  *     >
- *       <RangeInput attributeName="price"/>
+ *       <RangeInput attribute="price" />
  *     </InstantSearch>
  *   );
  * }

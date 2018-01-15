@@ -7,7 +7,7 @@ import RefinementList from '../components/RefinementList';
  * The RefinementList component displays a list that let the end user choose multiple values for a specific facet.
  * @name RefinementList
  * @kind widget
- * @propType {string} attributeName - the name of the attribute in the record
+ * @propType {string} attribute - the name of the attribute in the record
  * @propType {boolean} [withSearchBox=false] - true if the component should display an input to search for facet values. <br> In order to make this feature work, you need to make the attribute searchable [using the API](https://www.algolia.com/doc/guides/searching/faceting/?language=js#declaring-a-searchable-attribute-for-faceting) or [the dashboard](https://www.algolia.com/explorer/display/).
  * @propType {string} [operator=or] - How to apply the refinements. Possible values: 'or' or 'and'.
  * @propType {boolean} [showMore=false] - true if the component should display a button that will expand the number of items
@@ -30,7 +30,7 @@ import RefinementList from '../components/RefinementList';
  * @themeKey ais-RefinementList-showMore--disabled - the disabled button used to display more categories
  * @translationkey showMore - The label of the show more button. Accepts one parameters, a boolean that is true if the values are expanded
  * @translationkey noResults - The label of the no results text when no search for facet values results are found.
- * @requirements The attribute passed to the `attributeName` prop must be present in "attributes for faceting"
+ * @requirements The attribute passed to the `attribute` prop must be present in "attributes for faceting"
  * on the Algolia dashboard or configured as `attributesForFaceting` via a set settings call to the Algolia API.
  *
  * If you are using the `withSearchBox` prop, you'll also need to make the attribute searchable using
@@ -47,7 +47,7 @@ import RefinementList from '../components/RefinementList';
  *       apiKey="6be0576ff61c053d5f9a3225e2a90f76"
  *       indexName="ikea"
  *     >
- *       <RefinementList attributeName="colors" />
+ *       <RefinementList attribute="colors" />
  *     </InstantSearch>
  *   );
  * }

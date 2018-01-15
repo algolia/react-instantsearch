@@ -31,7 +31,7 @@ function parseItem(value) {
 const namespace = 'multiRange';
 
 function getId(props) {
-  return props.attributeName;
+  return props.attribute;
 }
 
 function getCurrentRefinement(props, searchState, context) {
@@ -64,9 +64,9 @@ function isItemRangeIncludedInsideRefinementsRange(stats, start, end) {
   );
 }
 
-function itemHasRefinement(attributeName, results, value) {
-  const stats = results.getFacetByName(attributeName)
-    ? results.getFacetStats(attributeName)
+function itemHasRefinement(attribute, results, value) {
+  const stats = results.getFacetByName(attribute)
+    ? results.getFacetStats(attribute)
     : null;
   const range = value.split(':');
   const start =
@@ -99,9 +99,9 @@ function cleanUp(props, searchState, context) {
  * give the user the ability to select a range value for a numeric attribute.
  * Ranges are defined statically.
  * @name connectNumericMenu
- * @requirements The attribute passed to the `attributeName` prop must be holding numerical values.
+ * @requirements The attribute passed to the `attribute` prop must be holding numerical values.
  * @kind connector
- * @propType {string} attributeName - the name of the attribute in the records
+ * @propType {string} attribute - the name of the attribute in the records
  * @propType {{label: string, start: number, end: number}[]} items - List of options. With a text label, and upper and lower bounds.
  * @propType {string} [defaultRefinement] - the value of the item selected by default, follow the shape of a `string` with a pattern of `'{start}:{end}'`.
  * @propType {function} [transformItems] - Function to modify the items being displayed, e.g. for filtering or sorting them. Takes an items as parameter and expects it back in return.
@@ -115,7 +115,7 @@ export default createConnector({
 
   propTypes: {
     id: PropTypes.string,
-    attributeName: PropTypes.string.isRequired,
+    attribute: PropTypes.string.isRequired,
     items: PropTypes.arrayOf(
       PropTypes.shape({
         label: PropTypes.node,
@@ -127,7 +127,7 @@ export default createConnector({
   },
 
   getProvidedProps(props, searchState, searchResults) {
-    const attributeName = props.attributeName;
+    const attribute = props.attribute;
     const currentRefinement = getCurrentRefinement(
       props,
       searchState,
@@ -148,8 +148,8 @@ export default createConnector({
     });
 
     const stats =
-      results && results.getFacetByName(attributeName)
-        ? results.getFacetStats(attributeName)
+      results && results.getFacetByName(attribute)
+        ? results.getFacetStats(attribute)
         : null;
     const refinedItem = find(items, item => item.isRefined === true);
     if (!items.some(item => item.value === '')) {
@@ -178,22 +178,22 @@ export default createConnector({
   },
 
   getSearchParameters(searchParameters, props, searchState) {
-    const { attributeName } = props;
+    const { attribute } = props;
     const { start, end } = parseItem(
       getCurrentRefinement(props, searchState, this.context)
     );
-    searchParameters = searchParameters.addDisjunctiveFacet(attributeName);
+    searchParameters = searchParameters.addDisjunctiveFacet(attribute);
 
     if (start) {
       searchParameters = searchParameters.addNumericRefinement(
-        attributeName,
+        attribute,
         '>=',
         start
       );
     }
     if (end) {
       searchParameters = searchParameters.addNumericRefinement(
-        attributeName,
+        attribute,
         '<=',
         end
       );
@@ -212,8 +212,8 @@ export default createConnector({
         item => stringifyItem(item) === value
       );
       items.push({
-        label: `${props.attributeName}: ${label}`,
-        attributeName: props.attributeName,
+        label: `${props.attribute}: ${label}`,
+        attribute: props.attribute,
         currentRefinement: label,
         value: nextState => refine(props, nextState, '', this.context),
       });

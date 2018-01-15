@@ -19,7 +19,7 @@ stories
     'default',
     () => (
       <WrapWithHits hasPlayground={true} linkedStoryGroup="RatingMenu">
-        <RatingMenu attributeName="rating" max={6} min={1} />
+        <RatingMenu attribute="rating" max={6} min={1} />
       </WrapWithHits>
     ),
     {
@@ -32,7 +32,7 @@ stories
     () => (
       <WrapWithHits hasPlayground={true} linkedStoryGroup="RatingMenu">
         <Configure filters="rating>=4" />
-        <RatingMenu attributeName="rating" max={6} min={1} />
+        <RatingMenu attribute="rating" max={6} min={1} />
       </WrapWithHits>
     ),
     {
@@ -45,7 +45,7 @@ stories
     () => (
       <WrapWithHits hasPlayground={true} linkedStoryGroup="RatingMenu">
         <Configure filters="rating>2" />
-        <RatingMenu attributeName="rating" max={6} min={1} />
+        <RatingMenu attribute="rating" max={6} min={1} />
       </WrapWithHits>
     ),
     {
@@ -58,7 +58,7 @@ stories
     () => (
       <WrapWithHits hasPlayground={true} linkedStoryGroup="RatingMenu">
         <Panel header="Rating Menu" footer="Footer">
-          <RatingMenu attributeName="rating" max={6} min={1} />
+          <RatingMenu attribute="rating" max={6} min={1} />
         </Panel>
       </WrapWithHits>
     ),
@@ -76,7 +76,7 @@ stories
         linkedStoryGroup="RatingMenu"
       >
         <Panel header="Rating Menu" footer="Footer">
-          <RatingMenu attributeName="rating" max={6} min={1} />
+          <RatingMenu attribute="rating" max={6} min={1} />
         </Panel>
 
         <div style={{ display: 'none' }}>
@@ -94,7 +94,7 @@ stories
     () => (
       <WrapWithHits linkedStoryGroup="RatingMenu">
         <RatingMenu
-          attributeName="rating"
+          attribute="rating"
           max={number('max', 6)}
           translations={object('translations', { ratingLabel: ' & Up' })}
         />

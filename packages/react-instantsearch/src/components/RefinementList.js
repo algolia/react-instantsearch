@@ -47,7 +47,7 @@ class RefinementList extends Component {
 
   renderItem = (item, resetQuery) => {
     const label = this.props.isFromSearch ? (
-      <Highlight attributeName="label" hit={item} />
+      <Highlight attribute="label" hit={item} />
     ) : (
       item.label
     );

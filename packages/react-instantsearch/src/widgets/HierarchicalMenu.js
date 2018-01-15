@@ -44,7 +44,7 @@ import HierarchicalMenu from '../components/HierarchicalMenu';
  * All attributes passed to the `attributes` prop must be present in "attributes for faceting"
  * on the Algolia dashboard or configured as `attributesForFaceting` via a set settings call to the Algolia API.
  *
- * @propType {string} attributes - List of attributes to use to generate the hierarchy of the menu. See the example for the convention to follow.
+ * @propType {array.<string>} attributes - List of attributes to use to generate the hierarchy of the menu. See the example for the convention to follow.
  * @propType {boolean} [showMore=false] - Flag to activate the show more button, for toggling the number of items between limitMin and limitMax.
  * @propType {number} [limitMin=10] -  The maximum number of items displayed.
  * @propType {number} [limitMax=20] -  The maximum number of items displayed when the user triggers the show more. Not considered if `showMore` is false.
@@ -80,8 +80,6 @@ import HierarchicalMenu from '../components/HierarchicalMenu';
  *       indexName="ikea"
  *     >
  *       <HierarchicalMenu
- *         id="categories"
- *         key="categories"
  *         attributes={[
  *           'category',
  *           'sub_category',

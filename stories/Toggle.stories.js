@@ -14,7 +14,7 @@ stories
     () => (
       <WrapWithHits linkedStoryGroup="Toggle">
         <Toggle
-          attributeName="materials"
+          attribute="materials"
           label="Made with solid pine"
           value={'Solid pine'}
         />
@@ -30,7 +30,7 @@ stories
     () => (
       <WrapWithHits linkedStoryGroup="Toggle">
         <Toggle
-          attributeName="materials"
+          attribute="materials"
           label="Made with solid pine"
           value="Solid pine"
           defaultRefinement={true}
@@ -48,7 +48,7 @@ stories
       <WrapWithHits linkedStoryGroup="Toggle">
         <Panel header="Toggle" footer="Footer">
           <Toggle
-            attributeName="materials"
+            attribute="materials"
             label="Made with solid pine"
             value="Solid pine"
           />

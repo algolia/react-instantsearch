@@ -50,12 +50,12 @@ stories
 function Product({ hit }) {
   return (
     <div>
-      <Highlight attributeName="name" hit={hit} />
+      <Highlight attribute="name" hit={hit} />
       <p>
-        <Highlight attributeName="type" hit={hit} />
+        <Highlight attribute="type" hit={hit} />
       </p>
       <p>
-        <Snippet attributeName="description" hit={hit} />
+        <Snippet attribute="description" hit={hit} />
       </p>
     </div>
   );

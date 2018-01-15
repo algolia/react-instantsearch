@@ -15,7 +15,7 @@ stories
     'default',
     () => (
       <WrapWithHits hasPlayground={true} linkedStoryGroup="RangeSlider">
-        <Range attributeName="price" />
+        <Range attribute="price" />
       </WrapWithHits>
     ),
     {
@@ -28,7 +28,7 @@ stories
     () => (
       <WrapWithHits hasPlayground={true} linkedStoryGroup="RangeSlider">
         <Range
-          attributeName="price"
+          attribute="price"
           defaultRefinement={{ min: 50, max: 200 }}
         />
       </WrapWithHits>
@@ -42,7 +42,7 @@ stories
     'custom min/max bounds',
     () => (
       <WrapWithHits hasPlayground={true} linkedStoryGroup="RangeSlider">
-        <Range attributeName="price" min={30} max={100} />
+        <Range attribute="price" min={30} max={100} />
       </WrapWithHits>
     ),
     {
@@ -55,7 +55,7 @@ stories
     () => (
       <WrapWithHits hasPlayground={true} linkedStoryGroup="RangeSlider">
         <Panel header="Range Slider" footer="Footer">
-          <Range attributeName="price" />
+          <Range attribute="price" />
         </Panel>
       </WrapWithHits>
     ),
@@ -69,7 +69,7 @@ stories
     () => (
       <WrapWithHits linkedStoryGroup="RangeSlider">
         <Range
-          attributeName="price"
+          attribute="price"
           defaultRefinement={object('default value', { min: 150, max: 200 })}
           min={number('min', 100)}
           max={number('max', 400)}

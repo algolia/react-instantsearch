@@ -2,6 +2,8 @@ import React from 'react';
 import { setAddon, storiesOf } from '@storybook/react';
 import {
   CurrentRefinements,
+  Menu,
+  HierarchicalMenu,
   Panel,
   RefinementList,
   Toggle,
@@ -14,18 +16,15 @@ const stories = storiesOf('CurrentRefinements', module);
 
 stories
   .addWithJSX(
-    'default',
+    'with RefinementList',
     () => (
       <WrapWithHits linkedStoryGroup="CurrentRefinements">
-        <div>
-          <CurrentRefinements />
-          <div style={{ display: 'none' }}>
-            <RefinementList
-              attributeName="category"
-              defaultRefinement={['Dining', 'Other']}
-            />
-          </div>
-        </div>
+        <CurrentRefinements />
+        <hr />
+        <RefinementList
+          attribute="category"
+          defaultRefinement={['Dining', 'Other']}
+        />
       </WrapWithHits>
     ),
     {
@@ -34,12 +33,45 @@ stories
     }
   )
   .addWithJSX(
-    'with toggle',
+    'with Menu',
     () => (
       <WrapWithHits linkedStoryGroup="CurrentRefinements">
         <CurrentRefinements />
+        <hr />
+        <Menu attribute="category" defaultRefinement="Dining" />
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
+    'with HierarchicalMenu',
+    () => (
+      <WrapWithHits linkedStoryGroup="CurrentRefinements">
+        <CurrentRefinements />
+        <hr />
+        <HierarchicalMenu
+          attributes={['category', 'sub_category', 'sub_sub_category']}
+          defaultRefinement="Eating"
+        />
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+
+  .addWithJSX(
+    'with Toggle',
+    () => (
+      <WrapWithHits linkedStoryGroup="CurrentRefinements">
+        <CurrentRefinements />
+        <hr />
         <Toggle
-          attributeName="materials"
+          attribute="materials"
           label="Made with solid pine"
           value={'Solid pine'}
         />
@@ -59,10 +91,7 @@ stories
         </Panel>
 
         <div style={{ display: 'none' }}>
-          <RefinementList
-            attributeName="category"
-            defaultRefinement={['Dining']}
-          />
+          <RefinementList attribute="category" defaultRefinement={['Dining']} />
         </div>
       </WrapWithHits>
     ),

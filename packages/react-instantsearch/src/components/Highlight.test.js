@@ -23,11 +23,11 @@ describe('Highlight', () => {
       },
     };
 
-    const highlight = ({ hit, attributeName, highlightProperty }) =>
+    const highlight = ({ hit, attribute, highlightProperty }) =>
       parseAlgoliaHit({
         preTag: '<ais-highlight>',
         postTag: '</ais-highlight>',
-        attributeName,
+        attribute,
         hit,
         highlightProperty,
       });
@@ -35,7 +35,7 @@ describe('Highlight', () => {
     const tree = renderer.create(
       <Highlight
         cx={(...x) => x.join(' ')}
-        attributeName="deep.attribute.value"
+        attribute="deep.attribute.value"
         hit={hitFromAPI}
         highlight={highlight}
       />
@@ -62,11 +62,11 @@ describe('Highlight', () => {
       },
     };
 
-    const highlight = ({ hit, attributeName, highlightProperty }) =>
+    const highlight = ({ hit, attribute, highlightProperty }) =>
       parseAlgoliaHit({
         preTag: '<ais-highlight>',
         postTag: '</ais-highlight>',
-        attributeName,
+        attribute,
         hit,
         highlightProperty,
       });
@@ -74,7 +74,7 @@ describe('Highlight', () => {
     const tree = renderer.create(
       <Highlight
         cx={(...x) => x.join(' ')}
-        attributeName="deep.attribute.value"
+        attribute="deep.attribute.value"
         hit={hitFromAPI}
         highlight={highlight}
         tagName="marquee"
@@ -102,11 +102,11 @@ describe('Highlight', () => {
       },
     };
 
-    const highlight = ({ hit, attributeName, highlightProperty }) =>
+    const highlight = ({ hit, attribute, highlightProperty }) =>
       parseAlgoliaHit({
         preTag: '<ais-highlight>',
         postTag: '</ais-highlight>',
-        attributeName,
+        attribute,
         hit,
         highlightProperty,
       });
@@ -115,7 +115,7 @@ describe('Highlight', () => {
       <Highlight
         cx={(...x) => x.join(' ')}
         className="MyCustomHighlight"
-        attributeName="deep.attribute.value"
+        attribute="deep.attribute.value"
         hit={hitFromAPI}
         highlight={highlight}
       />

@@ -53,18 +53,18 @@ describe('Highlighter - simple', () => {
     },
   };
 
-  const highlight = ({ hit, attributeName, highlightProperty }) =>
+  const highlight = ({ hit, attribute, highlightProperty }) =>
     parseAlgoliaHit({
       preTag: '<ais-highlight>',
       postTag: '</ais-highlight>',
-      attributeName,
+      attribute,
       hit,
       highlightProperty,
     });
 
   const defaultProps = {
     hit: hitFromAPI,
-    attributeName: 'title',
+    attribute: 'title',
     highlightProperty: '_highlight',
     highlight,
   };
@@ -161,18 +161,18 @@ describe('Highlighter - multi', () => {
     },
   };
 
-  const highlight = ({ hit, attributeName, highlightProperty }) =>
+  const highlight = ({ hit, attribute, highlightProperty }) =>
     parseAlgoliaHit({
       preTag: '<ais-highlight>',
       postTag: '</ais-highlight>',
-      attributeName,
+      attribute,
       hit,
       highlightProperty,
     });
 
   const defaultProps = {
     hit: hitFromAPI,
-    attributeName: 'titles',
+    attribute: 'titles',
     highlightProperty: '_highlight',
     highlight,
   };

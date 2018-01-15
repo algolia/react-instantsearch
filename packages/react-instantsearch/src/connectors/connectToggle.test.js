@@ -17,14 +17,14 @@ describe('connectToggle', () => {
     const getMetadata = connect.getMetadata.bind(context);
     const cleanUp = connect.cleanUp.bind(context);
     it('provides the correct props to the component', () => {
-      props = getProvidedProps({ attributeName: 't' }, {});
+      props = getProvidedProps({ attribute: 't' }, {});
       expect(props).toEqual({ currentRefinement: false });
 
-      props = getProvidedProps({ attributeName: 't' }, { toggle: { t: true } });
+      props = getProvidedProps({ attribute: 't' }, { toggle: { t: true } });
       expect(props).toEqual({ currentRefinement: true });
 
       props = getProvidedProps(
-        { defaultRefinement: true, attributeName: 't' },
+        { defaultRefinement: true, attribute: 't' },
         {}
       );
       expect(props).toEqual({ currentRefinement: true });
@@ -32,7 +32,7 @@ describe('connectToggle', () => {
 
     it("calling refine updates the widget's search state", () => {
       let searchState = refine(
-        { attributeName: 't' },
+        { attribute: 't' },
         { otherKey: 'val', toggle: { otherKey: false } },
         true
       );
@@ -42,7 +42,7 @@ describe('connectToggle', () => {
         toggle: { t: true, otherKey: false },
       });
 
-      searchState = refine({ attributeName: 't' }, { otherKey: 'val' }, false);
+      searchState = refine({ attribute: 't' }, { otherKey: 'val' }, false);
       expect(searchState).toEqual({
         page: 1,
         otherKey: 'val',
@@ -54,7 +54,7 @@ describe('connectToggle', () => {
       params = getSP(
         new SearchParameters(),
         {
-          attributeName: 'facet',
+          attribute: 'facet',
           value: 'val',
         },
         { toggle: { facet: true } }
@@ -66,7 +66,7 @@ describe('connectToggle', () => {
       params = getSP(
         new SearchParameters(),
         {
-          attributeName: 'facet',
+          attribute: 'facet',
           filter: sp => sp.setQuery('yep'),
         },
         { toggle: { facet: true } }
@@ -75,7 +75,7 @@ describe('connectToggle', () => {
     });
 
     it('registers its filter in metadata', () => {
-      let metadata = getMetadata({ attributeName: 't' }, {});
+      let metadata = getMetadata({ attribute: 't' }, {});
       expect(metadata).toEqual({
         items: [],
         id: 't',
@@ -83,7 +83,7 @@ describe('connectToggle', () => {
       });
 
       metadata = getMetadata(
-        { attributeName: 't', label: 'yep' },
+        { attribute: 't', label: 'yep' },
         { toggle: { t: true } }
       );
       expect(metadata).toEqual({
@@ -92,7 +92,7 @@ describe('connectToggle', () => {
             label: 'yep',
             // Ignore clear, we test it later
             value: metadata.items[0].value,
-            attributeName: 't',
+            attribute: 't',
             currentRefinement: 'yep',
           },
         ],
@@ -103,7 +103,7 @@ describe('connectToggle', () => {
 
     it('items value function should clear it from the search state', () => {
       const metadata = getMetadata(
-        { attributeName: 'one', label: 'yep' },
+        { attribute: 'one', label: 'yep' },
         { toggle: { one: true, two: false } }
       );
 
@@ -119,7 +119,7 @@ describe('connectToggle', () => {
 
     it('should return the right searchState when clean up', () => {
       let searchState = cleanUp(
-        { attributeName: 'name' },
+        { attribute: 'name' },
         {
           toggle: { name: 'searchState', name2: 'searchState' },
           another: { searchState: 'searchState' },
@@ -130,7 +130,7 @@ describe('connectToggle', () => {
         another: { searchState: 'searchState' },
       });
 
-      searchState = cleanUp({ attributeName: 'name2' }, searchState);
+      searchState = cleanUp({ attribute: 'name2' }, searchState);
       expect(searchState).toEqual({
         toggle: {},
         another: { searchState: 'searchState' },
@@ -150,11 +150,11 @@ describe('connectToggle', () => {
     const cleanUp = connect.cleanUp.bind(context);
 
     it('provides the correct props to the component', () => {
-      props = getProvidedProps({ attributeName: 't' }, {});
+      props = getProvidedProps({ attribute: 't' }, {});
       expect(props).toEqual({ currentRefinement: false });
 
       props = getProvidedProps(
-        { attributeName: 't' },
+        { attribute: 't' },
         { indices: { first: { toggle: { t: true } } } }
       );
       expect(props).toEqual({ currentRefinement: true });
@@ -164,7 +164,7 @@ describe('connectToggle', () => {
       let refine = connect.refine.bind(context);
 
       let searchState = refine(
-        { attributeName: 't' },
+        { attribute: 't' },
         {
           otherKey: 'val',
           indices: { first: { toggle: { otherKey: false } } },
@@ -185,7 +185,7 @@ describe('connectToggle', () => {
       refine = connect.refine.bind(context);
 
       searchState = refine(
-        { attributeName: 't' },
+        { attribute: 't' },
         { indices: { first: { toggle: { t: true, otherKey: false } } } },
         false
       );
@@ -201,7 +201,7 @@ describe('connectToggle', () => {
       params = getSP(
         new SearchParameters(),
         {
-          attributeName: 'facet',
+          attribute: 'facet',
           value: 'val',
         },
         { indices: { first: { toggle: { facet: true } } } }
@@ -213,7 +213,7 @@ describe('connectToggle', () => {
       params = getSP(
         new SearchParameters(),
         {
-          attributeName: 'facet',
+          attribute: 'facet',
           filter: sp => sp.setQuery('yep'),
         },
         { indices: { first: { toggle: { facet: true } } } }
@@ -223,7 +223,7 @@ describe('connectToggle', () => {
 
     it('registers its filter in metadata', () => {
       const metadata = getMetadata(
-        { attributeName: 't', label: 'yep' },
+        { attribute: 't', label: 'yep' },
         { indices: { first: { toggle: { t: true } } } }
       );
       expect(metadata).toEqual({
@@ -232,7 +232,7 @@ describe('connectToggle', () => {
             label: 'yep',
             // Ignore clear, we test it later
             value: metadata.items[0].value,
-            attributeName: 't',
+            attribute: 't',
             currentRefinement: 'yep',
           },
         ],
@@ -243,7 +243,7 @@ describe('connectToggle', () => {
 
     it('items value function should clear it from the search state', () => {
       const metadata = getMetadata(
-        { attributeName: 'one', label: 'yep' },
+        { attribute: 'one', label: 'yep' },
         { indices: { first: { toggle: { one: true, two: false } } } }
       );
 
@@ -258,7 +258,7 @@ describe('connectToggle', () => {
 
     it('should return the right searchState when clean up', () => {
       let searchState = cleanUp(
-        { attributeName: 'name' },
+        { attribute: 'name' },
         {
           indices: {
             first: { toggle: { name: 'searchState', name2: 'searchState' } },
@@ -271,7 +271,7 @@ describe('connectToggle', () => {
         another: { searchState: 'searchState' },
       });
 
-      searchState = cleanUp({ attributeName: 'name2' }, searchState);
+      searchState = cleanUp({ attribute: 'name2' }, searchState);
       expect(searchState).toEqual({
         indices: { first: { toggle: {} } },
         another: { searchState: 'searchState' },

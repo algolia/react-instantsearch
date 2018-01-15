@@ -19,7 +19,7 @@ stories
     'default',
     () => (
       <WrapWithHits hasPlayground={true} linkedStoryGroup="MenuSelect">
-        <MenuSelect attributeName="category" />
+        <MenuSelect attribute="category" />
       </WrapWithHits>
     ),
     {
@@ -31,7 +31,7 @@ stories
     'with default selected item',
     () => (
       <WrapWithHits hasPlayground={true} linkedStoryGroup="MenuSelect">
-        <MenuSelect attributeName="category" defaultRefinement="Eating" />
+        <MenuSelect attribute="category" defaultRefinement="Eating" />
       </WrapWithHits>
     ),
     {
@@ -44,7 +44,7 @@ stories
     () => (
       <WrapWithHits hasPlayground={true} linkedStoryGroup="MenuSelect">
         <MenuSelect
-          attributeName="category"
+          attribute="category"
           transformItems={items =>
             orderBy(items, ['label', 'count'], ['asc', 'desc'])
           }
@@ -61,7 +61,7 @@ stories
     () => (
       <WrapWithHits linkedStoryGroup="MenuSelect">
         <MenuSelect
-          attributeName="category"
+          attribute="category"
           defaultRefinement={text('defaultSelectedItem', 'Bathroom')}
         />
       </WrapWithHits>
@@ -76,7 +76,7 @@ stories
     () => (
       <WrapWithHits linkedStoryGroup="MenuSelect">
         <MenuSelect
-          attributeName="category"
+          attribute="category"
           defaultRefinement={text('defaultSelectedItem', 'Bathroom')}
           transformItems={items =>
             items.map(({ count, ...item }) => ({
@@ -97,7 +97,7 @@ stories
     () => (
       <WrapWithHits hasPlayground={true} linkedStoryGroup="MenuSelect">
         <Panel header="Menu select" footer="Footer">
-          <MenuSelect attributeName="category" />
+          <MenuSelect attribute="category" />
         </Panel>
       </WrapWithHits>
     ),
@@ -115,7 +115,7 @@ stories
         linkedStoryGroup="MenuSelect"
       >
         <Panel header="Menu select" footer="Footer">
-          <MenuSelect attributeName="category" />
+          <MenuSelect attribute="category" />
         </Panel>
 
         <div style={{ display: 'none' }}>

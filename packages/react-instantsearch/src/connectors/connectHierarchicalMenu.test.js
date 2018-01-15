@@ -500,7 +500,7 @@ describe('connectHierarchicalMenu', () => {
         items: [
           {
             label: 'ok: wat',
-            attributeName: 'ok',
+            attribute: 'ok',
             currentRefinement: 'wat',
             // Ignore clear, we test it later
             value: metadata.items[0].value,
@@ -807,7 +807,7 @@ describe('connectHierarchicalMenu', () => {
         items: [
           {
             label: 'ok: wat',
-            attributeName: 'ok',
+            attribute: 'ok',
             currentRefinement: 'wat',
             // Ignore clear, we test it later
             value: metadata.items[0].value,

@@ -40,7 +40,7 @@ class Menu extends Component {
   renderItem = (item, resetQuery) => {
     const { createURL } = this.props;
     const label = this.props.isFromSearch ? (
-      <Highlight attributeName="label" hit={item} />
+      <Highlight attribute="label" hit={item} />
     ) : (
       item.label
     );

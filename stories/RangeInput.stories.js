@@ -19,7 +19,7 @@ stories
     'default',
     () => (
       <WrapWithHits linkedStoryGroup="RangeInput">
-        <RangeInput attributeName="price" />
+        <RangeInput attribute="price" />
       </WrapWithHits>
     ),
     {
@@ -31,7 +31,7 @@ stories
     'visible without refinement',
     () => (
       <WrapWithHits searchBox={false} linkedStoryGroup="RangeInput">
-        <RangeInput attributeName="price" header="Range Input" />
+        <RangeInput attribute="price" header="Range Input" />
 
         <div style={{ display: 'none' }}>
           <SearchBox defaultRefinement="ds" />
@@ -47,7 +47,7 @@ stories
     'with no refinement',
     () => (
       <WrapWithHits searchBox={false} linkedStoryGroup="RangeInput">
-        <RangeInput attributeName="price" />
+        <RangeInput attribute="price" />
         <div style={{ display: 'none' }}>
           <SearchBox defaultRefinement="ds" />
         </div>
@@ -62,7 +62,7 @@ stories
     'with precision of 2',
     () => (
       <WrapWithHits linkedStoryGroup="RangeInput">
-        <RangeInput attributeName="price" precision={2} />
+        <RangeInput attribute="price" precision={2} />
       </WrapWithHits>
     ),
     {
@@ -75,7 +75,7 @@ stories
     () => (
       <WrapWithHits linkedStoryGroup="RangeInput">
         <RangeInput
-          attributeName="price"
+          attribute="price"
           defaultRefinement={{ min: 50, max: 200 }}
         />
       </WrapWithHits>
@@ -89,7 +89,7 @@ stories
     'with min boundaries',
     () => (
       <WrapWithHits linkedStoryGroup="RangeInput">
-        <RangeInput attributeName="price" min={30} />
+        <RangeInput attribute="price" min={30} />
       </WrapWithHits>
     ),
     {
@@ -101,7 +101,7 @@ stories
     'with max boundaries',
     () => (
       <WrapWithHits linkedStoryGroup="RangeInput">
-        <RangeInput attributeName="price" max={500} />
+        <RangeInput attribute="price" max={500} />
       </WrapWithHits>
     ),
     {
@@ -113,7 +113,7 @@ stories
     'with min / max boundaries',
     () => (
       <WrapWithHits linkedStoryGroup="RangeInput">
-        <RangeInput attributeName="price" min={30} max={500} />
+        <RangeInput attribute="price" min={30} max={500} />
       </WrapWithHits>
     ),
     {
@@ -126,7 +126,7 @@ stories
     () => (
       <WrapWithHits linkedStoryGroup="RangeInput">
         <RangeInput
-          attributeName="price"
+          attribute="price"
           min={30}
           max={500}
           defaultRefinement={{ min: 50, max: 200 }}
@@ -143,7 +143,7 @@ stories
     () => (
       <WrapWithHits linkedStoryGroup="RangeInput">
         <RangeInput
-          attributeName="price"
+          attribute="price"
           min={number('min', 0)}
           max={number('max', 500)}
           precision={number('precision', 0)}
@@ -165,7 +165,7 @@ stories
     () => (
       <WrapWithHits linkedStoryGroup="RangeInput">
         <Panel header="Range Input" footer="Footer">
-          <RangeInput attributeName="price" />
+          <RangeInput attribute="price" />
         </Panel>
       </WrapWithHits>
     ),
@@ -179,7 +179,7 @@ stories
     () => (
       <WrapWithHits searchBox={false} linkedStoryGroup="RangeInput">
         <Panel header="Range Input" footer="Footer">
-          <RangeInput attributeName="price" />
+          <RangeInput attribute="price" />
         </Panel>
 
         <div style={{ display: 'none' }}>

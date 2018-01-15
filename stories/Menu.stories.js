@@ -15,7 +15,7 @@ stories
     'default',
     () => (
       <WrapWithHits hasPlayground={true} linkedStoryGroup="Menu">
-        <Menu attributeName="category" />
+        <Menu attribute="category" />
       </WrapWithHits>
     ),
     {
@@ -27,7 +27,7 @@ stories
     'with default selected item',
     () => (
       <WrapWithHits hasPlayground={true} linkedStoryGroup="Menu">
-        <Menu attributeName="category" defaultRefinement="Eating" />
+        <Menu attribute="category" defaultRefinement="Eating" />
       </WrapWithHits>
     ),
     {
@@ -40,7 +40,7 @@ stories
     () => (
       <WrapWithHits hasPlayground={true} linkedStoryGroup="Menu">
         <Menu
-          attributeName="category"
+          attribute="category"
           limitMin={2}
           limitMax={5}
           showMore={true}
@@ -57,7 +57,7 @@ stories
     () => (
       <WrapWithHits hasPlayground={true} linkedStoryGroup="Menu">
         <Menu
-          attributeName="category"
+          attribute="category"
           withSearchBox
           transformItems={items =>
             orderBy(
@@ -79,7 +79,7 @@ stories
     () => (
       <WrapWithHits hasPlayground={true} linkedStoryGroup="Menu">
         <Menu
-          attributeName="category"
+          attribute="category"
           transformItems={items =>
             orderBy(items, ['label', 'count'], ['asc', 'desc'])
           }
@@ -96,7 +96,7 @@ stories
     () => (
       <WrapWithHits hasPlayground={true} linkedStoryGroup="Menu">
         <Panel header="Menu" footer="Footer">
-          <Menu attributeName="category" />
+          <Menu attribute="category" />
         </Panel>
       </WrapWithHits>
     ),
@@ -114,7 +114,7 @@ stories
         linkedStoryGroup="Menu"
       >
         <Panel header="Menu" footer="Footer">
-          <Menu attributeName="category" />
+          <Menu attribute="category" />
         </Panel>
 
         <div style={{ display: 'none' }}>
@@ -132,7 +132,7 @@ stories
     () => (
       <WrapWithHits linkedStoryGroup="Menu">
         <Menu
-          attributeName="category"
+          attribute="category"
           defaultRefinement={text('defaultSelectedItem', 'Bathroom')}
           limitMin={number('limitMin', 10)}
           limitMax={number('limitMax', 20)}

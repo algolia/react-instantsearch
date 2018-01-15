@@ -8,7 +8,7 @@ import {
 } from '../core/indexUtils';
 
 function getId(props) {
-  return props.attributeName;
+  return props.attribute;
 }
 
 const namespace = 'toggle';
@@ -50,9 +50,9 @@ function cleanUp(props, searchState, context) {
  * You can't toggle on null or not-null values. If you want to address this particular use-case you'll need to compute an
  * extra boolean attribute saying if the value exists or not. See this [thread](https://discourse.algolia.com/t/how-to-create-a-toggle-for-the-absence-of-a-string-attribute/2460) for more details.
  *
- * @propType {string} attributeName - Name of the attribute on which to apply the `value` refinement. Required when `value` is present.
+ * @propType {string} attribute - Name of the attribute on which to apply the `value` refinement. Required when `value` is present.
  * @propType {string} label - Label for the toggle.
- * @propType {string} value - Value of the refinement to apply on `attributeName`.
+ * @propType {string} value - Value of the refinement to apply on `attribute`.
  * @propType {boolean} [defaultRefinement=false] - Default searchState of the widget. Should the toggle be checked by default?
  * @providedPropType {function} refine - a function to toggle a refinement
  * @providedPropType {function} createURL - a function to generate a URL for the corresponding search state
@@ -64,7 +64,7 @@ export default createConnector({
   propTypes: {
     label: PropTypes.string,
     filter: PropTypes.func,
-    attributeName: PropTypes.string,
+    attribute: PropTypes.string,
     value: PropTypes.any,
     defaultRefinement: PropTypes.bool,
   },
@@ -87,14 +87,14 @@ export default createConnector({
   },
 
   getSearchParameters(searchParameters, props, searchState) {
-    const { attributeName, value, filter } = props;
+    const { attribute, value, filter } = props;
     const checked = getCurrentRefinement(props, searchState, this.context);
 
     if (checked) {
-      if (attributeName) {
+      if (attribute) {
         searchParameters = searchParameters
-          .addFacet(attributeName)
-          .addFacetRefinement(attributeName, value);
+          .addFacet(attribute)
+          .addFacetRefinement(attribute, value);
       }
       if (filter) {
         searchParameters = filter(searchParameters);
@@ -113,7 +113,7 @@ export default createConnector({
       items.push({
         label: props.label,
         currentRefinement: props.label,
-        attributeName: props.attributeName,
+        attribute: props.attribute,
         value: nextState => refine(props, nextState, false, this.context),
       });
     }
