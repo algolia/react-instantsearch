@@ -59,10 +59,10 @@ stories
     }
   )
   .addWithJSX(
-    'with precision of 0',
+    'with precision of 2',
     () => (
       <WrapWithHits linkedStoryGroup="RangeInput">
-        <RangeInput attributeName="price" precision={0} />
+        <RangeInput attributeName="price" precision={2} />
       </WrapWithHits>
     ),
     {
