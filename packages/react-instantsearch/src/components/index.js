@@ -14,4 +14,4 @@ export { default as ScrollTo } from './ScrollTo.js';
 export { default as SearchBox } from './SearchBox.js';
 export { default as SortBy } from './SortBy.js';
 export { default as Stats } from './Stats.js';
-export { default as Toggle } from './Toggle.js';
+export { default as ToggleRefinement } from './ToggleRefinement.js';

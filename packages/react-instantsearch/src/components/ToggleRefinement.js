@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import createClassNames from './createClassNames';
 
-const cx = createClassNames('Toggle');
+const cx = createClassNames('ToggleRefinement');
 
-class Toggle extends Component {
+class ToggleRefinement extends Component {
   static propTypes = {
     currentRefinement: PropTypes.bool.isRequired,
     refine: PropTypes.func.isRequired,
@@ -40,4 +40,4 @@ class Toggle extends Component {
   }
 }
 
-export default Toggle;
+export default ToggleRefinement;

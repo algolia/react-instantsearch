@@ -2,13 +2,14 @@
 
 import { SearchParameters } from 'algoliasearch-helper';
 
-import connect from './connectToggle';
+import connect from './connectToggleRefinement';
+
 jest.mock('../core/createConnector');
 
 let props;
 let params;
 
-describe('connectToggle', () => {
+describe('connectToggleRefinement', () => {
   describe('single index', () => {
     const context = { context: { ais: { mainTargetedIndex: 'index' } } };
     const getProvidedProps = connect.getProvidedProps.bind(context);
@@ -23,10 +24,7 @@ describe('connectToggle', () => {
       props = getProvidedProps({ attribute: 't' }, { toggle: { t: true } });
       expect(props).toEqual({ currentRefinement: true });
 
-      props = getProvidedProps(
-        { defaultRefinement: true, attribute: 't' },
-        {}
-      );
+      props = getProvidedProps({ defaultRefinement: true, attribute: 't' }, {});
       expect(props).toEqual({ currentRefinement: true });
     });
 

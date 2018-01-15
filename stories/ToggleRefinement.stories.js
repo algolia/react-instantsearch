@@ -1,19 +1,19 @@
 import React from 'react';
 import { setAddon, storiesOf } from '@storybook/react';
-import { Panel, Toggle } from '../packages/react-instantsearch/dom';
+import { Panel, ToggleRefinement } from '../packages/react-instantsearch/dom';
 import { displayName, filterProps, WrapWithHits } from './util';
 import JSXAddon from 'storybook-addon-jsx';
 
 setAddon(JSXAddon);
 
-const stories = storiesOf('Toggle', module);
+const stories = storiesOf('ToggleRefinement', module);
 
 stories
   .addWithJSX(
     'default',
     () => (
-      <WrapWithHits linkedStoryGroup="Toggle">
-        <Toggle
+      <WrapWithHits linkedStoryGroup="ToggleRefinement">
+        <ToggleRefinement
           attribute="materials"
           label="Made with solid pine"
           value={'Solid pine'}
@@ -28,8 +28,8 @@ stories
   .addWithJSX(
     'checked by default',
     () => (
-      <WrapWithHits linkedStoryGroup="Toggle">
-        <Toggle
+      <WrapWithHits linkedStoryGroup="ToggleRefinement">
+        <ToggleRefinement
           attribute="materials"
           label="Made with solid pine"
           value="Solid pine"
@@ -45,9 +45,9 @@ stories
   .addWithJSX(
     'with Panel',
     () => (
-      <WrapWithHits linkedStoryGroup="Toggle">
-        <Panel header="Toggle" footer="Footer">
-          <Toggle
+      <WrapWithHits linkedStoryGroup="ToggleRefinement">
+        <Panel header="Toggle Refinement" footer="Footer">
+          <ToggleRefinement
             attribute="materials"
             label="Made with solid pine"
             value="Solid pine"

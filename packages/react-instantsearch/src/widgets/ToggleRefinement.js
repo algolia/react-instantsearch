@@ -1,9 +1,9 @@
-import connectToggle from '../connectors/connectToggle';
-import Toggle from '../components/Toggle';
+import connectToggleRefinement from '../connectors/connectToggleRefinement';
+import ToggleRefinement from '../components/ToggleRefinement';
 
 /**
- * The Toggle provides an on/off filtering feature based on an attribute value. Note that if you provide an “off” option, it will be refined at initialization.
- * @name Toggle
+ * The ToggleRefinement provides an on/off filtering feature based on an attribute value. Note that if you provide an “off” option, it will be refined at initialization.
+ * @name ToggleRefinement
  * @kind widget
  * @requirements To use this widget, you'll need an attribute to toggle on.
  *
@@ -14,17 +14,17 @@ import Toggle from '../components/Toggle';
  * @propType {string} label - Label for the toggle.
  * @propType {any} value - Value of the refinement to apply on `attribute` when checked.
  * @propType {boolean} [defaultRefinement=false] - Default state of the widget. Should the toggle be checked by default?
- * @themeKey ais-Toggle - the root div of the widget
- * @themeKey ais-Toggle-list - the list of toggles
- * @themeKey ais-Toggle-item - the toggle list item
- * @themeKey ais-Toggle-label - the label of each toggle item
- * @themeKey ais-Toggle-checkbox - the checkbox input of each toggle item
- * @themeKey ais-Toggle-labelText - the label text of each toggle item
- * @themeKey ais-Toggle-count - the count of items for each item
+ * @themeKey ais-ToggleRefinement - the root div of the widget
+ * @themeKey ais-ToggleRefinement-list - the list of toggles
+ * @themeKey ais-ToggleRefinement-item - the toggle list item
+ * @themeKey ais-ToggleRefinement-label - the label of each toggle item
+ * @themeKey ais-ToggleRefinement-checkbox - the checkbox input of each toggle item
+ * @themeKey ais-ToggleRefinement-labelText - the label text of each toggle item
+ * @themeKey ais-ToggleRefinement-count - the count of items for each item
  * @example
  * import React from 'react';
  *
- * import { Toggle, InstantSearch } from 'react-instantsearch/dom';
+ * import { ToggleRefinement, InstantSearch } from 'react-instantsearch/dom';
  *
  * export default function App() {
  *   return (
@@ -33,7 +33,7 @@ import Toggle from '../components/Toggle';
  *       apiKey="6be0576ff61c053d5f9a3225e2a90f76"
  *       indexName="ikea"
  *     >
- *       <Toggle
+ *       <ToggleRefinement
  *         attribute="materials"
  *         label="Made with solid pine"
  *         value="Solid pine"
@@ -43,4 +43,4 @@ import Toggle from '../components/Toggle';
  * }
  */
 
-export default connectToggle(Toggle);
+export default connectToggleRefinement(ToggleRefinement);

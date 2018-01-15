@@ -6,7 +6,7 @@ import {
   HierarchicalMenu,
   Panel,
   RefinementList,
-  Toggle,
+  ToggleRefinement,
 } from '../packages/react-instantsearch/dom';
 import { displayName, filterProps, WrapWithHits } from './util';
 import JSXAddon from 'storybook-addon-jsx';
@@ -65,12 +65,12 @@ stories
   )
 
   .addWithJSX(
-    'with Toggle',
+    'with ToggleRefinement',
     () => (
       <WrapWithHits linkedStoryGroup="CurrentRefinements">
         <CurrentRefinements />
         <hr />
-        <Toggle
+        <ToggleRefinement
           attribute="materials"
           label="Made with solid pine"
           value={'Solid pine'}

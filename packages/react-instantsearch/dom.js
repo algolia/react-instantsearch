@@ -36,6 +36,6 @@ export { default as ScrollTo } from './src/widgets/ScrollTo.js';
 export { default as SearchBox } from './src/widgets/SearchBox.js';
 export { default as SortBy } from './src/widgets/SortBy.js';
 export { default as Stats } from './src/widgets/Stats.js';
-export { default as Toggle } from './src/widgets/Toggle.js';
+export { default as ToggleRefinement } from './src/widgets/ToggleRefinement.js';
 export { default as Panel } from './src/widgets/Panel.js';
 export { default as Breadcrumb } from './src/widgets/Breadcrumb';
