@@ -128,14 +128,14 @@ aside .facet {
   margin-bottom: 16px;
 }
 
-.ais-header {
+.ais-Panel-header {
   margin: 4px 0;
   clear: both;
   padding: initial;
   border-bottom: none;
 }
 
-.ais-header h5 {
+.ais-Panel-header h5 {
   font-weight: bold;
   text-transform: none;
 }

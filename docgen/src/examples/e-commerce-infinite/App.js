@@ -68,43 +68,39 @@ const Facets = () => (
 
     <section className="facet-wrapper">
       <div className="facet-category-title facet">Show results for</div>
+
       <HierarchicalMenu
-        key="categories"
         attributes={['category', 'sub_category', 'sub_sub_category']}
       />
     </section>
 
     <section className="facet-wrapper">
       <div className="facet-category-title facet">Refine By</div>
-      <RefinementList
-        attribute="type"
-        operator="or"
-        limit={5}
-        searchable
-        header={<h5>Type</h5>}
-      />
 
-      <RefinementList
-        attribute="materials"
-        operator="or"
-        limit={5}
-        searchable
-        header={<h5>Materials</h5>}
-      />
+      <Panel header={<h5>Type</h5>}>
+        <RefinementList attribute="type" operator="or" limit={5} searchable />
+      </Panel>
 
-      <ConnectedColorRefinementList
-        attribute="colors"
-        operator="or"
-        header={<h5>Colors</h5>}
-      />
+      <Panel header={<h5>Materials</h5>}>
+        <RefinementList
+          attribute="materials"
+          operator="or"
+          limit={5}
+          searchable
+        />
+      </Panel>
 
-      <RatingMenu attribute="rating" max={5} header={<h5>Rating</h5>} />
+      <Panel header={<h5>Colors</h5>}>
+        <ConnectedColorRefinementList attribute="colors" operator="or" />
+      </Panel>
 
-      <RangeInput
-        key="price_input"
-        attribute="price"
-        header={<h5>Price</h5>}
-      />
+      <Panel header={<h5>Rating</h5>}>
+        <RatingMenu attribute="rating" max={5} />
+      </Panel>
+
+      <Panel header={<h5>Price</h5>}>
+        <RangeInput key="price_input" attribute="price" />
+      </Panel>
     </section>
 
     <div className="thank-you">
@@ -146,18 +142,15 @@ const ColorItem = ({ item, createURL, refine }) => {
   );
 };
 
-const CustomColorRefinementList = ({ items, refine, createURL, header }) => (
-  <Panel header={header}>
-    {items.map(item => (
-      <ColorItem
-        key={item.label}
-        item={item}
-        refine={refine}
-        createURL={createURL}
-      />
-    ))}
-  </Panel>
-);
+const CustomColorRefinementList = ({ items, refine, createURL }) =>
+  items.map(item => (
+    <ColorItem
+      key={item.label}
+      item={item}
+      refine={refine}
+      createURL={createURL}
+    />
+  ));
 
 function CustomHits({ hits, refine, hasMore }) {
   return (
