@@ -9,6 +9,7 @@ import {
   SortBy,
   Stats,
   Pagination,
+  Panel,
   ClearRefinements,
   RatingMenu,
   RangeInput,
@@ -62,22 +63,23 @@ const Facets = () => (
       }}
     />
 
-    <HierarchicalMenu
-      key="categories"
-      attributes={['category', 'sub_category', 'sub_sub_category']}
-      header="Categories"
-    />
+    <Panel header="Categories">
+      <HierarchicalMenu
+        attributes={['category', 'sub_category', 'sub_sub_category']}
+      />
+    </Panel>
 
-    <RefinementList
-      attribute="materials"
-      operator="or"
-      limit={10}
-      header="Materials"
-    />
+    <Panel header="Materials">
+      <RefinementList attribute="materials" operator="or" limit={10} />
+    </Panel>
 
-    <RatingMenu attribute="rating" max={5} header="Rating" />
+    <Panel header="Rating">
+      <RatingMenu attribute="rating" max={5} />
+    </Panel>
 
-    <RangeInput key="price_input" attribute="price" header="Price" />
+    <Panel header="Price">
+      <RangeInput key="price_input" attribute="price" />
+    </Panel>
 
     <div className="thank-you">
       Data courtesy of <a href="http://www.ikea.com/">ikea.com</a>
