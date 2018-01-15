@@ -28,7 +28,7 @@ class Breadcrumb extends Component {
 
   static defaultProps = {
     rootURL: null,
-    separator: '>',
+    separator: ' > ',
     className: '',
   };
 
