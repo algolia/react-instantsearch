@@ -59,8 +59,8 @@ const sortBy = ['count:desc', 'name:asc'];
  * @kind connector
  * @propType {string} attribute - the name of the attribute in the record
  * @propType {boolean} [showMore=false] - true if the component should display a button that will expand the number of items
- * @propType {number} [limitMin=10] - the minimum number of diplayed items
- * @propType {number} [limitMax=20] - the maximun number of displayed items. Only used when showMore is set to `true`
+ * @propType {number} [limit=10] - the minimum number of diplayed items
+ * @propType {number} [showMoreLimit=20] - the maximun number of displayed items. Only used when showMore is set to `true`
  * @propType {string} [defaultRefinement] - the value of the item selected by default
  * @propType {boolean} [withSearchBox=false] - allow search inside values
  * @providedPropType {function} refine - a function to toggle a refinement
@@ -76,8 +76,8 @@ export default createConnector({
   propTypes: {
     attribute: PropTypes.string.isRequired,
     showMore: PropTypes.bool,
-    limitMin: PropTypes.number,
-    limitMax: PropTypes.number,
+    limit: PropTypes.number,
+    showMoreLimit: PropTypes.number,
     defaultRefinement: PropTypes.string,
     transformItems: PropTypes.func,
     withSearchBox: PropTypes.bool,
@@ -86,8 +86,8 @@ export default createConnector({
 
   defaultProps: {
     showMore: false,
-    limitMin: 10,
-    limitMax: 20,
+    limit: 10,
+    showMoreLimit: 20,
   },
 
   getProvidedProps(
@@ -97,8 +97,8 @@ export default createConnector({
     meta,
     searchForFacetValuesResults
   ) {
-    const { attribute, showMore, limitMin, limitMax } = props;
-    const limit = showMore ? limitMax : limitMin;
+    const { attribute, showMore, limit, showMoreLimit } = props;
+    const itemsLimit = showMore ? showMoreLimit : limit;
     const results = getResults(searchResults, this.context);
 
     const canRefine =
@@ -166,7 +166,7 @@ export default createConnector({
       ? props.transformItems(sortedItems)
       : sortedItems;
     return {
-      items: transformedItems.slice(0, limit),
+      items: transformedItems.slice(0, itemsLimit),
       currentRefinement: getCurrentRefinement(props, searchState, this.context),
       isFromSearch,
       withSearchBox,
@@ -187,13 +187,13 @@ export default createConnector({
   },
 
   getSearchParameters(searchParameters, props, searchState) {
-    const { attribute, showMore, limitMin, limitMax } = props;
-    const limit = showMore ? limitMax : limitMin;
+    const { attribute, showMore, limit, showMoreLimit } = props;
+    const itemsLimit = showMore ? showMoreLimit : limit;
 
     searchParameters = searchParameters.setQueryParameters({
       maxValuesPerFacet: Math.max(
         searchParameters.maxValuesPerFacet || 0,
-        limit
+        itemsLimit
       ),
     });
 

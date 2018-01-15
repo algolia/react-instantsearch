@@ -21,8 +21,8 @@ class List extends Component {
     selectItem: PropTypes.func,
     className: PropTypes.string,
     showMore: PropTypes.bool,
-    limitMin: PropTypes.number,
-    limitMax: PropTypes.number,
+    limit: PropTypes.number,
+    showMoreLimit: PropTypes.number,
     limit: PropTypes.number,
     show: PropTypes.func,
     searchForItems: PropTypes.func,
@@ -52,9 +52,9 @@ class List extends Component {
   };
 
   getLimit = () => {
-    const { limitMin, limitMax } = this.props;
+    const { limit, showMoreLimit } = this.props;
     const { extended } = this.state;
-    return extended ? limitMax : limitMin;
+    return extended ? showMoreLimit : limit;
   };
 
   resetQuery = () => {
@@ -89,7 +89,7 @@ class List extends Component {
   renderShowMore() {
     const { showMore, translate, cx } = this.props;
     const { extended } = this.state;
-    const disabled = this.props.limitMin >= this.props.items.length;
+    const disabled = this.props.limit >= this.props.items.length;
     if (!showMore) {
       return null;
     }
@@ -157,13 +157,12 @@ class List extends Component {
     // Always limit the number of items we show on screen, since the actual
     // number of retrieved items might vary with the `maxValuesPerFacet` config
     // option.
-    const limit = this.getLimit();
     return (
       <div className={rootClassName}>
         {searchBox}
         <ul className={cx('list', !canRefine && 'list--noRefinement')}>
           {items
-            .slice(0, limit)
+            .slice(0, this.getLimit())
             .map(item => this.renderItem(item, this.resetQuery))}
         </ul>
         {this.renderShowMore()}

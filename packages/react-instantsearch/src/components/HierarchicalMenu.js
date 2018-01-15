@@ -26,8 +26,8 @@ class HierarchicalMenu extends Component {
     items: itemsPropType,
     showMore: PropTypes.bool,
     className: PropTypes.string,
-    limitMin: PropTypes.number,
-    limitMax: PropTypes.number,
+    limit: PropTypes.number,
+    showMoreLimit: PropTypes.number,
     transformItems: PropTypes.func,
   };
 
@@ -59,8 +59,8 @@ class HierarchicalMenu extends Component {
           'translate',
           'items',
           'showMore',
-          'limitMin',
-          'limitMax',
+          'limit',
+          'showMoreLimit',
           'isEmpty',
           'canRefine',
           'className',

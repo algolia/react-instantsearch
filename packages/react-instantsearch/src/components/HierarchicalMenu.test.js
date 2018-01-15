@@ -28,8 +28,8 @@ describe('HierarchicalMenu', () => {
             { value: 'black', count: 20, label: 'black' },
             { value: 'blue', count: 30, label: 'blue' },
           ]}
-          limitMin={2}
-          limitMax={4}
+          limit={2}
+          showMoreLimit={4}
           showMore={true}
           canRefine={true}
         />
@@ -58,8 +58,8 @@ describe('HierarchicalMenu', () => {
             { value: 'black', count: 20, label: 'black' },
             { value: 'blue', count: 30, label: 'blue' },
           ]}
-          limitMin={2}
-          limitMax={4}
+          limit={2}
+          showMoreLimit={4}
           showMore={true}
           canRefine={true}
         />
@@ -148,8 +148,8 @@ describe('HierarchicalMenu', () => {
           { value: 'green', count: 30, label: 'green' },
           { value: 'cyan', count: 30, label: 'cyan' },
         ]}
-        limitMin={2}
-        limitMax={4}
+        limit={2}
+        showMoreLimit={4}
         showMore={true}
         canRefine={true}
       />
@@ -176,8 +176,8 @@ describe('HierarchicalMenu', () => {
           { value: 'white', count: 10, label: 'white' },
           { value: 'black', count: 20, label: 'black' },
         ]}
-        limitMin={2}
-        limitMax={4}
+        limit={2}
+        showMoreLimit={4}
         showMore={true}
         canRefine={true}
       />

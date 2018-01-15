@@ -21,8 +21,8 @@ describe('RefinementList', () => {
             { label: 'black', value: ['black'], count: 20, isRefined: false },
             { label: 'blue', value: ['blue'], count: 30, isRefined: false },
           ]}
-          limitMin={2}
-          limitMax={4}
+          limit={2}
+          showMoreLimit={4}
           showMore={true}
           isFromSearch={false}
           canRefine={true}
@@ -45,8 +45,8 @@ describe('RefinementList', () => {
             { label: 'black', value: ['black'], count: 20, isRefined: false },
             { label: 'blue', value: ['blue'], count: 30, isRefined: false },
           ]}
-          limitMin={2}
-          limitMax={4}
+          limit={2}
+          showMoreLimit={4}
           showMore={true}
           isFromSearch={false}
           canRefine={true}
@@ -68,8 +68,8 @@ describe('RefinementList', () => {
             { label: 'black', value: ['black'], count: 20, isRefined: false },
             { label: 'blue', value: ['blue'], count: 30, isRefined: false },
           ]}
-          limitMin={2}
-          limitMax={4}
+          limit={2}
+          showMoreLimit={4}
           showMore={true}
           isFromSearch={false}
           canRefine={false}
@@ -196,8 +196,8 @@ describe('RefinementList', () => {
           { label: 'red', value: ['red'], count: 30, isRefined: false },
           { label: 'green', value: ['green'], count: 30, isRefined: false },
         ]}
-        limitMin={2}
-        limitMax={4}
+        limit={2}
+        showMoreLimit={4}
         showMore={true}
         isFromSearch={false}
         canRefine={true}
@@ -226,8 +226,8 @@ describe('RefinementList', () => {
           { label: 'white', value: ['white'], count: 10, isRefined: false },
           { label: 'black', value: ['black'], count: 20, isRefined: false },
         ]}
-        limitMin={2}
-        limitMax={4}
+        limit={2}
+        showMoreLimit={4}
         showMore={true}
         isFromSearch={false}
         canRefine={true}

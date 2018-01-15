@@ -14,8 +14,8 @@ import Menu from '../components/Menu';
  * the [dashboard](https://www.algolia.com/explorer/display/) or using the [API](https://www.algolia.com/doc/guides/searching/faceting/#search-for-facet-values).
  * @propType {string} attribute - the name of the attribute in the record
  * @propType {boolean} [showMore=false] - true if the component should display a button that will expand the number of items
- * @propType {number} [limitMin=10] - the minimum number of diplayed items
- * @propType {number} [limitMax=20] - the maximun number of displayed items. Only used when showMore is set to `true`
+ * @propType {number} [limit=10] - the minimum number of diplayed items
+ * @propType {number} [showMoreLimit=20] - the maximun number of displayed items. Only used when showMore is set to `true`
  * @propType {string} [defaultRefinement] - the value of the item selected by default
  * @propType {function} [transformItems] - Function to modify the items being displayed, e.g. for filtering or sorting them. Takes an items as parameter and expects it back in return.
  * @propType {boolean} [withSearchBox=false] - true if the component should display an input to search for facet values. <br> In order to make this feature work, you need to make the attribute searchable [using the API](https://www.algolia.com/doc/guides/searching/faceting/?language=js#declaring-a-searchable-attribute-for-faceting) or [the dashboard](https://www.algolia.com/explorer/display/).

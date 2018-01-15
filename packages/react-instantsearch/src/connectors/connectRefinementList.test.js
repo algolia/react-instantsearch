@@ -124,7 +124,7 @@ describe('connectRefinementList', () => {
       ]);
 
       props = getProvidedProps(
-        { attribute: 'ok', limitMin: 1 },
+        { attribute: 'ok', limit: 1 },
         {},
         { results }
       );
@@ -138,7 +138,7 @@ describe('connectRefinementList', () => {
       ]);
 
       props = getProvidedProps(
-        { attribute: 'ok', limitMin: 1 },
+        { attribute: 'ok', limit: 1 },
         {},
         { results },
         {},
@@ -165,7 +165,7 @@ describe('connectRefinementList', () => {
       ]);
 
       props = getProvidedProps(
-        { attribute: 'ok', limitMin: 1 },
+        { attribute: 'ok', limit: 1 },
         {},
         { results },
         {},
@@ -181,7 +181,7 @@ describe('connectRefinementList', () => {
       ]);
 
       props = getProvidedProps(
-        { attribute: 'ok', showMore: true, limitMin: 0, limitMax: 1 },
+        { attribute: 'ok', showMore: true, limit: 0, showMoreLimit: 1 },
         {},
         { results }
       );
@@ -266,7 +266,7 @@ describe('connectRefinementList', () => {
       params = getSP(
         initSP,
         {
-          limitMin: 101,
+          limit: 101,
         },
         {}
       );
@@ -276,7 +276,7 @@ describe('connectRefinementList', () => {
         initSP,
         {
           showMore: true,
-          limitMax: 101,
+          showMoreLimit: 101,
         },
         {}
       );
@@ -285,7 +285,7 @@ describe('connectRefinementList', () => {
       params = getSP(
         initSP,
         {
-          limitMin: 99,
+          limit: 99,
         },
         {}
       );
@@ -295,7 +295,7 @@ describe('connectRefinementList', () => {
         initSP,
         {
           showMore: true,
-          limitMax: 99,
+          showMoreLimit: 99,
         },
         {}
       );
@@ -310,7 +310,7 @@ describe('connectRefinementList', () => {
         {
           attribute: 'ok',
           operator: 'or',
-          limitMin: 1,
+          limit: 1,
         },
         { refinementList: { ok: ['wat'] } }
       );
@@ -326,7 +326,7 @@ describe('connectRefinementList', () => {
         {
           attribute: 'ok',
           operator: 'and',
-          limitMin: 1,
+          limit: 1,
         },
         { refinementList: { ok: ['wat'] } }
       );
@@ -537,7 +537,7 @@ describe('connectRefinementList', () => {
         {
           attribute: 'ok',
           operator: 'or',
-          limitMin: 1,
+          limit: 1,
         },
         { indices: { first: { refinementList: { ok: ['wat'] } } } }
       );
@@ -553,7 +553,7 @@ describe('connectRefinementList', () => {
         {
           attribute: 'ok',
           operator: 'and',
-          limitMin: 1,
+          limit: 1,
         },
         { indices: { first: { refinementList: { ok: ['wat'] } } } }
       );

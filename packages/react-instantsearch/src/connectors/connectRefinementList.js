@@ -74,8 +74,8 @@ function cleanUp(props, searchState, context) {
  * @propType {boolean} [withSearchBox=false] - allow search inside values
  * @propType {string} [operator=or] - How to apply the refinements. Possible values: 'or' or 'and'.
  * @propType {boolean} [showMore=false] - true if the component should display a button that will expand the number of items
- * @propType {number} [limitMin=10] - the minimum number of displayed items
- * @propType {number} [limitMax=20] - the maximun number of displayed items. Only used when showMore is set to `true`
+ * @propType {number} [limit=10] - the minimum number of displayed items
+ * @propType {number} [showMoreLimit=20] - the maximun number of displayed items. Only used when showMore is set to `true`
  * @propType {string[]} defaultRefinement - the values of the items selected by default. The searchState of this widget takes the form of a list of `string`s, which correspond to the values of all selected refinements. However, when there are no refinements selected, the value of the searchState is an empty string.
  * @propType {function} [transformItems] - Function to modify the items being displayed, e.g. for filtering or sorting them. Takes an items as parameter and expects it back in return.
  * @providedPropType {function} refine - a function to toggle a refinement
@@ -95,8 +95,8 @@ export default createConnector({
     attribute: PropTypes.string.isRequired,
     operator: PropTypes.oneOf(['and', 'or']),
     showMore: PropTypes.bool,
-    limitMin: PropTypes.number,
-    limitMax: PropTypes.number,
+    limit: PropTypes.number,
+    showMoreLimit: PropTypes.number,
     defaultRefinement: PropTypes.arrayOf(
       PropTypes.oneOfType([PropTypes.string, PropTypes.number])
     ),
@@ -108,8 +108,8 @@ export default createConnector({
   defaultProps: {
     operator: 'or',
     showMore: false,
-    limitMin: 10,
-    limitMax: 20,
+    limit: 10,
+    showMoreLimit: 20,
   },
 
   getProvidedProps(
@@ -119,8 +119,8 @@ export default createConnector({
     metadata,
     searchForFacetValuesResults
   ) {
-    const { attribute, showMore, limitMin, limitMax } = props;
-    const limit = showMore ? limitMax : limitMin;
+    const { attribute, showMore, limit, showMoreLimit } = props;
+    const itemsLimit = showMore ? showMoreLimit : limit;
     const results = getResults(searchResults, this.context);
 
     const canRefine =
@@ -181,7 +181,7 @@ export default createConnector({
       : items;
 
     return {
-      items: transformedItems.slice(0, limit),
+      items: transformedItems.slice(0, itemsLimit),
       currentRefinement: getCurrentRefinement(props, searchState, this.context),
       isFromSearch,
       withSearchBox,
@@ -202,8 +202,8 @@ export default createConnector({
   },
 
   getSearchParameters(searchParameters, props, searchState) {
-    const { attribute, operator, showMore, limitMin, limitMax } = props;
-    const limit = showMore ? limitMax : limitMin;
+    const { attribute, operator, showMore, limit, showMoreLimit } = props;
+    const itemsLimit = showMore ? showMoreLimit : limit;
 
     const addKey = operator === 'and' ? 'addFacet' : 'addDisjunctiveFacet';
     const addRefinementKey = `${addKey}Refinement`;
@@ -211,7 +211,7 @@ export default createConnector({
     searchParameters = searchParameters.setQueryParameters({
       maxValuesPerFacet: Math.max(
         searchParameters.maxValuesPerFacet || 0,
-        limit
+        itemsLimit
       ),
     });
 

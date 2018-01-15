@@ -45,9 +45,9 @@ import HierarchicalMenu from '../components/HierarchicalMenu';
  * on the Algolia dashboard or configured as `attributesForFaceting` via a set settings call to the Algolia API.
  *
  * @propType {array.<string>} attributes - List of attributes to use to generate the hierarchy of the menu. See the example for the convention to follow.
- * @propType {boolean} [showMore=false] - Flag to activate the show more button, for toggling the number of items between limitMin and limitMax.
- * @propType {number} [limitMin=10] -  The maximum number of items displayed.
- * @propType {number} [limitMax=20] -  The maximum number of items displayed when the user triggers the show more. Not considered if `showMore` is false.
+ * @propType {boolean} [showMore=false] - Flag to activate the show more button, for toggling the number of items between limit and showMoreLimit.
+ * @propType {number} [limit=10] -  The maximum number of items displayed.
+ * @propType {number} [showMoreLimit=20] -  The maximum number of items displayed when the user triggers the show more. Not considered if `showMore` is false.
  * @propType {string} [separator='>'] -  Specifies the level separator used in the data.
  * @propType {string[]} [rootPath=null] - The already selected and hidden path.
  * @propType {boolean} [showParentLevel=true] - Flag to set if the parent level should be displayed.

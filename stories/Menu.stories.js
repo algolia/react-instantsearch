@@ -41,8 +41,8 @@ stories
       <WrapWithHits hasPlayground={true} linkedStoryGroup="Menu">
         <Menu
           attribute="category"
-          limitMin={2}
-          limitMax={5}
+          limit={2}
+          showMoreLimit={5}
           showMore={true}
         />
       </WrapWithHits>
@@ -134,8 +134,8 @@ stories
         <Menu
           attribute="category"
           defaultRefinement={text('defaultSelectedItem', 'Bathroom')}
-          limitMin={number('limitMin', 10)}
-          limitMax={number('limitMax', 20)}
+          limit={number('limit', 10)}
+          showMoreLimit={number('showMoreLimit', 20)}
           showMore={boolean('showMore', true)}
         />
       </WrapWithHits>

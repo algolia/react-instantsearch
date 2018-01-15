@@ -98,7 +98,7 @@ describe('connectHierarchicalMenu', () => {
       ]);
 
       props = getProvidedProps(
-        { attributes: ['ok'], limitMin: 1 },
+        { attributes: ['ok'], limit: 1 },
         {},
         { results }
       );
@@ -118,7 +118,7 @@ describe('connectHierarchicalMenu', () => {
       ]);
 
       props = getProvidedProps(
-        { attributes: ['ok'], showMore: true, limitMin: 0, limitMax: 1 },
+        { attributes: ['ok'], showMore: true, limit: 0, showMoreLimit: 1 },
         {},
         { results }
       );
@@ -170,7 +170,7 @@ describe('connectHierarchicalMenu', () => {
       expect(props.items).toEqual(['items']);
     });
 
-    it('shows the effect of limitMax when there is no transformItems', () => {
+    it('shows the effect of showMoreLimit when there is no transformItems', () => {
       const results = {
         getFacetValues: jest.fn(),
         getFacetByName: () => true,
@@ -214,7 +214,7 @@ describe('connectHierarchicalMenu', () => {
       }));
 
       props = getProvidedProps(
-        { attributes: ['ok'], showMore: true, limitMin: 0, limitMax: 2 },
+        { attributes: ['ok'], showMore: true, limit: 0, showMoreLimit: 2 },
         {},
         { results }
       );
@@ -288,7 +288,7 @@ describe('connectHierarchicalMenu', () => {
         ],
       }));
       props = getProvidedProps(
-        { attributes: ['ok'], showMore: true, limitMin: 0, limitMax: 3 },
+        { attributes: ['ok'], showMore: true, limit: 0, showMoreLimit: 3 },
         {},
         { results }
       );
@@ -377,8 +377,8 @@ describe('connectHierarchicalMenu', () => {
           attributes: ['ok'],
           transformItems,
           showMore: true,
-          limitMin: 0,
-          limitMax: 2,
+          limit: 0,
+          showMoreLimit: 2,
         },
         {},
         { results }
@@ -417,7 +417,7 @@ describe('connectHierarchicalMenu', () => {
         initSP,
         {
           attributes: ['attribute'],
-          limitMin: 101,
+          limit: 101,
         },
         {}
       );
@@ -428,7 +428,7 @@ describe('connectHierarchicalMenu', () => {
         {
           attributes: ['attribute'],
           showMore: true,
-          limitMax: 101,
+          showMoreLimit: 101,
         },
         {}
       );
@@ -438,7 +438,7 @@ describe('connectHierarchicalMenu', () => {
         initSP,
         {
           attributes: ['attribute'],
-          limitMin: 99,
+          limit: 99,
         },
         {}
       );
@@ -449,7 +449,7 @@ describe('connectHierarchicalMenu', () => {
         {
           attributes: ['attribute'],
           showMore: true,
-          limitMax: 99,
+          showMoreLimit: 99,
         },
         {}
       );
@@ -466,7 +466,7 @@ describe('connectHierarchicalMenu', () => {
           separator: 'SEPARATOR',
           rootPath: 'ROOT_PATH',
           showParentLevel: true,
-          limitMin: 1,
+          limit: 1,
         },
         { hierarchicalMenu: { ATTRIBUTE: 'ok' } }
       );
@@ -638,7 +638,7 @@ describe('connectHierarchicalMenu', () => {
       ]);
 
       props = getProvidedProps(
-        { attributes: ['ok'], limitMin: 1 },
+        { attributes: ['ok'], limit: 1 },
         {},
         { results }
       );
@@ -658,7 +658,7 @@ describe('connectHierarchicalMenu', () => {
       ]);
 
       props = getProvidedProps(
-        { attributes: ['ok'], showMore: true, limitMin: 0, limitMax: 1 },
+        { attributes: ['ok'], showMore: true, limit: 0, showMoreLimit: 1 },
         {},
         { results }
       );
@@ -774,7 +774,7 @@ describe('connectHierarchicalMenu', () => {
           separator: 'SEPARATOR',
           rootPath: 'ROOT_PATH',
           showParentLevel: true,
-          limitMin: 1,
+          limit: 1,
         },
         {
           indices: {

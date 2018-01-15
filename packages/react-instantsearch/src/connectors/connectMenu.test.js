@@ -114,7 +114,7 @@ describe('connectMenu', () => {
       ]);
 
       props = getProvidedProps(
-        { attribute: 'ok', limitMin: 1 },
+        { attribute: 'ok', limit: 1 },
         {},
         { results }
       );
@@ -128,7 +128,7 @@ describe('connectMenu', () => {
       ]);
 
       props = getProvidedProps(
-        { attribute: 'ok', showMore: true, limitMin: 0, limitMax: 1 },
+        { attribute: 'ok', showMore: true, limit: 0, showMoreLimit: 1 },
         {},
         { results }
       );
@@ -142,7 +142,7 @@ describe('connectMenu', () => {
       ]);
 
       props = getProvidedProps(
-        { attribute: 'ok', limitMin: 1 },
+        { attribute: 'ok', limit: 1 },
         {},
         { results },
         {},
@@ -169,7 +169,7 @@ describe('connectMenu', () => {
       ]);
 
       props = getProvidedProps(
-        { attribute: 'ok', limitMin: 1 },
+        { attribute: 'ok', limit: 1 },
         {},
         { results },
         {},
@@ -256,7 +256,7 @@ describe('connectMenu', () => {
       params = getSP(
         initSP,
         {
-          limitMin: 101,
+          limit: 101,
         },
         {}
       );
@@ -266,7 +266,7 @@ describe('connectMenu', () => {
         initSP,
         {
           showMore: true,
-          limitMax: 101,
+          showMoreLimit: 101,
         },
         {}
       );
@@ -275,7 +275,7 @@ describe('connectMenu', () => {
       params = getSP(
         initSP,
         {
-          limitMin: 99,
+          limit: 99,
         },
         {}
       );
@@ -285,7 +285,7 @@ describe('connectMenu', () => {
         initSP,
         {
           showMore: true,
-          limitMax: 99,
+          showMoreLimit: 99,
         },
         {}
       );
@@ -299,7 +299,7 @@ describe('connectMenu', () => {
         initSP,
         {
           attribute: 'ok',
-          limitMin: 1,
+          limit: 1,
         },
         { menu: { ok: 'wat' } }
       );
@@ -552,7 +552,7 @@ describe('connectMenu', () => {
       ]);
 
       props = getProvidedProps(
-        { attribute: 'ok', limitMin: 1 },
+        { attribute: 'ok', limit: 1 },
         {},
         { results }
       );
@@ -566,7 +566,7 @@ describe('connectMenu', () => {
       ]);
 
       props = getProvidedProps(
-        { attribute: 'ok', showMore: true, limitMin: 0, limitMax: 1 },
+        { attribute: 'ok', showMore: true, limit: 0, showMoreLimit: 1 },
         {},
         { results }
       );
@@ -580,7 +580,7 @@ describe('connectMenu', () => {
       ]);
 
       props = getProvidedProps(
-        { attribute: 'ok', limitMin: 1 },
+        { attribute: 'ok', limit: 1 },
         {},
         { results },
         {},
@@ -607,7 +607,7 @@ describe('connectMenu', () => {
       ]);
 
       props = getProvidedProps(
-        { attribute: 'ok', limitMin: 1 },
+        { attribute: 'ok', limit: 1 },
         {},
         { results },
         {},
@@ -729,7 +729,7 @@ describe('connectMenu', () => {
         initSP,
         {
           attribute: 'ok',
-          limitMin: 1,
+          limit: 1,
         },
         { indices: { first: { menu: { ok: 'wat' } } } }
       );
