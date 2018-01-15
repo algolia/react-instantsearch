@@ -84,10 +84,10 @@ const Facets = () => (
       <li className="separator" />
     </ul>
     <Panel title="Genres" id="genres">
-      <RefinementListLinks attributeName="genre" />
+      <RefinementListLinks attribute="genre" />
     </Panel>
     <Panel title="Rating" id="ratings">
-      <RatingMenu attributeName="rating" max={5} />
+      <RatingMenu attribute="rating" max={5} />
     </Panel>
     <div className="thank-you">
       {' '}
@@ -138,7 +138,7 @@ const Hit = hit => {
       </div>
       <div className="media-body">
         <h4 className="media-heading">
-          <Highlight attributeName="title" hit={hit.hit} />
+          <Highlight attribute="title" hit={hit.hit} />
           <Stars rating={rating} />
         </h4>
         <p className="year">{year}</p>

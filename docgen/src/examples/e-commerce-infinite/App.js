@@ -77,32 +77,32 @@ const Facets = () => (
     <section className="facet-wrapper">
       <div className="facet-category-title facet">Refine By</div>
       <RefinementList
-        attributeName="type"
+        attribute="type"
         operator="or"
-        limitMin={5}
-        withSearchBox
+        limit={5}
+        searchable
         header={<h5>Type</h5>}
       />
 
       <RefinementList
-        attributeName="materials"
+        attribute="materials"
         operator="or"
-        limitMin={5}
-        withSearchBox
+        limit={5}
+        searchable
         header={<h5>Materials</h5>}
       />
 
       <ConnectedColorRefinementList
-        attributeName="colors"
+        attribute="colors"
         operator="or"
         header={<h5>Colors</h5>}
       />
 
-      <RatingMenu attributeName="rating" max={5} header={<h5>Rating</h5>} />
+      <RatingMenu attribute="rating" max={5} header={<h5>Rating</h5>} />
 
       <RangeInput
         key="price_input"
-        attributeName="price"
+        attribute="price"
         header={<h5>Price</h5>}
       />
     </section>
@@ -205,10 +205,10 @@ const Hit = ({ item }) => {
       </div>
       <div className="product-desc-wrapper">
         <div className="product-name">
-          <Highlight attributeName="name" hit={item} />
+          <Highlight attribute="name" hit={item} />
         </div>
         <div className="product-type">
-          <Highlight attributeName="type" hit={item} />
+          <Highlight attribute="type" hit={item} />
         </div>
         <div className="product-footer">
           <div className="ais-RatingMenu-link">{icons}</div>

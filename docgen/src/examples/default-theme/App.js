@@ -69,15 +69,15 @@ const Facets = () => (
     />
 
     <RefinementList
-      attributeName="materials"
+      attribute="materials"
       operator="or"
-      limitMin={10}
+      limit={10}
       header="Materials"
     />
 
-    <RatingMenu attributeName="rating" max={5} header="Rating" />
+    <RatingMenu attribute="rating" max={5} header="Rating" />
 
-    <RangeInput key="price_input" attributeName="price" header="Price" />
+    <RangeInput key="price_input" attribute="price" header="Price" />
 
     <div className="thank-you">
       Data courtesy of <a href="http://www.ikea.com/">ikea.com</a>
@@ -108,10 +108,10 @@ const Hit = ({ hit }) => {
     <article className="hit">
       <div className="product-desc-wrapper">
         <div className="product-name">
-          <Highlight attributeName="name" hit={hit} />
+          <Highlight attribute="name" hit={hit} />
         </div>
         <div className="product-type">
-          <Highlight attributeName="type" hit={hit} />
+          <Highlight attribute="type" hit={hit} />
         </div>
         <div className="product-footer">
           <div className="ais-RatingMenu-link">{icons}</div>

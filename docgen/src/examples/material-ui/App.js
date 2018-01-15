@@ -120,11 +120,11 @@ class Content extends React.Component {
               />
               <Divider />
               <ConnectedCheckBoxRefinementList
-                attributeName="materials"
+                attribute="materials"
                 operator="or"
               />
               <ConnectedCheckBoxRefinementList
-                attributeName="colors"
+                attribute="colors"
                 operator="or"
               />
               <Divider />
@@ -207,13 +207,13 @@ const CheckBoxItem = ({ item, refine }) => (
 
 const MaterialUiCheckBoxRefinementList = ({
   items,
-  attributeName,
+  attribute,
   refine,
   createURL,
 }) => (
   <List>
     <Subheader style={{ fontSize: 18 }}>
-      {attributeName.toUpperCase()}
+      {attribute.toUpperCase()}
     </Subheader>
     {items.map(item => (
       <CheckBoxItem
@@ -321,7 +321,7 @@ function CustomHits({ hits, marginLeft, hasMore, refine }) {
         {hits.map(hit => (
           <Card key={hit.objectID} style={cardStyle}>
             <CardHeader
-              subtitle={<Highlight attributeName="name" hit={hit} />}
+              subtitle={<Highlight attribute="name" hit={hit} />}
             />
             <div style={imageHolderStyle}>
               <img
@@ -334,10 +334,10 @@ function CustomHits({ hits, marginLeft, hasMore, refine }) {
             <CardTitle
               title={
                 <span>
-                  <Highlight attributeName="name" hit={hit} /> - ${hit.price}
+                  <Highlight attribute="name" hit={hit} /> - ${hit.price}
                 </span>
               }
-              subtitle={<Highlight attributeName="type" hit={hit} />}
+              subtitle={<Highlight attribute="type" hit={hit} />}
               style={{
                 position: 'absolute',
                 bottom: 0,

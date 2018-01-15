@@ -65,7 +65,7 @@ function Filters() {
           <div className="aisdemo-filters">
             <DatesAndGuest />
             <Capacity />
-            <RoomType attributeName="room_type" operator="or" limitMin={3} />
+            <RoomType attribute="room_type" operator="or" limit={3} />
             <Price />
           </div>
 
@@ -165,7 +165,7 @@ function Capacity() {
       <div className="col-sm-2 aisdemo-filter-title">Capacity</div>
       <div className="col-sm-3">
         <CapacitySelector
-          attributeName="person_capacity"
+          attribute="person_capacity"
           items={[
             { label: '1 guest', start: 1, end: 1 },
             { label: '2 guests', start: 2, end: 2 },
@@ -269,7 +269,7 @@ function Price() {
     <div className="row aisdemo-filter rheostat-container">
       <div className="col-sm-2 aisdemo-filter-title">Price Range</div>
       <div className="col-sm-9">
-        <ConnectedRange attributeName="price" />
+        <ConnectedRange attribute="price" />
       </div>
     </div>
   );
@@ -289,7 +289,7 @@ function HitComponent({ hit }) {
       </div>
       <div className="infos">
         <h4 className="media-heading">
-          <Highlight attributeName="name" hit={hit} />
+          <Highlight attribute="name" hit={hit} />
         </h4>
         <HitDescription hit={hit} />
       </div>
@@ -300,8 +300,8 @@ function HitComponent({ hit }) {
 function HitDescription({ hit }) {
   return (
     <p>
-      {hit.room_type} - <Highlight attributeName="city" hit={hit} />
-      , <Highlight attributeName="country" hit={hit} />
+      {hit.room_type} - <Highlight attribute="city" hit={hit} />
+      , <Highlight attribute="country" hit={hit} />
     </p>
   );
 }
