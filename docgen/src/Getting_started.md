@@ -232,7 +232,7 @@ function Product({ hit }) {
   return (
     <div style={{ marginTop: '10px' }}>
       <span className="hit-name">
-        <Highlight attributeName="name" hit={hit} />
+        <Highlight attribute="name" hit={hit} />
       </span>
     </div>
   );
@@ -281,14 +281,14 @@ function Search() {
   return (
     <div className="container">
       <SearchBox />
-      <RefinementList attributeName="category" />
+      <RefinementList attribute="category" />
       <Hits hitComponent={Product} />
     </div>
   );
 }
 ```
 
-The `attributeName` props specifies the faceted attribute to use in this widget. This
+The `attribute` props specifies the faceted attribute to use in this widget. This
 attribute should be declared as a facet in the index configuration as well.
 
 The values displayed are computed by Algolia from the results.
@@ -335,7 +335,7 @@ function Search() {
       <CurrentRefinements />
       <ClearRefinements />
       <SearchBox />
-      <RefinementList attributeName="category" />
+      <RefinementList attribute="category" />
       <Hits hitComponent={Product} />
       <Pagination />
     </div>

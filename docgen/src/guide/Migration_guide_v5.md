@@ -70,7 +70,7 @@ import {
 const Search = () => (
   <div>
     <SearchBox />
-    <RefinementList attributeName="categories" />
+    <RefinementList attribute="categories" />
     <ClearAll />
     <Hits />
   </div>
@@ -87,7 +87,7 @@ import {
 const Search = () => (
   <div>
     <SearchBox />
-    <RefinementList attributeName="categories" />
+    <RefinementList attribute="categories" />
     <ClearRefinements />
     <Hits />
   </div>
@@ -101,12 +101,12 @@ The `Panel` widget has been updated to support `header` & `footer` prop instead 
 ```js
 // Before
 <Panel title="Category">
-  <RefinementList attributeName="category" />
+  <RefinementList attribute="category" />
 </Panel>
 
 // After with built-in widget
 <RefinementList
-  attributeName="category"
+  attribute="category"
   header="Category"
 />
 
@@ -118,7 +118,7 @@ const MyCustomRefinementList = connectRefinementList(({ header }) => (
 ));
 
 <MyCustomRefinementList
-  attributeName="category"
+  attribute="category"
   header="Category"
 />
 ```
@@ -155,7 +155,7 @@ In the previous version you could choose to wrap your widgets with the `Panel` c
 ```js
 // Before
 <Panel title="Category">
-  <RefinementList attributeName="category" />
+  <RefinementList attribute="category" />
 </Panel>
 
 // In your CSS
@@ -165,7 +165,7 @@ In the previous version you could choose to wrap your widgets with the `Panel` c
 
 // After
 <RefinementList
-  attributeName="category"
+  attribute="category"
   header="Category"
   autoHideContainer
 />
