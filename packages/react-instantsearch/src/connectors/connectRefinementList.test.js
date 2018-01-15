@@ -68,7 +68,7 @@ describe('connectRefinementList', () => {
       });
 
       props = getProvidedProps(
-        { attribute: 'ok', withSearchBox: true },
+        { attribute: 'ok', searchable: true },
         {},
         { results }
       );
@@ -77,7 +77,7 @@ describe('connectRefinementList', () => {
         currentRefinement: [],
         isFromSearch: false,
         canRefine: false,
-        withSearchBox: true,
+        searchable: true,
       });
 
       // searchForFacetValues is @deprecated. This test should be removed when searchForFacetValues is removed
@@ -91,7 +91,7 @@ describe('connectRefinementList', () => {
         currentRefinement: [],
         isFromSearch: false,
         canRefine: false,
-        withSearchBox: true,
+        searchable: true,
       });
 
       results.getFacetValues.mockClear();

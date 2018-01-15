@@ -71,7 +71,7 @@ function cleanUp(props, searchState, context) {
  * @requirements The attribute passed to the `attribute` prop must be present in "attributes for faceting"
  * on the Algolia dashboard or configured as `attributesForFaceting` via a set settings call to the Algolia API.
  * @propType {string} attribute - the name of the attribute in the record
- * @propType {boolean} [withSearchBox=false] - allow search inside values
+ * @propType {boolean} [searchable=false] - allow search inside values
  * @propType {string} [operator=or] - How to apply the refinements. Possible values: 'or' or 'and'.
  * @propType {boolean} [showMore=false] - true if the component should display a button that will expand the number of items
  * @propType {number} [limit=10] - the minimum number of displayed items
@@ -100,7 +100,7 @@ export default createConnector({
     defaultRefinement: PropTypes.arrayOf(
       PropTypes.oneOfType([PropTypes.string, PropTypes.number])
     ),
-    withSearchBox: PropTypes.bool,
+    searchable: PropTypes.bool,
     searchForFacetValues: PropTypes.bool, // @deprecated
     transformItems: PropTypes.func,
   },
@@ -131,16 +131,16 @@ export default createConnector({
         searchForFacetValuesResults[attribute] &&
         searchForFacetValuesResults.query !== ''
     );
-    const withSearchBox = props.withSearchBox || props.searchForFacetValues;
+    const searchable = props.searchable || props.searchForFacetValues;
     if (process.env.NODE_ENV === 'development' && props.searchForFacetValues) {
       // eslint-disable-next-line no-console
       console.warn(
         'react-instantsearch: `searchForFacetValues` has been renamed to' +
-          '`withSearchBox`, this will break in the next major version.'
+          '`searchable`, this will break in the next major version.'
       );
     }
     // Search For Facet Values is not available with derived helper (used for multi index search)
-    if (props.withSearchBox && this.context.multiIndexContext) {
+    if (props.searchable && this.context.multiIndexContext) {
       throw new Error(
         'react-instantsearch: searching in *List is not available when used inside a' +
           ' multi index context'
@@ -157,7 +157,7 @@ export default createConnector({
         ),
         canRefine,
         isFromSearch,
-        withSearchBox,
+        searchable,
       };
     }
 
@@ -184,7 +184,7 @@ export default createConnector({
       items: transformedItems.slice(0, itemsLimit),
       currentRefinement: getCurrentRefinement(props, searchState, this.context),
       isFromSearch,
-      withSearchBox,
+      searchable,
       canRefine: items.length > 0,
     };
   },

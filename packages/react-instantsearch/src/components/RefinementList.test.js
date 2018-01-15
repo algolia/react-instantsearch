@@ -85,7 +85,7 @@ describe('RefinementList', () => {
         <RefinementList
           refine={() => null}
           searchForItems={() => null}
-          withSearchBox
+          searchable
           createURL={() => '#'}
           items={[
             { label: 'white', value: ['white'], count: 10, isRefined: true },
@@ -105,7 +105,7 @@ describe('RefinementList', () => {
       .create(
         <RefinementList
           refine={() => null}
-          withSearchBox
+          searchable
           searchForItems={() => null}
           createURL={() => '#'}
           items={[
@@ -131,7 +131,7 @@ describe('RefinementList', () => {
         <RefinementList
           refine={() => null}
           searchForItems={() => null}
-          withSearchBox
+          searchable
           createURL={() => '#'}
           items={[
             { label: 'white', value: ['white'], count: 10, isRefined: false },
@@ -249,7 +249,7 @@ describe('RefinementList', () => {
     const refinementList = (
       <RefinementList
         refine={refine}
-        withSearchBox
+        searchable
         searchForItems={searchForItems}
         createURL={() => '#'}
         items={[

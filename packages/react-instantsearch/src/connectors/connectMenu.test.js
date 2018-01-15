@@ -402,7 +402,7 @@ describe('connectMenu', () => {
       ]);
 
       props = getProvidedProps(
-        { attribute: 'ok', withSearchBox: true },
+        { attribute: 'ok', searchable: true },
         {},
         { results }
       );

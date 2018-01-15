@@ -67,7 +67,7 @@ describe('Menu', () => {
         <Menu
           refine={() => null}
           searchForItems={() => null}
-          withSearchBox
+          searchable
           createURL={() => '#'}
           items={[
             { label: 'white', value: 'white', count: 10, isRefined: true },
@@ -88,7 +88,7 @@ describe('Menu', () => {
         <Menu
           refine={() => null}
           searchForItems={() => null}
-          withSearchBox
+          searchable
           createURL={() => '#'}
           items={[
             {
@@ -114,7 +114,7 @@ describe('Menu', () => {
           refine={() => null}
           createURL={() => '#'}
           searchForItems={() => null}
-          withSearchBox
+          searchable
           items={[
             { label: 'white', value: 'white', count: 10, isRefined: false },
             { label: 'black', value: 'black', count: 20, isRefined: false },
@@ -235,7 +235,7 @@ describe('Menu', () => {
     const menu = (
       <Menu
         refine={refine}
-        withSearchBox={true}
+        searchable
         searchForItems={searchForItems}
         createURL={() => '#'}
         items={[

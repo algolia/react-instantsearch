@@ -26,7 +26,7 @@ class List extends Component {
     limit: PropTypes.number,
     show: PropTypes.func,
     searchForItems: PropTypes.func,
-    withSearchBox: PropTypes.bool,
+    searchable: PropTypes.bool,
     isFromSearch: PropTypes.bool,
     canRefine: PropTypes.bool,
   };
@@ -143,8 +143,8 @@ class List extends Component {
   }
 
   render() {
-    const { cx, items, className, withSearchBox, canRefine } = this.props;
-    const searchBox = withSearchBox ? this.renderSearchBox() : null;
+    const { cx, items, className, searchable, canRefine } = this.props;
+    const searchBox = searchable ? this.renderSearchBox() : null;
     const rootClassName = classNames(
       cx('', !canRefine && '-noRefinement'),
       className

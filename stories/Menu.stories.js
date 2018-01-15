@@ -58,7 +58,7 @@ stories
       <WrapWithHits hasPlayground={true} linkedStoryGroup="Menu">
         <Menu
           attribute="category"
-          withSearchBox
+          searchable
           transformItems={items =>
             orderBy(
               items,

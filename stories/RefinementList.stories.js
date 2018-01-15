@@ -63,7 +63,7 @@ stories
     'with search inside items',
     () => (
       <WrapWithHits linkedStoryGroup="RefinementList" hasPlayground={true}>
-        <RefinementList attribute="category" withSearchBox />
+        <RefinementList attribute="category" searchable />
       </WrapWithHits>
     ),
     {

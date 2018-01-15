@@ -14,7 +14,7 @@ class Menu extends Component {
     translate: PropTypes.func.isRequired,
     refine: PropTypes.func.isRequired,
     searchForItems: PropTypes.func.isRequired,
-    withSearchBox: PropTypes.bool,
+    searchable: PropTypes.bool,
     createURL: PropTypes.func.isRequired,
     items: PropTypes.arrayOf(
       PropTypes.shape({
@@ -75,7 +75,7 @@ class Menu extends Component {
           'showMoreLimit',
           'isFromSearch',
           'searchForItems',
-          'withSearchBox',
+          'searchable',
           'canRefine',
           'className',
         ])}

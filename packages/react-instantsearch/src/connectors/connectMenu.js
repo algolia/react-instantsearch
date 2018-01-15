@@ -62,7 +62,7 @@ const sortBy = ['count:desc', 'name:asc'];
  * @propType {number} [limit=10] - the minimum number of diplayed items
  * @propType {number} [showMoreLimit=20] - the maximun number of displayed items. Only used when showMore is set to `true`
  * @propType {string} [defaultRefinement] - the value of the item selected by default
- * @propType {boolean} [withSearchBox=false] - allow search inside values
+ * @propType {boolean} [searchable=false] - allow search inside values
  * @providedPropType {function} refine - a function to toggle a refinement
  * @providedPropType {function} createURL - a function to generate a URL for the corresponding search state
  * @providedPropType {string} currentRefinement - the refinement currently applied
@@ -80,7 +80,7 @@ export default createConnector({
     showMoreLimit: PropTypes.number,
     defaultRefinement: PropTypes.string,
     transformItems: PropTypes.func,
-    withSearchBox: PropTypes.bool,
+    searchable: PropTypes.bool,
     searchForFacetValues: PropTypes.bool, // @deprecated
   },
 
@@ -109,16 +109,19 @@ export default createConnector({
         searchForFacetValuesResults[attribute] &&
         searchForFacetValuesResults.query !== ''
     );
-    const withSearchBox = props.withSearchBox || props.searchForFacetValues;
+
+    const searchable = props.searchable || props.searchForFacetValues;
+
     if (process.env.NODE_ENV === 'development' && props.searchForFacetValues) {
       // eslint-disable-next-line no-console
       console.warn(
         'react-instantsearch: `searchForFacetValues` has been renamed to' +
-          '`withSearchBox`, this will break in the next major version.'
+          '`searchable`, this will break in the next major version.'
       );
     }
+
     // Search For Facet Values is not available with derived helper (used for multi index search)
-    if (props.withSearchBox && this.context.multiIndexContext) {
+    if (props.searchable && this.context.multiIndexContext) {
       throw new Error(
         'react-instantsearch: searching in *List is not available when used inside a' +
           ' multi index context'
@@ -134,7 +137,7 @@ export default createConnector({
           this.context
         ),
         isFromSearch,
-        withSearchBox,
+        searchable,
         canRefine,
       };
     }
@@ -155,21 +158,23 @@ export default createConnector({
         }));
 
     const sortedItems =
-      withSearchBox && !isFromSearch
+      searchable && !isFromSearch
         ? orderBy(
             items,
             ['isRefined', 'count', 'label'],
             ['desc', 'desc', 'asc']
           )
         : items;
+
     const transformedItems = props.transformItems
       ? props.transformItems(sortedItems)
       : sortedItems;
+
     return {
       items: transformedItems.slice(0, itemsLimit),
       currentRefinement: getCurrentRefinement(props, searchState, this.context),
       isFromSearch,
-      withSearchBox,
+      searchable,
       canRefine: items.length > 0,
     };
   },
