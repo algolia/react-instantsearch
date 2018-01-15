@@ -35,8 +35,8 @@ stories
           showLast={true}
           showPrevious={true}
           showNext={true}
-          pagesPadding={2}
-          maxPages={3}
+          padding={2}
+          totalPages={3}
         />
       </WrapWithHits>
     ),
@@ -54,8 +54,8 @@ stories
           showLast={boolean('show Last', true)}
           showPrevious={boolean('show Previous', true)}
           showNext={boolean('show Next', true)}
-          pagesPadding={number('pages Padding', 2)}
-          maxPages={number('max Pages', 3)}
+          padding={number('pages Padding', 2)}
+          totalPages={number('max Pages', 3)}
         />
       </WrapWithHits>
     ),

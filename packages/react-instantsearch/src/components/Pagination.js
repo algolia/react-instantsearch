@@ -60,8 +60,8 @@ class Pagination extends Component {
     showPrevious: PropTypes.bool,
     showNext: PropTypes.bool,
     showLast: PropTypes.bool,
-    pagesPadding: PropTypes.number,
-    maxPages: PropTypes.number,
+    padding: PropTypes.number,
+    totalPages: PropTypes.number,
     className: PropTypes.string,
   };
 
@@ -71,17 +71,17 @@ class Pagination extends Component {
     showPrevious: true,
     showNext: true,
     showLast: false,
-    pagesPadding: 3,
-    maxPages: Infinity,
+    padding: 3,
+    totalPages: Infinity,
     className: '',
   };
 
   getItem(modifier, translationKey, value) {
-    const { nbPages, maxPages, translate } = this.props;
+    const { nbPages, totalPages, translate } = this.props;
     return {
       key: `${modifier}.${value}`,
       modifier,
-      disabled: value < 1 || value >= Math.min(maxPages, nbPages),
+      disabled: value < 1 || value >= Math.min(totalPages, nbPages),
       label: translate(translationKey, value),
       value,
       ariaLabel: translate(`aria${capitalize(translationKey)}`, value),
@@ -92,9 +92,9 @@ class Pagination extends Component {
     const {
       listComponent: ListComponent,
       nbPages,
-      maxPages,
+      totalPages,
       currentRefinement,
-      pagesPadding,
+      padding,
       showFirst,
       showPrevious,
       showNext,
@@ -107,8 +107,8 @@ class Pagination extends Component {
       ...otherProps
     } = this.props;
 
-    const totalPages = Math.min(nbPages, maxPages);
-    const lastPage = totalPages;
+    const maxPages = Math.min(nbPages, totalPages);
+    const lastPage = maxPages;
 
     let items = [];
     if (showFirst) {
@@ -133,7 +133,7 @@ class Pagination extends Component {
     }
 
     items = items.concat(
-      getPages(currentRefinement, totalPages, pagesPadding).map(value => ({
+      getPages(currentRefinement, maxPages, padding).map(value => ({
         key: value,
         modifier: 'item--page',
         label: translate('page', value),

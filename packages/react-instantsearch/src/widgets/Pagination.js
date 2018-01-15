@@ -12,8 +12,8 @@ import Pagination from '../components/Pagination';
  * @propType {boolean} [showLast=false] - Display the last page link.
  * @propType {boolean} [showPrevious=true] - Display the previous page link.
  * @propType {boolean} [showNext=true] - Display the next page link.
- * @propType {number} [pagesPadding=3] - How many page links to display around the current page.
- * @propType {number} [maxPages=Infinity] - Maximum number of pages to display.
+ * @propType {number} [padding=3] - How many page links to display around the current page.
+ * @propType {number} [totalPages=Infinity] - Maximum number of pages to display.
  * @themeKey ais-Pagination - the root div of the widget
  * @themeKey ais-Pagination--noRefinement - the root div of the widget when there is no refinement
  * @themeKey ais-Pagination-list - the list of all pagination items

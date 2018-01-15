@@ -45,7 +45,7 @@ describe('Pagination', () => {
       .create(
         <Pagination
           {...REQ_PROPS}
-          pagesPadding={5}
+          padding={5}
           nbPages={20}
           currentRefinement={0}
         />
@@ -57,7 +57,7 @@ describe('Pagination', () => {
       .create(
         <Pagination
           {...REQ_PROPS}
-          pagesPadding={4}
+          padding={4}
           nbPages={20}
           currentRefinement={9}
         />
@@ -69,7 +69,7 @@ describe('Pagination', () => {
       .create(
         <Pagination
           {...REQ_PROPS}
-          pagesPadding={3}
+          padding={3}
           nbPages={20}
           currentRefinement={19}
         />
@@ -81,7 +81,7 @@ describe('Pagination', () => {
       .create(
         <Pagination
           {...REQ_PROPS}
-          pagesPadding={2}
+          padding={2}
           nbPages={5}
           currentRefinement={3}
         />
@@ -161,7 +161,7 @@ describe('Pagination', () => {
       .create(
         <Pagination
           {...REQ_PROPS}
-          maxPages={10}
+          totalPages={10}
           showLast
           nbPages={15}
           currentRefinement={9}
@@ -174,7 +174,7 @@ describe('Pagination', () => {
       .create(
         <Pagination
           {...REQ_PROPS}
-          maxPages={10}
+          totalPages={10}
           showLast
           nbPages={9}
           currentRefinement={8}
@@ -202,7 +202,7 @@ describe('Pagination', () => {
             itemLink: 'LINK',
           }}
           showLast
-          pagesPadding={4}
+          padding={4}
           nbPages={10}
           currentRefinement={8}
         />
@@ -229,7 +229,7 @@ describe('Pagination', () => {
             ariaPage: page => `ARIA_PAGE_${(page + 1).toString()}`,
           }}
           showLast
-          pagesPadding={4}
+          padding={4}
           nbPages={10}
           currentRefinement={8}
         />
@@ -243,7 +243,7 @@ describe('Pagination', () => {
       .create(
         <Pagination
           {...REQ_PROPS}
-          maxPages={Number.POSITIVE_INFINITY}
+          totalPages={Number.POSITIVE_INFINITY}
           showLast
           showFirst
           showNext
@@ -314,7 +314,7 @@ describe('Pagination', () => {
     expect(refine.mock.calls).toHaveLength(0);
   });
 
-  describe('pagesPadding behaviour', () => {
+  describe('padding behaviour', () => {
     it('should be adjusted when currentPage < padding (at the very beginning)', () => {
       const refine = jest.fn();
       const wrapper = mount(
@@ -322,14 +322,14 @@ describe('Pagination', () => {
           {...REQ_PROPS}
           nbPages={18}
           showLast
-          pagesPadding={2}
+          padding={2}
           currentRefinement={2}
           refine={refine}
         />
       );
       const pages = wrapper.find('.ais-Pagination-item--page');
       const pageSelected = wrapper.find('.ais-Pagination-item--selected');
-      // Since pagesPadding = 2, the Pagination widget's size should be 5
+      // Since padding = 2, the Pagination widget's size should be 5
       expect(pages).toHaveLength(5);
 
       expect(pages.first().text()).toEqual('1');
@@ -341,21 +341,21 @@ describe('Pagination', () => {
       expect(pages.at(3).text()).toEqual('4');
       expect(pages.at(4).text()).toEqual('5');
     });
-    it('should be adjusted when currentPage < maxPages - padding (at the end)', () => {
+    it('should be adjusted when currentPage < totalPages - padding (at the end)', () => {
       const refine = jest.fn();
       const wrapper = mount(
         <Pagination
           {...REQ_PROPS}
           nbPages={18}
           showLast
-          pagesPadding={2}
+          padding={2}
           currentRefinement={18}
           refine={refine}
         />
       );
       const pages = wrapper.find('.ais-Pagination-item--page');
       const pageSelected = wrapper.find('.ais-Pagination-item--selected');
-      // Since pagesPadding = 2, the Pagination widget's size should be 5
+      // Since padding = 2, the Pagination widget's size should be 5
       expect(pages).toHaveLength(5);
 
       expect(pages.first().text()).toEqual('14');
@@ -373,14 +373,14 @@ describe('Pagination', () => {
           {...REQ_PROPS}
           nbPages={18}
           showLast
-          pagesPadding={2}
+          padding={2}
           currentRefinement={8}
           refine={refine}
         />
       );
       const pages = wrapper.find('.ais-Pagination-item--page');
       const pageSelected = wrapper.find('.ais-Pagination-item--selected');
-      // Since pagesPadding = 2, the Pagination widget's size should be 5
+      // Since padding = 2, the Pagination widget's size should be 5
       expect(pages).toHaveLength(5);
 
       expect(pages.first().text()).toEqual('6');
