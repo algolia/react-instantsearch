@@ -11,9 +11,9 @@ import SearchBox from '../components/SearchBox';
  * @propType {function} [onSubmit] - Intercept submit event sent from the SearchBox form container.
  * @propType {function} [onReset] - Listen to `reset` event sent from the SearchBox form container.
  * @propType {function} [on*] - Listen to any events sent form the search input itself.
- * @propType {React.Element} [submitComponent] - Change the apparence of the default submit button (magnifying glass).
- * @propType {React.Element} [resetComponent] - Change the apparence of the default reset button (cross).
- * @propType {React.Element} [loadingIndicatorComponent] - Change the apparence of the default loading indicator (spinning circle).
+ * @propType {node} [submit] - Change the apparence of the default submit button (magnifying glass).
+ * @propType {node} [reset] - Change the apparence of the default reset button (cross).
+ * @propType {node} [loadingIndicator] - Change the apparence of the default loading indicator (spinning circle).
  * @propType {string} [defaultRefinement] - Provide default refinement value when component is mounted.
  * @propType {boolean} [showLoadingIndicator=false] - Display that the search is loading. This only happens after a certain amount of time to avoid a blinking effect. This timer can be configured with `stalledSearchDelay` props on <InstantSearch>. By default, the value is 200ms.
  * @themeKey ais-SearchBox - the root div of the widget

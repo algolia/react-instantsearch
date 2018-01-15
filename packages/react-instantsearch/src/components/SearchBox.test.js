@@ -74,8 +74,8 @@ describe('SearchBox', () => {
     const instance = renderer.create(
       <SearchBox
         refine={() => null}
-        submitComponent={<span>🔍</span>}
-        resetComponent={
+        submit={<span>🔍</span>}
+        reset={
           <svg viewBox="200 198 108 122">
             <path d="M200.8 220l45 46.7-20 47.4 31.7-34 50.4 39.3-34.3-52.6 30.2-68.3-49.7 51.7" />
           </svg>

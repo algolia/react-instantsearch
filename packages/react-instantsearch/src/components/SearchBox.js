@@ -6,7 +6,7 @@ import createClassNames from './createClassNames';
 
 const cx = createClassNames('SearchBox');
 
-const DefaultLoadingIndicatorComponent = () => (
+const defaultLoadingIndicator = (
   <svg
     width="18"
     height="18"
@@ -33,7 +33,7 @@ const DefaultLoadingIndicatorComponent = () => (
   </svg>
 );
 
-const DefaultResetComponent = () => (
+const defaultReset = (
   <svg
     className={cx('resetIcon')}
     xmlns="http://www.w3.org/2000/svg"
@@ -45,7 +45,7 @@ const DefaultResetComponent = () => (
   </svg>
 );
 
-const DefaultSubmitComponent = () => (
+const defaultSubmit = (
   <svg
     className={cx('submitIcon')}
     xmlns="http://www.w3.org/2000/svg"
@@ -64,9 +64,9 @@ class SearchBox extends Component {
     refine: PropTypes.func.isRequired,
     translate: PropTypes.func.isRequired,
 
-    loadingIndicatorComponent: PropTypes.node,
-    resetComponent: PropTypes.node,
-    submitComponent: PropTypes.node,
+    loadingIndicator: PropTypes.node,
+    reset: PropTypes.node,
+    submit: PropTypes.node,
 
     focusShortcuts: PropTypes.arrayOf(
       PropTypes.oneOfType([PropTypes.string, PropTypes.number])
@@ -94,9 +94,9 @@ class SearchBox extends Component {
     searchAsYouType: true,
     showLoadingIndicator: false,
     isSearchStalled: false,
-    loadingIndicatorComponent: <DefaultLoadingIndicatorComponent />,
-    resetComponent: <DefaultResetComponent />,
-    submitComponent: <DefaultSubmitComponent />,
+    loadingIndicator: defaultLoadingIndicator,
+    reset: defaultReset,
+    submit: defaultSubmit,
   };
 
   constructor(props) {
@@ -222,9 +222,9 @@ class SearchBox extends Component {
       className,
       translate,
       autoFocus,
-      loadingIndicatorComponent,
-      submitComponent,
-      resetComponent,
+      loadingIndicator,
+      submit,
+      reset,
     } = this.props;
     const query = this.getQuery();
 
@@ -275,7 +275,7 @@ class SearchBox extends Component {
             title={translate('submitTitle')}
             className={cx('submit')}
           >
-            {submitComponent}
+            {submit}
           </button>
           <button
             type="reset"
@@ -284,11 +284,11 @@ class SearchBox extends Component {
             onClick={this.onReset}
             hidden={!query || isSearchStalled}
           >
-            {resetComponent}
+            {reset}
           </button>
           {this.props.showLoadingIndicator && (
             <span hidden={!isSearchStalled} className={cx('loadingIndicator')}>
-              {loadingIndicatorComponent}
+              {loadingIndicator}
             </span>
           )}
         </form>
