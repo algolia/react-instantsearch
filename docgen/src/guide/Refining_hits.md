@@ -26,9 +26,9 @@ $ yarn add react-instantsearch # or npm install --save react-instantsearch
 
 The index that we will use in this example needs to be set up with:
 
-```jsx
+```js
 index.setSettings({
-  attributesForFaceting: ["searchable(keywords)", "searchable(owner.name)"],
+  attributesForFaceting: ['searchable(keywords)', 'searchable(owner.name)'],
 });
 ```
 
@@ -79,7 +79,7 @@ const Tags = ({ keywords = [] }) => (
   <div>
     {keywords.map((keyword, i) => (
       <span key={keyword}>
-        {i > 0 && ", "}
+        {i > 0 && ', '}
         <button>{keyword}</button>
       </span>
     ))}
@@ -133,10 +133,10 @@ class App extends Component {
         <Hits hitComponent={Hit} />
         <Configure
           attributesToRetrieve={[
-            "name",
-            "description",
-            "keywords",
-            "owner.name",
+            'name',
+            'description',
+            'keywords',
+            'owner.name',
           ]}
         />
       </InstantSearch>
@@ -169,17 +169,17 @@ class App extends Component {
         indexName="npm-search"
       >
         <SearchBox />
-        <div style={{ display: "flex", border: "1px solid black" }}>
+        <div style={{ display: 'flex', border: '1px solid black' }}>
           <RefinementList attributeName="keywords" withSearchBox />
           <RefinementList attributeName="owner.name" withSearchBox />
         </div>
         <Hits hitComponent={Hit} />
         <Configure
           attributesToRetrieve={[
-            "name",
-            "description",
-            "keywords",
-            "owner.name",
+            'name',
+            'description',
+            'keywords',
+            'owner.name',
           ]}
         />
       </InstantSearch>
