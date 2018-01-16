@@ -68,7 +68,6 @@ const Facets = () => (
 
     <section className="facet-wrapper">
       <div className="facet-category-title facet">Show results for</div>
-
       <HierarchicalMenu
         attributes={['category', 'sub_category', 'sub_sub_category']}
       />
@@ -99,7 +98,7 @@ const Facets = () => (
       </Panel>
 
       <Panel header={<h5>Price</h5>}>
-        <RangeInput key="price_input" attribute="price" />
+        <RangeInput attribute="price" />
       </Panel>
     </section>
 
