@@ -16,8 +16,8 @@ This guide will provide step-by-step migration information for each widget & con
 
 * [Migration steps](guide/Migration_guide_v5.html#migration-steps)
   * [Updating widgets names](guide/Migration_guide_v5.html#updating-widgets-names)
+  * [Updating props names](guide/Migration_guide_v5.html#updating-props-names)
   * [Updating styles](guide/Migration_guide_v5.html#updating-styles)
-  * [Updating props](guide/Migration_guide_v5.html#updating-props)
   * [Adding className](guide/Migration_guide_v5.html#adding-classname)
 * [Widgets changes](guide/Migration_guide_v5.html#widgets-changes)
   * [Breadcrumb](guide/Migration_guide_v5.html#breadcrumb)
@@ -69,22 +69,7 @@ Complete list of changes:
 | connectMultiRange | connectNumericMenu      |
 | connectToggle     | connectToggleRefinement |
 
-### Updating styles
-
-The CSS naming convention used for widgets has been changed in favour of the [SUIT CSS](https://suitcss.github.io/) methodology.
-
-In order to fix broken stylings, please refer to the **CSS naming equivalency table** of each widget in the [Widgets changes](guide/Migration_guide_v5.html#widgets-changes) section.
-
-Two new CSS themes have also been written:
-
-* reset.css
-* algolia.css
-
-We **strongly recommend** to use at least **reset.css** in order to neglect the visual side effects induced by the new semantic changes made on most widgets.
-
-Please refer to the [Styling Widgets guide](guide/Styling_widgets.html) for more information on how to install and use those CSS themes.
-
-### Updating props
+### Updating props names
 
 Some of the props has been renamed for a better consistency across the library. See below the list of all of them:
 
@@ -100,6 +85,21 @@ Some of the props has been renamed for a better consistency across the library. 
 * `withSearchBox` &rarr; `searchable`
 
 Please refer to [Widgets changes](guide/Migration_guide_v5.html#widgets-changes) & [Connectors changes](guide/Migration_guide_v5.html#connectors-changes) sections for more detail informations.
+
+### Updating styles
+
+The CSS naming convention used for widgets has been changed in favour of the [SUIT CSS](https://suitcss.github.io/) methodology.
+
+In order to fix broken stylings, please refer to the **CSS naming equivalency table** of each widget in the [Widgets changes](guide/Migration_guide_v5.html#widgets-changes) section.
+
+Two new CSS themes have also been written:
+
+* reset.css
+* algolia.css
+
+We **strongly recommend** to use at least **reset.css** in order to neglect the visual side effects induced by the new semantic changes made on most widgets.
+
+Please refer to the [Styling Widgets guide](guide/Styling_widgets.html) for more information on how to install and use those CSS themes.
 
 ### Adding className
 
