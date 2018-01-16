@@ -16,9 +16,9 @@ This guide will provide step-by-step migration information for each React Instan
 
 * [Migration steps](guide/Migration_guide_v5.html#migration-steps)
   * [Updating widgets names](guide/Migration_guide_v5.html#updating-widgets-names)
-  * [Updating Panel](guide/Migration_guide_v5.html#updating-panel)
-  * [autoHideContainer](guide/Migration_guide_v5.html#autohidecontainer)
   * [Updating styles](guide/Migration_guide_v5.html#updating-styles)
+  * [Updating props](guide/Migration_guide_v5.html#updating-props)
+  * [Adding className](guide/Migration_guide_v5.html#adding-classname)
 * [Widgets changes](guide/Migration_guide_v5.html#widgets-changes)
   * [Breadcrumb](guide/Migration_guide_v5.html#breadcrumb)
   * [ClearAll](guide/Migration_guide_v5.html#clearall)
@@ -55,137 +55,7 @@ Complete list of changes:
 | ClearAll   | ClearRefinements |
 | MultiRange | NumericMenu      |
 | StarRating | RatingMenu       |
-
-Here is an example of how to update widget names inside imports and react components:
-
-```js
-// Before
-import {
-  SearchBox,
-  RefinementList,
-  ClearAll,
-  Hits,
-} from 'react-instantsearch/dom';
-
-const Search = () => (
-  <div>
-    <SearchBox />
-    <RefinementList attribute="categories" />
-    <ClearAll />
-    <Hits />
-  </div>
-);
-
-// After
-import {
-  SearchBox,
-  RefinementList,
-  ClearRefinements,
-  Hits,
-} from 'react-instantsearch/dom';
-
-const Search = () => (
-  <div>
-    <SearchBox />
-    <RefinementList attribute="categories" />
-    <ClearRefinements />
-    <Hits />
-  </div>
-);
-```
-
-### Updating Panel
-
-The `Panel` widget has been updated to support `header` & `footer` prop instead of `title`. By default **all the built-in widgets are wrapped by the Panel component** and expose its props.
-
-```js
-// Before
-<Panel title="Category">
-  <RefinementList attribute="category" />
-</Panel>
-
-// After with built-in widget
-<RefinementList
-  attribute="category"
-  header="Category"
-/>
-
-// After with custom widget
-const MyCustomRefinementList = connectRefinementList(({ header }) => (
-  <Panel header={header}>
-    My custom refinement list
-  </Panel>
-));
-
-<MyCustomRefinementList
-  attribute="category"
-  header="Category"
-/>
-```
-
-Both `header` and `footer` can provide a `node` in order to easily render a React component.
-
-Complete list of widgets accepting `header` and `footer` as props:
-
-* Breadcrumb
-* ClearRefinements
-* CurrentRefinements
-* HierarchicalMenu
-* Hits
-* HitsPerPage
-* InfiniteHits
-* Menu
-* MenuSelect
-* NumericMenu
-* Pagination
-* RangeInput
-* RatingMenu
-* RefinementList
-* SearchBox
-* SortBy
-* Stats
-* Toggle
-
-Please refer to the [Widgets guide](widgets) for more detailed information.
-
-### autoHideContainer
-
-In the previous version you could choose to wrap your widgets with the `Panel` component and then decide to hide them when no refinement was available by customizing the class `.ais-Panel__noRefinement`. But now since **every built-in widgets** are wrapped by the `Panel` you can't choose to hide a specific widget. That why we introduce the prop `autoHideContainer`, when provided it will hide your widget when no refinement are available.
-
-```js
-// Before
-<Panel title="Category">
-  <RefinementList attribute="category" />
-</Panel>
-
-// In your CSS
-// .ais-Panel__noRefinement {
-//   display: none;
-// }
-
-// After
-<RefinementList
-  attribute="category"
-  header="Category"
-  autoHideContainer
-/>
-```
-
-Complete list of widgets accepting `autoHideContainer` as prop:
-
-* Breadcrumb
-* ClearRefinements
-* CurrentRefinements
-* HierarchicalMenu
-* Menu
-* MenuSelect
-* NumericMenu
-* Pagination
-* RangeInput
-* RatingMenu
-* RefinementList
-
-Please refer to the [Widgets guide](widgets) for more detailed information.
+| Toggle     | ToggleRefinement |
 
 ### Updating styles
 
@@ -201,6 +71,39 @@ Two new CSS themes have also been written:
 We **strongly recommend** to use at least **reset.css** in order to neglect the visual side effects induced by the new semantic changes made on most widgets.
 
 Please refer to the [Styling Widgets guide](guide/Styling_widgets.html) for more information on how to install and use those CSS themes.
+
+### Updating props
+
+Some of the props has been renamed for a better consistency across the library. See below the list of all of them:
+
+* `attributeName` &rarr; `attribute`
+* `limitMin` &rarr; `limit`
+* `limitMax` &rarr; `showMoreLimit`
+* `maxPages` &rarr; `totalPages`
+* `pagesPadding` &rarr; `padding`
+* `title` &rarr; `header`
+* `submitComponent` &rarr; `submit`
+* `resetComponent` &rarr; `reset`
+* `loadingIndicatorComponent` &rarr; `loadingIndicator`
+* `withSearchBox` &rarr; `searchable`
+
+Please refer to [Widgets changes](guide/Migration_guide_v5.html#widgets-changes) section for more detail informations.
+
+### Adding className
+
+All the built-in widgets now accept a prop `className` that will be forwarded to the root element of the widgets.
+
+```js
+<RefinementList
+  className="MyCustomRefinementList"
+  attribute="category"
+/>
+
+// Will produce a DOM with
+<div className="ais-RefinementList MyCustomRefinementList">
+  // content of the RefinementList
+</div>
+```
 
 ## Widgets changes
 
