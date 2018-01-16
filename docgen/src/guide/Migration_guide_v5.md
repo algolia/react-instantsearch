@@ -111,6 +111,8 @@ All the built-in widgets now accept a prop `className` that will be forwarded to
 
 ### Breadcrumb
 
+See [the widget](widgets/Breadcrumb.html) documentation page.
+
 #### Naming
 
 No change.
@@ -135,6 +137,8 @@ No change.
 
 ### ClearAll
 
+See [the widget](widgets/ClearRefinements.html) documentation page.
+
 #### Naming
 
 Renamed to **ClearRefinements**.
@@ -151,6 +155,8 @@ No change.
 
 ### CurrentRefinements
 
+See [the widget](widgets/CurrentRefinements.html) documentation page.
+
 #### Naming
 
 No change.
@@ -161,23 +167,27 @@ Instead of displaying the widget as `category: One ✕ Two ✕`, it now displays
 
 #### CSS classes equivalency table
 
-| Old class name                       | New class name                 |
-| ------------------------------------ | ------------------------------ |
-| .ais-CurrentRefinements\_\_root      | .ais-CurrentRefinements        |
-| .ais-CurrentRefinements\_\_items     | .ais-CurrentRefinements-list   |
-| .ais-CurrentRefinements\_\_item      | .ais-CurrentRefinements-item   |
-| .ais-CurrentRefinements\_\_itemLabel | .ais-CurrentRefinements-label  |
-| .ais-CurrentRefinements\_\_itemClear | .ais-CurrentRefinements-delete |
+| Old class name                          | New class name                          |
+| --------------------------------------- | --------------------------------------- |
+| .ais-CurrentRefinements\_\_root         | .ais-CurrentRefinements                 |
+| .ais-CurrentRefinements\_\_items        | .ais-CurrentRefinements-list            |
+| .ais-CurrentRefinements\_\_item         | .ais-CurrentRefinements-item            |
+| .ais-CurrentRefinements\_\_itemLabel    | .ais-CurrentRefinements-label           |
+| .ais-CurrentRefinements\_\_itemClear    | .ais-CurrentRefinements-delete          |
+| .ais-CurrentRefinements\_\_noRefinement | .ais-CurrentRefinements\-\-noRefinement |
 
 ### HierarchicalMenu
 
+See [the widget](widgets/HierarchicalMenu.html) documentation page.
+
 #### Naming
 
-No change.
+* `limitMin` &rarr; `limit`
+* `limitMax` &rarr; `showMoreLimit`
 
 #### Behaviour
 
-Instead of displaying the widget as `category: One ✕ Two ✕`, it now displays like this: `One ✕` `Two ✕`.
+No change.
 
 #### CSS classes equivalency table
 
@@ -198,9 +208,11 @@ Instead of displaying the widget as `category: One ✕ Two ✕`, it now displays
 
 ### Highlight
 
+See [the widget](widgets/Highlight.html) documentation page.
+
 #### Naming
 
-No change.
+* `attributeName` &rarr; `attribute`
 
 #### Behaviour
 
@@ -215,6 +227,8 @@ No change.
 | .ais-Highlight\_\_nonHighlighted | .ais-Highlight-nonHighlighted |
 
 ### Hits
+
+See [the widget](widgets/Hits.html) documentation page.
 
 #### Naming
 
@@ -232,6 +246,8 @@ No change.
 
 ### HitsPerPage
 
+See [the widget](widgets/HitsPerPage.html) documentation page.
+
 #### Naming
 
 No change.
@@ -247,6 +263,8 @@ No change.
 | .ais-HitsPerPage\_\_root | .ais-HitsPerPage |
 
 ### InfiniteHits
+
+See [the widget](widgets/InfiniteHits.html) documentation page.
 
 #### Naming
 
@@ -264,9 +282,14 @@ No change.
 
 ### Menu
 
+See [the widget](widgets/Menu.html) documentation page.
+
 #### Naming
 
-No change.
+* `attributeName` &rarr; `attribute`
+* `limitMin` &rarr; `limit`
+* `limitMax` &rarr; `showMoreLimit`
+* `withSearchBox` &rarr; `searchable`
 
 #### Behaviour
 
@@ -285,15 +308,17 @@ No change.
 | .ais-Menu\_\_itemLabel         | .ais-Menu-label                                                      |
 | .ais-Menu\_\_itemCount         | .ais-Menu-count                                                      |
 | .ais-Menu\_\_itemCountSelected | **Removed**. Use `.ais-Menu-item--selected .ais-Menu-count` instead. |
-| .ais-Menu\_\_noRefinement      | .ais-Menu\-\-noRefinement                                            |
 | .ais-Menu\_\_showMore          | .ais-Menu-showMore                                                   |
 | .ais-Menu\_\_SearchBox         | .ais-Menu-searchBox                                                  |
+| .ais-Menu\_\_noRefinement      | .ais-Menu\-\-noRefinement                                            |
 
 ### MenuSelect
 
+See [the widget](widgets/MenuSelect.html) documentation page.
+
 #### Naming
 
-No change.
+* `attributeName` &rarr; `attribute`
 
 #### Behaviour
 
@@ -308,9 +333,13 @@ No change.
 
 ### MultiRange
 
+See [the widget](widgets/NumericMenu.html) documentation page.
+
 #### Naming
 
 Renamed to **NumericMenu**.
+
+* `attributeName` &rarr; `attribute`
 
 #### Behaviour
 
@@ -334,9 +363,12 @@ No change.
 
 ### Pagination
 
+See [the widget](widgets/Pagination.html) documentation page.
+
 #### Naming
 
-No change.
+* `maxPages` &rarr; `totalPages`
+* `pagesPadding` &rarr; `padding`
 
 #### Behaviour
 
@@ -360,13 +392,15 @@ No change.
 
 ### Panel
 
+See [the widget](widgets/Panel.html) documentation page.
+
 #### Naming
 
-No change.
+* `title` &rarr; `header`
 
 #### Behaviour
 
-The `title` prop has been removed in favour of `header` & `footer`.
+No change.
 
 #### CSS classes equivalency table
 
@@ -377,6 +411,8 @@ The `title` prop has been removed in favour of `header` & `footer`.
 | .ais-Panel\_\_noRefinement | .ais-Panel\-\-noRefinement |
 
 ### PoweredBy
+
+See [the widget](widgets/PoweredBy.html) documentation page.
 
 #### Naming
 
@@ -396,13 +432,15 @@ No change.
 
 ### RangeInput
 
+See [the widget](widgets/RangeInput.html) documentation page.
+
 #### Naming
 
-No change.
+* `attributeName` &rarr; `attribute`
 
 #### Behaviour
 
-No change.
+The default `precision` previously `2` has been updated to `0`.
 
 #### CSS classes equivalency table
 
@@ -419,9 +457,14 @@ No change.
 
 ### RefinementList
 
+See [the widget](widgets/RefinementList.html) documentation page.
+
 #### Naming
 
-No change.
+* `attributeName` &rarr; `attribute`
+* `limitMin` &rarr; `limit`
+* `limitMax` &rarr; `showMoreLimit`
+* `withSearchBox` &rarr; `searchable`
 
 #### Behaviour
 
@@ -451,9 +494,13 @@ No change.
   <a class="anchor" href="guide/Migration_guide_v5.html#searchBox" aria-hidden="true"></a>
 </h3>
 
+See [the widget](widgets/SearchBox.html) documentation page.
+
 #### Naming
 
-No change.
+* `submitComponent` &rarr; `submit`
+* `resetComponent` &rarr; `reset`
+* `loadingIndicatorComponent` &rarr; `loadingIndicator`
 
 #### Behaviour
 
@@ -472,6 +519,8 @@ No change.
 
 ### SortBy
 
+See [the widget](widgets/SortBy.html) documentation page.
+
 #### Naming
 
 No change.
@@ -488,9 +537,13 @@ No change.
 
 ### StarRating
 
+See [the widget](widgets/RatingMenu.html) documentation page.
+
 #### Naming
 
 Renamed to **RatingMenu**.
+
+* `attributeName` &rarr; `attribute`
 
 #### Behaviour
 
@@ -519,6 +572,8 @@ No change.
 
 ### Stats
 
+See [the widget](widgets/Stats.html) documentation page.
+
 #### Naming
 
 No change.
@@ -535,9 +590,13 @@ No change.
 
 ### Toggle
 
+See [the widget](widgets/ToggleRefinement.html) documentation page.
+
 #### Naming
 
-No change.
+Renamed to **ToggleRefinement**.
+
+* `attributeName` &rarr; `attribute`
 
 #### Behaviour
 
