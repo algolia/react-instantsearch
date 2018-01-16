@@ -10,7 +10,7 @@ React V5 introduces **a complete revamp of the HTML output of most widgets**. Th
 
 This release also introduces a **new CSS naming convention** which will be reused across all InstantSearch libraries. This will enable the possibility to develop cross-libraries CSS themes easily.
 
-This guide will provide step-by-step migration information for each React InstantSearch widget.
+This guide will provide step-by-step migration information for each widget & connector.
 
 ## Table of contents
 
@@ -41,21 +41,33 @@ This guide will provide step-by-step migration information for each React Instan
   * [StarRating](guide/Migration_guide_v5.html#starrating)
   * [Stats](guide/Migration_guide_v5.html#stats)
   * [Toggle](guide/Migration_guide_v5.html#toggle)
+* [Connectors changes](guide/Migration_guide_v5.html#connectors-changes)
+  * [connectCurrentRefinements](guide/Migration_guide_v5.html#connectcurrentrefinements)
+  * [connectHierarchicalMenu](guide/Migration_guide_v5.html#connecthierarchicalmenu)
+  * [connectHighlight](guide/Migration_guide_v5.html#connecthighlight)
+  * [connectMenu](guide/Migration_guide_v5.html#connectmenu)
+  * [connectMultiRange](guide/Migration_guide_v5.html#connectmultirange)
+  * [connectPagination](guide/Migration_guide_v5.html#connectpagination)
+  * [connectRange](guide/Migration_guide_v5.html#connectrange)
+  * [connectRefinementList](guide/Migration_guide_v5.html#connectrefinementlist)
+  * [connectToggle](guide/Migration_guide_v5.html#connecttoggle)
 
 ## Migration steps
 
-### Updating widgets names
+### Updating widgets & connectors names
 
-A few widgets have been renamed in order to improve widgets meaning as well as consistency between each InstantSearch library. You will need to **update your imports** to match new widget names.
+A few widgets & connectors have been renamed in order to improve the meaning as well as consistency between each InstantSearch library. You will need to **update your imports** to match new names.
 
 Complete list of changes:
 
-| Old name   | New name         |
-| ---------- | ---------------- |
-| ClearAll   | ClearRefinements |
-| MultiRange | NumericMenu      |
-| StarRating | RatingMenu       |
-| Toggle     | ToggleRefinement |
+| Old name          | New name                |
+| ----------------- | ----------------------- |
+| ClearAll          | ClearRefinements        |
+| MultiRange        | NumericMenu             |
+| StarRating        | RatingMenu              |
+| Toggle            | ToggleRefinement        |
+| connectMultiRange | connectNumericMenu      |
+| connectToggle     | connectToggleRefinement |
 
 ### Updating styles
 
@@ -87,7 +99,7 @@ Some of the props has been renamed for a better consistency across the library. 
 * `loadingIndicatorComponent` &rarr; `loadingIndicator`
 * `withSearchBox` &rarr; `searchable`
 
-Please refer to [Widgets changes](guide/Migration_guide_v5.html#widgets-changes) section for more detail informations.
+Please refer to [Widgets changes](guide/Migration_guide_v5.html#widgets-changes) & [Connectors changes](guide/Migration_guide_v5.html#connectors-changes) sections for more detail informations.
 
 ### Adding className
 
@@ -609,6 +621,128 @@ No change.
 | .ais-Toggle\_\_root     | .ais-Toggle          |
 | .ais-Toggle\_\_checkbox | .ais-Toggle-checkbox |
 | .ais-Toggle\_\_label    | .ais-Toggle-label    |
+
+## Connectors changes
+
+### connectCurrentRefinements
+
+See [the connector](connectors/connectCurrentRefinements.html) documentation page.
+
+#### Naming
+
+The property `attributeName` in the provided props `items` has been renamed `attribute`.
+
+#### Behaviour
+
+No change.
+
+### connectHierarchicalMenu
+
+See [the connector](connectors/connectHierarchicalMenu.html) documentation page.
+
+#### Naming
+
+* `limitMin` &rarr; `limit`
+* `limitMax` &rarr; `showMoreLimit`
+
+#### Behaviour
+
+No change.
+
+### connectHighlight
+
+See [the connector](connectors/connectHighlight.html) documentation page.
+
+#### Naming
+
+The property `attributeName` in the provided props `highlight` has been renamed `attribute`.
+
+#### Behaviour
+
+No change.
+
+### connectMenu
+
+See [the connector](connectors/connectMenu.html) documentation page.
+
+#### Naming
+
+* `attributeName` &rarr; `attribute`
+* `limitMin` &rarr; `limit`
+* `limitMax` &rarr; `showMoreLimit`
+* `withSearchBox` &rarr; `searchable`
+
+#### Behaviour
+
+No change.
+
+### connectMultiRange
+
+See [the connector](connectors/connectNumericMenu.html) documentation page.
+
+#### Naming
+
+Renamed to **connectNumericMenu**.
+
+* `attributeName` &rarr; `attribute`
+
+#### Behaviour
+
+No change.
+
+### connectPagination
+
+See [the connector](connectors/connectPagination.html) documentation page.
+
+#### Naming
+
+* `maxPages` &rarr; `totalPages`
+* `pagesPadding` &rarr; `padding`
+
+#### Behaviour
+
+No change.
+
+### connectRange
+
+See [the connector](connectors/connectRange.html) documentation page.
+
+#### Naming
+
+* `attributeName` &rarr; `attribute`
+
+#### Behaviour
+
+The default `precision` previously `2` has been updated to `0`.
+
+### connectRefinementList
+
+See [the connector](connectors/connectRefinementList.html) documentation page.
+
+#### Naming
+
+* `attributeName` &rarr; `attribute`
+* `limitMin` &rarr; `limit`
+* `limitMax` &rarr; `showMoreLimit`
+* `withSearchBox` &rarr; `searchable`
+
+#### Behaviour
+
+No change.
+
+### connectToggle
+
+See [the connector](connectors/connectToggleRefinement.html) documentation page.
+
+#### Naming
+
+Renamed to **connectToggleRefinement**.
+
+* `attributeName` &rarr; `attribute`
+
+#### Behaviour
+
+No change.
 
 <div class="guide-nav">
     <div class="guide-nav-left">
