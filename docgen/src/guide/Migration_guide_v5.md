@@ -16,7 +16,7 @@ This guide will provide step-by-step migration information for each widget & con
 
 * [Migration steps](guide/Migration_guide_v5.html#migration-steps)
   * [Updating widget & connector names](guide/Migration_guide_v5.html#updating-widgets-names)
-  * [Updating props names](guide/Migration_guide_v5.html#updating-props-names)
+  * [Updating prop names](guide/Migration_guide_v5.html#updating-prop-names)
   * [Updating styles](guide/Migration_guide_v5.html#updating-styles)
   * [Adding className](guide/Migration_guide_v5.html#adding-classname)
 * [Widgets changes](guide/Migration_guide_v5.html#widgets-changes)
@@ -69,7 +69,7 @@ Complete list of changes:
 | connectMultiRange | connectNumericMenu      |
 | connectToggle     | connectToggleRefinement |
 
-### Updating props names
+### Updating prop names
 
 Some of the props has been renamed for a better consistency across the library. See below the list of all of them:
 
