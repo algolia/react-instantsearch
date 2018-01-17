@@ -413,28 +413,6 @@ describe('connectMenu', () => {
           count: 20,
         },
       ]);
-
-      // searchForFacetValues is @deprecated. This test should be removed when searchForFacetValues is removed
-      props = getProvidedProps(
-        { attribute: 'ok', searchForFacetValues: true },
-        {},
-        { results }
-      );
-
-      expect(props.items).toEqual([
-        {
-          value: 'oy',
-          label: 'oy',
-          isRefined: true,
-          count: 10,
-        },
-        {
-          value: 'wat',
-          label: 'wat',
-          isRefined: false,
-          count: 20,
-        },
-      ]);
     });
   });
   describe('multi index', () => {
