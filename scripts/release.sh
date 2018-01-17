@@ -21,11 +21,6 @@ if [[ $(cd packages/react-instantsearch && npm owner ls) != *"$(npm whoami)"* ]]
   exit 1
 fi
 
-if [[ $(cd packages/react-instantsearch-theme-algolia && npm owner ls) != *"$(npm whoami)"* ]]; then
-  printf "Release: Not an owner of the npm theme repo, ask for it\n"
-  exit 1
-fi
-
 currentBranch=`git rev-parse --abbrev-ref HEAD`
 if [ $currentBranch != 'master' ]; then
   printf "Release: You must be on master\n"
@@ -72,11 +67,6 @@ cd packages/react-instantsearch
 mversion $newVersion
 )
 
-(
-cd packages/react-instantsearch-theme-algolia
-mversion $newVersion
-)
-
 mversion $newVersion
 
 # update changelog
@@ -112,17 +102,11 @@ cd packages/react-instantsearch
 VERSION=$newVersion npm run build-and-publish -- -n "$npmFlags"
 )
 
-(
-cd packages/react-instantsearch-theme-algolia -- -n "$npmFlags"
-npm run build-and-publish
-)
-
 printf "\n\nRelease: Package was published to npm."
 
 for d in packages/react-instantsearch/examples/* ; do
     cd $d
     yarn upgrade react-instantsearch@$newVersion
-    yarn upgrade react-instantsearch-theme-algolia@$newVersion
     cd ../../../..
 done
 
