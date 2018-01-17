@@ -101,7 +101,6 @@ export default createConnector({
       PropTypes.oneOfType([PropTypes.string, PropTypes.number])
     ),
     searchable: PropTypes.bool,
-    searchForFacetValues: PropTypes.bool, // @deprecated
     transformItems: PropTypes.func,
   },
 
@@ -119,7 +118,7 @@ export default createConnector({
     metadata,
     searchForFacetValuesResults
   ) {
-    const { attribute, showMore, limit, showMoreLimit } = props;
+    const { attribute, showMore, limit, showMoreLimit, searchable } = props;
     const itemsLimit = showMore ? showMoreLimit : limit;
     const results = getResults(searchResults, this.context);
 
@@ -131,14 +130,7 @@ export default createConnector({
         searchForFacetValuesResults[attribute] &&
         searchForFacetValuesResults.query !== ''
     );
-    const searchable = props.searchable || props.searchForFacetValues;
-    if (process.env.NODE_ENV === 'development' && props.searchForFacetValues) {
-      // eslint-disable-next-line no-console
-      console.warn(
-        'react-instantsearch: `searchForFacetValues` has been renamed to' +
-          '`searchable`, this will break in the next major version.'
-      );
-    }
+
     // Search For Facet Values is not available with derived helper (used for multi index search)
     if (props.searchable && this.context.multiIndexContext) {
       throw new Error(
