@@ -31,10 +31,7 @@ stories
     'with selected item',
     () => (
       <WrapWithHits linkedStoryGroup="RefinementList" hasPlayground={true}>
-        <RefinementList
-          attribute="category"
-          defaultRefinement={['Dining']}
-        />
+        <RefinementList attribute="category" defaultRefinement={['Dining']} />
       </WrapWithHits>
     ),
     {

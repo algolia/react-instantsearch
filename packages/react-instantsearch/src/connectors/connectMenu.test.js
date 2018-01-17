@@ -113,11 +113,7 @@ describe('connectMenu', () => {
         },
       ]);
 
-      props = getProvidedProps(
-        { attribute: 'ok', limit: 1 },
-        {},
-        { results }
-      );
+      props = getProvidedProps({ attribute: 'ok', limit: 1 }, {}, { results });
       expect(props.items).toEqual([
         {
           value: 'wat',
@@ -370,11 +366,7 @@ describe('connectMenu', () => {
     });
 
     it('calling searchForItems return the right searchForItems parameters', () => {
-      const parameters = searchForFacetValues(
-        { attribute: 'ok' },
-        {},
-        'yep'
-      );
+      const parameters = searchForFacetValues({ attribute: 'ok' }, {}, 'yep');
       expect(parameters).toEqual({
         facetName: 'ok',
         query: 'yep',
@@ -551,11 +543,7 @@ describe('connectMenu', () => {
         },
       ]);
 
-      props = getProvidedProps(
-        { attribute: 'ok', limit: 1 },
-        {},
-        { results }
-      );
+      props = getProvidedProps({ attribute: 'ok', limit: 1 }, {}, { results });
       expect(props.items).toEqual([
         {
           value: 'wat',

@@ -36,7 +36,7 @@ describe('ToggleRefinement', () => {
   it('expect to render with custom className', () => {
     const props = {
       ...defaultProps,
-      className: 'MyCustomToggleRefinement'
+      className: 'MyCustomToggleRefinement',
     };
 
     const wrapper = shallow(<ToggleRefinement {...props} />);

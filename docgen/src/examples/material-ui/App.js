@@ -212,9 +212,7 @@ const MaterialUiCheckBoxRefinementList = ({
   createURL,
 }) => (
   <List>
-    <Subheader style={{ fontSize: 18 }}>
-      {attribute.toUpperCase()}
-    </Subheader>
+    <Subheader style={{ fontSize: 18 }}>{attribute.toUpperCase()}</Subheader>
     {items.map(item => (
       <CheckBoxItem
         key={item.label}
@@ -320,9 +318,7 @@ function CustomHits({ hits, marginLeft, hasMore, refine }) {
       <main id="hits" style={containerCardStyle}>
         {hits.map(hit => (
           <Card key={hit.objectID} style={cardStyle}>
-            <CardHeader
-              subtitle={<Highlight attribute="name" hit={hit} />}
-            />
+            <CardHeader subtitle={<Highlight attribute="name" hit={hit} />} />
             <div style={imageHolderStyle}>
               <img
                 src={`https://res.cloudinary.com/hilnmyskv/image/fetch/h_300,q_100,f_auto/${

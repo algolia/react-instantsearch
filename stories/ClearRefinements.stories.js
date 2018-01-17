@@ -53,10 +53,7 @@ stories
           clearsQuery
           translations={{ reset: 'Clear refinements and query' }}
         />
-        <RefinementList
-          attribute="category"
-          defaultRefinement={['Dining']}
-        />
+        <RefinementList attribute="category" defaultRefinement={['Dining']} />
       </WrapWithHits>
     ),
     {
@@ -73,10 +70,7 @@ stories
         </Panel>
 
         <div style={{ display: 'none' }}>
-          <RefinementList
-            attribute="category"
-            defaultRefinement={['Dining']}
-          />
+          <RefinementList attribute="category" defaultRefinement={['Dining']} />
         </div>
       </WrapWithHits>
     ),

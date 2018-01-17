@@ -27,10 +27,7 @@ stories
     'providing default value',
     () => (
       <WrapWithHits hasPlayground={true} linkedStoryGroup="RangeSlider">
-        <Range
-          attribute="price"
-          defaultRefinement={{ min: 50, max: 200 }}
-        />
+        <Range attribute="price" defaultRefinement={{ min: 50, max: 200 }} />
       </WrapWithHits>
     ),
     {

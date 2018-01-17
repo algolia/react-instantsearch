@@ -123,11 +123,7 @@ describe('connectRefinementList', () => {
         },
       ]);
 
-      props = getProvidedProps(
-        { attribute: 'ok', limit: 1 },
-        {},
-        { results }
-      );
+      props = getProvidedProps({ attribute: 'ok', limit: 1 }, {}, { results });
       expect(props.items).toEqual([
         {
           value: ['wat'],
@@ -417,11 +413,7 @@ describe('connectRefinementList', () => {
     });
 
     it('calling searchForItems return the right searchForItems parameters', () => {
-      const parameters = searchForFacetValues(
-        { attribute: 'ok' },
-        {},
-        'yep'
-      );
+      const parameters = searchForFacetValues({ attribute: 'ok' }, {}, 'yep');
       expect(parameters).toEqual({
         facetName: 'ok',
         query: 'yep',

@@ -24,7 +24,7 @@ ToggleRefinement.propTypes = {
   label: PropTypes.string.isRequired,
   refine: PropTypes.func.isRequired,
   className: PropTypes.string,
-}
+};
 
 ToggleRefinement.defaultProps = {
   className: '',
