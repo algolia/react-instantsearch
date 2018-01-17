@@ -179,7 +179,14 @@ export default createConnector({
   },
 
   searchForFacetValues(props, searchState, nextRefinement) {
-    return { facetName: props.attributeName, query: nextRefinement };
+    const { showMore, limitMin, limitMax } = props;
+    const maxFacetHits = showMore ? limitMax : limitMin;
+
+    return {
+      facetName: props.attributeName,
+      query: nextRefinement,
+      maxFacetHits,
+    };
   },
 
   cleanUp(props, searchState) {
