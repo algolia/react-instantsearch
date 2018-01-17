@@ -15,7 +15,7 @@ This guide will provide step-by-step migration information for each widget & con
 ## Table of contents
 
 * [Migration steps](guide/Migration_guide_v5.html#migration-steps)
-  * [Updating widget & connector names](guide/Migration_guide_v5.html#updating-widgets-names)
+  * [Updating widget & connector names](guide/Migration_guide_v5.html#updating-widget-connector-names)
   * [Updating prop names](guide/Migration_guide_v5.html#updating-prop-names)
   * [Updating styles](guide/Migration_guide_v5.html#updating-styles)
   * [Adding className](guide/Migration_guide_v5.html#adding-classname)
