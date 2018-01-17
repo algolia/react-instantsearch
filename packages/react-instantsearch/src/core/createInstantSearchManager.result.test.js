@@ -171,7 +171,8 @@ describe('createInstantSearchManager', () => {
 
           expect(searchForFacetValues).toHaveBeenCalledWith(
             'facetName',
-            'query'
+            'query',
+            undefined
           );
 
           expect(store.searchingForFacetValues).toBe(false);
@@ -180,6 +181,56 @@ describe('createInstantSearchManager', () => {
             facetName: 'results',
             query: 'query',
           });
+        });
+      });
+
+      it('updates the store and searches with maxFacetHits', () => {
+        const searchForFacetValues = jest.fn(() =>
+          Promise.resolve({
+            facetHits: 'results',
+          })
+        );
+
+        jsHepler.mockImplementationOnce((...args) => {
+          const instance = jsHepler(...args);
+
+          instance.searchForFacetValues = searchForFacetValues;
+
+          return instance;
+        });
+
+        const ism = createInstantSearchManager({
+          indexName: 'index',
+          initialState: {},
+          searchParameters: {},
+          algoliaClient: client,
+        });
+
+        ism.onSearchForFacetValues({
+          facetName: 'facetName',
+          query: 'query',
+          maxFacetHits: 25,
+        });
+
+        expect(ism.store.getState().results).toBe(null);
+
+        jest.runAllTimers();
+
+        return Promise.resolve().then(() => {
+          const store = ism.store.getState();
+
+          expect(searchForFacetValues).toHaveBeenCalledWith(
+            'facetName',
+            'query',
+            25
+          );
+
+          expect(store.resultsFacetValues).toEqual({
+            facetName: 'results',
+            query: 'query',
+          });
+
+          expect(store.searchingForFacetValues).toBe(false);
         });
       });
     });
