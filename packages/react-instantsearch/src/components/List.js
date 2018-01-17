@@ -23,7 +23,6 @@ class List extends Component {
     showMore: PropTypes.bool,
     limit: PropTypes.number,
     showMoreLimit: PropTypes.number,
-    limit: PropTypes.number,
     show: PropTypes.func,
     searchForItems: PropTypes.func,
     searchable: PropTypes.bool,
