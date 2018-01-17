@@ -15,7 +15,7 @@ This guide will provide step-by-step migration information for each widget & con
 ## Table of contents
 
 * [Migration steps](guide/Migration_guide_v5.html#migration-steps)
-  * [Updating widgets names](guide/Migration_guide_v5.html#updating-widgets-names)
+  * [Updating widget & connector names](guide/Migration_guide_v5.html#updating-widgets-names)
   * [Updating props names](guide/Migration_guide_v5.html#updating-props-names)
   * [Updating styles](guide/Migration_guide_v5.html#updating-styles)
   * [Adding className](guide/Migration_guide_v5.html#adding-classname)
@@ -54,7 +54,7 @@ This guide will provide step-by-step migration information for each widget & con
 
 ## Migration steps
 
-### Updating widgets & connectors names
+### Updating widget & connector names
 
 A few widgets & connectors have been renamed in order to improve the meaning as well as consistency between each InstantSearch library. You will need to **update your imports** to match new names.
 
