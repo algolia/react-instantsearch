@@ -37,6 +37,10 @@ function getValue(name, props, searchState, context) {
   return name === currentRefinement ? '' : name;
 }
 
+function getLimit({ showMore, limitMin, limitMax }) {
+  return showMore ? limitMax : limitMin;
+}
+
 function refine(props, searchState, nextRefinement, context) {
   const id = getId(props);
   const nextValue = { [id]: nextRefinement ? nextRefinement : '' };
@@ -97,8 +101,7 @@ export default createConnector({
     meta,
     searchForFacetValuesResults
   ) {
-    const { attributeName, showMore, limitMin, limitMax } = props;
-    const limit = showMore ? limitMax : limitMin;
+    const { attributeName } = props;
     const results = getResults(searchResults, this.context);
 
     const canRefine =
@@ -166,7 +169,7 @@ export default createConnector({
       ? props.transformItems(sortedItems)
       : sortedItems;
     return {
-      items: transformedItems.slice(0, limit),
+      items: transformedItems.slice(0, getLimit(props)),
       currentRefinement: getCurrentRefinement(props, searchState, this.context),
       isFromSearch,
       withSearchBox,
@@ -179,13 +182,10 @@ export default createConnector({
   },
 
   searchForFacetValues(props, searchState, nextRefinement) {
-    const { showMore, limitMin, limitMax } = props;
-    const maxFacetHits = showMore ? limitMax : limitMin;
-
     return {
       facetName: props.attributeName,
       query: nextRefinement,
-      maxFacetHits,
+      maxFacetHits: getLimit(props),
     };
   },
 
@@ -194,13 +194,12 @@ export default createConnector({
   },
 
   getSearchParameters(searchParameters, props, searchState) {
-    const { attributeName, showMore, limitMin, limitMax } = props;
-    const limit = showMore ? limitMax : limitMin;
+    const { attributeName } = props;
 
     searchParameters = searchParameters.setQueryParameters({
       maxValuesPerFacet: Math.max(
         searchParameters.maxValuesPerFacet || 0,
-        limit
+        getLimit(props)
       ),
     });
 

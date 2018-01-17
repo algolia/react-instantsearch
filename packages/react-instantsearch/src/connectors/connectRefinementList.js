@@ -46,6 +46,10 @@ function getValue(name, props, searchState, context) {
   return nextRefinement;
 }
 
+function getLimit({ showMore, limitMin, limitMax }) {
+  return showMore ? limitMax : limitMin;
+}
+
 function refine(props, searchState, nextRefinement, context) {
   const id = getId(props);
   // Setting the value to an empty string ensures that it is persisted in
@@ -119,8 +123,7 @@ export default createConnector({
     metadata,
     searchForFacetValuesResults
   ) {
-    const { attributeName, showMore, limitMin, limitMax } = props;
-    const limit = showMore ? limitMax : limitMin;
+    const { attributeName } = props;
     const results = getResults(searchResults, this.context);
 
     const canRefine =
@@ -181,7 +184,7 @@ export default createConnector({
       : items;
 
     return {
-      items: transformedItems.slice(0, limit),
+      items: transformedItems.slice(0, getLimit(props)),
       currentRefinement: getCurrentRefinement(props, searchState, this.context),
       isFromSearch,
       withSearchBox,
@@ -194,13 +197,10 @@ export default createConnector({
   },
 
   searchForFacetValues(props, searchState, nextRefinement) {
-    const { showMore, limitMin, limitMax } = props;
-    const maxFacetHits = showMore ? limitMax : limitMin;
-
     return {
       facetName: props.attributeName,
       query: nextRefinement,
-      maxFacetHits,
+      maxFacetHits: getLimit(props),
     };
   },
 
@@ -209,8 +209,7 @@ export default createConnector({
   },
 
   getSearchParameters(searchParameters, props, searchState) {
-    const { attributeName, operator, showMore, limitMin, limitMax } = props;
-    const limit = showMore ? limitMax : limitMin;
+    const { attributeName, operator } = props;
 
     const addKey = operator === 'and' ? 'addFacet' : 'addDisjunctiveFacet';
     const addRefinementKey = `${addKey}Refinement`;
@@ -218,7 +217,7 @@ export default createConnector({
     searchParameters = searchParameters.setQueryParameters({
       maxValuesPerFacet: Math.max(
         searchParameters.maxValuesPerFacet || 0,
-        limit
+        getLimit(props)
       ),
     });
 
