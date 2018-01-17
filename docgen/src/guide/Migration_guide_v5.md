@@ -137,15 +137,15 @@ No change.
 
 | Old class name                  | New class name                                   |
 | ------------------------------- | ------------------------------------------------ |
-| .ais-Breadcrumb\_\_root         | .ais-Breadcrumb                                  |
-| .ais-Breadcrumb\_\_itemLinkRoot | **Removed**. Target with `:first-child` instead. |
-| .ais-Breadcrumb\_\_rootLabel    | **Removed**. Target with `:first-child` instead. |
-| .ais-Breadcrumb\_\_item         | .ais-Breadcrumb-item                             |
-| .ais-Breadcrumb\_\_itemLink     | .ais-Breadcrumb-link                             |
-| .ais-Breadcrumb\_\_itemLabel    | **Removed**. Use `.ais-Breadcrumb-link` instead. |
-| .ais-Breadcrumb\_\_itemDisabled | .ais-Breadcrumb-item\-\-selected                 |
-| .ais-Breadcrumb\_\_separator    | .ais-Breadcrumb-separator                        |
-| .ais-Breadcrumb\_\_noRefinement | .ais-Breadcrumb\-\-noRefinement                  |
+| `.ais-Breadcrumb__root`         | `.ais-Breadcrumb`                                |
+| `.ais-Breadcrumb__itemLinkRoot` | **Removed**. Target with `:first-child` instead. |
+| `.ais-Breadcrumb__rootLabel`    | **Removed**. Target with `:first-child` instead. |
+| `.ais-Breadcrumb__item`         | `.ais-Breadcrumb-item`                           |
+| `.ais-Breadcrumb__itemLink`     | `.ais-Breadcrumb-link`                           |
+| `.ais-Breadcrumb__itemLabel`    | **Removed**. Use `.ais-Breadcrumb-link` instead. |
+| `.ais-Breadcrumb__itemDisabled` | `.ais-Breadcrumb-item--selected`                 |
+| `.ais-Breadcrumb__separator`    | `.ais-Breadcrumb-separator`                      |
+| `.ais-Breadcrumb__noRefinement` | `.ais-Breadcrumb--noRefinement`                  |
 
 ### ClearAll
 
@@ -161,9 +161,9 @@ No change.
 
 #### CSS classes equivalency table
 
-| Old class name        | New class name               |
-| --------------------- | ---------------------------- |
-| .ais-ClearAll\_\_root | .ais-ClearRefinements-button |
+| Old class name        | New class name                 |
+| --------------------- | ------------------------------ |
+| `.ais-ClearAll__root` | `.ais-ClearRefinements-button` |
 
 ### CurrentRefinements
 
@@ -181,12 +181,12 @@ Instead of displaying the widget as `category: One ✕ Two ✕`, it now displays
 
 | Old class name                          | New class name                          |
 | --------------------------------------- | --------------------------------------- |
-| .ais-CurrentRefinements\_\_root         | .ais-CurrentRefinements                 |
-| .ais-CurrentRefinements\_\_items        | .ais-CurrentRefinements-list            |
-| .ais-CurrentRefinements\_\_item         | .ais-CurrentRefinements-item            |
-| .ais-CurrentRefinements\_\_itemLabel    | .ais-CurrentRefinements-label           |
-| .ais-CurrentRefinements\_\_itemClear    | .ais-CurrentRefinements-delete          |
-| .ais-CurrentRefinements\_\_noRefinement | .ais-CurrentRefinements\-\-noRefinement |
+| `.ais-CurrentRefinements__root`         | `.ais-CurrentRefinements`               |
+| `.ais-CurrentRefinements__items`        | `.ais-CurrentRefinements-list`          |
+| `.ais-CurrentRefinements__item`         | `.ais-CurrentRefinements-item`          |
+| `.ais-CurrentRefinements__itemLabel`    | `.ais-CurrentRefinements-label`         |
+| `.ais-CurrentRefinements__itemClear`    | `.ais-CurrentRefinements-delete`        |
+| `.ais-CurrentRefinements__noRefinement` | `.ais-CurrentRefinements--noRefinement` |
 
 ### HierarchicalMenu
 
@@ -205,18 +205,18 @@ No change.
 
 | Old class name                              | New class name                                                                                     |
 | ------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| .ais-HierarchicalMenu\_\_root               | .ais-HierarchicalMenu                                                                              |
-| .ais-HierarchicalMenu\_\_items              | .ais-HierarchicalMenu-list                                                                         |
-| .ais-HierarchicalMenu\_\_item               | .ais-HierarchicalMenu-item                                                                         |
-| .ais-HierarchicalMenu\_\_itemSelected       | .ais-HierarchicalMenu-item\-\-selected                                                             |
-| .ais-HierarchicalMenu\_\_itemParent         | .ais-HierarchicalMenu-item\-\-parent                                                               |
-| .ais-HierarchicalMenu\_\_itemSelectedParent | **Removed**. Use `.ais-HierarchicalMenu-item--selected.ais-HierarchicalMenu-item--parent` instead. |
-| .ais-HierarchicalMenu\_\_itemLink           | .ais-HierarchicalMenu-link                                                                         |
-| .ais-HierarchicalMenu\_\_itemLabel          | .ais-HierarchicalMenu-label                                                                        |
-| .ais-HierarchicalMenu\_\_itemCount          | .ais-HierarchicalMenu-count                                                                        |
-| .ais-HierarchicalMenu\_\_itemItems          | .ais-HierarchicalMenu-list\-\-child                                                                |
-| .ais-HierarchicalMenu\_\_showMore           | .ais-HierarchicalMenu-showMore                                                                     |
-| .ais-HierarchicalMenu\_\_noRefinement       | .ais-HierarchicalMenu\-\-noRefinement                                                              |
+| `.ais-HierarchicalMenu__root`               | `.ais-HierarchicalMenu`                                                                            |
+| `.ais-HierarchicalMenu__items`              | `.ais-HierarchicalMenu-list`                                                                       |
+| `.ais-HierarchicalMenu__item`               | `.ais-HierarchicalMenu-item`                                                                       |
+| `.ais-HierarchicalMenu__itemSelected`       | `.ais-HierarchicalMenu-item--selected`                                                             |
+| `.ais-HierarchicalMenu__itemParent`         | `.ais-HierarchicalMenu-item--parent`                                                               |
+| `.ais-HierarchicalMenu__itemSelectedParent` | **Removed**. Use `.ais-HierarchicalMenu-item--selected.ais-HierarchicalMenu-item--parent` instead. |
+| `.ais-HierarchicalMenu__itemLink`           | `.ais-HierarchicalMenu-link`                                                                       |
+| `.ais-HierarchicalMenu__itemLabel`          | `.ais-HierarchicalMenu-label`                                                                      |
+| `.ais-HierarchicalMenu__itemCount`          | `.ais-HierarchicalMenu-count`                                                                      |
+| `.ais-HierarchicalMenu__itemItems`          | `.ais-HierarchicalMenu-list--child`                                                                |
+| `.ais-HierarchicalMenu__showMore`           | `.ais-HierarchicalMenu-showMore`                                                                   |
+| `.ais-HierarchicalMenu__noRefinement`       | `.ais-HierarchicalMenu--noRefinement`                                                              |
 
 ### Highlight
 
@@ -232,11 +232,11 @@ No change.
 
 #### CSS classes equivalency table
 
-| Old class name                   | New class name                |
-| -------------------------------- | ----------------------------- |
-| .ais-Highlight                   | **No change**.                |
-| .ais-Highlight\_\_highlighted    | .ais-Highlight-highlighted    |
-| .ais-Highlight\_\_nonHighlighted | .ais-Highlight-nonHighlighted |
+| Old class name                   | New class name                  |
+| -------------------------------- | ------------------------------- |
+| `.ais-Highlight`                 | **No change**.                  |
+| `.ais-Highlight__highlighted`    | `.ais-Highlight-highlighted`    |
+| `.ais-Highlight__nonHighlighted` | `.ais-Highlight-nonHighlighted` |
 
 ### Hits
 
@@ -254,7 +254,7 @@ No change.
 
 | Old class name    | New class name |
 | ----------------- | -------------- |
-| .ais-Hits\_\_root | .ais-Hits      |
+| `.ais-Hits__root` | `.ais-Hits`    |
 
 ### HitsPerPage
 
@@ -270,9 +270,9 @@ No change.
 
 #### CSS classes equivalency table
 
-| Old class name           | New class name   |
-| ------------------------ | ---------------- |
-| .ais-HitsPerPage\_\_root | .ais-HitsPerPage |
+| Old class name           | New class name     |
+| ------------------------ | ------------------ |
+| `.ais-HitsPerPage__root` | `.ais-HitsPerPage` |
 
 ### InfiniteHits
 
@@ -288,9 +288,9 @@ No change.
 
 #### CSS classes equivalency table
 
-| Old class name            | New class name    |
-| ------------------------- | ----------------- |
-| .ais-InfiniteHits\_\_root | .ais-InfiniteHits |
+| Old class name            | New class name      |
+| ------------------------- | ------------------- |
+| `.ais-InfiniteHits__root` | `.ais-InfiniteHits` |
 
 ### Menu
 
@@ -311,18 +311,18 @@ No change.
 
 | Old class name                 | New class name                                                       |
 | ------------------------------ | -------------------------------------------------------------------- |
-| .ais-Menu\_\_root              | .ais-Menu                                                            |
-| .ais-Menu\_\_items             | .ais-Menu-list                                                       |
-| .ais-Menu\_\_item              | .ais-Menu-item                                                       |
-| .ais-Menu\_\_itemLinkSelected  | **Removed**. Use `.ais-Menu-item--selected .ais-Menu-link` instead.  |
-| .ais-Menu\_\_itemLink          | .ais-Menu-link                                                       |
-| .ais-Menu\_\_itemLabelSelected | **Removed**. Use `.ais-Menu-item--selected .ais-Menu-label` instead. |
-| .ais-Menu\_\_itemLabel         | .ais-Menu-label                                                      |
-| .ais-Menu\_\_itemCount         | .ais-Menu-count                                                      |
-| .ais-Menu\_\_itemCountSelected | **Removed**. Use `.ais-Menu-item--selected .ais-Menu-count` instead. |
-| .ais-Menu\_\_showMore          | .ais-Menu-showMore                                                   |
-| .ais-Menu\_\_SearchBox         | .ais-Menu-searchBox                                                  |
-| .ais-Menu\_\_noRefinement      | .ais-Menu\-\-noRefinement                                            |
+| `.ais-Menu__root`              | `.ais-Menu`                                                          |
+| `.ais-Menu__items`             | `.ais-Menu-list`                                                     |
+| `.ais-Menu__item`              | `.ais-Menu-item`                                                     |
+| `.ais-Menu__itemLinkSelected`  | **Removed**. Use `.ais-Menu-item--selected .ais-Menu-link` instead.  |
+| `.ais-Menu__itemLink`          | `.ais-Menu-link`                                                     |
+| `.ais-Menu__itemLabelSelected` | **Removed**. Use `.ais-Menu-item--selected .ais-Menu-label` instead. |
+| `.ais-Menu__itemLabel`         | `.ais-Menu-label`                                                    |
+| `.ais-Menu__itemCount`         | `.ais-Menu-count`                                                    |
+| `.ais-Menu__itemCountSelected` | **Removed**. Use `.ais-Menu-item--selected .ais-Menu-count` instead. |
+| `.ais-Menu__showMore`          | `.ais-Menu-showMore`                                                 |
+| `.ais-Menu__SearchBox`         | `.ais-Menu-searchBox`                                                |
+| `.ais-Menu__noRefinement`      | `.ais-Menu--noRefinement`                                            |
 
 ### MenuSelect
 
@@ -338,10 +338,10 @@ No change.
 
 #### CSS classes equivalency table
 
-| Old class name            | New class name         |
-| ------------------------- | ---------------------- |
-| .ais-MenuSelect\_\_select | .ais-MenuSelect-select |
-| .ais-MenuSelect\_\_option | .ais-MenuSelect-option |
+| Old class name            | New class name           |
+| ------------------------- | ------------------------ |
+| `.ais-MenuSelect__select` | `.ais-MenuSelect-select` |
+| `.ais-MenuSelect__option` | `.ais-MenuSelect-option` |
 
 ### MultiRange
 
@@ -361,17 +361,17 @@ No change.
 
 | Old class name                       | New class name                                                                     |
 | ------------------------------------ | ---------------------------------------------------------------------------------- |
-| .ais-MultiRange\_\_root              | .ais-NumericMenu                                                                   |
-| .ais-MultiRange\_\_items             | .ais-NumericMenu-list                                                              |
-| .ais-MultiRange\_\_item              | .ais-NumericMenu-item                                                              |
-| .ais-MultiRange\_\_itemSelected      | .ais-NumericMenu-item\-\-selected                                                  |
-| .ais-MultiRange\_\_itemLabel         | .ais-NumericMenu-label                                                             |
-| .ais-MultiRange\_\_itemLabelSelected | **Removed**. Use `.ais-NumericMenu-item--selected .ais-NumericMenu-label` instead. |
-| .ais-MultiRange\_\_itemRadio         | .ais-NumericMenu-radio                                                             |
-| .ais-MultiRange\_\_itemRadioSelected | **Removed**. Use `.ais-NumericMenu-item--selected .ais-NumericMenu-radio` instead. |
-| .ais-MultiRange\_\_noRefinement      | .ais-NumericMenu\-\-noRefinement                                                   |
-| .ais-MultiRange\_\_itemNoRefinement  | .ais-NumericMenu-item\-\-noRefinement                                              |
-| .ais-MultiRange\_\_itemAll           | **Removed**.                                                                       |
+| `.ais-MultiRange__root`              | `.ais-NumericMenu`                                                                 |
+| `.ais-MultiRange__items`             | `.ais-NumericMenu-list`                                                            |
+| `.ais-MultiRange__item`              | `.ais-NumericMenu-item`                                                            |
+| `.ais-MultiRange__itemSelected`      | `.ais-NumericMenu-item--selected`                                                  |
+| `.ais-MultiRange__itemLabel`         | `.ais-NumericMenu-label`                                                           |
+| `.ais-MultiRange__itemLabelSelected` | **Removed**. Use `.ais-NumericMenu-item--selected .ais-NumericMenu-label` instead. |
+| `.ais-MultiRange__itemRadio`         | `.ais-NumericMenu-radio`                                                           |
+| `.ais-MultiRange__itemRadioSelected` | **Removed**. Use `.ais-NumericMenu-item--selected .ais-NumericMenu-radio` instead. |
+| `.ais-MultiRange__noRefinement`      | `.ais-NumericMenu--noRefinement`                                                   |
+| `.ais-MultiRange__itemNoRefinement`  | `.ais-NumericMenu-item--noRefinement`                                              |
+| `.ais-MultiRange__itemAll`           | **Removed**.                                                                       |
 
 ### Pagination
 
@@ -390,17 +390,17 @@ No change.
 
 | Old class name                  | New class name                       |
 | ------------------------------- | ------------------------------------ |
-| .ais-Pagination\_\_root         | .ais-Pagination                      |
-| .ais-Pagination\_\_item         | .ais-Pagination-item                 |
-| .ais-Pagination\_\_itemFirst    | .ais-Pagination-item\-\-firstPage    |
-| .ais-Pagination\_\_itemPrevious | .ais-Pagination-item\-\-previousPage |
-| .ais-Pagination\_\_itemPage     | .ais-Pagination-item\-\-page         |
-| .ais-Pagination\_\_itemNext     | .ais-Pagination-item\-\-nextPage     |
-| .ais-Pagination\_\_itemLast     | .ais-Pagination-item\-\-lastPage     |
-| .ais-Pagination\_\_itemDisabled | .ais-Pagination-item\-\-disabled     |
-| .ais-Pagination\_\_itemSelected | .ais-Pagination-item\-\-selected     |
-| .ais-Pagination\_\_itemLink     | .ais-Pagination-link                 |
-| .ais-Pagination\_\_noRefinement | .ais-Pagination\-\-noRefinement      |
+| `.ais-Pagination__root`         | `.ais-Pagination`                    |
+| `.ais-Pagination__item`         | `.ais-Pagination-item`               |
+| `.ais-Pagination__itemFirst`    | `.ais-Pagination-item--firstPage`    |
+| `.ais-Pagination__itemPrevious` | `.ais-Pagination-item--previousPage` |
+| `.ais-Pagination__itemPage`     | `.ais-Pagination-item--page`         |
+| `.ais-Pagination__itemNext`     | `.ais-Pagination-item--nextPage`     |
+| `.ais-Pagination__itemLast`     | `.ais-Pagination-item--lastPage`     |
+| `.ais-Pagination__itemDisabled` | `.ais-Pagination-item--disabled`     |
+| `.ais-Pagination__itemSelected` | `.ais-Pagination-item--selected`     |
+| `.ais-Pagination__itemLink`     | `.ais-Pagination-link`               |
+| `.ais-Pagination__noRefinement` | `.ais-Pagination--noRefinement`      |
 
 ### Panel
 
@@ -418,9 +418,9 @@ No change.
 
 | Old class name             | New class name             |
 | -------------------------- | -------------------------- |
-| .ais-Panel\_\_root         | .ais-Panel                 |
-| .ais-Panel\_\_title        | **Removed**.               |
-| .ais-Panel\_\_noRefinement | .ais-Panel\-\-noRefinement |
+| `.ais-Panel__root`         | `.ais-Panel`               |
+| `.ais-Panel__title`        | **Removed**.               |
+| `.ais-Panel__noRefinement` | `.ais-Panel--noRefinement` |
 
 ### PoweredBy
 
@@ -436,11 +436,11 @@ No change.
 
 #### CSS classes equivalency table
 
-| Old class name                | New class name      |
-| ----------------------------- | ------------------- |
-| .ais-PoweredBy\_\_root        | .ais-PoweredBy      |
-| .ais-PoweredBy\_\_searchBy    | .ais-PoweredBy-text |
-| .ais-PoweredBy\_\_algoliaLink | .ais-PoweredBy-link |
+| Old class name                | New class name        |
+| ----------------------------- | --------------------- |
+| `.ais-PoweredBy__root`        | `.ais-PoweredBy`      |
+| `.ais-PoweredBy__searchBy`    | `.ais-PoweredBy-text` |
+| `.ais-PoweredBy__algoliaLink` | `.ais-PoweredBy-link` |
 
 ### RangeInput
 
@@ -458,14 +458,14 @@ The default `precision` previously `2` has been updated to `0`.
 
 | Old class name                  | New class name                  |
 | ------------------------------- | ------------------------------- |
-| .ais-RangeInput\_\_root         | .ais-RangeInput                 |
-| .ais-RangeInput\_\_labelMin     | **Removed**.                    |
-| .ais-RangeInput\_\_inputMin     | .ais-RangeInput-input\-\-min    |
-| .ais-RangeInput\_\_separator    | .ais-RangeInput-separator       |
-| .ais-RangeInput\_\_labelMax     | **Removed**.                    |
-| .ais-RangeInput\_\_inputMax     | .ais-RangeInput-input\-\-max    |
-| .ais-RangeInput\_\_submit       | .ais-RangeInput-submit          |
-| .ais-RangeInput\_\_noRefinement | .ais-RangeInput\-\-noRefinement |
+| `.ais-RangeInput__root`         | `.ais-RangeInput`               |
+| `.ais-RangeInput__labelMin`     | **Removed**.                    |
+| `.ais-RangeInput__inputMin`     | `.ais-RangeInput-input--min`    |
+| `.ais-RangeInput__separator`    | `.ais-RangeInput-separator`     |
+| `.ais-RangeInput__labelMax`     | **Removed**.                    |
+| `.ais-RangeInput__inputMax`     | `.ais-RangeInput-input--max`    |
+| `.ais-RangeInput__submit`       | `.ais-RangeInput-submit`        |
+| `.ais-RangeInput__noRefinement` | `.ais-RangeInput--noRefinement` |
 
 ### RefinementList
 
@@ -486,24 +486,23 @@ No change.
 
 | Old class name                              | New class name                                                                              |
 | ------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| .ais-RefinementList\_\_root                 | .ais-RefinementList                                                                         |
-| .ais-RefinementList\_\_items                | .ais-RefinementList-list                                                                    |
-| .ais-RefinementList\_\_item                 | .ais-RefinementList-item                                                                    |
-| .ais-RefinementList\_\_itemSelected         | .ais-RefinementList-item\-\-selected                                                        |
-| .ais-RefinementList\_\_itemCheckbox         | .ais-RefinementList-checkbox                                                                |
-| .ais-RefinementList\_\_itemCheckboxSelected | **Removed**. Use `.ais-RefinementList-item--selected .ais-RefinementList-checkbox` instead. |
-| .ais-RefinementList\_\_itemLabel            | .ais-RefinementList-label                                                                   |
-| .ais-RefinementList\_\_itemLabelSelected    | **Removed**. Use `.ais-RefinementList-item--selected .ais-RefinementList-label` instead.    |
-| .ais-RefinementList\_\_itemCount            | .ais-RefinementList-count                                                                   |
-| .ais-RefinementList\_\_itemCountSelected    | **Removed**. Use `.ais-RefinementList-item--selected .ais-RefinementList-count` instead.    |
-| .ais-RefinementList\_\_showMore             | .ais-RefinementList-showMore                                                                |
-| .ais-RefinementList\_\_SearchBox            | .ais-RefinementList-searchBox                                                               |
-| .ais-RefinementList\_\_noRefinement         | .ais-RefinementList\-\-noRefinement                                                         |
+| `.ais-RefinementList__root`                 | `.ais-RefinementList`                                                                       |
+| `.ais-RefinementList__items`                | `.ais-RefinementList-list`                                                                  |
+| `.ais-RefinementList__item`                 | `.ais-RefinementList-item`                                                                  |
+| `.ais-RefinementList__itemSelected`         | `.ais-RefinementList-item--selected`                                                        |
+| `.ais-RefinementList__itemCheckbox`         | `.ais-RefinementList-checkbox`                                                              |
+| `.ais-RefinementList__itemCheckboxSelected` | **Removed**. Use `.ais-RefinementList-item--selected .ais-RefinementList-checkbox` instead. |
+| `.ais-RefinementList__itemLabel`            | `.ais-RefinementList-label`                                                                 |
+| `.ais-RefinementList__itemLabelSelected`    | **Removed**. Use `.ais-RefinementList-item--selected .ais-RefinementList-label` instead.    |
+| `.ais-RefinementList__itemCount`            | `.ais-RefinementList-count`                                                                 |
+| `.ais-RefinementList__itemCountSelected`    | **Removed**. Use `.ais-RefinementList-item--selected .ais-RefinementList-count` instead.    |
+| `.ais-RefinementList__showMore`             | `.ais-RefinementList-showMore`                                                              |
+| `.ais-RefinementList__SearchBox`            | `.ais-RefinementList-searchBox`                                                             |
+| `.ais-RefinementList__noRefinement`         | `.ais-RefinementList--noRefinement`                                                         |
 
 <h3 id="searchBox">
-<!-- Avoid conflict with docsearch id -->
-  SearchBox
-  <a class="anchor" href="guide/Migration_guide_v5.html#searchBox" aria-hidden="true"></a>
+  <!-- Avoid conflict with docsearch id -->
+  SearchBox <a class="anchor" href="guide/Migration_guide_v5.html#searchBox" aria-hidden="true"></a>
 </h3>
 
 See [the widget](widgets/SearchBox.html) documentation page.
@@ -520,14 +519,14 @@ No change.
 
 #### CSS classes equivalency table
 
-| Old class name                      | New class name                  |
-| ----------------------------------- | ------------------------------- |
-| .ais-SearchBox\_\_root              | .ais-SearchBox                  |
-| .ais-SearchBox\_\_wrapper           | .ais-SearchBox-form             |
-| .ais-SearchBox\_\_input             | .ais-SearchBox-input            |
-| .ais-SearchBox\_\_submit            | .ais-SearchBox-submit           |
-| .ais-SearchBox\_\_reset             | .ais-SearchBox-reset            |
-| .ais-SearchBox\_\_loading-indicator | .ais-SearchBox-loadingIndicator |
+| Old class name                      | New class name                    |
+| ----------------------------------- | --------------------------------- |
+| `.ais-SearchBox__root`              | `.ais-SearchBox`                  |
+| `.ais-SearchBox__wrapper`           | `.ais-SearchBox-form`             |
+| `.ais-SearchBox__input`             | `.ais-SearchBox-input`            |
+| `.ais-SearchBox__submit`            | `.ais-SearchBox-submit`           |
+| `.ais-SearchBox__reset`             | `.ais-SearchBox-reset`            |
+| `.ais-SearchBox__loading-indicator` | `.ais-SearchBox-loadingIndicator` |
 
 ### SortBy
 
@@ -545,7 +544,7 @@ No change.
 
 | Old class name      | New class name |
 | ------------------- | -------------- |
-| .ais-SortBy\_\_root | .ais-SortBy    |
+| `.ais-SortBy__root` | `.ais-SortBy`  |
 
 ### StarRating
 
@@ -565,22 +564,22 @@ No change.
 
 | Old class name                             | New class name                                                                             |
 | ------------------------------------------ | ------------------------------------------------------------------------------------------ |
-| .ais-StarRating\_\_root                    | .ais-RatingMenu                                                                            |
-| .ais-StarRating\_\_ratingLink              | .ais-RatingMenu-link                                                                       |
-| .ais-StarRating\_\_ratingLinkSelected      | **Removed**. Use `.ais-RatingMenu-item--selected .ais-RatingMenu-link` instead.            |
-| .ais-StarRating\_\_ratingLinkDisabled      | **Removed**. Use `.ais-RatingMenu-item--disabled .ais-RatingMenu-link` instead.            |
-| .ais-StarRating\_\_ratingIcon              | .ais-RatingMenu-starIcon                                                                   |
-| .ais-StarRating\_\_ratingIconSelected      | **Removed**. Use `.ais-RatingMenu-item--selected .ais-RatingMenu-starIcon` instead.        |
-| .ais-StarRating\_\_ratingIconDisabled      | **Removed**. Use `.ais-RatingMenu-item--disabled .ais-RatingMenu-starIcon` instead.        |
-| .ais-StarRating\_\_ratingIconEmpty         | .ais-RatingMenu-starIcon--empty                                                            |
-| .ais-StarRating\_\_ratingIconEmptySelected | **Removed**. Use `.ais-RatingMenu-item--selected .ais-RatingMenu-starIcon--empty` instead. |
-| .ais-StarRating\_\_ratingIconEmptyDisabled | **Removed**. Use `.ais-RatingMenu-item--disabled .ais-RatingMenu-starIcon--empty` instead. |
-| .ais-StarRating\_\_ratingLabel             | .ais-RatingMenu-label                                                                      |
-| .ais-StarRating\_\_ratingLabelSelected     | **Removed**. Use `.ais-RatingMenu-item--selected .ais-RatingMenu-label` instead.           |
-| .ais-StarRating\_\_ratingLabelDisabled     | **Removed**. Use `.ais-RatingMenu-item--disabled .ais-RatingMenu-label` instead.           |
-| .ais-StarRating\_\_ratingCount             | .ais-RatingMenu-count                                                                      |
-| .ais-StarRating\_\_ratingCountSelected     | **Removed**. Use `.ais-RatingMenu-item--selected .ais-RatingMenu-count` instead.           |
-| .ais-StarRating\_\_ratingCountDisabled     | **Removed**. Use `.ais-RatingMenu-item--disabled .ais-RatingMenu-count` instead.           |
+| `.ais-StarRating__root`                    | `.ais-RatingMenu`                                                                          |
+| `.ais-StarRating__ratingLink`              | `.ais-RatingMenu-link`                                                                     |
+| `.ais-StarRating__ratingLinkSelected`      | **Removed**. Use `.ais-RatingMenu-item--selected .ais-RatingMenu-link` instead.            |
+| `.ais-StarRating__ratingLinkDisabled`      | **Removed**. Use `.ais-RatingMenu-item--disabled .ais-RatingMenu-link` instead.            |
+| `.ais-StarRating__ratingIcon`              | `.ais-RatingMenu-starIcon`                                                                 |
+| `.ais-StarRating__ratingIconSelected`      | **Removed**. Use `.ais-RatingMenu-item--selected .ais-RatingMenu-starIcon` instead.        |
+| `.ais-StarRating__ratingIconDisabled`      | **Removed**. Use `.ais-RatingMenu-item--disabled .ais-RatingMenu-starIcon` instead.        |
+| `.ais-StarRating__ratingIconEmpty`         | `.ais-RatingMenu-starIcon--empty`                                                          |
+| `.ais-StarRating__ratingIconEmptySelected` | **Removed**. Use `.ais-RatingMenu-item--selected .ais-RatingMenu-starIcon--empty` instead. |
+| `.ais-StarRating__ratingIconEmptyDisabled` | **Removed**. Use `.ais-RatingMenu-item--disabled .ais-RatingMenu-starIcon--empty` instead. |
+| `.ais-StarRating__ratingLabel`             | `.ais-RatingMenu-label`                                                                    |
+| `.ais-StarRating__ratingLabelSelected`     | **Removed**. Use `.ais-RatingMenu-item--selected .ais-RatingMenu-label` instead.           |
+| `.ais-StarRating__ratingLabelDisabled`     | **Removed**. Use `.ais-RatingMenu-item--disabled .ais-RatingMenu-label` instead.           |
+| `.ais-StarRating__ratingCount`             | `.ais-RatingMenu-count`                                                                    |
+| `.ais-StarRating__ratingCountSelected`     | **Removed**. Use `.ais-RatingMenu-item--selected .ais-RatingMenu-count` instead.           |
+| `.ais-StarRating__ratingCountDisabled`     | **Removed**. Use `.ais-RatingMenu-item--disabled .ais-RatingMenu-count` instead.           |
 
 ### Stats
 
@@ -596,9 +595,9 @@ No change.
 
 #### CSS classes equivalency table
 
-| Old class name     | New class name  |
-| ------------------ | --------------- |
-| .ais-Stats\_\_root | .ais-Stats-text |
+| Old class name     | New class name    |
+| ------------------ | ----------------- |
+| `.ais-Stats__root` | `.ais-Stats-text` |
 
 ### Toggle
 
@@ -616,11 +615,11 @@ No change.
 
 #### CSS classes equivalency table
 
-| Old class name          | New class name       |
-| ----------------------- | -------------------- |
-| .ais-Toggle\_\_root     | .ais-Toggle          |
-| .ais-Toggle\_\_checkbox | .ais-Toggle-checkbox |
-| .ais-Toggle\_\_label    | .ais-Toggle-label    |
+| Old class name          | New class name         |
+| ----------------------- | ---------------------- |
+| `.ais-Toggle__root`     | `.ais-Toggle`          |
+| `.ais-Toggle__checkbox` | `.ais-Toggle-checkbox` |
+| `.ais-Toggle__label`    | `.ais-Toggle-label`    |
 
 ## Connectors changes
 
