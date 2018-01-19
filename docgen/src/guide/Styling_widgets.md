@@ -36,23 +36,23 @@ We **strongly** recommend that you use at least **reset.css** in order to neglec
 
 ### Via CDN
 
-The themes are available on jsdelivr:
+The themes are available on jsDelivr:
 
 unminified:
 
-* https://cdn.jsdelivr.net/npm/instantsearch.css@latest/themes/reset.css
-* https://cdn.jsdelivr.net/npm/instantsearch.css@latest/themes/algolia.css
+* https://cdn.jsdelivr.net/npm/instantsearch.css@6.0.1/themes/reset.css
+* https://cdn.jsdelivr.net/npm/instantsearch.css@6.0.1/themes/algolia.css
 
 minified:
 
-* https://cdn.jsdelivr.net/npm/instantsearch.css@latest/themes/reset-min.css
-* https://cdn.jsdelivr.net/npm/instantsearch.css@latest/themes/algolia-min.css
+* https://cdn.jsdelivr.net/npm/instantsearch.css@6.0.1/themes/reset-min.css
+* https://cdn.jsdelivr.net/npm/instantsearch.css@6.0.1/themes/algolia-min.css
 
-You can either copy paste the content in your own app or use a direct link to jsdelivr:
+You can either copy paste the content in your own app or use a direct link to jsDelivr:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@latest/themes/reset-min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@latest/themes/algolia-min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@6.0.1/themes/reset-min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@6.0.1/themes/algolia-min.css">
 ```
 
 ### Via npm, Webpack
@@ -77,10 +77,10 @@ export default {
     loaders: [
       {
         test: /\.css$/,
-        loaders: ['style?insertAt=top', 'css']
-      }
-    ]
-  }
+        loaders: ['style?insertAt=top', 'css'],
+      },
+    ],
+  },
 };
 ```
 

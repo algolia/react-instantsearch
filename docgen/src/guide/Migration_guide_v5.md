@@ -88,6 +88,19 @@ Please refer to [Widgets changes](guide/Migration_guide_v5.html#widgets-changes)
 
 ### Updating styles
 
+We didn't rely on the `react-instantsearch-theme-algolia` package anymore for styling the widgets.
+
+The package has been removed in favour of `instantsearch.css`. This package will offer the same styling across all the InstantSearch libraries.
+
+Here is the new jsDelivr links for the theme:
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@6.0.1/themes/reset-min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@6.0.1/themes/algolia-min.css">
+```
+
+You can also use `npm` to install it, please refer to the [Styling Widgets guide](guide/Styling_widgets.html#via-npm-webpack) for more informations.
+
 The CSS naming convention used for widgets has been changed in favour of the [SUIT CSS](https://suitcss.github.io/) methodology.
 
 In order to fix broken stylings, please refer to the **CSS naming equivalency table** of each widget in the [Widgets changes](guide/Migration_guide_v5.html#widgets-changes) section.
