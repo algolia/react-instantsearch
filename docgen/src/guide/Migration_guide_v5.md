@@ -73,16 +73,16 @@ Complete list of changes:
 
 Some of the props has been renamed for a better consistency across the library. See below the list of all of them:
 
-* `attributeName` &rarr; `attribute`
-* `limitMin` &rarr; `limit`
-* `limitMax` &rarr; `showMoreLimit`
-* `maxPages` &rarr; `totalPages`
-* `pagesPadding` &rarr; `padding`
-* `title` &rarr; `header`
-* `submitComponent` &rarr; `submit`
-* `resetComponent` &rarr; `reset`
-* `loadingIndicatorComponent` &rarr; `loadingIndicator`
-* `withSearchBox` &rarr; `searchable`
+* `attributeName` &rarr; `attribute` (multiple widgets)
+* `limitMin` &rarr; `limit` (HierarchicalMenu, Menu, RefinementList)
+* `limitMax` &rarr; `showMoreLimit` (HierarchicalMenu, Menu, RefinementList)
+* `maxPages` &rarr; `totalPages` (Pagination)
+* `pagesPadding` &rarr; `padding` (Pagination)
+* `title` &rarr; `header` (Panel)
+* `submitComponent` &rarr; `submit` (SearchBox)
+* `resetComponent` &rarr; `reset` (SearchBox)
+* `loadingIndicatorComponent` &rarr; `loadingIndicator` (SearchBox)
+* `withSearchBox` &rarr; `searchable` (Menu, RefinementList)
 
 Please refer to [Widgets changes](guide/Migration_guide_v5.html#widgets-changes) & [Connectors changes](guide/Migration_guide_v5.html#connectors-changes) sections for more detail informations.
 
