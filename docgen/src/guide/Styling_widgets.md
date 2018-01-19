@@ -69,10 +69,10 @@ import 'instantsearch.css/themes/reset.css';
 import 'instantsearch.css/themes/algolia.css';
 ```
 
-webpack.config.babel.js:
+webpack.config.js:
 
 ```js
-export default {
+module.exports = {
   module: {
     loaders: [
       {
