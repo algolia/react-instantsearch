@@ -17,6 +17,7 @@ This guide will provide step-by-step migration information for each widget & con
 * [Migration steps](guide/Migration_guide_v5.html#migration-steps)
   * [Updating widget & connector names](guide/Migration_guide_v5.html#updating-widget-connector-names)
   * [Updating prop names](guide/Migration_guide_v5.html#updating-prop-names)
+  * [Removing deprecation](guide/Migration_guide_v5.html#removing-deprecation)
   * [Updating styles](guide/Migration_guide_v5.html#updating-styles)
   * [Adding className](guide/Migration_guide_v5.html#adding-classname)
 * [Widgets changes](guide/Migration_guide_v5.html#widgets-changes)
@@ -42,6 +43,7 @@ This guide will provide step-by-step migration information for each widget & con
   * [Stats](guide/Migration_guide_v5.html#stats)
   * [Toggle](guide/Migration_guide_v5.html#toggle)
 * [Connectors changes](guide/Migration_guide_v5.html#connectors-changes)
+  * [createConnector](guide/Migration_guide_v5.html#createconnector)
   * [connectCurrentRefinements](guide/Migration_guide_v5.html#connectcurrentrefinements)
   * [connectHierarchicalMenu](guide/Migration_guide_v5.html#connecthierarchicalmenu)
   * [connectHighlight](guide/Migration_guide_v5.html#connecthighlight)
@@ -83,6 +85,15 @@ Some of the props has been renamed for a better consistency across the library. 
 * `resetComponent` &rarr; `reset` (SearchBox)
 * `loadingIndicatorComponent` &rarr; `loadingIndicator` (SearchBox)
 * `withSearchBox` &rarr; `searchable` (Menu, RefinementList)
+
+Please refer to [Widgets changes](guide/Migration_guide_v5.html#widgets-changes) & [Connectors changes](guide/Migration_guide_v5.html#connectors-changes) sections for more detail informations.
+
+### Removing deprecation
+
+We introduce a couple of months ago [a warning](https://github.com/algolia/react-instantsearch/commit/59d1cc41f0dc739c658c413a4310d72e64b6832e) about the usage of `searchForFacetValues` in favour of `searchForItems` & `withSearchBox` (now renamed `searchable`). This warning has been removed and so the legacy API, so please update your code if it's not already the case. See below the list of changes:
+
+* `searchForFacetValues` &rarr; `withSearchBox` &rarr; `searchable` (RefinementList, Menu)
+* `searchForFacetValues` &rarr; `searchForItems` (createConnector, connectRefinementList, connectMenu)
 
 Please refer to [Widgets changes](guide/Migration_guide_v5.html#widgets-changes) & [Connectors changes](guide/Migration_guide_v5.html#connectors-changes) sections for more detail informations.
 
@@ -635,6 +646,18 @@ No change.
 
 ## Connectors changes
 
+### createConnector
+
+See [the connector](guide/Custom_connectors.html) documentation page.
+
+#### Naming
+
+* `searchForFacetValues` &rarr; `searchForItems`
+
+#### Behaviour
+
+No change.
+
 ### connectCurrentRefinements
 
 See [the connector](connectors/connectCurrentRefinements.html) documentation page.
@@ -682,6 +705,7 @@ See [the connector](connectors/connectMenu.html) documentation page.
 * `limitMin` &rarr; `limit`
 * `limitMax` &rarr; `showMoreLimit`
 * `withSearchBox` &rarr; `searchable`
+* `searchForFacetValues` &rarr; `searchForItems`
 
 #### Behaviour
 
@@ -736,6 +760,7 @@ See [the connector](connectors/connectRefinementList.html) documentation page.
 * `limitMin` &rarr; `limit`
 * `limitMax` &rarr; `showMoreLimit`
 * `withSearchBox` &rarr; `searchable`
+* `searchForFacetValues` &rarr; `searchForItems`
 
 #### Behaviour
 
