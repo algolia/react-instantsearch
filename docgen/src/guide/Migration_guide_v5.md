@@ -88,9 +88,8 @@ Please refer to [Widgets changes](guide/Migration_guide_v5.html#widgets-changes)
 
 ### Updating styles
 
-We didn't rely on the `react-instantsearch-theme-algolia` package anymore for styling the widgets.
-
-The package has been removed in favour of `instantsearch.css`. This package will offer the same styling across all the InstantSearch libraries.
+We are now making a unified theme for all InstantSearch versions, and React InstantSearch is the first to use it.
+It's published as [instantsearch.css](https://yarn.pm/instansearch.css), and causes the deprecation and removal of `react-instantsearch-theme-algolia`.
 
 Here is the new jsDelivr links for the theme:
 
