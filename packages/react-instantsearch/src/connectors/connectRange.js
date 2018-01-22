@@ -27,6 +27,7 @@ import createConnector from '../core/createConnector';
  * @providedPropType {string} currentRefinement - the refinement currently applied
  * @providedPropType {number} min - the minimum value available.
  * @providedPropType {number} max - the maximum value available.
+ * @providedPropType {number} precision - Number of digits after decimal point to use.
  */
 
 function getId(props) {
