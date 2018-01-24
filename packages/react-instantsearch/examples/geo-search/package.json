@@ -7,13 +7,13 @@
     "react-test-renderer": "16.2.0"
   },
   "dependencies": {
-    "google-map-react": "0.28.0",
+    "google-map-react": "0.29.0",
     "prop-types": "15.6.0",
     "qs": "6.5.1",
     "react": "16.2.0",
     "react-dom": "16.2.0",
-    "react-instantsearch": "4.4.1",
-    "react-instantsearch-theme-algolia": "4.4.1"
+    "react-instantsearch": "4.4.2",
+    "react-instantsearch-theme-algolia": "4.4.2"
   },
   "scripts": {
     "start": "react-scripts start",
