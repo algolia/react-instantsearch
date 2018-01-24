@@ -90,7 +90,7 @@ Please refer to [Widgets changes](guide/Migration_guide_v5.html#widgets-changes)
 
 ### Removing deprecation
 
-We introduce a couple of months ago [a warning](https://github.com/algolia/react-instantsearch/commit/59d1cc41f0dc739c658c413a4310d72e64b6832e) about the usage of `searchForFacetValues` in favour of `searchForItems` & `withSearchBox` (now renamed `searchable`). This warning has been removed and so the legacy API, so please update your code if it's not already the case. See below the list of changes:
+We introduced a couple of months ago [a warning](https://github.com/algolia/react-instantsearch/commit/59d1cc41f0dc739c658c413a4310d72e64b6832e) about the usage of `searchForFacetValues` in favour of `searchForItems` & `withSearchBox` (now renamed `searchable`). This warning has been removed and so is the legacy API.Update your code if it's not already the case. See below for the list of changes:
 
 * `searchForFacetValues` &rarr; `withSearchBox` &rarr; `searchable` (RefinementList, Menu)
 * `searchForFacetValues` &rarr; `searchForItems` (createConnector, connectRefinementList, connectMenu)
