@@ -18,12 +18,10 @@ export default function createInstantSearchManager({
   indexName,
   initialState = {},
   algoliaClient,
-  searchParameters = {},
   resultsState,
   stalledSearchDelay,
 }) {
   const baseSP = new SearchParameters({
-    ...searchParameters,
     index: indexName,
     ...highlightTags,
   });

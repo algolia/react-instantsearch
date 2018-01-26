@@ -21,6 +21,7 @@ This guide will provide step-by-step migration information for each widget & con
   * [Updating styles](guide/Migration_guide_v5.html#updating-styles)
   * [Adding className](guide/Migration_guide_v5.html#adding-classname)
 * [Widgets changes](guide/Migration_guide_v5.html#widgets-changes)
+  * [InstantSearch](guide/Migration_guide_v5.html#instantsearch)
   * [Breadcrumb](guide/Migration_guide_v5.html#breadcrumb)
   * [ClearAll](guide/Migration_guide_v5.html#clearall)
   * [CurrentRefinements](guide/Migration_guide_v5.html#currentrefinements)
@@ -94,6 +95,7 @@ We introduced a couple of months ago [a warning](https://github.com/algolia/reac
 
 * `searchForFacetValues` &rarr; `withSearchBox` &rarr; `searchable` (RefinementList, Menu)
 * `searchForFacetValues` &rarr; `searchForItems` (createConnector, connectRefinementList, connectMenu)
+* `searchParameters` &rarr; **removed** on `<InstantSearch>` in favour of `<Configure />`
 
 Please refer to [Widgets changes](guide/Migration_guide_v5.html#widgets-changes) & [Connectors changes](guide/Migration_guide_v5.html#connectors-changes) sections for more detail informations.
 
@@ -143,6 +145,22 @@ All the built-in widgets now accept a prop `className` that will be forwarded to
 ## Widgets changes
 
 **Note**: the equivalency table only shows the replacement classes for existing classes. New CSS classes are also available. For more details, please refer to the [Widgets guide](widgets).
+
+### InstantSearch
+
+See [the widget](widgets/<InstantSearch>.html) documentation page.
+
+#### Naming
+
+No change.
+
+#### Behaviour
+
+* `searchParameters` &rarr; **removed** in favour of `<Configure />`
+
+#### CSS classes equivalency table
+
+No change.
 
 ### Breadcrumb
 
