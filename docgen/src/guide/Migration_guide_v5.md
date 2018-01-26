@@ -216,7 +216,7 @@ No change.
 
 #### Behaviour
 
-Instead of displaying the widget as `category: One ✕ Two ✕`, it now displays like this: `One ✕` `Two ✕`.
+No change.
 
 #### CSS classes equivalency table
 
