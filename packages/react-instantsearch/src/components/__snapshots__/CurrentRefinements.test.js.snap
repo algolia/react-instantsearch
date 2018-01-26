@@ -12,14 +12,13 @@ exports[`CurrentRefinements - Connected expect to render a list of current refin
       key="color: Red"
     >
       <span
-        className="ais-CurrentRefinements-category"
-        key="color: Red"
+        className="ais-CurrentRefinements-label"
       >
-        <span
-          className="ais-CurrentRefinements-categoryLabel"
-        >
-          color: Red
-        </span>
+        color: Red
+      </span>
+      <span
+        className="ais-CurrentRefinements-category"
+      >
         <button
           className="ais-CurrentRefinements-delete"
           onClick={[Function]}
@@ -86,14 +85,13 @@ exports[`CurrentRefinements - Connected expect to render a list of current refin
       key="color: Red"
     >
       <span
-        className="ais-CurrentRefinements-category"
-        key="color: Red"
+        className="ais-CurrentRefinements-label"
       >
-        <span
-          className="ais-CurrentRefinements-categoryLabel"
-        >
-          color: Red
-        </span>
+        color: Red
+      </span>
+      <span
+        className="ais-CurrentRefinements-category"
+      >
         <button
           className="ais-CurrentRefinements-delete"
           onClick={[Function]}
@@ -160,14 +158,13 @@ exports[`CurrentRefinements expect to render a list of current refinements 1`] =
       key="color: Red"
     >
       <span
-        className="ais-CurrentRefinements-category"
-        key="color: Red"
+        className="ais-CurrentRefinements-label"
       >
-        <span
-          className="ais-CurrentRefinements-categoryLabel"
-        >
-          color: Red
-        </span>
+        color: Red
+      </span>
+      <span
+        className="ais-CurrentRefinements-category"
+      >
         <button
           className="ais-CurrentRefinements-delete"
           onClick={[Function]}
