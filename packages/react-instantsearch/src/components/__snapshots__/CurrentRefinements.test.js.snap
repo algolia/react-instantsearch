@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CurrentRefinements allows clearing unique items of a refinement 1`] = `
+exports[`CurrentRefinements - Connected expect to render a list of current refinements 1`] = `
 <div
   className="ais-CurrentRefinements"
 >
@@ -9,93 +9,235 @@ exports[`CurrentRefinements allows clearing unique items of a refinement 1`] = `
   >
     <li
       className="ais-CurrentRefinements-item"
+      key="color: Red"
     >
-      <button
-        className="ais-CurrentRefinements-button"
-        onClick={[Function]}
+      <span
+        className="ais-CurrentRefinements-category"
+        key="color: Red"
       >
         <span
-          className="ais-CurrentRefinements-label"
+          className="ais-CurrentRefinements-categoryLabel"
         >
-          Sci-fi
+          color: Red
         </span>
-        <span
+        <button
           className="ais-CurrentRefinements-delete"
+          onClick={[Function]}
         >
           ✕
+        </button>
+      </span>
+    </li>
+    <li
+      className="ais-CurrentRefinements-item"
+      key="category:"
+    >
+      <span
+        className="ais-CurrentRefinements-label"
+      >
+        category:
+      </span>
+      <span
+        className="ais-CurrentRefinements-category"
+        key="iPhone"
+      >
+        <span
+          className="ais-CurrentRefinements-categoryLabel"
+        >
+          iPhone
         </span>
-      </button>
+        <button
+          className="ais-CurrentRefinements-delete"
+          onClick={[Function]}
+        >
+          ✕
+        </button>
+      </span>
+      <span
+        className="ais-CurrentRefinements-category"
+        key="iPad"
+      >
+        <span
+          className="ais-CurrentRefinements-categoryLabel"
+        >
+          iPad
+        </span>
+        <button
+          className="ais-CurrentRefinements-delete"
+          onClick={[Function]}
+        >
+          ✕
+        </button>
+      </span>
     </li>
   </ul>
 </div>
 `;
 
-exports[`CurrentRefinements renders a empty list with no current refinements 1`] = `
+exports[`CurrentRefinements - Connected expect to render a list of current refinements with custom translations 1`] = `
+<div
+  className="ais-CurrentRefinements"
+>
+  <ul
+    className="ais-CurrentRefinements-list"
+  >
+    <li
+      className="ais-CurrentRefinements-item"
+      key="color: Red"
+    >
+      <span
+        className="ais-CurrentRefinements-category"
+        key="color: Red"
+      >
+        <span
+          className="ais-CurrentRefinements-categoryLabel"
+        >
+          color: Red
+        </span>
+        <button
+          className="ais-CurrentRefinements-delete"
+          onClick={[Function]}
+        >
+          DELETE
+        </button>
+      </span>
+    </li>
+    <li
+      className="ais-CurrentRefinements-item"
+      key="category:"
+    >
+      <span
+        className="ais-CurrentRefinements-label"
+      >
+        category:
+      </span>
+      <span
+        className="ais-CurrentRefinements-category"
+        key="iPhone"
+      >
+        <span
+          className="ais-CurrentRefinements-categoryLabel"
+        >
+          iPhone
+        </span>
+        <button
+          className="ais-CurrentRefinements-delete"
+          onClick={[Function]}
+        >
+          DELETE
+        </button>
+      </span>
+      <span
+        className="ais-CurrentRefinements-category"
+        key="iPad"
+      >
+        <span
+          className="ais-CurrentRefinements-categoryLabel"
+        >
+          iPad
+        </span>
+        <button
+          className="ais-CurrentRefinements-delete"
+          onClick={[Function]}
+        >
+          DELETE
+        </button>
+      </span>
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`CurrentRefinements expect to render a list of current refinements 1`] = `
+<div
+  className="ais-CurrentRefinements"
+>
+  <ul
+    className="ais-CurrentRefinements-list"
+  >
+    <li
+      className="ais-CurrentRefinements-item"
+      key="color: Red"
+    >
+      <span
+        className="ais-CurrentRefinements-category"
+        key="color: Red"
+      >
+        <span
+          className="ais-CurrentRefinements-categoryLabel"
+        >
+          color: Red
+        </span>
+        <button
+          className="ais-CurrentRefinements-delete"
+          onClick={[Function]}
+        >
+          clearFilter
+        </button>
+      </span>
+    </li>
+    <li
+      className="ais-CurrentRefinements-item"
+      key="category:"
+    >
+      <span
+        className="ais-CurrentRefinements-label"
+      >
+        category:
+      </span>
+      <span
+        className="ais-CurrentRefinements-category"
+        key="iPhone"
+      >
+        <span
+          className="ais-CurrentRefinements-categoryLabel"
+        >
+          iPhone
+        </span>
+        <button
+          className="ais-CurrentRefinements-delete"
+          onClick={[Function]}
+        >
+          clearFilter
+        </button>
+      </span>
+      <span
+        className="ais-CurrentRefinements-category"
+        key="iPad"
+      >
+        <span
+          className="ais-CurrentRefinements-categoryLabel"
+        >
+          iPad
+        </span>
+        <button
+          className="ais-CurrentRefinements-delete"
+          onClick={[Function]}
+        >
+          clearFilter
+        </button>
+      </span>
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`CurrentRefinements expect to render a list with a custom className 1`] = `
+<div
+  className="ais-CurrentRefinements MyCustomCurrentRefinements"
+>
+  <ul
+    className="ais-CurrentRefinements-list"
+  />
+</div>
+`;
+
+exports[`CurrentRefinements expect to render a list without refinements 1`] = `
 <div
   className="ais-CurrentRefinements ais-CurrentRefinements--noRefinement"
 >
   <ul
     className="ais-CurrentRefinements-list ais-CurrentRefinements-list--noRefinement"
   />
-</div>
-`;
-
-exports[`CurrentRefinements renders a list of current refinements 1`] = `
-<div
-  className="ais-CurrentRefinements"
->
-  <ul
-    className="ais-CurrentRefinements-list"
-  >
-    <li
-      className="ais-CurrentRefinements-item"
-    >
-      <button
-        className="ais-CurrentRefinements-button"
-        onClick={[Function]}
-      >
-        <span
-          className="ais-CurrentRefinements-label"
-        >
-          Genre
-        </span>
-        <span
-          className="ais-CurrentRefinements-delete"
-        >
-          ✕
-        </span>
-      </button>
-    </li>
-  </ul>
-</div>
-`;
-
-exports[`CurrentRefinements renders a list of current refinements with a custom className 1`] = `
-<div
-  className="ais-CurrentRefinements MyCustomCurrentRefinements"
->
-  <ul
-    className="ais-CurrentRefinements-list"
-  >
-    <li
-      className="ais-CurrentRefinements-item"
-    >
-      <button
-        className="ais-CurrentRefinements-button"
-        onClick={[Function]}
-      >
-        <span
-          className="ais-CurrentRefinements-label"
-        >
-          Genre
-        </span>
-        <span
-          className="ais-CurrentRefinements-delete"
-        >
-          ✕
-        </span>
-      </button>
-    </li>
-  </ul>
 </div>
 `;

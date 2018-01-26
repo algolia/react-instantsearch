@@ -1,85 +1,162 @@
-/* eslint-env jest, jasmine */
-
 import React from 'react';
-import renderer from 'react-test-renderer';
-import Enzyme from 'enzyme';
+import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import CurrentRefinements from './CurrentRefinements';
+import Connected, { CurrentRefinements } from './CurrentRefinements';
 
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('CurrentRefinements', () => {
-  it('renders a list of current refinements', () =>
-    expect(
-      renderer
-        .create(
-          <CurrentRefinements
-            refine={() => null}
-            items={[
-              {
-                label: 'Genre',
-                value: 'clear all genres',
-              },
-            ]}
-            canRefine={true}
-          />
-        )
-        .toJSON()
-    ).toMatchSnapshot());
+  const defaultProps = {
+    items: [],
+    canRefine: true,
+    refine: () => {},
+    translate: x => x,
+  };
 
-  it('renders a list of current refinements with a custom className', () =>
-    expect(
-      renderer
-        .create(
-          <CurrentRefinements
-            className="MyCustomCurrentRefinements"
-            refine={() => null}
-            items={[
-              {
-                label: 'Genre',
-                value: 'clear all genres',
-              },
-            ]}
-            canRefine={true}
-          />
-        )
-        .toJSON()
-    ).toMatchSnapshot());
+  it('expect to render a list of current refinements', () => {
+    const props = {
+      ...defaultProps,
+      items: [
+        { label: 'color: Red', value: () => {} },
+        {
+          label: 'category:',
+          value: () => {},
+          items: [
+            { label: 'iPhone', value: () => {} },
+            { label: 'iPad', value: () => {} },
+          ],
+        },
+      ],
+    };
 
-  it('renders a empty list with no current refinements', () =>
-    expect(
-      renderer
-        .create(
-          <CurrentRefinements
-            refine={() => null}
-            items={[]}
-            canRefine={false}
-          />
-        )
-        .toJSON()
-    ).toMatchSnapshot());
+    const wrapper = shallow(<CurrentRefinements {...props} />);
 
-  it('allows clearing unique items of a refinement', () =>
-    expect(
-      renderer
-        .create(
-          <CurrentRefinements
-            refine={() => null}
-            items={[
-              {
-                label: 'Genre',
-                value: 'clear all genres',
-                items: [
-                  {
-                    label: 'Sci-fi',
-                    value: 'clear sci-fi',
-                  },
-                ],
-              },
-            ]}
-            canRefine={true}
-          />
-        )
-        .toJSON()
-    ).toMatchSnapshot());
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('expect to render a list without refinements', () => {
+    const props = {
+      ...defaultProps,
+      canRefine: false,
+    };
+
+    const wrapper = shallow(<CurrentRefinements {...props} />);
+
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('expect to render a list with a custom className', () => {
+    const props = {
+      ...defaultProps,
+      className: 'MyCustomCurrentRefinements',
+    };
+
+    const wrapper = shallow(<CurrentRefinements {...props} />);
+
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('expect to refine the "color" onClick', () => {
+    const value = () => {};
+    const props = {
+      ...defaultProps,
+      items: [
+        { label: 'color: Red', value },
+        {
+          label: 'category:',
+          value: () => {},
+          items: [
+            { label: 'iPhone', value: () => {} },
+            { label: 'iPad', value: () => {} },
+          ],
+        },
+      ],
+      refine: jest.fn(),
+    };
+
+    const wrapper = shallow(<CurrentRefinements {...props} />);
+
+    expect(props.refine).not.toHaveBeenCalled();
+
+    wrapper
+      .find('li')
+      .first()
+      .find('button')
+      .simulate('click');
+
+    expect(props.refine).toHaveBeenCalledWith(value);
+  });
+
+  it('expect to refine the "category: iPad" onClick', () => {
+    const value = () => {};
+    const props = {
+      ...defaultProps,
+      items: [
+        { label: 'color: Red', value: () => {} },
+        {
+          label: 'category:',
+          value: () => {},
+          items: [
+            { label: 'iPhone', value: () => {} },
+            { label: 'iPad', value },
+          ],
+        },
+      ],
+      refine: jest.fn(),
+    };
+
+    const wrapper = shallow(<CurrentRefinements {...props} />);
+
+    expect(props.refine).not.toHaveBeenCalled();
+
+    wrapper
+      .find('li')
+      .last()
+      .find('button')
+      .last()
+      .simulate('click');
+
+    expect(props.refine).toHaveBeenCalledWith(value);
+  });
+});
+
+describe('CurrentRefinements - Connected', () => {
+  const defaultProps = {
+    items: [
+      { label: 'color: Red', value: () => {} },
+      {
+        label: 'category:',
+        value: () => {},
+        items: [
+          { label: 'iPhone', value: () => {} },
+          { label: 'iPad', value: () => {} },
+        ],
+      },
+    ],
+    canRefine: true,
+    refine: () => {},
+  };
+
+  it('expect to render a list of current refinements', () => {
+    const props = {
+      ...defaultProps,
+    };
+
+    const wrapper = shallow(<Connected {...props} />).dive();
+
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('expect to render a list of current refinements with custom translations', () => {
+    const props = {
+      ...defaultProps,
+      translations: {
+        clearFilter: 'DELETE',
+      },
+    };
+
+    const wrapper = shallow(<Connected {...props} />).dive();
+
+    expect(wrapper).toMatchSnapshot();
+  });
 });
