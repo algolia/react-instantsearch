@@ -13,26 +13,30 @@ const searchStateToUrl = searchState =>
 
 export default class extends React.Component {
   static propTypes = {
-    resultsState: PropTypes.object,
-    searchState: PropTypes.object,
+    initialResultsState: PropTypes.object,
+    initialSearchState: PropTypes.object,
   };
 
   constructor(props) {
     super(props);
     this.onSearchStateChange = this.onSearchStateChange.bind(this);
+
+    this.state = {
+      searchState: props.initialSearchState,
+    };
   }
 
   /*
      nextjs params.query doesn't handle nested objects
      once it does, params.query could be used directly here, but also inside the constructor
-     to initialize the searchState. 
+     to initialize the searchState.
   */
   static async getInitialProps(params) {
     const searchState = params.asPath.includes('?')
       ? qs.parse(params.asPath.substring(params.asPath.indexOf('?') + 1))
       : {};
-    const resultsState = await findResultsState(App, { searchState });
-    return { resultsState, searchState };
+    const initialResultsState = await findResultsState(App, { searchState });
+    return { initialResultsState, initialSearchState: searchState };
   }
 
   onSearchStateChange = searchState => {
@@ -62,11 +66,7 @@ export default class extends React.Component {
           <App
             resultsState={this.props.resultsState}
             onSearchStateChange={this.onSearchStateChange}
-            searchState={
-              this.state && this.state.searchState
-                ? this.state.searchState
-                : this.props.searchState
-            }
+            searchState={this.state.searchState}
             createURL={createURL}
           />
         </div>

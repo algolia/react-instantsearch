@@ -4,7 +4,7 @@ import App from '../pages/index.js';
 
 describe('Next app recipes', () => {
   it('App renders without crashing', () => {
-    const component = renderer.create(<App searchState={{}} />);
+    const component = renderer.create(<App initialSearchState={{}} />);
 
     expect(component.toJSON()).toMatchSnapshot();
   });
