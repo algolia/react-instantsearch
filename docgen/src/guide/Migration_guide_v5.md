@@ -76,16 +76,16 @@ Complete list of changes:
 
 Some of the props has been renamed for a better consistency across the library. See below the list of all of them:
 
-* `attributeName` &rarr; `attribute` (multiple widgets)
-* `limitMin` &rarr; `limit` (HierarchicalMenu, Menu, RefinementList)
-* `limitMax` &rarr; `showMoreLimit` (HierarchicalMenu, Menu, RefinementList)
-* `maxPages` &rarr; `totalPages` (Pagination)
-* `pagesPadding` &rarr; `padding` (Pagination)
-* `title` &rarr; `header` (Panel)
-* `submitComponent` &rarr; `submit` (SearchBox)
-* `resetComponent` &rarr; `reset` (SearchBox)
-* `loadingIndicatorComponent` &rarr; `loadingIndicator` (SearchBox)
-* `withSearchBox` &rarr; `searchable` (Menu, RefinementList)
+* `attributeName` → `attribute` (multiple widgets)
+* `limitMin` → `limit` (HierarchicalMenu, Menu, RefinementList)
+* `limitMax` → `showMoreLimit` (HierarchicalMenu, Menu, RefinementList)
+* `maxPages` → `totalPages` (Pagination)
+* `pagesPadding` → `padding` (Pagination)
+* `title` → `header` (Panel)
+* `submitComponent` → `submit` (SearchBox)
+* `resetComponent` → `reset` (SearchBox)
+* `loadingIndicatorComponent` → `loadingIndicator` (SearchBox)
+* `withSearchBox` → `searchable` (Menu, RefinementList)
 
 Please refer to [Widgets changes](guide/Migration_guide_v5.html#widgets-changes) & [Connectors changes](guide/Migration_guide_v5.html#connectors-changes) sections for more detail informations.
 
@@ -93,9 +93,9 @@ Please refer to [Widgets changes](guide/Migration_guide_v5.html#widgets-changes)
 
 We introduced a couple of months ago [a warning](https://github.com/algolia/react-instantsearch/commit/59d1cc41f0dc739c658c413a4310d72e64b6832e) about the usage of `searchForFacetValues` in favour of `searchForItems` & `withSearchBox` (now renamed `searchable`). This warning has been removed and so is the legacy API.Update your code if it's not already the case. See below for the list of changes:
 
-* `searchForFacetValues` &rarr; `withSearchBox` &rarr; `searchable` (RefinementList, Menu)
-* `searchForFacetValues` &rarr; `searchForItems` (createConnector, connectRefinementList, connectMenu)
-* `searchParameters` &rarr; **removed** on `<InstantSearch>` in favour of `<Configure />`
+* `searchForFacetValues` → `withSearchBox` → `searchable` (RefinementList, Menu)
+* `searchForFacetValues` → `searchForItems` (createConnector, connectRefinementList, connectMenu)
+* `searchParameters` → **removed** on `<InstantSearch>` in favour of `<Configure />`
 
 Please refer to [Widgets changes](guide/Migration_guide_v5.html#widgets-changes) & [Connectors changes](guide/Migration_guide_v5.html#connectors-changes) sections for more detail informations.
 
@@ -156,7 +156,7 @@ No change.
 
 #### Behaviour
 
-* `searchParameters` &rarr; **removed** in favour of `<Configure />`
+* `searchParameters` → **removed** in favour of `<Configure />`
 
 #### CSS classes equivalency table
 
@@ -235,8 +235,8 @@ See [the widget](widgets/HierarchicalMenu.html) documentation page.
 
 #### Naming
 
-* `limitMin` &rarr; `limit`
-* `limitMax` &rarr; `showMoreLimit`
+* `limitMin` → `limit`
+* `limitMax` → `showMoreLimit`
 
 #### Behaviour
 
@@ -265,7 +265,7 @@ See [the widget](widgets/Highlight.html) documentation page.
 
 #### Naming
 
-* `attributeName` &rarr; `attribute`
+* `attributeName` → `attribute`
 
 #### Behaviour
 
@@ -339,10 +339,10 @@ See [the widget](widgets/Menu.html) documentation page.
 
 #### Naming
 
-* `attributeName` &rarr; `attribute`
-* `limitMin` &rarr; `limit`
-* `limitMax` &rarr; `showMoreLimit`
-* `withSearchBox` &rarr; `searchable`
+* `attributeName` → `attribute`
+* `limitMin` → `limit`
+* `limitMax` → `showMoreLimit`
+* `withSearchBox` → `searchable`
 
 #### Behaviour
 
@@ -371,7 +371,7 @@ See [the widget](widgets/MenuSelect.html) documentation page.
 
 #### Naming
 
-* `attributeName` &rarr; `attribute`
+* `attributeName` → `attribute`
 
 #### Behaviour
 
@@ -392,7 +392,7 @@ See [the widget](widgets/NumericMenu.html) documentation page.
 
 Renamed to **NumericMenu**.
 
-* `attributeName` &rarr; `attribute`
+* `attributeName` → `attribute`
 
 #### Behaviour
 
@@ -420,8 +420,8 @@ See [the widget](widgets/Pagination.html) documentation page.
 
 #### Naming
 
-* `maxPages` &rarr; `totalPages`
-* `pagesPadding` &rarr; `padding`
+* `maxPages` → `totalPages`
+* `pagesPadding` → `padding`
 
 #### Behaviour
 
@@ -449,7 +449,7 @@ See [the widget](widgets/Panel.html) documentation page.
 
 #### Naming
 
-* `title` &rarr; `header`
+* `title` → `header`
 
 #### Behaviour
 
@@ -489,7 +489,7 @@ See [the widget](widgets/RangeInput.html) documentation page.
 
 #### Naming
 
-* `attributeName` &rarr; `attribute`
+* `attributeName` → `attribute`
 
 #### Behaviour
 
@@ -514,10 +514,10 @@ See [the widget](widgets/RefinementList.html) documentation page.
 
 #### Naming
 
-* `attributeName` &rarr; `attribute`
-* `limitMin` &rarr; `limit`
-* `limitMax` &rarr; `showMoreLimit`
-* `withSearchBox` &rarr; `searchable`
+* `attributeName` → `attribute`
+* `limitMin` → `limit`
+* `limitMax` → `showMoreLimit`
+* `withSearchBox` → `searchable`
 
 #### Behaviour
 
@@ -550,9 +550,9 @@ See [the widget](widgets/SearchBox.html) documentation page.
 
 #### Naming
 
-* `submitComponent` &rarr; `submit`
-* `resetComponent` &rarr; `reset`
-* `loadingIndicatorComponent` &rarr; `loadingIndicator`
+* `submitComponent` → `submit`
+* `resetComponent` → `reset`
+* `loadingIndicatorComponent` → `loadingIndicator`
 
 #### Behaviour
 
@@ -595,7 +595,7 @@ See [the widget](widgets/RatingMenu.html) documentation page.
 
 Renamed to **RatingMenu**.
 
-* `attributeName` &rarr; `attribute`
+* `attributeName` → `attribute`
 
 #### Behaviour
 
@@ -648,7 +648,7 @@ See [the widget](widgets/ToggleRefinement.html) documentation page.
 
 Renamed to **ToggleRefinement**.
 
-* `attributeName` &rarr; `attribute`
+* `attributeName` → `attribute`
 
 #### Behaviour
 
@@ -670,7 +670,7 @@ See [the connector](guide/Custom_connectors.html) documentation page.
 
 #### Naming
 
-* `searchForFacetValues` &rarr; `searchForItems`
+* `searchForFacetValues` → `searchForItems`
 
 #### Behaviour
 
@@ -694,8 +694,8 @@ See [the connector](connectors/connectHierarchicalMenu.html) documentation page.
 
 #### Naming
 
-* `limitMin` &rarr; `limit`
-* `limitMax` &rarr; `showMoreLimit`
+* `limitMin` → `limit`
+* `limitMax` → `showMoreLimit`
 
 #### Behaviour
 
@@ -719,11 +719,11 @@ See [the connector](connectors/connectMenu.html) documentation page.
 
 #### Naming
 
-* `attributeName` &rarr; `attribute`
-* `limitMin` &rarr; `limit`
-* `limitMax` &rarr; `showMoreLimit`
-* `withSearchBox` &rarr; `searchable`
-* `searchForFacetValues` &rarr; `searchForItems`
+* `attributeName` → `attribute`
+* `limitMin` → `limit`
+* `limitMax` → `showMoreLimit`
+* `withSearchBox` → `searchable`
+* `searchForFacetValues` → `searchForItems`
 
 #### Behaviour
 
@@ -737,7 +737,7 @@ See [the connector](connectors/connectNumericMenu.html) documentation page.
 
 Renamed to **connectNumericMenu**.
 
-* `attributeName` &rarr; `attribute`
+* `attributeName` → `attribute`
 
 #### Behaviour
 
@@ -749,8 +749,8 @@ See [the connector](connectors/connectPagination.html) documentation page.
 
 #### Naming
 
-* `maxPages` &rarr; `totalPages`
-* `pagesPadding` &rarr; `padding`
+* `maxPages` → `totalPages`
+* `pagesPadding` → `padding`
 
 #### Behaviour
 
@@ -762,7 +762,7 @@ See [the connector](connectors/connectRange.html) documentation page.
 
 #### Naming
 
-* `attributeName` &rarr; `attribute`
+* `attributeName` → `attribute`
 
 #### Behaviour
 
@@ -774,11 +774,11 @@ See [the connector](connectors/connectRefinementList.html) documentation page.
 
 #### Naming
 
-* `attributeName` &rarr; `attribute`
-* `limitMin` &rarr; `limit`
-* `limitMax` &rarr; `showMoreLimit`
-* `withSearchBox` &rarr; `searchable`
-* `searchForFacetValues` &rarr; `searchForItems`
+* `attributeName` → `attribute`
+* `limitMin` → `limit`
+* `limitMax` → `showMoreLimit`
+* `withSearchBox` → `searchable`
+* `searchForFacetValues` → `searchForItems`
 
 #### Behaviour
 
@@ -792,7 +792,7 @@ See [the connector](connectors/connectToggleRefinement.html) documentation page.
 
 Renamed to **connectToggleRefinement**.
 
-* `attributeName` &rarr; `attribute`
+* `attributeName` → `attribute`
 
 #### Behaviour
 
