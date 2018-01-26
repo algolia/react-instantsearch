@@ -17,6 +17,8 @@ import CurrentRefinements from '../components/CurrentRefinements';
  * @themeKey ais-CurrentRefinements-item - the refined list item
  * @themeKey ais-CurrentRefinements-button - the button of each refined list item
  * @themeKey ais-CurrentRefinements-label - the refined list label
+ * @themeKey ais-CurrentRefinements-category - the category of each item
+ * @themeKey ais-CurrentRefinements-categoryLabel - the label of each catgory
  * @themeKey ais-CurrentRefinements-delete - the delete button of each label
  * @translationKey clearFilter - the remove filter button label
  * @example
