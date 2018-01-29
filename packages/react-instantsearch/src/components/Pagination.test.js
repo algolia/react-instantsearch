@@ -1,6 +1,3 @@
-import PropTypes from 'prop-types';
-/* eslint-env jest, jasmine */
-
 import React from 'react';
 import renderer from 'react-test-renderer';
 import Enzyme, { mount } from 'enzyme';
@@ -28,12 +25,27 @@ describe('Pagination', () => {
     expect(tree).toMatchSnapshot();
   });
 
+  it('applies its default props without refinement', () => {
+    const tree = renderer
+      .create(<Pagination {...DEFAULT_PROPS} canRefine={false} />)
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('applies its default props with custom className', () => {
+    const tree = renderer
+      .create(<Pagination {...DEFAULT_PROPS} className="MyCustomPagination" />)
+      .toJSON();
+
+    expect(tree).toMatchSnapshot();
+  });
+
   it('displays the correct padding of links', () => {
     let tree = renderer
       .create(
         <Pagination
           {...REQ_PROPS}
-          pagesPadding={5}
+          padding={5}
           nbPages={20}
           currentRefinement={0}
         />
@@ -45,7 +57,7 @@ describe('Pagination', () => {
       .create(
         <Pagination
           {...REQ_PROPS}
-          pagesPadding={4}
+          padding={4}
           nbPages={20}
           currentRefinement={9}
         />
@@ -57,7 +69,7 @@ describe('Pagination', () => {
       .create(
         <Pagination
           {...REQ_PROPS}
-          pagesPadding={3}
+          padding={3}
           nbPages={20}
           currentRefinement={19}
         />
@@ -69,7 +81,7 @@ describe('Pagination', () => {
       .create(
         <Pagination
           {...REQ_PROPS}
-          pagesPadding={2}
+          padding={2}
           nbPages={5}
           currentRefinement={3}
         />
@@ -149,7 +161,7 @@ describe('Pagination', () => {
       .create(
         <Pagination
           {...REQ_PROPS}
-          maxPages={10}
+          totalPages={10}
           showLast
           nbPages={15}
           currentRefinement={9}
@@ -162,7 +174,7 @@ describe('Pagination', () => {
       .create(
         <Pagination
           {...REQ_PROPS}
-          maxPages={10}
+          totalPages={10}
           showLast
           nbPages={9}
           currentRefinement={8}
@@ -190,7 +202,7 @@ describe('Pagination', () => {
             itemLink: 'LINK',
           }}
           showLast
-          pagesPadding={4}
+          padding={4}
           nbPages={10}
           currentRefinement={8}
         />
@@ -217,7 +229,7 @@ describe('Pagination', () => {
             ariaPage: page => `ARIA_PAGE_${(page + 1).toString()}`,
           }}
           showLast
-          pagesPadding={4}
+          padding={4}
           nbPages={10}
           currentRefinement={8}
         />
@@ -231,7 +243,7 @@ describe('Pagination', () => {
       .create(
         <Pagination
           {...REQ_PROPS}
-          maxPages={Number.POSITIVE_INFINITY}
+          totalPages={Number.POSITIVE_INFINITY}
           showLast
           showFirst
           showNext
@@ -265,25 +277,25 @@ describe('Pagination', () => {
     const parameters = refine.mock.calls[1][0];
     expect(parameters.valueOf()).toBe(9);
     wrapper
-      .find('.ais-Pagination__itemPrevious')
+      .find('.ais-Pagination-item--previousPage')
       .find(Link)
       .simulate('click');
     expect(refine.mock.calls).toHaveLength(3);
     expect(refine.mock.calls[2][0]).toEqual(8);
     wrapper
-      .find('.ais-Pagination__itemNext')
+      .find('.ais-Pagination-item--nextPage')
       .find(Link)
       .simulate('click');
     expect(refine.mock.calls).toHaveLength(4);
     expect(refine.mock.calls[3][0]).toEqual(10);
     wrapper
-      .find('.ais-Pagination__itemFirst')
+      .find('.ais-Pagination-item--firstPage')
       .find(Link)
       .simulate('click');
     expect(refine.mock.calls).toHaveLength(5);
     expect(refine.mock.calls[4][0]).toEqual(1);
     wrapper
-      .find('.ais-Pagination__itemLast')
+      .find('.ais-Pagination-item--lastPage')
       .find(Link)
       .simulate('click');
     expect(refine.mock.calls).toHaveLength(6);
@@ -301,29 +313,8 @@ describe('Pagination', () => {
     el.simulate('click', { shiftKey: true });
     expect(refine.mock.calls).toHaveLength(0);
   });
-  it('Should indicate when no more refinement', () => {
-    const refine = jest.fn();
-    const canRefine = jest.fn();
-    const wrapper = mount(
-      <Pagination {...DEFAULT_PROPS} refine={refine} canRefine={true} />,
-      {
-        context: { canRefine },
-        childContextTypes: { canRefine: PropTypes.func },
-      }
-    );
 
-    expect(canRefine.mock.calls).toHaveLength(1);
-    expect(canRefine.mock.calls[0][0]).toEqual(true);
-    expect(wrapper.find('.ais-Pagination__noRefinement')).toHaveLength(0);
-
-    wrapper.setProps({ canRefine: false });
-
-    expect(canRefine.mock.calls).toHaveLength(2);
-    expect(canRefine.mock.calls[1][0]).toEqual(false);
-    expect(wrapper.find('.ais-Pagination__noRefinement')).toHaveLength(1);
-  });
-
-  describe('pagesPadding behaviour', () => {
+  describe('padding behaviour', () => {
     it('should be adjusted when currentPage < padding (at the very beginning)', () => {
       const refine = jest.fn();
       const wrapper = mount(
@@ -331,14 +322,14 @@ describe('Pagination', () => {
           {...REQ_PROPS}
           nbPages={18}
           showLast
-          pagesPadding={2}
+          padding={2}
           currentRefinement={2}
           refine={refine}
         />
       );
-      const pages = wrapper.find('.ais-Pagination__itemPage');
-      const pageSelected = wrapper.find('.ais-Pagination__itemLinkSelected');
-      // Since pagesPadding = 2, the Pagination widget's size should be 5
+      const pages = wrapper.find('.ais-Pagination-item--page');
+      const pageSelected = wrapper.find('.ais-Pagination-item--selected');
+      // Since padding = 2, the Pagination widget's size should be 5
       expect(pages).toHaveLength(5);
 
       expect(pages.first().text()).toEqual('1');
@@ -350,21 +341,21 @@ describe('Pagination', () => {
       expect(pages.at(3).text()).toEqual('4');
       expect(pages.at(4).text()).toEqual('5');
     });
-    it('should be adjusted when currentPage < maxPages - padding (at the end)', () => {
+    it('should be adjusted when currentPage < totalPages - padding (at the end)', () => {
       const refine = jest.fn();
       const wrapper = mount(
         <Pagination
           {...REQ_PROPS}
           nbPages={18}
           showLast
-          pagesPadding={2}
+          padding={2}
           currentRefinement={18}
           refine={refine}
         />
       );
-      const pages = wrapper.find('.ais-Pagination__itemPage');
-      const pageSelected = wrapper.find('.ais-Pagination__itemLinkSelected');
-      // Since pagesPadding = 2, the Pagination widget's size should be 5
+      const pages = wrapper.find('.ais-Pagination-item--page');
+      const pageSelected = wrapper.find('.ais-Pagination-item--selected');
+      // Since padding = 2, the Pagination widget's size should be 5
       expect(pages).toHaveLength(5);
 
       expect(pages.first().text()).toEqual('14');
@@ -382,14 +373,14 @@ describe('Pagination', () => {
           {...REQ_PROPS}
           nbPages={18}
           showLast
-          pagesPadding={2}
+          padding={2}
           currentRefinement={8}
           refine={refine}
         />
       );
-      const pages = wrapper.find('.ais-Pagination__itemPage');
-      const pageSelected = wrapper.find('.ais-Pagination__itemLinkSelected');
-      // Since pagesPadding = 2, the Pagination widget's size should be 5
+      const pages = wrapper.find('.ais-Pagination-item--page');
+      const pageSelected = wrapper.find('.ais-Pagination-item--selected');
+      // Since padding = 2, the Pagination widget's size should be 5
       expect(pages).toHaveLength(5);
 
       expect(pages.first().text()).toEqual('6');

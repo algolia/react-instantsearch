@@ -27,7 +27,7 @@ describe('connectMenu', () => {
         hits: [],
       };
 
-      props = getProvidedProps({ attributeName: 'ok' }, {}, {});
+      props = getProvidedProps({ attribute: 'ok' }, {}, {});
       expect(props).toEqual({
         items: [],
         currentRefinement: null,
@@ -37,7 +37,7 @@ describe('connectMenu', () => {
       });
 
       props = getProvidedProps(
-        { attributeName: 'ok' },
+        { attribute: 'ok' },
         { menu: { ok: 'wat' } },
         { results }
       );
@@ -50,7 +50,7 @@ describe('connectMenu', () => {
       });
 
       props = getProvidedProps(
-        { attributeName: 'ok' },
+        { attribute: 'ok' },
         { menu: { ok: 'wat' } },
         { results }
       );
@@ -63,7 +63,7 @@ describe('connectMenu', () => {
       });
 
       props = getProvidedProps(
-        { attributeName: 'ok', defaultRefinement: 'wat' },
+        { attribute: 'ok', defaultRefinement: 'wat' },
         {},
         { results }
       );
@@ -75,7 +75,7 @@ describe('connectMenu', () => {
         searchForItems: undefined,
       });
 
-      props = getProvidedProps({ attributeName: 'ok' }, {}, { results });
+      props = getProvidedProps({ attribute: 'ok' }, {}, { results });
       expect(props).toEqual({
         items: [],
         currentRefinement: null,
@@ -97,7 +97,7 @@ describe('connectMenu', () => {
           count: 10,
         },
       ]);
-      props = getProvidedProps({ attributeName: 'ok' }, {}, { results });
+      props = getProvidedProps({ attribute: 'ok' }, {}, { results });
       expect(props.items).toEqual([
         {
           value: 'wat',
@@ -113,8 +113,18 @@ describe('connectMenu', () => {
         },
       ]);
 
+      props = getProvidedProps({ attribute: 'ok', limit: 1 }, {}, { results });
+      expect(props.items).toEqual([
+        {
+          value: 'wat',
+          label: 'wat',
+          isRefined: true,
+          count: 20,
+        },
+      ]);
+
       props = getProvidedProps(
-        { attributeName: 'ok', limitMin: 1 },
+        { attribute: 'ok', showMore: true, limit: 0, showMoreLimit: 1 },
         {},
         { results }
       );
@@ -128,21 +138,7 @@ describe('connectMenu', () => {
       ]);
 
       props = getProvidedProps(
-        { attributeName: 'ok', showMore: true, limitMin: 0, limitMax: 1 },
-        {},
-        { results }
-      );
-      expect(props.items).toEqual([
-        {
-          value: 'wat',
-          label: 'wat',
-          isRefined: true,
-          count: 20,
-        },
-      ]);
-
-      props = getProvidedProps(
-        { attributeName: 'ok', limitMin: 1 },
+        { attribute: 'ok', limit: 1 },
         {},
         { results },
         {},
@@ -169,7 +165,7 @@ describe('connectMenu', () => {
       ]);
 
       props = getProvidedProps(
-        { attributeName: 'ok', limitMin: 1 },
+        { attribute: 'ok', limit: 1 },
         {},
         { results },
         {},
@@ -186,7 +182,7 @@ describe('connectMenu', () => {
 
       const transformItems = jest.fn(() => ['items']);
       props = getProvidedProps(
-        { attributeName: 'ok', transformItems },
+        { attribute: 'ok', transformItems },
         {},
         { results }
       );
@@ -222,7 +218,7 @@ describe('connectMenu', () => {
       ]);
 
       props = getProvidedProps(
-        { attributeName: 'ok' },
+        { attribute: 'ok' },
         { menu: { ok: 'wat' } },
         { results }
       );
@@ -239,7 +235,7 @@ describe('connectMenu', () => {
 
     it("calling refine updates the widget's search state", () => {
       const nextState = refine(
-        { attributeName: 'ok' },
+        { attribute: 'ok' },
         { otherKey: 'val', menu: { otherKey: 'val' } },
         'yep'
       );
@@ -256,7 +252,7 @@ describe('connectMenu', () => {
       params = getSP(
         initSP,
         {
-          limitMin: 101,
+          limit: 101,
         },
         {}
       );
@@ -266,7 +262,7 @@ describe('connectMenu', () => {
         initSP,
         {
           showMore: true,
-          limitMax: 101,
+          showMoreLimit: 101,
         },
         {}
       );
@@ -275,7 +271,7 @@ describe('connectMenu', () => {
       params = getSP(
         initSP,
         {
-          limitMin: 99,
+          limit: 99,
         },
         {}
       );
@@ -285,7 +281,7 @@ describe('connectMenu', () => {
         initSP,
         {
           showMore: true,
-          limitMax: 99,
+          showMoreLimit: 99,
         },
         {}
       );
@@ -298,8 +294,8 @@ describe('connectMenu', () => {
       params = getSP(
         initSP,
         {
-          attributeName: 'ok',
-          limitMin: 1,
+          attribute: 'ok',
+          limit: 1,
         },
         { menu: { ok: 'wat' } }
       );
@@ -312,13 +308,13 @@ describe('connectMenu', () => {
     });
 
     it('registers its id in metadata', () => {
-      const metadata = getMetadata({ attributeName: 'ok' }, {});
+      const metadata = getMetadata({ attribute: 'ok' }, {});
       expect(metadata).toEqual({ id: 'ok', index: 'index', items: [] });
     });
 
     it('registers its filter in metadata', () => {
       const metadata = getMetadata(
-        { attributeName: 'wot' },
+        { attribute: 'wot' },
         { menu: { wot: 'wat' } }
       );
       expect(metadata).toEqual({
@@ -327,7 +323,7 @@ describe('connectMenu', () => {
         items: [
           {
             label: 'wot: wat',
-            attributeName: 'wot',
+            attribute: 'wot',
             currentRefinement: 'wat',
             // Ignore clear, we test it later
             value: metadata.items[0].value,
@@ -338,7 +334,7 @@ describe('connectMenu', () => {
 
     it('items value function should clear it from the search state', () => {
       const metadata = getMetadata(
-        { attributeName: 'one' },
+        { attribute: 'one' },
         { menu: { one: 'one', two: 'two' } }
       );
 
@@ -351,7 +347,7 @@ describe('connectMenu', () => {
 
     it('should return the right searchState when clean up', () => {
       let searchState = cleanUp(
-        { attributeName: 'name' },
+        { attribute: 'name' },
         {
           menu: { name: 'searchState', name2: 'searchState' },
           another: { searchState: 'searchState' },
@@ -362,16 +358,16 @@ describe('connectMenu', () => {
         another: { searchState: 'searchState' },
       });
 
-      searchState = cleanUp({ attributeName: 'name2' }, searchState);
+      searchState = cleanUp({ attribute: 'name2' }, searchState);
       expect(searchState).toEqual({
         menu: {},
         another: { searchState: 'searchState' },
       });
     });
 
-    it('calling searchForItems return the right searchForItems parameters with limitMin', () => {
+    it('calling searchForItems return the right searchForItems parameters with limit', () => {
       const parameters = searchForFacetValues(
-        { attributeName: 'ok', limitMin: 15, limitMax: 25, showMore: false },
+        { attribute: 'ok', limit: 15, showMoreLimit: 25, showMore: false },
         {},
         'yep'
       );
@@ -383,9 +379,9 @@ describe('connectMenu', () => {
       });
     });
 
-    it('calling searchForItems return the right searchForItems parameters with limitMax', () => {
+    it('calling searchForItems return the right searchForItems parameters with showMoreLimit', () => {
       const parameters = searchForFacetValues(
-        { attributeName: 'ok', limitMin: 15, limitMax: 25, showMore: true },
+        { attribute: 'ok', limit: 15, showMoreLimit: 25, showMore: true },
         {},
         'yep'
       );
@@ -418,29 +414,7 @@ describe('connectMenu', () => {
       ]);
 
       props = getProvidedProps(
-        { attributeName: 'ok', withSearchBox: true },
-        {},
-        { results }
-      );
-
-      expect(props.items).toEqual([
-        {
-          value: 'oy',
-          label: 'oy',
-          isRefined: true,
-          count: 10,
-        },
-        {
-          value: 'wat',
-          label: 'wat',
-          isRefined: false,
-          count: 20,
-        },
-      ]);
-
-      // searchForFacetValues is @deprecated. This test should be removed when searchForFacetValues is removed
-      props = getProvidedProps(
-        { attributeName: 'ok', searchForFacetValues: true },
+        { attribute: 'ok', searchable: true },
         {},
         { results }
       );
@@ -481,7 +455,7 @@ describe('connectMenu', () => {
         },
       };
 
-      props = getProvidedProps({ attributeName: 'ok' }, {}, {});
+      props = getProvidedProps({ attribute: 'ok' }, {}, {});
       expect(props).toEqual({
         items: [],
         currentRefinement: null,
@@ -491,7 +465,7 @@ describe('connectMenu', () => {
       });
 
       props = getProvidedProps(
-        { attributeName: 'ok' },
+        { attribute: 'ok' },
         { indices: { first: { menu: { ok: 'wat' } } } },
         { results }
       );
@@ -504,7 +478,7 @@ describe('connectMenu', () => {
       });
 
       props = getProvidedProps(
-        { attributeName: 'ok' },
+        { attribute: 'ok' },
         { indices: { first: { menu: { ok: 'wat' } } } },
         { results }
       );
@@ -517,7 +491,7 @@ describe('connectMenu', () => {
       });
 
       props = getProvidedProps(
-        { attributeName: 'ok', defaultRefinement: 'wat' },
+        { attribute: 'ok', defaultRefinement: 'wat' },
         {},
         { results }
       );
@@ -529,7 +503,7 @@ describe('connectMenu', () => {
         searchForItems: undefined,
       });
 
-      props = getProvidedProps({ attributeName: 'ok' }, {}, { results });
+      props = getProvidedProps({ attribute: 'ok' }, {}, { results });
       expect(props).toEqual({
         items: [],
         currentRefinement: null,
@@ -551,7 +525,7 @@ describe('connectMenu', () => {
           count: 10,
         },
       ]);
-      props = getProvidedProps({ attributeName: 'ok' }, {}, { results });
+      props = getProvidedProps({ attribute: 'ok' }, {}, { results });
       expect(props.items).toEqual([
         {
           value: 'wat',
@@ -567,8 +541,18 @@ describe('connectMenu', () => {
         },
       ]);
 
+      props = getProvidedProps({ attribute: 'ok', limit: 1 }, {}, { results });
+      expect(props.items).toEqual([
+        {
+          value: 'wat',
+          label: 'wat',
+          isRefined: true,
+          count: 20,
+        },
+      ]);
+
       props = getProvidedProps(
-        { attributeName: 'ok', limitMin: 1 },
+        { attribute: 'ok', showMore: true, limit: 0, showMoreLimit: 1 },
         {},
         { results }
       );
@@ -582,21 +566,7 @@ describe('connectMenu', () => {
       ]);
 
       props = getProvidedProps(
-        { attributeName: 'ok', showMore: true, limitMin: 0, limitMax: 1 },
-        {},
-        { results }
-      );
-      expect(props.items).toEqual([
-        {
-          value: 'wat',
-          label: 'wat',
-          isRefined: true,
-          count: 20,
-        },
-      ]);
-
-      props = getProvidedProps(
-        { attributeName: 'ok', limitMin: 1 },
+        { attribute: 'ok', limit: 1 },
         {},
         { results },
         {},
@@ -623,7 +593,7 @@ describe('connectMenu', () => {
       ]);
 
       props = getProvidedProps(
-        { attributeName: 'ok', limitMin: 1 },
+        { attribute: 'ok', limit: 1 },
         {},
         { results },
         {},
@@ -640,7 +610,7 @@ describe('connectMenu', () => {
 
       const transformItems = jest.fn(() => ['items']);
       props = getProvidedProps(
-        { attributeName: 'ok', transformItems },
+        { attribute: 'ok', transformItems },
         {},
         { results }
       );
@@ -677,7 +647,7 @@ describe('connectMenu', () => {
       ]);
 
       props = getProvidedProps(
-        { attributeName: 'ok' },
+        { attribute: 'ok' },
         { indices: { first: { menu: { ok: 'wat' } } } },
         { results }
       );
@@ -696,7 +666,7 @@ describe('connectMenu', () => {
       let refine = connect.refine.bind(context);
 
       let nextState = refine(
-        { attributeName: 'ok' },
+        { attribute: 'ok' },
         {
           indices: {
             first: { otherKey: 'val', menu: { ok: 'wat', otherKey: 'val' } },
@@ -723,7 +693,7 @@ describe('connectMenu', () => {
       refine = connect.refine.bind(context);
 
       nextState = refine(
-        { attributeName: 'ok' },
+        { attribute: 'ok' },
         {
           indices: {
             first: { otherKey: 'val', menu: { ok: 'wat', otherKey: 'val' } },
@@ -744,8 +714,8 @@ describe('connectMenu', () => {
       params = getSP(
         initSP,
         {
-          attributeName: 'ok',
-          limitMin: 1,
+          attribute: 'ok',
+          limit: 1,
         },
         { indices: { first: { menu: { ok: 'wat' } } } }
       );
@@ -759,7 +729,7 @@ describe('connectMenu', () => {
 
     it('registers its filter in metadata', () => {
       const metadata = getMetadata(
-        { attributeName: 'wot' },
+        { attribute: 'wot' },
         { indices: { first: { menu: { wot: 'wat' } } } }
       );
       expect(metadata).toEqual({
@@ -768,7 +738,7 @@ describe('connectMenu', () => {
         items: [
           {
             label: 'wot: wat',
-            attributeName: 'wot',
+            attribute: 'wot',
             currentRefinement: 'wat',
             // Ignore clear, we test it later
             value: metadata.items[0].value,
@@ -779,7 +749,7 @@ describe('connectMenu', () => {
 
     it('items value function should clear it from the search state', () => {
       const metadata = getMetadata(
-        { attributeName: 'one' },
+        { attribute: 'one' },
         { indices: { first: { menu: { one: 'one', two: 'two' } } } }
       );
 
@@ -794,7 +764,7 @@ describe('connectMenu', () => {
 
     it('should return the right searchState when clean up', () => {
       let searchState = cleanUp(
-        { attributeName: 'name' },
+        { attribute: 'name' },
         {
           indices: {
             first: {
@@ -813,7 +783,7 @@ describe('connectMenu', () => {
         },
       });
 
-      searchState = cleanUp({ attributeName: 'name2' }, searchState);
+      searchState = cleanUp({ attribute: 'name2' }, searchState);
       expect(searchState).toEqual({
         indices: {
           first: { another: { searchState: 'searchState' }, menu: {} },

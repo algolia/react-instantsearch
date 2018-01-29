@@ -25,7 +25,7 @@ import {
 } from 'react-instantsearch/connectors';
 import Highlight from './components/Highlight';
 import Spinner from './components/Spinner';
-import StarRating from 'react-native-star-rating';
+import RatingMenu from 'react-native-star-rating';
 import ModalDropdown from 'react-native-modal-dropdown';
 import IosIcon from 'react-native-vector-icons/Ionicons';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
@@ -243,7 +243,7 @@ class Hits extends Component {
         </Text>
         <Text style={styles.itemPrice}>${hit.price}</Text>
         <View style={styles.starRating}>
-          <StarRating
+          <RatingMenu
             disabled={true}
             maxStars={5}
             rating={hit.rating}

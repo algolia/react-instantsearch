@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 /* eslint-env jest, jasmine */
 
 import React from 'react';
@@ -29,13 +28,44 @@ describe('HierarchicalMenu', () => {
             { value: 'black', count: 20, label: 'black' },
             { value: 'blue', count: 30, label: 'blue' },
           ]}
-          limitMin={2}
-          limitMax={4}
+          limit={2}
+          showMoreLimit={4}
           showMore={true}
           canRefine={true}
         />
       )
       .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('default hierarchical menu with a custom className', () => {
+    const tree = renderer
+      .create(
+        <HierarchicalMenu
+          className="MyCustomHierarchicalMenu"
+          refine={() => null}
+          createURL={() => '#'}
+          items={[
+            {
+              value: 'white',
+              count: 10,
+              label: 'white',
+              items: [
+                { value: 'white1', label: 'white1', count: 3 },
+                { value: 'white2', label: 'white2', count: 4 },
+              ],
+            },
+            { value: 'black', count: 20, label: 'black' },
+            { value: 'blue', count: 30, label: 'blue' },
+          ]}
+          limit={2}
+          showMoreLimit={4}
+          showMore={true}
+          canRefine={true}
+        />
+      )
+      .toJSON();
+
     expect(tree).toMatchSnapshot();
   });
 
@@ -91,14 +121,12 @@ describe('HierarchicalMenu', () => {
       />
     );
 
-    const itemParent = wrapper.find(
-      '.ais-HierarchicalMenu__item .ais-HierarchicalMenu__itemParent'
-    );
+    const itemParent = wrapper.find('.ais-HierarchicalMenu-item--parent');
 
     expect(itemParent).toHaveLength(1);
 
     itemParent
-      .find('.ais-HierarchicalMenu__itemLink')
+      .find('Link')
       .first()
       .simulate('click');
     expect(refine.mock.calls).toHaveLength(1);
@@ -120,20 +148,20 @@ describe('HierarchicalMenu', () => {
           { value: 'green', count: 30, label: 'green' },
           { value: 'cyan', count: 30, label: 'cyan' },
         ]}
-        limitMin={2}
-        limitMax={4}
+        limit={2}
+        showMoreLimit={4}
         showMore={true}
         canRefine={true}
       />
     );
 
-    const items = wrapper.find('.ais-HierarchicalMenu__item');
+    const items = wrapper.find('li');
 
     expect(items).toHaveLength(2);
 
-    wrapper.find('.ais-HierarchicalMenu__showMore').simulate('click');
+    wrapper.find('button').simulate('click');
 
-    expect(wrapper.find('.ais-HierarchicalMenu__item')).toHaveLength(4);
+    expect(wrapper.find('li')).toHaveLength(4);
 
     wrapper.unmount();
   });
@@ -148,65 +176,19 @@ describe('HierarchicalMenu', () => {
           { value: 'white', count: 10, label: 'white' },
           { value: 'black', count: 20, label: 'black' },
         ]}
-        limitMin={2}
-        limitMax={4}
+        limit={2}
+        showMoreLimit={4}
         showMore={true}
         canRefine={true}
       />
     );
 
-    const items = wrapper.find('.ais-HierarchicalMenu__item');
+    const items = wrapper.find('li');
 
     expect(items).toHaveLength(2);
 
-    expect(
-      wrapper.find('.ais-HierarchicalMenu__showMoreDisabled')
-    ).toBeDefined();
+    expect(wrapper.find('button')).toBeDefined();
 
     wrapper.unmount();
-  });
-
-  describe('Panel compatibility', () => {
-    it('Should indicate when no more refinement', () => {
-      const canRefine = jest.fn();
-      const wrapper = mount(
-        <HierarchicalMenu
-          refine={() => null}
-          createURL={() => '#'}
-          items={[
-            {
-              value: 'white',
-              count: 10,
-              label: 'white',
-              items: [
-                { value: 'white1', label: 'white1', count: 3 },
-                { value: 'white2', label: 'white2', count: 4 },
-              ],
-            },
-            { value: 'black', count: 20, label: 'black' },
-            { value: 'blue', count: 30, label: 'blue' },
-          ]}
-          canRefine={true}
-        />,
-        {
-          context: { canRefine },
-          childContextTypes: { canRefine: PropTypes.func },
-        }
-      );
-
-      expect(canRefine.mock.calls).toHaveLength(1);
-      expect(canRefine.mock.calls[0][0]).toEqual(true);
-      expect(wrapper.find('.ais-HierarchicalMenu__noRefinement')).toHaveLength(
-        0
-      );
-
-      wrapper.setProps({ canRefine: false });
-
-      expect(canRefine.mock.calls).toHaveLength(2);
-      expect(canRefine.mock.calls[1][0]).toEqual(false);
-      expect(wrapper.find('.ais-HierarchicalMenu__noRefinement')).toHaveLength(
-        1
-      );
-    });
   });
 });

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import StarRating from 'react-native-star-rating';
+import RatingMenu from 'react-native-star-rating';
 import {
   StyleSheet,
   Text,
@@ -118,7 +118,7 @@ class Rating extends Component {
         pointerEvents="none"
         style={{ padding: 10, flexDirection: 'row', alignItems: 'center' }}
       >
-        <StarRating
+        <RatingMenu
           disabled={true}
           maxStars={max}
           rating={min}
