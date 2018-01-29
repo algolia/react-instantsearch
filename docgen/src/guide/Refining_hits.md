@@ -574,7 +574,7 @@ class App extends Component {
   render() {
     return (
       // the rest of the app
-      <CurrentRefinements transformData={deleteDuplicates} />
+      <CurrentRefinements transformItems={deleteDuplicates} />
     );
   }
 }
