@@ -3,8 +3,10 @@ import { setAddon, storiesOf } from '@storybook/react';
 import {
   CurrentRefinements,
   Menu,
+  NumericMenu,
   HierarchicalMenu,
   Panel,
+  RangeInput,
   RefinementList,
   ToggleRefinement,
 } from '../packages/react-instantsearch/dom';
@@ -63,7 +65,6 @@ stories
       filterProps,
     }
   )
-
   .addWithJSX(
     'with ToggleRefinement',
     () => (
@@ -74,6 +75,46 @@ stories
           attribute="materials"
           label="Made with solid pine"
           value={'Solid pine'}
+        />
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
+    'with NumericMenu',
+    () => (
+      <WrapWithHits linkedStoryGroup="CurrentRefinements">
+        <CurrentRefinements />
+        <hr />
+        <NumericMenu
+          attribute="price"
+          items={[
+            { end: 10, label: '<$10' },
+            { start: 10, end: 100, label: '$10-$100' },
+            { start: 100, end: 500, label: '$100-$500' },
+            { start: 500, label: '>$500' },
+          ]}
+          defaultRefinement=":10"
+        />
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
+    'with RangeInput',
+    () => (
+      <WrapWithHits linkedStoryGroup="CurrentRefinements">
+        <CurrentRefinements />
+        <hr />
+        <RangeInput
+          attribute="price"
+          defaultRefinement={{ min: 30, max: 500 }}
         />
       </WrapWithHits>
     ),
