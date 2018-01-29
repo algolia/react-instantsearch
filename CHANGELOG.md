@@ -1,3 +1,32 @@
+<a name="4.4.2"></a>
+## [4.4.2](https://github.com/algolia/react-instantsearch/compare/v4.4.1...v4.4.2) (2018-01-24)
+
+
+### Bug Fixes
+
+* **currentRefinements:** give access to id and index from transformItems for deduplication ([#830](https://github.com/algolia/react-instantsearch/issues/830)) ([316b8f5](https://github.com/algolia/react-instantsearch/commit/316b8f5))
+* pass maxFacetHits to SFFV ([#863](https://github.com/algolia/react-instantsearch/issues/863)) ([de23a46](https://github.com/algolia/react-instantsearch/commit/de23a46))
+
+
+
+<a name="4.4.1"></a>
+## [4.4.1](https://github.com/algolia/react-instantsearch/compare/v4.4.0...v4.4.1) (2018-01-09)
+
+
+### Bug Fixes
+
+* **SearchBox**: clear SearchBox without search as you type ([#802](https://github.com/algolia/react-instantsearch/issues/802)) ([c49b2b6](https://github.com/algolia/react-instantsearch/commit/c49b2b6))
+* **connectRange:** check if facet exist before access ([#797](https://github.com/algolia/react-instantsearch/issues/797)) ([6520760](https://github.com/algolia/react-instantsearch/commit/6520760))
+* **stories:** avoid to use linear-background it breaks Argos every time ([#804](https://github.com/algolia/react-instantsearch/issues/804)) ([0beded7](https://github.com/algolia/react-instantsearch/commit/0beded7))
+* **stories:** limit hits per page on Index ([#806](https://github.com/algolia/react-instantsearch/issues/806)) ([6eb14d3](https://github.com/algolia/react-instantsearch/commit/6eb14d3))
+
+
+### Features
+
+* **Index:** allow custom root ([#792](https://github.com/algolia/react-instantsearch/issues/792)) ([d793b0a](https://github.com/algolia/react-instantsearch/commit/d793b0a))
+
+
+
 <a name="4.4.0"></a>
 # [4.4.0](https://github.com/algolia/react-instantsearch/compare/v4.3.0...v4.4.0) (2018-01-03)
 
@@ -6,7 +35,7 @@
 
 * **createInstantSearch:** remove the client from the Snapshot ([#749](https://github.com/algolia/react-instantsearch/issues/749)) ([700d8f4](https://github.com/algolia/react-instantsearch/commit/700d8f4))
 * refresh cache memory leak example ([#784](https://github.com/algolia/react-instantsearch/issues/784)) ([cf228ac](https://github.com/algolia/react-instantsearch/commit/cf228ac))
-* **stories:** rename InstantSearch to <InstantSearch> ([#789](https://github.com/algolia/react-instantsearch/issues/789)) ([05efda5](https://github.com/algolia/react-instantsearch/commit/05efda5))
+* **stories:** rename InstantSearch to `<InstantSearch>` ([#789](https://github.com/algolia/react-instantsearch/issues/789)) ([05efda5](https://github.com/algolia/react-instantsearch/commit/05efda5))
 
 
 ### Features

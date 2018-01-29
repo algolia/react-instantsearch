@@ -37,6 +37,10 @@ function getValue(name, props, searchState, context) {
   return name === currentRefinement ? '' : name;
 }
 
+function getLimit({ showMore, limit, showMoreLimit }) {
+  return showMore ? showMoreLimit : limit;
+}
+
 function refine(props, searchState, nextRefinement, context) {
   const id = getId(props);
   const nextValue = { [id]: nextRefinement ? nextRefinement : '' };
@@ -96,8 +100,7 @@ export default createConnector({
     meta,
     searchForFacetValuesResults
   ) {
-    const { attribute, showMore, limit, showMoreLimit, searchable } = props;
-    const itemsLimit = showMore ? showMoreLimit : limit;
+    const { attribute, searchable } = props;
     const results = getResults(searchResults, this.context);
 
     const canRefine =
@@ -110,7 +113,7 @@ export default createConnector({
     );
 
     // Search For Facet Values is not available with derived helper (used for multi index search)
-    if (props.searchable && this.context.multiIndexContext) {
+    if (searchable && this.context.multiIndexContext) {
       throw new Error(
         'react-instantsearch: searching in *List is not available when used inside a' +
           ' multi index context'
@@ -160,7 +163,7 @@ export default createConnector({
       : sortedItems;
 
     return {
-      items: transformedItems.slice(0, itemsLimit),
+      items: transformedItems.slice(0, getLimit(props)),
       currentRefinement: getCurrentRefinement(props, searchState, this.context),
       isFromSearch,
       searchable,
@@ -173,7 +176,11 @@ export default createConnector({
   },
 
   searchForFacetValues(props, searchState, nextRefinement) {
-    return { facetName: props.attribute, query: nextRefinement };
+    return {
+      facetName: props.attribute,
+      query: nextRefinement,
+      maxFacetHits: getLimit(props),
+    };
   },
 
   cleanUp(props, searchState) {
@@ -181,13 +188,12 @@ export default createConnector({
   },
 
   getSearchParameters(searchParameters, props, searchState) {
-    const { attribute, showMore, limit, showMoreLimit } = props;
-    const itemsLimit = showMore ? showMoreLimit : limit;
+    const { attribute } = props;
 
     searchParameters = searchParameters.setQueryParameters({
       maxValuesPerFacet: Math.max(
         searchParameters.maxValuesPerFacet || 0,
-        itemsLimit
+        getLimit(props)
       ),
     });
 

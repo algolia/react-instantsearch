@@ -398,14 +398,35 @@ describe('connectRefinementList', () => {
       });
     });
 
-    it('calling searchForItems return the right searchForItems parameters', () => {
-      const parameters = searchForFacetValues({ attribute: 'ok' }, {}, 'yep');
+    it('calling searchForItems return the right searchForItems parameters with limit', () => {
+      const parameters = searchForFacetValues(
+        { attribute: 'ok', limit: 15, showMoreLimit: 25, showMore: false },
+        {},
+        'yep'
+      );
+
       expect(parameters).toEqual({
         facetName: 'ok',
         query: 'yep',
+        maxFacetHits: 15,
+      });
+    });
+
+    it('calling searchForItems return the right searchForItems parameters with showMoreLimit', () => {
+      const parameters = searchForFacetValues(
+        { attribute: 'ok', limit: 15, showMoreLimit: 25, showMore: true },
+        {},
+        'yep'
+      );
+
+      expect(parameters).toEqual({
+        facetName: 'ok',
+        query: 'yep',
+        maxFacetHits: 25,
       });
     });
   });
+
   describe('multi index', () => {
     let context = {
       context: {

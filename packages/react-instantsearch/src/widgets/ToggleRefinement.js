@@ -2,7 +2,7 @@ import connectToggleRefinement from '../connectors/connectToggleRefinement';
 import ToggleRefinement from '../components/ToggleRefinement';
 
 /**
- * The ToggleRefinement provides an on/off filtering feature based on an attribute value. Note that if you provide an “off” option, it will be refined at initialization.
+ * The ToggleRefinement provides an on/off filtering feature based on an attribute value.
  * @name ToggleRefinement
  * @kind widget
  * @requirements To use this widget, you'll need an attribute to toggle on.

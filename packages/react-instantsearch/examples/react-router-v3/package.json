@@ -3,7 +3,7 @@
   "devDependencies": {
     "identity-obj-proxy": "3.0.0",
     "jest-environment-jsdom-11.0.0": "20.1.9",
-    "react-scripts": "1.0.17",
+    "react-scripts": "1.1.0",
     "react-test-renderer": "16.2.0"
   },
   "dependencies": {
@@ -12,8 +12,8 @@
     "qs": "6.5.1",
     "react": "16.2.0",
     "react-dom": "16.2.0",
-    "react-instantsearch": "4.4.0",
-    "react-instantsearch-theme-algolia": "4.4.0",
+    "react-instantsearch": "4.4.2",
+    "react-instantsearch-theme-algolia": "4.4.2",
     "react-router": "3.0.5"
   },
   "scripts": {
