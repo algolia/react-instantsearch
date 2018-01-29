@@ -40,19 +40,19 @@ The themes are available on jsDelivr:
 
 unminified:
 
-* https://cdn.jsdelivr.net/npm/instantsearch.css@6.0.1/themes/reset.css
-* https://cdn.jsdelivr.net/npm/instantsearch.css@6.0.1/themes/algolia.css
+* https://cdn.jsdelivr.net/npm/instantsearch.css@7.0.0/themes/reset.css
+* https://cdn.jsdelivr.net/npm/instantsearch.css@7.0.0/themes/algolia.css
 
 minified:
 
-* https://cdn.jsdelivr.net/npm/instantsearch.css@6.0.1/themes/reset-min.css
-* https://cdn.jsdelivr.net/npm/instantsearch.css@6.0.1/themes/algolia-min.css
+* https://cdn.jsdelivr.net/npm/instantsearch.css@7.0.0/themes/reset-min.css
+* https://cdn.jsdelivr.net/npm/instantsearch.css@7.0.0/themes/algolia-min.css
 
 You can either copy paste the content in your own app or use a direct link to jsDelivr:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@6.0.1/themes/reset-min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@6.0.1/themes/algolia-min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7.0.0/themes/reset-min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7.0.0/themes/algolia-min.css">
 ```
 
 ### Via npm, Webpack

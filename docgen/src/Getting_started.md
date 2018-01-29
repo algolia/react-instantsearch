@@ -107,8 +107,8 @@ We provide an Algolia theme that should be a good start.
 Include it in your webpage with this CDN link or copy paste the raw content:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@latest/themes/reset-min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@latest/themes/algolia-min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7.0.0/themes/reset-min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7.0.0/themes/algolia-min.css">
 ```
 
 Read the [styling](guide/Styling_widgets.html) guide for more information.

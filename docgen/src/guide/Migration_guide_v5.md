@@ -107,8 +107,8 @@ It's published as [instantsearch.css](https://yarn.pm/instansearch.css), and cau
 Here is the new jsDelivr links for the theme:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@6.0.1/themes/reset-min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@6.0.1/themes/algolia-min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7.0.0/themes/reset-min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7.0.0/themes/algolia-min.css">
 ```
 
 You can also use `npm` to install it, please refer to the [Styling Widgets guide](guide/Styling_widgets.html#via-npm-webpack) for more informations.
