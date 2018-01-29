@@ -553,23 +553,19 @@ We notice that in `CurrentRefinements`, each list show up twice. This is because
 
 ```jsx
 // ...
-const deleteDuplicates = items =>
+export const deleteDuplicates = (items) =>
   items
-    .map(({ id, index, ...rest }) => ({
+    .map(item => {
       // make a temporary key for deduplication
-      __dedupe: `${index}.${id}`,
-      id,
-      index,
-      ...rest,
-    }))
-    // sort based on that key
-    .sort((a, b) => a.id > b.__dedupe)
+      item.__dedupe = `${item.index}.${item.id}`;
+      return item;
+    })
     .filter(
-      (current, index, array) =>
-        // filter out each time the key has already been in the array
-        index === 0 || current.__dedupe !== array[index - 1].__dedupe
+      (obj, pos, arr) =>
+        arr.map(item => item.__dedupe).indexOf(obj.__dedupe) === pos
     )
     .map(item => {
+      // delete it afterwards
       delete item.__dedupe;
       return item;
     });
