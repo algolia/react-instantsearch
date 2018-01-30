@@ -1,8 +1,14 @@
 #!/usr/bin/env bash
 
+# The release script has been updated in order to force the beta release for the
+# v5. Before merging the branch to master we should revert the changes. In all the
+# file there are some comment to revert.
+
 set -e # exit when error
 
-beta=false
+# FIXME
+# beta=false
+beta=true
 if [ $# -gt 0 ]; then
   case "$1" in
     --beta)
@@ -22,8 +28,11 @@ if [[ $(cd packages/react-instantsearch && npm owner ls) != *"$(npm whoami)"* ]]
 fi
 
 currentBranch=`git rev-parse --abbrev-ref HEAD`
-if [ $currentBranch != 'master' ]; then
-  printf "Release: You must be on master\n"
+# FIXME
+# if [ $currentBranch != 'master' ]; then
+#   printf "Release: You must be on master\n"
+if [ $currentBranch != 'v5' ]; then
+  printf "Release: You must be on v5\n"
   exit 1
 fi
 
@@ -33,7 +42,9 @@ if [[ -n $(git status --porcelain) ]]; then
 fi
 
 # printf "\n\nRelease: update working tree"
-git pull origin master
+# FIXME
+# git pull origin master
+git pull origin v5
 git fetch origin --tags
 
 # printf "Release: install dependencies"
@@ -87,7 +98,9 @@ git tag "v$newVersion"
 printf "\n\nRelease: almost done, check everything in another terminal tab if you want.\n"
 read -p "=> Release: when ready, press [ENTER] to push to github and publish the package"
 
-git push origin master
+# FIXME
+# git push origin master
+git push origin v5
 git push origin --tags
 
 printf "\n\nRelease: pushed to github, publish on npm"
@@ -119,4 +132,6 @@ printf "\n\nalmost done, check everything in another terminal tab if you want."
 
 read -p "=> Update of react-instantsearch version in all examples: when ready, press [ENTER] to push to github"
 
-git push origin master
+# FIXME
+# git push origin master
+git push origin v5
