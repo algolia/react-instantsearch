@@ -154,10 +154,10 @@ class Home extends Component {
             />
           </View>
           <ConnectedHits />
-          <VirtualRefinementList attributeName="type" />
-          <VirtualRange attributeName="price" />
-          <VirtualMenu attributeName="category" />
-          <VirtualRange attributeName="rating" />
+          <VirtualRefinementList attribute="type" />
+          <VirtualRange attribute="price" />
+          <VirtualMenu attribute="category" />
+          <VirtualRange attribute="rating" />
         </InstantSearch>
       </View>
     );
@@ -229,14 +229,14 @@ class Hits extends Component {
       <View style={styles.itemContent}>
         <Text style={styles.itemName}>
           <Highlight
-            attributeName="name"
+            attribute="name"
             hit={hit}
             highlightProperty="_highlightResult"
           />
         </Text>
         <Text style={styles.itemType}>
           <Highlight
-            attributeName="type"
+            attribute="type"
             hit={hit}
             highlightProperty="_highlightResult"
           />

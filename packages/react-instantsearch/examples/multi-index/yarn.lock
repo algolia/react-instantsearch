@@ -3241,6 +3241,10 @@ inquirer@3.3.0, inquirer@^3.0.6:
     strip-ansi "^4.0.0"
     through "^2.3.6"
 
+instantsearch.css@7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/instantsearch.css/-/instantsearch.css-7.0.0.tgz#74fb9aa25ce64c80effc663fe92bc9ec785cc5e3"
+
 internal-ip@1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/internal-ip/-/internal-ip-1.2.0.tgz#ae9fbf93b984878785d50a8de1b356956058cf5c"
@@ -5299,13 +5303,9 @@ react-error-overlay@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-4.0.0.tgz#d198408a85b4070937a98667f500c832f86bd5d4"
 
-react-instantsearch-theme-algolia@4.4.2:
-  version "4.4.2"
-  resolved "https://registry.yarnpkg.com/react-instantsearch-theme-algolia/-/react-instantsearch-theme-algolia-4.4.2.tgz#e79e4b415fb2d4ce9b72d8e79fbabd1c321069f2"
-
-react-instantsearch@4.4.2:
-  version "4.4.2"
-  resolved "https://registry.yarnpkg.com/react-instantsearch/-/react-instantsearch-4.4.2.tgz#f50f3c411a59b678381c55ab07ef72d1e03fefed"
+react-instantsearch@5.0.0-beta.0:
+  version "5.0.0-beta.0"
+  resolved "https://registry.yarnpkg.com/react-instantsearch/-/react-instantsearch-5.0.0-beta.0.tgz#2eb8765adfe317b3a313d3cd0209a950ca2f0a85"
   dependencies:
     algoliasearch "^3.24.0"
     algoliasearch-helper "^2.21.0"

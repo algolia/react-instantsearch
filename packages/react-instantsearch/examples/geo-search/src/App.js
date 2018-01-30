@@ -1,11 +1,9 @@
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { InstantSearch, SearchBox, Configure } from 'react-instantsearch/dom';
 import { connectHits } from 'react-instantsearch/connectors';
-
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
 import GoogleMap from 'google-map-react';
 import { fitBounds } from 'google-map-react/utils';
-import 'react-instantsearch-theme-algolia/style.css';
 import qs from 'qs';
 
 const updateAfter = 700;

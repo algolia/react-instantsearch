@@ -229,7 +229,7 @@ const HitsList = ({ hits, removeSuggestions, onEndReached }) => (
         />
         <Text style={styles.hitsText}>
           <Highlight
-            attributeName="name"
+            attribute="name"
             hit={item}
             highlightProperty="_highlightResult"
           />
@@ -286,7 +286,7 @@ const SuggestionsHits = connectHits(({ hits, onPressItem }) => (
             style={styles.suggestionsIcon}
           />
           <Highlight
-            attributeName="query"
+            attribute="query"
             hit={item}
             highlightProperty="_highlightResult"
             inverted

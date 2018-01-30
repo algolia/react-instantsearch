@@ -49,14 +49,14 @@ class Filters extends Component {
           onSearchStateChange={this.onSearchStateChange}
           searchState={this.state.searchState}
         >
-          <ConnectedRating attributeName="rating" />
+          <ConnectedRating attribute="rating" />
           <Stats
             searchState={this.state.searchState}
             onSearchStateChange={this.props.onSearchStateChange}
           />
-          <VirtualRefinementList attributeName="type" />
-          <VirtualMenu attributeName="category" />
-          <VirtualRange attributeName="price" />
+          <VirtualRefinementList attribute="type" />
+          <VirtualMenu attribute="category" />
+          <VirtualRange attribute="price" />
           <VirtualSearchBox />
         </InstantSearch>
       </View>
