@@ -467,12 +467,6 @@ aside .facet-color[data-facet-value="White stained oak effect"] {
   max-width: 100%;
 }
 
-@media (min-width: 1400px) {
-  .hit .product-picture img {
-    height: inherit;
-  }
-}
-
 .hit .product-desc-wrapper {
   height: 100px;
   width: 100%;
