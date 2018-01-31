@@ -1,13 +1,11 @@
-import PropTypes from 'prop-types';
-/* eslint-env jest, jasmine */
-
 import React from 'react';
+import PropTypes from 'prop-types';
 import renderer from 'react-test-renderer';
 import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-Enzyme.configure({ adapter: new Adapter() });
-
 import StarRating from './StarRating';
+
+Enzyme.configure({ adapter: new Adapter() });
 
 describe('StarRating', () => {
   it('supports passing max/min values', () => {
@@ -150,29 +148,6 @@ describe('StarRating', () => {
 
     expect(refine.mock.calls).toHaveLength(1);
     expect(refine.mock.calls[0][0]).toEqual({ min: 1, max: 5 });
-    wrapper.unmount();
-  });
-
-  it('the default selected range should be the lowest one with count', () => {
-    const wrapper = mount(starRating);
-    wrapper.setProps({
-      count: [
-        { value: '2', count: 2 },
-        { value: '3', count: 3 },
-        { value: '4', count: 3 },
-      ],
-    });
-
-    const links = wrapper.find('.ais-StarRating__ratingLink');
-    expect(links.first().hasClass('ais-StarRating__ratingLinkSelected')).toBe(
-      false
-    );
-
-    const selected = wrapper.find('.ais-StarRating__ratingLinkSelected');
-    expect(selected.find('.ais-StarRating__ratingIconEmpty')).toHaveLength(3);
-    expect(selected.find('.ais-StarRating__ratingIcon')).toHaveLength(2);
-    expect(selected.text()).toContain('8');
-
     wrapper.unmount();
   });
 

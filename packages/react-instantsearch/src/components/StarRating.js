@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import translatable from '../core/translatable';
 import classNames from './classNames.js';
-import { isEmpty } from 'lodash';
 const cx = classNames('StarRating');
 
 class StarRating extends Component {
@@ -129,38 +128,46 @@ class StarRating extends Component {
 
   render() {
     const {
+      min = 1,
+      max = 0,
       translate,
-      refine,
-      min,
-      max,
       count,
       createURL,
       canRefine,
     } = this.props;
-    const items = [];
-    for (let i = max; i >= min; i--) {
-      const hasCount = !isEmpty(count.filter(item => Number(item.value) === i));
-      const lastSelectableItem = count.reduce(
-        (acc, item) =>
-          item.value < acc.value || (!acc.value && hasCount) ? item : acc,
-        {}
+
+    const values = count
+      .map(item => ({ ...item, value: parseFloat(item.value) }))
+      .filter(item => item.value >= min && item.value <= max);
+
+    const range = new Array(max - (min - 1))
+      .fill(null)
+      .map((_, index) => {
+        const element = values.find(item => item.value === max - index);
+        const placeholder = { value: max - index, count: 0, total: 0 };
+
+        return element || placeholder;
+      })
+      .reduce(
+        (acc, item, index) =>
+          acc.concat({
+            ...item,
+            total: index === 0 ? item.count : acc[index - 1].total + item.count,
+          }),
+        []
       );
-      const itemCount = count.reduce(
-        (acc, item) => (item.value >= i && hasCount ? acc + item.count : acc),
-        0
-      );
-      items.push(
-        this.buildItem({
-          lowerBound: i,
-          max,
-          refine,
-          count: itemCount,
-          translate,
-          createURL,
-          isLastSelectableItem: i === Number(lastSelectableItem.value),
-        })
-      );
-    }
+
+    const items = range.map((item, index) =>
+      this.buildItem({
+        lowerBound: item.value,
+        count: item.total,
+        isLastSelectableItem: range.length - 1 === index,
+        max,
+        translate,
+        createURL,
+      })
+    );
+
     return <div {...cx('root', !canRefine && 'noRefinement')}>{items}</div>;
   }
 }
