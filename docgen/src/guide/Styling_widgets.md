@@ -34,6 +34,8 @@ manually:
 
 We **strongly** recommend that you use at least **reset.css** in order to neglect visual side effects caused by the new HTML semantics.
 
+The `reset` theme is ship with the `algolia` one, so no need to import it when you are using the `algolia` theme.
+
 ### Via CDN
 
 The themes are available on jsDelivr:

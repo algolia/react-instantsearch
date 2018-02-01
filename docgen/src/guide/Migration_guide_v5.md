@@ -114,6 +114,8 @@ Here is the new jsDelivr links for the theme:
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7.0.0/themes/algolia-min.css">
 ```
 
+The `reset` theme is ship with the `algolia` one, so no need to import it when you are using the `algolia` theme.
+
 You can also use `npm` to install it, please refer to the [Styling Widgets guide](guide/Styling_widgets.html#via-npm-webpack) for more informations.
 
 The CSS naming convention used for widgets has been changed in favour of the [SUIT CSS](https://suitcss.github.io/) methodology.
