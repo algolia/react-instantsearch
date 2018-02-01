@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import translatable from '../core/translatable';
 import classNames from './classNames.js';
 const cx = classNames('StarRating');
@@ -127,24 +127,23 @@ class StarRating extends Component {
   }
 
   render() {
-    const {
-      min = 1,
-      max = 0,
-      translate,
-      count,
-      createURL,
-      canRefine,
-    } = this.props;
+    const { min, max, translate, count, createURL, canRefine } = this.props;
+
+    // min & max are always set when there is a results, otherwise it means
+    // that we don't want to render anything since we don't have any values.
+    const limitMin = min !== undefined ? min : 1;
+    const limitMax = max !== undefined ? max : limitMin - 1;
+    const inclusivePlaceholderLength = limitMax - (limitMin - 1);
 
     const values = count
       .map(item => ({ ...item, value: parseFloat(item.value) }))
-      .filter(item => item.value >= min && item.value <= max);
+      .filter(item => item.value >= limitMin && item.value <= limitMax);
 
-    const range = new Array(max - (min - 1))
+    const range = new Array(inclusivePlaceholderLength)
       .fill(null)
       .map((_, index) => {
-        const element = values.find(item => item.value === max - index);
-        const placeholder = { value: max - index, count: 0, total: 0 };
+        const element = values.find(item => item.value === limitMax - index);
+        const placeholder = { value: limitMax - index, count: 0, total: 0 };
 
         return element || placeholder;
       })
@@ -162,7 +161,7 @@ class StarRating extends Component {
         lowerBound: item.value,
         count: item.total,
         isLastSelectableItem: range.length - 1 === index,
-        max,
+        max: limitMax,
         translate,
         createURL,
       })
