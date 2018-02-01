@@ -20,7 +20,6 @@ import {
   connectInfiniteHits,
   connectStateResults,
 } from 'react-instantsearch/connectors';
-import 'instantsearch.css/themes/reset.css';
 import 'instantsearch.css/themes/algolia.css';
 
 export default function App() {

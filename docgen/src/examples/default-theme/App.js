@@ -18,7 +18,6 @@ import {
 } from 'react-instantsearch/dom';
 import { connectStateResults } from 'react-instantsearch/connectors';
 import { withUrlSync } from '../urlSync';
-import 'instantsearch.css/themes/reset.css';
 import 'instantsearch.css/themes/algolia.css';
 
 const App = props => (

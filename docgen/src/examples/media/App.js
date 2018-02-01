@@ -14,7 +14,6 @@ import {
   connectSearchBox,
   connectRefinementList,
 } from 'react-instantsearch/connectors';
-import 'instantsearch.css/themes/reset.css';
 import 'instantsearch.css/themes/algolia.css';
 import { withUrlSync } from '../urlSync';
 
