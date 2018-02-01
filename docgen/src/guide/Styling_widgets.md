@@ -52,6 +52,9 @@ You can either copy paste the content in your own app or use a direct link to js
 
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7.0.0/themes/reset-min.css">
+
+<!-- or -->
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7.0.0/themes/algolia-min.css">
 ```
 
@@ -66,6 +69,9 @@ App.js:
 
 ```js
 import 'instantsearch.css/themes/reset.css';
+
+// or
+
 import 'instantsearch.css/themes/algolia.css';
 ```
 

@@ -108,6 +108,9 @@ Include it in your webpage with this CDN link or copy paste the raw content:
 
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7.0.0/themes/reset-min.css">
+
+<!-- or -->
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7.0.0/themes/algolia-min.css">
 ```
 
