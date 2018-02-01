@@ -128,6 +128,58 @@ describe('StarRating', () => {
     }).not.toThrow();
   });
 
+  it('expect to render from from 0 when min is negative', () => {
+    const tree = renderer
+      .create(
+        <StarRating
+          createURL={() => '#'}
+          refine={() => null}
+          translations={{
+            ratingLabel: ' & Up',
+          }}
+          min={-5}
+          max={5}
+          currentRefinement={{ min: 1, max: 5 }}
+          count={[
+            { value: '1', count: 1 },
+            { value: '2', count: 2 },
+            { value: '3', count: 3 },
+            { value: '4', count: 4 },
+            { value: '5', count: 5 },
+          ]}
+          canRefine={true}
+        />
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('expect to render nothing when min is higher than max', () => {
+    const tree = renderer
+      .create(
+        <StarRating
+          createURL={() => '#'}
+          refine={() => null}
+          translations={{
+            ratingLabel: ' & Up',
+          }}
+          min={5}
+          max={3}
+          currentRefinement={{ min: 1, max: 5 }}
+          count={[
+            { value: '1', count: 1 },
+            { value: '2', count: 2 },
+            { value: '3', count: 3 },
+            { value: '4', count: 4 },
+            { value: '5', count: 5 },
+          ]}
+          canRefine={true}
+        />
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
   const refine = jest.fn();
   const createURL = jest.fn();
   const starRating = (
