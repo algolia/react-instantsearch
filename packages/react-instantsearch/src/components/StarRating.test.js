@@ -31,6 +31,29 @@ describe('StarRating', () => {
     expect(tree).toMatchSnapshot();
   });
 
+  it('supports passing max/min values smaller than count max & min', () => {
+    const tree = renderer
+      .create(
+        <StarRating
+          createURL={() => '#'}
+          refine={() => null}
+          min={2}
+          max={4}
+          currentRefinement={{}}
+          count={[
+            { value: '1', count: 1 },
+            { value: '2', count: 2 },
+            { value: '3', count: 3 },
+            { value: '4', count: 4 },
+            { value: '5', count: 5 },
+          ]}
+          canRefine={true}
+        />
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
   it('applies translations', () => {
     const tree = renderer
       .create(
