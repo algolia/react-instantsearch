@@ -16,11 +16,13 @@ describe('connectStateResults', () => {
       const searchState = { state: 'state' };
       const error = 'error';
       const searching = true;
+      const isSearchStalled = true;
       const searchingForFacetValues = true;
       const searchResults = {
         results: { nbHits: 25, hits: [] },
         error,
         searching,
+        isSearchStalled,
         searchingForFacetValues,
       };
 
@@ -28,10 +30,11 @@ describe('connectStateResults', () => {
         searchState,
         searchResults: searchResults.results,
         allSearchResults: searchResults.results,
+        props: { props: 'props' },
         error,
         searching,
+        isSearchStalled,
         searchingForFacetValues,
-        props: { props: 'props' },
       };
 
       const actual = getProvidedProps(
@@ -58,6 +61,7 @@ describe('connectStateResults', () => {
       const searchState = { state: 'state' };
       const error = 'error';
       const searching = true;
+      const isSearchStalled = true;
       const searchingForFacetValues = true;
       const searchResults = {
         results: {
@@ -66,6 +70,7 @@ describe('connectStateResults', () => {
         },
         error,
         searching,
+        isSearchStalled,
         searchingForFacetValues,
       };
 
@@ -73,10 +78,11 @@ describe('connectStateResults', () => {
         searchState,
         searchResults: searchResults.results.first,
         allSearchResults: searchResults.results,
+        props: { props: 'props' },
         error,
         searching,
+        isSearchStalled,
         searchingForFacetValues,
-        props: { props: 'props' },
       };
 
       const actual = getProvidedProps(
