@@ -1,12 +1,10 @@
-/* eslint-env jest, jasmine */
-
 import React from 'react';
 import renderer from 'react-test-renderer';
 import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-Enzyme.configure({ adapter: new Adapter() });
-
 import RatingMenu from './RatingMenu';
+
+Enzyme.configure({ adapter: new Adapter() });
 
 describe('RatingMenu', () => {
   it('supports passing max/min values', () => {
@@ -18,6 +16,29 @@ describe('RatingMenu', () => {
           min={1}
           max={5}
           currentRefinement={{ min: 1, max: 5 }}
+          count={[
+            { value: '1', count: 1 },
+            { value: '2', count: 2 },
+            { value: '3', count: 3 },
+            { value: '4', count: 4 },
+            { value: '5', count: 5 },
+          ]}
+          canRefine={true}
+        />
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('supports passing max/min values smaller than count max & min', () => {
+    const tree = renderer
+      .create(
+        <RatingMenu
+          createURL={() => '#'}
+          refine={() => null}
+          min={2}
+          max={4}
+          currentRefinement={{}}
           count={[
             { value: '1', count: 1 },
             { value: '2', count: 2 },
@@ -105,9 +126,110 @@ describe('RatingMenu', () => {
     expect(tree).toMatchSnapshot();
   });
 
+  it('expect to not throw when only min is defined', () => {
+    expect(() => {
+      renderer.create(
+        <RatingMenu
+          createURL={() => '#'}
+          refine={() => null}
+          translations={{
+            ratingLabel: ' & Up',
+          }}
+          min={3}
+          currentRefinement={{ min: 1, max: 5 }}
+          count={[
+            { value: '1', count: 1 },
+            { value: '2', count: 2 },
+            { value: '3', count: 3 },
+            { value: '4', count: 4 },
+            { value: '5', count: 5 },
+          ]}
+          canRefine={true}
+        />
+      );
+    }).not.toThrow();
+  });
+
+  it('expect to render when only max is defined', () => {
+    const tree = renderer
+      .create(
+        <RatingMenu
+          createURL={() => '#'}
+          refine={() => null}
+          translations={{
+            ratingLabel: ' & Up',
+          }}
+          max={3}
+          currentRefinement={{ min: 1, max: 5 }}
+          count={[
+            { value: '1', count: 1 },
+            { value: '2', count: 2 },
+            { value: '3', count: 3 },
+            { value: '4', count: 4 },
+            { value: '5', count: 5 },
+          ]}
+          canRefine={true}
+        />
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('expect to render from from 1 when min is negative', () => {
+    const tree = renderer
+      .create(
+        <RatingMenu
+          createURL={() => '#'}
+          refine={() => null}
+          translations={{
+            ratingLabel: ' & Up',
+          }}
+          min={-5}
+          max={5}
+          currentRefinement={{ min: 1, max: 5 }}
+          count={[
+            { value: '1', count: 1 },
+            { value: '2', count: 2 },
+            { value: '3', count: 3 },
+            { value: '4', count: 4 },
+            { value: '5', count: 5 },
+          ]}
+          canRefine={true}
+        />
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('expect to render nothing when min is higher than max', () => {
+    const tree = renderer
+      .create(
+        <RatingMenu
+          createURL={() => '#'}
+          refine={() => null}
+          translations={{
+            ratingLabel: ' & Up',
+          }}
+          min={5}
+          max={3}
+          currentRefinement={{ min: 1, max: 5 }}
+          count={[
+            { value: '1', count: 1 },
+            { value: '2', count: 2 },
+            { value: '3', count: 3 },
+            { value: '4', count: 4 },
+            { value: '5', count: 5 },
+          ]}
+          canRefine={true}
+        />
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
   const refine = jest.fn();
   const createURL = jest.fn();
-  const starRating = (
+  const ratingMenu = (
     <RatingMenu
       createURL={createURL}
       refine={refine}
@@ -131,7 +253,7 @@ describe('RatingMenu', () => {
   });
 
   it('should create an URL for each row except for the largest: the default selected one', () => {
-    const wrapper = mount(starRating);
+    const wrapper = mount(ratingMenu);
 
     expect(createURL.mock.calls).toHaveLength(3);
     expect(createURL.mock.calls[0][0]).toEqual({ min: 4, max: 5 });
@@ -142,7 +264,7 @@ describe('RatingMenu', () => {
   });
 
   it('refines its value on change', () => {
-    const wrapper = mount(starRating);
+    const wrapper = mount(ratingMenu);
     const links = wrapper.find('.ais-RatingMenu-link');
     expect(links).toHaveLength(5);
 
@@ -165,7 +287,7 @@ describe('RatingMenu', () => {
   });
 
   it('should display the right number of stars', () => {
-    const wrapper = mount(starRating);
+    const wrapper = mount(ratingMenu);
     wrapper
       .find('.ais-RatingMenu-link')
       .last()
@@ -182,7 +304,7 @@ describe('RatingMenu', () => {
   });
 
   it('clicking on the selected refinement should select the largest range', () => {
-    const wrapper = mount(starRating);
+    const wrapper = mount(ratingMenu);
     wrapper.setProps({ currentRefinement: { min: 4, max: 5 } });
 
     const links = wrapper.find('.ais-RatingMenu-link');
@@ -190,27 +312,6 @@ describe('RatingMenu', () => {
 
     expect(refine.mock.calls).toHaveLength(1);
     expect(refine.mock.calls[0][0]).toEqual({ min: 1, max: 5 });
-    wrapper.unmount();
-  });
-
-  it('the default selected range should be the lowest one with count', () => {
-    const wrapper = mount(starRating);
-    wrapper.setProps({
-      count: [
-        { value: '2', count: 2 },
-        { value: '3', count: 3 },
-        { value: '4', count: 3 },
-      ],
-    });
-
-    const items = wrapper.find('.ais-RatingMenu-item');
-    expect(items.first().hasClass('item--selected')).toBe(false);
-
-    const selected = wrapper.find('.ais-RatingMenu-item--selected');
-    expect(selected.find('.ais-RatingMenu-starIcon--empty')).toHaveLength(3);
-    expect(selected.find('.ais-RatingMenu-starIcon--full')).toHaveLength(2);
-    expect(selected.text()).toContain('8');
-
     wrapper.unmount();
   });
 });

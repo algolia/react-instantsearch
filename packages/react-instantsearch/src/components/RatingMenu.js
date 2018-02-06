@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { isEmpty } from 'lodash';
 import translatable from '../core/translatable';
 import createClassNames from './createClassNames';
 
@@ -125,40 +124,54 @@ class RatingMenu extends Component {
 
   render() {
     const {
-      translate,
-      refine,
       min,
       max,
+      translate,
       count,
       createURL,
       canRefine,
       className,
     } = this.props;
-    const items = [];
-    for (let i = max; i >= min; i--) {
-      const hasCount = !isEmpty(count.filter(item => Number(item.value) === i));
-      const lastSelectableItem = count.reduce(
-        (acc, item) =>
-          item.value < acc.value || (!acc.value && hasCount) ? item : acc,
-        {}
+
+    // min & max are always set when there is a results, otherwise it means
+    // that we don't want to render anything since we don't have any values.
+    const limitMin = min !== undefined && min >= 0 ? min : 1;
+    const limitMax = max !== undefined && max >= 0 ? max : 0;
+    const inclusiveLength = limitMax - limitMin + 1;
+    const safeInclusiveLength = Math.max(inclusiveLength, 0);
+
+    const values = count
+      .map(item => ({ ...item, value: parseFloat(item.value) }))
+      .filter(item => item.value >= limitMin && item.value <= limitMax);
+
+    const range = new Array(safeInclusiveLength)
+      .fill(null)
+      .map((_, index) => {
+        const element = values.find(item => item.value === limitMax - index);
+        const placeholder = { value: limitMax - index, count: 0, total: 0 };
+
+        return element || placeholder;
+      })
+      .reduce(
+        (acc, item, index) =>
+          acc.concat({
+            ...item,
+            total: index === 0 ? item.count : acc[index - 1].total + item.count,
+          }),
+        []
       );
-      const itemCount = count.reduce(
-        (acc, item) => (item.value >= i && hasCount ? acc + item.count : acc),
-        0
-      );
-      items.push(
-        this.buildItem({
-          cx,
-          lowerBound: i,
-          max,
-          refine,
-          count: itemCount,
-          translate,
-          createURL,
-          isLastSelectableItem: i === Number(lastSelectableItem.value),
-        })
-      );
-    }
+
+    const items = range.map((item, index) =>
+      this.buildItem({
+        lowerBound: item.value,
+        count: item.total,
+        isLastSelectableItem: range.length - 1 === index,
+        max: limitMax,
+        translate,
+        createURL,
+      })
+    );
+
     return (
       <div
         className={classNames(cx('', !canRefine && '-noRefinement'), className)}

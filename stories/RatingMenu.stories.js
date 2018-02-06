@@ -19,7 +19,7 @@ stories
     'default',
     () => (
       <WrapWithHits hasPlayground={true} linkedStoryGroup="RatingMenu">
-        <RatingMenu attribute="rating" max={6} min={1} />
+        <RatingMenu attribute="rating" />
       </WrapWithHits>
     ),
     {
@@ -28,11 +28,48 @@ stories
     }
   )
   .addWithJSX(
-    'with some unavailable refinements',
+    'with min',
+    () => (
+      <WrapWithHits hasPlayground={true} linkedStoryGroup="RatingMenu">
+        <RatingMenu attribute="rating" min={3} />
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
+    'with max',
+    () => (
+      <WrapWithHits hasPlayground={true} linkedStoryGroup="RatingMenu">
+        <RatingMenu attribute="rating" max={3} />
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
+    'with min & max',
+    () => (
+      <WrapWithHits hasPlayground={true} linkedStoryGroup="RatingMenu">
+        <RatingMenu attribute="rating" min={2} max={4} />
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
+    'with only one value available',
     () => (
       <WrapWithHits hasPlayground={true} linkedStoryGroup="RatingMenu">
         <Configure filters="rating>=4" />
-        <RatingMenu attribute="rating" max={6} min={1} />
+
+        <RatingMenu attribute="rating" />
       </WrapWithHits>
     ),
     {
@@ -41,11 +78,12 @@ stories
     }
   )
   .addWithJSX(
-    'with filter on rating',
+    'with only one value available & min & max',
     () => (
       <WrapWithHits hasPlayground={true} linkedStoryGroup="RatingMenu">
-        <Configure filters="rating>2" />
-        <RatingMenu attribute="rating" max={6} min={1} />
+        <Configure filters="rating>=4" />
+
+        <RatingMenu attribute="rating" min={1} max={5} />
       </WrapWithHits>
     ),
     {
@@ -57,8 +95,8 @@ stories
     'with Panel',
     () => (
       <WrapWithHits hasPlayground={true} linkedStoryGroup="RatingMenu">
-        <Panel header="Rating Menu" footer="Footer">
-          <RatingMenu attribute="rating" max={6} min={1} />
+        <Panel header="Ratings">
+          <RatingMenu attribute="rating" />
         </Panel>
       </WrapWithHits>
     ),
@@ -75,13 +113,35 @@ stories
         hasPlayground={true}
         linkedStoryGroup="RatingMenu"
       >
-        <Panel header="Rating Menu" footer="Footer">
-          <RatingMenu attribute="rating" max={6} min={1} />
-        </Panel>
+        <Panel header="Ratings">
+          <RatingMenu attribute="rating" />
 
-        <div style={{ display: 'none' }}>
-          <SearchBox defaultRefinement="ds" />
-        </div>
+          <div style={{ display: 'none' }}>
+            <SearchBox defaultRefinement="ds" />
+          </div>
+        </Panel>
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
+    'with Panel but no refinement & min & max',
+    () => (
+      <WrapWithHits
+        searchBox={false}
+        hasPlayground={true}
+        linkedStoryGroup="RatingMenu"
+      >
+        <Panel header="Ratings">
+          <RatingMenu attribute="rating" min={1} max={5} />
+
+          <div style={{ display: 'none' }}>
+            <SearchBox defaultRefinement="ds" />
+          </div>
+        </Panel>
       </WrapWithHits>
     ),
     {
@@ -95,7 +155,8 @@ stories
       <WrapWithHits linkedStoryGroup="RatingMenu">
         <RatingMenu
           attribute="rating"
-          max={number('max', 6)}
+          min={number('min', 1)}
+          max={number('max', 5)}
           translations={object('translations', { ratingLabel: ' & Up' })}
         />
       </WrapWithHits>

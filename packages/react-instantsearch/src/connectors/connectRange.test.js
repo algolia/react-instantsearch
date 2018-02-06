@@ -470,7 +470,7 @@ describe('connectRange', () => {
           {
             label: '5 <= wot',
             attribute: 'wot',
-            currentRefinement: { min: 5, max: undefined },
+            currentRefinement: { min: 5, max: 100 },
             // Ignore clear, we test it later
             value: metadata.items[0].value,
           },
@@ -505,7 +505,7 @@ describe('connectRange', () => {
           {
             label: 'wot <= 10',
             attribute: 'wot',
-            currentRefinement: { min: undefined, max: 10 },
+            currentRefinement: { min: 0, max: 10 },
             value: metadata.items[0].value,
           },
         ],
@@ -753,7 +753,7 @@ describe('connectRange', () => {
           {
             label: '5 <= wot',
             attribute: 'wot',
-            currentRefinement: { min: 5, max: undefined },
+            currentRefinement: { min: 5, max: 100 },
             // Ignore clear, we test it later
             value: metadata.items[0].value,
           },
@@ -792,7 +792,7 @@ describe('connectRange', () => {
           {
             label: 'wot <= 10',
             attribute: 'wot',
-            currentRefinement: { min: undefined, max: 10 },
+            currentRefinement: { min: 0, max: 10 },
             value: metadata.items[0].value,
           },
         ],
