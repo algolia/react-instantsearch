@@ -4770,9 +4770,9 @@ react-devtools-core@3.0.0:
     shell-quote "^1.6.1"
     ws "^2.0.3"
 
-react-instantsearch@5.0.0-beta.0:
-  version "5.0.0-beta.0"
-  resolved "https://registry.yarnpkg.com/react-instantsearch/-/react-instantsearch-5.0.0-beta.0.tgz#2eb8765adfe317b3a313d3cd0209a950ca2f0a85"
+react-instantsearch@5.0.0-beta.1:
+  version "5.0.0-beta.1"
+  resolved "https://registry.yarnpkg.com/react-instantsearch/-/react-instantsearch-5.0.0-beta.1.tgz#b3423b9c492da7751e401e0be775f5712011fafd"
   dependencies:
     algoliasearch "^3.24.0"
     algoliasearch-helper "^2.21.0"
