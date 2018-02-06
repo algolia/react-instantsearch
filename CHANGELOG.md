@@ -1,3 +1,13 @@
+<a name="5.0.0-beta.1"></a>
+# [5.0.0-beta.1](https://github.com/algolia/react-instantsearch/compare/v5.0.0-beta.0...v5.0.0-beta.1) (2018-02-06)
+
+
+Apply features & bug fixes from [v4.5.0](#450-2018-02-06) & [v4.5.1](#451-2018-02-06) on the v5.
+
+See their CHANGELOG for more details.
+
+
+
 <a name="4.5.1"></a>
 ## [4.5.1](https://github.com/algolia/react-instantsearch/compare/v4.5.0...v4.5.1) (2018-02-06)
 
