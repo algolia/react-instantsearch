@@ -1,3 +1,44 @@
+<a name="5.0.0-beta.1"></a>
+# [5.0.0-beta.1](https://github.com/algolia/react-instantsearch/compare/v4.5.1...v5.0.0-beta.1) (2018-02-06)
+
+
+### Bug Fixes
+
+* **Breadcrumb:** add space around separator ([fb90954](https://github.com/algolia/react-instantsearch/commit/fb90954))
+* **CHANGELOG:** reorder version ([20f17a7](https://github.com/algolia/react-instantsearch/commit/20f17a7))
+* **CurrentRefinements:** handle simple & nest items ([336040b](https://github.com/algolia/react-instantsearch/commit/336040b))
+* **docs:** update link for theme ([6897dd2](https://github.com/algolia/react-instantsearch/commit/6897dd2))
+* **docs:** use correct loader ([70d8f76](https://github.com/algolia/react-instantsearch/commit/70d8f76))
+* **example:** remove extra key & whitespace ([2f60eef](https://github.com/algolia/react-instantsearch/commit/2f60eef))
+* **header:** udpate link use an absolute one ([71d00bc](https://github.com/algolia/react-instantsearch/commit/71d00bc))
+* **HitsPerPage:** use correct className ([1749d73](https://github.com/algolia/react-instantsearch/commit/1749d73))
+* disable lint for import named in examples ([1310ba7](https://github.com/algolia/react-instantsearch/commit/1310ba7))
+* **List:** always use same DOM for the SearchBox ([85530b5](https://github.com/algolia/react-instantsearch/commit/85530b5))
+* **type:** plurals ([753442f](https://github.com/algolia/react-instantsearch/commit/753442f))
+* remove the reset when algolia is loaded ([0667138](https://github.com/algolia/react-instantsearch/commit/0667138))
+* **MigrationGuide:** add code black around classNames ([f6c7d23](https://github.com/algolia/react-instantsearch/commit/f6c7d23))
+* **MigrationGuide:** typo plurals ([7c31e1e](https://github.com/algolia/react-instantsearch/commit/7c31e1e))
+* **MigrationGuide:** update anchor ([98b9df3](https://github.com/algolia/react-instantsearch/commit/98b9df3))
+* **RangeSlider:** remove connector ([abdac22](https://github.com/algolia/react-instantsearch/commit/abdac22))
+* **RatingMenu:** avoid to bind events when link are disabled ([0890c8a](https://github.com/algolia/react-instantsearch/commit/0890c8a))
+* **ScrollTo:** use corret DOM props ([8b3ca24](https://github.com/algolia/react-instantsearch/commit/8b3ca24))
+* **SearchBox:** revert to previous props name ([ba6ba73](https://github.com/algolia/react-instantsearch/commit/ba6ba73))
+* revert examples change ([83f93ee](https://github.com/algolia/react-instantsearch/commit/83f93ee))
+* update example Snapshots ([#950](https://github.com/algolia/react-instantsearch/issues/950)) ([4e0dbd3](https://github.com/algolia/react-instantsearch/commit/4e0dbd3))
+
+
+### Features
+
+* **AutoHideContainer:** add component ([945b094](https://github.com/algolia/react-instantsearch/commit/945b094))
+* add className on root element for all widgets ([46fd28f](https://github.com/algolia/react-instantsearch/commit/46fd28f))
+* migrate widget on Panel with AutoHideContainer ([a2469c7](https://github.com/algolia/react-instantsearch/commit/a2469c7))
+* **CurrentRefineemntStories:** add RangeInput & NumericMenu stories ([4f9534c](https://github.com/algolia/react-instantsearch/commit/4f9534c))
+* **PanelCallbackHandler:** add component for handle canRefine callback ([91bd590](https://github.com/algolia/react-instantsearch/commit/91bd590))
+* **stories:** add Panel ([a02e4c8](https://github.com/algolia/react-instantsearch/commit/a02e4c8))
+* **ToggleRefinement:** add test ([b0bea5d](https://github.com/algolia/react-instantsearch/commit/b0bea5d))
+
+
+
 <a name="4.5.1"></a>
 ## [4.5.1](https://github.com/algolia/react-instantsearch/compare/v4.5.0...v4.5.1) (2018-02-06)
 
