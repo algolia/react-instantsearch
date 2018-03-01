@@ -115,10 +115,15 @@ function CustomMarker() {
 }
 
 function HitsMap({ hits, onLatLngChange }) {
+  if (!hits.length) {
+    return null;
+  }
+
   const availableSpace = {
     width: document.body.getBoundingClientRect().width * 5 / 12,
     height: 400,
   };
+
   const boundingPoints = hits.reduce(
     (bounds, hit) => {
       const pos = hit;
@@ -134,17 +139,18 @@ function HitsMap({ hits, onLatLngChange }) {
       se: { lat: 85, lng: -180 },
     }
   );
-  const boundsConfig =
-    hits.length > 0
-      ? fitBounds(boundingPoints, availableSpace)
-      : { zoom: 11, center: { lat: -85, lng: 180 } };
+
+  const boundsConfig = fitBounds(boundingPoints, availableSpace);
+
   const markers = hits.map(hit => (
     <CustomMarker lat={hit.lat} lng={hit.lng} key={hit.objectID} />
   ));
+
   const options = {
     minZoomOverride: true,
     minZoom: 2,
   };
+
   return (
     <GoogleMap
       options={() => options}
