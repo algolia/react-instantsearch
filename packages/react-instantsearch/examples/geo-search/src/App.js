@@ -1,4 +1,9 @@
-import { InstantSearch, SearchBox, Configure } from 'react-instantsearch/dom';
+import {
+  InstantSearch,
+  SearchBox,
+  Configure,
+  Pagination,
+} from 'react-instantsearch/dom';
 import { connectHits } from 'react-instantsearch/connectors';
 
 import PropTypes from 'prop-types';
@@ -35,6 +40,7 @@ class App extends Component {
     this.setState(prevState => ({
       searchState: {
         ...prevState.searchState,
+        page: 1,
         query: '',
       },
       aroundLatLng: `${lat},${lng}`,
@@ -81,6 +87,7 @@ class App extends Component {
         <div className="map">
           <ConnectedHitsMap onLatLngChange={this.onLatLngChange} />
         </div>
+        <Pagination />
       </InstantSearch>
     );
   }
