@@ -1,5 +1,3 @@
-/* eslint-env jest, jasmine */
-
 import React from 'react';
 import renderer from 'react-test-renderer';
 import Enzyme, { shallow, mount } from 'enzyme';
@@ -252,7 +250,7 @@ describe('SearchBox', () => {
     instanceWithLoadingIndicator.unmount();
   });
 
-  it('expect to clear the query when the reset button is click with searchAsYouType=true', () => {
+  it('expect to clear the query when the form is reset with searchAsYouType=true', () => {
     const refine = jest.fn();
 
     const wrapper = shallow(
@@ -262,13 +260,13 @@ describe('SearchBox', () => {
     // Simulate the ref
     wrapper.instance().input = { focus: jest.fn() };
 
-    wrapper.find('button[type="reset"]').simulate('click');
+    wrapper.find('form').simulate('reset');
 
     expect(refine).toHaveBeenCalledWith('');
     expect(wrapper.instance().input.focus).toHaveBeenCalled();
   });
 
-  it('expect to clear the query when the reset button is click with searchAsYouType=false', () => {
+  it('expect to clear the query when the form is reset with searchAsYouType=false', () => {
     const refine = jest.fn();
 
     const wrapper = shallow(
@@ -281,7 +279,7 @@ describe('SearchBox', () => {
     // Simulate change event
     wrapper.setState({ query: 'Hello' });
 
-    wrapper.find('button[type="reset"]').simulate('click');
+    wrapper.find('form').simulate('reset');
 
     expect(refine).toHaveBeenCalledWith('');
     expect(wrapper.instance().input.focus).toHaveBeenCalled();

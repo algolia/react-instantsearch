@@ -17,8 +17,8 @@
     "autoprefixer": "8.0.0",
     "cssnano": "3.10.0",
     "node-sass": "4.7.2",
-    "postcss": "6.0.17",
-    "postcss-scss": "1.0.3"
+    "postcss": "6.0.19",
+    "postcss-scss": "1.0.4"
   },
   "author": {
     "name": "Algolia, Inc.",
