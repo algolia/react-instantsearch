@@ -1,5 +1,3 @@
-/* eslint-env jest, jasmine */
-
 import React from 'react';
 import renderer from 'react-test-renderer';
 import Enzyme, { mount } from 'enzyme';

@@ -1,7 +1,4 @@
-/* eslint-env jest, jasmine */
-
 import { SearchParameters } from 'algoliasearch-helper';
-
 import connect from './connectToggleRefinement';
 
 jest.mock('../core/createConnector');

@@ -74,6 +74,18 @@ stories
     'with default value',
     () => (
       <WrapWithHits linkedStoryGroup="RangeInput">
+        <RangeInput attribute="price" defaultRefinement={{ min: 50 }} />
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
+    'with default values',
+    () => (
+      <WrapWithHits linkedStoryGroup="RangeInput">
         <RangeInput
           attribute="price"
           defaultRefinement={{ min: 50, max: 200 }}

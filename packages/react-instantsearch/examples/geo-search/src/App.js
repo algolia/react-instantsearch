@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { InstantSearch, SearchBox, Configure } from 'react-instantsearch/dom';
+import {
+  InstantSearch,
+  SearchBox,
+  Configure,
+  Pagination,
+} from 'react-instantsearch/dom';
 import { connectHits } from 'react-instantsearch/connectors';
 import GoogleMap from 'google-map-react';
 import { fitBounds } from 'google-map-react/utils';
@@ -33,6 +38,7 @@ class App extends Component {
     this.setState(prevState => ({
       searchState: {
         ...prevState.searchState,
+        page: 1,
         query: '',
       },
       aroundLatLng: `${lat},${lng}`,
@@ -79,6 +85,7 @@ class App extends Component {
         <div className="map">
           <ConnectedHitsMap onLatLngChange={this.onLatLngChange} />
         </div>
+        <Pagination />
       </InstantSearch>
     );
   }
@@ -113,10 +120,15 @@ function CustomMarker() {
 }
 
 function HitsMap({ hits, onLatLngChange }) {
+  if (!hits.length) {
+    return null;
+  }
+
   const availableSpace = {
     width: document.body.getBoundingClientRect().width * 5 / 12,
     height: 400,
   };
+
   const boundingPoints = hits.reduce(
     (bounds, hit) => {
       const pos = hit;
@@ -132,17 +144,18 @@ function HitsMap({ hits, onLatLngChange }) {
       se: { lat: 85, lng: -180 },
     }
   );
-  const boundsConfig =
-    hits.length > 0
-      ? fitBounds(boundingPoints, availableSpace)
-      : { zoom: 11, center: { lat: -85, lng: 180 } };
+
+  const boundsConfig = fitBounds(boundingPoints, availableSpace);
+
   const markers = hits.map(hit => (
     <CustomMarker lat={hit.lat} lng={hit.lng} key={hit.objectID} />
   ));
+
   const options = {
     minZoomOverride: true,
     minZoom: 2,
   };
+
   return (
     <GoogleMap
       options={() => options}

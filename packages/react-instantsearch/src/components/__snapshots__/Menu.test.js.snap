@@ -52,7 +52,6 @@ exports[`Menu Menu with search inside items but no search results 1`] = `
         <button
           className="ais-SearchBox-reset"
           hidden={true}
-          onClick={[Function]}
           title="Clear the search query."
           type="reset"
         >
@@ -193,7 +192,6 @@ exports[`Menu Menu with search inside items with search results 1`] = `
         <button
           className="ais-SearchBox-reset"
           hidden={true}
-          onClick={[Function]}
           title="Clear the search query."
           type="reset"
         >
@@ -290,7 +288,6 @@ exports[`Menu applies translations 1`] = `
         <button
           className="ais-SearchBox-reset"
           hidden={true}
-          onClick={[Function]}
           title="Clear the search query."
           type="reset"
         >

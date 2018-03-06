@@ -281,7 +281,6 @@ class SearchBox extends Component {
             type="reset"
             title={translate('resetTitle')}
             className={cx('reset')}
-            onClick={this.onReset}
             hidden={!query || isSearchStalled}
           >
             {reset}

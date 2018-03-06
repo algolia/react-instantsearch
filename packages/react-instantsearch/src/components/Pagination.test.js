@@ -3,9 +3,9 @@ import renderer from 'react-test-renderer';
 import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import Link from './Link';
-Enzyme.configure({ adapter: new Adapter() });
-
 import Pagination from './Pagination';
+
+Enzyme.configure({ adapter: new Adapter() });
 
 const REQ_PROPS = {
   createURL: () => '#',
