@@ -33,7 +33,6 @@ import HitsPerPage from '../components/HitsPerPage';
  *         { value: 10, label: 'Show 10 hits' },
  *       ]}
  *     />
- *
  *     <Hits />
  *   </InstantSearch>
  * );

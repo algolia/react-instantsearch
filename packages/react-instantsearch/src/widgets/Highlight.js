@@ -32,7 +32,6 @@ import Highlight from '../components/Highlight';
  *     indexName="ikea"
  *   >
  *     <SearchBox defaultRefinement="Legi" />
- *
  *     <Hits hitComponent={Hit} />
  *   </InstantSearch>
  * );

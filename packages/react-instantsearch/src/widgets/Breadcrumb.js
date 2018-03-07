@@ -74,7 +74,6 @@ import Breadcrumb from '../components/Breadcrumb';
  *         'sub_sub_category',
  *       ]}
  *     />
- *
  *     <HierarchicalMenu
  *       defaultRefinement="Kitchen & appliances > Pantry"
  *       attributes={[

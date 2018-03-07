@@ -25,7 +25,6 @@ import ClearRefinements from '../components/ClearRefinements';
  *     indexName="ikea"
  *   >
  *     <ClearRefinements />
- *
  *     <RefinementList
  *       attribute="colors"
  *       defaultRefinement={['Black']}

@@ -35,7 +35,6 @@ import Snippet from '../components/Snippet';
  *     indexName="ikea"
  *   >
  *     <SearchBox defaultRefinement="adjustable" />
- *
  *     <Hits hitComponent={Hit} />
  *   </InstantSearch>
  * );

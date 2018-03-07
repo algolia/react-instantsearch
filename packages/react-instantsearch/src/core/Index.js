@@ -22,11 +22,9 @@ import React, { Component, Children } from 'react';
  *   >
  *     <Configure hitsPerPage={5} />
  *     <SearchBox />
- *
  *     <Index indexName="ikea">
  *       <Hits />
  *     </Index>
- *
  *     <Index indexName="bestbuy">
  *       <Hits />
  *     </Index>

@@ -32,7 +32,6 @@ import CurrentRefinements from '../components/CurrentRefinements';
  *     indexName="ikea"
  *   >
  *     <CurrentRefinements />
- *
  *     <RefinementList
  *       attribute="colors"
  *       defaultRefinement={['Black']}
