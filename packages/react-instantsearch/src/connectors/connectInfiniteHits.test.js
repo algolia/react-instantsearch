@@ -202,6 +202,33 @@ describe('connectInfiniteHits', () => {
       const state1 = refine(props, state0);
       expect(state1).toEqual({ page: 1 });
     });
+
+    it('expect to always return an array of hits', () => {
+      const context = createSingleIndexContext();
+      const getProvidedProps = connect.getProvidedProps.bind(context);
+
+      const props = {};
+      const searchState = {};
+
+      // Retrieve the results from the cache that's why
+      // the page it's not zero on the first render
+      const searchResults = {
+        results: {
+          hits: [{}, {}, {}],
+          page: 1,
+          nbPages: 3,
+        },
+      };
+
+      const expectation = {
+        hits: [],
+        hasMore: true,
+      };
+
+      const actual = getProvidedProps(props, searchState, searchResults);
+
+      expect(actual).toEqual(expectation);
+    });
   });
 
   describe('multi index', () => {
