@@ -63,24 +63,37 @@ export default function createConnector(connectorDesc) {
 
         const { ais: { store, widgetsManager } } = context;
         const canRender = false;
+
+        const initialUiState = connectorDesc.initialUiState
+          ? connectorDesc.initialUiState(props)
+          : {};
+
         this.state = {
-          props: this.getProvidedProps({ ...props, canRender }),
+          uiState: initialUiState,
+          props: this.getProvidedProps({
+            ...props,
+            ...initialUiState,
+            canRender,
+          }),
           canRender, // use to know if a component is rendered (browser), or not (server).
         };
 
         this.unsubscribe = store.subscribe(() => {
           if (this.state.canRender) {
-            this.setState({
+            this.setState(prevState => ({
               props: this.getProvidedProps({
                 ...this.props,
+                ...prevState.uiState,
                 canRender: this.state.canRender,
               }),
-            });
+            }));
           }
         });
+
         if (isWidget) {
           this.unregisterWidget = widgetsManager.registerWidget(this);
         }
+
         if (process.env.NODE_ENV === 'development') {
           const onlyGetProvidedPropsUsage = !find(
             Object.keys(connectorDesc),
@@ -167,7 +180,10 @@ export default function createConnector(connectorDesc) {
       componentWillReceiveProps(nextProps) {
         if (!isEqual(this.props, nextProps)) {
           this.setState({
-            props: this.getProvidedProps(nextProps),
+            props: this.getProvidedProps({
+              ...nextProps,
+              ...this.state.uiState,
+            }),
           });
 
           if (isWidget) {
@@ -208,18 +224,28 @@ export default function createConnector(connectorDesc) {
       }
 
       shouldComponentUpdate(nextProps, nextState) {
+        const { props: stateProps, uiState: uiStateProps } = this.state;
+        const { props: nextStateProps, uiState: nextUiStateProps } = nextState;
+
         const propsEqual = shallowEqual(this.props, nextProps);
-        if (this.state.props === null || nextState.props === null) {
-          if (this.state.props === nextState.props) {
+
+        if (stateProps === null || nextStateProps === null) {
+          if (stateProps === nextStateProps) {
             return !propsEqual;
           }
+
           return true;
         }
-        return !propsEqual || !shallowEqual(this.state.props, nextState.props);
+
+        const statePropsEqual = shallowEqual(stateProps, nextStateProps);
+        const uiStatePropsEqual = shallowEqual(uiStateProps, nextUiStateProps);
+
+        return !propsEqual || !statePropsEqual || !uiStatePropsEqual;
       }
 
-      getProvidedProps = props => {
+      getProvidedProps(propsWithUi) {
         const { ais: { store } } = this.context;
+
         const {
           results,
           searching,
@@ -230,6 +256,7 @@ export default function createConnector(connectorDesc) {
           searchingForFacetValues,
           isSearchStalled,
         } = store.getState();
+
         const searchResults = {
           results,
           searching,
@@ -237,20 +264,50 @@ export default function createConnector(connectorDesc) {
           searchingForFacetValues,
           isSearchStalled,
         };
+
+        if (connectorDesc.getProvidedProps.length === 1) {
+          return connectorDesc.getProvidedProps({
+            props: propsWithUi,
+            context: this.context,
+            searchState: widgets,
+            searchForFacetValuesResults: resultsFacetValues,
+            setUiState: this.setUiState,
+            searchResults,
+            metadata,
+          });
+        }
+
         return connectorDesc.getProvidedProps.call(
           this,
-          props,
+          propsWithUi,
           widgets,
           searchResults,
           metadata,
           resultsFacetValues
         );
-      };
+      }
 
       refine = (...args) => {
+        if (connectorDesc.refine.length === 1) {
+          const [nextRefinement, ...rest] = args;
+          this.context.ais.onInternalStateUpdate(
+            connectorDesc.refine({
+              // @TODO: merge the ui props
+              props: this.props,
+              setUiState: this.setUiState,
+              searchState: this.context.ais.store.getState().widgets,
+              nextRefinement,
+              ...rest,
+            })
+          );
+
+          return;
+        }
+
         this.context.ais.onInternalStateUpdate(
           connectorDesc.refine.call(
             this,
+            // @TODO: merge the ui props
             this.props,
             this.context.ais.store.getState().widgets,
             ...args
@@ -261,6 +318,7 @@ export default function createConnector(connectorDesc) {
       searchForFacetValues = (...args) => {
         this.context.ais.onSearchForFacetValues(
           connectorDesc.searchForFacetValues(
+            // @TODO: merge the ui props
             this.props,
             this.context.ais.store.getState().widgets,
             ...args
@@ -272,6 +330,7 @@ export default function createConnector(connectorDesc) {
         this.context.ais.createHrefForState(
           connectorDesc.refine.call(
             this,
+            // @TODO: merge the ui props
             this.props,
             this.context.ais.store.getState().widgets,
             ...args
@@ -280,8 +339,19 @@ export default function createConnector(connectorDesc) {
 
       cleanUp = (...args) => connectorDesc.cleanUp.call(this, ...args);
 
+      setUiState = fn =>
+        this.setState(prevState => ({
+          ...prevState,
+          uiState: {
+            ...prevState.uiState,
+            ...fn(prevState.uiState),
+          },
+        }));
+
       render() {
-        if (this.state.props === null) {
+        const { props: stateProps, uiState: uiStateProps } = this.state;
+
+        if (stateProps === null) {
           return null;
         }
 
@@ -296,7 +366,8 @@ export default function createConnector(connectorDesc) {
         return (
           <Composed
             {...this.props}
-            {...this.state.props}
+            {...stateProps}
+            {...uiStateProps}
             {...refineProps}
             {...searchForFacetValuesProps}
           />
