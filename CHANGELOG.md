@@ -1,3 +1,19 @@
+<a name="5.0.1"></a>
+## [5.0.1](https://github.com/algolia/react-instantsearch/compare/v4.5.1...v5.0.1) (2018-03-12)
+
+
+### Bug Fixes
+
+* update example Snapshots ([#950](https://github.com/algolia/react-instantsearch/issues/950)) ([4e0dbd3](https://github.com/algolia/react-instantsearch/commit/4e0dbd3))
+* **connectInfiniteHits:** always provide an array for hits ([#1064](https://github.com/algolia/react-instantsearch/issues/1064)) ([c75e38b](https://github.com/algolia/react-instantsearch/commit/c75e38b))
+* **connectRange:** update default refinement propTypes ([#978](https://github.com/algolia/react-instantsearch/issues/978)) ([c065fb1](https://github.com/algolia/react-instantsearch/commit/c065fb1))
+* **deps:** update dependency enzyme-to-json to v3.3.1 ([#1063](https://github.com/algolia/react-instantsearch/issues/1063)) ([8462f4b](https://github.com/algolia/react-instantsearch/commit/8462f4b))
+* **IndexUtils:** avoid throw an error when cleanUp multi index ([#1019](https://github.com/algolia/react-instantsearch/issues/1019)) ([865a3c3](https://github.com/algolia/react-instantsearch/commit/865a3c3))
+* **recipes:** update Snaphot ([#1050](https://github.com/algolia/react-instantsearch/issues/1050)) ([d136bda](https://github.com/algolia/react-instantsearch/commit/d136bda))
+* **SearchBox:** avoid to bind click on reset button ([#979](https://github.com/algolia/react-instantsearch/issues/979)) ([ea3063a](https://github.com/algolia/react-instantsearch/commit/ea3063a))
+
+
+
 <a name="5.0.0"></a>
 # [5.0.0](https://github.com/algolia/react-instantsearch/compare/v4.5.2...v5.0.0) (2018-03-06)
 
