@@ -1,6 +1,6 @@
 [build]
   publish = "docs-production/"
-  command = "yarn boot && yarn docs:build-preview"
+  command = "yarn bootstrap && yarn docs:build-preview"
 
   [build.environment]
     YARN_VERSION = "1.5.1"
