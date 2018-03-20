@@ -64,7 +64,7 @@
     lodash "^4.17.4"
     react-native-vector-icons "4.4.2"
 
-"@ptomasroos/react-native-multi-slider@^0.0.11":
+"@ptomasroos/react-native-multi-slider@0.0.11":
   version "0.0.11"
   resolved "https://registry.yarnpkg.com/@ptomasroos/react-native-multi-slider/-/react-native-multi-slider-0.0.11.tgz#9ddc5ed07c1dff14e10b40d0e97e436bbc851393"
 
@@ -4841,15 +4841,6 @@ react-devtools-core@3.0.0:
   dependencies:
     shell-quote "^1.6.1"
     ws "^2.0.3"
-
-react-dom@16.2.0:
-  version "16.2.0"
-  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.2.0.tgz#69003178601c0ca19b709b33a83369fe6124c044"
-  dependencies:
-    fbjs "^0.8.16"
-    loose-envify "^1.1.0"
-    object-assign "^4.1.1"
-    prop-types "^15.6.0"
 
 react-instantsearch@5.0.1:
   version "5.0.1"

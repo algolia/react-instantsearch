@@ -1,7 +1,8 @@
 {
-  "license": "MIT",
+  "name": "example-server-side-rendering",
+  "version": "1.0.0",
   "private": true,
-  "main": "index.js",
+  "license": "MIT",
   "scripts": {
     "start": "yarn build && cd dist && node server.js",
     "build": "webpack",
