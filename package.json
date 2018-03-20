@@ -1,6 +1,9 @@
 {
   "private": true,
   "version": "5.0.1",
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "boot": "./scripts/boot.sh",
     "changelog": "conventional-changelog --preset angular --output-unreleased",
