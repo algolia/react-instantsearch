@@ -9,7 +9,7 @@ You will find two use cases:
 ## Clone the example
 
 ```
-curl https://codeload.github.com/algolia/react-instantsearch/tar.gz/master | tar -xz --strip=2 react-instantsearch-master/packages/react-instantsearch/examples/autocomplete
+curl https://codeload.github.com/algolia/react-instantsearch/tar.gz/master | tar -xz --strip=2 react-instantsearch-master/examples/autocomplete
 ```
 
 ## Start the example

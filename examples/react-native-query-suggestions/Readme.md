@@ -8,7 +8,7 @@ To learn how you can setup Query Suggestions on your Algolia application, [read 
 ## Clone the example
 
 ```
-curl https://codeload.github.com/algolia/react-instantsearch/tar.gz/master | tar -xz --strip=2 react-instantsearch-master/packages/react-instantsearch/examples/query-suggestions-rn
+curl https://codeload.github.com/algolia/react-instantsearch/tar.gz/master | tar -xz --strip=2 react-instantsearch-master/examples/react-native-query-suggestions
 ```
 
 ## Start the example

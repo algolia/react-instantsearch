@@ -1,7 +1,7 @@
-var join = require('path').join;
+const path = require('path');
 
 module.exports = {
-  extends: join(__dirname, '../../../.eslintrc.js'),
+  extends: path.join(__dirname, '..', '.eslintrc.js'),
   rules: {
     'import/no-unresolved': 'off',
     'import/named': 'off',

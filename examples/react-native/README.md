@@ -1,11 +1,11 @@
 This examples shows how to use `react-instantsearch` along with `react-native`.
 
-It was created using `create-react-native-app`. 
+It was created using `create-react-native-app`.
 
 ## Clone the example
 
 ```
-curl https://codeload.github.com/algolia/react-instantsearch/tar.gz/master | tar -xz --strip=2 react-instantsearch-master/packages/react-instantsearch/examples/react-native
+curl https://codeload.github.com/algolia/react-instantsearch/tar.gz/master | tar -xz --strip=2 react-instantsearch-master/examples/react-native
 ```
 
 ## Start the example
