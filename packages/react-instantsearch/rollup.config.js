@@ -15,7 +15,7 @@ const license = `/*! ReactInstantSearch ${version} | ${algolia} | ${link} */`;
 
 const plugins = [
   babel({
-    exclude: 'node_modules/**',
+    exclude: ['../../node_modules/**', 'node_modules/**'],
     // see: https://github.com/rollup/rollup-plugin-babel#helpers
     plugins: ['external-helpers'],
   }),
