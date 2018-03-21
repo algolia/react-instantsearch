@@ -111,6 +111,7 @@
     "react-dom": "16.2.0",
     "react-hot-loader": "4.0.0",
     "react-tap-event-plugin": "3.0.2",
+    "react-test-renderer": "16.2.0",
     "recursive-readdir": "2.2.2",
     "replace-in-file": "3.4.0",
     "rheostat": "2.1.3",
