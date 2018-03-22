@@ -1,6 +1,7 @@
 {
-  "private": true,
   "version": "5.0.1",
+  "private": true,
+  "license": "MIT",
   "workspaces": [
     "packages/*",
     "docgen"
@@ -83,7 +84,6 @@
       "packages/*"
     ]
   },
-  "license": "MIT",
   "author": {
     "name": "Algolia, Inc.",
     "url": "https://www.algolia.com"
