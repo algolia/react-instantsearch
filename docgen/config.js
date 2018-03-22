@@ -6,6 +6,8 @@ import fs from 'fs';
 import pkg from '../packages/react-instantsearch/package.json';
 import { rootPath } from './path';
 
+const ENV = process.env.NODE_ENV || 'development';
+
 const content = JSON.parse(
   fs
     .readFileSync(rootPath('docgen/src/data/communityHeader.json'), 'utf8')
@@ -43,4 +45,4 @@ const configs = {
   },
 };
 
-export default { ...configs[process.env.NODE_ENV], pkg };
+export default { ...configs[ENV], pkg };
