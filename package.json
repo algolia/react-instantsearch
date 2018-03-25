@@ -20,7 +20,6 @@
     "test:recipes": "./scripts/test:recipes.sh",
     "test:build": "NODE_ENV=production ./scripts/test:build.sh",
     "test:regressions": "webpack --config test/regressions/webpack.config.js && rm -rf test/screenshots && happo run && babel-node ./test/regressions/normalize.js",
-    "test:size": "bundlesize",
     "argos": "argos upload test/screenshots --token $ARGOS_TOKEN || true",
     "dev": "jest --watch --bail --projects packages/*",
     "docs:storybook-start": "start-storybook -p 6006 -c ./storybook -s ./storybook/public",
@@ -50,7 +49,6 @@
     "babel-preset-react": "6.24.1",
     "babel-preset-stage-2": "6.24.1",
     "browser-sync": "2.23.6",
-    "bundlesize": "0.17.0",
     "chokidar": "2.0.3",
     "clipboard": "2.0.0",
     "codemirror": "5.36.0",
@@ -129,20 +127,6 @@
       "packages/*"
     ]
   },
-  "bundlesize": [
-    {
-      "path": "packages/react-instantsearch/dist/umd/Core.min.js",
-      "maxSize": "8 kB"
-    },
-    {
-      "path": "packages/react-instantsearch/dist/umd/Connectors.min.js",
-      "maxSize": "38 kB"
-    },
-    {
-      "path": "packages/react-instantsearch/dist/umd/Dom.min.js",
-      "maxSize": "62 kB"
-    }
-  ],
   "license": "MIT",
   "author": {
     "name": "Algolia, Inc.",

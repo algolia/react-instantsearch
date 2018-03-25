@@ -25,7 +25,8 @@
   },
   "scripts": {
     "build": "./scripts/build.sh",
-    "build-and-publish": "./scripts/build-and-publish.sh"
+    "build-and-publish": "./scripts/build-and-publish.sh",
+    "test:size": "bundlesize"
   },
   "dependencies": {
     "algoliasearch": "^3.24.0",
@@ -38,6 +39,7 @@
     "react-native": "^0.54.2"
   },
   "devDependencies": {
+    "bundlesize": "0.17.0",
     "enzyme": "3.3.0",
     "enzyme-adapter-react-16": "1.1.1",
     "enzyme-to-json": "3.3.3",
@@ -56,5 +58,19 @@
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
     ]
-  }
+  },
+  "bundlesize": [
+    {
+      "path": "dist/umd/Core.min.js",
+      "maxSize": "8 kB"
+    },
+    {
+      "path": "dist/umd/Connectors.min.js",
+      "maxSize": "38 kB"
+    },
+    {
+      "path": "dist/umd/Dom.min.js",
+      "maxSize": "62 kB"
+    }
+  ]
 }
