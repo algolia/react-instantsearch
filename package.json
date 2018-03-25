@@ -22,7 +22,7 @@
     "test:regressions": "webpack --config test/regressions/webpack.config.js && rm -rf test/screenshots && happo run && babel-node ./test/regressions/normalize.js",
     "test:size": "bundlesize",
     "argos": "argos upload test/screenshots --token $ARGOS_TOKEN || true",
-    "dev": "jest --watch --bail",
+    "dev": "jest --watch --bail --projects packages/*",
     "docs:storybook-start": "start-storybook -p 6006 -c ./storybook -s ./storybook/public",
     "docs:storybook-build-production": "build-storybook -s ./storybook/public -o docs-production/react-instantsearch/storybook -c ./storybook"
   },
