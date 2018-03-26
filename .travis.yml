@@ -12,12 +12,6 @@ before_install:
 install:
   - yarn bootstrap
 
-cache:
-  yarn: true
-  directories:
-    - node_modules
-    - packages/react-instantsearch/node_modules
-
 env:
   global:
   # ARGOS
