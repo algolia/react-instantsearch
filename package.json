@@ -13,7 +13,7 @@
     "docs:build": "(cd docgen && yarn build) && yarn docs:storybook-build-production",
     "docs:deploy-production": "NODE_ENV=production yarn docs:build && babel-node scripts/gh-pages.js",
     "docs:build-preview": "./scripts/docs:build-preview.sh",
-    "docs:deploy-preview": "NODE_ENV=production yarn docs:build-preview && rm -f preview.zip && zip -r -9 preview.zip docs-production/ && netlify deploy && rm preview.zip",
+    "docs:deploy-preview": "NODE_ENV=production yarn docs:build-preview && rm -f preview.zip && zip -r -9 preview.zip docgen/docs-production/ && netlify deploy && rm preview.zip",
     "release": "NODE_ENV=production ./scripts/release.sh",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
@@ -25,7 +25,7 @@
     "argos": "argos upload test/screenshots --token $ARGOS_TOKEN || true",
     "dev": "jest --watch --bail --projects packages/*",
     "docs:storybook-start": "start-storybook -p 6006 -c ./storybook -s ./storybook/public",
-    "docs:storybook-build-production": "build-storybook -s ./storybook/public -o docs-production/react-instantsearch/storybook -c ./storybook"
+    "docs:storybook-build-production": "build-storybook -s ./storybook/public -o docgen/docs-production/react-instantsearch/storybook -c ./storybook"
   },
   "devDependencies": {
     "@storybook/addon-actions": "3.3.15",

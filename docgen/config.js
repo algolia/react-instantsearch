@@ -32,13 +32,13 @@ const header = algoliaComponents.communityHeader(content, {
 
 const configs = {
   production: {
-    docsDist: rootPath('docs-production/react-instantsearch'),
+    docsDist: rootPath('docgen/docs-production/react-instantsearch'),
     storyBookPublicPath: 'storybook/',
     publicPath: '/react-instantsearch/',
     header,
   },
   development: {
-    docsDist: rootPath('docs/react-instantsearch'),
+    docsDist: rootPath('docgen/docs-development/react-instantsearch'),
     storyBookPublicPath: 'http://localhost:6006/',
     publicPath: '/',
     header,
