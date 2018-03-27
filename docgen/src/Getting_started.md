@@ -359,5 +359,5 @@ displays a button to remove all the filters.
 At this point, you know the basics of React InstantSearch. Read the guide to know and do more with it.
 
 <div class="guide-nav">
-Next: <a href="guide/"> Guide →</a>
+  <p>Next: <a href="guide/"> Guide →</a></p>
 </div>
