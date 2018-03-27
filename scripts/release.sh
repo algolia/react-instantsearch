@@ -41,7 +41,7 @@ git pull origin master
 git fetch origin --tags
 
 # printf "Release: install dependencies"
-yarn boot
+yarn bootstrap
 
 # No need for complex release process for now, only patch releases should be ok
 currentVersion=`cat package.json | json version`
@@ -108,10 +108,10 @@ VERSION=$newVersion npm run build-and-publish -- -n "$npmFlags"
 
 printf "\n\nRelease: Package was published to npm."
 
-for d in packages/react-instantsearch/examples/* ; do
+for d in examples/* ; do
     cd $d
     yarn upgrade react-instantsearch@$newVersion
-    cd ../../../..
+    cd ../..
 done
 
 commitMessage="chore(deps): update examples to react-instantsearch v$newVersion"
