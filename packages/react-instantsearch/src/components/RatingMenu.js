@@ -1,4 +1,4 @@
-import { find } from 'lodash';
+import { find, fill } from 'lodash';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -145,8 +145,7 @@ class RatingMenu extends Component {
       .map(item => ({ ...item, value: parseFloat(item.value) }))
       .filter(item => item.value >= limitMin && item.value <= limitMax);
 
-    const range = new Array(safeInclusiveLength)
-      .fill(null)
+    const range = fill(new Array(safeInclusiveLength), null)
       .map((_, index) => {
         const element = find(values, item => item.value === limitMax - index);
         const placeholder = { value: limitMax - index, count: 0, total: 0 };
