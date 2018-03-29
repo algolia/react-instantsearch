@@ -7,7 +7,6 @@
     "docgen"
   ],
   "scripts": {
-    "bootstrap": "git clean -dfX && yarn",
     "changelog": "conventional-changelog --preset angular --output-unreleased",
     "start": "(cd docgen && yarn start) & yarn docs:storybook-start & wait",
     "docs:build": "(cd docgen && yarn build) && yarn docs:storybook-build-production",
