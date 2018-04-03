@@ -4,16 +4,18 @@ import createConnector from '../core/createConnector';
 const getId = () => 'geoSearch';
 
 const toggleRefineOnMapMove = update => () =>
-  update(prevProps => ({
-    isRefineOnMapMove: !prevProps.isRefineOnMapMove,
+  update(prevUiState => ({
+    isRefineOnMapMove: !prevUiState.isRefineOnMapMove,
   }));
 
 const setMapMoveSinceLastRefine = update => value =>
-  update(prevState => {
+  update(prevUiState => {
+    const { hasMapMoveSinceLastRefine } = prevUiState;
+
     // Prevent useless rendering, only render the first
     // time we change the value. It will avoid to run
     // the render on each move.
-    if (prevState.hasMapMoveSinceLastRefine === value) {
+    if (hasMapMoveSinceLastRefine === value) {
       return null;
     }
 
