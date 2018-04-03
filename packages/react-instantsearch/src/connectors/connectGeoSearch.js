@@ -43,7 +43,7 @@ export default createConnector({
   getProvidedProps({ searchResults, searchState, uiState }) {
     // @TODO: Handle multi-index
     const results = searchResults.results;
-    const { state: uiStateValue, update: setUiState } = uiState;
+    const { value: uiStateValue, updater: uiStateUpdater } = uiState;
     const searchParameters = results && results._state;
     const isRefinedWithMapFromSearchState = Boolean(searchState[getId()]);
     const isRefinedWithMapFromSearchParameters =
@@ -62,9 +62,9 @@ export default createConnector({
       // position: null // fetch from somewhere
       items: results ? results.hits.filter(_ => Boolean(_._geoloc)) : [],
       isRefineOnMapMove: uiStateValue.isRefineOnMapMove,
-      toggleRefineOnMapMove: toggleRefineOnMapMove(setUiState),
+      toggleRefineOnMapMove: toggleRefineOnMapMove(uiStateUpdater),
       hasMapMoveSinceLastRefine: uiStateValue.hasMapMoveSinceLastRefine,
-      setMapMoveSinceLastRefine: setMapMoveSinceLastRefine(setUiState),
+      setMapMoveSinceLastRefine: setMapMoveSinceLastRefine(uiStateUpdater),
       isRefinedWithMap,
     };
   },

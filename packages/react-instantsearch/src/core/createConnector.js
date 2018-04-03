@@ -270,8 +270,8 @@ export default function createConnector(connectorDesc) {
         };
 
         const uiStateUpdater = {
-          state: uiState,
-          update: this.setUiState,
+          value: uiState,
+          updater: this.setUiState,
         };
 
         if (connectorDesc.getProvidedProps.length === 1) {
