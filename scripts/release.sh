@@ -40,7 +40,9 @@ fi
 git pull origin master
 git fetch origin --tags
 
-# printf "Release: install dependencies"
+# Force Yarn to install **all** the dependencies since the NODE_ENV is set
+# to "production". Yarn will install only the production dependencies by default.
+# See: https://yarnpkg.com/en/docs/cli/install#toc-yarn-install-production-true-false
 yarn --production=false
 
 # No need for complex release process for now, only patch releases should be ok
