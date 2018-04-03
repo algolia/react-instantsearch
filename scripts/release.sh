@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
 
-# The release script has been updated in order to force the beta release for the
-# v5. Before merging the branch to master we should revert the changes. In all the
-# file there are some comment to revert.
-
 set -e # exit when error
 
 beta=false
