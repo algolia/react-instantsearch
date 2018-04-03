@@ -52,7 +52,7 @@
     "jest": "22.4.3",
     "react": "16.2.0",
     "react-dom": "16.2.0",
-    "react-native": "0.54.2",
+    "react-native": "0.54.4",
     "react-test-renderer": "16.2.0",
     "rollup": "0.57.1",
     "rollup-plugin-babel": "3.0.3",
