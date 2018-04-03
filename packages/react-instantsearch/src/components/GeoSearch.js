@@ -57,8 +57,7 @@ class GeoSearch extends Component {
 
   fitViewToBounds() {
     const { items, hasMapMoveSinceLastRefine, isRefinedWithMap } = this.props;
-    const isFitBoundsEnable =
-      !hasMapMoveSinceLastRefine && !isRefinedWithMap && !this.isPendingRefine;
+    const isFitBoundsEnable = !hasMapMoveSinceLastRefine && !isRefinedWithMap;
 
     if (isFitBoundsEnable) {
       this.isUserInteraction = false;
@@ -79,20 +78,20 @@ class GeoSearch extends Component {
     const ne = this.mapElement.getBounds().getNorthEast();
     const sw = this.mapElement.getBounds().getSouthWest();
 
-    setMapMoveSinceLastRefine(false);
-
     refine({
       northEast: { lat: ne.lat(), lng: ne.lng() },
       southWest: { lat: sw.lat(), lng: sw.lng() },
     });
+
+    setMapMoveSinceLastRefine(false);
   };
 
   clearMapRefinement = () => {
     const { refine, setMapMoveSinceLastRefine } = this.props;
 
-    setMapMoveSinceLastRefine(false);
-
     refine();
+
+    setMapMoveSinceLastRefine(false);
   };
 
   render() {
