@@ -34,20 +34,21 @@ class GeoSearch extends Component {
   }
 
   onChange = () => {
-    const { setMapMoveSinceLastRefine } = this.props;
+    const { isRefineOnMapMove, setMapMoveSinceLastRefine } = this.props;
 
     if (this.isMapAlreadyLoaded && this.isUserInteraction) {
-      this.isPendingRefine = true;
-      setMapMoveSinceLastRefine();
+      setMapMoveSinceLastRefine(true);
+
+      if (isRefineOnMapMove) {
+        this.isPendingRefine = true;
+      }
     }
   };
 
   onIdle = () => {
-    const { isRefineOnMapMove } = this.props;
-
     this.isMapAlreadyLoaded = true;
 
-    if (this.isUserInteraction && this.isPendingRefine && isRefineOnMapMove) {
+    if (this.isUserInteraction && this.isPendingRefine) {
       this.refineWithMap();
 
       this.isPendingRefine = false;
@@ -56,8 +57,10 @@ class GeoSearch extends Component {
 
   fitViewToBounds() {
     const { items, hasMapMoveSinceLastRefine, isRefinedWithMap } = this.props;
+    const isFitBoundsEnable =
+      !hasMapMoveSinceLastRefine && !isRefinedWithMap && !this.isPendingRefine;
 
-    if (!hasMapMoveSinceLastRefine && !isRefinedWithMap) {
+    if (isFitBoundsEnable) {
       this.isUserInteraction = false;
       this.mapElement.fitBounds(
         items.reduce(
@@ -71,26 +74,25 @@ class GeoSearch extends Component {
   }
 
   refineWithMap = () => {
-    const { refine } = this.props;
+    const { refine, setMapMoveSinceLastRefine } = this.props;
 
     const ne = this.mapElement.getBounds().getNorthEast();
     const sw = this.mapElement.getBounds().getSouthWest();
 
+    setMapMoveSinceLastRefine(false);
+
     refine({
-      reset: false,
-      bounds: {
-        northEast: { lat: ne.lat(), lng: ne.lng() },
-        southWest: { lat: sw.lat(), lng: sw.lng() },
-      },
+      northEast: { lat: ne.lat(), lng: ne.lng() },
+      southWest: { lat: sw.lat(), lng: sw.lng() },
     });
   };
 
   clearMapRefinement = () => {
-    const { refine } = this.props;
+    const { refine, setMapMoveSinceLastRefine } = this.props;
 
-    refine({
-      reset: true,
-    });
+    setMapMoveSinceLastRefine(false);
+
+    refine();
   };
 
   render() {

@@ -8,9 +8,9 @@ const toggleRefineOnMapMove = update => () =>
     isRefineOnMapMove: !prevProps.isRefineOnMapMove,
   }));
 
-const setMapMoveSinceLastRefine = update => () =>
+const setMapMoveSinceLastRefine = update => value =>
   update(() => ({
-    hasMapMoveSinceLastRefine: true,
+    hasMapMoveSinceLastRefine: value,
   }));
 
 export default createConnector({
@@ -42,16 +42,16 @@ export default createConnector({
     };
   },
 
-  refine({ searchState, nextRefinement, setUiState }) {
+  refine({ searchState, nextRefinement }) {
+    // refine({ searchState, nextRefinement, setUiState }) {
     // @TODO: Handle multi-index
-    const { bounds = {}, reset = true } = nextRefinement || {};
-    const { northEast: ne, southWest: sw } = bounds;
+    const { northEast: ne, southWest: sw } = nextRefinement || {};
     const boundingBox = ne && sw ? [ne.lat, ne.lng, sw.lat, sw.lng].join() : '';
 
-    setUiState(() => ({
-      hasMapMoveSinceLastRefine: false,
-      isRefinedWithMap: !reset,
-    }));
+    // setUiState(() => ({
+    //   hasMapMoveSinceLastRefine: false,
+    //   isRefinedWithMap: !reset,
+    // }));
 
     return {
       ...searchState,
