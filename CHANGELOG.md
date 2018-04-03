@@ -1,3 +1,22 @@
+<a name="5.0.3"></a>
+## [5.0.3](https://github.com/algolia/react-instantsearch/compare/v4.5.1...v5.0.3) (2018-04-03)
+
+
+### Bug Fixes
+
+* **connectInfiniteHits:** always provide an array for hits ([#1064](https://github.com/algolia/react-instantsearch/issues/1064)) ([c75e38b](https://github.com/algolia/react-instantsearch/commit/c75e38b))
+* **connectRange:** update default refinement propTypes ([#978](https://github.com/algolia/react-instantsearch/issues/978)) ([c065fb1](https://github.com/algolia/react-instantsearch/commit/c065fb1))
+* **deps:** update dependency enzyme-to-json to v3.3.1 ([#1063](https://github.com/algolia/react-instantsearch/issues/1063)) ([8462f4b](https://github.com/algolia/react-instantsearch/commit/8462f4b))
+* **IndexUtils:** avoid throw an error when cleanUp multi index ([#1019](https://github.com/algolia/react-instantsearch/issues/1019)) ([865a3c3](https://github.com/algolia/react-instantsearch/commit/865a3c3))
+* **recipes:** update Snaphot ([#1050](https://github.com/algolia/react-instantsearch/issues/1050)) ([d136bda](https://github.com/algolia/react-instantsearch/commit/d136bda))
+* **release:** install all the yarn dependencies ([#1134](https://github.com/algolia/react-instantsearch/issues/1134)) ([cd4e2ac](https://github.com/algolia/react-instantsearch/commit/cd4e2ac))
+* **SearchBox:** avoid to bind click on reset button ([#979](https://github.com/algolia/react-instantsearch/issues/979)) ([ea3063a](https://github.com/algolia/react-instantsearch/commit/ea3063a))
+* revert dependencies as devDependencies ([#1135](https://github.com/algolia/react-instantsearch/issues/1135)) ([6b627bb](https://github.com/algolia/react-instantsearch/commit/6b627bb))
+* update example Snapshots ([#950](https://github.com/algolia/react-instantsearch/issues/950)) ([4e0dbd3](https://github.com/algolia/react-instantsearch/commit/4e0dbd3))
+* use lodash version of unsupported Array.{fill, find} ([#1118](https://github.com/algolia/react-instantsearch/issues/1118)) ([ea7bf42](https://github.com/algolia/react-instantsearch/commit/ea7bf42))
+
+
+
 <a name="5.0.2"></a>
 ## [5.0.2](https://github.com/algolia/react-instantsearch/compare/v5.0.1...v5.0.2) (2018-04-03)
 
