@@ -9,9 +9,18 @@ const toggleRefineOnMapMove = update => () =>
   }));
 
 const setMapMoveSinceLastRefine = update => value =>
-  update(() => ({
-    hasMapMoveSinceLastRefine: value,
-  }));
+  update(prevState => {
+    // Prevent useless rendering, only render the first
+    // time we change the value. It will avoid to run
+    // the render on each move.
+    if (prevState.hasMapMoveSinceLastRefine === value) {
+      return null;
+    }
+
+    return {
+      hasMapMoveSinceLastRefine: value,
+    };
+  });
 
 export default createConnector({
   displayName: 'AlgoliaGeoSearch',
