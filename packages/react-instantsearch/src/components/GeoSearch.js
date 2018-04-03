@@ -33,6 +33,8 @@ class GeoSearch extends Component {
     this.fitViewToBounds();
   }
 
+  createRef = c => (this.element = c);
+
   onChange = () => {
     const { isRefineOnMapMove, setMapMoveSinceLastRefine } = this.props;
 
@@ -61,7 +63,7 @@ class GeoSearch extends Component {
 
     if (isFitBoundsEnable) {
       this.isUserInteraction = false;
-      this.mapElement.fitBounds(
+      this.element.fitBounds(
         items.reduce(
           (acc, item) =>
             acc.extend({ lat: item._geoloc.lat, lng: item._geoloc.lng }),
@@ -75,8 +77,8 @@ class GeoSearch extends Component {
   refineWithMap = () => {
     const { refine, setMapMoveSinceLastRefine } = this.props;
 
-    const ne = this.mapElement.getBounds().getNorthEast();
-    const sw = this.mapElement.getBounds().getSouthWest();
+    const ne = this.element.getBounds().getNorthEast();
+    const sw = this.element.getBounds().getSouthWest();
 
     refine({
       northEast: { lat: ne.lat(), lng: ne.lng() },
@@ -106,7 +108,7 @@ class GeoSearch extends Component {
     return (
       <div>
         <GoogleMap
-          ref={c => (this.mapElement = c)}
+          ref={this.createRef}
           defaultZoom={8}
           defaultCenter={{ lat: -34.397, lng: 150.644 }}
           options={{
