@@ -70,7 +70,6 @@ export default createConnector({
   },
 
   refine({ searchState, nextRefinement }) {
-    // refine({ searchState, nextRefinement, setUiState }) {
     // @TODO: Handle multi-index
     const { northEast: ne, southWest: sw } = nextRefinement || {};
     const boundingBox = ne && sw ? [ne.lat, ne.lng, sw.lat, sw.lng].join() : '';
