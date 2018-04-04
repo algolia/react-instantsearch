@@ -39,3 +39,4 @@ export { default as Stats } from './src/widgets/Stats.js';
 export { default as ToggleRefinement } from './src/widgets/ToggleRefinement.js';
 export { default as Panel } from './src/widgets/Panel.js';
 export { default as Breadcrumb } from './src/widgets/Breadcrumb';
+export { default as GeoSearch } from './src/widgets/GeoSearch';

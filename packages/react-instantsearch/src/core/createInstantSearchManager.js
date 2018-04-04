@@ -194,6 +194,7 @@ export default function createInstantSearchManager({
       },
       'resultsFacetValues'
     );
+
     store.setState(nextState);
   }
 

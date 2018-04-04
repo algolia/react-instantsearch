@@ -63,24 +63,41 @@ export default function createConnector(connectorDesc) {
 
         const { ais: { store, widgetsManager } } = context;
         const canRender = false;
+
+        const initialUiState = connectorDesc.initialUiState
+          ? connectorDesc.initialUiState(props)
+          : {};
+
         this.state = {
-          props: this.getProvidedProps({ ...props, canRender }),
+          uiState: initialUiState,
+          props: this.getProvidedProps({
+            uiState: initialUiState,
+            props: {
+              ...props,
+              canRender,
+            },
+          }),
           canRender, // use to know if a component is rendered (browser), or not (server).
         };
 
         this.unsubscribe = store.subscribe(() => {
           if (this.state.canRender) {
-            this.setState({
+            this.setState(prevState => ({
               props: this.getProvidedProps({
-                ...this.props,
-                canRender: this.state.canRender,
+                uiState: prevState.uiState,
+                props: {
+                  ...prevState.props,
+                  canRender: prevState.canRender,
+                },
               }),
-            });
+            }));
           }
         });
+
         if (isWidget) {
           this.unregisterWidget = widgetsManager.registerWidget(this);
         }
+
         if (process.env.NODE_ENV === 'development') {
           const onlyGetProvidedPropsUsage = !find(
             Object.keys(connectorDesc),
@@ -166,9 +183,12 @@ export default function createConnector(connectorDesc) {
 
       componentWillReceiveProps(nextProps) {
         if (!isEqual(this.props, nextProps)) {
-          this.setState({
-            props: this.getProvidedProps(nextProps),
-          });
+          this.setState(prevState => ({
+            props: this.getProvidedProps({
+              props: nextProps,
+              uiState: prevState.uiState,
+            }),
+          }));
 
           if (isWidget) {
             // Since props might have changed, we need to re-run getSearchParameters
@@ -208,18 +228,25 @@ export default function createConnector(connectorDesc) {
       }
 
       shouldComponentUpdate(nextProps, nextState) {
+        const { props: stateProps } = this.state;
+        const { props: nextStateProps } = nextState;
+
         const propsEqual = shallowEqual(this.props, nextProps);
-        if (this.state.props === null || nextState.props === null) {
-          if (this.state.props === nextState.props) {
+
+        if (stateProps === null || nextStateProps === null) {
+          if (stateProps === nextStateProps) {
             return !propsEqual;
           }
+
           return true;
         }
-        return !propsEqual || !shallowEqual(this.state.props, nextState.props);
+
+        const statePropsEqual = shallowEqual(stateProps, nextStateProps);
+
+        return !propsEqual || !statePropsEqual;
       }
 
-      getProvidedProps = props => {
-        const { ais: { store } } = this.context;
+      getProvidedProps = ({ props, uiState }) => {
         const {
           results,
           searching,
@@ -229,7 +256,8 @@ export default function createConnector(connectorDesc) {
           resultsFacetValues,
           searchingForFacetValues,
           isSearchStalled,
-        } = store.getState();
+        } = this.context.ais.store.getState();
+
         const searchResults = {
           results,
           searching,
@@ -237,13 +265,16 @@ export default function createConnector(connectorDesc) {
           searchingForFacetValues,
           isSearchStalled,
         };
+
         return connectorDesc.getProvidedProps.call(
           this,
           props,
           widgets,
           searchResults,
           metadata,
-          resultsFacetValues
+          resultsFacetValues,
+          uiState,
+          this.setUiState
         );
       };
 
@@ -280,8 +311,32 @@ export default function createConnector(connectorDesc) {
 
       cleanUp = (...args) => connectorDesc.cleanUp.call(this, ...args);
 
+      setUiState = fn =>
+        this.setState(prevState => {
+          const next = fn(prevState.uiState);
+
+          if (next === null) {
+            return null;
+          }
+
+          const nextUiState = {
+            ...prevState.uiState,
+            ...next,
+          };
+
+          return {
+            uiState: nextUiState,
+            props: this.getProvidedProps({
+              props: prevState.props,
+              uiState: nextUiState,
+            }),
+          };
+        });
+
       render() {
-        if (this.state.props === null) {
+        const { props: stateProps } = this.state;
+
+        if (stateProps === null) {
           return null;
         }
 
@@ -296,7 +351,7 @@ export default function createConnector(connectorDesc) {
         return (
           <Composed
             {...this.props}
-            {...this.state.props}
+            {...stateProps}
             {...refineProps}
             {...searchForFacetValuesProps}
           />

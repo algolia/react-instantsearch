@@ -98,26 +98,11 @@ const CustomHits = connectHits(({ hits }) => (
   <div className="hits">
     {hits.map(hit => (
       <div key={hit.objectID} className="hit">
-        <div>
-          <div className="hit-picture">
-            <img
-              src={`https://res.cloudinary.com/hilnmyskv/image/fetch/h_100,q_100,f_auto/${
-                hit.image
-              }`}
-            />
-          </div>
-        </div>
         <div className="hit-content">
           <div>
             <Highlight attribute="name" hit={hit} />
             <span> - ${hit.price}</span>
             <span> - {hit.rating} stars</span>
-          </div>
-          <div className="hit-type">
-            <Highlight attribute="type" hit={hit} />
-          </div>
-          <div className="hit-description">
-            <Highlight attribute="description" hit={hit} />
           </div>
         </div>
       </div>

@@ -51,3 +51,6 @@ export {
 export {
   default as connectStateResults,
 } from './src/connectors/connectStateResults.js';
+export {
+  default as connectGeoSearch,
+} from './src/connectors/connectGeoSearch.js';
