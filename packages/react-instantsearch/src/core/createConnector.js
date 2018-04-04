@@ -181,13 +181,18 @@ export default function createConnector(connectorDesc) {
         }
       }
 
+      // The canRender props is not sync with the one from the state because
+      // in this lifecycle we don't pass the `canRender` prop to the getProvidedProps
+      // function. It means that every time a component received new props the canRender
+      // prop is `undefined`.
       componentWillReceiveProps(nextProps) {
         if (!isEqual(this.props, nextProps)) {
-          this.setState({
+          this.setState(prevState => ({
             props: this.getProvidedProps({
+              uiState: prevState.uiState,
               props: nextProps,
             }),
-          });
+          }));
 
           if (isWidget) {
             // Since props might have changed, we need to re-run getSearchParameters
