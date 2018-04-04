@@ -82,11 +82,6 @@ export default createConnector({
     const { northEast: ne, southWest: sw } = nextRefinement || {};
     const boundingBox = ne && sw ? [ne.lat, ne.lng, sw.lat, sw.lng].join() : '';
 
-    // setUiState(() => ({
-    //   hasMapMoveSinceLastRefine: false,
-    //   isRefinedWithMap: !reset,
-    // }));
-
     return {
       ...searchState,
       [getId()]: boundingBox,

@@ -292,7 +292,6 @@ export default function createConnector(connectorDesc) {
       searchForFacetValues = (...args) => {
         this.context.ais.onSearchForFacetValues(
           connectorDesc.searchForFacetValues(
-            // @TODO: merge the ui props
             this.props,
             this.context.ais.store.getState().widgets,
             ...args
@@ -304,7 +303,6 @@ export default function createConnector(connectorDesc) {
         this.context.ais.createHrefForState(
           connectorDesc.refine.call(
             this,
-            // @TODO: merge the ui props
             this.props,
             this.context.ais.store.getState().widgets,
             ...args
