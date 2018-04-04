@@ -246,9 +246,7 @@ export default function createConnector(connectorDesc) {
         return !propsEqual || !statePropsEqual;
       }
 
-      getProvidedProps({ props, uiState }) {
-        const { ais: { store } } = this.context;
-
+      getProvidedProps = ({ props, uiState }) => {
         const {
           results,
           searching,
@@ -278,13 +276,12 @@ export default function createConnector(connectorDesc) {
           uiState,
           this.setUiState
         );
-      }
+      };
 
       refine = (...args) => {
         this.context.ais.onInternalStateUpdate(
           connectorDesc.refine.call(
             this,
-            // @TODO: merge the ui props
             this.props,
             this.context.ais.store.getState().widgets,
             ...args
