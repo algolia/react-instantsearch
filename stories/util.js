@@ -12,7 +12,7 @@ import { connectHits } from '../packages/react-instantsearch/connectors';
 import { linkTo } from '@storybook/addon-links';
 import 'instantsearch.css/themes/algolia.css';
 
-const Wrap = ({ appId, apiKey, indexName, children }) => (
+export const Wrap = ({ appId, apiKey, indexName, children }) => (
   <InstantSearch appId={appId} apiKey={apiKey} indexName={indexName}>
     {children}
   </InstantSearch>
@@ -31,7 +31,7 @@ Wrap.defaultProps = {
   indexName: 'ikea',
 };
 
-const WrapWithHits = ({
+export const WrapWithHits = ({
   searchParameters: askedSearchParameters = {},
   children,
   searchBox = true,
@@ -99,7 +99,7 @@ const WrapWithHits = ({
   );
 };
 
-const CustomHits = connectHits(({ hits }) => (
+export const CustomHits = connectHits(({ hits }) => (
   <div className="hits">
     {hits.map(hit => (
       <div key={hit.objectID} className="hit">
@@ -158,7 +158,7 @@ const getReactElementDisplayName = element =>
     : element.type);
 
 // displays the right name for the JSX addon in Storybook
-const displayName = element => {
+export const displayName = element => {
   const reactElementDisplayName = getReactElementDisplayName(element);
   const isWrap = reactElementDisplayName === 'Wrap';
   const isWrapWithHits = reactElementDisplayName === 'WrapWithHits';
@@ -202,6 +202,4 @@ const displayName = element => {
   return reactElementDisplayName;
 };
 
-const filterProps = ['linkedStoryGroup', 'hasPlayground'];
-
-export { CustomHits, displayName, filterProps, Wrap, WrapWithHits };
+export const filterProps = ['linkedStoryGroup', 'hasPlayground'];
