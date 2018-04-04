@@ -12,18 +12,23 @@ import { connectHits } from '../packages/react-instantsearch/connectors';
 import { linkTo } from '@storybook/addon-links';
 import 'instantsearch.css/themes/algolia.css';
 
-const Wrap = props => (
-  <InstantSearch
-    appId="latency"
-    apiKey="6be0576ff61c053d5f9a3225e2a90f76"
-    indexName="ikea"
-  >
-    {props.children}
+const Wrap = ({ appId, apiKey, indexName, children }) => (
+  <InstantSearch appId={appId} apiKey={apiKey} indexName={indexName}>
+    {children}
   </InstantSearch>
 );
 
 Wrap.propTypes = {
-  children: PropTypes.node,
+  children: PropTypes.node.isRequired,
+  appId: PropTypes.string,
+  apiKey: PropTypes.string,
+  indexName: PropTypes.string,
+};
+
+Wrap.defaultProps = {
+  appId: 'latency',
+  apiKey: '6be0576ff61c053d5f9a3225e2a90f76',
+  indexName: 'ikea',
 };
 
 const WrapWithHits = ({
@@ -33,9 +38,9 @@ const WrapWithHits = ({
   hasPlayground = false,
   linkedStoryGroup,
   pagination = true,
-  appId = 'latency',
-  apiKey = '6be0576ff61c053d5f9a3225e2a90f76',
-  indexName = 'ikea',
+  appId,
+  apiKey,
+  indexName,
 }) => {
   const sourceCodeUrl = `https://github.com/algolia/react-instantsearch/tree/master/stories/${linkedStoryGroup}.stories.js`;
   const playgroundLink = hasPlayground ? (
