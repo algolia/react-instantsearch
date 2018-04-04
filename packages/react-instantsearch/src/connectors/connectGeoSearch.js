@@ -40,10 +40,18 @@ export default createConnector({
     hasMapMoveSinceLastRefine: false,
   }),
 
-  getProvidedProps({ searchResults, searchState, uiState }) {
+  // eslint-disable-next-line max-params
+  getProvidedProps(
+    props,
+    searchState,
+    searchResults,
+    _,
+    __,
+    uiState,
+    setUiState
+  ) {
     // @TODO: Handle multi-index
     const results = searchResults.results;
-    const { value: uiStateValue, updater: uiStateUpdater } = uiState;
     const searchParameters = results && results._state;
     const isRefinedWithMapFromSearchState = Boolean(searchState[getId()]);
     const isRefinedWithMapFromSearchParameters =
@@ -60,16 +68,16 @@ export default createConnector({
 
     return {
       // position: null // fetch from somewhere
-      items: results ? results.hits.filter(_ => Boolean(_._geoloc)) : [],
-      isRefineOnMapMove: uiStateValue.isRefineOnMapMove,
-      toggleRefineOnMapMove: toggleRefineOnMapMove(uiStateUpdater),
-      hasMapMoveSinceLastRefine: uiStateValue.hasMapMoveSinceLastRefine,
-      setMapMoveSinceLastRefine: setMapMoveSinceLastRefine(uiStateUpdater),
+      items: results ? results.hits.filter(hit => Boolean(hit._geoloc)) : [],
+      isRefineOnMapMove: uiState.isRefineOnMapMove,
+      toggleRefineOnMapMove: toggleRefineOnMapMove(setUiState),
+      hasMapMoveSinceLastRefine: uiState.hasMapMoveSinceLastRefine,
+      setMapMoveSinceLastRefine: setMapMoveSinceLastRefine(setUiState),
       isRefinedWithMap,
     };
   },
 
-  refine({ searchState, nextRefinement }) {
+  refine(props, searchState, nextRefinement) {
     // @TODO: Handle multi-index
     const { northEast: ne, southWest: sw } = nextRefinement || {};
     const boundingBox = ne && sw ? [ne.lat, ne.lng, sw.lat, sw.lng].join() : '';

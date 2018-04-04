@@ -258,7 +258,7 @@ export default function createConnector(connectorDesc) {
           resultsFacetValues,
           searchingForFacetValues,
           isSearchStalled,
-        } = store.getState();
+        } = this.context.ais.store.getState();
 
         const searchResults = {
           results,
@@ -268,23 +268,6 @@ export default function createConnector(connectorDesc) {
           isSearchStalled,
         };
 
-        const uiStateUpdater = {
-          value: uiState,
-          updater: this.setUiState,
-        };
-
-        if (connectorDesc.getProvidedProps.length === 1) {
-          return connectorDesc.getProvidedProps({
-            props,
-            uiState: uiStateUpdater,
-            context: this.context,
-            searchState: widgets,
-            searchForFacetValuesResults: resultsFacetValues,
-            searchResults,
-            metadata,
-          });
-        }
-
         return connectorDesc.getProvidedProps.call(
           this,
           props,
@@ -292,27 +275,12 @@ export default function createConnector(connectorDesc) {
           searchResults,
           metadata,
           resultsFacetValues,
-          uiStateUpdater
+          uiState,
+          this.setUiState
         );
       }
 
       refine = (...args) => {
-        if (connectorDesc.refine.length === 1) {
-          const [nextRefinement, ...rest] = args;
-          this.context.ais.onInternalStateUpdate(
-            connectorDesc.refine({
-              // @TODO: merge the ui props
-              props: this.props,
-              setUiState: this.setUiState,
-              searchState: this.context.ais.store.getState().widgets,
-              nextRefinement,
-              ...rest,
-            })
-          );
-
-          return;
-        }
-
         this.context.ais.onInternalStateUpdate(
           connectorDesc.refine.call(
             this,
