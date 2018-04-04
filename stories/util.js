@@ -159,38 +159,47 @@ const getReactElementDisplayName = element =>
 
 // displays the right name for the JSX addon in Storybook
 const displayName = element => {
+  const reactElementDisplayName = getReactElementDisplayName(element);
+  const isWrap = reactElementDisplayName === 'Wrap';
+  const isWrapWithHits = reactElementDisplayName === 'WrapWithHits';
+
   // display 'InstantSearch' instead of 'WrapWithHits'
-  if (getReactElementDisplayName(element) === 'WrapWithHits') {
-    const instantSearch = 'InstantSearch';
-    return instantSearch;
+  if (isWrap || isWrapWithHits) {
+    return 'InstantSearch';
   }
+
   // wrapped component: AlgoliaWidgetName(Translatable..)" => "WidgetName"
   if (
     React.Component.isPrototypeOf(element.type) &&
-    getReactElementDisplayName(element).startsWith('Algolia')
+    reactElementDisplayName.startsWith('Algolia')
   ) {
     const innerComponentRegex = /\(([^()]+)\)/;
     const match = innerComponentRegex.exec(element.type.displayName);
     const innerComponentName = match[1];
     const rawName = element.type.displayName;
     const widgetName = rawName.split('(')[0].replace('Algolia', '');
+
     if (match) {
       // when a VirtualWidget is used, Algolia returns 'UnknownComponent' as the displayName
       if (innerComponentName === 'UnknownComponent') {
         return widgetName;
       }
+
       // when a Configure widget is used, Algolia returns '_default' as the displayName
       if (innerComponentName === '_default') {
         return widgetName;
       }
+
       // when a RangeInput widget is used, Algolia returns 'RawRangeInput' as the displayName
       if (innerComponentName === 'RawRangeInput') {
         return 'RangeInput';
       }
+
       return innerComponentName;
     }
   }
-  return getReactElementDisplayName(element);
+
+  return reactElementDisplayName;
 };
 
 const filterProps = ['linkedStoryGroup', 'hasPlayground'];
