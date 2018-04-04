@@ -11,14 +11,62 @@ function createState() {
     results: {},
     error: {},
     searching: {},
-    searchingForFacetValues: {},
     metadata: {},
+    searchingForFacetValues: {},
+    resultsFacetValues: {},
   };
 }
 
 describe('createConnector', () => {
   const getId = () => 'id';
+
   describe('state', () => {
+    it('computes initialUiState from props', () => {
+      const getInitialUiState = jest.fn(() => ({
+        isOpen: false,
+      }));
+
+      const Dummy = () => null;
+      const Connected = createConnector({
+        displayName: 'CoolConnector',
+        getProvidedProps: x => x,
+        getInitialUiState,
+        getId,
+      })(Dummy);
+
+      const props = {
+        hello: 'there',
+      };
+
+      const wrapper = mount(<Connected {...props} />, {
+        context: {
+          ais: {
+            store: {
+              getState: () => createState(),
+              subscribe: () => null,
+            },
+          },
+        },
+      });
+
+      expect(getInitialUiState).toHaveBeenCalledTimes(1);
+      expect(getInitialUiState).toHaveBeenCalledWith(props);
+      expect(wrapper.state()).toEqual({
+        // canRender is expected to be true because onDidMount
+        // the value is set to true. But the props computed
+        // with getProvidedProps are not recomputed at that
+        // time. That's why they are not in sync at that moment.
+        props: {
+          ...props,
+          canRender: false,
+        },
+        uiState: {
+          isOpen: false,
+        },
+        canRender: true,
+      });
+    });
+
     it('computes passed props from props and state', () => {
       const getProvidedProps = jest.fn(props => ({ gotProps: props }));
       const Dummy = () => null;
@@ -55,6 +103,66 @@ describe('createConnector', () => {
       expect(wrapper.find(Dummy).props()).toEqual({
         ...props,
         gotProps: props,
+      });
+    });
+
+    it('computes passed props from props and state (with uiState)', () => {
+      const getInitialUiState = jest.fn(() => ({
+        isOpen: false,
+      }));
+
+      const getProvidedProps = jest.fn((props, _, __, ___, ____, uiState) => ({
+        isMenuOpen: uiState.isOpen,
+        gotProps: props,
+      }));
+
+      const Dummy = () => null;
+      const Connected = createConnector({
+        displayName: 'CoolConnector',
+        getInitialUiState,
+        getProvidedProps,
+        getId,
+      })(Dummy);
+
+      const props = {
+        hello: 'there',
+      };
+
+      const wrapper = mount(<Connected {...props} />, {
+        context: {
+          ais: {
+            store: {
+              getState: () => createState(),
+              subscribe: () => null,
+            },
+          },
+        },
+      });
+
+      expect(getInitialUiState).toHaveBeenCalledTimes(1);
+      expect(getProvidedProps).toHaveBeenCalledTimes(1);
+
+      expect(wrapper.state()).toEqual({
+        props: {
+          isMenuOpen: false,
+          gotProps: {
+            ...props,
+            canRender: false,
+          },
+        },
+        uiState: {
+          isOpen: false,
+        },
+        canRender: true,
+      });
+
+      expect(wrapper.find(Dummy).props()).toEqual({
+        ...props,
+        isMenuOpen: false,
+        gotProps: {
+          ...props,
+          canRender: false,
+        },
       });
     });
 
