@@ -121,7 +121,7 @@ const IndexResults = connectStateResults(
 const AllResults = connectStateResults(({ allSearchResults, children }) => {
   const hasResults =
     allSearchResults &&
-    Object.values(allSearchResults).some(results => results.nbHits !== 0);
+    Object.values(allSearchResults).some(results => results.nbHits > 0);
 
   return !hasResults ? (
     <div>
