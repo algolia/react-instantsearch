@@ -228,8 +228,8 @@ export default function createConnector(connectorDesc) {
       }
 
       shouldComponentUpdate(nextProps, nextState) {
-        const { props: stateProps, uiState: uiStateProps } = this.state;
-        const { props: nextStateProps, uiState: nextUiStateProps } = nextState;
+        const { props: stateProps } = this.state;
+        const { props: nextStateProps } = nextState;
 
         const propsEqual = shallowEqual(this.props, nextProps);
 
@@ -242,9 +242,8 @@ export default function createConnector(connectorDesc) {
         }
 
         const statePropsEqual = shallowEqual(stateProps, nextStateProps);
-        const uiStatePropsEqual = shallowEqual(uiStateProps, nextUiStateProps);
 
-        return !propsEqual || !statePropsEqual || !uiStatePropsEqual;
+        return !propsEqual || !statePropsEqual;
       }
 
       getProvidedProps({ props, uiState }) {
