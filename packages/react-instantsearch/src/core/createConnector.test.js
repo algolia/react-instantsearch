@@ -268,6 +268,102 @@ describe('createConnector', () => {
       });
     });
 
+    it('updates on state change (with uiState)', () => {
+      const initialUiState = { isOpen: false };
+      const getInitialUiState = jest.fn(() => initialUiState);
+      const getProvidedProps = jest.fn(
+        (_, searchState, __, ___, ____, uiState) => ({
+          ...searchState,
+          isMenuOpen: uiState.isOpen,
+        })
+      );
+
+      const Dummy = () => null;
+      const Connected = createConnector({
+        displayName: 'CoolConnector',
+        getInitialUiState,
+        getProvidedProps,
+        getId,
+      })(Dummy);
+
+      let state = {
+        ...createState(),
+        widgets: {
+          hoy: 'hey',
+        },
+      };
+
+      const props = {
+        hello: 'there',
+      };
+
+      let listener;
+      const wrapper = mount(<Connected {...props} />, {
+        context: {
+          ais: {
+            store: {
+              getState: () => state,
+              subscribe: l => {
+                listener = l;
+              },
+            },
+          },
+        },
+      });
+
+      expect(getProvidedProps).toHaveBeenCalledTimes(1);
+      expect(getProvidedProps).toHaveBeenLastCalledWith(
+        { ...props, canRender: false },
+        state.widgets,
+        {
+          results: state.results,
+          error: state.error,
+          searching: state.searching,
+          searchingForFacetValues: state.searchingForFacetValues,
+        },
+        state.metadata,
+        state.resultsFacetValues,
+        initialUiState
+      );
+
+      expect(wrapper.find(Dummy).props()).toEqual({
+        ...props,
+        ...state.widgets,
+        isMenuOpen: false,
+      });
+
+      state = {
+        ...createState(),
+        widgets: {
+          hey: 'hoy',
+        },
+      };
+
+      listener();
+      wrapper.update();
+
+      expect(getProvidedProps).toHaveBeenCalledTimes(2);
+      expect(getProvidedProps).toHaveBeenLastCalledWith(
+        { ...props, canRender: true },
+        state.widgets,
+        {
+          results: state.results,
+          error: state.error,
+          searching: state.searching,
+          searchingForFacetValues: state.searchingForFacetValues,
+        },
+        state.metadata,
+        state.resultsFacetValues,
+        initialUiState
+      );
+
+      expect(wrapper.find(Dummy).props()).toEqual({
+        ...props,
+        ...state.widgets,
+        isMenuOpen: false,
+      });
+    });
+
     it('updates with latest props on state change', () => {
       const getProvidedProps = jest.fn((props, state) => state);
       const Dummy = () => null;

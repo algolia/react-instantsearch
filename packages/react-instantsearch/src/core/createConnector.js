@@ -82,19 +82,22 @@ export default function createConnector(connectorDesc) {
 
         this.unsubscribe = store.subscribe(() => {
           if (this.state.canRender) {
-            this.setState({
+            this.setState(prevState => ({
               props: this.getProvidedProps({
+                uiState: prevState.uiState,
                 props: {
                   ...this.props,
-                  canRender: this.state.canRender,
+                  canRender: prevState.canRender,
                 },
               }),
-            });
+            }));
           }
         });
+
         if (isWidget) {
           this.unregisterWidget = widgetsManager.registerWidget(this);
         }
+
         if (process.env.NODE_ENV === 'development') {
           const onlyGetProvidedPropsUsage = !find(
             Object.keys(connectorDesc),
