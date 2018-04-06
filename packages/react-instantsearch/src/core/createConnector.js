@@ -269,7 +269,8 @@ export default function createConnector(connectorDesc) {
           searchResults,
           metadata,
           resultsFacetValues,
-          uiState
+          uiState,
+          this.setUiState
         );
       };
 
@@ -305,6 +306,28 @@ export default function createConnector(connectorDesc) {
         );
 
       cleanUp = (...args) => connectorDesc.cleanUp.call(this, ...args);
+
+      setUiState = uiStateUpdater =>
+        this.setState(prevState => {
+          const nextSliceUiState = uiStateUpdater(prevState.uiState);
+
+          if (!nextSliceUiState) {
+            return null;
+          }
+
+          const nextUiState = {
+            ...prevState.uiState,
+            ...nextSliceUiState,
+          };
+
+          return {
+            uiState: nextUiState,
+            props: this.getProvidedProps({
+              props: prevState.props,
+              uiState: nextUiState,
+            }),
+          };
+        });
 
       render() {
         if (this.state.props === null) {
