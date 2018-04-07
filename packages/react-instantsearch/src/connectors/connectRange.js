@@ -75,10 +75,10 @@ function getCurrentRefinement(props, searchState, currentRange, context) {
     currentRefinement => {
       let { min, max } = currentRefinement;
       if (typeof min === 'string') {
-        min = parseInt(min, 10);
+        min = !props.precision ? parseInt(min, 10) : parseFloat(min);
       }
       if (typeof max === 'string') {
-        max = parseInt(max, 10);
+        max = !props.precision ? parseInt(max, 10) : parseFloat(max);
       }
       return { min, max };
     }
