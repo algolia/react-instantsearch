@@ -73,14 +73,27 @@ function getCurrentRefinement(props, searchState, currentRange, context) {
     `${namespace}.${getId(props)}`,
     {},
     currentRefinement => {
-      let { min, max } = currentRefinement;
-      if (typeof min === 'string') {
-        min = !props.precision ? parseInt(min, 10) : parseFloat(min);
+      const { min, max } = currentRefinement;
+      const isFloatPrecision = Boolean(props.precision);
+
+      let nextMin = min;
+      if (typeof nextMin === 'string') {
+        nextMin = isFloatPrecision
+          ? parseFloat(nextMin)
+          : parseInt(nextMin, 10);
       }
-      if (typeof max === 'string') {
-        max = !props.precision ? parseInt(max, 10) : parseFloat(max);
+
+      let nextMax = max;
+      if (typeof nextMax === 'string') {
+        nextMax = isFloatPrecision
+          ? parseFloat(nextMax)
+          : parseInt(nextMax, 10);
       }
-      return { min, max };
+
+      return {
+        min: nextMin,
+        max: nextMax,
+      };
     }
   );
 
