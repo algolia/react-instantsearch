@@ -61,7 +61,9 @@ export default function createConnector(connectorDesc) {
       constructor(props, context) {
         super(props, context);
 
-        const { ais: { store, widgetsManager } } = context;
+        const {
+          ais: { store, widgetsManager },
+        } = context;
         const canRender = false;
 
         const initialUiState = connectorDesc.getInitialUiState
