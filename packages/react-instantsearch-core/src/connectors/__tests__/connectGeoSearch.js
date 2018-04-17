@@ -417,4 +417,51 @@ describe('connectGeoSearch', () => {
       expect(actual).toEqual(expectation);
     });
   });
+
+  describe('getSearchParameters', () => {
+    it('expect to set the paremeter "insideBoundingBox" when boundingBox is provided', () => {
+      const instance = createSingleIndexInstance();
+      const searchParameters = new SearchParameters();
+      const props = {};
+      const searchState = {
+        boundingBox: {
+          northEast: {
+            lat: 10,
+            lng: 12,
+          },
+          southWest: {
+            lat: 12,
+            lng: 14,
+          },
+        },
+      };
+
+      const actual = connector.getSearchParameters.call(
+        instance,
+        searchParameters,
+        props,
+        searchState
+      );
+
+      const expectation = '10,12,12,14';
+
+      expect(actual.insideBoundingBox).toEqual(expectation);
+    });
+
+    it('expect to return the given searchParameters when boundingBox is omit', () => {
+      const instance = createSingleIndexInstance();
+      const searchParameters = new SearchParameters();
+      const props = {};
+      const searchState = {};
+
+      const actual = connector.getSearchParameters.call(
+        instance,
+        searchParameters,
+        props,
+        searchState
+      );
+
+      expect(actual).toEqual(searchParameters);
+    });
+  });
 });

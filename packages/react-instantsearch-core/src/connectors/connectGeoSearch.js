@@ -73,4 +73,26 @@ export default createConnector({
 
     return refineValue(searchState, nextRefinement, this.context, resetPage);
   },
+
+  getSearchParameters(searchParameters, props, searchState) {
+    const currentRefinement = getCurrentRefinement(
+      props,
+      searchState,
+      this.context
+    );
+
+    if (!currentRefinement) {
+      return searchParameters;
+    }
+
+    return searchParameters.setQueryParameter(
+      'insideBoundingBox',
+      [
+        currentRefinement.northEast.lat,
+        currentRefinement.northEast.lng,
+        currentRefinement.southWest.lat,
+        currentRefinement.southWest.lng,
+      ].join()
+    );
+  },
 });
