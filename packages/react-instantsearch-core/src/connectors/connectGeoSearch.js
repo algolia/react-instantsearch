@@ -3,6 +3,7 @@ import {
   getResults,
   getCurrentRefinementValue,
   refineValue,
+  cleanUpValue,
 } from '../core/indexUtils';
 
 const getBoundingBoxId = () => 'boundingBox';
@@ -94,5 +95,9 @@ export default createConnector({
         currentRefinement.southWest.lng,
       ].join()
     );
+  },
+
+  cleanUp(props, searchState) {
+    return cleanUpValue(searchState, this.context, getBoundingBoxId());
   },
 });

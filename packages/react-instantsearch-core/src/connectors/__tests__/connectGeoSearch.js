@@ -464,4 +464,48 @@ describe('connectGeoSearch', () => {
       expect(actual).toEqual(searchParameters);
     });
   });
+
+  describe('cleanUp', () => {
+    it('expect to remove the refinement from the searchState when boundingBox is provided', () => {
+      const instance = createSingleIndexInstance();
+      const props = {};
+      const searchState = {
+        query: 'studio',
+        boundingBox: {
+          northEast: {
+            lat: 10,
+            lng: 12,
+          },
+          southWest: {
+            lat: 12,
+            lng: 14,
+          },
+        },
+      };
+
+      const actual = connector.cleanUp.call(instance, props, searchState);
+
+      const expectation = {
+        query: 'studio',
+      };
+
+      expect(actual).toEqual(expectation);
+    });
+
+    it('expect to return the given searchState when boundingBox is omit', () => {
+      const instance = createSingleIndexInstance();
+      const props = {};
+      const searchState = {
+        query: 'studio',
+      };
+
+      const actual = connector.cleanUp.call(instance, props, searchState);
+
+      const expectation = {
+        query: 'studio',
+      };
+
+      expect(actual).toEqual(expectation);
+    });
+  });
 });
