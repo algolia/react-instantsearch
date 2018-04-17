@@ -300,4 +300,121 @@ describe('connectGeoSearch', () => {
       });
     });
   });
+
+  describe('refine', () => {
+    it('expect to set the boundingBox when boundingBox is provided', () => {
+      const instance = createSingleIndexInstance();
+      const props = {};
+      const searchState = {};
+      const nextRefinement = {
+        northEast: {
+          lat: 10,
+          lng: 12,
+        },
+        southWest: {
+          lat: 12,
+          lng: 14,
+        },
+      };
+
+      const actual = connector.refine.call(
+        instance,
+        props,
+        searchState,
+        nextRefinement
+      );
+
+      const expectation = {
+        page: 1,
+        boundingBox: {
+          northEast: {
+            lat: 10,
+            lng: 12,
+          },
+          southWest: {
+            lat: 12,
+            lng: 14,
+          },
+        },
+      };
+
+      expect(actual).toEqual(expectation);
+    });
+
+    it('expect to replace the previous value when boundingBox is provided', () => {
+      const instance = createSingleIndexInstance();
+      const props = {};
+      const searchState = {
+        boundingBox: {
+          northEast: {
+            lat: 8,
+            lng: 10,
+          },
+          southWest: {
+            lat: 10,
+            lng: 12,
+          },
+        },
+      };
+
+      const nextRefinement = {
+        northEast: {
+          lat: 10,
+          lng: 12,
+        },
+        southWest: {
+          lat: 12,
+          lng: 14,
+        },
+      };
+
+      const actual = connector.refine.call(
+        instance,
+        props,
+        searchState,
+        nextRefinement
+      );
+
+      const expectation = {
+        page: 1,
+        boundingBox: {
+          northEast: {
+            lat: 10,
+            lng: 12,
+          },
+          southWest: {
+            lat: 12,
+            lng: 14,
+          },
+        },
+      };
+
+      expect(actual).toEqual(expectation);
+    });
+
+    it('expect to clear the previous value when boundingBox is omit', () => {
+      const instance = createSingleIndexInstance();
+      const props = {};
+      const searchState = {
+        boundingBox: {
+          northEast: {
+            lat: 8,
+            lng: 10,
+          },
+          southWest: {
+            lat: 10,
+            lng: 12,
+          },
+        },
+      };
+
+      const actual = connector.refine.call(instance, props, searchState);
+
+      const expectation = {
+        page: 1,
+      };
+
+      expect(actual).toEqual(expectation);
+    });
+  });
 });
