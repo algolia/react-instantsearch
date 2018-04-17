@@ -508,4 +508,92 @@ describe('connectGeoSearch', () => {
       expect(actual).toEqual(expectation);
     });
   });
+
+  describe('getMetadata', () => {
+    it('expect to return the meta when boudingBox is provided', () => {
+      const instance = createSingleIndexInstance();
+      const props = {};
+      const searchState = {
+        boundingBox: {
+          northEast: {
+            lat: 10,
+            lng: 12,
+          },
+          southWest: {
+            lat: 12,
+            lng: 14,
+          },
+        },
+      };
+
+      const actual = connector.getMetadata.call(instance, props, searchState);
+
+      const expectation = {
+        id: 'boundingBox',
+        index: 'index',
+        items: [
+          {
+            label: 'boundingBox: 10,12,12,14',
+            value: expect.any(Function),
+            currentRefinement: {
+              northEast: {
+                lat: 10,
+                lng: 12,
+              },
+              southWest: {
+                lat: 12,
+                lng: 14,
+              },
+            },
+          },
+        ],
+      };
+
+      expect(actual).toEqual(expectation);
+    });
+
+    it('expect to return an empty meta when boudingBox is omit', () => {
+      const instance = createSingleIndexInstance();
+      const props = {};
+      const searchState = {};
+
+      const actual = connector.getMetadata.call(instance, props, searchState);
+
+      const expectation = {
+        id: 'boundingBox',
+        index: 'index',
+        items: [],
+      };
+
+      expect(actual).toEqual(expectation);
+    });
+
+    it('expect to clear the boundingBox when value is called', () => {
+      const instance = createSingleIndexInstance();
+      const props = {};
+      const searchState = {
+        query: 'studio',
+        boundingBox: {
+          northEast: {
+            lat: 10,
+            lng: 12,
+          },
+          southWest: {
+            lat: 12,
+            lng: 14,
+          },
+        },
+      };
+
+      const metadata = connector.getMetadata.call(instance, props, searchState);
+      const actual = metadata.items[0].value(searchState);
+
+      const expectation = {
+        query: 'studio',
+        page: 1,
+      };
+
+      expect(actual).toEqual(expectation);
+    });
+  });
 });

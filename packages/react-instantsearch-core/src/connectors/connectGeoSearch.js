@@ -2,6 +2,7 @@ import createConnector from '../core/createConnector';
 import {
   getResults,
   getCurrentRefinementValue,
+  getIndex,
   refineValue,
   cleanUpValue,
 } from '../core/indexUtils';
@@ -31,6 +32,23 @@ const getCurrentPosition = (props, searchState, context) =>
     null,
     x => x
   );
+
+const refine = (searchState, nextValue, context) => {
+  const resetPage = true;
+  const nextRefinement = {
+    [getBoundingBoxId()]: nextValue,
+  };
+
+  return refineValue(searchState, nextRefinement, context, resetPage);
+};
+
+const currentRefinementToString = currentRefinement =>
+  [
+    currentRefinement.northEast.lat,
+    currentRefinement.northEast.lng,
+    currentRefinement.southWest.lat,
+    currentRefinement.southWest.lng,
+  ].join();
 
 export default createConnector({
   displayName: 'AlgoliaGeoSearch',
@@ -67,12 +85,7 @@ export default createConnector({
   },
 
   refine(props, searchState, nextValue) {
-    const resetPage = true;
-    const nextRefinement = {
-      [getBoundingBoxId()]: nextValue,
-    };
-
-    return refineValue(searchState, nextRefinement, this.context, resetPage);
+    return refine(searchState, nextValue, this.context);
   },
 
   getSearchParameters(searchParameters, props, searchState) {
@@ -88,16 +101,36 @@ export default createConnector({
 
     return searchParameters.setQueryParameter(
       'insideBoundingBox',
-      [
-        currentRefinement.northEast.lat,
-        currentRefinement.northEast.lng,
-        currentRefinement.southWest.lat,
-        currentRefinement.southWest.lng,
-      ].join()
+      currentRefinementToString(currentRefinement)
     );
   },
 
   cleanUp(props, searchState) {
     return cleanUpValue(searchState, this.context, getBoundingBoxId());
+  },
+
+  getMetadata(props, searchState) {
+    const items = [];
+    const id = getBoundingBoxId();
+    const index = getIndex(this.context);
+    const currentRefinement = getCurrentRefinement(
+      props,
+      searchState,
+      this.context
+    );
+
+    if (currentRefinement) {
+      items.push({
+        label: `${id}: ${currentRefinementToString(currentRefinement)}`,
+        value: nextState => refine(nextState, undefined, this.context),
+        currentRefinement,
+      });
+    }
+
+    return {
+      id,
+      index,
+      items,
+    };
   },
 });
