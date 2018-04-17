@@ -11,14 +11,62 @@ function createState() {
     results: {},
     error: {},
     searching: {},
-    searchingForFacetValues: {},
     metadata: {},
+    searchingForFacetValues: {},
+    resultsFacetValues: {},
   };
 }
 
 describe('createConnector', () => {
   const getId = () => 'id';
+
   describe('state', () => {
+    it('computes initialUiState from props', () => {
+      const getInitialUiState = jest.fn(() => ({
+        isOpen: false,
+      }));
+
+      const Dummy = () => null;
+      const Connected = createConnector({
+        displayName: 'CoolConnector',
+        getProvidedProps: x => x,
+        getInitialUiState,
+        getId,
+      })(Dummy);
+
+      const props = {
+        hello: 'there',
+      };
+
+      const wrapper = mount(<Connected {...props} />, {
+        context: {
+          ais: {
+            store: {
+              getState: () => createState(),
+              subscribe: () => null,
+            },
+          },
+        },
+      });
+
+      expect(getInitialUiState).toHaveBeenCalledTimes(1);
+      expect(getInitialUiState).toHaveBeenCalledWith(props);
+      expect(wrapper.state()).toEqual({
+        // canRender is expected to be true because onDidMount
+        // the value is set to true. But the props computed
+        // with getProvidedProps are not recomputed at that
+        // time. That's why they are not in sync at that moment.
+        props: {
+          ...props,
+          canRender: false,
+        },
+        uiState: {
+          isOpen: false,
+        },
+        canRender: true,
+      });
+    });
+
     it('computes passed props from props and state', () => {
       const getProvidedProps = jest.fn(props => ({ gotProps: props }));
       const Dummy = () => null;
@@ -55,6 +103,66 @@ describe('createConnector', () => {
       expect(wrapper.find(Dummy).props()).toEqual({
         ...props,
         gotProps: props,
+      });
+    });
+
+    it('computes passed props from props and state (with uiState)', () => {
+      const getInitialUiState = jest.fn(() => ({
+        isOpen: false,
+      }));
+
+      const getProvidedProps = jest.fn((props, _, __, ___, ____, uiState) => ({
+        isMenuOpen: uiState.isOpen,
+        gotProps: props,
+      }));
+
+      const Dummy = () => null;
+      const Connected = createConnector({
+        displayName: 'CoolConnector',
+        getInitialUiState,
+        getProvidedProps,
+        getId,
+      })(Dummy);
+
+      const props = {
+        hello: 'there',
+      };
+
+      const wrapper = mount(<Connected {...props} />, {
+        context: {
+          ais: {
+            store: {
+              getState: () => createState(),
+              subscribe: () => null,
+            },
+          },
+        },
+      });
+
+      expect(getInitialUiState).toHaveBeenCalledTimes(1);
+      expect(getProvidedProps).toHaveBeenCalledTimes(1);
+
+      expect(wrapper.state()).toEqual({
+        props: {
+          isMenuOpen: false,
+          gotProps: {
+            ...props,
+            canRender: false,
+          },
+        },
+        uiState: {
+          isOpen: false,
+        },
+        canRender: true,
+      });
+
+      expect(wrapper.find(Dummy).props()).toEqual({
+        ...props,
+        isMenuOpen: false,
+        gotProps: {
+          ...props,
+          canRender: false,
+        },
       });
     });
 
@@ -95,6 +203,93 @@ describe('createConnector', () => {
       expect(wrapper.find(Dummy).props()).toEqual({
         ...props,
         gotProps: props,
+      });
+    });
+
+    it('updates on props change (with uiState)', () => {
+      const initialUiState = { isOpen: false };
+      const getInitialUiState = jest.fn(() => initialUiState);
+      const getProvidedProps = jest.fn((props, _, __, ___, ____, uiState) => ({
+        isMenuOpen: uiState.isOpen,
+        gotProps: props,
+      }));
+
+      const Dummy = () => null;
+      const Connected = createConnector({
+        displayName: 'CoolConnector',
+        getInitialUiState,
+        getProvidedProps,
+        getId,
+      })(Dummy);
+
+      const state = createState();
+
+      const props = {
+        hello: 'there',
+      };
+
+      const wrapper = mount(<Connected {...props} />, {
+        context: {
+          ais: {
+            store: {
+              getState: () => state,
+              subscribe: () => null,
+            },
+          },
+        },
+      });
+
+      expect(getProvidedProps).toHaveBeenCalledTimes(1);
+      expect(getProvidedProps).toHaveBeenLastCalledWith(
+        { ...props, canRender: false },
+        state.widgets,
+        {
+          results: state.results,
+          error: state.error,
+          searching: state.searching,
+          searchingForFacetValues: state.searchingForFacetValues,
+        },
+        state.metadata,
+        state.resultsFacetValues,
+        initialUiState,
+        expect.any(Function)
+      );
+
+      expect(wrapper.find(Dummy).props()).toEqual({
+        ...props,
+        isMenuOpen: false,
+        gotProps: {
+          ...props,
+          canRender: false,
+        },
+      });
+
+      const nextProps = {
+        hello: 'you',
+      };
+
+      wrapper.setProps(nextProps);
+
+      expect(getProvidedProps).toHaveBeenCalledTimes(2);
+      expect(getProvidedProps).toHaveBeenLastCalledWith(
+        nextProps,
+        state.widgets,
+        {
+          results: state.results,
+          error: state.error,
+          searching: state.searching,
+          searchingForFacetValues: state.searchingForFacetValues,
+        },
+        state.metadata,
+        state.resultsFacetValues,
+        initialUiState,
+        expect.any(Function)
+      );
+
+      expect(wrapper.find(Dummy).props()).toEqual({
+        ...nextProps,
+        gotProps: nextProps,
+        isMenuOpen: false,
       });
     });
 
@@ -157,6 +352,104 @@ describe('createConnector', () => {
       expect(wrapper.find(Dummy).props()).toEqual({
         ...props,
         ...state.widgets,
+      });
+    });
+
+    it('updates on state change (with uiState)', () => {
+      const initialUiState = { isOpen: false };
+      const getInitialUiState = jest.fn(() => initialUiState);
+      const getProvidedProps = jest.fn(
+        (_, searchState, __, ___, ____, uiState) => ({
+          ...searchState,
+          isMenuOpen: uiState.isOpen,
+        })
+      );
+
+      const Dummy = () => null;
+      const Connected = createConnector({
+        displayName: 'CoolConnector',
+        getInitialUiState,
+        getProvidedProps,
+        getId,
+      })(Dummy);
+
+      let state = {
+        ...createState(),
+        widgets: {
+          hoy: 'hey',
+        },
+      };
+
+      const props = {
+        hello: 'there',
+      };
+
+      let listener;
+      const wrapper = mount(<Connected {...props} />, {
+        context: {
+          ais: {
+            store: {
+              getState: () => state,
+              subscribe: l => {
+                listener = l;
+              },
+            },
+          },
+        },
+      });
+
+      expect(getProvidedProps).toHaveBeenCalledTimes(1);
+      expect(getProvidedProps).toHaveBeenLastCalledWith(
+        { ...props, canRender: false },
+        state.widgets,
+        {
+          results: state.results,
+          error: state.error,
+          searching: state.searching,
+          searchingForFacetValues: state.searchingForFacetValues,
+        },
+        state.metadata,
+        state.resultsFacetValues,
+        initialUiState,
+        expect.any(Function)
+      );
+
+      expect(wrapper.find(Dummy).props()).toEqual({
+        ...props,
+        ...state.widgets,
+        isMenuOpen: false,
+      });
+
+      state = {
+        ...createState(),
+        widgets: {
+          hey: 'hoy',
+        },
+      };
+
+      listener();
+      wrapper.update();
+
+      expect(getProvidedProps).toHaveBeenCalledTimes(2);
+      expect(getProvidedProps).toHaveBeenLastCalledWith(
+        { ...props, canRender: true },
+        state.widgets,
+        {
+          results: state.results,
+          error: state.error,
+          searching: state.searching,
+          searchingForFacetValues: state.searchingForFacetValues,
+        },
+        state.metadata,
+        state.resultsFacetValues,
+        initialUiState,
+        expect.any(Function)
+      );
+
+      expect(wrapper.find(Dummy).props()).toEqual({
+        ...props,
+        ...state.widgets,
+        isMenuOpen: false,
       });
     });
 
@@ -718,6 +1011,232 @@ describe('createConnector', () => {
       expect(searchForFacetValues.mock.calls[0][2]).toBe(facetName);
       expect(searchForFacetValues.mock.calls[0][3]).toBe(query);
       expect(onSearchForFacetValues.mock.calls[0][0]).toBe(searchState);
+    });
+  });
+
+  describe('setUiState', () => {
+    it('expect to update the uiState and trigger a render', () => {
+      const initialUiState = { isOpen: false };
+      const nextUiState = { isOpen: true };
+      const uiStateUpdater = jest.fn(prevUiState => ({
+        isOpen: !prevUiState.isOpen,
+      }));
+
+      const getInitialUiState = jest.fn(() => initialUiState);
+
+      const getProvidedProps = jest.fn(
+        (_, __, ___, ____, _____, uiState, setUiState) => ({
+          isMenuOpen: uiState.isOpen,
+          toggleMenu: () => setUiState(uiStateUpdater),
+        })
+      );
+
+      const Dummy = jest.fn(() => null);
+      const Connected = createConnector({
+        displayName: 'CoolConnector',
+        getInitialUiState,
+        getProvidedProps,
+      })(Dummy);
+
+      const wrapper = mount(<Connected />, {
+        context: {
+          ais: {
+            store: {
+              getState: () => createState(),
+              subscribe: () => null,
+            },
+          },
+        },
+      });
+
+      expect(getInitialUiState).toHaveBeenCalledTimes(1);
+      expect(getProvidedProps).toHaveBeenCalledTimes(1);
+      expect(uiStateUpdater).toHaveBeenCalledTimes(0);
+      expect(Dummy).toHaveBeenCalledTimes(1);
+
+      expect(getProvidedProps).toHaveBeenLastCalledWith(
+        expect.any(Object),
+        expect.any(Object),
+        expect.any(Object),
+        expect.any(Object),
+        expect.any(Object),
+        initialUiState,
+        expect.any(Function)
+      );
+
+      expect(wrapper.find(Dummy).props()).toEqual({
+        isMenuOpen: false,
+        toggleMenu: expect.any(Function),
+      });
+
+      wrapper
+        .find(Dummy)
+        .props()
+        .toggleMenu();
+
+      wrapper.update();
+
+      expect(getInitialUiState).toHaveBeenCalledTimes(1);
+      expect(getProvidedProps).toHaveBeenCalledTimes(2);
+      expect(uiStateUpdater).toHaveBeenCalledTimes(1);
+      expect(Dummy).toHaveBeenCalledTimes(2);
+
+      expect(getProvidedProps).toHaveBeenLastCalledWith(
+        expect.any(Object),
+        expect.any(Object),
+        expect.any(Object),
+        expect.any(Object),
+        expect.any(Object),
+        nextUiState,
+        expect.any(Function)
+      );
+
+      expect(wrapper.find(Dummy).props()).toEqual({
+        isMenuOpen: true,
+        toggleMenu: expect.any(Function),
+      });
+    });
+
+    it('expect to shallow merge the updated uiState', () => {
+      const uiStateUpdater = prevUiState => ({
+        isOpen: !prevUiState.isOpen,
+      });
+
+      const getInitialUiState = () => ({
+        isOpen: false,
+        willCloseOnClick: true,
+      });
+
+      const getProvidedProps = (
+        _,
+        __,
+        ___,
+        ____,
+        _____,
+        uiState,
+        setUiState
+      ) => ({
+        isMenuOpen: uiState.isOpen,
+        willMenuCloseOnClick: uiState.willCloseOnClick,
+        toggleMenu: () => setUiState(uiStateUpdater),
+      });
+
+      const Dummy = () => null;
+      const Connected = createConnector({
+        displayName: 'CoolConnector',
+        getInitialUiState,
+        getProvidedProps,
+      })(Dummy);
+
+      const wrapper = mount(<Connected />, {
+        context: {
+          ais: {
+            store: {
+              getState: () => createState(),
+              subscribe: () => null,
+            },
+          },
+        },
+      });
+
+      expect(wrapper.find(Dummy).props()).toEqual({
+        isMenuOpen: false,
+        willMenuCloseOnClick: true,
+        toggleMenu: expect.any(Function),
+      });
+
+      wrapper
+        .find(Dummy)
+        .props()
+        .toggleMenu();
+
+      wrapper.update();
+
+      expect(wrapper.find(Dummy).props()).toEqual({
+        isMenuOpen: true,
+        willMenuCloseOnClick: true,
+        toggleMenu: expect.any(Function),
+      });
+    });
+
+    it('expect to not update the uiState and prevent the render', () => {
+      const initialUiState = { isOpen: false };
+      const uiStateUpdater = jest.fn(() => false);
+
+      const getInitialUiState = jest.fn(() => initialUiState);
+
+      const getProvidedProps = jest.fn(
+        (_, __, ___, ____, _____, uiState, setUiState) => ({
+          isMenuOpen: uiState.isOpen,
+          willMenuCloseOnClick: uiState.willCloseOnClick,
+          toggleMenu: () => setUiState(uiStateUpdater),
+        })
+      );
+
+      const Dummy = jest.fn(() => null);
+      const Connected = createConnector({
+        displayName: 'CoolConnector',
+        getInitialUiState,
+        getProvidedProps,
+      })(Dummy);
+
+      const wrapper = mount(<Connected />, {
+        context: {
+          ais: {
+            store: {
+              getState: () => createState(),
+              subscribe: () => null,
+            },
+          },
+        },
+      });
+
+      expect(getInitialUiState).toHaveBeenCalledTimes(1);
+      expect(getProvidedProps).toHaveBeenCalledTimes(1);
+      expect(uiStateUpdater).toHaveBeenCalledTimes(0);
+      expect(Dummy).toHaveBeenCalledTimes(1);
+
+      expect(getProvidedProps).toHaveBeenLastCalledWith(
+        expect.any(Object),
+        expect.any(Object),
+        expect.any(Object),
+        expect.any(Object),
+        expect.any(Object),
+        initialUiState,
+        expect.any(Function)
+      );
+
+      expect(wrapper.find(Dummy).props()).toEqual({
+        isMenuOpen: false,
+        toggleMenu: expect.any(Function),
+      });
+
+      wrapper
+        .find(Dummy)
+        .props()
+        .toggleMenu();
+
+      wrapper.update();
+
+      expect(getInitialUiState).toHaveBeenCalledTimes(1);
+      expect(getProvidedProps).toHaveBeenCalledTimes(1);
+      expect(uiStateUpdater).toHaveBeenCalledTimes(1);
+      expect(Dummy).toHaveBeenCalledTimes(1);
+
+      expect(getProvidedProps).toHaveBeenLastCalledWith(
+        expect.any(Object),
+        expect.any(Object),
+        expect.any(Object),
+        expect.any(Object),
+        expect.any(Object),
+        initialUiState,
+        expect.any(Function)
+      );
+
+      expect(wrapper.find(Dummy).props()).toEqual({
+        isMenuOpen: false,
+        toggleMenu: expect.any(Function),
+      });
     });
   });
 });

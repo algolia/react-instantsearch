@@ -65,24 +65,41 @@ export default function createConnector(connectorDesc) {
           ais: { store, widgetsManager },
         } = context;
         const canRender = false;
+
+        const initialUiState = connectorDesc.getInitialUiState
+          ? connectorDesc.getInitialUiState(props)
+          : {};
+
         this.state = {
-          props: this.getProvidedProps({ ...props, canRender }),
+          uiState: initialUiState,
+          props: this.getProvidedProps({
+            uiState: initialUiState,
+            props: {
+              ...props,
+              canRender,
+            },
+          }),
           canRender, // use to know if a component is rendered (browser), or not (server).
         };
 
         this.unsubscribe = store.subscribe(() => {
           if (this.state.canRender) {
-            this.setState({
+            this.setState(prevState => ({
               props: this.getProvidedProps({
-                ...this.props,
-                canRender: this.state.canRender,
+                uiState: prevState.uiState,
+                props: {
+                  ...this.props,
+                  canRender: prevState.canRender,
+                },
               }),
-            });
+            }));
           }
         });
+
         if (isWidget) {
           this.unregisterWidget = widgetsManager.registerWidget(this);
         }
+
         if (process.env.NODE_ENV === 'development') {
           const onlyGetProvidedPropsUsage = !find(
             Object.keys(connectorDesc),
@@ -166,11 +183,18 @@ export default function createConnector(connectorDesc) {
         }
       }
 
+      // The canRender props is not sync with the one from the state because
+      // in this lifecycle we don't pass the `canRender` prop to the getProvidedProps
+      // function. It means that every time a component received new props the canRender
+      // prop is `undefined`.
       componentWillReceiveProps(nextProps) {
         if (!isEqual(this.props, nextProps)) {
-          this.setState({
-            props: this.getProvidedProps(nextProps),
-          });
+          this.setState(prevState => ({
+            props: this.getProvidedProps({
+              uiState: prevState.uiState,
+              props: nextProps,
+            }),
+          }));
 
           if (isWidget) {
             // Since props might have changed, we need to re-run getSearchParameters
@@ -220,10 +244,7 @@ export default function createConnector(connectorDesc) {
         return !propsEqual || !shallowEqual(this.state.props, nextState.props);
       }
 
-      getProvidedProps = props => {
-        const {
-          ais: { store },
-        } = this.context;
+      getProvidedProps = ({ props, uiState }) => {
         const {
           results,
           searching,
@@ -233,7 +254,8 @@ export default function createConnector(connectorDesc) {
           resultsFacetValues,
           searchingForFacetValues,
           isSearchStalled,
-        } = store.getState();
+        } = this.context.ais.store.getState();
+
         const searchResults = {
           results,
           searching,
@@ -241,13 +263,16 @@ export default function createConnector(connectorDesc) {
           searchingForFacetValues,
           isSearchStalled,
         };
+
         return connectorDesc.getProvidedProps.call(
           this,
           props,
           widgets,
           searchResults,
           metadata,
-          resultsFacetValues
+          resultsFacetValues,
+          uiState,
+          this.setUiState
         );
       };
 
@@ -283,6 +308,28 @@ export default function createConnector(connectorDesc) {
         );
 
       cleanUp = (...args) => connectorDesc.cleanUp.call(this, ...args);
+
+      setUiState = uiStateUpdater =>
+        this.setState(prevState => {
+          const nextSliceUiState = uiStateUpdater(prevState.uiState);
+
+          if (!nextSliceUiState) {
+            return null;
+          }
+
+          const nextUiState = {
+            ...prevState.uiState,
+            ...nextSliceUiState,
+          };
+
+          return {
+            uiState: nextUiState,
+            props: this.getProvidedProps({
+              props: prevState.props,
+              uiState: nextUiState,
+            }),
+          };
+        });
 
       render() {
         if (this.state.props === null) {
