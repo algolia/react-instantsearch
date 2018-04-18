@@ -7,31 +7,16 @@ import {
   cleanUpValue,
 } from '../core/indexUtils';
 
-const getBoundingBoxId = () => 'boundingBox';
-
 // To control the map with an external widget the other widget
-// must write the value in the attribute `aroundLatLng`
+// **must** write the value in the attribute `aroundLatLng`
+const getBoundingBoxId = () => 'boundingBox';
 const getAroundLatLngId = () => 'aroundLatLng';
 
-const getCurrentRefinement = (props, searchState, context) =>
-  getCurrentRefinementValue(
-    props,
-    searchState,
-    context,
-    getBoundingBoxId(),
-    null,
-    x => x
-  );
+const getRefinement = id => (props, searchState, context) =>
+  getCurrentRefinementValue(props, searchState, context, id);
 
-const getCurrentPosition = (props, searchState, context) =>
-  getCurrentRefinementValue(
-    props,
-    searchState,
-    context,
-    getAroundLatLngId(),
-    null,
-    x => x
-  );
+const getCurrentRefinement = getRefinement(getBoundingBoxId());
+const getCurrentPosition = getRefinement(getAroundLatLngId());
 
 const refine = (searchState, nextValue, context) => {
   const resetPage = true;
