@@ -13,8 +13,8 @@ import {
  * @name connectGeoSearch
  * @kind connector
  * @requirements Note that the GeoSearch connector uses the [geosearch](https://www.algolia.com/doc/guides/searching/geo-search) capabilities of Algolia.
- * Your hits **must** have a `_geoloc` attribute in order to be passed to the rendering function.
- * Currently, the feature is not compatible with multiple values in the `_geoloc` attribute.
+ * Your hits **must** have a `_geoloc` attribute in order to be passed to the rendering function. Currently, the feature is not compatible with multiple values in the `_geoloc` attribute
+ * (e.g. a restaurant with multiple locations). In that case you can duplicate your records and use the [distinct](https://www.algolia.com/doc/guides/ranking/distinct) feature of Algolia to only retrieve unique results.
  * @propType {{ northEast: { lat: number, lng: number }, southWest: { lat: number, lng: number } }} [defaultRefinement] - Default search state of the widget containing the bounds for the map
  * @providedPropType {function({ northEast: { lat: number, lng: number }, southWest: { lat: number, lng: number } })} refine - a function to toggle the refinement
  * @providedPropType {function} createURL - a function to generate a URL for the corresponding search state
