@@ -1,7 +1,7 @@
 import React from 'react';
 import { setAddon, storiesOf } from '@storybook/react';
 import JSXAddon from 'storybook-addon-jsx';
-import HelloWorld from '../packages/react-instantsearch-dom-geo/src/index';
+import { GoogleMapsLoader } from '../packages/react-instantsearch-dom-geo/src/index';
 import { displayName, filterProps, WrapWithHits } from './util';
 
 setAddon(JSXAddon);
@@ -12,7 +12,9 @@ stories.addWithJSX(
   'default',
   () => (
     <WrapWithHits linkedStoryGroup="GeoSearch">
-      <HelloWorld />
+      <GoogleMapsLoader apiKey="AIzaSyCl2TTJXpwxGuuc2zQZkAlIkWhpYbyjjP8">
+        {google => console.log(google) || null}
+      </GoogleMapsLoader>
     </WrapWithHits>
   ),
   {
