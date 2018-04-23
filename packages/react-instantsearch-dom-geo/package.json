@@ -29,7 +29,8 @@
     "algoliasearch-helper": "^2.21.0",
     "classnames": "^2.2.5",
     "lodash": "^4.17.4",
-    "prop-types": "^15.5.10"
+    "prop-types": "^15.5.10",
+    "scriptjs": "^2.5.8"
   },
   "devDependencies": {
     "babel-cli": "6.26.0",
