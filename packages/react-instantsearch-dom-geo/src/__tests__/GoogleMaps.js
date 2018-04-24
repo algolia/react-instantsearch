@@ -5,7 +5,7 @@ import {
   createFakeGoogleReference,
   createFakeMapInstance,
 } from '../../test/fakeGoogleMaps';
-import GoogleMaps from '../GoogleMaps';
+import GoogleMaps, { GOOGLE_MAPS_CONTEXT } from '../GoogleMaps';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -127,6 +127,58 @@ describe('GoogleMaps', () => {
           },
         }
       );
+    });
+  });
+
+  describe('context', () => {
+    it('expect to expose the google object through context', () => {
+      const google = createFakeGoogleReference();
+
+      const props = {
+        ...defaultProps,
+        google,
+      };
+
+      const wrapper = shallow(<GoogleMaps {...props} />, {
+        disableLifecycleMethods: true,
+      });
+
+      expect(wrapper.instance().getChildContext()).toEqual({
+        [GOOGLE_MAPS_CONTEXT]: expect.objectContaining({
+          google,
+        }),
+      });
+    });
+
+    it('expect to expose the map instance through context only when created', () => {
+      const mapInstance = createFakeMapInstance();
+      const google = createFakeGoogleReference({
+        mapInstance,
+      });
+
+      const props = {
+        ...defaultProps,
+        google,
+      };
+
+      const wrapper = shallow(<GoogleMaps {...props} />, {
+        disableLifecycleMethods: true,
+      });
+
+      expect(wrapper.instance().getChildContext()).toEqual({
+        [GOOGLE_MAPS_CONTEXT]: expect.objectContaining({
+          instance: undefined,
+        }),
+      });
+
+      // Simulate didMount
+      wrapper.instance().componentDidMount();
+
+      expect(wrapper.instance().getChildContext()).toEqual({
+        [GOOGLE_MAPS_CONTEXT]: expect.objectContaining({
+          instance: mapInstance,
+        }),
+      });
     });
   });
 

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+export const GOOGLE_MAPS_CONTEXT = '__ais_geo_search__google_maps__';
+
 const LatLngPropType = PropTypes.shape({
   lat: PropTypes.number.isRequired,
   lng: PropTypes.number.isRequired,
@@ -21,6 +23,13 @@ class GoogleMaps extends Component {
     children: PropTypes.node,
   };
 
+  static childContextTypes = {
+    [GOOGLE_MAPS_CONTEXT]: PropTypes.shape({
+      google: PropTypes.object,
+      instance: PropTypes.object,
+    }),
+  };
+
   static defaultProps = {
     mapOptions: {},
   };
@@ -28,6 +37,17 @@ class GoogleMaps extends Component {
   state = {
     isMapAlreadyRender: false,
   };
+
+  getChildContext() {
+    const { google } = this.props;
+
+    return {
+      [GOOGLE_MAPS_CONTEXT]: {
+        instance: this.instance,
+        google,
+      },
+    };
+  }
 
   componentDidMount() {
     const { google, mapOptions } = this.props;
