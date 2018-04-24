@@ -17,6 +17,7 @@ describe('GoogleMaps', () => {
       lat: 0,
       lng: 0,
     },
+    mapOptions: {},
     position: null,
     boundingBox: null,
     cx: x => `geo ${x}`.trim(),

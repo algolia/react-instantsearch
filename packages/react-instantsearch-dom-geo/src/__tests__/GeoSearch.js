@@ -78,6 +78,33 @@ describe('GeoSearch', () => {
     });
   });
 
+  it('expect to render with mapOptions', () => {
+    const props = {
+      ...defaultProps,
+      mapOptions: {
+        streetViewControl: true,
+      },
+    };
+
+    const renderProvidedProps = {
+      ...defaultRenderProvidedProps,
+    };
+
+    const renderPropsWrapper = shallow(
+      <ShallowWapper>
+        {renderProps({ props, renderProvidedProps })}
+      </ShallowWapper>
+    );
+
+    const googleMapProps = renderPropsWrapper
+      .find('[testID="GoogleMaps"]')
+      .props();
+
+    expect(googleMapProps.mapOptions).toEqual({
+      streetViewControl: true,
+    });
+  });
+
   it('expect to render with position', () => {
     const props = {
       ...defaultProps,

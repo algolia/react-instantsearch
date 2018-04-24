@@ -14,12 +14,12 @@ class GoogleMaps extends Component {
     google: PropTypes.object.isRequired,
     initialZoom: PropTypes.number.isRequired,
     initialPosition: LatLngPropType.isRequired,
+    mapOptions: PropTypes.object.isRequired,
     position: LatLngPropType,
     boundingBox: PropTypes.shape({
       northEast: LatLngPropType.isRequired,
       southWest: LatLngPropType.isRequired,
     }),
-    mapOptions: PropTypes.object,
     children: PropTypes.node,
   };
 
@@ -28,10 +28,6 @@ class GoogleMaps extends Component {
       google: PropTypes.object,
       instance: PropTypes.object,
     }),
-  };
-
-  static defaultProps = {
-    mapOptions: {},
   };
 
   state = {

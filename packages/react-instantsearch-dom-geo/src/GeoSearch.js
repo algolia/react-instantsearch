@@ -19,6 +19,7 @@ class GeoSearch extends Component {
     children: PropTypes.func.isRequired,
     initialZoom: PropTypes.number,
     initialPosition: LatLngPropType,
+    mapOptions: PropTypes.object,
   };
 
   static defaultProps = {
@@ -27,6 +28,7 @@ class GeoSearch extends Component {
       lat: 0,
       lng: 0,
     },
+    mapOptions: {},
   };
 
   createBoundingBoxFromHits(hits) {
@@ -44,7 +46,13 @@ class GeoSearch extends Component {
   }
 
   renderProviderChildren = ({ hits, currentRefinement, position }) => {
-    const { google, initialZoom, initialPosition, children } = this.props;
+    const {
+      google,
+      initialZoom,
+      initialPosition,
+      mapOptions,
+      children,
+    } = this.props;
 
     const boundingBox =
       !currentRefinement && Boolean(hits.length)
@@ -58,6 +66,7 @@ class GeoSearch extends Component {
         google={google}
         initialZoom={initialZoom}
         initialPosition={initialPosition}
+        mapOptions={mapOptions}
         boundingBox={boundingBox}
         position={position}
       >
