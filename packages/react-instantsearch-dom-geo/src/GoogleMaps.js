@@ -8,6 +8,7 @@ const LatLngPropType = PropTypes.shape({
 
 class GoogleMaps extends Component {
   static propTypes = {
+    cx: PropTypes.func.isRequired,
     google: PropTypes.object.isRequired,
     initialZoom: PropTypes.number.isRequired,
     initialPosition: LatLngPropType.isRequired,
@@ -18,7 +19,10 @@ class GoogleMaps extends Component {
     }),
     mapOptions: PropTypes.object,
     children: PropTypes.node,
-    cx: PropTypes.func.isRequired,
+  };
+
+  static defaultProps = {
+    mapOptions: {},
   };
 
   state = {
