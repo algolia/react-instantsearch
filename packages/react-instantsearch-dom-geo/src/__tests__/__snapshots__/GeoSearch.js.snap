@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GeoSearch expect to render 1`] = `
+<GoogleMaps
+  cx={[Function]}
+  google={
+    Object {
+      "maps": Object {
+        "ControlPosition": Object {
+          "LEFT_TOP": "left:top",
+        },
+        "LatLng": [MockFunction],
+        "LatLngBounds": [MockFunction],
+        "Map": [MockFunction],
+        "Marker": [MockFunction],
+        "OverlayView": Object {
+          "getPanes": [MockFunction],
+          "getProjection": [MockFunction],
+          "setMap": [MockFunction],
+        },
+        "event": Object {
+          "addListenerOnce": [MockFunction],
+        },
+      },
+    }
+  }
+  initialPosition={
+    Object {
+      "lat": 0,
+      "lng": 0,
+    }
+  }
+  initialZoom={1}
+  testID="GoogleMaps"
+>
+  <div>
+    Hello this is the children
+  </div>
+</GoogleMaps>
+`;
