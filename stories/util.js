@@ -18,7 +18,7 @@ export const CustomHits = connectHits(({ hits }) => (
   <div className="hits">
     {hits.map(hit => (
       <div key={hit.objectID} className="hit">
-        <div>
+        {hit.image && (
           <div className="hit-picture">
             <img
               src={`https://res.cloudinary.com/hilnmyskv/image/fetch/h_100,q_100,f_auto/${
@@ -26,7 +26,7 @@ export const CustomHits = connectHits(({ hits }) => (
               }`}
             />
           </div>
-        </div>
+        )}
         <div className="hit-content">
           <div>
             <Highlight attribute="name" hit={hit} />
