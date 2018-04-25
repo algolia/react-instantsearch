@@ -52,23 +52,40 @@ const currentRefinementToString = currentRefinement =>
     currentRefinement.southWest.lng,
   ].join();
 
+const stringToCurrentRefinement = value => {
+  const values = value.split(',');
+
+  return {
+    northEast: {
+      lat: parseFloat(values[0]),
+      lng: parseFloat(values[1]),
+    },
+    southWest: {
+      lat: parseFloat(values[2]),
+      lng: parseFloat(values[3]),
+    },
+  };
+};
+
 export default createConnector({
   displayName: 'AlgoliaGeoSearch',
 
   getProvidedProps(props, searchState, searchResults) {
     const results = getResults(searchResults, this.context);
-    const currentRefinement = getCurrentRefinement(
+
+    const currentRefinementFromSearchState = getCurrentRefinement(
       props,
       searchState,
       this.context
     );
 
-    const isRefinedWithMapFromSearchState = Boolean(currentRefinement);
-    const isRefinedWithMapFromSearchParameters = Boolean(
-      results && results._state.insideBoundingBox
-    );
+    const currentRefinementFromSearchParameters =
+      (results &&
+        results._state.insideBoundingBox &&
+        stringToCurrentRefinement(results._state.insideBoundingBox)) ||
+      undefined;
 
-    const isRefinedWithMap =
+    const currentRefinement =
       // We read it from both becuase the SearchParameters & the searchState are not always
       // in sync. When we set the refinement the searchState is used when we clear the refinement
       // the SearchParameters is used. In the first case when we render the results are not there
@@ -76,13 +93,14 @@ export default createConnector({
       // But whren we clear the refinement the searchState is immediatly clear even when the items
       // retrieve are still the one from the previous query with the bounding box. It leads to some
       // issue with fitBounds.
-      isRefinedWithMapFromSearchState || isRefinedWithMapFromSearchParameters;
+      // currentRefinementFromSearchState;
+      currentRefinementFromSearchState || currentRefinementFromSearchParameters;
 
     return {
       hits: !results ? [] : results.hits.filter(_ => Boolean(_._geoloc)),
       position: getCurrentPosition(props, searchState, this.context),
+      isRefinedWithMap: Boolean(currentRefinement),
       currentRefinement,
-      isRefinedWithMap,
     };
   },
 

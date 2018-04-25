@@ -201,7 +201,34 @@ describe('connectGeoSearch', () => {
           });
         });
 
-        it('expect to return an undefined from an empty searchState', () => {
+        it('expect to return the boundingBox from the SearchResults', () => {
+          const instance = createSingleIndexInstance();
+          const props = {};
+          const searchState = {};
+          const searchResults = createSingleSearchResults([], {
+            insideBoundingBox: '10, 12, 12, 14',
+          });
+
+          const actual = connector.getProvidedProps.call(
+            instance,
+            props,
+            searchState,
+            searchResults
+          );
+
+          expect(actual.currentRefinement).toEqual({
+            northEast: {
+              lat: 10,
+              lng: 12,
+            },
+            southWest: {
+              lat: 12,
+              lng: 14,
+            },
+          });
+        });
+
+        it('expect to return undefined from an empty searchState', () => {
           const instance = createSingleIndexInstance();
           const props = {};
           const searchState = {};
@@ -786,6 +813,33 @@ describe('connectGeoSearch', () => {
                 lng: 14,
               },
             },
+          });
+
+          const actual = connector.getProvidedProps.call(
+            instance,
+            props,
+            searchState,
+            searchResults
+          );
+
+          expect(actual.currentRefinement).toEqual({
+            northEast: {
+              lat: 10,
+              lng: 12,
+            },
+            southWest: {
+              lat: 12,
+              lng: 14,
+            },
+          });
+        });
+
+        it('expect to return the boundingBox from the SearchResults', () => {
+          const instance = createMultiIndexInstance();
+          const props = {};
+          const searchState = {};
+          const searchResults = createSingleSearchResults([], {
+            insideBoundingBox: '10, 12, 12, 14',
           });
 
           const actual = connector.getProvidedProps.call(
