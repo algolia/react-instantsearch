@@ -11,6 +11,7 @@ describe('Provider', () => {
     position: null,
     currentRefinement: null,
     isRefinedWithMap: false,
+    refine: () => {},
   };
 
   it('expect to call children with props', () => {
@@ -28,6 +29,7 @@ describe('Provider', () => {
       position: null,
       currentRefinement: null,
       isRefinedWithMap: false,
+      refine: expect.any(Function),
     });
   });
 });

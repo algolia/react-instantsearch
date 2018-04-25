@@ -7,6 +7,7 @@ export class Provider extends Component {
   static propTypes = {
     hits: PropTypes.arrayOf(PropTypes.object).isRequired,
     isRefinedWithMap: PropTypes.bool.isRequired,
+    refine: PropTypes.func.isRequired,
     children: PropTypes.func.isRequired,
     position: LatLngPropType,
     currentRefinement: BoundingBoxPropType,
@@ -18,6 +19,7 @@ export class Provider extends Component {
       isRefinedWithMap,
       position,
       currentRefinement,
+      refine,
       children,
     } = this.props;
 
@@ -26,6 +28,7 @@ export class Provider extends Component {
       isRefinedWithMap,
       position,
       currentRefinement,
+      refine,
     });
   }
 }
