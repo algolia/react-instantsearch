@@ -1,7 +1,7 @@
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import { createFakeGoogleReference } from '../../test/fakeGoogleMaps';
+import { createFakeGoogleReference } from '../../test/mockGoogleMaps';
 import GeoSearch from '../GeoSearch';
 
 Enzyme.configure({ adapter: new Adapter() });

@@ -5,7 +5,7 @@ import {
   createFakeGoogleReference,
   createFakeMapInstance,
   createFakeMarkerInstance,
-} from '../../test/fakeGoogleMaps';
+} from '../../test/mockGoogleMaps';
 import { GOOGLE_MAPS_CONTEXT } from '../GoogleMaps';
 import Marker from '../Marker';
 

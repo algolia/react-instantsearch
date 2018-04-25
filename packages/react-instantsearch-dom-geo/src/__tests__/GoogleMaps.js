@@ -4,7 +4,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import {
   createFakeGoogleReference,
   createFakeMapInstance,
-} from '../../test/fakeGoogleMaps';
+} from '../../test/mockGoogleMaps';
 import GoogleMaps, { GOOGLE_MAPS_CONTEXT } from '../GoogleMaps';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -76,58 +76,52 @@ describe('GoogleMaps', () => {
 
   describe('creation', () => {
     it('expect to create the GoogleMaps on didMount with the default options', () => {
-      const fakeGoogle = createFakeGoogleReference();
+      const google = createFakeGoogleReference();
 
       const props = {
         ...defaultProps,
-        google: fakeGoogle,
+        google,
       };
 
       mount(<GoogleMaps {...props} />);
 
-      expect(fakeGoogle.maps.Map).toHaveBeenCalledTimes(1);
-      expect(fakeGoogle.maps.Map).toHaveBeenCalledWith(
-        expect.any(HTMLDivElement),
-        {
-          mapTypeControl: false,
-          fullscreenControl: false,
-          streetViewControl: false,
-          clickableIcons: false,
-          zoomControlOptions: {
-            position: 'left:top',
-          },
-        }
-      );
+      expect(google.maps.Map).toHaveBeenCalledTimes(1);
+      expect(google.maps.Map).toHaveBeenCalledWith(expect.any(HTMLDivElement), {
+        mapTypeControl: false,
+        fullscreenControl: false,
+        streetViewControl: false,
+        clickableIcons: false,
+        zoomControlOptions: {
+          position: 'left:top',
+        },
+      });
     });
 
     it('expect to create the GoogleMaps on didMount witht the given options', () => {
-      const fakeGoogle = createFakeGoogleReference();
+      const google = createFakeGoogleReference();
 
       const props = {
         ...defaultProps,
-        google: fakeGoogle,
         mapOptions: {
           streetViewControl: true,
           otherOptionToPass: false,
         },
+        google,
       };
 
       mount(<GoogleMaps {...props} />);
 
-      expect(fakeGoogle.maps.Map).toHaveBeenCalledTimes(1);
-      expect(fakeGoogle.maps.Map).toHaveBeenCalledWith(
-        expect.any(HTMLDivElement),
-        {
-          mapTypeControl: false,
-          fullscreenControl: false,
-          streetViewControl: true,
-          clickableIcons: false,
-          otherOptionToPass: false,
-          zoomControlOptions: {
-            position: 'left:top',
-          },
-        }
-      );
+      expect(google.maps.Map).toHaveBeenCalledTimes(1);
+      expect(google.maps.Map).toHaveBeenCalledWith(expect.any(HTMLDivElement), {
+        mapTypeControl: false,
+        fullscreenControl: false,
+        streetViewControl: true,
+        clickableIcons: false,
+        otherOptionToPass: false,
+        zoomControlOptions: {
+          position: 'left:top',
+        },
+      });
     });
   });
 
