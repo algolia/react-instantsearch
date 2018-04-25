@@ -89,6 +89,8 @@ class GoogleMaps extends Component {
           0
         );
       });
+
+      return;
     }
 
     if (!boundingBox) {
@@ -98,6 +100,8 @@ class GoogleMaps extends Component {
         this.instance.setZoom(initialZoom);
         this.instance.setCenter(initialMapPosition);
       });
+
+      return;
     }
   }
 
