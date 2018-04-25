@@ -3,15 +3,11 @@ import PropTypes from 'prop-types';
 // @TODO: Update this import when the package is correctly split:
 // import { createClassNames } from 'react-instantsearch-dom';
 import createClassNames from '../../react-instantsearch/src/components/createClassNames';
+import { LatLngPropType } from './propTypes';
 import Provider from './Provider';
 import GoogleMaps from './GoogleMaps';
 
 const cx = createClassNames('GeoSearch');
-
-const LatLngPropType = PropTypes.shape({
-  lat: PropTypes.number.isRequired,
-  lng: PropTypes.number.isRequired,
-});
 
 class GeoSearch extends Component {
   static propTypes = {

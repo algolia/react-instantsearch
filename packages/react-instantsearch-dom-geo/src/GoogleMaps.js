@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { LatLngPropType, BoundingBoxPropType } from './propTypes';
 
 export const GOOGLE_MAPS_CONTEXT = '__ais_geo_search__google_maps__';
-
-const LatLngPropType = PropTypes.shape({
-  lat: PropTypes.number.isRequired,
-  lng: PropTypes.number.isRequired,
-});
 
 class GoogleMaps extends Component {
   static propTypes = {
@@ -16,10 +12,7 @@ class GoogleMaps extends Component {
     initialPosition: LatLngPropType.isRequired,
     mapOptions: PropTypes.object.isRequired,
     position: LatLngPropType,
-    boundingBox: PropTypes.shape({
-      northEast: LatLngPropType.isRequired,
-      southWest: LatLngPropType.isRequired,
-    }),
+    boundingBox: BoundingBoxPropType,
     children: PropTypes.node,
   };
 

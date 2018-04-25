@@ -1,11 +1,7 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
+import { LatLngPropType } from './propTypes';
 import { GOOGLE_MAPS_CONTEXT } from './GoogleMaps';
-
-const LatLngPropType = PropTypes.shape({
-  lat: PropTypes.number.isRequired,
-  lng: PropTypes.number.isRequired,
-});
 
 class Marker extends Component {
   static propTypes = {
