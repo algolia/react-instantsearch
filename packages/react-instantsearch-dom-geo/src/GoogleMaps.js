@@ -104,8 +104,6 @@ class GoogleMaps extends Component {
   }
 
   setupListenersWhenMapIsReady = () => {
-    const { refine } = this.props;
-
     this.setState(() => ({
       isMapReady: true,
     }));
@@ -125,12 +123,7 @@ class GoogleMaps extends Component {
         if (this.isUserInteraction && this.isPendingRefine) {
           this.isPendingRefine = false;
 
-          const bounds = this.instance.getBounds();
-
-          refine({
-            northEast: bounds.getNorthEast().toJSON(),
-            southWest: bounds.getSouthWest().toJSON(),
-          });
+          this.refineWithBoundingBox();
         }
       })
     );
@@ -140,6 +133,17 @@ class GoogleMaps extends Component {
     this.isUserInteraction = false;
     functionThatAlterTheMapPosition();
     this.isUserInteraction = true;
+  }
+
+  refineWithBoundingBox() {
+    const { refine } = this.props;
+
+    const bounds = this.instance.getBounds();
+
+    refine({
+      northEast: bounds.getNorthEast().toJSON(),
+      southWest: bounds.getSouthWest().toJSON(),
+    });
   }
 
   render() {
