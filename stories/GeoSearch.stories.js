@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, Component } from 'react';
 import PropTypes from 'prop-types';
 import { setAddon, storiesOf } from '@storybook/react';
 import JSXAddon from 'storybook-addon-jsx';
@@ -130,3 +130,54 @@ stories
       filterProps,
     }
   );
+
+stories.addWithJSX('with unmount', () => {
+  class Example extends Component {
+    state = {
+      visible: true,
+    };
+
+    onToggle = () =>
+      this.setState(({ visible }) => ({
+        visible: !visible,
+      }));
+
+    render() {
+      const { visible } = this.state;
+
+      return (
+        <WrapWithHits
+          indexName="airbnb"
+          linkedStoryGroup="GeoSearch"
+          searchParameters={{ hitsPerPage: 20 }}
+        >
+          <Configure aroundLatLngViaIP />
+
+          <button onClick={this.onToggle} style={{ marginBottom: 15 }}>
+            {visible ? 'Unmout' : 'Mount'}
+          </button>
+
+          {visible && (
+            <Container>
+              <GoogleMapsLoader apiKey="AIzaSyCl2TTJXpwxGuuc2zQZkAlIkWhpYbyjjP8">
+                {google => (
+                  <GeoSearch google={google}>
+                    {({ hits }) => (
+                      <Fragment>
+                        {hits.map(hit => (
+                          <Marker key={hit.objectID} hit={hit} />
+                        ))}
+                      </Fragment>
+                    )}
+                  </GeoSearch>
+                )}
+              </GoogleMapsLoader>
+            </Container>
+          )}
+        </WrapWithHits>
+      );
+    }
+  }
+
+  return <Example />;
+});
