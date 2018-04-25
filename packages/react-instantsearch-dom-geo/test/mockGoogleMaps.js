@@ -1,5 +1,7 @@
 export const createFakeMapInstance = () => ({
-  addListener: jest.fn(),
+  addListener: jest.fn(() => ({
+    remove: jest.fn(),
+  })),
   getCenter: jest.fn(),
   setCenter: jest.fn(),
   getZoom: jest.fn(),
