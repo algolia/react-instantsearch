@@ -11,6 +11,7 @@ class GoogleMaps extends Component {
     initialZoom: PropTypes.number.isRequired,
     initialPosition: LatLngPropType.isRequired,
     mapOptions: PropTypes.object.isRequired,
+    refine: PropTypes.func.isRequired,
     position: LatLngPropType,
     boundingBox: BoundingBoxPropType,
     children: PropTypes.node,
@@ -22,6 +23,10 @@ class GoogleMaps extends Component {
       instance: PropTypes.object,
     }),
   };
+
+  isUserInteraction = true;
+  isPendingRefine = false;
+  listeners = [];
 
   state = {
     isMapReady: false,
@@ -52,6 +57,12 @@ class GoogleMaps extends Component {
       ...mapOptions,
     });
 
+    google.maps.event.addListenerOnce(
+      this.instance,
+      'idle',
+      this.setupListenersWhenMapIsReady
+    );
+
     this.setState(() => ({
       isMapReady: true,
     }));
@@ -67,20 +78,68 @@ class GoogleMaps extends Component {
     } = this.props;
 
     if (boundingBox) {
-      this.instance.fitBounds(
-        new google.maps.LatLngBounds(
-          boundingBox.southWest,
-          boundingBox.northEast
-        )
-      );
+      this.lockUserInteration(() => {
+        this.instance.fitBounds(
+          new google.maps.LatLngBounds(
+            boundingBox.southWest,
+            boundingBox.northEast
+          ),
+          0
+        );
+      });
     }
 
     if (!boundingBox) {
       const initialMapPosition = position || initialPosition;
 
-      this.instance.setZoom(initialZoom);
-      this.instance.setCenter(initialMapPosition);
+      this.lockUserInteration(() => {
+        this.instance.setZoom(initialZoom);
+        this.instance.setCenter(initialMapPosition);
+      });
     }
+  }
+
+  componentWillUnmount() {
+    this.listeners.forEach(listener => {
+      listener.remove();
+    });
+
+    this.listeners = [];
+  }
+
+  setupListenersWhenMapIsReady = () => {
+    const { refine } = this.props;
+
+    const onChange = () => {
+      if (this.isUserInteraction) {
+        this.isPendingRefine = true;
+      }
+    };
+
+    this.listeners.push(this.instance.addListener('center_changed', onChange));
+    this.listeners.push(this.instance.addListener('zoom_changed', onChange));
+    this.listeners.push(this.instance.addListener('dragstart', onChange));
+
+    this.listeners.push(
+      this.instance.addListener('idle', () => {
+        if (this.isUserInteraction && this.isPendingRefine) {
+          this.isPendingRefine = false;
+
+          const bounds = this.instance.getBounds();
+
+          refine({
+            northEast: bounds.getNorthEast().toJSON(),
+            southWest: bounds.getSouthWest().toJSON(),
+          });
+        }
+      })
+    );
+  };
+
+  lockUserInteration(functionThatAlterTheMapPosition) {
+    this.isUserInteraction = false;
+    functionThatAlterTheMapPosition();
+    this.isUserInteraction = true;
   }
 
   render() {

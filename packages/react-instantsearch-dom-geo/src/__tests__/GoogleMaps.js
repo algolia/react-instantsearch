@@ -18,9 +18,18 @@ describe('GoogleMaps', () => {
       lng: 0,
     },
     mapOptions: {},
+    refine: () => {},
     position: null,
     boundingBox: null,
     cx: x => `geo ${x}`.trim(),
+  };
+
+  const simulateMapReadyEvent = google => {
+    google.maps.event.addListenerOnce.mock.calls[0][2]();
+  };
+
+  const simulateEvent = (fn, eventName, event) => {
+    fn.addListener.mock.calls.find(call => call.includes(eventName))[1](event);
   };
 
   it('expect render correctly without the map rendered', () => {
@@ -123,6 +132,199 @@ describe('GoogleMaps', () => {
         },
       });
     });
+
+    it('expect to listen "idle" event once to setup the rest of the listeners', () => {
+      const mapInstance = createFakeMapInstance();
+      const google = createFakeGoogleReference({
+        mapInstance,
+      });
+
+      const props = {
+        ...defaultProps,
+        google,
+      };
+
+      const wrapper = shallow(<GoogleMaps {...props} />);
+
+      expect(google.maps.event.addListenerOnce).toHaveBeenCalledTimes(1);
+      expect(google.maps.event.addListenerOnce).toHaveBeenCalledWith(
+        mapInstance,
+        'idle',
+        expect.any(Function)
+      );
+
+      simulateMapReadyEvent(google);
+
+      expect(mapInstance.addListener).toHaveBeenCalledWith(
+        'center_changed',
+        expect.any(Function)
+      );
+
+      expect(mapInstance.addListener).toHaveBeenCalledWith(
+        'zoom_changed',
+        expect.any(Function)
+      );
+
+      expect(mapInstance.addListener).toHaveBeenCalledWith(
+        'dragstart',
+        expect.any(Function)
+      );
+
+      expect(mapInstance.addListener).toHaveBeenCalledWith(
+        'idle',
+        expect.any(Function)
+      );
+
+      expect(wrapper.instance().listeners).toHaveLength(4);
+    });
+  });
+
+  describe('events', () => {
+    it('expect to trigger refine on "idle"', () => {
+      const mapInstance = createFakeMapInstance();
+      const google = createFakeGoogleReference({
+        mapInstance,
+      });
+
+      mapInstance.getBounds.mockImplementation(() => ({
+        getNorthEast: () => ({
+          toJSON: () => ({
+            lat: 10,
+            lng: 12,
+          }),
+        }),
+        getSouthWest: () => ({
+          toJSON: () => ({
+            lat: 12,
+            lng: 14,
+          }),
+        }),
+      }));
+
+      const props = {
+        ...defaultProps,
+        google,
+        refine: jest.fn(),
+      };
+
+      const wrapper = shallow(<GoogleMaps {...props} />);
+
+      simulateMapReadyEvent(google);
+
+      simulateEvent(mapInstance, 'center_changed');
+      simulateEvent(mapInstance, 'idle');
+
+      expect(wrapper.instance().isPendingRefine).toBe(false);
+      expect(props.refine).toHaveBeenCalledTimes(1);
+      expect(props.refine).toHaveBeenCalledWith({
+        northEast: {
+          lat: 10,
+          lng: 12,
+        },
+        southWest: {
+          lat: 12,
+          lng: 14,
+        },
+      });
+    });
+
+    it('expect to not trigger refine on "idle" when refine is not schedule', () => {
+      const mapInstance = createFakeMapInstance();
+      const google = createFakeGoogleReference({
+        mapInstance,
+      });
+
+      const props = {
+        ...defaultProps,
+        google,
+        refine: jest.fn(),
+      };
+
+      const wrapper = shallow(<GoogleMaps {...props} />);
+
+      simulateMapReadyEvent(google);
+
+      simulateEvent(mapInstance, 'idle');
+
+      expect(wrapper.instance().isPendingRefine).toBe(false);
+      expect(props.refine).toHaveBeenCalledTimes(0);
+    });
+
+    it('expect to not trigger refine on "idle" on programmatic interaction', () => {
+      const mapInstance = createFakeMapInstance();
+      const google = createFakeGoogleReference({
+        mapInstance,
+      });
+
+      const props = {
+        ...defaultProps,
+        google,
+        refine: jest.fn(),
+      };
+
+      const wrapper = shallow(<GoogleMaps {...props} />);
+
+      simulateMapReadyEvent(google);
+
+      simulateEvent(mapInstance, 'center_changed');
+
+      // Simulate fitBounds
+      wrapper.instance().isUserInteraction = false;
+
+      simulateEvent(mapInstance, 'idle');
+
+      expect(wrapper.instance().isPendingRefine).toBe(true);
+      expect(props.refine).toHaveBeenCalledTimes(0);
+    });
+
+    ['center_changed', 'zoom_changed', 'dragstart'].forEach(eventName => {
+      it(`expect to schedule refine on "${eventName}"`, () => {
+        const mapInstance = createFakeMapInstance();
+        const google = createFakeGoogleReference({
+          mapInstance,
+        });
+
+        const props = {
+          ...defaultProps,
+          google,
+        };
+
+        const wrapper = shallow(<GoogleMaps {...props} />);
+
+        simulateMapReadyEvent(google);
+
+        expect(wrapper.instance().isPendingRefine).toBe(false);
+
+        simulateEvent(mapInstance, eventName);
+
+        expect(wrapper.instance().isPendingRefine).toBe(true);
+      });
+
+      it(`expect to not schedule refine on "${eventName}" on programmatic interaction`, () => {
+        const mapInstance = createFakeMapInstance();
+        const google = createFakeGoogleReference({
+          mapInstance,
+        });
+
+        const props = {
+          ...defaultProps,
+          google,
+        };
+
+        const wrapper = shallow(<GoogleMaps {...props} />);
+
+        simulateMapReadyEvent(google);
+
+        expect(wrapper.instance().isPendingRefine).toBe(false);
+
+        // Simulate fitBounds
+        wrapper.instance().isUserInteraction = false;
+
+        simulateEvent(mapInstance, eventName);
+
+        expect(wrapper.instance().isPendingRefine).toBe(false);
+      });
+    });
   });
 
   describe('context', () => {
@@ -219,16 +421,19 @@ describe('GoogleMaps', () => {
       });
 
       expect(mapInstance.fitBounds).toHaveBeenCalledTimes(1);
-      expect(mapInstance.fitBounds).toHaveBeenCalledWith({
-        northEast: {
-          lat: 10,
-          lng: 10,
+      expect(mapInstance.fitBounds).toHaveBeenCalledWith(
+        {
+          northEast: {
+            lat: 10,
+            lng: 10,
+          },
+          southWest: {
+            lat: 14,
+            lng: 14,
+          },
         },
-        southWest: {
-          lat: 14,
-          lng: 14,
-        },
-      });
+        0
+      );
 
       expect(mapInstance.setZoom).toHaveBeenCalledTimes(0);
       expect(mapInstance.setCenter).toHaveBeenCalledTimes(0);
@@ -269,6 +474,34 @@ describe('GoogleMaps', () => {
       expect(mapInstance.setCenter).toHaveBeenCalledWith({
         lat: 0,
         lng: 0,
+      });
+    });
+  });
+
+  describe('delete', () => {
+    it('expect to remove all the listeners', () => {
+      const mapInstance = createFakeMapInstance();
+      const google = createFakeGoogleReference({
+        mapInstance,
+      });
+
+      const props = {
+        ...defaultProps,
+        google,
+      };
+
+      const wrapper = shallow(<GoogleMaps {...props} />);
+
+      simulateMapReadyEvent(google);
+
+      expect(wrapper.instance().listeners).toHaveLength(4);
+
+      const internalListeners = wrapper.instance().listeners.slice();
+
+      wrapper.unmount();
+
+      internalListeners.forEach(listener => {
+        expect(listener.remove).toHaveBeenCalledTimes(1);
       });
     });
   });
