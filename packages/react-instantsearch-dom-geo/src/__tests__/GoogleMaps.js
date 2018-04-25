@@ -53,8 +53,11 @@ describe('GoogleMaps', () => {
   });
 
   it('expect render correctly with the map rendered', () => {
+    const google = createFakeGoogleReference();
+
     const props = {
       ...defaultProps,
+      google,
     };
 
     const wrapper = shallow(
@@ -73,6 +76,8 @@ describe('GoogleMaps', () => {
 
     // Simulate didMount
     wrapper.instance().componentDidMount();
+
+    simulateMapReadyEvent(google);
 
     // Trigger the update
     wrapper.update();

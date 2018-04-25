@@ -62,10 +62,6 @@ class GoogleMaps extends Component {
       'idle',
       this.setupListenersWhenMapIsReady
     );
-
-    this.setState(() => ({
-      isMapReady: true,
-    }));
   }
 
   componentDidUpdate() {
@@ -109,6 +105,10 @@ class GoogleMaps extends Component {
 
   setupListenersWhenMapIsReady = () => {
     const { refine } = this.props;
+
+    this.setState(() => ({
+      isMapReady: true,
+    }));
 
     const onChange = () => {
       if (this.isUserInteraction) {
