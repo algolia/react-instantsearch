@@ -15,6 +15,7 @@ describe('GeoSearch', () => {
 
   const defaultRenderProvidedProps = {
     hits: [],
+    refine: () => {},
   };
 
   const renderProps = ({ props, renderProvidedProps, children = () => null }) =>

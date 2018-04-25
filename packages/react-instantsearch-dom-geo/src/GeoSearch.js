@@ -39,7 +39,7 @@ class GeoSearch extends Component {
     };
   }
 
-  renderProviderChildren = ({ hits, currentRefinement, position }) => {
+  renderProviderChildren = ({ hits, currentRefinement, position, refine }) => {
     const {
       google,
       initialZoom,
@@ -63,6 +63,7 @@ class GeoSearch extends Component {
         mapOptions={mapOptions}
         boundingBox={boundingBox}
         position={position}
+        refine={refine}
       >
         {children({ hits })}
       </GoogleMaps>
