@@ -73,6 +73,12 @@ class GoogleMaps extends Component {
       position,
     } = this.props;
 
+    const { isMapReady } = this.state;
+
+    if (!isMapReady || this.isPendingRefine) {
+      return;
+    }
+
     if (boundingBox) {
       this.lockUserInteration(() => {
         this.instance.fitBounds(

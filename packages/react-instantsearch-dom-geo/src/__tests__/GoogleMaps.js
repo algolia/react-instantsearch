@@ -407,6 +407,8 @@ describe('GoogleMaps', () => {
         </GoogleMaps>
       );
 
+      simulateMapReadyEvent(google);
+
       expect(mapInstance.fitBounds).toHaveBeenCalledTimes(0);
 
       expect(mapInstance.setZoom).toHaveBeenCalledTimes(0);
@@ -466,6 +468,8 @@ describe('GoogleMaps', () => {
         </GoogleMaps>
       );
 
+      simulateMapReadyEvent(google);
+
       expect(mapInstance.fitBounds).toHaveBeenCalledTimes(0);
 
       expect(mapInstance.setZoom).toHaveBeenCalledTimes(0);
@@ -480,6 +484,69 @@ describe('GoogleMaps', () => {
         lat: 0,
         lng: 0,
       });
+    });
+
+    it('expect to prevent the update when the map is not ready', () => {
+      const mapInstance = createFakeMapInstance();
+      const google = createFakeGoogleReference({
+        mapInstance,
+      });
+
+      const props = {
+        ...defaultProps,
+        google,
+      };
+
+      const wrapper = shallow(
+        <GoogleMaps {...props}>
+          <div>This is the children</div>
+        </GoogleMaps>
+      );
+
+      expect(mapInstance.fitBounds).toHaveBeenCalledTimes(0);
+
+      expect(mapInstance.setZoom).toHaveBeenCalledTimes(0);
+      expect(mapInstance.setCenter).toHaveBeenCalledTimes(0);
+
+      wrapper.setProps();
+
+      expect(mapInstance.fitBounds).toHaveBeenCalledTimes(0);
+
+      expect(mapInstance.setZoom).toHaveBeenCalledTimes(0);
+      expect(mapInstance.setCenter).toHaveBeenCalledTimes(0);
+    });
+
+    it('expect to prevent the update when there is a pending refinement', () => {
+      const mapInstance = createFakeMapInstance();
+      const google = createFakeGoogleReference({
+        mapInstance,
+      });
+
+      const props = {
+        ...defaultProps,
+        google,
+      };
+
+      const wrapper = shallow(
+        <GoogleMaps {...props}>
+          <div>This is the children</div>
+        </GoogleMaps>
+      );
+
+      simulateMapReadyEvent(google);
+      simulateEvent(mapInstance, 'center_changed');
+
+      expect(mapInstance.fitBounds).toHaveBeenCalledTimes(0);
+
+      expect(mapInstance.setZoom).toHaveBeenCalledTimes(0);
+      expect(mapInstance.setCenter).toHaveBeenCalledTimes(0);
+
+      wrapper.setProps();
+
+      expect(mapInstance.fitBounds).toHaveBeenCalledTimes(0);
+
+      expect(mapInstance.setZoom).toHaveBeenCalledTimes(0);
+      expect(mapInstance.setCenter).toHaveBeenCalledTimes(0);
     });
   });
 
