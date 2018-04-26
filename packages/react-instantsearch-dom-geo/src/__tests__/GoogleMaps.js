@@ -592,6 +592,32 @@ describe('GoogleMaps', () => {
         }),
       });
     });
+
+    it('expect to expose refineWithMapBounds through context', () => {
+      const mapInstance = createFakeMapInstance();
+      const google = createFakeGoogleReference({
+        mapInstance,
+      });
+
+      const props = {
+        ...defaultProps,
+        google,
+      };
+
+      const context = {
+        ...defaultContext,
+      };
+
+      const wrapper = shallow(<GoogleMaps {...props} />, {
+        context,
+      });
+
+      expect(wrapper.instance().getChildContext()).toEqual({
+        [GOOGLE_MAPS_CONTEXT]: expect.objectContaining({
+          refineWithBoundingBox: expect.any(Function),
+        }),
+      });
+    });
   });
 
   describe('update', () => {

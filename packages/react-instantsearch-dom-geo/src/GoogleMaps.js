@@ -29,6 +29,7 @@ class GoogleMaps extends Component {
     [GOOGLE_MAPS_CONTEXT]: PropTypes.shape({
       google: PropTypes.object,
       instance: PropTypes.object,
+      refineWithBoundingBox: PropTypes.func,
     }),
   };
 
@@ -46,6 +47,7 @@ class GoogleMaps extends Component {
     return {
       [GOOGLE_MAPS_CONTEXT]: {
         instance: this.instance,
+        refineWithBoundingBox: this.refineWithBoundingBox,
         google,
       },
     };
