@@ -31,6 +31,8 @@ describe('Provider', () => {
       position: null,
       currentRefinement: null,
       isRefinedWithMap: false,
+      isRefineOnMapMove: true,
+      toggleRefineOnMapMove: expect.any(Function),
       hasMapMoveSinceLastRefine: false,
       setMapMoveSinceLastRefine: expect.any(Function),
       refine: expect.any(Function),
@@ -88,8 +90,8 @@ describe('Provider', () => {
     });
   });
 
-  describe('context', () => {
-    it('expect to expose hasMapMoveSinceLastRefine & setMapMoveSinceLastRefine', () => {
+  describe('toggleRefineOnMapMove', () => {
+    it('expect to update the state with the invert of previous value (true)', () => {
       const children = jest.fn(x => x);
 
       const props = {
@@ -98,10 +100,61 @@ describe('Provider', () => {
 
       const wrapper = shallow(<Provider {...props}>{children}</Provider>);
 
+      expect(wrapper.state().isRefineOnMapMove).toBe(true);
+
+      lastRenderArgs(children).toggleRefineOnMapMove();
+
+      expect(wrapper.state().isRefineOnMapMove).toBe(false);
+    });
+
+    it('expect to update the state with the invert of previous value (false)', () => {
+      const children = jest.fn();
+
+      const props = {
+        ...defaultProps,
+      };
+
+      const wrapper = shallow(<Provider {...props}>{children}</Provider>);
+
+      wrapper.setState({
+        isRefineOnMapMove: false,
+      });
+
+      expect(wrapper.state().isRefineOnMapMove).toBe(false);
+
+      lastRenderArgs(children).toggleRefineOnMapMove();
+
+      expect(wrapper.state().isRefineOnMapMove).toBe(true);
+    });
+  });
+
+  describe('context', () => {
+    it('expect to expose hasMapMoveSinceLastRefine & setMapMoveSinceLastRefine', () => {
+      const props = {
+        ...defaultProps,
+      };
+
+      const wrapper = shallow(<Provider {...props}>{x => x}</Provider>);
+
       expect(wrapper.instance().getChildContext()).toEqual({
         [STATE_CONTEXT]: expect.objectContaining({
           hasMapMoveSinceLastRefine: false,
           setMapMoveSinceLastRefine: expect.any(Function),
+        }),
+      });
+    });
+
+    it('expect to expose isRefineOnMapMove & toggleRefineOnMapMove', () => {
+      const props = {
+        ...defaultProps,
+      };
+
+      const wrapper = shallow(<Provider {...props}>{x => x}</Provider>);
+
+      expect(wrapper.instance().getChildContext()).toEqual({
+        [STATE_CONTEXT]: expect.objectContaining({
+          isRefineOnMapMove: true,
+          toggleRefineOnMapMove: expect.any(Function),
         }),
       });
     });
