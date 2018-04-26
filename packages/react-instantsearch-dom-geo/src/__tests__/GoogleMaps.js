@@ -274,6 +274,10 @@ describe('GoogleMaps', () => {
 
       const context = {
         ...defaultContext,
+        [STATE_CONTEXT]: {
+          ...getStateContext(defaultContext),
+          setMapMoveSinceLastRefine: jest.fn(),
+        },
       };
 
       const wrapper = shallow(<GoogleMaps {...props} />, {
@@ -297,6 +301,13 @@ describe('GoogleMaps', () => {
           lng: 14,
         },
       });
+
+      expect(
+        getStateContext(context).setMapMoveSinceLastRefine
+      ).toHaveBeenCalledTimes(2); // with each event
+      expect(
+        getStateContext(context).setMapMoveSinceLastRefine
+      ).toHaveBeenLastCalledWith(false);
     });
 
     it('expect to not trigger refine on "idle" when refine is not schedule', () => {

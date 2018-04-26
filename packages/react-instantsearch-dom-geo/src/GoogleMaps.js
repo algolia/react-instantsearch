@@ -174,16 +174,21 @@ class GoogleMaps extends Component {
     this.isUserInteraction = true;
   }
 
-  refineWithBoundingBox() {
+  refineWithBoundingBox = () => {
     const { refine } = this.props;
+    const { setMapMoveSinceLastRefine } = this.getStateContext();
 
-    const bounds = this.instance.getBounds();
+    if (this.instance) {
+      const bounds = this.instance.getBounds();
 
-    refine({
-      northEast: bounds.getNorthEast().toJSON(),
-      southWest: bounds.getSouthWest().toJSON(),
-    });
-  }
+      refine({
+        northEast: bounds.getNorthEast().toJSON(),
+        southWest: bounds.getSouthWest().toJSON(),
+      });
+
+      setMapMoveSinceLastRefine(false);
+    }
+  };
 
   render() {
     const { cx, children } = this.props;
