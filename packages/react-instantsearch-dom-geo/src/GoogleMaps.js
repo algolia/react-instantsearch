@@ -20,6 +20,7 @@ class GoogleMaps extends Component {
 
   static contextTypes = {
     [STATE_CONTEXT]: PropTypes.shape({
+      isRefineOnMapMove: PropTypes.bool.isRequired,
       setMapMoveSinceLastRefine: PropTypes.func.isRequired,
     }).isRequired,
   };
@@ -129,17 +130,22 @@ class GoogleMaps extends Component {
   setupListenersWhenMapIsReady = () => {
     this.listeners = [];
 
-    const { setMapMoveSinceLastRefine } = this.getStateContext();
-
     this.setState(() => ({
       isMapReady: true,
     }));
 
     const onChange = () => {
+      const {
+        isRefineOnMapMove,
+        setMapMoveSinceLastRefine,
+      } = this.getStateContext();
+
       if (this.isUserInteraction) {
         setMapMoveSinceLastRefine(true);
 
-        this.isPendingRefine = true;
+        if (isRefineOnMapMove) {
+          this.isPendingRefine = true;
+        }
       }
     };
 

@@ -27,6 +27,7 @@ describe('GoogleMaps', () => {
 
   const defaultContext = {
     [STATE_CONTEXT]: {
+      isRefineOnMapMove: true,
       setMapMoveSinceLastRefine: () => {},
     },
   };
@@ -491,6 +492,38 @@ describe('GoogleMaps', () => {
 
         // Simulate fitBounds
         wrapper.instance().isUserInteraction = false;
+
+        simulateEvent(mapInstance, eventName);
+
+        expect(wrapper.instance().isPendingRefine).toBe(false);
+      });
+
+      it(`expect to not schedule refine on "${eventName}" when refine on map move is disabled`, () => {
+        const mapInstance = createFakeMapInstance();
+        const google = createFakeGoogleReference({
+          mapInstance,
+        });
+
+        const props = {
+          ...defaultProps,
+          google,
+        };
+
+        const context = {
+          ...defaultContext,
+          [STATE_CONTEXT]: {
+            ...getStateContext(defaultContext),
+            isRefineOnMapMove: false,
+          },
+        };
+
+        const wrapper = shallow(<GoogleMaps {...props} />, {
+          context,
+        });
+
+        simulateMapReadyEvent(google);
+
+        expect(wrapper.instance().isPendingRefine).toBe(false);
 
         simulateEvent(mapInstance, eventName);
 
