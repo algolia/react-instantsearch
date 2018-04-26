@@ -44,6 +44,7 @@ export default createConnector({
     const results = getResults(searchResults, this.context);
 
     this._allResults = this._allResults || [];
+    this.previousPage = this.previousPage || 0;
 
     if (!results) {
       return {
