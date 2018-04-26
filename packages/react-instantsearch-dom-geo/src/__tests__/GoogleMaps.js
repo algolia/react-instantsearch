@@ -39,7 +39,7 @@ describe('GoogleMaps', () => {
 
     expect(wrapper).toMatchSnapshot();
     expect(wrapper.state()).toEqual({
-      isMapAlreadyRender: false,
+      isMapReady: false,
     });
   });
 
@@ -59,7 +59,7 @@ describe('GoogleMaps', () => {
 
     expect(wrapper).toMatchSnapshot();
     expect(wrapper.state()).toEqual({
-      isMapAlreadyRender: false,
+      isMapReady: false,
     });
 
     // Simulate didMount
@@ -70,7 +70,7 @@ describe('GoogleMaps', () => {
 
     expect(wrapper).toMatchSnapshot();
     expect(wrapper.state()).toEqual({
-      isMapAlreadyRender: true,
+      isMapReady: true,
     });
   });
 

@@ -24,7 +24,7 @@ class GoogleMaps extends Component {
   };
 
   state = {
-    isMapAlreadyRender: false,
+    isMapReady: false,
   };
 
   getChildContext() {
@@ -53,7 +53,7 @@ class GoogleMaps extends Component {
     });
 
     this.setState(() => ({
-      isMapAlreadyRender: true,
+      isMapReady: true,
     }));
   }
 
@@ -85,12 +85,12 @@ class GoogleMaps extends Component {
 
   render() {
     const { cx, children } = this.props;
-    const { isMapAlreadyRender } = this.state;
+    const { isMapReady } = this.state;
 
     return (
       <div ref={c => (this.element = c)} className={cx('')}>
         <div className={cx('map')} />
-        {isMapAlreadyRender && children}
+        {isMapReady && children}
       </div>
     );
   }
