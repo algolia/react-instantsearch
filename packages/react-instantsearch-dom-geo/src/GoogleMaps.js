@@ -139,9 +139,9 @@ class GoogleMaps extends Component {
     );
   };
 
-  lockUserInteration(functionThatAlterTheMapPosition) {
+  lockUserInteration(functionThatAltersTheMapPosition) {
     this.isUserInteraction = false;
-    functionThatAlterTheMapPosition();
+    functionThatAltersTheMapPosition();
     this.isUserInteraction = true;
   }
 
