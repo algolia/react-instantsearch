@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { LatLngPropType, BoundingBoxPropType } from './propTypes';
+import { STATE_CONTEXT } from './Provider';
 
 export const GOOGLE_MAPS_CONTEXT = '__ais_geo_search__google_maps__';
 
@@ -15,6 +16,12 @@ class GoogleMaps extends Component {
     position: LatLngPropType,
     boundingBox: BoundingBoxPropType,
     children: PropTypes.node,
+  };
+
+  static contextTypes = {
+    [STATE_CONTEXT]: PropTypes.shape({
+      setMapMoveSinceLastRefine: PropTypes.func.isRequired,
+    }).isRequired,
   };
 
   static childContextTypes = {
@@ -41,6 +48,10 @@ class GoogleMaps extends Component {
         google,
       },
     };
+  }
+
+  getStateContext() {
+    return this.context[STATE_CONTEXT];
   }
 
   componentDidMount() {
@@ -118,12 +129,16 @@ class GoogleMaps extends Component {
   setupListenersWhenMapIsReady = () => {
     this.listeners = [];
 
+    const { setMapMoveSinceLastRefine } = this.getStateContext();
+
     this.setState(() => ({
       isMapReady: true,
     }));
 
     const onChange = () => {
       if (this.isUserInteraction) {
+        setMapMoveSinceLastRefine(true);
+
         this.isPendingRefine = true;
       }
     };
