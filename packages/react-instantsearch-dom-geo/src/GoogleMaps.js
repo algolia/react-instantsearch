@@ -89,7 +89,9 @@ class GoogleMaps extends Component {
 
     const { isMapReady } = this.state;
 
-    if (!isMapReady || this.isPendingRefine) {
+    const { hasMapMoveSinceLastRefine } = this.getStateContext();
+
+    if (!isMapReady || this.isPendingRefine || hasMapMoveSinceLastRefine) {
       return;
     }
 

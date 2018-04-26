@@ -786,6 +786,49 @@ describe('GoogleMaps', () => {
       expect(mapInstance.setZoom).toHaveBeenCalledTimes(0);
       expect(mapInstance.setCenter).toHaveBeenCalledTimes(0);
     });
+
+    it('expect to prevent the update when the map has move since last refine', () => {
+      const mapInstance = createFakeMapInstance();
+      const google = createFakeGoogleReference({
+        mapInstance,
+      });
+
+      const props = {
+        ...defaultProps,
+        google,
+      };
+
+      const context = {
+        ...defaultContext,
+        [STATE_CONTEXT]: {
+          ...getStateContext(defaultContext),
+          hasMapMoveSinceLastRefine: true,
+        },
+      };
+
+      const wrapper = shallow(
+        <GoogleMaps {...props}>
+          <div>This is the children</div>
+        </GoogleMaps>,
+        {
+          context,
+        }
+      );
+
+      simulateMapReadyEvent(google);
+
+      expect(mapInstance.fitBounds).toHaveBeenCalledTimes(0);
+
+      expect(mapInstance.setZoom).toHaveBeenCalledTimes(0);
+      expect(mapInstance.setCenter).toHaveBeenCalledTimes(0);
+
+      wrapper.setProps();
+
+      expect(mapInstance.fitBounds).toHaveBeenCalledTimes(0);
+
+      expect(mapInstance.setZoom).toHaveBeenCalledTimes(0);
+      expect(mapInstance.setCenter).toHaveBeenCalledTimes(0);
+    });
   });
 
   describe('delete', () => {
