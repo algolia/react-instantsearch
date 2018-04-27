@@ -57,10 +57,12 @@ class GoogleMaps extends Component {
       ...mapOptions,
     });
 
-    google.maps.event.addListenerOnce(
-      this.instance,
-      'idle',
-      this.setupListenersWhenMapIsReady
+    this.listeners.push(
+      google.maps.event.addListenerOnce(
+        this.instance,
+        'idle',
+        this.setupListenersWhenMapIsReady
+      )
     );
   }
 
@@ -114,6 +116,8 @@ class GoogleMaps extends Component {
   }
 
   setupListenersWhenMapIsReady = () => {
+    this.listeners = [];
+
     this.setState(() => ({
       isMapReady: true,
     }));

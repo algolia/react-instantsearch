@@ -158,6 +158,22 @@ describe('GoogleMaps', () => {
         expect.any(Function)
       );
 
+      expect(wrapper.instance().listeners).toHaveLength(1);
+    });
+
+    it('expect to setup the rest of the listener when the map is ready', () => {
+      const mapInstance = createFakeMapInstance();
+      const google = createFakeGoogleReference({
+        mapInstance,
+      });
+
+      const props = {
+        ...defaultProps,
+        google,
+      };
+
+      const wrapper = shallow(<GoogleMaps {...props} />);
+
       simulateMapReadyEvent(google);
 
       expect(mapInstance.addListener).toHaveBeenCalledWith(
