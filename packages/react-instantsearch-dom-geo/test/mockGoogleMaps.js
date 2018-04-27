@@ -47,7 +47,9 @@ export const createFakeGoogleReference = ({
       LEFT_TOP: 'left:top',
     },
     event: {
-      addListenerOnce: jest.fn(),
+      addListenerOnce: jest.fn(() => ({
+        remove: jest.fn(),
+      })),
     },
     OverlayView: {
       setMap: jest.fn(),
