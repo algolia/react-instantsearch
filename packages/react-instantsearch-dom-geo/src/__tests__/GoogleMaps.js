@@ -5,7 +5,6 @@ import {
   createFakeGoogleReference,
   createFakeMapInstance,
 } from '../../test/mockGoogleMaps';
-import { STATE_CONTEXT } from '../Provider';
 import GoogleMaps, { GOOGLE_MAPS_CONTEXT } from '../GoogleMaps';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -19,20 +18,14 @@ describe('GoogleMaps', () => {
       lng: 0,
     },
     mapOptions: {},
+    isRefineOnMapMove: true,
+    hasMapMoveSinceLastRefine: false,
     refine: () => {},
+    setMapMoveSinceLastRefine: () => {},
     position: null,
     boundingBox: null,
     cx: x => `geo ${x}`.trim(),
   };
-
-  const defaultContext = {
-    [STATE_CONTEXT]: {
-      isRefineOnMapMove: true,
-      setMapMoveSinceLastRefine: () => {},
-    },
-  };
-
-  const getStateContext = context => context[STATE_CONTEXT];
 
   const simulateMapReadyEvent = google => {
     google.maps.event.addListenerOnce.mock.calls[0][2]();
@@ -47,17 +40,12 @@ describe('GoogleMaps', () => {
       ...defaultProps,
     };
 
-    const context = {
-      ...defaultContext,
-    };
-
     const wrapper = shallow(
       <GoogleMaps {...props}>
         <div>This is the children</div>
       </GoogleMaps>,
       {
         disableLifecycleMethods: true,
-        context,
       }
     );
 
@@ -75,17 +63,12 @@ describe('GoogleMaps', () => {
       google,
     };
 
-    const context = {
-      ...defaultContext,
-    };
-
     const wrapper = shallow(
       <GoogleMaps {...props}>
         <div>This is the children</div>
       </GoogleMaps>,
       {
         disableLifecycleMethods: true,
-        context,
       }
     );
 
@@ -117,13 +100,7 @@ describe('GoogleMaps', () => {
         google,
       };
 
-      const context = {
-        ...defaultContext,
-      };
-
-      mount(<GoogleMaps {...props} />, {
-        context,
-      });
+      mount(<GoogleMaps {...props} />);
 
       expect(google.maps.Map).toHaveBeenCalledTimes(1);
       expect(google.maps.Map).toHaveBeenCalledWith(expect.any(HTMLDivElement), {
@@ -149,13 +126,7 @@ describe('GoogleMaps', () => {
         google,
       };
 
-      const context = {
-        ...defaultContext,
-      };
-
-      mount(<GoogleMaps {...props} />, {
-        context,
-      });
+      mount(<GoogleMaps {...props} />);
 
       expect(google.maps.Map).toHaveBeenCalledTimes(1);
       expect(google.maps.Map).toHaveBeenCalledWith(expect.any(HTMLDivElement), {
@@ -181,13 +152,7 @@ describe('GoogleMaps', () => {
         google,
       };
 
-      const context = {
-        ...defaultContext,
-      };
-
-      const wrapper = shallow(<GoogleMaps {...props} />, {
-        context,
-      });
+      const wrapper = shallow(<GoogleMaps {...props} />);
 
       expect(google.maps.event.addListenerOnce).toHaveBeenCalledTimes(1);
       expect(google.maps.event.addListenerOnce).toHaveBeenCalledWith(
@@ -210,13 +175,7 @@ describe('GoogleMaps', () => {
         google,
       };
 
-      const context = {
-        ...defaultContext,
-      };
-
-      const wrapper = shallow(<GoogleMaps {...props} />, {
-        context,
-      });
+      const wrapper = shallow(<GoogleMaps {...props} />);
 
       simulateMapReadyEvent(google);
 
@@ -270,19 +229,10 @@ describe('GoogleMaps', () => {
         ...defaultProps,
         google,
         refine: jest.fn(),
+        setMapMoveSinceLastRefine: jest.fn(),
       };
 
-      const context = {
-        ...defaultContext,
-        [STATE_CONTEXT]: {
-          ...getStateContext(defaultContext),
-          setMapMoveSinceLastRefine: jest.fn(),
-        },
-      };
-
-      const wrapper = shallow(<GoogleMaps {...props} />, {
-        context,
-      });
+      const wrapper = shallow(<GoogleMaps {...props} />);
 
       simulateMapReadyEvent(google);
 
@@ -302,12 +252,8 @@ describe('GoogleMaps', () => {
         },
       });
 
-      expect(
-        getStateContext(context).setMapMoveSinceLastRefine
-      ).toHaveBeenCalledTimes(2); // with each event
-      expect(
-        getStateContext(context).setMapMoveSinceLastRefine
-      ).toHaveBeenLastCalledWith(false);
+      expect(props.setMapMoveSinceLastRefine).toHaveBeenCalledTimes(2); // with each event
+      expect(props.setMapMoveSinceLastRefine).toHaveBeenLastCalledWith(false);
     });
 
     it('expect to not trigger refine on "idle" when refine is not schedule', () => {
@@ -322,13 +268,7 @@ describe('GoogleMaps', () => {
         refine: jest.fn(),
       };
 
-      const context = {
-        ...defaultContext,
-      };
-
-      const wrapper = shallow(<GoogleMaps {...props} />, {
-        context,
-      });
+      const wrapper = shallow(<GoogleMaps {...props} />);
 
       simulateMapReadyEvent(google);
 
@@ -350,13 +290,7 @@ describe('GoogleMaps', () => {
         refine: jest.fn(),
       };
 
-      const context = {
-        ...defaultContext,
-      };
-
-      const wrapper = shallow(<GoogleMaps {...props} />, {
-        context,
-      });
+      const wrapper = shallow(<GoogleMaps {...props} />);
 
       simulateMapReadyEvent(google);
 
@@ -380,35 +314,20 @@ describe('GoogleMaps', () => {
 
         const props = {
           ...defaultProps,
+          setMapMoveSinceLastRefine: jest.fn(),
           google,
         };
 
-        const context = {
-          ...defaultContext,
-          [STATE_CONTEXT]: {
-            ...getStateContext(defaultContext),
-            setMapMoveSinceLastRefine: jest.fn(),
-          },
-        };
-
-        shallow(<GoogleMaps {...props} />, {
-          context,
-        });
+        shallow(<GoogleMaps {...props} />);
 
         simulateMapReadyEvent(google);
 
-        expect(
-          context[STATE_CONTEXT].setMapMoveSinceLastRefine
-        ).toHaveBeenCalledTimes(0);
+        expect(props.setMapMoveSinceLastRefine).toHaveBeenCalledTimes(0);
 
         simulateEvent(mapInstance, eventName);
 
-        expect(
-          getStateContext(context).setMapMoveSinceLastRefine
-        ).toHaveBeenCalledTimes(1);
-        expect(
-          getStateContext(context).setMapMoveSinceLastRefine
-        ).toHaveBeenCalledWith(true);
+        expect(props.setMapMoveSinceLastRefine).toHaveBeenCalledTimes(1);
+        expect(props.setMapMoveSinceLastRefine).toHaveBeenCalledWith(true);
       });
 
       it(`expect to schedule refine on "${eventName}"`, () => {
@@ -422,13 +341,7 @@ describe('GoogleMaps', () => {
           google,
         };
 
-        const context = {
-          ...defaultContext,
-        };
-
-        const wrapper = shallow(<GoogleMaps {...props} />, {
-          context,
-        });
+        const wrapper = shallow(<GoogleMaps {...props} />);
 
         simulateMapReadyEvent(google);
 
@@ -447,35 +360,22 @@ describe('GoogleMaps', () => {
 
         const props = {
           ...defaultProps,
+          setMapMoveSinceLastRefine: jest.fn(),
           google,
         };
 
-        const context = {
-          ...defaultContext,
-          [STATE_CONTEXT]: {
-            ...getStateContext(defaultContext),
-            setMapMoveSinceLastRefine: jest.fn(),
-          },
-        };
-
-        const wrapper = shallow(<GoogleMaps {...props} />, {
-          context,
-        });
+        const wrapper = shallow(<GoogleMaps {...props} />);
 
         simulateMapReadyEvent(google);
 
-        expect(
-          getStateContext(context).setMapMoveSinceLastRefine
-        ).toHaveBeenCalledTimes(0);
+        expect(props.setMapMoveSinceLastRefine).toHaveBeenCalledTimes(0);
 
         // Simulate fitBounds
         wrapper.instance().isUserInteraction = false;
 
         simulateEvent(mapInstance, eventName);
 
-        expect(
-          getStateContext(context).setMapMoveSinceLastRefine
-        ).toHaveBeenCalledTimes(0);
+        expect(props.setMapMoveSinceLastRefine).toHaveBeenCalledTimes(0);
       });
 
       it(`expect to not schedule refine on "${eventName}" on programmatic interaction`, () => {
@@ -489,13 +389,7 @@ describe('GoogleMaps', () => {
           google,
         };
 
-        const context = {
-          ...defaultContext,
-        };
-
-        const wrapper = shallow(<GoogleMaps {...props} />, {
-          context,
-        });
+        const wrapper = shallow(<GoogleMaps {...props} />);
 
         simulateMapReadyEvent(google);
 
@@ -517,20 +411,11 @@ describe('GoogleMaps', () => {
 
         const props = {
           ...defaultProps,
+          isRefineOnMapMove: false,
           google,
         };
 
-        const context = {
-          ...defaultContext,
-          [STATE_CONTEXT]: {
-            ...getStateContext(defaultContext),
-            isRefineOnMapMove: false,
-          },
-        };
-
-        const wrapper = shallow(<GoogleMaps {...props} />, {
-          context,
-        });
+        const wrapper = shallow(<GoogleMaps {...props} />);
 
         simulateMapReadyEvent(google);
 
@@ -552,13 +437,8 @@ describe('GoogleMaps', () => {
         google,
       };
 
-      const context = {
-        ...defaultContext,
-      };
-
       const wrapper = shallow(<GoogleMaps {...props} />, {
         disableLifecycleMethods: true,
-        context,
       });
 
       expect(wrapper.instance().getChildContext()).toEqual({
@@ -579,13 +459,8 @@ describe('GoogleMaps', () => {
         google,
       };
 
-      const context = {
-        ...defaultContext,
-      };
-
       const wrapper = shallow(<GoogleMaps {...props} />, {
         disableLifecycleMethods: true,
-        context,
       });
 
       expect(wrapper.instance().getChildContext()).toEqual({
@@ -615,13 +490,7 @@ describe('GoogleMaps', () => {
         google,
       };
 
-      const context = {
-        ...defaultContext,
-      };
-
-      const wrapper = shallow(<GoogleMaps {...props} />, {
-        context,
-      });
+      const wrapper = shallow(<GoogleMaps {...props} />);
 
       expect(wrapper.instance().getChildContext()).toEqual({
         [GOOGLE_MAPS_CONTEXT]: expect.objectContaining({
@@ -648,17 +517,10 @@ describe('GoogleMaps', () => {
         google,
       };
 
-      const context = {
-        ...defaultContext,
-      };
-
       const wrapper = shallow(
         <GoogleMaps {...props}>
           <div>This is the children</div>
-        </GoogleMaps>,
-        {
-          context,
-        }
+        </GoogleMaps>
       );
 
       simulateMapReadyEvent(google);
@@ -716,17 +578,10 @@ describe('GoogleMaps', () => {
         google,
       };
 
-      const context = {
-        ...defaultContext,
-      };
-
       const wrapper = shallow(
         <GoogleMaps {...props}>
           <div>This is the children</div>
-        </GoogleMaps>,
-        {
-          context,
-        }
+        </GoogleMaps>
       );
 
       simulateMapReadyEvent(google);
@@ -758,17 +613,10 @@ describe('GoogleMaps', () => {
         google,
       };
 
-      const context = {
-        ...defaultContext,
-      };
-
       const wrapper = shallow(
         <GoogleMaps {...props}>
           <div>This is the children</div>
-        </GoogleMaps>,
-        {
-          context,
-        }
+        </GoogleMaps>
       );
 
       expect(mapInstance.fitBounds).toHaveBeenCalledTimes(0);
@@ -795,17 +643,10 @@ describe('GoogleMaps', () => {
         google,
       };
 
-      const context = {
-        ...defaultContext,
-      };
-
       const wrapper = shallow(
         <GoogleMaps {...props}>
           <div>This is the children</div>
-        </GoogleMaps>,
-        {
-          context,
-        }
+        </GoogleMaps>
       );
 
       simulateMapReadyEvent(google);
@@ -832,24 +673,14 @@ describe('GoogleMaps', () => {
 
       const props = {
         ...defaultProps,
+        hasMapMoveSinceLastRefine: true,
         google,
-      };
-
-      const context = {
-        ...defaultContext,
-        [STATE_CONTEXT]: {
-          ...getStateContext(defaultContext),
-          hasMapMoveSinceLastRefine: true,
-        },
       };
 
       const wrapper = shallow(
         <GoogleMaps {...props}>
           <div>This is the children</div>
-        </GoogleMaps>,
-        {
-          context,
-        }
+        </GoogleMaps>
       );
 
       simulateMapReadyEvent(google);
@@ -880,13 +711,7 @@ describe('GoogleMaps', () => {
         google,
       };
 
-      const context = {
-        ...defaultContext,
-      };
-
-      const wrapper = shallow(<GoogleMaps {...props} />, {
-        context,
-      });
+      const wrapper = shallow(<GoogleMaps {...props} />);
 
       simulateMapReadyEvent(google);
 

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { LatLngPropType, BoundingBoxPropType } from './propTypes';
-import { STATE_CONTEXT } from './Provider';
 
 export const GOOGLE_MAPS_CONTEXT = '__ais_geo_search__google_maps__';
 
@@ -12,17 +11,13 @@ class GoogleMaps extends Component {
     initialZoom: PropTypes.number.isRequired,
     initialPosition: LatLngPropType.isRequired,
     mapOptions: PropTypes.object.isRequired,
+    isRefineOnMapMove: PropTypes.bool.isRequired,
+    hasMapMoveSinceLastRefine: PropTypes.bool.isRequired,
     refine: PropTypes.func.isRequired,
+    setMapMoveSinceLastRefine: PropTypes.func.isRequired,
     position: LatLngPropType,
     boundingBox: BoundingBoxPropType,
     children: PropTypes.node,
-  };
-
-  static contextTypes = {
-    [STATE_CONTEXT]: PropTypes.shape({
-      isRefineOnMapMove: PropTypes.bool.isRequired,
-      setMapMoveSinceLastRefine: PropTypes.func.isRequired,
-    }).isRequired,
   };
 
   static childContextTypes = {
@@ -53,10 +48,6 @@ class GoogleMaps extends Component {
     };
   }
 
-  getStateContext() {
-    return this.context[STATE_CONTEXT];
-  }
-
   componentDidMount() {
     const { google, mapOptions } = this.props;
 
@@ -85,13 +76,12 @@ class GoogleMaps extends Component {
       google,
       initialZoom,
       initialPosition,
+      hasMapMoveSinceLastRefine,
       boundingBox,
       position,
     } = this.props;
 
     const { isMapReady } = this.state;
-
-    const { hasMapMoveSinceLastRefine } = this.getStateContext();
 
     if (!isMapReady || this.isPendingRefine || hasMapMoveSinceLastRefine) {
       return;
@@ -139,10 +129,7 @@ class GoogleMaps extends Component {
     }));
 
     const onChange = () => {
-      const {
-        isRefineOnMapMove,
-        setMapMoveSinceLastRefine,
-      } = this.getStateContext();
+      const { isRefineOnMapMove, setMapMoveSinceLastRefine } = this.props;
 
       if (this.isUserInteraction) {
         setMapMoveSinceLastRefine(true);
@@ -175,8 +162,7 @@ class GoogleMaps extends Component {
   }
 
   refineWithBoundingBox = () => {
-    const { refine } = this.props;
-    const { setMapMoveSinceLastRefine } = this.getStateContext();
+    const { refine, setMapMoveSinceLastRefine } = this.props;
 
     if (this.instance) {
       const bounds = this.instance.getBounds();
