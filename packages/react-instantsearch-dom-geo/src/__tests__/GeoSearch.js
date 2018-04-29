@@ -15,7 +15,10 @@ describe('GeoSearch', () => {
 
   const defaultRenderProvidedProps = {
     hits: [],
+    isRefineOnMapMove: true,
+    hasMapMoveSinceLastRefine: false,
     refine: () => {},
+    setMapMoveSinceLastRefine: () => {},
   };
 
   const renderProps = ({ props, renderProvidedProps, children = () => null }) =>
@@ -106,6 +109,52 @@ describe('GeoSearch', () => {
     });
   });
 
+  it('expect to render with isRefineOnMapMove', () => {
+    const props = {
+      ...defaultProps,
+    };
+
+    const renderProvidedProps = {
+      ...defaultRenderProvidedProps,
+      isRefineOnMapMove: false,
+    };
+
+    const renderPropsWrapper = shallow(
+      <ShallowWapper>
+        {renderProps({ props, renderProvidedProps })}
+      </ShallowWapper>
+    );
+
+    const googleMapProps = renderPropsWrapper
+      .find('[testID="GoogleMaps"]')
+      .props();
+
+    expect(googleMapProps.isRefineOnMapMove).toBe(false);
+  });
+
+  it('expect to render with hasMapMoveSinceLastRefine', () => {
+    const props = {
+      ...defaultProps,
+    };
+
+    const renderProvidedProps = {
+      ...defaultRenderProvidedProps,
+      hasMapMoveSinceLastRefine: true,
+    };
+
+    const renderPropsWrapper = shallow(
+      <ShallowWapper>
+        {renderProps({ props, renderProvidedProps })}
+      </ShallowWapper>
+    );
+
+    const googleMapProps = renderPropsWrapper
+      .find('[testID="GoogleMaps"]')
+      .props();
+
+    expect(googleMapProps.hasMapMoveSinceLastRefine).toBe(true);
+  });
+
   it('expect to render with position', () => {
     const props = {
       ...defaultProps,
@@ -133,6 +182,58 @@ describe('GeoSearch', () => {
       lat: 10,
       lng: 12,
     });
+  });
+
+  it('expect to render with refine', () => {
+    const refine = () => {};
+
+    const props = {
+      ...defaultProps,
+    };
+
+    const renderProvidedProps = {
+      ...defaultRenderProvidedProps,
+      refine,
+    };
+
+    const renderPropsWrapper = shallow(
+      <ShallowWapper>
+        {renderProps({ props, renderProvidedProps })}
+      </ShallowWapper>
+    );
+
+    const googleMapProps = renderPropsWrapper
+      .find('[testID="GoogleMaps"]')
+      .props();
+
+    expect(googleMapProps.refine).toBe(refine);
+  });
+
+  it('expect to render with setMapMoveSinceLastRefine', () => {
+    const setMapMoveSinceLastRefine = () => {};
+
+    const props = {
+      ...defaultProps,
+    };
+
+    const renderProvidedProps = {
+      ...defaultRenderProvidedProps,
+      setMapMoveSinceLastRefine,
+    };
+
+    const renderPropsWrapper = shallow(
+      <ShallowWapper>
+        {renderProps({ props, renderProvidedProps })}
+      </ShallowWapper>
+    );
+
+    const googleMapProps = renderPropsWrapper
+      .find('[testID="GoogleMaps"]')
+      .props();
+
+    expect(googleMapProps.setMapMoveSinceLastRefine).toBe(
+      setMapMoveSinceLastRefine
+    );
   });
 
   describe('boundingBox', () => {

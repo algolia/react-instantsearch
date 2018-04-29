@@ -24,6 +24,7 @@ exports[`GeoSearch expect to render 1`] = `
       },
     }
   }
+  hasMapMoveSinceLastRefine={false}
   initialPosition={
     Object {
       "lat": 0,
@@ -31,8 +32,10 @@ exports[`GeoSearch expect to render 1`] = `
     }
   }
   initialZoom={1}
+  isRefineOnMapMove={true}
   mapOptions={Object {}}
   refine={[Function]}
+  setMapMoveSinceLastRefine={[Function]}
   testID="GoogleMaps"
 >
   <div>
