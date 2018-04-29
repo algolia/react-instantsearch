@@ -24,7 +24,6 @@ describe('GoogleMaps', () => {
     setMapMoveSinceLastRefine: () => {},
     position: null,
     boundingBox: null,
-    cx: x => `geo ${x}`.trim(),
   };
 
   const simulateMapReadyEvent = google => {

@@ -2,20 +2,20 @@
 
 exports[`GoogleMaps expect render correctly with the map rendered 1`] = `
 <div
-  className="geo"
+  className="ais-GeoSearch"
 >
   <div
-    className="geo map"
+    className="ais-GeoSearch-map"
   />
 </div>
 `;
 
 exports[`GoogleMaps expect render correctly with the map rendered 2`] = `
 <div
-  className="geo"
+  className="ais-GeoSearch"
 >
   <div
-    className="geo map"
+    className="ais-GeoSearch-map"
   />
   <div>
     This is the children
@@ -25,10 +25,10 @@ exports[`GoogleMaps expect render correctly with the map rendered 2`] = `
 
 exports[`GoogleMaps expect render correctly without the map rendered 1`] = `
 <div
-  className="geo"
+  className="ais-GeoSearch"
 >
   <div
-    className="geo map"
+    className="ais-GeoSearch-map"
   />
 </div>
 `;

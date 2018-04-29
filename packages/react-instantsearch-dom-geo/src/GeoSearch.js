@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { createClassNames } from 'react-instantsearch-dom';
 import { LatLngPropType } from './propTypes';
 import Provider from './Provider';
 import GoogleMaps from './GoogleMaps';
-
-const cx = createClassNames('GeoSearch');
 
 class GeoSearch extends Component {
   static propTypes = {
@@ -64,7 +61,6 @@ class GeoSearch extends Component {
     return (
       <GoogleMaps
         testID="GoogleMaps"
-        cx={cx}
         google={google}
         initialZoom={initialZoom}
         initialPosition={initialPosition}

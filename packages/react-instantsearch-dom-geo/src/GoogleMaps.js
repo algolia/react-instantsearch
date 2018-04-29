@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+// @TODO: Update this import when the package is correctly split:
+// import { createClassNames } from 'react-instantsearch-dom';
+import createClassNames from '../../react-instantsearch/src/components/createClassNames';
 import { LatLngPropType, BoundingBoxPropType } from './propTypes';
+
+const cx = createClassNames('GeoSearch');
 
 export const GOOGLE_MAPS_CONTEXT = '__ais_geo_search__google_maps__';
 
 class GoogleMaps extends Component {
   static propTypes = {
-    cx: PropTypes.func.isRequired,
     google: PropTypes.object.isRequired,
     initialZoom: PropTypes.number.isRequired,
     initialPosition: LatLngPropType.isRequired,
@@ -177,7 +181,7 @@ class GoogleMaps extends Component {
   };
 
   render() {
-    const { cx, children } = this.props;
+    const { children } = this.props;
     const { isMapReady } = this.state;
 
     return (

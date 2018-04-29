@@ -2,7 +2,6 @@
 
 exports[`GeoSearch expect to render 1`] = `
 <GoogleMaps
-  cx={[Function]}
   google={
     Object {
       "maps": Object {
