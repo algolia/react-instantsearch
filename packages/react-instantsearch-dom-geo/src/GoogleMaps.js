@@ -88,8 +88,8 @@ class GoogleMaps extends Component {
     const { isMapReady } = this.state;
 
     return (
-      <div ref={c => (this.element = c)} className={cx('')}>
-        <div className={cx('map')} />
+      <div className={cx('')}>
+        <div ref={c => (this.element = c)} className={cx('map')} />
         {isMapReady && children}
       </div>
     );
