@@ -1,7 +1,7 @@
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import { Connector, STATE_CONTEXT } from '../Connector';
+import { Connector } from '../Connector';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -125,38 +125,6 @@ describe('Connector', () => {
       lastRenderArgs(children).toggleRefineOnMapMove();
 
       expect(wrapper.state().isRefineOnMapMove).toBe(true);
-    });
-  });
-
-  describe('context', () => {
-    it('expect to expose hasMapMoveSinceLastRefine & setMapMoveSinceLastRefine', () => {
-      const props = {
-        ...defaultProps,
-      };
-
-      const wrapper = shallow(<Connector {...props}>{x => x}</Connector>);
-
-      expect(wrapper.instance().getChildContext()).toEqual({
-        [STATE_CONTEXT]: expect.objectContaining({
-          hasMapMoveSinceLastRefine: false,
-          setMapMoveSinceLastRefine: expect.any(Function),
-        }),
-      });
-    });
-
-    it('expect to expose isRefineOnMapMove & toggleRefineOnMapMove', () => {
-      const props = {
-        ...defaultProps,
-      };
-
-      const wrapper = shallow(<Connector {...props}>{x => x}</Connector>);
-
-      expect(wrapper.instance().getChildContext()).toEqual({
-        [STATE_CONTEXT]: expect.objectContaining({
-          isRefineOnMapMove: true,
-          toggleRefineOnMapMove: expect.any(Function),
-        }),
-      });
     });
   });
 });

@@ -17,32 +17,10 @@ export class Connector extends Component {
     currentRefinement: BoundingBoxPropType,
   };
 
-  static childContextTypes = {
-    [STATE_CONTEXT]: PropTypes.shape({
-      isRefineOnMapMove: PropTypes.bool.isRequired,
-      toggleRefineOnMapMove: PropTypes.func.isRequired,
-      hasMapMoveSinceLastRefine: PropTypes.bool.isRequired,
-      setMapMoveSinceLastRefine: PropTypes.func.isRequired,
-    }).isRequired,
-  };
-
   state = {
     isRefineOnMapMove: true,
     hasMapMoveSinceLastRefine: false,
   };
-
-  getChildContext() {
-    const { isRefineOnMapMove, hasMapMoveSinceLastRefine } = this.state;
-
-    return {
-      [STATE_CONTEXT]: {
-        toggleRefineOnMapMove: this.toggleRefineOnMapMove,
-        setMapMoveSinceLastRefine: this.setMapMoveSinceLastRefine,
-        isRefineOnMapMove,
-        hasMapMoveSinceLastRefine,
-      },
-    };
-  }
 
   toggleRefineOnMapMove = () =>
     this.setState(({ isRefineOnMapMove }) => ({
