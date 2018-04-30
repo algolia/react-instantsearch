@@ -13,292 +13,346 @@ describe('GeoSearch', () => {
     google: createFakeGoogleReference(),
   };
 
-  const defaultRenderProvidedProps = {
+  const defaultConnectorProps = {
     hits: [],
     isRefineOnMapMove: true,
     hasMapMoveSinceLastRefine: false,
     refine: () => {},
+    toggleRefineOnMapMove: () => {},
     setMapMoveSinceLastRefine: () => {},
   };
 
-  const renderProps = ({ props, renderProvidedProps, children = () => null }) =>
+  const renderConnector = ({ props, connectorProps, children = () => null }) =>
     shallow(<GeoSearch {...props}>{children}</GeoSearch>)
-      .find('[testID="Provider"]')
+      .find('[testID="Connector"]')
       .props()
-      .children(renderProvidedProps);
+      .children(connectorProps);
 
-  it('expect to render', () => {
-    const children = jest.fn(() => <div>Hello this is the children</div>);
+  describe('Provider', () => {
+    it('expect to render', () => {
+      const props = {
+        ...defaultProps,
+      };
 
-    const props = {
-      ...defaultProps,
-    };
+      const connectorProps = {
+        ...defaultConnectorProps,
+      };
 
-    const renderProvidedProps = {
-      ...defaultRenderProvidedProps,
-    };
+      const renderPropsWrapper = shallow(
+        <ShallowWapper>
+          {renderConnector({ props, connectorProps })}
+        </ShallowWapper>
+      );
 
-    const renderPropsWrapper = shallow(
-      <ShallowWapper>
-        {renderProps({ props, renderProvidedProps, children })}
-      </ShallowWapper>
-    );
-
-    expect(renderPropsWrapper).toMatchSnapshot();
-    expect(children).toHaveBeenCalledTimes(1);
-    expect(children).toHaveBeenCalledWith({
-      hits: [],
+      expect(renderPropsWrapper).toMatchSnapshot();
     });
-  });
 
-  it('expect to render with initialZoom & initialPosition', () => {
-    const props = {
-      ...defaultProps,
-      initialZoom: 8,
-      initialPosition: {
+    it('expect to render with hits', () => {
+      const props = {
+        ...defaultProps,
+      };
+
+      const connectorProps = {
+        ...defaultConnectorProps,
+        hits: [
+          { objectID: '0001' },
+          { objectID: '0002' },
+          { objectID: '0003' },
+        ],
+      };
+
+      const renderPropsWrapper = shallow(
+        <ShallowWapper>
+          {renderConnector({ props, connectorProps })}
+        </ShallowWapper>
+      );
+
+      const providerProps = renderPropsWrapper
+        .find('[testID="Provider"]')
+        .props();
+
+      expect(providerProps.hits).toEqual([
+        { objectID: '0001' },
+        { objectID: '0002' },
+        { objectID: '0003' },
+      ]);
+    });
+
+    it('expect to render with position', () => {
+      const props = {
+        ...defaultProps,
+      };
+
+      const connectorProps = {
+        ...defaultConnectorProps,
+        position: {
+          lat: 10,
+          lng: 12,
+        },
+      };
+
+      const renderConnectorWrapper = shallow(
+        <ShallowWapper>
+          {renderConnector({ props, connectorProps })}
+        </ShallowWapper>
+      );
+
+      const providerProps = renderConnectorWrapper
+        .find('[testID="Provider"]')
+        .props();
+
+      expect(providerProps.position).toEqual({
         lat: 10,
         lng: 12,
-      },
-    };
+      });
+    });
 
-    const renderProvidedProps = {
-      ...defaultRenderProvidedProps,
-    };
+    it('expect to render with currentRefinement', () => {
+      const props = {
+        ...defaultProps,
+      };
 
-    const renderPropsWrapper = shallow(
-      <ShallowWapper>
-        {renderProps({ props, renderProvidedProps })}
-      </ShallowWapper>
-    );
+      const connectorProps = {
+        ...defaultConnectorProps,
+        currentRefinement: {
+          northEast: {
+            lat: 10,
+            lng: 12,
+          },
+          southWest: {
+            lat: 12,
+            lng: 14,
+          },
+        },
+      };
 
-    const googleMapProps = renderPropsWrapper
-      .find('[testID="GoogleMaps"]')
-      .props();
+      const renderConnectorWrapper = shallow(
+        <ShallowWapper>
+          {renderConnector({ props, connectorProps })}
+        </ShallowWapper>
+      );
 
-    expect(googleMapProps.initialZoom).toBe(8);
-    expect(googleMapProps.initialPosition).toEqual({
-      lat: 10,
-      lng: 12,
+      const providerProps = renderConnectorWrapper
+        .find('[testID="Provider"]')
+        .props();
+
+      expect(providerProps.currentRefinement).toEqual({
+        northEast: {
+          lat: 10,
+          lng: 12,
+        },
+        southWest: {
+          lat: 12,
+          lng: 14,
+        },
+      });
     });
   });
 
-  it('expect to render with mapOptions', () => {
-    const props = {
-      ...defaultProps,
-      mapOptions: {
+  describe('GoogleMaps', () => {
+    const defaultProviderProps = {
+      onChange: () => {},
+      onIdle: () => {},
+      shouldUpdate: () => true,
+    };
+
+    const renderProvider = ({ connectorPropsWrapper, providerProps }) =>
+      connectorPropsWrapper
+        .find('[testID="Provider"]')
+        .props()
+        .children(providerProps);
+
+    it('expect to render', () => {
+      const children = jest.fn(() => <div>Children</div>);
+
+      const props = {
+        ...defaultProps,
+      };
+
+      const connectorProps = {
+        ...defaultConnectorProps,
+      };
+
+      const providerProps = {
+        ...defaultProviderProps,
+      };
+
+      const connectorPropsWrapper = shallow(
+        <ShallowWapper>
+          {renderConnector({ props, connectorProps, children })}
+        </ShallowWapper>
+      );
+
+      const providerPropsWrapper = shallow(
+        <ShallowWapper>
+          {renderProvider({ connectorPropsWrapper, providerProps })}
+        </ShallowWapper>
+      );
+
+      expect(providerPropsWrapper).toMatchSnapshot();
+      expect(children).toHaveBeenCalledWith({ hits: [] });
+    });
+
+    it('expect to render with initialZoom', () => {
+      const props = {
+        ...defaultProps,
+        initialZoom: 8,
+      };
+
+      const connectorProps = {
+        ...defaultConnectorProps,
+      };
+
+      const providerProps = {
+        ...defaultProviderProps,
+      };
+
+      const connectorPropsWrapper = shallow(
+        <ShallowWapper>
+          {renderConnector({ props, connectorProps })}
+        </ShallowWapper>
+      );
+
+      const providerPropsWrapper = shallow(
+        <ShallowWapper>
+          {renderProvider({ connectorPropsWrapper, providerProps })}
+        </ShallowWapper>
+      );
+
+      const googleMapProps = providerPropsWrapper
+        .find('[testID="GoogleMaps"]')
+        .props();
+
+      expect(googleMapProps.initialZoom).toBe(8);
+    });
+
+    it('expect to render with postiion', () => {
+      const props = {
+        ...defaultProps,
+      };
+
+      const connectorProps = {
+        ...defaultConnectorProps,
+        position: {
+          lat: 10,
+          lng: 12,
+        },
+      };
+
+      const providerProps = {
+        ...defaultProviderProps,
+      };
+
+      const connectorPropsWrapper = shallow(
+        <ShallowWapper>
+          {renderConnector({ props, connectorProps })}
+        </ShallowWapper>
+      );
+
+      const providerPropsWrapper = shallow(
+        <ShallowWapper>
+          {renderProvider({ connectorPropsWrapper, providerProps })}
+        </ShallowWapper>
+      );
+
+      const googleMapProps = providerPropsWrapper
+        .find('[testID="GoogleMaps"]')
+        .props();
+
+      expect(googleMapProps.initialPosition).toEqual({
+        lat: 10,
+        lng: 12,
+      });
+    });
+
+    it('expect to render with initialPosition', () => {
+      const props = {
+        ...defaultProps,
+        initialPosition: {
+          lat: 10,
+          lng: 12,
+        },
+      };
+
+      const connectorProps = {
+        ...defaultConnectorProps,
+      };
+
+      const providerProps = {
+        ...defaultProviderProps,
+      };
+
+      const connectorPropsWrapper = shallow(
+        <ShallowWapper>
+          {renderConnector({ props, connectorProps })}
+        </ShallowWapper>
+      );
+
+      const providerPropsWrapper = shallow(
+        <ShallowWapper>
+          {renderProvider({ connectorPropsWrapper, providerProps })}
+        </ShallowWapper>
+      );
+
+      const googleMapProps = providerPropsWrapper
+        .find('[testID="GoogleMaps"]')
+        .props();
+
+      expect(googleMapProps.initialPosition).toEqual({
+        lat: 10,
+        lng: 12,
+      });
+    });
+
+    it('expect to render with map options', () => {
+      const props = {
+        ...defaultProps,
+        mapOptions: {
+          streetViewControl: true,
+        },
+      };
+
+      const connectorProps = {
+        ...defaultConnectorProps,
+      };
+
+      const providerProps = {
+        ...defaultProviderProps,
+      };
+
+      const connectorPropsWrapper = shallow(
+        <ShallowWapper>
+          {renderConnector({ props, connectorProps })}
+        </ShallowWapper>
+      );
+
+      const providerPropsWrapper = shallow(
+        <ShallowWapper>
+          {renderProvider({ connectorPropsWrapper, providerProps })}
+        </ShallowWapper>
+      );
+
+      const googleMapProps = providerPropsWrapper
+        .find('[testID="GoogleMaps"]')
+        .props();
+
+      expect(googleMapProps.mapOptions).toEqual({
         streetViewControl: true,
-      },
-    };
-
-    const renderProvidedProps = {
-      ...defaultRenderProvidedProps,
-    };
-
-    const renderPropsWrapper = shallow(
-      <ShallowWapper>
-        {renderProps({ props, renderProvidedProps })}
-      </ShallowWapper>
-    );
-
-    const googleMapProps = renderPropsWrapper
-      .find('[testID="GoogleMaps"]')
-      .props();
-
-    expect(googleMapProps.mapOptions).toEqual({
-      streetViewControl: true,
-    });
-  });
-
-  it('expect to render with isRefineOnMapMove', () => {
-    const props = {
-      ...defaultProps,
-    };
-
-    const renderProvidedProps = {
-      ...defaultRenderProvidedProps,
-      isRefineOnMapMove: false,
-    };
-
-    const renderPropsWrapper = shallow(
-      <ShallowWapper>
-        {renderProps({ props, renderProvidedProps })}
-      </ShallowWapper>
-    );
-
-    const googleMapProps = renderPropsWrapper
-      .find('[testID="GoogleMaps"]')
-      .props();
-
-    expect(googleMapProps.isRefineOnMapMove).toBe(false);
-  });
-
-  it('expect to render with hasMapMoveSinceLastRefine', () => {
-    const props = {
-      ...defaultProps,
-    };
-
-    const renderProvidedProps = {
-      ...defaultRenderProvidedProps,
-      hasMapMoveSinceLastRefine: true,
-    };
-
-    const renderPropsWrapper = shallow(
-      <ShallowWapper>
-        {renderProps({ props, renderProvidedProps })}
-      </ShallowWapper>
-    );
-
-    const googleMapProps = renderPropsWrapper
-      .find('[testID="GoogleMaps"]')
-      .props();
-
-    expect(googleMapProps.hasMapMoveSinceLastRefine).toBe(true);
-  });
-
-  it('expect to render with position', () => {
-    const props = {
-      ...defaultProps,
-    };
-
-    const renderProvidedProps = {
-      ...defaultRenderProvidedProps,
-      position: {
-        lat: 10,
-        lng: 12,
-      },
-    };
-
-    const renderPropsWrapper = shallow(
-      <ShallowWapper>
-        {renderProps({ props, renderProvidedProps })}
-      </ShallowWapper>
-    );
-
-    const googleMapProps = renderPropsWrapper
-      .find('[testID="GoogleMaps"]')
-      .props();
-
-    expect(googleMapProps.position).toEqual({
-      lat: 10,
-      lng: 12,
-    });
-  });
-
-  it('expect to render with refine', () => {
-    const refine = () => {};
-
-    const props = {
-      ...defaultProps,
-    };
-
-    const renderProvidedProps = {
-      ...defaultRenderProvidedProps,
-      refine,
-    };
-
-    const renderPropsWrapper = shallow(
-      <ShallowWapper>
-        {renderProps({ props, renderProvidedProps })}
-      </ShallowWapper>
-    );
-
-    const googleMapProps = renderPropsWrapper
-      .find('[testID="GoogleMaps"]')
-      .props();
-
-    expect(googleMapProps.refine).toBe(refine);
-  });
-
-  it('expect to render with setMapMoveSinceLastRefine', () => {
-    const setMapMoveSinceLastRefine = () => {};
-
-    const props = {
-      ...defaultProps,
-    };
-
-    const renderProvidedProps = {
-      ...defaultRenderProvidedProps,
-      setMapMoveSinceLastRefine,
-    };
-
-    const renderPropsWrapper = shallow(
-      <ShallowWapper>
-        {renderProps({ props, renderProvidedProps })}
-      </ShallowWapper>
-    );
-
-    const googleMapProps = renderPropsWrapper
-      .find('[testID="GoogleMaps"]')
-      .props();
-
-    expect(googleMapProps.setMapMoveSinceLastRefine).toBe(
-      setMapMoveSinceLastRefine
-    );
-  });
-
-  describe('boundingBox', () => {
-    it('expect to use hits when currentRefinement is not defined and hits are not empty', () => {
-      const google = createFakeGoogleReference();
-
-      google.maps.LatLngBounds.mockImplementation(() => ({
-        extend: jest.fn().mockReturnThis(),
-        getNorthEast: () => ({
-          toJSON: () => ({
-            lat: 10,
-            lng: 10,
-          }),
-        }),
-        getSouthWest: () => ({
-          toJSON: () => ({
-            lat: 14,
-            lng: 14,
-          }),
-        }),
-      }));
-
-      const props = {
-        ...defaultProps,
-        google,
-      };
-
-      const renderProvidedProps = {
-        ...defaultRenderProvidedProps,
-        hits: [
-          { _geoloc: { lat: 10, lng: 12 } },
-          { _geoloc: { lat: 12, lng: 14 } },
-        ],
-      };
-
-      const renderPropsWrapper = shallow(
-        <ShallowWapper>
-          {renderProps({ props, renderProvidedProps })}
-        </ShallowWapper>
-      );
-
-      const googleMapProps = renderPropsWrapper
-        .find('[testID="GoogleMaps"]')
-        .props();
-
-      expect(googleMapProps.boundingBox).toEqual({
-        northEast: {
-          lat: 10,
-          lng: 10,
-        },
-        southWest: {
-          lat: 14,
-          lng: 14,
-        },
       });
     });
 
-    it("expect to use currentRefinement when it's defined and hits are empty", () => {
+    it('expect to render with boundingBox', () => {
       const props = {
         ...defaultProps,
       };
 
-      const renderProvidedProps = {
-        ...defaultRenderProvidedProps,
-        currentRefinement: {
+      const connectorProps = {
+        ...defaultConnectorProps,
+      };
+
+      const providerProps = {
+        ...defaultProviderProps,
+        boundingBox: {
           northEast: {
             lat: 10,
             lng: 12,
@@ -310,13 +364,19 @@ describe('GeoSearch', () => {
         },
       };
 
-      const renderPropsWrapper = shallow(
+      const connectorPropsWrapper = shallow(
         <ShallowWapper>
-          {renderProps({ props, renderProvidedProps })}
+          {renderConnector({ props, connectorProps })}
         </ShallowWapper>
       );
 
-      const googleMapProps = renderPropsWrapper
+      const providerPropsWrapper = shallow(
+        <ShallowWapper>
+          {renderProvider({ connectorPropsWrapper, providerProps })}
+        </ShallowWapper>
+      );
+
+      const googleMapProps = providerPropsWrapper
         .find('[testID="GoogleMaps"]')
         .props();
 
@@ -332,71 +392,37 @@ describe('GeoSearch', () => {
       });
     });
 
-    it("expect to use currentRefinement when it's defined and hits are not empty", () => {
+    it('expect to render with boundingBoxPadding', () => {
       const props = {
         ...defaultProps,
       };
 
-      const renderProvidedProps = {
-        ...defaultRenderProvidedProps,
-        hits: [
-          { _geoloc: { lat: 10, lng: 12 } },
-          { _geoloc: { lat: 12, lng: 14 } },
-        ],
-        currentRefinement: {
-          northEast: {
-            lat: 10,
-            lng: 12,
-          },
-          southWest: {
-            lat: 12,
-            lng: 14,
-          },
-        },
+      const connectorProps = {
+        ...defaultConnectorProps,
       };
 
-      const renderPropsWrapper = shallow(
+      const providerProps = {
+        ...defaultProviderProps,
+        boundingBoxPadding: 10,
+      };
+
+      const connectorPropsWrapper = shallow(
         <ShallowWapper>
-          {renderProps({ props, renderProvidedProps })}
+          {renderConnector({ props, connectorProps })}
         </ShallowWapper>
       );
 
-      const googleMapProps = renderPropsWrapper
-        .find('[testID="GoogleMaps"]')
-        .props();
-
-      expect(googleMapProps.boundingBox).toEqual({
-        northEast: {
-          lat: 10,
-          lng: 12,
-        },
-        southWest: {
-          lat: 12,
-          lng: 14,
-        },
-      });
-    });
-
-    it("expect to use currentRefinement when it's not defined and hits are empty", () => {
-      const props = {
-        ...defaultProps,
-      };
-
-      const renderProvidedProps = {
-        ...defaultRenderProvidedProps,
-      };
-
-      const renderPropsWrapper = shallow(
+      const providerPropsWrapper = shallow(
         <ShallowWapper>
-          {renderProps({ props, renderProvidedProps })}
+          {renderProvider({ connectorPropsWrapper, providerProps })}
         </ShallowWapper>
       );
 
-      const googleMapProps = renderPropsWrapper
+      const googleMapProps = providerPropsWrapper
         .find('[testID="GoogleMaps"]')
         .props();
 
-      expect(googleMapProps.boundingBox).toBe(undefined);
+      expect(googleMapProps.boundingBoxPadding).toBe(10);
     });
   });
 });

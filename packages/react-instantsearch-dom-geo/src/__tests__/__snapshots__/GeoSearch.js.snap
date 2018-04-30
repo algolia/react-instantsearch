@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`GeoSearch expect to render 1`] = `
+exports[`GeoSearch GoogleMaps expect to render 1`] = `
 <GoogleMaps
   google={
     Object {
@@ -23,7 +23,6 @@ exports[`GeoSearch expect to render 1`] = `
       },
     }
   }
-  hasMapMoveSinceLastRefine={false}
   initialPosition={
     Object {
       "lat": 0,
@@ -31,14 +30,47 @@ exports[`GeoSearch expect to render 1`] = `
     }
   }
   initialZoom={1}
-  isRefineOnMapMove={true}
   mapOptions={Object {}}
-  refine={[Function]}
-  setMapMoveSinceLastRefine={[Function]}
+  onChange={[Function]}
+  onIdle={[Function]}
+  shouldUpdate={[Function]}
   testID="GoogleMaps"
 >
   <div>
-    Hello this is the children
+    Children
   </div>
 </GoogleMaps>
+`;
+
+exports[`GeoSearch Provider expect to render 1`] = `
+<Provider
+  google={
+    Object {
+      "maps": Object {
+        "ControlPosition": Object {
+          "LEFT_TOP": "left:top",
+        },
+        "LatLng": [MockFunction],
+        "LatLngBounds": [MockFunction],
+        "Map": [MockFunction],
+        "Marker": [MockFunction],
+        "OverlayView": Object {
+          "getPanes": [MockFunction],
+          "getProjection": [MockFunction],
+          "setMap": [MockFunction],
+        },
+        "event": Object {
+          "addListenerOnce": [MockFunction],
+        },
+      },
+    }
+  }
+  hasMapMoveSinceLastRefine={false}
+  hits={Array []}
+  isRefineOnMapMove={true}
+  refine={[Function]}
+  setMapMoveSinceLastRefine={[Function]}
+  testID="Provider"
+  toggleRefineOnMapMove={[Function]}
+/>
 `;
