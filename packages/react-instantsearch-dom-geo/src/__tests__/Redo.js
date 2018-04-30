@@ -1,6 +1,7 @@
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+import { createFakeMapInstance } from '../../test/mockGoogleMaps';
 import { STATE_CONTEXT } from '../Provider';
 import { GOOGLE_MAPS_CONTEXT } from '../GoogleMaps';
 import { Redo } from '../Redo';
@@ -17,9 +18,10 @@ describe('Redo', () => {
       isRefineOnMapMove: true,
       hasMapMoveSinceLastRefine: false,
       toggleRefineOnMapMove: () => {},
+      refineWithInstance: () => {},
     },
     [GOOGLE_MAPS_CONTEXT]: {
-      refineWithBoundingBox: () => {},
+      instance: createFakeMapInstance(),
     },
   };
 
@@ -123,16 +125,22 @@ describe('Redo', () => {
     ).toHaveBeenCalledTimes(0);
   });
 
-  it('expect to call refineWithBoundingBox on button click', () => {
+  it('expect to call refineWithInstance on button click', () => {
+    const instance = createFakeMapInstance();
+
     const props = {
       ...defaultProps,
     };
 
     const context = {
       ...defaultContext,
+      [STATE_CONTEXT]: {
+        ...getStateContext(defaultContext),
+        refineWithInstance: jest.fn(),
+      },
       [GOOGLE_MAPS_CONTEXT]: {
         ...getGoogleMapsContext(defaultContext),
-        refineWithBoundingBox: jest.fn(),
+        instance,
       },
     };
 
@@ -140,10 +148,13 @@ describe('Redo', () => {
       context,
     });
 
+    const { refineWithInstance } = getStateContext(context);
+
+    expect(refineWithInstance).toHaveBeenCalledTimes(0);
+
     wrapper.find('button').simulate('click');
 
-    expect(
-      getGoogleMapsContext(context).refineWithBoundingBox
-    ).toHaveBeenCalledTimes(1);
+    expect(refineWithInstance).toHaveBeenCalledTimes(1);
+    expect(refineWithInstance).toHaveBeenCalledWith(instance);
   });
 });
