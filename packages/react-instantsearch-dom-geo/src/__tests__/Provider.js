@@ -1,22 +1,30 @@
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import { Provider, STATE_CONTEXT } from '../Provider';
+import {
+  createFakeGoogleReference,
+  createFakeMapInstance,
+} from '../../test/mockGoogleMaps';
+import Provider, { STATE_CONTEXT } from '../Provider';
 
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('Provider', () => {
   const defaultProps = {
+    google: createFakeGoogleReference(),
     hits: [],
-    position: null,
-    currentRefinement: null,
-    isRefinedWithMap: false,
+    initialPosition: { lat: 0, lng: 0 },
+    isRefineOnMapMove: true,
+    hasMapMoveSinceLastRefine: false,
     refine: () => {},
+    toggleRefineOnMapMove: () => {},
+    setMapMoveSinceLastRefine: () => {},
+    children: () => {},
   };
 
   const lastRenderArgs = fn => fn.mock.calls[fn.mock.calls.length - 1][0];
 
-  it('expect to call children with props', () => {
+  it('expect to render with default props', () => {
     const children = jest.fn(x => x);
 
     const props = {
@@ -27,34 +35,164 @@ describe('Provider', () => {
 
     expect(children).toHaveBeenCalledTimes(1);
     expect(children).toHaveBeenCalledWith({
-      hits: [],
-      position: null,
-      currentRefinement: null,
-      isRefinedWithMap: false,
-      isRefineOnMapMove: true,
-      toggleRefineOnMapMove: expect.any(Function),
-      hasMapMoveSinceLastRefine: false,
-      setMapMoveSinceLastRefine: expect.any(Function),
-      refine: expect.any(Function),
+      boundingBox: undefined,
+      boundingBoxPadding: undefined,
+      position: { lat: 0, lng: 0 },
+      onChange: expect.any(Function),
+      onIdle: expect.any(Function),
+      shouldUpdate: expect.any(Function),
     });
   });
 
-  describe('setMapMoveSinceLastRefine', () => {
-    it('expect to update the state with the given value', () => {
+  it('expect to render with position', () => {
+    const children = jest.fn(x => x);
+
+    const props = {
+      ...defaultProps,
+      position: {
+        lat: 10,
+        lng: 12,
+      },
+    };
+
+    shallow(<Provider {...props}>{children}</Provider>);
+
+    expect(lastRenderArgs(children).position).toEqual({
+      lat: 10,
+      lng: 12,
+    });
+  });
+
+  it('expect to render with initialPosition', () => {
+    const children = jest.fn(x => x);
+
+    const props = {
+      ...defaultProps,
+      initialPosition: {
+        lat: 10,
+        lng: 12,
+      },
+    };
+
+    shallow(<Provider {...props}>{children}</Provider>);
+
+    expect(lastRenderArgs(children).position).toEqual({
+      lat: 10,
+      lng: 12,
+    });
+  });
+
+  describe('boundingBox', () => {
+    it('expect to use hits when currentRefinement is not defined and hits are not empty', () => {
+      const children = jest.fn(x => x);
+      const google = createFakeGoogleReference();
+
+      google.maps.LatLngBounds.mockImplementation(() => ({
+        extend: jest.fn().mockReturnThis(),
+        getNorthEast: () => ({
+          toJSON: () => ({
+            lat: 10,
+            lng: 10,
+          }),
+        }),
+        getSouthWest: () => ({
+          toJSON: () => ({
+            lat: 14,
+            lng: 14,
+          }),
+        }),
+      }));
+
+      const props = {
+        ...defaultProps,
+        hits: [
+          { _geoloc: { lat: 10, lng: 12 } },
+          { _geoloc: { lat: 12, lng: 14 } },
+        ],
+        google,
+      };
+
+      shallow(<Provider {...props}>{children}</Provider>);
+
+      expect(lastRenderArgs(children).boundingBox).toEqual({
+        northEast: {
+          lat: 10,
+          lng: 10,
+        },
+        southWest: {
+          lat: 14,
+          lng: 14,
+        },
+      });
+    });
+
+    it("expect to use currentRefinement when it's defined and hits are empty", () => {
       const children = jest.fn(x => x);
 
       const props = {
         ...defaultProps,
+        currentRefinement: {
+          northEast: {
+            lat: 10,
+            lng: 12,
+          },
+          southWest: {
+            lat: 12,
+            lng: 14,
+          },
+        },
       };
 
-      const wrapper = shallow(<Provider {...props}>{children}</Provider>);
+      shallow(<Provider {...props}>{children}</Provider>);
 
-      lastRenderArgs(children).setMapMoveSinceLastRefine(true);
-
-      expect(wrapper.state().hasMapMoveSinceLastRefine).toBe(true);
+      expect(lastRenderArgs(children).boundingBox).toEqual({
+        northEast: {
+          lat: 10,
+          lng: 12,
+        },
+        southWest: {
+          lat: 12,
+          lng: 14,
+        },
+      });
     });
 
-    it('expect to only update the state when the given is different', () => {
+    it("expect to use currentRefinement when it's defined and hits are not empty", () => {
+      const children = jest.fn(x => x);
+
+      const props = {
+        ...defaultProps,
+        hits: [
+          { _geoloc: { lat: 10, lng: 12 } },
+          { _geoloc: { lat: 12, lng: 14 } },
+        ],
+        currentRefinement: {
+          northEast: {
+            lat: 10,
+            lng: 12,
+          },
+          southWest: {
+            lat: 12,
+            lng: 14,
+          },
+        },
+      };
+
+      shallow(<Provider {...props}>{children}</Provider>);
+
+      expect(lastRenderArgs(children).boundingBox).toEqual({
+        northEast: {
+          lat: 10,
+          lng: 12,
+        },
+        southWest: {
+          lat: 12,
+          lng: 14,
+        },
+      });
+    });
+
+    it("expect to use currentRefinement when it's not defined and hits are empty", () => {
       const children = jest.fn(x => x);
 
       const props = {
@@ -63,35 +201,30 @@ describe('Provider', () => {
 
       shallow(<Provider {...props}>{children}</Provider>);
 
-      expect(children).toHaveBeenCalledTimes(1);
-      expect(children).toHaveBeenLastCalledWith(
-        expect.objectContaining({
-          hasMapMoveSinceLastRefine: false,
-        })
-      );
-
-      lastRenderArgs(children).setMapMoveSinceLastRefine(true);
-
-      expect(children).toHaveBeenCalledTimes(2);
-      expect(children).toHaveBeenLastCalledWith(
-        expect.objectContaining({
-          hasMapMoveSinceLastRefine: true,
-        })
-      );
-
-      lastRenderArgs(children).setMapMoveSinceLastRefine(true);
-
-      expect(children).toHaveBeenCalledTimes(2);
-      expect(children).toHaveBeenLastCalledWith(
-        expect.objectContaining({
-          hasMapMoveSinceLastRefine: true,
-        })
-      );
+      expect(lastRenderArgs(children).boundingBox).toBe(undefined);
     });
   });
 
-  describe('toggleRefineOnMapMove', () => {
-    it('expect to update the state with the invert of previous value (true)', () => {
+  describe('onChange', () => {
+    it('expect to call setMapMoveSinceLast refine', () => {
+      const children = jest.fn(x => x);
+
+      const props = {
+        ...defaultProps,
+        setMapMoveSinceLastRefine: jest.fn(),
+      };
+
+      shallow(<Provider {...props}>{children}</Provider>);
+
+      expect(props.setMapMoveSinceLastRefine).toHaveBeenCalledTimes(0);
+
+      lastRenderArgs(children).onChange();
+
+      expect(props.setMapMoveSinceLastRefine).toHaveBeenCalledTimes(1);
+      expect(props.setMapMoveSinceLastRefine).toHaveBeenCalledWith(true);
+    });
+
+    it('expect to schedule a refine call when refine on map move is enabled', () => {
       const children = jest.fn(x => x);
 
       const props = {
@@ -100,51 +233,204 @@ describe('Provider', () => {
 
       const wrapper = shallow(<Provider {...props}>{children}</Provider>);
 
-      expect(wrapper.state().isRefineOnMapMove).toBe(true);
+      expect(wrapper.instance().isPendingRefine).toBe(false);
 
-      lastRenderArgs(children).toggleRefineOnMapMove();
+      lastRenderArgs(children).onChange();
 
-      expect(wrapper.state().isRefineOnMapMove).toBe(false);
+      expect(wrapper.instance().isPendingRefine).toBe(true);
     });
 
-    it('expect to update the state with the invert of previous value (false)', () => {
-      const children = jest.fn();
+    it('expect to not schedule a refine call when refine on map move is disabled', () => {
+      const children = jest.fn(x => x);
 
       const props = {
         ...defaultProps,
+        isRefineOnMapMove: false,
       };
 
       const wrapper = shallow(<Provider {...props}>{children}</Provider>);
 
-      wrapper.setState({
-        isRefineOnMapMove: false,
-      });
+      expect(wrapper.instance().isPendingRefine).toBe(false);
 
-      expect(wrapper.state().isRefineOnMapMove).toBe(false);
+      lastRenderArgs(children).onChange();
 
-      lastRenderArgs(children).toggleRefineOnMapMove();
-
-      expect(wrapper.state().isRefineOnMapMove).toBe(true);
+      expect(wrapper.instance().isPendingRefine).toBe(false);
     });
   });
 
-  describe('context', () => {
-    it('expect to expose hasMapMoveSinceLastRefine & setMapMoveSinceLastRefine', () => {
+  describe('onIdle', () => {
+    it('expect to call refine when there is a pending refinement', () => {
+      const mapInstance = createFakeMapInstance();
+      const children = jest.fn(x => x);
+
+      mapInstance.getBounds.mockImplementation(() => ({
+        getNorthEast: () => ({
+          toJSON: () => ({
+            lat: 10,
+            lng: 12,
+          }),
+        }),
+        getSouthWest: () => ({
+          toJSON: () => ({
+            lat: 12,
+            lng: 14,
+          }),
+        }),
+      }));
+
+      const props = {
+        ...defaultProps,
+        refine: jest.fn(),
+      };
+
+      shallow(<Provider {...props}>{children}</Provider>);
+
+      lastRenderArgs(children).onChange();
+      lastRenderArgs(children).onIdle({ instance: mapInstance });
+
+      expect(props.refine).toHaveBeenCalledTimes(1);
+      expect(props.refine).toHaveBeenCalledWith({
+        northEast: {
+          lat: 10,
+          lng: 12,
+        },
+        southWest: {
+          lat: 12,
+          lng: 14,
+        },
+      });
+    });
+
+    it('expect to call setMapMoveSinceLastRefine when there is a pending refinement', () => {
+      const mapInstance = createFakeMapInstance();
+      const children = jest.fn(x => x);
+
+      mapInstance.getBounds.mockImplementation(() => ({
+        getNorthEast: () => ({
+          toJSON: () => {},
+        }),
+        getSouthWest: () => ({
+          toJSON: () => {},
+        }),
+      }));
+
+      const props = {
+        ...defaultProps,
+        setMapMoveSinceLastRefine: jest.fn(),
+      };
+
+      shallow(<Provider {...props}>{children}</Provider>);
+
+      lastRenderArgs(children).onChange();
+
+      expect(props.setMapMoveSinceLastRefine).toHaveBeenCalledTimes(1);
+
+      lastRenderArgs(children).onIdle({ instance: mapInstance });
+
+      expect(props.setMapMoveSinceLastRefine).toHaveBeenCalledTimes(2);
+      expect(props.setMapMoveSinceLastRefine).toBeCalledWith(false);
+    });
+
+    it('expect to reset the pending refinement when there is a pending refinement', () => {
+      const mapInstance = createFakeMapInstance();
+      const children = jest.fn(x => x);
+
+      mapInstance.getBounds.mockImplementation(() => ({
+        getNorthEast: () => ({
+          toJSON: () => {},
+        }),
+        getSouthWest: () => ({
+          toJSON: () => {},
+        }),
+      }));
+
+      const props = {
+        ...defaultProps,
+        refine: jest.fn(),
+      };
+
+      const wrapper = shallow(<Provider {...props}>{children}</Provider>);
+
+      lastRenderArgs(children).onChange();
+
+      expect(wrapper.instance().isPendingRefine).toBe(true);
+
+      lastRenderArgs(children).onIdle({ instance: mapInstance });
+
+      expect(wrapper.instance().isPendingRefine).toBe(false);
+    });
+
+    it('expect to be a noop when there is no pending refinement', () => {
+      const mapInstance = createFakeMapInstance();
+      const children = jest.fn(x => x);
+
+      const props = {
+        ...defaultProps,
+        refine: jest.fn(),
+        setMapMoveSinceLastRefine: jest.fn(),
+      };
+
+      const wrapper = shallow(<Provider {...props}>{children}</Provider>);
+
+      expect(wrapper.instance().isPendingRefine).toBe(false);
+
+      lastRenderArgs(children).onIdle({ instance: mapInstance });
+
+      expect(wrapper.instance().isPendingRefine).toBe(false);
+      expect(props.refine).not.toHaveBeenCalled();
+      expect(props.setMapMoveSinceLastRefine).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('shouldUpdate', () => {
+    it('expect to return true when there is no pending refinement and the map has not moved', () => {
+      const children = jest.fn(x => x);
+
       const props = {
         ...defaultProps,
       };
 
-      const wrapper = shallow(<Provider {...props}>{x => x}</Provider>);
+      shallow(<Provider {...props}>{children}</Provider>);
 
-      expect(wrapper.instance().getChildContext()).toEqual({
-        [STATE_CONTEXT]: expect.objectContaining({
-          hasMapMoveSinceLastRefine: false,
-          setMapMoveSinceLastRefine: expect.any(Function),
-        }),
-      });
+      const actual = lastRenderArgs(children).shouldUpdate();
+
+      expect(actual).toBe(true);
     });
 
-    it('expect to expose isRefineOnMapMove & toggleRefineOnMapMove', () => {
+    it('expect to return false when there is a pending refinement', () => {
+      const children = jest.fn(x => x);
+
+      const props = {
+        ...defaultProps,
+      };
+
+      shallow(<Provider {...props}>{children}</Provider>);
+
+      lastRenderArgs(children).onChange();
+
+      const actual = lastRenderArgs(children).shouldUpdate();
+
+      expect(actual).toBe(false);
+    });
+
+    it('expect to return false when the map has moved', () => {
+      const children = jest.fn(x => x);
+
+      const props = {
+        ...defaultProps,
+        hasMapMoveSinceLastRefine: true,
+      };
+
+      shallow(<Provider {...props}>{children}</Provider>);
+
+      const actual = lastRenderArgs(children).shouldUpdate();
+
+      expect(actual).toBe(false);
+    });
+  });
+
+  describe('context', () => {
+    it('expect to expose isRefineOnMapMove', () => {
       const props = {
         ...defaultProps,
       };
@@ -154,7 +440,62 @@ describe('Provider', () => {
       expect(wrapper.instance().getChildContext()).toEqual({
         [STATE_CONTEXT]: expect.objectContaining({
           isRefineOnMapMove: true,
-          toggleRefineOnMapMove: expect.any(Function),
+        }),
+      });
+    });
+
+    it('expect to expose hasMapMoveSinceLastRefine', () => {
+      const props = {
+        ...defaultProps,
+      };
+
+      const wrapper = shallow(<Provider {...props}>{x => x}</Provider>);
+
+      expect(wrapper.instance().getChildContext()).toEqual({
+        [STATE_CONTEXT]: expect.objectContaining({
+          hasMapMoveSinceLastRefine: false,
+        }),
+      });
+    });
+
+    it('expect to expose toggleRefineOnMapMove', () => {
+      const props = {
+        ...defaultProps,
+      };
+
+      const wrapper = shallow(<Provider {...props}>{x => x}</Provider>);
+
+      expect(wrapper.instance().getChildContext()).toEqual({
+        [STATE_CONTEXT]: expect.objectContaining({
+          toggleRefineOnMapMove: props.toggleRefineOnMapMove,
+        }),
+      });
+    });
+
+    it('expect to expose setMapMoveSinceLastRefine', () => {
+      const props = {
+        ...defaultProps,
+      };
+
+      const wrapper = shallow(<Provider {...props}>{x => x}</Provider>);
+
+      expect(wrapper.instance().getChildContext()).toEqual({
+        [STATE_CONTEXT]: expect.objectContaining({
+          setMapMoveSinceLastRefine: props.setMapMoveSinceLastRefine,
+        }),
+      });
+    });
+
+    it('expect to expose refineWithInstance', () => {
+      const props = {
+        ...defaultProps,
+      };
+
+      const wrapper = shallow(<Provider {...props}>{x => x}</Provider>);
+
+      expect(wrapper.instance().getChildContext()).toEqual({
+        [STATE_CONTEXT]: expect.objectContaining({
+          refineWithInstance: wrapper.instance().refineWithInstance,
         }),
       });
     });
