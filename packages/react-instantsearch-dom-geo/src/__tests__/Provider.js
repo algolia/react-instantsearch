@@ -37,48 +37,9 @@ describe('Provider', () => {
     expect(children).toHaveBeenCalledWith({
       boundingBox: undefined,
       boundingBoxPadding: undefined,
-      position: { lat: 0, lng: 0 },
       onChange: expect.any(Function),
       onIdle: expect.any(Function),
       shouldUpdate: expect.any(Function),
-    });
-  });
-
-  it('expect to render with position', () => {
-    const children = jest.fn(x => x);
-
-    const props = {
-      ...defaultProps,
-      position: {
-        lat: 10,
-        lng: 12,
-      },
-    };
-
-    shallow(<Provider {...props}>{children}</Provider>);
-
-    expect(lastRenderArgs(children).position).toEqual({
-      lat: 10,
-      lng: 12,
-    });
-  });
-
-  it('expect to render with initialPosition', () => {
-    const children = jest.fn(x => x);
-
-    const props = {
-      ...defaultProps,
-      initialPosition: {
-        lat: 10,
-        lng: 12,
-      },
-    };
-
-    shallow(<Provider {...props}>{children}</Provider>);
-
-    expect(lastRenderArgs(children).position).toEqual({
-      lat: 10,
-      lng: 12,
     });
   });
 

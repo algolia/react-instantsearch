@@ -8,7 +8,6 @@ class Provider extends Component {
   static propTypes = {
     google: PropTypes.object.isRequired,
     hits: PropTypes.arrayOf(PropTypes.object).isRequired,
-    initialPosition: LatLngPropType.isRequired,
     isRefineOnMapMove: PropTypes.bool.isRequired,
     hasMapMoveSinceLastRefine: PropTypes.bool.isRequired,
     refine: PropTypes.func.isRequired,
@@ -102,13 +101,7 @@ class Provider extends Component {
   };
 
   render() {
-    const {
-      position,
-      hits,
-      initialPosition,
-      currentRefinement,
-      children,
-    } = this.props;
+    const { hits, currentRefinement, children } = this.props;
 
     const boundingBoxPadding = !currentRefinement ? undefined : 0;
     const boundingBox =
@@ -117,7 +110,6 @@ class Provider extends Component {
         : currentRefinement;
 
     return children({
-      position: position || initialPosition,
       onChange: this.onChange,
       onIdle: this.onIdle,
       shouldUpdate: this.shouldUpdate,
