@@ -43,6 +43,73 @@ describe('Provider', () => {
     });
   });
 
+  describe('didUpdate', () => {
+    it('expect to call setMapMoveSinceLastRefine when position change', () => {
+      const children = jest.fn(x => x);
+
+      const props = {
+        ...defaultProps,
+        position: { lat: 10, lng: 12 },
+        setMapMoveSinceLastRefine: jest.fn(),
+      };
+
+      const wrapper = shallow(<Provider {...props}>{children}</Provider>);
+
+      expect(props.setMapMoveSinceLastRefine).toHaveBeenCalledTimes(0);
+
+      wrapper.setProps({
+        position: { lat: 12, lng: 14 },
+      });
+
+      expect(props.setMapMoveSinceLastRefine).toHaveBeenCalledTimes(1);
+      expect(props.setMapMoveSinceLastRefine).toBeCalledWith(false);
+    });
+
+    it('expect to call setMapMoveSinceLastRefine when currentRefinement change', () => {
+      const children = jest.fn(x => x);
+
+      const props = {
+        ...defaultProps,
+        currentRefinement: {
+          northEast: { lat: 10, lng: 12 },
+          southWest: { lat: 12, lng: 14 },
+        },
+        setMapMoveSinceLastRefine: jest.fn(),
+      };
+
+      const wrapper = shallow(<Provider {...props}>{children}</Provider>);
+
+      expect(props.setMapMoveSinceLastRefine).toHaveBeenCalledTimes(0);
+
+      wrapper.setProps({
+        currentRefinement: {
+          northEast: { lat: 12, lng: 14 },
+          southWest: { lat: 14, lng: 16 },
+        },
+      });
+
+      expect(props.setMapMoveSinceLastRefine).toHaveBeenCalledTimes(1);
+      expect(props.setMapMoveSinceLastRefine).toBeCalledWith(false);
+    });
+
+    it('expect to not call setMapMoveSinceLastRefine when nothing change', () => {
+      const children = jest.fn(x => x);
+
+      const props = {
+        ...defaultProps,
+        setMapMoveSinceLastRefine: jest.fn(),
+      };
+
+      const wrapper = shallow(<Provider {...props}>{children}</Provider>);
+
+      expect(props.setMapMoveSinceLastRefine).not.toHaveBeenCalled();
+
+      wrapper.setProps();
+
+      expect(props.setMapMoveSinceLastRefine).not.toHaveBeenCalled();
+    });
+  });
+
   describe('boundingBox', () => {
     it('expect to use hits when currentRefinement is not defined and hits are not empty', () => {
       const children = jest.fn(x => x);
@@ -260,36 +327,6 @@ describe('Provider', () => {
           lng: 14,
         },
       });
-    });
-
-    it('expect to call setMapMoveSinceLastRefine when there is a pending refinement', () => {
-      const mapInstance = createFakeMapInstance();
-      const children = jest.fn(x => x);
-
-      mapInstance.getBounds.mockImplementation(() => ({
-        getNorthEast: () => ({
-          toJSON: () => {},
-        }),
-        getSouthWest: () => ({
-          toJSON: () => {},
-        }),
-      }));
-
-      const props = {
-        ...defaultProps,
-        setMapMoveSinceLastRefine: jest.fn(),
-      };
-
-      shallow(<Provider {...props}>{children}</Provider>);
-
-      lastRenderArgs(children).onChange();
-
-      expect(props.setMapMoveSinceLastRefine).toHaveBeenCalledTimes(1);
-
-      lastRenderArgs(children).onIdle({ instance: mapInstance });
-
-      expect(props.setMapMoveSinceLastRefine).toHaveBeenCalledTimes(2);
-      expect(props.setMapMoveSinceLastRefine).toBeCalledWith(false);
     });
 
     it('expect to reset the pending refinement when there is a pending refinement', () => {
