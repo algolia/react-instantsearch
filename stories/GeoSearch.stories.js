@@ -11,6 +11,7 @@ import {
   Control,
 } from 'react-instantsearch-dom-maps';
 import { displayName, filterProps, WrapWithHits } from './util';
+import Places from './places';
 
 setAddon(JSXAddon);
 
@@ -46,6 +47,48 @@ stories.addWithJSX(
             <GeoSearch google={google}>
               {({ hits }) => (
                 <Fragment>
+                  {hits.map(hit => <Marker key={hit.objectID} hit={hit} />)}
+                </Fragment>
+              )}
+            </GeoSearch>
+          )}
+        </GoogleMapsLoader>
+      </Container>
+    </WrapWithHits>
+  ),
+  {
+    displayName,
+    filterProps,
+  }
+);
+
+// With Places
+stories.addWithJSX(
+  'with Places',
+  () => (
+    <WrapWithHits
+      indexName="airbnb"
+      linkedStoryGroup="GeoSearch"
+      searchParameters={{
+        hitsPerPage: 20,
+        aroundRadius: 5000,
+      }}
+    >
+      <Places
+        defaultRefinement={{
+          lat: 37.7793,
+          lng: -122.419,
+        }}
+      />
+
+      <Container>
+        <GoogleMapsLoader apiKey="AIzaSyCl2TTJXpwxGuuc2zQZkAlIkWhpYbyjjP8">
+          {google => (
+            <GeoSearch google={google} initialZoom={12}>
+              {({ hits }) => (
+                <Fragment>
+                  <Control />
+
                   {hits.map(hit => <Marker key={hit.objectID} hit={hit} />)}
                 </Fragment>
               )}
