@@ -147,6 +147,27 @@ describe('connectGeoSearch', () => {
           });
         });
 
+        it('expect to return the position from the SearchResults', () => {
+          const instance = createSingleIndexInstance();
+          const props = {};
+          const searchState = {};
+          const searchResults = createSingleSearchResults([], {
+            aroundLatLng: '10, 12',
+          });
+
+          const actual = connector.getProvidedProps.call(
+            instance,
+            props,
+            searchState,
+            searchResults
+          );
+
+          expect(actual.position).toEqual({
+            lat: 10,
+            lng: 12,
+          });
+        });
+
         it('expect to return undefined from an empty searchState', () => {
           const instance = createSingleIndexInstance();
           const props = {};
