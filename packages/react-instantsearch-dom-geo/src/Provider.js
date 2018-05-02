@@ -125,6 +125,11 @@ class Provider extends Component {
   render() {
     const { hits, currentRefinement, children } = this.props;
 
+    // We use this value for differentiate the padding to apply during
+    // fitBounds. When we don't have a currenRefinement (boundingBox)
+    // we let GoogleMaps compute the automatic padding. But when we
+    // provide the currentRefinement we explicitly set the padding
+    // to `0` otherwise the map will decrease the zoom on each refine.
     const boundingBoxPadding = !currentRefinement ? undefined : 0;
     const boundingBox =
       !currentRefinement && Boolean(hits.length)
