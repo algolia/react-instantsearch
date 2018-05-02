@@ -37,7 +37,7 @@ exports[`GeoSearch GoogleMaps expect to render 1`] = `
   testID="GoogleMaps"
 >
   <div>
-    Children
+    Hello this is the children
   </div>
 </GoogleMaps>
 `;

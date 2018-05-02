@@ -163,7 +163,7 @@ describe('GeoSearch', () => {
         .children(providerProps);
 
     it('expect to render', () => {
-      const children = jest.fn(() => <div>Children</div>);
+      const children = jest.fn(() => <div>Hello this is the children</div>);
 
       const props = {
         ...defaultProps,
