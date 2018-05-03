@@ -12,11 +12,7 @@ exports[`GeoSearch GoogleMaps expect to render 1`] = `
         "LatLngBounds": [MockFunction],
         "Map": [MockFunction],
         "Marker": [MockFunction],
-        "OverlayView": Object {
-          "getPanes": [MockFunction],
-          "getProjection": [MockFunction],
-          "setMap": [MockFunction],
-        },
+        "OverlayView": [Function],
         "event": Object {
           "addListenerOnce": [MockFunction],
         },
@@ -54,11 +50,7 @@ exports[`GeoSearch Provider expect to render 1`] = `
         "LatLngBounds": [MockFunction],
         "Map": [MockFunction],
         "Marker": [MockFunction],
-        "OverlayView": Object {
-          "getPanes": [MockFunction],
-          "getProjection": [MockFunction],
-          "setMap": [MockFunction],
-        },
+        "OverlayView": [Function],
         "event": Object {
           "addListenerOnce": [MockFunction],
         },
