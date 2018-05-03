@@ -7,6 +7,7 @@ import {
   GoogleMapsLoader,
   GeoSearch,
   Marker,
+  HTMLMarker,
   Redo,
   Control,
 } from 'react-instantsearch-dom-maps';
@@ -258,6 +259,53 @@ stories
                     <Control enableRefineOnMapMove={false} />
 
                     {hits.map(hit => <Marker key={hit.objectID} hit={hit} />)}
+                  </Fragment>
+                )}
+              </GeoSearch>
+            )}
+          </GoogleMapsLoader>
+        </Container>
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
+    'with <HTMLMarker>',
+    () => (
+      <WrapWithHits
+        indexName="airbnb"
+        linkedStoryGroup="GeoSearch"
+        searchParameters={{ hitsPerPage: 20 }}
+      >
+        <Configure aroundLatLngViaIP />
+
+        <Container>
+          <GoogleMapsLoader apiKey="AIzaSyCl2TTJXpwxGuuc2zQZkAlIkWhpYbyjjP8">
+            {google => (
+              <GeoSearch google={google}>
+                {({ hits }) => (
+                  <Fragment>
+                    <Control />
+
+                    {hits.map(hit => (
+                      <Fragment key={hit.objectID}>
+                        <HTMLMarker
+                          hit={hit}
+                          options={{
+                            className: 'my-custom-marker',
+                            anchor: {
+                              x: 0,
+                              y: 5,
+                            },
+                          }}
+                        >
+                          {hit.price_formatted}
+                        </HTMLMarker>
+                      </Fragment>
+                    ))}
                   </Fragment>
                 )}
               </GeoSearch>
