@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HTMLMarker creation expect to create the marker on didMount with default options 1`] = `
+<Marker
+  hit={
+    Object {
+      "_geoloc": Object {
+        "lat": 10,
+        "lng": 12,
+      },
+    }
+  }
+  options={Object {}}
+>
+  This is the children.
+</Marker>
+`;
