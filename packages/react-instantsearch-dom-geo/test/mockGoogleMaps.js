@@ -1,3 +1,20 @@
+export class FakeOverlayView {
+  setMap = jest.fn();
+
+  getPanes = jest.fn(() => ({
+    overlayMouseTarget: {
+      appendChild: jest.fn(),
+    },
+  }));
+
+  getProjection = jest.fn(() => ({
+    fromLatLngToDivPixel: jest.fn(() => ({
+      x: 0,
+      y: 0,
+    })),
+  }));
+}
+
 export const createFakeMapInstance = () => ({
   addListener: jest.fn(() => ({
     remove: jest.fn(),
@@ -34,7 +51,7 @@ export const createFakeGoogleReference = ({
   markerInstance = createFakeMarkerInstance(),
 } = {}) => ({
   maps: {
-    LatLng: jest.fn(),
+    LatLng: jest.fn(x => x),
     LatLngBounds: jest.fn(() => ({
       extend: jest.fn().mockReturnThis(),
     })),
@@ -51,19 +68,6 @@ export const createFakeGoogleReference = ({
         remove: jest.fn(),
       })),
     },
-    OverlayView: {
-      setMap: jest.fn(),
-      getPanes: jest.fn(() => ({
-        overlayMouseTarget: {
-          appendChild: jest.fn(),
-        },
-      })),
-      getProjection: jest.fn(() => ({
-        fromLatLngToDivPixel: jest.fn(() => ({
-          x: 0,
-          y: 0,
-        })),
-      })),
-    },
+    OverlayView: FakeOverlayView,
   },
 });
