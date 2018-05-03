@@ -11,7 +11,7 @@ import Marker from '../Marker';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe('GoogleMaps', () => {
+describe('Marker', () => {
   const defaultProps = {
     hit: {
       _geoloc: {
