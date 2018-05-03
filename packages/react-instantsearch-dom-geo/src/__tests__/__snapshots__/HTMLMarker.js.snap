@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`HTMLMarker creation expect to create the marker on didMount with default options 1`] = `
-<Marker
+exports[`HTMLMarker with portal expect to render correctly 1`] = `
+<HTMLMarker
   hit={
     Object {
       "_geoloc": Object {
@@ -12,6 +12,22 @@ exports[`HTMLMarker creation expect to create the marker on didMount with defaul
   }
   options={Object {}}
 >
-  This is the children.
-</Marker>
+  <span>
+    This is the children.
+  </span>
+</HTMLMarker>
+`;
+
+exports[`HTMLMarker with unstable_renderSubtreeIntoContainer expect to render correctly 1`] = `
+<HTMLMarker
+  hit={
+    Object {
+      "_geoloc": Object {
+        "lat": 10,
+        "lng": 12,
+      },
+    }
+  }
+  options={Object {}}
+/>
 `;

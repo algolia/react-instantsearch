@@ -5,7 +5,7 @@ import createHTMLMarker from './utils/createHTMLMarker';
 import { LatLngPropType } from './propTypes';
 import { GOOGLE_MAPS_CONTEXT } from './GoogleMaps';
 
-class Marker extends Component {
+class HTMLMarker extends Component {
   static propTypes = {
     hit: PropTypes.shape({
       _geoloc: LatLngPropType.isRequired,
@@ -25,6 +25,10 @@ class Marker extends Component {
     options: {},
   };
 
+  static isReact16() {
+    return typeof ReactDOM.createPortal === 'function';
+  }
+
   state = {
     marker: null,
   };
@@ -35,9 +39,9 @@ class Marker extends Component {
     // Not the best way to create the reference of the HTMLMarker
     // but since the Google object is required didn't find another
     // solution. Ideas?
-    const HTMLMarker = createHTMLMarker(google);
+    const Marker = createHTMLMarker(google);
 
-    const marker = new HTMLMarker({
+    const marker = new Marker({
       map: instance,
       position: hit._geoloc,
       ...options,
@@ -48,10 +52,27 @@ class Marker extends Component {
     }));
   }
 
+  componentDidUpdate() {
+    const { children } = this.props;
+    const { marker } = this.state;
+
+    if (marker && !HTMLMarker.isReact16()) {
+      ReactDOM.unstable_renderSubtreeIntoContainer(
+        this,
+        children,
+        marker.element
+      );
+    }
+  }
+
   componentWillUnmount() {
     const { marker } = this.state;
 
     if (marker) {
+      if (!HTMLMarker.isReact16()) {
+        ReactDOM.unmountComponentAtNode(marker.element);
+      }
+
       marker.setMap(null);
     }
   }
@@ -60,7 +81,7 @@ class Marker extends Component {
     const { children } = this.props;
     const { marker } = this.state;
 
-    if (!marker) {
+    if (!marker || !HTMLMarker.isReact16()) {
       return null;
     }
 
@@ -68,4 +89,4 @@ class Marker extends Component {
   }
 }
 
-export default Marker;
+export default HTMLMarker;
