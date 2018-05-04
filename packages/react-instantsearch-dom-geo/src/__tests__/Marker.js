@@ -146,31 +146,5 @@ describe('Marker', () => {
       expect(markerInstance.setMap).toHaveBeenCalledTimes(1);
       expect(markerInstance.setMap).toHaveBeenCalledWith(null);
     });
-
-    it("expect to remove the Marker on willUnmount only when it's created", () => {
-      const mapInstance = createFakeMapInstance();
-      const markerInstance = createFakeMarkerInstance();
-      const google = createFakeGoogleReference({
-        mapInstance,
-        markerInstance,
-      });
-
-      const props = {
-        ...defaultProps,
-      };
-
-      const wrapper = shallow(<Marker {...props} />, {
-        disableLifecycleMethods: true,
-        context: {
-          [GOOGLE_MAPS_CONTEXT]: {
-            instance: mapInstance,
-            google,
-          },
-        },
-      });
-
-      expect(() => wrapper.unmount()).not.toThrow();
-      expect(markerInstance.setMap).not.toHaveBeenCalled();
-    });
   });
 });

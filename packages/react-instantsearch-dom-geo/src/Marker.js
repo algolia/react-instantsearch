@@ -34,9 +34,7 @@ class Marker extends Component {
   }
 
   componentWillUnmount() {
-    if (this.instance) {
-      this.instance.setMap(null);
-    }
+    this.instance.setMap(null);
   }
 
   render() {
