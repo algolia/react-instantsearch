@@ -218,7 +218,6 @@ describe('HTMLMarker', () => {
     });
 
     it("expect to remove the Marker on willUnmount only when it's created", () => {
-      const marker = createFakeHTMLMarkerInstance();
       const mapInstance = createFakeMapInstance();
       const google = createFakeGoogleReference({
         mapInstance,
@@ -226,7 +225,6 @@ describe('HTMLMarker', () => {
 
       const props = {
         ...defaultProps,
-        className: 'my-marker',
       };
 
       const wrapper = shallow(
@@ -247,7 +245,6 @@ describe('HTMLMarker', () => {
       wrapper.unmount();
 
       expect(() => wrapper.unmount()).not.toThrow();
-      expect(marker.setMap).not.toHaveBeenCalled();
     });
   });
 
