@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { createFakeMarkerInstance } from '../../test/mockGoogleMaps';
 import * as utils from '../utils';
 
@@ -99,6 +100,33 @@ describe('utils', () => {
       removeEventListeners();
 
       expect(remove).toHaveBeenCalledTimes(2);
+    });
+  });
+
+  describe('createListenersPropType', () => {
+    it('expect to return an object with listeners propType from event types', () => {
+      const events = {
+        onClick: '',
+        onMouseMove: '',
+      };
+
+      const expectation = {
+        onClick: PropTypes.func,
+        onMouseMove: PropTypes.func,
+      };
+
+      const actual = utils.createListenersPropType(events);
+
+      expect(actual).toEqual(expectation);
+    });
+
+    it('expect to return an empty object from empty event types', () => {
+      const events = {};
+
+      const expectation = {};
+      const actual = utils.createListenersPropType(events);
+
+      expect(actual).toEqual(expectation);
     });
   });
 });

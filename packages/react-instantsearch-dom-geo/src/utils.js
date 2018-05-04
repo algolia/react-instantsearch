@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 export const registerEvents = (events, props, instance) => {
   const eventsAvailable = Object.keys(events);
   const listeners = Object.keys(props)
@@ -8,3 +10,9 @@ export const registerEvents = (events, props, instance) => {
     listeners.forEach(listener => listener.remove());
   };
 };
+
+export const createListenersPropType = eventTypes =>
+  Object.keys(eventTypes).reduce(
+    (acc, name) => ({ ...acc, [name]: PropTypes.func }),
+    {}
+  );
