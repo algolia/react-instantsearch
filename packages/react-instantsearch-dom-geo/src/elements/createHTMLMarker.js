@@ -12,7 +12,7 @@ const createHTMLMarker = google => {
       super();
 
       this.anchor = anchor;
-      this.listeners = {};
+      this.subscriptions = [];
       this.latLng = new google.maps.LatLng(position);
 
       this.element = document.createElement('div');
@@ -51,22 +51,30 @@ const createHTMLMarker = google => {
       if (this.element && this.element.parentNode) {
         this.element.parentNode.removeChild(this.element);
 
-        Object.keys(this.listeners).forEach(eventName => {
-          this.element.removeEventListener(
-            eventName,
-            this.listeners[eventName]
-          );
-        });
+        this.subscriptions.forEach(subscription => subscription.remove());
 
         delete this.element;
-        delete this.listeners;
+
+        this.subscriptions = [];
       }
     }
 
     addListener(eventName, listener) {
-      this.listeners[eventName] = listener;
+      const subscription = {
+        remove: () => {
+          this.element.removeEventListener(eventName, listener);
+
+          this.subscriptions = this.subscriptions.filter(
+            _ => _ !== subscription
+          );
+        },
+      };
 
       this.element.addEventListener(eventName, listener);
+
+      this.subscriptions = this.subscriptions.concat(subscription);
+
+      return subscription;
     }
 
     getPosition() {
