@@ -5,6 +5,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import {
   createFakeGoogleReference,
   createFakeMapInstance,
+  createFakeHTMLMarkerInstance,
 } from '../../test/mockGoogleMaps';
 import createHTMLMarker from '../utils/createHTMLMarker';
 import { GOOGLE_MAPS_CONTEXT } from '../GoogleMaps';
@@ -23,11 +24,6 @@ describe('HTMLMarker', () => {
       },
     },
   };
-
-  const createFakeHTMLMarkerInstance = () => ({
-    element: document.createElement('div'),
-    setMap: jest.fn(),
-  });
 
   describe('creation', () => {
     it('expect to create the marker on didMount with default options', () => {

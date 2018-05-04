@@ -46,6 +46,12 @@ export const createFakeMarkerInstance = () => ({
   addListener: jest.fn(),
 });
 
+export const createFakeHTMLMarkerInstance = () => ({
+  element: document.createElement('div'),
+  setMap: jest.fn(),
+  draw: jest.fn(),
+});
+
 export const createFakeGoogleReference = ({
   mapInstance = createFakeMapInstance(),
   markerInstance = createFakeMarkerInstance(),
