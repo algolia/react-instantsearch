@@ -62,10 +62,7 @@ export const createFakeGoogleReference = ({
       extend: jest.fn().mockReturnThis(),
     })),
     Map: jest.fn(() => mapInstance),
-    Marker: jest.fn(args => ({
-      ...args,
-      ...markerInstance,
-    })),
+    Marker: jest.fn(() => markerInstance),
     ControlPosition: {
       LEFT_TOP: 'left:top',
     },
