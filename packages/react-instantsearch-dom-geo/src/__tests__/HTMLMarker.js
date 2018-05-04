@@ -7,13 +7,13 @@ import {
   createFakeMapInstance,
   createFakeHTMLMarkerInstance,
 } from '../../test/mockGoogleMaps';
-import createHTMLMarker from '../utils/createHTMLMarker';
+import createHTMLMarker from '../elements/createHTMLMarker';
 import { GOOGLE_MAPS_CONTEXT } from '../GoogleMaps';
 import HTMLMarker from '../HTMLMarker';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-jest.mock('../utils/createHTMLMarker', () => jest.fn());
+jest.mock('../elements/createHTMLMarker', () => jest.fn());
 
 describe('HTMLMarker', () => {
   const defaultProps = {

@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import createHTMLMarker from './utils/createHTMLMarker';
+import createHTMLMarker from './elements/createHTMLMarker';
 import { LatLngPropType } from './propTypes';
 import { GOOGLE_MAPS_CONTEXT } from './GoogleMaps';
 
