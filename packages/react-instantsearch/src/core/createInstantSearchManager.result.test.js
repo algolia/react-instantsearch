@@ -20,6 +20,7 @@ jest.mock('algoliasearch-helper', () => {
 });
 
 const client = algoliaClient('latency', '249078a3d4337a8231f1665ec5a44966');
+client.addAlgoliaAgent = () => {};
 client.search = jest.fn(() => Promise.resolve({ results: [{ hits: [] }] }));
 
 describe('createInstantSearchManager', () => {
