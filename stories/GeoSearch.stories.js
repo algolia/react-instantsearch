@@ -1,6 +1,7 @@
 import React, { Fragment, Component } from 'react';
 import PropTypes from 'prop-types';
 import { setAddon, storiesOf } from '@storybook/react';
+import { action } from '@storybook/addon-actions';
 import JSXAddon from 'storybook-addon-jsx';
 import { Configure } from 'react-instantsearch-dom';
 import {
@@ -35,12 +36,8 @@ const initialPosition = {
 stories.addWithJSX(
   'default',
   () => (
-    <WrapWithHits
-      indexName="airbnb"
-      linkedStoryGroup="GeoSearch"
-      searchParameters={{ hitsPerPage: 20 }}
-    >
-      <Configure aroundLatLngViaIP />
+    <WrapWithHits indexName="airbnb" linkedStoryGroup="GeoSearch">
+      <Configure aroundLatLngViaIP hitsPerPage={20} />
 
       <Container>
         <GoogleMapsLoader apiKey="AIzaSyCl2TTJXpwxGuuc2zQZkAlIkWhpYbyjjP8">
@@ -67,14 +64,9 @@ stories.addWithJSX(
 stories.addWithJSX(
   'with Places',
   () => (
-    <WrapWithHits
-      indexName="airbnb"
-      linkedStoryGroup="GeoSearch"
-      searchParameters={{
-        hitsPerPage: 20,
-        aroundRadius: 5000,
-      }}
-    >
+    <WrapWithHits indexName="airbnb" linkedStoryGroup="GeoSearch">
+      <Configure hitsPerPage={20} aroundRadius={5000} />
+
       <Places
         defaultRefinement={{
           lat: 37.7793,
@@ -110,12 +102,8 @@ stories
   .addWithJSX(
     'with zoom & center',
     () => (
-      <WrapWithHits
-        indexName="airbnb"
-        linkedStoryGroup="GeoSearch"
-        searchParameters={{ hitsPerPage: 20 }}
-      >
-        <Configure aroundLatLngViaIP />
+      <WrapWithHits indexName="airbnb" linkedStoryGroup="GeoSearch">
+        <Configure aroundLatLngViaIP hitsPerPage={20} />
 
         <Container>
           <GoogleMapsLoader apiKey="AIzaSyCl2TTJXpwxGuuc2zQZkAlIkWhpYbyjjP8">
@@ -144,12 +132,8 @@ stories
   .addWithJSX(
     'with map options',
     () => (
-      <WrapWithHits
-        indexName="airbnb"
-        linkedStoryGroup="GeoSearch"
-        searchParameters={{ hitsPerPage: 20 }}
-      >
-        <Configure aroundLatLngViaIP />
+      <WrapWithHits indexName="airbnb" linkedStoryGroup="GeoSearch">
+        <Configure aroundLatLngViaIP hitsPerPage={20} />
 
         <Container>
           <GoogleMapsLoader apiKey="AIzaSyCl2TTJXpwxGuuc2zQZkAlIkWhpYbyjjP8">
@@ -177,14 +161,44 @@ stories
     }
   )
   .addWithJSX(
+    'with events',
+    () => (
+      <WrapWithHits indexName="airbnb" linkedStoryGroup="GeoSearch">
+        <Configure aroundLatLngViaIP hitsPerPage={20} />
+
+        <Container>
+          <GoogleMapsLoader apiKey="AIzaSyCl2TTJXpwxGuuc2zQZkAlIkWhpYbyjjP8">
+            {google => (
+              <GeoSearch google={google}>
+                {({ hits }) => (
+                  <Fragment>
+                    {hits.map(hit => (
+                      <Marker
+                        key={hit.objectID}
+                        hit={hit}
+                        onClick={event => {
+                          action('click', event, hit);
+                        }}
+                      />
+                    ))}
+                  </Fragment>
+                )}
+              </GeoSearch>
+            )}
+          </GoogleMapsLoader>
+        </Container>
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
     'with <Redo> component',
     () => (
-      <WrapWithHits
-        indexName="airbnb"
-        linkedStoryGroup="GeoSearch"
-        searchParameters={{ hitsPerPage: 20 }}
-      >
-        <Configure aroundLatLngViaIP />
+      <WrapWithHits indexName="airbnb" linkedStoryGroup="GeoSearch">
+        <Configure aroundLatLngViaIP hitsPerPage={20} />
 
         <Container>
           <GoogleMapsLoader apiKey="AIzaSyCl2TTJXpwxGuuc2zQZkAlIkWhpYbyjjP8">
@@ -211,12 +225,8 @@ stories
   .addWithJSX(
     'with <Control> component',
     () => (
-      <WrapWithHits
-        indexName="airbnb"
-        linkedStoryGroup="GeoSearch"
-        searchParameters={{ hitsPerPage: 20 }}
-      >
-        <Configure aroundLatLngViaIP />
+      <WrapWithHits indexName="airbnb" linkedStoryGroup="GeoSearch">
+        <Configure aroundLatLngViaIP hitsPerPage={20} />
 
         <Container>
           <GoogleMapsLoader apiKey="AIzaSyCl2TTJXpwxGuuc2zQZkAlIkWhpYbyjjP8">
@@ -243,12 +253,8 @@ stories
   .addWithJSX(
     'with <Control> component disabled',
     () => (
-      <WrapWithHits
-        indexName="airbnb"
-        linkedStoryGroup="GeoSearch"
-        searchParameters={{ hitsPerPage: 20 }}
-      >
-        <Configure aroundLatLngViaIP />
+      <WrapWithHits indexName="airbnb" linkedStoryGroup="GeoSearch">
+        <Configure aroundLatLngViaIP hitsPerPage={20} />
 
         <Container>
           <GoogleMapsLoader apiKey="AIzaSyCl2TTJXpwxGuuc2zQZkAlIkWhpYbyjjP8">
@@ -275,12 +281,8 @@ stories
   .addWithJSX(
     'with <CustomMarker>',
     () => (
-      <WrapWithHits
-        indexName="airbnb"
-        linkedStoryGroup="GeoSearch"
-        searchParameters={{ hitsPerPage: 20 }}
-      >
-        <Configure aroundLatLngViaIP />
+      <WrapWithHits indexName="airbnb" linkedStoryGroup="GeoSearch">
+        <Configure aroundLatLngViaIP hitsPerPage={20} />
 
         <Container>
           <GoogleMapsLoader apiKey="AIzaSyCl2TTJXpwxGuuc2zQZkAlIkWhpYbyjjP8">
@@ -318,6 +320,50 @@ stories
       displayName,
       filterProps,
     }
+  )
+  .addWithJSX(
+    'with <CustomMarker> events',
+    () => (
+      <WrapWithHits indexName="airbnb" linkedStoryGroup="GeoSearch">
+        <Configure aroundLatLngViaIP hitsPerPage={20} />
+
+        <Container>
+          <GoogleMapsLoader apiKey="AIzaSyCl2TTJXpwxGuuc2zQZkAlIkWhpYbyjjP8">
+            {google => (
+              <GeoSearch google={google}>
+                {({ hits }) => (
+                  <Fragment>
+                    <Control />
+
+                    {hits.map(hit => (
+                      <Fragment key={hit.objectID}>
+                        <CustomMarker
+                          hit={hit}
+                          options={{
+                            className: 'my-custom-marker',
+                            anchor: {
+                              x: 0,
+                              y: 5,
+                            },
+                          }}
+                          onClick={action('click')}
+                        >
+                          <span>{hit.price_formatted}</span>
+                        </CustomMarker>
+                      </Fragment>
+                    ))}
+                  </Fragment>
+                )}
+              </GeoSearch>
+            )}
+          </GoogleMapsLoader>
+        </Container>
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
   );
 
 stories.addWithJSX('with unmount', () => {
@@ -335,12 +381,8 @@ stories.addWithJSX('with unmount', () => {
       const { visible } = this.state;
 
       return (
-        <WrapWithHits
-          indexName="airbnb"
-          linkedStoryGroup="GeoSearch"
-          searchParameters={{ hitsPerPage: 20 }}
-        >
-          <Configure aroundLatLngViaIP />
+        <WrapWithHits indexName="airbnb" linkedStoryGroup="GeoSearch">
+          <Configure aroundLatLngViaIP hitsPerPage={20} />
 
           <button onClick={this.onToggle} style={{ marginBottom: 15 }}>
             {visible ? 'Unmout' : 'Mount'}
