@@ -16,7 +16,7 @@ import highlightTags from './highlightTags.js';
 export default function createInstantSearchManager({
   indexName,
   initialState = {},
-  algoliaClient,
+  searchClient,
   resultsState,
   stalledSearchDelay,
 }) {
