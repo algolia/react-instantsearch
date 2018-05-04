@@ -2,7 +2,7 @@ import { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import createHTMLMarker from './elements/createHTMLMarker';
-import { registerEvents } from './utils';
+import { registerEvents, createListenersPropType } from './utils';
 import { GeolocHitPropType } from './propTypes';
 import { GOOGLE_MAPS_CONTEXT } from './GoogleMaps';
 
@@ -20,6 +20,7 @@ const eventTypes = {
 
 class CustomMarker extends Component {
   static propTypes = {
+    ...createListenersPropType(eventTypes),
     hit: GeolocHitPropType.isRequired,
     children: PropTypes.node.isRequired,
     options: PropTypes.object,

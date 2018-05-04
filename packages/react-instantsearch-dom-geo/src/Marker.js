@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
-import { registerEvents } from './utils';
+import { registerEvents, createListenersPropType } from './utils';
 import { GeolocHitPropType } from './propTypes';
 import { GOOGLE_MAPS_CONTEXT } from './GoogleMaps';
 
@@ -15,6 +15,7 @@ const eventTypes = {
 
 class Marker extends Component {
   static propTypes = {
+    ...createListenersPropType(eventTypes),
     hit: GeolocHitPropType.isRequired,
     options: PropTypes.object,
   };
