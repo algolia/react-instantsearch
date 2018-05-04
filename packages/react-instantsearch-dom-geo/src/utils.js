@@ -16,3 +16,14 @@ export const createListenersPropType = eventTypes =>
     (acc, name) => ({ ...acc, [name]: PropTypes.func }),
     {}
   );
+
+export const createFilterProps = excludes => props =>
+  Object.keys(props)
+    .filter(name => excludes.indexOf(name) === -1)
+    .reduce(
+      (acc, name) => ({
+        ...acc,
+        [name]: props[name],
+      }),
+      {}
+    );

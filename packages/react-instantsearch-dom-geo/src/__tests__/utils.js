@@ -129,4 +129,40 @@ describe('utils', () => {
       expect(actual).toEqual(expectation);
     });
   });
+
+  describe('createFilterProps', () => {
+    it('expect to return an object without excluded keys', () => {
+      const excludes = ['children', 'onClick'];
+
+      const props = {
+        label: 'Title',
+        onClick: () => {},
+        children: '<div />',
+      };
+
+      const expectation = {
+        label: 'Title',
+      };
+
+      const filterProps = utils.createFilterProps(excludes);
+      const actual = filterProps(props);
+
+      expect(actual).toEqual(expectation);
+    });
+
+    it('expect to return an empty object when all keys are excluded', () => {
+      const excludes = ['children', 'onClick'];
+
+      const props = {
+        onClick: () => {},
+        children: '<div />',
+      };
+
+      const expectation = {};
+      const filterProps = utils.createFilterProps(excludes);
+      const actual = filterProps(props);
+
+      expect(actual).toEqual(expectation);
+    });
+  });
 });
