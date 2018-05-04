@@ -150,36 +150,6 @@ describe('CustomMarker', () => {
       expect(marker.setMap).toHaveBeenCalledTimes(1);
       expect(marker.setMap).toHaveBeenCalledWith(null);
     });
-
-    it("expect to remove the Marker on willUnmount only when it's created", () => {
-      const mapInstance = createFakeMapInstance();
-      const google = createFakeGoogleReference({
-        mapInstance,
-      });
-
-      const props = {
-        ...defaultProps,
-      };
-
-      const wrapper = shallow(
-        <CustomMarker {...props}>
-          <span>This is the children.</span>
-        </CustomMarker>,
-        {
-          disableLifecycleMethods: true,
-          context: {
-            [GOOGLE_MAPS_CONTEXT]: {
-              instance: mapInstance,
-              google,
-            },
-          },
-        }
-      );
-
-      wrapper.unmount();
-
-      expect(() => wrapper.unmount()).not.toThrow();
-    });
   });
 
   describe('with portal', () => {
@@ -482,53 +452,6 @@ describe('CustomMarker', () => {
         <span>This is the children.</span>,
         marker.element
       );
-
-      unstableRenderSubtreeIntoContainer.mockReset();
-      unstableRenderSubtreeIntoContainer.mockRestore();
-
-      isReact16.mockReset();
-      isReact16.mockRestore();
-    });
-
-    it('expect to not render on didUpdate without marker', () => {
-      const unstableRenderSubtreeIntoContainer = jest.spyOn(
-        ReactDOM,
-        'unstable_renderSubtreeIntoContainer'
-      );
-
-      const isReact16 = jest
-        .spyOn(CustomMarker, 'isReact16')
-        .mockImplementation(() => false);
-
-      const mapInstance = createFakeMapInstance();
-      const google = createFakeGoogleReference({
-        mapInstance,
-      });
-
-      const props = {
-        ...defaultProps,
-      };
-
-      const wrapper = shallow(
-        <CustomMarker {...props}>
-          <span>This is the children.</span>
-        </CustomMarker>,
-        {
-          disableLifecycleMethods: true,
-          context: {
-            [GOOGLE_MAPS_CONTEXT]: {
-              instance: mapInstance,
-              google,
-            },
-          },
-        }
-      );
-
-      expect(unstableRenderSubtreeIntoContainer).not.toHaveBeenCalled();
-
-      wrapper.instance().componentDidUpdate();
-
-      expect(unstableRenderSubtreeIntoContainer).not.toHaveBeenCalled();
 
       unstableRenderSubtreeIntoContainer.mockReset();
       unstableRenderSubtreeIntoContainer.mockRestore();
