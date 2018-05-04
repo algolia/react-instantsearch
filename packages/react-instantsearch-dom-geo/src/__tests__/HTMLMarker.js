@@ -116,6 +116,72 @@ describe('HTMLMarker', () => {
     });
   });
 
+  describe('update', () => {
+    it('expect to draw marker on didUpdate', () => {
+      const marker = createFakeHTMLMarkerInstance();
+      const factory = jest.fn(() => marker);
+      const mapInstance = createFakeMapInstance();
+      const google = createFakeGoogleReference({
+        mapInstance,
+      });
+
+      createHTMLMarker.mockImplementationOnce(() => factory);
+
+      const props = {
+        ...defaultProps,
+      };
+
+      // Use `mount` instead of `shallow` to trigger didUpdate
+      const wrapper = mount(
+        <HTMLMarker {...props}>
+          <span>This is the children.</span>
+        </HTMLMarker>,
+        {
+          context: {
+            [GOOGLE_MAPS_CONTEXT]: {
+              instance: mapInstance,
+              google,
+            },
+          },
+        }
+      );
+
+      expect(marker.draw).toHaveBeenCalledTimes(1);
+
+      wrapper.instance().componentDidUpdate();
+
+      expect(marker.draw).toHaveBeenCalledTimes(2);
+    });
+
+    it('expect to not draw marker on didUpdate without marker', () => {
+      const mapInstance = createFakeMapInstance();
+      const google = createFakeGoogleReference({
+        mapInstance,
+      });
+
+      const props = {
+        ...defaultProps,
+      };
+
+      const wrapper = shallow(
+        <HTMLMarker {...props}>
+          <span>This is the children.</span>
+        </HTMLMarker>,
+        {
+          disableLifecycleMethods: true,
+          context: {
+            [GOOGLE_MAPS_CONTEXT]: {
+              instance: mapInstance,
+              google,
+            },
+          },
+        }
+      );
+
+      expect(() => wrapper.instance().componentDidUpdate()).not.toThrow();
+    });
+  });
+
   describe('delete', () => {
     it('expect to remove the Marker on willUnmount', () => {
       const marker = createFakeHTMLMarkerInstance();

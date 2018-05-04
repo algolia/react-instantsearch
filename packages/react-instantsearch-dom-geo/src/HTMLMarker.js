@@ -56,12 +56,16 @@ class HTMLMarker extends Component {
     const { children } = this.props;
     const { marker } = this.state;
 
-    if (marker && !HTMLMarker.isReact16()) {
-      ReactDOM.unstable_renderSubtreeIntoContainer(
-        this,
-        children,
-        marker.element
-      );
+    if (marker) {
+      if (!HTMLMarker.isReact16()) {
+        ReactDOM.unstable_renderSubtreeIntoContainer(
+          this,
+          children,
+          marker.element
+        );
+      }
+
+      marker.draw();
     }
   }
 
