@@ -62,7 +62,7 @@ describe('createInstantSearchManager', () => {
         expect(ism.store.getState().results).toBe(null);
 
         return Promise.resolve()
-          .then(() => {})
+          .then(() => {}) // We need to wait for the next tick
           .then(() => {
             const store = ism.store.getState();
             expect(store.results.first).toEqual({
