@@ -647,6 +647,15 @@ describe('connectGeoSearch', () => {
         expect(actual).toEqual(expectation);
       });
     });
+
+    describe('shouldUpdate', () => {
+      it('expect to always return true', () => {
+        const expectation = true;
+        const actual = connector.shouldUpdate();
+
+        expect(actual).toBe(expectation);
+      });
+    });
   });
 
   describe('multi index', () => {

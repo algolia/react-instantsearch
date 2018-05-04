@@ -179,4 +179,8 @@ export default createConnector({
       items,
     };
   },
+
+  shouldUpdate() {
+    return true;
+  },
 });
