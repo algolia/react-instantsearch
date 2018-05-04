@@ -1,7 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CustomMarker with portal expect to render correctly 1`] = `
+exports[`HTMLMarker with portal expect to render correctly 1`] = `
 <CustomMarker
+  anchor={
+    Object {
+      "x": 0,
+      "y": 0,
+    }
+  }
+  className=""
   hit={
     Object {
       "_geoloc": Object {
@@ -10,7 +17,6 @@ exports[`CustomMarker with portal expect to render correctly 1`] = `
       },
     }
   }
-  options={Object {}}
 >
   <span>
     This is the children.
@@ -19,7 +25,14 @@ exports[`CustomMarker with portal expect to render correctly 1`] = `
 `;
 
 exports[`CustomMarker with unstable_renderSubtreeIntoContainer expect to render correctly 1`] = `
-<CustomMarker
+<HTMLMarker
+  anchor={
+    Object {
+      "x": 0,
+      "y": 0,
+    }
+  }
+  className=""
   hit={
     Object {
       "_geoloc": Object {
@@ -28,6 +41,5 @@ exports[`CustomMarker with unstable_renderSubtreeIntoContainer expect to render 
       },
     }
   }
-  options={Object {}}
 />
 `;
