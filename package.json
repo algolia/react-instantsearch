@@ -35,7 +35,7 @@
     "@storybook/react": "3.4.3",
     "@storybook/ui": "3.4.3",
     "argos-cli": "0.0.9",
-    "babel-core": "6.26.0",
+    "babel-core": "6.26.3",
     "babel-eslint": "8.2.3",
     "babel-loader": "7.1.4",
     "babel-plugin-inline-json-import": "0.2.1",
