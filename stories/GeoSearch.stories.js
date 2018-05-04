@@ -161,6 +161,39 @@ stories
     }
   )
   .addWithJSX(
+    'with <Marker> options',
+    () => (
+      <WrapWithHits indexName="airbnb" linkedStoryGroup="GeoSearch">
+        <Configure aroundLatLngViaIP hitsPerPage={20} />
+
+        <Container>
+          <GoogleMapsLoader apiKey="AIzaSyCl2TTJXpwxGuuc2zQZkAlIkWhpYbyjjP8">
+            {google => (
+              <GeoSearch google={google}>
+                {({ hits }) => (
+                  <Fragment>
+                    {hits.map(hit => (
+                      <Marker
+                        key={hit.objectID}
+                        hit={hit}
+                        label={hit.price_formatted}
+                        onClick={() => {}}
+                      />
+                    ))}
+                  </Fragment>
+                )}
+              </GeoSearch>
+            )}
+          </GoogleMapsLoader>
+        </Container>
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
     'with events',
     () => (
       <WrapWithHits indexName="airbnb" linkedStoryGroup="GeoSearch">
