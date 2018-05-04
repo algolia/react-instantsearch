@@ -28,6 +28,8 @@ describe('createInstantSearchManager', () => {
   describe('with correct result from algolia', () => {
     describe('on widget lifecycle', () => {
       it('updates the store and searches', () => {
+        expect.assertions(7);
+
         const ism = createInstantSearchManager({
           indexName: 'first',
           initialState: {},
@@ -104,6 +106,8 @@ describe('createInstantSearchManager', () => {
       });
 
       it('updates the store and searches with duplicate Index & SortBy', () => {
+        expect.assertions(2);
+
         // <InstantSearch indexName="first">
         //   <SearchBox defaultRefinement="query" />
         //
@@ -180,6 +184,8 @@ describe('createInstantSearchManager', () => {
 
     describe('on external updates', () => {
       it('updates the store and searches', () => {
+        expect.assertions(4);
+
         const ism = createInstantSearchManager({
           indexName: 'first',
           initialState: {},

@@ -64,6 +64,8 @@ describe('createInstantSearchManager errors', () => {
 
     describe('on external updates', () => {
       it('updates the store and searches', () => {
+        expect.assertions(3);
+
         const ism = createInstantSearchManager({
           indexName: 'index',
           initialState: {},
@@ -87,6 +89,8 @@ describe('createInstantSearchManager errors', () => {
 
     describe('on search for facet values', () => {
       it('updates the store and searches', () => {
+        expect.assertions(3);
+
         const ism = createInstantSearchManager({
           indexName: 'index',
           initialState: {},
@@ -108,6 +112,8 @@ describe('createInstantSearchManager errors', () => {
 
     describe('reset error after a succesful query', () => {
       it('on widget lifecyle', () => {
+        expect.assertions(5);
+
         const ism = createInstantSearchManager({
           indexName: 'index',
           initialState: {},

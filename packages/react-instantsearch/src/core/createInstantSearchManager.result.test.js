@@ -20,13 +20,14 @@ jest.mock('algoliasearch-helper', () => {
 });
 
 const client = algoliaClient('latency', '249078a3d4337a8231f1665ec5a44966');
-client.addAlgoliaAgent = () => {};
 client.search = jest.fn(() => Promise.resolve({ results: [{ hits: [] }] }));
 
 describe('createInstantSearchManager', () => {
   describe('with correct result from algolia', () => {
     describe('on widget lifecycle', () => {
       it('updates the store and searches', () => {
+        expect.assertions(7);
+
         const _dispatchAlgoliaResponse = jest.fn(function(state) {
           this.emit('result', { value: 'results' }, state);
         });
@@ -77,6 +78,8 @@ describe('createInstantSearchManager', () => {
 
     describe('on external updates', () => {
       it('updates the store and searches', () => {
+        expect.assertions(7);
+
         const _dispatchAlgoliaResponse = jest.fn(function(state) {
           this.emit('result', { value: 'results' }, state);
         });
@@ -121,6 +124,8 @@ describe('createInstantSearchManager', () => {
 
     describe('on search for facet values', () => {
       it('updates the store and searches', () => {
+        expect.assertions(4);
+
         const searchForFacetValues = jest.fn(() =>
           Promise.resolve({
             facetHits: 'results',
@@ -165,6 +170,8 @@ describe('createInstantSearchManager', () => {
       });
 
       it('updates the store and searches with maxFacetHits', () => {
+        expect.assertions(4);
+
         const searchForFacetValues = jest.fn(() =>
           Promise.resolve({
             facetHits: 'results',

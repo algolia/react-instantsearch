@@ -157,6 +157,8 @@ describe('createInstantSearchManager', () => {
 
   describe('Loading state', () => {
     it('should be updated if search is stalled', () => {
+      expect.assertions(10);
+
       const managedClient = makeManagedClient();
       const ism = createInstantSearchManager({
         indexName: 'index',
@@ -227,6 +229,8 @@ describe('createInstantSearchManager', () => {
 
   describe('client.search', () => {
     it('should be called when there is a new widget', () => {
+      expect.assertions(2);
+
       const client0 = makeClient(defaultResponse());
       expect(client0.search).toHaveBeenCalledTimes(0);
       const ism = createInstantSearchManager({
@@ -247,6 +251,8 @@ describe('createInstantSearchManager', () => {
     });
 
     it('should be called when there is a new client', () => {
+      expect.assertions(4);
+
       const client0 = makeClient(defaultResponse());
       expect(client0.search).toHaveBeenCalledTimes(0);
 
@@ -268,6 +274,8 @@ describe('createInstantSearchManager', () => {
       });
     });
     it('should not be called when the search is skipped', () => {
+      expect.assertions(2);
+
       const client0 = makeClient(defaultResponse());
       expect(client0.search).toHaveBeenCalledTimes(0);
       const ism = createInstantSearchManager({
