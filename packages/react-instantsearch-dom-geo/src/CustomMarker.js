@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import createHTMLMarker from './elements/createHTMLMarker';
 import { registerEvents } from './utils';
-import { LatLngPropType } from './propTypes';
+import { GeolocHitPropType } from './propTypes';
 import { GOOGLE_MAPS_CONTEXT } from './GoogleMaps';
 
 const eventTypes = {
@@ -20,9 +20,7 @@ const eventTypes = {
 
 class CustomMarker extends Component {
   static propTypes = {
-    hit: PropTypes.shape({
-      _geoloc: LatLngPropType.isRequired,
-    }).isRequired,
+    hit: GeolocHitPropType.isRequired,
     children: PropTypes.node.isRequired,
     options: PropTypes.object,
   };

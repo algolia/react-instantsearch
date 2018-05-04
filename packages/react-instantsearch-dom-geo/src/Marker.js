@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { registerEvents } from './utils';
-import { LatLngPropType } from './propTypes';
+import { GeolocHitPropType } from './propTypes';
 import { GOOGLE_MAPS_CONTEXT } from './GoogleMaps';
 
 const eventTypes = {
@@ -15,9 +15,7 @@ const eventTypes = {
 
 class Marker extends Component {
   static propTypes = {
-    hit: PropTypes.shape({
-      _geoloc: LatLngPropType.isRequired,
-    }).isRequired,
+    hit: GeolocHitPropType.isRequired,
     options: PropTypes.object,
   };
 
