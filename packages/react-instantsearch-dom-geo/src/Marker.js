@@ -1,6 +1,10 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
-import { registerEvents, createListenersPropType } from './utils';
+import {
+  registerEvents,
+  createListenersPropType,
+  createFilterProps,
+} from './utils';
 import { GeolocHitPropType } from './propTypes';
 import { GOOGLE_MAPS_CONTEXT } from './GoogleMaps';
 
@@ -13,11 +17,13 @@ const eventTypes = {
   onMouseUp: 'mouseup',
 };
 
+const excludes = ['children'].concat(Object.keys(eventTypes));
+const filterProps = createFilterProps(excludes);
+
 class Marker extends Component {
   static propTypes = {
     ...createListenersPropType(eventTypes),
     hit: GeolocHitPropType.isRequired,
-    options: PropTypes.object,
   };
 
   static contextTypes = {
@@ -27,18 +33,14 @@ class Marker extends Component {
     }),
   };
 
-  static defaultProps = {
-    options: {},
-  };
-
   componentDidMount() {
-    const { hit, options } = this.props;
+    const { hit, ...props } = this.props;
     const { google, instance } = this.context[GOOGLE_MAPS_CONTEXT];
 
     this.instance = new google.maps.Marker({
+      ...filterProps(props),
       map: instance,
       position: hit._geoloc,
-      ...options,
     });
 
     this.removeEventsListeners = registerEvents(

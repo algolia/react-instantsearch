@@ -12,7 +12,15 @@ import Marker from '../Marker';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-jest.mock('../utils');
+jest.mock('../utils', () => {
+  const module = require.requireActual('../utils');
+
+  return {
+    registerEvents: jest.fn(),
+    createFilterProps: module.createFilterProps,
+    createListenersPropType: module.createListenersPropType,
+  };
+});
 
 describe('Marker', () => {
   const defaultProps = {
@@ -95,9 +103,10 @@ describe('Marker', () => {
 
       const props = {
         ...defaultProps,
-        options: {
-          title: 'My Marker',
-        },
+        title: 'My Marker',
+        visible: false,
+        children: <span />,
+        onClick: () => {},
       };
 
       const wrapper = shallow(<Marker {...props} />, {
@@ -118,6 +127,7 @@ describe('Marker', () => {
       expect(google.maps.Marker).toHaveBeenCalledTimes(1);
       expect(google.maps.Marker).toHaveBeenCalledWith({
         title: 'My Marker',
+        visible: false,
         map: mapInstance,
         position: {
           lat: 10,
