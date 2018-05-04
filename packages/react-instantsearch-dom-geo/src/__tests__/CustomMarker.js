@@ -8,12 +8,15 @@ import {
   createFakeHTMLMarkerInstance,
 } from '../../test/mockGoogleMaps';
 import createHTMLMarker from '../elements/createHTMLMarker';
+import * as utils from '../utils';
 import { GOOGLE_MAPS_CONTEXT } from '../GoogleMaps';
 import CustomMarker from '../CustomMarker';
 
 Enzyme.configure({ adapter: new Adapter() });
 
 jest.mock('../elements/createHTMLMarker', () => jest.fn());
+
+jest.mock('../utils');
 
 describe('CustomMarker', () => {
   const defaultProps = {
@@ -24,6 +27,11 @@ describe('CustomMarker', () => {
       },
     },
   };
+
+  beforeEach(() => {
+    utils.registerEvents.mockClear();
+    utils.registerEvents.mockReset();
+  });
 
   describe('creation', () => {
     it('expect to create the marker on didMount with default options', () => {
@@ -114,6 +122,126 @@ describe('CustomMarker', () => {
         })
       );
     });
+
+    it('expect to register the listeners on didMount', () => {
+      const marker = createFakeHTMLMarkerInstance();
+      const factory = jest.fn(() => marker);
+      const mapInstance = createFakeMapInstance();
+      const google = createFakeGoogleReference({
+        mapInstance,
+      });
+
+      createHTMLMarker.mockImplementationOnce(() => factory);
+
+      const props = {
+        ...defaultProps,
+      };
+
+      shallow(
+        <CustomMarker {...props}>
+          <span>This is the children.</span>
+        </CustomMarker>,
+        {
+          context: {
+            [GOOGLE_MAPS_CONTEXT]: {
+              instance: mapInstance,
+              google,
+            },
+          },
+        }
+      );
+
+      expect(utils.registerEvents).toHaveBeenCalledTimes(1);
+      expect(utils.registerEvents).toHaveBeenCalledWith(
+        expect.any(Object),
+        expect.any(Object),
+        marker
+      );
+    });
+  });
+
+  describe('update', () => {
+    it('expect to remove the listeners on didUpdate', () => {
+      const removeEventListeners = jest.fn();
+      const marker = createFakeHTMLMarkerInstance();
+      const factory = jest.fn(() => marker);
+      const mapInstance = createFakeMapInstance();
+      const google = createFakeGoogleReference({
+        mapInstance,
+      });
+
+      createHTMLMarker.mockImplementationOnce(() => factory);
+
+      utils.registerEvents.mockImplementation(() => removeEventListeners);
+
+      const props = {
+        ...defaultProps,
+      };
+
+      const wrapper = shallow(
+        <CustomMarker {...props}>
+          <span>This is the children.</span>
+        </CustomMarker>,
+        {
+          context: {
+            [GOOGLE_MAPS_CONTEXT]: {
+              instance: mapInstance,
+              google,
+            },
+          },
+        }
+      );
+
+      expect(removeEventListeners).toHaveBeenCalledTimes(0);
+
+      // Simulate the update
+      wrapper.instance().componentDidUpdate();
+
+      expect(removeEventListeners).toHaveBeenCalledTimes(1);
+    });
+
+    it('expect to register the listeners on didUpdate', () => {
+      const marker = createFakeHTMLMarkerInstance();
+      const factory = jest.fn(() => marker);
+      const mapInstance = createFakeMapInstance();
+      const google = createFakeGoogleReference({
+        mapInstance,
+      });
+
+      createHTMLMarker.mockImplementationOnce(() => factory);
+
+      utils.registerEvents.mockImplementation(() => () => {});
+
+      const props = {
+        ...defaultProps,
+      };
+
+      const wrapper = shallow(
+        <CustomMarker {...props}>
+          <span>This is the children.</span>
+        </CustomMarker>,
+        {
+          context: {
+            [GOOGLE_MAPS_CONTEXT]: {
+              instance: mapInstance,
+              google,
+            },
+          },
+        }
+      );
+
+      expect(utils.registerEvents).toHaveBeenCalledTimes(1);
+
+      // Simulate the update
+      wrapper.instance().componentDidUpdate();
+
+      expect(utils.registerEvents).toHaveBeenCalledTimes(2);
+      expect(utils.registerEvents).toHaveBeenLastCalledWith(
+        expect.any(Object),
+        expect.any(Object),
+        marker
+      );
+    });
   });
 
   describe('delete', () => {
@@ -167,6 +295,8 @@ describe('CustomMarker', () => {
       });
 
       createHTMLMarker.mockImplementationOnce(() => factory);
+
+      utils.registerEvents.mockImplementation(() => () => {});
 
       const props = {
         ...defaultProps,
@@ -238,6 +368,8 @@ describe('CustomMarker', () => {
       });
 
       createHTMLMarker.mockImplementationOnce(() => factory);
+
+      utils.registerEvents.mockImplementation(() => () => {});
 
       const props = {
         ...defaultProps,
@@ -330,6 +462,8 @@ describe('CustomMarker', () => {
 
       createHTMLMarker.mockImplementationOnce(() => factory);
 
+      utils.registerEvents.mockImplementation(() => () => {});
+
       const props = {
         ...defaultProps,
       };
@@ -417,6 +551,8 @@ describe('CustomMarker', () => {
       });
 
       createHTMLMarker.mockImplementationOnce(() => factory);
+
+      utils.registerEvents.mockImplementation(() => () => {});
 
       const props = {
         ...defaultProps,

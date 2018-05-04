@@ -2,8 +2,21 @@ import { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import createHTMLMarker from './elements/createHTMLMarker';
+import { registerEvents } from './utils';
 import { LatLngPropType } from './propTypes';
 import { GOOGLE_MAPS_CONTEXT } from './GoogleMaps';
+
+const eventTypes = {
+  onClick: 'click',
+  onDoubleClick: 'dblclick',
+  onMouseDown: 'mousedown',
+  onMouseEnter: 'mouseenter',
+  onMouseLeave: 'mouseleave',
+  onMouseMove: 'mousemove',
+  onMouseOut: 'mouseout',
+  onMouseOver: 'mouseover',
+  onMouseUp: 'mouseup',
+};
 
 class CustomMarker extends Component {
   static propTypes = {
@@ -47,6 +60,8 @@ class CustomMarker extends Component {
       ...options,
     });
 
+    this.removeListeners = registerEvents(eventTypes, this.props, marker);
+
     this.setState(() => ({
       marker,
     }));
@@ -55,6 +70,10 @@ class CustomMarker extends Component {
   componentDidUpdate() {
     const { children } = this.props;
     const { marker } = this.state;
+
+    this.removeListeners();
+
+    this.removeListeners = registerEvents(eventTypes, this.props, marker);
 
     if (!CustomMarker.isReact16()) {
       ReactDOM.unstable_renderSubtreeIntoContainer(
