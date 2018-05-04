@@ -29,6 +29,7 @@ function validateNextProps(props, nextProps) {
  * @propType {string} indexName - Main index in which to search.
  * @propType {boolean} [refresh=false] - Flag to activate when the cache needs to be cleared so that the front-end is updated when a change occurs in the index.
  * @propType {object} [algoliaClient] - Provide a custom Algolia client instead of the internal one.
+ * @propType {object} [searchClient] - Provide a custom search client.
  * @propType {func} [onSearchStateChange] - Function to be called everytime a new search is done. Useful for [URL Routing](guide/Routing.html).
  * @propType {object} [searchState] - Object to inject some search state. Switches the InstantSearch component in controlled mode. Useful for [URL Routing](guide/Routing.html).
  * @propType {func} [createURL] - Function to call when creating links, useful for [URL Routing](guide/Routing.html).
@@ -59,7 +60,7 @@ class InstantSearch extends Component {
 
     this.aisManager = createInstantSearchManager({
       indexName: props.indexName,
-      algoliaClient: props.algoliaClient,
+      searchClient: props.searchClient || props.algoliaClient,
       initialState,
       resultsState: props.resultsState,
       stalledSearchDelay: props.stalledSearchDelay,
@@ -81,6 +82,10 @@ class InstantSearch extends Component {
 
     if (this.props.algoliaClient !== nextProps.algoliaClient) {
       this.aisManager.updateClient(nextProps.algoliaClient);
+    }
+
+    if (this.props.searchClient !== nextProps.searchClient) {
+      this.aisManager.updateClient(nextProps.searchClient);
     }
 
     if (this.isControlled) {
@@ -177,7 +182,9 @@ InstantSearch.propTypes = {
   // @TODO: These props are currently constant.
   indexName: PropTypes.string.isRequired,
 
-  algoliaClient: PropTypes.object.isRequired,
+  algoliaClient: PropTypes.object,
+
+  searchClient: PropTypes.object.isRequired,
 
   createURL: PropTypes.func,
 

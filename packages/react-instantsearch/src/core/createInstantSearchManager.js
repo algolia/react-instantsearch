@@ -27,7 +27,7 @@ export default function createInstantSearchManager({
 
   let stalledSearchTimer = null;
 
-  const helper = algoliasearchHelper(algoliaClient, indexName, baseSP);
+  const helper = algoliasearchHelper(searchClient, indexName, baseSP);
   helper.on('result', handleSearchSuccess);
   helper.on('error', handleSearchError);
   helper.on('search', handleNewSearch);
