@@ -1,7 +1,17 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
+import { registerEvents } from './utils';
 import { LatLngPropType } from './propTypes';
 import { GOOGLE_MAPS_CONTEXT } from './GoogleMaps';
+
+const eventTypes = {
+  onClick: 'click',
+  onDoubleClick: 'dblclick',
+  onMouseDown: 'mousedown',
+  onMouseOut: 'mouseout',
+  onMouseOver: 'mouseover',
+  onMouseUp: 'mouseup',
+};
 
 class Marker extends Component {
   static propTypes = {
@@ -31,6 +41,22 @@ class Marker extends Component {
       position: hit._geoloc,
       ...options,
     });
+
+    this.removeEventsListeners = registerEvents(
+      eventTypes,
+      this.props,
+      this.instance
+    );
+  }
+
+  componentDidUpdate() {
+    this.removeEventsListeners();
+
+    this.removeEventsListeners = registerEvents(
+      eventTypes,
+      this.props,
+      this.instance
+    );
   }
 
   componentWillUnmount() {

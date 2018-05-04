@@ -6,10 +6,13 @@ import {
   createFakeMapInstance,
   createFakeMarkerInstance,
 } from '../../test/mockGoogleMaps';
+import * as utils from '../utils';
 import { GOOGLE_MAPS_CONTEXT } from '../GoogleMaps';
 import Marker from '../Marker';
 
 Enzyme.configure({ adapter: new Adapter() });
+
+jest.mock('../utils');
 
 describe('Marker', () => {
   const defaultProps = {
@@ -20,6 +23,11 @@ describe('Marker', () => {
       },
     },
   };
+
+  beforeEach(() => {
+    utils.registerEvents.mockClear();
+    utils.registerEvents.mockReset();
+  });
 
   it('expect render correctly', () => {
     const mapInstance = createFakeMapInstance();
@@ -116,6 +124,111 @@ describe('Marker', () => {
           lng: 12,
         },
       });
+    });
+
+    it('expect to register the listeners on didMount', () => {
+      const mapInstance = createFakeMapInstance();
+      const markerInstance = createFakeMarkerInstance();
+      const google = createFakeGoogleReference({
+        mapInstance,
+        markerInstance,
+      });
+
+      const props = {
+        ...defaultProps,
+      };
+
+      const wrapper = shallow(<Marker {...props} />, {
+        disableLifecycleMethods: true,
+        context: {
+          [GOOGLE_MAPS_CONTEXT]: {
+            instance: mapInstance,
+            google,
+          },
+        },
+      });
+
+      expect(utils.registerEvents).toHaveBeenCalledTimes(0);
+
+      // Simulate didMount
+      wrapper.instance().componentDidMount();
+
+      expect(utils.registerEvents).toHaveBeenCalledTimes(1);
+      expect(utils.registerEvents).toHaveBeenCalledWith(
+        expect.any(Object),
+        expect.any(Object),
+        markerInstance
+      );
+    });
+  });
+
+  describe('update', () => {
+    it('expect to remove the listener on didUpdate', () => {
+      const removeEventListeners = jest.fn();
+      const mapInstance = createFakeMapInstance();
+      const markerInstance = createFakeMarkerInstance();
+      const google = createFakeGoogleReference({
+        mapInstance,
+        markerInstance,
+      });
+
+      utils.registerEvents.mockImplementation(() => removeEventListeners);
+
+      const props = {
+        ...defaultProps,
+      };
+
+      const wrapper = shallow(<Marker {...props} />, {
+        context: {
+          [GOOGLE_MAPS_CONTEXT]: {
+            instance: mapInstance,
+            google,
+          },
+        },
+      });
+
+      expect(removeEventListeners).toHaveBeenCalledTimes(0);
+
+      // Simulate the update
+      wrapper.instance().componentDidUpdate();
+
+      expect(removeEventListeners).toHaveBeenCalledTimes(1);
+    });
+
+    it('expect to register the listeners on didUpdate', () => {
+      const mapInstance = createFakeMapInstance();
+      const markerInstance = createFakeMarkerInstance();
+      const google = createFakeGoogleReference({
+        mapInstance,
+        markerInstance,
+      });
+
+      const props = {
+        ...defaultProps,
+      };
+
+      utils.registerEvents.mockImplementationOnce(() => () => {});
+
+      const wrapper = shallow(<Marker {...props} />, {
+        context: {
+          [GOOGLE_MAPS_CONTEXT]: {
+            instance: mapInstance,
+            google,
+          },
+        },
+      });
+
+      expect(utils.registerEvents).toHaveBeenCalledTimes(1);
+
+      // Simulate the update
+      wrapper.instance().componentDidUpdate();
+
+      expect(utils.registerEvents).toHaveBeenCalledTimes(2);
+      expect(utils.registerEvents).toHaveBeenLastCalledWith(
+        expect.any(Object),
+        expect.any(Object),
+        markerInstance
+      );
     });
   });
 
