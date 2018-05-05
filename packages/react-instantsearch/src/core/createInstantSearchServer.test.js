@@ -13,7 +13,6 @@ Enzyme.configure({ adapter: new Adapter() });
 
 describe('createInstantSearchServer', () => {
   const createAlgoliaClient = () => ({
-    addAlgoliaAgent: () => {},
     search: () =>
       Promise.resolve({
         results: [{ query: 'query' }],
