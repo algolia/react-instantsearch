@@ -24,12 +24,16 @@ describe('createInstantSearch', () => {
       <CustomInstantSearch appId="app" apiKey="key" indexName="name" />
     );
 
-    // eslint-disable-next-line no-shadow
-    const { algoliaClient, ...propsWithoutClient } = wrapper.props();
+    const {
+      algoliaClient, // eslint-disable-line no-shadow
+      searchClient,
+      ...propsWithoutClient
+    } = wrapper.props();
 
     expect(wrapper.is(InstantSearch)).toBe(true);
     expect(propsWithoutClient).toMatchSnapshot();
     expect(wrapper.props().algoliaClient).toBe(algoliaClient);
+    expect(wrapper.props().searchClient).toBe(searchClient);
   });
 
   it('creates an algolia client using the provided factory', () => {
@@ -167,8 +171,11 @@ describe('createInstantSearch', () => {
       <CustomInstantSearch indexName="name" root={root} />
     );
 
-    // eslint-disable-next-line no-shadow, no-unused-vars
-    const { algoliaClient, ...propsWithoutClient } = wrapper.props();
+    const {
+      algoliaClient, // eslint-disable-line no-shadow, no-unused-vars
+      searchClient, // eslint-disable-line no-unused-vars
+      ...propsWithoutClient
+    } = wrapper.props();
 
     expect(wrapper.props().root).toEqual(root);
     expect(propsWithoutClient).toMatchSnapshot();

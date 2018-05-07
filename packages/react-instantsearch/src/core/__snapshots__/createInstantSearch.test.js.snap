@@ -17,15 +17,6 @@ Object {
       },
     },
   },
-  "searchClient": Object {
-    "addAlgoliaAgent": [MockFunction] {
-      "calls": Array [
-        Array [
-          "react-instantsearch 5.0.3",
-        ],
-      ],
-    },
-  },
   "searchState": undefined,
   "stalledSearchDelay": 200,
 }
@@ -42,15 +33,6 @@ Object {
   "resultsState": undefined,
   "root": Object {
     "Root": "div",
-  },
-  "searchClient": Object {
-    "addAlgoliaAgent": [MockFunction] {
-      "calls": Array [
-        Array [
-          "react-instantsearch 5.0.3",
-        ],
-      ],
-    },
   },
   "searchState": undefined,
   "stalledSearchDelay": 200,
