@@ -43,6 +43,45 @@ describe('createInstantSearch', () => {
     );
   });
 
+  it('throws if algoliaClient is given with searchClient', () => {
+    const trigger = () =>
+      shallow(
+        <CustomInstantSearch
+          indexName="name"
+          searchClient={algoliaClient}
+          algoliaClient={algoliaClient}
+        />
+      );
+
+    expect(() => trigger()).toThrow();
+  });
+
+  it('throws if appId is given with searchClient', () => {
+    const trigger = () =>
+      shallow(
+        <CustomInstantSearch
+          indexName="name"
+          appId="appId"
+          searchClient={algoliaClient}
+        />
+      );
+
+    expect(() => trigger()).toThrow();
+  });
+
+  it('throws if apiKey is given with searchClient', () => {
+    const trigger = () =>
+      shallow(
+        <CustomInstantSearch
+          indexName="name"
+          apiKey="apiKey"
+          searchClient={algoliaClient}
+        />
+      );
+
+    expect(() => trigger()).toThrow();
+  });
+
   it('updates the algoliaClient when appId or apiKey changes', () => {
     const wrapper = shallow(
       <CustomInstantSearch appId="app" apiKey="key" indexName="name" />
@@ -54,6 +93,16 @@ describe('createInstantSearch', () => {
     expect(algoliaClientFactory).toHaveBeenCalledTimes(3);
     expect(algoliaClientFactory.mock.calls[1]).toEqual(['app2', 'key']);
     expect(algoliaClientFactory.mock.calls[2]).toEqual(['app', 'key2']);
+  });
+
+  it('uses the provided searchClient', () => {
+    const wrapper = shallow(
+      <CustomInstantSearch searchClient={algoliaClient} indexName="name" />
+    );
+
+    expect(algoliaClientFactory).toHaveBeenCalledTimes(0);
+    expect(algoliaClient.addAlgoliaAgent).toHaveBeenCalledTimes(1);
+    expect(wrapper.props().searchClient).toBe(algoliaClient);
   });
 
   it('uses the provided algoliaClient', () => {
@@ -82,6 +131,25 @@ describe('createInstantSearch', () => {
     });
 
     expect(wrapper.props().algoliaClient).toBe(newAlgoliaClient);
+    expect(newAlgoliaClient.addAlgoliaAgent).toHaveBeenCalledTimes(1);
+  });
+
+  it('updates the searchClient when provided searchClient is passed down', () => {
+    const newAlgoliaClient = {
+      addAlgoliaAgent: jest.fn(),
+    };
+
+    const wrapper = shallow(
+      <CustomInstantSearch searchClient={algoliaClient} indexName="name" />
+    );
+
+    expect(algoliaClient.addAlgoliaAgent).toHaveBeenCalledTimes(1);
+
+    wrapper.setProps({
+      searchClient: newAlgoliaClient,
+    });
+
+    expect(wrapper.props().searchClient).toBe(newAlgoliaClient);
     expect(newAlgoliaClient.addAlgoliaAgent).toHaveBeenCalledTimes(1);
   });
 
