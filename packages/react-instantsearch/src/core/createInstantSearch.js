@@ -45,7 +45,6 @@ export default function createInstantSearch(defaultAlgoliaClient, root) {
 
       if (this.props.searchClient) {
         if (this.props.appId || this.props.apiKey || this.props.algoliaClient) {
-          // eslint-disable-next-line no-console
           throw new Error(
             'react-instantsearch:: `searchClient` cannot be used with `appId`, `apiKey` or `algoliaClient`.'
           );
