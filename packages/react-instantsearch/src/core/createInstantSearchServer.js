@@ -137,11 +137,17 @@ const createInstantSearch = function(algoliasearch) {
 
       if (props.searchClient) {
         if (props.appId || props.apiKey || props.algoliaClient) {
-          // eslint-disable-next-line no-console
-          console.warn(
-            '`searchClient` cannot be used with `appId`, `apiKey` or `algoliaClient`.'
+          throw new Error(
+            'react-instantsearch:: `searchClient` cannot be used with `appId`, `apiKey` or `algoliaClient`.'
           );
         }
+      }
+
+      if (props.algoliaClient) {
+        // eslint-disable-next-line no-console
+        console.warn(
+          '`algoliaClient` option was renamed `searchClient`. Please use this new option before the next major version.'
+        );
       }
 
       client =
