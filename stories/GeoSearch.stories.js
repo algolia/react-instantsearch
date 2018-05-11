@@ -362,13 +362,8 @@ stories
                       <Fragment key={hit.objectID}>
                         <CustomMarker
                           hit={hit}
-                          options={{
-                            className: 'my-custom-marker',
-                            anchor: {
-                              x: 0,
-                              y: 5,
-                            },
-                          }}
+                          className="my-custom-marker"
+                          anchor={{ x: 0, y: 5 }}
                           onClick={action('click')}
                         >
                           <span>{hit.price_formatted}</span>
