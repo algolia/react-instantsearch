@@ -138,12 +138,7 @@ stories
         <Container>
           <GoogleMapsLoader apiKey="AIzaSyCl2TTJXpwxGuuc2zQZkAlIkWhpYbyjjP8">
             {google => (
-              <GeoSearch
-                google={google}
-                mapOptions={{
-                  streetViewControl: true,
-                }}
-              >
+              <GeoSearch google={google} streetViewControl>
                 {({ hits }) => (
                   <Fragment>
                     {hits.map(hit => <Marker key={hit.objectID} hit={hit} />)}
