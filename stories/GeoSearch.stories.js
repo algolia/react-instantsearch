@@ -27,6 +27,7 @@ Container.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
+const apiKey = 'AIzaSyBawL8VbstJDdU5397SUX7pEt9DslAwWgQ';
 const initialZoom = 12;
 const initialPosition = {
   lat: 40.71,
@@ -40,7 +41,7 @@ stories.addWithJSX(
       <Configure aroundLatLngViaIP hitsPerPage={20} />
 
       <Container>
-        <GoogleMapsLoader apiKey="AIzaSyCl2TTJXpwxGuuc2zQZkAlIkWhpYbyjjP8">
+        <GoogleMapsLoader apiKey={apiKey}>
           {google => (
             <GeoSearch google={google}>
               {({ hits }) => (
@@ -75,7 +76,7 @@ stories.addWithJSX(
       />
 
       <Container>
-        <GoogleMapsLoader apiKey="AIzaSyCl2TTJXpwxGuuc2zQZkAlIkWhpYbyjjP8">
+        <GoogleMapsLoader apiKey={apiKey}>
           {google => (
             <GeoSearch google={google} initialZoom={12}>
               {({ hits }) => (
@@ -106,7 +107,7 @@ stories
         <Configure aroundLatLngViaIP hitsPerPage={20} />
 
         <Container>
-          <GoogleMapsLoader apiKey="AIzaSyCl2TTJXpwxGuuc2zQZkAlIkWhpYbyjjP8">
+          <GoogleMapsLoader apiKey={apiKey}>
             {google => (
               <GeoSearch
                 google={google}
@@ -136,7 +137,7 @@ stories
         <Configure aroundLatLngViaIP hitsPerPage={20} />
 
         <Container>
-          <GoogleMapsLoader apiKey="AIzaSyCl2TTJXpwxGuuc2zQZkAlIkWhpYbyjjP8">
+          <GoogleMapsLoader apiKey={apiKey}>
             {google => (
               <GeoSearch google={google} streetViewControl>
                 {({ hits }) => (
@@ -162,7 +163,7 @@ stories
         <Configure aroundLatLngViaIP hitsPerPage={20} />
 
         <Container>
-          <GoogleMapsLoader apiKey="AIzaSyCl2TTJXpwxGuuc2zQZkAlIkWhpYbyjjP8">
+          <GoogleMapsLoader apiKey={apiKey}>
             {google => (
               <GeoSearch google={google}>
                 {({ hits }) => (
@@ -195,7 +196,7 @@ stories
         <Configure aroundLatLngViaIP hitsPerPage={20} />
 
         <Container>
-          <GoogleMapsLoader apiKey="AIzaSyCl2TTJXpwxGuuc2zQZkAlIkWhpYbyjjP8">
+          <GoogleMapsLoader apiKey={apiKey}>
             {google => (
               <GeoSearch google={google}>
                 {({ hits }) => (
@@ -227,7 +228,7 @@ stories
         <Configure aroundLatLngViaIP hitsPerPage={20} />
 
         <Container>
-          <GoogleMapsLoader apiKey="AIzaSyCl2TTJXpwxGuuc2zQZkAlIkWhpYbyjjP8">
+          <GoogleMapsLoader apiKey={apiKey}>
             {google => (
               <GeoSearch google={google}>
                 {({ hits }) => (
@@ -255,7 +256,7 @@ stories
         <Configure aroundLatLngViaIP hitsPerPage={20} />
 
         <Container>
-          <GoogleMapsLoader apiKey="AIzaSyCl2TTJXpwxGuuc2zQZkAlIkWhpYbyjjP8">
+          <GoogleMapsLoader apiKey={apiKey}>
             {google => (
               <GeoSearch google={google}>
                 {({ hits }) => (
@@ -283,7 +284,7 @@ stories
         <Configure aroundLatLngViaIP hitsPerPage={20} />
 
         <Container>
-          <GoogleMapsLoader apiKey="AIzaSyCl2TTJXpwxGuuc2zQZkAlIkWhpYbyjjP8">
+          <GoogleMapsLoader apiKey={apiKey}>
             {google => (
               <GeoSearch google={google}>
                 {({ hits }) => (
@@ -311,7 +312,7 @@ stories
         <Configure aroundLatLngViaIP hitsPerPage={20} />
 
         <Container>
-          <GoogleMapsLoader apiKey="AIzaSyCl2TTJXpwxGuuc2zQZkAlIkWhpYbyjjP8">
+          <GoogleMapsLoader apiKey={apiKey}>
             {google => (
               <GeoSearch google={google}>
                 {({ hits }) => (
@@ -349,7 +350,7 @@ stories
         <Configure aroundLatLngViaIP hitsPerPage={20} />
 
         <Container>
-          <GoogleMapsLoader apiKey="AIzaSyCl2TTJXpwxGuuc2zQZkAlIkWhpYbyjjP8">
+          <GoogleMapsLoader apiKey={apiKey}>
             {google => (
               <GeoSearch google={google}>
                 {({ hits }) => (
@@ -406,7 +407,7 @@ stories.addWithJSX('with unmount', () => {
 
           {visible && (
             <Container>
-              <GoogleMapsLoader apiKey="AIzaSyCl2TTJXpwxGuuc2zQZkAlIkWhpYbyjjP8">
+              <GoogleMapsLoader apiKey={apiKey}>
                 {google => (
                   <GeoSearch google={google}>
                     {({ hits }) => (
