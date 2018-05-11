@@ -150,6 +150,26 @@ describe('utils', () => {
       expect(actual).toEqual(expectation);
     });
 
+    it('expect to return the given props when excluded keys is empty', () => {
+      const onClick = () => {};
+      const excludes = [];
+
+      const props = {
+        children: '<div />',
+        onClick,
+      };
+
+      const expectation = {
+        children: '<div />',
+        onClick,
+      };
+
+      const filterProps = utils.createFilterProps(excludes);
+      const actual = filterProps(props);
+
+      expect(actual).toEqual(expectation);
+    });
+
     it('expect to return an empty object when all keys are excluded', () => {
       const excludes = ['children', 'onClick'];
 
