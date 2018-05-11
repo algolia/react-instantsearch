@@ -18,7 +18,7 @@ jest.mock('../utils', () => {
   return {
     registerEvents: jest.fn(),
     createFilterProps: module.createFilterProps,
-    createListenersPropType: module.createListenersPropType,
+    createListenersPropTypes: module.createListenersPropTypes,
   };
 });
 

@@ -2,7 +2,7 @@ import { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
   registerEvents,
-  createListenersPropType,
+  createListenersPropTypes,
   createFilterProps,
 } from './utils';
 import { GeolocHitPropType } from './propTypes';
@@ -22,7 +22,7 @@ const filterProps = createFilterProps(excludes);
 
 class Marker extends Component {
   static propTypes = {
-    ...createListenersPropType(eventTypes),
+    ...createListenersPropTypes(eventTypes),
     hit: GeolocHitPropType.isRequired,
   };
 

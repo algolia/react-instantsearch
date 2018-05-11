@@ -11,7 +11,7 @@ export const registerEvents = (events, props, instance) => {
   };
 };
 
-export const createListenersPropType = eventTypes =>
+export const createListenersPropTypes = eventTypes =>
   Object.keys(eventTypes).reduce(
     (acc, name) => ({ ...acc, [name]: PropTypes.func }),
     {}

@@ -103,7 +103,7 @@ describe('utils', () => {
     });
   });
 
-  describe('createListenersPropType', () => {
+  describe('createListenersPropTypes', () => {
     it('expect to return an object with listeners propType from event types', () => {
       const events = {
         onClick: '',
@@ -115,7 +115,7 @@ describe('utils', () => {
         onMouseMove: PropTypes.func,
       };
 
-      const actual = utils.createListenersPropType(events);
+      const actual = utils.createListenersPropTypes(events);
 
       expect(actual).toEqual(expectation);
     });
@@ -124,7 +124,7 @@ describe('utils', () => {
       const events = {};
 
       const expectation = {};
-      const actual = utils.createListenersPropType(events);
+      const actual = utils.createListenersPropTypes(events);
 
       expect(actual).toEqual(expectation);
     });
