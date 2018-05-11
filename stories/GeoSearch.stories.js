@@ -189,7 +189,7 @@ stories
     }
   )
   .addWithJSX(
-    'with events',
+    'with <Marker> events',
     () => (
       <WrapWithHits indexName="airbnb" linkedStoryGroup="GeoSearch">
         <Configure aroundLatLngViaIP hitsPerPage={20} />
@@ -204,9 +204,7 @@ stories
                       <Marker
                         key={hit.objectID}
                         hit={hit}
-                        onClick={event => {
-                          action('click', event, hit);
-                        }}
+                        onClick={action('click')}
                       />
                     ))}
                   </Fragment>
