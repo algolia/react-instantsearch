@@ -383,6 +383,62 @@ stories
     }
   );
 
+stories.addWithJSX('with InfoWindow', () => {
+  class Example extends Component {
+    static propTypes = {
+      google: PropTypes.object.isRequired,
+    };
+
+    InfoWindow = new this.props.google.maps.InfoWindow();
+
+    onClickMarker = ({ hit, marker }) => {
+      if (this.InfoWindow.getMap()) {
+        this.InfoWindow.close();
+      }
+
+      this.InfoWindow.setContent(hit.name);
+
+      this.InfoWindow.open(marker.getMap(), marker);
+    };
+
+    renderGeoHit = hit => (
+      <Marker
+        key={hit.objectID}
+        hit={hit}
+        anchor={{ x: 0, y: 5 }}
+        onClick={({ marker }) => {
+          this.onClickMarker({
+            hit,
+            marker,
+          });
+        }}
+      />
+    );
+
+    render() {
+      const { google } = this.props;
+
+      return (
+        <WrapWithHits indexName="airbnb" linkedStoryGroup="GeoSearch">
+          <Configure aroundLatLngViaIP hitsPerPage={20} />
+
+          <Container>
+            <GeoSearch google={google}>
+              {({ hits }) => <Fragment>{hits.map(this.renderGeoHit)}</Fragment>}
+            </GeoSearch>
+          </Container>
+        </WrapWithHits>
+      );
+    }
+  }
+
+  return (
+    <GoogleMapsLoader apiKey={apiKey}>
+      {google => <Example google={google} />}
+    </GoogleMapsLoader>
+  );
+});
+
 stories.addWithJSX('with hits communication (custom)', () => {
   const CustomHits = connectHits(({ hits, selectedHit, onHitOver }) => (
     <div className="hits">
