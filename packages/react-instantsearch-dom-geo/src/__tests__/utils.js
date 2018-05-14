@@ -22,11 +22,51 @@ describe('utils', () => {
       utils.registerEvents(events, props, instance);
 
       expect(instance.addListener).toHaveBeenCalledTimes(2);
-      expect(instance.addListener).toHaveBeenCalledWith('click', onClick);
+
+      expect(instance.addListener).toHaveBeenCalledWith(
+        'click',
+        expect.any(Function)
+      );
+
       expect(instance.addListener).toHaveBeenCalledWith(
         'mousemove',
-        onMouseMove
+        expect.any(Function)
       );
+    });
+
+    it('expect to add listeners with event & marker', () => {
+      const onClick = jest.fn();
+      const onMouseMove = jest.fn();
+      const instance = createFakeMarkerInstance();
+      const listeners = [];
+
+      instance.addListener.mockImplementation((event, listener) =>
+        listeners.push(listener)
+      );
+
+      const events = {
+        onClick: 'click',
+        onMouseMove: 'mousemove',
+      };
+
+      const props = {
+        onClick,
+        onMouseMove,
+      };
+
+      utils.registerEvents(events, props, instance);
+
+      listeners.forEach(listener => listener({ type: 'event' }));
+
+      expect(onClick).toHaveBeenCalledWith({
+        event: { type: 'event' },
+        marker: instance,
+      });
+
+      expect(onMouseMove).toHaveBeenCalledWith({
+        event: { type: 'event' },
+        marker: instance,
+      });
     });
 
     it('expect to only add listeners listed from events', () => {
@@ -47,7 +87,10 @@ describe('utils', () => {
       utils.registerEvents(events, props, instance);
 
       expect(instance.addListener).toHaveBeenCalledTimes(1);
-      expect(instance.addListener).toHaveBeenCalledWith('click', onClick);
+      expect(instance.addListener).toHaveBeenCalledWith(
+        'click',
+        expect.any(Function)
+      );
     });
 
     it('expect to only add listeners listed from props', () => {
@@ -66,7 +109,10 @@ describe('utils', () => {
       utils.registerEvents(events, props, instance);
 
       expect(instance.addListener).toHaveBeenCalledTimes(1);
-      expect(instance.addListener).toHaveBeenCalledWith('click', onClick);
+      expect(instance.addListener).toHaveBeenCalledWith(
+        'click',
+        expect.any(Function)
+      );
     });
 
     it('expect to return a function that remove the listeners', () => {
