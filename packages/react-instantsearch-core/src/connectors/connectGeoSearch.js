@@ -28,42 +28,7 @@ import {
 // **must** write the value in the attribute `aroundLatLng`
 const getBoundingBoxId = () => 'boundingBox';
 const getAroundLatLngId = () => 'aroundLatLng';
-
-const getCurrentRefinement = (props, searchState, context) => {
-  const refinement = getCurrentRefinementValue(
-    props,
-    searchState,
-    context,
-    getBoundingBoxId()
-  );
-
-  if (!refinement) {
-    return refinement;
-  }
-
-  return {
-    northEast: {
-      lat: parseFloat(refinement.northEast.lat),
-      lng: parseFloat(refinement.northEast.lng),
-    },
-    southWest: {
-      lat: parseFloat(refinement.southWest.lat),
-      lng: parseFloat(refinement.southWest.lng),
-    },
-  };
-};
-
-const getCurrentPosition = (props, searchState, context) =>
-  getCurrentRefinementValue(props, searchState, context, getAroundLatLngId());
-
-const refine = (searchState, nextValue, context) => {
-  const resetPage = true;
-  const nextRefinement = {
-    [getBoundingBoxId()]: nextValue,
-  };
-
-  return refineValue(searchState, nextRefinement, context, resetPage);
-};
+const getConfigureAroundLatLngId = () => 'configure.aroundLatLng';
 
 const currentRefinementToString = currentRefinement =>
   [
@@ -96,6 +61,62 @@ const stringToPosition = value => {
     lat: parseFloat(pattern[1]),
     lng: parseFloat(pattern[2]),
   };
+};
+
+const getCurrentRefinement = (props, searchState, context) => {
+  const refinement = getCurrentRefinementValue(
+    props,
+    searchState,
+    context,
+    getBoundingBoxId()
+  );
+
+  if (!refinement) {
+    return refinement;
+  }
+
+  return {
+    northEast: {
+      lat: parseFloat(refinement.northEast.lat),
+      lng: parseFloat(refinement.northEast.lng),
+    },
+    southWest: {
+      lat: parseFloat(refinement.southWest.lat),
+      lng: parseFloat(refinement.southWest.lng),
+    },
+  };
+};
+
+const getCurrentPosition = (props, searchState, context) => {
+  const aroundLatLng = getCurrentRefinementValue(
+    props,
+    searchState,
+    context,
+    getAroundLatLngId()
+  );
+
+  if (!aroundLatLng) {
+    // Fallback on `configure.aroundLatLng`
+    const configureAroundLatLng = getCurrentRefinementValue(
+      props,
+      searchState,
+      context,
+      getConfigureAroundLatLngId()
+    );
+
+    return configureAroundLatLng && stringToPosition(configureAroundLatLng);
+  }
+
+  return aroundLatLng;
+};
+
+const refine = (searchState, nextValue, context) => {
+  const resetPage = true;
+  const nextRefinement = {
+    [getBoundingBoxId()]: nextValue,
+  };
+
+  return refineValue(searchState, nextRefinement, context, resetPage);
 };
 
 export default createConnector({

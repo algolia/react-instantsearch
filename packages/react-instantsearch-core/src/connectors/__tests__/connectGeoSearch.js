@@ -123,7 +123,7 @@ describe('connectGeoSearch', () => {
       });
 
       describe('position', () => {
-        it('expect to return the position from the searchState', () => {
+        it('expect to return the position from the searchState (aroundLatLng)', () => {
           const instance = createSingleIndexInstance();
           const props = {};
           const searchResults = createSingleSearchResults();
@@ -131,6 +131,29 @@ describe('connectGeoSearch', () => {
             aroundLatLng: {
               lat: 10,
               lng: 12,
+            },
+          };
+
+          const actual = connector.getProvidedProps.call(
+            instance,
+            props,
+            searchState,
+            searchResults
+          );
+
+          expect(actual.position).toEqual({
+            lat: 10,
+            lng: 12,
+          });
+        });
+
+        it('expect to return the position from the searchState (configure.aroundLatLng)', () => {
+          const instance = createSingleIndexInstance();
+          const props = {};
+          const searchResults = createSingleSearchResults();
+          const searchState = {
+            configure: {
+              aroundLatLng: '10, 12',
             },
           };
 
@@ -822,7 +845,7 @@ describe('connectGeoSearch', () => {
       });
 
       describe('position', () => {
-        it('expect to return the position from the searchState', () => {
+        it('expect to return the position from the searchState (aroundLatLng)', () => {
           const instance = createMultiIndexInstance();
           const props = {};
           const searchResults = createSingleSearchResults();
@@ -830,6 +853,29 @@ describe('connectGeoSearch', () => {
             aroundLatLng: {
               lat: 10,
               lng: 12,
+            },
+          });
+
+          const actual = connector.getProvidedProps.call(
+            instance,
+            props,
+            searchState,
+            searchResults
+          );
+
+          expect(actual.position).toEqual({
+            lat: 10,
+            lng: 12,
+          });
+        });
+
+        it('expect to return the position from the searchState (configure.aroungLatLng)', () => {
+          const instance = createMultiIndexInstance();
+          const props = {};
+          const searchResults = createSingleSearchResults();
+          const searchState = createMultiIndexSearchState({
+            configure: {
+              aroundLatLng: '10, 12',
             },
           });
 
