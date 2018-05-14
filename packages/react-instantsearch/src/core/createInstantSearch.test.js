@@ -119,6 +119,22 @@ describe('createInstantSearch', () => {
     expect(wrapper.props().algoliaClient).toBe(algoliaClient);
   });
 
+  it('does not throw if searchClient does not have a `addAlgoliaAgent()` method', () => {
+    const client = {};
+    const trigger = () =>
+      shallow(<CustomInstantSearch indexName="name" searchClient={client} />);
+
+    expect(() => trigger()).not.toThrow();
+  });
+
+  it('does not throw if algoliaClient does not have a `addAlgoliaAgent()` method', () => {
+    const client = {};
+    const trigger = () =>
+      shallow(<CustomInstantSearch indexName="name" algoliaClient={client} />);
+
+    expect(() => trigger()).not.toThrow();
+  });
+
   it('updates the algoliaClient when provided algoliaClient is passed down', () => {
     const newAlgoliaClient = {
       addAlgoliaAgent: jest.fn(),
@@ -155,6 +171,30 @@ describe('createInstantSearch', () => {
 
     expect(wrapper.props().searchClient).toBe(newAlgoliaClient);
     expect(newAlgoliaClient.addAlgoliaAgent).toHaveBeenCalledTimes(1);
+  });
+
+  it('does not throw when algoliaClient gets updated and does not have a `addAlgoliaAgent()` method', () => {
+    const client = {};
+    const makeWrapper = () =>
+      shallow(<CustomInstantSearch indexName="name" algoliaClient={client} />);
+
+    expect(() => {
+      makeWrapper().setProps({
+        algoliaClient: client,
+      });
+    }).not.toThrow();
+  });
+
+  it('does not throw when searchClient gets updated and does not have a `addAlgoliaAgent()` method', () => {
+    const client = {};
+    const makeWrapper = () =>
+      shallow(<CustomInstantSearch indexName="name" searchClient={client} />);
+
+    expect(() => {
+      makeWrapper().setProps({
+        searchClient: client,
+      });
+    }).not.toThrow();
   });
 
   it('expect to create InstantSearch with a custom root props', () => {
