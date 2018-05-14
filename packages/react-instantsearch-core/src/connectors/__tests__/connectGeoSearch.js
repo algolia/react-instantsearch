@@ -222,6 +222,42 @@ describe('connectGeoSearch', () => {
           });
         });
 
+        it('expect to return the boundingBox from the searchState with string values', () => {
+          const instance = createSingleIndexInstance();
+          const props = {};
+          const searchResults = createSingleSearchResults();
+          const searchState = {
+            boundingBox: {
+              northEast: {
+                lat: '10.12',
+                lng: 12.1,
+              },
+              southWest: {
+                lat: 12.14,
+                lng: '14.12',
+              },
+            },
+          };
+
+          const actual = connector.getProvidedProps.call(
+            instance,
+            props,
+            searchState,
+            searchResults
+          );
+
+          expect(actual.currentRefinement).toEqual({
+            northEast: {
+              lat: 10.12,
+              lng: 12.1,
+            },
+            southWest: {
+              lat: 12.14,
+              lng: 14.12,
+            },
+          });
+        });
+
         it('expect to return the boundingBox from the SearchResults', () => {
           const instance = createSingleIndexInstance();
           const props = {};
@@ -860,6 +896,42 @@ describe('connectGeoSearch', () => {
             southWest: {
               lat: 12,
               lng: 14,
+            },
+          });
+        });
+
+        it('expect to return the boundingBox from the searchState with string values', () => {
+          const instance = createMultiIndexInstance();
+          const props = {};
+          const searchResults = createSingleSearchResults();
+          const searchState = createMultiIndexSearchState({
+            boundingBox: {
+              northEast: {
+                lat: '10.12',
+                lng: 12.1,
+              },
+              southWest: {
+                lat: 12.14,
+                lng: '14.12',
+              },
+            },
+          });
+
+          const actual = connector.getProvidedProps.call(
+            instance,
+            props,
+            searchState,
+            searchResults
+          );
+
+          expect(actual.currentRefinement).toEqual({
+            northEast: {
+              lat: 10.12,
+              lng: 12.1,
+            },
+            southWest: {
+              lat: 12.14,
+              lng: 14.12,
             },
           });
         });

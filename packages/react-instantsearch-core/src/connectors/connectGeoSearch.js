@@ -29,11 +29,32 @@ import {
 const getBoundingBoxId = () => 'boundingBox';
 const getAroundLatLngId = () => 'aroundLatLng';
 
-const getRefinement = id => (props, searchState, context) =>
-  getCurrentRefinementValue(props, searchState, context, id);
+const getCurrentRefinement = (props, searchState, context) => {
+  const refinement = getCurrentRefinementValue(
+    props,
+    searchState,
+    context,
+    getBoundingBoxId()
+  );
 
-const getCurrentRefinement = getRefinement(getBoundingBoxId());
-const getCurrentPosition = getRefinement(getAroundLatLngId());
+  if (!refinement) {
+    return refinement;
+  }
+
+  return {
+    northEast: {
+      lat: parseFloat(refinement.northEast.lat),
+      lng: parseFloat(refinement.northEast.lng),
+    },
+    southWest: {
+      lat: parseFloat(refinement.southWest.lat),
+      lng: parseFloat(refinement.southWest.lng),
+    },
+  };
+};
+
+const getCurrentPosition = (props, searchState, context) =>
+  getCurrentRefinementValue(props, searchState, context, getAroundLatLngId());
 
 const refine = (searchState, nextValue, context) => {
   const resetPage = true;
