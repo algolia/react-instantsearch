@@ -60,7 +60,7 @@ class InstantSearch extends Component {
 
     this.aisManager = createInstantSearchManager({
       indexName: props.indexName,
-      searchClient: props.searchClient || props.algoliaClient,
+      searchClient: props.searchClient,
       initialState,
       resultsState: props.resultsState,
       stalledSearchDelay: props.stalledSearchDelay,
@@ -78,10 +78,6 @@ class InstantSearch extends Component {
       if (nextProps.refresh) {
         this.aisManager.clearCache();
       }
-    }
-
-    if (this.props.algoliaClient !== nextProps.algoliaClient) {
-      this.aisManager.updateClient(nextProps.algoliaClient);
     }
 
     if (this.props.searchClient !== nextProps.searchClient) {
@@ -181,8 +177,6 @@ InstantSearch.defaultProps = {
 InstantSearch.propTypes = {
   // @TODO: These props are currently constant.
   indexName: PropTypes.string.isRequired,
-
-  algoliaClient: PropTypes.object,
 
   searchClient: PropTypes.object.isRequired,
 
