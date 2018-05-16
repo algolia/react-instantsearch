@@ -64,8 +64,6 @@ class HTMLMarker extends Component {
           marker.element
         );
       }
-
-      marker.draw();
     }
   }
 
