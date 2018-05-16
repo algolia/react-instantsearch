@@ -38,6 +38,53 @@ describe('createInstantSearchServer', () => {
       getId: () => 'id',
     })(() => null);
 
+  describe('props', () => {
+    it('throws if algoliaClient is given with searchClient', () => {
+      const { InstantSearch } = createInstantSearch(createAlgoliaClient);
+
+      const trigger = () =>
+        shallow(
+          <InstantSearch
+            indexName="name"
+            searchClient={createAlgoliaClient()}
+            algoliaClient={createAlgoliaClient()}
+          />
+        );
+
+      expect(() => trigger()).toThrow();
+    });
+
+    it('throws if appId is given with searchClient', () => {
+      const { InstantSearch } = createInstantSearch(createAlgoliaClient);
+
+      const trigger = () =>
+        shallow(
+          <InstantSearch
+            indexName="name"
+            appId="appId"
+            searchClient={createAlgoliaClient()}
+          />
+        );
+
+      expect(() => trigger()).toThrow();
+    });
+
+    it('throws if apiKey is given with searchClient', () => {
+      const { InstantSearch } = createInstantSearch(createAlgoliaClient);
+
+      const trigger = () =>
+        shallow(
+          <InstantSearch
+            indexName="name"
+            apiKey="apiKey"
+            searchClient={createAlgoliaClient()}
+          />
+        );
+
+      expect(() => trigger()).toThrow();
+    });
+  });
+
   describe('single index', () => {
     it('results shoud be SearchResults from the helper', () => {
       const { InstantSearch } = createInstantSearch(createAlgoliaClient);
