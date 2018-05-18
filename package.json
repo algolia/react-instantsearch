@@ -7,7 +7,7 @@
     "docgen"
   ],
   "scripts": {
-    "changelog": "conventional-changelog --preset angular --output-unreleased",
+    "postinstall": "lerna run build:cjs --scope react-instantsearch-*",
     "start": "(cd docgen && yarn start) & yarn docs:storybook-start & wait",
     "docs:build": "(cd docgen && yarn build) && yarn docs:storybook-build-production",
     "docs:deploy-production": "NODE_ENV=production yarn docs:build && babel-node scripts/gh-pages.js",
