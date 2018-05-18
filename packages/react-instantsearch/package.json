@@ -80,7 +80,7 @@
     },
     {
       "path": "dist/umd/Dom.min.js",
-      "maxSize": "62 kB"
+      "maxSize": "63 kB"
     }
   ]
 }
