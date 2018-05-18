@@ -1,4 +1,4 @@
-import connectSearchBox from '../connectors/connectSearchBox';
+import { connectSearchBox } from 'react-instantsearch-core';
 import SearchBox from '../components/SearchBox';
 
 /**

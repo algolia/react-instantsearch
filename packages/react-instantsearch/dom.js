@@ -1,18 +1,18 @@
-import createInstantSearch from './src/core/createInstantSearch';
-import createIndex from './src/core/createIndex';
 import algoliasearch from 'algoliasearch/lite';
+import { createInstantSearch, createIndex } from 'react-instantsearch-core';
 
-const InstantSearch = createInstantSearch(algoliasearch, {
+export const InstantSearch = createInstantSearch(algoliasearch, {
   Root: 'div',
   props: { className: 'ais-InstantSearch__root' },
 });
-export { InstantSearch };
-const Index = createIndex({
+
+export const Index = createIndex({
   Root: 'div',
   props: { className: 'ais-MultiIndex__root' },
 });
-export { Index };
-export { default as Configure } from './src/widgets/Configure.js';
+
+export { Configure } from 'react-instantsearch-core';
+
 export {
   default as CurrentRefinements,
 } from './src/widgets/CurrentRefinements.js';

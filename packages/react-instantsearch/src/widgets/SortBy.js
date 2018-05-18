@@ -1,4 +1,4 @@
-import connectSortBy from '../connectors/connectSortBy';
+import { connectSortBy } from 'react-instantsearch-core';
 import SortBy from '../components/SortBy';
 
 /**

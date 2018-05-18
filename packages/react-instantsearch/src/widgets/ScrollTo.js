@@ -1,4 +1,4 @@
-import connectScrollTo from '../connectors/connectScrollTo.js';
+import { connectScrollTo } from 'react-instantsearch-core';
 import ScrollToComponent from '../components/ScrollTo.js';
 
 /**

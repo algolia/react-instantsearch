@@ -1,4 +1,4 @@
-import connectHitsPerPage from '../connectors/connectHitsPerPage';
+import { connectHitsPerPage } from 'react-instantsearch-core';
 import HitsPerPage from '../components/HitsPerPage';
 
 /**

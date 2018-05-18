@@ -1,5 +1,5 @@
 import React from 'react';
-import connectRange from '../connectors/connectRange';
+import { connectRange } from 'react-instantsearch-core';
 import PanelCallbackHandler from '../components/PanelCallbackHandler';
 import RangeInput from '../components/RangeInput';
 

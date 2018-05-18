@@ -1,4 +1,4 @@
-import connectPoweredBy from '../connectors/connectPoweredBy.js';
+import { connectPoweredBy } from 'react-instantsearch-core';
 import PoweredByComponent from '../components/PoweredBy.js';
 
 /**

@@ -1,5 +1,5 @@
 import React from 'react';
-import connectCurrentRefinements from '../connectors/connectCurrentRefinements';
+import { connectCurrentRefinements } from 'react-instantsearch-core';
 import PanelCallbackHandler from '../components/PanelCallbackHandler';
 import CurrentRefinements from '../components/CurrentRefinements';
 

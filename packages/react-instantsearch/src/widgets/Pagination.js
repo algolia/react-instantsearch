@@ -1,5 +1,5 @@
 import React from 'react';
-import connectPagination from '../connectors/connectPagination';
+import { connectPagination } from 'react-instantsearch-core';
 import PanelCallbackHandler from '../components/PanelCallbackHandler';
 import Pagination from '../components/Pagination';
 

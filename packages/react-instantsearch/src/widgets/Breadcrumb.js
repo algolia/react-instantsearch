@@ -1,5 +1,5 @@
 import React from 'react';
-import connectBreadcrumb from '../connectors/connectBreadcrumb';
+import { connectBreadcrumb } from 'react-instantsearch-core';
 import PanelCallbackHandler from '../components/PanelCallbackHandler';
 import Breadcrumb from '../components/Breadcrumb';
 

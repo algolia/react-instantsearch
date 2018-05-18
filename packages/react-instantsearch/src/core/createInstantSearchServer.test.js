@@ -6,8 +6,7 @@ import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { version } from '../../package.json';
 import { SearchParameters } from 'algoliasearch-helper';
-import createConnector from './createConnector';
-import createIndex from './createIndex';
+import { createConnector, createIndex } from 'react-instantsearch-core';
 import { createInstantSearch } from './createInstantSearchServer';
 
 Enzyme.configure({ adapter: new Adapter() });

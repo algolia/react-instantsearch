@@ -1,5 +1,5 @@
 import React from 'react';
-import connectHierarchicalMenu from '../connectors/connectHierarchicalMenu';
+import { connectHierarchicalMenu } from 'react-instantsearch-core';
 import PanelCallbackHandler from '../components/PanelCallbackHandler';
 import HierarchicalMenu from '../components/HierarchicalMenu';
 

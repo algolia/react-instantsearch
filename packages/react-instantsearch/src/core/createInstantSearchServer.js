@@ -6,10 +6,18 @@ import algoliasearchHelper, {
   SearchParameters,
 } from 'algoliasearch-helper';
 import ReactDom from 'react-dom/server';
-import { getIndex, hasMultipleIndex } from './indexUtils';
 import { isEmpty } from 'lodash';
-import cis from './createInstantSearch';
-import highlightTags from './highlightTags.js';
+import {
+  createInstantSearch as cis,
+  HIGHLIGHT_TAGS,
+} from 'react-instantsearch-core';
+
+const getIndex = context =>
+  context && context.multiIndexContext
+    ? context.multiIndexContext.targetedIndex
+    : context.ais.mainTargetedIndex;
+
+const hasMultipleIndex = context => context && context.multiIndexContext;
 
 const createInstantSearch = function(algoliasearch) {
   const InstantSearch = cis(algoliasearch, {
@@ -55,7 +63,7 @@ const createInstantSearch = function(algoliasearch) {
             searchParameter.props,
             searchParameter.searchState
           ),
-        new SearchParameters({ index: indexName, ...highlightTags })
+        new SearchParameters({ index: indexName, ...HIGHLIGHT_TAGS })
       );
 
     const mergedSearchParameters = searchParameters

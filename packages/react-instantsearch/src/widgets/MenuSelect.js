@@ -1,5 +1,5 @@
 import React from 'react';
-import connectMenu from '../connectors/connectMenu';
+import { connectMenu } from 'react-instantsearch-core';
 import PanelCallbackHandler from '../components/PanelCallbackHandler';
 import MenuSelect from '../components/MenuSelect';
 

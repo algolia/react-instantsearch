@@ -1,4 +1,4 @@
-import connectHighlight from '../connectors/connectHighlight';
+import { connectHighlight } from 'react-instantsearch-core';
 import Highlight from '../components/Highlight';
 
 /**
