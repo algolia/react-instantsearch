@@ -10,5 +10,5 @@ fi
 yarn lint
 yarn test:regressions
 yarn argos
-NODE_ENV=production yarn test:build
+yarn test:build
 yarn test:recipes
