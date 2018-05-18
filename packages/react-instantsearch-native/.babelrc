@@ -40,6 +40,26 @@
         "lodash"
       ]
     },
+    "production": {
+      "presets": [
+        [
+          "env",
+          {
+            "targets": {
+              "browsers": [
+                "last 2 versions",
+                "ie >= 10"
+              ]
+            }
+          }
+        ],
+        "react",
+        "stage-2"
+      ],
+      "plugins": [
+        "lodash"
+      ]
+    },
     "es": {
       "presets": [
         [
