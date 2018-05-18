@@ -1,7 +1,5 @@
 import React from 'react';
 import { has } from 'lodash';
-
-import { getDisplayName } from './utils';
 import { withKeysPropType } from './propTypes';
 
 export default function translatable(defaultTranslations) {
@@ -22,7 +20,9 @@ export default function translatable(defaultTranslations) {
       return <Composed translate={translate} {...otherProps} />;
     }
 
-    Translatable.displayName = `Translatable(${getDisplayName(Composed)})`;
+    const name = Composed.displayName || Composed.name || 'UnknownComponent';
+
+    Translatable.displayName = `Translatable(${name})`;
 
     Translatable.propTypes = {
       translations: withKeysPropType(Object.keys(defaultTranslations)),
