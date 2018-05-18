@@ -1,6 +1,5 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import parseAlgoliaHit from '../core/highlight';
 import Snippet from './Snippet';
 
 describe('Snippet', () => {
@@ -23,14 +22,13 @@ describe('Snippet', () => {
       },
     };
 
-    const highlight = ({ hit, attribute, highlightProperty }) =>
-      parseAlgoliaHit({
-        preTag: '<ais-highlight>',
-        postTag: '</ais-highlight>',
-        attribute,
-        hit,
-        highlightProperty,
-      });
+    const highlight = () => [
+      { value: 'awesome ', isHighlighted: false },
+      { value: 'hi', isHighlighted: true },
+      { value: 'ghlighted ', isHighlighted: false },
+      { value: 'hi', isHighlighted: true },
+      { value: 't!', isHighlighted: false },
+    ];
 
     const tree = renderer.create(
       <Snippet
@@ -62,14 +60,13 @@ describe('Snippet', () => {
       },
     };
 
-    const highlight = ({ hit, attribute, highlightProperty }) =>
-      parseAlgoliaHit({
-        preTag: '<ais-highlight>',
-        postTag: '</ais-highlight>',
-        attribute,
-        hit,
-        highlightProperty,
-      });
+    const highlight = () => [
+      { value: 'awesome ', isHighlighted: false },
+      { value: 'hi', isHighlighted: true },
+      { value: 'ghlighted ', isHighlighted: false },
+      { value: 'hi', isHighlighted: true },
+      { value: 't!', isHighlighted: false },
+    ];
 
     const tree = renderer.create(
       <Snippet
@@ -102,14 +99,13 @@ describe('Snippet', () => {
       },
     };
 
-    const highlight = ({ hit, attribute, highlightProperty }) =>
-      parseAlgoliaHit({
-        preTag: '<ais-highlight>',
-        postTag: '</ais-highlight>',
-        attribute,
-        hit,
-        highlightProperty,
-      });
+    const highlight = () => [
+      { value: 'awesome ', isHighlighted: false },
+      { value: 'hi', isHighlighted: true },
+      { value: 'ghlighted ', isHighlighted: false },
+      { value: 'hi', isHighlighted: true },
+      { value: 't!', isHighlighted: false },
+    ];
 
     const tree = renderer.create(
       <Snippet

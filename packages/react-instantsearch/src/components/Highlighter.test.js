@@ -2,7 +2,6 @@ import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import Highlighter, { Highlight } from './Highlighter';
-import parseAlgoliaHit from '../core/highlight';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -51,25 +50,19 @@ describe('Highlighter - simple', () => {
     },
   };
 
-  const highlight = ({ hit, attribute, highlightProperty }) =>
-    parseAlgoliaHit({
-      preTag: '<ais-highlight>',
-      postTag: '</ais-highlight>',
-      attribute,
-      hit,
-      highlightProperty,
-    });
-
   const defaultProps = {
     hit: hitFromAPI,
     attribute: 'title',
     highlightProperty: '_highlight',
-    highlight,
   };
 
   it('renders a highlighted value', () => {
     const props = {
       ...defaultProps,
+      highlight: () => [
+        { value: 'Ap', isHighlighted: true },
+        { value: 'ple', isHighlighted: false },
+      ],
     };
 
     const wrapper = shallow(
@@ -91,6 +84,7 @@ describe('Highlighter - simple', () => {
           },
         },
       },
+      highlight: () => [{ value: 'Apple', isHighlighted: false }],
     };
 
     const wrapper = shallow(
@@ -104,6 +98,10 @@ describe('Highlighter - simple', () => {
     const props = {
       ...defaultProps,
       tagName: 'strong',
+      highlight: () => [
+        { value: 'Ap', isHighlighted: true },
+        { value: 'ple', isHighlighted: false },
+      ],
     };
 
     const wrapper = shallow(
@@ -117,6 +115,10 @@ describe('Highlighter - simple', () => {
     const props = {
       ...defaultProps,
       nonHighlightedTagName: 'p',
+      highlight: () => [
+        { value: 'Ap', isHighlighted: true },
+        { value: 'ple', isHighlighted: false },
+      ],
     };
 
     const wrapper = shallow(
@@ -130,6 +132,10 @@ describe('Highlighter - simple', () => {
     const props = {
       ...defaultProps,
       className: 'MyCustomHighlighter',
+      highlight: () => [
+        { value: 'Ap', isHighlighted: true },
+        { value: 'ple', isHighlighted: false },
+      ],
     };
 
     const wrapper = shallow(
@@ -159,25 +165,23 @@ describe('Highlighter - multi', () => {
     },
   };
 
-  const highlight = ({ hit, attribute, highlightProperty }) =>
-    parseAlgoliaHit({
-      preTag: '<ais-highlight>',
-      postTag: '</ais-highlight>',
-      attribute,
-      hit,
-      highlightProperty,
-    });
-
   const defaultProps = {
     hit: hitFromAPI,
     attribute: 'titles',
     highlightProperty: '_highlight',
-    highlight,
   };
 
   it('renders a highlighted value', () => {
     const props = {
       ...defaultProps,
+      highlight: () => [
+        [{ value: 'Apple', isHighlighted: false }],
+        [
+          { value: 'Sam', isHighlighted: true },
+          { value: 'sung', isHighlighted: false },
+        ],
+        [{ value: 'Philips', isHighlighted: false }],
+      ],
     };
 
     const wrapper = shallow(
@@ -207,6 +211,11 @@ describe('Highlighter - multi', () => {
           ],
         },
       },
+      highlight: () => [
+        [{ value: 'Apple', isHighlighted: false }],
+        [{ value: 'Samsung', isHighlighted: false }],
+        [{ value: 'Philips', isHighlighted: false }],
+      ],
     };
 
     const wrapper = shallow(
@@ -220,6 +229,14 @@ describe('Highlighter - multi', () => {
     const props = {
       ...defaultProps,
       tagName: 'strong',
+      highlight: () => [
+        [{ value: 'Apple', isHighlighted: false }],
+        [
+          { value: 'Sam', isHighlighted: true },
+          { value: 'sung', isHighlighted: false },
+        ],
+        [{ value: 'Philips', isHighlighted: false }],
+      ],
     };
 
     const wrapper = shallow(
@@ -233,6 +250,14 @@ describe('Highlighter - multi', () => {
     const props = {
       ...defaultProps,
       nonHighlightedTagName: 'p',
+      highlight: () => [
+        [{ value: 'Apple', isHighlighted: false }],
+        [
+          { value: 'Sam', isHighlighted: true },
+          { value: 'sung', isHighlighted: false },
+        ],
+        [{ value: 'Philips', isHighlighted: false }],
+      ],
     };
 
     const wrapper = shallow(
@@ -246,6 +271,14 @@ describe('Highlighter - multi', () => {
     const props = {
       ...defaultProps,
       separator: '-',
+      highlight: () => [
+        [{ value: 'Apple', isHighlighted: false }],
+        [
+          { value: 'Sam', isHighlighted: true },
+          { value: 'sung', isHighlighted: false },
+        ],
+        [{ value: 'Philips', isHighlighted: false }],
+      ],
     };
 
     const wrapper = shallow(
@@ -259,6 +292,14 @@ describe('Highlighter - multi', () => {
     const props = {
       ...defaultProps,
       className: 'MyCustomHighlighter',
+      highlight: () => [
+        [{ value: 'Apple', isHighlighted: false }],
+        [
+          { value: 'Sam', isHighlighted: true },
+          { value: 'sung', isHighlighted: false },
+        ],
+        [{ value: 'Philips', isHighlighted: false }],
+      ],
     };
 
     const wrapper = shallow(
