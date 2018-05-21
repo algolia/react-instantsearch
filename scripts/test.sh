@@ -4,9 +4,10 @@
 set -e
 
 if [ "$CI" = "true" ]
-  then jest --projects packages/* --runInBand
-  else jest --projects packages/*
+  then jest --runInBand
+  else jest
 fi
+
 yarn lint
 yarn test:regressions
 yarn argos

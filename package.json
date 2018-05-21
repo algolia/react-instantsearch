@@ -24,7 +24,7 @@
     "test:regressions": "webpack --config test/regressions/webpack.config.js && rm -rf test/screenshots && happo run && babel-node ./test/regressions/normalize.js",
     "test:size": "lerna run test:size --scope react-* --parallel",
     "argos": "argos upload test/screenshots --token $ARGOS_TOKEN || true",
-    "dev": "jest --watch --bail --projects packages/*",
+    "dev": "jest --watch --bail",
     "docs:storybook-start": "start-storybook -p 6006 -c ./storybook -s ./storybook/public",
     "docs:storybook-build-production": "build-storybook -s ./storybook/public -o docgen/docs-production/react-instantsearch/storybook -c ./storybook"
   },
