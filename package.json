@@ -38,6 +38,7 @@
     "@storybook/ui": "3.4.6",
     "algoliasearch": "3.27.1",
     "argos-cli": "0.0.9",
+    "babel-cli": "6.26.0",
     "babel-core": "6.26.0",
     "babel-eslint": "8.2.3",
     "babel-loader": "7.1.4",
