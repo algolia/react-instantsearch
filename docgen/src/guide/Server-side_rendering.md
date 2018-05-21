@@ -18,7 +18,7 @@ If you are looking for an example using another solution, read how to do custom 
 
 ## Three steps custom implementation
 
-We provide a new API entry, `createInstantSearch`, available under `'react-instantsearch/server'`.
+We provide a new API entry, `createInstantSearch`, available under `'react-instantsearch-dom/server'`.
 
 When called, `createInstantSearch` returns:
 
