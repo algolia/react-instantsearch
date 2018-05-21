@@ -81,7 +81,7 @@
     },
     {
       "path": "dist/umd/Connectors.min.js",
-      "maxSize": "38 kB"
+      "maxSize": "40 kB"
     },
     {
       "path": "dist/umd/Dom.min.js",
