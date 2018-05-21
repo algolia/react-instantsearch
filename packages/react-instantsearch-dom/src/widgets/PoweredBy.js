@@ -14,7 +14,7 @@ import PoweredBy from '../components/PoweredBy';
  * @translationKey searchBy - Label value for the powered by
  * @example
  * import React from 'react';
- * import { InstantSearch, PoweredBy } from 'react-instantsearch/dom';
+ * import { InstantSearch, PoweredBy } from 'react-instantsearch-dom';
  *
  * const App = () => (
  *   <InstantSearch

@@ -12,9 +12,9 @@ import React from 'react';
  *
  * // Here's an example showing how to connect the airbnb rheostat slider to React InstantSearch using the
  * // range connector
+ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import React, {Component} from 'react';
-import {connectRange} from 'react-instantsearch/connectors';
+import { connectRange } from 'react-instantsearch-dom';
 import Rheostat from 'rheostat';
 
 class Range extends React.Component {

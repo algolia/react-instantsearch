@@ -15,7 +15,7 @@ import SortBy from '../components/SortBy';
  * @themeKey ais-SortBy-option - the select option
  * @example
  * import React from 'react';
- * import { InstantSearch, SortBy } from 'react-instantsearch/dom';
+ * import { InstantSearch, SortBy } from 'react-instantsearch-dom';
  *
  * const App = () => (
  *   <InstantSearch

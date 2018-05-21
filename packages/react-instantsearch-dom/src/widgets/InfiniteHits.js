@@ -20,7 +20,7 @@ import InfiniteHits from '../components/InfiniteHits';
  * @translationKey loadMore - the label of load more button
  * @example
  * import React from 'react';
- * import { InstantSearch, InfiniteHits } from 'react-instantsearch/dom';
+ * import { InstantSearch, InfiniteHits } from 'react-instantsearch-dom';
  *
  * const App = () => (
  *   <InstantSearch

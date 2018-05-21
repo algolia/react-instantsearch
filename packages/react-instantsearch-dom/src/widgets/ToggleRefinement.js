@@ -23,7 +23,7 @@ import ToggleRefinement from '../components/ToggleRefinement';
  * @themeKey ais-ToggleRefinement-count - the count of items for each item
  * @example
  * import React from 'react';
- * import { InstantSearch, ToggleRefinement } from 'react-instantsearch/dom';
+ * import { InstantSearch, ToggleRefinement } from 'react-instantsearch-dom';
  *
  * const App = () => (
  *   <InstantSearch
