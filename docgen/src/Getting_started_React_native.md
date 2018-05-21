@@ -48,8 +48,8 @@ It maintains the state of the search, does the queries, and provides the results
 
 ```jsx
 import React from 'react';
-import { InstantSearch } from 'react-instantsearch/native';
 import { StyleSheet, View, Text } from 'react-native';
+import { InstantSearch } from 'react-instantsearch-native';
 
 export default class App extends React.Component {
   render() {
