@@ -12,7 +12,7 @@ const version = process.env.VERSION || 'UNRELEASED';
 const algolia = '© Algolia, inc.';
 const link = 'https://community.algolia.com/react-instantsearch';
 const createLicence = name =>
-  `/*! ReactInstantSearch${name} ${version} | ${algolia} | ${link} */`;
+  `/*! React InstantSearch${name} ${version} | ${algolia} | ${link} */`;
 
 const plugins = [
   babel({
