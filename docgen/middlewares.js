@@ -21,7 +21,7 @@ import sources from './plugins/sources.js';
 import webpackStartConfig from './webpack.config.start.babel.js';
 import webpackBuildConfig from './webpack.config.build.babel';
 
-import { reactPackage } from './path.js';
+import { reactPackage, corePackage } from './path.js';
 
 const common = [
   helpers,
@@ -35,10 +35,10 @@ const common = [
   }),
   sources(
     [
+      corePackage('src/components/InstantSearch.js'),
+      corePackage('src/components/Index.js'),
+      corePackage('src/connectors/*.js'),
       reactPackage('src/widgets/*.js'),
-      reactPackage('src/connectors/*.js'),
-      reactPackage('src/core/InstantSearch.js'),
-      reactPackage('src/core/Index.js'),
       reactPackage('src/core/findResultsState.js'),
     ],
     {
