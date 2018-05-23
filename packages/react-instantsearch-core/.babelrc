@@ -8,7 +8,7 @@
             "targets": {
               "browsers": [
                 "last 2 versions",
-                "ie >= 10"
+                "ie >= 9"
               ]
             }
           }
@@ -28,7 +28,7 @@
             "targets": {
               "browsers": [
                 "last 2 versions",
-                "ie >= 10"
+                "ie >= 9"
               ]
             }
           }
@@ -68,7 +68,7 @@
             "targets": {
               "browsers": [
                 "last 2 versions",
-                "ie >= 10"
+                "ie >= 9"
               ]
             },
             "modules": false
