@@ -11,7 +11,7 @@ const clear = x => x.filter(Boolean);
 const version = process.env.VERSION || 'UNRELEASED';
 const algolia = '© Algolia, inc.';
 const link = 'https://community.algolia.com/react-instantsearch';
-const license = `/*! ReactInstantSearch ${version} | ${algolia} | ${link} */`;
+const license = `/*! React InstantSearch ${version} | ${algolia} | ${link} */`;
 
 const plugins = [
   babel({
