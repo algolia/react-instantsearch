@@ -190,15 +190,16 @@ export function cleanUpValue(searchState, context, id) {
   const index = getIndex(context);
   const { namespace, attributeName } = getNamespaceAndAttributeName(id);
   if (hasMultipleIndex(context) && Boolean(searchState.indices)) {
-    return namespace
+    const searchStateIndex = searchState.indices[index];
+    return namespace && searchStateIndex
       ? {
           ...searchState,
           indices: {
             ...searchState.indices,
             [index]: {
-              ...searchState.indices[index],
+              ...searchStateIndex,
               [namespace]: omit(
-                searchState.indices[index][namespace],
+                searchStateIndex[namespace],
                 `${attributeName}`
               ),
             },
