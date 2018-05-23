@@ -7,3 +7,6 @@ export const reactPackage = (...args) =>
 
 export const corePackage = (...args) =>
   rootPath('packages/react-instantsearch-core/', ...args);
+
+export const domPackage = (...args) =>
+  rootPath('packages/react-instantsearch-dom/', ...args);
