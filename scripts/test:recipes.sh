@@ -9,9 +9,6 @@ for d in examples/* ; do
     cd $d
     yarn
     yarn build
-    if [ "$CI" = "true" ]
-        then yarn test --runInBand
-        else yarn test
-    fi
+    yarn test
     cd ../..
 done
