@@ -35,7 +35,7 @@
     "lodash": "^4.17.4",
     "prop-types": "^15.5.10",
     "react-instantsearch-core": "^5.1.0",
-    "react-instantsearch-dom": "^5.0.3"
+    "react-instantsearch-dom": "^5.1.0"
   },
   "devDependencies": {
     "babel-cli": "6.26.0",
