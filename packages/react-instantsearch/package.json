@@ -51,7 +51,6 @@
     "enzyme-adapter-react-16": "1.1.1",
     "enzyme-to-json": "3.3.4",
     "jest": "23.1.0",
-    "jest-watch-typeahead": "0.1.0",
     "react": "16.4.0",
     "react-dom": "16.4.0",
     "react-native": "0.54.2",
@@ -68,10 +67,6 @@
   "jest": {
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
-    ],
-    "watchPlugins": [
-      "jest-watch-typeahead/filename",
-      "jest-watch-typeahead/testname"
     ]
   },
   "bundlesize": [
