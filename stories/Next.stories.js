@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { storiesOf } from '@storybook/react';
 import algoliasearch from 'algoliasearch/lite';
 import {
@@ -26,12 +26,12 @@ stories
       <RefinementList attribute="categories" />
       <Hits
         renderHit={hit => (
-          <li key={hit.objectID} className="ais-Hits-item">
+          <Fragment>
             <p>objectID: {hit.objectID}</p>
             <p>
               name: <Highlight hit={hit} attribute="name" />
             </p>
-          </li>
+          </Fragment>
         )}
       />
     </InstantSearch>

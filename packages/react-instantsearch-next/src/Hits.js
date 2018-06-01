@@ -11,11 +11,7 @@ class Hits extends Component {
   };
 
   static defaultProps = {
-    renderHit: hit => (
-      <li key={hit.objectID} className="ais-Hits-item">
-        {JSON.stringify(hit).slice(0, 100)}...
-      </li>
-    ),
+    renderHit: hit => <div>{JSON.stringify(hit).slice(0, 100)}...</div>,
     children: null,
   };
 
@@ -49,7 +45,13 @@ class Hits extends Component {
 
     return (
       <div className="ais-Hits" style={{ marginTop: 8 }}>
-        <ol className="ais-Hits-list">{hits.map(renderHit)}</ol>
+        <ol className="ais-Hits-list">
+          {hits.map(hit => (
+            <li key={hit.objectID} className="ais-Hits-item">
+              {renderHit(hit)}
+            </li>
+          ))}
+        </ol>
       </div>
     );
   }
