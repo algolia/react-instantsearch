@@ -120,13 +120,14 @@ You’ll be able to search within your refinement lists from your custom backend
 Now, we need to tell InstantSearch to use the search client that we’ve created. This is possible with the `searchClient` option. This parameter will disable all Algolia requests coming from the frontend and will proxy them to your own backend implementation.
 
 ```javascript
-const App = () =>
+const App = () => (
   <InstantSearch
     indexName="YOUR_INDEX_NAME"
     searchClient={customSearchClient}
   >
     {/* Use widgets here */}
-  </InstantSearch>;
+  </InstantSearch>
+);
 ```
 
 That’s it! InstantSearch is now requesting your own backend and will display the UI accordingly.
