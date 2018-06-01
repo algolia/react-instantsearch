@@ -2,11 +2,19 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connectHits } from 'instantsearch.js/es/connectors';
 import Context from './Context';
-import Highlight from './Highlight';
 
 class Hits extends Component {
   static propTypes = {
     instance: PropTypes.object.isRequired,
+    renderHit: PropTypes.func,
+  };
+
+  static defaultProps = {
+    renderHit: hit => (
+      <li key={hit.objectID} className="ais-Hits-item">
+        {JSON.stringify(hit).slice(0, 100)}...
+      </li>
+    ),
   };
 
   state = null;
@@ -30,20 +38,12 @@ class Hits extends Component {
       return null;
     }
 
+    const { renderHit } = this.props;
     const { hits } = this.state;
 
     return (
       <div className="ais-Hits" style={{ marginTop: 8 }}>
-        <ol className="ais-Hits-list">
-          {hits.map(hit => (
-            <li key={hit.objectID} className="ais-Hits-item">
-              <p>objectID: {hit.objectID}</p>
-              <p>
-                name: <Highlight hit={hit} attribute="name" />
-              </p>
-            </li>
-          ))}
-        </ol>
+        <ol className="ais-Hits-list">{hits.map(renderHit)}</ol>
       </div>
     );
   }
