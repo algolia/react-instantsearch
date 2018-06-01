@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connectHits } from 'instantsearch.js/es/connectors';
 import Context from './Context';
+import Highlight from './Highlight';
 
 class Hits extends Component {
   static propTypes = {
@@ -37,7 +38,9 @@ class Hits extends Component {
           {hits.map(hit => (
             <li key={hit.objectID} className="ais-Hits-item">
               <p>objectID: {hit.objectID}</p>
-              <p>name: {hit.name}</p>
+              <p>
+                name: <Highlight hit={hit} attribute="name" />
+              </p>
             </li>
           ))}
         </ol>
