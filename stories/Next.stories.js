@@ -35,4 +35,24 @@ stories
         )}
       />
     </InstantSearch>
+  ))
+  .add('full Hits render', () => (
+    <InstantSearch searchClient={client} indexName="instant_search">
+      <SearchBox />
+      <RefinementList attribute="categories" />
+      <Hits>
+        {({ hits }) => (
+          <ol>
+            {hits.map(hit => (
+              <li key={hit.objectID} className="ais-Hits-item">
+                <p>objectID: {hit.objectID}</p>
+                <p>
+                  name: <Highlight hit={hit} attribute="name" />
+                </p>
+              </li>
+            ))}
+          </ol>
+        )}
+      </Hits>
+    </InstantSearch>
   ));

@@ -7,6 +7,7 @@ class Hits extends Component {
   static propTypes = {
     instance: PropTypes.object.isRequired,
     renderHit: PropTypes.func,
+    children: PropTypes.func,
   };
 
   static defaultProps = {
@@ -15,6 +16,7 @@ class Hits extends Component {
         {JSON.stringify(hit).slice(0, 100)}...
       </li>
     ),
+    children: null,
   };
 
   state = null;
@@ -38,8 +40,12 @@ class Hits extends Component {
       return null;
     }
 
-    const { renderHit } = this.props;
+    const { renderHit, children } = this.props;
     const { hits } = this.state;
+
+    if (children) {
+      return children({ hits });
+    }
 
     return (
       <div className="ais-Hits" style={{ marginTop: 8 }}>
