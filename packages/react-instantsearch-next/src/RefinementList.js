@@ -1,3 +1,4 @@
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connectRefinementList } from 'instantsearch.js/es/connectors';
 import createWidget from './core/createWidget';
@@ -15,19 +16,19 @@ const propTypes = {
   showMoreLimit: PropTypes.number,
 };
 
-export const RefinementListWidget = createWidget({
-  connector: connectRefinementList,
-  component: RefinementList,
-  mapPropsToWidgetParams,
-});
-
 export const RefinementListRenderer = createWidget({
   connector: connectRefinementList,
   mapPropsToWidgetParams,
 });
 
-RefinementListWidget.displayName = 'Widget(RefinementList)';
-RefinementListRenderer.displayName = 'Renderer(RefinementList)';
+export const RefinementListWidget = props => (
+  <RefinementListRenderer {...props}>
+    {renderArgs => <RefinementList {...renderArgs} />}
+  </RefinementListRenderer>
+);
 
-RefinementListWidget.propTypes = propTypes;
+RefinementListRenderer.displayName = 'Renderer(RefinementList)';
+RefinementListWidget.displayName = 'Widget(RefinementList)';
+
 RefinementListRenderer.propTypes = propTypes;
+RefinementListWidget.propTypes = propTypes;
