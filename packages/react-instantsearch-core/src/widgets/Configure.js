@@ -16,7 +16,7 @@ import connectConfigure from '../connectors/connectConfigure';
  * @kind widget
  * @example
  * import React from 'react';
- * import { InstantSearch, Configure, Hits } from 'react-instantsearch/dom';
+ * import { InstantSearch, Configure, Hits } from 'react-instantsearch-dom';
  *
  * const App = () => (
  *   <InstantSearch

@@ -27,7 +27,7 @@ import RangeInput from '../components/RangeInput';
  * @translationKey separator - Label value for the input separator
  * @example
  * import React from 'react';
- * import { InstantSearch, RangeInput } from 'react-instantsearch/dom';
+ * import { InstantSearch, RangeInput } from 'react-instantsearch-dom';
  *
  * const App = () => (
  *   <InstantSearch

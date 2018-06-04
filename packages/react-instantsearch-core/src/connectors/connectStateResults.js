@@ -17,8 +17,7 @@ import { getResults } from '../core/indexUtils';
  * @providedPropType {object} props - component props.
  * @example
  * import React from 'react';
- * import { InstantSearch, SearchBox, Hits } from 'react-instantsearch/dom';
- * import { connectStateResults } from 'react-instantsearch/connectors';
+ * import { InstantSearch, SearchBox, Hits, connectStateResults } from 'react-instantsearch-dom';
  *
  * const Content = connectStateResults(({ searchState, searchResults }) => {
  *   const hasResults = searchResults && searchResults.nbHits !== 0;

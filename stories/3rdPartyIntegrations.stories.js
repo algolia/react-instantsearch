@@ -1,9 +1,9 @@
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { storiesOf } from '@storybook/react';
-import { connectRange } from '../packages/react-instantsearch/connectors';
-import { WrapWithHits } from './util';
+import PropTypes from 'prop-types';
 import Rheostat from 'rheostat';
+import { storiesOf } from '@storybook/react';
+import { connectRange } from 'react-instantsearch-dom';
+import { WrapWithHits } from './util';
 
 const stories = storiesOf('Integration With Other Libraries', module);
 

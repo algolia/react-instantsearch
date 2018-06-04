@@ -10,7 +10,7 @@ import Stats from '../components/Stats';
  * @translationkey stats - The string displayed by the stats widget. You get function(n, ms) and you need to return a string. n is a number of hits retrieved, ms is a processed time.
  * @example
  * import React from 'react';
- * import { InstantSearch, Stats, Hits } from 'react-instantsearch/dom';
+ * import { InstantSearch, Stats, Hits } from 'react-instantsearch-dom';
  *
  * const App = () => (
  *   <InstantSearch

@@ -37,7 +37,7 @@ import RefinementList from '../components/RefinementList';
  * the [dashboard](https://www.algolia.com/explorer/display/) or using the [API](https://www.algolia.com/doc/guides/searching/faceting/#search-for-facet-values).
  * @example
  * import React from 'react';
- * import { InstantSearch, RefinementList } from 'react-instantsearch/dom';
+ * import { InstantSearch, RefinementList } from 'react-instantsearch-dom';
  *
  * const App = () => (
  *   <InstantSearch

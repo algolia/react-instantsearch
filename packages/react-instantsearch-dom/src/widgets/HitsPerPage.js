@@ -18,7 +18,7 @@ import HitsPerPage from '../components/HitsPerPage';
  * @themeKey ais-HitsPerPage-option - the select option
  * @example
  * import React from 'react';
- * import { InstantSearch, HitsPerPage, Hits } from 'react-instantsearch/dom';
+ * import { InstantSearch, HitsPerPage, Hits } from 'react-instantsearch-dom';
  *
  * const App = () => (
  *   <InstantSearch
