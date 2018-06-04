@@ -4,6 +4,7 @@ import algoliasearch from 'algoliasearch/lite';
 import {
   InstantSearch,
   Hits,
+  HitsRenderer,
   Highlight,
   RefinementList,
   SearchBox,
@@ -40,7 +41,7 @@ stories
     <InstantSearch searchClient={client} indexName="instant_search">
       <SearchBox />
       <RefinementList attribute="categories" />
-      <Hits>
+      <HitsRenderer>
         {({ hits }) => (
           <ol>
             {hits.map(hit => (
@@ -53,6 +54,6 @@ stories
             ))}
           </ol>
         )}
-      </Hits>
+      </HitsRenderer>
     </InstantSearch>
   ));
