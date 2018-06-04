@@ -18,8 +18,7 @@ import { getResults } from '../core/indexUtils';
  * @providedPropType {array.<object>} hits - the records that matched the search state
  * @example
  * import React from 'react';
- * import { InstantSearch, Highlight } from 'react-instantsearch/dom';
- * import { connectHits } from 'react-instantsearch/connectors';
+ * import { InstantSearch, Highlight, connectHits } from 'react-instantsearch-dom';
  *
  * const CustomHits = connectHits(({ hits }) => (
  *   <div>
