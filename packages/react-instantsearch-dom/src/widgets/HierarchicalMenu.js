@@ -69,7 +69,7 @@ import HierarchicalMenu from '../components/HierarchicalMenu';
  * @translationKey showMore - The label of the show more button. Accepts one parameter, a boolean that is true if the values are expanded
  * @example
  * import React from 'react';
- * import { InstantSearch, HierarchicalMenu } from 'react-instantsearch/dom';
+ * import { InstantSearch, HierarchicalMenu } from 'react-instantsearch-dom';
  *
  * const App = () => (
  *   <InstantSearch

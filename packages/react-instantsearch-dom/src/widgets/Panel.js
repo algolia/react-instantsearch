@@ -17,7 +17,7 @@ import Panel from '../components/Panel';
  * @themeKey ais-Panel-footer - the footer of the Panel (optional)
  * @example
  * import React from 'react';
- * import { InstantSearch, Panel, RefinementList } from 'react-instantsearch/dom';
+ * import { InstantSearch, Panel, RefinementList } from 'react-instantsearch-dom';
  *
  * const App = () => (
  *   <InstantSearch

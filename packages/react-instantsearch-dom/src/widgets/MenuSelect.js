@@ -19,7 +19,7 @@ import MenuSelect from '../components/MenuSelect';
  * @translationkey seeAllOption - The label of the option to select to remove the refinement
  * @example
  * import React from 'react';
- * import { InstantSearch, MenuSelect } from 'react-instantsearch/dom';
+ * import { InstantSearch, MenuSelect } from 'react-instantsearch-dom';
  *
  * const App = () => (
  *   <InstantSearch

@@ -39,7 +39,7 @@ import Pagination from '../components/Pagination';
  * @translationkey ariaPage - Accessibility label value for a page item. You get function(currentRefinement) and you need to return a string
  * @example
  * import React from 'react';
- * import { InstantSearch, Pagination } from 'react-instantsearch/dom';
+ * import { InstantSearch, Pagination } from 'react-instantsearch-dom';
  *
  * const App = () => (
  *   <InstantSearch
