@@ -17,7 +17,7 @@ import Hits from '../components/Hits';
  * @themeKey ais-Hits-item - the hit list item
  * @example
  * import React from 'react';
- * import { InstantSearch, Hits } from 'react-instantsearch/dom';
+ * import { InstantSearch, Hits } from 'react-instantsearch-dom';
  *
  * const App = () => (
  *   <InstantSearch

@@ -34,7 +34,7 @@ import Menu from '../components/Menu';
  * @translationkey noResults - The label of the no results text when no search for facet values results are found.
  * @example
  * import React from 'react';
- * import { InstantSearch, Menu } from 'react-instantsearch/dom';
+ * import { InstantSearch, Menu } from 'react-instantsearch-dom';
  *
  * const App = () => (
  *   <InstantSearch

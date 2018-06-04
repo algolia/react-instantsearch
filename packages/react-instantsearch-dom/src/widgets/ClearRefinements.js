@@ -16,7 +16,7 @@ import ClearRefinements from '../components/ClearRefinements';
  * @translationKey reset - the clear all button value
  * @example
  * import React from 'react';
- * import { InstantSearch, ClearRefinements, RefinementList } from 'react-instantsearch/dom';
+ * import { InstantSearch, ClearRefinements, RefinementList } from 'react-instantsearch-dom';
  *
  * const App = () => (
  *   <InstantSearch

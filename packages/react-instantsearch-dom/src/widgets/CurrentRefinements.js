@@ -23,7 +23,7 @@ import CurrentRefinements from '../components/CurrentRefinements';
  * @translationKey clearFilter - the remove filter button label
  * @example
  * import React from 'react';
- * import { InstantSearch, CurrentRefinements, RefinementList } from 'react-instantsearch/dom';
+ * import { InstantSearch, CurrentRefinements, RefinementList } from 'react-instantsearch-dom';
  *
  * const App = () => (
  *   <InstantSearch

@@ -12,7 +12,7 @@ import PropTypes from 'prop-types';
  * @propType {{ Root: string|function, props: object }} [root] - Use this to customize the root element. Default value: `{ Root: 'div' }`
  * @example
  * import React from 'react';
- * import { InstantSearch, Index, SearchBox, Hits, Configure } from 'react-instantsearch/dom';
+ * import { InstantSearch, Index, SearchBox, Hits, Configure } from 'react-instantsearch-dom';
  *
  * const App = () => (
  *   <InstantSearch

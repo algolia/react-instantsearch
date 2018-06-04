@@ -12,7 +12,7 @@ import ScrollTo from '../components/ScrollTo';
  * @themeKey ais-ScrollTo - the root div of the widget
  * @example
  * import React from 'react';
- * import { InstantSearch, ScrollTo, Hits } from 'react-instantsearch/dom';
+ * import { InstantSearch, ScrollTo, Hits } from 'react-instantsearch-dom';
  *
  * const App = () => (
  *   <InstantSearch
