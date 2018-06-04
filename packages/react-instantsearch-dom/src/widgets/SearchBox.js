@@ -30,7 +30,7 @@ import SearchBox from '../components/SearchBox';
  * @translationkey placeholder - The label of the input placeholder
  * @example
  * import React from 'react';
- * import { InstantSearch, SearchBox } from 'react-instantsearch/dom';
+ * import { InstantSearch, SearchBox } from 'react-instantsearch-dom';
  *
  * const App = () => (
  *   <InstantSearch

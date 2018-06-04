@@ -23,7 +23,7 @@ import NumericMenu from '../components/NumericMenu';
  * @translationkey all - The label of the largest range added automatically by react instantsearch
  * @example
  * import React from 'react';
- * import { InstantSearch, NumericMenu } from 'react-instantsearch/dom';
+ * import { InstantSearch, NumericMenu } from 'react-instantsearch-dom';
  *
  * const App = () => (
  *   <InstantSearch

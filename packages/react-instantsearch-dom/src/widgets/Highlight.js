@@ -17,7 +17,7 @@ import Highlight from '../components/Highlight';
  * @themeKey ais-Highlight-nonHighlighted - part of the text that is not highlighted
  * @example
  * import React from 'react';
- * import { InstantSearch, SearchBox, Hits, Highlight } from 'react-instantsearch/dom';
+ * import { InstantSearch, SearchBox, Hits, Highlight } from 'react-instantsearch-dom';
  *
  * const Hit = ({ hit }) => (
  *   <div>

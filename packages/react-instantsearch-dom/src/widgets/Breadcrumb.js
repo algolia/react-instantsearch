@@ -59,7 +59,7 @@ import Breadcrumb from '../components/Breadcrumb';
  * @translationKey rootLabel - The root's label. Accepts a string
  * @example
  * import React from 'react';
- * import { Breadcrumb, InstantSearch, HierarchicalMenu } from 'react-instantsearch/dom';
+ * import { Breadcrumb, InstantSearch, HierarchicalMenu } from 'react-instantsearch-dom';
  *
  * const App = () => (
  *   <InstantSearch

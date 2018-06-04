@@ -17,27 +17,18 @@
         "stage-2"
       ],
       "plugins": [
-        "lodash"
-      ]
-    },
-    "test": {
-      "presets": [
+        "lodash",
+        "inline-json-import",
         [
-          "env",
+          "transform-runtime",
           {
-            "targets": {
-              "browsers": [
-                "last 2 versions",
-                "ie >= 9"
-              ]
-            }
+            "helpers": false,
+            "polyfill": false,
+            "regenerator": true
           }
         ],
-        "react",
-        "stage-2"
-      ],
-      "plugins": [
-        "lodash"
+        "react-hot-loader/babel",
+        "transform-regenerator"
       ]
     },
     "production": {
@@ -57,7 +48,8 @@
         "stage-2"
       ],
       "plugins": [
-        "lodash"
+        "lodash",
+        "inline-json-import"
       ]
     }
   }

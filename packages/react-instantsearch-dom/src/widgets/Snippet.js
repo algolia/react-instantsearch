@@ -20,7 +20,7 @@ import Snippet from '../components/Snippet';
  * @themeKey ais-Snippet-nonHighlighted - the normal text
  * @example
  * import React from 'react';
- * import { InstantSearch, SearchBox, Hits, Snippet } from 'react-instantsearch/dom';
+ * import { InstantSearch, SearchBox, Hits, Snippet } from 'react-instantsearch-dom';
  *
  * const Hit = ({ hit }) => (
  *   <div>

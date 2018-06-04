@@ -33,7 +33,7 @@ import RatingMenu from '../components/RatingMenu';
  * @translationKey ratingLabel - Label value for the rating link
  * @example
  * import React from 'react';
- * import { InstantSearch, RatingMenu } from 'react-instantsearch/dom';
+ * import { InstantSearch, RatingMenu } from 'react-instantsearch-dom';
  *
  * const App = () => (
  *   <InstantSearch
