@@ -1,9 +1,9 @@
-import React, { createElement } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Context from './Context';
 import Widget from './Widget';
 
-const createWidget = ({ mapPropsToWidgetParams, connector, component }) => {
+const createWidget = ({ mapPropsToWidgetParams, connector }) => {
   const WidgetWithInstance = ({ children, ...props }) => (
     <Context.Consumer>
       {instance => (
@@ -12,30 +12,19 @@ const createWidget = ({ mapPropsToWidgetParams, connector, component }) => {
           connector={connector}
           widgetParams={mapPropsToWidgetParams(props)}
         >
-          {({ widgetParams, ...widgetState }) => {
-            if (component) {
-              return createElement(component, {
-                ...widgetState,
-                ...props,
-              });
-            }
-
-            if (children) {
-              return children({
-                ...widgetState,
-                ...props,
-              });
-            }
-
-            return null;
-          }}
+          {({ widgetParams, ...widgetState }) =>
+            children({
+              ...widgetState,
+              ...props,
+            })
+          }
         </Widget>
       )}
     </Context.Consumer>
   );
 
   WidgetWithInstance.propTypes = {
-    children: PropTypes.func,
+    children: PropTypes.func.isRequired,
   };
 
   return WidgetWithInstance;
