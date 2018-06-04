@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Context from './Context';
 import Widget from './Widget';
 
-const createWidget = ({ mapPropsToWidgetParams, connector }) => {
+const createWidget = ({ connector, mapPropsToWidgetParams = () => ({}) }) => {
   const WidgetWithInstance = ({ children, ...props }) => (
     <Context.Consumer>
       {instance => (
