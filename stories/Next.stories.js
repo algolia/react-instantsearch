@@ -3,6 +3,7 @@ import { storiesOf } from '@storybook/react';
 import algoliasearch from 'algoliasearch/lite';
 import {
   InstantSearch,
+  Configure,
   Hits,
   HitsRenderer,
   Highlight,
@@ -89,6 +90,33 @@ stories
             </p>
           )}
         </CustomWidget>
+      </InstantSearch>
+    );
+  })
+  .add('multi indices', () => {
+    const renderHit = hit => (
+      <Fragment>
+        <p>objectID: {hit.objectID}</p>
+        <p>
+          name: <Highlight hit={hit} attribute="name" />
+        </p>
+      </Fragment>
+    );
+
+    return (
+      <InstantSearch searchClient={client} indexName="instant_search">
+        <Configure hitsPerPage={8} />
+        <SearchBox />
+
+        <Index name="instant_search">
+          <RefinementList attribute="categories" limit={5} />
+          <Hits renderHit={renderHit} />
+        </Index>
+
+        <Index name="bestbuy">
+          <RefinementList attribute="categories" limit={5} />
+          <Hits renderHit={renderHit} />
+        </Index>
       </InstantSearch>
     );
   });
