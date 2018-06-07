@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import createInstantSearch from 'instantsearch.js/es';
-import Context from './core/Context';
+import Context from './Context';
 
 class InstantSearch extends Component {
   static propTypes = {

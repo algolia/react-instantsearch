@@ -2,7 +2,7 @@
 export { default as createWidget } from './core/createWidget';
 
 // Widget
-export { default as InstantSearch } from './InstantSearch';
+export { default as InstantSearch } from './core/InstantSearch';
 export { default as Highlight } from './Highlight';
 
 // DOM
