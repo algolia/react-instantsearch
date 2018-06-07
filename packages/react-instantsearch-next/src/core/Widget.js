@@ -1,12 +1,36 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 
+const createConnectorFromWidget = definition => renderer => () => ({
+  ...definition,
+  init(...initArgs) {
+    if (definition.init) {
+      return renderer(definition.init(...initArgs));
+    }
+
+    return renderer(...initArgs);
+  },
+  render(...renderArgs) {
+    if (definition.render) {
+      return renderer(definition.render(...renderArgs));
+    }
+
+    return renderer(...renderArgs);
+  },
+});
+
 class Widget extends Component {
   static propTypes = {
     instance: PropTypes.object.isRequired,
-    connector: PropTypes.func.isRequired,
-    widgetParams: PropTypes.object.isRequired,
     children: PropTypes.func.isRequired,
+    connector: PropTypes.func,
+    widgetParams: PropTypes.object,
+    widget: PropTypes.shape({
+      getConfigutation: PropTypes.func,
+      init: PropTypes.func,
+      render: PropTypes.func,
+      dispose: PropTypes.func,
+    }),
   };
 
   state = null;
@@ -14,9 +38,11 @@ class Widget extends Component {
   constructor(...args) {
     super(...args);
 
-    const { instance, connector, widgetParams } = this.props;
+    const { instance, connector, widget, widgetParams } = this.props;
 
-    const createWidget = connector(state => {
+    const connect = widget ? createConnectorFromWidget(widget) : connector;
+
+    const createWidget = connect(state => {
       this.setState(() => state);
     });
 
