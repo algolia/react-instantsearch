@@ -3,13 +3,18 @@ import PropTypes from 'prop-types';
 import Context from './Context';
 import Widget from './Widget';
 
-const createWidget = ({ connector, mapPropsToWidgetParams = () => ({}) }) => {
+const createWidget = ({
+  connector,
+  widget,
+  mapPropsToWidgetParams = x => x,
+}) => {
   const WidgetWithInstance = ({ children, ...props }) => (
     <Context.Consumer>
       {instance => (
         <Widget
           instance={instance}
           connector={connector}
+          widget={widget}
           widgetParams={mapPropsToWidgetParams(props)}
         >
           {({ widgetParams, ...widgetState }) =>
