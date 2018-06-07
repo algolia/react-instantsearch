@@ -13,6 +13,8 @@ class InstantSearch extends Component {
     indexName: PropTypes.string.isRequired,
   };
 
+  // It doesn't work with the StrictMode
+  // we call createInstantSearch two times
   instance = createInstantSearch({
     searchClient: this.props.searchClient,
     indexName: this.props.indexName,
