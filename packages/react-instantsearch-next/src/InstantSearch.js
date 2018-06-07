@@ -13,14 +13,10 @@ class InstantSearch extends Component {
     indexName: PropTypes.string.isRequired,
   };
 
-  constructor(...args) {
-    super(...args);
-
-    this.instance = createInstantSearch({
-      searchClient: this.props.searchClient,
-      indexName: this.props.indexName,
-    });
-  }
+  instance = createInstantSearch({
+    searchClient: this.props.searchClient,
+    indexName: this.props.indexName,
+  });
 
   componentDidMount() {
     this.instance.start();
