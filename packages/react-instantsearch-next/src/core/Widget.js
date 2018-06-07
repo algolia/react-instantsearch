@@ -35,9 +35,7 @@ class Widget extends Component {
 
   state = null;
 
-  constructor(...args) {
-    super(...args);
-
+  componentDidMount() {
     const { instance, connector, widget, widgetParams } = this.props;
 
     const connect = widget ? createConnectorFromWidget(widget) : connector;
