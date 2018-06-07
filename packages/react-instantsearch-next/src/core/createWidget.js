@@ -24,7 +24,11 @@ const createWidget = ({ connector, mapPropsToWidgetParams = () => ({}) }) => {
   );
 
   WidgetWithInstance.propTypes = {
-    children: PropTypes.func.isRequired,
+    children: PropTypes.func,
+  };
+
+  WidgetWithInstance.defaultProps = {
+    children: () => null,
   };
 
   return WidgetWithInstance;
