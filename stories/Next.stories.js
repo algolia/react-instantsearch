@@ -8,6 +8,7 @@ import {
   Highlight,
   RefinementList,
   SearchBox,
+  createWidget,
 } from 'react-instantsearch-next';
 
 const stories = storiesOf('<Next>', module);
@@ -56,4 +57,38 @@ stories
         )}
       </HitsRenderer>
     </InstantSearch>
-  ));
+  ))
+  .add('custom widget', () => {
+    const CustomWidget = createWidget({
+      widget: {
+        render({ state, helper }) {
+          const refine = () => {
+            const next = state.query === '' ? 'Apple' : '';
+
+            helper.setQuery(next).search();
+          };
+
+          return {
+            currentRefinement: state.query,
+            refine,
+          };
+        },
+      },
+    });
+
+    return (
+      <InstantSearch searchClient={client} indexName="instant_search">
+        <SearchBox />
+        <RefinementList attribute="categories" />
+        <CustomWidget>
+          {({ refine, currentRefinement }) => (
+            <p>
+              <button onClick={refine}>
+                {currentRefinement ? 'Clear' : 'Search for "Apple"'}
+              </button>
+            </p>
+          )}
+        </CustomWidget>
+      </InstantSearch>
+    );
+  });
