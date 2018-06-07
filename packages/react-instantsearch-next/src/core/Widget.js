@@ -40,9 +40,14 @@ class Widget extends Component {
 
     const connect = widget ? createConnectorFromWidget(widget) : connector;
 
-    const createWidget = connect(state => {
-      this.setState(() => state);
-    });
+    const createWidget = connect(
+      state => {
+        this.setState(() => state);
+      },
+      () => {
+        // Noop
+      }
+    );
 
     instance.addWidget(createWidget(widgetParams));
   }
