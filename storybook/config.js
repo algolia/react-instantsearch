@@ -8,7 +8,7 @@ setOptions({
   url: 'https://community.algolia.com/react-instantsearch/',
   goFullScreen: false,
   showStoriesPanel: true,
-  showAddonPanel: true,
+  showAddonPanel: false,
   showSearchBox: false,
   addonPanelInRight: true,
   sidebarAnimations: false,
