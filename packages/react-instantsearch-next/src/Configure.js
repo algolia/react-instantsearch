@@ -1,4 +1,4 @@
-import { connectConfigure } from 'instantsearch.js/es/connectors';
+import { connectConfigure } from 'react-instantsearch-vanilla/dist/connectors';
 import createWidget from './core/createWidget';
 
 const mapPropsToWidgetParams = props => ({

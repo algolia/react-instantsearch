@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connectRefinementList } from 'instantsearch.js/es/connectors';
+import { connectRefinementList } from 'react-instantsearch-vanilla/dist/connectors';
 import createWidget from './core/createWidget';
 import RefinementList from './components/RefinementList';
 

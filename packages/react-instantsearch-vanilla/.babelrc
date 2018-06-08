@@ -1,0 +1,52 @@
+{
+  "env": {
+    "test": {
+      "presets": [
+        [
+          "env",
+          {
+            "targets": {
+              "node": "current"
+            }
+          }
+        ],
+        "react",
+        "stage-2"
+      ]
+    },
+    "development": {
+      "presets": [
+        [
+          "env",
+          {
+            "targets": {
+              "browsers": [
+                "last 2 versions",
+                "ie >= 10"
+              ]
+            }
+          }
+        ],
+        "react",
+        "stage-2"
+      ]
+    },
+    "production": {
+      "presets": [
+        [
+          "env",
+          {
+            "targets": {
+              "browsers": [
+                "last 2 versions",
+                "ie >= 10"
+              ]
+            }
+          }
+        ],
+        "react",
+        "stage-2"
+      ]
+    }
+  }
+}

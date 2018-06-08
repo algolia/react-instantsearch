@@ -1,5 +1,5 @@
 import React from 'react';
-import { connectSearchBox } from 'instantsearch.js/es/connectors';
+import { connectSearchBox } from 'react-instantsearch-vanilla/dist/connectors';
 import createWidget from './core/createWidget';
 import SearchBox from './components/SearchBox';
 

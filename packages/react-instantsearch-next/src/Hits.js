@@ -1,5 +1,5 @@
 import React from 'react';
-import { connectHits } from 'instantsearch.js/es/connectors';
+import { connectHits } from 'react-instantsearch-vanilla/dist/connectors';
 import createWidget from './core/createWidget';
 import Hits from './components/Hits';
 
