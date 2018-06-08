@@ -10,9 +10,9 @@ const createWidget = ({
 }) => {
   const WidgetWithInstance = ({ children, ...props }) => (
     <Context.Consumer>
-      {instance => (
+      {({ main }) => (
         <Widget
-          instance={instance}
+          instance={main}
           connector={connector}
           widget={widget}
           widgetParams={mapPropsToWidgetParams(props)}
