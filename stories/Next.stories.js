@@ -133,4 +133,37 @@ stories
         </InstantSearch>
       </InstantSearch>
     );
+  })
+  .add('multi nested indices (multi instances)', () => {
+    const renderHit = hit => (
+      <Fragment>
+        <p>objectID: {hit.objectID}</p>
+        <p>
+          name: <Highlight hit={hit} attribute="name" />
+        </p>
+      </Fragment>
+    );
+
+    return (
+      <InstantSearch searchClient={client} indexName="instant_search">
+        <Configure hitsPerPage={4} />
+        <SearchBox />
+
+        <InstantSearch searchClient={client} indexName="instant_search">
+          <h2>
+            Index: <code>instant_search</code>
+          </h2>
+          <Hits renderHit={renderHit} />
+
+          <InstantSearch searchClient={client} indexName="instant_search">
+            <Configure hitsPerPage={2} />
+
+            <h2>
+              Index: <code>instant_search</code>
+            </h2>
+            <Hits renderHit={renderHit} />
+          </InstantSearch>
+        </InstantSearch>
+      </InstantSearch>
+    );
   });
