@@ -1,5 +1,6 @@
 import isFunction from 'lodash/isFunction';
 import isPlainObject from 'lodash/isPlainObject';
+import isEmpty from 'lodash/isEmpty';
 
 import { enhanceConfiguration } from '../../lib/InstantSearch.js';
 
@@ -96,6 +97,33 @@ export default function connectConfigure(renderFn, unmountFn) {
             false
           );
         }
+      },
+
+      getWidgetState(uiState) {
+        const { searchParameters } = widgetParams;
+
+        if (
+          isEmpty(searchParameters) ||
+          (uiState && uiState.searchParameters === searchParameters)
+        ) {
+          return uiState;
+        }
+
+        return {
+          ...uiState,
+          configure: searchParameters,
+        };
+      },
+
+      getWidgetSearchParameters(searchParameters, { uiState }) {
+        if (isEmpty(uiState.configure)) {
+          return searchParameters;
+        }
+
+        return Object.entries(uiState.configure).reduce(
+          (acc, [key, value]) => acc.setQueryParameter(key, value),
+          searchParameters
+        );
       },
 
       dispose({ state }) {
