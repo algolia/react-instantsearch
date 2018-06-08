@@ -93,7 +93,7 @@ stories
       </InstantSearch>
     );
   })
-  .add('multi indices', () => {
+  .add('multi indices (multi instances)', () => {
     const renderHit = hit => (
       <Fragment>
         <p>objectID: {hit.objectID}</p>
@@ -105,18 +105,32 @@ stories
 
     return (
       <InstantSearch searchClient={client} indexName="instant_search">
-        <Configure hitsPerPage={8} />
+        <Configure hitsPerPage={4} />
         <SearchBox />
 
-        <Index name="instant_search">
+        <InstantSearch searchClient={client} indexName="instant_search">
+          <h2>
+            Index: <code>instant_search</code>
+          </h2>
           <RefinementList attribute="categories" limit={5} />
           <Hits renderHit={renderHit} />
-        </Index>
+        </InstantSearch>
 
-        <Index name="bestbuy">
-          <RefinementList attribute="categories" limit={5} />
+        <InstantSearch searchClient={client} indexName="instant_search">
+          <h2>
+            Index: <code>instant_search</code>
+          </h2>
+          <RefinementList attribute="brand" limit={5} />
           <Hits renderHit={renderHit} />
-        </Index>
+        </InstantSearch>
+
+        <InstantSearch searchClient={client} indexName="bestbuy">
+          <h2>
+            Index: <code>bestbuy</code>
+          </h2>
+          <RefinementList attribute="category" limit={5} />
+          <Hits renderHit={renderHit} />
+        </InstantSearch>
       </InstantSearch>
     );
   });
