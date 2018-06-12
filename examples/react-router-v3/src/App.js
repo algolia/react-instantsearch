@@ -11,7 +11,7 @@ import {
   RefinementList,
   SearchBox,
   ClearRefinements,
-} from 'react-instantsearch/dom';
+} from 'react-instantsearch-dom';
 import { withRouter } from 'react-router';
 import qs from 'qs';
 import { isEqual } from 'lodash';
