@@ -10,7 +10,7 @@ import {
   RefinementList,
   SearchBox,
   ClearRefinements,
-} from 'react-instantsearch/dom';
+} from 'react-instantsearch-dom';
 import PropTypes from 'prop-types';
 import qs from 'qs';
 
