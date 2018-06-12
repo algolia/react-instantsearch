@@ -12,8 +12,8 @@ import {
   Platform,
   Dimensions,
 } from 'react-native';
-import { InstantSearch } from 'react-instantsearch/native';
 import {
+  InstantSearch,
   connectSearchBox,
   connectInfiniteHits,
   connectRefinementList,
@@ -22,7 +22,7 @@ import {
   connectSortBy,
   connectRange,
   connectCurrentRefinements,
-} from 'react-instantsearch/connectors';
+} from 'react-instantsearch-native';
 import Highlight from './components/Highlight';
 import Spinner from './components/Spinner';
 import RatingMenu from 'react-native-star-rating';

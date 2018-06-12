@@ -10,13 +10,13 @@ import {
   TouchableHighlight,
   Keyboard,
 } from 'react-native';
-import { InstantSearch } from 'react-instantsearch/native';
 import {
+  InstantSearch,
   connectMenu,
   connectRefinementList,
   connectSearchBox,
   connectRange,
-} from 'react-instantsearch/connectors';
+} from 'react-instantsearch-native';
 import Stats from './components/Stats';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Highlight from './components/Highlight';
