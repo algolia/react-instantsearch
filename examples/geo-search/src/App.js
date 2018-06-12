@@ -5,8 +5,8 @@ import {
   SearchBox,
   Configure,
   Pagination,
-} from 'react-instantsearch/dom';
-import { connectHits } from 'react-instantsearch/connectors';
+  connectHits,
+} from 'react-instantsearch-dom';
 import GoogleMap from 'google-map-react';
 import { fitBounds } from 'google-map-react/utils';
 import qs from 'qs';
