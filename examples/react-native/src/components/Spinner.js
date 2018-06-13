@@ -1,6 +1,6 @@
 import React from 'react';
 import { ActivityIndicator, View, Dimensions } from 'react-native';
-import { connectStateResults } from 'react-instantsearch/connectors';
+import { connectStateResults } from 'react-instantsearch-native';
 
 const { width, height } = Dimensions.get('window');
 

@@ -8,13 +8,13 @@ import {
   View,
   TouchableHighlight,
 } from 'react-native';
-import { InstantSearch } from 'react-instantsearch/native';
 import {
+  InstantSearch,
   connectRefinementList,
   connectSearchBox,
   connectRange,
   connectMenu,
-} from 'react-instantsearch/connectors';
+} from 'react-instantsearch-native';
 import Stats from './components/Stats';
 import { isEmpty } from 'lodash';
 

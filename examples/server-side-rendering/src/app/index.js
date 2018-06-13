@@ -5,8 +5,8 @@ import {
   SearchBox,
   Hits,
   Configure,
-} from 'react-instantsearch/dom';
-import { createInstantSearch } from 'react-instantsearch/server';
+} from 'react-instantsearch-dom';
+import { createInstantSearch } from 'react-instantsearch-dom/server';
 
 const { InstantSearch, findResultsState } = createInstantSearch();
 class App extends Component {

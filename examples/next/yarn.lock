@@ -4550,7 +4550,7 @@ react-instantsearch-core@^5.2.0-beta.1:
     lodash "^4.17.4"
     prop-types "^15.5.10"
 
-react-instantsearch-dom@^5.2.0-beta.1:
+react-instantsearch-dom@5.2.0-beta.1:
   version "5.2.0-beta.1"
   resolved "https://registry.yarnpkg.com/react-instantsearch-dom/-/react-instantsearch-dom-5.2.0-beta.1.tgz#b18bcb7fd5cf143a877822e0912fe793be769647"
   dependencies:
@@ -4560,21 +4560,6 @@ react-instantsearch-dom@^5.2.0-beta.1:
     lodash "^4.17.4"
     prop-types "^15.5.10"
     react-instantsearch-core "^5.2.0-beta.1"
-
-react-instantsearch-native@^5.2.0-beta.1:
-  version "5.2.0-beta.1"
-  resolved "https://registry.yarnpkg.com/react-instantsearch-native/-/react-instantsearch-native-5.2.0-beta.1.tgz#65d80f7dff18049aa730f768d35b07a0809a8a61"
-  dependencies:
-    algoliasearch "^3.27.1"
-    react-instantsearch-core "^5.2.0-beta.1"
-
-react-instantsearch@5.2.0-beta.1:
-  version "5.2.0-beta.1"
-  resolved "https://registry.yarnpkg.com/react-instantsearch/-/react-instantsearch-5.2.0-beta.1.tgz#28008f22871f0af3738763a1ae7352da2569b169"
-  dependencies:
-    react-instantsearch-core "^5.2.0-beta.1"
-    react-instantsearch-dom "^5.2.0-beta.1"
-    react-instantsearch-native "^5.2.0-beta.1"
 
 react-lifecycles-compat@^3.0.2:
   version "3.0.4"

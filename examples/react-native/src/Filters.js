@@ -9,14 +9,14 @@ import {
   TouchableHighlight,
   Keyboard,
 } from 'react-native';
-import { InstantSearch } from 'react-instantsearch/native';
 import {
+  InstantSearch,
   connectCurrentRefinements,
   connectMenu,
   connectRange,
   connectRefinementList,
   connectSearchBox,
-} from 'react-instantsearch/connectors';
+} from 'react-instantsearch-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const styles = StyleSheet.create({
