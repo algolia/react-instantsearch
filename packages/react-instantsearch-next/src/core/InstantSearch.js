@@ -51,6 +51,10 @@ class InstantSearch extends Component {
     // allow to trigger less requests on start
     // - idea: batch the starts
     // - idea: ...
+    //
+    // Avoid to start on didMount it triggers
+    // a sync setState because of the init
+    // lifecycle hook
     this.state.main.start();
   }
 

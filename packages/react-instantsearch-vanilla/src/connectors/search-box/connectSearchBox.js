@@ -95,6 +95,7 @@ export default function connectSearchBox(renderFn, unmountFn) {
       },
 
       init({ helper, onHistoryChange, instantSearchInstance }) {
+        console.log('INIT');
         this._cachedClear = this._cachedClear.bind(this);
         this._clear = clear(helper);
 

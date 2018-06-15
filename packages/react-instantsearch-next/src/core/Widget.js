@@ -42,6 +42,7 @@ class Widget extends Component {
 
     const createWidget = connect(
       state => {
+        console.log('CONNECT');
         this.setState(() => state);
       },
       () => {
