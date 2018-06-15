@@ -69,7 +69,7 @@
     "jest-watch-typeahead": "0.1.0",
     "json": "9.0.6",
     "lerna": "2.11.0",
-    "lodash": "4.17.10",
+    "lodash.orderby": "4.6.0",
     "mversion": "1.10.1",
     "netlify-cli": "1.2.2",
     "prettier": "1.13.5",
