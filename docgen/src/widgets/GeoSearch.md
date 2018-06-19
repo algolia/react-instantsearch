@@ -161,7 +161,7 @@ This component has no translations.
 <!-- Avoid the huge margin on the pseudo element -->
 <h3 class="sub-component-title">Decription</h3>
 
-This component is a wapper around [`google.maps.Marker`](https://developers.google.com/maps/documentation/javascript/reference/3.exp/marker#MarkerOptions), all the options avaible on the Marker class can be provided as props. This component cannot render any children components. See [`<HTMLMarker />`](/widgets/GeoSearch.html#htmlmarker) for this kind of behaviour.
+This component is a wapper around [`google.maps.Marker`](https://developers.google.com/maps/documentation/javascript/reference/3.exp/marker#MarkerOptions), all the options avaible on the Marker class can be provided as props. This component cannot render any children components. See [`<CustomMarker />`](/widgets/GeoSearch.html#custommarker) for this kind of behaviour.
 
 Currently the component does not support the update of the options. Once the component is rendered changing the props won't update the marker options.
 
@@ -279,7 +279,7 @@ This component has no CSS classes.
 
 This component has no translations.
 
-## `<HTMLMarker />`
+## `<CustomMarker />`
 
 <!-- Avoid the huge margin on the pseudo element -->
 <h3 class="sub-component-title">Decription</h3>
@@ -293,7 +293,7 @@ Currently the component does not support the update of the options. Once the com
 
 ```jsx
 import { InstantSearch } from 'react-instantsearch-dom';
-import { GeoSearch, HTMLMarker } from 'react-instantsearch-dom-geo-search';
+import { GeoSearch, CustomMarker } from 'react-instantsearch-dom-geo-search';
 
 const App = () => (
   <InstantSearch
@@ -305,9 +305,9 @@ const App = () => (
       {({ hits }) => (
         <div>
           {hits.map(hit => (
-            <HTMLMarker key={hit.objectID} hit={hit}>
+            <CustomMarker key={hit.objectID} hit={hit}>
               <span>{hit.price}</span>
-            </HTMLMarker>
+            </CustomMarker>
           ))}
         </div>
       )}
