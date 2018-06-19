@@ -2,13 +2,13 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { setAddon, storiesOf } from '@storybook/react';
 import JSXAddon from 'storybook-addon-jsx';
+import { Configure } from 'react-instantsearch-dom';
 import {
   GoogleMapsLoader,
   GeoSearch,
   Marker,
-} from '../packages/react-instantsearch-dom-geo/src/index';
+} from 'react-instantsearch-dom-maps';
 import { displayName, filterProps, WrapWithHits } from './util';
-import { Configure } from '../packages/react-instantsearch/dom';
 
 setAddon(JSXAddon);
 
