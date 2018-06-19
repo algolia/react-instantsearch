@@ -1,8 +1,6 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
-// @TODO: Update this import when the package is correctly split:
-// import { connectGeoSearch } from 'react-instantsearch-dom';
-import { connectGeoSearch } from '../../react-instantsearch/connectors';
+import { connectGeoSearch } from 'react-instantsearch-dom';
 import { LatLngPropType, BoundingBoxPropType } from './propTypes';
 
 export class Provider extends Component {
