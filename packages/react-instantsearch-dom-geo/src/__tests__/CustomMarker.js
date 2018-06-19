@@ -9,13 +9,13 @@ import {
 } from '../../test/mockGoogleMaps';
 import createHTMLMarker from '../elements/createHTMLMarker';
 import { GOOGLE_MAPS_CONTEXT } from '../GoogleMaps';
-import HTMLMarker from '../HTMLMarker';
+import CustomMarker from '../CustomMarker';
 
 Enzyme.configure({ adapter: new Adapter() });
 
 jest.mock('../elements/createHTMLMarker', () => jest.fn());
 
-describe('HTMLMarker', () => {
+describe('CustomMarker', () => {
   const defaultProps = {
     hit: {
       _geoloc: {
@@ -41,9 +41,9 @@ describe('HTMLMarker', () => {
       };
 
       const wrapper = shallow(
-        <HTMLMarker {...props}>
+        <CustomMarker {...props}>
           <span>This is the children.</span>
-        </HTMLMarker>,
+        </CustomMarker>,
         {
           context: {
             [GOOGLE_MAPS_CONTEXT]: {
@@ -91,9 +91,9 @@ describe('HTMLMarker', () => {
       };
 
       shallow(
-        <HTMLMarker {...props}>
+        <CustomMarker {...props}>
           <span>This is the children.</span>
-        </HTMLMarker>,
+        </CustomMarker>,
         {
           context: {
             [GOOGLE_MAPS_CONTEXT]: {
@@ -132,9 +132,9 @@ describe('HTMLMarker', () => {
       };
 
       const wrapper = shallow(
-        <HTMLMarker {...props}>
+        <CustomMarker {...props}>
           <span>This is the children.</span>
-        </HTMLMarker>,
+        </CustomMarker>,
         {
           context: {
             [GOOGLE_MAPS_CONTEXT]: {
@@ -162,9 +162,9 @@ describe('HTMLMarker', () => {
       };
 
       const wrapper = shallow(
-        <HTMLMarker {...props}>
+        <CustomMarker {...props}>
           <span>This is the children.</span>
-        </HTMLMarker>,
+        </CustomMarker>,
         {
           disableLifecycleMethods: true,
           context: {
@@ -205,9 +205,9 @@ describe('HTMLMarker', () => {
       // Use `mount` instead of `shallow` to trigger the render
       // of createPortal otherwise the Snapshot is empty
       const wrapper = mount(
-        <HTMLMarker {...props}>
+        <CustomMarker {...props}>
           <span>This is the children.</span>
-        </HTMLMarker>,
+        </CustomMarker>,
         {
           context: {
             [GOOGLE_MAPS_CONTEXT]: {
@@ -237,9 +237,9 @@ describe('HTMLMarker', () => {
       };
 
       const wrapper = shallow(
-        <HTMLMarker {...props}>
+        <CustomMarker {...props}>
           <span>This is the children.</span>
-        </HTMLMarker>,
+        </CustomMarker>,
         {
           disableLifecycleMethods: true,
           context: {
@@ -275,9 +275,9 @@ describe('HTMLMarker', () => {
 
       // Use `mount` instead of `shallow` to trigger didUpdate
       const wrapper = mount(
-        <HTMLMarker {...props}>
+        <CustomMarker {...props}>
           <span>This is the children.</span>
-        </HTMLMarker>,
+        </CustomMarker>,
         {
           context: {
             [GOOGLE_MAPS_CONTEXT]: {
@@ -318,9 +318,9 @@ describe('HTMLMarker', () => {
       };
 
       const wrapper = shallow(
-        <HTMLMarker {...props}>
+        <CustomMarker {...props}>
           <span>This is the children.</span>
-        </HTMLMarker>,
+        </CustomMarker>,
         {
           context: {
             [GOOGLE_MAPS_CONTEXT]: {
@@ -348,7 +348,7 @@ describe('HTMLMarker', () => {
       );
 
       const isReact16 = jest
-        .spyOn(HTMLMarker, 'isReact16')
+        .spyOn(CustomMarker, 'isReact16')
         .mockImplementation(() => false);
 
       const marker = createFakeHTMLMarkerInstance();
@@ -365,9 +365,9 @@ describe('HTMLMarker', () => {
       };
 
       const wrapper = mount(
-        <HTMLMarker {...props}>
+        <CustomMarker {...props}>
           <span>This is the children.</span>
-        </HTMLMarker>,
+        </CustomMarker>,
         {
           context: {
             [GOOGLE_MAPS_CONTEXT]: {
@@ -396,7 +396,7 @@ describe('HTMLMarker', () => {
 
     it('expect to render correctly without a marker', () => {
       const isReact16 = jest
-        .spyOn(HTMLMarker, 'isReact16')
+        .spyOn(CustomMarker, 'isReact16')
         .mockImplementation(() => false);
 
       const mapInstance = createFakeMapInstance();
@@ -409,9 +409,9 @@ describe('HTMLMarker', () => {
       };
 
       const wrapper = shallow(
-        <HTMLMarker {...props}>
+        <CustomMarker {...props}>
           <span>This is the children.</span>
-        </HTMLMarker>,
+        </CustomMarker>,
         {
           disableLifecycleMethods: true,
           context: {
@@ -436,7 +436,7 @@ describe('HTMLMarker', () => {
       );
 
       const isReact16 = jest
-        .spyOn(HTMLMarker, 'isReact16')
+        .spyOn(CustomMarker, 'isReact16')
         .mockImplementation(() => false);
 
       const marker = createFakeHTMLMarkerInstance();
@@ -454,9 +454,9 @@ describe('HTMLMarker', () => {
 
       // Use `mount` instead of `shallow` to trigger didUpdate
       const wrapper = mount(
-        <HTMLMarker {...props}>
+        <CustomMarker {...props}>
           <span>This is the children.</span>
-        </HTMLMarker>,
+        </CustomMarker>,
         {
           context: {
             [GOOGLE_MAPS_CONTEXT]: {
@@ -497,7 +497,7 @@ describe('HTMLMarker', () => {
       );
 
       const isReact16 = jest
-        .spyOn(HTMLMarker, 'isReact16')
+        .spyOn(CustomMarker, 'isReact16')
         .mockImplementation(() => false);
 
       const mapInstance = createFakeMapInstance();
@@ -510,9 +510,9 @@ describe('HTMLMarker', () => {
       };
 
       const wrapper = shallow(
-        <HTMLMarker {...props}>
+        <CustomMarker {...props}>
           <span>This is the children.</span>
-        </HTMLMarker>,
+        </CustomMarker>,
         {
           disableLifecycleMethods: true,
           context: {
@@ -544,7 +544,7 @@ describe('HTMLMarker', () => {
       );
 
       const isReact16 = jest
-        .spyOn(HTMLMarker, 'isReact16')
+        .spyOn(CustomMarker, 'isReact16')
         .mockImplementation(() => false);
 
       const marker = createFakeHTMLMarkerInstance();
@@ -561,9 +561,9 @@ describe('HTMLMarker', () => {
       };
 
       const wrapper = shallow(
-        <HTMLMarker {...props}>
+        <CustomMarker {...props}>
           <span>This is the children.</span>
-        </HTMLMarker>,
+        </CustomMarker>,
         {
           context: {
             [GOOGLE_MAPS_CONTEXT]: {

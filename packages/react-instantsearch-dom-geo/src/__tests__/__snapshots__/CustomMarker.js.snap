@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`HTMLMarker with portal expect to render correctly 1`] = `
-<HTMLMarker
+exports[`CustomMarker with portal expect to render correctly 1`] = `
+<CustomMarker
   hit={
     Object {
       "_geoloc": Object {
@@ -15,11 +15,11 @@ exports[`HTMLMarker with portal expect to render correctly 1`] = `
   <span>
     This is the children.
   </span>
-</HTMLMarker>
+</CustomMarker>
 `;
 
-exports[`HTMLMarker with unstable_renderSubtreeIntoContainer expect to render correctly 1`] = `
-<HTMLMarker
+exports[`CustomMarker with unstable_renderSubtreeIntoContainer expect to render correctly 1`] = `
+<CustomMarker
   hit={
     Object {
       "_geoloc": Object {
