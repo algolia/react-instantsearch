@@ -23,7 +23,7 @@ The `GeoSearch` widget displays the list of results from the search on a Google 
 The API of this widget is a bit different than the others that you can find in React InstantSearch. The API is component driven rather than options driven. We choose the former because it brings more flexibility to the widget. Since the geo search pattern is not a use case for every applications we decided to ship the widget in a separate package. Be sure to have it install before using it:
 
 ```shell
-yarn add react-instantsearch-dom-geo-search
+yarn add react-instantsearch-dom-maps
 ```
 
 Note that the GeoSearch widget uses the [geosearch](https://www.algolia.com/doc/guides/searching/geo-search) capabilities of Algolia. Your hits **must** have a `_geoloc` attribute in order to be available in the render prop.
@@ -38,7 +38,7 @@ Don’t forget to explicitly set the `height` of the map container, otherwise it
 
 ```jsx
 import { InstantSearch } from 'react-instantsearch-dom';
-import { GoogleMapsLoader, GeoSearch, Control, Marker } from 'react-instantsearch-dom-geo-search';
+import { GoogleMapsLoader, GeoSearch, Control, Marker } from 'react-instantsearch-dom-maps';
 
 const App = () => (
   <InstantSearch
@@ -79,7 +79,7 @@ This component provides the `hits` to display. All the other geo components need
 
 ```jsx
 import { InstantSearch } from 'react-instantsearch-dom';
-import { GeoSearch } from 'react-instantsearch-dom-geo-search';
+import { GeoSearch } from 'react-instantsearch-dom-maps';
 
 const App = () => (
   <InstantSearch
@@ -170,7 +170,7 @@ Currently the component does not support the update of the options. Once the com
 
 ```jsx
 import { InstantSearch } from 'react-instantsearch-dom';
-import { GeoSearch, Marker } from 'react-instantsearch-dom-geo-search';
+import { GeoSearch, Marker } from 'react-instantsearch-dom-maps';
 
 const App = () => (
   <InstantSearch
@@ -293,7 +293,7 @@ Currently the component does not support the update of the options. Once the com
 
 ```jsx
 import { InstantSearch } from 'react-instantsearch-dom';
-import { GeoSearch, CustomMarker } from 'react-instantsearch-dom-geo-search';
+import { GeoSearch, CustomMarker } from 'react-instantsearch-dom-maps';
 
 const App = () => (
   <InstantSearch
@@ -466,7 +466,7 @@ This component allow the user to control the different strategy for the refineme
 
 ```jsx
 import { InstantSearch } from 'react-instantsearch-dom';
-import { GeoSearch, Control } from 'react-instantsearch-dom-geo-search';
+import { GeoSearch, Control } from 'react-instantsearch-dom-maps';
 
 const App = () => (
   <InstantSearch
@@ -577,7 +577,7 @@ This component disable the refine on map move behaviour.
 
 ```jsx
 import { InstantSearch } from 'react-instantsearch-dom';
-import { GeoSearch, Redo } from 'react-instantsearch-dom-geo-search';
+import { GeoSearch, Redo } from 'react-instantsearch-dom-maps';
 
 const App = () => (
   <InstantSearch
@@ -659,7 +659,7 @@ This component provide a built-in solution to load the `google.maps` library in 
 
 ```jsx
 import { InstantSearch } from 'react-instantsearch-dom';
-import { GoogleMapsLoader, GeoSearch } from 'react-instantsearch-dom-geo-search';
+import { GoogleMapsLoader, GeoSearch } from 'react-instantsearch-dom-maps';
 
 const App = () => (
   <InstantSearch
