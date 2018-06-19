@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-// @TODO: Update this import when the package is correctly split:
-// import { createClassNames } from 'react-instantsearch-dom';
-import createClassNames from '../../react-instantsearch/src/components/createClassNames';
+import { createClassNames } from 'react-instantsearch-dom';
 import { LatLngPropType, BoundingBoxPropType } from './propTypes';
 
 const cx = createClassNames('GeoSearch');
