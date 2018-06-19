@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`HTMLMarker with portal expect to render correctly 1`] = `
+exports[`CustomMarker with portal expect to render correctly 1`] = `
 <CustomMarker
   anchor={
     Object {
@@ -25,7 +25,7 @@ exports[`HTMLMarker with portal expect to render correctly 1`] = `
 `;
 
 exports[`CustomMarker with unstable_renderSubtreeIntoContainer expect to render correctly 1`] = `
-<HTMLMarker
+<CustomMarker
   anchor={
     Object {
       "x": 0,
