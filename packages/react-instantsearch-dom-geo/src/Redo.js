@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-// @TODO: Update this import when the package is correctly split:
-// import { createClassNames } from 'react-instantsearch-dom';
-import createClassNames from '../../react-instantsearch/src/components/createClassNames';
-// @TODO: Update this import when the package is correctly split:
-// import { translatable } from 'react-instantsearch-core';
-import translatable from '../../react-instantsearch/src/core/translatable';
+import { createClassNames, translatable } from 'react-instantsearch-dom';
 import { STATE_CONTEXT } from './Provider';
 import { GOOGLE_MAPS_CONTEXT } from './GoogleMaps';
 
