@@ -73,7 +73,7 @@
     "mversion": "1.10.1",
     "netlify-cli": "1.2.2",
     "prettier": "1.13.5",
-    "prop-types": "15.6.1",
+    "prop-types": "15.6.2",
     "react": "16.4.1",
     "react-autosuggest": "9.3.4",
     "react-dom": "16.4.1",
