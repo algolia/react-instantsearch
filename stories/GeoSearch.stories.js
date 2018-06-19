@@ -7,7 +7,7 @@ import {
   GoogleMapsLoader,
   GeoSearch,
   Marker,
-  HTMLMarker,
+  CustomMarker,
   Redo,
   Control,
 } from 'react-instantsearch-dom-maps';
@@ -273,7 +273,7 @@ stories
     }
   )
   .addWithJSX(
-    'with <HTMLMarker>',
+    'with <CustomMarker>',
     () => (
       <WrapWithHits
         indexName="airbnb"
@@ -292,7 +292,7 @@ stories
 
                     {hits.map(hit => (
                       <Fragment key={hit.objectID}>
-                        <HTMLMarker
+                        <CustomMarker
                           hit={hit}
                           options={{
                             className: 'my-custom-marker',
@@ -303,7 +303,7 @@ stories
                           }}
                         >
                           {hit.price_formatted}
-                        </HTMLMarker>
+                        </CustomMarker>
                       </Fragment>
                     ))}
                   </Fragment>
