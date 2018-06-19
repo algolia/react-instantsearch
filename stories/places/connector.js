@@ -1,7 +1,4 @@
-import createConnector from '../../packages/react-instantsearch/src/core/createConnector';
-import { getCurrentRefinementValue } from '../../packages/react-instantsearch/src/core/indexUtils';
-
-const getId = () => 'aroundLatLng';
+import { createConnector } from 'react-instantsearch-dom';
 
 export default createConnector({
   displayName: 'AlgoliaGeoSearch',
@@ -21,12 +18,8 @@ export default createConnector({
   },
 
   getSearchParameters(searchParameters, props, searchState) {
-    const currentRefinement = getCurrentRefinementValue(
-      props,
-      searchState,
-      this.context,
-      getId()
-    );
+    const currentRefinement =
+      searchState.aroundLatLng || props.defaultRefinement;
 
     return searchParameters
       .setQueryParameter('insideBoundingBox')
