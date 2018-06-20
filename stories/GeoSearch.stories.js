@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { setAddon, storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import JSXAddon from 'storybook-addon-jsx';
-import { Configure } from 'react-instantsearch-dom';
+import { Configure, Highlight, connectHits } from 'react-instantsearch-dom';
 import {
   GoogleMapsLoader,
   GeoSearch,
@@ -382,6 +382,160 @@ stories
       filterProps,
     }
   );
+
+stories.addWithJSX('with InfoWindow', () => {
+  class Example extends Component {
+    static propTypes = {
+      google: PropTypes.object.isRequired,
+    };
+
+    InfoWindow = new this.props.google.maps.InfoWindow();
+
+    onClickMarker = ({ hit, marker }) => {
+      if (this.InfoWindow.getMap()) {
+        this.InfoWindow.close();
+      }
+
+      this.InfoWindow.setContent(hit.name);
+
+      this.InfoWindow.open(marker.getMap(), marker);
+    };
+
+    renderGeoHit = hit => (
+      <Marker
+        key={hit.objectID}
+        hit={hit}
+        anchor={{ x: 0, y: 5 }}
+        onClick={({ marker }) => {
+          this.onClickMarker({
+            hit,
+            marker,
+          });
+        }}
+      />
+    );
+
+    render() {
+      const { google } = this.props;
+
+      return (
+        <WrapWithHits indexName="airbnb" linkedStoryGroup="GeoSearch">
+          <Configure aroundLatLngViaIP hitsPerPage={20} />
+
+          <Container>
+            <GeoSearch google={google}>
+              {({ hits }) => <Fragment>{hits.map(this.renderGeoHit)}</Fragment>}
+            </GeoSearch>
+          </Container>
+        </WrapWithHits>
+      );
+    }
+  }
+
+  return (
+    <GoogleMapsLoader apiKey={apiKey}>
+      {google => <Example google={google} />}
+    </GoogleMapsLoader>
+  );
+});
+
+stories.addWithJSX('with hits communication (custom)', () => {
+  const CustomHits = connectHits(({ hits, selectedHit, onHitOver }) => (
+    <div className="hits">
+      {hits.map(hit => {
+        const classNames = [
+          'hit',
+          'hit--airbnb',
+          selectedHit && selectedHit.objectID === hit.objectID
+            ? 'hit--airbnb-active'
+            : '',
+        ];
+
+        return (
+          <div
+            key={hit.objectID}
+            className={classNames.join(' ').trim()}
+            onMouseEnter={() => onHitOver(hit)}
+            onMouseLeave={() => onHitOver(null)}
+          >
+            <div className="hit-content">
+              <div>
+                <Highlight attribute="name" hit={hit} />
+                <span> - ${hit.price}</span>
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  ));
+
+  class Example extends Component {
+    state = {
+      selectedHit: null,
+    };
+
+    onHitOver = hit =>
+      this.setState(() => ({
+        selectedHit: hit,
+      }));
+
+    renderGeoHit = hit => {
+      const { selectedHit } = this.state;
+
+      const classNames = [
+        'my-custom-marker',
+        selectedHit && selectedHit.objectID === hit.objectID
+          ? 'my-custom-marker--active'
+          : '',
+      ];
+
+      return (
+        <CustomMarker
+          key={hit.objectID}
+          hit={hit}
+          anchor={{ x: 0, y: 5 }}
+          onMouseEnter={() => this.onHitOver(hit)}
+          onMouseLeave={() => this.onHitOver(null)}
+        >
+          <div className={classNames.join(' ').trim()}>
+            <span>{hit.price_formatted}</span>
+          </div>
+        </CustomMarker>
+      );
+    };
+
+    render() {
+      const { selectedHit } = this.state;
+
+      return (
+        <WrapWithHits
+          indexName="airbnb"
+          linkedStoryGroup="GeoSearch"
+          hitsElement={
+            <CustomHits selectedHit={selectedHit} onHitOver={this.onHitOver} />
+          }
+        >
+          <Configure aroundLatLngViaIP hitsPerPage={20} />
+
+          <Container>
+            <GoogleMapsLoader apiKey={apiKey}>
+              {google => (
+                <GeoSearch google={google}>
+                  {({ hits }) => (
+                    <Fragment>{hits.map(this.renderGeoHit)}</Fragment>
+                  )}
+                </GeoSearch>
+              )}
+            </GoogleMapsLoader>
+          </Container>
+        </WrapWithHits>
+      );
+    }
+  }
+
+  return <Example />;
+});
 
 stories.addWithJSX('with unmount', () => {
   class Example extends Component {

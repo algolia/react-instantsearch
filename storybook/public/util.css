@@ -99,9 +99,15 @@
 }
 
 .hit {
-  margin: 10px 10px;
+  padding: 5px 5px;
   display: flex;
   align-items: center;
+}
+
+.hit--airbnb:hover,
+.hit--airbnb-active {
+  background-color: #3369e7;
+  color: #ffffff;
 }
 
 .ais-SearchBox__root {
