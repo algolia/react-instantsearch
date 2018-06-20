@@ -78,11 +78,5 @@
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
     ]
-  },
-  "bundlesize": [
-    {
-      "path": "dist/umd/ReactInstantSearchDOMMaps.min.js",
-      "maxSize": "10 kB"
-    }
-  ]
+  }
 }
