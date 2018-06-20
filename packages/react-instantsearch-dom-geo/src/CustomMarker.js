@@ -2,16 +2,32 @@ import { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import createHTMLMarker from './elements/createHTMLMarker';
-import { LatLngPropType } from './propTypes';
+import { registerEvents, createListenersPropTypes } from './utils';
+import { GeolocHitPropType } from './propTypes';
 import { GOOGLE_MAPS_CONTEXT } from './GoogleMaps';
+
+const eventTypes = {
+  onClick: 'click',
+  onDoubleClick: 'dblclick',
+  onMouseDown: 'mousedown',
+  onMouseEnter: 'mouseenter',
+  onMouseLeave: 'mouseleave',
+  onMouseMove: 'mousemove',
+  onMouseOut: 'mouseout',
+  onMouseOver: 'mouseover',
+  onMouseUp: 'mouseup',
+};
 
 class CustomMarker extends Component {
   static propTypes = {
-    hit: PropTypes.shape({
-      _geoloc: LatLngPropType.isRequired,
-    }).isRequired,
+    ...createListenersPropTypes(eventTypes),
+    hit: GeolocHitPropType.isRequired,
     children: PropTypes.node.isRequired,
-    options: PropTypes.object,
+    className: PropTypes.string,
+    anchor: PropTypes.shape({
+      x: PropTypes.number.isRequired,
+      y: PropTypes.number.isRequired,
+    }),
   };
 
   static contextTypes = {
@@ -22,7 +38,11 @@ class CustomMarker extends Component {
   };
 
   static defaultProps = {
-    options: {},
+    className: '',
+    anchor: {
+      x: 0,
+      y: 0,
+    },
   };
 
   static isReact16() {
@@ -34,7 +54,7 @@ class CustomMarker extends Component {
   };
 
   componentDidMount() {
-    const { hit, options } = this.props;
+    const { hit, className, anchor } = this.props;
     const { google, instance } = this.context[GOOGLE_MAPS_CONTEXT];
     // Not the best way to create the reference of the CustomMarker
     // but since the Google object is required didn't find another
@@ -44,8 +64,11 @@ class CustomMarker extends Component {
     const marker = new Marker({
       map: instance,
       position: hit._geoloc,
-      ...options,
+      className,
+      anchor,
     });
+
+    this.removeListeners = registerEvents(eventTypes, this.props, marker);
 
     this.setState(() => ({
       marker,
@@ -56,27 +79,27 @@ class CustomMarker extends Component {
     const { children } = this.props;
     const { marker } = this.state;
 
-    if (marker) {
-      if (!CustomMarker.isReact16()) {
-        ReactDOM.unstable_renderSubtreeIntoContainer(
-          this,
-          children,
-          marker.element
-        );
-      }
+    this.removeListeners();
+
+    this.removeListeners = registerEvents(eventTypes, this.props, marker);
+
+    if (!CustomMarker.isReact16()) {
+      ReactDOM.unstable_renderSubtreeIntoContainer(
+        this,
+        children,
+        marker.element
+      );
     }
   }
 
   componentWillUnmount() {
     const { marker } = this.state;
 
-    if (marker) {
-      if (!CustomMarker.isReact16()) {
-        ReactDOM.unmountComponentAtNode(marker.element);
-      }
-
-      marker.setMap(null);
+    if (!CustomMarker.isReact16()) {
+      ReactDOM.unmountComponentAtNode(marker.element);
     }
+
+    marker.setMap(null);
   }
 
   render() {

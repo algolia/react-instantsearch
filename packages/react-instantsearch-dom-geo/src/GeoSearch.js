@@ -11,7 +11,6 @@ class GeoSearch extends Component {
     children: PropTypes.func.isRequired,
     initialZoom: PropTypes.number,
     initialPosition: LatLngPropType,
-    mapOptions: PropTypes.object,
   };
 
   static defaultProps = {
@@ -20,16 +19,15 @@ class GeoSearch extends Component {
       lat: 0,
       lng: 0,
     },
-    mapOptions: {},
   };
 
   renderChildrenWithBoundFunction = ({ hits, position, ...rest }) => {
     const {
       google,
+      children,
       initialZoom,
       initialPosition,
-      mapOptions,
-      children,
+      ...mapOptions
     } = this.props;
 
     return (

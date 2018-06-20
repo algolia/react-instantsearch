@@ -307,9 +307,7 @@ describe('GeoSearch', () => {
     it('expect to render with map options', () => {
       const props = {
         ...defaultProps,
-        mapOptions: {
-          streetViewControl: true,
-        },
+        streetViewControl: true,
       };
 
       const connectorProps = {

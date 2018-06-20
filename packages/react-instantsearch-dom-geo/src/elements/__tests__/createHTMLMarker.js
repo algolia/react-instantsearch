@@ -20,7 +20,7 @@ describe('createHTMLMarker', () => {
     const marker = new HTMLMarker(params);
 
     expect(marker.anchor).toEqual({ x: 0, y: 0 });
-    expect(marker.listeners).toEqual({});
+    expect(marker.subscriptions).toEqual([]);
     expect(marker.latLng).toEqual({ lat: 10, lng: 12 });
 
     expect(marker.element).toEqual(expect.any(HTMLDivElement));
@@ -180,35 +180,22 @@ describe('createHTMLMarker', () => {
       const googleReference = createFakeGoogleReference();
       const HTMLMarker = createHTMLMarker(googleReference);
       const params = createFakeParams();
-      const onClick = () => {};
-      const onMouseOver = () => {};
+      const remove = jest.fn();
 
       const marker = new HTMLMarker(params);
-
-      const removeEventListener = jest.spyOn(
-        marker.element,
-        'removeEventListener'
-      );
 
       // Simulate the parentNode
       const parentNode = document.createElement('div');
       parentNode.appendChild(marker.element);
 
-      // Simulate the listeners
-      marker.listeners = {
-        click: onClick,
-        mouseover: onMouseOver,
-      };
+      // Simulate the subscriptions
+      marker.subscriptions.push({ remove });
+      marker.subscriptions.push({ remove });
 
       marker.onRemove();
 
-      expect(marker.listeners).toBe(undefined);
-      expect(removeEventListener).toHaveBeenCalledTimes(2);
-      expect(removeEventListener).toHaveBeenCalledWith('click', onClick);
-      expect(removeEventListener).toHaveBeenCalledWith(
-        'mouseover',
-        onMouseOver
-      );
+      expect(marker.subscriptions).toEqual([]);
+      expect(remove).toHaveBeenCalledTimes(2);
     });
   });
 
@@ -227,7 +214,29 @@ describe('createHTMLMarker', () => {
 
       expect(addEventListener).toHaveBeenCalledTimes(1);
       expect(addEventListener).toHaveBeenCalledWith('click', onClick);
-      expect(marker.listeners).toEqual({ click: onClick });
+      expect(marker.subscriptions).toHaveLength(1);
+    });
+
+    it('expect to return a function to remove the listener', () => {
+      const googleReference = createFakeGoogleReference();
+      const HTMLMarker = createHTMLMarker(googleReference);
+      const params = createFakeParams();
+      const onClick = () => {};
+
+      const marker = new HTMLMarker(params);
+
+      const removeEventListener = jest.spyOn(
+        marker.element,
+        'removeEventListener'
+      );
+
+      const subscription = marker.addListener('click', onClick);
+
+      subscription.remove();
+
+      expect(removeEventListener).toHaveBeenCalledTimes(1);
+      expect(removeEventListener).toHaveBeenCalledWith('click', onClick);
+      expect(marker.subscriptions).toHaveLength(0);
     });
   });
 
