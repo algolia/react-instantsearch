@@ -13,7 +13,7 @@ external: true
 The `GeoSearch` widget displays the list of results from the search on a Google Maps. It also provides a way to search for results based on their position. The widget also provide some of the common GeoSearch patterns like search on map interaction.
 
 <div class="storybook-section">
-  <a class="btn btn-cta" href="http://localhost:6006/?selectedKind=&lt;Index&gt;&amp;selectedStory=default" target="_blank">
+  <a class="btn btn-cta" href="https://community.algolia.com/react-instantsearch/storybook?selectedKind=GeoSearch&selectedStory=default" target="_blank">
     See live example
   </a>
 </div>
