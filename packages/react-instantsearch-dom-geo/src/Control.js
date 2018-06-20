@@ -56,9 +56,9 @@ export class Control extends Component {
     return (
       <div className={cx('control')}>
         {isRefineOnMapMove || !hasMapMoveSinceLastRefine ? (
-          <label className="ais-GeoSearch-label">
+          <label className={cx('label')}>
             <input
-              className="ais-GeoSearch-input"
+              className={cx('input')}
               type="checkbox"
               checked={isRefineOnMapMove}
               onChange={toggleRefineOnMapMove}
@@ -66,10 +66,7 @@ export class Control extends Component {
             {translate('control')}
           </label>
         ) : (
-          <button
-            className="ais-GeoSearch-redo"
-            onClick={refineWithBoundingBox}
-          >
+          <button className={cx('redo')} onClick={refineWithBoundingBox}>
             {translate('redo')}
           </button>
         )}
