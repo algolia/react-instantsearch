@@ -16,9 +16,10 @@ export class Redo extends Component {
       isRefineOnMapMove: PropTypes.bool.isRequired,
       toggleRefineOnMapMove: PropTypes.func.isRequired,
       hasMapMoveSinceLastRefine: PropTypes.bool.isRequired,
+      refineWithInstance: PropTypes.func.isRequired,
     }).isRequired,
     [GOOGLE_MAPS_CONTEXT]: PropTypes.shape({
-      refineWithBoundingBox: PropTypes.func.isRequired,
+      instance: PropTypes.object.isRequired,
     }).isRequired,
   };
 
@@ -40,15 +41,18 @@ export class Redo extends Component {
 
   render() {
     const { translate } = this.props;
-    const { hasMapMoveSinceLastRefine } = this.getStateContext();
-    const { refineWithBoundingBox } = this.getGoogleMapsContext();
+    const { instance } = this.getGoogleMapsContext();
+    const {
+      hasMapMoveSinceLastRefine,
+      refineWithInstance,
+    } = this.getStateContext();
 
     return (
       <div className={cx('control')}>
         <button
           className={cx('redo', !hasMapMoveSinceLastRefine && 'redo--disabled')}
           disabled={!hasMapMoveSinceLastRefine}
-          onClick={refineWithBoundingBox}
+          onClick={() => refineWithInstance(instance)}
         >
           {translate('redo')}
         </button>

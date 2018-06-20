@@ -18,10 +18,9 @@ describe('GoogleMaps', () => {
       lng: 0,
     },
     mapOptions: {},
-    isRefineOnMapMove: true,
-    hasMapMoveSinceLastRefine: false,
-    refine: () => {},
-    setMapMoveSinceLastRefine: () => {},
+    onChange: () => {},
+    onIdle: () => {},
+    shouldUpdate: () => true,
     position: null,
     boundingBox: null,
   };
@@ -203,59 +202,7 @@ describe('GoogleMaps', () => {
   });
 
   describe('events', () => {
-    it('expect to trigger refine on "idle"', () => {
-      const mapInstance = createFakeMapInstance();
-      const google = createFakeGoogleReference({
-        mapInstance,
-      });
-
-      mapInstance.getBounds.mockImplementation(() => ({
-        getNorthEast: () => ({
-          toJSON: () => ({
-            lat: 10,
-            lng: 12,
-          }),
-        }),
-        getSouthWest: () => ({
-          toJSON: () => ({
-            lat: 12,
-            lng: 14,
-          }),
-        }),
-      }));
-
-      const props = {
-        ...defaultProps,
-        google,
-        refine: jest.fn(),
-        setMapMoveSinceLastRefine: jest.fn(),
-      };
-
-      const wrapper = shallow(<GoogleMaps {...props} />);
-
-      simulateMapReadyEvent(google);
-
-      simulateEvent(mapInstance, 'center_changed');
-      simulateEvent(mapInstance, 'idle');
-
-      expect(wrapper.instance().isPendingRefine).toBe(false);
-      expect(props.refine).toHaveBeenCalledTimes(1);
-      expect(props.refine).toHaveBeenCalledWith({
-        northEast: {
-          lat: 10,
-          lng: 12,
-        },
-        southWest: {
-          lat: 12,
-          lng: 14,
-        },
-      });
-
-      expect(props.setMapMoveSinceLastRefine).toHaveBeenCalledTimes(2); // with each event
-      expect(props.setMapMoveSinceLastRefine).toHaveBeenLastCalledWith(false);
-    });
-
-    it('expect to not trigger refine on "idle" when refine is not schedule', () => {
+    it('expect to trigger idle callback', () => {
       const mapInstance = createFakeMapInstance();
       const google = createFakeGoogleReference({
         mapInstance,
@@ -263,21 +210,25 @@ describe('GoogleMaps', () => {
 
       const props = {
         ...defaultProps,
+        onIdle: jest.fn(),
         google,
-        refine: jest.fn(),
       };
 
-      const wrapper = shallow(<GoogleMaps {...props} />);
+      shallow(<GoogleMaps {...props} />);
 
       simulateMapReadyEvent(google);
+
+      expect(props.onIdle).toHaveBeenCalledTimes(0);
 
       simulateEvent(mapInstance, 'idle');
 
-      expect(wrapper.instance().isPendingRefine).toBe(false);
-      expect(props.refine).toHaveBeenCalledTimes(0);
+      expect(props.onIdle).toHaveBeenCalledTimes(1);
+      expect(props.onIdle).toHaveBeenCalledWith({
+        instance: mapInstance,
+      });
     });
 
-    it('expect to not trigger refine on "idle" on programmatic interaction', () => {
+    it('expect to not trigger idle callback on programmatic interaction', () => {
       const mapInstance = createFakeMapInstance();
       const google = createFakeGoogleReference({
         mapInstance,
@@ -285,27 +236,26 @@ describe('GoogleMaps', () => {
 
       const props = {
         ...defaultProps,
+        onIdle: jest.fn(),
         google,
-        refine: jest.fn(),
       };
 
       const wrapper = shallow(<GoogleMaps {...props} />);
 
       simulateMapReadyEvent(google);
-
-      simulateEvent(mapInstance, 'center_changed');
 
       // Simulate fitBounds
       wrapper.instance().isUserInteraction = false;
 
+      expect(props.onIdle).toHaveBeenCalledTimes(0);
+
       simulateEvent(mapInstance, 'idle');
 
-      expect(wrapper.instance().isPendingRefine).toBe(true);
-      expect(props.refine).toHaveBeenCalledTimes(0);
+      expect(props.onIdle).toHaveBeenCalledTimes(0);
     });
 
     ['center_changed', 'zoom_changed', 'dragstart'].forEach(eventName => {
-      it(`expect to setMapMoveSinceLastRefine to true on "${eventName}"`, () => {
+      it(`expect to call change callback on "${eventName}"`, () => {
         const mapInstance = createFakeMapInstance();
         const google = createFakeGoogleReference({
           mapInstance,
@@ -313,7 +263,7 @@ describe('GoogleMaps', () => {
 
         const props = {
           ...defaultProps,
-          setMapMoveSinceLastRefine: jest.fn(),
+          onChange: jest.fn(),
           google,
         };
 
@@ -321,15 +271,14 @@ describe('GoogleMaps', () => {
 
         simulateMapReadyEvent(google);
 
-        expect(props.setMapMoveSinceLastRefine).toHaveBeenCalledTimes(0);
+        expect(props.onChange).toHaveBeenCalledTimes(0);
 
         simulateEvent(mapInstance, eventName);
 
-        expect(props.setMapMoveSinceLastRefine).toHaveBeenCalledTimes(1);
-        expect(props.setMapMoveSinceLastRefine).toHaveBeenCalledWith(true);
+        expect(props.onChange).toHaveBeenCalledTimes(1);
       });
 
-      it(`expect to schedule refine on "${eventName}"`, () => {
+      it(`expect to not call change callback on "${eventName}" with programmatic interaction`, () => {
         const mapInstance = createFakeMapInstance();
         const google = createFakeGoogleReference({
           mapInstance,
@@ -337,6 +286,7 @@ describe('GoogleMaps', () => {
 
         const props = {
           ...defaultProps,
+          onChange: jest.fn(),
           google,
         };
 
@@ -344,85 +294,14 @@ describe('GoogleMaps', () => {
 
         simulateMapReadyEvent(google);
 
-        expect(wrapper.instance().isPendingRefine).toBe(false);
-
-        simulateEvent(mapInstance, eventName);
-
-        expect(wrapper.instance().isPendingRefine).toBe(true);
-      });
-
-      it(`expect to not setMapMoveSinceLastRefine on "${eventName}" on programmatic interaction`, () => {
-        const mapInstance = createFakeMapInstance();
-        const google = createFakeGoogleReference({
-          mapInstance,
-        });
-
-        const props = {
-          ...defaultProps,
-          setMapMoveSinceLastRefine: jest.fn(),
-          google,
-        };
-
-        const wrapper = shallow(<GoogleMaps {...props} />);
-
-        simulateMapReadyEvent(google);
-
-        expect(props.setMapMoveSinceLastRefine).toHaveBeenCalledTimes(0);
+        expect(props.onChange).toHaveBeenCalledTimes(0);
 
         // Simulate fitBounds
         wrapper.instance().isUserInteraction = false;
 
         simulateEvent(mapInstance, eventName);
 
-        expect(props.setMapMoveSinceLastRefine).toHaveBeenCalledTimes(0);
-      });
-
-      it(`expect to not schedule refine on "${eventName}" on programmatic interaction`, () => {
-        const mapInstance = createFakeMapInstance();
-        const google = createFakeGoogleReference({
-          mapInstance,
-        });
-
-        const props = {
-          ...defaultProps,
-          google,
-        };
-
-        const wrapper = shallow(<GoogleMaps {...props} />);
-
-        simulateMapReadyEvent(google);
-
-        expect(wrapper.instance().isPendingRefine).toBe(false);
-
-        // Simulate fitBounds
-        wrapper.instance().isUserInteraction = false;
-
-        simulateEvent(mapInstance, eventName);
-
-        expect(wrapper.instance().isPendingRefine).toBe(false);
-      });
-
-      it(`expect to not schedule refine on "${eventName}" when refine on map move is disabled`, () => {
-        const mapInstance = createFakeMapInstance();
-        const google = createFakeGoogleReference({
-          mapInstance,
-        });
-
-        const props = {
-          ...defaultProps,
-          isRefineOnMapMove: false,
-          google,
-        };
-
-        const wrapper = shallow(<GoogleMaps {...props} />);
-
-        simulateMapReadyEvent(google);
-
-        expect(wrapper.instance().isPendingRefine).toBe(false);
-
-        simulateEvent(mapInstance, eventName);
-
-        expect(wrapper.instance().isPendingRefine).toBe(false);
+        expect(props.onChange).toHaveBeenCalledTimes(0);
       });
     });
   });
@@ -477,26 +356,6 @@ describe('GoogleMaps', () => {
         }),
       });
     });
-
-    it('expect to expose refineWithMapBounds through context', () => {
-      const mapInstance = createFakeMapInstance();
-      const google = createFakeGoogleReference({
-        mapInstance,
-      });
-
-      const props = {
-        ...defaultProps,
-        google,
-      };
-
-      const wrapper = shallow(<GoogleMaps {...props} />);
-
-      expect(wrapper.instance().getChildContext()).toEqual({
-        [GOOGLE_MAPS_CONTEXT]: expect.objectContaining({
-          refineWithBoundingBox: expect.any(Function),
-        }),
-      });
-    });
   });
 
   describe('update', () => {
@@ -530,6 +389,7 @@ describe('GoogleMaps', () => {
       expect(mapInstance.setCenter).toHaveBeenCalledTimes(0);
 
       wrapper.setProps({
+        boundingBoxPadding: 0,
         boundingBox: {
           northEast: {
             lat: 10,
@@ -631,7 +491,7 @@ describe('GoogleMaps', () => {
       expect(mapInstance.setCenter).toHaveBeenCalledTimes(0);
     });
 
-    it('expect to prevent the update when there is a pending refinement', () => {
+    it('expect to prevent the update shouldUpdate return false', () => {
       const mapInstance = createFakeMapInstance();
       const google = createFakeGoogleReference({
         mapInstance,
@@ -639,6 +499,7 @@ describe('GoogleMaps', () => {
 
       const props = {
         ...defaultProps,
+        shouldUpdate: () => false,
         google,
       };
 
@@ -650,39 +511,6 @@ describe('GoogleMaps', () => {
 
       simulateMapReadyEvent(google);
       simulateEvent(mapInstance, 'center_changed');
-
-      expect(mapInstance.fitBounds).toHaveBeenCalledTimes(0);
-
-      expect(mapInstance.setZoom).toHaveBeenCalledTimes(0);
-      expect(mapInstance.setCenter).toHaveBeenCalledTimes(0);
-
-      wrapper.setProps();
-
-      expect(mapInstance.fitBounds).toHaveBeenCalledTimes(0);
-
-      expect(mapInstance.setZoom).toHaveBeenCalledTimes(0);
-      expect(mapInstance.setCenter).toHaveBeenCalledTimes(0);
-    });
-
-    it('expect to prevent the update when the map has move since last refine', () => {
-      const mapInstance = createFakeMapInstance();
-      const google = createFakeGoogleReference({
-        mapInstance,
-      });
-
-      const props = {
-        ...defaultProps,
-        hasMapMoveSinceLastRefine: true,
-        google,
-      };
-
-      const wrapper = shallow(
-        <GoogleMaps {...props}>
-          <div>This is the children</div>
-        </GoogleMaps>
-      );
-
-      simulateMapReadyEvent(google);
 
       expect(mapInstance.fitBounds).toHaveBeenCalledTimes(0);
 
