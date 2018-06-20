@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { createClassNames } from 'react-instantsearch-dom';
 import { LatLngPropType } from './propTypes';
+import Connector from './Connector';
 import Provider from './Provider';
 import GoogleMaps from './GoogleMaps';
-
-const cx = createClassNames('GeoSearch');
 
 class GeoSearch extends Component {
   static propTypes = {
@@ -13,7 +11,6 @@ class GeoSearch extends Component {
     children: PropTypes.func.isRequired,
     initialZoom: PropTypes.number,
     initialPosition: LatLngPropType,
-    mapOptions: PropTypes.object,
   };
 
   static defaultProps = {
@@ -22,55 +19,57 @@ class GeoSearch extends Component {
       lat: 0,
       lng: 0,
     },
-    mapOptions: {},
   };
 
-  createBoundingBoxFromHits(hits) {
-    const { google } = this.props;
-
-    const latLngBounds = hits.reduce(
-      (acc, hit) => acc.extend(hit._geoloc),
-      new google.maps.LatLngBounds()
-    );
-
-    return {
-      northEast: latLngBounds.getNorthEast().toJSON(),
-      southWest: latLngBounds.getSouthWest().toJSON(),
-    };
-  }
-
-  renderProviderChildren = ({ hits, currentRefinement, position }) => {
+  renderChildrenWithBoundFunction = ({ hits, position, ...rest }) => {
     const {
       google,
+      children,
       initialZoom,
       initialPosition,
-      mapOptions,
-      children,
+      ...mapOptions
     } = this.props;
 
-    const boundingBox =
-      !currentRefinement && Boolean(hits.length)
-        ? this.createBoundingBoxFromHits(hits)
-        : currentRefinement;
-
     return (
-      <GoogleMaps
-        testID="GoogleMaps"
-        cx={cx}
+      <Provider
+        {...rest}
+        testID="Provider"
         google={google}
-        initialZoom={initialZoom}
-        initialPosition={initialPosition}
-        mapOptions={mapOptions}
-        boundingBox={boundingBox}
+        hits={hits}
         position={position}
       >
-        {children({ hits })}
-      </GoogleMaps>
+        {({
+          boundingBox,
+          boundingBoxPadding,
+          onChange,
+          onIdle,
+          shouldUpdate,
+        }) => (
+          <GoogleMaps
+            testID="GoogleMaps"
+            google={google}
+            initialZoom={initialZoom}
+            initialPosition={position || initialPosition}
+            mapOptions={mapOptions}
+            boundingBox={boundingBox}
+            boundingBoxPadding={boundingBoxPadding}
+            onChange={onChange}
+            onIdle={onIdle}
+            shouldUpdate={shouldUpdate}
+          >
+            {children({ hits })}
+          </GoogleMaps>
+        )}
+      </Provider>
     );
   };
 
   render() {
-    return <Provider testID="Provider">{this.renderProviderChildren}</Provider>;
+    return (
+      <Connector testID="Connector">
+        {this.renderChildrenWithBoundFunction}
+      </Connector>
+    );
   }
 }
 

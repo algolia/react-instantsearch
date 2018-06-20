@@ -1,14 +1,29 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
-import { LatLngPropType } from './propTypes';
+import {
+  registerEvents,
+  createListenersPropTypes,
+  createFilterProps,
+} from './utils';
+import { GeolocHitPropType } from './propTypes';
 import { GOOGLE_MAPS_CONTEXT } from './GoogleMaps';
+
+const eventTypes = {
+  onClick: 'click',
+  onDoubleClick: 'dblclick',
+  onMouseDown: 'mousedown',
+  onMouseOut: 'mouseout',
+  onMouseOver: 'mouseover',
+  onMouseUp: 'mouseup',
+};
+
+const excludes = ['children'].concat(Object.keys(eventTypes));
+const filterProps = createFilterProps(excludes);
 
 class Marker extends Component {
   static propTypes = {
-    hit: PropTypes.shape({
-      _geoloc: LatLngPropType.isRequired,
-    }).isRequired,
-    options: PropTypes.object,
+    ...createListenersPropTypes(eventTypes),
+    hit: GeolocHitPropType.isRequired,
   };
 
   static contextTypes = {
@@ -18,25 +33,35 @@ class Marker extends Component {
     }),
   };
 
-  static defaultProps = {
-    options: {},
-  };
-
   componentDidMount() {
-    const { hit, options } = this.props;
+    const { hit, ...props } = this.props;
     const { google, instance } = this.context[GOOGLE_MAPS_CONTEXT];
 
     this.instance = new google.maps.Marker({
+      ...filterProps(props),
       map: instance,
       position: hit._geoloc,
-      ...options,
     });
+
+    this.removeEventsListeners = registerEvents(
+      eventTypes,
+      this.props,
+      this.instance
+    );
+  }
+
+  componentDidUpdate() {
+    this.removeEventsListeners();
+
+    this.removeEventsListeners = registerEvents(
+      eventTypes,
+      this.props,
+      this.instance
+    );
   }
 
   componentWillUnmount() {
-    if (this.instance) {
-      this.instance.setMap(null);
-    }
+    this.instance.setMap(null);
   }
 
   render() {
