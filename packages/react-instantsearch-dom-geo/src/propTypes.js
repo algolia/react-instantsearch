@@ -9,3 +9,7 @@ export const BoundingBoxPropType = PropTypes.shape({
   northEast: LatLngPropType.isRequired,
   southWest: LatLngPropType.isRequired,
 });
+
+export const GeolocHitPropType = PropTypes.shape({
+  _geoloc: LatLngPropType.isRequired,
+});

@@ -1,19 +1,23 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { createClassNames } from 'react-instantsearch-dom';
 import { LatLngPropType, BoundingBoxPropType } from './propTypes';
+
+const cx = createClassNames('GeoSearch');
 
 export const GOOGLE_MAPS_CONTEXT = '__ais_geo_search__google_maps__';
 
 class GoogleMaps extends Component {
   static propTypes = {
-    cx: PropTypes.func.isRequired,
     google: PropTypes.object.isRequired,
     initialZoom: PropTypes.number.isRequired,
     initialPosition: LatLngPropType.isRequired,
     mapOptions: PropTypes.object.isRequired,
-    refine: PropTypes.func.isRequired,
-    position: LatLngPropType,
+    onChange: PropTypes.func.isRequired,
+    onIdle: PropTypes.func.isRequired,
+    shouldUpdate: PropTypes.func.isRequired,
     boundingBox: BoundingBoxPropType,
+    boundingBoxPadding: PropTypes.number,
     children: PropTypes.node,
   };
 
@@ -72,12 +76,13 @@ class GoogleMaps extends Component {
       initialZoom,
       initialPosition,
       boundingBox,
-      position,
+      boundingBoxPadding,
+      shouldUpdate,
     } = this.props;
 
     const { isMapReady } = this.state;
 
-    if (!isMapReady || this.isPendingRefine) {
+    if (!isMapReady || !shouldUpdate()) {
       return;
     }
 
@@ -88,7 +93,7 @@ class GoogleMaps extends Component {
             boundingBox.southWest,
             boundingBox.northEast
           ),
-          0
+          boundingBoxPadding
         );
       });
 
@@ -96,11 +101,9 @@ class GoogleMaps extends Component {
     }
 
     if (!boundingBox) {
-      const initialMapPosition = position || initialPosition;
-
       this.lockUserInteration(() => {
         this.instance.setZoom(initialZoom);
-        this.instance.setCenter(initialMapPosition);
+        this.instance.setCenter(initialPosition);
       });
 
       return;
@@ -124,7 +127,7 @@ class GoogleMaps extends Component {
 
     const onChange = () => {
       if (this.isUserInteraction) {
-        this.isPendingRefine = true;
+        this.props.onChange();
       }
     };
 
@@ -134,10 +137,10 @@ class GoogleMaps extends Component {
 
     this.listeners.push(
       this.instance.addListener('idle', () => {
-        if (this.isUserInteraction && this.isPendingRefine) {
-          this.isPendingRefine = false;
-
-          this.refineWithBoundingBox();
+        if (this.isUserInteraction) {
+          this.props.onIdle({
+            instance: this.instance,
+          });
         }
       })
     );
@@ -149,19 +152,8 @@ class GoogleMaps extends Component {
     this.isUserInteraction = true;
   }
 
-  refineWithBoundingBox() {
-    const { refine } = this.props;
-
-    const bounds = this.instance.getBounds();
-
-    refine({
-      northEast: bounds.getNorthEast().toJSON(),
-      southWest: bounds.getSouthWest().toJSON(),
-    });
-  }
-
   render() {
-    const { cx, children } = this.props;
+    const { children } = this.props;
     const { isMapReady } = this.state;
 
     return (
