@@ -10,7 +10,7 @@ external: true
 
 ## Description
 
-The `GeoSearch` widget displays the list of results from the search on a Google Maps. It also provides a way to search for results based on their position. The widget also provide some of the common GeoSearch patterns like search on map interaction.
+The `GeoSearch` widget displays the list of results from the search on a Google Maps. It also provides a way to search for results based on their position. The widget provides some of the common GeoSearch patterns like search on map interaction.
 
 <div class="storybook-section">
   <a class="btn btn-cta" href="https://community.algolia.com/react-instantsearch/storybook?selectedKind=GeoSearch&selectedStory=default" target="_blank">
@@ -20,17 +20,17 @@ The `GeoSearch` widget displays the list of results from the search on a Google 
 
 ## Requirements
 
-The API of this widget is a bit different than the others that you can find in React InstantSearch. The API is component driven rather than options driven. We choose the former because it brings more flexibility to the widget. Since the geo search pattern is not a use case for every applications we decided to ship the widget in a separate package. Be sure to have it install before using it:
+The API of this widget is a bit different than the others that you can find in React InstantSearch. The API is component driven rather than options driven. We chose the former because it brings more flexibility to the widget. Since the geo search pattern is not a use case for every applications we decided to ship the widget in a separate package. Be sure to install it before using it:
 
 ```shell
 yarn add react-instantsearch-dom-maps
 ```
 
-Note that the GeoSearch widget uses the [geosearch](https://www.algolia.com/doc/guides/searching/geo-search) capabilities of Algolia. Your hits **must** have a `_geoloc` attribute in order to be available in the render prop.
+The GeoSearch widget uses the [geo search](https://www.algolia.com/doc/guides/searching/geo-search) capabilities of Algolia. Your hits **must** have a `_geoloc` attribute in order to be available in the render prop.
 
 Currently, the feature is not compatible with multiple values in the `_geoloc` attribute (e.g. a restaurant with multiple locations). In that case you can duplicate your records and use the [distinct](https://www.algolia.com/doc/guides/ranking/distinct) feature of Algolia to only retrieve unique results.
 
-You are also responsible for loading the Google Maps library. We provide a component to load the library ([`<GoogleMapsLoader />`](/widgets/GeoSearch.html#googlemapsloader)) but its usage **is not required to use the geo widget**. You can use any strategy you want to load the Google Maps library. You can find more informations about that in [the Google Maps documentation](https://developers.google.com/maps/documentation/javascript/tutorial).
+You are also responsible for loading the Google Maps library. We provide a component to load the library ([`<GoogleMapsLoader />`](/widgets/GeoSearch.html#googlemapsloader)) but its usage **is not required to use the geo widget**. You can use any strategy you want to load Google Maps. You can find more informations about that in [the Google Maps documentation](https://developers.google.com/maps/documentation/javascript/tutorial).
 
 Don’t forget to explicitly set the `height` of the map container, otherwise it won’t be shown (it’s a requirement of Google Maps).
 
@@ -119,7 +119,7 @@ const App = () => (
     <tr>
       <td colspan="3">
         <p>
-          The render function that takes an object as argument with the <code>hits</code> inside.
+          The render function takes an object as argument with the <code>hits</code> inside.
         </p>
       </td>
     </tr>
@@ -161,7 +161,7 @@ This component has no translations.
 <!-- Avoid the huge margin on the pseudo element -->
 <h3 class="sub-component-title">Decription</h3>
 
-This component is a wapper around [`google.maps.Marker`](https://developers.google.com/maps/documentation/javascript/reference/3.exp/marker#MarkerOptions), all the options avaible on the Marker class can be provided as props. This component cannot render any children components. See [`<CustomMarker />`](/widgets/GeoSearch.html#custommarker) for this kind of behaviour.
+This component is a wapper around [`google.maps.Marker`](https://developers.google.com/maps/documentation/javascript/reference/3.exp/marker#MarkerOptions), all the options avaible on the Marker class can be provided as props. This component cannot render any children components. See [`<CustomMarker />`](/widgets/GeoSearch.html#custommarker) for this behaviour.
 
 Currently the component does not support the update of the options. Once the component is rendered changing the props won't update the marker options.
 
@@ -459,7 +459,7 @@ This component has no translations.
 <!-- Avoid the huge margin on the pseudo element -->
 <h3 class="sub-component-title">Decription</h3>
 
-This component allow the user to control the different strategy for the refinement (enable / disable refine on map move).
+This component allows the user to control the different strategy for the refinement (enable / disable refine on map move).
 
 <!-- Avoid the huge margin on the pseudo element -->
 <h3 class="sub-component-title">Usage</h3>
