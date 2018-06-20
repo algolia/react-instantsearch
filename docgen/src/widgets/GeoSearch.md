@@ -496,20 +496,7 @@ const App = () => (
 <!-- Avoid the huge margin on the pseudo element -->
 <h3 class="sub-component-title">Props</h3>
 
-<table class="api">
-  <tbody>
-    <tr>
-      <td>enableRefineOnMapMove</td>
-      <td>Type: <code>boolean</code></td>
-      <td>Default: <code>true</code></td>
-    </tr>
-    <tr>
-      <td colspan="3">
-        <p>If true, refine will be triggered as you move the map.</p>
-      </td>
-    </tr>
-  </tbody>
-</table>
+The component has no props.
 
 <!-- Avoid the huge margin on the pseudo element -->
 <h3 class="sub-component-title">CSS classes</h3>
