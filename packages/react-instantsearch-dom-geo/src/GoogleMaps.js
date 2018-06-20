@@ -13,12 +13,11 @@ class GoogleMaps extends Component {
     initialZoom: PropTypes.number.isRequired,
     initialPosition: LatLngPropType.isRequired,
     mapOptions: PropTypes.object.isRequired,
-    isRefineOnMapMove: PropTypes.bool.isRequired,
-    hasMapMoveSinceLastRefine: PropTypes.bool.isRequired,
-    refine: PropTypes.func.isRequired,
-    setMapMoveSinceLastRefine: PropTypes.func.isRequired,
-    position: LatLngPropType,
+    onChange: PropTypes.func.isRequired,
+    onIdle: PropTypes.func.isRequired,
+    shouldUpdate: PropTypes.func.isRequired,
     boundingBox: BoundingBoxPropType,
+    boundingBoxPadding: PropTypes.number,
     children: PropTypes.node,
   };
 
@@ -26,7 +25,6 @@ class GoogleMaps extends Component {
     [GOOGLE_MAPS_CONTEXT]: PropTypes.shape({
       google: PropTypes.object,
       instance: PropTypes.object,
-      refineWithBoundingBox: PropTypes.func,
     }),
   };
 
@@ -44,7 +42,6 @@ class GoogleMaps extends Component {
     return {
       [GOOGLE_MAPS_CONTEXT]: {
         instance: this.instance,
-        refineWithBoundingBox: this.refineWithBoundingBox,
         google,
       },
     };
@@ -78,14 +75,14 @@ class GoogleMaps extends Component {
       google,
       initialZoom,
       initialPosition,
-      hasMapMoveSinceLastRefine,
       boundingBox,
-      position,
+      boundingBoxPadding,
+      shouldUpdate,
     } = this.props;
 
     const { isMapReady } = this.state;
 
-    if (!isMapReady || this.isPendingRefine || hasMapMoveSinceLastRefine) {
+    if (!isMapReady || !shouldUpdate()) {
       return;
     }
 
@@ -96,7 +93,7 @@ class GoogleMaps extends Component {
             boundingBox.southWest,
             boundingBox.northEast
           ),
-          0
+          boundingBoxPadding
         );
       });
 
@@ -104,11 +101,9 @@ class GoogleMaps extends Component {
     }
 
     if (!boundingBox) {
-      const initialMapPosition = position || initialPosition;
-
       this.lockUserInteration(() => {
         this.instance.setZoom(initialZoom);
-        this.instance.setCenter(initialMapPosition);
+        this.instance.setCenter(initialPosition);
       });
 
       return;
@@ -131,14 +126,8 @@ class GoogleMaps extends Component {
     }));
 
     const onChange = () => {
-      const { isRefineOnMapMove, setMapMoveSinceLastRefine } = this.props;
-
       if (this.isUserInteraction) {
-        setMapMoveSinceLastRefine(true);
-
-        if (isRefineOnMapMove) {
-          this.isPendingRefine = true;
-        }
+        this.props.onChange();
       }
     };
 
@@ -148,10 +137,10 @@ class GoogleMaps extends Component {
 
     this.listeners.push(
       this.instance.addListener('idle', () => {
-        if (this.isUserInteraction && this.isPendingRefine) {
-          this.isPendingRefine = false;
-
-          this.refineWithBoundingBox();
+        if (this.isUserInteraction) {
+          this.props.onIdle({
+            instance: this.instance,
+          });
         }
       })
     );
@@ -162,21 +151,6 @@ class GoogleMaps extends Component {
     functionThatAltersTheMapPosition();
     this.isUserInteraction = true;
   }
-
-  refineWithBoundingBox = () => {
-    const { refine, setMapMoveSinceLastRefine } = this.props;
-
-    if (this.instance) {
-      const bounds = this.instance.getBounds();
-
-      refine({
-        northEast: bounds.getNorthEast().toJSON(),
-        southWest: bounds.getSouthWest().toJSON(),
-      });
-
-      setMapMoveSinceLastRefine(false);
-    }
-  };
 
   render() {
     const { children } = this.props;

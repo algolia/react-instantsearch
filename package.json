@@ -73,6 +73,7 @@
     "lodash.orderby": "4.6.0",
     "mversion": "1.10.1",
     "netlify-cli": "1.2.2",
+    "places.js": "1.7.3",
     "prettier": "1.13.5",
     "prop-types": "15.6.1",
     "react": "16.4.1",

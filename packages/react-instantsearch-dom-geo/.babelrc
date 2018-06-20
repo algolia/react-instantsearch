@@ -15,6 +15,9 @@
         ],
         "react",
         "stage-2"
+      ],
+      "plugins": [
+        "lodash"
       ]
     },
     "test": {
@@ -32,6 +35,9 @@
         ],
         "react",
         "stage-2"
+      ],
+      "plugins": [
+        "lodash"
       ]
     },
     "production": {
@@ -49,6 +55,9 @@
         ],
         "react",
         "stage-2"
+      ],
+      "plugins": [
+        "lodash"
       ]
     },
     "es": {
@@ -67,6 +76,9 @@
         ],
         "react",
         "stage-2"
+      ],
+      "plugins": [
+        "lodash"
       ]
     }
   }

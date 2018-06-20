@@ -6,9 +6,10 @@ import { GOOGLE_MAPS_CONTEXT } from './GoogleMaps';
 
 const cx = createClassNames('GeoSearch');
 
-export class Redo extends Component {
+export class Control extends Component {
   static propTypes = {
     translate: PropTypes.func.isRequired,
+    enableRefineOnMapMove: PropTypes.bool,
   };
 
   static contextTypes = {
@@ -23,6 +24,10 @@ export class Redo extends Component {
     }).isRequired,
   };
 
+  static defaultProps = {
+    enableRefineOnMapMove: true,
+  };
+
   getStateContext() {
     return this.context[STATE_CONTEXT];
   }
@@ -32,9 +37,10 @@ export class Redo extends Component {
   }
 
   componentDidMount() {
+    const { enableRefineOnMapMove } = this.props;
     const { isRefineOnMapMove, toggleRefineOnMapMove } = this.getStateContext();
 
-    if (isRefineOnMapMove) {
+    if (!enableRefineOnMapMove && isRefineOnMapMove) {
       toggleRefineOnMapMove();
     }
   }
@@ -43,24 +49,38 @@ export class Redo extends Component {
     const { translate } = this.props;
     const { instance } = this.getGoogleMapsContext();
     const {
+      isRefineOnMapMove,
       hasMapMoveSinceLastRefine,
+      toggleRefineOnMapMove,
       refineWithInstance,
     } = this.getStateContext();
 
     return (
       <div className={cx('control')}>
-        <button
-          className={cx('redo', !hasMapMoveSinceLastRefine && 'redo--disabled')}
-          disabled={!hasMapMoveSinceLastRefine}
-          onClick={() => refineWithInstance(instance)}
-        >
-          {translate('redo')}
-        </button>
+        {isRefineOnMapMove || !hasMapMoveSinceLastRefine ? (
+          <label className={cx('label')}>
+            <input
+              className={cx('input')}
+              type="checkbox"
+              checked={isRefineOnMapMove}
+              onChange={toggleRefineOnMapMove}
+            />
+            {translate('control')}
+          </label>
+        ) : (
+          <button
+            className={cx('redo')}
+            onClick={() => refineWithInstance(instance)}
+          >
+            {translate('redo')}
+          </button>
+        )}
       </div>
     );
   }
 }
 
 export default translatable({
+  control: 'Search as I move the map',
   redo: 'Redo search here',
-})(Redo);
+})(Control);
