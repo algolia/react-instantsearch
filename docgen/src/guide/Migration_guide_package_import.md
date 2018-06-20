@@ -30,7 +30,7 @@ This split also allows using the correct [`peerDependencies`](https://nodejs.org
 - `react-instantsearch-dom`: has a peer dependency on `react ≥ 15.3.0 < 17` and `react-dom ≥ 15.3.0 < 17`
 - `react-instantsearch-native`: has a peer dependency on `react ≥ 15.3.0 < 17` and `react-native ≥ 0.32.0`
 
-As we this new architecture is backward compatible, we encourage all our users to update to the new package. We recommend doing so because the library is correctly tree shaken with [Webpack](https://webpack.js.org) ≥ 4. Here are some metrics about the two different versions:
+As this new architecture is backward compatible, we encourage all our users to update to the new package. We recommend doing so because the library is correctly tree shaken with [Webpack](https://webpack.js.org) ≥ 4. Here are some metrics about the two different versions:
 
 |    | **Create React App + Webpack 3** | **Webpack 4**
 | - | :---: | :---: |
