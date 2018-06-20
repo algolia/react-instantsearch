@@ -64,19 +64,5 @@
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
     ]
-  },
-  "bundlesize": [
-    {
-      "path": "dist/umd/Core.min.js",
-      "maxSize": "8 kB"
-    },
-    {
-      "path": "dist/umd/Connectors.min.js",
-      "maxSize": "40 kB"
-    },
-    {
-      "path": "dist/umd/Dom.min.js",
-      "maxSize": "63 kB"
-    }
-  ]
+  }
 }
