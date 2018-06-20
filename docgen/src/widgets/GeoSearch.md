@@ -153,6 +153,16 @@ const App = () => (
         <p>If false, this map is for display purposes only, not for refining the search</p>
       </td>
     </tr>
+    <tr>
+      <td>enableRefineOnMapMove</td>
+      <td>Type: <code>boolean</code></td>
+      <td>Default: <code>true</code></td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <p>If true, refine will be triggered as you move the map.</p>
+      </td>
+    </tr>
   </tbody>
 </table>
 
