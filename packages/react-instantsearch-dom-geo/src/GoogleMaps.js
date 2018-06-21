@@ -94,17 +94,11 @@ class GoogleMaps extends Component {
           boundingBoxPadding
         );
       });
-
-      return;
-    }
-
-    if (!boundingBox) {
+    } else {
       this.lockUserInteration(() => {
         this.instance.setZoom(initialZoom);
         this.instance.setCenter(initialPosition);
       });
-
-      return;
     }
   }
 
