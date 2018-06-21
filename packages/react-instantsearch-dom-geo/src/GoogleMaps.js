@@ -80,9 +80,7 @@ class GoogleMaps extends Component {
       shouldUpdate,
     } = this.props;
 
-    const { isMapReady } = this.state;
-
-    if (!isMapReady || !shouldUpdate()) {
+    if (!shouldUpdate()) {
       return;
     }
 

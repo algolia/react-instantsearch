@@ -461,36 +461,6 @@ describe('GoogleMaps', () => {
       });
     });
 
-    it('expect to prevent the update when the map is not ready', () => {
-      const mapInstance = createFakeMapInstance();
-      const google = createFakeGoogleReference({
-        mapInstance,
-      });
-
-      const props = {
-        ...defaultProps,
-        google,
-      };
-
-      const wrapper = shallow(
-        <GoogleMaps {...props}>
-          <div>This is the children</div>
-        </GoogleMaps>
-      );
-
-      expect(mapInstance.fitBounds).toHaveBeenCalledTimes(0);
-
-      expect(mapInstance.setZoom).toHaveBeenCalledTimes(0);
-      expect(mapInstance.setCenter).toHaveBeenCalledTimes(0);
-
-      wrapper.setProps();
-
-      expect(mapInstance.fitBounds).toHaveBeenCalledTimes(0);
-
-      expect(mapInstance.setZoom).toHaveBeenCalledTimes(0);
-      expect(mapInstance.setCenter).toHaveBeenCalledTimes(0);
-    });
-
     it('expect to prevent the update shouldUpdate return false', () => {
       const mapInstance = createFakeMapInstance();
       const google = createFakeGoogleReference({
