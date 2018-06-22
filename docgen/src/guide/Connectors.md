@@ -31,7 +31,7 @@ components which are called the **provided props**.
 
 If you want to create your own search box, you will need to use the [`connectSearchBox()`](connectors/connectSearchBox.html) connector.
 
-Note that this connected component will only work when rendered as a child or a descendant of the [`<InstantSearch>`](\<InstantSearch\>.html) component.
+Note that this connected component will only work when rendered as a child or a descendant of the [`<InstantSearch>`](guide/\<InstantSearch\>.html) component.
 
 ```jsx
 import { connectSearchBox } from 'react-instantsearch-dom';
