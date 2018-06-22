@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
-import { InstantSearch, Configure, Index } from 'react-instantsearch/dom';
+import {
+  InstantSearch,
+  Configure,
+  Index,
+  Highlight,
+} from 'react-instantsearch/dom';
 import { connectAutoComplete } from 'react-instantsearch/connectors';
 import Autosuggest from 'react-autosuggest';
 
@@ -40,11 +45,7 @@ class Example extends Component {
   }
 
   renderSuggestion(hit) {
-    return (
-      <div>
-        <div>{hit.name}</div>
-      </div>
-    );
+    return <Highlight attribute="name" hit={hit} tagName="mark" />;
   }
 
   renderSectionTitle(section) {
