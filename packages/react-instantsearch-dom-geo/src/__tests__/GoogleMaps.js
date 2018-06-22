@@ -461,7 +461,7 @@ describe('GoogleMaps', () => {
       });
     });
 
-    it('expect to prevent the update shouldUpdate return false', () => {
+    it('expect to prevent the map update when shouldUpdate return false', () => {
       const mapInstance = createFakeMapInstance();
       const google = createFakeGoogleReference({
         mapInstance,
@@ -493,6 +493,36 @@ describe('GoogleMaps', () => {
 
       expect(mapInstance.setZoom).toHaveBeenCalledTimes(0);
       expect(mapInstance.setCenter).toHaveBeenCalledTimes(0);
+    });
+
+    it('expect to still render the children when shouldUpdate return false', () => {
+      const mapInstance = createFakeMapInstance();
+      const google = createFakeGoogleReference({
+        mapInstance,
+      });
+
+      const props = {
+        ...defaultProps,
+        shouldUpdate: () => false,
+        google,
+      };
+
+      const wrapper = shallow(
+        <GoogleMaps {...props}>
+          <div>This is the children</div>
+        </GoogleMaps>
+      );
+
+      simulateMapReadyEvent(google);
+      simulateEvent(mapInstance, 'center_changed');
+
+      expect(wrapper).toMatchSnapshot();
+
+      wrapper.setProps({
+        children: <div>This is the children updated</div>,
+      });
+
+      expect(wrapper).toMatchSnapshot();
     });
   });
 
