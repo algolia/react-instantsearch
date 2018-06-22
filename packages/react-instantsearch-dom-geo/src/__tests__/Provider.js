@@ -401,7 +401,7 @@ describe('Provider', () => {
   });
 
   describe('shouldUpdate', () => {
-    it('expect to return true when there is no pending refinement and the map has not moved', () => {
+    it('expect to return true on mount when conditions are fulfilled', () => {
       const children = jest.fn(x => x);
 
       const props = {
@@ -409,6 +409,35 @@ describe('Provider', () => {
       };
 
       shallow(<Provider {...props}>{children}</Provider>);
+
+      const actual = lastRenderArgs(children).shouldUpdate();
+
+      expect(actual).toBe(true);
+    });
+
+    it('expect to return true on update when conditions are fulfilled', () => {
+      const children = jest.fn(x => x);
+
+      const props = {
+        ...defaultProps,
+      };
+
+      const wrapper = shallow(<Provider {...props}>{children}</Provider>, {
+        disableLifecycleMethods: true,
+      });
+
+      wrapper.setProps({
+        currentRefinement: {
+          northEast: {
+            lat: 10,
+            lng: 12,
+          },
+          southWest: {
+            lat: 12,
+            lng: 14,
+          },
+        },
+      });
 
       const actual = lastRenderArgs(children).shouldUpdate();
 
@@ -440,6 +469,33 @@ describe('Provider', () => {
       };
 
       shallow(<Provider {...props}>{children}</Provider>);
+
+      const actual = lastRenderArgs(children).shouldUpdate();
+
+      expect(actual).toBe(false);
+    });
+
+    it("expect to return false when the boundingBox doesn't change", () => {
+      const children = jest.fn(x => x);
+      const currentRefinement = {
+        northEast: {
+          lat: 10,
+          lng: 12,
+        },
+        southWest: {
+          lat: 12,
+          lng: 14,
+        },
+      };
+
+      const props = {
+        ...defaultProps,
+        currentRefinement,
+      };
+
+      const wrapper = shallow(<Provider {...props}>{children}</Provider>);
+
+      wrapper.setProps({ currentRefinement });
 
       const actual = lastRenderArgs(children).shouldUpdate();
 

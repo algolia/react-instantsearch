@@ -31,6 +31,8 @@ class Provider extends Component {
   };
 
   isPendingRefine = false;
+  boundingBox = null;
+  previousBoundingBox = null;
 
   getChildContext() {
     const {
@@ -72,6 +74,8 @@ class Provider extends Component {
     if (positionChanged || currentRefinementChanged) {
       setMapMoveSinceLastRefine(false);
     }
+
+    this.previousBoundingBox = this.boundingBox;
   }
 
   createBoundingBoxFromHits(hits) {
@@ -126,7 +130,11 @@ class Provider extends Component {
   shouldUpdate = () => {
     const { hasMapMoveSinceLastRefine } = this.props;
 
-    return !this.isPendingRefine && !hasMapMoveSinceLastRefine;
+    return (
+      !this.isPendingRefine &&
+      !hasMapMoveSinceLastRefine &&
+      !isEqual(this.boundingBox, this.previousBoundingBox)
+    );
   };
 
   render() {
@@ -142,6 +150,8 @@ class Provider extends Component {
       !currentRefinement && Boolean(hits.length)
         ? this.createBoundingBoxFromHits(hits)
         : currentRefinement;
+
+    this.boundingBox = boundingBox;
 
     return children({
       onChange: this.onChange,
