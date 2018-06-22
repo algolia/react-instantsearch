@@ -34,32 +34,59 @@ const initialPosition = {
   lng: -74.01,
 };
 
-stories.addWithJSX(
-  'default',
-  () => (
-    <WrapWithHits indexName="airbnb" linkedStoryGroup="GeoSearch">
-      <Configure aroundLatLngViaIP hitsPerPage={20} />
+stories
+  .addWithJSX(
+    'default',
+    () => (
+      <WrapWithHits indexName="airbnb" linkedStoryGroup="GeoSearch">
+        <Configure aroundLatLngViaIP hitsPerPage={20} />
 
-      <Container>
-        <GoogleMapsLoader apiKey={apiKey}>
-          {google => (
-            <GeoSearch google={google}>
-              {({ hits }) => (
-                <Fragment>
-                  {hits.map(hit => <Marker key={hit.objectID} hit={hit} />)}
-                </Fragment>
-              )}
-            </GeoSearch>
-          )}
-        </GoogleMapsLoader>
-      </Container>
-    </WrapWithHits>
-  ),
-  {
-    displayName,
-    filterProps,
-  }
-);
+        <Container>
+          <GoogleMapsLoader apiKey={apiKey}>
+            {google => (
+              <GeoSearch google={google}>
+                {({ hits }) => (
+                  <Fragment>
+                    {hits.map(hit => <Marker key={hit.objectID} hit={hit} />)}
+                  </Fragment>
+                )}
+              </GeoSearch>
+            )}
+          </GoogleMapsLoader>
+        </Container>
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
+    'with refine disabled',
+    () => (
+      <WrapWithHits indexName="airbnb" linkedStoryGroup="GeoSearch">
+        <Configure aroundLatLngViaIP hitsPerPage={20} />
+
+        <Container>
+          <GoogleMapsLoader apiKey={apiKey}>
+            {google => (
+              <GeoSearch google={google} enableRefine={false}>
+                {({ hits }) => (
+                  <Fragment>
+                    {hits.map(hit => <Marker key={hit.objectID} hit={hit} />)}
+                  </Fragment>
+                )}
+              </GeoSearch>
+            )}
+          </GoogleMapsLoader>
+        </Container>
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  );
 
 // With Places
 stories.addWithJSX(
