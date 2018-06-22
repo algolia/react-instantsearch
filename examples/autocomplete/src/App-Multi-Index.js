@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
   InstantSearch,
   Configure,
@@ -22,6 +23,12 @@ const App = () => (
 );
 
 class Example extends Component {
+  static propTypes = {
+    hits: PropTypes.arrayOf(PropTypes.object).isRequired,
+    currentRefinement: PropTypes.string.isRequired,
+    refine: PropTypes.func.isRequired,
+  };
+
   state = {
     value: this.props.currentRefinement,
   };
