@@ -16,6 +16,7 @@ describe('Provider', () => {
     initialPosition: { lat: 0, lng: 0 },
     isRefineOnMapMove: true,
     hasMapMoveSinceLastRefine: false,
+    isRefineEnable: true,
     refine: () => {},
     toggleRefineOnMapMove: () => {},
     setMapMoveSinceLastRefine: () => {},
@@ -283,6 +284,25 @@ describe('Provider', () => {
       lastRenderArgs(children).onChange();
 
       expect(wrapper.instance().isPendingRefine).toBe(false);
+    });
+
+    it('expect to be a noop when refine is disabled', () => {
+      const children = jest.fn(x => x);
+
+      const props = {
+        ...defaultProps,
+        isRefineEnable: false,
+        setMapMoveSinceLastRefine: jest.fn(),
+      };
+
+      const wrapper = shallow(<Provider {...props}>{children}</Provider>);
+
+      expect(wrapper.instance().isPendingRefine).toBe(false);
+
+      lastRenderArgs(children).onChange();
+
+      expect(wrapper.instance().isPendingRefine).toBe(false);
+      expect(props.setMapMoveSinceLastRefine).not.toHaveBeenCalled();
     });
   });
 

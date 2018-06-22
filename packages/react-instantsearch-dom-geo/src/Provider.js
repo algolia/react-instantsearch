@@ -11,6 +11,7 @@ class Provider extends Component {
     hits: PropTypes.arrayOf(PropTypes.object).isRequired,
     isRefineOnMapMove: PropTypes.bool.isRequired,
     hasMapMoveSinceLastRefine: PropTypes.bool.isRequired,
+    isRefineEnable: PropTypes.bool.isRequired,
     refine: PropTypes.func.isRequired,
     toggleRefineOnMapMove: PropTypes.func.isRequired,
     setMapMoveSinceLastRefine: PropTypes.func.isRequired,
@@ -99,12 +100,18 @@ class Provider extends Component {
   };
 
   onChange = () => {
-    const { isRefineOnMapMove, setMapMoveSinceLastRefine } = this.props;
+    const {
+      isRefineOnMapMove,
+      isRefineEnable,
+      setMapMoveSinceLastRefine,
+    } = this.props;
 
-    setMapMoveSinceLastRefine(true);
+    if (isRefineEnable) {
+      setMapMoveSinceLastRefine(true);
 
-    if (isRefineOnMapMove) {
-      this.isPendingRefine = true;
+      if (isRefineOnMapMove) {
+        this.isPendingRefine = true;
+      }
     }
   };
 
