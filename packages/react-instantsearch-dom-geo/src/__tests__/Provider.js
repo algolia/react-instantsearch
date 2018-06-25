@@ -286,7 +286,7 @@ describe('Provider', () => {
       expect(wrapper.instance().isPendingRefine).toBe(false);
     });
 
-    it('expect to be a noop when refine is disabled', () => {
+    it('expect to do nothing when refine is disabled', () => {
       const children = jest.fn(x => x);
 
       const props = {
@@ -378,7 +378,7 @@ describe('Provider', () => {
       expect(wrapper.instance().isPendingRefine).toBe(false);
     });
 
-    it('expect to be a noop when there is no pending refinement', () => {
+    it('expect to do nothing when there is no pending refinement', () => {
       const mapInstance = createFakeMapInstance();
       const children = jest.fn(x => x);
 
