@@ -42,6 +42,7 @@ export default function createConnector(connectorDesc) {
   const hasTransitionState = has(connectorDesc, 'transitionState');
   const hasCleanUp = has(connectorDesc, 'cleanUp');
   const hasShouldComponentUpdate = has(connectorDesc, 'shouldComponentUpdate');
+  const hasShoulWidgetdUpdate = has(connectorDesc, 'shouldWidgetUpdate');
   const isWidget = hasSearchParameters || hasMetadata || hasTransitionState;
 
   return Composed =>
@@ -173,10 +174,9 @@ export default function createConnector(connectorDesc) {
             props: this.getProvidedProps(nextProps),
           });
 
-          if (isWidget) {
-            // Since props might have changed, we need to re-run getSearchParameters
-            // and getMetadata with the new props.
+          if (isWidget && this.shouldWidgetUpdate(nextProps)) {
             this.context.ais.widgetsManager.update();
+
             if (connectorDesc.transitionState) {
               this.context.ais.onSearchStateChange(
                 connectorDesc.transitionState.call(
@@ -208,6 +208,18 @@ export default function createConnector(connectorDesc) {
             this.context.ais.onSearchStateChange(removeEmptyKey(newState));
           }
         }
+      }
+
+      shouldWidgetUpdate(nextProps) {
+        if (hasShoulWidgetdUpdate) {
+          return connectorDesc.shouldWidgetUpdate.call(
+            this,
+            this.props,
+            nextProps
+          );
+        }
+
+        return true;
       }
 
       shouldComponentUpdate(nextProps, nextState) {
