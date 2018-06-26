@@ -143,6 +143,16 @@ const App = () => (
         <p>By default the map will set the position accordingly to the markers displayed on it. When we refine it may happen that the results are empty. For those situations we need to provide a position to render the map.</p>
       </td>
     </tr>
+    <tr>
+      <td>enableRefine</td>
+      <td>Type: <code>boolean</code></td>
+      <td>Default: <code>true</code></td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <p>If false, you can't refine with the map.</p>
+      </td>
+    </tr>
   </tbody>
 </table>
 
