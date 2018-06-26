@@ -150,7 +150,7 @@ const App = () => (
     </tr>
     <tr>
       <td colspan="3">
-        <p>If false, you can't refine with the map.</p>
+        <p>If false, this map is for display purposes only, not for refining the search</p>
       </td>
     </tr>
   </tbody>
