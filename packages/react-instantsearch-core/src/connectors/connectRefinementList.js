@@ -1,3 +1,4 @@
+import { isEqual } from 'lodash';
 import PropTypes from 'prop-types';
 import createConnector from '../core/createConnector';
 import {
@@ -260,5 +261,17 @@ export default createConnector({
             ]
           : [],
     };
+  },
+
+  shouldWidgetUpdate(props, nextProps) {
+    const shouldUpdate =
+      props.attribute !== nextProps.attribute ||
+      props.operator !== nextProps.operator ||
+      props.limit !== nextProps.limit ||
+      props.showMoreLimit !== nextProps.showMoreLimit ||
+      props.showMore !== nextProps.showMore ||
+      !isEqual(props.defaultRefinement, nextProps.defaultRefinement);
+
+    return shouldUpdate;
   },
 });

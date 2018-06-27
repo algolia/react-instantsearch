@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
 import orderBy from 'lodash.orderby';
 import { setAddon, storiesOf } from '@storybook/react';
 import { boolean, number, array } from '@storybook/addon-knobs';
 import JSXAddon from 'storybook-addon-jsx';
-import { Panel, RefinementList, SearchBox } from 'react-instantsearch-dom';
+import {
+  Panel,
+  RefinementList,
+  SearchBox,
+  connectStateResults,
+} from 'react-instantsearch-dom';
 import { displayName, filterProps, WrapWithHits } from './util';
 
 setAddon(JSXAddon);
@@ -133,6 +138,90 @@ stories
         />
       </WrapWithHits>
     ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
+    'with re-render',
+    () => {
+      class Example extends Component {
+        state = {
+          count: 0,
+          limit: 5,
+          refinements: [],
+        };
+
+        onClickCounter = () => {
+          this.setState(({ count }) => ({
+            count: count + 1,
+          }));
+        };
+
+        onClickLimit = value => () => {
+          this.setState(({ limit }) => ({
+            limit: limit + value,
+          }));
+        };
+
+        onClickPush = value => () => {
+          this.setState(({ refinements }) => ({
+            refinements: refinements.concat(value),
+          }));
+        };
+
+        render() {
+          return (
+            <div>
+              <p>
+                <button onClick={this.onClickCounter}>
+                  Useless update ({this.state.count})
+                </button>
+              </p>
+
+              <p>
+                <button onClick={this.onClickLimit(-1)}>-</button>
+                <span>Count ({this.state.limit})</span>
+                <button onClick={this.onClickLimit(+1)}>+</button>
+              </p>
+
+              <p>
+                <button onClick={this.onClickPush('Decoration')}>
+                  {'"Decoration"'}
+                </button>
+
+                <button onClick={this.onClickPush('Lighting')}>
+                  {'"Lighting"'}
+                </button>
+
+                <button onClick={this.onClickPush('Eating')}>
+                  {'"Eating"'}
+                </button>
+              </p>
+
+              <RefinementList
+                attribute="category"
+                limit={this.state.limit}
+                defaultRefinement={this.state.refinements}
+                // defaultRefinement={['Decoration']}
+                translations={{
+                  showMore: extended => (extended ? 'Less' : 'More'),
+                }}
+              />
+            </div>
+          );
+        }
+      }
+
+      const Connected = connectStateResults(Example);
+
+      return (
+        <WrapWithHits linkedStoryGroup="RefinementList">
+          <Connected />
+        </WrapWithHits>
+      );
+    },
     {
       displayName,
       filterProps,
