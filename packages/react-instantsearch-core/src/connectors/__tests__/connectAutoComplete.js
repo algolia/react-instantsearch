@@ -165,4 +165,34 @@ describe('connectAutoComplete', () => {
       });
     });
   });
+
+  describe('shouldWidgetUpdate', () => {
+    it('expect to return `true` when `defaultRefinement` change', () => {
+      const props = {
+        defaultRefinement: 'previous',
+      };
+
+      const nextProps = {
+        defaultRefinement: 'next',
+      };
+
+      const actual = connect.shouldWidgetUpdate(props, nextProps);
+
+      expect(actual).toBe(true);
+    });
+
+    it('expect to return `false` when nothing change', () => {
+      const props = {
+        defaultRefinement: 'previous',
+      };
+
+      const nextProps = {
+        defaultRefinement: 'previous',
+      };
+
+      const actual = connect.shouldWidgetUpdate(props, nextProps);
+
+      expect(actual).toBe(false);
+    });
+  });
 });
