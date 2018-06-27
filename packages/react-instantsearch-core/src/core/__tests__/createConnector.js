@@ -585,72 +585,6 @@ describe('createConnector', () => {
         { canRender: true, props: null }
       );
     });
-
-    describe('unmounting', () => {
-      const Connected = createConnector({
-        displayName: 'CoolConnector',
-        getProvidedProps: () => null,
-        getMetadata: () => null,
-        cleanUp: () => ({ another: { state: 'state', key: {} }, key: {} }),
-      })(() => null);
-      const unregister = jest.fn();
-      const setState = jest.fn();
-      const onSearchStateChange = jest.fn();
-      it('unregisters itself on unmount', () => {
-        const wrapper = mount(<Connected />, {
-          context: {
-            ais: {
-              store: {
-                getState: () => ({ widgets: { another: { state: 'state' } } }),
-                setState,
-                subscribe: () => () => null,
-              },
-              widgetsManager: {
-                registerWidget: () => unregister,
-              },
-              onSearchStateChange,
-            },
-          },
-        });
-        expect(unregister.mock.calls).toHaveLength(0);
-        expect(setState.mock.calls).toHaveLength(0);
-        expect(onSearchStateChange.mock.calls).toHaveLength(0);
-
-        wrapper.unmount();
-
-        expect(unregister.mock.calls).toHaveLength(1);
-        expect(setState.mock.calls).toHaveLength(1);
-        expect(onSearchStateChange.mock.calls).toHaveLength(1);
-        expect(setState.mock.calls[0][0]).toEqual({
-          widgets: { another: { state: 'state' } },
-        });
-        expect(onSearchStateChange.mock.calls[0][0]).toEqual({
-          another: { state: 'state' },
-        });
-      });
-      it('empty key from the search state should be removed', () => {
-        const wrapper = mount(<Connected />, {
-          context: {
-            ais: {
-              store: {
-                getState: () => ({ widgets: { another: { state: 'state' } } }),
-                setState,
-                subscribe: () => () => null,
-              },
-              widgetsManager: {
-                registerWidget: () => unregister,
-              },
-              onSearchStateChange,
-            },
-          },
-        });
-        wrapper.unmount();
-
-        expect(onSearchStateChange.mock.calls[0][0]).toEqual({
-          another: { state: 'state' },
-        });
-      });
-    });
   });
 
   describe('shouldWidgetUpdate', () => {
@@ -774,6 +708,74 @@ describe('createConnector', () => {
 
       expect(update).toHaveBeenCalledTimes(0);
       expect(onSearchStateChange).toHaveBeenCalledTimes(0);
+    });
+  });
+
+  describe('unmount', () => {
+    const Connected = createConnector({
+      displayName: 'CoolConnector',
+      getProvidedProps: () => null,
+      getMetadata: () => null,
+      cleanUp: () => ({ another: { state: 'state', key: {} }, key: {} }),
+    })(() => null);
+    const unregister = jest.fn();
+    const setState = jest.fn();
+    const onSearchStateChange = jest.fn();
+
+    it('unregisters itself on unmount', () => {
+      const wrapper = mount(<Connected />, {
+        context: {
+          ais: {
+            store: {
+              getState: () => ({ widgets: { another: { state: 'state' } } }),
+              setState,
+              subscribe: () => () => null,
+            },
+            widgetsManager: {
+              registerWidget: () => unregister,
+            },
+            onSearchStateChange,
+          },
+        },
+      });
+      expect(unregister.mock.calls).toHaveLength(0);
+      expect(setState.mock.calls).toHaveLength(0);
+      expect(onSearchStateChange.mock.calls).toHaveLength(0);
+
+      wrapper.unmount();
+
+      expect(unregister.mock.calls).toHaveLength(1);
+      expect(setState.mock.calls).toHaveLength(1);
+      expect(onSearchStateChange.mock.calls).toHaveLength(1);
+      expect(setState.mock.calls[0][0]).toEqual({
+        widgets: { another: { state: 'state' } },
+      });
+      expect(onSearchStateChange.mock.calls[0][0]).toEqual({
+        another: { state: 'state' },
+      });
+    });
+
+    it('empty key from the search state should be removed', () => {
+      const wrapper = mount(<Connected />, {
+        context: {
+          ais: {
+            store: {
+              getState: () => ({ widgets: { another: { state: 'state' } } }),
+              setState,
+              subscribe: () => () => null,
+            },
+            widgetsManager: {
+              registerWidget: () => unregister,
+            },
+            onSearchStateChange,
+          },
+        },
+      });
+      wrapper.unmount();
+
+      expect(onSearchStateChange.mock.calls[0][0]).toEqual({
+        another: { state: 'state' },
+      });
     });
   });
 
