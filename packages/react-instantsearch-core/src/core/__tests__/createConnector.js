@@ -653,6 +653,130 @@ describe('createConnector', () => {
     });
   });
 
+  describe('shouldWidgetUpdate', () => {
+    it('use shouldWidgetUpdate when provided', () => {
+      const transitionState = jest.fn();
+      const shouldWidgetUpdate = jest.fn(() => true);
+      const Connected = createConnector({
+        displayName: 'CoolConnector',
+        getProvidedProps: () => null,
+        getMetadata: () => null,
+        getId,
+        transitionState,
+        shouldWidgetUpdate,
+      })(() => null);
+
+      const update = jest.fn();
+      const onSearchStateChange = jest.fn();
+      const props = { hello: 'there' };
+      const wrapper = mount(<Connected {...props} />, {
+        context: {
+          ais: {
+            store: {
+              getState: () => ({}),
+              subscribe: () => null,
+            },
+            widgetsManager: {
+              registerWidget: () => null,
+              update,
+            },
+            onSearchStateChange,
+          },
+        },
+      });
+
+      expect(shouldWidgetUpdate).toHaveBeenCalledTimes(0);
+
+      wrapper.setProps({ hello: 'you' });
+
+      expect(shouldWidgetUpdate).toHaveBeenCalledTimes(1);
+      expect(shouldWidgetUpdate).toHaveBeenCalledWith(
+        { hello: 'there' },
+        { hello: 'you' }
+      );
+    });
+
+    it('triggers the update when `shouldWidgetUpdate` return `true`', () => {
+      const transitionState = jest.fn();
+      const shouldWidgetUpdate = jest.fn(() => true);
+      const Connected = createConnector({
+        displayName: 'CoolConnector',
+        getProvidedProps: () => null,
+        getMetadata: () => null,
+        getId,
+        transitionState,
+        shouldWidgetUpdate,
+      })(() => null);
+
+      const update = jest.fn();
+      const onSearchStateChange = jest.fn();
+      const props = { hello: 'there' };
+      const wrapper = mount(<Connected {...props} />, {
+        context: {
+          ais: {
+            store: {
+              getState: () => ({}),
+              subscribe: () => null,
+            },
+            widgetsManager: {
+              registerWidget: () => null,
+              update,
+            },
+            onSearchStateChange,
+          },
+        },
+      });
+
+      expect(update).toHaveBeenCalledTimes(0);
+      expect(onSearchStateChange).toHaveBeenCalledTimes(0);
+
+      wrapper.setProps({ hello: 'you' });
+
+      expect(update).toHaveBeenCalledTimes(1);
+      expect(onSearchStateChange).toHaveBeenCalledTimes(1);
+    });
+
+    it('dont triggers the update when `shouldWidgetUpdate` return `false`', () => {
+      const transitionState = jest.fn();
+      const shouldWidgetUpdate = jest.fn(() => false);
+      const Connected = createConnector({
+        displayName: 'CoolConnector',
+        getProvidedProps: () => null,
+        getMetadata: () => null,
+        getId,
+        transitionState,
+        shouldWidgetUpdate,
+      })(() => null);
+
+      const update = jest.fn();
+      const onSearchStateChange = jest.fn();
+      const props = { hello: 'there' };
+      const wrapper = mount(<Connected {...props} />, {
+        context: {
+          ais: {
+            store: {
+              getState: () => ({}),
+              subscribe: () => null,
+            },
+            widgetsManager: {
+              registerWidget: () => null,
+              update,
+            },
+            onSearchStateChange,
+          },
+        },
+      });
+
+      expect(update).toHaveBeenCalledTimes(0);
+      expect(onSearchStateChange).toHaveBeenCalledTimes(0);
+
+      wrapper.setProps({ hello: 'you' });
+
+      expect(update).toHaveBeenCalledTimes(0);
+      expect(onSearchStateChange).toHaveBeenCalledTimes(0);
+    });
+  });
+
   describe('refine', () => {
     it('passes a refine method to the component', () => {
       const Dummy = () => null;
