@@ -700,6 +700,7 @@ describe('connectGeoSearch', () => {
 
         const expectation = {
           query: 'studio',
+          boundingBox: {},
           page: 1,
         };
 
@@ -1424,6 +1425,7 @@ describe('connectGeoSearch', () => {
           indices: {
             second: {
               query: 'studio',
+              boundingBox: {},
               page: 1,
             },
           },
