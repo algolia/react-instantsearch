@@ -206,6 +206,33 @@ describe('connectGeoSearch', () => {
 
           expect(actual.position).toBe(undefined);
         });
+
+        it('expect to return undefined with the default refinement', () => {
+          const instance = createSingleIndexInstance();
+          const searchState = {};
+          const searchResults = createSingleSearchResults();
+          const props = {
+            defaultRefinement: {
+              northEast: {
+                lat: 10,
+                lng: 12,
+              },
+              southWest: {
+                lat: 12,
+                lng: 14,
+              },
+            },
+          };
+
+          const actual = connector.getProvidedProps.call(
+            instance,
+            props,
+            searchState,
+            searchResults
+          );
+
+          expect(actual.position).toBe(undefined);
+        });
       });
 
       describe('currentRefinement', () => {
@@ -288,6 +315,42 @@ describe('connectGeoSearch', () => {
           const searchResults = createSingleSearchResults([], {
             insideBoundingBox: '10, 12, 12, 14',
           });
+
+          const actual = connector.getProvidedProps.call(
+            instance,
+            props,
+            searchState,
+            searchResults
+          );
+
+          expect(actual.currentRefinement).toEqual({
+            northEast: {
+              lat: 10,
+              lng: 12,
+            },
+            southWest: {
+              lat: 12,
+              lng: 14,
+            },
+          });
+        });
+
+        it('expect to return the default refinement', () => {
+          const instance = createSingleIndexInstance();
+          const searchState = {};
+          const searchResults = createSingleSearchResults();
+          const props = {
+            defaultRefinement: {
+              northEast: {
+                lat: 10,
+                lng: 12,
+              },
+              southWest: {
+                lat: 12,
+                lng: 14,
+              },
+            },
+          };
 
           const actual = connector.getProvidedProps.call(
             instance,
@@ -908,6 +971,33 @@ describe('connectGeoSearch', () => {
 
           expect(actual.position).toBe(undefined);
         });
+
+        it('expect to return undefined with the default refinement', () => {
+          const instance = createMultiIndexInstance();
+          const searchState = createMultiIndexSearchState();
+          const searchResults = createSingleSearchResults();
+          const props = {
+            defaultRefinement: {
+              northEast: {
+                lat: 10,
+                lng: 12,
+              },
+              southWest: {
+                lat: 12,
+                lng: 14,
+              },
+            },
+          };
+
+          const actual = connector.getProvidedProps.call(
+            instance,
+            props,
+            searchState,
+            searchResults
+          );
+
+          expect(actual.position).toBe(undefined);
+        });
       });
 
       describe('currentRefinement', () => {
@@ -990,6 +1080,42 @@ describe('connectGeoSearch', () => {
           const searchResults = createSingleSearchResults([], {
             insideBoundingBox: '10, 12, 12, 14',
           });
+
+          const actual = connector.getProvidedProps.call(
+            instance,
+            props,
+            searchState,
+            searchResults
+          );
+
+          expect(actual.currentRefinement).toEqual({
+            northEast: {
+              lat: 10,
+              lng: 12,
+            },
+            southWest: {
+              lat: 12,
+              lng: 14,
+            },
+          });
+        });
+
+        it('expect to return the default refinement', () => {
+          const instance = createMultiIndexInstance();
+          const searchState = createMultiIndexSearchState();
+          const searchResults = createSingleSearchResults();
+          const props = {
+            defaultRefinement: {
+              northEast: {
+                lat: 10,
+                lng: 12,
+              },
+              southWest: {
+                lat: 12,
+                lng: 14,
+              },
+            },
+          };
 
           const actual = connector.getProvidedProps.call(
             instance,
