@@ -770,15 +770,6 @@ describe('connectGeoSearch', () => {
         expect(actual).toEqual(expectation);
       });
     });
-
-    describe('shouldComponentUpdate', () => {
-      it('expect to always return true', () => {
-        const expectation = true;
-        const actual = connector.shouldComponentUpdate();
-
-        expect(actual).toBe(expectation);
-      });
-    });
   });
 
   describe('multi index', () => {
@@ -1559,6 +1550,15 @@ describe('connectGeoSearch', () => {
 
         expect(actual).toEqual(expectation);
       });
+    });
+  });
+
+  describe('shouldComponentUpdate', () => {
+    it('expect to always return true', () => {
+      const expectation = true;
+      const actual = connector.shouldComponentUpdate();
+
+      expect(actual).toBe(expectation);
     });
   });
 });
