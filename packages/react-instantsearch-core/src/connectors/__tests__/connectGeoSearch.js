@@ -15,7 +15,7 @@ describe('connectGeoSearch', () => {
       },
     });
 
-    const createSingleSearchResults = (hits = [], state) => ({
+    const createSingleIndexSearchResults = (hits = [], state) => ({
       results: new SearchResults(new SearchParameters(state), [
         {
           hits,
@@ -58,7 +58,7 @@ describe('connectGeoSearch', () => {
           const instance = createSingleIndexInstance();
           const props = {};
           const searchState = {};
-          const searchResults = createSingleSearchResults(hits);
+          const searchResults = createSingleIndexSearchResults(hits);
 
           const actual = connector.getProvidedProps.call(
             instance,
@@ -86,7 +86,7 @@ describe('connectGeoSearch', () => {
           const instance = createSingleIndexInstance();
           const props = {};
           const searchState = {};
-          const searchResults = createSingleSearchResults(hits);
+          const searchResults = createSingleIndexSearchResults(hits);
 
           const actual = connector.getProvidedProps.call(
             instance,
@@ -126,7 +126,7 @@ describe('connectGeoSearch', () => {
         it('expect to return the position from the searchState (aroundLatLng)', () => {
           const instance = createSingleIndexInstance();
           const props = {};
-          const searchResults = createSingleSearchResults();
+          const searchResults = createSingleIndexSearchResults();
           const searchState = {
             aroundLatLng: {
               lat: 10,
@@ -150,7 +150,7 @@ describe('connectGeoSearch', () => {
         it('expect to return the position from the searchState (configure.aroundLatLng)', () => {
           const instance = createSingleIndexInstance();
           const props = {};
-          const searchResults = createSingleSearchResults();
+          const searchResults = createSingleIndexSearchResults();
           const searchState = {
             configure: {
               aroundLatLng: '10, 12',
@@ -174,7 +174,7 @@ describe('connectGeoSearch', () => {
           const instance = createSingleIndexInstance();
           const props = {};
           const searchState = {};
-          const searchResults = createSingleSearchResults([], {
+          const searchResults = createSingleIndexSearchResults([], {
             aroundLatLng: '10, 12',
           });
 
@@ -195,7 +195,7 @@ describe('connectGeoSearch', () => {
           const instance = createSingleIndexInstance();
           const props = {};
           const searchState = {};
-          const searchResults = createSingleSearchResults();
+          const searchResults = createSingleIndexSearchResults();
 
           const actual = connector.getProvidedProps.call(
             instance,
@@ -210,7 +210,7 @@ describe('connectGeoSearch', () => {
         it('expect to return undefined with the default refinement', () => {
           const instance = createSingleIndexInstance();
           const searchState = {};
-          const searchResults = createSingleSearchResults();
+          const searchResults = createSingleIndexSearchResults();
           const props = {
             defaultRefinement: {
               northEast: {
@@ -239,7 +239,7 @@ describe('connectGeoSearch', () => {
         it('expect to return the boundingBox from the searchState', () => {
           const instance = createSingleIndexInstance();
           const props = {};
-          const searchResults = createSingleSearchResults();
+          const searchResults = createSingleIndexSearchResults();
           const searchState = {
             boundingBox: {
               northEast: {
@@ -275,7 +275,7 @@ describe('connectGeoSearch', () => {
         it('expect to return the boundingBox from the searchState with string values', () => {
           const instance = createSingleIndexInstance();
           const props = {};
-          const searchResults = createSingleSearchResults();
+          const searchResults = createSingleIndexSearchResults();
           const searchState = {
             boundingBox: {
               northEast: {
@@ -312,7 +312,7 @@ describe('connectGeoSearch', () => {
           const instance = createSingleIndexInstance();
           const props = {};
           const searchState = {};
-          const searchResults = createSingleSearchResults([], {
+          const searchResults = createSingleIndexSearchResults([], {
             insideBoundingBox: '10, 12, 12, 14',
           });
 
@@ -338,7 +338,7 @@ describe('connectGeoSearch', () => {
         it('expect to return the default refinement', () => {
           const instance = createSingleIndexInstance();
           const searchState = {};
-          const searchResults = createSingleSearchResults();
+          const searchResults = createSingleIndexSearchResults();
           const props = {
             defaultRefinement: {
               northEast: {
@@ -375,7 +375,7 @@ describe('connectGeoSearch', () => {
           const instance = createSingleIndexInstance();
           const props = {};
           const searchState = {};
-          const searchResults = createSingleSearchResults();
+          const searchResults = createSingleIndexSearchResults();
 
           const actual = connector.getProvidedProps.call(
             instance,
@@ -398,7 +398,7 @@ describe('connectGeoSearch', () => {
 
           const instance = createSingleIndexInstance();
           const props = {};
-          const searchResults = createSingleSearchResults(hits);
+          const searchResults = createSingleIndexSearchResults(hits);
           const searchState = {
             boundingBox: {
               northEast: {
@@ -432,7 +432,7 @@ describe('connectGeoSearch', () => {
           const instance = createSingleIndexInstance();
           const props = {};
           const searchState = {};
-          const searchResults = createSingleSearchResults(hits, {
+          const searchResults = createSingleIndexSearchResults(hits, {
             insideBoundingBox: '10, 12, 12, 14',
           });
 
@@ -456,7 +456,7 @@ describe('connectGeoSearch', () => {
           const instance = createSingleIndexInstance();
           const props = {};
           const searchState = {};
-          const searchResults = createSingleSearchResults(hits);
+          const searchResults = createSingleIndexSearchResults(hits);
 
           const actual = connector.getProvidedProps.call(
             instance,
