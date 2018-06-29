@@ -1,3 +1,4 @@
+import { isEqual } from 'lodash';
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connectGeoSearch } from 'react-instantsearch-dom';
@@ -16,9 +17,36 @@ export class Connector extends Component {
     currentRefinement: BoundingBoxPropType,
   };
 
+  static getDerivedStateFromProps(props, state) {
+    const { position, currentRefinement } = props;
+    const { previousPosition, previousCurrentRefinement } = state;
+
+    const positionChanged = !isEqual(previousPosition, position);
+    const currentRefinementChanged = !isEqual(
+      previousCurrentRefinement,
+      currentRefinement
+    );
+
+    const sliceNextState = {
+      previousPosition: position,
+      previousCurrentRefinement: currentRefinement,
+    };
+
+    if (positionChanged || currentRefinementChanged) {
+      return {
+        ...sliceNextState,
+        hasMapMoveSinceLastRefine: false,
+      };
+    }
+
+    return sliceNextState;
+  }
+
   state = {
     isRefineOnMapMove: this.props.enableRefineOnMapMove,
     hasMapMoveSinceLastRefine: false,
+    previousPosition: this.props.position,
+    previousCurrentRefinement: this.props.currentRefinement,
   };
 
   toggleRefineOnMapMove = () =>

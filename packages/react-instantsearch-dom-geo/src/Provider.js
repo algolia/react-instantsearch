@@ -1,4 +1,3 @@
-import { isEqual } from 'lodash';
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { LatLngPropType, BoundingBoxPropType } from './propTypes';
@@ -51,29 +50,6 @@ class Provider extends Component {
         hasMapMoveSinceLastRefine,
       },
     };
-  }
-
-  componentDidUpdate(prevProps) {
-    const {
-      position: previousPosition,
-      currentRefinement: previousCurrentRefinement,
-    } = prevProps;
-
-    const {
-      position,
-      currentRefinement,
-      setMapMoveSinceLastRefine,
-    } = this.props;
-
-    const positionChanged = !isEqual(previousPosition, position);
-    const currentRefinementChanged = !isEqual(
-      previousCurrentRefinement,
-      currentRefinement
-    );
-
-    if (positionChanged || currentRefinementChanged) {
-      setMapMoveSinceLastRefine(false);
-    }
   }
 
   createBoundingBoxFromHits(hits) {
