@@ -1,35 +1,46 @@
-[![React InstantSearch logo][logo]][website]
+<p align="center">
+  <a href="https://community.algolia.com/react-instantsearch">
+    <img alt="React InstantSearch" src="./docgen/assets/img/InstantSearch-React-medal.svg" width="250">
+  </a>
+
+  <p align="center">
+    React InstantSearch is a library for building blazing fast search-as-you-type search UIs with <a href="https://www.algolia.com">Algolia</a>.
+  </p>
+</p>
+
+---
 
 [![Version][version-svg]][package-url] [![Build Status][travis-svg]][travis-url] [![License][license-image]][license-url] [![Downloads][downloads-image]][downloads-url]
 
-InstantSearch projects: **React InstantSearch** | [InstantSearch.js][instantsearch.js-github]  | [Angular InstantSearch][instantsearch-angular-github] | [Vue InstantSearch][instantsearch-vue-github] | [InstantSearch Android][instantsearch-android-github] | [InstantSearch iOS][instantsearch-ios-github].
+React InstantSearch is a React library that lets you create an instant-search result experience using [Algolia][algolia-website]’s search API. It is part of the InstantSearch family:
 
-## React InstantSearch
-
-> ⚡ Lightning-fast search for React and React Native apps
-
-Built by [Algolia][algolia-website].
-
-This repository holds the code for the React InstantSearch project.
+**React InstantSearch** | [InstantSearch.js][instantsearch.js-github]  | [Angular InstantSearch][instantsearch-angular-github] | [Vue InstantSearch][instantsearch-vue-github] | [InstantSearch Android][instantsearch-android-github] | [InstantSearch iOS][instantsearch-ios-github].
 
 ## Documentation
 
-There's a dedicated documentation available at <https://community.algolia.com/react-instantsearch/>.
+The documentation is available at [community.algolia.com/react-instantsearch][website].
 
 ## Installation
 
-React InstantSearch is available in the npm registry. Install it:
+React InstantSearch is available on the npm registry.
 
-```
+```sh
 yarn add react-instantsearch
+# or
+npm install react-instantsearch
 ```
 
-## Contributing, dev, release
+## Contributing
 
 We welcome all contributors, from casual to regular. You are only
 one command away to start the developer environment, [read our CONTRIBUTING guide](CONTRIBUTING.md).
 
-[logo]: ./docgen/readme-logo.png
+## License
+
+React InstantSearch is [MIT licensed](LICENSE).
+
+<!-- Links -->
+
 [website]: https://community.algolia.com/react-instantsearch
 [algolia-website]: https://www.algolia.com/
 [instantsearch.js-github]: https://github.com/algolia/instantsearch.js
