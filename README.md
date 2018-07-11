@@ -18,11 +18,11 @@ React InstantSearch is a React library that lets you create an instant-search re
 
 ## Why
 
-You should be using InstantSearch if you want to:
+You should be using React InstantSearch if you want to:
 
 * Design search experiences with best practices
 * Customize your components at will
-* Remain independent from external frameworks
+* Follow React principles
 
 ## Installation
 
