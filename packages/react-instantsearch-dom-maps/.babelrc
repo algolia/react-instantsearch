@@ -81,6 +81,28 @@
         "stage-2"
       ],
       "plugins": [
+        "lodash",
+        "dynamic-import-node"
+      ]
+    },
+    "rollup": {
+      "presets": [
+        [
+          "env",
+          {
+            "targets": {
+              "browsers": [
+                "last 2 versions",
+                "ie >= 9"
+              ]
+            },
+            "modules": false
+          }
+        ],
+        "react",
+        "stage-2"
+      ],
+      "plugins": [
         "lodash"
       ]
     }
