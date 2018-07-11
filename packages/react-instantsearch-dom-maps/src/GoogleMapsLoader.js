@@ -19,20 +19,21 @@ class GoogleMapsLoader extends Component {
   isUnmounting = false;
 
   componentDidMount() {
-    // Inline the require to avoid to run the module on the server (rely on `document`)
+    // Inline the import to avoid to run the module on the server (rely on `document`)
+    // Under the hood we use `dynamic-import-node` to transpile the `import` to `require`
     // see: https://github.com/algolia/react-instantsearch/issues/1425
-    const injectScript = require('scriptjs');
+    return import('scriptjs').then(script => {
+      const { apiKey, endpoint } = this.props;
+      const operator = endpoint.indexOf('?') !== -1 ? '&' : '?';
+      const endpointWithCredentials = `${endpoint}${operator}key=${apiKey}`;
 
-    const { apiKey, endpoint } = this.props;
-    const operator = endpoint.indexOf('?') !== -1 ? '&' : '?';
-    const endpointWithCredentials = `${endpoint}${operator}key=${apiKey}`;
-
-    injectScript(endpointWithCredentials, () => {
-      if (!this.isUnmounting) {
-        this.setState(() => ({
-          google: window.google,
-        }));
-      }
+      script.default(endpointWithCredentials, () => {
+        if (!this.isUnmounting) {
+          this.setState(() => ({
+            google: window.google,
+          }));
+        }
+      });
     });
   }
 
