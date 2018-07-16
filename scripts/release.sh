@@ -132,6 +132,7 @@ sleep 2.5
 # Required until Lerna supports the top level package as a member
 # of the Workspaces. Another solution is to move out the stories
 # from the top level package (will be done at some point).
+yarn
 yarn upgrade react-instantsearch-dom@$newVersion -D
 yarn upgrade react-instantsearch-dom-maps@$newVersion -D
 
