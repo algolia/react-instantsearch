@@ -144,7 +144,7 @@ for example in examples/* ; do
 done
 
 commitMessage="chore(deps): update examples to react-instantsearch v$newVersion"
-git add .
+git add examples package.json yarn.lock
 printf "$commitMessage" | git commit --file -
 
 printf "\n\nUpdate of react-instantsearch version in all examples\n"
