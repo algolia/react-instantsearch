@@ -11949,9 +11949,9 @@ react-inspector@^2.2.2:
     babel-runtime "^6.26.0"
     is-dom "^1.0.9"
 
-react-instantsearch-dom-maps@5.2.0:
-  version "5.2.0"
-  resolved "https://registry.yarnpkg.com/react-instantsearch-dom-maps/-/react-instantsearch-dom-maps-5.2.0.tgz#8ee1cb493927200b7310a846bc6972bc4c2627bf"
+react-instantsearch-dom-maps@5.2.2:
+  version "5.2.2"
+  resolved "https://registry.yarnpkg.com/react-instantsearch-dom-maps/-/react-instantsearch-dom-maps-5.2.2.tgz#c241f3d4bef3d8f018d71a85f6013f167953b98f"
   dependencies:
     lodash "^4.17.4"
     prop-types "^15.5.10"
