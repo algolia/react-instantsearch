@@ -78,7 +78,7 @@ export { App, findResultsState };
 ```jsx
 import React from 'react';
 import { createServer } from 'http';
-import { App, findResultsState } from './app.js';
+import { App, findResultsState } from './App.js';
 import { renderToString } from 'react-dom/server';
 
 const server = createServer((req, res) => {
