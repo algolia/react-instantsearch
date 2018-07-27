@@ -21,7 +21,7 @@ const createIndex = defaultRoot => {
       Root: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.func,
-        PropTypes.object
+        PropTypes.object,
       ]).isRequired,
       props: PropTypes.object,
     }),
