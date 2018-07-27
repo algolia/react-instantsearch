@@ -29,7 +29,7 @@ export default function createInstantSearch(defaultAlgoliaClient, root) {
       onSearchParameters: PropTypes.func,
       resultsState: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
       root: PropTypes.shape({
-        Root: PropTypes.oneOfType([PropTypes.string, PropTypes.func])
+        Root: PropTypes.oneOfType([PropTypes.string, PropTypes.func, PropTypes.object])
           .isRequired,
         props: PropTypes.object,
       }),
