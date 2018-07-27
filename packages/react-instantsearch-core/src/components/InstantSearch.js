@@ -196,7 +196,7 @@ InstantSearch.propTypes = {
     Root: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.func,
-      PropTypes.object
+      PropTypes.object,
     ]),
     props: PropTypes.object,
   }).isRequired,
