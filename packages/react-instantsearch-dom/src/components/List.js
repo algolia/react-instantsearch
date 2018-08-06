@@ -61,7 +61,7 @@ class List extends Component {
   };
 
   renderItem = (item, resetQuery) => {
-    const items = item.items && (
+    const items = item.items && item.items.length && (
       <ul className={this.props.cx('list', 'list--child')}>
         {item.items
           .slice(0, this.getLimit())
