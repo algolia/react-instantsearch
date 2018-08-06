@@ -61,7 +61,7 @@ class List extends Component {
   };
 
   renderItem = (item, resetQuery) => {
-    const isItemHasChildren = item.items && Boolean(item.items.length);
+    const itemHasChildren = item.items && Boolean(item.items.length);
 
     return (
       <li
@@ -70,11 +70,11 @@ class List extends Component {
           'item',
           item.isRefined && 'item--selected',
           item.noRefinement && 'item--noRefinement',
-          isItemHasChildren && 'item--parent'
+          itemHasChildren && 'item--parent'
         )}
       >
         {this.props.renderItem(item, resetQuery)}
-        {isItemHasChildren && (
+        {itemHasChildren && (
           <ul className={this.props.cx('list', 'list--child')}>
             {item.items
               .slice(0, this.getLimit())
