@@ -41,8 +41,8 @@ Using React InstantSearch is as simple as adding these components to your app:
 ```javascript
 import React from 'react';
 import ReactDOM from 'react-dom';
+import algoliasearch from 'algoliasearch/lite';
 import { InstantSearch, SearchBox, Hits } from 'react-instantsearch-dom';
-import algoliasearch from 'algoliasearch';
 
 const searchClient = algoliasearch(
   'latency',
