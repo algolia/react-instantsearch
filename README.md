@@ -29,9 +29,9 @@ You should be using React InstantSearch if you want to:
 React InstantSearch is available on the npm registry. It relies on [`algoliasearch`](https://github.com/algolia/algoliasearch-client-javascript) to communicate with Algolia APIs.
 
 ```sh
-yarn add react-instantsearch algoliasearch
+yarn add react-instantsearch-dom algoliasearch
 # or
-npm install react-instantsearch algoliasearch
+npm install react-instantsearch-dom algoliasearch
 ```
 
 ## Getting started
