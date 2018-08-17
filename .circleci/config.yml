@@ -35,8 +35,7 @@ jobs:
 
       - run:
           name: Install dependencies
-          command: |
-            yarn install
+          command: yarn install
 
       - save_cache:
           name: Save Yarn cache
@@ -44,8 +43,22 @@ jobs:
           paths:
             - ~/.cache/yarn
 
-      - run: yarn lint
-      - run: yarn test:ci
-      - run: yarn test:e2e
-      - run: yarn test:build
-      - run: yarn test:examples
+      - run:
+          name: Code styles & lint
+          command: yarn lint
+
+      - run:
+          name: Unit Tests
+          command: yarn test:ci
+
+      - run:
+          name: E2E Tests
+          command: yarn test:e2e
+
+      - run:
+          name: Test packages size
+          command: yarn test:build
+
+      - run:
+          name: Test the examples
+          command: yarn test:examples
