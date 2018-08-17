@@ -1,0 +1,38 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/react-instantsearch
+
+    docker:
+      - image: circleci/node:8.11.4-browsers
+
+    steps:
+      - checkout
+
+      - run:
+          name: Install specific Yarn version
+          command: |
+            curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.9.4
+
+      - restore_cache:
+          name: Restore Yarn cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+
+      - run:
+          name: Install dependencies
+          command: |
+            yarn install
+
+      - save_cache:
+          name: Save Yarn cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+
+      - run: yarn lint
+      - run: yarn test:ci
+      - run: yarn test:e2e
+      - run: yarn test:build
+      - run: yarn test:examples
