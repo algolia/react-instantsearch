@@ -4,10 +4,20 @@ jobs:
     working_directory: ~/react-instantsearch
 
     docker:
-      - image: circleci/node:8.11.4-browsers
+      - image: circleci/node:8.11.4
+
+    environment:
+      FIREFOX_SOURCE_URL: https://download.mozilla.org/?product=firefox-56.0&lang=en-US&os=linux64
 
     steps:
       - checkout
+
+      - run:
+          name: Install specific FF version
+          command: |
+            wget --no-verbose -O /tmp/firefox-56.0.tar.bz2 $FIREFOX_SOURCE_URL
+            echo 'export PATH="$HOME/firefox-56.0/firefox:$PATH"' >> $BASH_ENV
+            firefox --version
 
       - run:
           name: Install specific Yarn version
