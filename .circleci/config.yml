@@ -16,7 +16,7 @@ jobs:
       - run:
           name: Install specific FF version
           command: |
-            curl -L -o "/tmp/firefox-$FIREFOX_VERSION.tar.bz2" "https://download-installer.cdn.mozilla.net/pub/firefox/releases/$FIREFOX_VERSION/linux-x86_64/en-US/firefox-$FIREFOX_VERSION.tar.bz2"
+            wget -O "/tmp/firefox-$FIREFOX_VERSION.tar.bz2" "https://download-installer.cdn.mozilla.net/pub/firefox/releases/$FIREFOX_VERSION/linux-x86_64/en-US/firefox-$FIREFOX_VERSION.tar.bz2"
             tar -jxf "/tmp/firefox-$FIREFOX_VERSION.tar.bz2" -C "/tmp/"
             sudo mv "/tmp/firefox" "/opt/firefox-$FIREFOX_VERSION"
             sudo ln -sf "/opt/firefox-$FIREFOX_VERSION/firefox" "/usr/bin/firefox"
