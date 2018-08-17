@@ -8,7 +8,7 @@ jobs:
 
     environment:
       FIREFOX_SOURCE_URL: https://download.mozilla.org/?product=firefox-56.0&lang=en-US&os=linux64
-      FIREFOX_VERSION: 56.0
+      FIREFOX_VERSION: '56.0'
 
     steps:
       - checkout
