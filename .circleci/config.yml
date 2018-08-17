@@ -18,6 +18,7 @@ jobs:
             wget --no-verbose -O firefox-56.0.tar.bz2 $FIREFOX_SOURCE_URL
             tar xjf firefox-56.0.tar.bz2
             echo 'export PATH="$HOME/react-instantsearch/firefox/firefox:$PATH"' >> $BASH_ENV
+            $HOME/react-instantsearch/firefox/firefox --version
             firefox --version
 
       - run:
