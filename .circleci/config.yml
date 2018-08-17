@@ -8,6 +8,7 @@ jobs:
 
     environment:
       FIREFOX_SOURCE_URL: https://download.mozilla.org/?product=firefox-56.0&lang=en-US&os=linux64
+      FIREFOX_VERSION: 56.0
 
     steps:
       - checkout
@@ -15,10 +16,11 @@ jobs:
       - run:
           name: Install specific FF version
           command: |
-            wget --no-verbose -O firefox-56.0.tar.bz2 $FIREFOX_SOURCE_URL
-            tar xjf firefox-56.0.tar.bz2
-            echo 'export PATH="$HOME/react-instantsearch/firefox/firefox:$PATH"' >> $BASH_ENV
-            $HOME/react-instantsearch/firefox/firefox --version
+            curl -L -o "/tmp/firefox-$FIREFOX_VERSION.tar.bz2" "https://download-installer.cdn.mozilla.net/pub/firefox/releases/$FIREFOX_VERSION/linux-x86_64/en-US/firefox-$FIREFOX_VERSION.tar.bz2"
+            tar -jxf "/tmp/firefox-$FIREFOX_VERSION.tar.bz2" -C "/tmp/"
+            sudo mv "/tmp/firefox" "/opt/firefox-$FIREFOX_VERSION"
+            sudo ln -sf "/opt/firefox-$FIREFOX_VERSION/firefox" "/usr/bin/firefox"
+            hash -r
             firefox --version
 
       - run:
