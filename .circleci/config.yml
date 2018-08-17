@@ -17,8 +17,7 @@ jobs:
           command: |
             wget --no-verbose -O $HOME/firefox-56.0.tar.bz2 $FIREFOX_SOURCE_URL
             tar xjf $HOME/firefox-56.0.tar.bz2
-            echo 'export PATH="$HOME/firefox-56.0/firefox:$PATH"' >> $BASH_ENV
-            ls -l $HOME
+            echo 'export PATH="$HOME/firefox/firefox:$PATH"' >> $BASH_ENV
             firefox --version
 
       - run:
