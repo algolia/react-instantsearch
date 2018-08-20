@@ -1,3 +1,25 @@
+aliases:
+  - &install_yarn_version
+    name: Install specific Yarn version
+    command: |
+      curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.9.4
+      echo 'export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"' >> $BASH_ENV
+
+  - &restore_yarn_cache
+    name: Restore Yarn cache
+    keys:
+      - yarn-{{ .Branch }}-packages-{{ checksum "yarn.lock" }}
+
+  - &save_yarn_cache
+    name: Save Yarn cache
+    key: yarn-{{ .Branch }}-packages-{{ checksum "yarn.lock" }}
+    paths:
+      - ~/.cache/yarn
+
+  - &run_yarn_install
+    name: Install dependencies
+    command: yarn install
+
 version: 2
 jobs:
   test_build:
@@ -6,23 +28,10 @@ jobs:
       - image: circleci/node:8.11.4
     steps:
       - checkout
-      - run:
-          name: Install specific Yarn version
-          command: |
-            curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.9.4
-            echo 'export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"' >> $BASH_ENV
-      - restore_cache:
-          name: Restore Yarn cache
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
-      - run:
-          name: Install dependencies
-          command: yarn install
-      - save_cache:
-          name: Save Yarn cache
-          key: yarn-packages-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.cache/yarn
+      - run: *install_yarn_version
+      - restore_cache: *restore_yarn_cache
+      - run: *run_yarn_install
+      - save_cache: *save_yarn_cache
       - run:
           name: Build & Test packages size
           command: yarn test:build
@@ -33,23 +42,10 @@ jobs:
       - image: circleci/node:8.11.4
     steps:
       - checkout
-      - run:
-          name: Install specific Yarn version
-          command: |
-            curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.9.4
-            echo 'export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"' >> $BASH_ENV
-      - restore_cache:
-          name: Restore Yarn cache
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
-      - run:
-          name: Install dependencies
-          command: yarn install
-      - save_cache:
-          name: Save Yarn cache
-          key: yarn-packages-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.cache/yarn
+      - run: *install_yarn_version
+      - restore_cache: *restore_yarn_cache
+      - run: *run_yarn_install
+      - save_cache: *save_yarn_cache
       - run:
           name: Lint & Code styles
           command: yarn lint
@@ -74,23 +70,10 @@ jobs:
             sudo ln -sf "/opt/firefox-$FIREFOX_VERSION/firefox" "/usr/bin/firefox"
             hash -r
             firefox --version
-      - run:
-          name: Install specific Yarn version
-          command: |
-            curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.9.4
-            echo 'export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"' >> $BASH_ENV
-      - restore_cache:
-          name: Restore Yarn cache
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
-      - run:
-          name: Install dependencies
-          command: yarn install
-      - save_cache:
-          name: Save Yarn cache
-          key: yarn-packages-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.cache/yarn
+      - run: *install_yarn_version
+      - restore_cache: *restore_yarn_cache
+      - run: *run_yarn_install
+      - save_cache: *save_yarn_cache
       - run:
           name: E2E Tests
           command: yarn test:e2e
@@ -101,23 +84,10 @@ jobs:
       - image: circleci/node:8.11.4
     steps:
       - checkout
-      - run:
-          name: Install specific Yarn version
-          command: |
-            curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.9.4
-            echo 'export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"' >> $BASH_ENV
-      - restore_cache:
-          name: Restore Yarn cache
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
-      - run:
-          name: Install dependencies
-          command: yarn install
-      - save_cache:
-          name: Save Yarn cache
-          key: yarn-packages-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.cache/yarn
+      - run: *install_yarn_version
+      - restore_cache: *restore_yarn_cache
+      - run: *run_yarn_install
+      - save_cache: *save_yarn_cache
       - run:
           name: Build & Test examples
           command: yarn test:examples
