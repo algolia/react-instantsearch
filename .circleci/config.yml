@@ -20,12 +20,15 @@ aliases:
     name: Install dependencies
     command: yarn install
 
+defaults: &defaults
+  working_directory: ~/react-instantsearch
+  docker:
+    - image: circleci/node:8.11.4
+
 version: 2
 jobs:
   test_build:
-    working_directory: ~/react-instantsearch
-    docker:
-      - image: circleci/node:8.11.4
+    <<: *defaults
     steps:
       - checkout
       - run: *install_yarn_version
@@ -37,9 +40,7 @@ jobs:
           command: yarn test:build
 
   test_unit:
-    working_directory: ~/react-instantsearch
-    docker:
-      - image: circleci/node:8.11.4
+    <<: *defaults
     steps:
       - checkout
       - run: *install_yarn_version
@@ -54,7 +55,7 @@ jobs:
           command: yarn test:ci
 
   test_e2e:
-    working_directory: ~/react-instantsearch
+    <<: *defaults
     docker:
       - image: circleci/node:8.11.4-browsers
     environment:
@@ -79,9 +80,7 @@ jobs:
           command: yarn test:e2e
 
   test_examples:
-    working_directory: ~/react-instantsearch
-    docker:
-      - image: circleci/node:8.11.4
+    <<: *defaults
     steps:
       - checkout
       - run: *install_yarn_version
