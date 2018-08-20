@@ -75,10 +75,6 @@ jobs:
             hash -r
             firefox --version
       - run:
-          name: Setup variables for screenshots
-          command: |
-            export DISPLAY=:99.0
-      - run:
           name: Install specific Yarn version
           command: |
             curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.9.4
