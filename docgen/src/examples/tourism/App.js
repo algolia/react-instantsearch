@@ -16,7 +16,6 @@ import React, { Component } from 'react';
 import GoogleMap from 'google-map-react';
 import { fitBounds } from 'google-map-react/utils';
 import Rheostat from 'rheostat';
-import 'instantsearch.css/themes/reset.css';
 import { withUrlSync } from '../urlSync';
 
 const App = props => (
