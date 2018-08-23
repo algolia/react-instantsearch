@@ -142,14 +142,15 @@ class InstantSearch extends Component {
     }
   }
 
-  onSearchParameters(getSearchParameters, context, props) {
+  onSearchParameters(getSearchParameters, context, props, self) {
     if (this.props.onSearchParameters) {
       const searchState = this.props.searchState ? this.props.searchState : {};
       this.props.onSearchParameters(
         getSearchParameters,
         context,
         props,
-        searchState
+        searchState,
+        self
       );
     }
   }

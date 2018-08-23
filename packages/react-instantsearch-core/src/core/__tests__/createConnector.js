@@ -420,6 +420,7 @@ describe('createConnector', () => {
       expect(onSearchParameters.mock.calls[0][0]).toBe(getSearchParameters);
       expect(onSearchParameters.mock.calls[0][1]).toEqual(context);
       expect(onSearchParameters.mock.calls[0][2]).toEqual(props);
+      expect(onSearchParameters.mock.calls[0][3]).toMatchSnapshot();
 
       Connected = createConnector({
         displayName: 'CoolConnector',

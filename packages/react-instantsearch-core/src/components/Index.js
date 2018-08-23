@@ -50,7 +50,9 @@ class Index extends Component {
     this.context.ais.onSearchParameters(
       this.getSearchParameters,
       this.getChildContext(),
-      this.props
+      this.props,
+      undefined,
+      this
     );
   }
 

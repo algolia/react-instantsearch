@@ -33,7 +33,8 @@ const createInstantSearchServer = algoliasearch => {
     getSearchParameters,
     context,
     props,
-    searchState
+    searchState,
+    self
   ) => {
     const index = getIndex(context);
     searchParameters.push({
@@ -42,6 +43,7 @@ const createInstantSearchServer = algoliasearch => {
       props,
       searchState,
       index,
+      self,
     });
   };
 
@@ -60,7 +62,10 @@ const createInstantSearchServer = algoliasearch => {
       .reduce(
         (acc, searchParameter) =>
           searchParameter.getSearchParameters.call(
-            { context: searchParameter.context },
+            {
+              ...searchParameter.self,
+              context: searchParameter.context,
+            },
             acc,
             searchParameter.props,
             searchParameter.searchState
@@ -73,7 +78,10 @@ const createInstantSearchServer = algoliasearch => {
       .reduce((acc, searchParameter) => {
         const index = getIndex(searchParameter.context);
         const sp = searchParameter.getSearchParameters.call(
-          { context: searchParameter.context },
+          {
+            ...searchParameter.self,
+            context: searchParameter.context,
+          },
           acc[index] ? acc[index] : sharedSearchParameters,
           searchParameter.props,
           searchParameter.searchState

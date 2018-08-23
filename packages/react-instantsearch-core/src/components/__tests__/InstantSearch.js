@@ -332,13 +332,22 @@ describe('InstantSearch', () => {
     );
     let childContext = wrapper.instance().getChildContext();
 
-    childContext.ais.onSearchParameters(getSearchParameters, context, props);
+    const self = {
+      foo: 'bar',
+    };
+    childContext.ais.onSearchParameters(
+      getSearchParameters,
+      context,
+      props,
+      self
+    );
 
     expect(onSearchParametersMock.mock.calls).toHaveLength(1);
     expect(onSearchParametersMock.mock.calls[0][0]).toBe(getSearchParameters);
     expect(onSearchParametersMock.mock.calls[0][1]).toEqual(context);
     expect(onSearchParametersMock.mock.calls[0][2]).toEqual(props);
     expect(onSearchParametersMock.mock.calls[0][3]).toEqual({});
+    expect(onSearchParametersMock.mock.calls[0][4]).toBe(self);
 
     wrapper = mount(
       <InstantSearch
@@ -367,7 +376,12 @@ describe('InstantSearch', () => {
 
     childContext = wrapper.instance().getChildContext();
 
-    childContext.ais.onSearchParameters(getSearchParameters, context, props);
+    childContext.ais.onSearchParameters(
+      getSearchParameters,
+      context,
+      props,
+      self
+    );
 
     expect(onSearchParametersMock.mock.calls).toHaveLength(2);
   });

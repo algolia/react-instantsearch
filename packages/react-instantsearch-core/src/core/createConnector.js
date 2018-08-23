@@ -162,7 +162,8 @@ export default function createConnector(connectorDesc) {
           this.context.ais.onSearchParameters(
             connectorDesc.getSearchParameters,
             this.context,
-            this.props
+            this.props,
+            this
           );
         }
       }
