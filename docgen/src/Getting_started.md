@@ -47,7 +47,7 @@ React InstantSearch is available in the [npm](https://www.npmjs.com) registry. T
 yarn add react-instantsearch-dom
 ```
 
-Note: we use `yarn add` to install dependencies but React InstantSearch is also installable via `npm install --save react-instantsearch-dom`.
+Note: we use `yarn add` to install dependencies but React InstantSearch is also installable via `npm install react-instantsearch-dom`.
 
 ## Add the `<InstantSearch>` component
 
