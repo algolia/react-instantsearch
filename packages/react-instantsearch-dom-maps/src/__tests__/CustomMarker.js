@@ -547,7 +547,7 @@ describe('CustomMarker', () => {
         ...defaultProps,
       };
 
-      // Use `mount` instead of `shallow` to trigger didUpdate
+      // Use `mount` instead of `shallow` to avoid issue with `unstable_renderSubtreeIntoContainer`
       const wrapper = mount(
         <CustomMarker {...props}>
           <span>This is the children.</span>
@@ -608,7 +608,8 @@ describe('CustomMarker', () => {
         ...defaultProps,
       };
 
-      const wrapper = shallow(
+      // Use `mount` instead of `shallow` to avoid issue with `unstable_renderSubtreeIntoContainer`
+      const wrapper = mount(
         <CustomMarker {...props}>
           <span>This is the children.</span>
         </CustomMarker>,
