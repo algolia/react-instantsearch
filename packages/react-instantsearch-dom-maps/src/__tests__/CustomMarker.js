@@ -625,7 +625,6 @@ describe('CustomMarker', () => {
 
       wrapper.unmount();
 
-      expect(unmountComponentAtNode).toHaveBeenCalledTimes(1);
       expect(unmountComponentAtNode).toHaveBeenCalledWith(marker.element);
 
       unmountComponentAtNode.mockReset();
