@@ -17,7 +17,7 @@ examples: [{
     description: 'This demos based on e-commerce demonstrates the usage of the load more UX pattern.',
     sourceCodeUrl: 'https://github.com/algolia/react-instantsearch/tree/master/docgen/src/examples/e-commerce-infinite',
     demoUrl: 'examples/e-commerce-infinite'
-  }, {
+  },{
     id: 'material-ui',
     title: 'Material-UI',
     description: 'This demos based on e-commerce demonstrates the integration of the Material UI component library with react-instantsearch.',
