@@ -31,6 +31,9 @@ describe('CustomMarker', () => {
   beforeEach(() => {
     utils.registerEvents.mockClear();
     utils.registerEvents.mockReset();
+
+    // Register default implementation
+    utils.registerEvents.mockImplementation(() => jest.fn());
   });
 
   describe('creation', () => {
@@ -207,8 +210,6 @@ describe('CustomMarker', () => {
       });
 
       createHTMLMarker.mockImplementationOnce(() => factory);
-
-      utils.registerEvents.mockImplementation(() => () => {});
 
       const props = {
         ...defaultProps,
