@@ -62,10 +62,10 @@ export default createConnector({
   displayName: 'AlgoliaToggle',
 
   propTypes: {
-    label: PropTypes.string,
+    label: PropTypes.string.isRequired,
+    attribute: PropTypes.string.isRequired,
+    value: PropTypes.any.isRequired,
     filter: PropTypes.func,
-    attribute: PropTypes.string,
-    value: PropTypes.any,
     defaultRefinement: PropTypes.bool,
   },
 
