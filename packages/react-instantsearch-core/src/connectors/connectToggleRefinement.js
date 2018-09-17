@@ -90,12 +90,14 @@ export default createConnector({
     const { attribute, value, filter } = props;
     const checked = getCurrentRefinement(props, searchState, this.context);
 
+    searchParameters = searchParameters.addDisjunctiveFacet(attribute);
+
     if (checked) {
-      if (attribute) {
-        searchParameters = searchParameters
-          .addFacet(attribute)
-          .addFacetRefinement(attribute, value);
-      }
+      searchParameters = searchParameters.addDisjunctiveFacetRefinement(
+        attribute,
+        value
+      );
+
       if (filter) {
         searchParameters = filter(searchParameters);
       }

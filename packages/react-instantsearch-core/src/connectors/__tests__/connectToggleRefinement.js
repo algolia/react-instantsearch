@@ -14,6 +14,7 @@ describe('connectToggleRefinement', () => {
     const getSP = connect.getSearchParameters.bind(context);
     const getMetadata = connect.getMetadata.bind(context);
     const cleanUp = connect.cleanUp.bind(context);
+
     it('provides the correct props to the component', () => {
       props = getProvidedProps({ attribute: 't' }, {});
       expect(props).toEqual({ currentRefinement: false });
@@ -45,16 +46,38 @@ describe('connectToggleRefinement', () => {
       });
     });
 
-    it('refines the corresponding facet', () => {
+    it('refines the corresponding facet with `true`', () => {
       params = getSP(
         new SearchParameters(),
         {
           attribute: 'facet',
           value: 'val',
         },
-        { toggle: { facet: true } }
+        {
+          toggle: {
+            facet: true,
+          },
+        }
       );
-      expect(params.getConjunctiveRefinements('facet')).toEqual(['val']);
+
+      expect(params.getDisjunctiveRefinements('facet')).toEqual(['val']);
+    });
+
+    it('does not refine the corresponding facet with `false`', () => {
+      params = getSP(
+        new SearchParameters(),
+        {
+          attribute: 'facet',
+          value: 'val',
+        },
+        {
+          toggle: {
+            facet: false,
+          },
+        }
+      );
+
+      expect(params.getDisjunctiveRefinements('facet')).toEqual([]);
     });
 
     it('applies the provided filter', () => {
@@ -192,16 +215,46 @@ describe('connectToggleRefinement', () => {
       });
     });
 
-    it('refines the corresponding facet', () => {
+    it('refines the corresponding facet with `true`', () => {
       params = getSP(
         new SearchParameters(),
         {
           attribute: 'facet',
           value: 'val',
         },
-        { indices: { first: { toggle: { facet: true } } } }
+        {
+          indices: {
+            first: {
+              toggle: {
+                facet: true,
+              },
+            },
+          },
+        }
       );
-      expect(params.getConjunctiveRefinements('facet')).toEqual(['val']);
+
+      expect(params.getDisjunctiveRefinements('facet')).toEqual(['val']);
+    });
+
+    it('does not refines the corresponding facet with `false`', () => {
+      params = getSP(
+        new SearchParameters(),
+        {
+          attribute: 'facet',
+          value: 'val',
+        },
+        {
+          indices: {
+            first: {
+              toggle: {
+                facet: false,
+              },
+            },
+          },
+        }
+      );
+
+      expect(params.getDisjunctiveRefinements('facet')).toEqual([]);
     });
 
     it('applies the provided filter', () => {
