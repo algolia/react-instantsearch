@@ -80,16 +80,38 @@ describe('connectToggleRefinement', () => {
       expect(params.getDisjunctiveRefinements('facet')).toEqual([]);
     });
 
-    it('applies the provided filter', () => {
+    it('applies the provided filter with `true`', () => {
       params = getSP(
         new SearchParameters(),
         {
           attribute: 'facet',
           filter: sp => sp.setQuery('yep'),
         },
-        { toggle: { facet: true } }
+        {
+          toggle: {
+            facet: true,
+          },
+        }
       );
+
       expect(params.query).toEqual('yep');
+    });
+
+    it('does not apply the provided filter with `false`', () => {
+      params = getSP(
+        new SearchParameters(),
+        {
+          attribute: 'facet',
+          filter: sp => sp.setQuery('yep'),
+        },
+        {
+          toggle: {
+            facet: false,
+          },
+        }
+      );
+
+      expect(params.query).toEqual('');
     });
 
     it('registers its filter in metadata', () => {
@@ -257,16 +279,46 @@ describe('connectToggleRefinement', () => {
       expect(params.getDisjunctiveRefinements('facet')).toEqual([]);
     });
 
-    it('applies the provided filter', () => {
+    it('applies the provided filter with `true`', () => {
       params = getSP(
         new SearchParameters(),
         {
           attribute: 'facet',
           filter: sp => sp.setQuery('yep'),
         },
-        { indices: { first: { toggle: { facet: true } } } }
+        {
+          indices: {
+            first: {
+              toggle: {
+                facet: true,
+              },
+            },
+          },
+        }
       );
+
       expect(params.query).toEqual('yep');
+    });
+
+    it('does not apply the provided filter with `false`', () => {
+      params = getSP(
+        new SearchParameters(),
+        {
+          attribute: 'facet',
+          filter: sp => sp.setQuery('yep'),
+        },
+        {
+          indices: {
+            first: {
+              toggle: {
+                facet: false,
+              },
+            },
+          },
+        }
+      );
+
+      expect(params.query).toEqual('');
     });
 
     it('registers its filter in metadata', () => {
