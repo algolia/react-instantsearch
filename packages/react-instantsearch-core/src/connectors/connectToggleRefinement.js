@@ -90,20 +90,20 @@ export default createConnector({
     const { attribute, value, filter } = props;
     const checked = getCurrentRefinement(props, searchState, this.context);
 
-    searchParameters = searchParameters.addDisjunctiveFacet(attribute);
+    let nextSearchParameters = searchParameters.addDisjunctiveFacet(attribute);
 
     if (checked) {
-      searchParameters = searchParameters.addDisjunctiveFacetRefinement(
+      nextSearchParameters = nextSearchParameters.addDisjunctiveFacetRefinement(
         attribute,
         value
       );
 
       if (filter) {
-        searchParameters = filter(searchParameters);
+        nextSearchParameters = filter(nextSearchParameters);
       }
     }
 
-    return searchParameters;
+    return nextSearchParameters;
   },
 
   getMetadata(props, searchState) {
