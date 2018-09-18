@@ -3,7 +3,6 @@ import connect from '../connectToggleRefinement';
 
 jest.mock('../../core/createConnector', () => x => x);
 
-let props;
 let params;
 
 describe('connectToggleRefinement', () => {
@@ -15,15 +14,52 @@ describe('connectToggleRefinement', () => {
     const getMetadata = connect.getMetadata.bind(context);
     const cleanUp = connect.cleanUp.bind(context);
 
-    it('provides the correct props to the component', () => {
-      props = getProvidedProps({ attribute: 't' }, {});
-      expect(props).toEqual({ currentRefinement: false });
+    it('provides the correct props to the component with the value unchecked', () => {
+      const _props = { attribute: 't' };
+      const searchState = {};
+      const searchResults = {};
 
-      props = getProvidedProps({ attribute: 't' }, { toggle: { t: true } });
-      expect(props).toEqual({ currentRefinement: true });
+      const providedProps = getProvidedProps(
+        _props,
+        searchState,
+        searchResults
+      );
 
-      props = getProvidedProps({ defaultRefinement: true, attribute: 't' }, {});
-      expect(props).toEqual({ currentRefinement: true });
+      expect(providedProps).toEqual({
+        currentRefinement: false,
+      });
+    });
+
+    it('provides the correct props to the component with value checked', () => {
+      const _props = { attribute: 't' };
+      const searchState = { toggle: { t: true } };
+      const searchResults = {};
+
+      const providedProps = getProvidedProps(
+        _props,
+        searchState,
+        searchResults
+      );
+
+      expect(providedProps).toEqual({
+        currentRefinement: true,
+      });
+    });
+
+    it('provides the correct props to the component with a default refinement', () => {
+      const _props = { defaultRefinement: true, attribute: 't' };
+      const searchState = {};
+      const searchResults = {};
+
+      const providedProps = getProvidedProps(
+        _props,
+        searchState,
+        searchResults
+      );
+
+      expect(providedProps).toEqual({
+        currentRefinement: true,
+      });
     });
 
     it("calling refine updates the widget's search state", () => {
@@ -177,6 +213,7 @@ describe('connectToggleRefinement', () => {
       });
     });
   });
+
   describe('multi index', () => {
     let context = {
       context: {
@@ -184,20 +221,40 @@ describe('connectToggleRefinement', () => {
         multiIndexContext: { targetedIndex: 'first' },
       },
     };
+
     const getProvidedProps = connect.getProvidedProps.bind(context);
     const getSP = connect.getSearchParameters.bind(context);
     const getMetadata = connect.getMetadata.bind(context);
     const cleanUp = connect.cleanUp.bind(context);
 
-    it('provides the correct props to the component', () => {
-      props = getProvidedProps({ attribute: 't' }, {});
-      expect(props).toEqual({ currentRefinement: false });
+    it('provides the correct props to the component with value unchecked', () => {
+      const _props = { attribute: 't' };
+      const searchState = {};
+      const searchResults = {};
 
-      props = getProvidedProps(
-        { attribute: 't' },
-        { indices: { first: { toggle: { t: true } } } }
+      const providedProps = getProvidedProps(
+        _props,
+        searchState,
+        searchResults
       );
-      expect(props).toEqual({ currentRefinement: true });
+
+      expect(providedProps).toEqual({ currentRefinement: false });
+    });
+
+    it('provides the correct props to the component with value checked', () => {
+      const _props = { attribute: 't' };
+      const searchState = { indices: { first: { toggle: { t: true } } } };
+      const searchResults = {};
+
+      const providedProps = getProvidedProps(
+        _props,
+        searchState,
+        searchResults
+      );
+
+      expect(providedProps).toEqual({
+        currentRefinement: true,
+      });
     });
 
     it("calling refine updates the widget's search state", () => {
