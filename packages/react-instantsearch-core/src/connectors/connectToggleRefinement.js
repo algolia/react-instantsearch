@@ -1,8 +1,10 @@
+import { find } from 'lodash';
 import PropTypes from 'prop-types';
 import createConnector from '../core/createConnector';
 import {
   cleanUpValue,
   getIndex,
+  getResults,
   refineValue,
   getCurrentRefinementValue,
 } from '../core/indexUtils';
@@ -69,13 +71,41 @@ export default createConnector({
     defaultRefinement: PropTypes.bool,
   },
 
-  getProvidedProps(props, searchState) {
+  getProvidedProps(props, searchState, searchResults) {
+    const { attribute, value } = props;
+    const results = getResults(searchResults, this.context);
     const currentRefinement = getCurrentRefinement(
       props,
       searchState,
       this.context
     );
-    return { currentRefinement };
+
+    const facetValues = results && results.getFacetValues(attribute);
+    const facetValue =
+      // Use null to always be consistent with type of the value
+      // count: number | null
+      facetValues && facetValues.length
+        ? find(facetValues, item => item.name === value.toString())
+        : null;
+
+    const facetValueCount = facetValue && facetValue.count;
+    const facetValuesCount =
+      // Use null to always be consistent with type of the value
+      // count: number | null
+      facetValues && facetValues.length
+        ? facetValues.reduce((acc, item) => acc + item.count, 0)
+        : null;
+
+    const count = {
+      checked: facetValuesCount,
+      unchecked: facetValueCount,
+    };
+
+    return {
+      canRefine: facetValueCount !== null && facetValueCount > 0,
+      currentRefinement,
+      count,
+    };
   },
 
   refine(props, searchState, nextRefinement) {
