@@ -20,7 +20,6 @@ import ToggleRefinement from '../components/ToggleRefinement';
  * @themeKey ais-ToggleRefinement-label - the label of each toggle item
  * @themeKey ais-ToggleRefinement-checkbox - the checkbox input of each toggle item
  * @themeKey ais-ToggleRefinement-labelText - the label text of each toggle item
- * @themeKey ais-ToggleRefinement-count - the count of items for each item
  * @example
  * import React from 'react';
  * import { InstantSearch, ToggleRefinement } from 'react-instantsearch-dom';
@@ -29,12 +28,12 @@ import ToggleRefinement from '../components/ToggleRefinement';
  *   <InstantSearch
  *     appId="latency"
  *     apiKey="6be0576ff61c053d5f9a3225e2a90f76"
- *     indexName="ikea"
+ *     indexName="instant_search"
  *   >
  *     <ToggleRefinement
- *       attribute="materials"
- *       label="Made with solid pine"
- *       value="Solid pine"
+ *       attribute="free_shipping"
+ *       label="Free Shipping"
+ *       value={true}
  *     />
  *   </InstantSearch>
  * );
