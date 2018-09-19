@@ -80,24 +80,24 @@ export default createConnector({
       this.context
     );
 
-    const facetValues = results && results.getFacetValues(attribute);
+    const allFacetValues = results && results.getFacetValues(attribute);
     const facetValue =
       // Use null to always be consistent with type of the value
       // count: number | null
-      facetValues && facetValues.length
-        ? find(facetValues, item => item.name === value.toString())
+      allFacetValues && allFacetValues.length
+        ? find(allFacetValues, item => item.name === value.toString())
         : null;
 
     const facetValueCount = facetValue && facetValue.count;
-    const facetValuesCount =
+    const allFacetValuesCount =
       // Use null to always be consistent with type of the value
       // count: number | null
-      facetValues && facetValues.length
-        ? facetValues.reduce((acc, item) => acc + item.count, 0)
+      allFacetValues && allFacetValues.length
+        ? allFacetValues.reduce((acc, item) => acc + item.count, 0)
         : null;
 
     const count = {
-      checked: facetValuesCount,
+      checked: allFacetValuesCount,
       unchecked: facetValueCount,
     };
 
