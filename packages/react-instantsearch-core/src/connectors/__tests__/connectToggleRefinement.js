@@ -558,7 +558,7 @@ describe('connectToggleRefinement', () => {
       expect(params.getDisjunctiveRefinements('facet')).toEqual(['val']);
     });
 
-    it('does not refines the corresponding facet with `false`', () => {
+    it('does not refine the corresponding facet with `false`', () => {
       params = getSP(
         new SearchParameters(),
         {
