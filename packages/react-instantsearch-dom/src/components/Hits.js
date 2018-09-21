@@ -12,10 +12,7 @@ const Hits = ({ hits, className, hitComponent: HitComponent }) => (
     <ul className={cx('list')}>
       {hits.map((hit, indexPosition) => (
         <li className={cx('item')} key={hit.objectID}>
-          <HitComponent
-            hit={hit}
-            indexPosition={indexPosition}
-          />
+          <HitComponent hit={hit} indexPosition={indexPosition} />
         </li>
       ))}
     </ul>
