@@ -353,6 +353,24 @@ describe('connectNumericMenu', () => {
         another: { searchState: 'searchState' },
       });
     });
+
+    it('computes canRefine based on the length of the transformed items list', () => {
+      const transformItems = items => [];
+      const results = {
+        getFacetStats: () => ({ min: 0, max: 300 }),
+        getFacetByName: () => true,
+        hits: [],
+      };
+      props = getProvidedProps(
+        {
+          items: [{ label: 'Ok', start: 100 }],
+          transformItems,
+        },
+        {},
+        { results }
+      );
+      expect(props.canRefine).toEqual(false);
+    });
   });
   describe('multi index', () => {
     let context = {

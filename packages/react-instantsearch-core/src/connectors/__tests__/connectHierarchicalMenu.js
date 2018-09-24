@@ -542,7 +542,19 @@ describe('connectHierarchicalMenu', () => {
         hierarchicalMenu: {},
       });
     });
+
+    it('computes canRefine based on the length of the transformed items list', () => {
+      const transformItems = items => [];
+      const results = {
+        getFacetValues: () => ({ data: [{ id: "test" }] }),
+        getFacetByName: () => true,
+        hits: [],
+      };
+      props = getProvidedProps({ attributes: ['ok'], transformItems }, {}, { results });
+      expect(props.canRefine).toEqual(false);
+    });
   });
+
   describe('multi index', () => {
     let context = {
       context: {

@@ -431,6 +431,17 @@ describe('connectMenu', () => {
         },
       ]);
     });
+
+    it('computes canRefine based on the length of the transformed items list', () => {
+      const transformItems = items => [];
+      const results = {
+        getFacetValues: () => [{ count: 1, id: "test", isRefined: true, name: "test" }],
+        getFacetByName: () => true,
+        hits: [],
+      };
+      props = getProvidedProps({ attribute: 'ok', transformItems }, {}, { results });
+      expect(props.canRefine).toEqual(false);
+    });
   });
   describe('multi index', () => {
     let context = {
