@@ -544,13 +544,19 @@ describe('connectHierarchicalMenu', () => {
     });
 
     it('computes canRefine based on the length of the transformed items list', () => {
-      const transformItems = items => [];
+      const transformItems = () => [];
       const results = {
-        getFacetValues: () => ({ data: [{ id: "test" }] }),
+        getFacetValues: () => ({ data: [{ id: 'test' }] }),
         getFacetByName: () => true,
         hits: [],
       };
-      props = getProvidedProps({ attributes: ['ok'], transformItems }, {}, { results });
+
+      props = getProvidedProps(
+        { attributes: ['ok'], transformItems },
+        {},
+        { results }
+      );
+
       expect(props.canRefine).toEqual(false);
     });
   });

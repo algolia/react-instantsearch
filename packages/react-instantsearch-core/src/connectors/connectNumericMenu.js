@@ -168,7 +168,8 @@ export default createConnector({
       items: transformedItems,
       currentRefinement,
       canRefine:
-        transformedItems.length > 0 && transformedItems.some(item => item.noRefinement === false),
+        transformedItems.length > 0 &&
+        transformedItems.some(item => item.noRefinement === false),
     };
   },
 
