@@ -61,8 +61,8 @@ function Header() {
 function Filters() {
   return (
     <div className="container-fluid">
-      <div className="row">
-        <div className="col-sm-7 aisdemo--left-column">
+      <div className="search-filters">
+        <div className="aisdemo--left-column">
           <div className="aisdemo-filters">
             <DatesAndGuest />
             <Capacity />
@@ -75,7 +75,7 @@ function Filters() {
           </div>
         </div>
 
-        <div className="col-sm-5 aisdemo--right-column">
+        <div className="aisdemo--right-column">
           <GoogleMapsLoader
             apiKey="AIzaSyBawL8VbstJDdU5397SUX7pEt9DslAwWgQ"
             endpoint="https://maps.googleapis.com/maps/api/js?v=weekly"

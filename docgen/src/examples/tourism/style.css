@@ -8,14 +8,19 @@ body {
   color: #565a5c;
 }
 
+.search-filters {
+  display: flex;
+}
+
 .aisdemo--left-column {
   height: 400px;
+  flex: 2 1 0;
 }
 
 .aisdemo--right-column {
-  padding-right: 0;
-  padding-left: 0;
+  position: relative;
   height: 400px;
+  flex: 1 1 0;
 }
 
 /* HEADER
