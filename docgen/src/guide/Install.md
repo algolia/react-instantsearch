@@ -14,7 +14,7 @@ npm install react-instantsearch-dom --save
 
 **Notes:**
 * For [widgets](guide/Widgets.html) to be effectively styled, you need to load the Algolia theme. See the [styling guide](guide/Styling_widgets.html).
-* You need to have `react`, `react-dom` or `react-native` (given your use case) dependencies installed for `react-instantsearch` to work.
+* You need to have `react`, `react-dom` or `react-native` (given your use case) dependencies installed for React InstantSearch to work.
 * We recommend using [create-react-app](https://github.com/facebookincubator/create-react-app) if this is your first React application.
 
 <div class="guide-nav">

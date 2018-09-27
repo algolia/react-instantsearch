@@ -8,7 +8,7 @@ examplesCTA: 'Go to live demo'
 examples: [{
     id: 'e-commerce',
     title: 'E-commerce',
-    description: 'This demos shows the usage of react-instantsearch in the context of an e-commerce website.',
+    description: 'This demos shows the usage of React InstantSearch in the context of an e-commerce website.',
     sourceCodeUrl: 'https://github.com/algolia/react-instantsearch/tree/master/docgen/src/examples/e-commerce',
     demoUrl: 'examples/e-commerce'
   },{
@@ -26,19 +26,19 @@ examples: [{
   }, {
     id: 'media',
     title: 'Media',
-    description: 'This demos shows the usage of react-instantsearch in the context of a media website',
+    description: 'This demos shows the usage of React InstantSearch in the context of a media website',
     sourceCodeUrl: 'https://github.com/algolia/react-instantsearch/tree/master/docgen/src/examples/media',
     demoUrl: 'examples/media'
   }, {
     id: 'tourism',
     title: 'Tourism',
-    description: 'This demos shows the usage of react-instantsearch in the context of a home renting website',
+    description: 'This demos shows the usage of React InstantSearch in the context of a home renting website',
     sourceCodeUrl: 'https://github.com/algolia/react-instantsearch/tree/master/docgen/src/examples/tourism',
     demoUrl: 'examples/tourism'
   }, {
     id: 'default-theme',
     title: 'Default theme',
-    description: 'This demos shows the usage of react-instantsearch in the context of a home renting website',
+    description: 'This demos shows the usage of React InstantSearch in the context of a home renting website',
     sourceCodeUrl: 'https://github.com/algolia/react-instantsearch/tree/master/docgen/src/examples/default-theme',
     demoUrl: 'examples/default-theme'
   }]
