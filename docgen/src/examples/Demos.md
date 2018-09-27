@@ -20,7 +20,7 @@ examples: [{
   },{
     id: 'material-ui',
     title: 'Material-UI',
-    description: 'This demos based on e-commerce demonstrates the integration of the Material UI component library with react-instantsearch.',
+    description: 'This demos based on e-commerce demonstrates the integration of the Material UI component library with react-instantsearch-dom.',
     sourceCodeUrl: 'https://github.com/algolia/react-instantsearch/tree/master/docgen/src/examples/material-ui',
     demoUrl: 'examples/material-ui'
   }, {

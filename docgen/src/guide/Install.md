@@ -6,10 +6,10 @@ category: guide
 navWeight: 95
 ---
 
-Install `react-instantsearch` using [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/):
+Install `react-instantsearch-dom` using [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/):
 
 ```shell
-npm install react-instantsearch --save
+npm install react-instantsearch-dom --save
 ```
 
 **Notes:**
