@@ -21,15 +21,18 @@ class App extends Component {
     const aroundLatLng = initialSearchState.configure
       ? initialSearchState.configure.aroundLatLng
       : null;
-    this.state = { searchState: initialSearchState, aroundLatLng };
 
-    this.onSearchStateChange = this.onSearchStateChange.bind(this);
-    window.addEventListener('popstate', ({ state: searchState }) =>
-      this.setState({ searchState })
-    );
+    this.state = {
+      searchState: initialSearchState,
+      aroundLatLng,
+    };
+
+    window.addEventListener('popstate', ({ state: searchState }) => {
+      this.setState({ searchState });
+    });
   }
 
-  onSearchStateChange(searchState) {
+  onSearchStateChange = searchState => {
     // update the URL when there is a new search state.
     clearTimeout(this.debouncedSetState);
     this.debouncedSetState = setTimeout(() => {
@@ -54,7 +57,7 @@ class App extends Component {
         },
       };
     });
-  }
+  };
 
   render() {
     const { aroundLatLng, searchState } = this.state;
@@ -72,7 +75,7 @@ class App extends Component {
         appId="latency"
         apiKey="6be0576ff61c053d5f9a3225e2a90f76"
         indexName="airbnb"
-        searchState={this.state.searchState}
+        searchState={searchState}
         onSearchStateChange={this.onSearchStateChange}
       >
         <Configure {...parameters} />
