@@ -40,27 +40,25 @@ const App = props => (
 
 function Header() {
   return (
-    <div className="container-fluid">
-      <header className="navbar navbar-static-top aisdemo-navbar">
-        <a href="./" className="is-logo">
-          <img
-            src="https://res.cloudinary.com/hilnmyskv/image/upload/w_100,h_100,dpr_2.0//v1461180087/logo-instantsearchjs-avatar.png"
-            width={40}
-          />
-        </a>
-        <a href="./" className="logo">
-          BnB
-        </a>
-        <i className="fa fa-search" />
-        <SearchBox />
-      </header>
-    </div>
+    <header className="navbar navbar-static-top aisdemo-navbar">
+      <a href="./" className="is-logo">
+        <img
+          src="https://res.cloudinary.com/hilnmyskv/image/upload/w_100,h_100,dpr_2.0//v1461180087/logo-instantsearchjs-avatar.png"
+          width={40}
+        />
+      </a>
+      <a href="./" className="logo">
+        BnB
+      </a>
+      <i className="fa fa-search" />
+      <SearchBox />
+    </header>
   );
 }
 
 function Filters() {
   return (
-    <div className="container-fluid">
+    <Fragment>
       <div className="search-filters">
         <div className="aisdemo--left-column">
           <div className="aisdemo-filters">
@@ -103,7 +101,7 @@ function Filters() {
           </GoogleMapsLoader>
         </div>
       </div>
-    </div>
+    </Fragment>
   );
 }
 
