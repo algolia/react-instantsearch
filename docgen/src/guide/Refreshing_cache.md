@@ -35,21 +35,18 @@ class App extends Component {
   }
 
   refresh = () => {
-    this.setState({ refresh: true });
-  };
-
-  onSearchStateChange = () => {
-    this.setState({ refresh: false });
+    this.setState({ refresh: true }, () => {
+      this.setState({ refresh: false });
+    });
   };
 
   render() {
     return (
       <InstantSearch
-        appId="yourAppId"
-        apiKey="yourApiKey"
-        indexName="yourIndexName"
+        appId="latency"
+        apiKey="6be0576ff61c053d5f9a3225e2a90f76"
+        indexName="instant_search"
         refresh={this.state.refresh}
-        onSearchStateChange={this.onSearchStateChange}
       >
         <SearchBox />
         <button onClick={this.refresh}>Refresh cache</button>
@@ -82,25 +79,26 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.interval = setInterval(() => this.setState({ refresh: true }), 5000);
+    this.interval = setInterval(
+      () =>
+        this.setState({ refresh: true }, () => {
+          this.setState({ refresh: false });
+        }),
+      5000
+    );
   }
 
   componentWillUnmount() {
     clearInterval(this.interval);
   }
 
-  onSearchStateChange = () => {
-    this.setState({ refresh: false });
-  };
-
   render() {
     return (
       <InstantSearch
-        appId="yourAppId"
-        apiKey="yourApiKey"
-        indexName="yourIndexName"
+        appId="latency"
+        apiKey="6be0576ff61c053d5f9a3225e2a90f76"
+        indexName="instant_search"
         refresh={this.state.refresh}
-        onSearchStateChange={this.onSearchStateChange}
       >
         <SearchBox />
         <Hits />
