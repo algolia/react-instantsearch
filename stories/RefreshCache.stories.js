@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
 import { storiesOf } from '@storybook/react';
+import algoliasearch from 'algoliasearch/lite';
 import { InstantSearch, SearchBox, Configure } from 'react-instantsearch-dom';
 import { CustomHits } from './util';
 
 const stories = storiesOf('RefreshCache', module);
+
+const searchClient = algoliasearch(
+  'latency',
+  '6be0576ff61c053d5f9a3225e2a90f76'
+);
 
 class AppWithRefresh extends Component {
   state = {
@@ -19,9 +25,8 @@ class AppWithRefresh extends Component {
   render() {
     return (
       <InstantSearch
-        appId="latency"
-        apiKey="6be0576ff61c053d5f9a3225e2a90f76"
         indexName="instant_search"
+        searchClient={searchClient}
         refresh={this.state.refresh}
       >
         <Configure hitsPerPage={5} />
@@ -139,9 +144,8 @@ class App extends Component {
   render() {
     return (
       <InstantSearch
-        appId="latency"
-        apiKey="6be0576ff61c053d5f9a3225e2a90f76"
         indexName="instant_search"
+        searchClient={searchClient}
         refresh={this.state.refresh}
       >
         <Configure hitsPerPage={5} />

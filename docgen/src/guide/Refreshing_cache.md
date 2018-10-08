@@ -23,7 +23,13 @@ If you know that the cache needs to be refreshed conditionally of a specific eve
 
 ```jsx
 import React, { Component } from 'react';
+import algoliasearch from 'algoliasearch/lite';
 import { InstantSearch, SearchBox, Hits } from 'react-instantsearch-dom';
+
+const searchClient = algoliasearch(
+  'latency',
+  '6be0576ff61c053d5f9a3225e2a90f76'
+);
 
 class App extends Component {
   constructor(props) {
@@ -43,9 +49,8 @@ class App extends Component {
   render() {
     return (
       <InstantSearch
-        appId="latency"
-        apiKey="6be0576ff61c053d5f9a3225e2a90f76"
         indexName="instant_search"
+        searchClient={searchClient}
         refresh={this.state.refresh}
       >
         <SearchBox />
@@ -67,7 +72,13 @@ You should use this approach if you cannot use a user action as a specific event
 
 ```jsx
 import React, { Component } from 'react';
+import algoliasearch from 'algoliasearch/lite';
 import { InstantSearch, SearchBox, Hits } from 'react-instantsearch-dom';
+
+const searchClient = algoliasearch(
+  'latency',
+  '6be0576ff61c053d5f9a3225e2a90f76'
+);
 
 class App extends Component {
   constructor(props) {
@@ -95,9 +106,8 @@ class App extends Component {
   render() {
     return (
       <InstantSearch
-        appId="latency"
-        apiKey="6be0576ff61c053d5f9a3225e2a90f76"
         indexName="instant_search"
+        searchClient={searchClient}
         refresh={this.state.refresh}
       >
         <SearchBox />
