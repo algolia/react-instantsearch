@@ -9,6 +9,7 @@ exports[`Hits accepts a custom className 1`] = `
   >
     <li
       className="ais-Hits-item"
+      data-index-position={0}
     >
       <div
         id={0}
@@ -16,6 +17,7 @@ exports[`Hits accepts a custom className 1`] = `
     </li>
     <li
       className="ais-Hits-item"
+      data-index-position={1}
     >
       <div
         id={1}
@@ -23,6 +25,7 @@ exports[`Hits accepts a custom className 1`] = `
     </li>
     <li
       className="ais-Hits-item"
+      data-index-position={2}
     >
       <div
         id={2}
@@ -41,6 +44,7 @@ exports[`Hits accepts a hitComponent prop 1`] = `
   >
     <li
       className="ais-Hits-item"
+      data-index-position={0}
     >
       <div
         id={0}
@@ -48,6 +52,7 @@ exports[`Hits accepts a hitComponent prop 1`] = `
     </li>
     <li
       className="ais-Hits-item"
+      data-index-position={1}
     >
       <div
         id={1}
@@ -55,6 +60,7 @@ exports[`Hits accepts a hitComponent prop 1`] = `
     </li>
     <li
       className="ais-Hits-item"
+      data-index-position={2}
     >
       <div
         id={2}
