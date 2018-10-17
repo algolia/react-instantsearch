@@ -19,6 +19,7 @@ export default function createInstantSearchManager({
   searchClient,
   resultsState,
   stalledSearchDelay,
+  disableEmptySearch,
 }) {
   const baseSP = new SearchParameters({
     index: indexName,
@@ -157,6 +158,10 @@ export default function createInstantSearchManager({
       });
 
       helper.setState(mainIndexParameters);
+
+      if (disableEmptySearch && !helper.state.query) {
+        return;
+      }
 
       helper.search();
     }
