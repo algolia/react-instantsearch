@@ -57,7 +57,7 @@ jobs:
   test_e2e:
     <<: *defaults
     docker:
-      - image: circleci/node:8.12.0-browsers@sha256:dc17d45c731dd31c3d727eb421cecff018e92c6c1967b19ad69aaec764fc3fae
+      - image: circleci/node:8.12.0-browsers@sha256:bb033ff2413b0523e846aea54cf0e95b6d7f598accc4edd0753481fee73997ea
     environment:
       FIREFOX_VERSION: '56.0'
     steps:
