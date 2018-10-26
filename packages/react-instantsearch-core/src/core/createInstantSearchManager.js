@@ -271,7 +271,7 @@ export default function createInstantSearchManager({
     search();
   }
 
-  function onSearchForFacetValues({ facetName, query, maxFacetHits }) {
+  function onSearchForFacetValues({ facetName, query, maxFacetHits = 10 }) {
     store.setState({
       ...store.getState(),
       searchingForFacetValues: true,

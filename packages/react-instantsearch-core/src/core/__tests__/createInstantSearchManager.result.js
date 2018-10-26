@@ -157,7 +157,7 @@ describe('createInstantSearchManager', () => {
           expect(searchForFacetValues).toHaveBeenCalledWith(
             'facetName',
             'query',
-            undefined
+            10
           );
 
           expect(store.searchingForFacetValues).toBe(false);
