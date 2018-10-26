@@ -218,6 +218,106 @@ describe('createInstantSearchManager', () => {
           expect(store.searchingForFacetValues).toBe(false);
         });
       });
+
+      it('updates the store and searches with maxFacetHits out of range (higher)', () => {
+        expect.assertions(4);
+
+        const searchForFacetValues = jest.fn(() =>
+          Promise.resolve({
+            facetHits: 'results',
+          })
+        );
+
+        jsHepler.mockImplementationOnce((...args) => {
+          const instance = jsHepler(...args);
+
+          instance.searchForFacetValues = searchForFacetValues;
+
+          return instance;
+        });
+
+        const ism = createInstantSearchManager({
+          indexName: 'index',
+          initialState: {},
+          searchParameters: {},
+          searchClient: client,
+        });
+
+        ism.onSearchForFacetValues({
+          facetName: 'facetName',
+          query: 'query',
+          maxFacetHits: 125,
+        });
+
+        expect(ism.store.getState().results).toBe(null);
+
+        return Promise.resolve().then(() => {
+          const store = ism.store.getState();
+
+          expect(searchForFacetValues).toHaveBeenCalledWith(
+            'facetName',
+            'query',
+            100
+          );
+
+          expect(store.resultsFacetValues).toEqual({
+            facetName: 'results',
+            query: 'query',
+          });
+
+          expect(store.searchingForFacetValues).toBe(false);
+        });
+      });
+
+      it('updates the store and searches with maxFacetHits out of range (lower)', () => {
+        expect.assertions(4);
+
+        const searchForFacetValues = jest.fn(() =>
+          Promise.resolve({
+            facetHits: 'results',
+          })
+        );
+
+        jsHepler.mockImplementationOnce((...args) => {
+          const instance = jsHepler(...args);
+
+          instance.searchForFacetValues = searchForFacetValues;
+
+          return instance;
+        });
+
+        const ism = createInstantSearchManager({
+          indexName: 'index',
+          initialState: {},
+          searchParameters: {},
+          searchClient: client,
+        });
+
+        ism.onSearchForFacetValues({
+          facetName: 'facetName',
+          query: 'query',
+          maxFacetHits: 0,
+        });
+
+        expect(ism.store.getState().results).toBe(null);
+
+        return Promise.resolve().then(() => {
+          const store = ism.store.getState();
+
+          expect(searchForFacetValues).toHaveBeenCalledWith(
+            'facetName',
+            'query',
+            1
+          );
+
+          expect(store.resultsFacetValues).toEqual({
+            facetName: 'results',
+            query: 'query',
+          });
+
+          expect(store.searchingForFacetValues).toBe(false);
+        });
+      });
     });
   });
 });
