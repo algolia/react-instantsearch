@@ -15327,6 +15327,16 @@ react-inspector@^2.2.2:
     babel-runtime "^6.26.0"
     is-dom "^1.0.9"
 
+react-instantsearch-dom-maps@5.3.1:
+  version "5.3.1"
+  resolved "https://registry.yarnpkg.com/react-instantsearch-dom-maps/-/react-instantsearch-dom-maps-5.3.1.tgz#0a7721b023fe22e2c4c42d7615b4f4822131b654"
+  integrity sha512-EHdXAHhFHGrEPQKB69HpsoX04JKlMuTETG+hHIfxxCIouHz+o8vNkK1Pm1S51fThtinBYWXOyT3gx6eLpL70nw==
+  dependencies:
+    lodash "^4.17.4"
+    prop-types "^15.5.10"
+    react-lifecycles-compat "^3.0.4"
+    scriptjs "^2.5.8"
+
 react-is@^16.3.0:
   version "16.3.0"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.3.0.tgz#f0e8bfd8c09b480dd610b8639d9ed65c13601224"
