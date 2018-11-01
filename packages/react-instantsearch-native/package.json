@@ -32,8 +32,8 @@
     "clean": "rm -rf dist",
     "watch": "yarn build:cjs --watch",
     "build": "yarn build:cjs && yarn build:es",
-    "build:cjs": "babel src --out-dir dist/cjs --ignore __tests__,__mocks__ --quiet",
-    "build:es": "BABEL_ENV=es babel src --out-dir dist/es --ignore __tests__,__mocks__ --quiet",
+    "build:cjs": "babel src --out-dir dist/cjs --ignore '**/__tests__/**/*.js' --quiet",
+    "build:es": "BABEL_ENV=es babel src --out-dir dist/es --ignore '**/__tests__/**/*.js' --quiet",
     "test": "jest",
     "release": "yarn clean && yarn build && yarn publish --non-interactive",
     "release:beta": "yarn clean && yarn build && yarn publish --tag beta --non-interactive"
