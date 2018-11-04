@@ -57,6 +57,9 @@ exports[`GeoSearch GoogleMaps expect to render 1`] = `
         "event": Object {
           "addListenerOnce": [MockFunction],
         },
+        "visualization": Object {
+          "HeatmapLayer": [MockFunction],
+        },
       },
     }
   }
@@ -94,6 +97,9 @@ exports[`GeoSearch Provider expect to render 1`] = `
         "OverlayView": [Function],
         "event": Object {
           "addListenerOnce": [MockFunction],
+        },
+        "visualization": Object {
+          "HeatmapLayer": [MockFunction],
         },
       },
     }

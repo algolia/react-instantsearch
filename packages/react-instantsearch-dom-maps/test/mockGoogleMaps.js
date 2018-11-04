@@ -46,6 +46,12 @@ export const createFakeMarkerInstance = () => ({
   addListener: jest.fn(),
 });
 
+export const createFakeHeatmapLayerInstance = () => ({
+  setMap: jest.fn(),
+  // getPosition: jest.fn(),
+  // addListener: jest.fn(),
+});
+
 export const createFakeHTMLMarkerInstance = () => ({
   element: document.createElement('div'),
   setMap: jest.fn(),
@@ -55,6 +61,7 @@ export const createFakeHTMLMarkerInstance = () => ({
 export const createFakeGoogleReference = ({
   mapInstance = createFakeMapInstance(),
   markerInstance = createFakeMarkerInstance(),
+  heatmapLayerInstance = createFakeHeatmapLayerInstance(),
 } = {}) => ({
   maps: {
     LatLng: jest.fn(x => x),
@@ -63,6 +70,9 @@ export const createFakeGoogleReference = ({
     })),
     Map: jest.fn(() => mapInstance),
     Marker: jest.fn(() => markerInstance),
+    visualization: {
+      HeatmapLayer: jest.fn(() => heatmapLayerInstance),
+    },
     ControlPosition: {
       LEFT_TOP: 'left:top',
     },
