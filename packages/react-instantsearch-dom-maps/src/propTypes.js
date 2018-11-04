@@ -13,3 +13,5 @@ export const BoundingBoxPropType = PropTypes.shape({
 export const GeolocHitPropType = PropTypes.shape({
   _geoloc: LatLngPropType.isRequired,
 });
+
+export const GeolocHitsPropType = PropTypes.arrayOf(GeolocHitPropType);
