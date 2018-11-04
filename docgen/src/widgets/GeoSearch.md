@@ -299,6 +299,68 @@ This component has no CSS classes.
 
 This component has no translations.
 
+## `<HeatmapLayer />`
+
+<!-- Avoid the huge margin on the pseudo element -->
+<h3 class="sub-component-title">Decription</h3>
+
+This component is a wapper around [`google.maps.visualization.HeatmapLayer`](https://developers.google.com/maps/documentation/javascript/reference/visualization#HeatmapLayerOptions), all the options avaible on the HeatmapLayer class can be provided as props. This component cannot render any children components.
+
+Currently the component does not support the update of the options. Once the component is rendered changing the props won't update the heatmap options.
+
+<!-- Avoid the huge margin on the pseudo element -->
+<h3 class="sub-component-title">Usage</h3>
+
+```jsx
+import { InstantSearch } from 'react-instantsearch-dom';
+import { GeoSearch, HeatmapLayer } from 'react-instantsearch-dom-maps';
+
+const App = () => (
+  <InstantSearch
+    appId="latency"
+    apiKey="6be0576ff61c053d5f9a3225e2a90f76"
+    indexName="airbnb"
+  >
+    <GeoSearch google={window.google}>
+      {({ hits }) => (
+        <div>
+          <HeatmapLayer hits={hits} />
+        </div>
+      )}
+    </GeoSearch>
+  </InstantSearch>
+);
+```
+
+<!-- Avoid the huge margin on the pseudo element -->
+<h3 class="sub-component-title">Props</h3>
+
+<table class="api">
+  <tbody>
+    <tr>
+      <td>hits*</td>
+      <td>Type: <code>object[]</code></td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <p>Hits to attach on the heatmap.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Avoid the huge margin on the pseudo element -->
+<h3 class="sub-component-title">CSS classes</h3>
+
+This component has no CSS classes.
+
+<!-- Avoid the huge margin on the pseudo element -->
+<h3 class="sub-component-title">Translation keys</h3>
+
+This component has no translations.
+
+
 ## `<CustomMarker />`
 
 <!-- Avoid the huge margin on the pseudo element -->
