@@ -9,6 +9,7 @@ import {
   GeoSearch,
   Marker,
   CustomMarker,
+  HeatmapLayer,
   Redo,
   Control,
 } from 'react-instantsearch-dom-maps';
@@ -28,7 +29,8 @@ Container.propTypes = {
 };
 
 const apiKey = 'AIzaSyBawL8VbstJDdU5397SUX7pEt9DslAwWgQ';
-const endpoint = 'https://maps.googleapis.com/maps/api/js?v=weekly';
+const endpoint =
+  'https://maps.googleapis.com/maps/api/js?v=weekly&libraries=visualization';
 const initialZoom = 12;
 const initialPosition = {
   lat: 40.71,
@@ -254,6 +256,28 @@ stories
                     ))}
                   </Fragment>
                 )}
+              </GeoSearch>
+            )}
+          </GoogleMapsLoader>
+        </Container>
+      </WrapWithHits>
+    ),
+    {
+      displayName,
+      filterProps,
+    }
+  )
+  .addWithJSX(
+    'with <HeatmapLayer> options',
+    () => (
+      <WrapWithHits indexName="airbnb" linkedStoryGroup="GeoSearch">
+        <Configure aroundLatLngViaIP hitsPerPage={20} />
+
+        <Container>
+          <GoogleMapsLoader apiKey={apiKey} endpoint={endpoint}>
+            {google => (
+              <GeoSearch google={google}>
+                {({ hits }) => <HeatmapLayer hits={hits} />}
               </GeoSearch>
             )}
           </GoogleMapsLoader>
