@@ -110,9 +110,10 @@ class HeatmapLayer extends Component {
 
     const hasChange = heatMapOptions.reduce(
       (acc, value) =>
-        value.equal(options[value.key], this.props[value.key]) || acc,
+        !value.equal(options[value.key], this.props[value.key]) || acc,
       false
     );
+
     return hasChange;
   }
 
