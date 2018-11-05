@@ -306,8 +306,6 @@ This component has no translations.
 
 This component is a wapper around [`google.maps.visualization.HeatmapLayer`](https://developers.google.com/maps/documentation/javascript/reference/visualization#HeatmapLayerOptions), all the options avaible on the HeatmapLayer class can be provided as props. This component cannot render any children components.
 
-Currently the component does not support the update of the options. Once the component is rendered changing the props won't update the heatmap options.
-
 <!-- Avoid the huge margin on the pseudo element -->
 <h3 class="sub-component-title">Usage</h3>
 
