@@ -48,6 +48,8 @@ export const createFakeMarkerInstance = () => ({
 
 export const createFakeHeatmapLayerInstance = () => ({
   setMap: jest.fn(),
+  setData: jest.fn(),
+  setOptions: jest.fn(),
   // getPosition: jest.fn(),
   // addListener: jest.fn(),
 });

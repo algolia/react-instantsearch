@@ -24,6 +24,7 @@ describe('HeatmapLayer', () => {
   const defaultProps = {
     hits: [
       {
+        objectID: '0001',
         _geoloc: {
           lat: 10,
           lng: 12,
@@ -117,6 +118,108 @@ describe('HeatmapLayer', () => {
         map: mapInstance,
         data: [new google.maps.LatLng(10, 12)],
       });
+    });
+  });
+
+  describe('update', () => {
+    it('expect to not update HeatmapLayer data didUpdate', () => {
+      const mapInstance = createFakeMapInstance();
+      const heatmapLayerInstance = createFakeHeatmapLayerInstance();
+      const google = createFakeGoogleReference({
+        mapInstance,
+        heatmapLayerInstance,
+      });
+
+      const props = {
+        ...defaultProps,
+      };
+
+      const wrapper = shallow(<HeatmapLayer {...props} />, {
+        context: {
+          [GOOGLE_MAPS_CONTEXT]: {
+            instance: mapInstance,
+            google,
+          },
+        },
+      });
+
+      expect(heatmapLayerInstance.setData).toHaveBeenCalledTimes(0);
+
+      // Simulate the update
+      wrapper.setProps(props);
+      wrapper.update();
+
+      expect(heatmapLayerInstance.setData).toHaveBeenCalledTimes(0);
+    });
+
+    it('expect to update HeatmapLayer data on didUpdate', () => {
+      const mapInstance = createFakeMapInstance();
+      const heatmapLayerInstance = createFakeHeatmapLayerInstance();
+      const google = createFakeGoogleReference({
+        mapInstance,
+        heatmapLayerInstance,
+      });
+
+      const props = {
+        ...defaultProps,
+      };
+
+      const wrapper = shallow(<HeatmapLayer {...props} />, {
+        context: {
+          [GOOGLE_MAPS_CONTEXT]: {
+            instance: mapInstance,
+            google,
+          },
+        },
+      });
+
+      expect(heatmapLayerInstance.setData).toHaveBeenCalledTimes(0);
+
+      // Simulate the update
+      wrapper.setProps({
+        ...defaultProps,
+        hits: [],
+      });
+      wrapper.update();
+      expect(heatmapLayerInstance.setData).toHaveBeenCalledTimes(1);
+      expect(heatmapLayerInstance.setData).toHaveBeenLastCalledWith(
+        expect.any(Array)
+      );
+    });
+
+    it('expect to update HeatmapLayer options on didUpdate', () => {
+      const mapInstance = createFakeMapInstance();
+      const heatmapLayerInstance = createFakeHeatmapLayerInstance();
+      const google = createFakeGoogleReference({
+        mapInstance,
+        heatmapLayerInstance,
+      });
+
+      const props = {
+        ...defaultProps,
+      };
+
+      const wrapper = shallow(<HeatmapLayer {...props} />, {
+        context: {
+          [GOOGLE_MAPS_CONTEXT]: {
+            instance: mapInstance,
+            google,
+          },
+        },
+      });
+
+      expect(heatmapLayerInstance.setOptions).toHaveBeenCalledTimes(0);
+
+      // Simulate the update
+      wrapper.setProps({
+        ...defaultProps,
+        opacity: 1,
+      });
+      wrapper.update();
+      expect(heatmapLayerInstance.setOptions).toHaveBeenCalledTimes(1);
+      expect(heatmapLayerInstance.setOptions).toHaveBeenLastCalledWith(
+        expect.any(Object)
+      );
     });
   });
 
