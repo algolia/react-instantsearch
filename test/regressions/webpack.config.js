@@ -1,4 +1,5 @@
 /* eslint-disable import/no-commonjs */
+
 const path = require('path');
 const storybookConfig = require('../../storybook/webpack.config');
 
@@ -14,7 +15,7 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
-        query: {
+        options: {
           cacheDirectory: true,
         },
       },
