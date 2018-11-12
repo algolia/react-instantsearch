@@ -12,13 +12,6 @@ const productionPluginDefine = isProduction
     ]
   : [];
 
-const commonLoaders = [
-  {
-    test: /\.json$/,
-    loader: 'json-loader',
-  },
-];
-
 module.exports = [
   {
     entry: ['babel-polyfill', './src/server.js'],
@@ -45,7 +38,7 @@ module.exports = [
           test: /\.js$/,
           loader: 'babel-loader',
         },
-      ].concat(commonLoaders),
+      ],
     },
   },
   {
