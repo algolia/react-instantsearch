@@ -1,12 +1,4 @@
-const plugins = [
-  '@babel/plugin-proposal-class-properties',
-  '@babel/plugin-syntax-dynamic-import',
-  'babel-plugin-lodash',
-];
-
-if (process.env.BABEL_ENV !== 'rollup') {
-  plugins.push('babel-plugin-dynamic-import-node');
-}
+const clean = x => x.filter(Boolean);
 
 module.exports = {
   presets: [
@@ -24,5 +16,10 @@ module.exports = {
     ],
     '@babel/preset-react',
   ],
-  plugins,
+  plugins: clean([
+    '@babel/plugin-proposal-class-properties',
+    '@babel/plugin-syntax-dynamic-import',
+    'babel-plugin-lodash',
+    process.env.BABEL_ENV !== 'rollup' && 'babel-plugin-dynamic-import-node',
+  ]),
 };
