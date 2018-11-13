@@ -17,6 +17,7 @@ module.exports = {
         loader: 'babel-loader',
         options: {
           cacheDirectory: true,
+          filename: path.join(__dirname, '.babelrc'),
         },
       },
     ]),
