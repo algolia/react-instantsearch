@@ -23,7 +23,7 @@ aliases:
 defaults: &defaults
   working_directory: ~/react-instantsearch
   docker:
-    - image: circleci/node:8.12.0@sha256:8b8ccd3e428085a6db8632e7248f841bfe51715a14bc8d0177c720e109ac8c31
+    - image: circleci/node:8.12.0@sha256:c29359180871fe36dbfbfd697a7365e188c5629f58312502a7706ae58cd7b1b1
 
 version: 2
 jobs:
@@ -57,7 +57,7 @@ jobs:
   test_e2e:
     <<: *defaults
     docker:
-      - image: circleci/node:8.12.0-browsers@sha256:dc17d45c731dd31c3d727eb421cecff018e92c6c1967b19ad69aaec764fc3fae
+      - image: circleci/node:8.12.0-browsers@sha256:86713b1c8f246f66c8e734ad38aa5ef876c4e47a69400f106c8e6db07559ea9f
     environment:
       FIREFOX_VERSION: '56.0'
     steps:
