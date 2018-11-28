@@ -12,7 +12,8 @@ For example an online shop for clothes could have a page like `https://www.cloth
 that shows hoodies and only hoodies:
 
 ```jsx
-import { InstantSearch, SearchBox, connectMenu } from 'react-instantsearch-dom';
+import { InstantSearch, SearchBox } from 'react-instantsearch-dom';
+import { connectMenu } from "react-instantsearch/connectors";
 
 const VirtualMenu = connectMenu(() => null);
 const Hoodies = () => <VirtualMenu attribute="clothes" defaultRefinement="hoodies" />;
