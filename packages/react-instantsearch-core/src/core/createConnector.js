@@ -63,7 +63,7 @@ export default function createConnector(connectorDesc) {
         super(props, context);
 
         const {
-          ais: { store, widgetsManager },
+          ais: { widgetsManager },
         } = context;
         const canRender = false;
         this.state = {
@@ -71,16 +71,8 @@ export default function createConnector(connectorDesc) {
           canRender, // use to know if a component is rendered (browser), or not (server).
         };
 
-        this.unsubscribe = store.subscribe(() => {
-          if (this.state.canRender) {
-            this.setState({
-              props: this.getProvidedProps({
-                ...this.props,
-                canRender: this.state.canRender,
-              }),
-            });
-          }
-        });
+        this.unsubscribe = () => {};
+
         if (isWidget) {
           this.unregisterWidget = widgetsManager.registerWidget(this);
         }
@@ -152,9 +144,27 @@ export default function createConnector(connectorDesc) {
       }
 
       componentDidMount() {
-        this.setState({
-          canRender: true,
-        });
+        const {
+          ais: { store },
+        } = this.context;
+
+        this.setState(
+          {
+            canRender: true,
+          },
+          () => {
+            this.unsubscribe = store.subscribe(() => {
+              if (this.state.canRender) {
+                this.setState({
+                  props: this.getProvidedProps({
+                    ...this.props,
+                    canRender: this.state.canRender,
+                  }),
+                });
+              }
+            });
+          }
+        );
       }
 
       componentWillMount() {
