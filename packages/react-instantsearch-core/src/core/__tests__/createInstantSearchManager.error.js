@@ -1,22 +1,8 @@
 import createInstantSearchManager from '../createInstantSearchManager';
 
 const createSearchClient = () => ({
-  search: jest.fn(() =>
-    Promise.resolve({
-      results: [
-        {
-          hits: [],
-        },
-      ],
-    })
-  ),
-  searchForFacetValues: jest.fn(() =>
-    Promise.resolve([
-      {
-        facetHits: [],
-      },
-    ])
-  ),
+  search: jest.fn(),
+  searchForFacetValues: jest.fn(),
 });
 
 describe('createInstantSearchManager with errors', () => {
