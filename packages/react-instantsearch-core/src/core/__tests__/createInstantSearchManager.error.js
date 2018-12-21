@@ -44,8 +44,8 @@ describe('createInstantSearchManager with errors', () => {
       expect(ism.store.getState().error).toBe(null);
 
       return Promise.resolve()
-        .then()
-        .then()
+        .then() // flush helper.search.then
+        .then() // flush helper.search.catch
         .then(() => {
           const state = ism.store.getState();
 
@@ -59,8 +59,8 @@ describe('createInstantSearchManager with errors', () => {
 
           ism.widgetsManager.update();
         })
-        .then()
-        .then()
+        .then() // flush helper.search.then
+        .then() // flush helper.search.catch
         .then(() => {
           const state = ism.store.getState();
 
@@ -89,8 +89,8 @@ describe('createInstantSearchManager with errors', () => {
       expect(ism.store.getState().error).toBe(null);
 
       return Promise.resolve()
-        .then()
-        .then()
+        .then() // flush helper.search.then
+        .then() // flush helper.search.catch
         .then(() => {
           const state = ism.store.getState();
 
@@ -104,8 +104,8 @@ describe('createInstantSearchManager with errors', () => {
 
           ism.onExternalStateUpdate({});
         })
-        .then()
-        .then()
+        .then() // flush helper.search.then
+        .then() // flush helper.search.catch
         .then(() => {
           const state = ism.store.getState();
 
@@ -138,8 +138,8 @@ describe('createInstantSearchManager with errors', () => {
       expect(ism.store.getState().error).toBe(null);
 
       return Promise.resolve()
-        .then()
-        .then()
+        .then() // flush helper.search.then
+        .then() // flush helper.search.catch
         .then(() => {
           const state = ism.store.getState();
 
