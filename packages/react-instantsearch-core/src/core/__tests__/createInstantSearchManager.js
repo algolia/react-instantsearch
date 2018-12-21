@@ -3,7 +3,7 @@ import createInstantSearchManager from '../createInstantSearchManager';
 jest.useFakeTimers();
 
 const runAllMicroTasks = () => new Promise(setImmediate);
-const flushNextPendingMicroTask = () => Promise.resolve();
+const runOnlyNextMicroTask = () => Promise.resolve();
 
 const createSearchClient = () => ({
   search: jest.fn(() =>
@@ -84,7 +84,7 @@ describe('createInstantSearchManager', () => {
 
       expect(ism.store.getState().searching).toBe(false);
 
-      await flushNextPendingMicroTask();
+      await runOnlyNextMicroTask();
 
       expect(ism.store.getState().searching).toBe(true);
 
@@ -169,7 +169,7 @@ describe('createInstantSearchManager', () => {
         isSearchStalled: true,
       });
 
-      await flushNextPendingMicroTask();
+      await runOnlyNextMicroTask();
 
       expect(searchClient.search).toHaveBeenCalledTimes(1);
 
@@ -183,7 +183,7 @@ describe('createInstantSearchManager', () => {
         isSearchStalled: true,
       });
 
-      await flushNextPendingMicroTask();
+      await runOnlyNextMicroTask();
 
       expect(ism.store.getState()).toMatchObject({
         isSearchStalled: false,
@@ -195,7 +195,7 @@ describe('createInstantSearchManager', () => {
         isSearchStalled: false,
       });
 
-      await flushNextPendingMicroTask();
+      await runOnlyNextMicroTask();
 
       expect(ism.store.getState()).toMatchObject({
         isSearchStalled: false,
@@ -207,7 +207,7 @@ describe('createInstantSearchManager', () => {
         isSearchStalled: true,
       });
 
-      await flushNextPendingMicroTask();
+      await runOnlyNextMicroTask();
 
       expect(ism.store.getState()).toMatchObject({
         isSearchStalled: false,
