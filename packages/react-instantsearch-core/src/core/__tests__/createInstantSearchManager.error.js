@@ -83,7 +83,7 @@ describe('createInstantSearchManager with errors', () => {
       expect(ism.store.getState().results).toEqual(null);
     });
 
-    it('reset the error after a succesful search', async () => {
+    it('reset the error after a successful search', async () => {
       const searchClient = createSearchClient();
 
       searchClient.search.mockImplementation(() =>
@@ -158,7 +158,7 @@ describe('createInstantSearchManager with errors', () => {
       expect(ism.store.getState().error).toEqual(new Error('API_ERROR'));
     });
 
-    it('reset the error after a succesful search', async () => {
+    it('reset the error after a successful search', async () => {
       const searchClient = createSearchClient();
 
       searchClient.searchForFacetValues.mockImplementation(() =>
