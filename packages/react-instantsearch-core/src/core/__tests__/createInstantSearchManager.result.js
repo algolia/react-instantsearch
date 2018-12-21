@@ -1,5 +1,7 @@
 import createInstantSearchManager from '../createInstantSearchManager';
 
+const flushPendingMicroTasks = () => new Promise(setImmediate);
+
 const createSearchClient = () => ({
   search: jest.fn(() =>
     Promise.resolve({
@@ -21,9 +23,7 @@ const createSearchClient = () => ({
 
 describe('createInstantSearchManager with results', () => {
   describe('on search', () => {
-    it('updates the store on widget lifecycle', () => {
-      expect.assertions(7);
-
+    it('updates the store on widget lifecycle', async () => {
       const searchClient = createSearchClient();
 
       const ism = createInstantSearchManager({
@@ -39,30 +39,22 @@ describe('createInstantSearchManager with results', () => {
 
       expect(ism.store.getState().results).toBe(null);
 
-      return Promise.resolve()
-        .then()
-        .then(() => {
-          const store = ism.store.getState();
+      await flushPendingMicroTasks();
 
-          expect(searchClient.search).toHaveBeenCalledTimes(1);
-          expect(store.results.hits).toEqual([{ value: 'results' }]);
-          expect(store.error).toBe(null);
+      expect(searchClient.search).toHaveBeenCalledTimes(1);
+      expect(ism.store.getState().results.hits).toEqual([{ value: 'results' }]);
+      expect(ism.store.getState().error).toBe(null);
 
-          ism.widgetsManager.update();
-        })
-        .then()
-        .then(() => {
-          const store = ism.store.getState();
+      ism.widgetsManager.update();
 
-          expect(searchClient.search).toHaveBeenCalledTimes(2);
-          expect(store.results.hits).toEqual([{ value: 'results' }]);
-          expect(store.error).toBe(null);
-        });
+      await flushPendingMicroTasks();
+
+      expect(searchClient.search).toHaveBeenCalledTimes(2);
+      expect(ism.store.getState().results.hits).toEqual([{ value: 'results' }]);
+      expect(ism.store.getState().error).toBe(null);
     });
 
-    it('updates the store on external updates', () => {
-      expect.assertions(6);
-
+    it('updates the store on external updates', async () => {
       const searchClient = createSearchClient();
 
       const ism = createInstantSearchManager({
@@ -72,24 +64,19 @@ describe('createInstantSearchManager with results', () => {
 
       ism.onExternalStateUpdate({});
 
-      return Promise.resolve()
-        .then(() => {
-          const store = ism.store.getState();
+      await flushPendingMicroTasks();
 
-          expect(searchClient.search).toHaveBeenCalledTimes(1);
-          expect(store.results.hits).toEqual([{ value: 'results' }]);
-          expect(store.error).toBe(null);
+      expect(searchClient.search).toHaveBeenCalledTimes(1);
+      expect(ism.store.getState().results.hits).toEqual([{ value: 'results' }]);
+      expect(ism.store.getState().error).toBe(null);
 
-          ism.onExternalStateUpdate({});
-        })
-        .then()
-        .then(() => {
-          const store = ism.store.getState();
+      ism.onExternalStateUpdate({});
 
-          expect(searchClient.search).toHaveBeenCalledTimes(2);
-          expect(store.results.hits).toEqual([{ value: 'results' }]);
-          expect(store.error).toBe(null);
-        });
+      await flushPendingMicroTasks();
+
+      expect(searchClient.search).toHaveBeenCalledTimes(2);
+      expect(ism.store.getState().results.hits).toEqual([{ value: 'results' }]);
+      expect(ism.store.getState().error).toBe(null);
     });
   });
 
@@ -100,9 +87,7 @@ describe('createInstantSearchManager with results', () => {
     // the helper to the manager with the real implementation by default. With this, we can easily
     // pass a custom helper (mocked or not) and don't rely on the helper + client.
 
-    it('updates the store and searches', () => {
-      expect.assertions(4);
-
+    it('updates the store and searches', async () => {
       const searchClient = createSearchClient();
 
       const ism = createInstantSearchManager({
@@ -117,42 +102,38 @@ describe('createInstantSearchManager with results', () => {
         context: {},
       });
 
-      return Promise.resolve()
-        .then()
-        .then(() => {
-          ism.onSearchForFacetValues({
-            facetName: 'facetName',
-            query: 'query',
-          });
+      await flushPendingMicroTasks();
 
-          expect(ism.store.getState().searchingForFacetValues).toBe(true);
-        })
-        .then()
-        .then(() => {
-          expect(ism.store.getState().searchingForFacetValues).toBe(false);
+      ism.onSearchForFacetValues({
+        facetName: 'facetName',
+        query: 'query',
+      });
 
-          expect(searchClient.searchForFacetValues).toHaveBeenCalledWith(
-            expect.arrayContaining([
-              expect.objectContaining({
-                params: expect.objectContaining({
-                  facetName: 'facetName',
-                  facetQuery: 'query',
-                  maxFacetHits: 10,
-                }),
-              }),
-            ])
-          );
+      expect(ism.store.getState().searchingForFacetValues).toBe(true);
 
-          expect(ism.store.getState().resultsFacetValues).toEqual({
-            facetName: [expect.objectContaining({ value: 'results' })],
-            query: 'query',
-          });
-        });
+      await flushPendingMicroTasks();
+
+      expect(ism.store.getState().searchingForFacetValues).toBe(false);
+
+      expect(searchClient.searchForFacetValues).toHaveBeenCalledWith(
+        expect.arrayContaining([
+          expect.objectContaining({
+            params: expect.objectContaining({
+              facetName: 'facetName',
+              facetQuery: 'query',
+              maxFacetHits: 10,
+            }),
+          }),
+        ])
+      );
+
+      expect(ism.store.getState().resultsFacetValues).toEqual({
+        facetName: [expect.objectContaining({ value: 'results' })],
+        query: 'query',
+      });
     });
 
-    it('updates the store and searches with maxFacetHits', () => {
-      expect.assertions(1);
-
+    it('updates the store and searches with maxFacetHits', async () => {
       const searchClient = createSearchClient();
 
       const ism = createInstantSearchManager({
@@ -167,32 +148,28 @@ describe('createInstantSearchManager with results', () => {
         context: {},
       });
 
-      return Promise.resolve()
-        .then()
-        .then(() => {
-          ism.onSearchForFacetValues({
-            facetName: 'facetName',
-            query: 'query',
-            maxFacetHits: 25,
-          });
-        })
-        .then()
-        .then(() => {
-          expect(searchClient.searchForFacetValues).toHaveBeenCalledWith(
-            expect.arrayContaining([
-              expect.objectContaining({
-                params: expect.objectContaining({
-                  maxFacetHits: 25,
-                }),
-              }),
-            ])
-          );
-        });
+      await flushPendingMicroTasks();
+
+      ism.onSearchForFacetValues({
+        facetName: 'facetName',
+        query: 'query',
+        maxFacetHits: 25,
+      });
+
+      await flushPendingMicroTasks();
+
+      expect(searchClient.searchForFacetValues).toHaveBeenCalledWith(
+        expect.arrayContaining([
+          expect.objectContaining({
+            params: expect.objectContaining({
+              maxFacetHits: 25,
+            }),
+          }),
+        ])
+      );
     });
 
-    it('updates the store and searches with maxFacetHits out of range (higher)', () => {
-      expect.assertions(1);
-
+    it('updates the store and searches with maxFacetHits out of range (higher)', async () => {
       const searchClient = createSearchClient();
 
       const ism = createInstantSearchManager({
@@ -207,32 +184,28 @@ describe('createInstantSearchManager with results', () => {
         context: {},
       });
 
-      return Promise.resolve()
-        .then()
-        .then(() => {
-          ism.onSearchForFacetValues({
-            facetName: 'facetName',
-            query: 'query',
-            maxFacetHits: 125,
-          });
-        })
-        .then()
-        .then(() => {
-          expect(searchClient.searchForFacetValues).toHaveBeenCalledWith(
-            expect.arrayContaining([
-              expect.objectContaining({
-                params: expect.objectContaining({
-                  maxFacetHits: 100,
-                }),
-              }),
-            ])
-          );
-        });
+      await flushPendingMicroTasks();
+
+      ism.onSearchForFacetValues({
+        facetName: 'facetName',
+        query: 'query',
+        maxFacetHits: 125,
+      });
+
+      await flushPendingMicroTasks();
+
+      expect(searchClient.searchForFacetValues).toHaveBeenCalledWith(
+        expect.arrayContaining([
+          expect.objectContaining({
+            params: expect.objectContaining({
+              maxFacetHits: 100,
+            }),
+          }),
+        ])
+      );
     });
 
-    it('updates the store and searches with maxFacetHits out of range (lower)', () => {
-      expect.assertions(1);
-
+    it('updates the store and searches with maxFacetHits out of range (lower)', async () => {
       const searchClient = createSearchClient();
 
       const ism = createInstantSearchManager({
@@ -247,27 +220,25 @@ describe('createInstantSearchManager with results', () => {
         context: {},
       });
 
-      return Promise.resolve()
-        .then()
-        .then(() => {
-          ism.onSearchForFacetValues({
-            facetName: 'facetName',
-            query: 'query',
-            maxFacetHits: 0,
-          });
-        })
-        .then()
-        .then(() => {
-          expect(searchClient.searchForFacetValues).toHaveBeenCalledWith(
-            expect.arrayContaining([
-              expect.objectContaining({
-                params: expect.objectContaining({
-                  maxFacetHits: 1,
-                }),
-              }),
-            ])
-          );
-        });
+      await flushPendingMicroTasks();
+
+      ism.onSearchForFacetValues({
+        facetName: 'facetName',
+        query: 'query',
+        maxFacetHits: 0,
+      });
+
+      await flushPendingMicroTasks();
+
+      expect(searchClient.searchForFacetValues).toHaveBeenCalledWith(
+        expect.arrayContaining([
+          expect.objectContaining({
+            params: expect.objectContaining({
+              maxFacetHits: 1,
+            }),
+          }),
+        ])
+      );
     });
   });
 });
