@@ -22,34 +22,6 @@ const createSearchClient = () => ({
   ),
 });
 
-const createControlledSearchClient = () => {
-  const searchResultsPromises = [];
-
-  return {
-    search: jest.fn(() => {
-      const results = Promise.resolve({
-        results: [
-          {
-            params: 'query=&hitsPerPage=10&page=0&facets=%5B%5D&tagFilters=',
-            page: 0,
-            hits: [],
-            hitsPerPage: 10,
-            nbPages: 0,
-            processingTimeMS: 4,
-            query: '',
-            nbHits: 0,
-            index: 'index',
-          },
-        ],
-      });
-
-      searchResultsPromises.push(results);
-
-      return results;
-    }),
-  };
-};
-
 describe('createInstantSearchManager', () => {
   it('initializes the manager with an empty state', () => {
     const ism = createInstantSearchManager({
@@ -185,11 +157,11 @@ describe('createInstantSearchManager', () => {
     it('should be updated if search is stalled', () => {
       expect.assertions(10);
 
-      const controlledSearchClient = createControlledSearchClient();
+      const searchClient = createSearchClient();
 
       const ism = createInstantSearchManager({
         indexName: 'index',
-        searchClient: controlledSearchClient,
+        searchClient,
       });
 
       ism.widgetsManager.registerWidget({
@@ -197,14 +169,14 @@ describe('createInstantSearchManager', () => {
         transitionState: () => {},
       });
 
-      expect(controlledSearchClient.search).not.toHaveBeenCalled();
+      expect(searchClient.search).not.toHaveBeenCalled();
       expect(ism.store.getState()).toMatchObject({
         isSearchStalled: true,
       });
 
       return Promise.resolve()
         .then(() => {
-          expect(controlledSearchClient.search).toHaveBeenCalledTimes(1);
+          expect(searchClient.search).toHaveBeenCalledTimes(1);
 
           expect(ism.store.getState()).toMatchObject({
             isSearchStalled: true,
