@@ -1,5 +1,7 @@
 import createInstantSearchManager from '../createInstantSearchManager';
 
+const flushPendingMicroTasks = () => new Promise(setImmediate);
+
 const createSearchClient = () => ({
   search(requests) {
     return Promise.resolve({
@@ -21,9 +23,7 @@ const createSearchClient = () => ({
 });
 
 describe('createInstantSearchManager with multi index', () => {
-  it('updates the store and searches', () => {
-    expect.assertions(5);
-
+  it('updates the store and searches', async () => {
     // <InstantSearch indexName="first">
     //   <SearchBox defaultRefinement="first query 1" />
     //
@@ -88,66 +88,59 @@ describe('createInstantSearchManager with multi index', () => {
 
     expect(ism.store.getState().results).toBe(null);
 
-    return Promise.resolve()
-      .then()
-      .then(() => {
-        const store = ism.store.getState();
+    await flushPendingMicroTasks();
 
-        expect(store.results.first).toEqual(
-          expect.objectContaining({
-            query: 'first query 1',
-            index: 'first',
-            page: 3,
-          })
-        );
-
-        expect(store.results.second).toEqual(
-          expect.objectContaining({
-            query: 'second query 1',
-            index: 'second',
-            page: 0,
-          })
-        );
+    expect(ism.store.getState().results.first).toEqual(
+      expect.objectContaining({
+        query: 'first query 1',
+        index: 'first',
+        page: 3,
       })
-      .then(() => {
-        // <SearchBox defaultRefinement="first query 2" />
-        ism.widgetsManager.getWidgets()[0].getSearchParameters = params =>
-          params.setQuery('first query 2');
+    );
 
-        // <Index indexName="second">
-        //   <SearchBox defaultRefinement="second query 2" />
-        // </Index>
-        ism.widgetsManager.getWidgets()[4].getSearchParameters = params =>
-          params.setQuery('second query 2');
-
-        // Simualte an udpate (see `createConnector`)
-        ism.widgetsManager.update();
+    expect(ism.store.getState().results.second).toEqual(
+      expect.objectContaining({
+        query: 'second query 1',
+        index: 'second',
+        page: 0,
       })
-      .then()
-      .then(() => {
-        const store = ism.store.getState();
+    );
 
-        expect(store.results.first).toEqual(
-          expect.objectContaining({
-            query: 'first query 2',
-            index: 'first',
-            page: 3,
-          })
-        );
+    await flushPendingMicroTasks();
 
-        expect(store.results.second).toEqual(
-          expect.objectContaining({
-            query: 'second query 2',
-            index: 'second',
-            page: 0,
-          })
-        );
-      });
+    // <SearchBox defaultRefinement="first query 2" />
+    ism.widgetsManager.getWidgets()[0].getSearchParameters = params =>
+      params.setQuery('first query 2');
+
+    // <Index indexName="second">
+    //   <SearchBox defaultRefinement="second query 2" />
+    // </Index>
+    ism.widgetsManager.getWidgets()[4].getSearchParameters = params =>
+      params.setQuery('second query 2');
+
+    // Simualte an udpate (see `createConnector`)
+    ism.widgetsManager.update();
+
+    await flushPendingMicroTasks();
+
+    expect(ism.store.getState().results.first).toEqual(
+      expect.objectContaining({
+        query: 'first query 2',
+        index: 'first',
+        page: 3,
+      })
+    );
+
+    expect(ism.store.getState().results.second).toEqual(
+      expect.objectContaining({
+        query: 'second query 2',
+        index: 'second',
+        page: 0,
+      })
+    );
   });
 
-  it('searches with duplicate Index & SortBy', () => {
-    expect.assertions(3);
-
+  it('searches with duplicate Index & SortBy', async () => {
     // <InstantSearch indexName="first">
     //   <SearchBox defaultRefinement="query" />
     //
@@ -201,32 +194,26 @@ describe('createInstantSearchManager with multi index', () => {
 
     expect(ism.store.getState().results).toBe(null);
 
-    return Promise.resolve()
-      .then()
-      .then(() => {
-        const store = ism.store.getState();
+    await flushPendingMicroTasks();
 
-        expect(store.results.first).toEqual(
-          expect.objectContaining({
-            index: 'third',
-            query: 'query',
-            page: 0,
-          })
-        );
+    expect(ism.store.getState().results.first).toEqual(
+      expect.objectContaining({
+        index: 'third',
+        query: 'query',
+        page: 0,
+      })
+    );
 
-        expect(store.results.second).toEqual(
-          expect.objectContaining({
-            index: 'second',
-            query: 'query',
-            page: 0,
-          })
-        );
-      });
+    expect(ism.store.getState().results.second).toEqual(
+      expect.objectContaining({
+        index: 'second',
+        query: 'query',
+        page: 0,
+      })
+    );
   });
 
-  it('switching from mono to multi index', () => {
-    expect.assertions(6);
-
+  it('switching from mono to multi index', async () => {
     // <InstantSearch indexName="first">
     //   <SearchBox defaultRefinement="first query 1" />
     //
@@ -291,102 +278,94 @@ describe('createInstantSearchManager with multi index', () => {
 
     expect(ism.store.getState().results).toBe(null);
 
-    return Promise.resolve()
-      .then()
-      .then(() => {
-        const store = ism.store.getState();
+    await flushPendingMicroTasks();
 
-        expect(store.results.first).toEqual(
-          expect.objectContaining({
-            index: 'first',
-            query: 'first query 1',
-            page: 3,
-          })
-        );
-
-        expect(store.results.second).toEqual(
-          expect.objectContaining({
-            index: 'second',
-            query: 'second query 1',
-            page: 0,
-          })
-        );
-
-        ism.widgetsManager.getWidgets()[0].getSearchParameters = params =>
-          params.setQuery('first query 2');
-
-        unregisterFirstIndexWidget();
-        unregisterPaginationWidget();
-        unregisterSecondIndexWidget();
-        unregisterSecondSearchBoxWidget();
+    expect(ism.store.getState().results.first).toEqual(
+      expect.objectContaining({
+        index: 'first',
+        query: 'first query 1',
+        page: 3,
       })
-      .then()
-      .then(() => {
-        const store = ism.store.getState();
+    );
 
-        expect(store.results).toEqual(
-          expect.objectContaining({
-            index: 'first',
-            query: 'first query 2',
-            page: 0,
-          })
-        );
-
-        // <Index indexName="first" />
-        ism.widgetsManager.registerWidget({
-          getSearchParameters: params => params.setIndex('first'),
-          context: {},
-          props: {
-            indexName: 'first',
-          },
-        });
-
-        // <Index indexName="first">
-        //   <Pagination defaultRefinement={3} />
-        // </Index>
-        ism.widgetsManager.registerWidget({
-          getSearchParameters: params => params.setPage(3),
-          context: { multiIndexContext: { targetedIndex: 'first' } },
-          props: {},
-        });
-
-        // <Index indexName="second" />
-        ism.widgetsManager.registerWidget({
-          getSearchParameters: params => params.setIndex('second'),
-          context: {},
-          props: {
-            indexName: 'second',
-          },
-        });
-
-        // <Index indexName="second">
-        //   <SearchBox defaultRefinement="second query 1" />
-        // </Index>
-        ism.widgetsManager.registerWidget({
-          getSearchParameters: params => params.setQuery('second query 2'),
-          context: { multiIndexContext: { targetedIndex: 'second' } },
-          props: {},
-        });
+    expect(ism.store.getState().results.second).toEqual(
+      expect.objectContaining({
+        index: 'second',
+        query: 'second query 1',
+        page: 0,
       })
-      .then()
-      .then(() => {
-        const store = ism.store.getState();
+    );
 
-        expect(store.results.first).toEqual(
-          expect.objectContaining({
-            index: 'first',
-            query: 'first query 2',
-            page: 3,
-          })
-        );
+    ism.widgetsManager.getWidgets()[0].getSearchParameters = params =>
+      params.setQuery('first query 2');
 
-        expect(store.results.second).toEqual(
-          expect.objectContaining({
-            index: 'second',
-            query: 'second query 2',
-            page: 0,
-          })
-        );
-      });
+    unregisterFirstIndexWidget();
+    unregisterPaginationWidget();
+    unregisterSecondIndexWidget();
+    unregisterSecondSearchBoxWidget();
+
+    await flushPendingMicroTasks();
+
+    expect(ism.store.getState().results).toEqual(
+      expect.objectContaining({
+        index: 'first',
+        query: 'first query 2',
+        page: 0,
+      })
+    );
+
+    // <Index indexName="first" />
+    ism.widgetsManager.registerWidget({
+      getSearchParameters: params => params.setIndex('first'),
+      context: {},
+      props: {
+        indexName: 'first',
+      },
+    });
+
+    // <Index indexName="first">
+    //   <Pagination defaultRefinement={3} />
+    // </Index>
+    ism.widgetsManager.registerWidget({
+      getSearchParameters: params => params.setPage(3),
+      context: { multiIndexContext: { targetedIndex: 'first' } },
+      props: {},
+    });
+
+    // <Index indexName="second" />
+    ism.widgetsManager.registerWidget({
+      getSearchParameters: params => params.setIndex('second'),
+      context: {},
+      props: {
+        indexName: 'second',
+      },
+    });
+
+    // <Index indexName="second">
+    //   <SearchBox defaultRefinement="second query 1" />
+    // </Index>
+    ism.widgetsManager.registerWidget({
+      getSearchParameters: params => params.setQuery('second query 2'),
+      context: { multiIndexContext: { targetedIndex: 'second' } },
+      props: {},
+    });
+
+    await flushPendingMicroTasks();
+
+    expect(ism.store.getState().results.first).toEqual(
+      expect.objectContaining({
+        index: 'first',
+        query: 'first query 2',
+        page: 3,
+      })
+    );
+
+    expect(ism.store.getState().results.second).toEqual(
+      expect.objectContaining({
+        index: 'second',
+        query: 'second query 2',
+        page: 0,
+      })
+    );
   });
 });
