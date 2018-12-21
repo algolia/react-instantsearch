@@ -242,8 +242,6 @@ describe('createInstantSearchManager', () => {
     });
 
     it('should be called when there is a new client', () => {
-      expect.assertions(4);
-
       const searchClient = createSearchClient();
       const nextSearchClient = createSearchClient();
 
@@ -257,10 +255,8 @@ describe('createInstantSearchManager', () => {
 
       ism.updateClient(nextSearchClient);
 
-      return Promise.resolve().then(() => {
-        expect(searchClient.search).toHaveBeenCalledTimes(0);
-        expect(nextSearchClient.search).toHaveBeenCalledTimes(1);
-      });
+      expect(searchClient.search).toHaveBeenCalledTimes(0);
+      expect(nextSearchClient.search).toHaveBeenCalledTimes(1);
     });
 
     it('should not be called when the search is skipped', () => {
