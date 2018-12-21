@@ -1,35 +1,64 @@
-import algoliaClient from 'algoliasearch/lite';
 import createInstantSearchManager from '../createInstantSearchManager';
 
 jest.useFakeTimers();
 
-const defaultResponse = () => ({
-  results: [
-    {
-      params: 'query=&hitsPerPage=10&page=0&facets=%5B%5D&tagFilters=',
-      page: 0,
-      hits: [],
-      hitsPerPage: 10,
-      nbPages: 0,
-      processingTimeMS: 4,
-      query: '',
-      nbHits: 0,
-      index: 'index',
-    },
-  ],
+const createSearchClient = () => ({
+  search: jest.fn(() =>
+    Promise.resolve({
+      results: [
+        {
+          params: 'query=&hitsPerPage=10&page=0&facets=%5B%5D&tagFilters=',
+          page: 0,
+          hits: [],
+          hitsPerPage: 10,
+          nbPages: 0,
+          processingTimeMS: 4,
+          query: '',
+          nbHits: 0,
+          index: 'index',
+        },
+      ],
+    })
+  ),
 });
+
+const createControlledSearchClient = () => {
+  const searchResultsPromises = [];
+
+  return {
+    search: jest.fn(() => {
+      const results = Promise.resolve({
+        results: [
+          {
+            params: 'query=&hitsPerPage=10&page=0&facets=%5B%5D&tagFilters=',
+            page: 0,
+            hits: [],
+            hitsPerPage: 10,
+            nbPages: 0,
+            processingTimeMS: 4,
+            query: '',
+            nbHits: 0,
+            index: 'index',
+          },
+        ],
+      });
+
+      searchResultsPromises.push(results);
+
+      return results;
+    }),
+  };
+};
 
 describe('createInstantSearchManager', () => {
   it('initializes the manager with an empty state', () => {
     const ism = createInstantSearchManager({
       indexName: 'index',
-      initialState: {},
-      searchParameters: {},
-      searchClient: makeClient(defaultResponse()),
+      searchClient: createSearchClient(),
     });
 
-    const store = ism.store.getState();
-    expect(store).toEqual({
+    const state = ism.store.getState();
+    expect(state).toEqual({
       error: null,
       isSearchStalled: true,
       metadata: [],
@@ -53,14 +82,12 @@ describe('createInstantSearchManager', () => {
   it('initialize with results', () => {
     const ism = createInstantSearchManager({
       indexName: 'index',
-      initialState: {},
-      searchParameters: {},
-      searchClient: makeClient(defaultResponse()),
       resultsState: { some: 'results' },
+      searchClient: createSearchClient(),
     });
 
-    const store = ism.store.getState();
-    expect(store).toEqual({
+    const state = ism.store.getState();
+    expect(state).toEqual({
       error: null,
       metadata: [],
       results: { some: 'results' },
@@ -71,62 +98,66 @@ describe('createInstantSearchManager', () => {
     });
   });
 
-  describe('Widget manager', () => {
-    it('triggers the search when a widget is added', () => {
+  describe('widget manager', () => {
+    it('triggers a search when a widget is added', () => {
       expect.assertions(2);
+
+      const searchClient = createSearchClient();
 
       const ism = createInstantSearchManager({
         indexName: 'index',
-        initialState: {},
-        searchParameters: {},
-        searchClient: makeClient(defaultResponse()),
+        searchClient,
       });
 
       ism.widgetsManager.registerWidget({
+        getSearchParameters: () => ({}),
         props: {},
         context: {},
-        getMetadata: () => ({}),
-        getSearchParameters: () => ({}),
-        transitionState: () => ({}),
       });
 
-      const storeT0 = ism.store.getState();
-      expect(storeT0.searching).toBe(false);
+      expect(ism.store.getState().searching).toBe(false);
 
       return Promise.resolve().then(() => {
-        const storeT1 = ism.store.getState();
-        expect(storeT1.searching).toBe(true);
+        expect(ism.store.getState().searching).toBe(true);
       });
     });
   });
 
-  describe('transitionstate', () => {
-    it('executes widgets transitionstate hooks', () => {
+  describe('transitionState', () => {
+    it('executes widgets hook', () => {
       const ism = createInstantSearchManager({
         indexName: 'index',
-        initialState: {},
-        searchParameters: {},
-        searchClient: makeClient(defaultResponse()),
+        searchClient: createSearchClient(),
       });
 
       const nextSearchState = {};
 
       ism.widgetsManager.registerWidget({
-        transitionState: (nxt, current) => {
-          expect(nxt).toEqual(nextSearchState);
-          return { ...current, a: 1 };
+        transitionState: (next, current) => {
+          expect(next).toEqual(nextSearchState);
+
+          return {
+            ...current,
+            a: 1,
+          };
         },
       });
 
       ism.widgetsManager.registerWidget({
-        transitionState: (nxt, current) => {
-          expect(nxt).toEqual(nextSearchState);
-          return { ...current, b: 2 };
+        transitionState: (next, current) => {
+          expect(next).toEqual(nextSearchState);
+
+          return {
+            ...current,
+            b: 2,
+          };
         },
       });
 
-      const state = ism.transitionState();
-      expect(state).toEqual({ a: 1, b: 2 });
+      expect(ism.transitionState()).toEqual({
+        a: 1,
+        b: 2,
+      });
     });
   });
 
@@ -134,37 +165,31 @@ describe('createInstantSearchManager', () => {
     it('returns the list of ids of all registered widgets', () => {
       const ism = createInstantSearchManager({
         indexName: 'index',
-        initialState: {},
-        searchParameters: {},
-        searchClient: makeClient(defaultResponse()),
+        searchClient: createSearchClient(),
       });
 
-      const widgetIDsT0 = ism.getWidgetsIds().sort();
-      expect(widgetIDsT0).toEqual([]);
+      expect(ism.getWidgetsIds()).toEqual([]);
 
       ism.widgetsManager.registerWidget({ getMetadata: () => ({ id: 'a' }) });
       ism.widgetsManager.registerWidget({ getMetadata: () => ({ id: 'b' }) });
       ism.widgetsManager.registerWidget({ getMetadata: () => ({ id: 'c' }) });
-
       ism.widgetsManager.registerWidget({ getMetadata: () => ({ id: 'd' }) });
 
       return Promise.resolve().then(() => {
-        const widgetIDsT1 = ism.getWidgetsIds().sort();
-        expect(widgetIDsT1).toEqual(['a', 'b', 'c', 'd']);
+        expect(ism.getWidgetsIds()).toEqual(['a', 'b', 'c', 'd']);
       });
     });
   });
 
-  describe('Loading state', () => {
+  describe('searchStalled', () => {
     it('should be updated if search is stalled', () => {
       expect.assertions(10);
 
-      const managedClient = makeManagedClient();
+      const controlledSearchClient = createControlledSearchClient();
+
       const ism = createInstantSearchManager({
         indexName: 'index',
-        initialState: {},
-        searchParameters: {},
-        searchClient: managedClient,
+        searchClient: controlledSearchClient,
       });
 
       ism.widgetsManager.registerWidget({
@@ -172,14 +197,14 @@ describe('createInstantSearchManager', () => {
         transitionState: () => {},
       });
 
-      expect(managedClient.search).not.toHaveBeenCalled();
+      expect(controlledSearchClient.search).not.toHaveBeenCalled();
       expect(ism.store.getState()).toMatchObject({
         isSearchStalled: true,
       });
 
       return Promise.resolve()
         .then(() => {
-          expect(managedClient.search).toHaveBeenCalledTimes(1);
+          expect(controlledSearchClient.search).toHaveBeenCalledTimes(1);
 
           expect(ism.store.getState()).toMatchObject({
             isSearchStalled: true,
@@ -190,8 +215,6 @@ describe('createInstantSearchManager', () => {
           expect(ism.store.getState()).toMatchObject({
             isSearchStalled: true,
           });
-
-          return managedClient.searchResultsPromises[0];
         })
         .then(() => {
           expect(ism.store.getState()).toMatchObject({
@@ -203,8 +226,6 @@ describe('createInstantSearchManager', () => {
           expect(ism.store.getState()).toMatchObject({
             isSearchStalled: false,
           });
-
-          return Promise.resolve();
         })
         .then(() => {
           expect(ism.store.getState()).toMatchObject({
@@ -216,8 +237,6 @@ describe('createInstantSearchManager', () => {
           expect(ism.store.getState()).toMatchObject({
             isSearchStalled: true,
           });
-
-          return managedClient.searchResultsPromises[1];
         })
         .then(() => {
           expect(ism.store.getState()).toMatchObject({
@@ -231,13 +250,11 @@ describe('createInstantSearchManager', () => {
     it('should be called when there is a new widget', () => {
       expect.assertions(2);
 
-      const client0 = makeClient(defaultResponse());
-      expect(client0.search).toHaveBeenCalledTimes(0);
+      const searchClient = createSearchClient();
+
       const ism = createInstantSearchManager({
         indexName: 'index',
-        initialState: {},
-        searchParameters: {},
-        searchClient: client0,
+        searchClient,
       });
 
       ism.widgetsManager.registerWidget({
@@ -245,44 +262,43 @@ describe('createInstantSearchManager', () => {
         transitionState: () => {},
       });
 
+      expect(searchClient.search).toHaveBeenCalledTimes(0);
+
       return Promise.resolve().then(() => {
-        expect(client0.search).toHaveBeenCalledTimes(1);
+        expect(searchClient.search).toHaveBeenCalledTimes(1);
       });
     });
 
     it('should be called when there is a new client', () => {
       expect.assertions(4);
 
-      const client0 = makeClient(defaultResponse());
-      expect(client0.search).toHaveBeenCalledTimes(0);
+      const searchClient = createSearchClient();
+      const nextSearchClient = createSearchClient();
 
       const ism = createInstantSearchManager({
         indexName: 'index',
-        initialState: {},
-        searchParameters: {},
-        searchClient: client0,
+        searchClient,
       });
 
-      const client1 = makeClient(defaultResponse());
-      expect(client1.search).toHaveBeenCalledTimes(0);
+      expect(searchClient.search).toHaveBeenCalledTimes(0);
+      expect(nextSearchClient.search).toHaveBeenCalledTimes(0);
 
-      ism.updateClient(client1);
+      ism.updateClient(nextSearchClient);
 
       return Promise.resolve().then(() => {
-        expect(client0.search).toHaveBeenCalledTimes(0);
-        expect(client1.search).toHaveBeenCalledTimes(1);
+        expect(searchClient.search).toHaveBeenCalledTimes(0);
+        expect(nextSearchClient.search).toHaveBeenCalledTimes(1);
       });
     });
-    it('should not be called when the search is skipped', () => {
-      expect.assertions(2);
 
-      const client0 = makeClient(defaultResponse());
-      expect(client0.search).toHaveBeenCalledTimes(0);
+    it('should not be called when the search is skipped', () => {
+      expect.assertions(1);
+
+      const searchClient = createSearchClient();
+
       const ism = createInstantSearchManager({
         indexName: 'index',
-        initialState: {},
-        searchParameters: {},
-        searchClient: client0,
+        searchClient,
       });
 
       ism.skipSearch();
@@ -293,35 +309,8 @@ describe('createInstantSearchManager', () => {
       });
 
       return Promise.resolve().then(() => {
-        expect(client0.search).toHaveBeenCalledTimes(0);
+        expect(searchClient.search).toHaveBeenCalledTimes(0);
       });
     });
   });
 });
-
-function makeClient(response) {
-  const clientInstance = algoliaClient(
-    'latency',
-    '249078a3d4337a8231f1665ec5a44966'
-  );
-  clientInstance.search = jest.fn(() => {
-    const clonedResponse = JSON.parse(JSON.stringify(response));
-    return Promise.resolve(clonedResponse);
-  });
-
-  return clientInstance;
-}
-
-function makeManagedClient() {
-  const searchResultsPromises = [];
-  const fakeClient = {
-    search: jest.fn(() => {
-      const results = Promise.resolve(defaultResponse());
-      searchResultsPromises.push(results);
-      return results;
-    }),
-    searchResultsPromises,
-  };
-
-  return fakeClient;
-}
