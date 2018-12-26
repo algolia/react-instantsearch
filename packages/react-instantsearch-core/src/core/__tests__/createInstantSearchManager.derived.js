@@ -3,16 +3,16 @@ import createInstantSearchManager from '../createInstantSearchManager';
 const runAllMicroTasks = () => new Promise(setImmediate);
 
 const createSearchClient = () => ({
-  search(requests) {
-    return Promise.resolve({
+  search: jest.fn(requests =>
+    Promise.resolve({
       results: requests.map(request => ({
         index: request.indexName,
         query: request.params.query,
         page: request.params.page,
         hits: [],
       })),
-    });
-  },
+    })
+  ),
   searchForFacetValues() {
     return Promise.resolve([
       {
@@ -118,7 +118,6 @@ describe('createInstantSearchManager with multi index', () => {
     ism.widgetsManager.getWidgets()[4].getSearchParameters = params =>
       params.setQuery('second query 2');
 
-    // Simualte an udpate (see `createConnector`)
     ism.widgetsManager.update();
 
     await runAllMicroTasks();
@@ -211,6 +210,70 @@ describe('createInstantSearchManager with multi index', () => {
         page: 0,
       })
     );
+  });
+
+  it('searches with N queries for N Index widgets', async () => {
+    // <InstantSearch indexName="first">
+    //   <Index indexName="first" />
+    //   <Index indexName="second" />
+    //   <Index indexName="third" />
+    //   <Index indexName="four" />
+    // </InstantSearch>;
+
+    const searchClient = createSearchClient();
+
+    const ism = createInstantSearchManager({
+      indexName: 'first',
+      initialState: {},
+      searchParameters: {},
+      searchClient,
+    });
+
+    // <Index indexName="first" />
+    ism.widgetsManager.registerWidget({
+      getSearchParameters: x => x.setIndex('first'),
+      context: {},
+      props: {
+        indexName: 'first',
+      },
+    });
+
+    // <Index indexName="second" />
+    ism.widgetsManager.registerWidget({
+      getSearchParameters: x => x.setIndex('second'),
+      context: {},
+      props: {
+        indexName: 'second',
+      },
+    });
+
+    // <Index indexName="third" />
+    ism.widgetsManager.registerWidget({
+      getSearchParameters: x => x.setIndex('third'),
+      context: {},
+      props: {
+        indexName: 'third',
+      },
+    });
+
+    // <Index indexName="four" />
+    ism.widgetsManager.registerWidget({
+      getSearchParameters: x => x.setIndex('four'),
+      context: {},
+      props: {
+        indexName: 'four',
+      },
+    });
+
+    await runAllMicroTasks();
+
+    expect(searchClient.search.mock.calls[0][0]).toHaveLength(4);
+
+    ism.widgetsManager.update();
+
+    await runAllMicroTasks();
+
+    expect(searchClient.search.mock.calls[1][0]).toHaveLength(4);
   });
 
   it('switching from mono to multi index', async () => {
