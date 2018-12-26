@@ -77,7 +77,7 @@ export default function createInstantSearchManager({
       .filter(
         widget =>
           !widget.context.multiIndexContext &&
-          (widget.props.indexName === indexName || !widget.props.indexName)
+          (!widget.props.indexId || widget.props.indexId === indexName)
       )
       .reduce(
         (res, widget) => widget.getSearchParameters(res),
@@ -91,7 +91,7 @@ export default function createInstantSearchManager({
         widget =>
           (widget.context.multiIndexContext &&
             widget.context.multiIndexContext.targetedIndex === indexName) ||
-          (widget.props.indexName && widget.props.indexName === indexName)
+          (widget.props.indexId && widget.props.indexId === indexName)
       )
       .reduce(
         (res, widget) => widget.getSearchParameters(res),
@@ -105,18 +105,21 @@ export default function createInstantSearchManager({
         widget =>
           (widget.context.multiIndexContext &&
             widget.context.multiIndexContext.targetedIndex !== indexName) ||
-          (widget.props.indexName && widget.props.indexName !== indexName)
+          (widget.props.indexId && widget.props.indexId !== indexName)
       )
       .reduce((indices, widget) => {
         const targetedIndex = widget.context.multiIndexContext
           ? widget.context.multiIndexContext.targetedIndex
-          : widget.props.indexName;
+          : widget.props.indexId;
+
         const index = find(indices, i => i.targetedIndex === targetedIndex);
+
         if (index) {
           index.widgets.push(widget);
         } else {
           indices.push({ targetedIndex, widgets: [widget] });
         }
+
         return indices;
       }, []);
 
@@ -159,16 +162,21 @@ export default function createInstantSearchManager({
 
       helper.setState(sharedParameters);
 
-      derivatedWidgets.forEach(derivatedSearchParameters => {
-        const index = derivatedSearchParameters.targetedIndex;
+      derivatedWidgets.forEach(derivedIndex => {
         const derivedHelper = helper.derive(() =>
-          derivatedSearchParameters.widgets.reduce(
+          derivedIndex.widgets.reduce(
             (res, widget) => widget.getSearchParameters(res),
             sharedParameters
           )
         );
 
-        derivedHelper.on('result', handleSearchSuccess({ indexId: index }));
+        derivedHelper.on(
+          'result',
+          handleSearchSuccess({
+            indexId: derivedIndex.targetedIndex,
+          })
+        );
+
         derivedHelper.on('error', handleSearchError);
       });
 
