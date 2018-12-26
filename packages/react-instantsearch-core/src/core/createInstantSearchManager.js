@@ -136,6 +136,21 @@ export default function createInstantSearchManager({
         mainIndexParameters,
         derivatedWidgets,
       } = getSearchParameters(helper.state);
+
+      // Since we detach the derived helpers on **every** new search
+      // they won't receive intermediate resutls in case of a stalled search.
+      // Only the last results is dispatch by the derived helper beause they
+      // are not detached yet:
+      //
+      // - a -> main helper receives results
+      // - ap -> main helper receives results
+      // - app -> main helper + derived helpers receive results
+      //
+      // The quick fix is to avoid to detatch them on search but only once they
+      // received the resutls. But it means that in case of a stalled search
+      // all the derived helper not detached yet register a new search inside
+      // the helper. The number grows fast in case of a bad network and it's
+      // not deterministic.
       Object.keys(derivedHelpers).forEach(key => derivedHelpers[key].detach());
       derivedHelpers = {};
 
