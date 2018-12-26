@@ -28,12 +28,11 @@ export default function createInstantSearchManager({
   let stalledSearchTimer = null;
 
   const helper = algoliasearchHelper(searchClient, indexName, baseSP);
-  helper.on('result', handleSearchSuccess);
+  helper.on('result', handleSearchSuccess({ indexId: indexName }));
   helper.on('error', handleSearchError);
   helper.on('search', handleNewSearch);
 
   let derivedHelpers = {};
-  let indexMapping = {}; // keep track of the original index where the parameters applied when sortBy is used.
 
   let initialSearchParameters = helper.state;
 
@@ -73,7 +72,6 @@ export default function createInstantSearchManager({
   }
 
   function getSearchParameters() {
-    indexMapping = {};
     const sharedParameters = widgetsManager
       .getWidgets()
       .filter(widget => Boolean(widget.getSearchParameters))
@@ -86,7 +84,6 @@ export default function createInstantSearchManager({
         (res, widget) => widget.getSearchParameters(res),
         initialSearchParameters
       );
-    indexMapping[sharedParameters.index] = indexName;
 
     const derivatedWidgets = widgetsManager
       .getWidgets()
@@ -124,8 +121,6 @@ export default function createInstantSearchManager({
         sharedParameters
       );
 
-    indexMapping[mainIndexParameters.index] = indexName;
-
     return { sharedParameters, mainIndexParameters, derivatedWidgets };
   }
 
@@ -158,16 +153,16 @@ export default function createInstantSearchManager({
 
       derivatedWidgets.forEach(derivatedSearchParameters => {
         const index = derivatedSearchParameters.targetedIndex;
-        const derivedHelper = helper.derive(() => {
-          const parameters = derivatedSearchParameters.widgets.reduce(
+        const derivedHelper = helper.derive(() =>
+          derivatedSearchParameters.widgets.reduce(
             (res, widget) => widget.getSearchParameters(res),
             sharedParameters
-          );
-          indexMapping[parameters.index] = index;
-          return parameters;
-        });
-        derivedHelper.on('result', handleSearchSuccess);
+          )
+        );
+
+        derivedHelper.on('result', handleSearchSuccess({ indexId: index }));
         derivedHelper.on('error', handleSearchError);
+
         derivedHelpers[index] = derivedHelper;
       });
 
@@ -177,39 +172,44 @@ export default function createInstantSearchManager({
     }
   }
 
-  function handleSearchSuccess(content) {
-    const state = store.getState();
-    let results = state.results ? state.results : {};
+  function handleSearchSuccess({ indexId }) {
+    return content => {
+      const state = store.getState();
+      const isDerivedHelpersEmpty = isEmpty(derivedHelpers);
 
-    /* if switching from mono index to multi index and vice versa,
-    results needs to reset to {}*/
-    results = !isEmpty(derivedHelpers) && results.getFacetByName ? {} : results;
+      let results = state.results ? state.results : {};
 
-    if (!isEmpty(derivedHelpers)) {
-      results[indexMapping[content.index]] = content;
-    } else {
-      results = content;
-    }
+      /* if switching from mono index to multi index and vice versa,
+      results needs to reset to {}*/
+      results = !isDerivedHelpersEmpty && results.getFacetByName ? {} : results;
 
-    const currentState = store.getState();
-    let nextIsSearchStalled = currentState.isSearchStalled;
-    if (!helper.hasPendingRequests()) {
-      clearTimeout(stalledSearchTimer);
-      stalledSearchTimer = null;
-      nextIsSearchStalled = false;
-    }
+      if (!isDerivedHelpersEmpty) {
+        results[indexId] = content;
+      } else {
+        results = content;
+      }
 
-    const nextState = omit(
-      {
-        ...currentState,
-        results,
-        isSearchStalled: nextIsSearchStalled,
-        searching: false,
-        error: null,
-      },
-      'resultsFacetValues'
-    );
-    store.setState(nextState);
+      const currentState = store.getState();
+      let nextIsSearchStalled = currentState.isSearchStalled;
+      if (!helper.hasPendingRequests()) {
+        clearTimeout(stalledSearchTimer);
+        stalledSearchTimer = null;
+        nextIsSearchStalled = false;
+      }
+
+      const nextState = omit(
+        {
+          ...currentState,
+          results,
+          isSearchStalled: nextIsSearchStalled,
+          searching: false,
+          error: null,
+        },
+        'resultsFacetValues'
+      );
+
+      store.setState(nextState);
+    };
   }
 
   function handleSearchError(error) {
