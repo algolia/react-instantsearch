@@ -84,6 +84,20 @@ export default function createInstantSearchManager({
         initialSearchParameters
       );
 
+    const mainIndexParameters = widgetsManager
+      .getWidgets()
+      .filter(widget => Boolean(widget.getSearchParameters))
+      .filter(
+        widget =>
+          (widget.context.multiIndexContext &&
+            widget.context.multiIndexContext.targetedIndex === indexName) ||
+          (widget.props.indexName && widget.props.indexName === indexName)
+      )
+      .reduce(
+        (res, widget) => widget.getSearchParameters(res),
+        sharedParameters
+      );
+
     const derivatedWidgets = widgetsManager
       .getWidgets()
       .filter(widget => Boolean(widget.getSearchParameters))
@@ -106,21 +120,11 @@ export default function createInstantSearchManager({
         return indices;
       }, []);
 
-    const mainIndexParameters = widgetsManager
-      .getWidgets()
-      .filter(widget => Boolean(widget.getSearchParameters))
-      .filter(
-        widget =>
-          (widget.context.multiIndexContext &&
-            widget.context.multiIndexContext.targetedIndex === indexName) ||
-          (widget.props.indexName && widget.props.indexName === indexName)
-      )
-      .reduce(
-        (res, widget) => widget.getSearchParameters(res),
-        sharedParameters
-      );
-
-    return { sharedParameters, mainIndexParameters, derivatedWidgets };
+    return {
+      sharedParameters,
+      mainIndexParameters,
+      derivatedWidgets,
+    };
   }
 
   function search() {
