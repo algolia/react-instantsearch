@@ -1,4 +1,3 @@
-import { isEmpty } from 'lodash';
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
@@ -24,16 +23,20 @@ describe('createInstantSearchServer', () => {
     createConnector({
       displayName: 'CoolConnector',
       getProvidedProps: () => null,
-      getSearchParameters: (searchParameters, props, searchState) => {
+      getSearchParameters(searchParameters, _, searchState) {
         getSearchParameters();
 
-        return isEmpty(searchState)
-          ? searchParameters.setIndex(searchParameters.index)
-          : searchParameters.setIndex(
-              searchState.index
-                ? searchState.index
-                : searchState.indices[searchParameters.index].index
-            );
+        if (this.context && this.context.multiIndexContext) {
+          const index = this.context.multiIndexContext.targetedIndex;
+          const indexSearchState =
+            searchState.indices && searchState.indices[index]
+              ? searchState.indices[index]
+              : {};
+
+          return searchParameters.setQuery(indexSearchState.query || 'Apple');
+        }
+
+        return searchParameters.setQuery(searchState.query || 'Apple');
       },
       getMetadata: () => null,
       getId: () => 'id',
@@ -261,6 +264,7 @@ describe('createInstantSearchServer', () => {
         expect(data._originalResponse).toBeDefined();
         expect(data.content).toBeDefined();
         expect(data.state.index).toBe('indexName');
+        expect(data.state.query).toBe('Apple');
       });
 
       it('with search state', async () => {
@@ -280,13 +284,14 @@ describe('createInstantSearchServer', () => {
 
         const data = await findResultsState(App, {
           searchState: {
-            index: 'index search state',
+            query: 'iPhone',
           },
         });
 
         expect(data._originalResponse).toBeDefined();
         expect(data.content).toBeDefined();
-        expect(data.state.index).toBe('index search state');
+        expect(data.state.index).toBe('indexName');
+        expect(data.state.query).toBe('iPhone');
       });
     });
   });
@@ -386,10 +391,12 @@ describe('createInstantSearchServer', () => {
         const [first] = data;
 
         expect(first.state.index).toBe('index1');
+        expect(first.state.query).toBe('Apple');
 
         const [, second] = data;
 
         expect(second.state.index).toBe('index2');
+        expect(second.state.query).toBe('Apple');
       });
 
       it('without search state - second API', async () => {
@@ -419,10 +426,12 @@ describe('createInstantSearchServer', () => {
         const [first] = data;
 
         expect(first.state.index).toBe('index1');
+        expect(first.state.query).toBe('Apple');
 
         const [, second] = data;
 
         expect(second.state.index).toBe('index2');
+        expect(second.state.query).toBe('Apple');
       });
 
       it('with search state - first API', async () => {
@@ -451,10 +460,10 @@ describe('createInstantSearchServer', () => {
           searchState: {
             indices: {
               index1: {
-                index: 'index1 new name',
+                query: 'iPhone',
               },
               index2: {
-                index: 'index2 new name',
+                query: 'iPad',
               },
             },
           },
@@ -464,11 +473,13 @@ describe('createInstantSearchServer', () => {
 
         const [first] = data;
 
-        expect(first.state.index).toBe('index1 new name');
+        expect(first.state.index).toBe('index1');
+        expect(first.state.query).toBe('iPhone');
 
         const [, second] = data;
 
-        expect(second.state.index).toBe('index2 new name');
+        expect(second.state.index).toBe('index2');
+        expect(second.state.query).toBe('iPad');
       });
 
       it('with search state - second API', async () => {
@@ -493,12 +504,10 @@ describe('createInstantSearchServer', () => {
 
         const data = await findResultsState(App, {
           searchState: {
+            query: 'iPhone',
             indices: {
-              index1: {
-                index: 'index1 new name',
-              },
               index2: {
-                index: 'index2 new name',
+                query: 'iPad',
               },
             },
           },
@@ -508,11 +517,13 @@ describe('createInstantSearchServer', () => {
 
         const [first] = data;
 
-        expect(first.state.index).toBe('index1 new name');
+        expect(first.state.index).toBe('index1');
+        expect(first.state.query).toBe('iPhone');
 
         const [, second] = data;
 
-        expect(second.state.index).toBe('index2 new name');
+        expect(second.state.index).toBe('index2');
+        expect(second.state.query).toBe('iPad');
       });
     });
   });
