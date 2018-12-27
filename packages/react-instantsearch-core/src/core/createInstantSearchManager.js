@@ -1,5 +1,5 @@
 import { omit } from 'lodash';
-import algoliasearchHelper, { SearchParameters } from 'algoliasearch-helper';
+import algoliasearchHelper from 'algoliasearch-helper';
 import createWidgetsManager from './createWidgetsManager';
 import createStore from './createStore';
 import { HIGHLIGHT_TAGS } from './highlight';
@@ -32,14 +32,11 @@ export default function createInstantSearchManager({
   resultsState,
   stalledSearchDelay,
 }) {
-  const baseSP = new SearchParameters({
-    index: indexName,
+  const helper = algoliasearchHelper(searchClient, indexName, {
     ...HIGHLIGHT_TAGS,
   });
 
   let stalledSearchTimer = null;
-
-  const helper = algoliasearchHelper(searchClient, indexName, baseSP);
 
   helper.on('result', handleSearchSuccess({ indexId: indexName }));
   helper.on('error', handleSearchError);
