@@ -187,14 +187,14 @@ export function getCurrentRefinementValue(
 }
 
 export function cleanUpValue(searchState, context, id) {
-  const indexName = getIndex(context);
+  const index = getIndex(context);
   const { namespace, attributeName } = getNamespaceAndAttributeName(id);
 
   if (hasMultipleIndex(context) && Boolean(searchState.indices)) {
     return cleanUpValueWithMutliIndex({
       attribute: attributeName,
       searchState,
-      indexName,
+      index,
       id,
       namespace,
     });
@@ -226,25 +226,25 @@ function cleanUpValueWithSingleIndex({
 
 function cleanUpValueWithMutliIndex({
   searchState,
-  indexName,
+  index,
   id,
   namespace,
   attribute,
 }) {
-  const index = searchState.indices[indexName];
+  const indexSearchState = searchState.indices[index];
 
-  if (namespace && index) {
+  if (namespace && indexSearchState) {
     return {
       ...searchState,
       indices: {
         ...searchState.indices,
-        [indexName]: {
-          ...index,
-          [namespace]: omit(index[namespace], attribute),
+        [index]: {
+          ...indexSearchState,
+          [namespace]: omit(indexSearchState[namespace], attribute),
         },
       },
     };
   }
 
-  return omit(searchState, `indices.${indexName}.${id}`);
+  return omit(searchState, `indices.${index}.${id}`);
 }
