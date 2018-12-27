@@ -36,12 +36,13 @@ export default function createInstantSearchManager({
     ...HIGHLIGHT_TAGS,
   });
 
+  helper
+    .on('search', handleNewSearch)
+    .on('result', handleSearchSuccess({ indexId: indexName }))
+    .on('error', handleSearchError);
+
+  let skip = false;
   let stalledSearchTimer = null;
-
-  helper.on('result', handleSearchSuccess({ indexId: indexName }));
-  helper.on('error', handleSearchError);
-  helper.on('search', handleNewSearch);
-
   let initialSearchParameters = helper.state;
 
   const widgetsManager = createWidgetsManager(onWidgetsUpdate);
@@ -55,8 +56,6 @@ export default function createInstantSearchManager({
     isSearchStalled: true,
     searchingForFacetValues: false,
   });
-
-  let skip = false;
 
   function skipSearch() {
     skip = true;
