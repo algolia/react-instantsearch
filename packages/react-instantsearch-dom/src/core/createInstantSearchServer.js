@@ -147,30 +147,6 @@ const createInstantSearchServer = algoliasearch => {
     );
   };
 
-  const decorateResults = function(results) {
-    if (!results) {
-      return undefined;
-    }
-
-    if (Array.isArray(results)) {
-      return results.reduce(
-        (acc, result) => ({
-          ...acc,
-          [result._internalIndexId]: new SearchResults(
-            new SearchParameters(result.state),
-            result._originalResponse.results
-          ),
-        }),
-        {}
-      );
-    }
-
-    return new SearchResults(
-      new SearchParameters(results.state),
-      results._originalResponse.results
-    );
-  };
-
   class CreateInstantSearchServer extends Component {
     static propTypes = {
       algoliaClient: PropTypes.object,
@@ -211,8 +187,31 @@ const createInstantSearchServer = algoliasearch => {
       indexName = props.indexName;
     }
 
+    hydrateResultsState() {
+      const { resultsState = [] } = this.props;
+
+      if (Array.isArray(resultsState)) {
+        return resultsState.reduce(
+          (acc, result) => ({
+            ...acc,
+            [result._internalIndexId]: new SearchResults(
+              new SearchParameters(result.state),
+              result._originalResponse.results
+            ),
+          }),
+          {}
+        );
+      }
+
+      return new SearchResults(
+        new SearchParameters(resultsState.state),
+        resultsState._originalResponse.results
+      );
+    }
+
     render() {
-      const resultsState = decorateResults(this.props.resultsState);
+      const resultsState = this.hydrateResultsState();
+
       return (
         <InstantSearch
           {...this.props}
