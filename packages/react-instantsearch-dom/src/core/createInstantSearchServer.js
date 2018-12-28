@@ -107,21 +107,6 @@ const createInstantSearchServer = algoliasearch => {
   let client;
   let indexName = '';
 
-  const onSearchParameters = (
-    getWidgetSearchParameters,
-    context,
-    props,
-    searchState
-  ) => {
-    searchParameters.push({
-      getSearchParameters: getWidgetSearchParameters,
-      index: getIndex(context),
-      context,
-      props,
-      searchState,
-    });
-  };
-
   const findResultsState = function(App, props) {
     searchParameters = [];
 
@@ -187,6 +172,16 @@ const createInstantSearchServer = algoliasearch => {
       indexName = props.indexName;
     }
 
+    onSearchParameters(getWidgetSearchParameters, context, props, searchState) {
+      searchParameters.push({
+        getSearchParameters: getWidgetSearchParameters,
+        index: getIndex(context),
+        context,
+        props,
+        searchState,
+      });
+    }
+
     hydrateResultsState() {
       const { resultsState = [] } = this.props;
 
@@ -216,7 +211,7 @@ const createInstantSearchServer = algoliasearch => {
         <InstantSearch
           {...this.props}
           resultsState={resultsState}
-          onSearchParameters={onSearchParameters}
+          onSearchParameters={this.onSearchParameters}
         />
       );
     }
