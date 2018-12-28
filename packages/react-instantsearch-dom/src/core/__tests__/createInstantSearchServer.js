@@ -1,7 +1,7 @@
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import { SearchParameters } from 'algoliasearch-helper';
+import { SearchParameters, SearchResults } from 'algoliasearch-helper';
 import {
   createIndex,
   createConnector,
@@ -209,6 +209,30 @@ describe('createInstantSearchServer', () => {
     });
 
     describe('find results', () => {
+      it('results shoud be SearchResults and SearchParameters from the helper', async () => {
+        const { InstantSearch, findResultsState } = createInstantSearchServer();
+
+        const getSearchParameters = jest.fn();
+        const Connected = createWidget({
+          getSearchParameters,
+        });
+
+        const props = {
+          ...requiredPropsWithSearchClient,
+        };
+
+        const App = () => (
+          <InstantSearch {...props}>
+            <Connected />
+          </InstantSearch>
+        );
+
+        const results = await findResultsState(App);
+
+        expect(results.content).toBeInstanceOf(SearchResults);
+        expect(results.state).toBeInstanceOf(SearchParameters);
+      });
+
       it('searchParameters should be cleaned each time', async () => {
         const { InstantSearch, findResultsState } = createInstantSearchServer();
 
@@ -325,6 +349,34 @@ describe('createInstantSearchServer', () => {
     });
 
     describe('find results', () => {
+      it('results shoud be SearchResults and SearchParameters from the helper', async () => {
+        const { InstantSearch, findResultsState } = createInstantSearchServer();
+
+        const getSearchParameters = jest.fn();
+        const Connected = createWidget({
+          getSearchParameters,
+        });
+
+        const props = {
+          ...requiredPropsWithSearchClient,
+        };
+
+        const App = () => (
+          <InstantSearch {...props}>
+            <Index indexName="index2">
+              <Connected />
+            </Index>
+          </InstantSearch>
+        );
+
+        const results = await findResultsState(App);
+
+        results.forEach(result => {
+          expect(result.content).toBeInstanceOf(SearchResults);
+          expect(result.state).toBeInstanceOf(SearchParameters);
+        });
+      });
+
       it('searchParameters should be cleaned each time', async () => {
         const { InstantSearch, findResultsState } = createInstantSearchServer();
 
