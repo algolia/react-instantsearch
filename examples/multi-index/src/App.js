@@ -10,7 +10,7 @@ const App = () => (
     <SearchBox />
     <p>Results in first dataset</p>
     <Hits />
-    <Index indexName="instant_search">
+    <Index indexId="instant_search" indexName="instant_search">
       <p>Results in second dataset</p>
       <Hits />
     </Index>

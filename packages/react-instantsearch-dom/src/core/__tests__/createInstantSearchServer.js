@@ -397,7 +397,7 @@ describe('createInstantSearchServer', () => {
 
         const App = () => (
           <InstantSearch {...props}>
-            <Index indexName="index2">
+            <Index indexId="index2" indexName="index2">
               <Connected />
             </Index>
           </InstantSearch>
@@ -425,7 +425,7 @@ describe('createInstantSearchServer', () => {
 
         const App = () => (
           <InstantSearch {...props}>
-            <Index indexName="index2">
+            <Index indexId="index2" indexName="index2">
               <Connected />
             </Index>
           </InstantSearch>

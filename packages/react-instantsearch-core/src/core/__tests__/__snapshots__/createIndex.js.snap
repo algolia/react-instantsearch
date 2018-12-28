@@ -2,7 +2,7 @@
 
 exports[`createIndex expects to create an Index 1`] = `
 <Index
-  indexId="indexName"
+  indexId="indexId"
   indexName="indexName"
   root={
     Object {

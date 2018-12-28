@@ -167,11 +167,15 @@ export default class App extends React.Component {
             defaultRefinement={this.state.query}
             clearFilter={this.clearFilter}
           />
-          <Index indexName="instant_search_demo_query_suggestions">
+          <Index
+            indexId="instant_search_demo_query_suggestions"
+            indexName="instant_search_demo_query_suggestions"
+          >
             <Configure hitsPerPage={5} />
             {suggestions}
           </Index>
           <Index
+            indexId="instant_search"
             indexName="instant_search"
             root={{
               Root: View,

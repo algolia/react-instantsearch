@@ -27,7 +27,7 @@ stories
     >
       <SearchBox />
 
-      <Index indexName="bestbuy">
+      <Index indexId="bestbuy" indexName="bestbuy">
         <h3>
           index: <code>bestbuy</code>
         </h3>
@@ -35,7 +35,7 @@ stories
         <CustomCategoriesOrBrands />
       </Index>
 
-      <Index indexName="instant_search">
+      <Index indexId="instant_search" indexName="instant_search">
         <h3>
           index: <code>instant_search</code>
         </h3>
@@ -75,8 +75,8 @@ stories
       indexName="categories"
     >
       <Configure hitsPerPage={3} />
-      <Index indexName="brands" />
-      <Index indexName="products">
+      <Index indexId="brands" indexName="brands" />
+      <Index indexId="products" indexName="products">
         <Configure hitsPerPage={5} />
       </Index>
       <AutoComplete />
@@ -92,7 +92,7 @@ stories
 
       <div className="multi-index_content">
         <div className="multi-index_categories-or-brands">
-          <Index indexName="categories">
+          <Index indexId="categories" indexName="categories">
             <Configure hitsPerPage={3} />
 
             <SortBy
@@ -106,7 +106,7 @@ stories
             <CustomCategoriesOrBrands />
           </Index>
 
-          <Index indexName="products">
+          <Index indexId="products" indexName="products">
             <Configure hitsPerPage={3} />
 
             <SortBy
@@ -133,7 +133,7 @@ stories
       <Results>
         <div className="multi-index_content">
           <div className="multi-index_categories-or-brands">
-            <Index indexName="categories">
+            <Index indexId="categories" indexName="categories">
               <Content>
                 <div>
                   <div>Categories: </div>
@@ -142,7 +142,7 @@ stories
                 </div>
               </Content>
             </Index>
-            <Index indexName="brands">
+            <Index indexId="brands" indexName="brands">
               <Content>
                 <div>
                   <div>Brand: </div>
@@ -153,7 +153,7 @@ stories
             </Index>
           </div>
           <div className="multi-index_products">
-            <Index indexName="products">
+            <Index indexId="products" indexName="products">
               <Content>
                 <div>
                   <div>Products: </div>
@@ -179,7 +179,7 @@ stories
       <CustomCategoriesOrBrands />
       <Pagination />
 
-      <Index indexName="products">
+      <Index indexId="products" indexName="products">
         <CustomProducts />
         <Pagination />
       </Index>
@@ -197,6 +197,7 @@ stories
 
         <SearchBox />
         <Index
+          indexId="products"
           indexName="products"
           root={{
             Root: 'div',
@@ -311,9 +312,9 @@ const Results = connectStateResults(({ allSearchResults, children }) => {
   return noResults ? (
     <div>
       <div>No results in category, products or brand</div>
-      <Index indexName="categories" />
-      <Index indexName="brands" />
-      <Index indexName="products" />
+      <Index indexId="categories" indexName="categories" />
+      <Index indexId="brands" indexName="brands" />
+      <Index indexId="products" indexName="products" />
     </div>
   ) : (
     children

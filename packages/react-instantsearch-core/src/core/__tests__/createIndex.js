@@ -8,6 +8,7 @@ Enzyme.configure({ adapter: new Adapter() });
 
 describe('createIndex', () => {
   const requiredProps = {
+    indexId: 'indexId',
     indexName: 'indexName',
   };
 
@@ -83,6 +84,7 @@ describe('createIndex', () => {
 
     const props = {
       ...requiredProps,
+      indexId: undefined,
     };
 
     const wrapper = shallow(<CustomIndex {...props} />);
@@ -97,6 +99,7 @@ describe('createIndex', () => {
 
     const props = {
       ...requiredProps,
+      indexId: undefined,
     };
 
     shallow(<CustomIndex {...props} />);
@@ -115,6 +118,7 @@ describe('createIndex', () => {
 
     const props = {
       ...requiredProps,
+      indexId: undefined,
     };
 
     shallow(<CustomIndex {...props} />);

@@ -17,8 +17,8 @@ const App = () => (
   >
     <AutoComplete />
     <Configure hitsPerPage={1} />
-    <Index indexName="bestbuy" />
-    <Index indexName="airbnb" />
+    <Index indexId="bestbuy" indexName="bestbuy" />
+    <Index indexId="airbnb" indexName="airbnb" />
   </InstantSearch>
 );
 
