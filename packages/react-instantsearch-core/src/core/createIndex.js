@@ -9,11 +9,22 @@ import Index from '../components/Index';
  * @return {object} a Index root
  */
 const createIndex = defaultRoot => {
-  const CreateIndex = ({ indexName, indexId, root, children }) => (
-    <Index indexName={indexName} indexId={indexId || indexName} root={root}>
-      {children}
-    </Index>
-  );
+  let hasAlreadyWarn = false;
+  const CreateIndex = ({ indexName, indexId, root, children }) => {
+    if (process.env.NODE_ENV !== 'production' && !hasAlreadyWarn && !indexId) {
+      hasAlreadyWarn = true;
+      // eslint-disable-next-line no-console
+      console.warn(
+        '[React InstantSearch]: `indexId` is required for the `Index` component. Please use this prop before the next major version.'
+      );
+    }
+
+    return (
+      <Index indexName={indexName} indexId={indexId || indexName} root={root}>
+        {children}
+      </Index>
+    );
+  };
 
   CreateIndex.propTypes = {
     indexName: PropTypes.string.isRequired,
