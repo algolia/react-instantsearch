@@ -204,7 +204,7 @@ describe('createInstantSearchServer', () => {
 
       const wrapper = shallow(<InstantSearch {...props} />);
 
-      expect(wrapper.props().resultsState.getFacetByName).toBeDefined();
+      expect(wrapper.props().resultsState).toBeInstanceOf(SearchResults);
       expect(wrapper.props().resultsState.query).toEqual('query');
     });
 
@@ -343,9 +343,9 @@ describe('createInstantSearchServer', () => {
       const wrapper = shallow(<InstantSearch {...props} />);
 
       expect(wrapper.props().resultsState.index1.query).toBe('query1');
-      expect(wrapper.props().resultsState.index1.getFacetByName).toBeDefined();
+      expect(wrapper.props().resultsState.index1).toBeInstanceOf(SearchResults);
       expect(wrapper.props().resultsState.index2.query).toBe('query2');
-      expect(wrapper.props().resultsState.index2.getFacetByName).toBeDefined();
+      expect(wrapper.props().resultsState.index2).toBeInstanceOf(SearchResults);
     });
 
     describe('find results', () => {
