@@ -1,4 +1,4 @@
-import { isEmpty } from 'lodash';
+import { isEmpty, zipWith } from 'lodash';
 import React, { Component } from 'react';
 import { renderToString } from 'react-dom/server';
 import PropTypes from 'prop-types';
@@ -51,12 +51,7 @@ const createInstantSearchServer = algoliasearch => {
     renderToString(<App {...props} />);
 
     const sharedSearchParameters = searchParameters
-      .filter(
-        searchParameter =>
-          !hasMultipleIndex(searchParameter.context) &&
-          (searchParameter.props.indexName === indexName ||
-            !searchParameter.props.indexName)
-      )
+      .filter(searchParameter => !hasMultipleIndex(searchParameter.context))
       .reduce(
         (acc, searchParameter) =>
           searchParameter.getSearchParameters(
@@ -64,20 +59,25 @@ const createInstantSearchServer = algoliasearch => {
             searchParameter.props,
             searchParameter.searchState
           ),
-        new SearchParameters({ index: indexName, ...HIGHLIGHT_TAGS })
+        new SearchParameters({
+          ...HIGHLIGHT_TAGS,
+          index: indexName,
+        })
       );
 
     const mergedSearchParameters = searchParameters
       .filter(searchParameter => hasMultipleIndex(searchParameter.context))
       .reduce((acc, searchParameter) => {
         const index = getIndex(searchParameter.context);
-        const sp = searchParameter.getSearchParameters(
-          acc[index] ? acc[index] : sharedSearchParameters,
-          searchParameter.props,
-          searchParameter.searchState
-        );
-        acc[index] = sp;
-        return acc;
+
+        return {
+          ...acc,
+          [index]: searchParameter.getSearchParameters(
+            acc[index] || sharedSearchParameters,
+            searchParameter.props,
+            searchParameter.searchState
+          ),
+        };
       }, {});
 
     if (isEmpty(mergedSearchParameters)) {
@@ -91,8 +91,7 @@ const createInstantSearchServer = algoliasearch => {
         search.push(
           helper.searchOnce({
             ...sharedSearchParameters,
-            ...mergedSearchParameters[sharedSearchParameters.index],
-            index: mergedSearchParameters[sharedSearchParameters.index].index,
+            ...mergedSearchParameters[indexName],
           })
         );
         delete mergedSearchParameters[indexName];
@@ -100,17 +99,29 @@ const createInstantSearchServer = algoliasearch => {
         search.push(helper.searchOnce(sharedSearchParameters));
       }
 
+      const indexIds = Object.keys(mergedSearchParameters);
+
       search.push(
-        ...Object.keys(mergedSearchParameters).map(key => {
+        ...indexIds.map(indexId => {
           const derivedHelper = algoliasearchHelper(
             client,
-            mergedSearchParameters[key].index
+            mergedSearchParameters[indexId].index
           );
-          return derivedHelper.searchOnce(mergedSearchParameters[key]);
+          return derivedHelper.searchOnce(mergedSearchParameters[indexId]);
         })
       );
 
-      return Promise.all(search);
+      return Promise.all(search).then(results =>
+        zipWith([indexName, ...indexIds], results, (indexId, result) =>
+          // We attach `indexId` on the results to be able to reconstruct the
+          // object client side. We cannot rely on `state.index` anymore because
+          // we may have multiple times the same index.
+          ({
+            ...result,
+            _internalIndexId: indexId,
+          })
+        )
+      );
     }
   };
 
@@ -119,18 +130,23 @@ const createInstantSearchServer = algoliasearch => {
       return undefined;
     }
 
-    return Array.isArray(results)
-      ? results.reduce((acc, result) => {
-          acc[result.state.index] = new SearchResults(
+    if (Array.isArray(results)) {
+      return results.reduce(
+        (acc, result) => ({
+          ...acc,
+          [result._internalIndexId]: new SearchResults(
             new SearchParameters(result.state),
             result._originalResponse.results
-          );
-          return acc;
-        }, [])
-      : new SearchResults(
-          new SearchParameters(results.state),
-          results._originalResponse.results
-        );
+          ),
+        }),
+        {}
+      );
+    }
+
+    return new SearchResults(
+      new SearchParameters(results.state),
+      results._originalResponse.results
+    );
   };
 
   class CreateInstantSearchServer extends Component {
