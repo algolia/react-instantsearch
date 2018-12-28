@@ -100,12 +100,14 @@ const multiIndexSearch = (
 const createInstantSearchServer = algoliasearch => {
   const InstantSearch = createInstantSearch(algoliasearch, {
     Root: 'div',
-    props: { className: 'ais-InstantSearch__root' },
+    props: {
+      className: 'ais-InstantSearch__root',
+    },
   });
 
-  let searchParameters = [];
-  let client;
+  let client = null;
   let indexName = '';
+  let searchParameters = [];
 
   const findResultsState = function(App, props) {
     searchParameters = [];
@@ -142,18 +144,18 @@ const createInstantSearchServer = algoliasearch => {
       resultsState: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     };
 
-    constructor(props) {
-      super();
+    constructor(...args) {
+      super(...args);
 
-      if (props.searchClient) {
-        if (props.appId || props.apiKey || props.algoliaClient) {
+      if (this.props.searchClient) {
+        if (this.props.appId || this.props.apiKey || this.props.algoliaClient) {
           throw new Error(
             'react-instantsearch:: `searchClient` cannot be used with `appId`, `apiKey` or `algoliaClient`.'
           );
         }
       }
 
-      if (props.algoliaClient) {
+      if (this.props.algoliaClient) {
         // eslint-disable-next-line no-console
         console.warn(
           '`algoliaClient` option was renamed `searchClient`. Please use this new option before the next major version.'
@@ -161,15 +163,15 @@ const createInstantSearchServer = algoliasearch => {
       }
 
       client =
-        props.searchClient ||
-        props.algoliaClient ||
-        algoliasearch(props.appId, props.apiKey);
+        this.props.searchClient ||
+        this.props.algoliaClient ||
+        algoliasearch(this.props.appId, this.props.apiKey);
 
       if (typeof client.addAlgoliaAgent === 'function') {
         client.addAlgoliaAgent(`react-instantsearch ${version}`);
       }
 
-      indexName = props.indexName;
+      indexName = this.props.indexName;
     }
 
     onSearchParameters(getWidgetSearchParameters, context, props, searchState) {
@@ -217,7 +219,10 @@ const createInstantSearchServer = algoliasearch => {
     }
   }
 
-  return { InstantSearch: CreateInstantSearchServer, findResultsState };
+  return {
+    InstantSearch: CreateInstantSearchServer,
+    findResultsState,
+  };
 };
 
 export default createInstantSearchServer;
