@@ -58,6 +58,45 @@ const getSearchParameters = (indexName, searchParameters) => {
 
 const singleIndexSearch = (helper, parameters) => helper.searchOnce(parameters);
 
+const multiIndexSearch = (
+  indexName,
+  client,
+  helper,
+  sharedParameters,
+  { [indexName]: mainParameters, ...derivedParameters }
+) => {
+  const search = [
+    helper.searchOnce({
+      ...sharedParameters,
+      ...mainParameters,
+    }),
+  ];
+
+  const indexIds = Object.keys(derivedParameters);
+
+  search.push(
+    ...indexIds.map(indexId => {
+      const parameters = derivedParameters[indexId];
+
+      return algoliasearchHelper(client, parameters.index).searchOnce(
+        parameters
+      );
+    })
+  );
+
+  return Promise.all(search).then(results =>
+    zipWith([indexName, ...indexIds], results, (indexId, result) =>
+      // We attach `indexId` on the results to be able to reconstruct the
+      // object client side. We cannot rely on `state.index` anymore because
+      // we may have multiple times the same index.
+      ({
+        ...result,
+        _internalIndexId: indexId,
+      })
+    )
+  );
+};
+
 const createInstantSearchServer = algoliasearch => {
   const InstantSearch = createInstantSearch(algoliasearch, {
     Root: 'div',
@@ -97,45 +136,15 @@ const createInstantSearchServer = algoliasearch => {
 
     if (isEmpty(derivedParameters)) {
       return singleIndexSearch(helper, sharedParameters);
-    } else {
-      const search = [];
-
-      if (derivedParameters[indexName]) {
-        search.push(
-          helper.searchOnce({
-            ...sharedParameters,
-            ...derivedParameters[indexName],
-          })
-        );
-        delete derivedParameters[indexName];
-      } else {
-        search.push(helper.searchOnce(sharedParameters));
-      }
-
-      const indexIds = Object.keys(derivedParameters);
-
-      search.push(
-        ...indexIds.map(indexId => {
-          const derivedHelper = algoliasearchHelper(
-            client,
-            derivedParameters[indexId].index
-          );
-          return derivedHelper.searchOnce(derivedParameters[indexId]);
-        })
-      );
-
-      return Promise.all(search).then(results =>
-        zipWith([indexName, ...indexIds], results, (indexId, result) =>
-          // We attach `indexId` on the results to be able to reconstruct the
-          // object client side. We cannot rely on `state.index` anymore because
-          // we may have multiple times the same index.
-          ({
-            ...result,
-            _internalIndexId: indexId,
-          })
-        )
-      );
     }
+
+    return multiIndexSearch(
+      indexName,
+      client,
+      helper,
+      sharedParameters,
+      derivedParameters
+    );
   };
 
   const decorateResults = function(results) {
