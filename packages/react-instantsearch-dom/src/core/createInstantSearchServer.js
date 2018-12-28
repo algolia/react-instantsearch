@@ -19,6 +19,43 @@ const getIndex = context =>
 
 const hasMultipleIndex = context => context && context.multiIndexContext;
 
+const getSearchParameters = (indexName, searchParameters) => {
+  const sharedParameters = searchParameters
+    .filter(searchParameter => !hasMultipleIndex(searchParameter.context))
+    .reduce(
+      (acc, searchParameter) =>
+        searchParameter.getSearchParameters(
+          acc,
+          searchParameter.props,
+          searchParameter.searchState
+        ),
+      new SearchParameters({
+        ...HIGHLIGHT_TAGS,
+        index: indexName,
+      })
+    );
+
+  const derivedParameters = searchParameters
+    .filter(searchParameter => hasMultipleIndex(searchParameter.context))
+    .reduce((acc, searchParameter) => {
+      const index = getIndex(searchParameter.context);
+
+      return {
+        ...acc,
+        [index]: searchParameter.getSearchParameters(
+          acc[index] || sharedParameters,
+          searchParameter.props,
+          searchParameter.searchState
+        ),
+      };
+    }, {});
+
+  return {
+    sharedParameters,
+    derivedParameters,
+  };
+};
+
 const createInstantSearchServer = algoliasearch => {
   const InstantSearch = createInstantSearch(algoliasearch, {
     Root: 'div',
@@ -30,18 +67,17 @@ const createInstantSearchServer = algoliasearch => {
   let indexName = '';
 
   const onSearchParameters = (
-    getSearchParameters,
+    getWidgetSearchParameters,
     context,
     props,
     searchState
   ) => {
-    const index = getIndex(context);
     searchParameters.push({
-      getSearchParameters,
+      getSearchParameters: getWidgetSearchParameters,
+      index: getIndex(context),
       context,
       props,
       searchState,
-      index,
     });
   };
 
@@ -50,64 +86,39 @@ const createInstantSearchServer = algoliasearch => {
 
     renderToString(<App {...props} />);
 
-    const sharedSearchParameters = searchParameters
-      .filter(searchParameter => !hasMultipleIndex(searchParameter.context))
-      .reduce(
-        (acc, searchParameter) =>
-          searchParameter.getSearchParameters(
-            acc,
-            searchParameter.props,
-            searchParameter.searchState
-          ),
-        new SearchParameters({
-          ...HIGHLIGHT_TAGS,
-          index: indexName,
-        })
-      );
+    const { sharedParameters, derivedParameters } = getSearchParameters(
+      indexName,
+      searchParameters
+    );
 
-    const mergedSearchParameters = searchParameters
-      .filter(searchParameter => hasMultipleIndex(searchParameter.context))
-      .reduce((acc, searchParameter) => {
-        const index = getIndex(searchParameter.context);
-
-        return {
-          ...acc,
-          [index]: searchParameter.getSearchParameters(
-            acc[index] || sharedSearchParameters,
-            searchParameter.props,
-            searchParameter.searchState
-          ),
-        };
-      }, {});
-
-    if (isEmpty(mergedSearchParameters)) {
-      const helper = algoliasearchHelper(client, sharedSearchParameters.index);
-      return helper.searchOnce(sharedSearchParameters);
+    if (isEmpty(derivedParameters)) {
+      const helper = algoliasearchHelper(client, sharedParameters.index);
+      return helper.searchOnce(sharedParameters);
     } else {
-      const helper = algoliasearchHelper(client, sharedSearchParameters.index);
+      const helper = algoliasearchHelper(client, sharedParameters.index);
       const search = [];
 
-      if (mergedSearchParameters[indexName]) {
+      if (derivedParameters[indexName]) {
         search.push(
           helper.searchOnce({
-            ...sharedSearchParameters,
-            ...mergedSearchParameters[indexName],
+            ...sharedParameters,
+            ...derivedParameters[indexName],
           })
         );
-        delete mergedSearchParameters[indexName];
+        delete derivedParameters[indexName];
       } else {
-        search.push(helper.searchOnce(sharedSearchParameters));
+        search.push(helper.searchOnce(sharedParameters));
       }
 
-      const indexIds = Object.keys(mergedSearchParameters);
+      const indexIds = Object.keys(derivedParameters);
 
       search.push(
         ...indexIds.map(indexId => {
           const derivedHelper = algoliasearchHelper(
             client,
-            mergedSearchParameters[indexId].index
+            derivedParameters[indexId].index
           );
-          return derivedHelper.searchOnce(mergedSearchParameters[indexId]);
+          return derivedHelper.searchOnce(derivedParameters[indexId]);
         })
       );
 
