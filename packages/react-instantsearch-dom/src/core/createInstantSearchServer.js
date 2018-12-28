@@ -56,6 +56,8 @@ const getSearchParameters = (indexName, searchParameters) => {
   };
 };
 
+const singleIndexSearch = (helper, parameters) => helper.searchOnce(parameters);
+
 const createInstantSearchServer = algoliasearch => {
   const InstantSearch = createInstantSearch(algoliasearch, {
     Root: 'div',
@@ -91,11 +93,11 @@ const createInstantSearchServer = algoliasearch => {
       searchParameters
     );
 
+    const helper = algoliasearchHelper(client, sharedParameters.index);
+
     if (isEmpty(derivedParameters)) {
-      const helper = algoliasearchHelper(client, sharedParameters.index);
-      return helper.searchOnce(sharedParameters);
+      return singleIndexSearch(helper, sharedParameters);
     } else {
-      const helper = algoliasearchHelper(client, sharedParameters.index);
       const search = [];
 
       if (derivedParameters[indexName]) {
