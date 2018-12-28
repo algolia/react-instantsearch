@@ -197,8 +197,18 @@ describe('createInstantSearchServer', () => {
       const props = {
         ...requiredPropsWithSearchClient,
         resultsState: {
-          _originalResponse: { results: [{ query: 'query' }] },
-          state: new SearchParameters(),
+          _originalResponse: {
+            results: [
+              {
+                index: 'indexName',
+                query: 'query',
+              },
+            ],
+          },
+          state: {
+            index: 'indexName',
+            query: 'query',
+          },
         },
       };
 
@@ -330,12 +340,34 @@ describe('createInstantSearchServer', () => {
         ...requiredPropsWithSearchClient,
         resultsState: [
           {
-            _originalResponse: { results: [{ query: 'query1' }] },
-            state: new SearchParameters({ index: 'index1' }),
+            _internalIndexId: 'index1',
+            _originalResponse: {
+              results: [
+                {
+                  index: 'index1',
+                  query: 'query1',
+                },
+              ],
+            },
+            state: {
+              index: 'index1',
+              query: 'query1',
+            },
           },
           {
-            _originalResponse: { results: [{ query: 'query2' }] },
-            state: new SearchParameters({ index: 'index2' }),
+            _internalIndexId: 'index2',
+            _originalResponse: {
+              results: [
+                {
+                  index: 'index2',
+                  query: 'query2',
+                },
+              ],
+            },
+            state: {
+              index: 'index2',
+              query: 'query2',
+            },
           },
         ],
       };
