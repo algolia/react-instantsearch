@@ -65,6 +65,10 @@ export default function createConnector(connectorDesc) {
         this.state = {
           props: this.getProvidedProps({
             ...props,
+            // @MAJOR: We cannot drop this beacuse it's a breaking change. The
+            // prop is provided to `createConnector.getProvidedProps`. All the
+            // custom connector are impacted by this change. It should be fine
+            // to drop it in the next major though.
             canRender: false,
           }),
         };
@@ -141,6 +145,7 @@ export default function createConnector(connectorDesc) {
           this.setState({
             props: this.getProvidedProps({
               ...this.props,
+              // @MAJOR: see constructor
               canRender: true,
             }),
           });
@@ -168,6 +173,7 @@ export default function createConnector(connectorDesc) {
           this.setState({
             props: this.getProvidedProps({
               ...nextProps,
+              // @MAJOR: see constructor
               canRender: true,
             }),
           });
