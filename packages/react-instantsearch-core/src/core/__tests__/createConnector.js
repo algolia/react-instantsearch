@@ -316,6 +316,40 @@ describe('createConnector', () => {
       expect(() => trigger()).not.toThrow();
     });
 
+    it('does not throw an error on dispatch after unmount', () => {
+      const Connected = createConnector({
+        displayName: 'CoolConnector',
+        getProvidedProps: () => null,
+        getId,
+      })(() => null);
+
+      const subscribe = jest.fn(() => {
+        const unsubscribe = () => {};
+
+        return unsubscribe;
+      });
+
+      const wrapper = shallow(<Connected />, {
+        context: {
+          ais: {
+            store: {
+              getState: () => ({}),
+              subscribe,
+            },
+          },
+        },
+      });
+
+      const trigger = () => {
+        wrapper.unmount();
+
+        // Simulate a dispatch
+        subscribe.mock.calls[0][0]();
+      };
+
+      expect(() => trigger()).not.toThrow();
+    });
+
     it("doesn't update the component when passed props don't change", () => {
       const getProvidedProps = jest.fn(() => {});
       const getSearchParameters = jest.fn(() => {});

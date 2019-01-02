@@ -59,6 +59,8 @@ export default function createConnector(connectorDesc) {
         multiIndexContext: PropTypes.object,
       };
 
+      isUnmounting = false;
+
       constructor(props, context) {
         super(props, context);
 
@@ -142,13 +144,15 @@ export default function createConnector(connectorDesc) {
 
       componentDidMount() {
         this.unsubscribe = this.context.ais.store.subscribe(() => {
-          this.setState({
-            props: this.getProvidedProps({
-              ...this.props,
-              // @MAJOR: see constructor
-              canRender: true,
-            }),
-          });
+          if (!this.isUnmounting) {
+            this.setState({
+              props: this.getProvidedProps({
+                ...this.props,
+                // @MAJOR: see constructor
+                canRender: true,
+              }),
+            });
+          }
         });
 
         if (isWidget) {
@@ -197,6 +201,8 @@ export default function createConnector(connectorDesc) {
       }
 
       componentWillUnmount() {
+        this.isUnmounting = true;
+
         if (this.unsubscribe) {
           this.unsubscribe();
         }
