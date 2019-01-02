@@ -60,7 +60,7 @@ export default function createConnector(connectorDesc) {
       };
 
       mounted = false;
-      isUnmounting = false;
+      unmounting = false;
 
       constructor(props, context) {
         super(props, context);
@@ -147,7 +147,7 @@ export default function createConnector(connectorDesc) {
         this.mounted = true;
 
         this.unsubscribe = this.context.ais.store.subscribe(() => {
-          if (!this.isUnmounting) {
+          if (!this.unmounting) {
             this.setState({
               props: this.getProvidedProps({
                 ...this.props,
@@ -204,7 +204,7 @@ export default function createConnector(connectorDesc) {
       }
 
       componentWillUnmount() {
-        this.isUnmounting = true;
+        this.unmounting = true;
 
         if (this.unsubscribe) {
           this.unsubscribe();

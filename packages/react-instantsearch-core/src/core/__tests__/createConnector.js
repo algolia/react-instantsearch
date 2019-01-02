@@ -314,7 +314,7 @@ describe('createConnector', () => {
       expect(subscribe).toHaveBeenCalledTimes(1);
     });
 
-    it('unsubscribes from the store on willUnmount', () => {
+    it('unsubscribes from the store on unmount', () => {
       const Connected = createConnector({
         displayName: 'CoolConnector',
         getProvidedProps: () => null,
@@ -580,7 +580,7 @@ describe('createConnector', () => {
       expect(registerWidget).toHaveBeenCalledWith(wrapper.instance());
     });
 
-    it('calls onSearchParameters on willMount', () => {
+    it('calls onSearchParameters on mount', () => {
       const getSearchParameters = jest.fn(() => null);
       const onSearchParameters = jest.fn(() => null);
       let Connected = createConnector({
@@ -628,7 +628,7 @@ describe('createConnector', () => {
       expect(onSearchParameters.mock.calls).toHaveLength(1);
     });
 
-    it('binds getSearchParameters to its own instance when calling onSearchParameters in componentWillMount', () => {
+    it('binds getSearchParameters to its own instance when calling onSearchParameters on mount', () => {
       const getSearchParameters = jest.fn(() => null);
       const onSearchParameters = jest.fn(boundGetSearchParameters =>
         // The bound getSearchParameters function must be invoked in order for it
