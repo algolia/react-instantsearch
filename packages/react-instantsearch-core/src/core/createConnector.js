@@ -317,8 +317,6 @@ export default function createConnector(connectorDesc) {
           )
         );
 
-      cleanUp = (...args) => connectorDesc.cleanUp.call(this, ...args);
-
       render() {
         if (this.state.props === null) {
           return null;
