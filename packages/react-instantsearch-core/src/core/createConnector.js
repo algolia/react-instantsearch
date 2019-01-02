@@ -197,19 +197,25 @@ export default function createConnector(connectorDesc) {
       }
 
       componentWillUnmount() {
-        this.unsubscribe();
-        if (isWidget) {
+        if (this.unsubscribe) {
+          this.unsubscribe();
+        }
+
+        if (this.unregisterWidget) {
           this.unregisterWidget(); // will schedule an update
+
           if (hasCleanUp) {
             const newState = connectorDesc.cleanUp.call(
               this,
               this.props,
               this.context.ais.store.getState().widgets
             );
+
             this.context.ais.store.setState({
               ...this.context.ais.store.getState(),
               widgets: newState,
             });
+
             this.context.ais.onSearchStateChange(removeEmptyKey(newState));
           }
         }

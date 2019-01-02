@@ -288,6 +288,34 @@ describe('createConnector', () => {
       expect(unsubscribe.mock.calls).toHaveLength(1);
     });
 
+    it('does not throw an error on unmount before mount', () => {
+      const Connected = createConnector({
+        displayName: 'CoolConnector',
+        getProvidedProps: () => null,
+        getId,
+      })(() => null);
+
+      const wrapper = shallow(<Connected />, {
+        disableLifecycleMethods: true,
+        context: {
+          ais: {
+            store: {
+              getState: () => ({}),
+              subscribe() {
+                return () => {
+                  // unsubscribe
+                };
+              },
+            },
+          },
+        },
+      });
+
+      const trigger = () => wrapper.unmount();
+
+      expect(() => trigger()).not.toThrow();
+    });
+
     it("doesn't update the component when passed props don't change", () => {
       const getProvidedProps = jest.fn(() => {});
       const getSearchParameters = jest.fn(() => {});
@@ -724,6 +752,7 @@ describe('createConnector', () => {
       const unregister = jest.fn();
       const setState = jest.fn();
       const onSearchStateChange = jest.fn();
+
       it('unregisters itself on unmount', () => {
         const wrapper = mount(<Connected />, {
           context: {
@@ -756,6 +785,28 @@ describe('createConnector', () => {
           another: { state: 'state' },
         });
       });
+
+      it('does not throw an error on unmount before mount', () => {
+        const wrapper = shallow(<Connected />, {
+          disableLifecycleMethods: true,
+          context: {
+            ais: {
+              store: {
+                getState: () => ({}),
+                subscribe: () => {},
+              },
+              widgetsManager: {
+                registerWidget: () => {},
+              },
+            },
+          },
+        });
+
+        const trigger = () => wrapper.unmount();
+
+        expect(() => trigger()).not.toThrow();
+      });
+
       it('empty key from the search state should be removed', () => {
         const wrapper = mount(<Connected />, {
           context: {
