@@ -5,301 +5,365 @@ import createConnector from '../createConnector';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-function createState() {
-  return {
-    widgets: {},
-    results: {},
-    error: {},
-    searching: {},
-    searchingForFacetValues: {},
-    metadata: {},
-  };
-}
-
 describe('createConnector', () => {
   const getId = () => 'id';
+
+  const createFakeState = props => ({
+    widgets: {},
+    results: {},
+    resultsFacetValues: {},
+    searching: false,
+    searchingForFacetValues: false,
+    isSearchStalled: false,
+    metadata: {},
+    error: {},
+    ...props,
+  });
+
+  const createFakeStore = props => ({
+    getState() {},
+    setState() {},
+    subscribe() {},
+    ...props,
+  });
+
+  const createFakeWidgetManager = props => ({
+    registerWidget() {},
+    getWidgets() {},
+    update() {},
+    ...props,
+  });
+
+  const createFakeContext = props => ({
+    ais: {
+      onInternalStateUpdate() {},
+      createHrefForState() {},
+      onSearchForFacetValues() {},
+      onSearchStateChange() {},
+      onSearchParameters() {},
+      store: createFakeStore(),
+      widgetsManager: createFakeWidgetManager(),
+      ...props,
+    },
+  });
+
   describe('state', () => {
-    it('computes passed props from props and state', () => {
-      const getProvidedProps = jest.fn(props => ({ gotProps: props }));
-      const Dummy = () => null;
+    it('computes provided props', () => {
+      const getProvidedProps = jest.fn(props => ({
+        providedProps: props,
+      }));
+
+      const Fake = () => null;
       const Connected = createConnector({
-        displayName: 'CoolConnector',
+        displayName: 'Connector',
         getProvidedProps,
-        getId,
-      })(Dummy);
-      const state = createState();
+      })(Fake);
+
+      const state = createFakeState();
+
       const props = {
         hello: 'there',
-        canRender: false,
       };
-      const wrapper = mount(<Connected {...props} />, {
-        context: {
-          ais: {
-            store: {
-              getState: () => state,
-              subscribe: () => null,
-            },
-          },
-        },
+
+      const context = createFakeContext({
+        store: createFakeStore({
+          getState: () => state,
+        }),
       });
-      const args = getProvidedProps.mock.calls[0];
-      expect(args[0]).toEqual(props);
-      expect(args[1]).toBe(state.widgets);
-      expect(args[2].results).toBe(state.results);
-      expect(args[2].error).toBe(state.error);
-      expect(args[2].searching).toBe(state.searching);
-      expect(args[2].searchingForFacetValues).toBe(
-        state.searchingForFacetValues
+
+      const wrapper = shallow(<Connected {...props} />, {
+        context,
+      });
+
+      expect(getProvidedProps).toHaveBeenCalledTimes(1);
+      expect(getProvidedProps).toHaveBeenCalledWith(
+        { hello: 'there', canRender: false },
+        state.widgets,
+        {
+          results: state.results,
+          searching: state.searching,
+          searchingForFacetValues: state.searchingForFacetValues,
+          isSearchStalled: state.isSearchStalled,
+          error: state.error,
+        },
+        state.metadata,
+        state.resultsFacetValues
       );
-      expect(args[3]).toBe(state.metadata);
-      expect(wrapper.find(Dummy).props()).toEqual({
-        ...props,
-        gotProps: props,
+
+      expect(wrapper.find(Fake).props()).toEqual({
+        hello: 'there',
+        providedProps: {
+          hello: 'there',
+          canRender: false,
+        },
       });
     });
 
-    it('updates on props change', () => {
-      const getProvidedProps = jest.fn(props => ({ gotProps: props }));
-      const Dummy = () => null;
-      const Connected = createConnector({
-        displayName: 'CoolConnector',
-        getProvidedProps,
-        getId,
-      })(Dummy);
-      const state = createState();
-      let props = { hello: 'there' };
-      const wrapper = mount(<Connected {...props} />, {
-        context: {
-          ais: {
-            store: {
-              getState: () => state,
-              subscribe: () => null,
-            },
-          },
-        },
-      });
-      props = { hello: 'you' };
-      wrapper.setProps(props);
-      expect(getProvidedProps.mock.calls).toHaveLength(2);
-      const args = getProvidedProps.mock.calls[1];
-      expect(args[0]).toEqual({ ...props, canRender: true });
-      expect(args[1]).toBe(state.widgets);
-      expect(args[2].results).toBe(state.results);
-      expect(args[2].error).toBe(state.error);
-      expect(args[2].searching).toBe(state.searching);
-      expect(args[2].searchingForFacetValues).toBe(
-        state.searchingForFacetValues
-      );
+    it('computes provided props on props change', () => {
+      const getProvidedProps = jest.fn(props => ({
+        providedProps: props,
+      }));
 
-      expect(args[3]).toBe(state.metadata);
-      expect(wrapper.find(Dummy).props()).toEqual({
-        ...props,
-        gotProps: {
-          ...props,
+      const Fake = () => null;
+      const Connected = createConnector({
+        displayName: 'Connector',
+        getProvidedProps,
+      })(Fake);
+
+      const props = {
+        hello: 'there',
+      };
+
+      const context = createFakeContext({
+        store: createFakeStore({
+          getState: () => createFakeState(),
+        }),
+      });
+
+      const wrapper = shallow(<Connected {...props} />, {
+        context,
+      });
+
+      expect(getProvidedProps).toHaveBeenCalledTimes(1);
+
+      wrapper.setProps({
+        hello: 'again',
+      });
+
+      expect(getProvidedProps).toHaveBeenCalledTimes(2);
+      expect(wrapper.find(Fake).props()).toEqual({
+        hello: 'again',
+        providedProps: {
+          hello: 'again',
           canRender: true,
         },
       });
     });
 
-    it('uses the correct value for `canRender` on props change', () => {
-      const getProvidedProps = jest.fn(() => {});
+    it('computes provided props with the correct value for `canRender` on props change', () => {
+      const getProvidedProps = jest.fn(props => ({
+        providedProps: props,
+      }));
+
+      const Fake = () => null;
       const Connected = createConnector({
-        displayName: 'CoolConnector',
+        displayName: 'Connector',
         getProvidedProps,
-        getId,
-      })(() => null);
+      })(Fake);
 
       const props = {
         hello: 'there',
       };
 
+      const context = createFakeContext({
+        store: createFakeStore({
+          getState: () => createFakeState(),
+        }),
+      });
+
       const wrapper = shallow(<Connected {...props} />, {
         disableLifecycleMethods: true,
-        context: {
-          ais: {
-            store: {
-              getState: () => ({}),
-              subscribe: () => null,
-            },
-            widgetsManager: {
-              registerWidget: () => {},
-            },
-            onSearchParameters: () => {},
-          },
-        },
+        context,
       });
 
       // Simulate props change before mount
-      wrapper.setProps({ hello: 'here' });
+      wrapper.setProps({ hello: 'again' });
 
-      expect(getProvidedProps.mock.calls[1][0]).toEqual({
-        hello: 'here',
-        canRender: false,
+      expect(wrapper.find(Fake).props()).toEqual({
+        hello: 'again',
+        providedProps: {
+          hello: 'again',
+          canRender: false,
+        },
       });
 
       // Simulate mount lifecycle
       wrapper.instance().componentDidMount();
 
       // Simulate props change after mount
-      wrapper.setProps({ hello: 'again' });
+      wrapper.setProps({ hello: 'once again' });
 
-      expect(getProvidedProps.mock.calls[2][0]).toEqual({
-        hello: 'again',
-        canRender: true,
+      expect(wrapper.find(Fake).props()).toEqual({
+        hello: 'once again',
+        providedProps: {
+          hello: 'once again',
+          canRender: true,
+        },
       });
     });
 
-    it('updates on state change', () => {
-      const getProvidedProps = jest.fn((props, state) => state);
-      const Dummy = () => null;
+    it('computes provided props on search state change', () => {
+      const getProvidedProps = jest.fn((_, state) => state);
+
+      const Fake = () => null;
       const Connected = createConnector({
-        displayName: 'CoolConnector',
+        displayName: 'Connector',
         getProvidedProps,
-        getId,
-      })(Dummy);
-      let state = {
-        ...createState(),
+      })(Fake);
+
+      const subscribe = jest.fn();
+
+      const state = createFakeState({
         widgets: {
-          hoy: 'hey',
+          query: 'hello',
         },
-      };
+      });
+
       const props = {
         hello: 'there',
-        canRender: true,
       };
-      let listener;
-      const wrapper = mount(<Connected {...props} />, {
-        context: {
-          ais: {
-            store: {
-              getState: () => state,
-              subscribe: l => {
-                listener = l;
-              },
-            },
-          },
-        },
+
+      const context = createFakeContext({
+        store: createFakeStore({
+          getState: jest.fn(() => state),
+          subscribe,
+        }),
       });
-      expect(wrapper.find(Dummy).props()).toEqual({
-        ...props,
-        ...state.widgets,
+
+      const wrapper = shallow(<Connected {...props} />, {
+        context,
       });
-      state = {
-        ...createState(),
+
+      expect(getProvidedProps).toHaveBeenCalledTimes(1);
+      expect(wrapper.find(Fake).props()).toEqual({
+        hello: 'there',
+        query: 'hello',
+      });
+
+      // Simulate a search state change
+      context.ais.store.getState.mockImplementation(() => ({
+        ...state,
         widgets: {
-          hey: 'hoy',
+          query: 'hello World',
         },
-      };
-      listener();
-      wrapper.update();
+      }));
 
-      expect(getProvidedProps.mock.calls).toHaveLength(2);
-      const args = getProvidedProps.mock.calls[1];
-      expect(args[0]).toEqual(props);
-      expect(args[1]).toBe(state.widgets);
-      expect(args[2].results).toBe(state.results);
-      expect(args[2].error).toBe(state.error);
-      expect(args[2].searching).toBe(state.searching);
-      expect(args[2].searchingForFacetValues).toBe(
-        state.searchingForFacetValues
-      );
+      // Simulate a dispatch on search state change
+      context.ais.store.subscribe.mock.calls[0][0]();
 
-      expect(args[3]).toBe(state.metadata);
-      expect(wrapper.find(Dummy).props()).toEqual({
-        ...props,
-        ...state.widgets,
+      expect(getProvidedProps).toHaveBeenCalledTimes(2);
+      expect(wrapper.find(Fake).props()).toEqual({
+        hello: 'there',
+        query: 'hello World',
       });
     });
 
-    it('updates with latest props on state change', () => {
-      const getProvidedProps = jest.fn((props, state) => state);
-      const Dummy = () => null;
+    it('computes provided props with latest props on search state change', () => {
+      const getProvidedProps = jest.fn((_, state) => state);
+
+      const Fake = () => null;
       const Connected = createConnector({
-        displayName: 'CoolConnector',
+        displayName: 'Connector',
         getProvidedProps,
-        getId,
-      })(Dummy);
-      let state = {
-        ...createState(),
+      })(Fake);
+
+      const subscribe = jest.fn();
+
+      const state = createFakeState({
         widgets: {
-          hoy: 'hey',
+          query: 'hello',
         },
-      };
-      let props = {
+      });
+
+      const props = {
         hello: 'there',
       };
-      let listener;
-      const wrapper = mount(<Connected {...props} />, {
-        context: {
-          ais: {
-            store: {
-              getState: () => state,
-              subscribe: l => {
-                listener = l;
-              },
-            },
-          },
-        },
+
+      const context = createFakeContext({
+        store: createFakeStore({
+          getState: jest.fn(() => state),
+          subscribe,
+        }),
       });
-      expect(wrapper.find(Dummy).props()).toEqual({
-        ...props,
-        ...state.widgets,
+
+      const wrapper = shallow(<Connected {...props} />, {
+        context,
       });
-      state = {
-        ...createState(),
+
+      expect(wrapper.find(Fake).props()).toEqual({
+        hello: 'there',
+        query: 'hello',
+      });
+
+      // Simulate a search state change
+      context.ais.store.getState.mockImplementation(() => ({
+        ...state,
         widgets: {
-          hey: 'hoy',
+          query: 'hello world',
         },
+      }));
+
+      // Simulate a props change
+      wrapper.setProps({
+        hello: 'again',
+      });
+
+      // Simulate a dispatch on search state change
+      context.ais.store.subscribe.mock.calls[0][0]();
+
+      expect(wrapper.find(Fake).props()).toEqual({
+        hello: 'again',
+        query: 'hello world',
+      });
+    });
+
+    it('does not compute provided props when props do not change', () => {
+      const getProvidedProps = jest.fn(props => ({
+        providedProps: props,
+      }));
+
+      const Fake = jest.fn(() => null);
+      const Connected = createConnector({
+        displayName: 'Connector',
+        getProvidedProps,
+      })(Fake);
+
+      const props = {
+        hello: 'again',
+        another: ['one', 'two'],
       };
 
-      // also update props
-      props = { hello: 'you', canRender: true };
-      wrapper.setProps(props);
-
-      listener();
-      expect(getProvidedProps.mock.calls).toHaveLength(3);
-      const args = getProvidedProps.mock.calls[2];
-      expect(args[0]).toEqual(props);
-      expect(args[1]).toBe(state.widgets);
-      expect(args[2].results).toBe(state.results);
-      expect(args[2].error).toBe(state.error);
-      expect(args[2].searching).toBe(state.searching);
-      expect(args[2].searchingForFacetValues).toBe(
-        state.searchingForFacetValues
-      );
-      expect(args[3]).toBe(state.metadata);
-      expect(wrapper.find(Dummy).props()).toEqual({
-        ...props,
-        ...state.widgets,
+      const context = createFakeContext({
+        store: createFakeStore({
+          getState: () => createFakeState(),
+        }),
       });
+
+      const wrapper = shallow(<Connected {...props} />, {
+        context,
+      });
+
+      expect(getProvidedProps).toHaveBeenCalledTimes(1);
+
+      wrapper.setProps({
+        hello: 'again',
+        another: ['one', 'two'],
+      });
+
+      expect(getProvidedProps).toHaveBeenCalledTimes(1);
+
+      wrapper.setProps({
+        hello: 'again',
+        another: ['one', 'two'],
+      });
+
+      expect(getProvidedProps).toHaveBeenCalledTimes(1);
     });
 
     it('subscribes to the store once mounted', () => {
       const Connected = createConnector({
         displayName: 'Connector',
-        getProvidedProps: () => null,
-        getSearchParameters: () => null,
-        getId,
+        getProvidedProps: () => {},
       })(() => null);
 
       const subscribe = jest.fn();
 
-      const state = {
-        widgets: {},
-      };
-
-      const context = {
-        ais: {
-          store: {
-            getState: () => state,
-            subscribe,
-          },
-          widgetsManager: {
-            registerWidget: () => {},
-          },
-          onSearchParameters: () => {},
-        },
-      };
+      const context = createFakeContext({
+        store: createFakeStore({
+          getState: () => createFakeState(),
+          subscribe,
+        }),
+      });
 
       const wrapper = shallow(<Connected />, {
         disableLifecycleMethods: true,
@@ -316,129 +380,81 @@ describe('createConnector', () => {
 
     it('unsubscribes from the store on unmount', () => {
       const Connected = createConnector({
-        displayName: 'CoolConnector',
-        getProvidedProps: () => null,
-        getId,
+        displayName: 'Connector',
+        getProvidedProps: () => {},
       })(() => null);
+
       const unsubscribe = jest.fn();
-      const wrapper = mount(<Connected />, {
-        context: {
-          ais: {
-            store: {
-              getState: () => ({}),
-              subscribe: () => unsubscribe,
-            },
-          },
-        },
+
+      const context = createFakeContext({
+        store: createFakeStore({
+          getState: () => createFakeState(),
+          subscribe: () => unsubscribe,
+        }),
       });
-      expect(unsubscribe.mock.calls).toHaveLength(0);
+
+      const wrapper = shallow(<Connected />, {
+        context,
+      });
+
+      expect(unsubscribe).toHaveBeenCalledTimes(0);
+
       wrapper.unmount();
-      expect(unsubscribe.mock.calls).toHaveLength(1);
+
+      expect(unsubscribe).toHaveBeenCalledTimes(1);
     });
 
     it('does not throw an error on unmount before mount', () => {
       const Connected = createConnector({
-        displayName: 'CoolConnector',
+        displayName: 'Connector',
         getProvidedProps: () => null,
-        getId,
       })(() => null);
+
+      const context = createFakeContext({
+        store: createFakeStore({
+          getState: () => createFakeState(),
+          subscribe() {
+            return () => {
+              // unsubscribe
+            };
+          },
+        }),
+      });
 
       const wrapper = shallow(<Connected />, {
         disableLifecycleMethods: true,
-        context: {
-          ais: {
-            store: {
-              getState: () => ({}),
-              subscribe() {
-                return () => {
-                  // unsubscribe
-                };
-              },
-            },
-          },
-        },
+        context,
       });
 
-      const trigger = () => wrapper.unmount();
-
-      expect(() => trigger()).not.toThrow();
+      expect(() => wrapper.unmount()).not.toThrow();
     });
 
     it('does not throw an error on dispatch after unmount', () => {
       const Connected = createConnector({
-        displayName: 'CoolConnector',
+        displayName: 'Connector',
         getProvidedProps: () => null,
-        getId,
       })(() => null);
 
-      const subscribe = jest.fn(() => {
-        const unsubscribe = () => {};
+      const unsubscribe = () => {};
+      const subscribe = jest.fn(() => unsubscribe);
 
-        return unsubscribe;
+      const context = createFakeContext({
+        store: createFakeStore({
+          getState: () => createFakeState(),
+          subscribe,
+        }),
       });
 
       const wrapper = shallow(<Connected />, {
-        context: {
-          ais: {
-            store: {
-              getState: () => ({}),
-              subscribe,
-            },
-          },
-        },
+        context,
       });
 
-      const trigger = () => {
+      expect(() => () => {
         wrapper.unmount();
 
         // Simulate a dispatch
         subscribe.mock.calls[0][0]();
-      };
-
-      expect(() => trigger()).not.toThrow();
-    });
-
-    it("does not update the component when passed props don't change", () => {
-      const getProvidedProps = jest.fn(() => {});
-      const getSearchParameters = jest.fn(() => {});
-      const onSearchStateChange = jest.fn();
-      const transitionState = jest.fn();
-      const update = jest.fn();
-      const Dummy = jest.fn(() => null);
-      const Connected = createConnector({
-        displayName: 'CoolConnector',
-        getProvidedProps,
-        getSearchParameters,
-        transitionState,
-        getId,
-      })(Dummy);
-      const wrapper = mount(<Connected />, {
-        context: {
-          ais: {
-            store: {
-              getState: () => ({}),
-              subscribe: () => null,
-            },
-            widgetsManager: {
-              registerWidget: () => null,
-              update,
-            },
-            onSearchStateChange,
-            onSearchParameters: () => {},
-          },
-        },
-      });
-      expect(onSearchStateChange.mock.calls).toHaveLength(0);
-      expect(update.mock.calls).toHaveLength(0);
-      expect(transitionState.mock.calls).toHaveLength(0);
-      wrapper.setProps({ hello: 'there', another: ['one', 'two'] });
-      expect(onSearchStateChange.mock.calls).toHaveLength(1);
-      expect(transitionState.mock.calls).toHaveLength(1);
-      expect(update.mock.calls).toHaveLength(1);
-      wrapper.setProps({ hello: 'there', another: ['one', 'two'] });
-      expect(onSearchStateChange.mock.calls).toHaveLength(1);
-      expect(transitionState.mock.calls).toHaveLength(1);
-      expect(update.mock.calls).toHaveLength(1);
+      }).not.toThrow();
     });
   });
 

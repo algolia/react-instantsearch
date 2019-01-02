@@ -62,12 +62,12 @@ export default function createConnector(connectorDesc) {
       mounted = false;
       unmounting = false;
 
-      constructor(props, context) {
-        super(props, context);
+      constructor(...args) {
+        super(...args);
 
         this.state = {
           props: this.getProvidedProps({
-            ...props,
+            ...this.props,
             // @MAJOR: We cannot drop this beacuse it's a breaking change. The
             // prop is provided to `createConnector.getProvidedProps`. All the
             // custom connectors are impacted by this change. It should be fine
@@ -220,22 +220,22 @@ export default function createConnector(connectorDesc) {
 
       getProvidedProps(props) {
         const {
-          results,
-          searching,
-          error,
           widgets,
-          metadata,
+          results,
           resultsFacetValues,
+          searching,
           searchingForFacetValues,
           isSearchStalled,
+          metadata,
+          error,
         } = this.context.ais.store.getState();
 
         const searchResults = {
           results,
           searching,
-          error,
           searchingForFacetValues,
           isSearchStalled,
+          error,
         };
 
         return connectorDesc.getProvidedProps.call(
@@ -244,6 +244,9 @@ export default function createConnector(connectorDesc) {
           widgets,
           searchResults,
           metadata,
+          // @MAJOR: move this attribute on the `searchResults` it doesn't
+          // makes sense to have it into a separate argument. The search
+          // flags are on the object why not the resutls?
           resultsFacetValues
         );
       }
