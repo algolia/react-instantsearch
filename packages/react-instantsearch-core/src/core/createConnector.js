@@ -59,6 +59,7 @@ export default function createConnector(connectorDesc) {
         multiIndexContext: PropTypes.object,
       };
 
+      mounted = false;
       isUnmounting = false;
 
       constructor(props, context) {
@@ -143,6 +144,8 @@ export default function createConnector(connectorDesc) {
       }
 
       componentDidMount() {
+        this.mounted = true;
+
         this.unsubscribe = this.context.ais.store.subscribe(() => {
           if (!this.isUnmounting) {
             this.setState({
@@ -178,7 +181,7 @@ export default function createConnector(connectorDesc) {
             props: this.getProvidedProps({
               ...nextProps,
               // @MAJOR: see constructor
-              canRender: true,
+              canRender: this.mounted,
             }),
           });
 

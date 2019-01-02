@@ -101,6 +101,54 @@ describe('createConnector', () => {
       });
     });
 
+    it('uses the correct value for `canRender` on props change', () => {
+      const getProvidedProps = jest.fn(() => {});
+      const Connected = createConnector({
+        displayName: 'CoolConnector',
+        getProvidedProps,
+        getId,
+      })(() => null);
+
+      const props = {
+        hello: 'there',
+      };
+
+      const wrapper = shallow(<Connected {...props} />, {
+        disableLifecycleMethods: true,
+        context: {
+          ais: {
+            store: {
+              getState: () => ({}),
+              subscribe: () => null,
+            },
+            widgetsManager: {
+              registerWidget: () => {},
+            },
+            onSearchParameters: () => {},
+          },
+        },
+      });
+
+      // Simulate props change before mount
+      wrapper.setProps({ hello: 'here' });
+
+      expect(getProvidedProps.mock.calls[1][0]).toEqual({
+        hello: 'here',
+        canRender: false,
+      });
+
+      // Simulate mount lifecycle
+      wrapper.instance().componentDidMount();
+
+      // Simulate props change after mount
+      wrapper.setProps({ hello: 'again' });
+
+      expect(getProvidedProps.mock.calls[2][0]).toEqual({
+        hello: 'again',
+        canRender: true,
+      });
+    });
+
     it('updates on state change', () => {
       const getProvidedProps = jest.fn((props, state) => state);
       const Dummy = () => null;
@@ -350,7 +398,7 @@ describe('createConnector', () => {
       expect(() => trigger()).not.toThrow();
     });
 
-    it("doesn't update the component when passed props don't change", () => {
+    it("does not update the component when passed props don't change", () => {
       const getProvidedProps = jest.fn(() => {});
       const getSearchParameters = jest.fn(() => {});
       const onSearchStateChange = jest.fn();
