@@ -108,39 +108,14 @@ export default function createConnector(connectorDesc) {
         }
       }
 
-      getMetadata(nextWidgetsState) {
-        if (hasMetadata) {
-          return connectorDesc.getMetadata.call(
-            this,
-            this.props,
-            nextWidgetsState
+      componentWillMount() {
+        if (connectorDesc.getSearchParameters) {
+          this.context.ais.onSearchParameters(
+            connectorDesc.getSearchParameters.bind(this),
+            this.context,
+            this.props
           );
         }
-        return {};
-      }
-
-      getSearchParameters(searchParameters) {
-        if (hasSearchParameters) {
-          return connectorDesc.getSearchParameters.call(
-            this,
-            searchParameters,
-            this.props,
-            this.context.ais.store.getState().widgets
-          );
-        }
-        return null;
-      }
-
-      transitionState(prevWidgetsState, nextWidgetsState) {
-        if (hasTransitionState) {
-          return connectorDesc.transitionState.call(
-            this,
-            this.props,
-            prevWidgetsState,
-            nextWidgetsState
-          );
-        }
-        return nextWidgetsState;
       }
 
       componentDidMount() {
@@ -161,16 +136,6 @@ export default function createConnector(connectorDesc) {
         if (isWidget) {
           this.unregisterWidget = this.context.ais.widgetsManager.registerWidget(
             this
-          );
-        }
-      }
-
-      componentWillMount() {
-        if (connectorDesc.getSearchParameters) {
-          this.context.ais.onSearchParameters(
-            connectorDesc.getSearchParameters.bind(this),
-            this.context,
-            this.props
           );
         }
       }
@@ -203,6 +168,29 @@ export default function createConnector(connectorDesc) {
         }
       }
 
+      shouldComponentUpdate(nextProps, nextState) {
+        if (hasShouldComponentUpdate) {
+          return connectorDesc.shouldComponentUpdate.call(
+            this,
+            this.props,
+            nextProps,
+            this.state,
+            nextState
+          );
+        }
+
+        const propsEqual = shallowEqual(this.props, nextProps);
+
+        if (this.state.props === null || nextState.props === null) {
+          if (this.state.props === nextState.props) {
+            return !propsEqual;
+          }
+          return true;
+        }
+
+        return !propsEqual || !shallowEqual(this.state.props, nextState.props);
+      }
+
       componentWillUnmount() {
         this.unmounting = true;
 
@@ -230,31 +218,7 @@ export default function createConnector(connectorDesc) {
         }
       }
 
-      shouldComponentUpdate(nextProps, nextState) {
-        if (hasShouldComponentUpdate) {
-          return connectorDesc.shouldComponentUpdate.call(
-            this,
-            this.props,
-            nextProps,
-            this.state,
-            nextState
-          );
-        }
-
-        const propsEqual = shallowEqual(this.props, nextProps);
-        if (this.state.props === null || nextState.props === null) {
-          if (this.state.props === nextState.props) {
-            return !propsEqual;
-          }
-          return true;
-        }
-        return !propsEqual || !shallowEqual(this.state.props, nextState.props);
-      }
-
-      getProvidedProps = props => {
-        const {
-          ais: { store },
-        } = this.context;
+      getProvidedProps(props) {
         const {
           results,
           searching,
@@ -264,7 +228,8 @@ export default function createConnector(connectorDesc) {
           resultsFacetValues,
           searchingForFacetValues,
           isSearchStalled,
-        } = store.getState();
+        } = this.context.ais.store.getState();
+
         const searchResults = {
           results,
           searching,
@@ -272,6 +237,7 @@ export default function createConnector(connectorDesc) {
           searchingForFacetValues,
           isSearchStalled,
         };
+
         return connectorDesc.getProvidedProps.call(
           this,
           props,
@@ -280,7 +246,45 @@ export default function createConnector(connectorDesc) {
           metadata,
           resultsFacetValues
         );
-      };
+      }
+
+      getSearchParameters(searchParameters) {
+        if (hasSearchParameters) {
+          return connectorDesc.getSearchParameters.call(
+            this,
+            searchParameters,
+            this.props,
+            this.context.ais.store.getState().widgets
+          );
+        }
+
+        return null;
+      }
+
+      getMetadata(nextWidgetsState) {
+        if (hasMetadata) {
+          return connectorDesc.getMetadata.call(
+            this,
+            this.props,
+            nextWidgetsState
+          );
+        }
+
+        return {};
+      }
+
+      transitionState(prevWidgetsState, nextWidgetsState) {
+        if (hasTransitionState) {
+          return connectorDesc.transitionState.call(
+            this,
+            this.props,
+            prevWidgetsState,
+            nextWidgetsState
+          );
+        }
+
+        return nextWidgetsState;
+      }
 
       refine = (...args) => {
         this.context.ais.onInternalStateUpdate(
