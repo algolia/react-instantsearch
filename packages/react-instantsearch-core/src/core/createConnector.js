@@ -62,28 +62,13 @@ export default function createConnector(connectorDesc) {
       constructor(props, context) {
         super(props, context);
 
-        const {
-          ais: { store, widgetsManager },
-        } = context;
-        const canRender = false;
         this.state = {
-          props: this.getProvidedProps({ ...props, canRender }),
-          canRender, // use to know if a component is rendered (browser), or not (server).
+          props: this.getProvidedProps({
+            ...props,
+            canRender: false,
+          }),
         };
 
-        this.unsubscribe = store.subscribe(() => {
-          if (this.state.canRender) {
-            this.setState({
-              props: this.getProvidedProps({
-                ...this.props,
-                canRender: this.state.canRender,
-              }),
-            });
-          }
-        });
-        if (isWidget) {
-          this.unregisterWidget = widgetsManager.registerWidget(this);
-        }
         if (process.env.NODE_ENV === 'development') {
           const onlyGetProvidedPropsUsage = !find(
             Object.keys(connectorDesc),
@@ -152,9 +137,20 @@ export default function createConnector(connectorDesc) {
       }
 
       componentDidMount() {
-        this.setState({
-          canRender: true,
+        this.unsubscribe = this.context.ais.store.subscribe(() => {
+          this.setState({
+            props: this.getProvidedProps({
+              ...this.props,
+              canRender: true,
+            }),
+          });
         });
+
+        if (isWidget) {
+          this.unregisterWidget = this.context.ais.widgetsManager.registerWidget(
+            this
+          );
+        }
       }
 
       componentWillMount() {
@@ -170,7 +166,10 @@ export default function createConnector(connectorDesc) {
       componentWillReceiveProps(nextProps) {
         if (!isEqual(this.props, nextProps)) {
           this.setState({
-            props: this.getProvidedProps(nextProps),
+            props: this.getProvidedProps({
+              ...nextProps,
+              canRender: true,
+            }),
           });
 
           if (isWidget) {

@@ -1,5 +1,5 @@
 import React from 'react';
-import Enzyme, { mount } from 'enzyme';
+import Enzyme, { mount, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import createConnector from '../createConnector';
 
@@ -82,7 +82,7 @@ describe('createConnector', () => {
       wrapper.setProps(props);
       expect(getProvidedProps.mock.calls).toHaveLength(2);
       const args = getProvidedProps.mock.calls[1];
-      expect(args[0]).toEqual(props);
+      expect(args[0]).toEqual({ ...props, canRender: true });
       expect(args[1]).toBe(state.widgets);
       expect(args[2].results).toBe(state.results);
       expect(args[2].error).toBe(state.error);
@@ -94,7 +94,10 @@ describe('createConnector', () => {
       expect(args[3]).toBe(state.metadata);
       expect(wrapper.find(Dummy).props()).toEqual({
         ...props,
-        gotProps: props,
+        gotProps: {
+          ...props,
+          canRender: true,
+        },
       });
     });
 
@@ -223,7 +226,47 @@ describe('createConnector', () => {
       });
     });
 
-    it('unsubscribes from the store on unmount', () => {
+    it('subscribes to the store once mounted', () => {
+      const Connected = createConnector({
+        displayName: 'Connector',
+        getProvidedProps: () => null,
+        getSearchParameters: () => null,
+        getId,
+      })(() => null);
+
+      const subscribe = jest.fn();
+
+      const state = {
+        widgets: {},
+      };
+
+      const context = {
+        ais: {
+          store: {
+            getState: () => state,
+            subscribe,
+          },
+          widgetsManager: {
+            registerWidget: () => {},
+          },
+          onSearchParameters: () => {},
+        },
+      };
+
+      const wrapper = shallow(<Connected />, {
+        disableLifecycleMethods: true,
+        context,
+      });
+
+      expect(subscribe).toHaveBeenCalledTimes(0);
+
+      // Simulate didMount
+      wrapper.instance().componentDidMount();
+
+      expect(subscribe).toHaveBeenCalledTimes(1);
+    });
+
+    it('unsubscribes from the store on willUnmount', () => {
       const Connected = createConnector({
         displayName: 'CoolConnector',
         getProvidedProps: () => null,
@@ -386,7 +429,48 @@ describe('createConnector', () => {
       expect(outputSP).toBe(sp);
     });
 
-    it('calls onSearchParameters when mounted if getSearchParameters are defined', () => {
+    it('registers itself as a widget once mounted', () => {
+      const Connected = createConnector({
+        displayName: 'Connector',
+        getProvidedProps: () => null,
+        getSearchParameters: () => null,
+        getId,
+      })(() => null);
+
+      const registerWidget = jest.fn();
+
+      const state = {
+        widgets: {},
+      };
+
+      const context = {
+        ais: {
+          store: {
+            getState: () => state,
+            subscribe: () => null,
+          },
+          widgetsManager: {
+            registerWidget,
+          },
+          onSearchParameters: () => {},
+        },
+      };
+
+      const wrapper = shallow(<Connected />, {
+        disableLifecycleMethods: true,
+        context,
+      });
+
+      expect(registerWidget).toHaveBeenCalledTimes(0);
+
+      // Simulate didMount
+      wrapper.instance().componentDidMount();
+
+      expect(registerWidget).toHaveBeenCalledTimes(1);
+      expect(registerWidget).toHaveBeenCalledWith(wrapper.instance());
+    });
+
+    it('calls onSearchParameters on willMount', () => {
       const getSearchParameters = jest.fn(() => null);
       const onSearchParameters = jest.fn(() => null);
       let Connected = createConnector({
@@ -582,7 +666,7 @@ describe('createConnector', () => {
       const shouldComponentUpdate = jest.fn(() => true);
       const Connected = createConnector({
         displayName: 'CoolConnector',
-        getProvidedProps: () => null,
+        getProvidedProps: props => props,
         getMetadata: () => null,
         getId,
         shouldComponentUpdate,
@@ -607,22 +691,26 @@ describe('createConnector', () => {
         },
       });
 
-      expect(shouldComponentUpdate).toHaveBeenCalledTimes(1);
-      expect(shouldComponentUpdate).toHaveBeenCalledWith(
-        { hello: 'there' },
-        { hello: 'there' },
-        { canRender: false, props: null },
-        { canRender: true, props: null }
-      );
+      expect(shouldComponentUpdate).toHaveBeenCalledTimes(0);
 
       wrapper.setProps({ hello: 'here' });
 
-      expect(shouldComponentUpdate).toHaveBeenCalledTimes(2);
+      expect(shouldComponentUpdate).toHaveBeenCalledTimes(1);
       expect(shouldComponentUpdate).toHaveBeenCalledWith(
         { hello: 'there' },
         { hello: 'here' },
-        { canRender: true, props: null },
-        { canRender: true, props: null }
+        {
+          props: {
+            hello: 'there',
+            canRender: false,
+          },
+        },
+        {
+          props: {
+            hello: 'here',
+            canRender: true,
+          },
+        }
       );
     });
 
