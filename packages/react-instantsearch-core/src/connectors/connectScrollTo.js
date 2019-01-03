@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import createConnector from '../core/createConnector';
 import {
   getCurrentRefinementValue,
-  hasMultipleIndex,
+  hasMultipleIndices,
   getIndexId,
 } from '../core/indexUtils';
 import { shallowEqual } from '../core/utils';
@@ -44,7 +44,7 @@ export default createConnector({
     }
 
     /* Get the subpart of the state that interest us*/
-    if (hasMultipleIndex(this.context)) {
+    if (hasMultipleIndices(this.context)) {
       searchState = searchState.indices
         ? searchState.indices[getIndexId(this.context)]
         : {};

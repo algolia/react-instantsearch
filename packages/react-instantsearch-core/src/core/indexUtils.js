@@ -16,7 +16,7 @@ export function getResults(searchResults, context) {
   }
 }
 
-export function hasMultipleIndex(context) {
+export function hasMultipleIndices(context) {
   return context && context.multiIndexContext;
 }
 
@@ -28,7 +28,7 @@ export function refineValue(
   resetPage,
   namespace
 ) {
-  if (hasMultipleIndex(context)) {
+  if (hasMultipleIndices(context)) {
     return namespace
       ? refineMultiIndexWithNamespace(
           searchState,
@@ -173,22 +173,22 @@ export function getCurrentRefinementValue(
   const indexId = getIndexId(context);
   const { namespace, attributeName } = getNamespaceAndAttributeName(id);
   const refinements =
-    (hasMultipleIndex(context) &&
+    (hasMultipleIndices(context) &&
       searchState.indices &&
       namespace &&
       searchState.indices[`${indexId}`] &&
       has(searchState.indices[`${indexId}`][namespace], `${attributeName}`)) ||
-    (hasMultipleIndex(context) &&
+    (hasMultipleIndices(context) &&
       searchState.indices &&
       has(searchState, `indices.${indexId}.${id}`)) ||
-    (!hasMultipleIndex(context) &&
+    (!hasMultipleIndices(context) &&
       namespace &&
       has(searchState[namespace], attributeName)) ||
-    (!hasMultipleIndex(context) && has(searchState, id));
+    (!hasMultipleIndices(context) && has(searchState, id));
   if (refinements) {
     let currentRefinement;
 
-    if (hasMultipleIndex(context)) {
+    if (hasMultipleIndices(context)) {
       currentRefinement = namespace
         ? get(searchState.indices[`${indexId}`][namespace], attributeName)
         : get(searchState.indices[indexId], id);
@@ -212,7 +212,7 @@ export function cleanUpValue(searchState, context, id) {
   const indexId = getIndexId(context);
   const { namespace, attributeName } = getNamespaceAndAttributeName(id);
 
-  if (hasMultipleIndex(context) && Boolean(searchState.indices)) {
+  if (hasMultipleIndices(context) && Boolean(searchState.indices)) {
     return cleanUpValueWithMutliIndex({
       attribute: attributeName,
       searchState,
