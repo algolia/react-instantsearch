@@ -193,7 +193,7 @@ describe('createInstantSearchServer', () => {
   });
 
   describe('single index', () => {
-    it('results shoud be SearchResults from the helper', () => {
+    it('results shoud be instance of SearchResults', () => {
       const { InstantSearch } = createInstantSearchServer();
 
       const props = {
@@ -221,7 +221,7 @@ describe('createInstantSearchServer', () => {
     });
 
     describe('find results', () => {
-      it('results shoud be SearchResults and SearchParameters from the helper', async () => {
+      it('results shoud be instance of SearchResults and SearchParameters', async () => {
         const { InstantSearch, findResultsState } = createInstantSearchServer();
 
         const getSearchParameters = jest.fn();
@@ -335,7 +335,7 @@ describe('createInstantSearchServer', () => {
   describe('multi index', () => {
     const Index = createIndex({ Root: 'div' });
 
-    it('results shoud be SearchResults from the helper', () => {
+    it('results shoud be instance of SearchResults', () => {
       const { InstantSearch } = createInstantSearchServer();
 
       const props = {
@@ -383,7 +383,7 @@ describe('createInstantSearchServer', () => {
     });
 
     describe('find results', () => {
-      it('results shoud be SearchResults and SearchParameters from the helper', async () => {
+      it('results shoud be instance of SearchResults and SearchParameters', async () => {
         const { InstantSearch, findResultsState } = createInstantSearchServer();
 
         const getSearchParameters = jest.fn();
