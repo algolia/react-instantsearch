@@ -1,5 +1,3 @@
-/* eslint valid-jsdoc: 0 */
-
 import React, { Component, Children } from 'react';
 import PropTypes from 'prop-types';
 
