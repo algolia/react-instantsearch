@@ -6,15 +6,15 @@ import { HIGHLIGHT_TAGS } from './highlight';
 import { hasMultipleIndex } from './indexUtils';
 
 const isMultiIndexContext = widget => hasMultipleIndex(widget.context);
-const isTargetedIndexEqualIndex = (widget, index) =>
-  widget.context.multiIndexContext.targetedIndex === index;
+const isTargetedIndexEqualIndex = (widget, indexId) =>
+  widget.context.multiIndexContext.targetedIndex === indexId;
 
 // Relying on the `indexId` is a bit brittle to detect the `Index` widget.
 // Since it's a class we could rely on `instanceof` or similar. We never
 // had an issue though. Works for now.
 const isIndexWidget = widget => Boolean(widget.props.indexId);
-const isIndexWidgetEqualIndex = (widget, index) =>
-  widget.props.indexId === index;
+const isIndexWidgetEqualIndex = (widget, indexId) =>
+  widget.props.indexId === indexId;
 
 /**
  * Creates a new instance of the InstantSearchManager which controls the widgets and
