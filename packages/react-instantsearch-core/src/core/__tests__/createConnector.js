@@ -1125,6 +1125,99 @@ describe('createConnector', () => {
     });
   });
 
+  describe('transitionState', () => {
+    it('returns the widget transitionState when transitionState is provided', () => {
+      const transitionState = function(
+        props,
+        previousSearchState,
+        nextSearchState
+      ) {
+        return {
+          instanceProps: this.props,
+          providedProps: props,
+          previousSearchState,
+          nextSearchState,
+        };
+      };
+
+      const Connected = createConnector({
+        displayName: 'Connector',
+        getProvidedProps: () => {},
+        transitionState,
+      })(() => null);
+
+      const props = {
+        hello: 'there',
+      };
+
+      const previousSearchState = {
+        query: 'hello',
+      };
+
+      const nextSearchState = {
+        query: 'hello again',
+      };
+
+      const context = createFakeContext();
+
+      const wrapper = shallow(<Connected {...props} />, {
+        context,
+      });
+
+      const widgetTransitionState = wrapper
+        .instance()
+        .transitionState(previousSearchState, nextSearchState);
+
+      expect(widgetTransitionState).toEqual({
+        instanceProps: {
+          hello: 'there',
+        },
+        providedProps: {
+          hello: 'there',
+        },
+        previousSearchState: {
+          query: 'hello',
+        },
+        nextSearchState: {
+          query: 'hello again',
+        },
+      });
+    });
+
+    it('returns the given next state when transitionState is not provided', () => {
+      const Connected = createConnector({
+        displayName: 'Connector',
+        getProvidedProps: () => {},
+      })(() => null);
+
+      const props = {
+        hello: 'there',
+      };
+
+      const previousSearchState = {
+        query: 'hello',
+      };
+
+      const nextSearchState = {
+        query: 'hello again',
+      };
+
+      const context = createFakeContext();
+
+      const wrapper = shallow(<Connected {...props} />, {
+        context,
+      });
+
+      const widgetTransitionState = wrapper
+        .instance()
+        .transitionState(previousSearchState, nextSearchState);
+
+      expect(widgetTransitionState).toEqual({
+        query: 'hello again',
+      });
+    });
+  });
+
   describe('refine', () => {
     it('passes a refine method to the component', () => {
       const refine = (props, searchState, next) => ({
