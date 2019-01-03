@@ -6,8 +6,6 @@ import createConnector from '../createConnector';
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('createConnector', () => {
-  const getId = () => 'id';
-
   const createFakeState = props => ({
     widgets: {},
     results: {},
@@ -21,7 +19,7 @@ describe('createConnector', () => {
   });
 
   const createFakeStore = props => ({
-    getState() {},
+    getState: () => createFakeState(),
     setState() {},
     subscribe() {},
     ...props,
@@ -114,11 +112,7 @@ describe('createConnector', () => {
         hello: 'there',
       };
 
-      const context = createFakeContext({
-        store: createFakeStore({
-          getState: () => createFakeState(),
-        }),
-      });
+      const context = createFakeContext();
 
       const wrapper = shallow(<Connected {...props} />, {
         context,
@@ -155,11 +149,7 @@ describe('createConnector', () => {
         hello: 'there',
       };
 
-      const context = createFakeContext({
-        store: createFakeStore({
-          getState: () => createFakeState(),
-        }),
-      });
+      const context = createFakeContext();
 
       const wrapper = shallow(<Connected {...props} />, {
         disableLifecycleMethods: true,
@@ -323,11 +313,7 @@ describe('createConnector', () => {
         another: ['one', 'two'],
       };
 
-      const context = createFakeContext({
-        store: createFakeStore({
-          getState: () => createFakeState(),
-        }),
-      });
+      const context = createFakeContext();
 
       const wrapper = shallow(<Connected {...props} />, {
         context,
@@ -350,451 +336,12 @@ describe('createConnector', () => {
       expect(getProvidedProps).toHaveBeenCalledTimes(1);
     });
 
-    it('subscribes to the store once mounted', () => {
-      const Connected = createConnector({
-        displayName: 'Connector',
-        getProvidedProps: () => {},
-      })(() => null);
-
-      const subscribe = jest.fn();
-
-      const context = createFakeContext({
-        store: createFakeStore({
-          getState: () => createFakeState(),
-          subscribe,
-        }),
-      });
-
-      const wrapper = shallow(<Connected />, {
-        disableLifecycleMethods: true,
-        context,
-      });
-
-      expect(subscribe).toHaveBeenCalledTimes(0);
-
-      // Simulate didMount
-      wrapper.instance().componentDidMount();
-
-      expect(subscribe).toHaveBeenCalledTimes(1);
-    });
-
-    it('unsubscribes from the store on unmount', () => {
-      const Connected = createConnector({
-        displayName: 'Connector',
-        getProvidedProps: () => {},
-      })(() => null);
-
-      const unsubscribe = jest.fn();
-
-      const context = createFakeContext({
-        store: createFakeStore({
-          getState: () => createFakeState(),
-          subscribe: () => unsubscribe,
-        }),
-      });
-
-      const wrapper = shallow(<Connected />, {
-        context,
-      });
-
-      expect(unsubscribe).toHaveBeenCalledTimes(0);
-
-      wrapper.unmount();
-
-      expect(unsubscribe).toHaveBeenCalledTimes(1);
-    });
-
-    it('does not throw an error on unmount before mount', () => {
-      const Connected = createConnector({
-        displayName: 'Connector',
-        getProvidedProps: () => null,
-      })(() => null);
-
-      const context = createFakeContext({
-        store: createFakeStore({
-          getState: () => createFakeState(),
-          subscribe() {
-            return () => {
-              // unsubscribe
-            };
-          },
-        }),
-      });
-
-      const wrapper = shallow(<Connected />, {
-        disableLifecycleMethods: true,
-        context,
-      });
-
-      expect(() => wrapper.unmount()).not.toThrow();
-    });
-
-    it('does not throw an error on dispatch after unmount', () => {
-      const Connected = createConnector({
-        displayName: 'Connector',
-        getProvidedProps: () => null,
-      })(() => null);
-
-      const unsubscribe = () => {};
-      const subscribe = jest.fn(() => unsubscribe);
-
-      const context = createFakeContext({
-        store: createFakeStore({
-          getState: () => createFakeState(),
-          subscribe,
-        }),
-      });
-
-      const wrapper = shallow(<Connected />, {
-        context,
-      });
-
-      expect(() => () => {
-        wrapper.unmount();
-
-        // Simulate a dispatch
-        subscribe.mock.calls[0][0]();
-      }).not.toThrow();
-    });
-  });
-
-  describe('widget', () => {
-    it("doesn't register itself as a widget when neither getMetadata nor getSearchParameters are present", () => {
-      const Connected = createConnector({
-        displayName: 'CoolConnector',
-        getProvidedProps: () => null,
-        getId,
-      })(() => null);
-      const registerWidget = jest.fn();
-      mount(<Connected />, {
-        context: {
-          ais: {
-            store: {
-              getState: () => ({}),
-              subscribe: () => null,
-            },
-            widgetsManager: {
-              registerWidget,
-            },
-          },
-        },
-      });
-      expect(registerWidget.mock.calls).toHaveLength(0);
-    });
-
-    it('registers itself as a widget with getMetadata', () => {
-      const metadata = {};
-      const getMetadata = jest.fn(() => metadata);
-      const Connected = createConnector({
-        displayName: 'CoolConnector',
-        getProvidedProps: () => null,
-        getMetadata,
-        getId,
-      })(() => null);
-      const registerWidget = jest.fn();
-      const props = { hello: 'there' };
-      mount(<Connected {...props} />, {
-        context: {
-          ais: {
-            store: {
-              getState: () => ({}),
-              subscribe: () => null,
-            },
-            widgetsManager: {
-              registerWidget,
-            },
-          },
-        },
-      });
-      expect(registerWidget.mock.calls).toHaveLength(1);
-      const state = {};
-      const outputMetadata = registerWidget.mock.calls[0][0].getMetadata(state);
-      expect(getMetadata.mock.calls).toHaveLength(1);
-      expect(getMetadata.mock.calls[0][0]).toEqual(props);
-      expect(getMetadata.mock.calls[0][1]).toBe(state);
-      expect(outputMetadata).toBe(metadata);
-    });
-
-    it('registers itself as a widget with getSearchParameters', () => {
-      const sp = {};
-      const getSearchParameters = jest.fn(() => sp);
-      const Connected = createConnector({
-        displayName: 'CoolConnector',
-        getProvidedProps: () => null,
-        getSearchParameters,
-        getId,
-      })(() => null);
-      const registerWidget = jest.fn();
-      const props = { hello: 'there' };
-      const state = {
-        widgets: {},
-      };
-      mount(<Connected {...props} />, {
-        context: {
-          ais: {
-            store: {
-              getState: () => state,
-              subscribe: () => null,
-            },
-            widgetsManager: {
-              registerWidget,
-            },
-            onSearchParameters: () => {},
-          },
-        },
-      });
-      expect(registerWidget.mock.calls).toHaveLength(1);
-      const inputSP = {};
-      const outputSP = registerWidget.mock.calls[0][0].getSearchParameters(
-        inputSP
-      );
-      expect(getSearchParameters.mock.calls).toHaveLength(1);
-      expect(getSearchParameters.mock.calls[0][0]).toBe(inputSP);
-      expect(getSearchParameters.mock.calls[0][1]).toEqual(props);
-      expect(getSearchParameters.mock.calls[0][2]).toBe(state.widgets);
-      expect(outputSP).toBe(sp);
-    });
-
-    it('registers itself as a widget once mounted', () => {
-      const Connected = createConnector({
-        displayName: 'Connector',
-        getProvidedProps: () => null,
-        getSearchParameters: () => null,
-        getId,
-      })(() => null);
-
-      const registerWidget = jest.fn();
-
-      const state = {
-        widgets: {},
-      };
-
-      const context = {
-        ais: {
-          store: {
-            getState: () => state,
-            subscribe: () => null,
-          },
-          widgetsManager: {
-            registerWidget,
-          },
-          onSearchParameters: () => {},
-        },
-      };
-
-      const wrapper = shallow(<Connected />, {
-        disableLifecycleMethods: true,
-        context,
-      });
-
-      expect(registerWidget).toHaveBeenCalledTimes(0);
-
-      // Simulate didMount
-      wrapper.instance().componentDidMount();
-
-      expect(registerWidget).toHaveBeenCalledTimes(1);
-      expect(registerWidget).toHaveBeenCalledWith(wrapper.instance());
-    });
-
-    it('calls onSearchParameters on mount', () => {
-      const getSearchParameters = jest.fn(() => null);
-      const onSearchParameters = jest.fn(() => null);
-      let Connected = createConnector({
-        displayName: 'CoolConnector',
-        getProvidedProps: () => null,
-        getSearchParameters,
-        getId,
-      })(() => null);
-      const state = {
-        widgets: {},
-      };
-      const registerWidget = jest.fn();
-      const props = { hello: 'there' };
-      const context = {
-        ais: {
-          store: {
-            getState: () => state,
-            subscribe: () => null,
-          },
-          onSearchParameters,
-          widgetsManager: {
-            registerWidget,
-          },
-        },
-      };
-      mount(<Connected {...props} />, {
-        context,
-      });
-
-      expect(onSearchParameters.mock.calls).toHaveLength(1);
-      expect(onSearchParameters.mock.calls[0][0]).toEqual(expect.any(Function));
-      expect(onSearchParameters.mock.calls[0][1]).toEqual(context);
-      expect(onSearchParameters.mock.calls[0][2]).toEqual(props);
-
-      Connected = createConnector({
-        displayName: 'CoolConnector',
-        getProvidedProps: () => null,
-        getId,
-      })(() => null);
-
-      mount(<Connected {...props} />, {
-        context,
-      });
-
-      expect(onSearchParameters.mock.calls).toHaveLength(1);
-    });
-
-    it('binds getSearchParameters to its own instance when calling onSearchParameters on mount', () => {
-      const getSearchParameters = jest.fn(() => null);
-      const onSearchParameters = jest.fn(boundGetSearchParameters =>
-        // The bound getSearchParameters function must be invoked in order for it
-        // to be registered as an instance of getSearchParameters
-        boundGetSearchParameters()
-      );
-
-      const Connected = createConnector({
-        displayName: 'CoolConnector',
-        getProvidedProps: () => null,
-        getSearchParameters,
-        getId,
-      })(() => null);
-      const state = {
-        widgets: {},
-      };
-      const registerWidget = jest.fn();
-      const props = { hello: 'there' };
-      const context = {
-        ais: {
-          store: {
-            getState: () => state,
-            subscribe: () => null,
-          },
-          onSearchParameters,
-          widgetsManager: {
-            registerWidget,
-          },
-        },
-      };
-      mount(<Connected {...props} />, {
-        context,
-      });
-
-      expect(getSearchParameters.mock.instances).toHaveLength(1);
-      expect(getSearchParameters.mock.instances[0].props).toEqual(props);
-      expect(getSearchParameters.mock.instances[0].context).toEqual(context);
-    });
-
-    it('calls update when props change', () => {
-      const transitionState = jest.fn();
-      const Connected = createConnector({
-        displayName: 'CoolConnector',
-        getProvidedProps: () => null,
-        getMetadata: () => null,
-        getId,
-        transitionState,
-      })(() => null);
-      const update = jest.fn();
-      const onSearchStateChange = jest.fn();
-      const props = { hello: 'there' };
-      const wrapper = mount(<Connected {...props} />, {
-        context: {
-          ais: {
-            store: {
-              getState: () => ({}),
-              subscribe: () => null,
-            },
-            widgetsManager: {
-              registerWidget: () => null,
-              update,
-            },
-            onSearchStateChange,
-          },
-        },
-      });
-      expect(update.mock.calls).toHaveLength(0);
-      expect(onSearchStateChange.mock.calls).toHaveLength(0);
-      expect(transitionState.mock.calls).toHaveLength(0);
-      wrapper.setProps({ hello: 'you' });
-      expect(update.mock.calls).toHaveLength(1);
-      expect(onSearchStateChange.mock.calls).toHaveLength(1);
-      expect(transitionState.mock.calls).toHaveLength(1);
-    });
-
-    it('dont trigger onSearchStateChange when props change and the component has no transitionState function', () => {
-      const Connected = createConnector({
-        displayName: 'CoolConnector',
-        getProvidedProps: () => null,
-        getMetadata: () => null,
-        getId,
-      })(() => null);
-      const update = jest.fn();
-      const onSearchStateChange = jest.fn();
-      const props = { hello: 'there' };
-      const wrapper = mount(<Connected {...props} />, {
-        context: {
-          ais: {
-            store: {
-              getState: () => ({}),
-              subscribe: () => null,
-            },
-            widgetsManager: {
-              registerWidget: () => null,
-              update,
-            },
-            onSearchStateChange,
-          },
-        },
-      });
-      expect(update.mock.calls).toHaveLength(0);
-      expect(onSearchStateChange.mock.calls).toHaveLength(0);
-      wrapper.setProps({ hello: 'you' });
-      expect(update.mock.calls).toHaveLength(1);
-      expect(onSearchStateChange.mock.calls).toHaveLength(0);
-    });
-
-    it('dont update when props dont change', () => {
-      const transitionState = jest.fn();
-      const Connected = createConnector({
-        displayName: 'CoolConnector',
-        getProvidedProps: () => null,
-        getMetadata: () => null,
-        getId,
-        transitionState,
-      })(() => null);
-      const onSearchStateChange = jest.fn();
-      const update = jest.fn();
-      const props = { hello: 'there' };
-      const wrapper = mount(<Connected {...props} />, {
-        context: {
-          ais: {
-            store: {
-              getState: () => ({}),
-              subscribe: () => null,
-            },
-            widgetsManager: {
-              registerWidget: () => null,
-              update,
-            },
-            onSearchStateChange,
-          },
-        },
-      });
-      expect(onSearchStateChange.mock.calls).toHaveLength(0);
-      expect(update.mock.calls).toHaveLength(0);
-      expect(transitionState.mock.calls).toHaveLength(0);
-      wrapper.setProps({ hello: 'there' });
-      expect(onSearchStateChange.mock.calls).toHaveLength(0);
-      expect(update.mock.calls).toHaveLength(0);
-      expect(transitionState.mock.calls).toHaveLength(0);
-    });
-
     it('use shouldComponentUpdate when provided', () => {
       const shouldComponentUpdate = jest.fn(() => true);
       const Connected = createConnector({
-        displayName: 'CoolConnector',
+        displayName: 'Connector',
         getProvidedProps: props => props,
         getMetadata: () => null,
-        getId,
         shouldComponentUpdate,
       })(() => null);
 
@@ -840,93 +387,582 @@ describe('createConnector', () => {
       );
     });
 
-    describe('unmounting', () => {
+    it('subscribes to the store once mounted', () => {
+      const Connected = createConnector({
+        displayName: 'Connector',
+        getProvidedProps: () => {},
+      })(() => null);
+
+      const subscribe = jest.fn();
+
+      const context = createFakeContext({
+        store: createFakeStore({
+          subscribe,
+        }),
+      });
+
+      const wrapper = shallow(<Connected />, {
+        disableLifecycleMethods: true,
+        context,
+      });
+
+      expect(subscribe).toHaveBeenCalledTimes(0);
+
+      // Simulate didMount
+      wrapper.instance().componentDidMount();
+
+      expect(subscribe).toHaveBeenCalledTimes(1);
+    });
+
+    it('unsubscribes from the store on unmount', () => {
+      const Connected = createConnector({
+        displayName: 'Connector',
+        getProvidedProps: () => {},
+      })(() => null);
+
+      const unsubscribe = jest.fn();
+
+      const context = createFakeContext({
+        store: createFakeStore({
+          subscribe: () => unsubscribe,
+        }),
+      });
+
+      const wrapper = shallow(<Connected />, {
+        context,
+      });
+
+      expect(unsubscribe).toHaveBeenCalledTimes(0);
+
+      wrapper.unmount();
+
+      expect(unsubscribe).toHaveBeenCalledTimes(1);
+    });
+
+    it('does not throw an error on unmount before mount', () => {
+      const Connected = createConnector({
+        displayName: 'Connector',
+        getProvidedProps: () => null,
+      })(() => null);
+
+      const context = createFakeContext({
+        store: createFakeStore({
+          subscribe() {
+            return () => {
+              // unsubscribe
+            };
+          },
+        }),
+      });
+
+      const wrapper = shallow(<Connected />, {
+        disableLifecycleMethods: true,
+        context,
+      });
+
+      expect(() => wrapper.unmount()).not.toThrow();
+    });
+
+    it('does not throw an error on dispatch after unmount', () => {
+      const Connected = createConnector({
+        displayName: 'Connector',
+        getProvidedProps: () => null,
+      })(() => null);
+
+      const unsubscribe = () => {};
+      const subscribe = jest.fn(() => unsubscribe);
+
+      const context = createFakeContext({
+        store: createFakeStore({
+          subscribe,
+        }),
+      });
+
+      const wrapper = shallow(<Connected />, {
+        context,
+      });
+
+      expect(() => () => {
+        wrapper.unmount();
+
+        // Simulate a dispatch
+        subscribe.mock.calls[0][0]();
+      }).not.toThrow();
+    });
+  });
+
+  describe('widget', () => {
+    it('registers itself as a widget with getMetadata', () => {
+      const Connected = createConnector({
+        displayName: 'Connector',
+        getProvidedProps: () => null,
+        getMetadata: () => null,
+      })(() => null);
+
+      const registerWidget = jest.fn();
+
+      const context = createFakeContext({
+        widgetsManager: createFakeWidgetManager({
+          registerWidget,
+        }),
+      });
+
+      const wrapper = shallow(<Connected />, {
+        context,
+      });
+
+      expect(registerWidget).toHaveBeenCalledTimes(1);
+      expect(registerWidget).toHaveBeenCalledWith(wrapper.instance());
+    });
+
+    it('registers itself as a widget with getSearchParameters', () => {
+      const Connected = createConnector({
+        displayName: 'Connector',
+        getProvidedProps: () => null,
+        getSearchParameters: () => null,
+      })(() => null);
+
+      const registerWidget = jest.fn();
+
+      const context = createFakeContext({
+        widgetsManager: createFakeWidgetManager({
+          registerWidget,
+        }),
+      });
+
+      const wrapper = shallow(<Connected />, {
+        context,
+      });
+
+      expect(registerWidget).toHaveBeenCalledTimes(1);
+      expect(registerWidget).toHaveBeenCalledWith(wrapper.instance());
+    });
+
+    it('registers itself as a widget once mounted', () => {
+      const Connected = createConnector({
+        displayName: 'Connector',
+        getProvidedProps: () => null,
+        getSearchParameters: () => null,
+      })(() => null);
+
+      const registerWidget = jest.fn();
+
+      const context = createFakeContext({
+        widgetsManager: createFakeWidgetManager({
+          registerWidget,
+        }),
+      });
+
+      const wrapper = shallow(<Connected />, {
+        disableLifecycleMethods: true,
+        context,
+      });
+
+      expect(registerWidget).toHaveBeenCalledTimes(0);
+
+      // Simulate didMount
+      wrapper.instance().componentDidMount();
+
+      expect(registerWidget).toHaveBeenCalledTimes(1);
+      expect(registerWidget).toHaveBeenCalledWith(wrapper.instance());
+    });
+
+    it('does not register itself as a widget without getMetadata nor getSearchParameters', () => {
+      const Connected = createConnector({
+        displayName: 'Connector',
+        getProvidedProps: () => null,
+      })(() => null);
+
+      const registerWidget = jest.fn();
+
+      const context = createFakeContext({
+        widgetsManager: createFakeWidgetManager({
+          registerWidget,
+        }),
+      });
+
+      shallow(<Connected />, {
+        context,
+      });
+
+      expect(registerWidget).not.toHaveBeenCalled();
+    });
+
+    it('calls onSearchParameters on mount with getSearchParameters', () => {
       const Connected = createConnector({
         displayName: 'CoolConnector',
         getProvidedProps: () => null,
-        getMetadata: () => null,
-        cleanUp: () => ({ another: { state: 'state', key: {} }, key: {} }),
+        getSearchParameters: () => null,
       })(() => null);
-      const unregister = jest.fn();
-      const setState = jest.fn();
+
+      const onSearchParameters = jest.fn();
+
+      const props = {
+        hello: 'there',
+      };
+
+      const context = createFakeContext({
+        onSearchParameters,
+      });
+
+      shallow(<Connected {...props} />, {
+        context,
+      });
+
+      expect(onSearchParameters).toHaveBeenCalledTimes(1);
+      expect(onSearchParameters).toHaveBeenCalledWith(
+        expect.any(Function),
+        context,
+        props
+      );
+    });
+
+    it('does not call onSearchParameters on mount without getSearchParameters', () => {
+      const Connected = createConnector({
+        displayName: 'CoolConnector',
+        getProvidedProps: () => null,
+      })(() => null);
+
+      const onSearchParameters = jest.fn();
+
+      const props = {
+        hello: 'there',
+      };
+
+      const context = createFakeContext({
+        onSearchParameters,
+      });
+
+      shallow(<Connected {...props} />, {
+        context,
+      });
+
+      expect(onSearchParameters).not.toHaveBeenCalled();
+    });
+
+    it('binds getSearchParameters to the connector instance with onSearchParameters', () => {
+      const getSearchParameters = jest.fn(function() {
+        return this;
+      });
+
+      const Connected = createConnector({
+        displayName: 'Connector',
+        getProvidedProps: () => null,
+        getSearchParameters,
+      })(() => null);
+
+      const onSearchParameters = jest.fn();
+
+      const context = createFakeContext({
+        onSearchParameters,
+      });
+
+      const wrapper = shallow(<Connected />, {
+        context,
+      });
+
+      expect(onSearchParameters.mock.calls[0][0]()).toBe(wrapper.instance());
+    });
+
+    it('triggers a widgetManager update on props change', () => {
+      const Connected = createConnector({
+        displayName: 'Connector',
+        getProvidedProps: () => null,
+        getMetadata: () => null,
+      })(() => null);
+
+      const update = jest.fn();
+
+      const props = {
+        hello: 'there',
+      };
+
+      const context = createFakeContext({
+        widgetsManager: createFakeWidgetManager({
+          update,
+        }),
+      });
+
+      const wrapper = shallow(<Connected {...props} />, {
+        context,
+      });
+
+      expect(update).toHaveBeenCalledTimes(0);
+
+      wrapper.setProps({
+        hello: 'again',
+      });
+
+      expect(update).toHaveBeenCalledTimes(1);
+    });
+
+    it('does not trigger a widgetManager update when props do not change', () => {
+      const Connected = createConnector({
+        displayName: 'Connector',
+        getProvidedProps: () => null,
+        getMetadata: () => null,
+      })(() => null);
+
+      const update = jest.fn();
+
+      const props = {
+        hello: 'there',
+      };
+
+      const context = createFakeContext({
+        widgetsManager: createFakeWidgetManager({
+          update,
+        }),
+      });
+
+      const wrapper = shallow(<Connected {...props} />, {
+        context,
+      });
+
+      expect(update).toHaveBeenCalledTimes(0);
+
+      wrapper.setProps({
+        hello: 'there',
+      });
+
+      expect(update).toHaveBeenCalledTimes(0);
+    });
+
+    it('triggers an onSearchStateChange on props change with transitationState', () => {
+      const transitionState = jest.fn(function() {
+        return this.props;
+      });
+
+      const Connected = createConnector({
+        displayName: 'Connector',
+        getProvidedProps: () => null,
+        getMetadata: () => null,
+        transitionState,
+      })(() => null);
+
+      const state = createFakeState();
       const onSearchStateChange = jest.fn();
 
-      it('unregisters itself on unmount', () => {
-        const wrapper = mount(<Connected />, {
-          context: {
-            ais: {
-              store: {
-                getState: () => ({ widgets: { another: { state: 'state' } } }),
-                setState,
-                subscribe: () => () => null,
-              },
-              widgetsManager: {
-                registerWidget: () => unregister,
-              },
-              onSearchStateChange,
-            },
-          },
-        });
-        expect(unregister.mock.calls).toHaveLength(0);
-        expect(setState.mock.calls).toHaveLength(0);
-        expect(onSearchStateChange.mock.calls).toHaveLength(0);
+      const props = {
+        hello: 'there',
+      };
 
-        wrapper.unmount();
-
-        expect(unregister.mock.calls).toHaveLength(1);
-        expect(setState.mock.calls).toHaveLength(1);
-        expect(onSearchStateChange.mock.calls).toHaveLength(1);
-        expect(setState.mock.calls[0][0]).toEqual({
-          widgets: { another: { state: 'state' } },
-        });
-        expect(onSearchStateChange.mock.calls[0][0]).toEqual({
-          another: { state: 'state' },
-        });
+      const context = createFakeContext({
+        store: createFakeStore({
+          getState: () => state,
+        }),
+        onSearchStateChange,
       });
 
-      it('does not throw an error on unmount before mount', () => {
-        const wrapper = shallow(<Connected />, {
-          disableLifecycleMethods: true,
-          context: {
-            ais: {
-              store: {
-                getState: () => ({}),
-                subscribe: () => {},
-              },
-              widgetsManager: {
-                registerWidget: () => {},
-              },
-            },
-          },
-        });
-
-        const trigger = () => wrapper.unmount();
-
-        expect(() => trigger()).not.toThrow();
+      const wrapper = shallow(<Connected {...props} />, {
+        context,
       });
 
-      it('empty key from the search state should be removed', () => {
-        const wrapper = mount(<Connected />, {
-          context: {
-            ais: {
-              store: {
-                getState: () => ({ widgets: { another: { state: 'state' } } }),
-                setState,
-                subscribe: () => () => null,
-              },
-              widgetsManager: {
-                registerWidget: () => unregister,
-              },
-              onSearchStateChange,
-            },
-          },
-        });
-        wrapper.unmount();
+      expect(onSearchStateChange).toHaveBeenCalledTimes(0);
+      expect(transitionState).toHaveBeenCalledTimes(0);
 
-        expect(onSearchStateChange.mock.calls[0][0]).toEqual({
-          another: { state: 'state' },
-        });
+      wrapper.setProps({
+        hello: 'again',
       });
+
+      expect(onSearchStateChange).toHaveBeenCalledTimes(1);
+      expect(onSearchStateChange).toHaveBeenCalledWith({
+        hello: 'there', // the instance didn't have the next props yet
+      });
+
+      expect(transitionState).toHaveBeenCalledTimes(1);
+      expect(transitionState).toHaveBeenCalledWith(
+        { hello: 'again' },
+        state.widgets,
+        state.widgets
+      );
+    });
+
+    it('does not trigger an onSearchStateChange on props change wihtout transitionState', () => {
+      const Connected = createConnector({
+        displayName: 'Connector',
+        getProvidedProps: () => null,
+        getMetadata: () => null,
+      })(() => null);
+
+      const onSearchStateChange = jest.fn();
+
+      const props = {
+        hello: 'there',
+      };
+
+      const context = createFakeContext({
+        onSearchStateChange,
+      });
+
+      const wrapper = shallow(<Connected {...props} />, {
+        context,
+      });
+
+      expect(onSearchStateChange).not.toHaveBeenCalled();
+
+      wrapper.setProps({
+        hello: 'again',
+      });
+
+      expect(onSearchStateChange).not.toHaveBeenCalled();
+    });
+
+    it('unregisters itself on unmount', () => {
+      const Connected = createConnector({
+        displayName: 'Connector',
+        getProvidedProps: () => null,
+        getMetadata: () => null,
+      })(() => null);
+
+      const unregisterWidget = jest.fn();
+
+      const context = createFakeContext({
+        widgetsManager: createFakeWidgetManager({
+          registerWidget: () => unregisterWidget,
+        }),
+      });
+
+      const wrapper = shallow(<Connected />, {
+        context,
+      });
+
+      expect(unregisterWidget).toHaveBeenCalledTimes(0);
+
+      wrapper.unmount();
+
+      expect(unregisterWidget).toHaveBeenCalledTimes(1);
+    });
+
+    it('calls onSearchStateChange with cleanUp on unmount', () => {
+      const cleanUp = jest.fn(function(props, searchState) {
+        return {
+          instanceProps: this.props,
+          providedProps: props,
+          searchState,
+        };
+      });
+
+      const Connected = createConnector({
+        displayName: 'Connector',
+        getProvidedProps: () => null,
+        getMetadata: () => null,
+        cleanUp,
+      })(() => null);
+
+      const onSearchStateChange = jest.fn();
+      const setState = jest.fn();
+
+      const state = createFakeState({
+        widgets: {
+          query: 'hello',
+        },
+      });
+
+      const props = {
+        hello: 'there',
+      };
+
+      const context = createFakeContext({
+        store: createFakeStore({
+          getState: () => state,
+          setState,
+        }),
+        widgetsManager: createFakeWidgetManager({
+          registerWidget: () => () => {},
+        }),
+        onSearchStateChange,
+      });
+
+      const wrapper = shallow(<Connected {...props} />, {
+        context,
+      });
+
+      expect(cleanUp).toHaveBeenCalledTimes(0);
+      expect(onSearchStateChange).toHaveBeenCalledTimes(0);
+
+      wrapper.unmount();
+
+      expect(cleanUp).toHaveBeenCalledTimes(1);
+      expect(onSearchStateChange).toHaveBeenCalledTimes(1);
+      expect(onSearchStateChange).toHaveBeenCalledWith({
+        providedProps: {
+          hello: 'there',
+        },
+        instanceProps: {
+          hello: 'there',
+        },
+        searchState: {
+          query: 'hello',
+        },
+      });
+    });
+
+    it('calls onSearchStateChange with cleanUp without empty keys on unmount', () => {
+      const cleanUp = jest.fn((_, searchState) => searchState);
+
+      const Connected = createConnector({
+        displayName: 'Connector',
+        getProvidedProps: () => null,
+        getMetadata: () => null,
+        cleanUp,
+      })(() => null);
+
+      const onSearchStateChange = jest.fn();
+      const setState = jest.fn();
+
+      const state = createFakeState({
+        widgets: {
+          query: 'hello',
+          hello: {},
+        },
+      });
+
+      const context = createFakeContext({
+        store: createFakeStore({
+          getState: () => state,
+          setState,
+        }),
+        widgetsManager: createFakeWidgetManager({
+          registerWidget: () => () => {},
+        }),
+        onSearchStateChange,
+      });
+
+      const wrapper = shallow(<Connected />, {
+        context,
+      });
+
+      wrapper.unmount();
+
+      expect(onSearchStateChange).toHaveBeenCalledWith({
+        query: 'hello',
+      });
+    });
+
+    it('does not throw an error on unmount before mount', () => {
+      const Connected = createConnector({
+        displayName: 'Connector',
+        getProvidedProps: () => null,
+        getMetadata: () => null,
+      })(() => null);
+
+      const unregisterWidget = jest.fn();
+
+      const context = createFakeContext({
+        widgetsManager: createFakeWidgetManager({
+          registerWidget: () => unregisterWidget,
+        }),
+      });
+
+      const wrapper = shallow(<Connected />, {
+        disableLifecycleMethods: true,
+        context,
+      });
+
+      const trigger = () => wrapper.unmount();
+
+      expect(() => trigger()).not.toThrow();
     });
   });
 

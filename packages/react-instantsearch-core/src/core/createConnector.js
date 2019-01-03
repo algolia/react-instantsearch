@@ -151,9 +151,8 @@ export default function createConnector(connectorDesc) {
           });
 
           if (isWidget) {
-            // Since props might have changed, we need to re-run getSearchParameters
-            // and getMetadata with the new props.
             this.context.ais.widgetsManager.update();
+
             if (connectorDesc.transitionState) {
               this.context.ais.onSearchStateChange(
                 connectorDesc.transitionState.call(
@@ -199,10 +198,10 @@ export default function createConnector(connectorDesc) {
         }
 
         if (this.unregisterWidget) {
-          this.unregisterWidget(); // will schedule an update
+          this.unregisterWidget();
 
           if (hasCleanUp) {
-            const newState = connectorDesc.cleanUp.call(
+            const nextState = connectorDesc.cleanUp.call(
               this,
               this.props,
               this.context.ais.store.getState().widgets
@@ -210,10 +209,10 @@ export default function createConnector(connectorDesc) {
 
             this.context.ais.store.setState({
               ...this.context.ais.store.getState(),
-              widgets: newState,
+              widgets: nextState,
             });
 
-            this.context.ais.onSearchStateChange(removeEmptyKey(newState));
+            this.context.ais.onSearchStateChange(removeEmptyKey(nextState));
           }
         }
       }
