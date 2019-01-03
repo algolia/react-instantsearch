@@ -1,6 +1,6 @@
 import { has, omit, get } from 'lodash';
 
-export function getIndex(context) {
+export function getIndexId(context) {
   return context && context.multiIndexContext
     ? context.multiIndexContext.targetedIndex
     : context.ais.mainTargetedIndex;
@@ -8,8 +8,8 @@ export function getIndex(context) {
 
 export function getResults(searchResults, context) {
   if (searchResults.results && !searchResults.results.hits) {
-    return searchResults.results[getIndex(context)]
-      ? searchResults.results[getIndex(context)]
+    return searchResults.results[getIndexId(context)]
+      ? searchResults.results[getIndexId(context)]
       : null;
   } else {
     return searchResults.results ? searchResults.results : null;
@@ -68,17 +68,30 @@ export function refineValue(
 
 function refineMultiIndex(searchState, nextRefinement, context, resetPage) {
   const page = resetPage ? { page: 1 } : undefined;
-  const index = getIndex(context);
-  const state = has(searchState, `indices.${index}`)
+  const indexId = getIndexId(context);
+  const state = has(searchState, `indices.${indexId}`)
     ? {
         ...searchState.indices,
-        [index]: { ...searchState.indices[index], ...nextRefinement, ...page },
+        [indexId]: {
+          ...searchState.indices[indexId],
+          ...nextRefinement,
+          ...page,
+        },
       }
     : {
         ...searchState.indices,
-        ...{ [index]: { ...nextRefinement, ...page } },
+        ...{
+          [indexId]: {
+            ...nextRefinement,
+            ...page,
+          },
+        },
       };
-  return { ...searchState, indices: state };
+
+  return {
+    ...searchState,
+    indices: state,
+  };
 }
 
 function refineSingleIndex(searchState, nextRefinement, resetPage) {
@@ -94,16 +107,16 @@ function refineMultiIndexWithNamespace(
   resetPage,
   namespace
 ) {
-  const index = getIndex(context);
+  const indexId = getIndexId(context);
   const page = resetPage ? { page: 1 } : undefined;
-  const state = has(searchState, `indices.${index}`)
+  const state = has(searchState, `indices.${indexId}`)
     ? {
         ...searchState.indices,
-        [index]: {
-          ...searchState.indices[index],
+        [indexId]: {
+          ...searchState.indices[indexId],
           ...{
             [namespace]: {
-              ...searchState.indices[index][namespace],
+              ...searchState.indices[indexId][namespace],
               ...nextRefinement,
             },
             page: 1,
@@ -112,9 +125,18 @@ function refineMultiIndexWithNamespace(
       }
     : {
         ...searchState.indices,
-        ...{ [index]: { [namespace]: nextRefinement, ...page } },
+        ...{
+          [indexId]: {
+            [namespace]: nextRefinement,
+            ...page,
+          },
+        },
       };
-  return { ...searchState, indices: state };
+
+  return {
+    ...searchState,
+    indices: state,
+  };
 }
 
 function refineSingleIndexWithNamespace(
@@ -148,17 +170,17 @@ export function getCurrentRefinementValue(
   defaultValue,
   refinementsCallback = x => x
 ) {
-  const index = getIndex(context);
+  const indexId = getIndexId(context);
   const { namespace, attributeName } = getNamespaceAndAttributeName(id);
   const refinements =
     (hasMultipleIndex(context) &&
       searchState.indices &&
       namespace &&
-      searchState.indices[`${index}`] &&
-      has(searchState.indices[`${index}`][namespace], `${attributeName}`)) ||
+      searchState.indices[`${indexId}`] &&
+      has(searchState.indices[`${indexId}`][namespace], `${attributeName}`)) ||
     (hasMultipleIndex(context) &&
       searchState.indices &&
-      has(searchState, `indices.${index}.${id}`)) ||
+      has(searchState, `indices.${indexId}.${id}`)) ||
     (!hasMultipleIndex(context) &&
       namespace &&
       has(searchState[namespace], attributeName)) ||
@@ -168,8 +190,8 @@ export function getCurrentRefinementValue(
 
     if (hasMultipleIndex(context)) {
       currentRefinement = namespace
-        ? get(searchState.indices[`${index}`][namespace], attributeName)
-        : get(searchState.indices[index], id);
+        ? get(searchState.indices[`${indexId}`][namespace], attributeName)
+        : get(searchState.indices[indexId], id);
     } else {
       currentRefinement = namespace
         ? get(searchState[namespace], attributeName)
@@ -187,14 +209,14 @@ export function getCurrentRefinementValue(
 }
 
 export function cleanUpValue(searchState, context, id) {
-  const index = getIndex(context);
+  const indexId = getIndexId(context);
   const { namespace, attributeName } = getNamespaceAndAttributeName(id);
 
   if (hasMultipleIndex(context) && Boolean(searchState.indices)) {
     return cleanUpValueWithMutliIndex({
       attribute: attributeName,
       searchState,
-      index,
+      indexId,
       id,
       namespace,
     });
@@ -226,19 +248,19 @@ function cleanUpValueWithSingleIndex({
 
 function cleanUpValueWithMutliIndex({
   searchState,
-  index,
+  indexId,
   id,
   namespace,
   attribute,
 }) {
-  const indexSearchState = searchState.indices[index];
+  const indexSearchState = searchState.indices[indexId];
 
   if (namespace && indexSearchState) {
     return {
       ...searchState,
       indices: {
         ...searchState.indices,
-        [index]: {
+        [indexId]: {
           ...indexSearchState,
           [namespace]: omit(indexSearchState[namespace], attribute),
         },
@@ -246,5 +268,5 @@ function cleanUpValueWithMutliIndex({
     };
   }
 
-  return omit(searchState, `indices.${index}.${id}`);
+  return omit(searchState, `indices.${indexId}.${id}`);
 }

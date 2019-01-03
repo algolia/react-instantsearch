@@ -4,7 +4,7 @@ import createConnector from '../core/createConnector';
 import {
   getCurrentRefinementValue,
   hasMultipleIndex,
-  getIndex,
+  getIndexId,
 } from '../core/indexUtils';
 import { shallowEqual } from '../core/utils';
 
@@ -45,8 +45,9 @@ export default createConnector({
 
     /* Get the subpart of the state that interest us*/
     if (hasMultipleIndex(this.context)) {
-      const index = getIndex(this.context);
-      searchState = searchState.indices ? searchState.indices[index] : {};
+      searchState = searchState.indices
+        ? searchState.indices[getIndexId(this.context)]
+        : {};
     }
 
     /*
