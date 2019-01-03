@@ -1058,6 +1058,73 @@ describe('createConnector', () => {
     });
   });
 
+  describe('getMetadata', () => {
+    it('returns the widget metadata when getMetadata is provided', () => {
+      const getMetadata = function(props, searchState) {
+        return {
+          instanceProps: this.props,
+          providedProps: props,
+          searchState,
+        };
+      };
+
+      const Connected = createConnector({
+        displayName: 'Connector',
+        getProvidedProps: () => {},
+        getMetadata,
+      })(() => null);
+
+      const props = {
+        hello: 'there',
+      };
+
+      const searchState = {
+        query: 'hello',
+      };
+
+      const context = createFakeContext();
+
+      const wrapper = shallow(<Connected {...props} />, {
+        context,
+      });
+
+      const widgetMetadata = wrapper.instance().getMetadata(searchState);
+
+      expect(widgetMetadata).toEqual({
+        instanceProps: {
+          hello: 'there',
+        },
+        providedProps: {
+          hello: 'there',
+        },
+        searchState: {
+          query: 'hello',
+        },
+      });
+    });
+
+    it('returns an empty object when getMetadata is not provided', () => {
+      const Connected = createConnector({
+        displayName: 'Connector',
+        getProvidedProps: () => {},
+      })(() => null);
+
+      const searchState = {
+        query: 'hello',
+      };
+
+      const context = createFakeContext();
+
+      const wrapper = shallow(<Connected />, {
+        context,
+      });
+
+      const widgetMetadata = wrapper.instance().getMetadata(searchState);
+
+      expect(widgetMetadata).toEqual({});
+    });
+  });
+
   describe('refine', () => {
     it('passes a refine method to the component', () => {
       const refine = (props, searchState, next) => ({
