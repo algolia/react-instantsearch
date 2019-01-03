@@ -299,16 +299,6 @@ export default function createConnector(connectorDesc) {
         );
       };
 
-      searchForFacetValues = (...args) => {
-        this.context.ais.onSearchForFacetValues(
-          connectorDesc.searchForFacetValues(
-            this.props,
-            this.context.ais.store.getState().widgets,
-            ...args
-          )
-        );
-      };
-
       createURL = (...args) =>
         this.context.ais.createHrefForState(
           connectorDesc.refine.call(
@@ -318,6 +308,16 @@ export default function createConnector(connectorDesc) {
             ...args
           )
         );
+
+      searchForFacetValues = (...args) => {
+        this.context.ais.onSearchForFacetValues(
+          connectorDesc.searchForFacetValues(
+            this.props,
+            this.context.ais.store.getState().widgets,
+            ...args
+          )
+        );
+      };
 
       render() {
         if (this.state.props === null) {

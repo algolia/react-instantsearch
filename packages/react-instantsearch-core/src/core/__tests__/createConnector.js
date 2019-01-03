@@ -968,117 +968,187 @@ describe('createConnector', () => {
 
   describe('refine', () => {
     it('passes a refine method to the component', () => {
-      const Dummy = () => null;
-      const nextState = {};
-      const widgets = {};
-      const refine = jest.fn(() => nextState);
-      const Connected = createConnector({
-        displayName: 'CoolConnector',
-        getProvidedProps: () => ({}),
-        refine,
-        getId,
-      })(Dummy);
-      const onInternalStateUpdate = jest.fn();
-      const props = { hello: 'there' };
-      const wrapper = mount(<Connected {...props} />, {
-        context: {
-          ais: {
-            store: {
-              getState: () => ({
-                widgets,
-              }),
-              subscribe: () => null,
-            },
-            onInternalStateUpdate,
-          },
-        },
+      const refine = (props, searchState, next) => ({
+        props,
+        searchState,
+        next,
       });
-      const passedProps = wrapper.find(Dummy).props();
-      const arg1 = {};
-      const arg2 = {};
-      passedProps.refine(arg1, arg2);
-      expect(refine.mock.calls[0][0]).toEqual(props);
-      expect(refine.mock.calls[0][1]).toBe(widgets);
-      expect(refine.mock.calls[0][2]).toBe(arg1);
-      expect(refine.mock.calls[0][3]).toBe(arg2);
-      expect(onInternalStateUpdate.mock.calls[0][0]).toBe(nextState);
-    });
 
-    it('passes a createURL method to the component', () => {
       const Dummy = () => null;
-      const nextState = {};
-      const widgets = {};
-      const refine = jest.fn(() => nextState);
       const Connected = createConnector({
-        displayName: 'CoolConnector',
-        getProvidedProps: () => ({}),
+        displayName: 'Connector',
+        getProvidedProps: () => {},
         refine,
-        getId,
       })(Dummy);
-      const createHrefForState = jest.fn();
-      const props = { hello: 'there' };
-      const wrapper = mount(<Connected {...props} />, {
-        context: {
-          ais: {
-            store: {
-              getState: () => ({
-                widgets,
-              }),
-              subscribe: () => null,
-            },
-            createHrefForState,
-          },
+
+      const onInternalStateUpdate = jest.fn();
+
+      const state = createFakeState({
+        widgets: {
+          query: 'hello',
         },
       });
-      const passedProps = wrapper.find(Dummy).props();
-      const arg1 = {};
-      const arg2 = {};
-      passedProps.createURL(arg1, arg2);
-      expect(refine.mock.calls[0][0]).toEqual(props);
-      expect(refine.mock.calls[0][1]).toBe(widgets);
-      expect(refine.mock.calls[0][2]).toBe(arg1);
-      expect(refine.mock.calls[0][3]).toBe(arg2);
-      expect(createHrefForState.mock.calls[0][0]).toBe(nextState);
+
+      const props = {
+        hello: 'there',
+      };
+
+      const context = createFakeContext({
+        store: createFakeStore({
+          getState: () => state,
+        }),
+        onInternalStateUpdate,
+      });
+
+      const wrapper = shallow(<Connected {...props} />, {
+        context,
+      });
+
+      expect(onInternalStateUpdate).toHaveBeenCalledTimes(0);
+
+      wrapper
+        .find(Dummy)
+        .props()
+        .refine({ query: 'hello world' });
+
+      expect(onInternalStateUpdate).toHaveBeenCalledTimes(1);
+      expect(onInternalStateUpdate).toHaveBeenCalledWith({
+        props: {
+          hello: 'there',
+        },
+        searchState: {
+          query: 'hello',
+        },
+        next: {
+          query: 'hello world',
+        },
+      });
+    });
+  });
+
+  describe('createURL', () => {
+    it('passes a createURL method to the component', () => {
+      const refine = (props, searchState, next) => ({
+        props,
+        searchState,
+        next,
+      });
+
+      const Dummy = () => null;
+      const Connected = createConnector({
+        displayName: 'Connector',
+        getProvidedProps: () => {},
+        refine,
+      })(Dummy);
+
+      const createHrefForState = jest.fn();
+
+      const state = createFakeState({
+        widgets: {
+          query: 'hello',
+        },
+      });
+
+      const props = {
+        hello: 'there',
+      };
+
+      const context = createFakeContext({
+        store: createFakeStore({
+          getState: () => state,
+        }),
+        createHrefForState,
+      });
+
+      const wrapper = shallow(<Connected {...props} />, {
+        context,
+      });
+
+      expect(createHrefForState).toHaveBeenCalledTimes(0);
+
+      wrapper
+        .find(Dummy)
+        .props()
+        .createURL({ query: 'hello world' });
+
+      expect(createHrefForState).toHaveBeenCalledTimes(1);
+      expect(createHrefForState).toHaveBeenCalledWith({
+        props: {
+          hello: 'there',
+        },
+        searchState: {
+          query: 'hello',
+        },
+        next: {
+          query: 'hello world',
+        },
+      });
     });
   });
 
   describe('searchForFacetValues', () => {
     it('passes a searchForItems method to the component', () => {
+      const searchForFacetValues = (props, searchState, next) => ({
+        props,
+        searchState,
+        next,
+      });
+
       const Dummy = () => null;
-      const searchState = {};
-      const widgets = {};
-      const searchForFacetValues = jest.fn(() => searchState);
       const Connected = createConnector({
-        displayName: 'CoolConnector',
-        getProvidedProps: () => ({}),
+        displayName: 'Connector',
+        getProvidedProps: () => {},
         searchForFacetValues,
-        getId,
       })(Dummy);
+
       const onSearchForFacetValues = jest.fn();
-      const props = { hello: 'there' };
-      const wrapper = mount(<Connected {...props} />, {
-        context: {
-          ais: {
-            store: {
-              getState: () => ({
-                widgets,
-              }),
-              subscribe: () => null,
-            },
-            onSearchForFacetValues,
-          },
+
+      const props = {
+        hello: 'there',
+      };
+
+      const state = createFakeState({
+        widgets: {
+          query: 'hello',
         },
       });
-      const passedProps = wrapper.find(Dummy).props();
-      const facetName = 'facetName';
-      const query = 'query';
 
-      passedProps.searchForItems(facetName, query);
-      expect(searchForFacetValues.mock.calls[0][0]).toEqual(props);
-      expect(searchForFacetValues.mock.calls[0][1]).toBe(widgets);
-      expect(searchForFacetValues.mock.calls[0][2]).toBe(facetName);
-      expect(searchForFacetValues.mock.calls[0][3]).toBe(query);
-      expect(onSearchForFacetValues.mock.calls[0][0]).toBe(searchState);
+      const context = createFakeContext({
+        store: createFakeStore({
+          getState: () => state,
+        }),
+        onSearchForFacetValues,
+      });
+
+      const wrapper = shallow(<Connected {...props} />, {
+        context,
+      });
+
+      expect(onSearchForFacetValues).toHaveBeenCalledTimes(0);
+
+      wrapper
+        .find(Dummy)
+        .props()
+        .searchForItems({
+          facetName: 'brand',
+          query: 'apple',
+          maxFacetHits: 10,
+        });
+
+      expect(onSearchForFacetValues).toHaveBeenCalledTimes(1);
+      expect(onSearchForFacetValues).toHaveBeenCalledWith({
+        props: {
+          hello: 'there',
+        },
+        searchState: {
+          query: 'hello',
+        },
+        next: {
+          facetName: 'brand',
+          query: 'apple',
+          maxFacetHits: 10,
+        },
+      });
     });
   });
 });
