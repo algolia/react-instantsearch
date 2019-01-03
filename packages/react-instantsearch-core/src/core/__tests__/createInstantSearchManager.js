@@ -49,7 +49,7 @@ describe('createInstantSearchManager', () => {
     expect(ism.getWidgetsIds()).toEqual([]);
   });
 
-  it('initialize with results', () => {
+  it('initializes with results', () => {
     const ism = createInstantSearchManager({
       indexName: 'index',
       resultsState: { some: 'results' },
@@ -151,7 +151,7 @@ describe('createInstantSearchManager', () => {
   });
 
   describe('getSearchParameters', () => {
-    it('expect a widget top level to be shared between main and derived parameters', () => {
+    it('expects a widget top level to be shared between main and derived parameters', () => {
       // <InstantSearch indexName="index">
       //   <SearchBox defaultRefinement="shared" />
       //   <Index indexId="main" indexName="main" />
@@ -201,7 +201,7 @@ describe('createInstantSearchManager', () => {
       ]);
     });
 
-    it('expect a widget with the same id than the indexName to be a main parameters', () => {
+    it('expects a widget with the same id than the indexName to be a main parameters', () => {
       // <InstantSearch indexName="index">
       //   <Index indexId="index" indexName="main" />
       // </InstantSearch>
@@ -233,7 +233,7 @@ describe('createInstantSearchManager', () => {
       expect(derivedParameters).toEqual([]);
     });
 
-    it('expect a widget with a different id than the indexName to be a derived parameters', () => {
+    it('expects a widget with a different id than the indexName to be a derived parameters', () => {
       // <InstantSearch indexName="index">
       //   <Index indexId="index_main" indexName="main" />
       // </InstantSearch>
@@ -272,7 +272,7 @@ describe('createInstantSearchManager', () => {
       ]);
     });
 
-    it('expect a widget within a mutli index context with the same id than the indexName to be a main parameters', () => {
+    it('expects a widget within a mutli index context with the same id than the indexName to be a main parameters', () => {
       // <InstantSearch indexName="index">
       //   <Index indexId="index" indexName="index" />
       //     <SearchBox defaultRefinement="main" />
@@ -322,7 +322,7 @@ describe('createInstantSearchManager', () => {
       expect(derivedParameters).toEqual([]);
     });
 
-    it('expect a widget within a mutli index context with a different id than the indexName to be a derived parameters', () => {
+    it('expects a widget within a mutli index context with a different id than the indexName to be a derived parameters', () => {
       // <InstantSearch indexName="index">
       //   <Index indexId="index_with_refinement" indexName="index" />
       //     <SearchBox defaultRefinement="dervied" />
