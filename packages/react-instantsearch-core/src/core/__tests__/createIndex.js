@@ -13,7 +13,7 @@ describe('createIndex', () => {
     indexName: 'indexName',
   };
 
-  it('expect to create an Index', () => {
+  it('expects to create an Index', () => {
     const props = {
       ...requiredProps,
     };
@@ -24,7 +24,7 @@ describe('createIndex', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('expect to create an Index with the default root', () => {
+  it('expects to create an Index with the default root', () => {
     const props = {
       ...requiredProps,
     };
@@ -36,7 +36,7 @@ describe('createIndex', () => {
     });
   });
 
-  it('expect to create an Index with a custom root props', () => {
+  it('expects to create an Index with a custom root props', () => {
     const props = {
       ...requiredProps,
       root: {
@@ -61,7 +61,7 @@ describe('createIndex', () => {
     });
   });
 
-  it('expect to create an Index with an indexId when provided', () => {
+  it('expects to create an Index with an indexId when provided', () => {
     const props = {
       ...requiredProps,
       indexId: 'indexId',
@@ -72,7 +72,7 @@ describe('createIndex', () => {
     expect(wrapper.props().indexId).toBe('indexId');
   });
 
-  it("expect to create an Index with an indexId that fallback to indexName when it's not provided", () => {
+  it("expects to create an Index with an indexId that fallback to indexName when it's not provided", () => {
     const props = {
       ...requiredProps,
     };

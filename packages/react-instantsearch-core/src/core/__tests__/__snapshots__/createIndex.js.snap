@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`createIndex expect to create an Index 1`] = `
+exports[`createIndex expects to create an Index 1`] = `
 <Index
   indexId="indexName"
   indexName="indexName"

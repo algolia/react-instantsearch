@@ -25,7 +25,7 @@ describe('Index', () => {
     },
   };
 
-  it('register itself on mount', () => {
+  it('registers itself on mount', () => {
     const context = createContext();
 
     const wrapper = shallow(
@@ -58,7 +58,7 @@ describe('Index', () => {
     expect(context.ais.onSearchParameters).toHaveBeenCalledTimes(1);
   });
 
-  it('call update if indexName prop change', () => {
+  it('calls update if indexName prop changes', () => {
     const context = createContext();
 
     const wrapper = shallow(
@@ -77,7 +77,7 @@ describe('Index', () => {
     expect(context.ais.widgetsManager.update).toHaveBeenCalledTimes(1);
   });
 
-  it('unregister itself on unmount', () => {
+  it('unregisters itself on unmount', () => {
     const unregister = jest.fn();
     const context = createContext();
 
