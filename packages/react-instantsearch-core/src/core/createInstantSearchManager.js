@@ -131,15 +131,15 @@ export default function createInstantSearchManager({
         derivatedWidgets,
       } = getSearchParameters(helper.state);
 
-      // We have to call slice because the method `detach` on the dervied
-      // helpers mutate the value `derivedHelpers`. The forEach loop does
-      // not iterate on each value and we're not able to correctly clear
-      // the previous derived helpers (memory leak + useless requests).
+      // We have to call `slice` because the method `detach` on the derived
+      // helpers mutates the value `derivedHelpers`. The `forEach` loop does
+      // not iterate on each value and we're not able to correctly clear the
+      // previous derived helpers (memory leak + useless requests).
       helper.derivedHelpers.slice().forEach(derivedHelper => {
-        // Since we detach the derived helpers on **every** new search
-        // they won't receive intermediate results in case of a stalled search.
-        // Only the last results is dispatch by the derived helper beause they
-        // are not detached yet:
+        // Since we detach the derived helpers on **every** new search they
+        // won't receive intermediate results in case of a stalled search.
+        // Only the last result is dispatched by the derived helper because
+        // they are not detached yet:
         //
         // - a -> main helper receives results
         // - ap -> main helper receives results
@@ -147,7 +147,7 @@ export default function createInstantSearchManager({
         //
         // The quick fix is to avoid to detatch them on search but only once they
         // received the results. But it means that in case of a stalled search
-        // all the derived helper not detached yet register a new search inside
+        // all the derived helpers not detached yet register a new search inside
         // the helper. The number grows fast in case of a bad network and it's
         // not deterministic.
         derivedHelper.detach();
