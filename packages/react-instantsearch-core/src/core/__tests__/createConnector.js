@@ -442,7 +442,7 @@ describe('createConnector', () => {
     it('does not throw an error on unmount before mount', () => {
       const Connected = createConnector({
         displayName: 'Connector',
-        getProvidedProps: () => null,
+        getProvidedProps: () => {},
       })(() => null);
 
       const context = createFakeContext({
@@ -466,7 +466,7 @@ describe('createConnector', () => {
     it('does not throw an error on dispatch after unmount', () => {
       const Connected = createConnector({
         displayName: 'Connector',
-        getProvidedProps: () => null,
+        getProvidedProps: () => {},
       })(() => null);
 
       const unsubscribe = () => {};
@@ -495,7 +495,7 @@ describe('createConnector', () => {
     it('registers itself as a widget with getMetadata', () => {
       const Connected = createConnector({
         displayName: 'Connector',
-        getProvidedProps: () => null,
+        getProvidedProps: () => {},
         getMetadata: () => null,
       })(() => null);
 
@@ -518,7 +518,7 @@ describe('createConnector', () => {
     it('registers itself as a widget with getSearchParameters', () => {
       const Connected = createConnector({
         displayName: 'Connector',
-        getProvidedProps: () => null,
+        getProvidedProps: () => {},
         getSearchParameters: () => null,
       })(() => null);
 
@@ -541,7 +541,7 @@ describe('createConnector', () => {
     it('registers itself as a widget once mounted', () => {
       const Connected = createConnector({
         displayName: 'Connector',
-        getProvidedProps: () => null,
+        getProvidedProps: () => {},
         getSearchParameters: () => null,
       })(() => null);
 
@@ -570,7 +570,7 @@ describe('createConnector', () => {
     it('does not register itself as a widget without getMetadata nor getSearchParameters', () => {
       const Connected = createConnector({
         displayName: 'Connector',
-        getProvidedProps: () => null,
+        getProvidedProps: () => {},
       })(() => null);
 
       const registerWidget = jest.fn();
@@ -591,7 +591,7 @@ describe('createConnector', () => {
     it('calls onSearchParameters on mount with getSearchParameters', () => {
       const Connected = createConnector({
         displayName: 'CoolConnector',
-        getProvidedProps: () => null,
+        getProvidedProps: () => {},
         getSearchParameters: () => null,
       })(() => null);
 
@@ -620,7 +620,7 @@ describe('createConnector', () => {
     it('does not call onSearchParameters on mount without getSearchParameters', () => {
       const Connected = createConnector({
         displayName: 'CoolConnector',
-        getProvidedProps: () => null,
+        getProvidedProps: () => {},
       })(() => null);
 
       const onSearchParameters = jest.fn();
@@ -647,7 +647,7 @@ describe('createConnector', () => {
 
       const Connected = createConnector({
         displayName: 'Connector',
-        getProvidedProps: () => null,
+        getProvidedProps: () => {},
         getSearchParameters,
       })(() => null);
 
@@ -667,7 +667,7 @@ describe('createConnector', () => {
     it('triggers a widgetManager update on props change', () => {
       const Connected = createConnector({
         displayName: 'Connector',
-        getProvidedProps: () => null,
+        getProvidedProps: () => {},
         getMetadata: () => null,
       })(() => null);
 
@@ -699,7 +699,7 @@ describe('createConnector', () => {
     it('does not trigger a widgetManager update when props do not change', () => {
       const Connected = createConnector({
         displayName: 'Connector',
-        getProvidedProps: () => null,
+        getProvidedProps: () => {},
         getMetadata: () => null,
       })(() => null);
 
@@ -735,7 +735,7 @@ describe('createConnector', () => {
 
       const Connected = createConnector({
         displayName: 'Connector',
-        getProvidedProps: () => null,
+        getProvidedProps: () => {},
         getMetadata: () => null,
         transitionState,
       })(() => null);
@@ -781,7 +781,7 @@ describe('createConnector', () => {
     it('does not trigger an onSearchStateChange on props change wihtout transitionState', () => {
       const Connected = createConnector({
         displayName: 'Connector',
-        getProvidedProps: () => null,
+        getProvidedProps: () => {},
         getMetadata: () => null,
       })(() => null);
 
@@ -811,7 +811,7 @@ describe('createConnector', () => {
     it('unregisters itself on unmount', () => {
       const Connected = createConnector({
         displayName: 'Connector',
-        getProvidedProps: () => null,
+        getProvidedProps: () => {},
         getMetadata: () => null,
       })(() => null);
 
@@ -845,7 +845,7 @@ describe('createConnector', () => {
 
       const Connected = createConnector({
         displayName: 'Connector',
-        getProvidedProps: () => null,
+        getProvidedProps: () => {},
         getMetadata: () => null,
         cleanUp,
       })(() => null);
@@ -903,7 +903,7 @@ describe('createConnector', () => {
 
       const Connected = createConnector({
         displayName: 'Connector',
-        getProvidedProps: () => null,
+        getProvidedProps: () => {},
         getMetadata: () => null,
         cleanUp,
       })(() => null);
@@ -943,7 +943,7 @@ describe('createConnector', () => {
     it('does not throw an error on unmount before mount', () => {
       const Connected = createConnector({
         displayName: 'Connector',
-        getProvidedProps: () => null,
+        getProvidedProps: () => {},
         getMetadata: () => null,
       })(() => null);
 
