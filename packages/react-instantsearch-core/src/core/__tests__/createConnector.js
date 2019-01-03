@@ -966,6 +966,98 @@ describe('createConnector', () => {
     });
   });
 
+  describe('getSearchParameters', () => {
+    it('returns the widget search parameters when getSearchParameters is provided', () => {
+      const getSearchParameters = function(
+        searchParameters,
+        props,
+        searchState
+      ) {
+        return {
+          instanceProps: this.props,
+          providedProps: props,
+          searchParameters,
+          searchState,
+        };
+      };
+
+      const Connected = createConnector({
+        displayName: 'Connector',
+        getProvidedProps: () => {},
+        getSearchParameters,
+      })(() => null);
+
+      const searchParameters = {
+        query: '',
+        hitsPerPage: 10,
+      };
+
+      const state = createFakeState({
+        widgets: {
+          query: 'hello',
+        },
+      });
+
+      const props = {
+        hello: 'there',
+      };
+
+      const context = createFakeContext({
+        store: createFakeStore({
+          getState: () => state,
+        }),
+      });
+
+      const wrapper = shallow(<Connected {...props} />, {
+        context,
+      });
+
+      const widgetSearchParamameters = wrapper
+        .instance()
+        .getSearchParameters(searchParameters);
+
+      expect(widgetSearchParamameters).toEqual({
+        searchParameters: {
+          query: '',
+          hitsPerPage: 10,
+        },
+        instanceProps: {
+          hello: 'there',
+        },
+        providedProps: {
+          hello: 'there',
+        },
+        searchState: {
+          query: 'hello',
+        },
+      });
+    });
+
+    it('returns null when getSearchParameters is not provided', () => {
+      const Connected = createConnector({
+        displayName: 'Connector',
+        getProvidedProps: () => {},
+      })(() => null);
+
+      const searchParameters = {
+        query: '',
+        hitsPerPage: 10,
+      };
+
+      const context = createFakeContext();
+
+      const wrapper = shallow(<Connected />, {
+        context,
+      });
+
+      const widgetSearchParamameters = wrapper
+        .instance()
+        .getSearchParameters(searchParameters);
+
+      expect(widgetSearchParamameters).toBe(null);
+    });
+  });
+
   describe('refine', () => {
     it('passes a refine method to the component', () => {
       const refine = (props, searchState, next) => ({
