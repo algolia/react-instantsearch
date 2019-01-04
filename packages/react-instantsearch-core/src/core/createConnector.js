@@ -70,7 +70,7 @@ export default function createConnector(connectorDesc) {
             ...props,
             // @MAJOR: We cannot drop this beacuse it's a breaking change. The
             // prop is provided to `createConnector.getProvidedProps`. All the
-            // custom connector are impacted by this change. It should be fine
+            // custom connectors are impacted by this change. It should be fine
             // to drop it in the next major though.
             canRender: false,
           }),
