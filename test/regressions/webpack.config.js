@@ -10,16 +10,18 @@ module.exports = {
     filename: 'tests.js',
   },
   module: {
-    rules: storybookConfig.module.rules.concat([
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader',
-        options: {
-          cacheDirectory: true,
-          filename: path.join(__dirname, '.babelrc'),
+    rules: storybookConfig.module.rules
+      .filter(rule => rule.loader !== 'babel-loader')
+      .concat([
+        {
+          test: /\.js$/,
+          exclude: /node_modules/,
+          loader: 'babel-loader',
+          options: {
+            cacheDirectory: true,
+            filename: path.join(__dirname, '..', '..', 'storybook', '.babelrc'),
+          },
         },
-      },
-    ]),
+      ]),
   },
 };
