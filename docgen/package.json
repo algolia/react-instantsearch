@@ -4,8 +4,8 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "start": "babel-node start.js",
-    "build": "babel-node build.js"
+    "start": "babel-node --config-file '../babel.config.js' start.js",
+    "build": "babel-node --config-file '../babel.config.js' build.js"
   },
   "devDependencies": {
     "@babel/cli": "7.1.2",
