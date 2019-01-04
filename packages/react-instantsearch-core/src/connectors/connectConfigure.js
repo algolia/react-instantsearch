@@ -1,6 +1,10 @@
 import { omit, difference, keys } from 'lodash';
 import createConnector from '../core/createConnector';
-import { hasMultipleIndex, getIndexId, refineValue } from '../core/indexUtils';
+import {
+  refineValue,
+  getIndexId,
+  hasMultipleIndices,
+} from '../core/indexUtils';
 
 function getId() {
   return 'configure';
@@ -31,7 +35,7 @@ export default createConnector({
     const id = getId();
     const indexId = getIndexId(this.context);
     const subState =
-      hasMultipleIndex(this.context) && searchState.indices
+      hasMultipleIndices(this.context) && searchState.indices
         ? searchState.indices[indexId]
         : searchState;
     const configureKeys =

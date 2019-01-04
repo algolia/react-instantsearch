@@ -17,11 +17,11 @@ const getIndexId = context =>
     ? context.multiIndexContext.targetedIndex
     : context.ais.mainTargetedIndex;
 
-const hasMultipleIndex = context => context && context.multiIndexContext;
+const hasMultipleIndices = context => context && context.multiIndexContext;
 
 const getSearchParameters = (indexName, searchParameters) => {
   const sharedParameters = searchParameters
-    .filter(searchParameter => !hasMultipleIndex(searchParameter.context))
+    .filter(searchParameter => !hasMultipleIndices(searchParameter.context))
     .reduce(
       (acc, searchParameter) =>
         searchParameter.getSearchParameters(
@@ -36,7 +36,7 @@ const getSearchParameters = (indexName, searchParameters) => {
     );
 
   const derivedParameters = searchParameters
-    .filter(searchParameter => hasMultipleIndex(searchParameter.context))
+    .filter(searchParameter => hasMultipleIndices(searchParameter.context))
     .reduce((acc, searchParameter) => {
       const indexId = getIndexId(searchParameter.context);
 
