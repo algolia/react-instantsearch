@@ -12,16 +12,16 @@ import {
   HIGHLIGHT_TAGS,
 } from 'react-instantsearch-core';
 
-const getIndex = context =>
+const getIndexId = context =>
   context && context.multiIndexContext
     ? context.multiIndexContext.targetedIndex
     : context.ais.mainTargetedIndex;
 
-const hasMultipleIndex = context => context && context.multiIndexContext;
+const hasMultipleIndices = context => context && context.multiIndexContext;
 
 const getSearchParameters = (indexName, searchParameters) => {
   const sharedParameters = searchParameters
-    .filter(searchParameter => !hasMultipleIndex(searchParameter.context))
+    .filter(searchParameter => !hasMultipleIndices(searchParameter.context))
     .reduce(
       (acc, searchParameter) =>
         searchParameter.getSearchParameters(
@@ -36,14 +36,14 @@ const getSearchParameters = (indexName, searchParameters) => {
     );
 
   const derivedParameters = searchParameters
-    .filter(searchParameter => hasMultipleIndex(searchParameter.context))
+    .filter(searchParameter => hasMultipleIndices(searchParameter.context))
     .reduce((acc, searchParameter) => {
-      const index = getIndex(searchParameter.context);
+      const indexId = getIndexId(searchParameter.context);
 
       return {
         ...acc,
-        [index]: searchParameter.getSearchParameters(
-          acc[index] || sharedParameters,
+        [indexId]: searchParameter.getSearchParameters(
+          acc[indexId] || sharedParameters,
           searchParameter.props,
           searchParameter.searchState
         ),
@@ -177,7 +177,7 @@ const createInstantSearchServer = algoliasearch => {
     onSearchParameters(getWidgetSearchParameters, context, props, searchState) {
       searchParameters.push({
         getSearchParameters: getWidgetSearchParameters,
-        index: getIndex(context),
+        index: getIndexId(context),
         context,
         props,
         searchState,
