@@ -3,9 +3,9 @@ import algoliasearchHelper from 'algoliasearch-helper';
 import createWidgetsManager from './createWidgetsManager';
 import createStore from './createStore';
 import { HIGHLIGHT_TAGS } from './highlight';
-import { hasMultipleIndex } from './indexUtils';
+import { hasMultipleIndices } from './indexUtils';
 
-const isMultiIndexContext = widget => hasMultipleIndex(widget.context);
+const isMultiIndexContext = widget => hasMultipleIndices(widget.context);
 const isTargetedIndexEqualIndex = (widget, indexId) =>
   widget.context.multiIndexContext.targetedIndex === indexId;
 
