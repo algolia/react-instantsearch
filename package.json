@@ -33,13 +33,13 @@
     "docs:doctoc": "doctoc --maxlevel 1 README.md"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "3.4.11",
-    "@storybook/addon-knobs": "3.4.11",
-    "@storybook/addon-links": "3.4.11",
-    "@storybook/addon-options": "3.4.11",
-    "@storybook/addons": "3.4.11",
-    "@storybook/react": "3.4.11",
-    "@storybook/ui": "3.4.11",
+    "@storybook/addon-a11y": "4.1.4",
+    "@storybook/addon-actions": "4.1.4",
+    "@storybook/addon-knobs": "4.1.4",
+    "@storybook/addon-links": "4.1.4",
+    "@storybook/addon-options": "4.1.4",
+    "@storybook/addons": "4.1.4",
+    "@storybook/react": "4.1.4",
     "algoliasearch": "3.32.0",
     "argos-cli": "0.0.9",
     "babel-cli": "6.26.0",
@@ -85,7 +85,6 @@
     "react-instantsearch-dom-maps": "5.4.0-beta.0",
     "react-native": "0.57.8",
     "rheostat": "2.2.0",
-    "storybook-addon-a11y": "3.1.9",
     "storybook-addon-jsx": "5.4.0",
     "style-loader": "0.23.1",
     "webpack": "3.12.0"
