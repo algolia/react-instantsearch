@@ -15,9 +15,6 @@ addDecorator(
   })
 );
 
-// adding decorators globally except for the JSX usage (added on a case per case basis)
-// as not relevant for some stories with custom components
-// or the ones that display unreadable output (MultiIndex, Highlight etc.)
 addDecorator(withKnobs);
 addDecorator(checkA11y);
 
