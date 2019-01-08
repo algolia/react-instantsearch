@@ -12,6 +12,7 @@ preview.zip
 
 # Ignore Argos CI screenshots.
 test/screenshots/
+integration/screenshots/
 
 # Ignore Happo build.
 test/.happo/
