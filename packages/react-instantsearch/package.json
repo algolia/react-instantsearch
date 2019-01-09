@@ -37,6 +37,7 @@
     "release:beta": "yarn clean && yarn preparePackageFolder && yarn build && cd dist && yarn publish --tag beta --non-interactive"
   },
   "dependencies": {
+    "@babel/runtime": "^7.1.2",
     "react-instantsearch-core": "^5.4.0-beta.1",
     "react-instantsearch-dom": "^5.4.0-beta.1",
     "react-instantsearch-native": "^5.4.0-beta.1"

@@ -41,6 +41,7 @@
     "release:beta": "yarn clean && yarn build && yarn publish --tag beta --non-interactive"
   },
   "dependencies": {
+    "@babel/runtime": "^7.1.2",
     "algoliasearch": "^3.27.1",
     "algoliasearch-helper": "^2.26.0",
     "classnames": "^2.2.5",
