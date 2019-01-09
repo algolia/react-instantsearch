@@ -25,7 +25,7 @@
     "test:size": "bundlesize",
     "docs:start": "cd docgen && yarn start",
     "docs:build": "(cd docgen && yarn build) && yarn docs:storybook-build-production",
-    "docs:deploy-production": "NODE_ENV=production yarn docs:build && babel-node scripts/gh-pages.js",
+    "docs:deploy-production": "NODE_ENV=production yarn docs:build && node scripts/gh-pages.js",
     "docs:build-preview": "./scripts/docs:build-preview.sh",
     "docs:deploy-preview": "NODE_ENV=production yarn docs:build-preview && rm -f preview.zip && zip -r -9 preview.zip docgen/docs-production/ && netlify deploy && rm preview.zip",
     "docs:storybook-start": "start-storybook -p 6006 -c ./storybook -s ./storybook/public",
