@@ -10,9 +10,5 @@ build/
 preview.zip
 .happypack/
 
-# Ignore Argos CI screenshots.
-test/screenshots/
+# Argos CI screenshots
 integration/screenshots/
-
-# Ignore Happo build.
-test/.happo/
