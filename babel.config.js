@@ -1,5 +1,7 @@
 /* eslint-disable import/no-commonjs */
 
+const isES = process.env.BABEL_ENV === 'es';
+const isRollup = process.env.BABEL_ENV === 'rollup';
 const isProduction = process.env.BABEL_ENV === 'production';
 
 const clean = x => x.filter(Boolean);
@@ -12,13 +14,20 @@ module.exports = {
         targets: {
           browsers: ['last 2 versions', 'ie >= 9'],
         },
-        modules: 'commonjs',
+        modules: !isES && !isRollup ? 'commonjs' : false,
       },
     ],
     '@babel/preset-react',
   ],
   plugins: ['@babel/plugin-proposal-class-properties', 'babel-plugin-lodash'],
   overrides: [
+    {
+      test: 'packages/react-instantsearch-dom-maps',
+      plugins: clean([
+        '@babel/plugin-syntax-dynamic-import',
+        !isRollup && 'babel-plugin-dynamic-import-node',
+      ]),
+    },
     {
       test: 'docgen',
       plugins: clean([
