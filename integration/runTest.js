@@ -40,6 +40,8 @@ const port = process.env.PORT || 8080;
 
   await page.setViewport({ width: 640, height: 888 });
 
+  console.log('Screenshots in progress...');
+
   for (const story of stories) {
     await takeScreenshot({
       screenshotsPath,
@@ -47,6 +49,8 @@ const port = process.env.PORT || 8080;
       page,
     });
   }
+
+  console.log('Screenshots are done.');
 
   await browser.close();
 
