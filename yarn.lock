@@ -16473,6 +16473,18 @@ react-inspector@^2.3.0:
     is-dom "^1.0.9"
     prop-types "^15.6.1"
 
+react-instantsearch-dom@5.4.0-beta.0:
+  version "5.4.0-beta.0"
+  resolved "https://registry.yarnpkg.com/react-instantsearch-dom/-/react-instantsearch-dom-5.4.0-beta.0.tgz#7b30bde3004ce04e188d1ce0eda35b8368814534"
+  integrity sha512-XcImNalMPaEJ+SDAy945Q2X1L2xuLh4Kx8IJBF3+iJ+tyaLOlaKzVwppArYO36bG1k81n78kswL5fJhM9pem8A==
+  dependencies:
+    algoliasearch "^3.27.1"
+    algoliasearch-helper "^2.26.0"
+    classnames "^2.2.5"
+    lodash "^4.17.4"
+    prop-types "^15.5.10"
+    react-instantsearch-core "^5.4.0-beta.0"
+
 react-is@^16.3.0:
   version "16.3.0"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.3.0.tgz#f0e8bfd8c09b480dd610b8639d9ed65c13601224"
