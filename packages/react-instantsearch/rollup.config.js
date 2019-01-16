@@ -18,6 +18,7 @@ const plugins = [
   babel({
     exclude: ['../../node_modules/**', 'node_modules/**'],
     rootMode: 'upward',
+    runtimeHelpers: true,
   }),
   resolve({
     browser: true,

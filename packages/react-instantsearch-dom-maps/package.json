@@ -42,6 +42,7 @@
     "release:beta": "yarn clean && yarn build && yarn publish --tag beta --non-interactive"
   },
   "dependencies": {
+    "@babel/runtime": "^7.1.2",
     "lodash": "^4.17.4",
     "prop-types": "^15.5.10",
     "react-lifecycles-compat": "^3.0.4",

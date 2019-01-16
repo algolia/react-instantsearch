@@ -22,6 +22,20 @@ module.exports = {
   plugins: ['@babel/plugin-proposal-class-properties', 'babel-plugin-lodash'],
   overrides: [
     {
+      test: 'packages/*',
+      plugins: [
+        [
+          '@babel/plugin-transform-runtime',
+          {
+            corejs: false,
+            helpers: true,
+            regenerator: false,
+            useESModules: isES || isRollup,
+          },
+        ],
+      ],
+    },
+    {
       test: 'packages/react-instantsearch-dom-maps',
       plugins: clean([
         '@babel/plugin-syntax-dynamic-import',
