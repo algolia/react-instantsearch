@@ -28,8 +28,8 @@
   "scripts": {
     "clean": "rm -rf dist",
     "build": "yarn build:cjs && yarn build:es && yarn build:umd",
-    "build:cjs": "babel connectors.js dom.js index.js native.js server.js --root-mode upward --out-dir dist --quiet",
-    "build:es": "BABEL_ENV=es babel connectors.js dom.js index.js native.js server.js --root-mode upward --out-dir dist/es --quiet",
+    "build:cjs": "babel connectors.js dom.js index.js native.js server.js --root-mode upward --extensions '.js,.ts,.tsx' --out-dir dist --quiet",
+    "build:es": "BABEL_ENV=es babel connectors.js dom.js index.js native.js server.js --root-mode upward --extensions '.js,.ts,.tsx' --out-dir dist/es --quiet",
     "build:umd": "BABEL_ENV=rollup rollup -c rollup.config.js",
     "test": "jest",
     "preparePackageFolder": "mkdir -p dist && cp {package.json,README.md} dist",
@@ -48,6 +48,7 @@
     "@babel/plugin-proposal-class-properties": "7.1.0",
     "@babel/preset-env": "7.1.0",
     "@babel/preset-react": "7.0.0",
+    "@babel/preset-typescript": "7.1.0",
     "babel-plugin-lodash": "3.3.4",
     "rollup": "1.1.0",
     "rollup-plugin-babel": "4.3.0",
