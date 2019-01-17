@@ -18,7 +18,6 @@
     "type-check:watch": "yarn type-check --watch",
     "test": "yarn jest",
     "test:watch": "yarn jest --watch",
-    "test:ci": "yarn test --maxWorkers=4",
     "test:e2e": "yarn test:regressions && yarn test:argos",
     "test:examples": "./scripts/test:examples.sh",
     "test:build": "yarn build && yarn test:size",
