@@ -49,6 +49,7 @@
     "@storybook/addon-options": "4.1.6",
     "@storybook/addons": "4.1.6",
     "@storybook/react": "4.1.6",
+    "@types/classnames": "^2.2.7",
     "@types/enzyme": "^3.1.15",
     "@types/enzyme-adapter-react-16": "^1.0.3",
     "@types/jest": "^23.3.12",
