@@ -37,7 +37,6 @@
     "build:cjs": "babel src --root-mode upward --extensions '.js,.ts,.tsx' --out-dir dist/cjs --ignore '**/__tests__/**/*','**/__mocks__/**/*' --quiet",
     "build:es": "BABEL_ENV=es babel src --root-mode upward --extensions '.js,.ts,.tsx' --out-dir dist/es --ignore '**/__tests__/**/*','**/__mocks__/**/*' --quiet",
     "build:umd": "BABEL_ENV=rollup rollup -c rollup.config.js",
-    "test": "jest",
     "release": "yarn clean && yarn build && yarn publish --non-interactive",
     "release:beta": "yarn clean && yarn build && yarn publish --tag beta --non-interactive"
   },
@@ -59,10 +58,5 @@
   },
   "peerDependencies": {
     "react-instantsearch-dom": ">= 5.2.0"
-  },
-  "jest": {
-    "snapshotSerializers": [
-      "enzyme-to-json/serializer"
-    ]
   }
 }

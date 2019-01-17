@@ -34,7 +34,6 @@
     "build": "yarn build:cjs && yarn build:es",
     "build:cjs": "babel src --root-mode upward --extensions '.js,.ts,.tsx' --out-dir dist/cjs --ignore '**/__tests__/**/*','**/__mocks__/**/*' --quiet",
     "build:es": "BABEL_ENV=es babel src --root-mode upward --extensions '.js,.ts,.tsx' --out-dir dist/es --ignore '**/__tests__/**/*','**/__mocks__/**/*' --quiet",
-    "test": "jest",
     "release": "yarn clean && yarn build && yarn publish --non-interactive",
     "release:beta": "yarn clean && yarn build && yarn publish --tag beta --non-interactive"
   },
@@ -55,10 +54,5 @@
   "peerDependencies": {
     "react": ">= 15.3.0 < 17",
     "react-native": ">= 0.32.0"
-  },
-  "jest": {
-    "snapshotSerializers": [
-      "enzyme-to-json/serializer"
-    ]
   }
 }
