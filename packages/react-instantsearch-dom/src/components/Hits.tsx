@@ -35,7 +35,7 @@ const Hits: React.SFC<Props> = ({
   </div>
 );
 
-const DefaultHitComponent: React.SFC<HitProps> = props => (
+const DefaultHitComponent: React.FC<HitProps> = props => (
   <div
     style={{
       borderBottom: '1px solid #bbb',
