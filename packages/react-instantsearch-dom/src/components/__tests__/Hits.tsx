@@ -8,7 +8,7 @@ describe('Hits', () => {
   const Hit = ({ hit }: Props) => <div id={hit.objectID} />;
 
   it('accepts a hitComponent prop', () => {
-    const hits = [{ objectID: '0' }, { objectID: '1' }, { objectID: '2' }];
+    const hits = [{ objectID: 0 }, { objectID: 1 }, { objectID: 2 }];
 
     const tree = renderer.create(<Hits hitComponent={Hit} hits={hits} />);
 
@@ -16,7 +16,7 @@ describe('Hits', () => {
   });
 
   it('accepts a custom className', () => {
-    const hits = [{ objectID: '0' }, { objectID: '1' }, { objectID: '2' }];
+    const hits = [{ objectID: 0 }, { objectID: 1 }, { objectID: 2 }];
 
     const tree = renderer.create(
       <Hits className="MyCustomHits" hitComponent={Hit} hits={hits} />
