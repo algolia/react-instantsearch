@@ -5,7 +5,7 @@
     // Avoid always prefixing interfaces with `IXxxx` but allow `Xxxx`
     "interface-name": [true, "never-prefix"],
     // Interfaces are preferred for exported types but type literals are very
-    // handy to define "private" simple type like  `Props` inside a component.
+    // handy to define "private" simple types like `Props` inside a component.
     "interface-over-type-literal": false,
     "no-parameter-reassignment": false,
     "object-literal-sort-keys": false,
