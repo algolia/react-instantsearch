@@ -2,7 +2,7 @@
   "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
   "rulesDirectory": ["tslint-plugin-prettier"],
   "rules": {
-    // Avoid to always prefix interface with `IXxxx` but allow `Xxxx`
+    // Avoid always prefixing interfaces with `IXxxx` but allow `Xxxx`
     "interface-name": [true, "never-prefix"],
     // Interface are preferred for exported types but type litreals are very
     // handy to define "private" simple type like  `Props` inside a component.
