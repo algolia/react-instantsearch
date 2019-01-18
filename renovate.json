@@ -3,13 +3,5 @@
     "config:js-lib",
     ":automergeMinor",
     ":automergePr"
-  ],
-  "packageRules": [
-    {
-      "packagePatterns": [
-        "@types/*"
-      ],
-      "rangeStrategy": "replace"
-    }
   ]
 }
