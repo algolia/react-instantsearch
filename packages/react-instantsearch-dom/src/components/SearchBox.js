@@ -61,6 +61,7 @@ class SearchBox extends Component {
   static propTypes = {
     currentRefinement: PropTypes.string,
     className: PropTypes.string,
+    inputClassName: PropTypes.string,
     refine: PropTypes.func.isRequired,
     translate: PropTypes.func.isRequired,
 
@@ -81,6 +82,7 @@ class SearchBox extends Component {
 
     isSearchStalled: PropTypes.bool,
     showLoadingIndicator: PropTypes.bool,
+    showControls: PropTypes.bool
 
     // For testing purposes
     __inputRef: PropTypes.func,
@@ -220,11 +222,13 @@ class SearchBox extends Component {
   render() {
     const {
       className,
+      inputClassName,
       translate,
       autoFocus,
       loadingIndicator,
       submit,
       reset,
+      showControls
     } = this.props;
     const query = this.getQuery();
 
@@ -270,21 +274,25 @@ class SearchBox extends Component {
             {...searchInputEvents}
             className={cx('input')}
           />
-          <button
-            type="submit"
-            title={translate('submitTitle')}
-            className={cx('submit')}
-          >
-            {submit}
-          </button>
-          <button
-            type="reset"
-            title={translate('resetTitle')}
-            className={cx('reset')}
-            hidden={!query || isSearchStalled}
-          >
-            {reset}
-          </button>
+          {showControls &&
+             <>
+              <button
+                type="submit"
+                title={translate('submitTitle')}
+                className={`${cx('submit')} ${inputClassName}`}
+              >
+                {submit}
+              </button>
+              <button
+                type="reset"
+                title={translate('resetTitle')}
+                className={cx('reset')}
+                hidden={!query || isSearchStalled}
+              >
+                {reset}
+              </button>
+             </>
+          }
           {this.props.showLoadingIndicator && (
             <span hidden={!isSearchStalled} className={cx('loadingIndicator')}>
               {loadingIndicator}
