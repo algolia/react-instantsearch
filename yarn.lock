@@ -16991,6 +16991,16 @@ react-inspector@^2.3.0:
     is-dom "^1.0.9"
     prop-types "^15.6.1"
 
+react-instantsearch-dom-maps@5.4.0-beta.1:
+  version "5.4.0-beta.1"
+  resolved "https://registry.yarnpkg.com/react-instantsearch-dom-maps/-/react-instantsearch-dom-maps-5.4.0-beta.1.tgz#ca1b102f84c9837c58500207eaf3b239e61e5c38"
+  integrity sha512-UbSKF5D98BDNsy+kOhas1WgUWzOhXiKARAVaAkgZqAn5G6Qe35B4N0NAowbPC80bKUI0C2EUV4zAdjbhtZ9kzQ==
+  dependencies:
+    lodash "^4.17.4"
+    prop-types "^15.5.10"
+    react-lifecycles-compat "^3.0.4"
+    scriptjs "^2.5.8"
+
 react-is@^16.3.0:
   version "16.3.0"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.3.0.tgz#f0e8bfd8c09b480dd610b8639d9ed65c13601224"
