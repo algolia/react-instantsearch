@@ -1,4 +1,3 @@
-/* eslint react/prop-types: 0 */
 import React from 'react';
 import {
   InstantSearch,
@@ -17,8 +16,8 @@ import {
   Configure,
   connectStateResults,
 } from 'react-instantsearch-dom';
-import { withUrlSync } from '../urlSync';
-import 'instantsearch.css/themes/algolia.css';
+import { withUrlSync } from './urlSync';
+import './App.css';
 
 const App = props => (
   <InstantSearch
@@ -45,9 +44,11 @@ const Header = () => (
       className="is-logo"
     >
       <img
+        alt=""
         className="logo"
         src="https://res.cloudinary.com/hilnmyskv/image/upload/w_100,h_100,dpr_2.0//v1461180087/logo-instantsearchjs-avatar.png"
         width={40}
+        height={40}
       />
     </a>
     <SearchBox />

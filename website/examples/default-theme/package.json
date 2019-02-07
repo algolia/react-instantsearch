@@ -1,0 +1,35 @@
+{
+  "name": "tmp",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "lint": "eslint .",
+    "lint:fix": "npm run lint -- --fix"
+  },
+  "dependencies": {
+    "algoliasearch": "3.30.0",
+    "qs": "6.6.0",
+    "react": "16.6.3",
+    "react-dom": "16.6.3",
+    "react-instantsearch-dom": "5.4.0",
+    "react-scripts": "2.1.1"
+  },
+  "devDependencies": {
+    "eslint": "5.6.0",
+    "eslint-config-algolia": "13.2.3",
+    "eslint-config-prettier": "3.3.0",
+    "eslint-plugin-import": "2.14.0",
+    "eslint-plugin-prettier": "3.0.0",
+    "eslint-plugin-react": "7.11.1",
+    "prettier": "1.15.3",
+    "prop-types": "15.6.2"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

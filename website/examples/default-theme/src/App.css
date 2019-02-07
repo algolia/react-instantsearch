@@ -1,18 +1,3 @@
-* {
-  box-sizing: border-box;
-}
-
-html,
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-}
-
-.ais-InstantSearch__root {
-  padding-top: 56px;
-}
-
 header.header {
   display: flex;
   align-items: center;
@@ -20,7 +5,7 @@ header.header {
   padding-top: 56px;
   width: 100%;
   padding: 10px;
-  background: #222F3F;
+  background: #222f3f;
 }
 
 header.header .is-logo {
