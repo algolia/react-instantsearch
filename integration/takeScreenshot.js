@@ -11,14 +11,22 @@ const takeScreenshot = async ({ screenshotsPath, story, page }) => {
     mkdirSync(folderPath);
   }
 
-  await page.goto(url, {
-    waitUntil: 'networkidle2',
-  });
+  try {
+    await page.goto(url, {
+      waitUntil: 'networkidle2',
+    });
+  } catch (error) {
+    console.log('goto', error);
+  }
 
-  await page.screenshot({
-    path: filePath,
-    fullPage: true,
-  });
+  try {
+    await page.screenshot({
+      path: filePath,
+      fullPage: true,
+    });
+  } catch (error) {
+    console.log('screenshot', error);
+  }
 };
 
 module.exports = takeScreenshot;
