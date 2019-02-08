@@ -1,5 +1,5 @@
 import React from 'react';
-import Enzyme, { shallow } from 'enzyme';
+import Enzyme, { shallow, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import {
   createFakeGoogleReference,
@@ -7,7 +7,7 @@ import {
   createFakeMarkerInstance,
 } from '../../test/mockGoogleMaps';
 import * as utils from '../utils';
-import { Marker } from '../Marker';
+import Connected, { Marker } from '../Marker';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -235,6 +235,39 @@ describe('Marker', () => {
 
       expect(markerInstance.setMap).toHaveBeenCalledTimes(1);
       expect(markerInstance.setMap).toHaveBeenCalledWith(null);
+    });
+  });
+
+  describe('Connected', () => {
+    it('expect to have access to Google Maps', () => {
+      const mapInstance = createFakeMapInstance();
+      const markerInstance = createFakeMarkerInstance();
+      const google = createFakeGoogleReference({
+        mapInstance,
+        markerInstance,
+      });
+
+      const props = {
+        ...defaultProps,
+      };
+
+      mount(<Connected {...props} />, {
+        context: {
+          // eslint-disable-next-line camelcase
+          __ais_geo_search__google_maps__: {
+            instance: mapInstance,
+            google,
+          },
+        },
+      });
+
+      expect(google.maps.Marker).toHaveBeenCalledWith({
+        map: mapInstance,
+        position: {
+          lat: 10,
+          lng: 12,
+        },
+      });
     });
   });
 });
