@@ -7,8 +7,7 @@ import {
   createFakeMarkerInstance,
 } from '../../test/mockGoogleMaps';
 import * as utils from '../utils';
-import { GOOGLE_MAPS_CONTEXT } from '../GoogleMaps';
-import Marker from '../Marker';
+import { Marker } from '../Marker';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -45,16 +44,11 @@ describe('Marker', () => {
 
     const props = {
       ...defaultProps,
+      googleMapsInstance: mapInstance,
+      google,
     };
 
-    const wrapper = shallow(<Marker {...props} />, {
-      context: {
-        [GOOGLE_MAPS_CONTEXT]: {
-          instance: mapInstance,
-          google,
-        },
-      },
-    });
+    const wrapper = shallow(<Marker {...props} />);
 
     expect(wrapper.type()).toBe(null);
   });
@@ -68,16 +62,12 @@ describe('Marker', () => {
 
       const props = {
         ...defaultProps,
+        googleMapsInstance: mapInstance,
+        google,
       };
 
       const wrapper = shallow(<Marker {...props} />, {
         disableLifecycleMethods: true,
-        context: {
-          [GOOGLE_MAPS_CONTEXT]: {
-            instance: mapInstance,
-            google,
-          },
-        },
       });
 
       expect(google.maps.Marker).not.toHaveBeenCalled();
@@ -103,20 +93,16 @@ describe('Marker', () => {
 
       const props = {
         ...defaultProps,
+        googleMapsInstance: mapInstance,
         title: 'My Marker',
         visible: false,
         children: <span />,
         onClick: () => {},
+        google,
       };
 
       const wrapper = shallow(<Marker {...props} />, {
         disableLifecycleMethods: true,
-        context: {
-          [GOOGLE_MAPS_CONTEXT]: {
-            instance: mapInstance,
-            google,
-          },
-        },
       });
 
       expect(google.maps.Marker).not.toHaveBeenCalled();
@@ -146,16 +132,12 @@ describe('Marker', () => {
 
       const props = {
         ...defaultProps,
+        googleMapsInstance: mapInstance,
+        google,
       };
 
       const wrapper = shallow(<Marker {...props} />, {
         disableLifecycleMethods: true,
-        context: {
-          [GOOGLE_MAPS_CONTEXT]: {
-            instance: mapInstance,
-            google,
-          },
-        },
       });
 
       expect(utils.registerEvents).toHaveBeenCalledTimes(0);
@@ -186,16 +168,11 @@ describe('Marker', () => {
 
       const props = {
         ...defaultProps,
+        googleMapsInstance: mapInstance,
+        google,
       };
 
-      const wrapper = shallow(<Marker {...props} />, {
-        context: {
-          [GOOGLE_MAPS_CONTEXT]: {
-            instance: mapInstance,
-            google,
-          },
-        },
-      });
+      const wrapper = shallow(<Marker {...props} />);
 
       expect(removeEventListeners).toHaveBeenCalledTimes(0);
 
@@ -215,18 +192,13 @@ describe('Marker', () => {
 
       const props = {
         ...defaultProps,
+        googleMapsInstance: mapInstance,
+        google,
       };
 
       utils.registerEvents.mockImplementationOnce(() => () => {});
 
-      const wrapper = shallow(<Marker {...props} />, {
-        context: {
-          [GOOGLE_MAPS_CONTEXT]: {
-            instance: mapInstance,
-            google,
-          },
-        },
-      });
+      const wrapper = shallow(<Marker {...props} />);
 
       expect(utils.registerEvents).toHaveBeenCalledTimes(1);
 
@@ -253,16 +225,11 @@ describe('Marker', () => {
 
       const props = {
         ...defaultProps,
+        googleMapsInstance: mapInstance,
+        google,
       };
 
-      const wrapper = shallow(<Marker {...props} />, {
-        context: {
-          [GOOGLE_MAPS_CONTEXT]: {
-            instance: mapInstance,
-            google,
-          },
-        },
-      });
+      const wrapper = shallow(<Marker {...props} />);
 
       wrapper.unmount();
 
