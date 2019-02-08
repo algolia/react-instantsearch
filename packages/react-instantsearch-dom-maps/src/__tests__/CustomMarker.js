@@ -9,7 +9,7 @@ import {
 } from '../../test/mockGoogleMaps';
 import createHTMLMarker from '../elements/createHTMLMarker';
 import * as utils from '../utils';
-import { CustomMarker } from '../CustomMarker';
+import Connected, { CustomMarker } from '../CustomMarker';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -551,6 +551,46 @@ describe('CustomMarker', () => {
 
       isReact16.mockReset();
       isReact16.mockRestore();
+    });
+  });
+
+  describe('Connected', () => {
+    it('expect to have access to Google Maps', () => {
+      const marker = createFakeHTMLMarkerInstance();
+      const factory = jest.fn(() => marker);
+      const mapInstance = createFakeMapInstance();
+      const google = createFakeGoogleReference({
+        mapInstance,
+      });
+
+      createHTMLMarker.mockImplementationOnce(() => factory);
+
+      const props = {
+        ...defaultProps,
+      };
+
+      mount(
+        <Connected {...props}>
+          <span>This is the children.</span>
+        </Connected>,
+        {
+          context: {
+            // eslint-disable-next-line camelcase
+            __ais_geo_search__google_maps__: {
+              instance: mapInstance,
+              google,
+            },
+          },
+        }
+      );
+
+      expect(createHTMLMarker).toHaveBeenCalledWith(google);
+
+      expect(factory).toHaveBeenCalledWith(
+        expect.objectContaining({
+          map: mapInstance,
+        })
+      );
     });
   });
 });
