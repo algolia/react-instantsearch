@@ -1,5 +1,3 @@
-/* eslint react/prop-types: 0 */
-
 import {
   InstantSearch,
   ClearRefinements,
@@ -20,7 +18,8 @@ import {
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import Rheostat from 'rheostat';
-import { withUrlSync } from '../urlSync';
+import { withUrlSync } from './urlSync';
+import './App.css';
 
 const App = props => (
   <InstantSearch
@@ -41,8 +40,12 @@ const App = props => (
 function Header() {
   return (
     <header className="navbar navbar-static-top aisdemo-navbar">
-      <a href="./" className="is-logo">
+      <a
+        href="https://www.algolia.com/doc/guides/building-search-ui/what-is-instantsearch/react/"
+        className="is-logo"
+      >
         <img
+          alt="React InstantSearch"
           src="https://res.cloudinary.com/hilnmyskv/image/upload/w_100,h_100,dpr_2.0//v1461180087/logo-instantsearchjs-avatar.png"
           width={40}
         />
@@ -230,8 +233,12 @@ function HitComponent({ hit }) {
   return (
     <div className="hit col-sm-3">
       <div className="pictures-wrapper">
-        <img className="picture" src={hit.picture_url} />
-        <img className="profile" src={hit.user.user.thumbnail_url} />
+        <img className="picture" alt={hit.name} src={hit.picture_url} />
+        <img
+          className="profile"
+          alt={hit.user.user.first_name}
+          src={hit.user.user.thumbnail_url}
+        />
       </div>
       <div className="infos">
         <h4 className="media-heading">

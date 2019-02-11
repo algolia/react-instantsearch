@@ -1,11 +1,3 @@
-html,
-body {
-  min-height: 100%;
-  font-family: Roboto;
-  background: #F1F1F1;
-  font-size: 14px;
-}
-
 a {
   color: #333333;
 }
@@ -34,15 +26,14 @@ article hr {
 
 .logo i {
   margin-left: 5px;
-  color: #E91D00;
+  color: #e91d00;
 }
 
 header {
-  background: #FFFFFF;
+  background: #ffffff;
   padding: 10px;
-  border-bottom: 1px solid #E8E8E8;
+  border-bottom: 1px solid #e8e8e8;
   position: relative;
-  top: 60px;
   left: 0;
   right: 0;
   z-index: 2;
@@ -65,24 +56,24 @@ header {
 .searchbox-container button {
   padding-left: 20px;
   padding-right: 20px;
-  background: #F8F8F8;
+  background: #f8f8f8;
   border-radius: 0;
 }
 
 section {
-  background: #F1F1F1;
+  background: #f1f1f1;
   min-height: 100%;
   z-index: 1;
 }
 
 section aside {
   position: absolute;
-  top: 130px;
+  top: 67px;
   left: 0;
   bottom: 0;
   width: 230px;
-  background: #FFFFFF;
-  border-right: 1px solid #E8E8E8;
+  background: #ffffff;
+  border-right: 1px solid #e8e8e8;
 }
 
 .nav {
@@ -96,17 +87,17 @@ section aside {
 }
 
 .nav li a:hover {
-  color: #FFFFFF;
+  color: #ffffff;
   background: #333333;
 }
 
 .nav li.separator {
   height: 1px;
-  background: #E8E8E8;
+  background: #e8e8e8;
 }
 
 section aside h5 {
-  color: #CE1312;
+  color: #ce1312;
   margin-left: 30px;
   text-transform: uppercase;
   font-size: 10px;
@@ -114,8 +105,8 @@ section aside h5 {
 }
 
 section aside .badge {
-  font-size: .8em;
-  background: #BBBBBB;
+  font-size: 0.8em;
+  background: #bbbbbb;
   position: relative;
   top: 1px;
 }
@@ -125,18 +116,18 @@ section aside .badge {
   cursor: pointer;
   padding: 4px 4px 4px 8px;
   font-weight: normal;
-  font-size: .9em;
+  font-size: 0.9em;
   margin: 0 0 -1px;
 }
 
 #genres .item:hover {
   background: #333333;
-  color: #FFFFFF;
+  color: #ffffff;
   text-decoration: none;
 }
 
 #genres .active .item {
-  border: 1px solid #CE1312;
+  border: 1px solid #ce1312;
   margin-top: -1px;
 }
 
@@ -145,19 +136,19 @@ section aside .badge {
 }
 
 section article {
-  margin-top: 67px;
+  margin-top: 7px;
   margin-bottom: 10px;
   margin-left: 237px;
   margin-right: 10px;
   padding: 10px 0;
   max-width: 100%;
-  background: #FFFFFF;
+  background: #ffffff;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .ais-Stats-text {
   padding-right: 14px;
-  font-size: .8em;
+  font-size: 0.8em;
   line-height: 24px;
 }
 
@@ -181,20 +172,20 @@ section article {
   margin-left: 4px;
 }
 
-.ais-Pagination-item--disabled{
+.ais-Pagination-item--disabled {
   display: none;
 }
 
-.ais-Pagination-link{
-  display:block;
-  background: #F8F8F8;
+.ais-Pagination-link {
+  display: block;
+  background: #f8f8f8;
   padding: 3px 8px;
   color: #333333;
 }
 
 .ais-Pagination-item--selected .ais-Pagination-link {
   border-color: #b5b5b5;
-  background: #E8E8E8;
+  background: #e8e8e8;
 }
 
 .ais-Pagination-link:hover {
@@ -219,12 +210,12 @@ section article {
 .hit {
   margin-bottom: 10px;
   height: 130px;
-  border: 1px solid #F3F3F3;
+  border: 1px solid #f3f3f3;
 }
 
 .hit em {
   font-style: normal;
-  background: #FFFFD4;
+  background: #ffffd4;
   text-decoration: underline;
 }
 
@@ -238,7 +229,7 @@ section article {
 }
 
 .hit .media-heading {
-  color: #167AC6;
+  color: #167ac6;
   font-weight: normal;
   font-size: 18px;
 }
@@ -248,13 +239,13 @@ section article {
 }
 
 .thank-you {
-  font-size: .8em;
+  font-size: 0.8em;
   margin-top: 18px;
   margin-left: 30px;
 }
 
 .thank-you a {
-  color: #CE1312;
+  color: #ce1312;
 }
 
 .stars {
@@ -270,7 +261,7 @@ section article {
 
 .star:before {
   content: '\2605';
-  color: #FBAE00;
+  color: #fbae00;
 }
 
 .star__empty {
@@ -282,10 +273,11 @@ section article {
 
 .star__empty:before {
   content: '\2606';
-  color: #FBAE00;
+  color: #fbae00;
 }
 
-.genre, .year {
+.genre,
+.year {
   margin: 12px 0;
 }
 
@@ -298,7 +290,7 @@ section article {
 }
 
 .genre .badge {
-  background: #BBBBBB;
+  background: #bbbbbb;
 }
 
 .ais-RatingMenu {

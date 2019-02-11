@@ -1,5 +1,3 @@
-/* eslint react/prop-types: 0 */
-
 import React from 'react';
 import {
   InstantSearch,
@@ -28,13 +26,13 @@ import {
   CardHeader,
   CardTitle,
   AppBar,
-  FontIcon,
   IconMenu,
   Drawer,
   IconButton,
 } from 'material-ui';
 import SortIcon from 'material-ui/svg-icons/content/sort';
-import { withUrlSync } from '../urlSync';
+import { withUrlSync } from './urlSync';
+import './App.css';
 
 const App = props => (
   <MuiThemeProvider>
@@ -66,7 +64,7 @@ class Content extends React.Component {
   render() {
     const baseDrawerStyle = {
       transition: 'none',
-      top: 120,
+      top: 65,
     };
     const openDrawerStyle = {
       ...baseDrawerStyle,
@@ -115,21 +113,14 @@ class Content extends React.Component {
               <Divider />
               <ConnectedNestedList
                 id="Categories"
-                attributes={['category', 'sub_category', 'sub_sub_category']}
+                attributes={[
+                  'hierarchicalCategories.lvl0',
+                  'hierarchicalCategories.lvl1',
+                  'hierarchicalCategories.lvl2',
+                ]}
               />
               <Divider />
-              <ConnectedCheckBoxRefinementList
-                attribute="materials"
-                operator="or"
-              />
-              <ConnectedCheckBoxRefinementList
-                attribute="colors"
-                operator="or"
-              />
-              <Divider />
-              <div style={{ marginBottom: 120 }}>
-                <ConnectedCurrentRefinements />
-              </div>
+              <ConnectedCheckBoxRefinementList attribute="brand" />
             </Drawer>
           </div>
           <div
@@ -138,7 +129,7 @@ class Content extends React.Component {
               marginLeft,
               display: 'flex',
               flexDirection: 'column',
-              marginTop: 140,
+              marginTop: 100,
             }}
           >
             <ConnectedHits />
@@ -149,45 +140,27 @@ class Content extends React.Component {
   }
 }
 
-const MaterialUiSearchBox = ({ currentRefinement, refine }) => {
-  const style = {
-    backgroundColor: 'white',
-    display: 'flex',
-    alignItems: 'center',
-    padding: '0px 10px',
-    marginLeft: 0,
-    flexGrow: 1,
-  };
-
-  const clear = currentRefinement ? (
-    <FontIcon
-      style={{ color: 'lightgrey' }}
-      className="material-icons"
-      onClick={() => refine('')}
-    >
-      {' '}
-      clear{' '}
-    </FontIcon>
-  ) : null;
-
-  return (
-    <div style={style}>
-      <FontIcon style={{ color: 'lightgrey' }} className="material-icons">
-        {' '}
-        search{' '}
-      </FontIcon>
-      <TextField
-        value={currentRefinement}
-        onChange={e => refine(e.target.value)}
-        id="SearchBox"
-        hintText="Search for a product..."
-        fullWidth={true}
-        underlineShow={false}
-      />
-      {clear}
-    </div>
-  );
-};
+const MaterialUiSearchBox = ({ currentRefinement, refine }) => (
+  <div
+    style={{
+      backgroundColor: 'white',
+      display: 'flex',
+      alignItems: 'center',
+      padding: '0px 10px',
+      marginLeft: 0,
+      flexGrow: 1,
+    }}
+  >
+    <TextField
+      value={currentRefinement}
+      onChange={e => refine(e.target.value)}
+      id="SearchBox"
+      hintText="Search for a product..."
+      fullWidth={true}
+      underlineShow={false}
+    />
+  </div>
+);
 
 const CheckBoxItem = ({ item, refine }) => (
   <ListItem
@@ -319,6 +292,7 @@ function CustomHits({ hits, marginLeft, hasMore, refine }) {
             <CardHeader subtitle={<Highlight attribute="name" hit={hit} />} />
             <div style={imageHolderStyle}>
               <img
+                alt={hit.name}
                 src={`https://res.cloudinary.com/hilnmyskv/image/fetch/h_300,q_100,f_auto/${
                   hit.image
                 }`}

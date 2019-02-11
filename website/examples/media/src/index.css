@@ -1,0 +1,12 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+}
+
+body {
+  min-height: 100%;
+  font-family: Roboto;
+  background: #f1f1f1;
+}
