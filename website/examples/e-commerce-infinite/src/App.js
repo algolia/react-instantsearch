@@ -1,5 +1,3 @@
-/* eslint react/prop-types: 0 */
-
 import React from 'react';
 import {
   InstantSearch,
@@ -17,7 +15,7 @@ import {
   connectInfiniteHits,
   connectStateResults,
 } from 'react-instantsearch-dom';
-import 'instantsearch.css/themes/algolia.css';
+import './App.css';
 
 export default function App() {
   return (
@@ -39,10 +37,11 @@ export default function App() {
 const Header = () => (
   <header className="content-wrapper">
     <a
-      href="https://community.algolia.com/react-instantsearch/"
+      href="https://www.algolia.com/doc/guides/building-search-ui/what-is-instantsearch/react/"
       className="is-logo"
     >
       <img
+        alt="React InstantSearch"
         src="https://res.cloudinary.com/hilnmyskv/image/upload/w_100,h_100,dpr_2.0//v1461180087/logo-instantsearchjs-avatar.png"
         width={40}
       />
@@ -157,6 +156,7 @@ const Hit = ({ item }) => {
       <div className="product-picture-wrapper">
         <div className="product-picture">
           <img
+            alt={item.name}
             src={`https://res.cloudinary.com/hilnmyskv/image/fetch/h_300,q_100,f_auto/${
               item.image
             }`}
