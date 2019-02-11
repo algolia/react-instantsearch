@@ -13,6 +13,7 @@ const examplesDistPath = path.join(websiteDistPath, 'examples');
 const examplePaths = [
   path.join(examplesSourcePath, 'default-theme'),
   path.join(examplesSourcePath, 'e-commerce'),
+  path.join(examplesSourcePath, 'e-commerce-infinite'),
 ];
 
 const staticPaths = ['assets'];
