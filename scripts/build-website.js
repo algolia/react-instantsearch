@@ -15,6 +15,7 @@ const examplePaths = [
   path.join(examplesSourcePath, 'e-commerce'),
   path.join(examplesSourcePath, 'e-commerce-infinite'),
   path.join(examplesSourcePath, 'material-ui'),
+  path.join(examplesSourcePath, 'media'),
 ];
 
 const staticPaths = ['assets'];
