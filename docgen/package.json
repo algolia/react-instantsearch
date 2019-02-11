@@ -49,7 +49,7 @@
     "postcss": "7.0.14",
     "postcss-loader": "3.0.0",
     "postcss-scss": "2.0.0",
-    "prop-types": "15.6.1",
+    "prop-types": "15.7.1",
     "pug": "2.0.3",
     "qs": "6.6.0",
     "react": "16.8.1",
