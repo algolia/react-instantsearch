@@ -8,8 +8,7 @@ const websiteDistPath = path.join(websitePath, 'dist');
 const examplesSourcePath = path.join(websitePath, 'examples');
 const examplesDistPath = path.join(websiteDistPath, 'examples');
 
-// const examples = glob.sync(path.join(sourcePath, '*'));
-const examplePaths = glob.sync(path.join(examplesSourcePath, 'default-theme'));
+const examplePaths = glob.sync(path.join(examplesSourcePath, '*'));
 const staticPaths = ['assets'];
 
 execSync(`mkdir -p ${examplesDistPath}`);
