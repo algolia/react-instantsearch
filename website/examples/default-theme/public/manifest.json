@@ -1,6 +1,6 @@
 {
-  "short_name": "tmp",
-  "name": "tmp Sample",
+  "short_name": "algolia-theme",
+  "name": "algolia-theme",
   "icons": [
     {
       "src": "favicon.png",

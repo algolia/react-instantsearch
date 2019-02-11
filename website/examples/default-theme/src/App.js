@@ -40,11 +40,11 @@ const App = props => (
 const Header = () => (
   <header className="content-wrapper header">
     <a
-      href="https://community.algolia.com/react-instantsearch/"
+      href="https://www.algolia.com/doc/guides/building-search-ui/what-is-instantsearch/react/"
       className="is-logo"
     >
       <img
-        alt=""
+        alt="React InstantSearch"
         className="logo"
         src="https://res.cloudinary.com/hilnmyskv/image/upload/w_100,h_100,dpr_2.0//v1461180087/logo-instantsearchjs-avatar.png"
         width={40}
