@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-// const glob = require('glob');
+const glob = require('glob');
 const { execSync } = require('child_process');
 
 const websitePath = path.join(__dirname, '..', 'website');
@@ -8,13 +8,7 @@ const websiteDistPath = path.join(websitePath, 'dist');
 const examplesSourcePath = path.join(websitePath, 'examples');
 const examplesDistPath = path.join(websiteDistPath, 'examples');
 
-// const examples = glob.sync(path.join(examplesSourcePath, '*'));
-
-const examplePaths = [
-  path.join(examplesSourcePath, 'default-theme'),
-  path.join(examplesSourcePath, 'e-commerce'),
-];
-
+const examplePaths = glob.sync(path.join(examplesSourcePath, '*'));
 const staticPaths = ['assets'];
 
 execSync(`mkdir -p ${examplesDistPath}`);
