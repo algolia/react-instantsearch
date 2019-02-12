@@ -9,7 +9,7 @@ const examplesSourcePath = path.join(websitePath, 'examples');
 const examplesDistPath = path.join(websiteDistPath, 'examples');
 
 const examplePaths = glob.sync(path.join(examplesSourcePath, '*'));
-const staticPaths = ['assets'];
+const staticPaths = ['assets', '_redirects'];
 
 execSync(`mkdir -p ${examplesDistPath}`);
 
