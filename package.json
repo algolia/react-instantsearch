@@ -26,7 +26,7 @@
     "test:size": "bundlesize",
     "storybook": "start-storybook -p 6006 -c storybook -s storybook/public",
     "storybook:build": "build-storybook -s storybook/public -o website/dist/storybook -c storybook",
-    "website:build": "yarn storybook:build"
+    "website:build": "yarn storybook:build && node scripts/build-website.js"
   },
   "devDependencies": {
     "@babel/cli": "7.2.3",
