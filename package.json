@@ -3,8 +3,7 @@
   "private": true,
   "license": "MIT",
   "workspaces": [
-    "packages/*",
-    "docgen"
+    "packages/*"
   ],
   "scripts": {
     "postinstall": "lerna run build:cjs --scope react-instantsearch-*",
