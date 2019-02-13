@@ -9,7 +9,7 @@ import GoogleMaps from '../GoogleMaps';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe('GoogleMaps', () => {
+describe.skip('GoogleMaps', () => {
   const defaultProps = {
     google: createFakeGoogleReference(),
     initialZoom: 1,

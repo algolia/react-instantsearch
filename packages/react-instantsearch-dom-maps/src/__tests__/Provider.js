@@ -5,7 +5,7 @@ import {
   createFakeGoogleReference,
   createFakeMapInstance,
 } from '../../test/mockGoogleMaps';
-import Provider, { STATE_CONTEXT } from '../Provider';
+import Provider from '../Provider';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -388,11 +388,7 @@ describe('Provider', () => {
 
       const wrapper = shallow(<Provider {...props}>{x => x}</Provider>);
 
-      expect(wrapper.instance().getChildContext()).toEqual({
-        [STATE_CONTEXT]: expect.objectContaining({
-          isRefineOnMapMove: true,
-        }),
-      });
+      expect(wrapper.props().value.isRefineOnMapMove).toBe(true);
     });
 
     it('expect to expose hasMapMoveSinceLastRefine', () => {
@@ -402,11 +398,7 @@ describe('Provider', () => {
 
       const wrapper = shallow(<Provider {...props}>{x => x}</Provider>);
 
-      expect(wrapper.instance().getChildContext()).toEqual({
-        [STATE_CONTEXT]: expect.objectContaining({
-          hasMapMoveSinceLastRefine: false,
-        }),
-      });
+      expect(wrapper.props().value.hasMapMoveSinceLastRefine).toBe(false);
     });
 
     it('expect to expose toggleRefineOnMapMove', () => {
@@ -416,11 +408,9 @@ describe('Provider', () => {
 
       const wrapper = shallow(<Provider {...props}>{x => x}</Provider>);
 
-      expect(wrapper.instance().getChildContext()).toEqual({
-        [STATE_CONTEXT]: expect.objectContaining({
-          toggleRefineOnMapMove: props.toggleRefineOnMapMove,
-        }),
-      });
+      expect(wrapper.props().value.toggleRefineOnMapMove).toBe(
+        props.toggleRefineOnMapMove
+      );
     });
 
     it('expect to expose setMapMoveSinceLastRefine', () => {
@@ -430,11 +420,9 @@ describe('Provider', () => {
 
       const wrapper = shallow(<Provider {...props}>{x => x}</Provider>);
 
-      expect(wrapper.instance().getChildContext()).toEqual({
-        [STATE_CONTEXT]: expect.objectContaining({
-          setMapMoveSinceLastRefine: props.setMapMoveSinceLastRefine,
-        }),
-      });
+      expect(wrapper.props().value.setMapMoveSinceLastRefine).toBe(
+        props.setMapMoveSinceLastRefine
+      );
     });
 
     it('expect to expose refineWithInstance', () => {
@@ -444,11 +432,9 @@ describe('Provider', () => {
 
       const wrapper = shallow(<Provider {...props}>{x => x}</Provider>);
 
-      expect(wrapper.instance().getChildContext()).toEqual({
-        [STATE_CONTEXT]: expect.objectContaining({
-          refineWithInstance: wrapper.instance().refineWithInstance,
-        }),
-      });
+      expect(wrapper.props().value.refineWithInstance).toBe(
+        wrapper.instance().refineWithInstance
+      );
     });
   });
 });

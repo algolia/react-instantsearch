@@ -238,7 +238,7 @@ describe('Marker', () => {
     });
   });
 
-  describe('Connected', () => {
+  describe.skip('Connected', () => {
     it('expect to have access to Google Maps', () => {
       const mapInstance = createFakeMapInstance();
       const markerInstance = createFakeMarkerInstance();

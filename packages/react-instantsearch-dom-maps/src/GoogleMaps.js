@@ -2,10 +2,26 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { createClassNames } from 'react-instantsearch-dom';
 import { LatLngPropType, BoundingBoxPropType } from './propTypes';
+import GoogleMapsContext from './GoogleMapsContext';
 
 const cx = createClassNames('GeoSearch');
 
-class GoogleMaps extends Component {
+export const GoogleMaps = ({ onRef, isMapReady, children }) => (
+  <div className={cx('')}>
+    <div ref={onRef} className={cx('map')} />
+    {isMapReady && children}
+  </div>
+);
+
+GoogleMaps.propTypes = {
+  onRef: PropTypes.func,
+  isMapReady: PropTypes.bool,
+  children: PropTypes.node.isRequired,
+};
+
+export class GoogleMapsWrapper extends Component {
+  static displayName = 'GoogleMaps';
+
   static propTypes = {
     google: PropTypes.object.isRequired,
     initialZoom: PropTypes.number.isRequired,
@@ -19,14 +35,6 @@ class GoogleMaps extends Component {
     children: PropTypes.node,
   };
 
-  static childContextTypes = {
-    // eslint-disable-next-line camelcase
-    __ais_geo_search__google_maps__: PropTypes.shape({
-      google: PropTypes.object,
-      instance: PropTypes.object,
-    }),
-  };
-
   isUserInteraction = true;
   isPendingRefine = false;
   listeners = [];
@@ -34,18 +42,6 @@ class GoogleMaps extends Component {
   state = {
     isMapReady: false,
   };
-
-  getChildContext() {
-    const { google } = this.props;
-
-    return {
-      // eslint-disable-next-line camelcase
-      __ais_geo_search__google_maps__: {
-        instance: this.instance,
-        google,
-      },
-    };
-  }
 
   componentDidMount() {
     const { google, mapOptions } = this.props;
@@ -145,16 +141,17 @@ class GoogleMaps extends Component {
   }
 
   render() {
-    const { children } = this.props;
+    const { google, children } = this.props;
     const { isMapReady } = this.state;
 
     return (
-      <div className={cx('')}>
-        <div ref={c => (this.element = c)} className={cx('map')} />
-        {isMapReady && children}
-      </div>
+      <GoogleMapsContext.Provider value={{ google, instance: this.instance }}>
+        <GoogleMaps isMapReady={isMapReady} onRef={ref => (this.element = ref)}>
+          {children}
+        </GoogleMaps>
+      </GoogleMapsContext.Provider>
     );
   }
 }
 
-export default GoogleMaps;
+export default GoogleMapsWrapper;

@@ -2,35 +2,33 @@ import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { createFakeMapInstance } from '../../test/mockGoogleMaps';
-import { STATE_CONTEXT } from '../Provider';
 import { Control } from '../Control';
 
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('Control', () => {
+  const getStateContext = context => ({ ...context });
+
   const defaultProps = {
     googleMapsInstance: createFakeMapInstance(),
     translate: x => x,
   };
 
   const defaultContext = {
-    [STATE_CONTEXT]: {
-      isRefineOnMapMove: true,
-      hasMapMoveSinceLastRefine: false,
-      toggleRefineOnMapMove: () => {},
-      refineWithInstance: () => {},
-    },
+    isRefineOnMapMove: true,
+    hasMapMoveSinceLastRefine: false,
+    toggleRefineOnMapMove: () => {},
+    refineWithInstance: () => {},
   };
 
-  const getStateContext = context => context[STATE_CONTEXT];
-
   it('expect to render correctly with refine on map move', () => {
-    const props = {
-      ...defaultProps,
-    };
-
     const context = {
       ...defaultContext,
+    };
+
+    const props = {
+      ...defaultProps,
+      context,
     };
 
     const wrapper = shallow(<Control {...props} />, {
@@ -42,16 +40,15 @@ describe('Control', () => {
   });
 
   it('expect to render correctly without refine on map move', () => {
-    const props = {
-      ...defaultProps,
-    };
-
     const context = {
       ...defaultContext,
-      [STATE_CONTEXT]: {
-        ...getStateContext(defaultContext),
-        isRefineOnMapMove: false,
-      },
+      ...getStateContext(defaultContext),
+      isRefineOnMapMove: false,
+    };
+
+    const props = {
+      ...defaultProps,
+      context,
     };
 
     const wrapper = shallow(<Control {...props} />, {
@@ -63,17 +60,16 @@ describe('Control', () => {
   });
 
   it('expect to render correctly without refine on map move when the map has moved', () => {
-    const props = {
-      ...defaultProps,
-    };
-
     const context = {
       ...defaultContext,
-      [STATE_CONTEXT]: {
-        ...getStateContext(defaultContext),
-        isRefineOnMapMove: false,
-        hasMapMoveSinceLastRefine: true,
-      },
+      ...getStateContext(defaultContext),
+      isRefineOnMapMove: false,
+      hasMapMoveSinceLastRefine: true,
+    };
+
+    const props = {
+      ...defaultProps,
+      context,
     };
 
     const wrapper = shallow(<Control {...props} />, {
@@ -84,16 +80,15 @@ describe('Control', () => {
   });
 
   it('expect to call toggleRefineOnMapMove on input change', () => {
-    const props = {
-      ...defaultProps,
-    };
-
     const context = {
       ...defaultContext,
-      [STATE_CONTEXT]: {
-        ...getStateContext(defaultContext),
-        toggleRefineOnMapMove: jest.fn(),
-      },
+      ...getStateContext(defaultContext),
+      toggleRefineOnMapMove: jest.fn(),
+    };
+
+    const props = {
+      ...defaultProps,
+      context,
     };
 
     const wrapper = shallow(<Control {...props} />, {
@@ -114,19 +109,18 @@ describe('Control', () => {
   it('expect to call refineWithInstance on button click', () => {
     const mapInstance = createFakeMapInstance();
 
+    const context = {
+      ...defaultContext,
+      ...getStateContext(defaultContext),
+      isRefineOnMapMove: false,
+      hasMapMoveSinceLastRefine: true,
+      refineWithInstance: jest.fn(),
+    };
+
     const props = {
       ...defaultProps,
       googleMapsInstance: mapInstance,
-    };
-
-    const context = {
-      ...defaultContext,
-      [STATE_CONTEXT]: {
-        ...getStateContext(defaultContext),
-        isRefineOnMapMove: false,
-        hasMapMoveSinceLastRefine: true,
-        refineWithInstance: jest.fn(),
-      },
+      context,
     };
 
     const wrapper = shallow(<Control {...props} />, {

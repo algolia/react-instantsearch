@@ -1,8 +1,7 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { LatLngPropType, BoundingBoxPropType } from './propTypes';
-
-export const STATE_CONTEXT = '__ais_geo_search__state__';
+import GeoSearchContext from './GeoSearchContext';
 
 class Provider extends Component {
   static propTypes = {
@@ -19,38 +18,9 @@ class Provider extends Component {
     currentRefinement: BoundingBoxPropType,
   };
 
-  static childContextTypes = {
-    [STATE_CONTEXT]: PropTypes.shape({
-      isRefineOnMapMove: PropTypes.bool.isRequired,
-      hasMapMoveSinceLastRefine: PropTypes.bool.isRequired,
-      toggleRefineOnMapMove: PropTypes.func.isRequired,
-      setMapMoveSinceLastRefine: PropTypes.func.isRequired,
-      refineWithInstance: PropTypes.func.isRequired,
-    }).isRequired,
-  };
-
   isPendingRefine = false;
   boundingBox = null;
   previousBoundingBox = null;
-
-  getChildContext() {
-    const {
-      isRefineOnMapMove,
-      hasMapMoveSinceLastRefine,
-      toggleRefineOnMapMove,
-      setMapMoveSinceLastRefine,
-    } = this.props;
-
-    return {
-      [STATE_CONTEXT]: {
-        refineWithInstance: this.refineWithInstance,
-        toggleRefineOnMapMove,
-        setMapMoveSinceLastRefine,
-        isRefineOnMapMove,
-        hasMapMoveSinceLastRefine,
-      },
-    };
-  }
 
   createBoundingBoxFromHits(hits) {
     const { google } = this.props;
@@ -108,7 +78,15 @@ class Provider extends Component {
   };
 
   render() {
-    const { hits, currentRefinement, children } = this.props;
+    const {
+      hits,
+      currentRefinement,
+      isRefineOnMapMove,
+      hasMapMoveSinceLastRefine,
+      toggleRefineOnMapMove,
+      setMapMoveSinceLastRefine,
+      children,
+    } = this.props;
 
     // We use this value for differentiate the padding to apply during
     // fitBounds. When we don't have a currenRefinement (boundingBox)
@@ -121,13 +99,25 @@ class Provider extends Component {
         ? this.createBoundingBoxFromHits(hits)
         : currentRefinement;
 
-    return children({
-      onChange: this.onChange,
-      onIdle: this.onIdle,
-      shouldUpdate: this.shouldUpdate,
-      boundingBox,
-      boundingBoxPadding,
-    });
+    return (
+      <GeoSearchContext.Provider
+        value={{
+          isRefineOnMapMove,
+          hasMapMoveSinceLastRefine,
+          toggleRefineOnMapMove,
+          setMapMoveSinceLastRefine,
+          refineWithInstance: this.refineWithInstance,
+        }}
+      >
+        {children({
+          onChange: this.onChange,
+          onIdle: this.onIdle,
+          shouldUpdate: this.shouldUpdate,
+          boundingBox,
+          boundingBoxPadding,
+        })}
+      </GeoSearchContext.Provider>
+    );
   }
 }
 
