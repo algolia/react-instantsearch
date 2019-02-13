@@ -1,7 +1,9 @@
-/* VARIABLES
-// ------------------------- */
-/* GENERAL
-// ------------------------- */
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   font-family: Roboto;
   font-size: 16px;
