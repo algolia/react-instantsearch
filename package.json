@@ -19,7 +19,7 @@
     "test": "yarn jest",
     "test:watch": "yarn jest --watch",
     "test:e2e": "yarn test:regressions && yarn test:argos",
-    "test:examples": "scripts/test:examples.sh",
+    "test:examples": "node scripts/test-examples.js",
     "test:build": "yarn build && yarn test:size",
     "test:regressions": "webpack --config integration/webpack.config.js && node integration/runTest.js",
     "test:argos": "argos upload integration/screenshots --token $ARGOS_TOKEN || true",
