@@ -18,7 +18,7 @@ import {
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import Rheostat from 'rheostat';
-import { withUrlSync } from './urlSync';
+import withURLSync from './URLSync';
 import './App.css';
 
 const App = props => (
@@ -343,4 +343,4 @@ class Range extends Component {
 
 const ConnectedRange = connectRange(Range);
 
-export default withUrlSync(App);
+export default withURLSync(App);

@@ -10,7 +10,7 @@ import {
   connectSearchBox,
   connectRefinementList,
 } from 'react-instantsearch-dom';
-import { withUrlSync } from './urlSync';
+import withURLSync from './URLSync';
 import './App.css';
 
 const App = props => (
@@ -186,4 +186,4 @@ const RefinementListLinks = connectRefinementList(
   }
 );
 
-export default withUrlSync(App);
+export default withURLSync(App);

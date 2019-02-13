@@ -16,7 +16,7 @@ import {
   Configure,
   connectStateResults,
 } from 'react-instantsearch-dom';
-import { withUrlSync } from './urlSync';
+import withURLSync from './URLSync';
 import './App.css';
 
 const App = props => (
@@ -162,4 +162,4 @@ const CustomResults = connectStateResults(({ searchState, searchResults }) => (
   </div>
 ));
 
-export default withUrlSync(App);
+export default withURLSync(App);

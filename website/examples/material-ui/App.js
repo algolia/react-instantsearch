@@ -31,7 +31,7 @@ import {
   IconButton,
 } from 'material-ui';
 import SortIcon from 'material-ui/svg-icons/content/sort';
-import { withUrlSync } from './urlSync';
+import withURLSync from './URLSync';
 import './App.css';
 
 const App = props => (
@@ -363,4 +363,4 @@ const ConnectedCurrentRefinements = connectCurrentRefinements(
   MaterialUiClearAllFilters
 );
 
-export default withUrlSync(App);
+export default withURLSync(App);
