@@ -9,6 +9,7 @@ import {
 } from '../../test/mockGoogleMaps';
 import createHTMLMarker from '../elements/createHTMLMarker';
 import * as utils from '../utils';
+import GoogleMapsContext from '../GoogleMapsContext';
 import Connected, { CustomMarker } from '../CustomMarker';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -554,7 +555,7 @@ describe('CustomMarker', () => {
     });
   });
 
-  describe.skip('Connected', () => {
+  describe('Connected', () => {
     it('expect to have access to Google Maps', () => {
       const marker = createFakeHTMLMarkerInstance();
       const factory = jest.fn(() => marker);
@@ -570,15 +571,16 @@ describe('CustomMarker', () => {
       };
 
       mount(
-        <Connected {...props}>
-          <span>This is the children.</span>
-        </Connected>,
-        {
-          context: {
+        <GoogleMapsContext.Provider
+          value={{
             instance: mapInstance,
             google,
-          },
-        }
+          }}
+        >
+          <Connected {...props}>
+            <span>This is the children.</span>
+          </Connected>
+        </GoogleMapsContext.Provider>
       );
 
       expect(createHTMLMarker).toHaveBeenCalledWith(google);

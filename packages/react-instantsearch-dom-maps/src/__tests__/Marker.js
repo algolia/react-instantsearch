@@ -7,6 +7,7 @@ import {
   createFakeMarkerInstance,
 } from '../../test/mockGoogleMaps';
 import * as utils from '../utils';
+import GoogleMapsContext from '../GoogleMapsContext';
 import Connected, { Marker } from '../Marker';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -238,7 +239,7 @@ describe('Marker', () => {
     });
   });
 
-  describe.skip('Connected', () => {
+  describe('Connected', () => {
     it('expect to have access to Google Maps', () => {
       const mapInstance = createFakeMapInstance();
       const markerInstance = createFakeMarkerInstance();
@@ -251,15 +252,16 @@ describe('Marker', () => {
         ...defaultProps,
       };
 
-      mount(<Connected {...props} />, {
-        context: {
-          // eslint-disable-next-line camelcase
-          __ais_geo_search__google_maps__: {
-            instance: mapInstance,
+      mount(
+        <GoogleMapsContext.Provider
+          value={{
             google,
-          },
-        },
-      });
+            instance: mapInstance,
+          }}
+        >
+          <Connected {...props} />
+        </GoogleMapsContext.Provider>
+      );
 
       expect(google.maps.Marker).toHaveBeenCalledWith({
         map: mapInstance,
