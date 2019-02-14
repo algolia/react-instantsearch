@@ -6,15 +6,14 @@ import GoogleMapsContext from './GoogleMapsContext';
 
 const cx = createClassNames('GeoSearch');
 
-export const GoogleMaps = ({ onRef, isMapReady, children }) => (
+export const GoogleMaps = React.forwardRef(({ isMapReady, children }, ref) => (
   <div className={cx('')}>
-    <div ref={onRef} className={cx('map')} />
+    <div ref={ref} className={cx('map')} />
     {isMapReady && children}
   </div>
-);
+));
 
 GoogleMaps.propTypes = {
-  onRef: PropTypes.func,
   isMapReady: PropTypes.bool,
   children: PropTypes.node.isRequired,
 };
@@ -38,6 +37,7 @@ export class GoogleMapsWrapper extends Component {
   isUserInteraction = true;
   isPendingRefine = false;
   listeners = [];
+  mapRef = React.createRef();
 
   state = {
     isMapReady: false,
@@ -46,7 +46,7 @@ export class GoogleMapsWrapper extends Component {
   componentDidMount() {
     const { google, mapOptions } = this.props;
 
-    this.instance = new google.maps.Map(this.element, {
+    this.instance = new google.maps.Map(this.mapRef.current, {
       mapTypeControl: false,
       fullscreenControl: false,
       streetViewControl: false,
@@ -146,7 +146,7 @@ export class GoogleMapsWrapper extends Component {
 
     return (
       <GoogleMapsContext.Provider value={{ google, instance: this.instance }}>
-        <GoogleMaps isMapReady={isMapReady} onRef={ref => (this.element = ref)}>
+        <GoogleMaps isMapReady={isMapReady} ref={this.mapRef}>
           {children}
         </GoogleMaps>
       </GoogleMapsContext.Provider>
