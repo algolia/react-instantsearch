@@ -1,10 +1,13 @@
 import React from 'react';
 
 export type GoogleMapsContextState = {
-  google: typeof google;
-  instance: google.maps.Map;
+  google: typeof google | null;
+  instance: google.maps.Map | null;
 }
 
-const GoogleMapsContext = React.createContext<Partial<GoogleMapsContextState>>({});
+const GoogleMapsContext = React.createContext<GoogleMapsContextState>({
+  google: null,
+  instance: null,
+});
 
 export default GoogleMapsContext;

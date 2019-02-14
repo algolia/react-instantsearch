@@ -4,10 +4,16 @@ type GeoSearchContextState = {
   isRefineOnMapMove: boolean;
   hasMapMoveSinceLastRefine: boolean;
   toggleRefineOnMapMove: () => void;
-  setMapMoveSinceLastRefine: () => void;
-  refineWithInstance: () => void;
+  setMapMoveSinceLastRefine: (value: boolean) => void;
+  refineWithInstance: (value: google.maps.Map) => void;
 }
 
-const GeoSearchContext = React.createContext<Partial<GeoSearchContextState>>({});
+const GeoSearchContext = React.createContext<GeoSearchContextState>({
+  isRefineOnMapMove: true,
+  hasMapMoveSinceLastRefine: false,
+  toggleRefineOnMapMove: () => {},
+  setMapMoveSinceLastRefine: () => {},
+  refineWithInstance: () => {},
+});
 
 export default GeoSearchContext;
