@@ -1,6 +1,6 @@
 import React from 'react';
 
-type GeoSearchContextProps = {
+type GeoSearchContextState = {
   isRefineOnMapMove: boolean;
   hasMapMoveSinceLastRefine: boolean;
   toggleRefineOnMapMove: () => void;
@@ -8,6 +8,6 @@ type GeoSearchContextProps = {
   refineWithInstance: () => void;
 }
 
-const GeoSearchContext = React.createContext<Partial<GeoSearchContextProps>>({});
+const GeoSearchContext = React.createContext<Partial<GeoSearchContextState>>({});
 
 export default GeoSearchContext;
