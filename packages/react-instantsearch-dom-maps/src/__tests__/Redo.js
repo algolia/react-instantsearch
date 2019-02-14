@@ -7,8 +7,6 @@ import { Redo } from '../Redo';
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('Redo', () => {
-  const getStateContext = context => ({ ...context });
-
   const defaultProps = {
     googleMapsInstance: createFakeMapInstance(),
     translate: x => x,
@@ -57,7 +55,6 @@ describe('Redo', () => {
 
     const context = {
       ...defaultContext,
-      ...getStateContext(defaultContext),
       refineWithInstance: jest.fn(),
     };
 

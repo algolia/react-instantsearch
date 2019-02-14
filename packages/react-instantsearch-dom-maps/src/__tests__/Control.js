@@ -42,7 +42,6 @@ describe('Control', () => {
   it('expect to render correctly without refine on map move', () => {
     const context = {
       ...defaultContext,
-      ...getStateContext(defaultContext),
       isRefineOnMapMove: false,
     };
 
@@ -62,7 +61,6 @@ describe('Control', () => {
   it('expect to render correctly without refine on map move when the map has moved', () => {
     const context = {
       ...defaultContext,
-      ...getStateContext(defaultContext),
       isRefineOnMapMove: false,
       hasMapMoveSinceLastRefine: true,
     };
@@ -82,7 +80,6 @@ describe('Control', () => {
   it('expect to call toggleRefineOnMapMove on input change', () => {
     const context = {
       ...defaultContext,
-      ...getStateContext(defaultContext),
       toggleRefineOnMapMove: jest.fn(),
     };
 
