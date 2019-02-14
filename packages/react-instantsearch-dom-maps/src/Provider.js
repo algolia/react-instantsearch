@@ -22,6 +22,20 @@ class Provider extends Component {
   boundingBox = null;
   previousBoundingBox = null;
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      value: {
+        isRefineOnMapMove: this.props.isRefineOnMapMove,
+        hasMapMoveSinceLastRefine: this.props.hasMapMoveSinceLastRefine,
+        toggleRefineOnMapMove: this.props.toggleRefineOnMapMove,
+        setMapMoveSinceLastRefine: this.props.setMapMoveSinceLastRefine,
+        refineWithInstance: this.refineWithInstance,
+      },
+    };
+  }
+
   createBoundingBoxFromHits(hits) {
     const { google } = this.props;
 
@@ -78,15 +92,7 @@ class Provider extends Component {
   };
 
   render() {
-    const {
-      hits,
-      currentRefinement,
-      isRefineOnMapMove,
-      hasMapMoveSinceLastRefine,
-      toggleRefineOnMapMove,
-      setMapMoveSinceLastRefine,
-      children,
-    } = this.props;
+    const { hits, currentRefinement, children } = this.props;
 
     // We use this value for differentiate the padding to apply during
     // fitBounds. When we don't have a currenRefinement (boundingBox)
@@ -100,15 +106,7 @@ class Provider extends Component {
         : currentRefinement;
 
     return (
-      <GeoSearchContext.Provider
-        value={{
-          isRefineOnMapMove,
-          hasMapMoveSinceLastRefine,
-          toggleRefineOnMapMove,
-          setMapMoveSinceLastRefine,
-          refineWithInstance: this.refineWithInstance,
-        }}
-      >
+      <GeoSearchContext.Provider value={this.state.value}>
         {children({
           onChange: this.onChange,
           onIdle: this.onIdle,

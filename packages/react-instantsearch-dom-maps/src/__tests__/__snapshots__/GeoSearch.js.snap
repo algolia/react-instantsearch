@@ -42,7 +42,7 @@ exports[`GeoSearch Connector expect to render with enableRefineOnMapMove 1`] = `
 `;
 
 exports[`GeoSearch GoogleMaps expect to render 1`] = `
-<GoogleMaps
+<GoogleMapsWrapper
   google={
     Object {
       "maps": Object {
@@ -76,7 +76,7 @@ exports[`GeoSearch GoogleMaps expect to render 1`] = `
   <div>
     Hello this is the children
   </div>
-</GoogleMaps>
+</GoogleMapsWrapper>
 `;
 
 exports[`GeoSearch Provider expect to render 1`] = `

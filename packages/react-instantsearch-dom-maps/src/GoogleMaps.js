@@ -19,8 +19,6 @@ GoogleMaps.propTypes = {
 };
 
 export class GoogleMapsWrapper extends Component {
-  static displayName = 'GoogleMaps';
-
   static propTypes = {
     google: PropTypes.object.isRequired,
     initialZoom: PropTypes.number.isRequired,
@@ -55,6 +53,13 @@ export class GoogleMapsWrapper extends Component {
         position: google.maps.ControlPosition.LEFT_TOP,
       },
       ...mapOptions,
+    });
+
+    this.setState({
+      value: {
+        google,
+        instance: this.instance,
+      },
     });
 
     this.listeners.push(
@@ -141,11 +146,11 @@ export class GoogleMapsWrapper extends Component {
   }
 
   render() {
-    const { google, children } = this.props;
+    const { children } = this.props;
     const { isMapReady } = this.state;
 
     return (
-      <GoogleMapsContext.Provider value={{ google, instance: this.instance }}>
+      <GoogleMapsContext.Provider value={this.state.value}>
         <GoogleMaps isMapReady={isMapReady} ref={this.mapRef}>
           {children}
         </GoogleMaps>

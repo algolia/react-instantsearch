@@ -10,21 +10,14 @@ describe('Redo', () => {
   const defaultProps = {
     googleMapsInstance: createFakeMapInstance(),
     translate: x => x,
-  };
 
-  const defaultContext = {
     hasMapMoveSinceLastRefine: false,
     refineWithInstance: () => {},
   };
 
   it('expect to render correctly', () => {
-    const context = {
-      ...defaultContext,
-    };
-
     const props = {
       ...defaultProps,
-      context,
     };
 
     const wrapper = shallow(<Redo {...props} />);
@@ -34,14 +27,9 @@ describe('Redo', () => {
   });
 
   it('expect to render correctly when map has moved', () => {
-    const context = {
-      ...defaultContext,
-      hasMapMoveSinceLastRefine: true,
-    };
-
     const props = {
       ...defaultProps,
-      context,
+      hasMapMoveSinceLastRefine: true,
     };
 
     const wrapper = shallow(<Redo {...props} />);
@@ -53,20 +41,15 @@ describe('Redo', () => {
   it('expect to call refineWithInstance on button click', () => {
     const mapInstance = createFakeMapInstance();
 
-    const context = {
-      ...defaultContext,
-      refineWithInstance: jest.fn(),
-    };
-
     const props = {
       ...defaultProps,
       googleMapsInstance: mapInstance,
-      context,
+      refineWithInstance: jest.fn(),
     };
 
     const wrapper = shallow(<Redo {...props} />);
 
-    const { refineWithInstance } = context;
+    const { refineWithInstance } = props;
 
     expect(refineWithInstance).toHaveBeenCalledTimes(0);
 

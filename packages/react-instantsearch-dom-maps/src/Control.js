@@ -10,22 +10,29 @@ const ControlPropTypes = {
   translate: PropTypes.func.isRequired,
 };
 
-export const Control = ({ googleMapsInstance, translate, context }) => (
+export const Control = ({
+  googleMapsInstance,
+  translate,
+  isRefineOnMapMove,
+  hasMapMoveSinceLastRefine,
+  toggleRefineOnMapMove,
+  refineWithInstance,
+}) => (
   <div className={cx('control')}>
-    {context.isRefineOnMapMove || !context.hasMapMoveSinceLastRefine ? (
+    {isRefineOnMapMove || !hasMapMoveSinceLastRefine ? (
       <label className={cx('label')}>
         <input
           className={cx('input')}
           type="checkbox"
-          checked={context.isRefineOnMapMove}
-          onChange={context.toggleRefineOnMapMove}
+          checked={isRefineOnMapMove}
+          onChange={toggleRefineOnMapMove}
         />
         {translate('control')}
       </label>
     ) : (
       <button
         className={cx('redo')}
-        onClick={() => context.refineWithInstance(googleMapsInstance)}
+        onClick={() => refineWithInstance(googleMapsInstance)}
       >
         {translate('redo')}
       </button>
@@ -35,17 +42,28 @@ export const Control = ({ googleMapsInstance, translate, context }) => (
 
 Control.propTypes = {
   ...ControlPropTypes,
-  context: PropTypes.shape({
-    isRefineOnMapMove: PropTypes.bool.isRequired,
-    toggleRefineOnMapMove: PropTypes.func.isRequired,
-    hasMapMoveSinceLastRefine: PropTypes.bool.isRequired,
-    refineWithInstance: PropTypes.func.isRequired,
-  }),
+  isRefineOnMapMove: PropTypes.bool.isRequired,
+  toggleRefineOnMapMove: PropTypes.func.isRequired,
+  hasMapMoveSinceLastRefine: PropTypes.bool.isRequired,
+  refineWithInstance: PropTypes.func.isRequired,
 };
 
 const ControlWrapper = props => (
   <GeoSearchContext.Consumer>
-    {context => <Control {...props} context={context} />}
+    {({
+      isRefineOnMapMove,
+      hasMapMoveSinceLastRefine,
+      toggleRefineOnMapMove,
+      refineWithInstance,
+    }) => (
+      <Control
+        {...props}
+        isRefineOnMapMove={isRefineOnMapMove}
+        hasMapMoveSinceLastRefine={hasMapMoveSinceLastRefine}
+        toggleRefineOnMapMove={toggleRefineOnMapMove}
+        refineWithInstance={refineWithInstance}
+      />
+    )}
   </GeoSearchContext.Consumer>
 );
 

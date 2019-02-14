@@ -10,15 +10,17 @@ const RedoPropTypes = {
   translate: PropTypes.func.isRequired,
 };
 
-export const Redo = ({ googleMapsInstance, translate, context }) => (
+export const Redo = ({
+  googleMapsInstance,
+  translate,
+  hasMapMoveSinceLastRefine,
+  refineWithInstance,
+}) => (
   <div className={cx('control')}>
     <button
-      className={cx(
-        'redo',
-        !context.hasMapMoveSinceLastRefine && 'redo--disabled'
-      )}
-      disabled={!context.hasMapMoveSinceLastRefine}
-      onClick={() => context.refineWithInstance(googleMapsInstance)}
+      className={cx('redo', !hasMapMoveSinceLastRefine && 'redo--disabled')}
+      disabled={!hasMapMoveSinceLastRefine}
+      onClick={() => refineWithInstance(googleMapsInstance)}
     >
       {translate('redo')}
     </button>
@@ -27,15 +29,19 @@ export const Redo = ({ googleMapsInstance, translate, context }) => (
 
 Redo.propTypes = {
   ...RedoPropTypes,
-  context: PropTypes.shape({
-    hasMapMoveSinceLastRefine: PropTypes.bool.isRequired,
-    refineWithInstance: PropTypes.func.isRequired,
-  }),
+  hasMapMoveSinceLastRefine: PropTypes.bool.isRequired,
+  refineWithInstance: PropTypes.func.isRequired,
 };
 
 const RedoWrapper = props => (
   <GeoSearchContext.Consumer>
-    {context => <Redo {...props} context={context} />}
+    {({ hasMapMoveSinceLastRefine, refineWithInstance }) => (
+      <Redo
+        {...props}
+        hasMapMoveSinceLastRefine={hasMapMoveSinceLastRefine}
+        refineWithInstance={refineWithInstance}
+      />
+    )}
   </GeoSearchContext.Consumer>
 );
 

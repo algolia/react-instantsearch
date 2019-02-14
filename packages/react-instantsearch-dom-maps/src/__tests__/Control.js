@@ -7,14 +7,9 @@ import { Control } from '../Control';
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('Control', () => {
-  const getStateContext = context => ({ ...context });
-
   const defaultProps = {
     googleMapsInstance: createFakeMapInstance(),
     translate: x => x,
-  };
-
-  const defaultContext = {
     isRefineOnMapMove: true,
     hasMapMoveSinceLastRefine: false,
     toggleRefineOnMapMove: () => {},
@@ -22,109 +17,69 @@ describe('Control', () => {
   };
 
   it('expect to render correctly with refine on map move', () => {
-    const context = {
-      ...defaultContext,
-    };
-
     const props = {
       ...defaultProps,
-      context,
     };
 
-    const wrapper = shallow(<Control {...props} />, {
-      context,
-    });
+    const wrapper = shallow(<Control {...props} />);
 
     expect(wrapper).toMatchSnapshot();
     expect(wrapper.find('input').props().checked).toBe(true);
   });
 
   it('expect to render correctly without refine on map move', () => {
-    const context = {
-      ...defaultContext,
+    const props = {
+      ...defaultProps,
       isRefineOnMapMove: false,
     };
 
-    const props = {
-      ...defaultProps,
-      context,
-    };
-
-    const wrapper = shallow(<Control {...props} />, {
-      context,
-    });
+    const wrapper = shallow(<Control {...props} />);
 
     expect(wrapper).toMatchSnapshot();
     expect(wrapper.find('input').props().checked).toBe(false);
   });
 
   it('expect to render correctly without refine on map move when the map has moved', () => {
-    const context = {
-      ...defaultContext,
+    const props = {
+      ...defaultProps,
       isRefineOnMapMove: false,
       hasMapMoveSinceLastRefine: true,
     };
 
-    const props = {
-      ...defaultProps,
-      context,
-    };
-
-    const wrapper = shallow(<Control {...props} />, {
-      context,
-    });
+    const wrapper = shallow(<Control {...props} />);
 
     expect(wrapper).toMatchSnapshot();
   });
 
   it('expect to call toggleRefineOnMapMove on input change', () => {
-    const context = {
-      ...defaultContext,
+    const props = {
+      ...defaultProps,
       toggleRefineOnMapMove: jest.fn(),
     };
 
-    const props = {
-      ...defaultProps,
-      context,
-    };
+    const wrapper = shallow(<Control {...props} />);
 
-    const wrapper = shallow(<Control {...props} />, {
-      context,
-    });
-
-    expect(
-      getStateContext(context).toggleRefineOnMapMove
-    ).toHaveBeenCalledTimes(0);
+    expect(props.toggleRefineOnMapMove).toHaveBeenCalledTimes(0);
 
     wrapper.find('input').simulate('change');
 
-    expect(
-      getStateContext(context).toggleRefineOnMapMove
-    ).toHaveBeenCalledTimes(1);
+    expect(props.toggleRefineOnMapMove).toHaveBeenCalledTimes(1);
   });
 
   it('expect to call refineWithInstance on button click', () => {
     const mapInstance = createFakeMapInstance();
 
-    const context = {
-      ...defaultContext,
-      ...getStateContext(defaultContext),
+    const props = {
+      ...defaultProps,
+      googleMapsInstance: mapInstance,
       isRefineOnMapMove: false,
       hasMapMoveSinceLastRefine: true,
       refineWithInstance: jest.fn(),
     };
 
-    const props = {
-      ...defaultProps,
-      googleMapsInstance: mapInstance,
-      context,
-    };
+    const wrapper = shallow(<Control {...props} />);
 
-    const wrapper = shallow(<Control {...props} />, {
-      context,
-    });
-
-    const { refineWithInstance } = getStateContext(context);
+    const { refineWithInstance } = props;
 
     expect(refineWithInstance).toHaveBeenCalledTimes(0);
 
