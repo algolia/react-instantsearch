@@ -49,7 +49,6 @@ const ControlWrapper = props => (
   </GeoSearchContext.Consumer>
 );
 
-ControlWrapper.displayName = 'Control';
 ControlWrapper.propTypes = ControlPropTypes;
 
 export default translatable({

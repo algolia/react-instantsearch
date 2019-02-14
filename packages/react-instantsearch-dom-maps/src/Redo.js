@@ -39,7 +39,6 @@ const RedoWrapper = props => (
   </GeoSearchContext.Consumer>
 );
 
-RedoWrapper.displayName = 'Redo';
 RedoWrapper.propTypes = RedoPropTypes;
 
 export default translatable({
