@@ -1,5 +1,5 @@
 import React from 'react';
-import GoogleMapsContext from './GoogleMapsContext'
+import GoogleMapsContext from './GoogleMapsContext';
 
 type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
 type Subtract<T, K> = Omit<T, keyof K>;
@@ -12,9 +12,9 @@ export interface WithGoogleMapsProps {
 const withGoogleMaps = <Props extends WithGoogleMapsProps>(
   Wrapped: React.ComponentType<Props>
 ) => {
-  const WithGoogleMaps: React.FC<Subtract<Props, WithGoogleMapsProps>> = (
-    props
-  ) => (
+  const WithGoogleMaps: React.FC<
+    Subtract<Props, WithGoogleMapsProps>
+  > = props => (
     <GoogleMapsContext.Consumer>
       {({ google, instance }) => (
         <Wrapped
@@ -26,7 +26,7 @@ const withGoogleMaps = <Props extends WithGoogleMapsProps>(
         />
       )}
     </GoogleMapsContext.Consumer>
-  )
+  );
 
   return WithGoogleMaps;
 };
