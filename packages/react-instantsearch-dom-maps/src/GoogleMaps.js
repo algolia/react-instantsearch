@@ -6,19 +6,7 @@ import GoogleMapsContext from './GoogleMapsContext';
 
 const cx = createClassNames('GeoSearch');
 
-export const GoogleMaps = React.forwardRef(({ isMapReady, children }, ref) => (
-  <div className={cx('')}>
-    <div ref={ref} className={cx('map')} />
-    {isMapReady && children}
-  </div>
-));
-
-GoogleMaps.propTypes = {
-  isMapReady: PropTypes.bool,
-  children: PropTypes.node.isRequired,
-};
-
-export class GoogleMapsWrapper extends Component {
+class GoogleMaps extends Component {
   static propTypes = {
     google: PropTypes.object.isRequired,
     initialZoom: PropTypes.number.isRequired,
@@ -151,12 +139,13 @@ export class GoogleMapsWrapper extends Component {
 
     return (
       <GoogleMapsContext.Provider value={this.state.value}>
-        <GoogleMaps isMapReady={isMapReady} ref={this.mapRef}>
-          {children}
-        </GoogleMaps>
+        <div className={cx('')}>
+          <div className={cx('map')} />
+          {isMapReady && children}
+        </div>
       </GoogleMapsContext.Provider>
     );
   }
 }
 
-export default GoogleMapsWrapper;
+export default GoogleMaps;
