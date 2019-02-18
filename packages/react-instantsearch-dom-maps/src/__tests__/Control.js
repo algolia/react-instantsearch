@@ -79,13 +79,11 @@ describe('Control', () => {
 
     const wrapper = shallow(<Control {...props} />);
 
-    const { refineWithInstance } = props;
-
-    expect(refineWithInstance).toHaveBeenCalledTimes(0);
+    expect(props.refineWithInstance).toHaveBeenCalledTimes(0);
 
     wrapper.find('button').simulate('click');
 
-    expect(refineWithInstance).toHaveBeenCalledTimes(1);
-    expect(refineWithInstance).toHaveBeenCalledWith(mapInstance);
+    expect(props.refineWithInstance).toHaveBeenCalledTimes(1);
+    expect(props.refineWithInstance).toHaveBeenCalledWith(mapInstance);
   });
 });
