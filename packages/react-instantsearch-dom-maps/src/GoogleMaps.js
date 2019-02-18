@@ -43,13 +43,6 @@ class GoogleMaps extends Component {
       ...mapOptions,
     });
 
-    this.setState({
-      value: {
-        google,
-        instance: this.instance,
-      },
-    });
-
     this.listeners.push(
       google.maps.event.addListenerOnce(
         this.instance,
@@ -102,9 +95,13 @@ class GoogleMaps extends Component {
   setupListenersWhenMapIsReady = () => {
     this.listeners = [];
 
-    this.setState(() => ({
+    this.setState({
       isMapReady: true,
-    }));
+      value: {
+        google: this.props.google,
+        instance: this.instance,
+      },
+    });
 
     const onChange = () => {
       if (this.isUserInteraction) {
