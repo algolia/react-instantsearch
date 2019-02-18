@@ -135,12 +135,14 @@ class GoogleMaps extends Component {
     const { isMapReady } = this.state;
 
     return (
-      <GoogleMapsContext.Provider value={this.state.value}>
-        <div className={cx('')}>
-          <div ref={this.mapRef} className={cx('map')} />
-          {isMapReady && children}
-        </div>
-      </GoogleMapsContext.Provider>
+      <div className={cx('')}>
+        <div ref={this.mapRef} className={cx('map')} />
+        {isMapReady && (
+          <GoogleMapsContext.Provider value={this.state.value}>
+            {children}
+          </GoogleMapsContext.Provider>
+        )}
+      </div>
     );
   }
 }

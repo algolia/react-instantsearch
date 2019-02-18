@@ -41,13 +41,10 @@ describe('GoogleMaps', () => {
     const wrapper = shallow(
       <GoogleMaps {...props}>
         <div>This is the children</div>
-      </GoogleMaps>,
-      {
-        disableLifecycleMethods: true,
-      }
+      </GoogleMaps>
     );
 
-    expect(wrapper.html()).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot();
     expect(wrapper.state().isMapReady).toBe(false);
   });
 
@@ -61,14 +58,11 @@ describe('GoogleMaps', () => {
 
     const wrapper = shallow(
       <GoogleMaps {...props}>
-        <div>This is the children</div>
-      </GoogleMaps>,
-      {
-        disableLifecycleMethods: true,
-      }
+        <div className="children">This is the children</div>
+      </GoogleMaps>
     );
 
-    expect(wrapper.html()).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot();
     expect(wrapper.state().isMapReady).toBe(false);
 
     // Simulate didMount
@@ -79,11 +73,11 @@ describe('GoogleMaps', () => {
     // Trigger the update
     wrapper.update();
 
-    expect(wrapper.html()).toMatchSnapshot();
+    expect(wrapper.find('.children')).toBeTruthy();
     expect(wrapper.state().isMapReady).toBe(true);
   });
 
-  describe.skip('creation', () => {
+  describe('creation', () => {
     it('expect to create the GoogleMaps on didMount with the default options', () => {
       const google = createFakeGoogleReference();
 
@@ -106,7 +100,7 @@ describe('GoogleMaps', () => {
       });
     });
 
-    it('expect to create the GoogleMaps on didMount witht the given options', () => {
+    it('expect to create the GoogleMaps on didMount with the given options', () => {
       const google = createFakeGoogleReference();
 
       const props = {
@@ -382,8 +376,8 @@ describe('GoogleMaps', () => {
 
       expect(mapInstance.fitBounds).toHaveBeenCalledTimes(0);
 
-      expect(mapInstance.setZoom).toHaveBeenCalledTimes(2); // cDM
-      expect(mapInstance.setCenter).toHaveBeenCalledTimes(2); // cDM
+      expect(mapInstance.setZoom).toHaveBeenCalledTimes(1); // cDM
+      expect(mapInstance.setCenter).toHaveBeenCalledTimes(1); // cDM
 
       wrapper.setProps({
         boundingBoxPadding: 0,
@@ -414,8 +408,8 @@ describe('GoogleMaps', () => {
         0
       );
 
-      expect(mapInstance.setZoom).toHaveBeenCalledTimes(2); // cDM
-      expect(mapInstance.setCenter).toHaveBeenCalledTimes(2); // cDM
+      expect(mapInstance.setZoom).toHaveBeenCalledTimes(1); // cDM
+      expect(mapInstance.setCenter).toHaveBeenCalledTimes(1); // cDM
     });
 
     it('expect to call setCenter & setZoom when boundingBox is not provided', () => {
@@ -444,17 +438,17 @@ describe('GoogleMaps', () => {
 
       expect(mapInstance.fitBounds).toHaveBeenCalledTimes(0);
 
-      expect(mapInstance.setZoom).toHaveBeenCalledTimes(2); // cDM
-      expect(mapInstance.setCenter).toHaveBeenCalledTimes(2); // cDM
+      expect(mapInstance.setZoom).toHaveBeenCalledTimes(1); // cDM
+      expect(mapInstance.setCenter).toHaveBeenCalledTimes(1); // cDM
 
       wrapper.setProps();
 
       expect(mapInstance.fitBounds).toHaveBeenCalledTimes(0);
 
-      expect(mapInstance.setZoom).toHaveBeenCalledTimes(3); // cDM + cDU
+      expect(mapInstance.setZoom).toHaveBeenCalledTimes(2); // cDM + cDU
       expect(mapInstance.setZoom).toHaveBeenCalledWith(1);
 
-      expect(mapInstance.setCenter).toHaveBeenCalledTimes(3); // cDM + cDU
+      expect(mapInstance.setCenter).toHaveBeenCalledTimes(2); // cDM + cDU
       expect(mapInstance.setCenter).toHaveBeenCalledWith({
         lat: 0,
         lng: 0,
@@ -509,20 +503,20 @@ describe('GoogleMaps', () => {
 
       const wrapper = shallow(
         <GoogleMaps {...props}>
-          <div>This is the children</div>
+          <div className="children">This is the children</div>
         </GoogleMaps>
       );
 
       simulateMapReadyEvent(google);
       simulateEvent(mapInstance, 'center_changed');
 
-      expect(wrapper.html()).toMatchSnapshot();
+      expect(wrapper.find('.children')).toMatchSnapshot();
 
       wrapper.setProps({
-        children: <div>This is the children updated</div>,
+        children: <div className="children">This is the children updated</div>,
       });
 
-      expect(wrapper.html()).toMatchSnapshot();
+      expect(wrapper.find('.children')).toMatchSnapshot();
     });
   });
 
