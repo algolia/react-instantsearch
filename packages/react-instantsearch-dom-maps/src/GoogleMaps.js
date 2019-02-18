@@ -137,7 +137,7 @@ class GoogleMaps extends Component {
     return (
       <GoogleMapsContext.Provider value={this.state.value}>
         <div className={cx('')}>
-          <div className={cx('map')} />
+          <div ref={this.mapRef} className={cx('map')} />
           {isMapReady && children}
         </div>
       </GoogleMapsContext.Provider>
