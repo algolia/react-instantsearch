@@ -22,19 +22,15 @@ class Provider extends Component {
   boundingBox = null;
   previousBoundingBox = null;
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      value: {
-        isRefineOnMapMove: this.props.isRefineOnMapMove,
-        hasMapMoveSinceLastRefine: this.props.hasMapMoveSinceLastRefine,
-        toggleRefineOnMapMove: this.props.toggleRefineOnMapMove,
-        setMapMoveSinceLastRefine: this.props.setMapMoveSinceLastRefine,
-        refineWithInstance: this.refineWithInstance,
-      },
-    };
-  }
+  state = {
+    value: {
+      isRefineOnMapMove: this.props.isRefineOnMapMove,
+      hasMapMoveSinceLastRefine: this.props.hasMapMoveSinceLastRefine,
+      toggleRefineOnMapMove: this.props.toggleRefineOnMapMove,
+      setMapMoveSinceLastRefine: this.props.setMapMoveSinceLastRefine,
+      refineWithInstance: this.refineWithInstance,
+    },
+  };
 
   createBoundingBoxFromHits(hits) {
     const { google } = this.props;
