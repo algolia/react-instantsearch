@@ -4,6 +4,9 @@
     ":automergeMinor",
     ":automergePr"
   ],
+  "ignorePresets": [
+    ":ignoreModulesAndTests"
+  ],
   "packageRules": [
     {
       "packagePatterns": [
