@@ -180,10 +180,10 @@
     lodash "^4.17.4"
     react-native-vector-icons "4.4.2"
 
-"@ptomasroos/react-native-multi-slider@0.0.11":
-  version "0.0.11"
-  resolved "https://registry.yarnpkg.com/@ptomasroos/react-native-multi-slider/-/react-native-multi-slider-0.0.11.tgz#9ddc5ed07c1dff14e10b40d0e97e436bbc851393"
-  integrity sha1-ndxe0Hwd/xThC0DQ6X5Da7yFE5M=
+"@ptomasroos/react-native-multi-slider@0.0.14":
+  version "0.0.14"
+  resolved "https://registry.yarnpkg.com/@ptomasroos/react-native-multi-slider/-/react-native-multi-slider-0.0.14.tgz#a6dcf0fa72c24e8ff21e7a7aad9a1eab440065f4"
+  integrity sha512-36VU9JTlbys0XCaFSJDtnrH5EpSU1tWpzlZRbpAO+a+BjQOuETypV4FTm+hJwX3h2hr8ATtL/HuG4PtZZIigoQ==
 
 "@segment/loosely-validate-event@^1.1.2":
   version "1.1.2"
