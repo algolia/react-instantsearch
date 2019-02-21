@@ -68,7 +68,7 @@ export default function createConnector(connectorDesc) {
         this.state = {
           props: this.getProvidedProps({
             ...this.props,
-            // @MAJOR: We cannot drop this beacuse it's a breaking change. The
+            // @MAJOR: We cannot drop this because it's a breaking change. The
             // prop is provided to `createConnector.getProvidedProps`. All the
             // custom connectors are impacted by this change. It should be fine
             // to drop it in the next major though.

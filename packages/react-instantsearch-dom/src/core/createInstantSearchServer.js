@@ -147,7 +147,7 @@ const createInstantSearchServer = algoliasearch => {
       if (this.props.searchClient) {
         if (this.props.appId || this.props.apiKey || this.props.algoliaClient) {
           throw new Error(
-            'react-instantsearch:: `searchClient` cannot be used with `appId`, `apiKey` or `algoliaClient`.'
+            'react-instantsearch: `searchClient` cannot be used with `appId`, `apiKey` or `algoliaClient`.'
           );
         }
       }

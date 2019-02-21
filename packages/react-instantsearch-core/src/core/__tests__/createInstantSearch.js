@@ -63,7 +63,9 @@ describe('createInstantSearch', () => {
         />
       );
 
-    expect(() => trigger()).toThrow();
+    expect(() => trigger()).toThrowErrorMatchingInlineSnapshot(
+      `"react-instantsearch: \`searchClient\` cannot be used with \`appId\`, \`apiKey\` or \`algoliaClient\`."`
+    );
   });
 
   it('throws if appId is given with searchClient', () => {
@@ -116,6 +118,7 @@ describe('createInstantSearch', () => {
   });
 
   it('uses the provided algoliaClient', () => {
+    global.console.warn = jest.fn();
     const wrapper = shallow(
       <CustomInstantSearch algoliaClient={algoliaClient} indexName="name" />
     );
@@ -123,6 +126,7 @@ describe('createInstantSearch', () => {
     expect(algoliaClientFactory).toHaveBeenCalledTimes(0);
     expect(algoliaClient.addAlgoliaAgent).toHaveBeenCalledTimes(2);
     expect(wrapper.props().algoliaClient).toBe(algoliaClient);
+    expect(global.console.warn).toHaveBeenCalledTimes(1);
   });
 
   it('does not throw if searchClient does not have a `addAlgoliaAgent()` method', () => {
@@ -134,14 +138,18 @@ describe('createInstantSearch', () => {
   });
 
   it('does not throw if algoliaClient does not have a `addAlgoliaAgent()` method', () => {
+    global.console.warn = jest.fn();
     const client = {};
     const trigger = () =>
       shallow(<CustomInstantSearch indexName="name" algoliaClient={client} />);
 
     expect(() => trigger()).not.toThrow();
+    expect(global.console.warn).toHaveBeenCalledTimes(1);
   });
 
   it('updates the algoliaClient when provided algoliaClient is passed down', () => {
+    global.console.warn = jest.fn();
+
     const newAlgoliaClient = {
       addAlgoliaAgent: jest.fn(),
     };
@@ -158,6 +166,7 @@ describe('createInstantSearch', () => {
 
     expect(wrapper.props().algoliaClient).toBe(newAlgoliaClient);
     expect(newAlgoliaClient.addAlgoliaAgent).toHaveBeenCalledTimes(2);
+    expect(global.console.warn).toHaveBeenCalledTimes(1);
   });
 
   it('updates the searchClient when provided searchClient is passed down', () => {
@@ -180,6 +189,7 @@ describe('createInstantSearch', () => {
   });
 
   it('does not throw when algoliaClient gets updated and does not have a `addAlgoliaAgent()` method', () => {
+    global.console.warn = jest.fn();
     const client = {};
     const makeWrapper = () =>
       shallow(<CustomInstantSearch indexName="name" algoliaClient={client} />);
@@ -189,6 +199,7 @@ describe('createInstantSearch', () => {
         algoliaClient: client,
       });
     }).not.toThrow();
+    expect(global.console.warn).toHaveBeenCalledTimes(1);
   });
 
   it('does not throw when searchClient gets updated and does not have a `addAlgoliaAgent()` method', () => {
