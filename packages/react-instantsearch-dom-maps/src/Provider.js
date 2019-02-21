@@ -41,6 +41,24 @@ class Provider extends Component {
     refineWithInstance: this.refineWithInstance,
   };
 
+  getMapValue = () => {
+    if (
+      this.mapValue.isRefineOnMapMove !== this.props.isRefineOnMapMove ||
+      this.mapValue.hasMapMoveSinceLastRefine !==
+        this.props.hasMapMoveSinceLastRefine
+    ) {
+      this.mapValue = {
+        isRefineOnMapMove: this.props.isRefineOnMapMove,
+        hasMapMoveSinceLastRefine: this.props.hasMapMoveSinceLastRefine,
+        toggleRefineOnMapMove: this.props.toggleRefineOnMapMove,
+        setMapMoveSinceLastRefine: this.props.setMapMoveSinceLastRefine,
+        refineWithInstance: this.refineWithInstance,
+      };
+    }
+
+    return this.mapValue;
+  };
+
   createBoundingBoxFromHits(hits) {
     const { google } = this.props;
 
@@ -100,7 +118,7 @@ class Provider extends Component {
         : currentRefinement;
 
     return (
-      <GeoSearchContext.Provider value={this.mapValue}>
+      <GeoSearchContext.Provider value={this.getMapValue()}>
         {children({
           onChange: this.onChange,
           onIdle: this.onIdle,
