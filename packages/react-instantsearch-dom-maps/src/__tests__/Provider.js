@@ -437,7 +437,28 @@ describe('Provider', () => {
       );
     });
 
-    it('expect to pass new reference for toggleRefineOnMapMove when isRefineOnMapMove changes', () => {
+    it('expect to pass same reference for toggleRefineOnMapMove when isRefineOnMapMove changes', () => {
+      const props = {
+        ...defaultProps,
+        toggleRefineOnMapMove: jest.fn(),
+      };
+
+      const wrapper = shallow(<Provider {...props} />);
+
+      expect(wrapper.props().value.toggleRefineOnMapMove).toEqual(
+        wrapper.instance().mapValue.toggleRefineOnMapMove
+      );
+
+      wrapper.setProps({
+        isRefineOnMapMove: false,
+      });
+
+      expect(wrapper.props().value.toggleRefineOnMapMove).toEqual(
+        wrapper.instance().mapValue.toggleRefineOnMapMove
+      );
+    });
+
+    it('expect to pass same reference for toggleRefineOnMapMove when hasMapMoveSinceLastRefine changes', () => {
       const props = {
         ...defaultProps,
         toggleRefineOnMapMove: jest.fn(),
@@ -445,41 +466,20 @@ describe('Provider', () => {
 
       const wrapper = shallow(<Provider {...props}>{x => x}</Provider>);
 
-      expect(wrapper.props().value.toggleRefineOnMapMove).toBe(
-        wrapper.instance().toggleRefineOnMapMove
-      );
-
-      wrapper.setProps({
-        isRefineOnMapMove: false,
-      });
-
-      expect(wrapper.props().value.toggleRefineOnMapMove).not.toBe(
-        wrapper.instance().toggleRefineOnMapMove
-      );
-    });
-
-    it('expect to pass new reference for toggleRefineOnMapMove when hasMapMoveSinceLastRefine changes', () => {
-      const props = {
-        ...defaultProps,
-        toggleRefineOnMapMove: jest.fn(),
-      };
-
-      const wrapper = shallow(<Provider {...props}>{x => x}</Provider>);
-
-      expect(wrapper.props().value.toggleRefineOnMapMove).toBe(
-        wrapper.instance().toggleRefineOnMapMove
+      expect(wrapper.props().value.toggleRefineOnMapMove).toEqual(
+        wrapper.instance().mapValue.toggleRefineOnMapMove
       );
 
       wrapper.setProps({
         hasMapMoveSinceLastRefine: false,
       });
 
-      expect(wrapper.props().value.toggleRefineOnMapMove).not.toBe(
-        wrapper.instance().toggleRefineOnMapMove
+      expect(wrapper.props().value.toggleRefineOnMapMove).toEqual(
+        wrapper.instance().mapValue.toggleRefineOnMapMove
       );
     });
 
-    it('expect to pass new reference for setMapMoveSinceLastRefine when isRefineOnMapMove changes', () => {
+    it('expect to pass same reference for setMapMoveSinceLastRefine when isRefineOnMapMove changes', () => {
       const props = {
         ...defaultProps,
         setMapMoveSinceLastRefine: jest.fn(),
@@ -487,20 +487,20 @@ describe('Provider', () => {
 
       const wrapper = shallow(<Provider {...props}>{x => x}</Provider>);
 
-      expect(wrapper.props().value.setMapMoveSinceLastRefine).toBe(
-        wrapper.instance().setMapMoveSinceLastRefine
+      expect(wrapper.props().value.setMapMoveSinceLastRefine).toEqual(
+        wrapper.instance().mapValue.setMapMoveSinceLastRefine
       );
 
       wrapper.setProps({
         isRefineOnMapMove: false,
       });
 
-      expect(wrapper.props().value.setMapMoveSinceLastRefine).not.toBe(
-        wrapper.instance().setMapMoveSinceLastRefine
+      expect(wrapper.props().value.setMapMoveSinceLastRefine).toEqual(
+        wrapper.instance().mapValue.setMapMoveSinceLastRefine
       );
     });
 
-    it('expect to pass new reference for setMapMoveSinceLastRefine when hasMapMoveSinceLastRefine changes', () => {
+    it('expect to pass same reference for setMapMoveSinceLastRefine when hasMapMoveSinceLastRefine changes', () => {
       const props = {
         ...defaultProps,
         setMapMoveSinceLastRefine: jest.fn(),
@@ -508,20 +508,20 @@ describe('Provider', () => {
 
       const wrapper = shallow(<Provider {...props}>{x => x}</Provider>);
 
-      expect(wrapper.props().value.setMapMoveSinceLastRefine).toBe(
-        wrapper.instance().setMapMoveSinceLastRefine
+      expect(wrapper.props().value.setMapMoveSinceLastRefine).toEqual(
+        wrapper.instance().mapValue.setMapMoveSinceLastRefine
       );
 
       wrapper.setProps({
         hasMapMoveSinceLastRefine: false,
       });
 
-      expect(wrapper.props().value.setMapMoveSinceLastRefine).not.toBe(
-        wrapper.instance().setMapMoveSinceLastRefine
+      expect(wrapper.props().value.setMapMoveSinceLastRefine).toEqual(
+        wrapper.instance().mapValue.setMapMoveSinceLastRefine
       );
     });
 
-    it('expect to pass new reference for refineWithInstance when isRefineOnMapMove changes', () => {
+    it('expect to pass same reference for refineWithInstance when isRefineOnMapMove changes', () => {
       const props = {
         ...defaultProps,
         refineWithInstance: jest.fn(),
@@ -529,20 +529,20 @@ describe('Provider', () => {
 
       const wrapper = shallow(<Provider {...props}>{x => x}</Provider>);
 
-      expect(wrapper.props().value.refineWithInstance).toBe(
-        wrapper.instance().refineWithInstance
+      expect(wrapper.props().value.refineWithInstance).toEqual(
+        wrapper.instance().mapValue.refineWithInstance
       );
 
       wrapper.setProps({
         isRefineOnMapMove: false,
       });
 
-      expect(wrapper.props().value.refineWithInstance).not.toBe(
-        wrapper.instance().refineWithInstance
+      expect(wrapper.props().value.refineWithInstance).toEqual(
+        wrapper.instance().mapValue.refineWithInstance
       );
     });
 
-    it('expect to pass new reference for refineWithInstance when hasMapMoveSinceLastRefine changes', () => {
+    it('expect to pass same reference for refineWithInstance when hasMapMoveSinceLastRefine changes', () => {
       const props = {
         ...defaultProps,
         refineWithInstance: jest.fn(),
@@ -550,16 +550,16 @@ describe('Provider', () => {
 
       const wrapper = shallow(<Provider {...props}>{x => x}</Provider>);
 
-      expect(wrapper.props().value.refineWithInstance).toBe(
-        wrapper.instance().refineWithInstance
+      expect(wrapper.props().value.refineWithInstance).toEqual(
+        wrapper.instance().mapValue.refineWithInstance
       );
 
       wrapper.setProps({
         hasMapMoveSinceLastRefine: false,
       });
 
-      expect(wrapper.props().value.refineWithInstance).not.toBe(
-        wrapper.instance().refineWithInstance
+      expect(wrapper.props().value.refineWithInstance).toEqual(
+        wrapper.instance().mapValue.refineWithInstance
       );
     });
   });

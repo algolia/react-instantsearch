@@ -6,6 +6,7 @@ import {
   createFakeMapInstance,
 } from '../../test/mockGoogleMaps';
 import GoogleMaps from '../GoogleMaps';
+import GoogleMapsContext from '../GoogleMapsContext';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -294,28 +295,10 @@ describe('GoogleMaps', () => {
     });
   });
 
-  describe.skip('context', () => {
-    it('expect to expose the google object through context', () => {
-      const google = createFakeGoogleReference();
+  describe('context', () => {
+    it('expect not to expose the context only when map is not ready', () => {
+      expect.assertions(1);
 
-      const props = {
-        ...defaultProps,
-        google,
-      };
-
-      const wrapper = shallow(<GoogleMaps {...props} />, {
-        disableLifecycleMethods: true,
-      });
-
-      expect(wrapper.instance().getChildContext()).toEqual({
-        // eslint-disable-next-line camelcase
-        __ais_geo_search__google_maps__: expect.objectContaining({
-          google,
-        }),
-      });
-    });
-
-    it('expect to expose the map instance through context only when created', () => {
       const mapInstance = createFakeMapInstance();
       const google = createFakeGoogleReference({
         mapInstance,
@@ -326,26 +309,63 @@ describe('GoogleMaps', () => {
         google,
       };
 
-      const wrapper = shallow(<GoogleMaps {...props} />, {
-        disableLifecycleMethods: true,
+      const wrapper = shallow(
+        <GoogleMaps {...props}>
+          <GoogleMapsContext.Consumer>{() => null}</GoogleMapsContext.Consumer>
+        </GoogleMaps>
+      );
+
+      expect(wrapper.find(GoogleMapsContext.Consumer).exists()).toBe(false);
+    });
+
+    it('expect to expose the context only when created', () => {
+      expect.assertions(1);
+
+      const mapInstance = createFakeMapInstance();
+      const google = createFakeGoogleReference({
+        mapInstance,
       });
 
-      expect(wrapper.instance().getChildContext()).toEqual({
-        // eslint-disable-next-line camelcase
-        __ais_geo_search__google_maps__: expect.objectContaining({
-          instance: undefined,
-        }),
+      const props = {
+        ...defaultProps,
+        google,
+      };
+
+      const wrapper = shallow(
+        <GoogleMaps {...props}>
+          <GoogleMapsContext.Consumer>{() => null}</GoogleMapsContext.Consumer>
+        </GoogleMaps>
+      );
+
+      simulateMapReadyEvent(google);
+
+      expect(wrapper.find(GoogleMapsContext.Consumer).exists()).toBe(true);
+    });
+
+    it('expect to expose the map instance through context only when created', () => {
+      expect.assertions(1);
+
+      const mapInstance = createFakeMapInstance();
+      const google = createFakeGoogleReference({
+        mapInstance,
       });
 
-      // Simulate didMount
-      wrapper.instance().componentDidMount();
+      const props = {
+        ...defaultProps,
+        google,
+      };
 
-      expect(wrapper.instance().getChildContext()).toEqual({
-        // eslint-disable-next-line camelcase
-        __ais_geo_search__google_maps__: expect.objectContaining({
-          instance: mapInstance,
-        }),
-      });
+      const renderFn = jest.fn(() => null);
+
+      mount(
+        <GoogleMaps {...props}>
+          <GoogleMapsContext.Consumer>{renderFn}</GoogleMapsContext.Consumer>
+        </GoogleMaps>
+      );
+
+      simulateMapReadyEvent(google);
+
+      expect(renderFn).toHaveBeenCalledWith({ google, instance: mapInstance });
     });
   });
 
