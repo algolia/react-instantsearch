@@ -11,9 +11,9 @@ type GeoSearchContextState = {
 const GeoSearchContext = React.createContext<GeoSearchContextState>({
   isRefineOnMapMove: true,
   hasMapMoveSinceLastRefine: false,
-  toggleRefineOnMapMove: () => {},
-  setMapMoveSinceLastRefine: () => {},
-  refineWithInstance: () => {},
+  toggleRefineOnMapMove: () => undefined,
+  setMapMoveSinceLastRefine: () => undefined,
+  refineWithInstance: () => undefined,
 });
 
 export default GeoSearchContext;
