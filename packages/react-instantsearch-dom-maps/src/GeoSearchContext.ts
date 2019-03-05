@@ -9,6 +9,8 @@ type GeoSearchContextState = {
 };
 
 const GeoSearchContext = React.createContext<GeoSearchContextState>({
+  // The actual default value comes from the prop of the component
+  // wrapping the `Provider`.
   isRefineOnMapMove: true,
   hasMapMoveSinceLastRefine: false,
   toggleRefineOnMapMove: () => {},

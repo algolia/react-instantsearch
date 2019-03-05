@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
 import { createClassNames } from 'react-instantsearch-dom';
 import { LatLngPropType, BoundingBoxPropType } from './propTypes';
@@ -23,7 +23,7 @@ class GoogleMaps extends Component {
   isUserInteraction = true;
   isPendingRefine = false;
   listeners = [];
-  mapRef = React.createRef();
+  mapRef = createRef();
 
   state = {
     isMapReady: false,

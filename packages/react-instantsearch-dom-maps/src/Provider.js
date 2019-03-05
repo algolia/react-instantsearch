@@ -42,17 +42,16 @@ class Provider extends Component {
   };
 
   getMapValue = () => {
-    if (
+    const haveContextValuesChanges =
       this.mapValue.isRefineOnMapMove !== this.props.isRefineOnMapMove ||
       this.mapValue.hasMapMoveSinceLastRefine !==
-        this.props.hasMapMoveSinceLastRefine
-    ) {
+        this.props.hasMapMoveSinceLastRefine;
+
+    if (haveContextValuesChanges) {
       this.mapValue = {
+        ...this.mapValue,
         isRefineOnMapMove: this.props.isRefineOnMapMove,
         hasMapMoveSinceLastRefine: this.props.hasMapMoveSinceLastRefine,
-        toggleRefineOnMapMove: this.props.toggleRefineOnMapMove,
-        setMapMoveSinceLastRefine: this.props.setMapMoveSinceLastRefine,
-        refineWithInstance: this.refineWithInstance,
       };
     }
 

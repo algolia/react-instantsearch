@@ -41,12 +41,12 @@ describe('GoogleMaps', () => {
 
     const wrapper = shallow(
       <GoogleMaps {...props}>
-        <div>This is the children</div>
+        <div testId="children">This is the children</div>
       </GoogleMaps>
     );
 
     expect(wrapper).toMatchSnapshot();
-    expect(wrapper.state().isMapReady).toBe(false);
+    expect(wrapper.find('[testId]').exists()).toBe(false);
   });
 
   it('expect render correctly with the map rendered', () => {
@@ -59,23 +59,17 @@ describe('GoogleMaps', () => {
 
     const wrapper = shallow(
       <GoogleMaps {...props}>
-        <div className="children">This is the children</div>
+        <div testId="children">This is the children</div>
       </GoogleMaps>
     );
 
     expect(wrapper).toMatchSnapshot();
-    expect(wrapper.state().isMapReady).toBe(false);
-
-    // Simulate didMount
-    wrapper.instance().componentDidMount();
+    expect(wrapper.find('[testId]').exists()).toBe(false);
 
     simulateMapReadyEvent(google);
 
-    // Trigger the update
-    wrapper.update();
-
-    expect(wrapper.find('.children')).toBeTruthy();
-    expect(wrapper.state().isMapReady).toBe(true);
+    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.find('[testId]').exists()).toBe(true);
   });
 
   describe('creation', () => {
@@ -296,7 +290,7 @@ describe('GoogleMaps', () => {
   });
 
   describe('context', () => {
-    it('expect not to expose the context only when map is not ready', () => {
+    it('expect to not expose the context when map is not ready', () => {
       expect.assertions(1);
 
       const mapInstance = createFakeMapInstance();
