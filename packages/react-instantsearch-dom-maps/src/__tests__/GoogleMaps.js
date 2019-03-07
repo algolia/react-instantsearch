@@ -290,13 +290,8 @@ describe('GoogleMaps', () => {
   });
 
   describe('context', () => {
-    it('expect to not expose the context when map is not ready', () => {
-      expect.assertions(1);
-
-      const mapInstance = createFakeMapInstance();
-      const google = createFakeGoogleReference({
-        mapInstance,
-      });
+    it('expect to not expose the context when the map is not ready', () => {
+      const google = createFakeGoogleReference({});
 
       const props = {
         ...defaultProps,
@@ -312,13 +307,8 @@ describe('GoogleMaps', () => {
       expect(wrapper.find(GoogleMapsContext.Consumer).exists()).toBe(false);
     });
 
-    it('expect to expose the context only when created', () => {
-      expect.assertions(1);
-
-      const mapInstance = createFakeMapInstance();
-      const google = createFakeGoogleReference({
-        mapInstance,
-      });
+    it('expect to expose the context only when the map is created', () => {
+      const google = createFakeGoogleReference({});
 
       const props = {
         ...defaultProps,
@@ -337,8 +327,6 @@ describe('GoogleMaps', () => {
     });
 
     it('expect to expose the map instance through context only when created', () => {
-      expect.assertions(1);
-
       const mapInstance = createFakeMapInstance();
       const google = createFakeGoogleReference({
         mapInstance,
