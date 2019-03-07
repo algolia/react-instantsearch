@@ -5,8 +5,6 @@ import PropTypes from 'prop-types';
 import { connectGeoSearch } from 'react-instantsearch-dom';
 import { LatLngPropType, BoundingBoxPropType } from './propTypes';
 
-export const STATE_CONTEXT = '__ais_geo_search__state__';
-
 export class Connector extends Component {
   static propTypes = {
     hits: PropTypes.arrayOf(PropTypes.object).isRequired,
