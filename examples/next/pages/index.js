@@ -30,6 +30,14 @@ export default class extends React.Component {
     const searchState = params.asPath.includes('?')
       ? qs.parse(params.asPath.substring(params.asPath.indexOf('?') + 1))
       : {};
+
+    // XX: trying to inject filter here  
+    Object.assign(searchState, {
+      configure: {
+        filters: 'categories:Appliances',
+      },
+    });
+
     const resultsState = await findResultsState(App, { searchState });
     return { resultsState, searchState };
   }
