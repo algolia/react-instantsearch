@@ -181,8 +181,10 @@ export default createConnector({
     return refine(searchState, nextValue, { ais: props.contextValue });
   },
 
-  getSearchParameters(searchParameters, props, searchState, context) {
-    const currentRefinement = getCurrentRefinement(props, searchState, context);
+  getSearchParameters(searchParameters, props, searchState) {
+    const currentRefinement = getCurrentRefinement(props, searchState, {
+      ais: props.contextValue,
+    });
 
     if (!currentRefinement) {
       return searchParameters;

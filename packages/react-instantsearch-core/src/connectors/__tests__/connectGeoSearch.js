@@ -7,9 +7,9 @@ describe('connectGeoSearch', () => {
   const empty = {};
 
   describe('single index', () => {
-    const createSingleIndexInstance = () => ({
+    const contextValue = {
       mainTargetedIndex: 'index',
-    });
+    };
 
     const createSingleIndexSearchResults = (hits = [], state) => ({
       results: new SearchResults(new SearchParameters(state), [
@@ -21,8 +21,7 @@ describe('connectGeoSearch', () => {
 
     describe('getProvidedProps', () => {
       it('expect to return default provided props', () => {
-        const instance = createSingleIndexInstance();
-        const props = { contextValue: instance };
+        const props = { contextValue };
         const searchState = {};
         const searchResults = empty;
 
@@ -50,8 +49,7 @@ describe('connectGeoSearch', () => {
             { objectID: '789', _geoloc: true },
           ];
 
-          const instance = createSingleIndexInstance();
-          const props = { contextValue: instance };
+          const props = { contextValue };
           const searchState = {};
           const searchResults = createSingleIndexSearchResults(hits);
 
@@ -77,8 +75,7 @@ describe('connectGeoSearch', () => {
             { objectID: '789', _geoloc: true },
           ];
 
-          const instance = createSingleIndexInstance();
-          const props = { contextValue: instance };
+          const props = { contextValue };
           const searchState = {};
           const searchResults = createSingleIndexSearchResults(hits);
 
@@ -97,8 +94,7 @@ describe('connectGeoSearch', () => {
         });
 
         it("expect to return empty hits when we don't have results", () => {
-          const instance = createSingleIndexInstance();
-          const props = { contextValue: instance };
+          const props = { contextValue };
           const searchState = {};
           const searchResults = empty;
 
@@ -116,8 +112,7 @@ describe('connectGeoSearch', () => {
 
       describe('position', () => {
         it('expect to return the position from the searchState (aroundLatLng)', () => {
-          const instance = createSingleIndexInstance();
-          const props = { contextValue: instance };
+          const props = { contextValue };
           const searchResults = createSingleIndexSearchResults();
           const searchState = {
             aroundLatLng: {
@@ -139,8 +134,7 @@ describe('connectGeoSearch', () => {
         });
 
         it('expect to return the position from the searchState (configure.aroundLatLng)', () => {
-          const instance = createSingleIndexInstance();
-          const props = { contextValue: instance };
+          const props = { contextValue };
           const searchResults = createSingleIndexSearchResults();
           const searchState = {
             configure: {
@@ -161,8 +155,7 @@ describe('connectGeoSearch', () => {
         });
 
         it('expect to return the position from the SearchResults', () => {
-          const instance = createSingleIndexInstance();
-          const props = { contextValue: instance };
+          const props = { contextValue };
           const searchState = {};
           const searchResults = createSingleIndexSearchResults([], {
             aroundLatLng: '10, 12',
@@ -181,8 +174,7 @@ describe('connectGeoSearch', () => {
         });
 
         it('expect to return undefined from an empty searchState', () => {
-          const instance = createSingleIndexInstance();
-          const props = { contextValue: instance };
+          const props = { contextValue };
           const searchState = {};
           const searchResults = createSingleIndexSearchResults();
 
@@ -196,11 +188,10 @@ describe('connectGeoSearch', () => {
         });
 
         it('expect to return undefined with the default refinement', () => {
-          const instance = createSingleIndexInstance();
           const searchState = {};
           const searchResults = createSingleIndexSearchResults();
           const props = {
-            contextValue: instance,
+            contextValue,
             defaultRefinement: {
               northEast: {
                 lat: 10,
@@ -225,8 +216,7 @@ describe('connectGeoSearch', () => {
 
       describe('currentRefinement', () => {
         it('expect to return the boundingBox from the searchState', () => {
-          const instance = createSingleIndexInstance();
-          const props = { contextValue: instance };
+          const props = { contextValue };
           const searchResults = createSingleIndexSearchResults();
           const searchState = {
             boundingBox: {
@@ -260,8 +250,7 @@ describe('connectGeoSearch', () => {
         });
 
         it('expect to return the boundingBox from the searchState with string values', () => {
-          const instance = createSingleIndexInstance();
-          const props = { contextValue: instance };
+          const props = { contextValue };
           const searchResults = createSingleIndexSearchResults();
           const searchState = {
             boundingBox: {
@@ -295,8 +284,7 @@ describe('connectGeoSearch', () => {
         });
 
         it('expect to return the boundingBox from the SearchResults', () => {
-          const instance = createSingleIndexInstance();
-          const props = { contextValue: instance };
+          const props = { contextValue };
           const searchState = {};
           const searchResults = createSingleIndexSearchResults([], {
             insideBoundingBox: '10, 12, 12, 14',
@@ -321,11 +309,10 @@ describe('connectGeoSearch', () => {
         });
 
         it('expect to return the default refinement', () => {
-          const instance = createSingleIndexInstance();
           const searchState = {};
           const searchResults = createSingleIndexSearchResults();
           const props = {
-            contextValue: instance,
+            contextValue,
             defaultRefinement: {
               northEast: {
                 lat: 10,
@@ -357,8 +344,7 @@ describe('connectGeoSearch', () => {
         });
 
         it('expect to return undefined from an empty searchState', () => {
-          const instance = createSingleIndexInstance();
-          const props = { contextValue: instance };
+          const props = { contextValue };
           const searchState = {};
           const searchResults = createSingleIndexSearchResults();
 
@@ -380,8 +366,7 @@ describe('connectGeoSearch', () => {
             { objectID: '789', _geoloc: true },
           ];
 
-          const instance = createSingleIndexInstance();
-          const props = { contextValue: instance };
+          const props = { contextValue };
           const searchResults = createSingleIndexSearchResults(hits);
           const searchState = {
             boundingBox: {
@@ -412,8 +397,7 @@ describe('connectGeoSearch', () => {
             { objectID: '789', _geoloc: true },
           ];
 
-          const instance = createSingleIndexInstance();
-          const props = { contextValue: instance };
+          const props = { contextValue };
           const searchState = {};
           const searchResults = createSingleIndexSearchResults(hits, {
             insideBoundingBox: '10, 12, 12, 14',
@@ -435,8 +419,7 @@ describe('connectGeoSearch', () => {
             { objectID: '789', _geoloc: true },
           ];
 
-          const instance = createSingleIndexInstance();
-          const props = { contextValue: instance };
+          const props = { contextValue };
           const searchState = {};
           const searchResults = createSingleIndexSearchResults(hits);
 
@@ -453,8 +436,7 @@ describe('connectGeoSearch', () => {
 
     describe('refine', () => {
       it('expect to set the boundingBox when boundingBox is provided', () => {
-        const instance = createSingleIndexInstance();
-        const props = { contextValue: instance };
+        const props = { contextValue };
         const searchState = {};
         const nextRefinement = {
           northEast: {
@@ -485,8 +467,7 @@ describe('connectGeoSearch', () => {
       });
 
       it('expect to replace the previous value when boundingBox is provided', () => {
-        const instance = createSingleIndexInstance();
-        const props = { contextValue: instance };
+        const props = { contextValue };
         const searchState = {
           boundingBox: {
             northEast: {
@@ -529,8 +510,7 @@ describe('connectGeoSearch', () => {
       });
 
       it('expect to clear the previous value when boundingBox is omit', () => {
-        const instance = createSingleIndexInstance();
-        const props = { contextValue: instance };
+        const props = { contextValue };
         const searchState = {
           boundingBox: {
             northEast: {
@@ -555,10 +535,9 @@ describe('connectGeoSearch', () => {
     });
 
     describe('getSearchParameters', () => {
-      it('expect to set the paremeter "insideBoundingBox" when boundingBox is provided', () => {
-        const instance = createSingleIndexInstance();
+      it('expect to set the parameter "insideBoundingBox" when boundingBox is provided', () => {
         const searchParameters = new SearchParameters();
-        const props = {};
+        const props = { contextValue };
         const searchState = {
           boundingBox: {
             northEast: {
@@ -575,8 +554,7 @@ describe('connectGeoSearch', () => {
         const actual = connector.getSearchParameters(
           searchParameters,
           props,
-          searchState,
-          { ais: instance }
+          searchState
         );
 
         const expectation = '10,12,12,14';
@@ -585,16 +563,14 @@ describe('connectGeoSearch', () => {
       });
 
       it('expect to return the given searchParameters when boundingBox is omit', () => {
-        const instance = createSingleIndexInstance();
         const searchParameters = new SearchParameters();
-        const props = {};
+        const props = { contextValue };
         const searchState = {};
 
         const actual = connector.getSearchParameters(
           searchParameters,
           props,
-          searchState,
-          { ais: instance }
+          searchState
         );
 
         expect(actual).toEqual(searchParameters);
@@ -603,8 +579,7 @@ describe('connectGeoSearch', () => {
 
     describe('cleanUp', () => {
       it('expect to remove the refinement from the searchState when boundingBox is provided', () => {
-        const instance = createSingleIndexInstance();
-        const props = { contextValue: instance };
+        const props = { contextValue };
         const searchState = {
           query: 'studio',
           boundingBox: {
@@ -629,8 +604,7 @@ describe('connectGeoSearch', () => {
       });
 
       it('expect to return the given searchState when boundingBox is omit', () => {
-        const instance = createSingleIndexInstance();
-        const props = { contextValue: instance };
+        const props = { contextValue };
         const searchState = {
           query: 'studio',
         };
@@ -647,8 +621,7 @@ describe('connectGeoSearch', () => {
 
     describe('getMetadata', () => {
       it('expect to return the meta when boundingBox is provided', () => {
-        const instance = createSingleIndexInstance();
-        const props = { contextValue: instance };
+        const props = { contextValue };
         const searchState = {
           boundingBox: {
             northEast: {
@@ -689,8 +662,7 @@ describe('connectGeoSearch', () => {
       });
 
       it('expect to return an empty meta when boundingBox is omit', () => {
-        const instance = createSingleIndexInstance();
-        const props = { contextValue: instance };
+        const props = { contextValue };
         const searchState = {};
 
         const actual = connector.getMetadata(props, searchState);
@@ -703,8 +675,7 @@ describe('connectGeoSearch', () => {
       });
 
       it('expect to clear the boundingBox when value is called', () => {
-        const instance = createSingleIndexInstance();
-        const props = { contextValue: instance };
+        const props = { contextValue };
         const searchState = {
           query: 'studio',
           boundingBox: {
