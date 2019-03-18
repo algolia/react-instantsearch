@@ -82,6 +82,7 @@ export default createConnector({
       hits: getHits(searchResults),
       currentRefinement: getCurrentRefinement(props, searchState, {
         ais: props.contextValue,
+        multiIndexContext: props.indexContextValue,
       }),
     };
   },
@@ -89,11 +90,15 @@ export default createConnector({
   refine(props, searchState, nextRefinement) {
     return refine(props, searchState, nextRefinement, {
       ais: props.contextValue,
+      multiIndexContext: props.indexContextValue,
     });
   },
 
   cleanUp(props, searchState) {
-    return cleanUp(props, searchState, { ais: props.contextValue });
+    return cleanUp(props, searchState, {
+      ais: props.contextValue,
+      multiIndexContext: props.indexContextValue,
+    });
   },
 
   /* connectAutoComplete needs to be considered as a widget to trigger a search if no others widgets are used.
@@ -102,7 +107,10 @@ export default createConnector({
    * */
   getSearchParameters(searchParameters, props, searchState) {
     return searchParameters.setQuery(
-      getCurrentRefinement(props, searchState, { ais: props.contextValue })
+      getCurrentRefinement(props, searchState, {
+        ais: props.contextValue,
+        multiIndexContext: props.indexContextValue,
+      })
     );
   },
 });
