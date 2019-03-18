@@ -45,7 +45,10 @@ export default createConnector({
   displayName: 'AlgoliaHits',
 
   getProvidedProps(props, searchState, searchResults) {
-    const results = getResults(searchResults, { ais: props.contextValue });
+    const results = getResults(searchResults, {
+      ais: props.contextValue,
+      multiIndexContext: props.indexContextValue,
+    });
     if (!results) {
       return { hits: [] };
     }
