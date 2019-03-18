@@ -29,11 +29,17 @@ export default createConnector({
     const nextValue = {
       [id]: { ...omit(nextSearchState[id], nonPresentKeys), ...items },
     };
-    return refineValue(nextSearchState, nextValue, { ais: props.contextValue });
+    return refineValue(nextSearchState, nextValue, {
+      ais: props.contextValue,
+      multiIndexContext: props.indexContextValue,
+    });
   },
   cleanUp(props, searchState) {
     const id = getId();
-    const indexId = getIndexId({ ais: props.contextValue });
+    const indexId = getIndexId({
+      ais: props.contextValue,
+      multiIndexContext: props.indexContextValue,
+    });
 
     const subState =
       hasMultipleIndices(props.contextValue) && searchState.indices
@@ -52,6 +58,9 @@ export default createConnector({
 
     const nextValue = { [id]: configureState };
 
-    return refineValue(searchState, nextValue, { ais: props.contextValue });
+    return refineValue(searchState, nextValue, {
+      ais: props.contextValue,
+      multiIndexContext: props.indexContextValue,
+    });
   },
 });
