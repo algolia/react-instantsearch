@@ -1,6 +1,5 @@
 import { SearchResults, SearchParameters } from 'algoliasearch-helper';
 import connector from '../connectGeoSearch';
-import { consoleTestResultHandler } from 'tslint/lib/test';
 
 jest.mock('../../core/createConnector', () => x => x);
 
