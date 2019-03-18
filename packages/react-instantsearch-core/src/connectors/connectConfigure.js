@@ -16,12 +16,12 @@ export default createConnector({
     return {};
   },
   getSearchParameters(searchParameters, props) {
-    const items = omit(props, 'children', 'contextValue');
+    const items = omit(props, 'children', 'contextValue', 'indexContextValue');
     return searchParameters.setQueryParameters(items);
   },
   transitionState(props, prevSearchState, nextSearchState) {
     const id = getId();
-    const items = omit(props, 'children', 'contextValue');
+    const items = omit(props, 'children', 'contextValue', 'indexContextValue');
     const nonPresentKeys = this._props
       ? difference(Object.keys(this._props), Object.keys(props))
       : [];
