@@ -12,6 +12,13 @@
     "ordered-imports": false,
     "prettier": true,
     "jsx-no-lambda": false,
-    "no-empty": false
+    "member-access": false,
+    "variable-name": [
+      true,
+      "ban-keywords",
+      "check-format",
+      "allow-leading-underscore",
+      "allow-pascal-case"
+    ]
   }
 }

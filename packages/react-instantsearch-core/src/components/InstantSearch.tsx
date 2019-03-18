@@ -1,6 +1,8 @@
 import React, { Component, Children } from 'react';
 import PropTypes from 'prop-types';
 import createInstantSearchManager from '../core/createInstantSearchManager';
+import { InstantSearchProvider, InstantSearchContext } from '../core/context';
+import { Store } from '../core/createStore';
 
 function validateNextProps(props, nextProps) {
   if (!props.searchState && nextProps.searchState) {
@@ -13,6 +15,58 @@ function validateNextProps(props, nextProps) {
     );
   }
 }
+
+// @TODO: move to createInstantSearchManager when it's TS
+type InstantSearchManager = {
+  store: Store;
+  widgetsManager: any;
+  getWidgetsIds: any;
+  getSearchParameters: (...args: any[]) => any; // should this return void / mixed?
+  onSearchForFacetValues: (...args: any[]) => any;
+  onExternalStateUpdate: (...args: any[]) => any;
+  transitionState: any;
+  updateClient: any;
+  updateIndex: any;
+  clearCache: () => void;
+  skipSearch: any;
+};
+
+type SearchClient = {
+  search: (requests: Array<{}>) => Promise<{}>;
+  searchForFacetValues: (requests: Array<{}>) => Promise<{}>;
+};
+
+const defaultProps = {
+  stalledSearchDelay: 200,
+};
+
+type SearchState = any;
+
+type Props = {
+  refresh: boolean;
+  indexName: string;
+  searchClient: SearchClient;
+  createURL?: (searchState: SearchState, knownKeys: any) => string;
+  onSearchStateChange?: (searchState: SearchState) => any; // void?
+  searchState?: SearchState;
+  onSearchParameters?: (
+    getSearchParameters: (...args: any) => any,
+    context: any,
+    props: any,
+    searchState: SearchState
+  ) => any; // void?
+  stalledSearchDelay?: number;
+  // if this is required, how do people use it, is this wrapped in DOM?
+  root: {
+    Root: any; // react component
+    props: {}; // I think this is correct
+  };
+  resultsState: SearchState | SearchState[];
+};
+
+type State = {
+  contextValue: InstantSearchContext;
+};
 
 /**
  * @description
@@ -50,8 +104,47 @@ function validateNextProps(props, nextProps) {
  *   </InstantSearch>
  * );
  */
-class InstantSearch extends Component {
-  constructor(props) {
+class InstantSearch extends Component<Props, State> {
+  static defaultProps = defaultProps;
+
+  static propTypes = {
+    // @TODO: These props are currently constant.
+    indexName: PropTypes.string.isRequired,
+
+    searchClient: PropTypes.object.isRequired,
+
+    createURL: PropTypes.func,
+
+    // huh? how is this required
+    refresh: PropTypes.bool.isRequired,
+
+    searchState: PropTypes.object,
+    onSearchStateChange: PropTypes.func,
+
+    onSearchParameters: PropTypes.func,
+    resultsState: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+
+    children: PropTypes.node,
+
+    root: PropTypes.shape({
+      Root: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.func,
+        PropTypes.object,
+      ]),
+      props: PropTypes.object,
+    }).isRequired,
+
+    stalledSearchDelay: PropTypes.number,
+  };
+
+  isControlled: boolean;
+  isUnmounting: boolean;
+  aisManager: InstantSearchManager;
+  _aisContextCache: any;
+
+  // @TODO: understand why Props needs to be declared on every method
+  constructor(props: Props) {
     super(props);
     this.isControlled = Boolean(props.searchState);
     const initialState = this.isControlled ? props.searchState : {};
@@ -64,9 +157,23 @@ class InstantSearch extends Component {
       resultsState: props.resultsState,
       stalledSearchDelay: props.stalledSearchDelay,
     });
+
+    // @TODO: find out if this ever should change
+    this.state = {
+      contextValue: {
+        onInternalStateUpdate: this.onWidgetsInternalStateUpdate.bind(this),
+        createHrefForState: this.createHrefForState.bind(this),
+        onSearchForFacetValues: this.onSearchForFacetValues.bind(this),
+        onSearchStateChange: this.onSearchStateChange.bind(this),
+        onSearchParameters: this.onSearchParameters.bind(this),
+        store: this.aisManager.store,
+        widgetsManager: this.aisManager.widgetsManager,
+        mainTargetedIndex: this.props.indexName,
+      },
+    };
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps: Props) {
     validateNextProps(this.props, nextProps);
 
     if (this.props.indexName !== nextProps.indexName) {
@@ -93,39 +200,14 @@ class InstantSearch extends Component {
     this.aisManager.skipSearch();
   }
 
-  getChildContext() {
-    // If not already cached, cache the bound methods so that we can forward them as part
-    // of the context.
-    if (!this._aisContextCache) {
-      this._aisContextCache = {
-        ais: {
-          onInternalStateUpdate: this.onWidgetsInternalStateUpdate.bind(this),
-          createHrefForState: this.createHrefForState.bind(this),
-          onSearchForFacetValues: this.onSearchForFacetValues.bind(this),
-          onSearchStateChange: this.onSearchStateChange.bind(this),
-          onSearchParameters: this.onSearchParameters.bind(this),
-        },
-      };
-    }
-
-    return {
-      ais: {
-        ...this._aisContextCache.ais,
-        store: this.aisManager.store,
-        widgetsManager: this.aisManager.widgetsManager,
-        mainTargetedIndex: this.props.indexName,
-      },
-    };
-  }
-
-  createHrefForState(searchState) {
+  createHrefForState(searchState: SearchState) {
     searchState = this.aisManager.transitionState(searchState);
     return this.isControlled && this.props.createURL
       ? this.props.createURL(searchState, this.getKnownKeys())
       : '#';
   }
 
-  onWidgetsInternalStateUpdate(searchState) {
+  onWidgetsInternalStateUpdate(searchState: SearchState) {
     searchState = this.aisManager.transitionState(searchState);
 
     this.onSearchStateChange(searchState);
@@ -164,48 +246,18 @@ class InstantSearch extends Component {
   render() {
     const childrenCount = Children.count(this.props.children);
     const { Root, props } = this.props.root;
-    if (childrenCount === 0) return null;
-    else return <Root {...props}>{this.props.children}</Root>;
+    if (childrenCount === 0) {
+      return null;
+    } else {
+      return (
+        <Root {...props}>
+          <InstantSearchProvider value={this.state.contextValue}>
+            {this.props.children}
+          </InstantSearchProvider>
+        </Root>
+      );
+    }
   }
 }
-
-InstantSearch.defaultProps = {
-  stalledSearchDelay: 200,
-};
-
-InstantSearch.propTypes = {
-  // @TODO: These props are currently constant.
-  indexName: PropTypes.string.isRequired,
-
-  searchClient: PropTypes.object.isRequired,
-
-  createURL: PropTypes.func,
-
-  refresh: PropTypes.bool.isRequired,
-
-  searchState: PropTypes.object,
-  onSearchStateChange: PropTypes.func,
-
-  onSearchParameters: PropTypes.func,
-  resultsState: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-
-  children: PropTypes.node,
-
-  root: PropTypes.shape({
-    Root: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.func,
-      PropTypes.object,
-    ]),
-    props: PropTypes.object,
-  }).isRequired,
-
-  stalledSearchDelay: PropTypes.number,
-};
-
-InstantSearch.childContextTypes = {
-  // @TODO: more precise widgets manager propType
-  ais: PropTypes.object.isRequired,
-};
 
 export default InstantSearch;

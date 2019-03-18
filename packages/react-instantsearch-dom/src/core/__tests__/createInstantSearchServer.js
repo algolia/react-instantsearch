@@ -13,7 +13,7 @@ import createInstantSearchServer from '../createInstantSearchServer';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe('createInstantSearchServer', () => {
+describe.skip('createInstantSearchServer', () => {
   const createSearchClient = () => ({
     search: () =>
       Promise.resolve({

@@ -1,7 +1,10 @@
 import React from 'react';
 import Enzyme, { mount, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import createConnector from '../createConnector';
+import createConnector, {
+  createConnectorWithoutContext,
+} from '../createConnector';
+import { InstantSearchProvider } from '../context';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -33,16 +36,14 @@ describe('createConnector', () => {
   });
 
   const createFakeContext = props => ({
-    ais: {
-      onInternalStateUpdate() {},
-      createHrefForState() {},
-      onSearchForFacetValues() {},
-      onSearchStateChange() {},
-      onSearchParameters() {},
-      store: createFakeStore(),
-      widgetsManager: createFakeWidgetManager(),
-      ...props,
-    },
+    onInternalStateUpdate() {},
+    createHrefForState() {},
+    onSearchForFacetValues() {},
+    onSearchStateChange() {},
+    onSearchParameters() {},
+    store: createFakeStore(),
+    widgetsManager: createFakeWidgetManager(),
+    ...props,
   });
 
   describe('state', () => {
@@ -52,7 +53,7 @@ describe('createConnector', () => {
       }));
 
       const Fake = () => null;
-      const Connected = createConnector({
+      const Connected = createConnectorWithoutContext({
         displayName: 'Connector',
         getProvidedProps,
       })(Fake);
@@ -69,13 +70,11 @@ describe('createConnector', () => {
         }),
       });
 
-      const wrapper = shallow(<Connected {...props} />, {
-        context,
-      });
+      const wrapper = mount(<Connected {...props} contextValue={context} />);
 
       expect(getProvidedProps).toHaveBeenCalledTimes(1);
       expect(getProvidedProps).toHaveBeenCalledWith(
-        { hello: 'there', canRender: false },
+        { hello: 'there', contextValue: context },
         state.widgets,
         {
           results: state.results,
@@ -92,7 +91,7 @@ describe('createConnector', () => {
         hello: 'there',
         providedProps: {
           hello: 'there',
-          canRender: false,
+          contextValue: context,
         },
       });
     });
@@ -103,7 +102,7 @@ describe('createConnector', () => {
       }));
 
       const Fake = () => null;
-      const Connected = createConnector({
+      const Connected = createConnectorWithoutContext({
         displayName: 'Connector',
         getProvidedProps,
       })(Fake);
@@ -114,9 +113,7 @@ describe('createConnector', () => {
 
       const context = createFakeContext();
 
-      const wrapper = shallow(<Connected {...props} />, {
-        context,
-      });
+      const wrapper = shallow(<Connected contextValue={context} {...props} />);
 
       expect(getProvidedProps).toHaveBeenCalledTimes(1);
 
@@ -129,7 +126,7 @@ describe('createConnector', () => {
         hello: 'again',
         providedProps: {
           hello: 'again',
-          canRender: true,
+          contextValue: context,
         },
       });
     });
@@ -140,7 +137,7 @@ describe('createConnector', () => {
       }));
 
       const Fake = () => null;
-      const Connected = createConnector({
+      const Connected = createConnectorWithoutContext({
         displayName: 'Connector',
         getProvidedProps,
       })(Fake);
@@ -151,10 +148,13 @@ describe('createConnector', () => {
 
       const context = createFakeContext();
 
-      const wrapper = shallow(<Connected {...props} />, {
-        disableLifecycleMethods: true,
-        context,
-      });
+      const wrapper = mount(
+        <Connected {...props} contextValue={context} />,
+
+        {
+          disableLifecycleMethods: true,
+        }
+      );
 
       // Simulate props change before mount
       wrapper.setProps({ hello: 'again' });
@@ -163,7 +163,7 @@ describe('createConnector', () => {
         hello: 'again',
         providedProps: {
           hello: 'again',
-          canRender: false,
+          contextValue: context,
         },
       });
 
@@ -177,7 +177,7 @@ describe('createConnector', () => {
         hello: 'once again',
         providedProps: {
           hello: 'once again',
-          canRender: true,
+          contextValue: context,
         },
       });
     });
@@ -186,7 +186,7 @@ describe('createConnector', () => {
       const getProvidedProps = jest.fn((_, state) => state);
 
       const Fake = () => null;
-      const Connected = createConnector({
+      const Connected = createConnectorWithoutContext({
         displayName: 'Connector',
         getProvidedProps,
       })(Fake);
@@ -210,9 +210,7 @@ describe('createConnector', () => {
         }),
       });
 
-      const wrapper = shallow(<Connected {...props} />, {
-        context,
-      });
+      const wrapper = shallow(<Connected {...props} contextValue={context} />);
 
       expect(getProvidedProps).toHaveBeenCalledTimes(1);
       expect(wrapper.find(Fake).props()).toEqual({
@@ -221,7 +219,7 @@ describe('createConnector', () => {
       });
 
       // Simulate a search state change
-      context.ais.store.getState.mockImplementation(() => ({
+      context.store.getState.mockImplementation(() => ({
         ...state,
         widgets: {
           query: 'hello World',
@@ -229,7 +227,7 @@ describe('createConnector', () => {
       }));
 
       // Simulate a dispatch on search state change
-      context.ais.store.subscribe.mock.calls[0][0]();
+      context.store.subscribe.mock.calls[0][0]();
 
       expect(getProvidedProps).toHaveBeenCalledTimes(2);
       expect(wrapper.find(Fake).props()).toEqual({
@@ -242,7 +240,7 @@ describe('createConnector', () => {
       const getProvidedProps = jest.fn((_, state) => state);
 
       const Fake = () => null;
-      const Connected = createConnector({
+      const Connected = createConnectorWithoutContext({
         displayName: 'Connector',
         getProvidedProps,
       })(Fake);
@@ -266,9 +264,7 @@ describe('createConnector', () => {
         }),
       });
 
-      const wrapper = shallow(<Connected {...props} />, {
-        context,
-      });
+      const wrapper = shallow(<Connected {...props} contextValue={context} />);
 
       expect(wrapper.find(Fake).props()).toEqual({
         hello: 'there',
@@ -276,7 +272,7 @@ describe('createConnector', () => {
       });
 
       // Simulate a search state change
-      context.ais.store.getState.mockImplementation(() => ({
+      context.store.getState.mockImplementation(() => ({
         ...state,
         widgets: {
           query: 'hello world',
@@ -289,7 +285,7 @@ describe('createConnector', () => {
       });
 
       // Simulate a dispatch on search state change
-      context.ais.store.subscribe.mock.calls[0][0]();
+      context.store.subscribe.mock.calls[0][0]();
 
       expect(wrapper.find(Fake).props()).toEqual({
         hello: 'again',
@@ -303,7 +299,7 @@ describe('createConnector', () => {
       }));
 
       const Fake = jest.fn(() => null);
-      const Connected = createConnector({
+      const Connected = createConnectorWithoutContext({
         displayName: 'Connector',
         getProvidedProps,
       })(Fake);
@@ -315,9 +311,7 @@ describe('createConnector', () => {
 
       const context = createFakeContext();
 
-      const wrapper = shallow(<Connected {...props} />, {
-        context,
-      });
+      const wrapper = shallow(<Connected {...props} contextValue={context} />);
 
       expect(getProvidedProps).toHaveBeenCalledTimes(1);
 
@@ -338,7 +332,7 @@ describe('createConnector', () => {
 
     it('use shouldComponentUpdate when provided', () => {
       const shouldComponentUpdate = jest.fn(() => true);
-      const Connected = createConnector({
+      const Connected = createConnectorWithoutContext({
         displayName: 'Connector',
         getProvidedProps: props => props,
         getMetadata: () => null,
@@ -348,21 +342,18 @@ describe('createConnector', () => {
       const onSearchStateChange = jest.fn();
       const update = jest.fn();
       const props = { hello: 'there' };
-      const wrapper = mount(<Connected {...props} />, {
-        context: {
-          ais: {
-            store: {
-              getState: () => ({}),
-              subscribe: () => null,
-            },
-            widgetsManager: {
-              registerWidget: () => null,
-              update,
-            },
-            onSearchStateChange,
-          },
+      const context = {
+        store: {
+          getState: () => ({}),
+          subscribe: () => null,
         },
-      });
+        widgetsManager: {
+          registerWidget: () => null,
+          update,
+        },
+        onSearchStateChange,
+      };
+      const wrapper = mount(<Connected {...props} contextValue={context} />);
 
       expect(shouldComponentUpdate).toHaveBeenCalledTimes(0);
 
@@ -370,25 +361,31 @@ describe('createConnector', () => {
 
       expect(shouldComponentUpdate).toHaveBeenCalledTimes(1);
       expect(shouldComponentUpdate).toHaveBeenCalledWith(
-        { hello: 'there' },
-        { hello: 'here' },
         {
-          props: {
+          hello: 'there',
+          contextValue: context,
+        },
+        {
+          hello: 'here',
+          contextValue: context,
+        },
+        {
+          providedProps: {
             hello: 'there',
-            canRender: false,
+            contextValue: context,
           },
         },
         {
-          props: {
+          providedProps: {
             hello: 'here',
-            canRender: true,
+            contextValue: context,
           },
         }
       );
     });
 
     it('subscribes to the store once mounted', () => {
-      const Connected = createConnector({
+      const Connected = createConnectorWithoutContext({
         displayName: 'Connector',
         getProvidedProps: () => {},
       })(() => null);
@@ -401,9 +398,8 @@ describe('createConnector', () => {
         }),
       });
 
-      const wrapper = shallow(<Connected />, {
+      const wrapper = shallow(<Connected contextValue={context} />, {
         disableLifecycleMethods: true,
-        context,
       });
 
       expect(subscribe).toHaveBeenCalledTimes(0);
@@ -415,7 +411,7 @@ describe('createConnector', () => {
     });
 
     it('unsubscribes from the store on unmount', () => {
-      const Connected = createConnector({
+      const Connected = createConnectorWithoutContext({
         displayName: 'Connector',
         getProvidedProps: () => {},
       })(() => null);
@@ -428,9 +424,7 @@ describe('createConnector', () => {
         }),
       });
 
-      const wrapper = shallow(<Connected />, {
-        context,
-      });
+      const wrapper = shallow(<Connected contextValue={context} />);
 
       expect(unsubscribe).toHaveBeenCalledTimes(0);
 
@@ -440,7 +434,7 @@ describe('createConnector', () => {
     });
 
     it('does not throw an error on unmount before mount', () => {
-      const Connected = createConnector({
+      const Connected = createConnectorWithoutContext({
         displayName: 'Connector',
         getProvidedProps: () => {},
       })(() => null);
@@ -455,16 +449,15 @@ describe('createConnector', () => {
         }),
       });
 
-      const wrapper = shallow(<Connected />, {
+      const wrapper = shallow(<Connected contextValue={context} />, {
         disableLifecycleMethods: true,
-        context,
       });
 
       expect(() => wrapper.unmount()).not.toThrow();
     });
 
     it('does not throw an error on dispatch after unmount', () => {
-      const Connected = createConnector({
+      const Connected = createConnectorWithoutContext({
         displayName: 'Connector',
         getProvidedProps: () => {},
       })(() => null);
@@ -478,9 +471,7 @@ describe('createConnector', () => {
         }),
       });
 
-      const wrapper = shallow(<Connected />, {
-        context,
-      });
+      const wrapper = shallow(<Connected contextValue={context} />);
 
       expect(() => () => {
         wrapper.unmount();
@@ -493,7 +484,7 @@ describe('createConnector', () => {
 
   describe('widget', () => {
     it('registers itself as a widget with getMetadata', () => {
-      const Connected = createConnector({
+      const Connected = createConnectorWithoutContext({
         displayName: 'Connector',
         getProvidedProps: () => {},
         getMetadata: () => null,
@@ -507,16 +498,14 @@ describe('createConnector', () => {
         }),
       });
 
-      const wrapper = shallow(<Connected />, {
-        context,
-      });
+      const wrapper = shallow(<Connected contextValue={context} />);
 
       expect(registerWidget).toHaveBeenCalledTimes(1);
       expect(registerWidget).toHaveBeenCalledWith(wrapper.instance());
     });
 
     it('registers itself as a widget with getSearchParameters', () => {
-      const Connected = createConnector({
+      const Connected = createConnectorWithoutContext({
         displayName: 'Connector',
         getProvidedProps: () => {},
         getSearchParameters: () => null,
@@ -530,16 +519,14 @@ describe('createConnector', () => {
         }),
       });
 
-      const wrapper = shallow(<Connected />, {
-        context,
-      });
+      const wrapper = shallow(<Connected contextValue={context} />);
 
       expect(registerWidget).toHaveBeenCalledTimes(1);
       expect(registerWidget).toHaveBeenCalledWith(wrapper.instance());
     });
 
     it('registers itself as a widget once mounted', () => {
-      const Connected = createConnector({
+      const Connected = createConnectorWithoutContext({
         displayName: 'Connector',
         getProvidedProps: () => {},
         getSearchParameters: () => null,
@@ -553,9 +540,8 @@ describe('createConnector', () => {
         }),
       });
 
-      const wrapper = shallow(<Connected />, {
+      const wrapper = shallow(<Connected contextValue={context} />, {
         disableLifecycleMethods: true,
-        context,
       });
 
       expect(registerWidget).toHaveBeenCalledTimes(0);
@@ -568,7 +554,7 @@ describe('createConnector', () => {
     });
 
     it('does not register itself as a widget without getMetadata nor getSearchParameters', () => {
-      const Connected = createConnector({
+      const Connected = createConnectorWithoutContext({
         displayName: 'Connector',
         getProvidedProps: () => {},
       })(() => null);
@@ -581,15 +567,13 @@ describe('createConnector', () => {
         }),
       });
 
-      shallow(<Connected />, {
-        context,
-      });
+      shallow(<Connected contextValue={context} />);
 
       expect(registerWidget).not.toHaveBeenCalled();
     });
 
     it('calls onSearchParameters on mount with getSearchParameters', () => {
-      const Connected = createConnector({
+      const Connected = createConnectorWithoutContext({
         displayName: 'CoolConnector',
         getProvidedProps: () => {},
         getSearchParameters: () => null,
@@ -605,20 +589,18 @@ describe('createConnector', () => {
         onSearchParameters,
       });
 
-      shallow(<Connected {...props} />, {
-        context,
-      });
+      shallow(<Connected {...props} contextValue={context} />);
 
       expect(onSearchParameters).toHaveBeenCalledTimes(1);
       expect(onSearchParameters).toHaveBeenCalledWith(
         expect.any(Function),
         context,
-        props
+        { ...props, contextValue: context }
       );
     });
 
     it('does not call onSearchParameters on mount without getSearchParameters', () => {
-      const Connected = createConnector({
+      const Connected = createConnectorWithoutContext({
         displayName: 'CoolConnector',
         getProvidedProps: () => {},
       })(() => null);
@@ -633,9 +615,7 @@ describe('createConnector', () => {
         onSearchParameters,
       });
 
-      shallow(<Connected {...props} />, {
-        context,
-      });
+      shallow(<Connected {...props} contextValue={context} />);
 
       expect(onSearchParameters).not.toHaveBeenCalled();
     });
@@ -645,7 +625,7 @@ describe('createConnector', () => {
         return this;
       });
 
-      const Connected = createConnector({
+      const Connected = createConnectorWithoutContext({
         displayName: 'Connector',
         getProvidedProps: () => {},
         getSearchParameters,
@@ -657,15 +637,13 @@ describe('createConnector', () => {
         onSearchParameters,
       });
 
-      const wrapper = shallow(<Connected />, {
-        context,
-      });
+      const wrapper = shallow(<Connected contextValue={context} />);
 
       expect(onSearchParameters.mock.calls[0][0]()).toBe(wrapper.instance());
     });
 
     it('triggers a widgetManager update on props change', () => {
-      const Connected = createConnector({
+      const Connected = createConnectorWithoutContext({
         displayName: 'Connector',
         getProvidedProps: () => {},
         getMetadata: () => null,
@@ -683,9 +661,7 @@ describe('createConnector', () => {
         }),
       });
 
-      const wrapper = shallow(<Connected {...props} />, {
-        context,
-      });
+      const wrapper = shallow(<Connected {...props} contextValue={context} />);
 
       expect(update).toHaveBeenCalledTimes(0);
 
@@ -697,7 +673,7 @@ describe('createConnector', () => {
     });
 
     it('does not trigger a widgetManager update when props do not change', () => {
-      const Connected = createConnector({
+      const Connected = createConnectorWithoutContext({
         displayName: 'Connector',
         getProvidedProps: () => {},
         getMetadata: () => null,
@@ -715,9 +691,7 @@ describe('createConnector', () => {
         }),
       });
 
-      const wrapper = shallow(<Connected {...props} />, {
-        context,
-      });
+      const wrapper = shallow(<Connected {...props} contextValue={context} />);
 
       expect(update).toHaveBeenCalledTimes(0);
 
@@ -733,7 +707,7 @@ describe('createConnector', () => {
         return this.props;
       });
 
-      const Connected = createConnector({
+      const Connected = createConnectorWithoutContext({
         displayName: 'Connector',
         getProvidedProps: () => {},
         getMetadata: () => null,
@@ -754,9 +728,7 @@ describe('createConnector', () => {
         onSearchStateChange,
       });
 
-      const wrapper = shallow(<Connected {...props} />, {
-        context,
-      });
+      const wrapper = shallow(<Connected {...props} contextValue={context} />);
 
       expect(onSearchStateChange).toHaveBeenCalledTimes(0);
       expect(transitionState).toHaveBeenCalledTimes(0);
@@ -768,18 +740,19 @@ describe('createConnector', () => {
       expect(onSearchStateChange).toHaveBeenCalledTimes(1);
       expect(onSearchStateChange).toHaveBeenCalledWith({
         hello: 'there', // the instance didn't have the next props yet
+        contextValue: context,
       });
 
       expect(transitionState).toHaveBeenCalledTimes(1);
       expect(transitionState).toHaveBeenCalledWith(
-        { hello: 'again' },
+        { hello: 'again', contextValue: context },
         state.widgets,
         state.widgets
       );
     });
 
     it('does not trigger an onSearchStateChange on props change wihtout transitionState', () => {
-      const Connected = createConnector({
+      const Connected = createConnectorWithoutContext({
         displayName: 'Connector',
         getProvidedProps: () => {},
         getMetadata: () => null,
@@ -795,9 +768,7 @@ describe('createConnector', () => {
         onSearchStateChange,
       });
 
-      const wrapper = shallow(<Connected {...props} />, {
-        context,
-      });
+      const wrapper = shallow(<Connected {...props} contextValue={context} />);
 
       expect(onSearchStateChange).not.toHaveBeenCalled();
 
@@ -809,7 +780,7 @@ describe('createConnector', () => {
     });
 
     it('unregisters itself on unmount', () => {
-      const Connected = createConnector({
+      const Connected = createConnectorWithoutContext({
         displayName: 'Connector',
         getProvidedProps: () => {},
         getMetadata: () => null,
@@ -823,9 +794,7 @@ describe('createConnector', () => {
         }),
       });
 
-      const wrapper = shallow(<Connected />, {
-        context,
-      });
+      const wrapper = shallow(<Connected contextValue={context} />);
 
       expect(unregisterWidget).toHaveBeenCalledTimes(0);
 
@@ -843,7 +812,7 @@ describe('createConnector', () => {
         };
       });
 
-      const Connected = createConnector({
+      const Connected = createConnectorWithoutContext({
         displayName: 'Connector',
         getProvidedProps: () => {},
         getMetadata: () => null,
@@ -874,9 +843,7 @@ describe('createConnector', () => {
         onSearchStateChange,
       });
 
-      const wrapper = shallow(<Connected {...props} />, {
-        context,
-      });
+      const wrapper = shallow(<Connected {...props} contextValue={context} />);
 
       expect(cleanUp).toHaveBeenCalledTimes(0);
       expect(onSearchStateChange).toHaveBeenCalledTimes(0);
@@ -888,9 +855,11 @@ describe('createConnector', () => {
       expect(onSearchStateChange).toHaveBeenCalledWith({
         providedProps: {
           hello: 'there',
+          contextValue: context,
         },
         instanceProps: {
           hello: 'there',
+          contextValue: context,
         },
         searchState: {
           query: 'hello',
@@ -901,7 +870,7 @@ describe('createConnector', () => {
     it('calls onSearchStateChange with cleanUp without empty keys on unmount', () => {
       const cleanUp = jest.fn((_, searchState) => searchState);
 
-      const Connected = createConnector({
+      const Connected = createConnectorWithoutContext({
         displayName: 'Connector',
         getProvidedProps: () => {},
         getMetadata: () => null,
@@ -929,9 +898,7 @@ describe('createConnector', () => {
         onSearchStateChange,
       });
 
-      const wrapper = shallow(<Connected />, {
-        context,
-      });
+      const wrapper = shallow(<Connected contextValue={context} />);
 
       wrapper.unmount();
 
@@ -941,7 +908,7 @@ describe('createConnector', () => {
     });
 
     it('does not throw an error on unmount before mount', () => {
-      const Connected = createConnector({
+      const Connected = createConnectorWithoutContext({
         displayName: 'Connector',
         getProvidedProps: () => {},
         getMetadata: () => null,
@@ -955,9 +922,8 @@ describe('createConnector', () => {
         }),
       });
 
-      const wrapper = shallow(<Connected />, {
+      const wrapper = shallow(<Connected contextValue={context} />, {
         disableLifecycleMethods: true,
-        context,
       });
 
       const trigger = () => wrapper.unmount();
@@ -981,7 +947,7 @@ describe('createConnector', () => {
         };
       };
 
-      const Connected = createConnector({
+      const Connected = createConnectorWithoutContext({
         displayName: 'Connector',
         getProvidedProps: () => {},
         getSearchParameters,
@@ -1008,24 +974,24 @@ describe('createConnector', () => {
         }),
       });
 
-      const wrapper = shallow(<Connected {...props} />, {
-        context,
-      });
+      const wrapper = shallow(<Connected {...props} contextValue={context} />);
 
-      const widgetSearchParamameters = wrapper
+      const widgetSearchParameters = wrapper
         .instance()
         .getSearchParameters(searchParameters);
 
-      expect(widgetSearchParamameters).toEqual({
+      expect(widgetSearchParameters).toEqual({
         searchParameters: {
           query: '',
           hitsPerPage: 10,
         },
         instanceProps: {
           hello: 'there',
+          contextValue: context,
         },
         providedProps: {
           hello: 'there',
+          contextValue: context,
         },
         searchState: {
           query: 'hello',
@@ -1034,7 +1000,7 @@ describe('createConnector', () => {
     });
 
     it('returns null when getSearchParameters is not provided', () => {
-      const Connected = createConnector({
+      const Connected = createConnectorWithoutContext({
         displayName: 'Connector',
         getProvidedProps: () => {},
       })(() => null);
@@ -1046,9 +1012,7 @@ describe('createConnector', () => {
 
       const context = createFakeContext();
 
-      const wrapper = shallow(<Connected />, {
-        context,
-      });
+      const wrapper = shallow(<Connected contextValue={context} />);
 
       const widgetSearchParamameters = wrapper
         .instance()
@@ -1068,7 +1032,7 @@ describe('createConnector', () => {
         };
       };
 
-      const Connected = createConnector({
+      const Connected = createConnectorWithoutContext({
         displayName: 'Connector',
         getProvidedProps: () => {},
         getMetadata,
@@ -1084,18 +1048,18 @@ describe('createConnector', () => {
 
       const context = createFakeContext();
 
-      const wrapper = shallow(<Connected {...props} />, {
-        context,
-      });
+      const wrapper = shallow(<Connected {...props} contextValue={context} />);
 
       const widgetMetadata = wrapper.instance().getMetadata(searchState);
 
       expect(widgetMetadata).toEqual({
         instanceProps: {
           hello: 'there',
+          contextValue: context,
         },
         providedProps: {
           hello: 'there',
+          contextValue: context,
         },
         searchState: {
           query: 'hello',
@@ -1104,7 +1068,7 @@ describe('createConnector', () => {
     });
 
     it('returns an empty object when getMetadata is not provided', () => {
-      const Connected = createConnector({
+      const Connected = createConnectorWithoutContext({
         displayName: 'Connector',
         getProvidedProps: () => {},
       })(() => null);
@@ -1115,9 +1079,7 @@ describe('createConnector', () => {
 
       const context = createFakeContext();
 
-      const wrapper = shallow(<Connected />, {
-        context,
-      });
+      const wrapper = shallow(<Connected contextValue={context} />);
 
       const widgetMetadata = wrapper.instance().getMetadata(searchState);
 
@@ -1140,7 +1102,7 @@ describe('createConnector', () => {
         };
       };
 
-      const Connected = createConnector({
+      const Connected = createConnectorWithoutContext({
         displayName: 'Connector',
         getProvidedProps: () => {},
         transitionState,
@@ -1160,9 +1122,7 @@ describe('createConnector', () => {
 
       const context = createFakeContext();
 
-      const wrapper = shallow(<Connected {...props} />, {
-        context,
-      });
+      const wrapper = shallow(<Connected {...props} contextValue={context} />);
 
       const widgetTransitionState = wrapper
         .instance()
@@ -1171,9 +1131,11 @@ describe('createConnector', () => {
       expect(widgetTransitionState).toEqual({
         instanceProps: {
           hello: 'there',
+          contextValue: context,
         },
         providedProps: {
           hello: 'there',
+          contextValue: context,
         },
         previousSearchState: {
           query: 'hello',
@@ -1185,7 +1147,7 @@ describe('createConnector', () => {
     });
 
     it('returns the given next state when transitionState is not provided', () => {
-      const Connected = createConnector({
+      const Connected = createConnectorWithoutContext({
         displayName: 'Connector',
         getProvidedProps: () => {},
       })(() => null);
@@ -1204,9 +1166,7 @@ describe('createConnector', () => {
 
       const context = createFakeContext();
 
-      const wrapper = shallow(<Connected {...props} />, {
-        context,
-      });
+      const wrapper = shallow(<Connected {...props} contextValue={context} />);
 
       const widgetTransitionState = wrapper
         .instance()
@@ -1227,7 +1187,7 @@ describe('createConnector', () => {
       });
 
       const Dummy = () => null;
-      const Connected = createConnector({
+      const Connected = createConnectorWithoutContext({
         displayName: 'Connector',
         getProvidedProps: () => {},
         refine,
@@ -1252,9 +1212,7 @@ describe('createConnector', () => {
         onInternalStateUpdate,
       });
 
-      const wrapper = shallow(<Connected {...props} />, {
-        context,
-      });
+      const wrapper = shallow(<Connected {...props} contextValue={context} />);
 
       expect(onInternalStateUpdate).toHaveBeenCalledTimes(0);
 
@@ -1267,6 +1225,7 @@ describe('createConnector', () => {
       expect(onInternalStateUpdate).toHaveBeenCalledWith({
         props: {
           hello: 'there',
+          contextValue: context,
         },
         searchState: {
           query: 'hello',
@@ -1287,7 +1246,7 @@ describe('createConnector', () => {
       });
 
       const Dummy = () => null;
-      const Connected = createConnector({
+      const Connected = createConnectorWithoutContext({
         displayName: 'Connector',
         getProvidedProps: () => {},
         refine,
@@ -1312,9 +1271,7 @@ describe('createConnector', () => {
         createHrefForState,
       });
 
-      const wrapper = shallow(<Connected {...props} />, {
-        context,
-      });
+      const wrapper = shallow(<Connected {...props} contextValue={context} />);
 
       expect(createHrefForState).toHaveBeenCalledTimes(0);
 
@@ -1327,6 +1284,7 @@ describe('createConnector', () => {
       expect(createHrefForState).toHaveBeenCalledWith({
         props: {
           hello: 'there',
+          contextValue: context,
         },
         searchState: {
           query: 'hello',
@@ -1347,7 +1305,7 @@ describe('createConnector', () => {
       });
 
       const Dummy = () => null;
-      const Connected = createConnector({
+      const Connected = createConnectorWithoutContext({
         displayName: 'Connector',
         getProvidedProps: () => {},
         searchForFacetValues,
@@ -1372,9 +1330,7 @@ describe('createConnector', () => {
         onSearchForFacetValues,
       });
 
-      const wrapper = shallow(<Connected {...props} />, {
-        context,
-      });
+      const wrapper = shallow(<Connected {...props} contextValue={context} />);
 
       expect(onSearchForFacetValues).toHaveBeenCalledTimes(0);
 
@@ -1391,6 +1347,7 @@ describe('createConnector', () => {
       expect(onSearchForFacetValues).toHaveBeenCalledWith({
         props: {
           hello: 'there',
+          contextValue: context,
         },
         searchState: {
           query: 'hello',
@@ -1401,6 +1358,65 @@ describe('createConnector', () => {
           maxFacetHits: 10,
         },
       });
+    });
+  });
+
+  describe('wrapped with InstantSearchProvider', () => {
+    it('default export reads from context', () => {
+      const state = createFakeState({
+        widgets: {
+          query: 'hello',
+        },
+      });
+
+      const context = createFakeContext({
+        store: createFakeStore({
+          getState: () => state,
+        }),
+      });
+
+      const Dummy = props => {
+        return (
+          <pre>
+            {JSON.stringify(
+              props,
+              (key, val) => {
+                if (key === 'contextValue') {
+                  expect(val).toEqual(context);
+                  return 'context';
+                }
+                return val;
+              },
+              2
+            ).replace(/"/g, '')}
+          </pre>
+        );
+      };
+
+      const Connected = createConnector({
+        displayName: 'Connector',
+        getProvidedProps: props => ({ providedProps: props }),
+      })(Dummy);
+
+      const props = {
+        message: 'hello',
+      };
+
+      const wrapper = mount(
+        <InstantSearchProvider value={context}>
+          <Connected {...props} />
+        </InstantSearchProvider>
+      );
+
+      expect(wrapper.html()).toMatchInlineSnapshot(`
+"<pre>{
+  message: hello,
+  providedProps: {
+    contextValue: context,
+    message: hello
+  }
+}</pre>"
+`);
     });
   });
 });
