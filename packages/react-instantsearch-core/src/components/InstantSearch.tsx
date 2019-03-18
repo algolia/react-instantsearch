@@ -1,4 +1,4 @@
-import React, { Component, Children } from 'react';
+import React, { Component, Children, ReactType } from 'react';
 import PropTypes from 'prop-types';
 import createInstantSearchManager from '../core/createInstantSearchManager';
 import { InstantSearchProvider, InstantSearchContext } from '../core/context';
@@ -58,7 +58,7 @@ type Props = {
   stalledSearchDelay?: number;
   // if this is required, how do people use it, is this wrapped in DOM?
   root: {
-    Root: any; // react component
+    Root: ReactType; // react component
     props: {}; // I think this is correct
   };
   resultsState: SearchState | SearchState[];
