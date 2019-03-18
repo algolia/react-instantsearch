@@ -1,7 +1,12 @@
 import { isEqual } from 'lodash';
 import React, { Component, ReactType } from 'react';
 import { shallowEqual, getDisplayName, removeEmptyKey } from './utils';
-import { InstantSearchConsumer, InstantSearchContext } from './context';
+import {
+  InstantSearchConsumer,
+  InstantSearchContext,
+  IndexConsumer,
+  IndexContext,
+} from './context';
 
 export type ConnectorDescription = {
   displayName: string;
@@ -45,6 +50,7 @@ export type ConnectorDescription = {
 
 type ConnectorProps = {
   contextValue: InstantSearchContext;
+  indexContextValue: IndexContext;
 };
 
 export type ConnectedProps<WidgetProps> = WidgetProps & ConnectorProps;
@@ -347,7 +353,17 @@ const createConnectorWithContext = (connectorDesc: ConnectorDescription) => (
 
   return props => (
     <InstantSearchConsumer>
-      {contextValue => <Connector contextValue={contextValue} {...props} />}
+      {contextValue => (
+        <IndexConsumer>
+          {indexContextValue => (
+            <Connector
+              contextValue={contextValue}
+              indexContextValue={indexContextValue}
+              {...props}
+            />
+          )}
+        </IndexConsumer>
+      )}
     </InstantSearchConsumer>
   );
 };
