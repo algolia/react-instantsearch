@@ -15,7 +15,6 @@ type State = {
 export default function createStore(initialState: State) {
   let state = initialState;
   const listeners: Listener[] = [];
-
   return {
     getState() {
       return state;

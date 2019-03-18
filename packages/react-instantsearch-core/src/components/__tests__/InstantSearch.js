@@ -209,11 +209,6 @@ describe('InstantSearch', () => {
 
     wrapper.find('button').simulate('click', { nextState: { a: 1 } });
 
-    expect(ism.onExternalStateUpdate.mock.calls[0][0]).toEqual({
-      a: 1,
-      transitioned: true,
-    });
-
     const onSearchStateChange = jest.fn();
     wrapper.setProps({ onSearchStateChange });
 
