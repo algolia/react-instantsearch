@@ -90,7 +90,10 @@ export default createConnector({
 
   getProvidedProps(props, searchState, searchResults) {
     const id = getId(props);
-    const results = getResults(searchResults, { ais: props.contextValue });
+    const results = getResults(searchResults, {
+      ais: props.contextValue,
+      multiIndexContext: props.indexContextValue,
+    });
 
     const isFacetPresent =
       Boolean(results) && Boolean(results.getFacetByName(id));
@@ -119,6 +122,7 @@ export default createConnector({
   refine(props, searchState, nextRefinement) {
     return refine(props, searchState, nextRefinement, {
       ais: props.contextValue,
+      multiIndexContext: props.indexContextValue,
     });
   },
 });

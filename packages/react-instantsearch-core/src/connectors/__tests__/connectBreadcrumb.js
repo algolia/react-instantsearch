@@ -109,14 +109,9 @@ describe('connectHierarchicalMenu', () => {
     });
   });
 
-  describe.skip('multi index', () => {
-    let context = {
-      context: {
-        ais: { mainTargetedIndex: 'first' },
-        multiIndexContext: { targetedIndex: 'first' },
-      },
-    };
-    const getProvidedProps = connect.getProvidedProps.bind(context);
+  describe('multi index', () => {
+    const contextValue = { mainTargetedIndex: 'first' };
+    const indexContextValue = { targetedIndex: 'first' };
 
     it('provides the correct props to the component', () => {
       const results = {
@@ -127,8 +122,8 @@ describe('connectHierarchicalMenu', () => {
       };
 
       results.first.getFacetValues.mockImplementationOnce(() => ({}));
-      props = getProvidedProps(
-        { attributes: ['ok'] },
+      props = connect.getProvidedProps(
+        { attributes: ['ok'], contextValue, indexContextValue },
         { indices: { first: { hierarchicalMenu: { ok: 'wat' } } } },
         { results }
       );
@@ -137,7 +132,11 @@ describe('connectHierarchicalMenu', () => {
         items: [],
       });
 
-      props = getProvidedProps({ attributes: ['ok'] }, {}, {});
+      props = connect.getProvidedProps(
+        { attributes: ['ok'], contextValue, indexContextValue },
+        {},
+        {}
+      );
       expect(props).toEqual({
         canRefine: false,
         items: [],
@@ -174,7 +173,11 @@ describe('connectHierarchicalMenu', () => {
           },
         ],
       }));
-      props = getProvidedProps({ attributes: ['ok'] }, {}, { results });
+      props = connect.getProvidedProps(
+        { attributes: ['ok'], contextValue, indexContextValue },
+        {},
+        { results }
+      );
       expect(props.items).toEqual([
         {
           label: 'wat',
@@ -187,8 +190,8 @@ describe('connectHierarchicalMenu', () => {
       ]);
 
       const transformItems = jest.fn(() => ['items']);
-      props = getProvidedProps(
-        { attributes: ['ok'], transformItems },
+      props = connect.getProvidedProps(
+        { attributes: ['ok'], transformItems, contextValue, indexContextValue },
         {},
         { results }
       );
@@ -206,10 +209,12 @@ describe('connectHierarchicalMenu', () => {
     });
 
     it("calling refine updates the widget's search state", () => {
-      let refine = connect.refine.bind(context);
-
-      let nextState = refine(
-        { attributes: ['ok'] },
+      let nextState = connect.refine(
+        {
+          attributes: ['ok'],
+          contextValue,
+          indexContextValue,
+        },
         {
           indices: {
             first: { otherKey: 'val', hierarchicalMenu: { otherKey: 'val' } },
@@ -227,16 +232,12 @@ describe('connectHierarchicalMenu', () => {
         },
       });
 
-      context = {
-        context: {
-          ais: { mainTargetedIndex: 'first' },
-          multiIndexContext: { targetedIndex: 'second' },
+      nextState = connect.refine(
+        {
+          attributes: ['ok'],
+          contextValue: { mainTargetedIndex: 'first' },
+          indexContextValue: { targetedIndex: 'second' },
         },
-      };
-      refine = connect.refine.bind(context);
-
-      nextState = refine(
-        { attributes: ['ok'] },
         {
           indices: {
             first: {
