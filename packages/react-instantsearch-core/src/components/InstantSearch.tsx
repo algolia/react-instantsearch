@@ -141,7 +141,6 @@ class InstantSearch extends Component<Props, State> {
   isControlled: boolean;
   isUnmounting: boolean;
   aisManager: InstantSearchManager;
-  _aisContextCache: any;
 
   // @TODO: understand why Props needs to be declared on every method
   constructor(props: Props) {
