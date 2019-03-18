@@ -49,7 +49,7 @@ export default createConnector({
   displayName: 'AlgoliaStateResults',
 
   getProvidedProps(props, searchState, searchResults) {
-    const results = getResults(searchResults, this.context);
+    const results = getResults(searchResults, { ais: props.contextValue });
 
     return {
       searchState,

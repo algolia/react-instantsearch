@@ -100,7 +100,7 @@ export default createConnector({
     searchForFacetValuesResults
   ) {
     const { attribute, searchable } = props;
-    const results = getResults(searchResults, this.context);
+    const results = getResults(searchResults, { ais: props.contextValue });
 
     const canRefine =
       Boolean(results) && Boolean(results.getFacetByName(attribute));
@@ -112,21 +112,20 @@ export default createConnector({
     );
 
     // Search For Facet Values is not available with derived helper (used for multi index search)
-    if (searchable && this.context.multiIndexContext) {
-      throw new Error(
-        'react-instantsearch: searching in *List is not available when used inside a' +
-          ' multi index context'
-      );
-    }
+    // @TODO: re-enable this error
+    // if (searchable && this.context.multiIndexContext) {
+    //   throw new Error(
+    //     'react-instantsearch: searching in *List is not available when used inside a' +
+    //       ' multi index context'
+    //   );
+    // }
 
     if (!canRefine) {
       return {
         items: [],
-        currentRefinement: getCurrentRefinement(
-          props,
-          searchState,
-          this.context
-        ),
+        currentRefinement: getCurrentRefinement(props, searchState, {
+          ais: props.contextValue,
+        }),
         isFromSearch,
         searchable,
         canRefine,
@@ -136,14 +135,18 @@ export default createConnector({
     const items = isFromSearch
       ? searchForFacetValuesResults[attribute].map(v => ({
           label: v.value,
-          value: getValue(v.value, props, searchState, this.context),
+          value: getValue(v.value, props, searchState, {
+            ais: props.contextValue,
+          }),
           _highlightResult: { label: { value: v.highlighted } },
           count: v.count,
           isRefined: v.isRefined,
         }))
       : results.getFacetValues(attribute, { sortBy }).map(v => ({
           label: v.name,
-          value: getValue(v.name, props, searchState, this.context),
+          value: getValue(v.name, props, searchState, {
+            ais: props.contextValue,
+          }),
           count: v.count,
           isRefined: v.isRefined,
         }));
@@ -163,7 +166,9 @@ export default createConnector({
 
     return {
       items: transformedItems.slice(0, getLimit(props)),
-      currentRefinement: getCurrentRefinement(props, searchState, this.context),
+      currentRefinement: getCurrentRefinement(props, searchState, {
+        ais: props.contextValue,
+      }),
       isFromSearch,
       searchable,
       canRefine: transformedItems.length > 0,
@@ -171,7 +176,9 @@ export default createConnector({
   },
 
   refine(props, searchState, nextRefinement) {
-    return refine(props, searchState, nextRefinement, this.context);
+    return refine(props, searchState, nextRefinement, {
+      ais: props.contextValue,
+    });
   },
 
   searchForFacetValues(props, searchState, nextRefinement) {
@@ -183,7 +190,7 @@ export default createConnector({
   },
 
   cleanUp(props, searchState) {
-    return cleanUp(props, searchState, this.context);
+    return cleanUp(props, searchState, { ais: props.contextValue });
   },
 
   getSearchParameters(searchParameters, props, searchState) {
@@ -198,11 +205,9 @@ export default createConnector({
 
     searchParameters = searchParameters.addDisjunctiveFacet(attribute);
 
-    const currentRefinement = getCurrentRefinement(
-      props,
-      searchState,
-      this.context
-    );
+    const currentRefinement = getCurrentRefinement(props, searchState, {
+      ais: props.contextValue,
+    });
     if (currentRefinement !== null) {
       searchParameters = searchParameters.addDisjunctiveFacetRefinement(
         attribute,
@@ -215,14 +220,12 @@ export default createConnector({
 
   getMetadata(props, searchState) {
     const id = getId(props);
-    const currentRefinement = getCurrentRefinement(
-      props,
-      searchState,
-      this.context
-    );
+    const currentRefinement = getCurrentRefinement(props, searchState, {
+      ais: props.contextValue,
+    });
     return {
       id,
-      index: getIndexId(this.context),
+      index: getIndexId({ ais: props.contextValue }),
       items:
         currentRefinement === null
           ? []
@@ -230,7 +233,8 @@ export default createConnector({
               {
                 label: `${props.attribute}: ${currentRefinement}`,
                 attribute: props.attribute,
-                value: nextState => refine(props, nextState, '', this.context),
+                value: nextState =>
+                  refine(props, nextState, '', { ais: props.contextValue }),
                 currentRefinement,
               },
             ],
