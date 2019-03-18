@@ -259,7 +259,8 @@ export function createConnectorWithoutContext(
           error,
         };
 
-        return connectorDesc.getProvidedProps(
+        return connectorDesc.getProvidedProps.call(
+          this,
           props,
           widgets,
           searchResults,
