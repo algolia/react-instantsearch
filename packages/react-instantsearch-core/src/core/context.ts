@@ -36,3 +36,4 @@ export const {
   Consumer: IndexConsumer,
   Provider: IndexProvider,
 } = createContext<IndexContext>(undefined);
+s
