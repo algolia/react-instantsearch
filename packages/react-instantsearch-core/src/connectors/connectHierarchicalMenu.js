@@ -177,42 +177,46 @@ export default createConnector({
     const { showMore, limit, showMoreLimit } = props;
     const id = getId(props);
 
-    const results = getResults(searchResults, this.context);
+    const results = getResults(searchResults, { ais: props.contextValue });
     const isFacetPresent =
       Boolean(results) && Boolean(results.getFacetByName(id));
 
     if (!isFacetPresent) {
       return {
         items: [],
-        currentRefinement: getCurrentRefinement(
-          props,
-          searchState,
-          this.context
-        ),
+        currentRefinement: getCurrentRefinement(props, searchState, {
+          ais: props.contextValue,
+        }),
         canRefine: false,
       };
     }
     const itemsLimit = showMore ? showMoreLimit : limit;
     const value = results.getFacetValues(id, { sortBy });
     const items = value.data
-      ? transformValue(value.data, props, searchState, this.context)
+      ? transformValue(value.data, props, searchState, {
+          ais: props.contextValue,
+        })
       : [];
     const transformedItems = props.transformItems
       ? props.transformItems(items)
       : items;
     return {
       items: truncate(transformedItems, itemsLimit),
-      currentRefinement: getCurrentRefinement(props, searchState, this.context),
+      currentRefinement: getCurrentRefinement(props, searchState, {
+        ais: props.contextValue,
+      }),
       canRefine: transformedItems.length > 0,
     };
   },
 
   refine(props, searchState, nextRefinement) {
-    return refine(props, searchState, nextRefinement, this.context);
+    return refine(props, searchState, nextRefinement, {
+      ais: props.contextValue,
+    });
   },
 
   cleanUp(props, searchState) {
-    return cleanUp(props, searchState, this.context);
+    return cleanUp(props, searchState, { ais: props.contextValue });
   },
 
   getSearchParameters(searchParameters, props, searchState) {
@@ -224,6 +228,7 @@ export default createConnector({
       showMore,
       limit,
       showMoreLimit,
+      contextValue,
     } = props;
 
     const id = getId(props);
@@ -244,11 +249,9 @@ export default createConnector({
         ),
       });
 
-    const currentRefinement = getCurrentRefinement(
-      props,
-      searchState,
-      this.context
-    );
+    const currentRefinement = getCurrentRefinement(props, searchState, {
+      ais: contextValue,
+    });
     if (currentRefinement !== null) {
       searchParameters = searchParameters.toggleHierarchicalFacetRefinement(
         id,
@@ -262,25 +265,26 @@ export default createConnector({
   getMetadata(props, searchState) {
     const rootAttribute = props.attributes[0];
     const id = getId(props);
-    const currentRefinement = getCurrentRefinement(
-      props,
-      searchState,
-      this.context
-    );
+    const currentRefinement = getCurrentRefinement(props, searchState, {
+      ais: props.contextValue,
+    });
+
+    const items = !currentRefinement
+      ? []
+      : [
+          {
+            label: `${rootAttribute}: ${currentRefinement}`,
+            attribute: rootAttribute,
+            value: nextState =>
+              refine(props, nextState, '', { ais: props.contextValue }),
+            currentRefinement,
+          },
+        ];
 
     return {
       id,
-      index: getIndexId(this.context),
-      items: !currentRefinement
-        ? []
-        : [
-            {
-              label: `${rootAttribute}: ${currentRefinement}`,
-              attribute: rootAttribute,
-              value: nextState => refine(props, nextState, '', this.context),
-              currentRefinement,
-            },
-          ],
+      index: getIndexId({ ais: props.contextValue }),
+      items,
     };
   },
 });

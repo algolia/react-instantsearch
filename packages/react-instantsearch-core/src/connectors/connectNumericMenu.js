@@ -127,12 +127,10 @@ export default createConnector({
 
   getProvidedProps(props, searchState, searchResults) {
     const attribute = props.attribute;
-    const currentRefinement = getCurrentRefinement(
-      props,
-      searchState,
-      this.context
-    );
-    const results = getResults(searchResults, this.context);
+    const currentRefinement = getCurrentRefinement(props, searchState, {
+      ais: props.contextValue,
+    });
+    const results = getResults(searchResults, { ais: props.contextValue });
 
     const items = props.items.map(item => {
       const value = stringifyItem(item);
@@ -174,17 +172,19 @@ export default createConnector({
   },
 
   refine(props, searchState, nextRefinement) {
-    return refine(props, searchState, nextRefinement, this.context);
+    return refine(props, searchState, nextRefinement, {
+      ais: props.contextValue,
+    });
   },
 
   cleanUp(props, searchState) {
-    return cleanUp(props, searchState, this.context);
+    return cleanUp(props, searchState, { ais: props.contextValue });
   },
 
   getSearchParameters(searchParameters, props, searchState) {
     const { attribute } = props;
     const { start, end } = parseItem(
-      getCurrentRefinement(props, searchState, this.context)
+      getCurrentRefinement(props, searchState, { ais: props.contextValue })
     );
     searchParameters = searchParameters.addDisjunctiveFacet(attribute);
 
@@ -207,9 +207,11 @@ export default createConnector({
 
   getMetadata(props, searchState) {
     const id = getId(props);
-    const value = getCurrentRefinement(props, searchState, this.context);
+    const value = getCurrentRefinement(props, searchState, {
+      ais: props.contextValue,
+    });
     const items = [];
-    const index = getIndexId(this.context);
+    const index = getIndexId({ ais: props.contextValue });
     if (value !== '') {
       const { label } = find(
         props.items,
@@ -219,7 +221,8 @@ export default createConnector({
         label: `${props.attribute}: ${label}`,
         attribute: props.attribute,
         currentRefinement: label,
-        value: nextState => refine(props, nextState, '', this.context),
+        value: nextState =>
+          refine(props, nextState, '', { ais: props.contextValue }),
       });
     }
     return { id, index, items };

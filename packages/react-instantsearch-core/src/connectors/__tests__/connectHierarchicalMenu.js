@@ -8,12 +8,7 @@ let params;
 
 describe('connectHierarchicalMenu', () => {
   describe('single index', () => {
-    const context = { context: { ais: { mainTargetedIndex: 'index' } } };
-    const getProvidedProps = connect.getProvidedProps.bind(context);
-    const refine = connect.refine.bind(context);
-    const getSP = connect.getSearchParameters.bind(context);
-    const getMetadata = connect.getMetadata.bind(context);
-    const cleanUp = connect.cleanUp.bind(context);
+    const contextValue = { mainTargetedIndex: 'index' };
 
     it('provides the correct props to the component', () => {
       const results = {
@@ -23,8 +18,8 @@ describe('connectHierarchicalMenu', () => {
       };
 
       results.getFacetValues.mockImplementationOnce(() => ({}));
-      props = getProvidedProps(
-        { attributes: ['ok'] },
+      props = connect.getProvidedProps(
+        { attributes: ['ok'], contextValue },
         { hierarchicalMenu: { ok: 'wat' } },
         { results }
       );
@@ -35,7 +30,11 @@ describe('connectHierarchicalMenu', () => {
         items: [],
       });
 
-      props = getProvidedProps({ attributes: ['ok'] }, {}, {});
+      props = connect.getProvidedProps(
+        { attributes: ['ok'], contextValue },
+        {},
+        {}
+      );
       expect(props).toEqual({
         canRefine: false,
         currentRefinement: null,
@@ -69,7 +68,11 @@ describe('connectHierarchicalMenu', () => {
           },
         ],
       }));
-      props = getProvidedProps({ attributes: ['ok'] }, {}, { results });
+      props = connect.getProvidedProps(
+        { attributes: ['ok'], contextValue },
+        {},
+        { results }
+      );
       expect(props.items).toEqual([
         {
           label: 'wat',
@@ -95,8 +98,8 @@ describe('connectHierarchicalMenu', () => {
         },
       ]);
 
-      props = getProvidedProps(
-        { attributes: ['ok'], limit: 1 },
+      props = connect.getProvidedProps(
+        { attributes: ['ok'], limit: 1, contextValue },
         {},
         { results }
       );
@@ -115,8 +118,14 @@ describe('connectHierarchicalMenu', () => {
         },
       ]);
 
-      props = getProvidedProps(
-        { attributes: ['ok'], showMore: true, limit: 0, showMoreLimit: 1 },
+      props = connect.getProvidedProps(
+        {
+          attributes: ['ok'],
+          showMore: true,
+          limit: 0,
+          showMoreLimit: 1,
+          contextValue,
+        },
         {},
         { results }
       );
@@ -136,8 +145,8 @@ describe('connectHierarchicalMenu', () => {
       ]);
 
       const transformItems = jest.fn(() => ['items']);
-      props = getProvidedProps(
-        { attributes: ['ok'], transformItems },
+      props = connect.getProvidedProps(
+        { attributes: ['ok'], transformItems, contextValue },
         {},
         { results }
       );
@@ -211,8 +220,14 @@ describe('connectHierarchicalMenu', () => {
         ],
       }));
 
-      props = getProvidedProps(
-        { attributes: ['ok'], showMore: true, limit: 0, showMoreLimit: 2 },
+      props = connect.getProvidedProps(
+        {
+          attributes: ['ok'],
+          showMore: true,
+          limit: 0,
+          showMoreLimit: 2,
+          contextValue,
+        },
         {},
         { results }
       );
@@ -285,8 +300,14 @@ describe('connectHierarchicalMenu', () => {
           },
         ],
       }));
-      props = getProvidedProps(
-        { attributes: ['ok'], showMore: true, limit: 0, showMoreLimit: 3 },
+      props = connect.getProvidedProps(
+        {
+          attributes: ['ok'],
+          showMore: true,
+          limit: 0,
+          showMoreLimit: 3,
+          contextValue,
+        },
         {},
         { results }
       );
@@ -331,8 +352,8 @@ describe('connectHierarchicalMenu', () => {
         return 0;
       }
       const transformItems = jest.fn(items => items.sort(compareItem));
-      props = getProvidedProps(
-        { attributes: ['ok'], transformItems },
+      props = connect.getProvidedProps(
+        { attributes: ['ok'], transformItems, contextValue },
         {},
         { results }
       );
@@ -370,13 +391,14 @@ describe('connectHierarchicalMenu', () => {
           ],
         },
       ]);
-      props = getProvidedProps(
+      props = connect.getProvidedProps(
         {
           attributes: ['ok'],
           transformItems,
           showMore: true,
           limit: 0,
           showMoreLimit: 2,
+          contextValue,
         },
         {},
         { results }
@@ -396,8 +418,8 @@ describe('connectHierarchicalMenu', () => {
     });
 
     it("calling refine updates the widget's search state", () => {
-      const nextState = refine(
-        { attributes: ['ok'] },
+      const nextState = connect.refine(
+        { attributes: ['ok'], contextValue },
         { otherKey: 'val', hierarchicalMenu: { otherKey: 'val' } },
         'yep'
       );
@@ -411,43 +433,47 @@ describe('connectHierarchicalMenu', () => {
     it("increases maxValuesPerFacet when it isn't big enough", () => {
       const initSP = new SearchParameters({ maxValuesPerFacet: 100 });
 
-      params = getSP(
+      params = connect.getSearchParameters(
         initSP,
         {
           attributes: ['attribute'],
           limit: 101,
+          contextValue,
         },
         {}
       );
       expect(params.maxValuesPerFacet).toBe(101);
 
-      params = getSP(
+      params = connect.getSearchParameters(
         initSP,
         {
           attributes: ['attribute'],
           showMore: true,
           showMoreLimit: 101,
+          contextValue,
         },
         {}
       );
       expect(params.maxValuesPerFacet).toBe(101);
 
-      params = getSP(
+      params = connect.getSearchParameters(
         initSP,
         {
           attributes: ['attribute'],
           limit: 99,
+          contextValue,
         },
         {}
       );
       expect(params.maxValuesPerFacet).toBe(100);
 
-      params = getSP(
+      params = connect.getSearchParameters(
         initSP,
         {
           attributes: ['attribute'],
           showMore: true,
           showMoreLimit: 99,
+          contextValue,
         },
         {}
       );
@@ -457,7 +483,7 @@ describe('connectHierarchicalMenu', () => {
     it('correctly applies its state to search parameters', () => {
       const initSP = new SearchParameters();
 
-      params = getSP(
+      params = connect.getSearchParameters(
         initSP,
         {
           attributes: ['ATTRIBUTE'],
@@ -465,6 +491,7 @@ describe('connectHierarchicalMenu', () => {
           rootPath: 'ROOT_PATH',
           showParentLevel: true,
           limit: 1,
+          contextValue,
         },
         { hierarchicalMenu: { ATTRIBUTE: 'ok' } }
       );
@@ -483,13 +510,16 @@ describe('connectHierarchicalMenu', () => {
     });
 
     it('registers its id in metadata', () => {
-      const metadata = getMetadata({ attributes: ['ok'] }, {});
+      const metadata = connect.getMetadata(
+        { attributes: ['ok'], contextValue },
+        {}
+      );
       expect(metadata).toEqual({ items: [], index: 'index', id: 'ok' });
     });
 
     it('registers its filter in metadata', () => {
-      const metadata = getMetadata(
-        { attributes: ['ok'] },
+      const metadata = connect.getMetadata(
+        { attributes: ['ok'], contextValue },
         { hierarchicalMenu: { ok: 'wat' } }
       );
       expect(metadata).toEqual({
@@ -508,8 +538,8 @@ describe('connectHierarchicalMenu', () => {
     });
 
     it('items value function should clear it from the search state', () => {
-      const metadata = getMetadata(
-        { attributes: ['one'] },
+      const metadata = connect.getMetadata(
+        { attributes: ['one'], contextValue },
         { hierarchicalMenu: { one: 'one', two: 'two' } }
       );
 
@@ -524,8 +554,8 @@ describe('connectHierarchicalMenu', () => {
     });
 
     it('should return the right searchState when clean up', () => {
-      let searchState = cleanUp(
-        { attributes: ['name'] },
+      let searchState = connect.cleanUp(
+        { attributes: ['name'], contextValue },
         {
           hierarchicalMenu: { name: 'searchState', name2: 'searchState' },
           another: { searchState: 'searchState' },
@@ -536,7 +566,10 @@ describe('connectHierarchicalMenu', () => {
         another: { searchState: 'searchState' },
       });
 
-      searchState = cleanUp({ attributes: ['name2'] }, searchState);
+      searchState = connect.cleanUp(
+        { attributes: ['name2'], contextValue },
+        searchState
+      );
       expect(searchState).toEqual({
         another: { searchState: 'searchState' },
         hierarchicalMenu: {},
@@ -551,8 +584,8 @@ describe('connectHierarchicalMenu', () => {
         hits: [],
       };
 
-      props = getProvidedProps(
-        { attributes: ['ok'], transformItems },
+      props = connect.getProvidedProps(
+        { attributes: ['ok'], transformItems, contextValue },
         {},
         { results }
       );
@@ -561,7 +594,7 @@ describe('connectHierarchicalMenu', () => {
     });
   });
 
-  describe('multi index', () => {
+  describe.skip('multi index', () => {
     let context = {
       context: {
         ais: { mainTargetedIndex: 'first' },

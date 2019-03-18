@@ -128,7 +128,7 @@ export default createConnector({
   displayName: 'AlgoliaGeoSearch',
 
   getProvidedProps(props, searchState, searchResults) {
-    const results = getResults(searchResults, this.context);
+    const results = getResults(searchResults, { ais: props.contextValue });
 
     // We read it from both because the SearchParameters & the searchState are not always
     // in sync. When we set the refinement the searchState is used but when we clear the refinement
@@ -142,7 +142,7 @@ export default createConnector({
     const currentRefinementFromSearchState = getCurrentRefinement(
       props,
       searchState,
-      this.context
+      { ais: props.contextValue }
     );
 
     const currentRefinementFromSearchParameters =
@@ -154,7 +154,7 @@ export default createConnector({
     const currentPositionFromSearchState = getCurrentPosition(
       props,
       searchState,
-      this.context
+      { ais: props.contextValue }
     );
 
     const currentPositionFromSearchParameters =
@@ -178,15 +178,13 @@ export default createConnector({
   },
 
   refine(props, searchState, nextValue) {
-    return refine(searchState, nextValue, this.context);
+    return refine(searchState, nextValue, { ais: props.contextValue });
   },
 
   getSearchParameters(searchParameters, props, searchState) {
-    const currentRefinement = getCurrentRefinement(
-      props,
-      searchState,
-      this.context
-    );
+    const currentRefinement = getCurrentRefinement(props, searchState, {
+      ais: props.contextValue,
+    });
 
     if (!currentRefinement) {
       return searchParameters;
@@ -199,24 +197,27 @@ export default createConnector({
   },
 
   cleanUp(props, searchState) {
-    return cleanUpValue(searchState, this.context, getBoundingBoxId());
+    return cleanUpValue(
+      searchState,
+      { ais: props.contextValue },
+      getBoundingBoxId()
+    );
   },
 
   getMetadata(props, searchState) {
     const items = [];
     const id = getBoundingBoxId();
-    const index = getIndexId(this.context);
+    const index = getIndexId({ ais: props.contextValue });
     const nextRefinement = {};
-    const currentRefinement = getCurrentRefinement(
-      props,
-      searchState,
-      this.context
-    );
+    const currentRefinement = getCurrentRefinement(props, searchState, {
+      ais: props.contextValue,
+    });
 
     if (currentRefinement) {
       items.push({
         label: `${id}: ${currentRefinementToString(currentRefinement)}`,
-        value: nextState => refine(nextState, nextRefinement, this.context),
+        value: nextState =>
+          refine(nextState, nextRefinement, { ais: props.contextValue }),
         currentRefinement,
       });
     }

@@ -9,21 +9,12 @@ const connect: (client) => any = connectReal;
 function setup() {
   const insightsClient = jest.fn();
 
-  const createMultiIndexContext = () => ({
-    context: {
-      ais: {
-        mainTargetedIndex: 'theFirstIndex',
-      },
-      multiIndexContext: {
-        targetedIndex: 'theIndex',
-      },
-    },
-  });
-
-  const context = createMultiIndexContext();
-  const getProvidedProps = connect(insightsClient).getProvidedProps.bind(
-    context
-  );
+  const contextValue = {
+    mainTargetedIndex: 'theIndex', // @TODO: change to theFirstIndex in context-5
+  };
+  // const indexContextValue = {
+  //   targetedIndex: 'theIndex',
+  // };
 
   const hit = {
     objectID: 'objectID_42',
@@ -31,7 +22,11 @@ function setup() {
     __queryID: 'theQueryID',
   };
   const searchResults = { results: { theIndex: { index: 'theIndex' } } };
-  const props = getProvidedProps({ hit }, null, searchResults);
+  const props = connect(insightsClient).getProvidedProps(
+    { hit, contextValue },
+    null,
+    searchResults
+  );
   return { insightsClient, props };
 }
 

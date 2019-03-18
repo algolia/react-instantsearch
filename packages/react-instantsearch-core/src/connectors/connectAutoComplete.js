@@ -80,16 +80,20 @@ export default createConnector({
   getProvidedProps(props, searchState, searchResults) {
     return {
       hits: getHits(searchResults),
-      currentRefinement: getCurrentRefinement(props, searchState, this.context),
+      currentRefinement: getCurrentRefinement(props, searchState, {
+        ais: props.contextValue,
+      }),
     };
   },
 
   refine(props, searchState, nextRefinement) {
-    return refine(props, searchState, nextRefinement, this.context);
+    return refine(props, searchState, nextRefinement, {
+      ais: props.contextValue,
+    });
   },
 
   cleanUp(props, searchState) {
-    return cleanUp(props, searchState, this.context);
+    return cleanUp(props, searchState, { ais: props.contextValue });
   },
 
   /* connectAutoComplete needs to be considered as a widget to trigger a search if no others widgets are used.
@@ -98,7 +102,7 @@ export default createConnector({
    * */
   getSearchParameters(searchParameters, props, searchState) {
     return searchParameters.setQuery(
-      getCurrentRefinement(props, searchState, this.context)
+      getCurrentRefinement(props, searchState, { ais: props.contextValue })
     );
   },
 });

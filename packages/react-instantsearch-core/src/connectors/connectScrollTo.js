@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import createConnector from '../core/createConnector';
 import {
   getCurrentRefinementValue,
-  hasMultipleIndices,
-  getIndexId,
+  // hasMultipleIndices,
+  // getIndexId,
 } from '../core/indexUtils';
 import { shallowEqual } from '../core/utils';
 
@@ -33,7 +33,7 @@ export default createConnector({
     const value = getCurrentRefinementValue(
       props,
       searchState,
-      this.context,
+      { ais: props.contextValue },
       id,
       null,
       currentRefinement => currentRefinement
@@ -43,24 +43,24 @@ export default createConnector({
       this._prevSearchState = {};
     }
 
-    /* Get the subpart of the state that interest us*/
-    if (hasMultipleIndices(this.context)) {
-      searchState = searchState.indices
-        ? searchState.indices[getIndexId(this.context)]
-        : {};
-    }
+    // @TODO: re-enable on multi-index
+    // Get the subpart of the state that interest us
+    // if (hasMultipleIndices(this.context)) {
+    //   searchState = searchState.indices
+    //     ? searchState.indices[getIndexId(this.context)]
+    //     : {};
+    // }
 
-    /*
-      if there is a change in the app that has been triggered by another element than
-      "props.scrollOn (id) or the Configure widget, we need to keep track of the search state to
-      know if there's a change in the app that was not triggered by the props.scrollOn (id)
-      or the Configure widget. This is useful when using ScrollTo in combination of Pagination.
-      As pagination can be change by every widget, we want to scroll only if it cames from the pagination
-      widget itself. We also remove the configure key from the search state to do this comparaison because for
-      now configure values are not present in the search state before a first refinement has been made
-      and will false the results.
-      See: https://github.com/algolia/react-instantsearch/issues/164
-    */
+    // if there is a change in the app that has been triggered by another element
+    // than "props.scrollOn (id) or the Configure widget, we need to keep track of
+    // the search state to know if there's a change in the app that was not triggered
+    // by the props.scrollOn (id) or the Configure widget. This is useful when
+    // using ScrollTo in combination of Pagination. As pagination can be change
+    // by every widget, we want to scroll only if it cames from the pagination
+    // widget itself. We also remove the configure key from the search state to
+    // do this comparaison because for now configure values are not present in the
+    // search state before a first refinement has been made and will false the results.
+    // See: https://github.com/algolia/react-instantsearch/issues/164
     const cleanedSearchState = omit(omit(searchState, 'configure'), id);
 
     const hasNotChanged = shallowEqual(

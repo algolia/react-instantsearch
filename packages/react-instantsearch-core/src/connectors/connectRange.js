@@ -215,7 +215,7 @@ export default createConnector({
 
   getProvidedProps(props, searchState, searchResults) {
     const { attribute, precision, min: minBound, max: maxBound } = props;
-    const results = getResults(searchResults, this.context);
+    const results = getResults(searchResults, { ais: props.contextValue });
     const hasFacet = results && results.getFacetByName(attribute);
     const stats = hasFacet ? results.getFacetStats(attribute) || {} : {};
     const facetValues = hasFacet ? results.getFacetValues(attribute) : [];
@@ -233,7 +233,7 @@ export default createConnector({
 
     // The searchState is not always in sync with the helper state. For example
     // when we set boundaries on the first render the searchState don't have
-    // the correct refinement. If this behaviour change in the upcoming version
+    // the correct refinement. If this behavior change in the upcoming version
     // we could store the range inside the searchState instead of rely on `this`.
     this._currentRange = {
       min: rangeMin,
@@ -244,7 +244,7 @@ export default createConnector({
       props,
       searchState,
       this._currentRange,
-      this.context
+      { ais: props.contextValue }
     );
 
     return {
@@ -261,17 +261,13 @@ export default createConnector({
   },
 
   refine(props, searchState, nextRefinement) {
-    return refine(
-      props,
-      searchState,
-      nextRefinement,
-      this._currentRange,
-      this.context
-    );
+    return refine(props, searchState, nextRefinement, this._currentRange, {
+      ais: props.contextValue,
+    });
   },
 
   cleanUp(props, searchState) {
-    return cleanUp(props, searchState, this.context);
+    return cleanUp(props, searchState, { ais: props.contextValue });
   },
 
   getSearchParameters(params, props, searchState) {
@@ -280,7 +276,7 @@ export default createConnector({
       props,
       searchState,
       this._currentRange,
-      this.context
+      { ais: props.contextValue }
     );
 
     params = params.addDisjunctiveFacet(attribute);
@@ -302,7 +298,7 @@ export default createConnector({
       props,
       searchState,
       this._currentRange,
-      this.context
+      { ais: props.contextValue }
     );
 
     const items = [];
@@ -322,7 +318,9 @@ export default createConnector({
         label: fragments.join(''),
         attribute: props.attribute,
         value: nextState =>
-          refine(props, nextState, {}, this._currentRange, this.context),
+          refine(props, nextState, {}, this._currentRange, {
+            ais: props.contextValue,
+          }),
         currentRefinement: getCurrentRefinementWithRange(
           { min: minValue, max: maxValue },
           { min: minRange, max: maxRange }
@@ -332,7 +330,7 @@ export default createConnector({
 
     return {
       id: getId(props),
-      index: getIndexId(this.context),
+      index: getIndexId({ ais: props.contextValue }),
       items,
     };
   },
