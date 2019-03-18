@@ -594,17 +594,9 @@ describe('connectHierarchicalMenu', () => {
     });
   });
 
-  describe.skip('multi index', () => {
-    let context = {
-      context: {
-        ais: { mainTargetedIndex: 'first' },
-        multiIndexContext: { targetedIndex: 'first' },
-      },
-    };
-    const getProvidedProps = connect.getProvidedProps.bind(context);
-    const getSP = connect.getSearchParameters.bind(context);
-    const getMetadata = connect.getMetadata.bind(context);
-    const cleanUp = connect.cleanUp.bind(context);
+  describe('multi index', () => {
+    const contextValue = { mainTargetedIndex: 'first' };
+    const indexContextValue = { targetedIndex: 'first' };
 
     it('provides the correct props to the component', () => {
       const results = {
@@ -615,8 +607,8 @@ describe('connectHierarchicalMenu', () => {
       };
 
       results.first.getFacetValues.mockImplementationOnce(() => ({}));
-      props = getProvidedProps(
-        { attributes: ['ok'] },
+      props = connect.getProvidedProps(
+        { attributes: ['ok'], contextValue, indexContextValue },
         { indices: { first: { hierarchicalMenu: { ok: 'wat' } } } },
         { results }
       );
@@ -626,7 +618,11 @@ describe('connectHierarchicalMenu', () => {
         items: [],
       });
 
-      props = getProvidedProps({ attributes: ['ok'] }, {}, {});
+      props = connect.getProvidedProps(
+        { attributes: ['ok'], contextValue, indexContextValue },
+        {},
+        {}
+      );
       expect(props).toEqual({
         canRefine: false,
         currentRefinement: null,
@@ -660,7 +656,11 @@ describe('connectHierarchicalMenu', () => {
           },
         ],
       }));
-      props = getProvidedProps({ attributes: ['ok'] }, {}, { results });
+      props = connect.getProvidedProps(
+        { attributes: ['ok'], contextValue, indexContextValue },
+        {},
+        { results }
+      );
       expect(props.items).toEqual([
         {
           label: 'wat',
@@ -686,8 +686,8 @@ describe('connectHierarchicalMenu', () => {
         },
       ]);
 
-      props = getProvidedProps(
-        { attributes: ['ok'], limit: 1 },
+      props = connect.getProvidedProps(
+        { attributes: ['ok'], limit: 1, contextValue, indexContextValue },
         {},
         { results }
       );
@@ -706,8 +706,15 @@ describe('connectHierarchicalMenu', () => {
         },
       ]);
 
-      props = getProvidedProps(
-        { attributes: ['ok'], showMore: true, limit: 0, showMoreLimit: 1 },
+      props = connect.getProvidedProps(
+        {
+          attributes: ['ok'],
+          showMore: true,
+          limit: 0,
+          showMoreLimit: 1,
+          contextValue,
+          indexContextValue,
+        },
         {},
         { results }
       );
@@ -727,8 +734,8 @@ describe('connectHierarchicalMenu', () => {
       ]);
 
       const transformItems = jest.fn(() => ['items']);
-      props = getProvidedProps(
-        { attributes: ['ok'], transformItems },
+      props = connect.getProvidedProps(
+        { attributes: ['ok'], transformItems, contextValue, indexContextValue },
         {},
         { results }
       );
@@ -760,10 +767,8 @@ describe('connectHierarchicalMenu', () => {
     });
 
     it("calling refine updates the widget's search state", () => {
-      let refine = connect.refine.bind(context);
-
-      let nextState = refine(
-        { attributes: ['ok'] },
+      let nextState = connect.refine(
+        { attributes: ['ok'], contextValue, indexContextValue },
         {
           indices: {
             first: { otherKey: 'val', hierarchicalMenu: { otherKey: 'val' } },
@@ -781,16 +786,12 @@ describe('connectHierarchicalMenu', () => {
         },
       });
 
-      context = {
-        context: {
-          ais: { mainTargetedIndex: 'first' },
-          multiIndexContext: { targetedIndex: 'second' },
+      nextState = connect.refine(
+        {
+          attributes: ['ok'],
+          contextValue: { mainTargetedIndex: 'first' },
+          indexContextValue: { targetedIndex: 'second' },
         },
-      };
-      refine = connect.refine.bind(context);
-
-      nextState = refine(
-        { attributes: ['ok'] },
         {
           indices: {
             first: {
@@ -816,7 +817,7 @@ describe('connectHierarchicalMenu', () => {
     it('correctly applies its state to search parameters', () => {
       const initSP = new SearchParameters();
 
-      params = getSP(
+      const params = connect.getSearchParameters(
         initSP,
         {
           attributes: ['ATTRIBUTE'],
@@ -824,6 +825,8 @@ describe('connectHierarchicalMenu', () => {
           rootPath: 'ROOT_PATH',
           showParentLevel: true,
           limit: 1,
+          contextValue,
+          indexContextValue,
         },
         {
           indices: {
@@ -846,8 +849,8 @@ describe('connectHierarchicalMenu', () => {
     });
 
     it('registers its filter in metadata', () => {
-      const metadata = getMetadata(
-        { attributes: ['ok'] },
+      const metadata = connect.getMetadata(
+        { attributes: ['ok'], contextValue, indexContextValue },
         { indices: { first: { hierarchicalMenu: { ok: 'wat' } } } }
       );
       expect(metadata).toEqual({
@@ -866,8 +869,8 @@ describe('connectHierarchicalMenu', () => {
     });
 
     it('items value function should clear it from the search state', () => {
-      const metadata = getMetadata(
-        { attributes: ['one'] },
+      const metadata = connect.getMetadata(
+        { attributes: ['one'], contextValue, indexContextValue },
         { indices: { first: { hierarchicalMenu: { one: 'one', two: 'two' } } } }
       );
 
@@ -883,8 +886,8 @@ describe('connectHierarchicalMenu', () => {
     });
 
     it('should return the right searchState when clean up', () => {
-      let searchState = cleanUp(
-        { attributes: ['one'] },
+      let searchState = connect.cleanUp(
+        { attributes: ['one'], contextValue, indexContextValue },
         {
           indices: {
             first: {
@@ -903,7 +906,10 @@ describe('connectHierarchicalMenu', () => {
         },
       });
 
-      searchState = cleanUp({ attributes: ['two'] }, searchState);
+      searchState = connect.cleanUp(
+        { attributes: ['two'], contextValue, indexContextValue },
+        searchState
+      );
       expect(searchState).toEqual({
         indices: {
           first: {

@@ -177,7 +177,10 @@ export default createConnector({
     const { showMore, limit, showMoreLimit } = props;
     const id = getId(props);
 
-    const results = getResults(searchResults, { ais: props.contextValue });
+    const results = getResults(searchResults, {
+      ais: props.contextValue,
+      multiIndexContext: props.indexContextValue,
+    });
     const isFacetPresent =
       Boolean(results) && Boolean(results.getFacetByName(id));
 
@@ -186,6 +189,7 @@ export default createConnector({
         items: [],
         currentRefinement: getCurrentRefinement(props, searchState, {
           ais: props.contextValue,
+          multiIndexContext: props.indexContextValue,
         }),
         canRefine: false,
       };
@@ -195,6 +199,7 @@ export default createConnector({
     const items = value.data
       ? transformValue(value.data, props, searchState, {
           ais: props.contextValue,
+          multiIndexContext: props.indexContextValue,
         })
       : [];
     const transformedItems = props.transformItems
@@ -204,6 +209,7 @@ export default createConnector({
       items: truncate(transformedItems, itemsLimit),
       currentRefinement: getCurrentRefinement(props, searchState, {
         ais: props.contextValue,
+        multiIndexContext: props.indexContextValue,
       }),
       canRefine: transformedItems.length > 0,
     };
@@ -212,11 +218,15 @@ export default createConnector({
   refine(props, searchState, nextRefinement) {
     return refine(props, searchState, nextRefinement, {
       ais: props.contextValue,
+      multiIndexContext: props.indexContextValue,
     });
   },
 
   cleanUp(props, searchState) {
-    return cleanUp(props, searchState, { ais: props.contextValue });
+    return cleanUp(props, searchState, {
+      ais: props.contextValue,
+      multiIndexContext: props.indexContextValue,
+    });
   },
 
   getSearchParameters(searchParameters, props, searchState) {
@@ -251,6 +261,7 @@ export default createConnector({
 
     const currentRefinement = getCurrentRefinement(props, searchState, {
       ais: contextValue,
+      multiIndexContext: props.indexContextValue,
     });
     if (currentRefinement !== null) {
       searchParameters = searchParameters.toggleHierarchicalFacetRefinement(
@@ -267,6 +278,7 @@ export default createConnector({
     const id = getId(props);
     const currentRefinement = getCurrentRefinement(props, searchState, {
       ais: props.contextValue,
+      multiIndexContext: props.indexContextValue,
     });
 
     const items = !currentRefinement
@@ -276,14 +288,20 @@ export default createConnector({
             label: `${rootAttribute}: ${currentRefinement}`,
             attribute: rootAttribute,
             value: nextState =>
-              refine(props, nextState, '', { ais: props.contextValue }),
+              refine(props, nextState, '', {
+                ais: props.contextValue,
+                multiIndexContext: props.indexContextValue,
+              }),
             currentRefinement,
           },
         ];
 
     return {
       id,
-      index: getIndexId({ ais: props.contextValue }),
+      index: getIndexId({
+        ais: props.contextValue,
+        multiIndexContext: props.indexContextValue,
+      }),
       items,
     };
   },
