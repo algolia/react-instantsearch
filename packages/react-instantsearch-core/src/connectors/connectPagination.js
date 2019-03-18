@@ -55,7 +55,7 @@ export default createConnector({
   displayName: 'AlgoliaPagination',
 
   getProvidedProps(props, searchState, searchResults) {
-    const results = getResults(searchResults, this.context);
+    const results = getResults(searchResults, { ais: props.contextValue });
 
     if (!results) {
       return null;
@@ -64,22 +64,24 @@ export default createConnector({
     const nbPages = results.nbPages;
     return {
       nbPages,
-      currentRefinement: getCurrentRefinement(props, searchState, this.context),
+      currentRefinement: getCurrentRefinement(props, searchState, {
+        ais: props.contextValue,
+      }),
       canRefine: nbPages > 1,
     };
   },
 
   refine(props, searchState, nextPage) {
-    return refine(props, searchState, nextPage, this.context);
+    return refine(props, searchState, nextPage, { ais: props.contextValue });
   },
 
   cleanUp(props, searchState) {
-    return cleanUpValue(searchState, this.context, getId());
+    return cleanUpValue(searchState, { ais: props.contextValue }, getId());
   },
 
   getSearchParameters(searchParameters, props, searchState) {
     return searchParameters.setPage(
-      getCurrentRefinement(props, searchState, this.context) - 1
+      getCurrentRefinement(props, searchState, { ais: props.contextValue }) - 1
     );
   },
 
