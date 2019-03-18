@@ -111,23 +111,15 @@ describe('connectHitsPerPage', () => {
     });
   });
 
-  describe.skip('multi index', () => {
-    let context = {
-      context: {
-        ais: { mainTargetedIndex: 'first' },
-        multiIndexContext: { targetedIndex: 'first' },
-      },
-    };
-    const getProvidedProps = connect.getProvidedProps.bind(context);
-    const getSP = connect.getSearchParameters.bind(context);
-    const getMetadata = connect.getMetadata.bind(context);
-    const cleanUp = connect.cleanUp.bind(context);
+  describe('multi index', () => {
+    const contextValue = { mainTargetedIndex: 'first' };
+    const indexContextValue = { targetedIndex: 'first' };
 
     const items = [{ label: '10', value: 10 }, { label: '20', value: 20 }];
 
     it('provides the correct props to the component', () => {
-      props = getProvidedProps(
-        { items },
+      props = connect.getProvidedProps(
+        { items, contextValue, indexContextValue },
         { indices: { first: { hitsPerPage: '10' } } }
       );
       expect(props).toEqual({
@@ -142,7 +134,10 @@ describe('connectHitsPerPage', () => {
         ],
       });
 
-      props = getProvidedProps({ defaultRefinement: 20, items }, {});
+      props = connect.getProvidedProps(
+        { defaultRefinement: 20, items, contextValue, indexContextValue },
+        {}
+      );
       expect(props).toEqual({
         currentRefinement: 20,
         items: [
@@ -156,8 +151,8 @@ describe('connectHitsPerPage', () => {
       });
 
       const transformItems = jest.fn(() => ['items']);
-      props = getProvidedProps(
-        { items, transformItems },
+      props = connect.getProvidedProps(
+        { items, transformItems, contextValue, indexContextValue },
         { indices: { first: { hitsPerPage: '10' } } }
       );
       expect(transformItems.mock.calls[0][0]).toEqual([
@@ -168,10 +163,8 @@ describe('connectHitsPerPage', () => {
     });
 
     it("calling refine updates the widget's search state", () => {
-      let refine = connect.refine.bind(context);
-
-      let nextState = refine(
-        {},
+      let nextState = connect.refine(
+        { contextValue, indexContextValue },
         { indices: { first: { otherKey: 'val' } } },
         30
       );
@@ -181,16 +174,11 @@ describe('connectHitsPerPage', () => {
         },
       });
 
-      context = {
-        context: {
-          ais: { mainTargetedIndex: 'first' },
-          multiIndexContext: { targetedIndex: 'second' },
+      nextState = connect.refine(
+        {
+          contextValue: { mainTargetedIndex: 'first' },
+          indexContextValue: { targetedIndex: 'second' },
         },
-      };
-      refine = connect.refine.bind(context);
-
-      nextState = refine(
-        {},
         { indices: { first: { otherKey: 'val', hitsPerPage: 30 } } },
         30
       );
@@ -205,24 +193,36 @@ describe('connectHitsPerPage', () => {
     it('correctly applies its state to search parameters', () => {
       const sp = new SearchParameters();
 
-      params = getSP(sp, {}, { indices: { first: { hitsPerPage: '10' } } });
+      params = connect.getSearchParameters(
+        sp,
+        { contextValue, indexContextValue },
+        { indices: { first: { hitsPerPage: '10' } } }
+      );
       expect(params).toEqual(sp.setQueryParameter('hitsPerPage', 10));
 
-      params = getSP(sp, {}, { indices: { first: { hitsPerPage: '10' } } });
+      params = connect.getSearchParameters(
+        sp,
+        { contextValue, indexContextValue },
+        { indices: { first: { hitsPerPage: '10' } } }
+      );
       expect(params).toEqual(sp.setQueryParameter('hitsPerPage', 10));
 
-      params = getSP(sp, { defaultRefinement: 20 }, {});
+      params = connect.getSearchParameters(
+        sp,
+        { defaultRefinement: 20, contextValue, indexContextValue },
+        {}
+      );
       expect(params).toEqual(sp.setQueryParameter('hitsPerPage', 20));
     });
 
     it('registers its id in metadata', () => {
-      const metadata = getMetadata({});
+      const metadata = connect.getMetadata({});
       expect(metadata).toEqual({ id: 'hitsPerPage' });
     });
 
     it('should return the right searchState when clean up', () => {
-      const searchState = cleanUp(
-        {},
+      const searchState = connect.cleanUp(
+        { contextValue, indexContextValue },
         {
           indices: {
             first: {
