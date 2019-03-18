@@ -478,17 +478,9 @@ describe('connectMenu', () => {
     });
   });
 
-  describe.skip('multi index', () => {
-    let context = {
-      context: {
-        ais: { mainTargetedIndex: 'first' },
-        multiIndexContext: { targetedIndex: 'first' },
-      },
-    };
-    const getProvidedProps = connect.getProvidedProps.bind(context);
-    const getSP = connect.getSearchParameters.bind(context);
-    const getMetadata = connect.getMetadata.bind(context);
-    const cleanUp = connect.cleanUp.bind(context);
+  describe('multi index', () => {
+    const contextValue = { mainTargetedIndex: 'first' };
+    const indexContextValue = { targetedIndex: 'first' };
 
     it('provides the correct props to the component', () => {
       const results = {
@@ -498,7 +490,11 @@ describe('connectMenu', () => {
         },
       };
 
-      props = getProvidedProps({ attribute: 'ok' }, {}, {});
+      props = connect.getProvidedProps(
+        { attribute: 'ok', contextValue, indexContextValue },
+        {},
+        {}
+      );
       expect(props).toEqual({
         items: [],
         currentRefinement: null,
@@ -507,8 +503,8 @@ describe('connectMenu', () => {
         searchForItems: undefined,
       });
 
-      props = getProvidedProps(
-        { attribute: 'ok' },
+      props = connect.getProvidedProps(
+        { attribute: 'ok', contextValue, indexContextValue },
         { indices: { first: { menu: { ok: 'wat' } } } },
         { results }
       );
@@ -520,8 +516,8 @@ describe('connectMenu', () => {
         searchForItems: undefined,
       });
 
-      props = getProvidedProps(
-        { attribute: 'ok' },
+      props = connect.getProvidedProps(
+        { attribute: 'ok', contextValue, indexContextValue },
         { indices: { first: { menu: { ok: 'wat' } } } },
         { results }
       );
@@ -533,8 +529,13 @@ describe('connectMenu', () => {
         searchForItems: undefined,
       });
 
-      props = getProvidedProps(
-        { attribute: 'ok', defaultRefinement: 'wat' },
+      props = connect.getProvidedProps(
+        {
+          attribute: 'ok',
+          defaultRefinement: 'wat',
+          contextValue,
+          indexContextValue,
+        },
         {},
         { results }
       );
@@ -546,7 +547,11 @@ describe('connectMenu', () => {
         searchForItems: undefined,
       });
 
-      props = getProvidedProps({ attribute: 'ok' }, {}, { results });
+      props = connect.getProvidedProps(
+        { attribute: 'ok', contextValue, indexContextValue },
+        {},
+        { results }
+      );
       expect(props).toEqual({
         items: [],
         currentRefinement: null,
@@ -568,7 +573,11 @@ describe('connectMenu', () => {
           count: 10,
         },
       ]);
-      props = getProvidedProps({ attribute: 'ok' }, {}, { results });
+      props = connect.getProvidedProps(
+        { attribute: 'ok', contextValue, indexContextValue },
+        {},
+        { results }
+      );
       expect(props.items).toEqual([
         {
           value: 'wat',
@@ -584,18 +593,8 @@ describe('connectMenu', () => {
         },
       ]);
 
-      props = getProvidedProps({ attribute: 'ok', limit: 1 }, {}, { results });
-      expect(props.items).toEqual([
-        {
-          value: 'wat',
-          label: 'wat',
-          isRefined: true,
-          count: 20,
-        },
-      ]);
-
-      props = getProvidedProps(
-        { attribute: 'ok', showMore: true, limit: 0, showMoreLimit: 1 },
+      props = connect.getProvidedProps(
+        { attribute: 'ok', limit: 1, contextValue, indexContextValue },
         {},
         { results }
       );
@@ -608,8 +607,29 @@ describe('connectMenu', () => {
         },
       ]);
 
-      props = getProvidedProps(
-        { attribute: 'ok', limit: 1 },
+      props = connect.getProvidedProps(
+        {
+          attribute: 'ok',
+          showMore: true,
+          limit: 0,
+          showMoreLimit: 1,
+          contextValue,
+          indexContextValue,
+        },
+        {},
+        { results }
+      );
+      expect(props.items).toEqual([
+        {
+          value: 'wat',
+          label: 'wat',
+          isRefined: true,
+          count: 20,
+        },
+      ]);
+
+      props = connect.getProvidedProps(
+        { attribute: 'ok', limit: 1, contextValue, indexContextValue },
         {},
         { results },
         {},
@@ -635,8 +655,8 @@ describe('connectMenu', () => {
         },
       ]);
 
-      props = getProvidedProps(
-        { attribute: 'ok', limit: 1 },
+      props = connect.getProvidedProps(
+        { attribute: 'ok', limit: 1, contextValue, indexContextValue },
         {},
         { results },
         {},
@@ -652,8 +672,8 @@ describe('connectMenu', () => {
       ]);
 
       const transformItems = jest.fn(() => ['items']);
-      props = getProvidedProps(
-        { attribute: 'ok', transformItems },
+      props = connect.getProvidedProps(
+        { attribute: 'ok', transformItems, contextValue, indexContextValue },
         {},
         { results }
       );
@@ -689,8 +709,8 @@ describe('connectMenu', () => {
         },
       ]);
 
-      props = getProvidedProps(
-        { attribute: 'ok' },
+      props = connect.getProvidedProps(
+        { attribute: 'ok', contextValue, indexContextValue },
         { indices: { first: { menu: { ok: 'wat' } } } },
         { results }
       );
@@ -706,10 +726,8 @@ describe('connectMenu', () => {
     });
 
     it("calling refine updates the widget's search state", () => {
-      let refine = connect.refine.bind(context);
-
-      let nextState = refine(
-        { attribute: 'ok' },
+      let nextState = connect.refine(
+        { attribute: 'ok', contextValue, indexContextValue },
         {
           indices: {
             first: { otherKey: 'val', menu: { ok: 'wat', otherKey: 'val' } },
@@ -727,16 +745,12 @@ describe('connectMenu', () => {
         },
       });
 
-      context = {
-        context: {
-          ais: { mainTargetedIndex: 'first' },
-          multiIndexContext: { targetedIndex: 'second' },
+      nextState = connect.refine(
+        {
+          attribute: 'ok',
+          contextValue,
+          indexContextValue: { targetedIndex: 'second' },
         },
-      };
-      refine = connect.refine.bind(context);
-
-      nextState = refine(
-        { attribute: 'ok' },
         {
           indices: {
             first: { otherKey: 'val', menu: { ok: 'wat', otherKey: 'val' } },
@@ -751,14 +765,17 @@ describe('connectMenu', () => {
         },
       });
     });
+
     it('correctly applies its state to search parameters', () => {
       const initSP = new SearchParameters();
 
-      params = getSP(
+      params = connect.getSearchParameters(
         initSP,
         {
           attribute: 'ok',
           limit: 1,
+          contextValue,
+          indexContextValue,
         },
         { indices: { first: { menu: { ok: 'wat' } } } }
       );
@@ -771,8 +788,8 @@ describe('connectMenu', () => {
     });
 
     it('registers its filter in metadata', () => {
-      const metadata = getMetadata(
-        { attribute: 'wot' },
+      const metadata = connect.getMetadata(
+        { attribute: 'wot', contextValue, indexContextValue },
         { indices: { first: { menu: { wot: 'wat' } } } }
       );
       expect(metadata).toEqual({
@@ -791,8 +808,8 @@ describe('connectMenu', () => {
     });
 
     it('items value function should clear it from the search state', () => {
-      const metadata = getMetadata(
-        { attribute: 'one' },
+      const metadata = connect.getMetadata(
+        { attribute: 'one', contextValue, indexContextValue },
         { indices: { first: { menu: { one: 'one', two: 'two' } } } }
       );
 
@@ -806,8 +823,8 @@ describe('connectMenu', () => {
     });
 
     it('should return the right searchState when clean up', () => {
-      let searchState = cleanUp(
-        { attribute: 'name' },
+      let searchState = connect.cleanUp(
+        { attribute: 'name', contextValue, indexContextValue },
         {
           indices: {
             first: {
@@ -826,12 +843,31 @@ describe('connectMenu', () => {
         },
       });
 
-      searchState = cleanUp({ attribute: 'name2' }, searchState);
+      searchState = connect.cleanUp(
+        { attribute: 'name2', contextValue, indexContextValue },
+        searchState
+      );
       expect(searchState).toEqual({
         indices: {
           first: { another: { searchState: 'searchState' }, menu: {} },
         },
       });
+    });
+
+    it('errors if searchable is used in a multi index context', () => {
+      expect(() => {
+        connect.getProvidedProps(
+          {
+            contextValue,
+            indexContextValue,
+            searchable: true,
+          },
+          {},
+          {}
+        );
+      }).toThrowErrorMatchingInlineSnapshot(
+        `"react-instantsearch: searching in *List is not available when used inside a multi index context"`
+      );
     });
   });
 });
