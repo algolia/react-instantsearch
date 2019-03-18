@@ -233,7 +233,7 @@ export default createConnector({
 
     // The searchState is not always in sync with the helper state. For example
     // when we set boundaries on the first render the searchState don't have
-    // the correct refinement. If this behaviour change in the upcoming version
+    // the correct refinement. If this behavior change in the upcoming version
     // we could store the range inside the searchState instead of rely on `this`.
     this._currentRange = {
       min: rangeMin,
