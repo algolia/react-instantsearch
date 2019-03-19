@@ -64,16 +64,17 @@ export default createConnector({
     return { hits: hitsWithPositionsAndQueryID };
   },
 
-  /* Hits needs to be considered as a widget to trigger a search,
+  /**
+   * Hits needs to be considered as a widget to trigger a search,
    * even if no other widgets are used.
    *
    * To be considered as a widget you need either:
    * - getSearchParameters
    * - getMetadata
-   * - getTransitionState
+   * - transitionState
    *
    * See: createConnector.tsx
-   * */
+   */
   getSearchParameters(searchParameters) {
     return searchParameters;
   },

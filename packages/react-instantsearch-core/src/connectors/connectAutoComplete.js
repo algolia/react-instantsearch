@@ -101,10 +101,17 @@ export default createConnector({
     });
   },
 
-  /* connectAutoComplete needs to be considered as a widget to trigger a search if no others widgets are used.
-   * To be considered as a widget you need either getSearchParameters, getMetadata or getTransitionState
-   * See createConnector.js
-   * */
+  /**
+   * AutoComplete needs to be considered as a widget to trigger a search,
+   * even if no other widgets are used.
+   *
+   * To be considered as a widget you need either:
+   * - getSearchParameters
+   * - getMetadata
+   * - transitionState
+   *
+   * See: createConnector.tsx
+   */
   getSearchParameters(searchParameters, props, searchState) {
     return searchParameters.setQuery(
       getCurrentRefinement(props, searchState, {
