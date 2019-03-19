@@ -3,9 +3,6 @@ import connect from '../connectHierarchicalMenu';
 
 jest.mock('../../core/createConnector', () => x => x);
 
-let props;
-let params;
-
 describe('connectHierarchicalMenu', () => {
   describe('single index', () => {
     const contextValue = { mainTargetedIndex: 'index' };
@@ -18,7 +15,7 @@ describe('connectHierarchicalMenu', () => {
       };
 
       results.getFacetValues.mockImplementationOnce(() => ({}));
-      props = connect.getProvidedProps(
+      let props = connect.getProvidedProps(
         { attributes: ['ok'], contextValue },
         { hierarchicalMenu: { ok: 'wat' } },
         { results }
@@ -220,7 +217,7 @@ describe('connectHierarchicalMenu', () => {
         ],
       }));
 
-      props = connect.getProvidedProps(
+      const props = connect.getProvidedProps(
         {
           attributes: ['ok'],
           showMore: true,
@@ -300,7 +297,7 @@ describe('connectHierarchicalMenu', () => {
           },
         ],
       }));
-      props = connect.getProvidedProps(
+      let props = connect.getProvidedProps(
         {
           attributes: ['ok'],
           showMore: true,
@@ -433,7 +430,7 @@ describe('connectHierarchicalMenu', () => {
     it("increases maxValuesPerFacet when it isn't big enough", () => {
       const initSP = new SearchParameters({ maxValuesPerFacet: 100 });
 
-      params = connect.getSearchParameters(
+      let params = connect.getSearchParameters(
         initSP,
         {
           attributes: ['attribute'],
@@ -483,7 +480,7 @@ describe('connectHierarchicalMenu', () => {
     it('correctly applies its state to search parameters', () => {
       const initSP = new SearchParameters();
 
-      params = connect.getSearchParameters(
+      const params = connect.getSearchParameters(
         initSP,
         {
           attributes: ['ATTRIBUTE'],
@@ -584,7 +581,7 @@ describe('connectHierarchicalMenu', () => {
         hits: [],
       };
 
-      props = connect.getProvidedProps(
+      const props = connect.getProvidedProps(
         { attributes: ['ok'], transformItems, contextValue },
         {},
         { results }
@@ -607,7 +604,7 @@ describe('connectHierarchicalMenu', () => {
       };
 
       results.first.getFacetValues.mockImplementationOnce(() => ({}));
-      props = connect.getProvidedProps(
+      let props = connect.getProvidedProps(
         { attributes: ['ok'], contextValue, indexContextValue },
         { indices: { first: { hierarchicalMenu: { ok: 'wat' } } } },
         { results }
