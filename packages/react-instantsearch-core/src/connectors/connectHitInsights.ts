@@ -66,7 +66,7 @@ const wrapInsightsClient = (
 };
 
 export default (insightsClient: InsightsClient) =>
-  createConnector({
+  createConnector<{ hit: any }>({
     displayName: 'AlgoliaInsights',
 
     getProvidedProps(props, _, searchResults) {

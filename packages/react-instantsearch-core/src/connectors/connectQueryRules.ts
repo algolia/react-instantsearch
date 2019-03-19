@@ -1,9 +1,7 @@
-import createConnector, { ConnectedProps } from '../core/createConnector';
+import createConnector from '../core/createConnector';
 import { getResults, getIndexId, hasMultipleIndices } from '../core/indexUtils';
 
 type SearchState = any;
-
-type SearchParameters = any;
 
 export type CustomUserData = {
   [key: string]: any;
@@ -108,24 +106,17 @@ function getRuleContextsFromTrackedFilters({
   return ruleContexts;
 }
 
-export default createConnector({
+export default createConnector<QueryRulesProps>({
   displayName: 'AlgoliaQueryRules',
 
   defaultProps: {
     transformItems: items => items,
     transformRuleContexts: ruleContexts => ruleContexts,
     trackedFilters: {},
-  } as QueryRulesProps,
+  },
 
-  getProvidedProps(
-    props: ConnectedProps<QueryRulesProps>,
-    _1: any,
-    searchResults: any
-  ) {
-    const results = getResults(searchResults, {
-      ais: props.contextValue,
-      multiIndexContext: props.indexContextValue,
-    });
+  getProvidedProps(props, _1, searchResults) {
+    const results = getResults(searchResults, { ais: props.contextValue });
 
     if (results === null) {
       return {
@@ -144,11 +135,7 @@ export default createConnector({
     };
   },
 
-  getSearchParameters(
-    searchParameters: SearchParameters,
-    props: ConnectedProps<QueryRulesProps>,
-    searchState: SearchState
-  ) {
+  getSearchParameters(searchParameters, props, searchState) {
     if (Object.keys(props.trackedFilters).length === 0) {
       return searchParameters;
     }

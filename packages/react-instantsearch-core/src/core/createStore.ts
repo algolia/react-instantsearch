@@ -1,17 +1,22 @@
-type SearchState = any;
-type ResultsState = any;
-type ResultsFacetsValues = any;
-type Listener = () => void;
-type State = {
+import {
+  SearchState,
+  MetaData,
+  SearchResults,
+  SearchForFacetValuesResults,
+} from '../types';
+
+export type State = {
   widgets: SearchState;
-  metadata: any[];
-  results: ResultsState | null;
-  resultsFacetValues: ResultsFacetsValues | null;
-  error: Error | null;
+  metadata: MetaData;
+  results: SearchResults | null;
+  resultsFacetValues: SearchForFacetValuesResults | null;
+  error: any | null;
   searching: boolean;
   isSearchStalled: boolean;
   searchingForFacetValues: boolean;
 };
+type Listener = () => void;
+
 export default function createStore(initialState: State) {
   let state = initialState;
   const listeners: Listener[] = [];
