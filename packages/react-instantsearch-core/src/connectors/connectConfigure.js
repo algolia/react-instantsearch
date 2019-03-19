@@ -42,7 +42,10 @@ export default createConnector({
     });
 
     const subState =
-      hasMultipleIndices(props.contextValue) && searchState.indices
+      hasMultipleIndices({
+        ais: props.contextValue,
+        multiIndexContext: props.indexContextValue,
+      }) && searchState.indices
         ? searchState.indices[indexId]
         : searchState;
 
