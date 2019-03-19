@@ -1,19 +1,18 @@
 import React from 'react';
-import Enzyme, { shallow } from 'enzyme';
+import Enzyme, { shallow, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { SearchParameters } from 'algoliasearch-helper';
-import Index from '../Index';
+import { IndexComponentWithoutContext } from '../Index';
+import { IndexConsumer } from '../../core/context';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe.skip('Index', () => {
+describe('Index', () => {
   const createContext = () => ({
-    ais: {
-      onSearchParameters: jest.fn(),
-      widgetsManager: {
-        registerWidget: jest.fn(),
-        update: jest.fn(),
-      },
+    onSearchParameters: jest.fn(),
+    widgetsManager: {
+      registerWidget: jest.fn(),
+      update: jest.fn(),
     },
   });
 
@@ -29,16 +28,13 @@ describe.skip('Index', () => {
     const context = createContext();
 
     const wrapper = shallow(
-      <Index {...requiredProps}>
+      <IndexComponentWithoutContext {...requiredProps} contextValue={context}>
         <div />
-      </Index>,
-      {
-        context,
-      }
+      </IndexComponentWithoutContext>
     );
 
-    expect(context.ais.widgetsManager.registerWidget).toHaveBeenCalledTimes(1);
-    expect(context.ais.widgetsManager.registerWidget).toHaveBeenCalledWith(
+    expect(context.widgetsManager.registerWidget).toHaveBeenCalledTimes(1);
+    expect(context.widgetsManager.registerWidget).toHaveBeenCalledWith(
       wrapper.instance()
     );
   });
@@ -47,51 +43,40 @@ describe.skip('Index', () => {
     const context = createContext();
 
     shallow(
-      <Index {...requiredProps}>
+      <IndexComponentWithoutContext {...requiredProps} contextValue={context}>
         <div />
-      </Index>,
-      {
-        context,
-      }
+      </IndexComponentWithoutContext>
     );
 
-    expect(context.ais.onSearchParameters).toHaveBeenCalledTimes(1);
+    expect(context.onSearchParameters).toHaveBeenCalledTimes(1);
   });
 
   it('calls update if indexName prop changes', () => {
     const context = createContext();
 
     const wrapper = shallow(
-      <Index {...requiredProps}>
+      <IndexComponentWithoutContext {...requiredProps} contextValue={context}>
         <div />
-      </Index>,
-      {
-        context,
-      }
+      </IndexComponentWithoutContext>
     );
 
-    expect(context.ais.widgetsManager.update).toHaveBeenCalledTimes(0);
+    expect(context.widgetsManager.update).toHaveBeenCalledTimes(0);
 
     wrapper.setProps({ indexName: 'newIndexName' });
 
-    expect(context.ais.widgetsManager.update).toHaveBeenCalledTimes(1);
+    expect(context.widgetsManager.update).toHaveBeenCalledTimes(1);
   });
 
   it('unregisters itself on unmount', () => {
     const unregister = jest.fn();
     const context = createContext();
 
-    context.ais.widgetsManager.registerWidget.mockImplementation(
-      () => unregister
-    );
+    context.widgetsManager.registerWidget.mockImplementation(() => unregister);
 
     const wrapper = shallow(
-      <Index {...requiredProps}>
+      <IndexComponentWithoutContext {...requiredProps} contextValue={context}>
         <div />
-      </Index>,
-      {
-        context,
-      }
+      </IndexComponentWithoutContext>
     );
 
     expect(unregister).toHaveBeenCalledTimes(0);
@@ -104,30 +89,26 @@ describe.skip('Index', () => {
   it('exposes multi index context', () => {
     const context = createContext();
 
-    const wrapper = shallow(
-      <Index {...requiredProps}>
-        <div />
-      </Index>,
-      {
-        context,
-      }
+    const wrapper = mount(
+      <IndexComponentWithoutContext {...requiredProps} contextValue={context}>
+        <IndexConsumer>
+          {childContext => (
+            <div className="inner">{childContext.targetedIndex}</div>
+          )}
+        </IndexConsumer>
+      </IndexComponentWithoutContext>
     );
 
-    const childContext = wrapper.instance().getChildContext();
-
-    expect(childContext.multiIndexContext.targetedIndex).toBe('indexId');
+    expect(wrapper.find('.inner').text()).toBe('indexId');
   });
 
   it('provides search parameters from instance props', () => {
     const context = createContext();
 
     const wrapper = shallow(
-      <Index {...requiredProps}>
+      <IndexComponentWithoutContext {...requiredProps} contextValue={context}>
         <div />
-      </Index>,
-      {
-        context,
-      }
+      </IndexComponentWithoutContext>
     );
 
     const parameters = wrapper
@@ -141,12 +122,9 @@ describe.skip('Index', () => {
     const context = createContext();
 
     const wrapper = shallow(
-      <Index {...requiredProps}>
+      <IndexComponentWithoutContext {...requiredProps} contextValue={context}>
         <div />
-      </Index>,
-      {
-        context,
-      }
+      </IndexComponentWithoutContext>
     );
 
     const parameters = wrapper

@@ -134,4 +134,5 @@ const IndexWrapper = (props: Props) => (
   </InstantSearchConsumer>
 );
 
+export const IndexComponentWithoutContext = Index;
 export default IndexWrapper;
