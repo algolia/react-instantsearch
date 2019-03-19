@@ -13,7 +13,7 @@ import createInstantSearchServer from '../createInstantSearchServer';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe.skip('createInstantSearchServer', () => {
+describe('createInstantSearchServer', () => {
   const createSearchClient = () => ({
     search: () =>
       Promise.resolve({
@@ -30,6 +30,7 @@ describe.skip('createInstantSearchServer', () => {
 
         const fallback = props.defaultRefinement || 'Apple';
 
+        // @TODO, use props instead
         if (this.context && this.context.multiIndexContext) {
           const index = this.context.multiIndexContext.targetedIndex;
           const indexSearchState =
