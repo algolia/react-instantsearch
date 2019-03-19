@@ -1,6 +1,6 @@
 import { configure, addDecorator } from '@storybook/react';
 import { withKnobs } from '@storybook/addon-knobs';
-import { checkA11y } from '@storybook/addon-a11y';
+import { withA11y } from '@storybook/addon-a11y';
 import { withOptions } from '@storybook/addon-options';
 
 addDecorator(
@@ -16,7 +16,7 @@ addDecorator(
 );
 
 addDecorator(withKnobs);
-addDecorator(checkA11y);
+addDecorator(withA11y);
 
 const req = require.context('../stories', true, /\.stories\.(js|ts|tsx)$/);
 
