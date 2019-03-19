@@ -89,20 +89,17 @@ describe('connectSortBy', () => {
     });
   });
 
-  describe.skip('multi index', () => {
-    const context = {
-      context: {
-        ais: { mainTargetedIndex: 'first' },
-        multiIndexContext: { targetedIndex: 'first' },
-      },
-    };
-    const getProvidedProps = connect.getProvidedProps.bind(context);
-    const getSP = connect.getSearchParameters.bind(context);
-    const cleanUp = connect.cleanUp.bind(context);
+  describe('multi index', () => {
+    const contextValue = { mainTargetedIndex: 'first' };
+    const indexContextValue = { targetedIndex: 'first' };
 
     it('provides the correct props to the component', () => {
-      props = getProvidedProps(
-        { items: [{ value: 'yep' }, { value: 'yop' }] },
+      props = connect.getProvidedProps(
+        {
+          items: [{ value: 'yep' }, { value: 'yop' }],
+          contextValue,
+          indexContextValue,
+        },
         { indices: { first: { sortBy: 'yep' } } }
       );
       expect(props).toEqual({
@@ -115,9 +112,11 @@ describe('connectSortBy', () => {
     });
 
     it("calling refine updates the widget's search state", () => {
-      const refine = connect.refine.bind(context);
-
-      const nextState = refine({}, { otherKey: 'val' }, 'yep');
+      const nextState = connect.refine(
+        { contextValue, indexContextValue },
+        { otherKey: 'val' },
+        'yep'
+      );
       expect(nextState).toEqual({
         otherKey: 'val',
         indices: { first: { page: 1, sortBy: 'yep' } },
@@ -125,17 +124,17 @@ describe('connectSortBy', () => {
     });
 
     it('refines the index parameter', () => {
-      params = getSP(
+      params = connect.getSearchParameters(
         new SearchParameters(),
-        {},
+        { contextValue, indexContextValue },
         { indices: { first: { sortBy: 'yep' } } }
       );
       expect(params.index).toBe('yep');
     });
 
     it('should return the right searchState when clean up', () => {
-      const searchState = cleanUp(
-        {},
+      const searchState = connect.cleanUp(
+        { contextValue, indexContextValue },
         {
           indices: { first: { sortBy: { searchState: 'searchState' } } },
           another: { searchState: 'searchState' },
