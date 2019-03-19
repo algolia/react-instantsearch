@@ -1440,16 +1440,9 @@ describe('connectRange', () => {
     });
   });
 
-  describe.skip('multi index', () => {
-    const context = {
-      context: {
-        ais: { mainTargetedIndex: 'first' },
-        multiIndexContext: { targetedIndex: 'first' },
-      },
-    };
-    const getProvidedProps = connect.getProvidedProps.bind(context);
-    const getSearchParameters = connect.getSearchParameters.bind(context);
-    const cleanUp = connect.cleanUp.bind(context);
+  describe('multi index', () => {
+    const contextValue = { mainTargetedIndex: 'first' };
+    const indexContextValue = { targetedIndex: 'first' };
 
     it('provides the correct props to the component', () => {
       const results = {
@@ -1462,8 +1455,8 @@ describe('connectRange', () => {
           getFacetByName: () => true,
         },
       };
-      props = getProvidedProps(
-        { attribute: 'ok', precision: 2 },
+      props = connect.getProvidedProps(
+        { attribute: 'ok', precision: 2, contextValue, indexContextValue },
         {},
         { results }
       );
@@ -1476,12 +1469,14 @@ describe('connectRange', () => {
         precision: 2,
       });
 
-      props = getProvidedProps(
+      props = connect.getProvidedProps(
         {
           attribute: 'ok',
           min: 5,
           max: 10,
           precision: 2,
+          contextValue,
+          indexContextValue,
         },
         {
           indices: { first: { range: { ok: { min: 6, max: 9 } } } },
@@ -1497,10 +1492,12 @@ describe('connectRange', () => {
         precision: 2,
       });
 
-      props = getProvidedProps(
+      props = connect.getProvidedProps(
         {
           attribute: 'ok',
           precision: 2,
+          contextValue,
+          indexContextValue,
         },
         {},
         {
@@ -1525,10 +1522,9 @@ describe('connectRange', () => {
     it("calling refine updates the widget's search state", () => {
       let nextState = connect.refine.call(
         {
-          ...context,
           _currentRange: { min: 0, max: 100 },
         },
-        { attribute: 'ok' },
+        { attribute: 'ok', contextValue, indexContextValue },
         {
           otherKey: 'val',
           indices: { first: { range: { otherKey: { min: 1, max: 2 } } } },
@@ -1547,13 +1543,13 @@ describe('connectRange', () => {
 
       nextState = connect.refine.call(
         {
-          context: {
-            ais: { mainTargetedIndex: 'first' },
-            multiIndexContext: { targetedIndex: 'second' },
-          },
           _currentRange: { min: 0, max: 100 },
         },
-        { attribute: 'ok' },
+        {
+          attribute: 'ok',
+          contextValue: { mainTargetedIndex: 'first' },
+          indexContextValue: { targetedIndex: 'second' },
+        },
         {
           otherKey: 'val',
           indices: { first: { range: { otherKey: { min: 1, max: 2 } } } },
@@ -1570,9 +1566,9 @@ describe('connectRange', () => {
     });
 
     it('refines the corresponding numeric facet', () => {
-      params = getSearchParameters(
+      params = connect.getSearchParameters(
         new SearchParameters(),
-        { attribute: 'facet' },
+        { attribute: 'facet', contextValue, indexContextValue },
         { indices: { first: { range: { facet: { min: 10, max: 30 } } } } }
       );
       expect(params.getNumericRefinements('facet')).toEqual({
@@ -1584,10 +1580,9 @@ describe('connectRange', () => {
     it('registers its filter in metadata', () => {
       let metadata = connect.getMetadata.call(
         {
-          ...context,
           _currentRange: { min: 0, max: 100 },
         },
-        { attribute: 'wot' },
+        { attribute: 'wot', contextValue, indexContextValue },
         { indices: { first: { range: { wot: { min: 5 } } } } }
       );
       expect(metadata).toEqual({
@@ -1623,10 +1618,9 @@ describe('connectRange', () => {
 
       metadata = connect.getMetadata.call(
         {
-          ...context,
           _currentRange: { min: 0, max: 100 },
         },
-        { attribute: 'wot' },
+        { attribute: 'wot', contextValue, indexContextValue },
         { indices: { first: { range: { wot: { max: 10 } } } } }
       );
       expect(metadata).toEqual({
@@ -1644,10 +1638,9 @@ describe('connectRange', () => {
 
       metadata = connect.getMetadata.call(
         {
-          ...context,
           _currentRange: { min: 0, max: 100 },
         },
-        { attribute: 'wot' },
+        { attribute: 'wot', contextValue, indexContextValue },
         { indices: { first: { range: { wot: { max: 100 } } } } }
       );
       expect(metadata).toEqual({
@@ -1660,10 +1653,9 @@ describe('connectRange', () => {
     it('items value function should clear it from the search state', () => {
       const metadata = connect.getMetadata.call(
         {
-          ...context,
           _currentRange: { min: 0, max: 100 },
         },
-        { attribute: 'one' },
+        { attribute: 'one', contextValue, indexContextValue },
         { indices: { first: { range: { one: { min: 5 }, two: { max: 4 } } } } }
       );
 
@@ -1690,8 +1682,8 @@ describe('connectRange', () => {
     });
 
     it('should return the right searchState when clean up', () => {
-      let searchState = cleanUp(
-        { attribute: 'name' },
+      let searchState = connect.cleanUp(
+        { attribute: 'name', contextValue, indexContextValue },
         {
           indices: {
             first: { range: { name: 'searchState', name2: 'searchState' } },
@@ -1704,7 +1696,10 @@ describe('connectRange', () => {
         another: { searchState: 'searchState' },
       });
 
-      searchState = cleanUp({ attribute: 'name2' }, searchState);
+      searchState = connect.cleanUp(
+        { attribute: 'name2', contextValue, indexContextValue },
+        searchState
+      );
       expect(searchState).toEqual({
         another: { searchState: 'searchState' },
         indices: { first: { range: {} } },
