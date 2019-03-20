@@ -1,18 +1,15 @@
 import React from 'react';
-import Enzyme, { shallow } from 'enzyme';
+import Enzyme, { shallow, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import PanelCallbackHandler from '../PanelCallbackHandler';
+import { PanelProvider } from '../Panel';
 
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('PanelCallbackHandler', () => {
   it('expect to render', () => {
-    const props = {
-      canRefine: true,
-    };
-
     const wrapper = shallow(
-      <PanelCallbackHandler {...props}>
+      <PanelCallbackHandler canRefine={true}>
         <div>Hello content</div>
       </PanelCallbackHandler>
     );
@@ -22,101 +19,87 @@ describe('PanelCallbackHandler', () => {
 
   describe('willMount', () => {
     it('expect to call setCanRefine when the context is given', () => {
-      const props = {
-        canRefine: true,
-      };
+      const setCanRefine = jest.fn();
 
-      const context = {
-        setCanRefine: jest.fn(),
-      };
-
-      shallow(
-        <PanelCallbackHandler {...props}>
-          <div>Hello content</div>
-        </PanelCallbackHandler>,
-        { context }
+      mount(
+        <PanelProvider value={setCanRefine}>
+          <PanelCallbackHandler canRefine={true}>
+            <div>Hello content</div>
+          </PanelCallbackHandler>
+        </PanelProvider>
       );
 
-      expect(context.setCanRefine).toHaveBeenCalledTimes(1);
-      expect(context.setCanRefine).toHaveBeenCalledWith(true);
+      expect(setCanRefine).toHaveBeenCalledTimes(1);
+      expect(setCanRefine).toHaveBeenCalledWith(true);
     });
 
     it('expect to not throw when the context is not given', () => {
-      const props = {
-        canRefine: true,
-      };
-
-      const trigger = () =>
+      expect(() =>
         shallow(
-          <PanelCallbackHandler {...props}>
+          <PanelCallbackHandler canRefine={true}>
             <div>Hello content</div>
           </PanelCallbackHandler>
-        );
-
-      expect(() => trigger()).not.toThrow();
+        )
+      ).not.toThrow();
     });
   });
 
   describe('willReceiveProps', () => {
     it('expect to call setCanRefine when the context is given', () => {
-      const props = {
-        canRefine: true,
-      };
+      const setCanRefine = jest.fn();
 
-      const context = {
-        setCanRefine: jest.fn(),
-      };
-
-      const wrapper = shallow(
-        <PanelCallbackHandler {...props}>
-          <div>Hello content</div>
-        </PanelCallbackHandler>,
-        { context }
+      const wrapper = mount(
+        <PanelProvider value={setCanRefine}>
+          <PanelCallbackHandler canRefine={true}>
+            <div>Hello content</div>
+          </PanelCallbackHandler>
+        </PanelProvider>
       );
 
-      wrapper.setProps({ canRefine: false });
+      wrapper.setProps({
+        children: (
+          <PanelCallbackHandler canRefine={false}>
+            <div>Hello content</div>
+          </PanelCallbackHandler>
+        ),
+      });
 
-      expect(context.setCanRefine).toHaveBeenCalledTimes(2);
-      expect(context.setCanRefine).toHaveBeenLastCalledWith(false);
+      expect(setCanRefine).toHaveBeenCalledTimes(2);
+      expect(setCanRefine).toHaveBeenLastCalledWith(false);
     });
 
     it('expect to not call setCanRefine when the nextProps is the same', () => {
-      const props = {
-        canRefine: true,
-      };
+      const setCanRefine = jest.fn();
 
-      const context = {
-        setCanRefine: jest.fn(),
-      };
-
-      const wrapper = shallow(
-        <PanelCallbackHandler {...props}>
-          <div>Hello content</div>
-        </PanelCallbackHandler>,
-        { context }
+      const wrapper = mount(
+        <PanelProvider value={setCanRefine}>
+          <PanelCallbackHandler canRefine={true}>
+            <div>Hello content</div>
+          </PanelCallbackHandler>
+        </PanelProvider>
       );
 
-      wrapper.setProps({ canRefine: true });
+      wrapper.setProps({
+        children: (
+          <PanelCallbackHandler canRefine={true}>
+            <div>Hello content</div>
+          </PanelCallbackHandler>
+        ),
+      });
 
-      expect(context.setCanRefine).toHaveBeenCalledTimes(1);
+      expect(setCanRefine).toHaveBeenCalledTimes(1);
     });
 
     it('expect to not throw when the context is not given', () => {
-      const props = {
-        canRefine: true,
-      };
-
-      const trigger = () => {
+      expect(() => {
         const wrapper = shallow(
-          <PanelCallbackHandler {...props}>
+          <PanelCallbackHandler canRefine={true}>
             <div>Hello content</div>
           </PanelCallbackHandler>
         );
 
         wrapper.setProps({ canRefine: false });
-      };
-
-      expect(() => trigger()).not.toThrow();
+      }).not.toThrow();
     });
   });
 });

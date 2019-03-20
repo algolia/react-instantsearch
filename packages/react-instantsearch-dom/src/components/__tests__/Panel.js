@@ -1,7 +1,7 @@
 import React from 'react';
-import Enzyme, { shallow } from 'enzyme';
+import Enzyme, { shallow, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import Panel from '../Panel';
+import Panel, { PanelConsumer } from '../Panel';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -70,22 +70,30 @@ describe('Panel', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('expect to expose context to his children', () => {
-    const wrapper = shallow(
+  it('expect to expose context to its children', () => {
+    let provided;
+    const wrapper = mount(
       <Panel>
-        <div>Hello content</div>
+        <PanelConsumer>
+          {setCanRefine => {
+            provided = setCanRefine;
+            return null;
+          }}
+        </PanelConsumer>
       </Panel>
     );
 
-    expect(wrapper.instance().getChildContext()).toEqual({
-      setCanRefine: wrapper.instance().setCanRefine,
-    });
+    expect(provided).toEqual(wrapper.instance().setCanRefine);
   });
 
   it('expect to render when setCanRefine is called', () => {
-    const wrapper = shallow(
+    const wrapper = mount(
       <Panel>
-        <div>Hello content</div>
+        <PanelConsumer>
+          {setCanRefine => (
+            <button onClick={() => setCanRefine(false)}>set to false</button>
+          )}
+        </PanelConsumer>
       </Panel>
     );
 
@@ -93,14 +101,11 @@ describe('Panel', () => {
     expect(wrapper).toMatchSnapshot();
 
     // Simulate context call
-    wrapper
-      .instance()
-      .getChildContext()
-      .setCanRefine(false);
+    wrapper.find('button').simulate('click');
 
-    wrapper.update();
+    // wrapper.update();
 
     expect(wrapper.state('canRefine')).toBe(false);
     expect(wrapper).toMatchSnapshot();
   });
-});
+}); // ok
