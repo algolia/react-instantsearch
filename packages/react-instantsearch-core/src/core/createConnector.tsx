@@ -104,7 +104,10 @@ export function createConnectorWithoutContext(
         if (connectorDesc.getSearchParameters) {
           this.props.contextValue.onSearchParameters(
             connectorDesc.getSearchParameters.bind(this),
-            this.props.contextValue,
+            {
+              ais: this.props.contextValue,
+              multiIndexContext: this.props.indexContextValue,
+            },
             this.props
           );
         }
