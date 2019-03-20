@@ -26,13 +26,13 @@ export const {
   mainTargetedIndex: '',
 });
 
-export type IndexContext = {
-  targetedIndex: string;
-};
+export type IndexContext =
+  | {
+      targetedIndex: string;
+    }
+  | undefined;
 
 export const {
   Consumer: IndexConsumer,
   Provider: IndexProvider,
-} = createContext<IndexContext>({
-  targetedIndex: '',
-});
+} = createContext<IndexContext>(undefined);

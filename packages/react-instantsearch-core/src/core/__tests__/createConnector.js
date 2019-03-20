@@ -1378,17 +1378,11 @@ describe('createConnector', () => {
 
       expect(wrapper.text()).toMatchInlineSnapshot(`
 "{
-  indexContextValue: {
-    targetedIndex: 
-  },
   message: hello,
   providedProps: {
     contextValue: {
       store: {},
       widgetsManager: {}
-    },
-    indexContextValue: {
-      targetedIndex: 
     },
     message: hello
   }
