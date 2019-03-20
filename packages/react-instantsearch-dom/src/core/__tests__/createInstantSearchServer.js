@@ -30,9 +30,8 @@ describe('createInstantSearchServer', () => {
 
         const fallback = props.defaultRefinement || 'Apple';
 
-        // @TODO, use props instead
-        if (this.context && this.context.multiIndexContext) {
-          const index = this.context.multiIndexContext.targetedIndex;
+        if (this.props.indexContextValue) {
+          const index = this.props.indexContextValue.targetedIndex;
           const indexSearchState =
             searchState.indices && searchState.indices[index]
               ? searchState.indices[index]
@@ -104,6 +103,7 @@ describe('createInstantSearchServer', () => {
     });
 
     it('uses the provided algoliaClient', () => {
+      global.console.warn = jest.fn();
       const { InstantSearch } = createInstantSearchServer();
 
       const algoliaClient = {
@@ -126,6 +126,9 @@ describe('createInstantSearchServer', () => {
         `react-instantsearch (${version})`
       );
       expect(wrapper.props().algoliaClient).toBe(algoliaClient);
+      expect(global.console.warn.mock.calls[0][0]).toMatchInlineSnapshot(
+        `"\`algoliaClient\` option was renamed \`searchClient\`. Please use this new option before the next major version."`
+      );
     });
 
     it('does not throw if searchClient does not have a `addAlgoliaAgent()` method', () => {
@@ -142,6 +145,7 @@ describe('createInstantSearchServer', () => {
     });
 
     it('does not throw if algoliaClient does not have a `addAlgoliaAgent()` method', () => {
+      global.console.warn = jest.fn();
       const { InstantSearch } = createInstantSearchServer();
 
       const props = {
@@ -152,6 +156,9 @@ describe('createInstantSearchServer', () => {
       const trigger = () => shallow(<InstantSearch {...props} />);
 
       expect(() => trigger()).not.toThrow();
+      expect(global.console.warn.mock.calls[0][0]).toMatchInlineSnapshot(
+        `"\`algoliaClient\` option was renamed \`searchClient\`. Please use this new option before the next major version."`
+      );
     });
 
     it('throws if algoliaClient is given with searchClient', () => {
