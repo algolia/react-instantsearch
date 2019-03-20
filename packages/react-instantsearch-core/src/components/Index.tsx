@@ -81,7 +81,10 @@ class Index extends Component<Props, State> {
 
     this.props.contextValue.onSearchParameters(
       this.getSearchParameters.bind(this),
-      this.state.indexContext,
+      {
+        ais: this.props.contextValue,
+        multiIndexContext: this.state.indexContext,
+      },
       this.props
     );
   }
