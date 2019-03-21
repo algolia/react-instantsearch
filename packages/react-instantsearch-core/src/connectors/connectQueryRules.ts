@@ -16,11 +16,7 @@ export default createConnector({
     transformItems: items => items,
   } as QueryRulesProps,
 
-  getProvidedProps(
-    props: QueryRulesProps,
-    _searchState: any,
-    searchResults: any
-  ) {
+  getProvidedProps(props: QueryRulesProps, _1: any, searchResults: any) {
     const results = getResults(searchResults, this.context);
 
     if (results === null) {
