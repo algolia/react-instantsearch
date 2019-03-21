@@ -165,7 +165,7 @@ const createInstantSearchServer = algoliasearch => {
         algoliasearch(this.props.appId, this.props.apiKey);
 
       if (typeof client.addAlgoliaAgent === 'function') {
-        client.addAlgoliaAgent(`react-instantsearch ${version}`);
+        client.addAlgoliaAgent(`react-instantsearch (${version})`);
       }
 
       indexName = this.props.indexName;

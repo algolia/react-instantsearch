@@ -46,7 +46,7 @@ describe('createInstantSearch', () => {
 
     expect(algoliaClient.addAlgoliaAgent).toHaveBeenCalledTimes(1);
     expect(algoliaClient.addAlgoliaAgent).toHaveBeenCalledWith(
-      `react-instantsearch ${version}`
+      `react-instantsearch (${version})`
     );
   });
 

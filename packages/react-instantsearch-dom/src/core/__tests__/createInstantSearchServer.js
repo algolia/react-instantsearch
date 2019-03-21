@@ -80,7 +80,7 @@ describe('createInstantSearchServer', () => {
       expect(createSearchClientMock).toHaveBeenCalledWith('appId', 'apiKey');
       expect(searchClient.addAlgoliaAgent).toHaveBeenCalledTimes(1);
       expect(searchClient.addAlgoliaAgent).toHaveBeenCalledWith(
-        `react-instantsearch ${version}`
+        `react-instantsearch (${version})`
       );
     });
 
