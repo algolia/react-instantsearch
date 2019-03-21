@@ -1,6 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { QueryRuleCustomData, Panel } from 'react-instantsearch-dom';
+import { connectHits } from 'react-instantsearch-core';
+import { QueryRuleCustomData, Panel, Highlight } from 'react-instantsearch-dom';
 import { WrapWithHits } from './util';
 
 type CustomDataItem = {
@@ -9,13 +10,42 @@ type CustomDataItem = {
   link: string;
 };
 
+type MovieHit = {
+  actors: string[];
+  color: string;
+  genre: string[];
+  image: string;
+  objectID: string;
+  score: number;
+  title: string;
+};
+
 const stories = storiesOf('QueryRuleCustomData', module);
+
+const StoryHits = connectHits(({ hits }: { hits: MovieHit[] }) => (
+  <div className="hits">
+    {hits.map(hit => (
+      <div key={hit.objectID} className="hit">
+        <div className="hit-picture">
+          <img src={hit.image} />
+        </div>
+
+        <div className="hit-content">
+          <div>
+            <Highlight attribute="title" hit={hit} />
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+));
 
 const storyProps = {
   appId: 'latency',
   apiKey: 'af044fb0788d6bb15f807e4420592bc5',
   indexName: 'instant_search_movies',
   linkedStoryGroup: 'QueryRuleCustomData',
+  hitsElement: <StoryHits />,
 };
 
 stories
