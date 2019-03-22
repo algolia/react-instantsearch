@@ -1,5 +1,9 @@
 import createConnector from '../core/createConnector';
-import { getResults } from '../core/indexUtils';
+import {
+  addAbsolutePositions,
+  addQueryID,
+  getResults,
+} from '../core/indexUtils';
 
 /**
  * connectHits connector provides the logic to create connected
@@ -45,8 +49,16 @@ export default createConnector({
 
   getProvidedProps(props, searchState, searchResults) {
     const results = getResults(searchResults, this.context);
-    const hits = results ? results.hits : [];
+    let hits = [];
+    if (results) {
+      hits = addAbsolutePositions(
+        results.hits,
+        results.hitsPerPage,
+        results.page
+      );
 
+      hits = addQueryID(hits, results.queryID);
+    }
     return { hits };
   },
 
