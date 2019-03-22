@@ -5,7 +5,7 @@ export type CustomUserData = {
   [key: string]: any;
 };
 
-type QueryRulesProps<TItem = CustomUserData> = {
+export type QueryRulesProps<TItem = CustomUserData> = {
   transformItems: (items: TItem[]) => TItem[];
 };
 
@@ -28,9 +28,7 @@ export default createConnector({
 
     const { userData = [] } = results;
     const { transformItems } = props;
-    const transformedItems = transformItems
-      ? transformItems(userData)
-      : userData;
+    const transformedItems = transformItems(userData);
 
     return {
       items: transformedItems,
