@@ -3,6 +3,8 @@ import {
   getCurrentRefinementValue,
   refineValue,
   getResults,
+  addAbsolutePositions,
+  addQueryID,
 } from '../core/indexUtils';
 
 function getId() {
@@ -53,7 +55,10 @@ export default createConnector({
       };
     }
 
-    const { hits, page, nbPages } = results;
+    const { page, nbPages } = results;
+
+    let hits = addAbsolutePositions(results.hits, results.hitsPerPage, page);
+    hits = addQueryID(hits, results.queryID);
 
     if (page === 0) {
       this._allResults = hits;
