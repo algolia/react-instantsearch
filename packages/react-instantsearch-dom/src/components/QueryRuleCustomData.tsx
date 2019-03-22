@@ -16,7 +16,7 @@ export type QueryRuleCustomDataProps<TItem> = {
   children: (options: QueryRuleCustomDataRenderProps<TItem>) => React.ReactNode;
 };
 
-const QueryRuleCustomData: React.SFC<
+const QueryRuleCustomData: React.FC<
   QueryRuleCustomDataProps<CustomUserData>
 > = ({ items, className, children }) => (
   <div className={classNames(cx(''), className)}>{children({ items })}</div>

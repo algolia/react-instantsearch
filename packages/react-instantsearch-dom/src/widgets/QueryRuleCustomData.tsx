@@ -5,7 +5,7 @@ import QueryRuleCustomData, {
   QueryRuleCustomDataProps,
 } from '../components/QueryRuleCustomData';
 
-const QueryRuleCustomDataWidget: React.SFC<
+const QueryRuleCustomDataWidget: React.FC<
   QueryRuleCustomDataProps<CustomUserData>
 > = props => (
   <PanelCallbackHandler {...props}>
