@@ -3,9 +3,8 @@ import {
   getCurrentRefinementValue,
   refineValue,
   getResults,
-  addAbsolutePositions,
-  addQueryID,
 } from '../core/indexUtils';
+import { addAbsolutePositions, addQueryID } from '../core/utils';
 
 function getId() {
   return 'page';
