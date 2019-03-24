@@ -1,9 +1,6 @@
 import createConnector from '../core/createConnector';
-import {
-  addAbsolutePositions,
-  addQueryID,
-  getResults,
-} from '../core/indexUtils';
+import { getResults } from '../core/indexUtils';
+import { addAbsolutePositions, addQueryID } from '../core/utils';
 
 /**
  * connectHits connector provides the logic to create connected
