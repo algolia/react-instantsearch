@@ -264,7 +264,7 @@ export function createConnectorWithoutContext(
       }
 
       getSearchParameters(searchParameters) {
-        if (connectorDesc.getSearchParameters) {
+        if (typeof connectorDesc.getSearchParameters === 'function') {
           return connectorDesc.getSearchParameters.call(
             this,
             searchParameters,
