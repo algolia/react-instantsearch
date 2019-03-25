@@ -30,9 +30,7 @@ function inferPayload({
   method: InsightsClientMethod;
   results: Results;
   currentHit: Hit;
-}):
-  | Without<InsightsClientPayload, 'eventName'>
-  | Without<InsightsClientPayload, 'eventName' | 'positions'> {
+}): Without<InsightsClientPayload, 'eventName'> {
   const { index } = results;
   const queryID = currentHit.__queryID;
   const objectIDs = [currentHit.objectID];
