@@ -193,21 +193,21 @@ describe('InstantSearch', () => {
     };
     createInstantSearchManager.mockImplementation(() => ism);
 
-    let nextState = { a: 1 };
-
     const wrapper = mount(
       <InstantSearch {...DEFAULT_PROPS}>
         <InstantSearchConsumer>
           {contextValue => (
             <button
-              onClick={() => contextValue.onInternalStateUpdate(nextState)}
+              onClick={({ nextState }) =>
+                contextValue.onInternalStateUpdate(nextState)
+              }
             />
           )}
         </InstantSearchConsumer>
       </InstantSearch>
     );
 
-    wrapper.find('button').simulate('click');
+    wrapper.find('button').simulate('click', { nextState: { a: 1 } });
 
     expect(ism.onExternalStateUpdate.mock.calls[0][0]).toEqual({
       a: 1,
@@ -217,8 +217,7 @@ describe('InstantSearch', () => {
     const onSearchStateChange = jest.fn();
     wrapper.setProps({ onSearchStateChange });
 
-    nextState = { a: 2 };
-    wrapper.find('button').simulate('click');
+    wrapper.find('button').simulate('click', { nextState: { a: 2 } });
 
     expect(onSearchStateChange.mock.calls[0][0]).toEqual({
       a: 2,
