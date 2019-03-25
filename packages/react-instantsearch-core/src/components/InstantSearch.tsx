@@ -16,12 +16,20 @@ function validateNextProps(props, nextProps) {
   }
 }
 
+// @TODO: move this to the helper?
+type SearchParameters = any; // algoliaHelper.SearchParameters
+
 // @TODO: move to createInstantSearchManager when it's TS
 type InstantSearchManager = {
   store: Store;
   widgetsManager: any;
   getWidgetsIds: any;
-  getSearchParameters: (...args: any[]) => any; // should this return void / mixed?
+  getSearchParameters: (
+    ...args: any[]
+  ) => {
+    mainParameters: SearchParameters;
+    derivedParameters: SearchParameters;
+  }; // should this return void / mixed?
   onSearchForFacetValues: (...args: any[]) => any;
   onExternalStateUpdate: (...args: any[]) => any;
   transitionState: any;
@@ -47,16 +55,15 @@ type Props = {
   indexName: string;
   searchClient: SearchClient;
   createURL?: (searchState: SearchState, knownKeys: any) => string;
-  onSearchStateChange?: (searchState: SearchState) => any; // void?
+  onSearchStateChange?: (searchState: SearchState) => void;
   searchState?: SearchState;
   onSearchParameters?: (
     getSearchParameters: (...args: any) => any,
     context: any,
     props: any,
     searchState: SearchState
-  ) => any; // void?
+  ) => void;
   stalledSearchDelay?: number;
-  // if this is required, how do people use it, is this wrapped in DOM?
   root: {
     Root: ReactType; // react component
     props: {}; // I think this is correct
@@ -115,7 +122,6 @@ class InstantSearch extends Component<Props, State> {
 
     createURL: PropTypes.func,
 
-    // huh? how is this required
     refresh: PropTypes.bool.isRequired,
 
     searchState: PropTypes.object,
@@ -247,15 +253,14 @@ class InstantSearch extends Component<Props, State> {
     const { Root, props } = this.props.root;
     if (childrenCount === 0) {
       return null;
-    } else {
-      return (
-        <Root {...props}>
-          <InstantSearchProvider value={this.state.contextValue}>
-            {this.props.children}
-          </InstantSearchProvider>
-        </Root>
-      );
     }
+    return (
+      <Root {...props}>
+        <InstantSearchProvider value={this.state.contextValue}>
+          {this.props.children}
+        </InstantSearchProvider>
+      </Root>
+    );
   }
 }
 
