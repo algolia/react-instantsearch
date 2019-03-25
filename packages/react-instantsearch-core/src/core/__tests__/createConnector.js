@@ -70,7 +70,7 @@ describe('createConnector', () => {
         }),
       });
 
-      const wrapper = mount(<Connected {...props} contextValue={context} />);
+      const wrapper = shallow(<Connected {...props} contextValue={context} />);
 
       expect(getProvidedProps).toHaveBeenCalledTimes(1);
       expect(getProvidedProps).toHaveBeenCalledWith(
@@ -148,13 +148,9 @@ describe('createConnector', () => {
 
       const context = createFakeContext();
 
-      const wrapper = mount(
-        <Connected {...props} contextValue={context} />,
-
-        {
-          disableLifecycleMethods: true,
-        }
-      );
+      const wrapper = shallow(<Connected {...props} contextValue={context} />, {
+        disableLifecycleMethods: true,
+      });
 
       // Simulate props change before mount
       wrapper.setProps({ hello: 'again' });
@@ -353,7 +349,7 @@ describe('createConnector', () => {
         },
         onSearchStateChange,
       };
-      const wrapper = mount(<Connected {...props} contextValue={context} />);
+      const wrapper = shallow(<Connected {...props} contextValue={context} />);
 
       expect(shouldComponentUpdate).toHaveBeenCalledTimes(0);
 
