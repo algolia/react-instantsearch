@@ -1,13 +1,13 @@
 type SearchState = any; // @TODO: give searchState type
 type ResultsState = any; // @TODO: give results type
 type ResultsFacetsValues = any;
-type Listener = () => any;
+type Listener = () => void;
 type State = {
   widgets: SearchState;
   metadata: any[];
   results: ResultsState | null;
   resultsFacetValues: ResultsFacetsValues | null;
-  error: any | null;
+  error: Error | null;
   searching: boolean;
   isSearchStalled: boolean;
   searchingForFacetValues: boolean;
@@ -15,16 +15,14 @@ type State = {
 export default function createStore(initialState: State) {
   let state = initialState;
   const listeners: Listener[] = [];
-  function dispatch() {
-    listeners.forEach(listener => listener());
-  }
+
   return {
     getState() {
       return state;
     },
     setState(nextState: State) {
       state = nextState;
-      dispatch();
+      listeners.forEach(listener => listener());
     },
     subscribe(listener: Listener) {
       listeners.push(listener);
