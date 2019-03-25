@@ -113,7 +113,7 @@ describe('createConnector', () => {
 
       const context = createFakeContext();
 
-      const wrapper = shallow(<Connected contextValue={context} {...props} />);
+      const wrapper = shallow(<Connected {...props} contextValue={context} />);
 
       expect(getProvidedProps).toHaveBeenCalledTimes(1);
 
@@ -335,20 +335,8 @@ describe('createConnector', () => {
         shouldComponentUpdate,
       })(() => null);
 
-      const onSearchStateChange = jest.fn();
-      const update = jest.fn();
       const props = { hello: 'there' };
-      const context = {
-        store: {
-          getState: () => ({}),
-          subscribe: () => null,
-        },
-        widgetsManager: {
-          registerWidget: () => null,
-          update,
-        },
-        onSearchStateChange,
-      };
+      const context = createFakeContext();
       const wrapper = shallow(<Connected {...props} contextValue={context} />);
 
       expect(shouldComponentUpdate).toHaveBeenCalledTimes(0);

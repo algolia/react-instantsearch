@@ -109,8 +109,6 @@ export function createConnectorWithoutContext(
       static displayName = `${connectorDesc.displayName}(${getDisplayName(
         Composed
       )})`;
-      // @TODO: this doesn't seem used, can it be removed?
-      // static defaultClassNames = Composed.defaultClassNames;
       static propTypes = connectorDesc.propTypes;
       static defaultProps = connectorDesc.defaultProps;
 
