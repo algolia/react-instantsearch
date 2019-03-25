@@ -12,7 +12,7 @@ import {
 } from 'react-instantsearch-dom';
 import 'instantsearch.css/themes/algolia.css';
 
-const RawCustomHits = ({ hits }) => (
+const Hits = ({ hits }) => (
   <div className="hits">
     {hits.map(hit => (
       <div key={hit.objectID} className="hit">
@@ -43,11 +43,11 @@ const RawCustomHits = ({ hits }) => (
   </div>
 );
 
-RawCustomHits.propTypes = {
+Hits.propTypes = {
   hits: PropTypes.array.isRequired,
 };
 
-export const CustomHits = connectHits(RawCustomHits);
+export const CustomHits = connectHits(Hits);
 
 export const Wrap = ({ appId, apiKey, indexName, children }) => (
   <InstantSearch appId={appId} apiKey={apiKey} indexName={indexName}>
