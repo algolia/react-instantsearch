@@ -91,6 +91,8 @@ export function createConnectorWithoutContext(
     );
   }
 
+  needlessUsageWarning(connectorDesc);
+
   const isWidget =
     typeof connectorDesc.getSearchParameters === 'function' ||
     typeof connectorDesc.getMetadata === 'function' ||
@@ -121,12 +123,6 @@ export function createConnectorWithoutContext(
       state: ConnectorState = {
         providedProps: this.getProvidedProps(this.props),
       };
-
-      constructor(props: ConnectorProps) {
-        super(props);
-
-        needlessUsageWarning(connectorDesc);
-      }
 
       componentWillMount() {
         if (connectorDesc.getSearchParameters) {
