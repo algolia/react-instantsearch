@@ -53,7 +53,9 @@ export function addAbsolutePositions(hits, hitsPerPage, page) {
 }
 
 export function addQueryID(hits, queryID) {
-  if (!queryID) return hits;
+  if (!queryID) {
+    return hits;
+  }
   return hits.map(hit => ({
     ...hit,
     __queryID: queryID,
