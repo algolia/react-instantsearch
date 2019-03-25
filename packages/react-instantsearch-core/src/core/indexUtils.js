@@ -1,4 +1,4 @@
-import { get, has, omit } from 'lodash';
+import { has, omit, get } from 'lodash';
 
 export function getIndexId(context) {
   return context && context.multiIndexContext
