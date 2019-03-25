@@ -56,15 +56,22 @@ export default createConnector({
 
     const { page, nbPages } = results;
 
-    let hits = addAbsolutePositions(results.hits, results.hitsPerPage, page);
-    hits = addQueryID(hits, results.queryID);
+    const hitsWithPositions = addAbsolutePositions(
+      results.hits,
+      results.hitsPerPage,
+      page
+    );
+    const hitsWithPositionsAndQueryID = addQueryID(
+      hitsWithPositions,
+      results.queryID
+    );
 
     if (page === 0) {
-      this._allResults = hits;
+      this._allResults = hitsWithPositionsAndQueryID;
     } else if (page > this._previousPage) {
-      this._allResults = [...this._allResults, ...hits];
+      this._allResults = [...this._allResults, ...hitsWithPositionsAndQueryID];
     } else if (page < this._previousPage) {
-      this._allResults = hits;
+      this._allResults = hitsWithPositionsAndQueryID;
     }
 
     const lastPageIndex = nbPages - 1;
