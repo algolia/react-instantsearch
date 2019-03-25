@@ -119,15 +119,14 @@ class Index extends Component<Props, State> {
     const { Root, props } = this.props.root;
     if (childrenCount === 0) {
       return null;
-    } else {
-      return (
-        <Root {...props}>
-          <IndexProvider value={this.state.indexContext}>
-            {this.props.children}
-          </IndexProvider>
-        </Root>
-      );
     }
+    return (
+      <Root {...props}>
+        <IndexProvider value={this.state.indexContext}>
+          {this.props.children}
+        </IndexProvider>
+      </Root>
+    );
   }
 }
 
