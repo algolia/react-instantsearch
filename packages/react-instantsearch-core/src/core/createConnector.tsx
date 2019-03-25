@@ -117,7 +117,6 @@ export function createConnectorWithoutContext(
       unsubscribe?: () => any;
       unregisterWidget?: () => any;
 
-      mounted = false;
       isUnmounting = false;
 
       state: ConnectorState = {
@@ -135,8 +134,6 @@ export function createConnectorWithoutContext(
       }
 
       componentDidMount() {
-        this.mounted = true;
-
         this.unsubscribe = this.props.contextValue.store.subscribe(() => {
           if (!this.isUnmounting) {
             this.setState({
