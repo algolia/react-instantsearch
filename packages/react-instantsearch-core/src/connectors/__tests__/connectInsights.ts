@@ -125,4 +125,17 @@ describe('connectInsights', () => {
       expect(payload.index).toEqual('theIndex');
     });
   });
+
+  describe('when called with an unsupported method', () => {
+    it('should reject the call', () => {
+      expect(() => {
+        // @ts-ignore
+        props.insights('wrong-method-name', {
+          eventName: 'Add to cart',
+        });
+      }).toThrowErrorMatchingInlineSnapshot(
+        `"Unsupported method \\"wrong-method-name\\" passed to the insights function. The supported methods are: \\"clickedObjectIDsAfterSearch\\", \\"convertedObjectIDsAfterSearch\\"."`
+      );
+    });
+  });
 });

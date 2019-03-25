@@ -44,7 +44,9 @@ function inferPayload({
       return { index, queryID, objectIDs };
 
     default:
-      throw new Error(`Unsupported method passed ${method}`);
+      throw new Error(
+        `Unsupported method "${method}" passed to the insights function. The supported methods are: "clickedObjectIDsAfterSearch", "convertedObjectIDsAfterSearch".`
+      );
   }
 }
 
