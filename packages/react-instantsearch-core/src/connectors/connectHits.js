@@ -46,17 +46,19 @@ export default createConnector({
 
   getProvidedProps(props, searchState, searchResults) {
     const results = getResults(searchResults, this.context);
-    let hits = [];
-    if (results) {
-      hits = addAbsolutePositions(
-        results.hits,
-        results.hitsPerPage,
-        results.page
-      );
-
-      hits = addQueryID(hits, results.queryID);
+    if (!results) {
+      return { hits: [] };
     }
-    return { hits };
+    const hitsWithPositions = addAbsolutePositions(
+      results.hits,
+      results.hitsPerPage,
+      results.page
+    );
+    const hitsWithPositionsAndQueryID = addQueryID(
+      hitsWithPositions,
+      results.queryID
+    );
+    return { hits: hitsWithPositionsAndQueryID };
   },
 
   /* Hits needs to be considered as a widget to trigger a search if no others widgets are used.
