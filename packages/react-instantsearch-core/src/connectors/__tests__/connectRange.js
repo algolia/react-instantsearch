@@ -11,7 +11,8 @@ describe('connectRange', () => {
     const contextValue = { mainTargetedIndex: 'index' };
 
     it('provides the correct props to the component', () => {
-      props = connect.getProvidedProps(
+      props = connect.getProvidedProps.call(
+        {},
         { attribute: 'ok', min: 5, max: 10, precision: 2, contextValue },
         {},
         {}
@@ -34,7 +35,8 @@ describe('connectRange', () => {
         getFacetByName: () => true,
         hits: [],
       };
-      props = connect.getProvidedProps(
+      props = connect.getProvidedProps.call(
+        {},
         {
           attribute: 'ok',
           precision: 2,
@@ -61,7 +63,8 @@ describe('connectRange', () => {
         getFacetByName: () => true,
         hits: [],
       };
-      props = connect.getProvidedProps(
+      props = connect.getProvidedProps.call(
+        {},
         {
           attribute: 'ok',
           precision: 0,
@@ -88,7 +91,8 @@ describe('connectRange', () => {
         getFacetByName: () => true,
         hits: [],
       };
-      props = connect.getProvidedProps(
+      props = connect.getProvidedProps.call(
+        {},
         {
           attribute: 'ok',
           precision: 2,
@@ -117,7 +121,8 @@ describe('connectRange', () => {
         getFacetByName: () => true,
         hits: [],
       };
-      props = connect.getProvidedProps(
+      props = connect.getProvidedProps.call(
+        {},
         {
           attribute: 'ok',
           precision: 0,
@@ -144,7 +149,8 @@ describe('connectRange', () => {
         getFacetByName: () => true,
         hits: [],
       };
-      props = connect.getProvidedProps(
+      props = connect.getProvidedProps.call(
+        {},
         {
           attribute: 'ok',
           precision: 1,
@@ -171,7 +177,8 @@ describe('connectRange', () => {
         getFacetByName: () => true,
         hits: [],
       };
-      props = connect.getProvidedProps(
+      props = connect.getProvidedProps.call(
+        {},
         {
           attribute: 'ok',
           precision: 2,
@@ -198,7 +205,8 @@ describe('connectRange', () => {
         getFacetByName: () => true,
         hits: [],
       };
-      props = connect.getProvidedProps(
+      props = connect.getProvidedProps.call(
+        {},
         {
           attribute: 'ok',
           precision: 3,
@@ -222,7 +230,8 @@ describe('connectRange', () => {
         getFacetValues: () => [],
         hits: [],
       };
-      props = connect.getProvidedProps(
+      props = connect.getProvidedProps.call(
+        {},
         {
           attribute: 'ok',
           precision: 2,
@@ -243,7 +252,8 @@ describe('connectRange', () => {
         precision: 2,
       });
 
-      props = connect.getProvidedProps(
+      props = connect.getProvidedProps.call(
+        {},
         { attribute: 'ok', precision: 2, contextValue },
         { ok: { min: 6, max: 9 } },
         {}
@@ -260,7 +270,8 @@ describe('connectRange', () => {
         precision: 2,
       });
 
-      props = connect.getProvidedProps(
+      props = connect.getProvidedProps.call(
+        {},
         {
           attribute: 'ok',
           min: 5,
@@ -282,7 +293,8 @@ describe('connectRange', () => {
         precision: 2,
       });
 
-      props = connect.getProvidedProps(
+      props = connect.getProvidedProps.call(
+        {},
         {
           attribute: 'ok',
           min: 5,
@@ -305,7 +317,8 @@ describe('connectRange', () => {
       });
 
       // With a precision of 0 -> parseInt
-      props = connect.getProvidedProps(
+      props = connect.getProvidedProps.call(
+        {},
         {
           attribute: 'ok',
           min: 5,
@@ -328,7 +341,8 @@ describe('connectRange', () => {
       });
 
       // With a precision of > 0 -> parseFloat
-      props = connect.getProvidedProps(
+      props = connect.getProvidedProps.call(
+        {},
         {
           attribute: 'ok',
           min: 5,
@@ -350,7 +364,8 @@ describe('connectRange', () => {
         precision: 1,
       });
 
-      props = connect.getProvidedProps(
+      props = connect.getProvidedProps.call(
+        {},
         {
           attribute: 'ok',
           min: 5,
@@ -371,7 +386,8 @@ describe('connectRange', () => {
         precision: 2,
       });
 
-      props = connect.getProvidedProps(
+      props = connect.getProvidedProps.call(
+        {},
         {
           attribute: 'ok',
           precision: 2,
@@ -395,7 +411,8 @@ describe('connectRange', () => {
       });
 
       expect(() =>
-        connect.getProvidedProps(
+        connect.getProvidedProps.call(
+          {},
           {
             attribute: 'ok',
             min: 5,
@@ -410,7 +427,8 @@ describe('connectRange', () => {
       ).toThrow("You can't provide min value lower than range.");
 
       expect(() =>
-        connect.getProvidedProps(
+        connect.getProvidedProps.call(
+          {},
           {
             attribute: 'ok',
             min: 5,
@@ -624,7 +642,8 @@ describe('connectRange', () => {
     });
 
     it('should return the right searchState when clean up', () => {
-      let searchState = connect.cleanUp(
+      let searchState = connect.cleanUp.call(
+        {},
         { attribute: 'name', contextValue },
         {
           range: { name: 'searchState', name2: 'searchState' },
@@ -636,7 +655,8 @@ describe('connectRange', () => {
         another: { searchState: 'searchState' },
       });
 
-      searchState = connect.cleanUp(
+      searchState = connect.cleanUp.call(
+        {},
         { attribute: 'name2', contextValue },
         searchState
       );

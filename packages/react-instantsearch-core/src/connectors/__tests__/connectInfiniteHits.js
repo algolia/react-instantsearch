@@ -12,7 +12,7 @@ describe('connectInfiniteHits', () => {
       const contextValue = createSingleIndexContext();
 
       const hits = [{}];
-      const props = connect.getProvidedProps({ contextValue }, null, {
+      const props = connect.getProvidedProps.call({}, { contextValue }, null, {
         results: { hits, page: 0, hitsPerPage: 2, nbPages: 3 },
       });
 
@@ -27,14 +27,16 @@ describe('connectInfiniteHits', () => {
 
       const hits = [{}, {}];
       const hits2 = [{}, {}];
-      const res1 = connect.getProvidedProps({ contextValue }, null, {
+      const ctx = {};
+
+      const res1 = connect.getProvidedProps.call(ctx, { contextValue }, null, {
         results: { hits, page: 0, hitsPerPage: 2, nbPages: 3 },
       });
 
       expect(res1.hits).toEqual(hits.map(hit => expect.objectContaining(hit)));
       expect(res1.hasMore).toBe(true);
 
-      const res2 = connect.getProvidedProps({ contextValue }, null, {
+      const res2 = connect.getProvidedProps.call(ctx, { contextValue }, null, {
         results: {
           hits: hits2,
           page: 1,
@@ -55,8 +57,9 @@ describe('connectInfiniteHits', () => {
       const hits = [{}, {}, {}, {}, {}, {}];
       const hits2 = [{}, {}, {}, {}, {}, {}];
       const hits3 = [{}, {}, {}, {}, {}, {}, {}, {}];
+      const ctx = {};
 
-      const res1 = connect.getProvidedProps({ contextValue }, null, {
+      const res1 = connect.getProvidedProps.call(ctx, { contextValue }, null, {
         results: {
           hits,
           page: 0,
@@ -78,7 +81,7 @@ describe('connectInfiniteHits', () => {
       ]);
       expect(res1.hasMore).toBe(true);
 
-      const res2 = connect.getProvidedProps({ contextValue }, null, {
+      const res2 = connect.getProvidedProps.call(ctx, { contextValue }, null, {
         results: {
           hits: hits2,
           page: 1,
@@ -125,7 +128,7 @@ describe('connectInfiniteHits', () => {
       ]);
       expect(res2.hasMore).toBe(true);
 
-      let res3 = connect.getProvidedProps({ contextValue }, null, {
+      let res3 = connect.getProvidedProps.call(ctx, { contextValue }, null, {
         results: {
           hits: hits3,
           page: 2,
@@ -192,7 +195,7 @@ describe('connectInfiniteHits', () => {
       expect(res3.hasMore).toBe(true);
 
       // re-render with the same property
-      res3 = connect.getProvidedProps({ contextValue }, null, {
+      res3 = connect.getProvidedProps.call(ctx, { contextValue }, null, {
         results: {
           hits: hits3,
           page: 2,
@@ -264,12 +267,13 @@ describe('connectInfiniteHits', () => {
 
       const hits = [{}, {}];
       const nbPages = 5;
+      const ctx = {};
 
       let allHits = [];
       for (let page = 0; page < nbPages - 1; page++) {
         allHits = [...allHits, ...hits];
 
-        const res = connect.getProvidedProps({ contextValue }, null, {
+        const res = connect.getProvidedProps.call(ctx, { contextValue }, null, {
           results: {
             hits,
             page,
@@ -288,7 +292,7 @@ describe('connectInfiniteHits', () => {
 
       allHits = [...allHits, ...hits];
 
-      const res = connect.getProvidedProps({ contextValue }, null, {
+      const res = connect.getProvidedProps.call(ctx, { contextValue }, null, {
         results: {
           hits,
           page: nbPages - 1,
@@ -335,12 +339,13 @@ describe('connectInfiniteHits', () => {
       const hits = [{}, {}];
       const hits2 = [{}, {}];
       const hits3 = [{}];
+      const ctx = {};
 
-      connect.getProvidedProps({ contextValue }, null, {
+      connect.getProvidedProps.call(ctx, { contextValue }, null, {
         results: { hits, page: 0, hitsPerPage: 2, nbPages: 3 },
       });
 
-      connect.getProvidedProps({ contextValue }, null, {
+      connect.getProvidedProps.call(ctx, { contextValue }, null, {
         results: {
           hits: hits2,
           page: 1,
@@ -349,7 +354,7 @@ describe('connectInfiniteHits', () => {
         },
       });
 
-      const props = connect.getProvidedProps({ contextValue }, null, {
+      const props = connect.getProvidedProps.call(ctx, { contextValue }, null, {
         results: {
           hits: hits3,
           page: 2,
@@ -370,10 +375,10 @@ describe('connectInfiniteHits', () => {
       const props = { contextValue };
       const state0 = {};
 
-      const state1 = connect.refine(props, state0);
+      const state1 = connect.refine.call({}, props, state0);
       expect(state1).toEqual({ page: 2 });
 
-      const state2 = connect.refine(props, state1);
+      const state2 = connect.refine.call({}, props, state1);
       expect(state2).toEqual({ page: 3 });
     });
 
@@ -383,7 +388,7 @@ describe('connectInfiniteHits', () => {
       const props = { contextValue };
       const state0 = { page: '0' };
 
-      const state1 = connect.refine(props, state0);
+      const state1 = connect.refine.call({}, props, state0);
       expect(state1).toEqual({ page: 1 });
     });
 
@@ -409,7 +414,8 @@ describe('connectInfiniteHits', () => {
         hasMore: true,
       };
 
-      const actual = connect.getProvidedProps(
+      const actual = connect.getProvidedProps.call(
+        {},
         props,
         searchState,
         searchResults
