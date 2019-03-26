@@ -8,7 +8,8 @@ describe('connectConfigure', () => {
     const contextValue = { ais: { mainTargetedIndex: 'index' } };
 
     it('propagates the props to the SearchParameters without children & contextValue', () => {
-      const searchParameters = connect.getSearchParameters(
+      const searchParameters = connect.getSearchParameters.call(
+        {},
         new SearchParameters(),
         { distinct: 1, whatever: 'please', children: 'whatever', contextValue },
         {}
@@ -44,7 +45,9 @@ describe('connectConfigure', () => {
     });
 
     it('calling transitionState should add configure parameters to the search state', () => {
-      let searchState = connect.transitionState(
+      const ctx = {};
+      let searchState = connect.transitionState.call(
+        ctx,
         {
           distinct: 1,
           whatever: 'please',
@@ -58,7 +61,8 @@ describe('connectConfigure', () => {
         configure: { distinct: 1, whatever: 'please' },
       });
 
-      searchState = connect.transitionState(
+      searchState = connect.transitionState.call(
+        ctx,
         { whatever: 'other', children: 'whatever', contextValue },
         { configure: { distinct: 1, whatever: 'please' } },
         { configure: { distinct: 1, whatever: 'please' } }
@@ -68,7 +72,8 @@ describe('connectConfigure', () => {
     });
 
     it('calling cleanUp should remove configure parameters from the search state', () => {
-      let searchState = connect.cleanUp(
+      let searchState = connect.cleanUp.call(
+        {},
         {
           distinct: 1,
           whatever: 'please',
@@ -85,7 +90,8 @@ describe('connectConfigure', () => {
       );
       expect(searchState).toEqual({ configure: { another: 'parameters' } });
 
-      searchState = connect.cleanUp(
+      searchState = connect.cleanUp.call(
+        {},
         { distinct: 1, whatever: 'please', children: 'whatever', contextValue },
         { configure: { distinct: 1, whatever: 'please' } }
       );
