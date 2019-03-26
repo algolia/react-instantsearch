@@ -169,23 +169,7 @@ describe('Index', () => {
       },
     };
 
-    const Dummy = props => {
-      return (
-        <pre>
-          {JSON.stringify(
-            props,
-            (key, val) => {
-              if (key === 'contextValue') {
-                expect(val).toEqual(context);
-                return 'context';
-              }
-              return val;
-            },
-            2
-          ).replace(/"/g, '')}
-        </pre>
-      );
-    };
+    const Dummy = props => JSON.stringify(props, null, 2).replace(/"/g, '');
 
     const Connected = createConnector({
       displayName: 'Connector',
@@ -204,17 +188,20 @@ describe('Index', () => {
       </InstantSearchProvider>
     );
 
-    expect(wrapper.html()).toMatchInlineSnapshot(`
-"<div><pre>{
+    expect(wrapper.text()).toMatchInlineSnapshot(`
+"{
   message: hello,
   providedProps: {
-    contextValue: context,
+    contextValue: {
+      widgetsManager: {},
+      store: {}
+    },
     indexContextValue: {
       targetedIndex: test
     },
     message: hello
   }
-}</pre></div>"
+}"
 `);
   });
 });
