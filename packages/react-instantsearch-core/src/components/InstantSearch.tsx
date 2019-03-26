@@ -149,7 +149,6 @@ class InstantSearch extends Component<Props, State> {
   isUnmounting: boolean;
   aisManager: InstantSearchManager;
 
-  // @TODO: understand why Props needs to be declared on every method
   constructor(props: Props) {
     super(props);
     this.isControlled = Boolean(props.searchState);

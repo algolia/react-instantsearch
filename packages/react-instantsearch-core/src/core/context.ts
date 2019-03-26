@@ -22,7 +22,6 @@ export const {
   onSearchForFacetValues: () => undefined,
   onSearchStateChange: () => undefined,
   onSearchParameters: () => undefined,
-  // TODO: move store out of context
   store: {} as Store,
   widgetsManager: {},
   mainTargetedIndex: '',
