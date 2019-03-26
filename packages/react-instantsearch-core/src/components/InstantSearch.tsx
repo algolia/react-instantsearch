@@ -183,6 +183,12 @@ class InstantSearch extends Component<Props, State> {
 
     if (this.props.indexName !== nextProps.indexName) {
       this.aisManager.updateIndex(nextProps.indexName);
+      this.setState(state => ({
+        contextValue: {
+          ...state.contextValue,
+          mainTargetedIndex: nextProps.indexName,
+        },
+      }));
     }
 
     if (this.props.refresh !== nextProps.refresh) {

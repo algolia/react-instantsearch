@@ -314,7 +314,9 @@ describe('InstantSearch', () => {
 
     const wrapper = shallow(
       <InstantSearch {...DEFAULT_PROPS}>
-        <div />
+        <InstantSearchConsumer>
+          {contextValue => contextValue.mainTargetedIndex}
+        </InstantSearchConsumer>
       </InstantSearch>
     );
 
@@ -324,11 +326,15 @@ describe('InstantSearch', () => {
       indexName: 'foobar',
     });
 
+    expect(wrapper.html()).toMatchInlineSnapshot(`"<div>foobar</div>"`);
+
     expect(ism.updateIndex).not.toHaveBeenCalled();
 
     wrapper.setProps({
       indexName: 'newindexname',
     });
+
+    expect(wrapper.html()).toMatchInlineSnapshot(`"<div>newindexname</div>"`);
 
     expect(ism.updateIndex).toHaveBeenCalledTimes(1);
   });
