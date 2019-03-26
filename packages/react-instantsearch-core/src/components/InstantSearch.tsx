@@ -18,6 +18,7 @@ function validateNextProps(props, nextProps) {
 
 // @TODO: move this to the helper?
 type SearchParameters = any; // algoliaHelper.SearchParameters
+type SearchResults = any; // algoliaHelper.SearchResults
 
 // @TODO: move to createInstantSearchManager when it's TS
 type InstantSearchManager = {
@@ -68,7 +69,7 @@ type Props = {
     Root: ReactType; // react component
     props: {}; // I think this is correct
   };
-  resultsState: SearchState | SearchState[];
+  resultsState: SearchResults | { [indexId: string]: SearchResults };
 };
 
 type State = {
