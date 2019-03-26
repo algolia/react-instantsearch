@@ -104,7 +104,8 @@ describe('connectConfigure', () => {
     const indexContextValue = { targetedIndex: 'second' };
 
     it('it propagates the props to the SearchParameters without children', () => {
-      const searchParameters = connect.getSearchParameters(
+      const searchParameters = connect.getSearchParameters.call(
+        {},
         new SearchParameters(),
         {
           distinct: 1,
@@ -123,7 +124,9 @@ describe('connectConfigure', () => {
     });
 
     it('calling transitionState should add configure parameters to the search state', () => {
-      let searchState = connect.transitionState(
+      const ctx = {};
+      let searchState = connect.transitionState.call(
+        ctx,
         {
           distinct: 1,
           whatever: 'please',
@@ -138,7 +141,8 @@ describe('connectConfigure', () => {
         indices: { second: { configure: { distinct: 1, whatever: 'please' } } },
       });
 
-      searchState = connect.transitionState(
+      searchState = connect.transitionState.call(
+        ctx,
         {
           whatever: 'other',
           children: 'whatever',
@@ -161,7 +165,8 @@ describe('connectConfigure', () => {
         indices: { second: { configure: { whatever: 'other' } } },
       });
 
-      searchState = connect.transitionState(
+      searchState = connect.transitionState.call(
+        ctx,
         {
           distinct: 1,
           whatever: 'please',
@@ -180,7 +185,8 @@ describe('connectConfigure', () => {
         },
       });
 
-      searchState = connect.transitionState(
+      searchState = connect.transitionState.call(
+        ctx,
         {
           whatever: 'other',
           children: 'whatever',
@@ -210,7 +216,9 @@ describe('connectConfigure', () => {
     });
 
     it('calling cleanUp should remove configure parameters from the search state', () => {
-      let searchState = connect.cleanUp(
+      const ctx = {};
+      let searchState = connect.cleanUp.call(
+        ctx,
         {
           distinct: 1,
           whatever: 'please',
@@ -232,7 +240,8 @@ describe('connectConfigure', () => {
         },
       });
 
-      searchState = connect.cleanUp(
+      searchState = connect.cleanUp.call(
+        ctx,
         {
           distinct: 1,
           whatever: 'please',
@@ -251,7 +260,8 @@ describe('connectConfigure', () => {
         indices: { first: { configure: {} }, second: { configure: {} } },
       });
 
-      searchState = connect.cleanUp(
+      searchState = connect.cleanUp.call(
+        ctx,
         {
           distinct: 1,
           whatever: 'please',

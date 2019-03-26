@@ -42,9 +42,11 @@ describe('connectScrollTo', () => {
     const contextValue = { mainTargetedIndex: 'first' };
     const indexContextValue = { targetedIndex: 'second' };
     it('provides the correct props to the component', () => {
+      const ctx = {};
       const searchState = { indices: { second: { p: 1 } } };
 
-      props = connect.getProvidedProps(
+      props = connect.getProvidedProps.call(
+        ctx,
         { scrollOn: 'p', contextValue, indexContextValue },
         searchState
       );
@@ -52,7 +54,8 @@ describe('connectScrollTo', () => {
 
       searchState.indices.second = { ...searchState.indices.second, p: 2 };
 
-      props = connect.getProvidedProps(
+      props = connect.getProvidedProps.call(
+        ctx,
         { scrollOn: 'p', contextValue, indexContextValue },
         searchState
       );
@@ -63,7 +66,8 @@ describe('connectScrollTo', () => {
         anything: 'ok',
       };
 
-      props = connect.getProvidedProps(
+      props = connect.getProvidedProps.call(
+        ctx,
         { scrollOn: 'p', contextValue, indexContextValue },
         searchState
       );
