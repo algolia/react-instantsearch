@@ -231,27 +231,27 @@ describe('InstantSearch', () => {
       widgetsManager: {},
     };
     createInstantSearchManager.mockImplementation(() => ism);
-    let providedValue = false;
+    let childContext = false;
     mount(
       <InstantSearch {...DEFAULT_PROPS}>
         <InstantSearchConsumer>
           {contextValue => {
-            providedValue = contextValue;
+            childContext = contextValue;
             return null;
           }}
         </InstantSearchConsumer>
       </InstantSearch>
     );
 
-    expect(providedValue.store).toBe(ism.store);
-    expect(providedValue.widgetsManager).toBe(ism.widgetsManager);
+    expect(childContext.store).toBe(ism.store);
+    expect(childContext.widgetsManager).toBe(ism.widgetsManager);
   });
 
   it('onSearchStateChange should not be called and search should be skipped if the widget is unmounted', () => {
     const ism = {
       skipSearch: jest.fn(),
     };
-    let providedValue;
+    let childContext;
     createInstantSearchManager.mockImplementation(() => ism);
     const onSearchStateChangeMock = jest.fn();
     const wrapper = mount(
@@ -261,7 +261,7 @@ describe('InstantSearch', () => {
       >
         <InstantSearchConsumer>
           {contextValue => {
-            providedValue = contextValue;
+            childContext = contextValue;
             return null;
           }}
         </InstantSearchConsumer>
@@ -269,7 +269,7 @@ describe('InstantSearch', () => {
     );
 
     wrapper.unmount();
-    providedValue.onSearchStateChange({});
+    childContext.onSearchStateChange({});
 
     expect(onSearchStateChangeMock.mock.calls).toHaveLength(0);
     expect(ism.skipSearch.mock.calls).toHaveLength(1);

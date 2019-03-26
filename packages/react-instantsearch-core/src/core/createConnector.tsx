@@ -338,7 +338,9 @@ export function createConnectorWithoutContext(
 
       render() {
         const { contextValue, ...props } = this.props;
-        if (this.state.providedProps === null) {
+        const { providedProps } = this.state;
+
+        if (providedProps === null) {
           return null;
         }
 
@@ -355,7 +357,7 @@ export function createConnectorWithoutContext(
         return (
           <Composed
             {...props}
-            {...this.state.providedProps}
+            {...providedProps}
             {...refineProps}
             {...searchForFacetValuesProps}
           />
