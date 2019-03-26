@@ -1359,9 +1359,7 @@ describe('createConnector', () => {
         }),
       });
 
-      const Dummy = props => {
-        return JSON.stringify(props, null, 2).replace(/"/g, '');
-      };
+      const Dummy = props => JSON.stringify(props, null, 2).replace(/"/g, '');
 
       const Connected = createConnector({
         displayName: 'Connector',
