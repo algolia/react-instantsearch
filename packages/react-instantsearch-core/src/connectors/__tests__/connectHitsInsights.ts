@@ -1,4 +1,4 @@
-import connect from '../connectInsights';
+import connect from '../connectHitsInsights';
 
 jest.mock('../../core/createConnector', () => x => x);
 
@@ -31,7 +31,7 @@ function setup() {
   return { insightsClient, props };
 }
 
-describe('connectInsights', () => {
+describe('connectHitsInsights', () => {
   it('should expose an `insights` property', () => {
     const { props } = setup();
     expect(props).toHaveProperty('insights');
