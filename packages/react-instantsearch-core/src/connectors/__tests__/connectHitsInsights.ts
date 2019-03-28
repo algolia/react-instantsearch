@@ -56,11 +56,13 @@ describe('connectHitsInsights', () => {
       expect(insightsClient).toHaveBeenCalledTimes(1);
       const [method, payload] = insightsClient.mock.calls[0];
       expect(method).toEqual('clickedObjectIDsAfterSearch');
-      expect(payload.eventName).toEqual('Add to cart');
-      expect(payload.objectIDs).toEqual(['objectID_42']);
-      expect(payload.positions).toEqual([42]);
-      expect(payload.queryID).toEqual('theQueryID');
-      expect(payload.index).toEqual('theIndex');
+      expect(payload).toEqual({
+        eventName: 'Add to cart',
+        objectIDs: ['objectID_42'],
+        positions: [42],
+        queryID: 'theQueryID',
+        index: 'theIndex',
+      })
     });
   });
 
@@ -79,11 +81,12 @@ describe('connectHitsInsights', () => {
 
       const [method, payload] = insightsClient.mock.calls[0];
       expect(method).toEqual('convertedObjectIDsAfterSearch');
-      expect(payload.eventName).toEqual('Add to cart');
-      expect(payload.objectIDs).toEqual(['objectID_42']);
-      expect(payload).not.toHaveProperty('positions');
-      expect(payload.queryID).toEqual('theQueryID');
-      expect(payload.index).toEqual('theIndex');
+      expect(payload).toEqual({
+        eventName: 'Add to cart',
+        objectIDs: ['objectID_42'],
+        queryID: 'theQueryID',
+        index: 'theIndex',
+      })
     });
   });
 
