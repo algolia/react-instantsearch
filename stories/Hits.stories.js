@@ -9,7 +9,7 @@ import {
   Snippet,
   Configure,
 } from 'react-instantsearch-dom';
-import { connectHitsInsights } from 'react-instantsearch-core';
+import { connectHitInsights } from 'react-instantsearch-core';
 import { WrapWithHits } from './util';
 
 const stories = storiesOf('Hits', module);
@@ -53,7 +53,7 @@ stories
   .add('with Insights', () => {
     const insightsClient = (method, payload) =>
       action(`[InsightsClient] sent ${method} with payload`)(payload);
-    const ProductWithInsights = connectHitsInsights(insightsClient)(Product);
+    const ProductWithInsights = connectHitInsights(insightsClient)(Product);
     function Product({ hit, insights }) {
       return (
         <div>

@@ -1,4 +1,4 @@
-import connect from '../connectHitsInsights';
+import connect from '../connectHitInsights';
 
 jest.mock('../../core/createConnector', () => x => x);
 
@@ -31,7 +31,7 @@ function setup() {
   return { insightsClient, props };
 }
 
-describe('connectHitsInsights', () => {
+describe('connectHitInsights', () => {
   it('should expose an `insights` property', () => {
     const { props } = setup();
     expect(props).toHaveProperty('insights');
@@ -62,7 +62,7 @@ describe('connectHitsInsights', () => {
         positions: [42],
         queryID: 'theQueryID',
         index: 'theIndex',
-      })
+      });
     });
   });
 
@@ -86,7 +86,7 @@ describe('connectHitsInsights', () => {
         objectIDs: ['objectID_42'],
         queryID: 'theQueryID',
         index: 'theIndex',
-      })
+      });
     });
   });
 
