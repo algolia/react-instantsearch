@@ -54,13 +54,9 @@ export default createConnector({
       };
     }
 
-    const { page, nbPages } = results;
+    const { hits, hitsPerPage, page, nbPages } = results;
 
-    const hitsWithPositions = addAbsolutePositions(
-      results.hits,
-      results.hitsPerPage,
-      page
-    );
+    const hitsWithPositions = addAbsolutePositions(hits, hitsPerPage, page);
     const hitsWithPositionsAndQueryID = addQueryID(
       hitsWithPositions,
       results.queryID
