@@ -21,6 +21,7 @@ export { connectMenu } from 'react-instantsearch-core';
 export { connectNumericMenu } from 'react-instantsearch-core';
 export { connectPagination } from 'react-instantsearch-core';
 export { connectPoweredBy } from 'react-instantsearch-core';
+export { connectQueryRules } from 'react-instantsearch-core';
 export { connectRange } from 'react-instantsearch-core';
 export { connectRefinementList } from 'react-instantsearch-core';
 export { connectScrollTo } from 'react-instantsearch-core';
@@ -29,7 +30,6 @@ export { connectSortBy } from 'react-instantsearch-core';
 export { connectStateResults } from 'react-instantsearch-core';
 export { connectStats } from 'react-instantsearch-core';
 export { connectToggleRefinement } from 'react-instantsearch-core';
-export { connectQueryRules } from 'react-instantsearch-core';
 
 // Native
 export { default as InstantSearch } from './widgets/InstantSearch';

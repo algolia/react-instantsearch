@@ -34,6 +34,7 @@ export { default as connectMenu } from './connectors/connectMenu';
 export { default as connectNumericMenu } from './connectors/connectNumericMenu';
 export { default as connectPagination } from './connectors/connectPagination';
 export { default as connectPoweredBy } from './connectors/connectPoweredBy';
+export { default as connectQueryRules } from './connectors/connectQueryRules';
 export { default as connectRange } from './connectors/connectRange';
 export {
   default as connectRefinementList,
@@ -48,4 +49,3 @@ export { default as connectStats } from './connectors/connectStats';
 export {
   default as connectToggleRefinement,
 } from './connectors/connectToggleRefinement';
-export { default as connectQueryRules } from './connectors/connectQueryRules';
