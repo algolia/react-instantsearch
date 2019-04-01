@@ -160,6 +160,7 @@ describe('connectInfiniteHits', () => {
         10,
         11,
         12,
+        // hitsPerPage changed from 6 to 8, elements 13-16 are skipped
         // page: 2, hitsPerPage: 8
         17,
         18,
@@ -226,6 +227,7 @@ describe('connectInfiniteHits', () => {
         10,
         11,
         12,
+        // hitsPerPage changed from 6 to 8, elements 13-16 are skipped
         // page: 2, hitsPerPage: 8
         17,
         18,
