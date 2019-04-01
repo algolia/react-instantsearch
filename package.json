@@ -98,7 +98,7 @@
     "react-dom": "16.8.6",
     "react-instantsearch-dom": "5.4.0",
     "react-instantsearch-dom-maps": "5.4.0",
-    "react-native": "0.58.4",
+    "react-native": "0.59.3",
     "react-test-renderer": "16.8.6",
     "rheostat": "2.2.0",
     "rollup": "1.7.4",
