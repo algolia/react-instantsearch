@@ -59,6 +59,7 @@ export default function createInstantSearch(root) {
       this.client = nextProps.searchClient;
 
       if (typeof this.client.addAlgoliaAgent === 'function') {
+        // @TODO: maybe DidUpdate if that's not too late, otherwise side effect in derived state
         this.client.addAlgoliaAgent(`react (${React.version})`);
         this.client.addAlgoliaAgent(`react-instantsearch (${version})`);
       }
