@@ -83,27 +83,23 @@ stories
           />
 
           <QueryRuleCustomData>
-            {({ items }: { items: CustomDataItem[] }) => {
-              if (!items[0]) {
-                return null;
-              }
+            {({ items }: { items: CustomDataItem[] }) =>
+              items.map(({ banner, title, link }) => {
+                if (!banner) {
+                  return null;
+                }
 
-              const { banner, title, link } = items[0];
+                return (
+                  <section key={title}>
+                    <h2>{title}</h2>
 
-              if (!banner) {
-                return null;
-              }
-
-              return (
-                <section key={title}>
-                  <h2>{title}</h2>
-
-                  <a href={link}>
-                    <img src={banner} alt={title} />
-                  </a>
-                </section>
-              );
-            }}
+                    <a href={link}>
+                      <img src={banner} alt={title} />
+                    </a>
+                  </section>
+                );
+              })
+            }
           </QueryRuleCustomData>
         </main>
       </div>
@@ -142,27 +138,23 @@ stories
           />
 
           <QueryRuleCustomData>
-            {({ items }: { items: CustomDataItem[] }) => {
-              if (!items[0]) {
-                return null;
-              }
+            {({ items }: { items: CustomDataItem[] }) =>
+              items.map(({ banner, title, link }) => {
+                if (!banner) {
+                  return null;
+                }
 
-              const { banner, title, link } = items[0];
+                return (
+                  <section key={title}>
+                    <h2>{title}</h2>
 
-              if (!banner) {
-                return null;
-              }
-
-              return (
-                <section key={title}>
-                  <h2>{title}</h2>
-
-                  <a href={link}>
-                    <img src={banner} alt={title} />
-                  </a>
-                </section>
-              );
-            }}
+                    <a href={link}>
+                      <img src={banner} alt={title} />
+                    </a>
+                  </section>
+                );
+              })
+            }
           </QueryRuleCustomData>
         </main>
       </div>
