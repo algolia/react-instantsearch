@@ -33,6 +33,8 @@ export class RawRangeInput extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    // @TODO: Render, worst case in Derived State
+
     // In react@16.0.0 the call to setState on the inputs trigger this lifecycle hook
     // because the context has changed (for react). I don't think that the bug is related
     // to react because I failed to reproduce it with a simple hierarchy of components.

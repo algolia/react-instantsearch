@@ -86,6 +86,7 @@ class Range extends React.Component {
     };
   }
   componentWillReceiveProps(sliderState) {
+    // @TODO: derived state
     if (sliderState.canRefine) {
       this.setState({
         currentValues: {

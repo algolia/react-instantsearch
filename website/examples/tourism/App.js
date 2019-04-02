@@ -297,6 +297,7 @@ class Range extends Component {
   state = { currentValues: { min: this.props.min, max: this.props.max } };
 
   componentWillReceiveProps(sliderState) {
+    // @TODO: derived state
     if (sliderState.canRefine) {
       this.setState({
         currentValues: {
