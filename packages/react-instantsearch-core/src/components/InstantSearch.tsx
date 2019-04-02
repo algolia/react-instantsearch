@@ -175,7 +175,8 @@ class InstantSearch extends Component<Props, State> {
     };
   }
 
-  componentWillReceiveProps(nextProps: Props) {
+  componentWillReceiveProps(nextProps) {
+    // @TODO: DidUpdate
     validateNextProps(this.props, nextProps);
 
     if (this.props.indexName !== nextProps.indexName) {

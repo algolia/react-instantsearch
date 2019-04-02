@@ -101,6 +101,7 @@ export function createConnectorWithoutContext(
       };
 
       componentWillMount() {
+        // @TODO: constructor
         if (connectorDesc.getSearchParameters) {
           this.props.contextValue.onSearchParameters(
             connectorDesc.getSearchParameters.bind(this),
@@ -130,6 +131,7 @@ export function createConnectorWithoutContext(
       }
 
       componentWillReceiveProps(nextProps) {
+        // @TODO: split in Derived for state & DidUpdate
         if (!isEqual(this.props, nextProps)) {
           this.setState({
             providedProps: this.getProvidedProps(nextProps),

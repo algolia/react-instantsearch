@@ -116,6 +116,8 @@ class SearchBox extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    // @TODO: should component maybe be controlled, otherwise Derived
+
     // Reset query when the searchParameters query has changed.
     // This is kind of an anti-pattern (props in state), but it works here
     // since we know for sure that searchParameters having changed means a
