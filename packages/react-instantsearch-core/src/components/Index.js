@@ -45,6 +45,7 @@ class Index extends Component {
   }
 
   componentWillMount() {
+    // @TODO: constructor
     this.context.ais.onSearchParameters(
       this.getSearchParameters.bind(this),
       this.getChildContext(),
@@ -53,6 +54,7 @@ class Index extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    // @TODO: DidUpdate
     if (this.props.indexName !== nextProps.indexName) {
       this.context.ais.widgetsManager.update();
     }

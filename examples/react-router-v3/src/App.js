@@ -25,6 +25,7 @@ class App extends Component {
   }
 
   componentWillReceiveProps() {
+    // @TODO: derived state
     this.setState({ searchState: qs.parse(this.props.router.location.query) });
   }
 

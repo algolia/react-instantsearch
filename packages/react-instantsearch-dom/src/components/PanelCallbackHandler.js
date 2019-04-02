@@ -12,12 +12,14 @@ class PanelCallbackHandler extends Component {
   };
 
   componentWillMount() {
+    // @TODO: didMount? -> really test this
     if (this.context.setCanRefine) {
       this.context.setCanRefine(this.props.canRefine);
     }
   }
 
   componentWillReceiveProps(nextProps) {
+    // @TODO: DidUpdate
     if (
       this.context.setCanRefine &&
       this.props.canRefine !== nextProps.canRefine

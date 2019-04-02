@@ -74,6 +74,7 @@ export default function createInstantSearch(defaultAlgoliaClient, root) {
     }
 
     componentWillReceiveProps(nextProps) {
+      // @TODO: DidUpdate, but might be too late? If needs to be before rendering: derived State for client
       const props = this.props;
 
       if (nextProps.searchClient) {
@@ -88,6 +89,7 @@ export default function createInstantSearch(defaultAlgoliaClient, root) {
       }
 
       if (typeof this.client.addAlgoliaAgent === 'function') {
+        // @TODO: maybe DidUpdate if that's not too late, otherwise side effect in derived state
         this.client.addAlgoliaAgent(`react-instantsearch ${version}`);
       }
     }

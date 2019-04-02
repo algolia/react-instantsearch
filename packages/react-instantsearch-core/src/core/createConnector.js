@@ -109,6 +109,7 @@ export default function createConnector(connectorDesc) {
       }
 
       componentWillMount() {
+        // @TODO: constructor
         if (connectorDesc.getSearchParameters) {
           this.context.ais.onSearchParameters(
             connectorDesc.getSearchParameters.bind(this),
@@ -141,6 +142,7 @@ export default function createConnector(connectorDesc) {
       }
 
       componentWillReceiveProps(nextProps) {
+        // @TODO: split in Derived for state & DidUpdate
         if (!isEqual(this.props, nextProps)) {
           this.setState({
             props: this.getProvidedProps({
