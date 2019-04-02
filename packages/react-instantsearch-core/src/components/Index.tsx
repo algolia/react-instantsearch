@@ -100,6 +100,7 @@ class Index extends Component<InnerProps, State> {
   }
 
   componentWillReceiveProps(nextProps: InnerProps) {
+    // @TODO: DidUpdate
     if (this.props.indexName !== nextProps.indexName) {
       this.props.contextValue.widgetsManager.update();
     }
