@@ -50,6 +50,7 @@ export default class extends React.Component {
   }
 
   componentWillReceiveProps() {
+    // @TODO: probably derived state
     this.setState({ searchState: qs.parse(window.location.search.slice(1)) });
   }
 

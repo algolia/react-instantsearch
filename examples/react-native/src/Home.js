@@ -127,8 +127,6 @@ class Home extends Component {
     };
   }
 
-  componentWillReceiveProps() {}
-
   onSearchStateChange = nextState => {
     this.setState({ searchState: { ...this.state.searchState, ...nextState } });
   };
