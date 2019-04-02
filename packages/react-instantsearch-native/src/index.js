@@ -5,6 +5,7 @@ export { translatable } from 'react-instantsearch-core';
 
 // Widget
 export { Configure } from 'react-instantsearch-core';
+export { QueryRuleContext } from 'react-instantsearch-core';
 
 // Connectors
 export { connectAutoComplete } from 'react-instantsearch-core';
