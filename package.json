@@ -14,7 +14,7 @@
     "release": "scripts/release.sh",
     "lint": "eslint . && tslint --project .",
     "lint:fix": "eslint . --fix && tslint --project . --fix",
-    "snapshot": "build-storybook -s storybook/public -c storybook && percy-storybook --widths=320,1280",
+    "snapshot": "build-storybook -s storybook/public -o website/dist/storybook -c storybook && percy-storybook --widths=320,1280 --build_dir=website/dist/storybook",
     "type-check": "tsc",
     "type-check:watch": "yarn type-check --watch",
     "test": "yarn jest",
