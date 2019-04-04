@@ -326,6 +326,14 @@ describe('connectQueryRules', () => {
       });
 
       it('slices and warns in development when more than 10 rule contexts are applied', () => {
+        // We need to simulate being in development mode and to mock the global console object
+        // in this test to assert that development warnings are displayed correctly.
+        const originalNodeEnv = process.env.NODE_ENV;
+        process.env.NODE_ENV = 'development';
+        const originalConsole = global.console;
+        const warnSpy = jest.fn();
+        global.console = { ...global.console, warn: warnSpy };
+
         const brandFacetRefinements = [
           'Insignia',
           'Canon',
@@ -360,13 +368,10 @@ describe('connectQueryRules', () => {
           searchState
         );
 
-        if (process.env.NODE_ENV === 'development') {
-          const warnSpy = jest.spyOn(console, 'warn');
-          expect(warnSpy).toHaveBeenCalledTimes(1);
-          expect(warnSpy)
-            .toHaveBeenCalledWith(`The maximum number of \`ruleContexts\` is 10. They have been sliced to that limit.
+        expect(warnSpy).toHaveBeenCalledTimes(1);
+        expect(warnSpy)
+          .toHaveBeenCalledWith(`The maximum number of \`ruleContexts\` is 10. They have been sliced to that limit.
 Consider using \`transformRuleContexts\` to minimize the number of rules sent to Algolia.`);
-        }
 
         expect(brandSpy).toHaveBeenCalledTimes(1);
         expect(brandSpy).toHaveBeenCalledWith([
@@ -394,6 +399,9 @@ Consider using \`transformRuleContexts\` to minimize the number of rules sent to
           'ais-brand-Samsung',
           'ais-brand-Speck',
         ]);
+
+        process.env.NODE_ENV = originalNodeEnv;
+        global.console = originalConsole;
       });
     });
 
