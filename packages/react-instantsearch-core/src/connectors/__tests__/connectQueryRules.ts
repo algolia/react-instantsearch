@@ -330,9 +330,9 @@ describe('connectQueryRules', () => {
         // in this test to assert that development warnings are displayed correctly.
         const originalNodeEnv = process.env.NODE_ENV;
         process.env.NODE_ENV = 'development';
-        const originalConsole = global.console;
-        const warnSpy = jest.fn();
-        global.console = { ...global.console, warn: warnSpy };
+        const warnSpy = jest
+          .spyOn(console, 'warn')
+          .mockImplementation(() => {});
 
         const brandFacetRefinements = [
           'Insignia',
@@ -401,7 +401,7 @@ Consider using \`transformRuleContexts\` to minimize the number of rules sent to
         ]);
 
         process.env.NODE_ENV = originalNodeEnv;
-        global.console = originalConsole;
+        warnSpy.mockRestore();
       });
     });
 
