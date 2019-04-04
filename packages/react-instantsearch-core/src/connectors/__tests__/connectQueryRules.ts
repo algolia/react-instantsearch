@@ -268,15 +268,18 @@ describe('connectQueryRules', () => {
 
       it('sets ruleContexts based on toggle', () => {
         const freeShippingSpy = jest.fn(values => values);
+        const availableInStockSpy = jest.fn(values => values);
         const props: QueryRulesProps = {
           ...defaultProps,
           trackedFilters: {
             freeShipping: freeShippingSpy,
+            availableInStock: availableInStockSpy,
           },
         };
         const searchState = {
           toggle: {
             freeShipping: true,
+            availableInStock: false,
           },
         };
         const searchParameters = getSearchParameters(
@@ -287,8 +290,11 @@ describe('connectQueryRules', () => {
 
         expect(freeShippingSpy).toHaveBeenCalledTimes(1);
         expect(freeShippingSpy).toHaveBeenCalledWith([true]);
+        expect(availableInStockSpy).toHaveBeenCalledTimes(1);
+        expect(availableInStockSpy).toHaveBeenCalledWith([false]);
         expect(searchParameters.ruleContexts).toEqual([
           'ais-freeShipping-true',
+          'ais-availableInStock-false',
         ]);
       });
 
