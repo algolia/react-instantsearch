@@ -1,3 +1,5 @@
 import connectQueryRules from '../connectors/connectQueryRules';
 
-export default connectQueryRules(() => null);
+export default connectQueryRules(function QueryRuleContext() {
+  return null;
+});
