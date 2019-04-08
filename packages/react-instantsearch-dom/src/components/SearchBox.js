@@ -115,19 +115,13 @@ class SearchBox extends Component {
     document.removeEventListener('keydown', this.onKeyDown);
   }
 
-  componentWillReceiveProps(nextProps) {
-    // @TODO: should component maybe be controlled, otherwise Derived
-
-    // Reset query when the searchParameters query has changed.
-    // This is kind of an anti-pattern (props in state), but it works here
-    // since we know for sure that searchParameters having changed means a
-    // new search has been triggered.
+  componentDidUpdate(prevProps) {
     if (
-      !nextProps.searchAsYouType &&
-      nextProps.currentRefinement !== this.props.currentRefinement
+      !prevProps.searchAsYouType &&
+      prevProps.currentRefinement !== this.props.currentRefinement
     ) {
       this.setState({
-        query: nextProps.currentRefinement,
+        query: this.props.currentRefinement,
       });
     }
   }
