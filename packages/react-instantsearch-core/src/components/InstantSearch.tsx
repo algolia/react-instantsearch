@@ -163,7 +163,6 @@ class InstantSearch extends Component<Props, State> {
       stalledSearchDelay: props.stalledSearchDelay,
     });
 
-    // @TODO: find out if this ever should change
     this.state = {
       contextValue: {
         onInternalStateUpdate: this.onWidgetsInternalStateUpdate.bind(this),
