@@ -20,7 +20,7 @@ describe('PanelCallbackHandler', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  describe('willMount', () => {
+  describe('didMount', () => {
     it('expect to call setCanRefine when the context is given', () => {
       const props = {
         canRefine: true,
@@ -57,7 +57,7 @@ describe('PanelCallbackHandler', () => {
     });
   });
 
-  describe('willReceiveProps', () => {
+  describe('didUpdate', () => {
     it('expect to call setCanRefine when the context is given', () => {
       const props = {
         canRefine: true,
