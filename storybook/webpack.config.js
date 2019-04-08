@@ -11,6 +11,7 @@ module.exports = {
             loader: 'babel-loader',
             options: {
               rootMode: 'upward',
+              presets: [['react-app', { typescript: true }]],
             },
           },
         ],

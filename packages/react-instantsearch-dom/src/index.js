@@ -5,6 +5,7 @@ export { translatable } from 'react-instantsearch-core';
 
 // Widget
 export { Configure } from 'react-instantsearch-core';
+export { QueryRuleContext } from 'react-instantsearch-core';
 
 // Connectors
 export { connectAutoComplete } from 'react-instantsearch-core';
@@ -58,6 +59,7 @@ export { default as Snippet } from './widgets/Snippet';
 export { default as SortBy } from './widgets/SortBy';
 export { default as Stats } from './widgets/Stats';
 export { default as ToggleRefinement } from './widgets/ToggleRefinement';
+export { default as QueryRuleCustomData } from './widgets/QueryRuleCustomData';
 
 // Utils
 export { createClassNames } from './core/utils';
