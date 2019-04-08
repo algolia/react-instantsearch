@@ -35,8 +35,7 @@ export class RawRangeInput extends Component {
   componentDidUpdate(prevProps) {
     if (
       this.props.canRefine &&
-      (prevProps.canRefine !== this.props.canRefine ||
-        prevProps.currentRefinement.min !== this.props.currentRefinement.min ||
+      (prevProps.currentRefinement.min !== this.props.currentRefinement.min ||
         prevProps.currentRefinement.max !== this.props.currentRefinement.max)
     ) {
       this.setState(this.normalizeStateForRendering(this.props));
