@@ -93,8 +93,8 @@ describe('Index', () => {
     const wrapper = mount(
       <IndexComponentWithoutContext {...requiredProps} contextValue={context}>
         <IndexConsumer>
-          {childContext => (
-            <div className="inner">{childContext.targetedIndex}</div>
+          {multiIndexContext => (
+            <div className="inner">{multiIndexContext.targetedIndex}</div>
           )}
         </IndexConsumer>
       </IndexComponentWithoutContext>
@@ -182,7 +182,7 @@ describe('Index', () => {
 
     const wrapper = mount(
       <InstantSearchProvider value={context}>
-        <Index root={{ Root: 'div' }} indexId="test-id" indexName="test-name">
+        <Index {...requiredProps}>
           <Connected {...props} />
         </Index>
       </InstantSearchProvider>
@@ -191,7 +191,7 @@ describe('Index', () => {
     expect(wrapper.text()).toMatchInlineSnapshot(`
 "{
   indexContextValue: {
-    targetedIndex: test-id
+    targetedIndex: indexId
   },
   message: hello,
   providedProps: {
@@ -200,7 +200,7 @@ describe('Index', () => {
       store: {}
     },
     indexContextValue: {
-      targetedIndex: test-id
+      targetedIndex: indexId
     },
     message: hello
   }
