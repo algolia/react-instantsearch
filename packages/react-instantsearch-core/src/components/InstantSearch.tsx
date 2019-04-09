@@ -146,6 +146,7 @@ class InstantSearch extends Component<Props, State> {
   isControlled: boolean;
   isUnmounting: boolean;
   aisManager: InstantSearchManager;
+
   constructor(props: Props) {
     super(props);
     this.isControlled = Boolean(props.searchState);
