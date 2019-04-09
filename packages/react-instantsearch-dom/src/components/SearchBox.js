@@ -117,7 +117,7 @@ class SearchBox extends Component {
 
   componentDidUpdate(prevProps) {
     if (
-      !prevProps.searchAsYouType &&
+      !this.props.searchAsYouType &&
       prevProps.currentRefinement !== this.props.currentRefinement
     ) {
       this.setState({
