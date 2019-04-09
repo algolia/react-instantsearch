@@ -57,7 +57,11 @@ describe('connectHitsPerPage', () => {
     });
 
     it("calling refine updates the widget's search state", () => {
-      const nextState = connect.refine({}, { otherKey: 'val' }, 30);
+      const nextState = connect.refine(
+        { contextValue },
+        { otherKey: 'val' },
+        30
+      );
       expect(nextState).toEqual({
         otherKey: 'val',
         page: 1,

@@ -7,25 +7,30 @@ describe('connectScrollTo', () => {
   describe('single index', () => {
     const contextValue = { mainTargetedIndex: 'index' };
     it('provides the correct props to the component', () => {
-      props = connect.getProvidedProps(
+      const instance = {};
+      props = connect.getProvidedProps.call(
+        instance,
         { scrollOn: 'p', contextValue },
         { p: 1, configure: 3, refinementList: 'ok' }
       );
       expect(props).toEqual({ value: 1, hasNotChanged: false });
 
-      props = connect.getProvidedProps(
+      props = connect.getProvidedProps.call(
+        instance,
         { scrollOn: 'p', contextValue },
         { p: 1, configure: 3, refinementList: 'not ok' }
       );
       expect(props).toEqual({ value: 1, hasNotChanged: false });
 
-      props = connect.getProvidedProps(
+      props = connect.getProvidedProps.call(
+        instance,
         { scrollOn: 'p', contextValue },
         { p: 2, configure: 3, refinementList: 'not ok' }
       );
       expect(props).toEqual({ value: 2, hasNotChanged: true });
 
-      props = connect.getProvidedProps(
+      props = connect.getProvidedProps.call(
+        instance,
         { scrollOn: 'anything', contextValue },
         { anything: 2 }
       );

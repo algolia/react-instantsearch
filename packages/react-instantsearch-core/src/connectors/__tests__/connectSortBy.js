@@ -11,8 +11,7 @@ describe('connectSortBy', () => {
     const contextValue = { mainTargetedIndex: 'index' };
 
     it('provides the correct props to the component', () => {
-      props = connect.getProvidedProps.call(
-        {},
+      props = connect.getProvidedProps(
         { items: [{ value: 'yep' }, { value: 'yop' }], contextValue },
         { sortBy: 'yep' }
       );
@@ -24,8 +23,7 @@ describe('connectSortBy', () => {
         currentRefinement: 'yep',
       });
 
-      props = connect.getProvidedProps.call(
-        {},
+      props = connect.getProvidedProps(
         { items: [{ value: 'yep' }], defaultRefinement: 'yep', contextValue },
         {}
       );
@@ -35,8 +33,7 @@ describe('connectSortBy', () => {
       });
 
       const transformItems = jest.fn(() => ['items']);
-      props = connect.getProvidedProps.call(
-        {},
+      props = connect.getProvidedProps(
         {
           items: [{ value: 'yep' }, { value: 'yop' }],
           transformItems,
@@ -52,8 +49,7 @@ describe('connectSortBy', () => {
     });
 
     it("calling refine updates the widget's search state", () => {
-      const nextState = connect.refine.call(
-        {},
+      const nextState = connect.refine(
         { contextValue },
         { otherKey: 'val' },
         'yep'
@@ -66,8 +62,7 @@ describe('connectSortBy', () => {
     });
 
     it('refines the index parameter', () => {
-      params = connect.getSearchParameters.call(
-        {},
+      params = connect.getSearchParameters(
         new SearchParameters(),
         { contextValue },
         { sortBy: 'yep' }
@@ -76,13 +71,12 @@ describe('connectSortBy', () => {
     });
 
     it('registers its id in metadata', () => {
-      const metadata = connect.getMetadata.call({}, { contextValue });
+      const metadata = connect.getMetadata({ contextValue });
       expect(metadata).toEqual({ id: 'sortBy' });
     });
 
     it('should return the right searchState when clean up', () => {
-      const searchState = connect.cleanUp.call(
-        {},
+      const searchState = connect.cleanUp(
         {
           contextValue,
         },

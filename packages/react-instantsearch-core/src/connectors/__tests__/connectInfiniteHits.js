@@ -27,23 +27,33 @@ describe('connectInfiniteHits', () => {
 
       const hits = [{}, {}];
       const hits2 = [{}, {}];
-      const ctx = {};
+      const instance = {};
 
-      const res1 = connect.getProvidedProps.call(ctx, { contextValue }, null, {
-        results: { hits, page: 0, hitsPerPage: 2, nbPages: 3 },
-      });
+      const res1 = connect.getProvidedProps.call(
+        instance,
+        { contextValue },
+        null,
+        {
+          results: { hits, page: 0, hitsPerPage: 2, nbPages: 3 },
+        }
+      );
 
       expect(res1.hits).toEqual(hits.map(hit => expect.objectContaining(hit)));
       expect(res1.hasMore).toBe(true);
 
-      const res2 = connect.getProvidedProps.call(ctx, { contextValue }, null, {
-        results: {
-          hits: hits2,
-          page: 1,
-          hitsPerPage: 2,
-          nbPages: 3,
-        },
-      });
+      const res2 = connect.getProvidedProps.call(
+        instance,
+        { contextValue },
+        null,
+        {
+          results: {
+            hits: hits2,
+            page: 1,
+            hitsPerPage: 2,
+            nbPages: 3,
+          },
+        }
+      );
 
       expect(res2.hits).toEqual(
         [...hits, ...hits2].map(hit => expect.objectContaining(hit))
@@ -57,17 +67,22 @@ describe('connectInfiniteHits', () => {
       const hits = [{}, {}, {}, {}, {}, {}];
       const hits2 = [{}, {}, {}, {}, {}, {}];
       const hits3 = [{}, {}, {}, {}, {}, {}, {}, {}];
-      const ctx = {};
+      const instance = {};
 
-      const res1 = connect.getProvidedProps.call(ctx, { contextValue }, null, {
-        results: {
-          hits,
-          page: 0,
-          hitsPerPage: 6,
-          nbPages: 10,
-          queryID: 'theQueryID_0',
-        },
-      });
+      const res1 = connect.getProvidedProps.call(
+        instance,
+        { contextValue },
+        null,
+        {
+          results: {
+            hits,
+            page: 0,
+            hitsPerPage: 6,
+            nbPages: 10,
+            queryID: 'theQueryID_0',
+          },
+        }
+      );
 
       expect(res1.hits).toEqual(hits.map(hit => expect.objectContaining(hit)));
       expect(res1.hits.map(hit => hit.__position)).toEqual([1, 2, 3, 4, 5, 6]);
@@ -81,15 +96,20 @@ describe('connectInfiniteHits', () => {
       ]);
       expect(res1.hasMore).toBe(true);
 
-      const res2 = connect.getProvidedProps.call(ctx, { contextValue }, null, {
-        results: {
-          hits: hits2,
-          page: 1,
-          hitsPerPage: 6,
-          nbPages: 10,
-          queryID: 'theQueryID_1',
-        },
-      });
+      const res2 = connect.getProvidedProps.call(
+        instance,
+        { contextValue },
+        null,
+        {
+          results: {
+            hits: hits2,
+            page: 1,
+            hitsPerPage: 6,
+            nbPages: 10,
+            queryID: 'theQueryID_1',
+          },
+        }
+      );
 
       expect(res2.hits).toEqual(
         [...hits, ...hits2].map(hit => expect.objectContaining(hit))
@@ -128,15 +148,20 @@ describe('connectInfiniteHits', () => {
       ]);
       expect(res2.hasMore).toBe(true);
 
-      let res3 = connect.getProvidedProps.call(ctx, { contextValue }, null, {
-        results: {
-          hits: hits3,
-          page: 2,
-          hitsPerPage: 8,
-          nbPages: 10,
-          queryID: 'theQueryID_2',
-        },
-      });
+      let res3 = connect.getProvidedProps.call(
+        instance,
+        { contextValue },
+        null,
+        {
+          results: {
+            hits: hits3,
+            page: 2,
+            hitsPerPage: 8,
+            nbPages: 10,
+            queryID: 'theQueryID_2',
+          },
+        }
+      );
 
       expect(res3.hits).toEqual(
         [...hits, ...hits2, ...hits3].map(hit => expect.objectContaining(hit))
@@ -195,7 +220,7 @@ describe('connectInfiniteHits', () => {
       expect(res3.hasMore).toBe(true);
 
       // re-render with the same property
-      res3 = connect.getProvidedProps.call(ctx, { contextValue }, null, {
+      res3 = connect.getProvidedProps.call(instance, { contextValue }, null, {
         results: {
           hits: hits3,
           page: 2,
@@ -267,21 +292,26 @@ describe('connectInfiniteHits', () => {
 
       const hits = [{}, {}];
       const nbPages = 5;
-      const ctx = {};
+      const instance = {};
 
       let allHits = [];
       for (let page = 0; page < nbPages - 1; page++) {
         allHits = [...allHits, ...hits];
 
-        const res = connect.getProvidedProps.call(ctx, { contextValue }, null, {
-          results: {
-            hits,
-            page,
-            hitsPerPage: hits.length,
-            nbPages,
-            queryID: `theQueryID_${page}`,
-          },
-        });
+        const res = connect.getProvidedProps.call(
+          instance,
+          { contextValue },
+          null,
+          {
+            results: {
+              hits,
+              page,
+              hitsPerPage: hits.length,
+              nbPages,
+              queryID: `theQueryID_${page}`,
+            },
+          }
+        );
 
         expect(res.hits).toEqual(
           allHits.map(hit => expect.objectContaining(hit))
@@ -292,15 +322,20 @@ describe('connectInfiniteHits', () => {
 
       allHits = [...allHits, ...hits];
 
-      const res = connect.getProvidedProps.call(ctx, { contextValue }, null, {
-        results: {
-          hits,
-          page: nbPages - 1,
-          hitsPerPage: hits.length,
-          nbPages,
-          queryID: `theQueryID_${nbPages - 1}`,
-        },
-      });
+      const res = connect.getProvidedProps.call(
+        instance,
+        { contextValue },
+        null,
+        {
+          results: {
+            hits,
+            page: nbPages - 1,
+            hitsPerPage: hits.length,
+            nbPages,
+            queryID: `theQueryID_${nbPages - 1}`,
+          },
+        }
+      );
 
       expect(res.hits).toHaveLength(nbPages * 2);
       expect(res.hits).toEqual(
@@ -339,13 +374,13 @@ describe('connectInfiniteHits', () => {
       const hits = [{}, {}];
       const hits2 = [{}, {}];
       const hits3 = [{}];
-      const ctx = {};
+      const instance = {};
 
-      connect.getProvidedProps.call(ctx, { contextValue }, null, {
+      connect.getProvidedProps.call(instance, { contextValue }, null, {
         results: { hits, page: 0, hitsPerPage: 2, nbPages: 3 },
       });
 
-      connect.getProvidedProps.call(ctx, { contextValue }, null, {
+      connect.getProvidedProps.call(instance, { contextValue }, null, {
         results: {
           hits: hits2,
           page: 1,
@@ -354,14 +389,19 @@ describe('connectInfiniteHits', () => {
         },
       });
 
-      const props = connect.getProvidedProps.call(ctx, { contextValue }, null, {
-        results: {
-          hits: hits3,
-          page: 2,
-          hitsPerPage: 2,
-          nbPages: 3,
-        },
-      });
+      const props = connect.getProvidedProps.call(
+        instance,
+        { contextValue },
+        null,
+        {
+          results: {
+            hits: hits3,
+            page: 2,
+            hitsPerPage: 2,
+            nbPages: 3,
+          },
+        }
+      );
 
       expect(props.hits).toEqual(
         [...hits, ...hits2, ...hits3].map(hit => expect.objectContaining(hit))

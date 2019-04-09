@@ -17,10 +17,9 @@ describe('connectHierarchicalMenu', () => {
 
       results.getFacetValues.mockImplementationOnce(() => ({}));
       props = connect.getProvidedProps(
-        { attributes: ['ok'] },
+        { attributes: ['ok'], contextValue },
         { hierarchicalMenu: { ok: 'wat' } },
-        { results },
-        contextValue
+        { results }
       );
       expect(props).toEqual({
         canRefine: false,
@@ -79,10 +78,9 @@ describe('connectHierarchicalMenu', () => {
 
       const transformItems = jest.fn(() => ['items']);
       props = connect.getProvidedProps(
-        { attributes: ['ok'], transformItems },
+        { attributes: ['ok'], transformItems, contextValue },
         {},
-        { results },
-        contextValue
+        { results }
       );
       expect(transformItems.mock.calls[0][0]).toEqual([
         {
@@ -208,11 +206,10 @@ describe('connectHierarchicalMenu', () => {
     });
 
     it("calling refine updates the widget's search state", () => {
-      let nextState = connect.refine(
-        {
-          attributes: ['ok'],
-          contextValue: { ais: { mainTargetedIndex: 'index' } },
-        },
+      let refine = connect.refine.bind(context);
+
+      let nextState = refine(
+        { attributes: ['ok'] },
         {
           indices: {
             first: { otherKey: 'val', hierarchicalMenu: { otherKey: 'val' } },
@@ -236,7 +233,7 @@ describe('connectHierarchicalMenu', () => {
           multiIndexContext: { targetedIndex: 'second' },
         },
       };
-      const refine = connect.refine.bind(context);
+      refine = connect.refine.bind(context);
 
       nextState = refine(
         { attributes: ['ok'] },
