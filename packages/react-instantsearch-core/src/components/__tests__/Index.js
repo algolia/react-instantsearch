@@ -182,7 +182,7 @@ describe('Index', () => {
 
     const wrapper = mount(
       <InstantSearchProvider value={context}>
-        <Index root={{ Root: 'div' }} indexId="test" indexName="test">
+        <Index root={{ Root: 'div' }} indexId="test-id" indexName="test-name">
           <Connected {...props} />
         </Index>
       </InstantSearchProvider>
@@ -190,6 +190,9 @@ describe('Index', () => {
 
     expect(wrapper.text()).toMatchInlineSnapshot(`
 "{
+  indexContextValue: {
+    targetedIndex: test-id
+  },
   message: hello,
   providedProps: {
     contextValue: {
@@ -197,7 +200,7 @@ describe('Index', () => {
       store: {}
     },
     indexContextValue: {
-      targetedIndex: test
+      targetedIndex: test-id
     },
     message: hello
   }
