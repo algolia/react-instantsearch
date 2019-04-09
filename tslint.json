@@ -13,6 +13,7 @@
     "prettier": true,
     "jsx-no-lambda": false,
     "member-access": false,
+    "no-empty": false,
     "variable-name": [
       true,
       "ban-keywords",
