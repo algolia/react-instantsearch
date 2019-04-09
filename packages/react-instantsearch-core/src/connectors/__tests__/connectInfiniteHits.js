@@ -4,13 +4,11 @@ jest.mock('../../core/createConnector', () => x => x);
 
 describe('connectInfiniteHits', () => {
   describe('single index', () => {
-    const createSingleIndexContext = () => ({
+    const contextValue = {
       mainTargetedIndex: 'index',
-    });
+    };
 
     it('provides the current hits to the component', () => {
-      const contextValue = createSingleIndexContext();
-
       const hits = [{}];
       const props = connect.getProvidedProps.call({}, { contextValue }, null, {
         results: { hits, page: 0, hitsPerPage: 2, nbPages: 3 },
@@ -23,8 +21,6 @@ describe('connectInfiniteHits', () => {
     });
 
     it('accumulate hits internally', () => {
-      const contextValue = createSingleIndexContext();
-
       const hits = [{}, {}];
       const hits2 = [{}, {}];
       const instance = {};
@@ -62,8 +58,6 @@ describe('connectInfiniteHits', () => {
     });
 
     it('accumulate hits internally while changing hitsPerPage configuration', () => {
-      const contextValue = createSingleIndexContext();
-
       const hits = [{}, {}, {}, {}, {}, {}];
       const hits2 = [{}, {}, {}, {}, {}, {}];
       const hits3 = [{}, {}, {}, {}, {}, {}, {}, {}];
@@ -288,8 +282,6 @@ describe('connectInfiniteHits', () => {
     });
 
     it('should not reset while accumulating results', () => {
-      const contextValue = createSingleIndexContext();
-
       const hits = [{}, {}];
       const nbPages = 5;
       const instance = {};
@@ -369,8 +361,6 @@ describe('connectInfiniteHits', () => {
     });
 
     it('Indicates the last page after several pages', () => {
-      const contextValue = createSingleIndexContext();
-
       const hits = [{}, {}];
       const hits2 = [{}, {}];
       const hits3 = [{}];
@@ -410,8 +400,6 @@ describe('connectInfiniteHits', () => {
     });
 
     it('adds 1 to page when calling refine', () => {
-      const contextValue = createSingleIndexContext();
-
       const props = { contextValue };
       const state0 = {};
 
@@ -423,8 +411,6 @@ describe('connectInfiniteHits', () => {
     });
 
     it('automatically converts String state to Number', () => {
-      const contextValue = createSingleIndexContext();
-
       const props = { contextValue };
       const state0 = { page: '0' };
 
@@ -433,8 +419,6 @@ describe('connectInfiniteHits', () => {
     });
 
     it('expect to always return an array of hits', () => {
-      const contextValue = createSingleIndexContext();
-
       const props = { contextValue };
       const searchState = {};
 
