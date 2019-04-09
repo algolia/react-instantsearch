@@ -51,6 +51,7 @@ export default createConnector({
         hits: [],
         hasPrevious: false,
         hasMore: false,
+        refine: () => {},
         refinePrevious: () => {},
         refineNext: () => {},
       };
@@ -92,6 +93,7 @@ export default createConnector({
       hits: this._allResults,
       hasPrevious,
       hasMore,
+      refine: () => refine(this._lastReceivedPage + 2),
       refinePrevious: () => refine(this._firstReceivedPage),
       refineNext: () => refine(this._lastReceivedPage + 2),
     };

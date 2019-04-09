@@ -15,8 +15,7 @@ class InfiniteHits extends Component {
       hasPrevious,
       hasMore,
       refinePrevious,
-      refine,
-      refineNext = refine,
+      refineNext,
       translate,
       className,
     } = this.props;
@@ -54,31 +53,13 @@ class InfiniteHits extends Component {
   }
 }
 
-const refineNextPropType = (props, propName, componentName) => {
-  if (!props.refine && !props.refineNext) {
-    return new Error(
-      `One of props \`refine\` or \`refineNext\` is required in '${componentName}'.`
-    );
-  }
-  if (props[propName]) {
-    PropTypes.checkPropTypes(
-      { [propName]: PropTypes.func },
-      { [propName]: props[propName] },
-      'prop',
-      componentName
-    );
-  }
-  return null;
-};
-
 InfiniteHits.propTypes = {
   hits: PropTypes.arrayOf(PropTypes.object).isRequired,
   showPrevious: PropTypes.bool.isRequired,
   hasPrevious: PropTypes.bool.isRequired,
   hasMore: PropTypes.bool.isRequired,
   refinePrevious: PropTypes.func.isRequired,
-  refine: refineNextPropType,
-  refineNext: refineNextPropType,
+  refineNext: PropTypes.func.isRequired,
   translate: PropTypes.func.isRequired,
   className: PropTypes.string,
   hitComponent: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
