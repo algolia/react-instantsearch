@@ -38,7 +38,7 @@
     "@babel/preset-env": "7.4.3",
     "@babel/preset-react": "7.0.0",
     "@babel/preset-typescript": "7.3.3",
-    "@percy-io/percy-storybook": "3.0.0-beta.0",
+    "@percy/storybook": "3.0.1",
     "@storybook/addon-a11y": "5.0.6",
     "@storybook/addon-actions": "5.0.6",
     "@storybook/addon-knobs": "5.0.6",
