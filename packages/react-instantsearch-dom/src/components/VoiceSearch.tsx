@@ -20,11 +20,11 @@ type InnerComponentProps = {
   isListening: boolean;
   transcript?: string;
   isSpeechFinal?: boolean;
-  isSupportedBrowser: boolean;
+  isBrowserSupported: boolean;
 };
 
 type VoiceSearchProps = {
-  isSupportedBrowser: boolean;
+  isBrowserSupported: boolean;
   isListening: boolean;
   toggleListening: ToggleListening;
   voiceListeningState: VoiceListeningState;
@@ -110,7 +110,7 @@ const DefaultStatusComponent: React.FunctionComponent<InnerComponentProps> = ({
 
 const VoiceSearch = ({
   translate,
-  isSupportedBrowser,
+  isBrowserSupported,
   isListening,
   toggleListening,
   voiceListeningState,
@@ -132,7 +132,7 @@ const VoiceSearch = ({
     isListening,
     transcript,
     isSpeechFinal,
-    isSupportedBrowser,
+    isBrowserSupported,
   };
 
   return (
@@ -142,7 +142,7 @@ const VoiceSearch = ({
         type="button"
         title={translate('buttonTitle')}
         onClick={onClick}
-        disabled={!isSupportedBrowser}
+        disabled={!isBrowserSupported}
       >
         <ButtonComponent {...innerProps} />
       </button>
