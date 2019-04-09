@@ -74,7 +74,7 @@ class Index extends Component<Props, State> {
     },
   };
 
-  componentWillMount() {
+  componentDidMount() {
     this.unregisterWidget = this.props.contextValue.widgetsManager.registerWidget(
       this
     );
