@@ -51,7 +51,7 @@ describe('InfiniteHits', () => {
     const wrapped = mount(
       <InfiniteHits
         refinePrevious={() => undefined}
-        refine={mockedRefine}
+        refineNext={mockedRefine}
         hitComponent={Hit}
         hits={hits}
         hasMore={true}

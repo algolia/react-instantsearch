@@ -26,6 +26,7 @@ describe('connectInfiniteHits', () => {
         hits: hits.map(hit => expect.objectContaining(hit)),
         hasPrevious: false,
         hasMore: true,
+        refine: expect.any(Function),
         refinePrevious: expect.any(Function),
         refineNext: expect.any(Function),
       });
@@ -479,6 +480,7 @@ describe('connectInfiniteHits', () => {
         hits: [{}, {}, {}].map(hit => expect.objectContaining(hit)),
         hasPrevious: true,
         hasMore: true,
+        refine: expect.any(Function),
         refinePrevious: expect.any(Function),
         refineNext: expect.any(Function),
       };
@@ -514,6 +516,7 @@ describe('connectInfiniteHits', () => {
         hits: hits.map(hit => expect.objectContaining(hit)),
         hasPrevious: false,
         hasMore: true,
+        refine: expect.any(Function),
         refinePrevious: expect.any(Function),
         refineNext: expect.any(Function),
       });
