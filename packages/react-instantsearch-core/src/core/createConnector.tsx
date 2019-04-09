@@ -50,7 +50,7 @@ export type ConnectorDescription = {
 
 type ConnectorProps = {
   contextValue: InstantSearchContext;
-  indexContextValue: IndexContext;
+  indexContextValue?: IndexContext;
 };
 
 export type ConnectedProps<WidgetProps> = WidgetProps & ConnectorProps;
