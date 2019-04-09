@@ -117,7 +117,12 @@ export default createConnector({
     trackedFilters: {},
   } as QueryRulesProps,
 
-  getProvidedProps(props: QueryRulesProps, _1: any, searchResults: any) {
+  getProvidedProps(
+    this: { context: any },
+    props: QueryRulesProps,
+    _1: any,
+    searchResults: any
+  ) {
     const results = getResults(searchResults, this.context);
 
     if (results === null) {
@@ -138,6 +143,7 @@ export default createConnector({
   },
 
   getSearchParameters(
+    this: { context: any },
     searchParameters: SearchParameters,
     props: QueryRulesProps,
     searchState: SearchState

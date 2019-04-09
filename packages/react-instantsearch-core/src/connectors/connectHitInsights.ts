@@ -69,8 +69,9 @@ export default (insightsClient: InsightsClient) =>
   createConnector({
     displayName: 'AlgoliaInsights',
 
-    getProvidedProps(props, _, searchResults) {
+    getProvidedProps(this: { context: any }, props, _, searchResults) {
       const results: Results = getResults(searchResults, this.context);
+
       const insights = wrapInsightsClient(insightsClient, results, props.hit);
       return { insights };
     },

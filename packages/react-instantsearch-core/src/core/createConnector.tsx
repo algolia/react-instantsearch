@@ -31,8 +31,8 @@ function needlessUsageWarning(connectorDesc: ConnectorDescription) {
     }
   }
 }
-// @TODO: which are optional here, all?
-type ConnectorDescription = {
+
+export type ConnectorDescription = {
   displayName: string;
   /**
    * a function to filter the local state
