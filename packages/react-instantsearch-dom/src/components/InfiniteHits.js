@@ -11,14 +11,30 @@ class InfiniteHits extends Component {
     const {
       hitComponent: HitComponent,
       hits,
+      showPrevious,
+      hasPrevious,
       hasMore,
+      refinePrevious,
       refine,
+      refineNext = refine,
       translate,
       className,
     } = this.props;
 
     return (
       <div className={classNames(cx(''), className)}>
+        {showPrevious ? (
+          <button
+            className={cx(
+              'loadPrevious',
+              !hasPrevious && 'loadPrevious--disabled'
+            )}
+            onClick={() => refinePrevious()}
+            disabled={!hasPrevious}
+          >
+            {translate('loadPrevious')}
+          </button>
+        ) : null}
         <ul className={cx('list')}>
           {hits.map(hit => (
             <li key={hit.objectID} className={cx('item')}>
@@ -28,7 +44,7 @@ class InfiniteHits extends Component {
         </ul>
         <button
           className={cx('loadMore', !hasMore && 'loadMore--disabled')}
-          onClick={() => refine()}
+          onClick={() => refineNext()}
           disabled={!hasMore}
         >
           {translate('loadMore')}
@@ -38,10 +54,31 @@ class InfiniteHits extends Component {
   }
 }
 
+const refineNextPropType = (props, propName, componentName) => {
+  if (!props.refine && !props.refineNext) {
+    return new Error(
+      `One of props \`refine\` or \`refineNext\` is required in '${componentName}'.`
+    );
+  }
+  if (props[propName]) {
+    PropTypes.checkPropTypes(
+      { [propName]: PropTypes.func },
+      { [propName]: props[propName] },
+      'prop',
+      componentName
+    );
+  }
+  return null;
+};
+
 InfiniteHits.propTypes = {
   hits: PropTypes.arrayOf(PropTypes.object).isRequired,
+  showPrevious: PropTypes.bool.isRequired,
+  hasPrevious: PropTypes.bool.isRequired,
   hasMore: PropTypes.bool.isRequired,
-  refine: PropTypes.func.isRequired,
+  refinePrevious: PropTypes.func.isRequired,
+  refine: refineNextPropType,
+  refineNext: refineNextPropType,
   translate: PropTypes.func.isRequired,
   className: PropTypes.string,
   hitComponent: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
@@ -49,6 +86,7 @@ InfiniteHits.propTypes = {
 
 InfiniteHits.defaultProps = {
   className: '',
+  showPrevious: false,
   hitComponent: hit => (
     <div
       style={{
@@ -65,5 +103,6 @@ InfiniteHits.defaultProps = {
 };
 
 export default translatable({
+  loadPrevious: 'Load previous',
   loadMore: 'Load more',
 })(InfiniteHits);

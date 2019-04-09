@@ -45,12 +45,14 @@ export default createConnector({
     const results = getResults(searchResults, this.context);
 
     this._allResults = this._allResults || [];
-    this._previousPage = this._previousPage || 0;
 
     if (!results) {
       return {
         hits: [],
+        hasPrevious: false,
         hasMore: false,
+        refinePrevious: () => {},
+        refineNext: () => {},
       };
     }
 
@@ -62,22 +64,36 @@ export default createConnector({
       results.queryID
     );
 
-    if (page === 0) {
-      this._allResults = hitsWithPositionsAndQueryID;
-    } else if (page > this._previousPage) {
+    if (this._firstReceivedPage === undefined) {
+      this._allResults = [...hitsWithPositionsAndQueryID];
+      this._firstReceivedPage = page;
+      this._lastReceivedPage = page;
+    } else if (this._lastReceivedPage < page) {
       this._allResults = [...this._allResults, ...hitsWithPositionsAndQueryID];
-    } else if (page < this._previousPage) {
-      this._allResults = hitsWithPositionsAndQueryID;
+      this._lastReceivedPage = page;
+    } else if (this._firstReceivedPage > page) {
+      this._allResults = [...hitsWithPositionsAndQueryID, ...this._allResults];
+      this._firstReceivedPage = page;
     }
 
+    const hasPrevious = this._firstReceivedPage > 0;
     const lastPageIndex = nbPages - 1;
     const hasMore = page < lastPageIndex;
-
-    this._previousPage = page;
+    const refine = index => {
+      const id = getId();
+      const nextValue = { [id]: index };
+      const resetPage = false;
+      this.context.ais.onInternalStateUpdate(
+        refineValue(searchState, nextValue, this.context, resetPage)
+      );
+    };
 
     return {
       hits: this._allResults,
+      hasPrevious,
       hasMore,
+      refinePrevious: () => refine(this._firstReceivedPage),
+      refineNext: () => refine(this._lastReceivedPage + 2),
     };
   },
 
@@ -85,13 +101,5 @@ export default createConnector({
     return searchParameters.setQueryParameters({
       page: getCurrentRefinement(props, searchState, this.context) - 1,
     });
-  },
-
-  refine(props, searchState) {
-    const id = getId();
-    const nextPage = getCurrentRefinement(props, searchState, this.context) + 1;
-    const nextValue = { [id]: nextPage };
-    const resetPage = false;
-    return refineValue(searchState, nextValue, this.context, resetPage);
   },
 });

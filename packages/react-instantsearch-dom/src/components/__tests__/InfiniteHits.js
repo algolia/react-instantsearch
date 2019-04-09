@@ -21,7 +21,9 @@ describe('InfiniteHits', () => {
         hitComponent={Hit}
         hits={hits}
         hasMore={false}
-        refine={() => undefined}
+        hasPrevious={false}
+        refinePrevious={() => undefined}
+        refineNext={() => undefined}
       />
     );
     expect(tree.toJSON()).toMatchSnapshot();
@@ -35,7 +37,9 @@ describe('InfiniteHits', () => {
         hitComponent={Hit}
         hits={hits}
         hasMore={false}
-        refine={() => undefined}
+        hasPrevious={false}
+        refinePrevious={() => undefined}
+        refineNext={() => undefined}
       />
     );
     expect(tree.toJSON()).toMatchSnapshot();
@@ -46,10 +50,12 @@ describe('InfiniteHits', () => {
     const hits = [{ objectID: 0 }, { objectID: 1 }, { objectID: 2 }];
     const wrapped = mount(
       <InfiniteHits
+        refinePrevious={() => undefined}
         refine={mockedRefine}
         hitComponent={Hit}
         hits={hits}
         hasMore={true}
+        hasPrevious={false}
       />
     );
     expect(mockedRefine.mock.calls).toHaveLength(0);
@@ -57,16 +63,73 @@ describe('InfiniteHits', () => {
     expect(mockedRefine.mock.calls).toHaveLength(1);
   });
 
-  it('Button is disabled when it is the last page', () => {
+  it('calls refineNext when the load more button is clicked', () => {
+    const mockedRefine = jest.fn();
     const hits = [{ objectID: 0 }, { objectID: 1 }, { objectID: 2 }];
     const wrapped = mount(
       <InfiniteHits
-        refine={() => undefined}
+        refinePrevious={() => undefined}
+        refineNext={mockedRefine}
+        hitComponent={Hit}
+        hits={hits}
+        hasMore={true}
+        hasPrevious={false}
+      />
+    );
+    expect(mockedRefine.mock.calls).toHaveLength(0);
+    wrapped.find('button').simulate('click');
+    expect(mockedRefine.mock.calls).toHaveLength(1);
+  });
+
+  it('calls previousRefine when the load previous button is clicked', () => {
+    const mockedRefinePrevious = jest.fn();
+    const hits = [{ objectID: 0 }, { objectID: 1 }, { objectID: 2 }];
+    const wrapped = mount(
+      <InfiniteHits
+        showPrevious={true}
+        refinePrevious={mockedRefinePrevious}
+        refineNext={() => undefined}
+        hitComponent={Hit}
+        hits={hits}
+        hasMore={true}
+        hasPrevious={true}
+      />
+    );
+    expect(mockedRefinePrevious.mock.calls).toHaveLength(0);
+    wrapped.find('.ais-InfiniteHits-loadPrevious').simulate('click');
+    expect(mockedRefinePrevious.mock.calls).toHaveLength(1);
+  });
+
+  it('"Show more" button is disabled when it is the last page', () => {
+    const hits = [{ objectID: 0 }, { objectID: 1 }, { objectID: 2 }];
+    const wrapped = mount(
+      <InfiniteHits
+        refinePrevious={() => undefined}
+        refineNext={() => undefined}
         hitComponent={Hit}
         hits={hits}
         hasMore={false}
+        hasPrevious={false}
       />
     );
     expect(wrapped.find('button').props().disabled).toBe(true);
+  });
+
+  it('"Show previous" button is disabled when it is the first page', () => {
+    const hits = [{ objectID: 0 }, { objectID: 1 }, { objectID: 2 }];
+    const wrapped = mount(
+      <InfiniteHits
+        showPrevious={true}
+        refinePrevious={() => undefined}
+        refineNext={() => undefined}
+        hitComponent={Hit}
+        hits={hits}
+        hasMore={false}
+        hasPrevious={false}
+      />
+    );
+    expect(
+      wrapped.find('.ais-InfiniteHits-loadPrevious').props().disabled
+    ).toBe(true);
   });
 });

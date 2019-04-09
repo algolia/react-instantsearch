@@ -20,6 +20,21 @@ stories
       <InfiniteHits />
     </WrapWithHits>
   ))
+  .add('with previous button', () => {
+    const urlLogger = action('Routing state');
+    return (
+      <WrapWithHits
+        linkedStoryGroup="InfiniteHits"
+        pagination={false}
+        initialSearchState={{ page: 3 }}
+        onSearchStateChange={({ configure, ...searchState }) => {
+          urlLogger(JSON.stringify(searchState, null, 2));
+        }}
+      >
+        <InfiniteHits showPrevious={true} />
+      </WrapWithHits>
+    );
+  })
   .add('with custom rendering', () => {
     function Product({ hit }) {
       return (
