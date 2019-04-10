@@ -1,3 +1,4 @@
+import { isEmpty } from 'lodash';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import RatingMenu from 'react-native-star-rating';
@@ -8,15 +9,14 @@ import {
   View,
   TouchableHighlight,
 } from 'react-native';
-import { InstantSearch } from 'react-instantsearch/native';
+import { InstantSearch } from 'react-instantsearch-native';
 import {
   connectRefinementList,
   connectSearchBox,
   connectRange,
   connectMenu,
-} from 'react-instantsearch/connectors';
+} from 'react-instantsearch-core';
 import Stats from './components/Stats';
-import { isEmpty } from 'lodash';
 
 const styles = StyleSheet.create({
   mainContainer: {

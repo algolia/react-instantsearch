@@ -1,15 +1,15 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { InstantSearch } from 'react-instantsearch/native';
+import { InstantSearch } from 'react-instantsearch-native';
 import {
   connectRefinementList,
   connectSearchBox,
   connectRange,
   connectMenu,
-} from 'react-instantsearch/connectors';
-import Stats from './components/Stats';
+} from 'react-instantsearch-core';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
+import Stats from './components/Stats';
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
 
 class Filters extends Component {
   static displayName = 'React Native example';
+
   constructor(props) {
     super(props);
     this.onSearchStateChange = this.onSearchStateChange.bind(this);
@@ -32,11 +33,13 @@ class Filters extends Component {
       searchState: props.searchState,
     };
   }
+
   onSearchStateChange(nextState) {
     const searchState = { ...this.state.searchState, ...nextState };
     this.setState({ searchState });
     this.props.onSearchStateChange(searchState);
   }
+
   render() {
     return (
       <View style={styles.mainContainer}>
@@ -80,13 +83,17 @@ class Range extends React.Component {
       },
     };
   }
-  componentWillReceiveProps(sliderState) {
-    // @TODO: derived state
-    if (sliderState.canRefine) {
+
+  componentDidUpdate(prevProps) {
+    if (
+      this.props.canRefine &&
+      (prevProps.currentRefinement.min !== this.props.currentRefinement.min ||
+        prevProps.currentRefinement.max !== this.props.currentRefinement.max)
+    ) {
       this.setState({
         currentValues: {
-          min: sliderState.currentRefinement.min,
-          max: sliderState.currentRefinement.max,
+          min: this.props.currentRefinement.min,
+          max: this.props.currentRefinement.max,
         },
       });
     }
@@ -149,8 +156,12 @@ class Range extends React.Component {
 Range.propTypes = {
   min: PropTypes.number,
   max: PropTypes.number,
-  currentRefinement: PropTypes.object,
+  currentRefinement: PropTypes.shape({
+    min: PropTypes.number,
+    max: PropTypes.number,
+  }),
   refine: PropTypes.func.isRequired,
+  canRefine: PropTypes.bool.isRequired,
 };
 
 const VirtualRefinementList = connectRefinementList(() => null);

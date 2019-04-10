@@ -12,7 +12,7 @@ import {
   Platform,
   Dimensions,
 } from 'react-native';
-import { InstantSearch } from 'react-instantsearch/native';
+import { InstantSearch } from 'react-instantsearch-native';
 import {
   connectSearchBox,
   connectInfiniteHits,
@@ -22,14 +22,14 @@ import {
   connectSortBy,
   connectRange,
   connectCurrentRefinements,
-} from 'react-instantsearch/connectors';
-import Highlight from './components/Highlight';
-import Spinner from './components/Spinner';
+} from 'react-instantsearch-core';
 import RatingMenu from 'react-native-star-rating';
 import ModalDropdown from 'react-native-modal-dropdown';
 import IosIcon from 'react-native-vector-icons/Ionicons';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import { Actions } from 'react-native-router-flux';
+import Highlight from './components/Highlight';
+import Spinner from './components/Spinner';
 
 const { height } = Dimensions.get('window');
 
