@@ -31,10 +31,9 @@ class App extends Component {
     };
   }
 
-  componentWillReceiveProps(props) {
-    // @TODO: derived state
-    if (props.location !== this.props.location) {
-      this.setState({ searchState: urlToSearchState(props.location) });
+  componentDidUpdate(prevProps) {
+    if (prevProps.location !== this.props.location) {
+      this.setState({ searchState: urlToSearchState(this.props.location) });
     }
   }
 
