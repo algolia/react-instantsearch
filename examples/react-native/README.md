@@ -1,12 +1,8 @@
 This example shows how to use React InstantSearch along with React Native.
 
-## Clone the example
+## Get started
 
-```
-curl https://codeload.github.com/algolia/react-instantsearch/tar.gz/master | tar -xz --strip=2 react-instantsearch-master/examples/react-native
-```
-
-## Start the example
+To run this project locally, install the dependencies and run the local server:
 
 ```sh
 yarn install --no-lockfile
