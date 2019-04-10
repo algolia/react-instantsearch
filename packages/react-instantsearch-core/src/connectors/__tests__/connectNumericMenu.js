@@ -387,10 +387,10 @@ describe('connectNumericMenu', () => {
 
   describe('multi index', () => {
     const contextValue = { mainTargetedIndex: 'first' };
-    const indexContextValue = { targetedIndex: 'first' };
+    const indexContextValue = { targetedIndex: 'second' };
 
     const results = {
-      first: {
+      second: {
         getFacetStats: () => ({ min: 0, max: 300 }),
         getFacetByName: () => true,
       },
@@ -408,7 +408,7 @@ describe('connectNumericMenu', () => {
           contextValue,
           indexContextValue,
         },
-        { indices: { first: { multiRange: { ok: 'wat' } } } },
+        { indices: { second: { multiRange: { ok: 'wat' } } } },
         { results }
       );
       expect(props).toEqual({
@@ -438,14 +438,14 @@ describe('connectNumericMenu', () => {
         { attribute: 'ok', contextValue, indexContextValue },
         {
           indices: {
-            first: { otherKey: 'val', multiRange: { otherKey: 'val' } },
+            second: { otherKey: 'val', multiRange: { otherKey: 'val' } },
           },
         },
         'yep'
       );
       expect(nextState).toEqual({
         indices: {
-          first: {
+          second: {
             otherKey: 'val',
             page: 1,
             multiRange: { ok: 'yep', otherKey: 'val' },
@@ -456,12 +456,12 @@ describe('connectNumericMenu', () => {
       nextState = connect.refine(
         {
           attribute: 'ok',
-          contextValue: { mainTargetedIndex: 'first' },
-          indexContextValue: { targetedIndex: 'second' },
+          contextValue,
+          indexContextValue,
         },
         {
           indices: {
-            first: {
+            second: {
               otherKey: 'val',
               multiRange: { ok: 'yep', otherKey: 'val' },
             },
@@ -471,11 +471,11 @@ describe('connectNumericMenu', () => {
       );
       expect(nextState).toEqual({
         indices: {
-          first: {
+          second: {
+            page: 1,
             otherKey: 'val',
             multiRange: { ok: 'yep', otherKey: 'val' },
           },
-          second: { page: 1, multiRange: { ok: 'yep' } },
         },
       });
     });
@@ -486,7 +486,7 @@ describe('connectNumericMenu', () => {
       params = connect.getSearchParameters(
         initSP,
         { attribute: 'facet', contextValue, indexContextValue },
-        { indices: { first: { multiRange: { facet: '100:' } } } }
+        { indices: { second: { multiRange: { facet: '100:' } } } }
       );
       expect(params.getNumericRefinements('facet')).toEqual({
         '>=': [100],
@@ -507,11 +507,11 @@ describe('connectNumericMenu', () => {
           contextValue,
           indexContextValue,
         },
-        { indices: { first: { multiRange: { wot: '100:200' } } } }
+        { indices: { second: { multiRange: { wot: '100:200' } } } }
       );
       expect(metadata).toEqual({
         id: 'wot',
-        index: 'first',
+        index: 'second',
         items: [
           {
             label: 'wot: YAY',
@@ -540,18 +540,18 @@ describe('connectNumericMenu', () => {
         },
         {
           indices: {
-            first: { multiRange: { one: '100:200', two: '200:400' } },
+            second: { multiRange: { one: '100:200', two: '200:400' } },
           },
         }
       );
 
       const searchState = metadata.items[0].value({
-        indices: { first: { multiRange: { one: '100:200', two: '200:400' } } },
+        indices: { second: { multiRange: { one: '100:200', two: '200:400' } } },
       });
 
       expect(searchState).toEqual({
         indices: {
-          first: { page: 1, multiRange: { one: '', two: '200:400' } },
+          second: { page: 1, multiRange: { one: '', two: '200:400' } },
         },
       });
     });
@@ -562,6 +562,9 @@ describe('connectNumericMenu', () => {
         {
           indices: {
             first: {
+              another: { name: 'searchState' },
+            },
+            second: {
               multiRange: { name: 'searchState', name2: 'searchState' },
             },
           },
@@ -569,7 +572,12 @@ describe('connectNumericMenu', () => {
         }
       );
       expect(searchState).toEqual({
-        indices: { first: { multiRange: { name2: 'searchState' } } },
+        indices: {
+          first: {
+            another: { name: 'searchState' },
+          },
+          second: { multiRange: { name2: 'searchState' } },
+        },
         another: { searchState: 'searchState' },
       });
 
@@ -578,7 +586,12 @@ describe('connectNumericMenu', () => {
         searchState
       );
       expect(searchState).toEqual({
-        indices: { first: { multiRange: {} } },
+        indices: {
+          first: {
+            another: { name: 'searchState' },
+          },
+          second: { multiRange: {} },
+        },
         another: { searchState: 'searchState' },
       });
     });

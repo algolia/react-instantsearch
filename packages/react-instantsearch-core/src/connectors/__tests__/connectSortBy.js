@@ -91,17 +91,16 @@ describe('connectSortBy', () => {
 
   describe('multi index', () => {
     const contextValue = { mainTargetedIndex: 'first' };
-    const indexContextValue = { targetedIndex: 'first' };
+    const indexContextValue = { targetedIndex: 'second' };
 
     it('provides the correct props to the component', () => {
-      props = connect.getProvidedProps.call(
-        {},
+      props = connect.getProvidedProps(
         {
           items: [{ value: 'yep' }, { value: 'yop' }],
           contextValue,
           indexContextValue,
         },
-        { indices: { first: { sortBy: 'yep' } } }
+        { indices: { second: { sortBy: 'yep' } } }
       );
       expect(props).toEqual({
         items: [
@@ -113,39 +112,36 @@ describe('connectSortBy', () => {
     });
 
     it("calling refine updates the widget's search state", () => {
-      const nextState = connect.refine.call(
-        {},
+      const nextState = connect.refine(
         { contextValue, indexContextValue },
         { otherKey: 'val' },
         'yep'
       );
       expect(nextState).toEqual({
         otherKey: 'val',
-        indices: { first: { page: 1, sortBy: 'yep' } },
+        indices: { second: { page: 1, sortBy: 'yep' } },
       });
     });
 
     it('refines the index parameter', () => {
-      params = connect.getSearchParameters.call(
-        {},
+      params = connect.getSearchParameters(
         new SearchParameters(),
         { contextValue, indexContextValue },
-        { indices: { first: { sortBy: 'yep' } } }
+        { indices: { second: { sortBy: 'yep' } } }
       );
       expect(params.index).toBe('yep');
     });
 
     it('should return the right searchState when clean up', () => {
-      const searchState = connect.cleanUp.call(
-        {},
+      const searchState = connect.cleanUp(
         { contextValue, indexContextValue },
         {
-          indices: { first: { sortBy: { searchState: 'searchState' } } },
+          indices: { second: { sortBy: { searchState: 'searchState' } } },
           another: { searchState: 'searchState' },
         }
       );
       expect(searchState).toEqual({
-        indices: { first: {} },
+        indices: { second: {} },
         another: { searchState: 'searchState' },
       });
     });

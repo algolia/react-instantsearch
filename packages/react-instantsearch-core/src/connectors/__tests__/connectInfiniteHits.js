@@ -459,7 +459,8 @@ describe('connectInfiniteHits', () => {
 
     it('provides the current hits to the component', () => {
       const hits = [{}];
-      const props = connect.getProvidedProps(
+      const props = connect.getProvidedProps.call(
+        {},
         { contextValue, indexContextValue },
         null,
         {
@@ -477,7 +478,10 @@ describe('connectInfiniteHits', () => {
       const hits = [{}, {}];
       const hits2 = [{}, {}];
 
-      const res1 = connect.getProvidedProps(
+      const instance = {};
+
+      const res1 = connect.getProvidedProps.call(
+        instance,
         { contextValue, indexContextValue },
         null,
         {
@@ -488,7 +492,8 @@ describe('connectInfiniteHits', () => {
       expect(res1.hits).toEqual(hits.map(hit => expect.objectContaining(hit)));
       expect(res1.hasMore).toBe(true);
 
-      const res2 = connect.getProvidedProps(
+      const res2 = connect.getProvidedProps.call(
+        instance,
         { contextValue, indexContextValue },
         null,
         {
@@ -508,8 +513,10 @@ describe('connectInfiniteHits', () => {
       const hits = [{}, {}, {}, {}, {}, {}];
       const hits2 = [{}, {}, {}, {}, {}, {}];
       const hits3 = [{}, {}, {}, {}, {}, {}, {}, {}];
+      const instance = {};
 
-      const res1 = connect.getProvidedProps(
+      const res1 = connect.getProvidedProps.call(
+        instance,
         { contextValue, indexContextValue },
         null,
         {
@@ -520,7 +527,8 @@ describe('connectInfiniteHits', () => {
       expect(res1.hits).toEqual(hits.map(hit => expect.objectContaining(hit)));
       expect(res1.hasMore).toBe(true);
 
-      const res2 = connect.getProvidedProps(
+      const res2 = connect.getProvidedProps.call(
+        instance,
         { contextValue, indexContextValue },
         null,
         {
@@ -535,7 +543,8 @@ describe('connectInfiniteHits', () => {
       );
       expect(res2.hasMore).toBe(true);
 
-      let res3 = connect.getProvidedProps(
+      let res3 = connect.getProvidedProps.call(
+        instance,
         { contextValue, indexContextValue },
         null,
         {
@@ -551,7 +560,8 @@ describe('connectInfiniteHits', () => {
       expect(res3.hasMore).toBe(true);
 
       // re-render with the same property
-      res3 = connect.getProvidedProps(
+      res3 = connect.getProvidedProps.call(
+        instance,
         { contextValue, indexContextValue },
         null,
         {
@@ -570,12 +580,14 @@ describe('connectInfiniteHits', () => {
     it('should not reset while accumulating results', () => {
       const hits = [{}, {}];
       const nbPages = 100;
+      const instance = {};
 
       let allHits = [];
       for (let page = 0; page < nbPages - 1; page++) {
         allHits = [...allHits, ...hits];
 
-        const res = connect.getProvidedProps(
+        const res = connect.getProvidedProps.call(
+          instance,
           { contextValue, indexContextValue },
           null,
           {
@@ -599,7 +611,8 @@ describe('connectInfiniteHits', () => {
 
       allHits = [...allHits, ...hits];
 
-      const res = connect.getProvidedProps(
+      const res = connect.getProvidedProps.call(
+        instance,
         { contextValue, indexContextValue },
         null,
         {
@@ -625,18 +638,30 @@ describe('connectInfiniteHits', () => {
       const hits = [{}, {}];
       const hits2 = [{}, {}];
       const hits3 = [{}];
+      const instance = {};
 
-      connect.getProvidedProps({ contextValue, indexContextValue }, null, {
-        results: { second: { hits, page: 0, hitsPerPage: 2, nbPages: 3 } },
-      });
+      connect.getProvidedProps.call(
+        instance,
+        { contextValue, indexContextValue },
+        null,
+        {
+          results: { second: { hits, page: 0, hitsPerPage: 2, nbPages: 3 } },
+        }
+      );
 
-      connect.getProvidedProps({ contextValue, indexContextValue }, null, {
-        results: {
-          second: { hits: hits2, page: 1, hitsPerPage: 2, nbPages: 3 },
-        },
-      });
+      connect.getProvidedProps.call(
+        instance,
+        { contextValue, indexContextValue },
+        null,
+        {
+          results: {
+            second: { hits: hits2, page: 1, hitsPerPage: 2, nbPages: 3 },
+          },
+        }
+      );
 
-      const props = connect.getProvidedProps(
+      const props = connect.getProvidedProps.call(
+        instance,
         { contextValue, indexContextValue },
         null,
         {

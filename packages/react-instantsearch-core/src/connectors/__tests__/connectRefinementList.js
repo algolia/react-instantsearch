@@ -477,10 +477,14 @@ describe('connectRefinementList', () => {
 
   describe('multi index', () => {
     const contextValue = { mainTargetedIndex: 'first' };
-    const indexContextValue = { targetedIndex: 'first' };
+    const indexContextValue = { targetedIndex: 'second' };
 
     const results = {
       first: {
+        getFacetValues: jest.fn(() => []),
+        getFacetByName: () => true,
+      },
+      second: {
         getFacetValues: jest.fn(() => []),
         getFacetByName: () => true,
       },
@@ -501,7 +505,7 @@ describe('connectRefinementList', () => {
 
       props = connect.getProvidedProps(
         { attribute: 'ok', contextValue, indexContextValue },
-        { indices: { first: { refinementList: { ok: ['wat'] } } } },
+        { indices: { second: { refinementList: { ok: ['wat'] } } } },
         { results }
       );
       expect(props).toEqual({
@@ -511,8 +515,8 @@ describe('connectRefinementList', () => {
         canRefine: false,
       });
 
-      results.first.getFacetValues.mockClear();
-      results.first.getFacetValues.mockImplementation(() => [
+      results.second.getFacetValues.mockClear();
+      results.second.getFacetValues.mockImplementation(() => [
         {
           name: 'wat',
           isRefined: true,
@@ -531,14 +535,14 @@ describe('connectRefinementList', () => {
         { attribute: 'ok', contextValue, indexContextValue },
         {
           otherKey: 'val',
-          indices: { first: { refinementList: { otherKey: ['val'] } } },
+          indices: { second: { refinementList: { otherKey: ['val'] } } },
         },
         ['yep']
       );
       expect(nextState).toEqual({
         otherKey: 'val',
         indices: {
-          first: {
+          second: {
             page: 1,
             refinementList: { ok: ['yep'], otherKey: ['val'] },
           },
@@ -548,20 +552,22 @@ describe('connectRefinementList', () => {
       nextState = connect.refine(
         {
           attribute: 'ok',
-          contextValue: { mainTargetedIndex: 'first' },
-          indexContextValue: { targetedIndex: 'second' },
+          contextValue,
+          indexContextValue,
         },
         {
           otherKey: 'val',
-          indices: { first: { refinementList: { otherKey: ['val'] } } },
+          indices: { second: { refinementList: { otherKey: ['val'] } } },
         },
         ['yep']
       );
       expect(nextState).toEqual({
         otherKey: 'val',
         indices: {
-          first: { refinementList: { otherKey: ['val'] } },
-          second: { page: 1, refinementList: { ok: ['yep'] } },
+          second: {
+            page: 1,
+            refinementList: { ok: ['yep'], otherKey: ['val'] },
+          },
         },
       });
     });
@@ -578,7 +584,7 @@ describe('connectRefinementList', () => {
           contextValue,
           indexContextValue,
         },
-        { indices: { first: { refinementList: { ok: ['wat'] } } } }
+        { indices: { second: { refinementList: { ok: ['wat'] } } } }
       );
       expect(params).toEqual(
         initSP
@@ -596,7 +602,7 @@ describe('connectRefinementList', () => {
           contextValue,
           indexContextValue,
         },
-        { indices: { first: { refinementList: { ok: ['wat'] } } } }
+        { indices: { second: { refinementList: { ok: ['wat'] } } } }
       );
       expect(params).toEqual(
         initSP
@@ -609,11 +615,11 @@ describe('connectRefinementList', () => {
     it('registers its filter in metadata', () => {
       const metadata = connect.getMetadata(
         { attribute: 'wot', contextValue, indexContextValue },
-        { indices: { first: { refinementList: { wot: ['wat', 'wut'] } } } }
+        { indices: { second: { refinementList: { wot: ['wat', 'wut'] } } } }
       );
       expect(metadata).toEqual({
         id: 'wot',
-        index: 'first',
+        index: 'second',
         items: [
           {
             label: 'wot: ',
@@ -641,20 +647,20 @@ describe('connectRefinementList', () => {
         { attribute: 'one', contextValue, indexContextValue },
         {
           indices: {
-            first: { refinementList: { one: ['one1', 'one2'], two: ['two'] } },
+            second: { refinementList: { one: ['one1', 'one2'], two: ['two'] } },
           },
         }
       );
 
       let searchState = metadata.items[0].items[0].value({
         indices: {
-          first: { refinementList: { one: ['one1', 'one2'], two: ['two'] } },
+          second: { refinementList: { one: ['one1', 'one2'], two: ['two'] } },
         },
       });
 
       expect(searchState).toEqual({
         indices: {
-          first: { page: 1, refinementList: { one: ['one2'], two: ['two'] } },
+          second: { page: 1, refinementList: { one: ['one2'], two: ['two'] } },
         },
       });
 
@@ -662,7 +668,7 @@ describe('connectRefinementList', () => {
 
       expect(searchState).toEqual({
         indices: {
-          first: { page: 1, refinementList: { one: '', two: ['two'] } },
+          second: { page: 1, refinementList: { one: '', two: ['two'] } },
         },
       });
     });
@@ -672,7 +678,7 @@ describe('connectRefinementList', () => {
         { attribute: 'name', contextValue, indexContextValue },
         {
           indices: {
-            first: {
+            second: {
               refinementList: { name: 'searchState', name2: 'searchState' },
             },
           },
@@ -680,7 +686,7 @@ describe('connectRefinementList', () => {
         }
       );
       expect(searchState).toEqual({
-        indices: { first: { refinementList: { name2: 'searchState' } } },
+        indices: { second: { refinementList: { name2: 'searchState' } } },
         another: { searchState: 'searchState' },
       });
 
@@ -689,7 +695,7 @@ describe('connectRefinementList', () => {
         searchState
       );
       expect(searchState).toEqual({
-        indices: { first: { refinementList: {} } },
+        indices: { second: { refinementList: {} } },
         another: { searchState: 'searchState' },
       });
     });

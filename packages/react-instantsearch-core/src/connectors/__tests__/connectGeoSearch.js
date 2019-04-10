@@ -724,11 +724,17 @@ describe('connectGeoSearch', () => {
 
     describe('getProvidedProps', () => {
       it('expect to return default provided props', () => {
+        const searchState = createMultiIndexSearchState();
         const props = { contextValue, indexContextValue };
 
         const searchResults = empty;
 
-        const actual = connector.getProvidedProps(props, {}, searchResults);
+        const actual = connector.getProvidedProps(
+          props,
+          {},
+          searchState,
+          searchResults
+        );
 
         const expectation = {
           hits: [],

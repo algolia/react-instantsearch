@@ -415,17 +415,17 @@ describe('connectToggleRefinement', () => {
 
   describe('multi index', () => {
     const contextValue = { mainTargetedIndex: 'first' };
-    const indexContextValue = { targetedIndex: 'first' };
+    const indexContextValue = { targetedIndex: 'second' };
 
     const createMultiIndexSearchState = (state = {}) => ({
       indices: {
-        first: state,
+        second: state,
       },
     });
 
     const createMultiIndexSearchResults = (...args) => ({
       results: {
-        first: createSearchResults(...args),
+        second: createSearchResults(...args),
       },
     });
 
@@ -717,28 +717,27 @@ describe('connectToggleRefinement', () => {
         { attribute: 't', contextValue, indexContextValue },
         {
           otherKey: 'val',
-          indices: { first: { toggle: { otherKey: false } } },
+          indices: { second: { toggle: { otherKey: false } } },
         },
         true
       );
       expect(searchState).toEqual({
         otherKey: 'val',
-        indices: { first: { page: 1, toggle: { t: true, otherKey: false } } },
+        indices: { second: { page: 1, toggle: { t: true, otherKey: false } } },
       });
 
       searchState = connect.refine(
         {
           attribute: 't',
           contextValue: { mainTargetedIndex: 'first' },
-          indexContextValue: { targetedIndex: 'second' },
+          indexContextValue: { targetedIndex: 'first' },
         },
         { indices: { first: { toggle: { t: true, otherKey: false } } } },
         false
       );
       expect(searchState).toEqual({
         indices: {
-          first: { toggle: { t: true, otherKey: false } },
-          second: { page: 1, toggle: { t: false } },
+          first: { page: 1, toggle: { t: false, otherKey: false } },
         },
       });
     });
@@ -754,7 +753,7 @@ describe('connectToggleRefinement', () => {
         },
         {
           indices: {
-            first: {
+            second: {
               toggle: {
                 facet: true,
               },
@@ -777,7 +776,7 @@ describe('connectToggleRefinement', () => {
         },
         {
           indices: {
-            first: {
+            second: {
               toggle: {
                 facet: false,
               },
@@ -800,7 +799,7 @@ describe('connectToggleRefinement', () => {
         },
         {
           indices: {
-            first: {
+            second: {
               toggle: {
                 facet: true,
               },
@@ -823,7 +822,7 @@ describe('connectToggleRefinement', () => {
         },
         {
           indices: {
-            first: {
+            second: {
               toggle: {
                 facet: false,
               },
@@ -838,7 +837,7 @@ describe('connectToggleRefinement', () => {
     it('registers its filter in metadata', () => {
       const metadata = connect.getMetadata(
         { attribute: 't', label: 'yep', contextValue, indexContextValue },
-        { indices: { first: { toggle: { t: true } } } }
+        { indices: { second: { toggle: { t: true } } } }
       );
       expect(metadata).toEqual({
         items: [
@@ -851,22 +850,22 @@ describe('connectToggleRefinement', () => {
           },
         ],
         id: 't',
-        index: 'first',
+        index: 'second',
       });
     });
 
     it('items value function should clear it from the search state', () => {
       const metadata = connect.getMetadata(
         { attribute: 'one', label: 'yep', contextValue, indexContextValue },
-        { indices: { first: { toggle: { one: true, two: false } } } }
+        { indices: { second: { toggle: { one: true, two: false } } } }
       );
 
       const searchState = metadata.items[0].value({
-        indices: { first: { toggle: { one: true, two: false } } },
+        indices: { second: { toggle: { one: true, two: false } } },
       });
 
       expect(searchState).toEqual({
-        indices: { first: { page: 1, toggle: { one: false, two: false } } },
+        indices: { second: { page: 1, toggle: { one: false, two: false } } },
       });
     });
 
@@ -875,13 +874,13 @@ describe('connectToggleRefinement', () => {
         { attribute: 'name', contextValue, indexContextValue },
         {
           indices: {
-            first: { toggle: { name: 'searchState', name2: 'searchState' } },
+            second: { toggle: { name: 'searchState', name2: 'searchState' } },
           },
           another: { searchState: 'searchState' },
         }
       );
       expect(searchState).toEqual({
-        indices: { first: { toggle: { name2: 'searchState' } } },
+        indices: { second: { toggle: { name2: 'searchState' } } },
         another: { searchState: 'searchState' },
       });
 
@@ -890,7 +889,7 @@ describe('connectToggleRefinement', () => {
         searchState
       );
       expect(searchState).toEqual({
-        indices: { first: { toggle: {} } },
+        indices: { second: { toggle: {} } },
         another: { searchState: 'searchState' },
       });
     });

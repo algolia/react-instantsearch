@@ -593,20 +593,20 @@ describe('connectHierarchicalMenu', () => {
 
   describe('multi index', () => {
     const contextValue = { mainTargetedIndex: 'first' };
-    const indexContextValue = { targetedIndex: 'first' };
+    const indexContextValue = { targetedIndex: 'second' };
 
     it('provides the correct props to the component', () => {
       const results = {
-        first: {
+        second: {
           getFacetValues: jest.fn(),
           getFacetByName: () => true,
         },
       };
 
-      results.first.getFacetValues.mockImplementationOnce(() => ({}));
+      results.second.getFacetValues.mockImplementationOnce(() => ({}));
       let props = connect.getProvidedProps(
         { attributes: ['ok'], contextValue, indexContextValue },
-        { indices: { first: { hierarchicalMenu: { ok: 'wat' } } } },
+        { indices: { second: { hierarchicalMenu: { ok: 'wat' } } } },
         { results }
       );
       expect(props).toEqual({
@@ -626,8 +626,8 @@ describe('connectHierarchicalMenu', () => {
         items: [],
       });
 
-      results.first.getFacetValues.mockClear();
-      results.first.getFacetValues.mockImplementation(() => ({
+      results.second.getFacetValues.mockClear();
+      results.second.getFacetValues.mockImplementation(() => ({
         data: [
           {
             name: 'wat',
@@ -768,14 +768,20 @@ describe('connectHierarchicalMenu', () => {
         { attributes: ['ok'], contextValue, indexContextValue },
         {
           indices: {
-            first: { otherKey: 'val', hierarchicalMenu: { otherKey: 'val' } },
+            first: { otherKey: 'val1', hierarchicalMenu: { otherKey: 'val1' } },
+            second: { otherKey: 'val', hierarchicalMenu: { otherKey: 'val' } },
           },
         },
         'yep'
       );
+
       expect(nextState).toEqual({
         indices: {
           first: {
+            otherKey: 'val1',
+            hierarchicalMenu: { otherKey: 'val1' },
+          },
+          second: {
             otherKey: 'val',
             page: 1,
             hierarchicalMenu: { ok: 'yep', otherKey: 'val' },
@@ -827,7 +833,7 @@ describe('connectHierarchicalMenu', () => {
         },
         {
           indices: {
-            first: { otherKey: 'val', hierarchicalMenu: { ATTRIBUTE: 'ok' } },
+            second: { otherKey: 'val', hierarchicalMenu: { ATTRIBUTE: 'ok' } },
           },
         }
       );
@@ -848,11 +854,11 @@ describe('connectHierarchicalMenu', () => {
     it('registers its filter in metadata', () => {
       const metadata = connect.getMetadata(
         { attributes: ['ok'], contextValue, indexContextValue },
-        { indices: { first: { hierarchicalMenu: { ok: 'wat' } } } }
+        { indices: { second: { hierarchicalMenu: { ok: 'wat' } } } }
       );
       expect(metadata).toEqual({
         id: 'ok',
-        index: 'first',
+        index: 'second',
         items: [
           {
             label: 'ok: wat',
@@ -868,16 +874,18 @@ describe('connectHierarchicalMenu', () => {
     it('items value function should clear it from the search state', () => {
       const metadata = connect.getMetadata(
         { attributes: ['one'], contextValue, indexContextValue },
-        { indices: { first: { hierarchicalMenu: { one: 'one', two: 'two' } } } }
+        {
+          indices: { second: { hierarchicalMenu: { one: 'one', two: 'two' } } },
+        }
       );
 
       const searchState = metadata.items[0].value({
-        indices: { first: { hierarchicalMenu: { one: 'one', two: 'two' } } },
+        indices: { second: { hierarchicalMenu: { one: 'one', two: 'two' } } },
       });
 
       expect(searchState).toEqual({
         indices: {
-          first: { page: 1, hierarchicalMenu: { one: '', two: 'two' } },
+          second: { page: 1, hierarchicalMenu: { one: '', two: 'two' } },
         },
       });
     });
@@ -887,7 +895,7 @@ describe('connectHierarchicalMenu', () => {
         { attributes: ['one'], contextValue, indexContextValue },
         {
           indices: {
-            first: {
+            second: {
               hierarchicalMenu: { one: 'one', two: 'two' },
               another: { searchState: 'searchState' },
             },
@@ -896,7 +904,7 @@ describe('connectHierarchicalMenu', () => {
       );
       expect(searchState).toEqual({
         indices: {
-          first: {
+          second: {
             hierarchicalMenu: { two: 'two' },
             another: { searchState: 'searchState' },
           },
@@ -909,7 +917,7 @@ describe('connectHierarchicalMenu', () => {
       );
       expect(searchState).toEqual({
         indices: {
-          first: {
+          second: {
             another: { searchState: 'searchState' },
             hierarchicalMenu: {},
           },

@@ -1442,11 +1442,11 @@ describe('connectRange', () => {
 
   describe('multi index', () => {
     const contextValue = { mainTargetedIndex: 'first' };
-    const indexContextValue = { targetedIndex: 'first' };
+    const indexContextValue = { targetedIndex: 'second' };
 
     it('provides the correct props to the component', () => {
       const results = {
-        first: {
+        second: {
           getFacetStats: () => ({ min: 5, max: 10 }),
           getFacetValues: () => [
             { name: '5', count: 10 },
@@ -1455,7 +1455,10 @@ describe('connectRange', () => {
           getFacetByName: () => true,
         },
       };
-      props = connect.getProvidedProps(
+      const instance = {};
+
+      props = connect.getProvidedProps.call(
+        instance,
         { attribute: 'ok', precision: 2, contextValue, indexContextValue },
         {},
         { results }
@@ -1469,7 +1472,8 @@ describe('connectRange', () => {
         precision: 2,
       });
 
-      props = connect.getProvidedProps(
+      props = connect.getProvidedProps.call(
+        instance,
         {
           attribute: 'ok',
           min: 5,
@@ -1479,7 +1483,7 @@ describe('connectRange', () => {
           indexContextValue,
         },
         {
-          indices: { first: { range: { ok: { min: 6, max: 9 } } } },
+          indices: { second: { range: { ok: { min: 6, max: 9 } } } },
         },
         {}
       );
@@ -1492,7 +1496,8 @@ describe('connectRange', () => {
         precision: 2,
       });
 
-      props = connect.getProvidedProps(
+      props = connect.getProvidedProps.call(
+        instance,
         {
           attribute: 'ok',
           precision: 2,
@@ -1502,7 +1507,7 @@ describe('connectRange', () => {
         {},
         {
           results: {
-            first: new SearchResults(new SearchParameters(), [{ hits: [] }]),
+            second: new SearchResults(new SearchParameters(), [{ hits: [] }]),
           },
         }
       );
@@ -1527,14 +1532,14 @@ describe('connectRange', () => {
         { attribute: 'ok', contextValue, indexContextValue },
         {
           otherKey: 'val',
-          indices: { first: { range: { otherKey: { min: 1, max: 2 } } } },
+          indices: { second: { range: { otherKey: { min: 1, max: 2 } } } },
         },
         { min: 3, max: 5 }
       );
       expect(nextState).toEqual({
         otherKey: 'val',
         indices: {
-          first: {
+          second: {
             page: 1,
             range: { ok: { min: 3, max: 5 }, otherKey: { min: 1, max: 2 } },
           },
@@ -1547,20 +1552,20 @@ describe('connectRange', () => {
         },
         {
           attribute: 'ok',
-          contextValue: { mainTargetedIndex: 'first' },
-          indexContextValue: { targetedIndex: 'second' },
+          contextValue,
+          indexContextValue: { targetedIndex: 'first' },
         },
         {
           otherKey: 'val',
-          indices: { first: { range: { otherKey: { min: 1, max: 2 } } } },
+          indices: { second: { range: { otherKey: { min: 1, max: 2 } } } },
         },
         { min: 3, max: 5 }
       );
       expect(nextState).toEqual({
         otherKey: 'val',
         indices: {
-          first: { range: { otherKey: { min: 1, max: 2 } } },
-          second: { page: 1, range: { ok: { min: 3, max: 5 } } },
+          first: { page: 1, range: { ok: { min: 3, max: 5 } } },
+          second: { range: { otherKey: { min: 1, max: 2 } } },
         },
       });
     });
@@ -1569,7 +1574,7 @@ describe('connectRange', () => {
       params = connect.getSearchParameters(
         new SearchParameters(),
         { attribute: 'facet', contextValue, indexContextValue },
-        { indices: { first: { range: { facet: { min: 10, max: 30 } } } } }
+        { indices: { second: { range: { facet: { min: 10, max: 30 } } } } }
       );
       expect(params.getNumericRefinements('facet')).toEqual({
         '>=': [10],
@@ -1583,11 +1588,11 @@ describe('connectRange', () => {
           _currentRange: { min: 0, max: 100 },
         },
         { attribute: 'wot', contextValue, indexContextValue },
-        { indices: { first: { range: { wot: { min: 5 } } } } }
+        { indices: { second: { range: { wot: { min: 5 } } } } }
       );
       expect(metadata).toEqual({
         id: 'wot',
-        index: 'first',
+        index: 'second',
         items: [
           {
             label: '5 <= wot',
@@ -1600,11 +1605,11 @@ describe('connectRange', () => {
       });
 
       const searchState = metadata.items[0].value({
-        indices: { first: { range: { wot: { min: 5 } } } },
+        indices: { second: { range: { wot: { min: 5 } } } },
       });
       expect(searchState).toEqual({
         indices: {
-          first: {
+          second: {
             page: 1,
             range: {
               wot: {
@@ -1621,11 +1626,11 @@ describe('connectRange', () => {
           _currentRange: { min: 0, max: 100 },
         },
         { attribute: 'wot', contextValue, indexContextValue },
-        { indices: { first: { range: { wot: { max: 10 } } } } }
+        { indices: { second: { range: { wot: { max: 10 } } } } }
       );
       expect(metadata).toEqual({
         id: 'wot',
-        index: 'first',
+        index: 'second',
         items: [
           {
             label: 'wot <= 10',
@@ -1641,11 +1646,11 @@ describe('connectRange', () => {
           _currentRange: { min: 0, max: 100 },
         },
         { attribute: 'wot', contextValue, indexContextValue },
-        { indices: { first: { range: { wot: { max: 100 } } } } }
+        { indices: { second: { range: { wot: { max: 100 } } } } }
       );
       expect(metadata).toEqual({
         id: 'wot',
-        index: 'first',
+        index: 'second',
         items: [],
       });
     });
@@ -1656,16 +1661,16 @@ describe('connectRange', () => {
           _currentRange: { min: 0, max: 100 },
         },
         { attribute: 'one', contextValue, indexContextValue },
-        { indices: { first: { range: { one: { min: 5 }, two: { max: 4 } } } } }
+        { indices: { second: { range: { one: { min: 5 }, two: { max: 4 } } } } }
       );
 
       const searchState = metadata.items[0].value({
-        indices: { first: { range: { one: { min: 5 }, two: { max: 4 } } } },
+        indices: { second: { range: { one: { min: 5 }, two: { max: 4 } } } },
       });
 
       expect(searchState).toEqual({
         indices: {
-          first: {
+          second: {
             page: 1,
             range: {
               one: {
@@ -1686,13 +1691,13 @@ describe('connectRange', () => {
         { attribute: 'name', contextValue, indexContextValue },
         {
           indices: {
-            first: { range: { name: 'searchState', name2: 'searchState' } },
+            second: { range: { name: 'searchState', name2: 'searchState' } },
           },
           another: { searchState: 'searchState' },
         }
       );
       expect(searchState).toEqual({
-        indices: { first: { range: { name2: 'searchState' } } },
+        indices: { second: { range: { name2: 'searchState' } } },
         another: { searchState: 'searchState' },
       });
 
@@ -1702,7 +1707,7 @@ describe('connectRange', () => {
       );
       expect(searchState).toEqual({
         another: { searchState: 'searchState' },
-        indices: { first: { range: {} } },
+        indices: { second: { range: {} } },
       });
     });
   });

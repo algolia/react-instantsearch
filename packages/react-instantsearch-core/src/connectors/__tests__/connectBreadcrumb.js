@@ -4,7 +4,7 @@ jest.mock('../../core/createConnector', () => x => x);
 
 let props;
 
-describe('connectHierarchicalMenu', () => {
+describe('connectBreadcrumb', () => {
   describe('single index', () => {
     const contextValue = { mainTargetedIndex: 'index' };
 
@@ -111,20 +111,20 @@ describe('connectHierarchicalMenu', () => {
 
   describe('multi index', () => {
     const contextValue = { mainTargetedIndex: 'first' };
-    const indexContextValue = { targetedIndex: 'first' };
+    const indexContextValue = { targetedIndex: 'second' };
 
     it('provides the correct props to the component', () => {
       const results = {
-        first: {
+        second: {
           getFacetValues: jest.fn(),
           getFacetByName: () => true,
         },
       };
 
-      results.first.getFacetValues.mockImplementationOnce(() => ({}));
+      results.second.getFacetValues.mockImplementationOnce(() => ({}));
       props = connect.getProvidedProps(
         { attributes: ['ok'], contextValue, indexContextValue },
-        { indices: { first: { hierarchicalMenu: { ok: 'wat' } } } },
+        { indices: { second: { hierarchicalMenu: { ok: 'wat' } } } },
         { results }
       );
       expect(props).toEqual({
@@ -142,8 +142,8 @@ describe('connectHierarchicalMenu', () => {
         items: [],
       });
 
-      results.first.getFacetValues.mockClear();
-      results.first.getFacetValues.mockImplementation(() => ({
+      results.second.getFacetValues.mockClear();
+      results.second.getFacetValues.mockImplementation(() => ({
         data: [
           {
             name: 'wat',
@@ -217,16 +217,22 @@ describe('connectHierarchicalMenu', () => {
         },
         {
           indices: {
-            first: { otherKey: 'val', hierarchicalMenu: { otherKey: 'val' } },
+            first: { otherKey: 'val1', hierarchicalMenu: { otherKey: 'val1' } },
+            second: { otherKey: 'val', hierarchicalMenu: { otherKey: 'val' } },
           },
         },
         'yep'
       );
+
       expect(nextState).toEqual({
         indices: {
           first: {
-            otherKey: 'val',
+            otherKey: 'val1',
+            hierarchicalMenu: { otherKey: 'val1' },
+          },
+          second: {
             page: 1,
+            otherKey: 'val',
             hierarchicalMenu: { ok: 'yep', otherKey: 'val' },
           },
         },
@@ -235,12 +241,13 @@ describe('connectHierarchicalMenu', () => {
       nextState = connect.refine(
         {
           attributes: ['ok'],
-          contextValue: { mainTargetedIndex: 'first' },
+          contextValue,
           indexContextValue: { targetedIndex: 'second' },
         },
         {
           indices: {
-            first: {
+            first: { page: 1, hierarchicalMenu: { otherKey: 'val1' } },
+            second: {
               otherKey: 'val',
               hierarchicalMenu: { ok: 'yep', otherKey: 'val' },
             },
@@ -251,11 +258,12 @@ describe('connectHierarchicalMenu', () => {
 
       expect(nextState).toEqual({
         indices: {
-          first: {
+          first: { page: 1, hierarchicalMenu: { otherKey: 'val1' } },
+          second: {
+            page: 1,
             otherKey: 'val',
             hierarchicalMenu: { ok: 'yep', otherKey: 'val' },
           },
-          second: { page: 1, hierarchicalMenu: { ok: 'yep' } },
         },
       });
     });

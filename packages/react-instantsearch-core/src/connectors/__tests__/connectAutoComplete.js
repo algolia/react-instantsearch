@@ -81,7 +81,7 @@ describe('connectAutoComplete', () => {
 
   describe('multi index', () => {
     const contextValue = { mainTargetedIndex: 'first' };
-    const indexContextValue = { targetedIndex: 'first' };
+    const indexContextValue = { targetedIndex: 'second' };
 
     it('provides current hits to the component', () => {
       const firstHits = [{}];
@@ -103,7 +103,7 @@ describe('connectAutoComplete', () => {
 
       props = connect.getProvidedProps(
         { contextValue, indexContextValue },
-        { indices: { first: { query: 'query' } } },
+        { indices: { second: { query: 'query' } } },
         {
           results: { first: { hits: firstHits }, second: { hits: secondHits } },
         }
@@ -136,7 +136,7 @@ describe('connectAutoComplete', () => {
       const params = connect.getSearchParameters(
         new SearchParameters(),
         { contextValue, indexContextValue },
-        { indices: { first: { query: 'bar' } } }
+        { indices: { second: { query: 'bar' } } }
       );
       expect(params.query).toBe('bar');
     });
@@ -149,7 +149,7 @@ describe('connectAutoComplete', () => {
       );
       expect(nextState).toEqual({
         otherKey: 'val',
-        indices: { first: { query: 'yep', page: 1 } },
+        indices: { second: { query: 'yep', page: 1 } },
       });
     });
 
@@ -157,12 +157,12 @@ describe('connectAutoComplete', () => {
       const searchState = connect.cleanUp(
         { contextValue, indexContextValue },
         {
-          indices: { first: { query: '' } },
+          indices: { second: { query: '' } },
           another: { searchState: 'searchState' },
         }
       );
       expect(searchState).toEqual({
-        indices: { first: {} },
+        indices: { second: {} },
         another: { searchState: 'searchState' },
       });
     });

@@ -66,7 +66,7 @@ describe('connectSearchBox', () => {
 
   describe('multi index', () => {
     const contextValue = { mainTargetedIndex: 'first' };
-    const indexContextValue = { targetedIndex: 'first' };
+    const indexContextValue = { targetedIndex: 'second' };
 
     it('provides the correct props to the component', () => {
       props = connect.getProvidedProps(
@@ -78,7 +78,7 @@ describe('connectSearchBox', () => {
 
       props = connect.getProvidedProps(
         { contextValue, indexContextValue },
-        { indices: { first: { query: 'yep' } } },
+        { indices: { second: { query: 'yep' } } },
         {}
       );
       expect(props).toEqual({ currentRefinement: 'yep' });
@@ -92,20 +92,27 @@ describe('connectSearchBox', () => {
       );
       expect(nextState).toEqual({
         otherKey: 'val',
-        indices: { first: { query: 'yep', page: 1 } },
+        indices: { second: { query: 'yep', page: 1 } },
       });
 
       nextState = connect.refine(
         {
           contextValue: { mainTargetedIndex: 'first' },
-          indexContextValue: { targetedIndex: 'second' },
+          indexContextValue: { targetedIndex: 'first' },
         },
-        { indices: { first: { query: 'yep' } }, otherKey: 'val' },
-        'yop'
+        {
+          indices: {
+            first: { query: 'yep' },
+          },
+          otherKey: 'val',
+        },
+        'yip'
       );
       expect(nextState).toEqual({
         otherKey: 'val',
-        indices: { second: { query: 'yop', page: 1 }, first: { query: 'yep' } },
+        indices: {
+          first: { query: 'yip', page: 1 },
+        },
       });
     });
 
@@ -125,7 +132,7 @@ describe('connectSearchBox', () => {
       params = connect.getSearchParameters(
         new SearchParameters(),
         { contextValue, indexContextValue },
-        { indices: { first: { query: 'bar' } } }
+        { indices: { second: { query: 'bar' } } }
       );
       expect(params.query).toBe('bar');
     });
@@ -134,12 +141,12 @@ describe('connectSearchBox', () => {
       const searchState = connect.cleanUp(
         { contextValue, indexContextValue },
         {
-          indices: { first: { query: '' } },
+          indices: { second: { query: '' } },
           another: { searchState: 'searchState' },
         }
       );
       expect(searchState).toEqual({
-        indices: { first: {} },
+        indices: { second: {} },
         another: { searchState: 'searchState' },
       });
     });
