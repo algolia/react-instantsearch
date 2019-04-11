@@ -74,10 +74,8 @@ class Index extends Component<Props, State> {
     },
   };
 
-  componentDidMount() {
-    this.unregisterWidget = this.props.contextValue.widgetsManager.registerWidget(
-      this
-    );
+  constructor(props) {
+    super(props);
 
     this.props.contextValue.onSearchParameters(
       this.getSearchParameters.bind(this),
@@ -86,6 +84,12 @@ class Index extends Component<Props, State> {
         multiIndexContext: this.state.indexContext,
       },
       this.props
+    );
+  }
+
+  componentDidMount() {
+    this.unregisterWidget = this.props.contextValue.widgetsManager.registerWidget(
+      this
     );
   }
 
