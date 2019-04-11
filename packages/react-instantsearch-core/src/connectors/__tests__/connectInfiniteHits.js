@@ -624,6 +624,44 @@ describe('connectInfiniteHits', () => {
       expect(res3.hasMore).toBe(true);
     });
 
+    it('should not accumulate hits internally while changing query', () => {
+      const context = createMultiIndexContext();
+      const getProvidedProps = connect.getProvidedProps.bind(context);
+
+      const hits = [{}, {}, {}, {}, {}, {}];
+      const hits2 = [{}, {}, {}, {}, {}, {}];
+
+      const res1 = getProvidedProps(null, null, {
+        results: {
+          second: {
+            hits,
+            page: 0,
+            hitsPerPage: 6,
+            nbPages: 10,
+            _state: { page: 0, query: 'a' },
+          },
+        },
+      });
+
+      expect(res1.hits).toEqual(hits.map(hit => expect.objectContaining(hit)));
+      expect(res1.hasMore).toBe(true);
+
+      const res2 = getProvidedProps(null, null, {
+        results: {
+          second: {
+            hits: hits2,
+            page: 0,
+            hitsPerPage: 6,
+            nbPages: 10,
+            _state: { page: 0, query: 'b' },
+          },
+        },
+      });
+
+      expect(res2.hits).toEqual(hits2.map(hit => expect.objectContaining(hit)));
+      expect(res2.hasMore).toBe(true);
+    });
+
     it('should not reset while accumulating results', () => {
       const context = createMultiIndexContext();
       const getProvidedProps = connect.getProvidedProps.bind(context);

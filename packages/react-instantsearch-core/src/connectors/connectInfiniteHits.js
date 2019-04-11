@@ -45,6 +45,7 @@ export default createConnector({
     const results = getResults(searchResults, this.context);
 
     this._allResults = this._allResults || [];
+    this._prevState = this._prevState || '';
 
     if (!results) {
       return {
@@ -57,15 +58,25 @@ export default createConnector({
       };
     }
 
-    const { hits, hitsPerPage, page, nbPages } = results;
+    const {
+      page,
+      hits,
+      hitsPerPage,
+      nbPages,
+      _state: { page: p, ...stateWithoutPage } = {},
+    } = results;
 
+    const currentState = JSON.stringify(stateWithoutPage);
     const hitsWithPositions = addAbsolutePositions(hits, hitsPerPage, page);
     const hitsWithPositionsAndQueryID = addQueryID(
       hitsWithPositions,
       results.queryID
     );
 
-    if (this._firstReceivedPage === undefined) {
+    if (
+      this._firstReceivedPage === undefined ||
+      currentState !== this._prevState
+    ) {
       this._allResults = [...hitsWithPositionsAndQueryID];
       this._firstReceivedPage = page;
       this._lastReceivedPage = page;
@@ -76,6 +87,8 @@ export default createConnector({
       this._allResults = [...hitsWithPositionsAndQueryID, ...this._allResults];
       this._firstReceivedPage = page;
     }
+
+    this._prevState = currentState;
 
     const hasPrevious = this._firstReceivedPage > 0;
     const lastPageIndex = nbPages - 1;
