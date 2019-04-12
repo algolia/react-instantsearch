@@ -12,10 +12,11 @@ type Props = {
   indexId: string;
   root: {
     Root: ReactType;
-    props: {}; // I think this is correct
+    props: {};
   };
-  contextValue: InstantSearchContext;
 };
+
+type InnerProps = Props & { contextValue: InstantSearchContext };
 
 type State = {
   indexContext: IndexContext;
@@ -50,7 +51,7 @@ type State = {
  *   </InstantSearch>
  * );
  */
-class Index extends Component<Props, State> {
+class Index extends Component<InnerProps, State> {
   static propTypes = {
     // @TODO: These props are currently constant.
     indexName: PropTypes.string.isRequired,
@@ -74,7 +75,7 @@ class Index extends Component<Props, State> {
     },
   };
 
-  constructor(props) {
+  constructor(props: InnerProps) {
     super(props);
 
     this.props.contextValue.onSearchParameters(
@@ -93,7 +94,7 @@ class Index extends Component<Props, State> {
     );
   }
 
-  componentWillReceiveProps(nextProps: Props) {
+  componentWillReceiveProps(nextProps: InnerProps) {
     if (this.props.indexName !== nextProps.indexName) {
       this.props.contextValue.widgetsManager.update();
     }
@@ -134,7 +135,7 @@ class Index extends Component<Props, State> {
   }
 }
 
-const IndexWrapper = (props: Props) => (
+const IndexWrapper: React.FC<Props> = props => (
   <InstantSearchConsumer>
     {contextValue => <Index contextValue={contextValue} {...props} />}
   </InstantSearchConsumer>
