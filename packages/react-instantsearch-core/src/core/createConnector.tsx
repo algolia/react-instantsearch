@@ -354,7 +354,7 @@ const createConnectorWithContext = (connectorDesc: ConnectorDescription) => (
 ) => {
   const Connector = createConnectorWithoutContext(connectorDesc)(Composed);
 
-  return props => (
+  const ConnectorWrapper: React.FC<any> = props => (
     <InstantSearchConsumer>
       {contextValue => (
         <IndexConsumer>
@@ -369,6 +369,8 @@ const createConnectorWithContext = (connectorDesc: ConnectorDescription) => (
       )}
     </InstantSearchConsumer>
   );
+
+  return ConnectorWrapper;
 };
 
 export default createConnectorWithContext;
