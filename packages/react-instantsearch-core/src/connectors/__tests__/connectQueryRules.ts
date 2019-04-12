@@ -31,7 +31,7 @@ describe('connectQueryRules', () => {
 
     describe('default', () => {
       it('without userData provides the correct props to the component', () => {
-        const props: ConnectedProps<QueryRulesProps> = defaultProps;
+        const props: ConnectedProps<QueryRulesProps> = defaultPropsSingleIndex;
         const searchState = {};
         const searchResults = {
           results: { [indexName]: { userData: undefined } },
