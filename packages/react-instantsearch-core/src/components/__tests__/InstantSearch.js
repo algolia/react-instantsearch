@@ -331,10 +331,10 @@ describe('InstantSearch', () => {
     expect(ism.updateIndex).not.toHaveBeenCalled();
 
     wrapper.setProps({
-      indexName: 'newindexname',
+      indexName: 'newIndexName',
     });
 
-    expect(wrapper.html()).toMatchInlineSnapshot(`"<div>newindexname</div>"`);
+    expect(wrapper.html()).toMatchInlineSnapshot(`"<div>newIndexName</div>"`);
 
     expect(ism.updateIndex).toHaveBeenCalledTimes(1);
   });

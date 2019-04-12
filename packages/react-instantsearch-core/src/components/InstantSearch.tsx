@@ -67,7 +67,7 @@ type Props = {
   stalledSearchDelay?: number;
   root: {
     Root: ReactType; // react component
-    props: {}; // I think this is correct
+    props: {};
   };
   resultsState: SearchResults | { [indexId: string]: SearchResults };
 };

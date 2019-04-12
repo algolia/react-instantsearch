@@ -3,35 +3,6 @@ import React, { Component, ReactType } from 'react';
 import { shallowEqual, getDisplayName, removeEmptyKey } from './utils';
 import { InstantSearchConsumer, InstantSearchContext } from './context';
 
-function needlessUsageWarning(connectorDesc: ConnectorDescription) {
-  if (process.env.NODE_ENV === 'development') {
-    const onlyGetProvidedPropsUsage = !Object.keys(connectorDesc).find(
-      key =>
-        ['getMetadata', 'getSearchParameters', 'refine', 'cleanUp'].indexOf(
-          key
-        ) > -1
-    );
-
-    if (
-      onlyGetProvidedPropsUsage &&
-      connectorDesc.displayName.substr(0, 7) !== 'Algolia'
-    ) {
-      // tslint:disable-next-line no-console
-      console.warn(
-        'react-instantsearch: it seems that you are using the `createConnector` api ' +
-          'only to access the `searchState` and the `searchResults` through `getProvidedProps`.' +
-          'We are now provided a dedicated API' +
-          ' the `connectStateResults` connector that you should use instead. The `createConnector` API will be ' +
-          'soon deprecated and will break in future next major versions.' +
-          '\n\n' +
-          'See more at https://www.algolia.com/doc/api-reference/widgets/state-results/react/' +
-          '\n' +
-          'and https://www.algolia.com/doc/guides/building-search-ui/going-further/conditional-display/react/'
-      );
-    }
-  }
-}
-
 export type ConnectorDescription = {
   displayName: string;
   /**
@@ -91,8 +62,6 @@ export function createConnectorWithoutContext(
     );
   }
 
-  needlessUsageWarning(connectorDesc);
-
   const isWidget =
     typeof connectorDesc.getSearchParameters === 'function' ||
     typeof connectorDesc.getMetadata === 'function' ||
@@ -114,8 +83,8 @@ export function createConnectorWithoutContext(
       static propTypes = connectorDesc.propTypes;
       static defaultProps = connectorDesc.defaultProps;
 
-      unsubscribe?: () => any;
-      unregisterWidget?: () => any;
+      unsubscribe?: () => void;
+      unregisterWidget?: () => void;
 
       isUnmounting = false;
 
@@ -374,7 +343,6 @@ const createConnectorWithContext = (connectorDesc: ConnectorDescription) => (
 ) => {
   const Connector = createConnectorWithoutContext(connectorDesc)(Composed);
 
-  // @TODO: does this need a display name?
   return props => (
     <InstantSearchConsumer>
       {contextValue => <Connector contextValue={contextValue} {...props} />}

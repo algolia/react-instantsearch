@@ -1,5 +1,5 @@
-type SearchState = any; // @TODO: give searchState type
-type ResultsState = any; // @TODO: give results type
+type SearchState = any;
+type ResultsState = any;
 type ResultsFacetsValues = any;
 type Listener = () => void;
 type State = {
