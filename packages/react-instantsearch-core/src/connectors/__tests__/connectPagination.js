@@ -62,7 +62,11 @@ describe('connectPagination', () => {
     });
 
     it("calling refine updates the widget's search state", () => {
-      const nextState = connect.refine({}, { otherKey: 'val' }, 'yep');
+      const nextState = connect.refine(
+        { contextValue },
+        { otherKey: 'val' },
+        'yep'
+      );
       expect(nextState).toEqual({
         otherKey: 'val',
         page: 'yep',

@@ -5,7 +5,7 @@ jest.mock('../../core/createConnector', () => x => x);
 
 describe('connectConfigure', () => {
   describe('single index', () => {
-    const contextValue = { ais: { mainTargetedIndex: 'index' } };
+    const contextValue = { mainTargetedIndex: 'index' };
 
     it('propagates the props to the SearchParameters without children & contextValue', () => {
       const searchParameters = connect.getSearchParameters.call(
@@ -45,9 +45,9 @@ describe('connectConfigure', () => {
     });
 
     it('calling transitionState should add configure parameters to the search state', () => {
-      const ctx = {};
+      const instance = {};
       let searchState = connect.transitionState.call(
-        ctx,
+        instance,
         {
           distinct: 1,
           whatever: 'please',
@@ -62,7 +62,7 @@ describe('connectConfigure', () => {
       });
 
       searchState = connect.transitionState.call(
-        ctx,
+        instance,
         { whatever: 'other', children: 'whatever', contextValue },
         { configure: { distinct: 1, whatever: 'please' } },
         { configure: { distinct: 1, whatever: 'please' } }
