@@ -5,11 +5,8 @@ const STATUS_RECOGNIZING = 'recognizing';
 const STATUS_FINISHED = 'finished';
 const STATUS_ERROR = 'error';
 
-export type VoiceSearchHelperParams = {
-  searchAsYouSpeak: boolean;
-  onQueryChange: (query: string) => void;
-  onStateChange: () => void;
-};
+type QueryChangeListener = (query: string) => void;
+type StateChangeListener = () => void;
 
 export type VoiceListeningState = {
   status: string;
@@ -20,16 +17,8 @@ export type VoiceListeningState = {
 
 export type ToggleListening = () => void;
 
-interface SpeechRecognitionAPI {
-  new (): SpeechRecognition;
-}
-
-export default function voiceSearchHelper({
-  searchAsYouSpeak,
-  onQueryChange,
-  onStateChange,
-}: VoiceSearchHelperParams) {
-  const SpeechRecognitionAPI: SpeechRecognitionAPI =
+export default function voiceSearchHelper() {
+  const SpeechRecognitionAPI: new () => SpeechRecognition =
     (window as any).webkitSpeechRecognition ||
     (window as any).SpeechRecognition;
   const getDefaultState = (status: string): VoiceListeningState => ({
@@ -40,6 +29,16 @@ export default function voiceSearchHelper({
   });
   let state: VoiceListeningState = getDefaultState(STATUS_INITIAL);
   let recognition: SpeechRecognition | undefined;
+  let searchAsYouSpeak;
+  let onQueryChange: QueryChangeListener = () => {};
+  let onStateChange: StateChangeListener = () => {};
+
+  const setOnQueryChange = (queryChangeListener: QueryChangeListener) =>
+    (onQueryChange = queryChangeListener);
+  const setOnStateChange = (stateChangeListener: StateChangeListener) =>
+    (onStateChange = stateChangeListener);
+
+  const setSearchAsYouSpeak = value => (searchAsYouSpeak = value);
 
   const isBrowserSupported = () => Boolean(SpeechRecognitionAPI);
 
@@ -119,6 +118,9 @@ export default function voiceSearchHelper({
   };
 
   return {
+    setOnQueryChange,
+    setOnStateChange,
+    setSearchAsYouSpeak,
     getState,
     isBrowserSupported,
     isListening,
