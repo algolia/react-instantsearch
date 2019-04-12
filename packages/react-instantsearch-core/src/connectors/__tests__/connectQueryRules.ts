@@ -69,9 +69,8 @@ describe('connectQueryRules', () => {
           { banner: 'image-transformed.png' },
         ]);
         const props: ConnectedProps<QueryRulesProps> = {
-          ...defaultProps,
+          ...defaultPropsSingleIndex,
           transformItems: transformItemsSpy,
-          contextValue,
         };
         const searchState = {};
         const searchResults = {
