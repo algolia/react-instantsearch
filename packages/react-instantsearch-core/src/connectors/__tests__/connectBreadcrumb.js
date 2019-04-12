@@ -6,7 +6,7 @@ let props;
 
 describe('connectHierarchicalMenu', () => {
   describe('single index', () => {
-    const contextValue = { ais: { mainTargetedIndex: 'index' } };
+    const contextValue = { mainTargetedIndex: 'index' };
 
     it('provides the correct props to the component', () => {
       const results = {
