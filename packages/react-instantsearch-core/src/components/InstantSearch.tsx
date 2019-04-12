@@ -30,7 +30,7 @@ type InstantSearchManager = {
   ) => {
     mainParameters: SearchParameters;
     derivedParameters: SearchParameters;
-  }; // should this return void / mixed?
+  };
   onSearchForFacetValues: (...args: any[]) => any;
   onExternalStateUpdate: (...args: any[]) => any;
   transitionState: any;
@@ -43,10 +43,6 @@ type InstantSearchManager = {
 type SearchClient = {
   search: (requests: Array<{}>) => Promise<{}>;
   searchForFacetValues: (requests: Array<{}>) => Promise<{}>;
-};
-
-const defaultProps = {
-  stalledSearchDelay: 200,
 };
 
 type SearchState = any;
@@ -113,7 +109,9 @@ type State = {
  * );
  */
 class InstantSearch extends Component<Props, State> {
-  static defaultProps = defaultProps;
+  static defaultProps = {
+    stalledSearchDelay: 200,
+  };
 
   static propTypes = {
     // @TODO: These props are currently constant.
