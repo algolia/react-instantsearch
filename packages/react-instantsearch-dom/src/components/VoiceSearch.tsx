@@ -31,11 +31,11 @@ type VoiceSearchProps = {
   searchAsYouSpeak?: boolean;
 
   translate: Translate;
-  buttonComponent?: React.FunctionComponent<InnerComponentProps>;
-  statusComponent?: React.FunctionComponent<InnerComponentProps>;
+  buttonComponent?: React.FC<InnerComponentProps>;
+  statusComponent?: React.FC<InnerComponentProps>;
 };
 
-const DefaultButton: React.FunctionComponent<InnerComponentProps> = ({
+const DefaultButton: React.FC<InnerComponentProps> = ({
   status,
   errorCode,
   isListening,
@@ -104,9 +104,9 @@ const DefaultButton: React.FunctionComponent<InnerComponentProps> = ({
   }
 };
 
-const DefaultStatusComponent: React.FC<InnerComponentProps> = ({
-  status,
-}) => <p>{status}</p>;
+const DefaultStatus: React.FC<InnerComponentProps> = ({ status }) => (
+  <p>{status}</p>
+);
 
 const VoiceSearch = ({
   translate,
@@ -116,8 +116,8 @@ const VoiceSearch = ({
   voiceListeningState,
   searchAsYouSpeak = false,
 
-  buttonComponent: Button = DefaultButtonComponent,
-  statusComponent: Status = DefaultStatusComponent,
+  buttonComponent: Button = DefaultButton,
+  statusComponent: Status = DefaultStatus,
 }: VoiceSearchProps) => {
   const onClick = (event: React.MouseEvent<HTMLElement>) => {
     event.currentTarget.blur();
