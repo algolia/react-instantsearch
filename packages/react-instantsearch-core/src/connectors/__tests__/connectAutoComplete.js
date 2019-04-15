@@ -5,15 +5,12 @@ jest.mock('../../core/createConnector', () => x => x);
 
 describe('connectAutoComplete', () => {
   describe('single index', () => {
-    const context = { context: { ais: { mainTargetedIndex: 'index' } } };
-    const getProvidedProps = connect.getProvidedProps.bind(context);
-    const refine = connect.refine.bind(context);
-    const getSearchParameters = connect.getSearchParameters.bind(context);
-    const cleanUp = connect.cleanUp.bind(context);
+    const contextValue = { mainTargetedIndex: 'index' };
+
     it('provides current hits to the component', () => {
       const hits = [{}];
-      let props = getProvidedProps(
-        {},
+      let props = connect.getProvidedProps(
+        { contextValue },
         {},
         {
           results: { hits },
@@ -24,8 +21,8 @@ describe('connectAutoComplete', () => {
         currentRefinement: '',
       });
 
-      props = getProvidedProps(
-        {},
+      props = connect.getProvidedProps(
+        { contextValue },
         { query: 'query' },
         {
           results: { hits },
@@ -36,8 +33,8 @@ describe('connectAutoComplete', () => {
         currentRefinement: 'query',
       });
 
-      props = getProvidedProps(
-        { defaultRefinement: 'query' },
+      props = connect.getProvidedProps(
+        { defaultRefinement: 'query', contextValue },
         {},
         {
           results: { hits },
@@ -49,25 +46,30 @@ describe('connectAutoComplete', () => {
       });
     });
     it('refines the query parameter', () => {
-      const params = getSearchParameters(
+      const params = connect.getSearchParameters(
         new SearchParameters(),
-        {},
+        { contextValue },
         { query: 'bar' }
       );
       expect(params.query).toBe('bar');
     });
 
     it("calling refine updates the widget's search state", () => {
-      const nextState = refine({}, { otherKey: 'val' }, 'yep');
+      const nextState = connect.refine(
+        { contextValue },
+        { otherKey: 'val' },
+        'yep'
+      );
       expect(nextState).toEqual({
         otherKey: 'val',
         query: 'yep',
         page: 1,
       });
     });
+
     it('should return the right searchState when clean up', () => {
-      const searchState = cleanUp(
-        {},
+      const searchState = connect.cleanUp(
+        { contextValue },
         {
           query: { searchState: 'searchState' },
           another: { searchState: 'searchState' },
@@ -76,22 +78,16 @@ describe('connectAutoComplete', () => {
       expect(searchState).toEqual({ another: { searchState: 'searchState' } });
     });
   });
+
   describe('multi index', () => {
-    const context = {
-      context: {
-        ais: { mainTargetedIndex: 'first' },
-        multiIndexContext: { targetedIndex: 'first' },
-      },
-    };
-    const getProvidedProps = connect.getProvidedProps.bind(context);
-    const getSearchParameters = connect.getSearchParameters.bind(context);
-    const refine = connect.refine.bind(context);
-    const cleanUp = connect.cleanUp.bind(context);
+    const contextValue = { mainTargetedIndex: 'first' };
+    const indexContextValue = { targetedIndex: 'second' };
+
     it('provides current hits to the component', () => {
       const firstHits = [{}];
       const secondHits = [{}];
-      let props = getProvidedProps(
-        {},
+      let props = connect.getProvidedProps(
+        { contextValue, indexContextValue },
         {},
         {
           results: { first: { hits: firstHits }, second: { hits: secondHits } },
@@ -105,9 +101,9 @@ describe('connectAutoComplete', () => {
         currentRefinement: '',
       });
 
-      props = getProvidedProps(
-        {},
-        { indices: { first: { query: 'query' } } },
+      props = connect.getProvidedProps(
+        { contextValue, indexContextValue },
+        { indices: { second: { query: 'query' } } },
         {
           results: { first: { hits: firstHits }, second: { hits: secondHits } },
         }
@@ -120,8 +116,8 @@ describe('connectAutoComplete', () => {
         currentRefinement: 'query',
       });
 
-      props = getProvidedProps(
-        { defaultRefinement: 'query' },
+      props = connect.getProvidedProps(
+        { defaultRefinement: 'query', contextValue, indexContextValue },
         {},
         {
           results: { first: { hits: firstHits }, second: { hits: secondHits } },
@@ -135,32 +131,38 @@ describe('connectAutoComplete', () => {
         currentRefinement: 'query',
       });
     });
+
     it('refines the query parameter', () => {
-      const params = getSearchParameters(
+      const params = connect.getSearchParameters(
         new SearchParameters(),
-        {},
-        { indices: { first: { query: 'bar' } } }
+        { contextValue, indexContextValue },
+        { indices: { second: { query: 'bar' } } }
       );
       expect(params.query).toBe('bar');
     });
 
     it("calling refine updates the widget's search state", () => {
-      const nextState = refine({}, { otherKey: 'val' }, 'yep');
+      const nextState = connect.refine(
+        { contextValue, indexContextValue },
+        { otherKey: 'val' },
+        'yep'
+      );
       expect(nextState).toEqual({
         otherKey: 'val',
-        indices: { first: { query: 'yep', page: 1 } },
+        indices: { second: { query: 'yep', page: 1 } },
       });
     });
+
     it('should return the right searchState when clean up', () => {
-      const searchState = cleanUp(
-        {},
+      const searchState = connect.cleanUp(
+        { contextValue, indexContextValue },
         {
-          indices: { first: { query: '' } },
+          indices: { second: { query: '' } },
           another: { searchState: 'searchState' },
         }
       );
       expect(searchState).toEqual({
-        indices: { first: {} },
+        indices: { second: {} },
         another: { searchState: 'searchState' },
       });
     });

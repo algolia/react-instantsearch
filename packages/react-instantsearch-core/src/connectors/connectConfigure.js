@@ -16,12 +16,12 @@ export default createConnector({
     return {};
   },
   getSearchParameters(searchParameters, props) {
-    const items = omit(props, 'children', 'contextValue');
+    const { children, contextValue, indexContextValue, ...items } = props;
     return searchParameters.setQueryParameters(items);
   },
   transitionState(props, prevSearchState, nextSearchState) {
     const id = getId();
-    const items = omit(props, 'children', 'contextValue');
+    const { children, contextValue, indexContextValue, ...items } = props;
     const nonPresentKeys = this._props
       ? difference(Object.keys(this._props), Object.keys(props))
       : [];
@@ -29,14 +29,23 @@ export default createConnector({
     const nextValue = {
       [id]: { ...omit(nextSearchState[id], nonPresentKeys), ...items },
     };
-    return refineValue(nextSearchState, nextValue, { ais: props.contextValue });
+    return refineValue(nextSearchState, nextValue, {
+      ais: props.contextValue,
+      multiIndexContext: props.indexContextValue,
+    });
   },
   cleanUp(props, searchState) {
     const id = getId();
-    const indexId = getIndexId({ ais: props.contextValue });
+    const indexId = getIndexId({
+      ais: props.contextValue,
+      multiIndexContext: props.indexContextValue,
+    });
 
     const subState =
-      hasMultipleIndices(props.contextValue) && searchState.indices
+      hasMultipleIndices({
+        ais: props.contextValue,
+        multiIndexContext: props.indexContextValue,
+      }) && searchState.indices
         ? searchState.indices[indexId]
         : searchState;
 
@@ -52,6 +61,9 @@ export default createConnector({
 
     const nextValue = { [id]: configureState };
 
-    return refineValue(searchState, nextValue, { ais: props.contextValue });
+    return refineValue(searchState, nextValue, {
+      ais: props.contextValue,
+      multiIndexContext: props.indexContextValue,
+    });
   },
 });

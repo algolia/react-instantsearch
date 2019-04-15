@@ -64,81 +64,89 @@ describe('connectSearchBox', () => {
     });
   });
 
-  describe.skip('multi index', () => {
-    let context = {
-      context: {
-        ais: { mainTargetedIndex: 'first' },
-        multiIndexContext: { targetedIndex: 'first' },
-      },
-    };
-    const getProvidedProps = connect.getProvidedProps.bind(context);
-    const getSP = connect.getSearchParameters.bind(context);
-    const cleanUp = connect.cleanUp.bind(context);
+  describe('multi index', () => {
+    const contextValue = { mainTargetedIndex: 'first' };
+    const indexContextValue = { targetedIndex: 'second' };
+
     it('provides the correct props to the component', () => {
-      props = getProvidedProps({}, {}, {});
+      props = connect.getProvidedProps(
+        { contextValue, indexContextValue },
+        {},
+        {}
+      );
       expect(props).toEqual({ currentRefinement: '' });
 
-      props = getProvidedProps(
-        {},
-        { indices: { first: { query: 'yep' } } },
+      props = connect.getProvidedProps(
+        { contextValue, indexContextValue },
+        { indices: { second: { query: 'yep' } } },
         {}
       );
       expect(props).toEqual({ currentRefinement: 'yep' });
     });
 
     it("calling refine updates the widget's search state", () => {
-      let refine = connect.refine.bind(context);
-
-      let nextState = refine({}, { otherKey: 'val' }, 'yep');
-      expect(nextState).toEqual({
-        otherKey: 'val',
-        indices: { first: { query: 'yep', page: 1 } },
-      });
-
-      context = {
-        context: {
-          ais: { mainTargetedIndex: 'first' },
-          multiIndexContext: { targetedIndex: 'second' },
-        },
-      };
-      refine = connect.refine.bind(context);
-
-      nextState = refine(
-        {},
-        { indices: { first: { query: 'yep' } }, otherKey: 'val' },
-        'yop'
+      let nextState = connect.refine(
+        { contextValue, indexContextValue },
+        { otherKey: 'val' },
+        'yep'
       );
       expect(nextState).toEqual({
         otherKey: 'val',
-        indices: { second: { query: 'yop', page: 1 }, first: { query: 'yep' } },
+        indices: { second: { query: 'yep', page: 1 } },
+      });
+
+      nextState = connect.refine(
+        {
+          contextValue: { mainTargetedIndex: 'first' },
+          indexContextValue: { targetedIndex: 'first' },
+        },
+        {
+          indices: {
+            first: { query: 'yep' },
+          },
+          otherKey: 'val',
+        },
+        'yip'
+      );
+      expect(nextState).toEqual({
+        otherKey: 'val',
+        indices: {
+          first: { query: 'yip', page: 1 },
+        },
       });
     });
 
     it('supports defaultRefinement', () => {
-      expect(getProvidedProps({ defaultRefinement: 'yaw' }, {}, {})).toEqual({
+      expect(
+        connect.getProvidedProps(
+          { defaultRefinement: 'yaw', contextValue, indexContextValue },
+          {},
+          {}
+        )
+      ).toEqual({
         currentRefinement: 'yaw',
       });
     });
 
     it('refines the query parameter', () => {
-      params = getSP(
+      params = connect.getSearchParameters(
         new SearchParameters(),
-        {},
-        { indices: { first: { query: 'bar' } } }
+        { contextValue, indexContextValue },
+        { indices: { second: { query: 'bar' } } }
       );
       expect(params.query).toBe('bar');
     });
 
     it('should return the right searchState when clean up', () => {
-      const searchState = cleanUp(
-        {},
+      const searchState = connect.cleanUp(
+        { contextValue, indexContextValue },
         {
-          indices: { first: { query: '' } },
+          indices: { second: { query: '' } },
           another: { searchState: 'searchState' },
         }
       );
       expect(searchState).toEqual({
-        indices: { first: {} },
+        indices: { second: {} },
         another: { searchState: 'searchState' },
       });
     });
