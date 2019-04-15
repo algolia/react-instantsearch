@@ -35,7 +35,7 @@ type VoiceSearchProps = {
   statusComponent?: React.FunctionComponent<InnerComponentProps>;
 };
 
-const DefaultButtonComponent: React.FunctionComponent<InnerComponentProps> = ({
+const DefaultButton: React.FunctionComponent<InnerComponentProps> = ({
   status,
   errorCode,
   isListening,
