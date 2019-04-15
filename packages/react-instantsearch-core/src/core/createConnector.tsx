@@ -66,7 +66,7 @@ export type ConnectorDescription<TWidgetProps = {}> = {
     searchResults: SearchResults,
     metadata: SearchMetadata,
     resultsFacetValues: SearchForFacetValuesResults
-  ) => TWidgetProps;
+  ) => any; // @TODO: this should also become a generic
 
   /**
    * hook when the widget will unmount. Receives (props, searchState) and return a cleaned state.
@@ -88,8 +88,8 @@ export type ConnectorDescription<TWidgetProps = {}> = {
   shouldComponentUpdate?: (
     props: ConnectedProps<TWidgetProps>,
     nextProps: ConnectedProps<TWidgetProps>,
-    state: ConnectedState<TWidgetProps>,
-    nextState: ConnectedState<TWidgetProps>
+    state: ConnectedState,
+    nextState: ConnectedState
   ) => boolean;
 
   /**
@@ -102,13 +102,13 @@ export type ConnectorDescription<TWidgetProps = {}> = {
 
 type ContextProps = {
   contextValue: InstantSearchContext;
-  indexContextValue: IndexContext;
+  indexContextValue?: IndexContext;
 };
 
 export type ConnectedProps<TWidgetProps> = TWidgetProps & ContextProps;
 
-type ConnectedState<TWidgetProps> = {
-  providedProps: TWidgetProps;
+type ConnectedState = {
+  providedProps: any;
 };
 
 /**
@@ -137,7 +137,7 @@ export function createConnectorWithoutContext<TWidgetProps = {}>(
 
   return (Composed: ReactType) => {
     type ConnectorProps = ConnectedProps<TWidgetProps>;
-    type ConnectorState = ConnectedState<TWidgetProps>;
+    type ConnectorState = ConnectedState;
 
     class Connector extends Component<ConnectorProps, ConnectorState> {
       static displayName = `${connectorDesc.displayName}(${getDisplayName(

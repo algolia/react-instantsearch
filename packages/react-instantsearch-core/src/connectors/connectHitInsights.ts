@@ -65,8 +65,13 @@ const wrapInsightsClient = (
   aa(method, { ...inferredPayload, ...payload } as any);
 };
 
+export type HitsInsightsProps = {
+  hit: Hit;
+  insights: InsightsClient;
+};
+
 export default (insightsClient: InsightsClient) =>
-  createConnector<{ hit: any }>({
+  createConnector<HitsInsightsProps>({
     displayName: 'AlgoliaInsights',
 
     getProvidedProps(props, _, searchResults) {

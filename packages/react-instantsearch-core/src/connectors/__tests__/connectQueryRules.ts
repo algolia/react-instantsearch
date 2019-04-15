@@ -9,10 +9,8 @@ jest.mock(
   '../../core/createConnector',
   () => (connector: ConnectorDescription) => connector
 );
-// our mock implementation is diverging from the regular createConnector,
-// so we redefine it as `any` here, since we have no more information
-// @TODO: refactor these tests to work better with TS
-const connect: any = connectReal;
+// @ts-ignore TS seems to think this is the real value, instead of the mocked one
+const connect = connectReal as ConnectorDescription<QueryRulesProps>;
 
 describe('connectQueryRules', () => {
   const defaultProps: QueryRulesProps = {
@@ -24,21 +22,21 @@ describe('connectQueryRules', () => {
   describe('single index', () => {
     const indexName = 'index';
     const contextValue: any = { mainTargetedIndex: indexName };
-    const defaultPropsSingleIndex = {
+    const defaultPropsSingleIndex: ConnectedProps<QueryRulesProps> = {
       ...defaultProps,
       contextValue,
     };
 
     describe('default', () => {
       it('without userData provides the correct props to the component', () => {
-        const props: ConnectedProps<QueryRulesProps> = defaultPropsSingleIndex;
+        const props = defaultPropsSingleIndex;
         const searchState = {};
         const searchResults = {
           results: { [indexName]: { userData: undefined } },
         };
 
         expect(
-          connect.getProvidedProps(props, searchState, searchResults)
+          connect.getProvidedProps(props, searchState, searchResults, {}, {})
         ).toEqual({
           items: [],
           canRefine: false,
@@ -46,7 +44,7 @@ describe('connectQueryRules', () => {
       });
 
       it('with userData provides the correct props to the component', () => {
-        const props: ConnectedProps<QueryRulesProps> = defaultPropsSingleIndex;
+        const props = defaultPropsSingleIndex;
         const searchState = {};
         const searchResults = {
           results: {
@@ -55,7 +53,7 @@ describe('connectQueryRules', () => {
         };
 
         expect(
-          connect.getProvidedProps(props, searchState, searchResults)
+          connect.getProvidedProps(props, searchState, searchResults, {}, {})
         ).toEqual({
           items: [{ banner: 'image.png' }],
           canRefine: true,
@@ -80,7 +78,7 @@ describe('connectQueryRules', () => {
         };
 
         expect(
-          connect.getProvidedProps(props, searchState, searchResults)
+          connect.getProvidedProps(props, searchState, searchResults, {}, {})
         ).toEqual({
           items: [{ banner: 'image-transformed.png' }],
           canRefine: true,
@@ -94,19 +92,19 @@ describe('connectQueryRules', () => {
 
     describe('trackedFilters', () => {
       it('does not set ruleContexts without search state and trackedFilters', () => {
-        const props: ConnectedProps<QueryRulesProps> = defaultPropsSingleIndex;
+        const props = defaultPropsSingleIndex;
         const searchState = {};
-        const searchParameters = connect.getSearchParameters(
+        const searchParameters = connect.getSearchParameters!(
           new SearchParameters(),
           props,
-          searchState
+          searchState,
         );
 
         expect(searchParameters.ruleContexts).toEqual(undefined);
       });
 
       it('does not set ruleContexts with search state but without tracked filters', () => {
-        const props: ConnectedProps<QueryRulesProps> = defaultPropsSingleIndex;
+        const props = defaultPropsSingleIndex;
         const searchState = {
           range: {
             price: {
@@ -115,7 +113,7 @@ describe('connectQueryRules', () => {
             },
           },
         };
-        const searchParameters = connect.getSearchParameters(
+        const searchParameters = connect.getSearchParameters!(
           new SearchParameters(),
           props,
           searchState
@@ -132,7 +130,7 @@ describe('connectQueryRules', () => {
           },
         };
         const searchState = {};
-        const searchParameters = connect.getSearchParameters(
+        const searchParameters = connect.getSearchParameters!(
           SearchParameters.make({
             ruleContexts: ['initial-rule'],
           }),
@@ -159,7 +157,7 @@ describe('connectQueryRules', () => {
             },
           },
         };
-        const searchParameters = connect.getSearchParameters(
+        const searchParameters = connect.getSearchParameters!(
           new SearchParameters(),
           props,
           searchState
@@ -186,7 +184,7 @@ describe('connectQueryRules', () => {
             fruit: ['lemon', 'orange'],
           },
         };
-        const searchParameters = connect.getSearchParameters(
+        const searchParameters = connect.getSearchParameters!(
           new SearchParameters(),
           props,
           searchState
@@ -213,7 +211,7 @@ describe('connectQueryRules', () => {
             products: 'Laptops > Surface',
           },
         };
-        const searchParameters = connect.getSearchParameters(
+        const searchParameters = connect.getSearchParameters!(
           new SearchParameters(),
           props,
           searchState
@@ -239,7 +237,7 @@ describe('connectQueryRules', () => {
             brands: 'Sony',
           },
         };
-        const searchParameters = connect.getSearchParameters(
+        const searchParameters = connect.getSearchParameters!(
           new SearchParameters(),
           props,
           searchState
@@ -263,7 +261,7 @@ describe('connectQueryRules', () => {
             rank: '2:5',
           },
         };
-        const searchParameters = connect.getSearchParameters(
+        const searchParameters = connect.getSearchParameters!(
           new SearchParameters(),
           props,
           searchState
@@ -293,7 +291,7 @@ describe('connectQueryRules', () => {
             availableInStock: false,
           },
         };
-        const searchParameters = connect.getSearchParameters(
+        const searchParameters = connect.getSearchParameters!(
           new SearchParameters(),
           props,
           searchState
@@ -322,7 +320,7 @@ describe('connectQueryRules', () => {
             brand: ['Insignia™', '© Apple'],
           },
         };
-        const searchParameters = connect.getSearchParameters(
+        const searchParameters = connect.getSearchParameters!(
           new SearchParameters(),
           props,
           searchState
@@ -373,7 +371,7 @@ describe('connectQueryRules', () => {
             brand: brandFacetRefinements,
           },
         };
-        const searchParameters = connect.getSearchParameters(
+        const searchParameters = connect.getSearchParameters!(
           new SearchParameters(),
           props,
           searchState
@@ -435,7 +433,7 @@ Consider using \`transformRuleContexts\` to minimize the number of rules sent to
             },
           },
         };
-        const searchParameters = connect.getSearchParameters(
+        const searchParameters = connect.getSearchParameters!(
           new SearchParameters(),
           props,
           searchState
@@ -458,23 +456,22 @@ Consider using \`transformRuleContexts\` to minimize the number of rules sent to
     const contextValue: any = { mainTargetedIndex: firstIndexName };
     const indexContextValue: any = { targetedIndex: secondIndexName };
 
-    const defaultPropsMultiIndex = {
+    const defaultPropsMultiIndex: ConnectedProps<QueryRulesProps> = {
       ...defaultProps,
       contextValue,
       indexContextValue,
     };
 
     it('without userData provides the correct props to the component', () => {
-      const props: ConnectedProps<QueryRulesProps> = {
-        ...defaultPropsMultiIndex,
-      };
+      const props = defaultPropsMultiIndex;
+
       const searchState = {};
       const searchResults = {
         results: { [secondIndexName]: { userData: undefined } },
       };
 
       expect(
-        connect.getProvidedProps(props, searchState, searchResults)
+        connect.getProvidedProps(props, searchState, searchResults,{},{})
       ).toEqual({
         items: [],
         canRefine: false,
@@ -482,9 +479,7 @@ Consider using \`transformRuleContexts\` to minimize the number of rules sent to
     });
 
     it('with userData provides the correct props to the component', () => {
-      const props: ConnectedProps<QueryRulesProps> = {
-        ...defaultPropsMultiIndex,
-      };
+      const props = defaultPropsMultiIndex;
       const searchState = {};
       const searchResults = {
         results: {
@@ -493,7 +488,7 @@ Consider using \`transformRuleContexts\` to minimize the number of rules sent to
       };
 
       expect(
-        connect.getProvidedProps(props, searchState, searchResults)
+        connect.getProvidedProps(props, searchState, searchResults,{},{})
       ).toEqual({
         items: [{ banner: 'image.png' }],
         canRefine: true,
@@ -516,7 +511,7 @@ Consider using \`transformRuleContexts\` to minimize the number of rules sent to
           },
         };
         expect(
-          connect.getProvidedProps(props, searchState, searchResults)
+          connect.getProvidedProps(props, searchState, searchResults,{},{})
         ).toEqual({
           items: [{ banner: 'image-transformed.png' }],
           canRefine: true,
@@ -530,11 +525,10 @@ Consider using \`transformRuleContexts\` to minimize the number of rules sent to
 
     describe('trackedFilters', () => {
       it('does not set ruleContexts without search state and trackedFilters', () => {
-        const props: ConnectedProps<QueryRulesProps> = {
-          ...defaultPropsMultiIndex,
-        };
+        const props = defaultPropsMultiIndex;
+
         const searchState = {};
-        const searchParameters = connect.getSearchParameters(
+        const searchParameters = connect.getSearchParameters!(
           new SearchParameters(),
           props,
           searchState
@@ -544,9 +538,8 @@ Consider using \`transformRuleContexts\` to minimize the number of rules sent to
       });
 
       it('does not set ruleContexts with search state but without tracked filters', () => {
-        const props: ConnectedProps<QueryRulesProps> = {
-          ...defaultPropsMultiIndex,
-        };
+        const props = defaultPropsMultiIndex;
+
         const searchState = {
           indices: {
             [secondIndexName]: {
@@ -559,7 +552,7 @@ Consider using \`transformRuleContexts\` to minimize the number of rules sent to
             },
           },
         };
-        const searchParameters = connect.getSearchParameters(
+        const searchParameters = connect.getSearchParameters!(
           new SearchParameters(),
           props,
           searchState
@@ -588,7 +581,7 @@ Consider using \`transformRuleContexts\` to minimize the number of rules sent to
             },
           },
         };
-        const searchParameters = connect.getSearchParameters(
+        const searchParameters = connect.getSearchParameters!(
           new SearchParameters(),
           props,
           searchState
@@ -626,7 +619,7 @@ Consider using \`transformRuleContexts\` to minimize the number of rules sent to
             },
           },
         };
-        const searchParameters = connect.getSearchParameters(
+        const searchParameters = connect.getSearchParameters!(
           new SearchParameters(),
           props,
           searchState
