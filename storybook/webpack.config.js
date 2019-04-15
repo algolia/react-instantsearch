@@ -13,7 +13,6 @@ module.exports = ({ config }) => ({
             loader: 'babel-loader',
             options: {
               rootMode: 'upward',
-              envName: 'storybook',
               presets: [['react-app', { typescript: true }]],
             },
           },

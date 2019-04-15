@@ -7,7 +7,6 @@ const clean = x => x.filter(Boolean);
 
 module.exports = api => {
   const isTest = api.env('test');
-  const isStorybook = api.env('storybook');
   const targets = {};
 
   if (!isTest) {
@@ -30,7 +29,7 @@ module.exports = api => {
     plugins: clean([
       '@babel/plugin-proposal-class-properties',
       'babel-plugin-lodash',
-      !isStorybook && 'babel-plugin-transform-react-remove-prop-types',
+      isRollup && 'babel-plugin-transform-react-remove-prop-types',
     ]),
     overrides: [
       {
