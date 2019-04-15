@@ -15,6 +15,7 @@ const renderAndMatchSnapshot = (element: JSX.Element) => {
 const defaultProps = {
   isBrowserSupported: true,
   isListening: false,
+  // tslint:disable-next-line:no-empty
   toggleListening: () => {},
   voiceListeningState: {
     status: 'initial',
@@ -62,9 +63,8 @@ describe('VoiceSearch', () => {
       );
 
       const props = {
-        isBrowserSupported: true,
+        ...defaultProps,
         isListening: true,
-        toggleListening: () => {},
         voiceListeningState: {
           status: 'recognizing',
           transcript: undefined,
@@ -98,9 +98,8 @@ describe('VoiceSearch', () => {
       );
 
       const props = {
-        isBrowserSupported: true,
+        ...defaultProps,
         isListening: true,
-        toggleListening: () => {},
         voiceListeningState: {
           status: 'recognizing',
           transcript: 'Hello',
