@@ -6,7 +6,9 @@ function getId() {
   return 'query';
 }
 
+/* tslint:disable:variable-name */
 function refine(_props, searchState, nextRefinement, context) {
+  /* tslint:enable:variable-name */
   const id = getId();
   const nextValue = { [id]: nextRefinement };
   const resetPage = true;
