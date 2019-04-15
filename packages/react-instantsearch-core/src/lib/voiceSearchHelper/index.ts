@@ -30,7 +30,9 @@ export default function voiceSearchHelper() {
   let state: VoiceListeningState = getDefaultState(STATUS_INITIAL);
   let recognition: SpeechRecognition | undefined;
   let searchAsYouSpeak;
+  // tslint:disable-next-line:no-empty
   let onQueryChange: QueryChangeListener = () => {};
+  // tslint:disable-next-line:no-empty
   let onStateChange: StateChangeListener = () => {};
 
   const setOnQueryChange = (queryChangeListener: QueryChangeListener) =>

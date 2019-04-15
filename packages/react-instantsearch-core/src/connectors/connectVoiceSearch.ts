@@ -6,7 +6,7 @@ function getId() {
   return 'query';
 }
 
-function refine(props, searchState, nextRefinement, context) {
+function refine(_props, searchState, nextRefinement, context) {
   const id = getId();
   const nextValue = { [id]: nextRefinement };
   const resetPage = true;
