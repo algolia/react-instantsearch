@@ -3,6 +3,7 @@ import Enzyme, { shallow, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import createInstantSearchManager from '../../core/createInstantSearchManager';
 import InstantSearch from '../InstantSearch';
+import { InstantSearchConsumer } from '../../core/context';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -161,16 +162,21 @@ describe('InstantSearch', () => {
         onSearchStateChange={onSearchStateChange}
         createURL={() => '#'}
       >
-        <div />
+        <InstantSearchConsumer>
+          {contextValue => (
+            <button
+              onClick={() => contextValue.onInternalStateUpdate({ a: 1 })}
+            />
+          )}
+        </InstantSearchConsumer>
       </InstantSearch>
     );
     expect(createInstantSearchManager.mock.calls[0][0].initialState).toBe(
       initialState
     );
-    const {
-      ais: { onInternalStateUpdate },
-    } = wrapper.instance().getChildContext();
-    onInternalStateUpdate({ a: 1 });
+
+    wrapper.find('button').simulate('click');
+
     expect(onSearchStateChange.mock.calls[0][0]).toEqual({
       transitioned: true,
       a: 1,
@@ -189,15 +195,20 @@ describe('InstantSearch', () => {
 
     const wrapper = mount(
       <InstantSearch {...DEFAULT_PROPS}>
-        <div />
+        <InstantSearchConsumer>
+          {contextValue => (
+            <button
+              onClick={({ nextState }) =>
+                contextValue.onInternalStateUpdate(nextState)
+              }
+            />
+          )}
+        </InstantSearchConsumer>
       </InstantSearch>
     );
 
-    const nextState = { a: 1 };
-    const {
-      ais: { onInternalStateUpdate },
-    } = wrapper.instance().getChildContext();
-    onInternalStateUpdate(nextState);
+    wrapper.find('button').simulate('click', { nextState: { a: 1 } });
+
     expect(ism.onExternalStateUpdate.mock.calls[0][0]).toEqual({
       a: 1,
       transitioned: true,
@@ -205,7 +216,9 @@ describe('InstantSearch', () => {
 
     const onSearchStateChange = jest.fn();
     wrapper.setProps({ onSearchStateChange });
-    onInternalStateUpdate({ a: 2 });
+
+    wrapper.find('button').simulate('click', { nextState: { a: 2 } });
+
     expect(onSearchStateChange.mock.calls[0][0]).toEqual({
       a: 2,
       transitioned: true,
@@ -218,21 +231,27 @@ describe('InstantSearch', () => {
       widgetsManager: {},
     };
     createInstantSearchManager.mockImplementation(() => ism);
-    const wrapper = mount(
+    let childContext = false;
+    mount(
       <InstantSearch {...DEFAULT_PROPS}>
-        <div />
+        <InstantSearchConsumer>
+          {contextValue => {
+            childContext = contextValue;
+            return null;
+          }}
+        </InstantSearchConsumer>
       </InstantSearch>
     );
 
-    const context = wrapper.instance().getChildContext();
-    expect(context.ais.store).toBe(ism.store);
-    expect(context.ais.widgetsManager).toBe(ism.widgetsManager);
+    expect(childContext.store).toBe(ism.store);
+    expect(childContext.widgetsManager).toBe(ism.widgetsManager);
   });
 
-  it('onSearchStateChange should not be called and search should be skipped if the widget is unmounting', () => {
+  it('onSearchStateChange should not be called and search should be skipped if the widget is unmounted', () => {
     const ism = {
       skipSearch: jest.fn(),
     };
+    let childContext;
     createInstantSearchManager.mockImplementation(() => ism);
     const onSearchStateChangeMock = jest.fn();
     const wrapper = mount(
@@ -240,15 +259,17 @@ describe('InstantSearch', () => {
         {...DEFAULT_PROPS}
         onSearchStateChange={onSearchStateChangeMock}
       >
-        <div />
+        <InstantSearchConsumer>
+          {contextValue => {
+            childContext = contextValue;
+            return null;
+          }}
+        </InstantSearchConsumer>
       </InstantSearch>
     );
-    const {
-      ais: { onSearchStateChange },
-    } = wrapper.instance().getChildContext();
 
     wrapper.unmount();
-    onSearchStateChange({});
+    childContext.onSearchStateChange({});
 
     expect(onSearchStateChangeMock.mock.calls).toHaveLength(0);
     expect(ism.skipSearch.mock.calls).toHaveLength(1);
@@ -293,7 +314,9 @@ describe('InstantSearch', () => {
 
     const wrapper = shallow(
       <InstantSearch {...DEFAULT_PROPS}>
-        <div />
+        <InstantSearchConsumer>
+          {contextValue => contextValue.mainTargetedIndex}
+        </InstantSearchConsumer>
       </InstantSearch>
     );
 
@@ -303,11 +326,15 @@ describe('InstantSearch', () => {
       indexName: 'foobar',
     });
 
+    expect(wrapper.html()).toMatchInlineSnapshot(`"<div>foobar</div>"`);
+
     expect(ism.updateIndex).not.toHaveBeenCalled();
 
     wrapper.setProps({
-      indexName: 'newindexname',
+      indexName: 'newIndexName',
     });
+
+    expect(wrapper.html()).toMatchInlineSnapshot(`"<div>newIndexName</div>"`);
 
     expect(ism.updateIndex).toHaveBeenCalledTimes(1);
   });
@@ -322,17 +349,22 @@ describe('InstantSearch', () => {
     const getSearchParameters = jest.fn();
     const context = { context: 'some' };
     const props = { props: 'some' };
-    let wrapper = mount(
+    let childContext;
+    mount(
       <InstantSearch
         {...DEFAULT_PROPS}
         onSearchParameters={onSearchParametersMock}
       >
-        <div />
+        <InstantSearchConsumer>
+          {contextValue => {
+            childContext = contextValue;
+            return null;
+          }}
+        </InstantSearchConsumer>
       </InstantSearch>
     );
-    let childContext = wrapper.instance().getChildContext();
 
-    childContext.ais.onSearchParameters(getSearchParameters, context, props);
+    childContext.onSearchParameters(getSearchParameters, context, props);
 
     expect(onSearchParametersMock.mock.calls).toHaveLength(1);
     expect(onSearchParametersMock.mock.calls[0][0]).toBe(getSearchParameters);
@@ -340,34 +372,40 @@ describe('InstantSearch', () => {
     expect(onSearchParametersMock.mock.calls[0][2]).toEqual(props);
     expect(onSearchParametersMock.mock.calls[0][3]).toEqual({});
 
-    wrapper = mount(
+    mount(
       <InstantSearch
         {...DEFAULT_PROPS}
         onSearchParameters={onSearchParametersMock}
         searchState={{ search: 'state' }}
       >
-        <div />
+        <InstantSearchConsumer>
+          {contextValue => {
+            childContext = contextValue;
+            return null;
+          }}
+        </InstantSearchConsumer>
       </InstantSearch>
     );
 
-    childContext = wrapper.instance().getChildContext();
-
-    childContext.ais.onSearchParameters(getSearchParameters, context, props);
+    childContext.onSearchParameters(getSearchParameters, context, props);
 
     expect(onSearchParametersMock.mock.calls).toHaveLength(2);
     expect(onSearchParametersMock.mock.calls[1][3]).toEqual({
       search: 'state',
     });
 
-    wrapper = mount(
+    mount(
       <InstantSearch {...DEFAULT_PROPS}>
-        <div />
+        <InstantSearchConsumer>
+          {contextValue => {
+            childContext = contextValue;
+            return null;
+          }}
+        </InstantSearchConsumer>
       </InstantSearch>
     );
 
-    childContext = wrapper.instance().getChildContext();
-
-    childContext.ais.onSearchParameters(getSearchParameters, context, props);
+    childContext.onSearchParameters(getSearchParameters, context, props);
 
     expect(onSearchParametersMock.mock.calls).toHaveLength(2);
   });
@@ -385,35 +423,43 @@ describe('InstantSearch', () => {
       createInstantSearchManager.mockImplementation(() => ism);
       const createURL = jest.fn(searchState => searchState);
 
-      const wrapper = mount(
+      let childContext;
+      mount(
         <InstantSearch
           {...DEFAULT_PROPS}
           searchState={{}}
           onSearchStateChange={() => null}
           createURL={createURL}
         >
-          <div />
+          <InstantSearchConsumer>
+            {contextValue => {
+              childContext = contextValue;
+              return null;
+            }}
+          </InstantSearchConsumer>
         </InstantSearch>
       );
 
-      const {
-        ais: { createHrefForState },
-      } = wrapper.instance().getChildContext();
+      const { createHrefForState } = childContext;
       const outputURL = createHrefForState({ a: 1 });
       expect(outputURL).toEqual({ a: 1, transitioned: true });
       expect(createURL.mock.calls[0][1]).toBe(widgetsIds);
     });
 
     it('returns # otherwise', () => {
-      const wrapper = mount(
+      let childContext;
+      mount(
         <InstantSearch {...DEFAULT_PROPS}>
-          <div />
+          <InstantSearchConsumer>
+            {contextValue => {
+              childContext = contextValue;
+              return null;
+            }}
+          </InstantSearchConsumer>
         </InstantSearch>
       );
 
-      const {
-        ais: { createHrefForState },
-      } = wrapper.instance().getChildContext();
+      const { createHrefForState } = childContext;
       const outputURL = createHrefForState({ a: 1 });
       expect(outputURL).toBe('#');
     });
@@ -423,14 +469,18 @@ describe('InstantSearch', () => {
         onSearchForFacetValues: jest.fn(),
       };
       createInstantSearchManager.mockImplementation(() => ism);
-      const wrapper = mount(
+      let childContext;
+      mount(
         <InstantSearch {...DEFAULT_PROPS}>
-          <div />
+          <InstantSearchConsumer>
+            {contextValue => {
+              childContext = contextValue;
+              return null;
+            }}
+          </InstantSearchConsumer>
         </InstantSearch>
       );
-      const {
-        ais: { onSearchForFacetValues },
-      } = wrapper.instance().getChildContext();
+      const { onSearchForFacetValues } = childContext;
       onSearchForFacetValues({ a: 1 });
       expect(ism.onSearchForFacetValues.mock.calls[0][0]).toEqual({ a: 1 });
     });
