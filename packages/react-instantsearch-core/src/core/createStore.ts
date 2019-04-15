@@ -1,16 +1,16 @@
 import {
   SearchState,
-  MetaData,
+  SearchMetadata,
   SearchResults,
   SearchForFacetValuesResults,
 } from '../types';
 
 export type State = {
   widgets: SearchState;
-  metadata: MetaData;
+  metadata: SearchMetadata[];
   results: SearchResults | null;
   resultsFacetValues: SearchForFacetValuesResults | null;
-  error: any | null;
+  error: Error | null;
   searching: boolean;
   isSearchStalled: boolean;
   searchingForFacetValues: boolean;

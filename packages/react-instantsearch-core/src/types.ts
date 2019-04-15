@@ -1,12 +1,18 @@
-// from AlgoliaSearchHelper:
 export type SearchParameters = any; // AlgoliaSearchHelper.SearchParameters
 export type SearchResults = any; // AlgoliaSearchHelper.SearchResults
 export type SearchForFacetValuesResults = any;
 
 // internal
-type UIState = {
-  [index: string]: any;
+type SingleIndexSearchState = {
+  [widget: string]: any;
 };
-export type SearchState = { indices?: UIState } | UIState;
 
-export type MetaData = any[];
+type MultiIndexSearchState = SingleIndexSearchState & {
+  indices?: {
+    [index: string]: SingleIndexSearchState;
+  };
+};
+
+export type SearchState = SingleIndexSearchState | MultiIndexSearchState;
+
+export type SearchMetadata = any;

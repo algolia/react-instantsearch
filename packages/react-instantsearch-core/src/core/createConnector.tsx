@@ -12,12 +12,12 @@ import {
   SearchResults,
   SearchState,
   SearchForFacetValuesResults,
-  MetaData,
+  SearchMetadata,
 } from '../types';
 
-export type ConnectorDescription<WidgetProps = {}> = {
+export type ConnectorDescription<TWidgetProps = {}> = {
   /**
-   * Name of the Connector, PascalCase, starting With Algolia
+   * Name of the Connector, in PascalCase
    */
   displayName: string;
 
@@ -25,17 +25,17 @@ export type ConnectorDescription<WidgetProps = {}> = {
    * a function to filter the local state
    */
   refine?: (
-    props: ConnectedProps<WidgetProps>,
+    props: ConnectedProps<TWidgetProps>,
     searchState: SearchState,
     ...args: any[]
-  ) => any;
+  ) => SearchState;
 
   /**
    * function transforming the local state to a SearchParameters
    */
   getSearchParameters?: (
     searchParameters: SearchParameters,
-    props: ConnectedProps<WidgetProps>,
+    props: ConnectedProps<TWidgetProps>,
     searchState: SearchState
   ) => SearchParameters;
 
@@ -43,46 +43,41 @@ export type ConnectorDescription<WidgetProps = {}> = {
    * metadata of the widget (for current refinements)
    */
   getMetadata?: (
-    props: ConnectedProps<WidgetProps>,
+    props: ConnectedProps<TWidgetProps>,
     searchState: SearchState
-  ) => any;
+  ) => SearchMetadata;
 
   /**
    * hook after the state has changed
    */
   transitionState?: (
-    nextProps: ConnectedProps<WidgetProps>,
+    nextProps: ConnectedProps<TWidgetProps>,
     prevSearchState: SearchState,
     nextSearchState: SearchState
-  ) => any;
+  ) => SearchState;
 
   /**
    * transform the state into props passed to the wrapped component.
    * Receives (props, widgetStates, searchState, metadata) and returns the local state.
    */
   getProvidedProps: (
-    props: ConnectedProps<WidgetProps>,
+    props: ConnectedProps<TWidgetProps>,
     searchState: SearchState,
     searchResults: SearchResults,
-    metadata: MetaData,
+    metadata: SearchMetadata,
     resultsFacetValues: SearchForFacetValuesResults
-  ) => any;
-
-  /**
-   * Receives props and return the id that will be used to identify the widget
-   */
-  getId?: (...args: any[]) => string; // @TODO: is this even part of a ConnectorDesc?
+  ) => TWidgetProps;
 
   /**
    * hook when the widget will unmount. Receives (props, searchState) and return a cleaned state.
    */
   cleanUp?: (
-    props: ConnectedProps<WidgetProps>,
+    props: ConnectedProps<TWidgetProps>,
     searchState: SearchState
   ) => SearchState;
 
   searchForFacetValues?: (
-    props: ConnectedProps<WidgetProps>,
+    props: ConnectedProps<TWidgetProps>,
     searchState: SearchState,
     ...args: any[]
   ) => any;
@@ -91,29 +86,29 @@ export type ConnectorDescription<WidgetProps = {}> = {
    * Function that will be called on shouldComponentUpdate of the connector
    */
   shouldComponentUpdate?: (
-    props: ConnectedProps<WidgetProps>,
-    nextProps: ConnectedProps<WidgetProps>,
-    state: ConnectorState,
-    nextState: ConnectorState
+    props: ConnectedProps<TWidgetProps>,
+    nextProps: ConnectedProps<TWidgetProps>,
+    state: ConnectedState<TWidgetProps>,
+    nextState: ConnectedState<TWidgetProps>
   ) => boolean;
 
   /**
    * PropTypes forwarded to the wrapped component.
    */
-  propTypes?: WeakValidationMap<{}>;
+  propTypes?: WeakValidationMap<TWidgetProps>;
 
-  defaultProps?: WidgetProps;
+  defaultProps?: Partial<TWidgetProps>;
 };
 
 type ContextProps = {
   contextValue: InstantSearchContext;
-  indexContextValue?: IndexContext;
+  indexContextValue: IndexContext;
 };
 
-export type ConnectedProps<WidgetProps> = WidgetProps & ContextProps;
+export type ConnectedProps<TWidgetProps> = TWidgetProps & ContextProps;
 
-type ConnectorState = {
-  providedProps: {};
+type ConnectedState<TWidgetProps> = {
+  providedProps: TWidgetProps;
 };
 
 /**
@@ -126,8 +121,8 @@ type ConnectorState = {
  * @return {Connector} a function that wraps a component into
  * an instantsearch connected one.
  */
-export function createConnectorWithoutContext<WidgetProps>(
-  connectorDesc: ConnectorDescription<WidgetProps>
+export function createConnectorWithoutContext<TWidgetProps = {}>(
+  connectorDesc: ConnectorDescription<TWidgetProps>
 ) {
   if (!connectorDesc.displayName) {
     throw new Error(
@@ -141,7 +136,9 @@ export function createConnectorWithoutContext<WidgetProps>(
     typeof connectorDesc.transitionState === 'function';
 
   return (Composed: ReactType) => {
-    type ConnectorProps = ConnectedProps<WidgetProps>;
+    type ConnectorProps = ConnectedProps<TWidgetProps>;
+    type ConnectorState = ConnectedState<TWidgetProps>;
+
     class Connector extends Component<ConnectorProps, ConnectorState> {
       static displayName = `${connectorDesc.displayName}(${getDisplayName(
         Composed
@@ -411,13 +408,11 @@ export function createConnectorWithoutContext<WidgetProps>(
   };
 }
 
-export default function createConnectorWithContext<WidgetProps = {}>(
-  connectorDesc: ConnectorDescription<WidgetProps>
+function createConnectorWithContext<TWidgetProps = {}>(
+  connectorDesc: ConnectorDescription<TWidgetProps>
 ) {
   return (Composed: ReactType) => {
-    const Connector = createConnectorWithoutContext<WidgetProps>(connectorDesc)(
-      Composed
-    );
+    const Connector = createConnectorWithoutContext(connectorDesc)(Composed);
 
     const ConnectorWrapper: React.FC<any> = props => (
       <InstantSearchConsumer>
@@ -438,3 +433,5 @@ export default function createConnectorWithContext<WidgetProps = {}>(
     return ConnectorWrapper;
   };
 }
+
+export default createConnectorWithContext;

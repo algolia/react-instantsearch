@@ -116,7 +116,10 @@ export default createConnector<QueryRulesProps>({
   },
 
   getProvidedProps(props, _1, searchResults) {
-    const results = getResults(searchResults, { ais: props.contextValue });
+    const results = getResults(searchResults, {
+      ais: props.contextValue,
+      multiIndexContext: props.indexContextValue,
+    });
 
     if (results === null) {
       return {
