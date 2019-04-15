@@ -19,7 +19,7 @@ type Props = {
 
 const cx = createClassNames('Hits');
 
-const Hits: React.SFC<Props> = ({
+const Hits: React.FC<Props> = ({
   hits,
   className = '',
   hitComponent: HitComponent = DefaultHitComponent,
