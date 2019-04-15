@@ -104,7 +104,7 @@ const DefaultButtonComponent: React.FunctionComponent<InnerComponentProps> = ({
   }
 };
 
-const DefaultStatusComponent: React.FunctionComponent<InnerComponentProps> = ({
+const DefaultStatusComponent: React.FC<InnerComponentProps> = ({
   status,
 }) => <p>{status}</p>;
 
