@@ -116,7 +116,7 @@ const VoiceSearch = ({
   voiceListeningState,
   searchAsYouSpeak = false,
 
-  buttonComponent: ButtonComponent = DefaultButtonComponent,
+  buttonComponent: Button = DefaultButtonComponent,
   statusComponent: StatusComponent = DefaultStatusComponent,
 }: VoiceSearchProps) => {
   const onClick = (event: React.MouseEvent<HTMLElement>) => {
