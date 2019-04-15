@@ -10,11 +10,11 @@ function setup() {
   const insightsClient = jest.fn();
 
   const contextValue = {
-    mainTargetedIndex: 'theIndex', // @TODO: change to theFirstIndex in context-5
+    mainTargetedIndex: 'firstIndex',
   };
-  // const indexContextValue = {
-  //   targetedIndex: 'theIndex',
-  // };
+  const indexContextValue = {
+    targetedIndex: 'theIndex',
+  };
 
   const hit = {
     objectID: 'objectID_42',
@@ -23,7 +23,7 @@ function setup() {
   };
   const searchResults = { results: { theIndex: { index: 'theIndex' } } };
   const props = connect(insightsClient).getProvidedProps(
-    { hit, contextValue },
+    { hit, contextValue, indexContextValue },
     null,
     searchResults
   );
