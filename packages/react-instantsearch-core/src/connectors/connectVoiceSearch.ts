@@ -51,8 +51,8 @@ export default Composed => {
       } = voiceSearch;
 
       return {
-        isBrowserSupported,
-        isListening,
+        isBrowserSupported: isBrowserSupported(),
+        isListening: isListening(),
         toggleListening,
         voiceListeningState: getState(),
         searchAsYouSpeak,
