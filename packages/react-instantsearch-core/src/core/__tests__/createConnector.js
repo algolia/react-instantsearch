@@ -1377,17 +1377,17 @@ describe('createConnector', () => {
       );
 
       expect(wrapper.text()).toMatchInlineSnapshot(`
-"{
-  message: hello,
-  providedProps: {
-    contextValue: {
-      store: {},
-      widgetsManager: {}
-    },
-    message: hello
-  }
-}"
-`);
+        "{
+          message: hello,
+          providedProps: {
+            contextValue: {
+              store: {},
+              widgetsManager: {}
+            },
+            message: hello
+          }
+        }"
+      `);
     });
   });
 });

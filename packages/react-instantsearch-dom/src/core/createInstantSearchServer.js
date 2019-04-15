@@ -9,12 +9,12 @@ import {
   HIGHLIGHT_TAGS,
 } from 'react-instantsearch-core';
 
+const hasMultipleIndices = context => context && context.multiIndexContext;
+
 const getIndexId = context =>
-  context && context.multiIndexContext
+  hasMultipleIndices(context)
     ? context.multiIndexContext.targetedIndex
     : context.ais.mainTargetedIndex;
-
-const hasMultipleIndices = context => context && context.multiIndexContext;
 
 const getSearchParameters = (indexName, searchParameters) => {
   const sharedParameters = searchParameters

@@ -74,9 +74,13 @@ export default createConnector({
 
   getProvidedProps(props, searchState, searchResults) {
     const { attribute, value } = props;
-    const results = getResults(searchResults, { ais: props.contextValue });
+    const results = getResults(searchResults, {
+      ais: props.contextValue,
+      multiIndexContext: props.indexContextValue,
+    });
     const currentRefinement = getCurrentRefinement(props, searchState, {
       ais: props.contextValue,
+      multiIndexContext: props.indexContextValue,
     });
 
     const allFacetValues =
@@ -118,17 +122,22 @@ export default createConnector({
   refine(props, searchState, nextRefinement) {
     return refine(props, searchState, nextRefinement, {
       ais: props.contextValue,
+      multiIndexContext: props.indexContextValue,
     });
   },
 
   cleanUp(props, searchState) {
-    return cleanUp(props, searchState, { ais: props.contextValue });
+    return cleanUp(props, searchState, {
+      ais: props.contextValue,
+      multiIndexContext: props.indexContextValue,
+    });
   },
 
   getSearchParameters(searchParameters, props, searchState) {
     const { attribute, value, filter } = props;
     const checked = getCurrentRefinement(props, searchState, {
       ais: props.contextValue,
+      multiIndexContext: props.indexContextValue,
     });
 
     let nextSearchParameters = searchParameters.addDisjunctiveFacet(attribute);
@@ -151,9 +160,13 @@ export default createConnector({
     const id = getId(props);
     const checked = getCurrentRefinement(props, searchState, {
       ais: props.contextValue,
+      multiIndexContext: props.indexContextValue,
     });
     const items = [];
-    const index = getIndexId({ ais: props.contextValue });
+    const index = getIndexId({
+      ais: props.contextValue,
+      multiIndexContext: props.indexContextValue,
+    });
 
     if (checked) {
       items.push({
@@ -161,7 +174,10 @@ export default createConnector({
         currentRefinement: checked,
         attribute: props.attribute,
         value: nextState =>
-          refine(props, nextState, false, { ais: props.contextValue }),
+          refine(props, nextState, false, {
+            ais: props.contextValue,
+            multiIndexContext: props.indexContextValue,
+          }),
       });
     }
 

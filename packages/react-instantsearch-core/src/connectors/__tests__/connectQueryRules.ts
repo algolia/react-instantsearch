@@ -451,36 +451,39 @@ Consider using \`transformRuleContexts\` to minimize the number of rules sent to
     });
   });
 
-  describe.skip('multi index', () => {
+  describe('multi index', () => {
     const firstIndexName = 'firstIndex';
     const secondIndexName = 'secondIndex';
-    const context = {
-      context: {
-        ais: { mainTargetedIndex: firstIndexName },
-        multiIndexContext: { targetedIndex: secondIndexName },
-      },
+
+    const contextValue: any = { mainTargetedIndex: firstIndexName };
+    const indexContextValue: any = { targetedIndex: secondIndexName };
+
+    const defaultPropsMultiIndex = {
+      ...defaultProps,
+      contextValue,
+      indexContextValue,
     };
-    const getProvidedProps = connect.getProvidedProps.bind(context);
-    const getSearchParameters = connect.getSearchParameters.bind(context);
 
     it('without userData provides the correct props to the component', () => {
-      const props: QueryRulesProps = {
-        ...defaultProps,
+      const props: ConnectedProps<QueryRulesProps> = {
+        ...defaultPropsMultiIndex,
       };
       const searchState = {};
       const searchResults = {
         results: { [secondIndexName]: { userData: undefined } },
       };
 
-      expect(getProvidedProps(props, searchState, searchResults)).toEqual({
+      expect(
+        connect.getProvidedProps(props, searchState, searchResults)
+      ).toEqual({
         items: [],
         canRefine: false,
       });
     });
 
     it('with userData provides the correct props to the component', () => {
-      const props: QueryRulesProps = {
-        ...defaultProps,
+      const props: ConnectedProps<QueryRulesProps> = {
+        ...defaultPropsMultiIndex,
       };
       const searchState = {};
       const searchResults = {
@@ -489,7 +492,9 @@ Consider using \`transformRuleContexts\` to minimize the number of rules sent to
         },
       };
 
-      expect(getProvidedProps(props, searchState, searchResults)).toEqual({
+      expect(
+        connect.getProvidedProps(props, searchState, searchResults)
+      ).toEqual({
         items: [{ banner: 'image.png' }],
         canRefine: true,
       });
@@ -500,8 +505,8 @@ Consider using \`transformRuleContexts\` to minimize the number of rules sent to
         const transformItemsSpy = jest.fn(() => [
           { banner: 'image-transformed.png' },
         ]);
-        const props: QueryRulesProps = {
-          ...defaultProps,
+        const props: ConnectedProps<QueryRulesProps> = {
+          ...defaultPropsMultiIndex,
           transformItems: transformItemsSpy,
         };
         const searchState = {};
@@ -510,7 +515,9 @@ Consider using \`transformRuleContexts\` to minimize the number of rules sent to
             [secondIndexName]: { userData: [{ banner: 'image.png' }] },
           },
         };
-        expect(getProvidedProps(props, searchState, searchResults)).toEqual({
+        expect(
+          connect.getProvidedProps(props, searchState, searchResults)
+        ).toEqual({
           items: [{ banner: 'image-transformed.png' }],
           canRefine: true,
         });
@@ -523,11 +530,11 @@ Consider using \`transformRuleContexts\` to minimize the number of rules sent to
 
     describe('trackedFilters', () => {
       it('does not set ruleContexts without search state and trackedFilters', () => {
-        const props: QueryRulesProps = {
-          ...defaultProps,
+        const props: ConnectedProps<QueryRulesProps> = {
+          ...defaultPropsMultiIndex,
         };
         const searchState = {};
-        const searchParameters = getSearchParameters(
+        const searchParameters = connect.getSearchParameters(
           new SearchParameters(),
           props,
           searchState
@@ -537,8 +544,8 @@ Consider using \`transformRuleContexts\` to minimize the number of rules sent to
       });
 
       it('does not set ruleContexts with search state but without tracked filters', () => {
-        const props: QueryRulesProps = {
-          ...defaultProps,
+        const props: ConnectedProps<QueryRulesProps> = {
+          ...defaultPropsMultiIndex,
         };
         const searchState = {
           indices: {
@@ -552,7 +559,7 @@ Consider using \`transformRuleContexts\` to minimize the number of rules sent to
             },
           },
         };
-        const searchParameters = getSearchParameters(
+        const searchParameters = connect.getSearchParameters(
           new SearchParameters(),
           props,
           searchState
@@ -563,8 +570,8 @@ Consider using \`transformRuleContexts\` to minimize the number of rules sent to
 
       it('sets ruleContexts based on range', () => {
         const priceSpy = jest.fn(values => values);
-        const props: QueryRulesProps = {
-          ...defaultProps,
+        const props: ConnectedProps<QueryRulesProps> = {
+          ...defaultPropsMultiIndex,
           trackedFilters: {
             price: priceSpy,
           },
@@ -581,7 +588,7 @@ Consider using \`transformRuleContexts\` to minimize the number of rules sent to
             },
           },
         };
-        const searchParameters = getSearchParameters(
+        const searchParameters = connect.getSearchParameters(
           new SearchParameters(),
           props,
           searchState
@@ -599,8 +606,8 @@ Consider using \`transformRuleContexts\` to minimize the number of rules sent to
     describe('transformRuleContexts', () => {
       it('transform rule contexts before adding them to search parameters', () => {
         const priceSpy = jest.fn(values => values);
-        const props: QueryRulesProps = {
-          ...defaultProps,
+        const props: ConnectedProps<QueryRulesProps> = {
+          ...defaultPropsMultiIndex,
           trackedFilters: {
             price: priceSpy,
           },
@@ -619,7 +626,7 @@ Consider using \`transformRuleContexts\` to minimize the number of rules sent to
             },
           },
         };
-        const searchParameters = getSearchParameters(
+        const searchParameters = connect.getSearchParameters(
           new SearchParameters(),
           props,
           searchState

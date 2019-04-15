@@ -385,27 +385,19 @@ describe('connectNumericMenu', () => {
     });
   });
 
-  describe.skip('multi index', () => {
-    let context = {
-      context: {
-        ais: { mainTargetedIndex: 'first' },
-        multiIndexContext: { targetedIndex: 'first' },
-      },
-    };
-    const getProvidedProps = connect.getProvidedProps.bind(context);
-    const getSP = connect.getSearchParameters.bind(context);
-    const getMetadata = connect.getMetadata.bind(context);
-    const cleanUp = connect.cleanUp.bind(context);
+  describe('multi index', () => {
+    const contextValue = { mainTargetedIndex: 'first' };
+    const indexContextValue = { targetedIndex: 'second' };
 
     const results = {
-      first: {
+      second: {
         getFacetStats: () => ({ min: 0, max: 300 }),
         getFacetByName: () => true,
       },
     };
 
     it('provides the correct props to the component', () => {
-      props = getProvidedProps(
+      props = connect.getProvidedProps(
         {
           attribute: 'ok',
           items: [
@@ -413,8 +405,10 @@ describe('connectNumericMenu', () => {
             { label: 'Not ok', end: 200 },
             { label: 'Maybe ok?', start: 100, end: 200 },
           ],
+          contextValue,
+          indexContextValue,
         },
-        { indices: { first: { multiRange: { ok: 'wat' } } } },
+        { indices: { second: { multiRange: { ok: 'wat' } } } },
         { results }
       );
       expect(props).toEqual({
@@ -440,20 +434,18 @@ describe('connectNumericMenu', () => {
     });
 
     it("calling refine updates the widget's search state", () => {
-      let refine = connect.refine.bind(context);
-
-      let nextState = refine(
-        { attribute: 'ok' },
+      let nextState = connect.refine(
+        { attribute: 'ok', contextValue, indexContextValue },
         {
           indices: {
-            first: { otherKey: 'val', multiRange: { otherKey: 'val' } },
+            second: { otherKey: 'val', multiRange: { otherKey: 'val' } },
           },
         },
         'yep'
       );
       expect(nextState).toEqual({
         indices: {
-          first: {
+          second: {
             otherKey: 'val',
             page: 1,
             multiRange: { ok: 'yep', otherKey: 'val' },
@@ -461,19 +453,15 @@ describe('connectNumericMenu', () => {
         },
       });
 
-      context = {
-        context: {
-          ais: { mainTargetedIndex: 'first' },
-          multiIndexContext: { targetedIndex: 'second' },
+      nextState = connect.refine(
+        {
+          attribute: 'ok',
+          contextValue,
+          indexContextValue,
         },
-      };
-      refine = connect.refine.bind(context);
-
-      nextState = refine(
-        { attribute: 'ok' },
         {
           indices: {
-            first: {
+            second: {
               otherKey: 'val',
               multiRange: { ok: 'yep', otherKey: 'val' },
             },
@@ -483,11 +471,11 @@ describe('connectNumericMenu', () => {
       );
       expect(nextState).toEqual({
         indices: {
-          first: {
+          second: {
+            page: 1,
             otherKey: 'val',
             multiRange: { ok: 'yep', otherKey: 'val' },
           },
-          second: { page: 1, multiRange: { ok: 'yep' } },
         },
       });
     });
@@ -495,10 +483,10 @@ describe('connectNumericMenu', () => {
     it('refines the corresponding numeric facet', () => {
       const initSP = new SearchParameters();
 
-      params = getSP(
+      params = connect.getSearchParameters(
         initSP,
-        { attribute: 'facet' },
-        { indices: { first: { multiRange: { facet: '100:' } } } }
+        { attribute: 'facet', contextValue, indexContextValue },
+        { indices: { second: { multiRange: { facet: '100:' } } } }
       );
       expect(params.getNumericRefinements('facet')).toEqual({
         '>=': [100],
@@ -506,7 +494,7 @@ describe('connectNumericMenu', () => {
     });
 
     it('registers its filter in metadata', () => {
-      const metadata = getMetadata(
+      const metadata = connect.getMetadata(
         {
           attribute: 'wot',
           items: [
@@ -516,12 +504,14 @@ describe('connectNumericMenu', () => {
               end: 200,
             },
           ],
+          contextValue,
+          indexContextValue,
         },
-        { indices: { first: { multiRange: { wot: '100:200' } } } }
+        { indices: { second: { multiRange: { wot: '100:200' } } } }
       );
       expect(metadata).toEqual({
         id: 'wot',
-        index: 'first',
+        index: 'second',
         items: [
           {
             label: 'wot: YAY',
@@ -535,7 +525,7 @@ describe('connectNumericMenu', () => {
     });
 
     it('items value function should clear it from the search state', () => {
-      const metadata = getMetadata(
+      const metadata = connect.getMetadata(
         {
           attribute: 'one',
           items: [
@@ -545,31 +535,36 @@ describe('connectNumericMenu', () => {
               end: 200,
             },
           ],
+          contextValue,
+          indexContextValue,
         },
         {
           indices: {
-            first: { multiRange: { one: '100:200', two: '200:400' } },
+            second: { multiRange: { one: '100:200', two: '200:400' } },
           },
         }
       );
 
       const searchState = metadata.items[0].value({
-        indices: { first: { multiRange: { one: '100:200', two: '200:400' } } },
+        indices: { second: { multiRange: { one: '100:200', two: '200:400' } } },
       });
 
       expect(searchState).toEqual({
         indices: {
-          first: { page: 1, multiRange: { one: '', two: '200:400' } },
+          second: { page: 1, multiRange: { one: '', two: '200:400' } },
         },
       });
     });
 
     it('should return the right searchState when clean up', () => {
-      let searchState = cleanUp(
-        { attribute: 'name' },
+      let searchState = connect.cleanUp(
+        { attribute: 'name', contextValue, indexContextValue },
         {
           indices: {
             first: {
+              another: { name: 'searchState' },
+            },
+            second: {
               multiRange: { name: 'searchState', name2: 'searchState' },
             },
           },
@@ -577,13 +572,26 @@ describe('connectNumericMenu', () => {
         }
       );
       expect(searchState).toEqual({
-        indices: { first: { multiRange: { name2: 'searchState' } } },
+        indices: {
+          first: {
+            another: { name: 'searchState' },
+          },
+          second: { multiRange: { name2: 'searchState' } },
+        },
         another: { searchState: 'searchState' },
       });
 
-      searchState = cleanUp({ attribute: 'name2' }, searchState);
+      searchState = connect.cleanUp(
+        { attribute: 'name2', contextValue, indexContextValue },
+        searchState
+      );
       expect(searchState).toEqual({
-        indices: { first: { multiRange: {} } },
+        indices: {
+          first: {
+            another: { name: 'searchState' },
+          },
+          second: { multiRange: {} },
+        },
         another: { searchState: 'searchState' },
       });
     });

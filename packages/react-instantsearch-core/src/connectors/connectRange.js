@@ -215,7 +215,10 @@ export default createConnector({
 
   getProvidedProps(props, searchState, searchResults) {
     const { attribute, precision, min: minBound, max: maxBound } = props;
-    const results = getResults(searchResults, { ais: props.contextValue });
+    const results = getResults(searchResults, {
+      ais: props.contextValue,
+      multiIndexContext: props.indexContextValue,
+    });
     const hasFacet = results && results.getFacetByName(attribute);
     const stats = hasFacet ? results.getFacetStats(attribute) || {} : {};
     const facetValues = hasFacet ? results.getFacetValues(attribute) : [];
@@ -244,7 +247,7 @@ export default createConnector({
       props,
       searchState,
       this._currentRange,
-      { ais: props.contextValue }
+      { ais: props.contextValue, multiIndexContext: props.indexContextValue }
     );
 
     return {
@@ -263,11 +266,15 @@ export default createConnector({
   refine(props, searchState, nextRefinement) {
     return refine(props, searchState, nextRefinement, this._currentRange, {
       ais: props.contextValue,
+      multiIndexContext: props.indexContextValue,
     });
   },
 
   cleanUp(props, searchState) {
-    return cleanUp(props, searchState, { ais: props.contextValue });
+    return cleanUp(props, searchState, {
+      ais: props.contextValue,
+      multiIndexContext: props.indexContextValue,
+    });
   },
 
   getSearchParameters(params, props, searchState) {
@@ -276,7 +283,7 @@ export default createConnector({
       props,
       searchState,
       this._currentRange,
-      { ais: props.contextValue }
+      { ais: props.contextValue, multiIndexContext: props.indexContextValue }
     );
 
     params = params.addDisjunctiveFacet(attribute);
@@ -298,7 +305,7 @@ export default createConnector({
       props,
       searchState,
       this._currentRange,
-      { ais: props.contextValue }
+      { ais: props.contextValue, multiIndexContext: props.indexContextValue }
     );
 
     const items = [];
@@ -320,6 +327,7 @@ export default createConnector({
         value: nextState =>
           refine(props, nextState, {}, this._currentRange, {
             ais: props.contextValue,
+            multiIndexContext: props.indexContextValue,
           }),
         currentRefinement: getCurrentRefinementWithRange(
           { min: minValue, max: maxValue },
@@ -330,7 +338,10 @@ export default createConnector({
 
     return {
       id: getId(props),
-      index: getIndexId({ ais: props.contextValue }),
+      index: getIndexId({
+        ais: props.contextValue,
+        multiIndexContext: props.indexContextValue,
+      }),
       items,
     };
   },

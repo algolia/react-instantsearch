@@ -38,23 +38,27 @@ describe('connectScrollTo', () => {
     });
   });
 
-  describe.skip('multi index', () => {
-    const context = {
-      context: {
-        ais: { mainTargetedIndex: 'first' },
-        multiIndexContext: { targetedIndex: 'second' },
-      },
-    };
-    const getProvidedProps = connect.getProvidedProps.bind(context);
+  describe('multi index', () => {
+    const contextValue = { mainTargetedIndex: 'first' };
+    const indexContextValue = { targetedIndex: 'second' };
     it('provides the correct props to the component', () => {
+      const instance = {};
       const searchState = { indices: { second: { p: 1 } } };
 
-      props = getProvidedProps({ scrollOn: 'p' }, searchState);
+      props = connect.getProvidedProps.call(
+        instance,
+        { scrollOn: 'p', contextValue, indexContextValue },
+        searchState
+      );
       expect(props).toEqual({ value: 1, hasNotChanged: true });
 
       searchState.indices.second = { ...searchState.indices.second, p: 2 };
 
-      props = getProvidedProps({ scrollOn: 'p' }, searchState);
+      props = connect.getProvidedProps.call(
+        instance,
+        { scrollOn: 'p', contextValue, indexContextValue },
+        searchState
+      );
       expect(props).toEqual({ value: 2, hasNotChanged: true });
 
       searchState.indices.second = {
@@ -62,7 +66,11 @@ describe('connectScrollTo', () => {
         anything: 'ok',
       };
 
-      props = getProvidedProps({ scrollOn: 'p' }, searchState);
+      props = connect.getProvidedProps.call(
+        instance,
+        { scrollOn: 'p', contextValue, indexContextValue },
+        searchState
+      );
       expect(props).toEqual({ value: 2, hasNotChanged: false });
     });
   });

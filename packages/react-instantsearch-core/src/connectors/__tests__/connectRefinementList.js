@@ -475,27 +475,27 @@ describe('connectRefinementList', () => {
     });
   });
 
-  describe.skip('multi index', () => {
-    let context = {
-      context: {
-        ais: { mainTargetedIndex: 'first' },
-        multiIndexContext: { targetedIndex: 'first' },
-      },
-    };
-    const getProvidedProps = connect.getProvidedProps.bind(context);
-    const getSP = connect.getSearchParameters.bind(context);
-    const getMetadata = connect.getMetadata.bind(context);
-    const cleanUp = connect.cleanUp.bind(context);
+  describe('multi index', () => {
+    const contextValue = { mainTargetedIndex: 'first' };
+    const indexContextValue = { targetedIndex: 'second' };
 
     const results = {
       first: {
         getFacetValues: jest.fn(() => []),
         getFacetByName: () => true,
       },
+      second: {
+        getFacetValues: jest.fn(() => []),
+        getFacetByName: () => true,
+      },
     };
 
     it('provides the correct props to the component', () => {
-      props = getProvidedProps({ attribute: 'ok' }, {}, { results });
+      props = connect.getProvidedProps(
+        { attribute: 'ok', contextValue, indexContextValue },
+        {},
+        { results }
+      );
       expect(props).toEqual({
         items: [],
         currentRefinement: [],
@@ -503,9 +503,9 @@ describe('connectRefinementList', () => {
         canRefine: false,
       });
 
-      props = getProvidedProps(
-        { attribute: 'ok' },
-        { indices: { first: { refinementList: { ok: ['wat'] } } } },
+      props = connect.getProvidedProps(
+        { attribute: 'ok', contextValue, indexContextValue },
+        { indices: { second: { refinementList: { ok: ['wat'] } } } },
         { results }
       );
       expect(props).toEqual({
@@ -515,8 +515,8 @@ describe('connectRefinementList', () => {
         canRefine: false,
       });
 
-      results.first.getFacetValues.mockClear();
-      results.first.getFacetValues.mockImplementation(() => [
+      results.second.getFacetValues.mockClear();
+      results.second.getFacetValues.mockImplementation(() => [
         {
           name: 'wat',
           isRefined: true,
@@ -531,47 +531,43 @@ describe('connectRefinementList', () => {
     });
 
     it("calling refine updates the widget's search state", () => {
-      let refine = connect.refine.bind(context);
-
-      let nextState = refine(
-        { attribute: 'ok' },
+      let nextState = connect.refine(
+        { attribute: 'ok', contextValue, indexContextValue },
         {
           otherKey: 'val',
-          indices: { first: { refinementList: { otherKey: ['val'] } } },
+          indices: { second: { refinementList: { otherKey: ['val'] } } },
         },
         ['yep']
       );
       expect(nextState).toEqual({
         otherKey: 'val',
         indices: {
-          first: {
+          second: {
             page: 1,
             refinementList: { ok: ['yep'], otherKey: ['val'] },
           },
         },
       });
 
-      context = {
-        context: {
-          ais: { mainTargetedIndex: 'first' },
-          multiIndexContext: { targetedIndex: 'second' },
+      nextState = connect.refine(
+        {
+          attribute: 'ok',
+          contextValue,
+          indexContextValue,
         },
-      };
-      refine = connect.refine.bind(context);
-
-      nextState = refine(
-        { attribute: 'ok' },
         {
           otherKey: 'val',
-          indices: { first: { refinementList: { otherKey: ['val'] } } },
+          indices: { second: { refinementList: { otherKey: ['val'] } } },
         },
         ['yep']
       );
       expect(nextState).toEqual({
         otherKey: 'val',
         indices: {
-          first: { refinementList: { otherKey: ['val'] } },
-          second: { page: 1, refinementList: { ok: ['yep'] } },
+          second: {
+            page: 1,
+            refinementList: { ok: ['yep'], otherKey: ['val'] },
+          },
         },
       });
     });
@@ -579,14 +575,16 @@ describe('connectRefinementList', () => {
     it('correctly applies its state to search parameters', () => {
       const initSP = new SearchParameters();
 
-      params = getSP(
+      params = connect.getSearchParameters(
         initSP,
         {
           attribute: 'ok',
           operator: 'or',
           limit: 1,
+          contextValue,
+          indexContextValue,
         },
-        { indices: { first: { refinementList: { ok: ['wat'] } } } }
+        { indices: { second: { refinementList: { ok: ['wat'] } } } }
       );
       expect(params).toEqual(
         initSP
@@ -595,14 +593,16 @@ describe('connectRefinementList', () => {
           .setQueryParameter('maxValuesPerFacet', 1)
       );
 
-      params = getSP(
+      params = connect.getSearchParameters(
         initSP,
         {
           attribute: 'ok',
           operator: 'and',
           limit: 1,
+          contextValue,
+          indexContextValue,
         },
-        { indices: { first: { refinementList: { ok: ['wat'] } } } }
+        { indices: { second: { refinementList: { ok: ['wat'] } } } }
       );
       expect(params).toEqual(
         initSP
@@ -613,13 +613,13 @@ describe('connectRefinementList', () => {
     });
 
     it('registers its filter in metadata', () => {
-      const metadata = getMetadata(
-        { attribute: 'wot' },
-        { indices: { first: { refinementList: { wot: ['wat', 'wut'] } } } }
+      const metadata = connect.getMetadata(
+        { attribute: 'wot', contextValue, indexContextValue },
+        { indices: { second: { refinementList: { wot: ['wat', 'wut'] } } } }
       );
       expect(metadata).toEqual({
         id: 'wot',
-        index: 'first',
+        index: 'second',
         items: [
           {
             label: 'wot: ',
@@ -643,24 +643,24 @@ describe('connectRefinementList', () => {
     });
 
     it('items value function should clear it from the search state', () => {
-      const metadata = getMetadata(
-        { attribute: 'one' },
+      const metadata = connect.getMetadata(
+        { attribute: 'one', contextValue, indexContextValue },
         {
           indices: {
-            first: { refinementList: { one: ['one1', 'one2'], two: ['two'] } },
+            second: { refinementList: { one: ['one1', 'one2'], two: ['two'] } },
           },
         }
       );
 
       let searchState = metadata.items[0].items[0].value({
         indices: {
-          first: { refinementList: { one: ['one1', 'one2'], two: ['two'] } },
+          second: { refinementList: { one: ['one1', 'one2'], two: ['two'] } },
         },
       });
 
       expect(searchState).toEqual({
         indices: {
-          first: { page: 1, refinementList: { one: ['one2'], two: ['two'] } },
+          second: { page: 1, refinementList: { one: ['one2'], two: ['two'] } },
         },
       });
 
@@ -668,17 +668,17 @@ describe('connectRefinementList', () => {
 
       expect(searchState).toEqual({
         indices: {
-          first: { page: 1, refinementList: { one: '', two: ['two'] } },
+          second: { page: 1, refinementList: { one: '', two: ['two'] } },
         },
       });
     });
 
     it('should return the right searchState when clean up', () => {
-      let searchState = cleanUp(
-        { attribute: 'name' },
+      let searchState = connect.cleanUp(
+        { attribute: 'name', contextValue, indexContextValue },
         {
           indices: {
-            first: {
+            second: {
               refinementList: { name: 'searchState', name2: 'searchState' },
             },
           },
@@ -686,15 +686,34 @@ describe('connectRefinementList', () => {
         }
       );
       expect(searchState).toEqual({
-        indices: { first: { refinementList: { name2: 'searchState' } } },
+        indices: { second: { refinementList: { name2: 'searchState' } } },
         another: { searchState: 'searchState' },
       });
 
-      searchState = cleanUp({ attribute: 'name2' }, searchState);
+      searchState = connect.cleanUp(
+        { attribute: 'name2', contextValue, indexContextValue },
+        searchState
+      );
       expect(searchState).toEqual({
-        indices: { first: { refinementList: {} } },
+        indices: { second: { refinementList: {} } },
         another: { searchState: 'searchState' },
       });
+    });
+
+    it('errors if searchable is used in a multi index context', () => {
+      expect(() => {
+        connect.getProvidedProps(
+          {
+            contextValue,
+            indexContextValue,
+            searchable: true,
+          },
+          {},
+          {}
+        );
+      }).toThrowErrorMatchingInlineSnapshot(
+        `"react-instantsearch: searching in *List is not available when used inside a multi index context"`
+      );
     });
   });
 });

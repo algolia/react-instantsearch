@@ -41,15 +41,9 @@ describe('connectStateResults', () => {
     });
   });
 
-  describe.skip('multi index', () => {
-    const context = {
-      context: {
-        ais: { mainTargetedIndex: 'first' },
-        multiIndexContext: { targetedIndex: 'first' },
-      },
-    };
-
-    const getProvidedProps = connect.getProvidedProps.bind(context);
+  describe('multi index', () => {
+    const contextValue = { mainTargetedIndex: 'first' };
+    const indexContextValue = { targetedIndex: 'second' };
 
     it('provides the correct props to the component', () => {
       const searchState = { state: 'state' };
@@ -60,7 +54,7 @@ describe('connectStateResults', () => {
       const searchResults = {
         results: {
           first: { nbHits: 25, hits: [] },
-          second: { nbHits: 25, hits: [] },
+          second: { nbHits: 26, hits: [] },
         },
         error,
         searching,
@@ -70,17 +64,17 @@ describe('connectStateResults', () => {
 
       const expectation = {
         searchState,
-        searchResults: searchResults.results.first,
+        searchResults: searchResults.results.second,
         allSearchResults: searchResults.results,
-        props: { props: 'props' },
+        props: { props: 'props', contextValue, indexContextValue },
         error,
         searching,
         isSearchStalled,
         searchingForFacetValues,
       };
 
-      const actual = getProvidedProps(
-        { props: 'props' },
+      const actual = connect.getProvidedProps(
+        { props: 'props', contextValue, indexContextValue },
         searchState,
         searchResults
       );

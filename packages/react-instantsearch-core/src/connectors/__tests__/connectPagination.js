@@ -100,22 +100,15 @@ describe('connectPagination', () => {
     });
   });
 
-  describe.skip('multi index', () => {
-    let context = {
-      context: {
-        ais: { mainTargetedIndex: 'first' },
-        multiIndexContext: { targetedIndex: 'first' },
-      },
-    };
-    const getProvidedProps = connect.getProvidedProps.bind(context);
-    const getSP = connect.getSearchParameters.bind(context);
-    const cleanUp = connect.cleanUp.bind(context);
+  describe('multi index', () => {
+    const contextValue = { mainTargetedIndex: 'first' };
+    const indexContextValue = { targetedIndex: 'second' };
 
     it('provides the correct props to the component', () => {
-      props = getProvidedProps(
+      props = connect.getProvidedProps(
+        { contextValue, indexContextValue },
         {},
-        {},
-        { results: { first: { nbPages: 666 } } }
+        { results: { second: { nbPages: 666 } } }
       );
       expect(props).toEqual({
         currentRefinement: 1,
@@ -123,10 +116,10 @@ describe('connectPagination', () => {
         canRefine: true,
       });
 
-      props = getProvidedProps(
-        {},
-        { indices: { first: { page: 5 } } },
-        { results: { first: { nbPages: 666 } } }
+      props = connect.getProvidedProps(
+        { contextValue, indexContextValue },
+        { indices: { second: { page: 5 } } },
+        { results: { second: { nbPages: 666 } } }
       );
       expect(props).toEqual({
         currentRefinement: 5,
@@ -136,55 +129,51 @@ describe('connectPagination', () => {
     });
 
     it("calling refine updates the widget's search state", () => {
-      let refine = connect.refine.bind(context);
-
-      let nextState = refine(
-        {},
-        { indices: { first: { otherKey: 'val' } } },
+      let nextState = connect.refine(
+        { contextValue, indexContextValue },
+        { indices: { second: { otherKey: 'val' } } },
         'yep'
       );
       expect(nextState).toEqual({
         indices: {
-          first: {
+          second: {
             otherKey: 'val',
             page: 'yep',
           },
         },
       });
 
-      context = {
-        context: {
-          ais: { mainTargetedIndex: 'first' },
-          multiIndexContext: { targetedIndex: 'second' },
+      nextState = connect.refine(
+        {
+          contextValue: { mainTargetedIndex: 'second' },
+          indexContextValue: { targetedIndex: 'second' },
         },
-      };
-      refine = connect.refine.bind(context);
-
-      nextState = refine(
-        {},
-        { indices: { first: { otherKey: 'val', page: 'yep' } } },
+        { indices: { second: { otherKey: 'val', page: 'yep' } } },
         'yep'
       );
       expect(nextState).toEqual({
         indices: {
-          first: { otherKey: 'val', page: 'yep' },
-          second: { page: 'yep' },
+          second: { otherKey: 'val', page: 'yep' },
         },
       });
     });
 
     it('refines the page parameter', () => {
       const initSP = new SearchParameters();
-      params = getSP(initSP, {}, { indices: { first: { page: 667 } } });
+      params = connect.getSearchParameters(
+        initSP,
+        { contextValue, indexContextValue },
+        { indices: { second: { page: 667 } } }
+      );
       expect(params.page).toBe(666);
     });
 
     it('should return the right searchState when clean up', () => {
-      const newState = cleanUp(
-        {},
+      const newState = connect.cleanUp(
+        { contextValue, indexContextValue },
         {
           indices: {
-            first: {
+            second: {
               page: { searchState: 'searchState' },
               another: { searchState: 'searchState' },
             },
@@ -192,7 +181,7 @@ describe('connectPagination', () => {
         }
       );
       expect(newState).toEqual({
-        indices: { first: { another: { searchState: 'searchState' } } },
+        indices: { second: { another: { searchState: 'searchState' } } },
       });
     });
   });
