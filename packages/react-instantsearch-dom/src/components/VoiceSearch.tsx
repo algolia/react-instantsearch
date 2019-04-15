@@ -147,7 +147,7 @@ const VoiceSearch = ({
         <Button {...innerProps} />
       </button>
       <div className={cx('div')}>
-        <StatusComponent {...innerProps} />
+        <Status {...innerProps} />
       </div>
     </div>
   );
