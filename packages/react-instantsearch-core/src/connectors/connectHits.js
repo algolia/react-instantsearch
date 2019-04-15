@@ -45,7 +45,10 @@ export default createConnector({
   displayName: 'AlgoliaHits',
 
   getProvidedProps(props, searchState, searchResults) {
-    const results = getResults(searchResults, this.context);
+    const results = getResults(searchResults, {
+      ais: props.contextValue,
+      multiIndexContext: props.indexContextValue,
+    });
     if (!results) {
       return { hits: [] };
     }
@@ -61,10 +64,17 @@ export default createConnector({
     return { hits: hitsWithPositionsAndQueryID };
   },
 
-  /* Hits needs to be considered as a widget to trigger a search if no others widgets are used.
-   * To be considered as a widget you need either getSearchParameters, getMetadata or getTransitionState
-   * See createConnector.js
-   * */
+  /**
+   * Hits needs to be considered as a widget to trigger a search,
+   * even if no other widgets are used.
+   *
+   * To be considered as a widget you need either:
+   * - getSearchParameters
+   * - getMetadata
+   * - transitionState
+   *
+   * See: createConnector.tsx
+   */
   getSearchParameters(searchParameters) {
     return searchParameters;
   },

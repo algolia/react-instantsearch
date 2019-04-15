@@ -30,4 +30,6 @@ import connectConfigure from '../connectors/connectConfigure';
  * );
  */
 
-export default connectConfigure(() => null);
+export default connectConfigure(function Configure() {
+  return null;
+});

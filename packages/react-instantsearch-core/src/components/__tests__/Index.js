@@ -1,19 +1,19 @@
 import React from 'react';
-import Enzyme, { shallow } from 'enzyme';
+import Enzyme, { shallow, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { SearchParameters } from 'algoliasearch-helper';
-import Index from '../Index';
+import Index, { IndexComponentWithoutContext } from '../Index';
+import { IndexConsumer, InstantSearchProvider } from '../../core/context';
+import createConnector from '../../core/createConnector';
 
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('Index', () => {
   const createContext = () => ({
-    ais: {
-      onSearchParameters: jest.fn(),
-      widgetsManager: {
-        registerWidget: jest.fn(),
-        update: jest.fn(),
-      },
+    onSearchParameters: jest.fn(),
+    widgetsManager: {
+      registerWidget: jest.fn(),
+      update: jest.fn(),
     },
   });
 
@@ -29,16 +29,13 @@ describe('Index', () => {
     const context = createContext();
 
     const wrapper = shallow(
-      <Index {...requiredProps}>
+      <IndexComponentWithoutContext {...requiredProps} contextValue={context}>
         <div />
-      </Index>,
-      {
-        context,
-      }
+      </IndexComponentWithoutContext>
     );
 
-    expect(context.ais.widgetsManager.registerWidget).toHaveBeenCalledTimes(1);
-    expect(context.ais.widgetsManager.registerWidget).toHaveBeenCalledWith(
+    expect(context.widgetsManager.registerWidget).toHaveBeenCalledTimes(1);
+    expect(context.widgetsManager.registerWidget).toHaveBeenCalledWith(
       wrapper.instance()
     );
   });
@@ -47,51 +44,40 @@ describe('Index', () => {
     const context = createContext();
 
     shallow(
-      <Index {...requiredProps}>
+      <IndexComponentWithoutContext {...requiredProps} contextValue={context}>
         <div />
-      </Index>,
-      {
-        context,
-      }
+      </IndexComponentWithoutContext>
     );
 
-    expect(context.ais.onSearchParameters).toHaveBeenCalledTimes(1);
+    expect(context.onSearchParameters).toHaveBeenCalledTimes(1);
   });
 
   it('calls update if indexName prop changes', () => {
     const context = createContext();
 
     const wrapper = shallow(
-      <Index {...requiredProps}>
+      <IndexComponentWithoutContext {...requiredProps} contextValue={context}>
         <div />
-      </Index>,
-      {
-        context,
-      }
+      </IndexComponentWithoutContext>
     );
 
-    expect(context.ais.widgetsManager.update).toHaveBeenCalledTimes(0);
+    expect(context.widgetsManager.update).toHaveBeenCalledTimes(0);
 
     wrapper.setProps({ indexName: 'newIndexName' });
 
-    expect(context.ais.widgetsManager.update).toHaveBeenCalledTimes(1);
+    expect(context.widgetsManager.update).toHaveBeenCalledTimes(1);
   });
 
   it('unregisters itself on unmount', () => {
     const unregister = jest.fn();
     const context = createContext();
 
-    context.ais.widgetsManager.registerWidget.mockImplementation(
-      () => unregister
-    );
+    context.widgetsManager.registerWidget.mockImplementation(() => unregister);
 
     const wrapper = shallow(
-      <Index {...requiredProps}>
+      <IndexComponentWithoutContext {...requiredProps} contextValue={context}>
         <div />
-      </Index>,
-      {
-        context,
-      }
+      </IndexComponentWithoutContext>
     );
 
     expect(unregister).toHaveBeenCalledTimes(0);
@@ -104,30 +90,26 @@ describe('Index', () => {
   it('exposes multi index context', () => {
     const context = createContext();
 
-    const wrapper = shallow(
-      <Index {...requiredProps}>
-        <div />
-      </Index>,
-      {
-        context,
-      }
+    const wrapper = mount(
+      <IndexComponentWithoutContext {...requiredProps} contextValue={context}>
+        <IndexConsumer>
+          {multiIndexContext => (
+            <div className="inner">{multiIndexContext.targetedIndex}</div>
+          )}
+        </IndexConsumer>
+      </IndexComponentWithoutContext>
     );
 
-    const childContext = wrapper.instance().getChildContext();
-
-    expect(childContext.multiIndexContext.targetedIndex).toBe('indexId');
+    expect(wrapper.find('.inner').text()).toBe('indexId');
   });
 
   it('provides search parameters from instance props', () => {
     const context = createContext();
 
     const wrapper = shallow(
-      <Index {...requiredProps}>
+      <IndexComponentWithoutContext {...requiredProps} contextValue={context}>
         <div />
-      </Index>,
-      {
-        context,
-      }
+      </IndexComponentWithoutContext>
     );
 
     const parameters = wrapper
@@ -141,12 +123,9 @@ describe('Index', () => {
     const context = createContext();
 
     const wrapper = shallow(
-      <Index {...requiredProps}>
+      <IndexComponentWithoutContext {...requiredProps} contextValue={context}>
         <div />
-      </Index>,
-      {
-        context,
-      }
+      </IndexComponentWithoutContext>
     );
 
     const parameters = wrapper
@@ -156,5 +135,76 @@ describe('Index', () => {
       });
 
     expect(parameters.index).toBe('otherIndexName');
+  });
+
+  it('wrapped with InstantSearchProvider: sets correct props', () => {
+    const state = {
+      results: {},
+      resultsFacetValues: {},
+      searching: false,
+      searchingForFacetValues: false,
+      isSearchStalled: false,
+      metadata: {},
+      error: {},
+      widgets: {
+        query: 'hello',
+      },
+    };
+
+    const context = {
+      onInternalStateUpdate() {},
+      createHrefForState() {},
+      onSearchForFacetValues() {},
+      onSearchStateChange() {},
+      onSearchParameters() {},
+      widgetsManager: {
+        registerWidget() {},
+        getWidgets() {},
+        update() {},
+      },
+      store: {
+        setState() {},
+        subscribe() {},
+        getState: () => state,
+      },
+    };
+
+    const Dummy = props => JSON.stringify(props, null, 2).replace(/"/g, '');
+
+    const Connected = createConnector({
+      displayName: 'Connector',
+      getProvidedProps: props => ({ providedProps: props }),
+    })(Dummy);
+
+    const props = {
+      message: 'hello',
+    };
+
+    const wrapper = mount(
+      <InstantSearchProvider value={context}>
+        <Index {...requiredProps}>
+          <Connected {...props} />
+        </Index>
+      </InstantSearchProvider>
+    );
+
+    expect(wrapper.text()).toMatchInlineSnapshot(`
+"{
+  indexContextValue: {
+    targetedIndex: indexId
+  },
+  message: hello,
+  providedProps: {
+    contextValue: {
+      widgetsManager: {},
+      store: {}
+    },
+    indexContextValue: {
+      targetedIndex: indexId
+    },
+    message: hello
+  }
+}"
+`);
   });
 });
