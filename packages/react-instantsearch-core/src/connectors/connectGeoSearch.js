@@ -128,10 +128,12 @@ export default createConnector({
   displayName: 'AlgoliaGeoSearch',
 
   getProvidedProps(props, searchState, searchResults) {
-    const results = getResults(searchResults, {
+    const context = {
       ais: props.contextValue,
       multiIndexContext: props.indexContextValue,
-    });
+    };
+
+    const results = getResults(searchResults, context);
 
     // We read it from both because the SearchParameters & the searchState are not always
     // in sync. When we set the refinement the searchState is used but when we clear the refinement
@@ -145,7 +147,7 @@ export default createConnector({
     const currentRefinementFromSearchState = getCurrentRefinement(
       props,
       searchState,
-      { ais: props.contextValue, multiIndexContext: props.indexContextValue }
+      context
     );
 
     const currentRefinementFromSearchParameters =
@@ -157,7 +159,7 @@ export default createConnector({
     const currentPositionFromSearchState = getCurrentPosition(
       props,
       searchState,
-      { ais: props.contextValue, multiIndexContext: props.indexContextValue }
+      context
     );
 
     const currentPositionFromSearchParameters =
@@ -214,24 +216,18 @@ export default createConnector({
   getMetadata(props, searchState) {
     const items = [];
     const id = getBoundingBoxId();
-    const index = getIndexId({
+    const context = {
       ais: props.contextValue,
       multiIndexContext: props.indexContextValue,
-    });
+    };
+    const index = getIndexId(context);
     const nextRefinement = {};
-    const currentRefinement = getCurrentRefinement(props, searchState, {
-      ais: props.contextValue,
-      multiIndexContext: props.indexContextValue,
-    });
+    const currentRefinement = getCurrentRefinement(props, searchState, context);
 
     if (currentRefinement) {
       items.push({
         label: `${id}: ${currentRefinementToString(currentRefinement)}`,
-        value: nextState =>
-          refine(nextState, nextRefinement, {
-            ais: props.contextValue,
-            multiIndexContext: props.indexContextValue,
-          }),
+        value: nextState => refine(nextState, nextRefinement, context),
         currentRefinement,
       });
     }

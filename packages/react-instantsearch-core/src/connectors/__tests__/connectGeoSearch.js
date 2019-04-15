@@ -731,7 +731,6 @@ describe('connectGeoSearch', () => {
 
         const actual = connector.getProvidedProps(
           props,
-          {},
           searchState,
           searchResults
         );
