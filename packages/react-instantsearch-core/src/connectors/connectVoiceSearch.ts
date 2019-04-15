@@ -27,17 +27,17 @@ function getCurrentRefinement(props, searchState, context) {
 }
 
 export default Composed => {
-  const helper = voiceSearchHelper();
+  const voiceSearch = voiceSearchHelper();
 
   const connector = createConnector({
     displayName: 'AlgoliaVoiceSearch',
 
     getProvidedProps({ searchAsYouSpeak = false } = {}) {
-      helper.setSearchAsYouSpeak(searchAsYouSpeak);
-      helper.setOnQueryChange(query => {
+      voiceSearch.setSearchAsYouSpeak(searchAsYouSpeak);
+      voiceSearch.setOnQueryChange(query => {
         this.refine(query);
       });
-      helper.setOnStateChange(() => {
+      voiceSearch.setOnStateChange(() => {
         this.context.ais.widgetsManager.update();
       });
 
@@ -46,7 +46,7 @@ export default Composed => {
         isBrowserSupported,
         isListening,
         toggleListening,
-      } = helper;
+      } = voiceSearch;
 
       return {
         isBrowserSupported,
