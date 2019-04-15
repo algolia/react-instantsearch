@@ -1,7 +1,7 @@
 import { has, omit, get } from 'lodash';
 
 export function getIndexId(context) {
-  return context && context.multiIndexContext
+  return hasMultipleIndices(context)
     ? context.multiIndexContext.targetedIndex
     : context.ais.mainTargetedIndex;
 }

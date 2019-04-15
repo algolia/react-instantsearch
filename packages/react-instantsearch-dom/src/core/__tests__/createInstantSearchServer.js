@@ -13,7 +13,7 @@ import createInstantSearchServer from '../createInstantSearchServer';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe.skip('createInstantSearchServer', () => {
+describe('createInstantSearchServer', () => {
   const createSearchClient = () => ({
     search: () =>
       Promise.resolve({
@@ -30,8 +30,8 @@ describe.skip('createInstantSearchServer', () => {
 
         const fallback = props.defaultRefinement || 'Apple';
 
-        if (this.context && this.context.multiIndexContext) {
-          const index = this.context.multiIndexContext.targetedIndex;
+        if (this.props.indexContextValue) {
+          const index = this.props.indexContextValue.targetedIndex;
           const indexSearchState =
             searchState.indices && searchState.indices[index]
               ? searchState.indices[index]
@@ -103,6 +103,8 @@ describe.skip('createInstantSearchServer', () => {
     });
 
     it('uses the provided algoliaClient', () => {
+      const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+
       const { InstantSearch } = createInstantSearchServer();
 
       const algoliaClient = {
@@ -125,6 +127,11 @@ describe.skip('createInstantSearchServer', () => {
         `react-instantsearch (${version})`
       );
       expect(wrapper.props().algoliaClient).toBe(algoliaClient);
+      expect(warnSpy.mock.calls[0][0]).toMatchInlineSnapshot(
+        `"\`algoliaClient\` option was renamed \`searchClient\`. Please use this new option before the next major version."`
+      );
+
+      warnSpy.mockRestore();
     });
 
     it('does not throw if searchClient does not have a `addAlgoliaAgent()` method', () => {
@@ -141,6 +148,7 @@ describe.skip('createInstantSearchServer', () => {
     });
 
     it('does not throw if algoliaClient does not have a `addAlgoliaAgent()` method', () => {
+      const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
       const { InstantSearch } = createInstantSearchServer();
 
       const props = {
@@ -151,6 +159,10 @@ describe.skip('createInstantSearchServer', () => {
       const trigger = () => shallow(<InstantSearch {...props} />);
 
       expect(() => trigger()).not.toThrow();
+      expect(warnSpy.mock.calls[0][0]).toMatchInlineSnapshot(
+        `"\`algoliaClient\` option was renamed \`searchClient\`. Please use this new option before the next major version."`
+      );
+      warnSpy.mockRestore();
     });
 
     it('throws if algoliaClient is given with searchClient', () => {

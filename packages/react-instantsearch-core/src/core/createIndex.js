@@ -5,7 +5,7 @@ import Index from '../components/Index';
 /**
  * Creates a specialized root Index component. It accepts
  * a specification of the root Element.
- * @param {object} defaultRoot - the defininition of the root of an Index sub tree.
+ * @param {object} defaultRoot - the definition of the root of an Index sub tree.
  * @return {object} a Index root
  */
 const createIndex = defaultRoot => {
