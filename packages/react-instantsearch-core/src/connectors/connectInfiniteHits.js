@@ -1,3 +1,5 @@
+import { isEqual } from 'lodash';
+
 import createConnector from '../core/createConnector';
 import {
   getCurrentRefinementValue,
@@ -63,10 +65,9 @@ export default createConnector({
       hits,
       hitsPerPage,
       nbPages,
-      _state: { page: p, ...stateWithoutPage } = {},
+      _state: { page: p, ...currentState } = {},
     } = results;
 
-    const currentState = JSON.stringify(stateWithoutPage);
     const hitsWithPositions = addAbsolutePositions(hits, hitsPerPage, page);
     const hitsWithPositionsAndQueryID = addQueryID(
       hitsWithPositions,
@@ -75,7 +76,7 @@ export default createConnector({
 
     if (
       this._firstReceivedPage === undefined ||
-      currentState !== this._prevState
+      !isEqual(currentState, this._prevState)
     ) {
       this._allResults = [...hitsWithPositionsAndQueryID];
       this._firstReceivedPage = page;
