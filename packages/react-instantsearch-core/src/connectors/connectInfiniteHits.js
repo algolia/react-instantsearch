@@ -42,7 +42,10 @@ export default createConnector({
   displayName: 'AlgoliaInfiniteHits',
 
   getProvidedProps(props, searchState, searchResults) {
-    const results = getResults(searchResults, { ais: props.contextValue });
+    const results = getResults(searchResults, {
+      ais: props.contextValue,
+      multiIndexContext: props.indexContextValue,
+    });
 
     this._allResults = this._allResults || [];
     this._previousPage = this._previousPage || 0;
@@ -84,21 +87,26 @@ export default createConnector({
   getSearchParameters(searchParameters, props, searchState) {
     return searchParameters.setQueryParameters({
       page:
-        getCurrentRefinement(props, searchState, { ais: props.contextValue }) -
-        1,
+        getCurrentRefinement(props, searchState, {
+          ais: props.contextValue,
+          multiIndexContext: props.indexContextValue,
+        }) - 1,
     });
   },
 
   refine(props, searchState) {
     const id = getId();
     const nextPage =
-      getCurrentRefinement(props, searchState, { ais: props.contextValue }) + 1;
+      getCurrentRefinement(props, searchState, {
+        ais: props.contextValue,
+        multiIndexContext: props.indexContextValue,
+      }) + 1;
     const nextValue = { [id]: nextPage };
     const resetPage = false;
     return refineValue(
       searchState,
       nextValue,
-      { ais: props.contextValue },
+      { ais: props.contextValue, multiIndexContext: props.indexContextValue },
       resetPage
     );
   },

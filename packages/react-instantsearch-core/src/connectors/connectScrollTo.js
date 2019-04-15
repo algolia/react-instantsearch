@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import createConnector from '../core/createConnector';
 import {
   getCurrentRefinementValue,
-  // hasMultipleIndices,
-  // getIndexId,
+  hasMultipleIndices,
+  getIndexId,
 } from '../core/indexUtils';
 import { shallowEqual } from '../core/utils';
 
@@ -33,7 +33,7 @@ export default createConnector({
     const value = getCurrentRefinementValue(
       props,
       searchState,
-      { ais: props.contextValue },
+      { ais: props.contextValue, multiIndexContext: props.indexContextValue },
       id,
       null,
       currentRefinement => currentRefinement
@@ -43,13 +43,22 @@ export default createConnector({
       this._prevSearchState = {};
     }
 
-    // @TODO: re-enable on multi-index
     // Get the subpart of the state that interest us
-    // if (hasMultipleIndices(this.context)) {
-    //   searchState = searchState.indices
-    //     ? searchState.indices[getIndexId(this.context)]
-    //     : {};
-    // }
+    if (
+      hasMultipleIndices({
+        ais: props.contextValue,
+        multiIndexContext: props.indexContextValue,
+      })
+    ) {
+      searchState = searchState.indices
+        ? searchState.indices[
+            getIndexId({
+              ais: props.contextValue,
+              multiIndexContext: props.indexContextValue,
+            })
+          ]
+        : {};
+    }
 
     // if there is a change in the app that has been triggered by another element
     // than "props.scrollOn (id) or the Configure widget, we need to keep track of

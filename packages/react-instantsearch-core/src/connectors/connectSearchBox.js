@@ -60,6 +60,7 @@ export default createConnector({
     return {
       currentRefinement: getCurrentRefinement(props, searchState, {
         ais: props.contextValue,
+        multiIndexContext: props.indexContextValue,
       }),
       isSearchStalled: searchResults.isSearchStalled,
     };
@@ -68,16 +69,23 @@ export default createConnector({
   refine(props, searchState, nextRefinement) {
     return refine(props, searchState, nextRefinement, {
       ais: props.contextValue,
+      multiIndexContext: props.indexContextValue,
     });
   },
 
   cleanUp(props, searchState) {
-    return cleanUp(props, searchState, { ais: props.contextValue });
+    return cleanUp(props, searchState, {
+      ais: props.contextValue,
+      multiIndexContext: props.indexContextValue,
+    });
   },
 
   getSearchParameters(searchParameters, props, searchState) {
     return searchParameters.setQuery(
-      getCurrentRefinement(props, searchState, { ais: props.contextValue })
+      getCurrentRefinement(props, searchState, {
+        ais: props.contextValue,
+        multiIndexContext: props.indexContextValue,
+      })
     );
   },
 
@@ -85,10 +93,14 @@ export default createConnector({
     const id = getId(props);
     const currentRefinement = getCurrentRefinement(props, searchState, {
       ais: props.contextValue,
+      multiIndexContext: props.indexContextValue,
     });
     return {
       id,
-      index: getIndexId({ ais: props.contextValue }),
+      index: getIndexId({
+        ais: props.contextValue,
+        multiIndexContext: props.indexContextValue,
+      }),
       items:
         currentRefinement === null
           ? []
@@ -96,7 +108,10 @@ export default createConnector({
               {
                 label: `${id}: ${currentRefinement}`,
                 value: nextState =>
-                  refine(props, nextState, '', { ais: props.contextValue }),
+                  refine(props, nextState, '', {
+                    ais: props.contextValue,
+                    multiIndexContext: props.indexContextValue,
+                  }),
                 currentRefinement,
               },
             ],

@@ -122,7 +122,10 @@ export default createConnector({
     _1: any,
     searchResults: any
   ) {
-    const results = getResults(searchResults, { ais: props.contextValue });
+    const results = getResults(searchResults, {
+      ais: props.contextValue,
+      multiIndexContext: props.indexContextValue,
+    });
 
     if (results === null) {
       return {
@@ -150,8 +153,16 @@ export default createConnector({
       return searchParameters;
     }
 
-    const indexSearchState = hasMultipleIndices({ ais: props.contextValue })
-      ? searchState.indices[getIndexId({ ais: props.contextValue })]
+    const indexSearchState = hasMultipleIndices({
+      ais: props.contextValue,
+      multiIndexContext: props.indexContextValue,
+    })
+      ? searchState.indices[
+          getIndexId({
+            ais: props.contextValue,
+            multiIndexContext: props.indexContextValue,
+          })
+        ]
       : searchState;
 
     const newRuleContexts = getRuleContextsFromTrackedFilters({

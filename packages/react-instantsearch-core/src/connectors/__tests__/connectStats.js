@@ -18,21 +18,25 @@ describe('connectStats', () => {
     });
   });
 
-  describe.skip('multi index', () => {
-    const context = {
-      context: {
-        ais: { mainTargetedIndex: 'first' },
-        multiIndexContext: { targetedIndex: 'second' },
-      },
-    };
-    const getProvidedProps = connect.getProvidedProps.bind(context);
+  describe('multi index', () => {
+    const contextValue = { mainTargetedIndex: 'first' };
+    const indexContextValue = { targetedIndex: 'second' };
+
     it('provides the correct props to the component', () => {
-      props = getProvidedProps(null, null, {});
+      props = connect.getProvidedProps(
+        { contextValue, indexContextValue },
+        null,
+        {}
+      );
       expect(props).toBe(null);
 
-      props = getProvidedProps(null, null, {
-        results: { second: { nbHits: 666, processingTimeMS: 1 } },
-      });
+      props = connect.getProvidedProps(
+        { contextValue, indexContextValue },
+        null,
+        {
+          results: { second: { nbHits: 666, processingTimeMS: 1 } },
+        }
+      );
       expect(props).toEqual({ nbHits: 666, processingTimeMS: 1 });
     });
   });
