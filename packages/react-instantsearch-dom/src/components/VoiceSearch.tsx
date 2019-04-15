@@ -117,7 +117,7 @@ const VoiceSearch = ({
   searchAsYouSpeak = false,
 
   buttonComponent: Button = DefaultButtonComponent,
-  statusComponent: StatusComponent = DefaultStatusComponent,
+  statusComponent: Status = DefaultStatusComponent,
 }: VoiceSearchProps) => {
   const onClick = (event: React.MouseEvent<HTMLElement>) => {
     event.currentTarget.blur();
