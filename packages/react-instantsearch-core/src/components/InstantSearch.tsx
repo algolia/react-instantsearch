@@ -85,7 +85,6 @@ type State = {
  * @propType {string} apiKey - Your Algolia search-only API key.
  * @propType {string} indexName - Main index in which to search.
  * @propType {boolean} [refresh=false] - Flag to activate when the cache needs to be cleared so that the front-end is updated when a change occurs in the index.
- * @propType {object} [algoliaClient] - Provide a custom Algolia client instead of the internal one (deprecated in favor of `searchClient`).
  * @propType {object} [searchClient] - Provide a custom search client.
  * @propType {func} [onSearchStateChange] - Function to be called everytime a new search is done. Useful for [URL Routing](guide/Routing.html).
  * @propType {object} [searchState] - Object to inject some search state. Switches the InstantSearch component in controlled mode. Useful for [URL Routing](guide/Routing.html).

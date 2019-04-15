@@ -13,7 +13,6 @@ import version from './version';
 export default function createInstantSearch(defaultAlgoliaClient, root) {
   return class CreateInstantSearch extends Component {
     static propTypes = {
-      algoliaClient: PropTypes.object,
       searchClient: PropTypes.object,
       appId: PropTypes.string,
       apiKey: PropTypes.string,
@@ -47,23 +46,15 @@ export default function createInstantSearch(defaultAlgoliaClient, root) {
       super(...args);
 
       if (this.props.searchClient) {
-        if (this.props.appId || this.props.apiKey || this.props.algoliaClient) {
+        if (this.props.appId || this.props.apiKey) {
           throw new Error(
-            'react-instantsearch:: `searchClient` cannot be used with `appId`, `apiKey` or `algoliaClient`.'
+            'react-instantsearch:: `searchClient` cannot be used with `appId` and `apiKey`.'
           );
         }
       }
 
-      if (this.props.algoliaClient) {
-        // eslint-disable-next-line no-console
-        console.warn(
-          '`algoliaClient` option was renamed `searchClient`. Please use this new option before the next major version.'
-        );
-      }
-
       this.client =
         this.props.searchClient ||
-        this.props.algoliaClient ||
         defaultAlgoliaClient(this.props.appId, this.props.apiKey, {
           _useRequestCache: true,
         });
@@ -79,8 +70,6 @@ export default function createInstantSearch(defaultAlgoliaClient, root) {
 
       if (nextProps.searchClient) {
         this.client = nextProps.searchClient;
-      } else if (nextProps.algoliaClient) {
-        this.client = nextProps.algoliaClient;
       } else if (
         props.appId !== nextProps.appId ||
         props.apiKey !== nextProps.apiKey
@@ -104,7 +93,6 @@ export default function createInstantSearch(defaultAlgoliaClient, root) {
           onSearchParameters={this.props.onSearchParameters}
           root={this.props.root}
           searchClient={this.client}
-          algoliaClient={this.client}
           refresh={this.props.refresh}
           resultsState={this.props.resultsState}
         >

@@ -102,38 +102,6 @@ describe('createInstantSearchServer', () => {
       expect(wrapper.props().searchClient).toBe(searchClient);
     });
 
-    it('uses the provided algoliaClient', () => {
-      const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
-
-      const { InstantSearch } = createInstantSearchServer();
-
-      const algoliaClient = {
-        ...createSearchClient(),
-        addAlgoliaAgent: jest.fn(),
-      };
-
-      const props = {
-        ...requiredProps,
-        algoliaClient,
-      };
-
-      const wrapper = shallow(<InstantSearch {...props} />);
-
-      expect(algoliaClient.addAlgoliaAgent).toHaveBeenCalledTimes(2);
-      expect(algoliaClient.addAlgoliaAgent).toHaveBeenCalledWith(
-        `react (${React.version})`
-      );
-      expect(algoliaClient.addAlgoliaAgent).toHaveBeenCalledWith(
-        `react-instantsearch (${version})`
-      );
-      expect(wrapper.props().algoliaClient).toBe(algoliaClient);
-      expect(warnSpy.mock.calls[0][0]).toMatchInlineSnapshot(
-        `"\`algoliaClient\` option was renamed \`searchClient\`. Please use this new option before the next major version."`
-      );
-
-      warnSpy.mockRestore();
-    });
-
     it('does not throw if searchClient does not have a `addAlgoliaAgent()` method', () => {
       const { InstantSearch } = createInstantSearchServer();
 
@@ -145,41 +113,6 @@ describe('createInstantSearchServer', () => {
       const trigger = () => shallow(<InstantSearch {...props} />);
 
       expect(() => trigger()).not.toThrow();
-    });
-
-    it('does not throw if algoliaClient does not have a `addAlgoliaAgent()` method', () => {
-      const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
-      const { InstantSearch } = createInstantSearchServer();
-
-      const props = {
-        ...requiredProps,
-        algoliaClient: createSearchClient(),
-      };
-
-      const trigger = () => shallow(<InstantSearch {...props} />);
-
-      expect(() => trigger()).not.toThrow();
-      expect(warnSpy.mock.calls[0][0]).toMatchInlineSnapshot(
-        `"\`algoliaClient\` option was renamed \`searchClient\`. Please use this new option before the next major version."`
-      );
-      warnSpy.mockRestore();
-    });
-
-    it('throws if algoliaClient is given with searchClient', () => {
-      const { InstantSearch } = createInstantSearchServer();
-
-      const props = {
-        ...requiredProps,
-        searchClient: createSearchClient(),
-        algoliaClient: createSearchClient(),
-      };
-
-      const trigger = () =>
-        shallow(<InstantSearch indexName="name" {...props} />);
-
-      expect(() => trigger()).toThrowErrorMatchingInlineSnapshot(
-        `"react-instantsearch:: \`searchClient\` cannot be used with \`appId\`, \`apiKey\` or \`algoliaClient\`."`
-      );
     });
 
     it('throws if appId is given with searchClient', () => {
@@ -194,7 +127,7 @@ describe('createInstantSearchServer', () => {
       const trigger = () => shallow(<InstantSearch {...props} />);
 
       expect(() => trigger()).toThrowErrorMatchingInlineSnapshot(
-        `"react-instantsearch:: \`searchClient\` cannot be used with \`appId\`, \`apiKey\` or \`algoliaClient\`."`
+        `"react-instantsearch:: \`searchClient\` cannot be used with \`appId\` and \`apiKey\`."`
       );
     });
 
@@ -210,7 +143,7 @@ describe('createInstantSearchServer', () => {
       const trigger = () => shallow(<InstantSearch {...props} />);
 
       expect(() => trigger()).toThrowErrorMatchingInlineSnapshot(
-        `"react-instantsearch:: \`searchClient\` cannot be used with \`appId\`, \`apiKey\` or \`algoliaClient\`."`
+        `"react-instantsearch:: \`searchClient\` cannot be used with \`appId\` and \`apiKey\`."`
       );
     });
   });
