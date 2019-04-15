@@ -144,7 +144,7 @@ const VoiceSearch = ({
         onClick={onClick}
         disabled={!isBrowserSupported}
       >
-        <ButtonComponent {...innerProps} />
+        <Button {...innerProps} />
       </button>
       <div className={cx('div')}>
         <StatusComponent {...innerProps} />
