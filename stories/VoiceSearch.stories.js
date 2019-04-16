@@ -38,14 +38,25 @@ stories
       <SearchBox />
     </WrapWithHits>
   ))
-  .add('with a custom button text', () => (
-    <WrapWithHits
-      searchBox={false}
-      hasPlayground={true}
-      linkedStoryGroup="VoiceSearch"
-    >
-      <VoiceSearch
-        buttonComponent={({ isListening }) => (isListening ? 'Stop' : 'Start')}
-      />
-    </WrapWithHits>
-  ));
+  .add('with a custom button text', () => {
+    const style = window.document.createElement('style');
+    window.document.head.appendChild(style);
+    [
+      `.custom-button-story .ais-VoiceSearch-button:hover {
+        background: inherit;
+      }`,
+    ].forEach(rule => style.sheet.insertRule(rule));
+    return (
+      <div className="custom-button-story">
+        <WrapWithHits
+          searchBox={false}
+          hasPlayground={true}
+          linkedStoryGroup="VoiceSearch"
+        >
+          <VoiceSearch
+            buttonComponent={({ isListening }) => (isListening ? '⏹' : '🎙')}
+          />
+        </WrapWithHits>
+      </div>
+    );
+  });
