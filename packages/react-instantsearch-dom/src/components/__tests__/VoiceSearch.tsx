@@ -25,10 +25,6 @@ const defaultProps = {
 };
 
 describe('VoiceSearch', () => {
-  it('does nothing', () => {
-    expect(true).toBe(true);
-  });
-
   describe('button', () => {
     it('calls toggleListening when button is clicked', () => {
       const props = {
