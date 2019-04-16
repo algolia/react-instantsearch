@@ -1,7 +1,9 @@
 /* eslint-disable import/no-commonjs */
 
-module.exports = {
+module.exports = ({ config }) => ({
+  ...config,
   module: {
+    ...config.module,
     rules: [
       {
         test: /\.(js|ts|tsx)$/,
@@ -11,6 +13,7 @@ module.exports = {
             loader: 'babel-loader',
             options: {
               rootMode: 'upward',
+              presets: [['react-app', { typescript: true }]],
             },
           },
         ],
@@ -21,4 +24,4 @@ module.exports = {
       },
     ],
   },
-};
+});
