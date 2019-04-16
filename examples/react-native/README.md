@@ -1,21 +1,23 @@
-# example-react-native
+This examples shows how to use React InstantSearch along with React Native.
 
-_This project was generated with [create-instantsearch-app](https://github.com/algolia/create-instantsearch-app) by [Algolia](https://algolia.com)._
+## Clone the example
 
-This examples shows how to use `react-instantsearch` along with `react-native`.
-
-## Get started
-
-To run this project locally, install the dependencies and run the local server:
-
-```sh
-npm install
-npm start
+```
+curl https://codeload.github.com/algolia/react-instantsearch/tar.gz/master | tar -xz --strip=2 react-instantsearch-master/examples/react-native
 ```
 
-Alternatively, you may use [Yarn](https://http://yarnpkg.com/):
+## Start the example
 
 ```sh
-yarn
-yarn start
+yarn install --no-lockfile
+
+yarn start // to see the app on your phone using the Expo client
+
+yarn run ios // to see the app running on the ios simulator
+
+yarn run android // to see the app running on the android emulator
 ```
+
+Read more about React InstantSearch [in our documentation](https://www.algolia.com/doc/guides/building-search-ui/what-is-instantsearch/react/).
+
+Read more about React Native and how to run projects in [their documentation](https://facebook.github.io/react-native/docs/getting-started.html).
