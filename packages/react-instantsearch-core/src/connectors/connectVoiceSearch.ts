@@ -6,9 +6,7 @@ function getId() {
   return 'query';
 }
 
-/* tslint:disable:variable-name */
-function refine(_props, searchState, nextRefinement, context) {
-  /* tslint:enable:variable-name */
+function refine(searchState, nextRefinement, context) {
   const id = getId();
   const nextValue = { [id]: nextRefinement };
   const resetPage = true;
@@ -59,8 +57,8 @@ export default Composed => {
       };
     },
 
-    refine(props, searchState, nextRefinement) {
-      return refine(props, searchState, nextRefinement, this.context);
+    refine(_0, searchState, nextRefinement) {
+      return refine(searchState, nextRefinement, this.context);
     },
 
     getSearchParameters(searchParameters, props, searchState) {
