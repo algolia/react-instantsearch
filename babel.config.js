@@ -33,7 +33,7 @@ module.exports = api => {
     ]),
     overrides: [
       {
-        test: 'packages/*',
+        test: ['packages/*', 'stories/*'],
         presets: ['@babel/preset-typescript'],
         plugins: [
           [
