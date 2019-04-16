@@ -35,12 +35,15 @@ export default function voiceSearchHelper() {
   // tslint:disable-next-line:no-empty
   let onStateChange: StateChangeListener = () => {};
 
-  const setOnQueryChange = (queryChangeListener: QueryChangeListener) =>
-    (onQueryChange = queryChangeListener);
-  const setOnStateChange = (stateChangeListener: StateChangeListener) =>
-    (onStateChange = stateChangeListener);
-
-  const setSearchAsYouSpeak = value => (searchAsYouSpeak = value);
+  const setOnQueryChange = (queryChangeListener: QueryChangeListener) => {
+    onQueryChange = queryChangeListener;
+  };
+  const setOnStateChange = (stateChangeListener: StateChangeListener) => {
+    onStateChange = stateChangeListener;
+  };
+  const setSearchAsYouSpeak = value => {
+    searchAsYouSpeak = value;
+  };
 
   const isBrowserSupported = () => Boolean(SpeechRecognitionAPI);
 
