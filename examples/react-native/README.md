@@ -1,4 +1,4 @@
-This examples shows how to use React InstantSearch along with React Native.
+This example shows how to use React InstantSearch along with React Native.
 
 ## Clone the example
 
