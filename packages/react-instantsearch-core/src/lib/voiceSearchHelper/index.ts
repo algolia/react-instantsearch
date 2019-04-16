@@ -29,7 +29,7 @@ export default function voiceSearchHelper() {
   });
   let state: VoiceListeningState = getDefaultState(STATUS_INITIAL);
   let recognition: SpeechRecognition | undefined;
-  let searchAsYouSpeak: boolean;
+  let searchAsYouSpeak: boolean = false;
   let onQueryChange: QueryChangeListener = () => {};
   let onStateChange: StateChangeListener = () => {};
 
@@ -39,7 +39,7 @@ export default function voiceSearchHelper() {
   const setOnStateChange = (stateChangeListener: StateChangeListener) => {
     onStateChange = stateChangeListener;
   };
-  const setSearchAsYouSpeak = value => {
+  const setSearchAsYouSpeak = (value: boolean) => {
     searchAsYouSpeak = value;
   };
 
