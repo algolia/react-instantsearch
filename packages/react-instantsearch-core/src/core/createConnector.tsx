@@ -80,7 +80,11 @@ export type ConnectorDescription<TWidgetProps = {}> = {
     props: ConnectedProps<TWidgetProps>,
     searchState: SearchState,
     ...args: any[]
-  ) => any;
+  ) => {
+    facetName: string;
+    query: string;
+    maxFacetHits?: number;
+  };
 
   /**
    * Function that will be called on shouldComponentUpdate of the connector
