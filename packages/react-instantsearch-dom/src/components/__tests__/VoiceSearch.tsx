@@ -1,16 +1,9 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
-import Enzyme, { mount } from 'enzyme';
+import Enzyme, { mount, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import VoiceSearch from '../VoiceSearch';
 
 Enzyme.configure({ adapter: new Adapter() });
-
-const renderAndMatchSnapshot = (element: JSX.Element) => {
-  const instance = renderer.create(element);
-  expect(instance.toJSON()).toMatchSnapshot();
-  instance.unmount();
-};
 
 const defaultProps = {
   isBrowserSupported: true,
@@ -39,7 +32,8 @@ describe('VoiceSearch', () => {
 
   describe('Rendering', () => {
     it('with default props', () => {
-      renderAndMatchSnapshot(<VoiceSearch {...defaultProps} />);
+      const wrapper = shallow(<VoiceSearch {...defaultProps} />);
+      expect(wrapper).toMatchSnapshot();
     });
 
     it('with custom component for button with isListening: false', () => {
@@ -47,9 +41,10 @@ describe('VoiceSearch', () => {
         <button>{isListening ? 'Stop' : 'Start'}</button>
       );
 
-      renderAndMatchSnapshot(
+      const wrapper = shallow(
         <VoiceSearch {...defaultProps} buttonComponent={customButton} />
       );
+      expect(wrapper).toMatchSnapshot();
     });
 
     it('with custom component for button with isListening: true', () => {
@@ -68,9 +63,10 @@ describe('VoiceSearch', () => {
         },
       };
 
-      renderAndMatchSnapshot(
+      const wrapper = shallow(
         <VoiceSearch {...props} buttonComponent={customButton} />
       );
+      expect(wrapper).toMatchSnapshot();
     });
 
     it('with custom template for status', () => {
@@ -103,9 +99,10 @@ describe('VoiceSearch', () => {
         },
       };
 
-      renderAndMatchSnapshot(
+      const wrapper = shallow(
         <VoiceSearch {...props} statusComponent={customStatus} />
       );
+      expect(wrapper).toMatchSnapshot();
     });
   });
 });
