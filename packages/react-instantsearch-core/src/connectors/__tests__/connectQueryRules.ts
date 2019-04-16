@@ -97,7 +97,7 @@ describe('connectQueryRules', () => {
         const searchParameters = connect.getSearchParameters!(
           new SearchParameters(),
           props,
-          searchState,
+          searchState
         );
 
         expect(searchParameters.ruleContexts).toEqual(undefined);
@@ -471,7 +471,7 @@ Consider using \`transformRuleContexts\` to minimize the number of rules sent to
       };
 
       expect(
-        connect.getProvidedProps(props, searchState, searchResults,{},{})
+        connect.getProvidedProps(props, searchState, searchResults, {}, {})
       ).toEqual({
         items: [],
         canRefine: false,
@@ -488,7 +488,7 @@ Consider using \`transformRuleContexts\` to minimize the number of rules sent to
       };
 
       expect(
-        connect.getProvidedProps(props, searchState, searchResults,{},{})
+        connect.getProvidedProps(props, searchState, searchResults, {}, {})
       ).toEqual({
         items: [{ banner: 'image.png' }],
         canRefine: true,
@@ -511,7 +511,7 @@ Consider using \`transformRuleContexts\` to minimize the number of rules sent to
           },
         };
         expect(
-          connect.getProvidedProps(props, searchState, searchResults,{},{})
+          connect.getProvidedProps(props, searchState, searchResults, {}, {})
         ).toEqual({
           items: [{ banner: 'image-transformed.png' }],
           canRefine: true,
