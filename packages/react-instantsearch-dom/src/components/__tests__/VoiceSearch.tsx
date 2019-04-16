@@ -15,7 +15,6 @@ const renderAndMatchSnapshot = (element: JSX.Element) => {
 const defaultProps = {
   isBrowserSupported: true,
   isListening: false,
-  // tslint:disable-next-line:no-empty
   toggleListening: () => {},
   voiceListeningState: {
     status: 'initial',
