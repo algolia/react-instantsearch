@@ -5,8 +5,7 @@ import version from './version';
 
 /**
  * Creates a specialized root InstantSearch component. It accepts
- * an algolia client and a specification of the root Element.
- * @param {function} defaultAlgoliaClient - a function that builds an Algolia client
+ * a specification of the root Element.
  * @param {object} root - the defininition of the root of an InstantSearch sub tree.
  * @returns {object} an InstantSearch root
  */
