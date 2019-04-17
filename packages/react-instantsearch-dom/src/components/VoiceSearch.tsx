@@ -81,7 +81,7 @@ const DefaultButton: React.FC<InnerComponentProps> = ({
       strokeLinecap="round"
       strokeLinejoin="round"
     >
-      ${getDefaultButtonInnerElement(status, errorCode, isListening)}
+      {getDefaultButtonInnerElement(status, errorCode, isListening)}
     </svg>
   );
 };
