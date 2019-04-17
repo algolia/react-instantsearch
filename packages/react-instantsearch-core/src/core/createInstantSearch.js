@@ -10,7 +10,7 @@ import version from './version';
  * @param {object} root - the defininition of the root of an InstantSearch sub tree.
  * @returns {object} an InstantSearch root
  */
-export default function createInstantSearch(defaultAlgoliaClient, root) {
+export default function createInstantSearch(root) {
   return class CreateInstantSearch extends Component {
     static propTypes = {
       searchClient: PropTypes.object.isRequired,

@@ -9,14 +9,12 @@ Enzyme.configure({ adapter: new Adapter() });
 
 describe('createInstantSearch', () => {
   const searchClient = { addAlgoliaAgent: jest.fn() };
-  const searchClientFactory = jest.fn(() => searchClient);
-  const CustomInstantSearch = createInstantSearch(searchClientFactory, {
+  const CustomInstantSearch = createInstantSearch({
     Root: 'div',
   });
 
   beforeEach(() => {
     searchClient.addAlgoliaAgent.mockClear();
-    searchClientFactory.mockClear();
   });
 
   it('wraps InstantSearch', () => {
@@ -51,8 +49,15 @@ describe('createInstantSearch', () => {
       <CustomInstantSearch searchClient={searchClient} indexName="name" />
     );
 
-    expect(searchClientFactory).toHaveBeenCalledTimes(0);
     expect(searchClient.addAlgoliaAgent).toHaveBeenCalledTimes(2);
+
+    expect(searchClient.addAlgoliaAgent).toHaveBeenCalledWith(
+      `react-instantsearch (${version})`
+    );
+    expect(searchClient.addAlgoliaAgent).toHaveBeenCalledWith(
+      `react (${React.version})`
+    );
+
     expect(wrapper.props().searchClient).toBe(searchClient);
   });
 
@@ -81,6 +86,12 @@ describe('createInstantSearch', () => {
 
     expect(wrapper.props().searchClient).toBe(newSearchClient);
     expect(newSearchClient.addAlgoliaAgent).toHaveBeenCalledTimes(2);
+    expect(newSearchClient.addAlgoliaAgent).toHaveBeenCalledWith(
+      `react-instantsearch (${version})`
+    );
+    expect(newSearchClient.addAlgoliaAgent).toHaveBeenCalledWith(
+      `react (${React.version})`
+    );
   });
 
   it('does not throw when searchClient gets updated and does not have a `addAlgoliaAgent()` method', () => {

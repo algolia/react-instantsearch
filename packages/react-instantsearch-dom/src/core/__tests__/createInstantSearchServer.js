@@ -56,6 +56,30 @@ describe('createInstantSearchServer', () => {
   };
 
   describe('props', () => {
+    it('adds expected user agents', () => {
+      const searchClient = {
+        ...createSearchClient(),
+        addAlgoliaAgent: jest.fn(),
+      };
+
+      const { InstantSearch } = createInstantSearchServer();
+
+      const props = {
+        ...requiredProps,
+        searchClient,
+      };
+
+      shallow(<InstantSearch {...props} />);
+
+      expect(searchClient.addAlgoliaAgent).toHaveBeenCalledTimes(2);
+      expect(searchClient.addAlgoliaAgent).toHaveBeenCalledWith(
+        `react (${React.version})`
+      );
+      expect(searchClient.addAlgoliaAgent).toHaveBeenCalledWith(
+        `react-instantsearch (${version})`
+      );
+    });
+
     it('uses the provided searchClient', () => {
       const { InstantSearch } = createInstantSearchServer();
 

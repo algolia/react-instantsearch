@@ -94,8 +94,8 @@ const multiIndexSearch = (
   );
 };
 
-const createInstantSearchServer = algoliasearch => {
-  const InstantSearch = createInstantSearch(algoliasearch, {
+const createInstantSearchServer = () => {
+  const InstantSearch = createInstantSearch({
     Root: 'div',
     props: {
       className: 'ais-InstantSearch__root',
