@@ -39,7 +39,6 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.1.2",
-    "algoliasearch": "^3.27.1",
     "react-instantsearch-core": "^5.4.0"
   },
   "peerDependencies": {
