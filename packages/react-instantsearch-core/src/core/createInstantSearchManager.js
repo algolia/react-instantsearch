@@ -4,6 +4,7 @@ import createWidgetsManager from './createWidgetsManager';
 import createStore from './createStore';
 import { HIGHLIGHT_TAGS } from './highlight';
 import { hasMultipleIndices } from './indexUtils';
+import { addAlgoliaAgents } from './utils';
 
 const isMultiIndexContext = widget => hasMultipleIndices(widget.context);
 const isTargetedIndexEqualIndex = (widget, indexId) =>
@@ -36,6 +37,8 @@ export default function createInstantSearchManager({
     ...HIGHLIGHT_TAGS,
   });
 
+  addAlgoliaAgents(searchClient);
+
   helper
     .on('search', handleNewSearch)
     .on('result', handleSearchSuccess({ indexId: indexName }))
@@ -62,6 +65,7 @@ export default function createInstantSearchManager({
   }
 
   function updateClient(client) {
+    addAlgoliaAgents(client);
     helper.setClient(client);
     search();
   }

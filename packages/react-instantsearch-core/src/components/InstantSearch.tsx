@@ -61,10 +61,6 @@ type Props = {
     searchState: SearchState
   ) => void;
   stalledSearchDelay?: number;
-  root: {
-    Root: ReactType;
-    props: {};
-  };
   resultsState: SearchResults | { [indexId: string]: SearchResults };
 };
 
@@ -137,16 +133,6 @@ class InstantSearch extends Component<Props, State> {
     resultsState: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
 
     children: PropTypes.node,
-
-    root: PropTypes.shape({
-      Root: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.func,
-        PropTypes.object,
-      ]),
-      props: PropTypes.object,
-    }).isRequired,
-
     stalledSearchDelay: PropTypes.number,
   };
 
@@ -260,16 +246,13 @@ class InstantSearch extends Component<Props, State> {
 
   render() {
     const childrenCount = Children.count(this.props.children);
-    const { Root, props } = this.props.root;
     if (childrenCount === 0) {
       return null;
     }
     return (
-      <Root {...props}>
-        <InstantSearchProvider value={this.state.contextValue}>
-          {this.props.children}
-        </InstantSearchProvider>
-      </Root>
+      <InstantSearchProvider value={this.state.contextValue}>
+        {this.props.children}
+      </InstantSearchProvider>
     );
   }
 }
