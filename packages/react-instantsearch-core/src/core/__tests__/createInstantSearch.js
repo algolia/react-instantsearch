@@ -21,11 +21,10 @@ describe('createInstantSearch', () => {
 
   it('wraps InstantSearch', () => {
     const wrapper = shallow(
-      <CustomInstantSearch appId="app" apiKey="key" indexName="name" />
+      <CustomInstantSearch searchClient={searchClient} indexName="name" />
     );
 
-    // eslint-disable-next-line no-shadow
-    const { searchClient, ...propsWithoutClient } = wrapper.props();
+    const { searchClient: _, ...propsWithoutClient } = wrapper.props();
 
     expect(wrapper.is(InstantSearch)).toBe(true);
     expect(wrapper.props().searchClient).toBe(searchClient);
@@ -45,66 +44,6 @@ describe('createInstantSearch', () => {
               "stalledSearchDelay": 200,
             }
         `);
-  });
-
-  it('creates an algolia client using the provided factory', () => {
-    shallow(<CustomInstantSearch appId="app" apiKey="key" indexName="name" />);
-
-    expect(searchClientFactory).toHaveBeenCalledTimes(1);
-    expect(searchClientFactory).toHaveBeenCalledWith('app', 'key', {
-      _useRequestCache: true,
-    });
-
-    expect(searchClient.addAlgoliaAgent).toHaveBeenCalledTimes(2);
-    expect(searchClient.addAlgoliaAgent).toHaveBeenCalledWith(
-      `react-instantsearch (${version})`
-    );
-    expect(searchClient.addAlgoliaAgent).toHaveBeenCalledWith(
-      `react (${React.version})`
-    );
-  });
-
-  it('throws if appId is given with searchClient', () => {
-    const trigger = () =>
-      shallow(
-        <CustomInstantSearch
-          indexName="name"
-          appId="appId"
-          searchClient={searchClient}
-        />
-      );
-
-    expect(() => trigger()).toThrowErrorMatchingInlineSnapshot(
-      `"react-instantsearch: \`searchClient\` cannot be used with \`appId\` and \`apiKey\`."`
-    );
-  });
-
-  it('throws if apiKey is given with searchClient', () => {
-    const trigger = () =>
-      shallow(
-        <CustomInstantSearch
-          indexName="name"
-          apiKey="apiKey"
-          searchClient={searchClient}
-        />
-      );
-
-    expect(() => trigger()).toThrowErrorMatchingInlineSnapshot(
-      `"react-instantsearch: \`searchClient\` cannot be used with \`appId\` and \`apiKey\`."`
-    );
-  });
-
-  it('updates the searchClient when appId or apiKey changes', () => {
-    const wrapper = shallow(
-      <CustomInstantSearch appId="app" apiKey="key" indexName="name" />
-    );
-
-    wrapper.setProps({ appId: 'app2', apiKey: 'key' });
-    wrapper.setProps({ appId: 'app', apiKey: 'key2' });
-
-    expect(searchClientFactory).toHaveBeenCalledTimes(3);
-    expect(searchClientFactory.mock.calls[1]).toEqual(['app2', 'key']);
-    expect(searchClientFactory.mock.calls[2]).toEqual(['app', 'key2']);
   });
 
   it('uses the provided searchClient', () => {
@@ -167,7 +106,7 @@ describe('createInstantSearch', () => {
     };
 
     const wrapper = shallow(
-      <CustomInstantSearch indexName="name" root={root} />
+      <CustomInstantSearch indexName="name" searchClient={{}} root={root} />
     );
 
     // eslint-disable-next-line no-shadow, no-unused-vars

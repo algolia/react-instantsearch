@@ -134,8 +134,6 @@ const createInstantSearchServer = algoliasearch => {
   class CreateInstantSearchServer extends Component {
     static propTypes = {
       searchClient: PropTypes.object,
-      appId: PropTypes.string,
-      apiKey: PropTypes.string,
       indexName: PropTypes.string.isRequired,
       resultsState: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     };
@@ -143,17 +141,7 @@ const createInstantSearchServer = algoliasearch => {
     constructor(...args) {
       super(...args);
 
-      if (this.props.searchClient) {
-        if (this.props.appId || this.props.apiKey) {
-          throw new Error(
-            'react-instantsearch: `searchClient` cannot be used with `appId` and `apiKey`.'
-          );
-        }
-      }
-
-      client =
-        this.props.searchClient ||
-        algoliasearch(this.props.appId, this.props.apiKey);
+      client = this.props.searchClient;
 
       if (typeof client.addAlgoliaAgent === 'function') {
         client.addAlgoliaAgent(`react (${React.version})`);

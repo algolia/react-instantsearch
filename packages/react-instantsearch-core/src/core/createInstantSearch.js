@@ -13,9 +13,7 @@ import version from './version';
 export default function createInstantSearch(defaultAlgoliaClient, root) {
   return class CreateInstantSearch extends Component {
     static propTypes = {
-      searchClient: PropTypes.object,
-      appId: PropTypes.string,
-      apiKey: PropTypes.string,
+      searchClient: PropTypes.object.isRequired,
       children: PropTypes.oneOfType([
         PropTypes.arrayOf(PropTypes.node),
         PropTypes.node,
@@ -45,19 +43,7 @@ export default function createInstantSearch(defaultAlgoliaClient, root) {
     constructor(...args) {
       super(...args);
 
-      if (this.props.searchClient) {
-        if (this.props.appId || this.props.apiKey) {
-          throw new Error(
-            'react-instantsearch: `searchClient` cannot be used with `appId` and `apiKey`.'
-          );
-        }
-      }
-
-      this.client =
-        this.props.searchClient ||
-        defaultAlgoliaClient(this.props.appId, this.props.apiKey, {
-          _useRequestCache: true,
-        });
+      this.client = this.props.searchClient;
 
       if (typeof this.client.addAlgoliaAgent === 'function') {
         this.client.addAlgoliaAgent(`react (${React.version})`);
@@ -66,16 +52,7 @@ export default function createInstantSearch(defaultAlgoliaClient, root) {
     }
 
     componentWillReceiveProps(nextProps) {
-      const props = this.props;
-
-      if (nextProps.searchClient) {
-        this.client = nextProps.searchClient;
-      } else if (
-        props.appId !== nextProps.appId ||
-        props.apiKey !== nextProps.apiKey
-      ) {
-        this.client = defaultAlgoliaClient(nextProps.appId, nextProps.apiKey);
-      }
+      this.client = nextProps.searchClient;
 
       if (typeof this.client.addAlgoliaAgent === 'function') {
         this.client.addAlgoliaAgent(`react (${React.version})`);

@@ -56,37 +56,6 @@ describe('createInstantSearchServer', () => {
   };
 
   describe('props', () => {
-    it('uses the provided factory', () => {
-      const searchClient = {
-        ...createSearchClient(),
-        addAlgoliaAgent: jest.fn(),
-      };
-
-      const createSearchClientMock = jest.fn(() => searchClient);
-
-      const { InstantSearch } = createInstantSearchServer(
-        createSearchClientMock
-      );
-
-      const props = {
-        ...requiredProps,
-        appId: 'appId',
-        apiKey: 'apiKey',
-      };
-
-      shallow(<InstantSearch {...props} />);
-
-      expect(createSearchClientMock).toHaveBeenCalledTimes(1);
-      expect(createSearchClientMock).toHaveBeenCalledWith('appId', 'apiKey');
-      expect(searchClient.addAlgoliaAgent).toHaveBeenCalledTimes(2);
-      expect(searchClient.addAlgoliaAgent).toHaveBeenCalledWith(
-        `react (${React.version})`
-      );
-      expect(searchClient.addAlgoliaAgent).toHaveBeenCalledWith(
-        `react-instantsearch (${version})`
-      );
-    });
-
     it('uses the provided searchClient', () => {
       const { InstantSearch } = createInstantSearchServer();
 
@@ -113,38 +82,6 @@ describe('createInstantSearchServer', () => {
       const trigger = () => shallow(<InstantSearch {...props} />);
 
       expect(() => trigger()).not.toThrow();
-    });
-
-    it('throws if appId is given with searchClient', () => {
-      const { InstantSearch } = createInstantSearchServer();
-
-      const props = {
-        ...requiredProps,
-        appId: 'appId',
-        searchClient: createSearchClient(),
-      };
-
-      const trigger = () => shallow(<InstantSearch {...props} />);
-
-      expect(() => trigger()).toThrowErrorMatchingInlineSnapshot(
-        `"react-instantsearch: \`searchClient\` cannot be used with \`appId\` and \`apiKey\`."`
-      );
-    });
-
-    it('throws if apiKey is given with searchClient', () => {
-      const { InstantSearch } = createInstantSearchServer();
-
-      const props = {
-        ...requiredProps,
-        apiKey: 'apiKey',
-        searchClient: createSearchClient(),
-      };
-
-      const trigger = () => shallow(<InstantSearch {...props} />);
-
-      expect(() => trigger()).toThrowErrorMatchingInlineSnapshot(
-        `"react-instantsearch: \`searchClient\` cannot be used with \`appId\` and \`apiKey\`."`
-      );
     });
   });
 
