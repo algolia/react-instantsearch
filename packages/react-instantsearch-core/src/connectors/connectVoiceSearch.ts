@@ -26,47 +26,45 @@ function getCurrentRefinement(props, searchState, context) {
   );
 }
 
-export default Composed => {
-  const voiceSearch = voiceSearchHelper();
+export default createConnector({
+  displayName: 'AlgoliaVoiceSearch',
 
-  const connector = createConnector({
-    displayName: 'AlgoliaVoiceSearch',
-
-    getProvidedProps({ searchAsYouSpeak = false } = {}) {
-      voiceSearch.setSearchAsYouSpeak(searchAsYouSpeak);
-      voiceSearch.setOnQueryChange(query => {
-        this.refine(query);
-      });
-      voiceSearch.setOnStateChange(() => {
-        this.context.ais.widgetsManager.update();
-      });
-
-      const {
-        getState,
-        isBrowserSupported,
-        isListening,
-        toggleListening,
-      } = voiceSearch;
-
-      return {
-        isBrowserSupported: isBrowserSupported(),
-        isListening: isListening(),
-        toggleListening,
-        voiceListeningState: getState(),
+  getProvidedProps({ searchAsYouSpeak = false } = {}) {
+    if (!this._voiceSearch) {
+      this._voiceSearch = voiceSearchHelper({
         searchAsYouSpeak,
-      };
-    },
+        onQueryChange: query => {
+          this.refine(query);
+        },
+        onStateChange: () => {
+          this.context.ais.widgetsManager.update();
+        },
+      });
+    }
 
-    refine(_0, searchState, nextRefinement) {
-      return refine(searchState, nextRefinement, this.context);
-    },
+    const {
+      getState,
+      isBrowserSupported,
+      isListening,
+      toggleListening,
+    } = this._voiceSearch;
 
-    getSearchParameters(searchParameters, props, searchState) {
-      return searchParameters.setQuery(
-        getCurrentRefinement(props, searchState, this.context)
-      );
-    },
-  });
+    return {
+      isBrowserSupported: isBrowserSupported(),
+      isListening: isListening(),
+      toggleListening,
+      voiceListeningState: getState(),
+      searchAsYouSpeak,
+    };
+  },
 
-  return connector(Composed);
-};
+  refine(_0, searchState, nextRefinement) {
+    return refine(searchState, nextRefinement, this.context);
+  },
+
+  getSearchParameters(searchParameters, props, searchState) {
+    return searchParameters.setQuery(
+      getCurrentRefinement(props, searchState, this.context)
+    );
+  },
+});
