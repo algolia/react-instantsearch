@@ -1,4 +1,4 @@
-import React, { Component, Children, ReactType } from 'react';
+import React, { Component, Children } from 'react';
 import PropTypes from 'prop-types';
 import {
   InstantSearchConsumer,
@@ -7,13 +7,15 @@ import {
   IndexContext,
 } from '../core/context';
 
+function getIndexContext(props: Props): IndexContext {
+  return {
+    targetedIndex: props.indexId || props.indexName,
+  };
+}
+
 type Props = {
   indexName: string;
-  indexId: string;
-  root: {
-    Root: ReactType;
-    props: {};
-  };
+  indexId?: string;
 };
 
 type InnerProps = Props & { contextValue: InstantSearchContext };
@@ -29,7 +31,6 @@ type State = {
  * @kind widget
  * @name <Index>
  * @propType {string} indexName - index in which to search.
- * @propType {{ Root: string|function, props: object }} [root] - Use this to customize the root element. Default value: `{ Root: 'div' }`
  * @example
  * import React from 'react';
  * import algoliasearch from 'algoliasearch/lite';
@@ -58,27 +59,22 @@ type State = {
  */
 class Index extends Component<InnerProps, State> {
   static propTypes = {
-    // @TODO: These props are currently constant.
     indexName: PropTypes.string.isRequired,
-    indexId: PropTypes.string.isRequired,
+    indexId: PropTypes.string,
     children: PropTypes.node,
-    root: PropTypes.shape({
-      Root: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.func,
-        PropTypes.object,
-      ]),
-      props: PropTypes.object,
-    }).isRequired,
+  };
+
+  static getDerivedStateFromProps(props: InnerProps) {
+    return {
+      indexContext: getIndexContext(props),
+    };
+  }
+
+  state = {
+    indexContext: getIndexContext(this.props),
   };
 
   unregisterWidget?: () => void;
-
-  state = {
-    indexContext: {
-      targetedIndex: this.props.indexId,
-    },
-  };
 
   constructor(props: InnerProps) {
     super(props);
@@ -87,7 +83,7 @@ class Index extends Component<InnerProps, State> {
       this.getSearchParameters.bind(this),
       {
         ais: this.props.contextValue,
-        multiIndexContext: this.state.indexContext,
+        multiIndexContext: getIndexContext(props),
       },
       this.props
     );
@@ -99,17 +95,9 @@ class Index extends Component<InnerProps, State> {
     );
   }
 
-  componentWillReceiveProps(nextProps: InnerProps) {
-    // @TODO: DidUpdate
-    if (this.props.indexName !== nextProps.indexName) {
+  componentDidUpdate(prevProps: InnerProps) {
+    if (this.props.indexName !== prevProps.indexName) {
       this.props.contextValue.widgetsManager.update();
-    }
-    if (this.props.indexId !== nextProps.indexId) {
-      this.setState({
-        indexContext: {
-          targetedIndex: nextProps.indexId,
-        },
-      });
     }
   }
 
@@ -119,7 +107,7 @@ class Index extends Component<InnerProps, State> {
     }
   }
 
-  getSearchParameters(searchParameters, props) {
+  getSearchParameters(searchParameters, props: InnerProps) {
     return searchParameters.setIndex(
       this.props ? this.props.indexName : props.indexName
     );
@@ -127,16 +115,13 @@ class Index extends Component<InnerProps, State> {
 
   render() {
     const childrenCount = Children.count(this.props.children);
-    const { Root, props } = this.props.root;
     if (childrenCount === 0) {
       return null;
     }
     return (
-      <Root {...props}>
-        <IndexProvider value={this.state.indexContext}>
-          {this.props.children}
-        </IndexProvider>
-      </Root>
+      <IndexProvider value={this.state.indexContext}>
+        {this.props.children}
+      </IndexProvider>
     );
   }
 }
