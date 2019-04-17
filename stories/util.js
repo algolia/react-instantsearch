@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { linkTo } from '@storybook/addon-links';
+import algoliasearch from 'algoliasearch/lite';
 import {
   InstantSearch,
   ClearRefinements,
@@ -50,7 +51,10 @@ Hits.propTypes = {
 export const CustomHits = connectHits(Hits);
 
 export const Wrap = ({ appId, apiKey, indexName, children }) => (
-  <InstantSearch appId={appId} apiKey={apiKey} indexName={indexName}>
+  <InstantSearch
+    searchClient={algoliasearch(appId, apiKey)}
+    indexName={indexName}
+  >
     {children}
   </InstantSearch>
 );
@@ -112,7 +116,10 @@ export const WrapWithHits = ({
   };
 
   return (
-    <InstantSearch appId={appId} apiKey={apiKey} indexName={indexName}>
+    <InstantSearch
+      searchClient={algoliasearch(appId, apiKey)}
+      indexName={indexName}
+    >
       <Configure {...searchParameters} />
       <div>
         <div className="container widget-container">{children}</div>
