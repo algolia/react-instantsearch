@@ -127,7 +127,7 @@ describe('createInstantSearchServer', () => {
       const trigger = () => shallow(<InstantSearch {...props} />);
 
       expect(() => trigger()).toThrowErrorMatchingInlineSnapshot(
-        `"react-instantsearch:: \`searchClient\` cannot be used with \`appId\` and \`apiKey\`."`
+        `"react-instantsearch: \`searchClient\` cannot be used with \`appId\` and \`apiKey\`."`
       );
     });
 
@@ -143,7 +143,7 @@ describe('createInstantSearchServer', () => {
       const trigger = () => shallow(<InstantSearch {...props} />);
 
       expect(() => trigger()).toThrowErrorMatchingInlineSnapshot(
-        `"react-instantsearch:: \`searchClient\` cannot be used with \`appId\` and \`apiKey\`."`
+        `"react-instantsearch: \`searchClient\` cannot be used with \`appId\` and \`apiKey\`."`
       );
     });
   });

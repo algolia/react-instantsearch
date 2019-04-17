@@ -30,21 +30,21 @@ describe('createInstantSearch', () => {
     expect(wrapper.is(InstantSearch)).toBe(true);
     expect(wrapper.props().searchClient).toBe(searchClient);
     expect(propsWithoutClient).toMatchInlineSnapshot(`
-      Object {
-        "children": undefined,
-        "createURL": undefined,
-        "indexName": "name",
-        "onSearchParameters": undefined,
-        "onSearchStateChange": undefined,
-        "refresh": false,
-        "resultsState": undefined,
-        "root": Object {
-          "Root": "div",
-        },
-        "searchState": undefined,
-        "stalledSearchDelay": 200,
-      }
-    `);
+            Object {
+              "children": undefined,
+              "createURL": undefined,
+              "indexName": "name",
+              "onSearchParameters": undefined,
+              "onSearchStateChange": undefined,
+              "refresh": false,
+              "resultsState": undefined,
+              "root": Object {
+                "Root": "div",
+              },
+              "searchState": undefined,
+              "stalledSearchDelay": 200,
+            }
+        `);
   });
 
   it('creates an algolia client using the provided factory', () => {
@@ -75,7 +75,7 @@ describe('createInstantSearch', () => {
       );
 
     expect(() => trigger()).toThrowErrorMatchingInlineSnapshot(
-      `"react-instantsearch:: \`searchClient\` cannot be used with \`appId\` and \`apiKey\`."`
+      `"react-instantsearch: \`searchClient\` cannot be used with \`appId\` and \`apiKey\`."`
     );
   });
 
@@ -90,7 +90,7 @@ describe('createInstantSearch', () => {
       );
 
     expect(() => trigger()).toThrowErrorMatchingInlineSnapshot(
-      `"react-instantsearch:: \`searchClient\` cannot be used with \`appId\` and \`apiKey\`."`
+      `"react-instantsearch: \`searchClient\` cannot be used with \`appId\` and \`apiKey\`."`
     );
   });
 
@@ -175,25 +175,25 @@ describe('createInstantSearch', () => {
 
     expect(wrapper.props().root).toEqual(root);
     expect(propsWithoutClient).toMatchInlineSnapshot(`
-            Object {
-              "children": undefined,
-              "createURL": undefined,
-              "indexName": "name",
-              "onSearchParameters": undefined,
-              "onSearchStateChange": undefined,
-              "refresh": false,
-              "resultsState": undefined,
-              "root": Object {
-                "Root": "span",
-                "props": Object {
-                  "style": Object {
-                    "flex": 1,
-                  },
-                },
-              },
-              "searchState": undefined,
-              "stalledSearchDelay": 200,
-            }
-        `);
+                  Object {
+                    "children": undefined,
+                    "createURL": undefined,
+                    "indexName": "name",
+                    "onSearchParameters": undefined,
+                    "onSearchStateChange": undefined,
+                    "refresh": false,
+                    "resultsState": undefined,
+                    "root": Object {
+                      "Root": "span",
+                      "props": Object {
+                        "style": Object {
+                          "flex": 1,
+                        },
+                      },
+                    },
+                    "searchState": undefined,
+                    "stalledSearchDelay": 200,
+                  }
+            `);
   });
 });
