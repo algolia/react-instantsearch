@@ -81,7 +81,7 @@ describe('InfiniteHits', () => {
     expect(mockedRefine.mock.calls).toHaveLength(1);
   });
 
-  it('calls previousRefine when the load previous button is clicked', () => {
+  it('calls refinePrevious when the load previous button is clicked', () => {
     const mockedRefinePrevious = jest.fn();
     const hits = [{ objectID: 0 }, { objectID: 1 }, { objectID: 2 }];
     const wrapped = mount(
