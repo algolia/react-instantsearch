@@ -55,7 +55,8 @@ describe('Index', () => {
   it('calls update if indexName prop changes', () => {
     const context = createContext();
 
-    const wrapper = shallow(
+    // componentDidUpdate wasn't called on `shallow`
+    const wrapper = mount(
       <IndexComponentWithoutContext {...requiredProps} contextValue={context}>
         <div />
       </IndexComponentWithoutContext>
