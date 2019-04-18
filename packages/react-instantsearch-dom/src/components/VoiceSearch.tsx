@@ -1,18 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { translatable, Translate } from 'react-instantsearch-core';
 import { createClassNames } from '../core/utils';
+import voiceSearchHelper, {
+  VoiceSearchHelper,
+  VoiceListeningState,
+} from '../lib/voiceSearchHelper';
 const cx = createClassNames('VoiceSearch');
-
-type VoiceListeningState = {
-  status: string;
-  transcript?: string;
-  isSpeechFinal?: boolean;
-  errorCode?: string;
-};
-
-type ToggleListening = (toggleListeningParams: {
-  searchAsYouSpeak: boolean;
-}) => void;
 
 type InnerComponentProps = {
   status: string;
@@ -24,12 +17,9 @@ type InnerComponentProps = {
 };
 
 type VoiceSearchProps = {
-  isBrowserSupported: boolean;
-  isListening: boolean;
-  toggleListening: ToggleListening;
-  voiceListeningState: VoiceListeningState;
   searchAsYouSpeak?: boolean;
 
+  refine: (query: string) => void;
   translate: Translate;
   buttonComponent?: React.FC<InnerComponentProps>;
   statusComponent?: React.FC<InnerComponentProps>;
@@ -86,54 +76,67 @@ const DefaultButton: React.FC<InnerComponentProps> = ({
   );
 };
 
-const DefaultStatus: React.FC<InnerComponentProps> = ({ status }) => (
-  <p>{status}</p>
+const DefaultStatus: React.FC<InnerComponentProps> = ({ transcript }) => (
+  <p>{transcript}</p>
 );
 
-const VoiceSearch = ({
-  translate,
-  isBrowserSupported,
-  isListening,
-  toggleListening,
-  voiceListeningState,
-  searchAsYouSpeak = false,
+class VoiceSearch extends Component<VoiceSearchProps, VoiceListeningState> {
+  private voiceSearch: VoiceSearchHelper;
 
-  buttonComponent: Button = DefaultButton,
-  statusComponent: Status = DefaultStatus,
-}: VoiceSearchProps) => {
-  const onClick = (event: React.MouseEvent<HTMLElement>) => {
-    event.currentTarget.blur();
-    toggleListening({ searchAsYouSpeak });
-  };
+  constructor(props: VoiceSearchProps) {
+    super(props);
+    const { searchAsYouSpeak = false, refine } = props;
+    this.voiceSearch = voiceSearchHelper({
+      searchAsYouSpeak,
+      onQueryChange: query => refine(query),
+      onStateChange: () => {
+        this.setState(this.voiceSearch.getState());
+      },
+    });
+    this.state = this.voiceSearch.getState();
+  }
 
-  const { status, transcript, isSpeechFinal, errorCode } = voiceListeningState;
+  public render() {
+    const { status, transcript, isSpeechFinal, errorCode } = this.state;
+    const { isListening, isBrowserSupported } = this.voiceSearch;
+    const {
+      translate,
+      buttonComponent: Button = DefaultButton,
+      statusComponent: Status = DefaultStatus,
+    } = this.props;
+    const innerProps: InnerComponentProps = {
+      status,
+      errorCode,
+      isListening: isListening(),
+      transcript,
+      isSpeechFinal,
+      isBrowserSupported: isBrowserSupported(),
+    };
 
-  const innerProps = {
-    status,
-    errorCode,
-    isListening,
-    transcript,
-    isSpeechFinal,
-    isBrowserSupported,
-  };
-
-  return (
-    <div className={cx('')}>
-      <button
-        className={cx('button')}
-        type="button"
-        title={translate('buttonTitle')}
-        onClick={onClick}
-        disabled={!isBrowserSupported}
-      >
-        <Button {...innerProps} />
-      </button>
-      <div className={cx('status')}>
-        <Status {...innerProps} />
+    return (
+      <div className={cx('')}>
+        <button
+          className={cx('button')}
+          type="button"
+          title={translate('buttonTitle')}
+          onClick={this.onClick}
+          disabled={!isBrowserSupported}
+        >
+          <Button {...innerProps} />
+        </button>
+        <div className={cx('status')}>
+          <Status {...innerProps} />
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+
+  private onClick = (event: React.MouseEvent<HTMLElement>) => {
+    event.currentTarget.blur();
+    const { toggleListening } = this.voiceSearch;
+    toggleListening();
+  };
+}
 
 export default translatable({
   buttonTitle: 'Search by voice',

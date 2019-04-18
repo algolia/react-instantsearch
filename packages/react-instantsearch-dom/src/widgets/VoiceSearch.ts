@@ -1,4 +1,4 @@
-import { connectVoiceSearch } from 'react-instantsearch-core';
+import { connectSearchBox } from 'react-instantsearch-core';
 import VoiceSearch from '../components/VoiceSearch';
 
-export default connectVoiceSearch(VoiceSearch);
+export default connectSearchBox(VoiceSearch);

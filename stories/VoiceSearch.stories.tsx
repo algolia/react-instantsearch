@@ -168,7 +168,7 @@ stories
       >
         <div className="custom-ui">
           <VoiceSearch statusComponent={Status} />
-          <SearchBox reset={() => null} />
+          <SearchBox reset={null} />
         </div>
       </WrapWithHits>
     );

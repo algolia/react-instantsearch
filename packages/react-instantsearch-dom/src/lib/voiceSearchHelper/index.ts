@@ -20,11 +20,18 @@ export type VoiceListeningState = {
 
 export type ToggleListening = () => void;
 
+export type VoiceSearchHelper = {
+  getState: () => VoiceListeningState;
+  isBrowserSupported: () => boolean;
+  isListening: () => boolean;
+  toggleListening: () => void;
+};
+
 export default function voiceSearchHelper({
   searchAsYouSpeak,
   onQueryChange,
   onStateChange,
-}: VoiceSearchHelperParams) {
+}: VoiceSearchHelperParams): VoiceSearchHelper {
   const SpeechRecognitionAPI: new () => SpeechRecognition =
     (window as any).webkitSpeechRecognition ||
     (window as any).SpeechRecognition;

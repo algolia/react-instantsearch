@@ -50,7 +50,6 @@ export { default as connectStats } from './connectors/connectStats';
 export {
   default as connectToggleRefinement,
 } from './connectors/connectToggleRefinement';
-export { default as connectVoiceSearch } from './connectors/connectVoiceSearch';
 export { default as connectHitInsights } from './connectors/connectHitInsights';
 
 // Types
