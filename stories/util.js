@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { linkTo } from '@storybook/addon-links';
 import {
@@ -62,134 +62,117 @@ Wrap.defaultProps = {
   indexName: 'instant_search',
 };
 
-export class WrapWithHits extends PureComponent {
-  static propTypes = {
-    appId: PropTypes.string,
-    apiKey: PropTypes.string,
-    indexName: PropTypes.string,
-    children: PropTypes.node,
-    searchBox: PropTypes.bool,
-    linkedStoryGroup: PropTypes.string,
-    hasPlayground: PropTypes.bool,
-    pagination: PropTypes.bool,
-    searchParameters: PropTypes.object,
-    hitsElement: PropTypes.element,
-    initialSearchState: PropTypes.object,
-    onSearchStateChange: PropTypes.func,
-  };
+export const WrapWithHits = ({
+  searchParameters: askedSearchParameters = {},
+  children,
+  searchBox = true,
+  hasPlayground = false,
+  linkedStoryGroup,
+  pagination = true,
+  appId,
+  apiKey,
+  indexName,
+  hitsElement,
+  initialSearchState,
+  onSearchStateChange,
+}) => {
+  const sourceCodeUrl = `https://github.com/algolia/react-instantsearch/tree/master/stories/${linkedStoryGroup}.stories.js`;
+  const playgroundLink = hasPlayground ? (
+    <button
+      onClick={linkTo(linkedStoryGroup, 'playground')}
+      className="playground-url"
+    >
+      <span>Play with props</span>
+    </button>
+  ) : null;
 
-  static defaultProps = {
-    appId: 'latency',
-    apiKey: '6be0576ff61c053d5f9a3225e2a90f76',
-    indexName: 'instant_search',
-    pagination: true,
-    searchBox: true,
-    hasPlayground: false,
-    searchParameters: {},
-    initialSearchState: {},
-  };
-
-  constructor(props) {
-    super();
-
-    this.state = {
-      searchState: props.initialSearchState,
-    };
-  }
-
-  onSearchStateChange = searchState => {
-    this.setState({ searchState });
-    if (this.props.onSearchStateChange) {
-      this.props.onSearchStateChange(searchState);
-    }
-  };
-
-  render() {
-    const {
-      appId,
-      apiKey,
-      indexName,
-      hasPlayground,
-      linkedStoryGroup,
-      hitsElement,
-      searchParameters: askedSearchParameters,
-      children,
-      searchBox,
-      pagination,
-    } = this.props;
-    const sourceCodeUrl = `https://github.com/algolia/react-instantsearch/tree/master/stories/${linkedStoryGroup}.stories.js`;
-    const playgroundLink = hasPlayground ? (
-      <button
-        onClick={linkTo(linkedStoryGroup, 'playground')}
-        className="playground-url"
+  const footer = linkedStoryGroup ? (
+    <div className="footer-container">
+      {playgroundLink}
+      <a
+        href={sourceCodeUrl}
+        className="source-code-url"
+        target="_blank"
+        rel="noopener noreferrer"
       >
-        <span>Play with props</span>
-      </button>
-    ) : null;
+        <div>View source code</div>
+      </a>
+    </div>
+  ) : null;
 
-    const footer = linkedStoryGroup ? (
-      <div className="footer-container">
-        {playgroundLink}
-        <a
-          href={sourceCodeUrl}
-          className="source-code-url"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <div>View source code</div>
-        </a>
-      </div>
-    ) : null;
+  const hits = hitsElement || <CustomHits />;
 
-    const hits = hitsElement || <CustomHits />;
+  const searchParameters = {
+    hitsPerPage: 3,
+    ...askedSearchParameters,
+  };
 
-    const searchParameters = {
-      hitsPerPage: 3,
-      ...askedSearchParameters,
-    };
+  const [searchState, setSearchState] = useState(initialSearchState);
 
-    return (
-      <InstantSearch
-        appId={appId}
-        apiKey={apiKey}
-        indexName={indexName}
-        searchState={this.state.searchState}
-        onSearchStateChange={this.onSearchStateChange}
-        createURL={() => ''}
-      >
-        <Configure {...searchParameters} />
+  const setNextSearchState = nextSearchState => {
+    setSearchState(nextSearchState);
+    onSearchStateChange(nextSearchState);
+  };
+
+  return (
+    <InstantSearch
+      appId={appId}
+      apiKey={apiKey}
+      indexName={indexName}
+      searchState={searchState}
+      onSearchStateChange={setNextSearchState}
+      createURL={() => ''}
+    >
+      <Configure {...searchParameters} />
+      <div>
+        <div className="container widget-container">{children}</div>
         <div>
-          <div className="container widget-container">{children}</div>
-          <div>
-            <div
-              style={
-                linkedStoryGroup ? {} : { borderRadius: '0px 0px 5px 5px' }
-              }
-              className="container hits-container"
-            >
-              <div className="hit-actions">
-                {searchBox ? (
-                  <SearchBox
-                    translations={{
-                      placeholder: 'Search into our products: phones, tv...',
-                    }}
-                  />
-                ) : null}
-                <ClearRefinements
+          <div
+            style={linkedStoryGroup ? {} : { borderRadius: '0px 0px 5px 5px' }}
+            className="container hits-container"
+          >
+            <div className="hit-actions">
+              {searchBox ? (
+                <SearchBox
                   translations={{
-                    reset: 'Clear all filters',
+                    placeholder: 'Search into our products: phones, tv...',
                   }}
                 />
-              </div>
-              {hits}
-              <div className="hit-pagination">
-                {pagination ? <Pagination showLast={true} /> : null}
-              </div>
+              ) : null}
+              <ClearRefinements translations={{ reset: 'Clear all filters' }} />
             </div>
-            {footer}
+            {hits}
+            <div className="hit-pagination">
+              {pagination ? <Pagination showLast={true} /> : null}
+            </div>
           </div>
+          {footer}
         </div>
-      </InstantSearch>
-    );
-  }
-}
+      </div>
+    </InstantSearch>
+  );
+};
+
+WrapWithHits.propTypes = {
+  appId: PropTypes.string,
+  apiKey: PropTypes.string,
+  indexName: PropTypes.string,
+  children: PropTypes.node,
+  searchBox: PropTypes.bool,
+  linkedStoryGroup: PropTypes.string,
+  hasPlayground: PropTypes.bool,
+  pagination: PropTypes.bool,
+  searchParameters: PropTypes.object,
+  hitsElement: PropTypes.element,
+  initialSearchState: PropTypes.object,
+  onSearchStateChange: PropTypes.func,
+};
+
+// defaultProps added so that they're displayed in the JSX addon
+WrapWithHits.defaultProps = {
+  appId: 'latency',
+  apiKey: '6be0576ff61c053d5f9a3225e2a90f76',
+  indexName: 'instant_search',
+  initialSearchState: {},
+  onSearchStateChange: () => {},
+};
