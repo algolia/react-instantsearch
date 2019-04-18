@@ -1,13 +1,4 @@
 import { isEmpty, isPlainObject } from 'lodash';
-import { version as ReactVersion } from 'react';
-import version from './version';
-
-export function addAlgoliaAgents(searchClient) {
-  if (typeof searchClient.addAlgoliaAgent === 'function') {
-    searchClient.addAlgoliaAgent(`react (${ReactVersion})`);
-    searchClient.addAlgoliaAgent(`react-instantsearch (${version})`);
-  }
-}
 
 // From https://github.com/reactjs/react-redux/blob/master/src/utils/shallowEqual.js
 export const shallowEqual = (objA, objB) => {
