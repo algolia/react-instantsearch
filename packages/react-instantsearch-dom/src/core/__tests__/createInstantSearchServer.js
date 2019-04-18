@@ -1,14 +1,10 @@
 /* eslint-disable react/prop-types */
 
 import React from 'react';
-import Enzyme, { shallow } from 'enzyme';
+import Enzyme, { shallow, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { SearchParameters, SearchResults } from 'algoliasearch-helper';
-import {
-  createIndex,
-  createConnector,
-  version,
-} from 'react-instantsearch-core';
+import { Index, createConnector, version } from 'react-instantsearch-core';
 import createInstantSearchServer from '../createInstantSearchServer';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -69,9 +65,9 @@ describe('createInstantSearchServer', () => {
         searchClient,
       };
 
-      shallow(<InstantSearch {...props} />);
+      mount(<InstantSearch {...props} />);
 
-      expect(searchClient.addAlgoliaAgent).toHaveBeenCalledTimes(2);
+      expect(searchClient.addAlgoliaAgent).toHaveBeenCalledTimes(4);
       expect(searchClient.addAlgoliaAgent).toHaveBeenCalledWith(
         `react (${React.version})`
       );
@@ -244,8 +240,6 @@ describe('createInstantSearchServer', () => {
   });
 
   describe('multi index', () => {
-    const Index = createIndex({ Root: 'div' });
-
     it('results should be instance of SearchResults', () => {
       const { InstantSearch } = createInstantSearchServer();
 

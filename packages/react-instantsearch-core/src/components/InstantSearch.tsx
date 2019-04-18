@@ -109,6 +109,7 @@ type State = {
 class InstantSearch extends Component<Props, State> {
   static defaultProps = {
     stalledSearchDelay: 200,
+    refresh: false,
   };
 
   static propTypes = {
@@ -124,7 +125,7 @@ class InstantSearch extends Component<Props, State> {
 
     createURL: PropTypes.func,
 
-    refresh: PropTypes.bool.isRequired,
+    refresh: PropTypes.bool,
 
     searchState: PropTypes.object,
     onSearchStateChange: PropTypes.func,
