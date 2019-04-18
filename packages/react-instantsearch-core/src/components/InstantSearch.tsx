@@ -1,4 +1,4 @@
-import React, { Component, Children, ReactType } from 'react';
+import React, { Component, Children } from 'react';
 import PropTypes from 'prop-types';
 import createInstantSearchManager from '../core/createInstantSearchManager';
 import { InstantSearchProvider, InstantSearchContext } from '../core/context';
