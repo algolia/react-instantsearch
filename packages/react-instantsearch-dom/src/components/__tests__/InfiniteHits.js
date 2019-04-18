@@ -112,7 +112,7 @@ describe('InfiniteHits', () => {
         hasPrevious={false}
       />
     );
-    expect(wrapped.find('button').props().disabled).toBe(true);
+    expect(wrapped.find('.ais-InfiniteHits-loadMore').props().disabled).toBe(true);
   });
 
   it('"Show previous" button is disabled when it is the first page', () => {
