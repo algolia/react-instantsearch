@@ -78,7 +78,6 @@ export class WrapWithHits extends PureComponent {
     onSearchStateChange: PropTypes.func,
   };
 
-  // defaultProps added so that they're displayed in the JSX addon
   static defaultProps = {
     appId: 'latency',
     apiKey: '6be0576ff61c053d5f9a3225e2a90f76',
