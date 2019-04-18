@@ -97,10 +97,10 @@ export class WrapWithHits extends PureComponent {
     };
   }
 
-  onSearchStateChange = ({ configure, ...searchState }) => {
+  onSearchStateChange = searchState => {
     this.setState({ searchState });
     if (this.props.onSearchStateChange) {
-      this.props.onSearchStateChange({ configure, ...searchState });
+      this.props.onSearchStateChange(searchState);
     }
   };
 
