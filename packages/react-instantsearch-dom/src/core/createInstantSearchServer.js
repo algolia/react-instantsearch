@@ -3,11 +3,7 @@ import React, { Component } from 'react';
 import { renderToString } from 'react-dom/server';
 import PropTypes from 'prop-types';
 import algoliasearchHelper from 'algoliasearch-helper';
-import {
-  createInstantSearch,
-  version,
-  HIGHLIGHT_TAGS,
-} from 'react-instantsearch-core';
+import { InstantSearch, HIGHLIGHT_TAGS } from 'react-instantsearch-core';
 
 const hasMultipleIndices = context => context && context.multiIndexContext;
 
@@ -95,13 +91,6 @@ const multiIndexSearch = (
 };
 
 const createInstantSearchServer = () => {
-  const InstantSearch = createInstantSearch({
-    Root: 'div',
-    props: {
-      className: 'ais-InstantSearch__root',
-    },
-  });
-
   let client = null;
   let indexName = '';
   let searchParameters = [];
@@ -142,12 +131,6 @@ const createInstantSearchServer = () => {
       super(...args);
 
       client = this.props.searchClient;
-
-      if (typeof client.addAlgoliaAgent === 'function') {
-        client.addAlgoliaAgent(`react (${React.version})`);
-        client.addAlgoliaAgent(`react-instantsearch (${version})`);
-      }
-
       indexName = this.props.indexName;
     }
 
