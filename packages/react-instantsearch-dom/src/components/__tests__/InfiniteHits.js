@@ -100,6 +100,26 @@ describe('InfiniteHits', () => {
     expect(mockedRefinePrevious.mock.calls).toHaveLength(1);
   });
 
+  it('render "Show previous" button depending of `showPrevious` prop', () => {
+    const hits = [{ objectID: 0 }, { objectID: 1 }, { objectID: 2 }];
+    const wrapped = mount(
+      <InfiniteHits
+        showPrevious={false}
+        refinePrevious={() => undefined}
+        refineNext={() => undefined}
+        hitComponent={Hit}
+        hits={hits}
+        hasMore={false}
+        hasPrevious={false}
+      />
+    );
+    expect(wrapped.find('.ais-InfiniteHits-loadPrevious').length).toEqual(0);
+
+    wrapped.setProps({ showPrevious: true });
+
+    expect(wrapped.find('.ais-InfiniteHits-loadPrevious').length).toEqual(1);
+  });
+
   it('"Show more" button is disabled when it is the last page', () => {
     const hits = [{ objectID: 0 }, { objectID: 1 }, { objectID: 2 }];
     const wrapped = mount(
