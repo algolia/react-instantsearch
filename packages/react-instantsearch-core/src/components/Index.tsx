@@ -70,6 +70,10 @@ class Index extends Component<InnerProps, State> {
     };
   }
 
+  state = {
+    indexContext: getIndexContext(this.props),
+  };
+
   unregisterWidget?: () => void;
 
   constructor(props: InnerProps) {
