@@ -33,7 +33,7 @@ exports[`Panel expect to render when setCanRefine is called 1`] = `
       <button
         onClick={[Function]}
       >
-        set to false
+        call setCanRefine
       </button>
     </div>
   </div>
@@ -55,7 +55,7 @@ exports[`Panel expect to render when setCanRefine is called 2`] = `
       <button
         onClick={[Function]}
       >
-        set to false
+        call setCanRefine
       </button>
     </div>
   </div>
