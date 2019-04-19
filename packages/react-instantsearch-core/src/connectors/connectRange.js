@@ -65,36 +65,31 @@ function getCurrentRange(boundaries, stats, precision) {
 }
 
 function getCurrentRefinement(props, searchState, currentRange, context) {
-  const refinement = getCurrentRefinementValue(
+  let refinement = getCurrentRefinementValue(
     props,
     searchState,
     context,
     `${namespace}.${getId(props)}`,
-    {},
-    currentRefinement => {
-      const { min, max } = currentRefinement;
-      const isFloatPrecision = Boolean(props.precision);
-
-      let nextMin = min;
-      if (typeof nextMin === 'string') {
-        nextMin = isFloatPrecision
-          ? parseFloat(nextMin)
-          : parseInt(nextMin, 10);
-      }
-
-      let nextMax = max;
-      if (typeof nextMax === 'string') {
-        nextMax = isFloatPrecision
-          ? parseFloat(nextMax)
-          : parseInt(nextMax, 10);
-      }
-
-      return {
-        min: nextMin,
-        max: nextMax,
-      };
-    }
+    {}
   );
+
+  const { min, max } = refinement;
+  const isFloatPrecision = Boolean(props.precision);
+
+  let nextMin = min;
+  if (typeof nextMin === 'string') {
+    nextMin = isFloatPrecision ? parseFloat(nextMin) : parseInt(nextMin, 10);
+  }
+
+  let nextMax = max;
+  if (typeof nextMax === 'string') {
+    nextMax = isFloatPrecision ? parseFloat(nextMax) : parseInt(nextMax, 10);
+  }
+
+  refinement = {
+    min: nextMin,
+    max: nextMax,
+  };
 
   const hasMinBound = props.min !== undefined;
   const hasMaxBound = props.max !== undefined;
