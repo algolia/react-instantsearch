@@ -478,7 +478,7 @@ describe('connectInfiniteHits', () => {
       expect(state2).toEqual({ page: 3 });
     });
 
-    it('set page to the matching index', () => {
+    it('set page to the corresponding index', () => {
       const context = createSingleIndexContext();
       const refine = connect.refine.bind(context);
 
