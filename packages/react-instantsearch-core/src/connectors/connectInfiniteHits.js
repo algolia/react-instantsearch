@@ -47,7 +47,7 @@ export default createConnector({
     const results = getResults(searchResults, this.context);
 
     this._allResults = this._allResults || [];
-    this._prevState = this._prevState || '';
+    this._prevState = this._prevState || {};
 
     if (!results) {
       return {
