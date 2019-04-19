@@ -436,6 +436,8 @@ describe('connectInfiniteHits', () => {
 
       props.refineNext.apply(context);
 
+      // `results.page` is indexed from 0, but `onInternalStateUpdate` receives `page` indexed from 1
+      // So next page index = `results.page` + 1 (to index from 1) + 1 (for next page) = 2 + 1 + 1 = 4
       expect(
         context.context.ais.onInternalStateUpdate.mock.calls[0][0]
       ).toEqual({ page: 4 });
@@ -462,6 +464,8 @@ describe('connectInfiniteHits', () => {
 
       props.refinePrevious.apply(context);
 
+      // `results.page` is indexed from 0, but `onInternalStateUpdate` receives `page` indexed from 1
+      // So previous page index = `results.page` + 1 (to index from 1) - 1 (for previous page) = 2 + 1 - 1 = 2
       expect(
         context.context.ais.onInternalStateUpdate.mock.calls[0][0]
       ).toEqual({ page: 2 });
