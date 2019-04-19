@@ -152,36 +152,28 @@ class InstantSearch extends Component<Props, State> {
     };
   }
 
-  isUnmounting: boolean;
-  aisManager: InstantSearchManager;
+  isUnmounting: boolean = false;
+  aisManager: InstantSearchManager = createInstantSearchManager({
+    indexName: this.props.indexName,
+    searchClient: this.props.searchClient,
+    initialState: this.props.searchState || {},
+    resultsState: this.props.resultsState,
+    stalledSearchDelay: this.props.stalledSearchDelay,
+  });
 
-  constructor(props: Props) {
-    super(props);
-    const initialState = props.searchState || {};
-    this.isUnmounting = false;
-
-    this.aisManager = createInstantSearchManager({
-      indexName: props.indexName,
-      searchClient: props.searchClient,
-      initialState,
-      resultsState: props.resultsState,
-      stalledSearchDelay: props.stalledSearchDelay,
-    });
-
-    this.state = {
-      isControlled: isControlled(this.props),
-      contextValue: {
-        onInternalStateUpdate: this.onWidgetsInternalStateUpdate.bind(this),
-        createHrefForState: this.createHrefForState.bind(this),
-        onSearchForFacetValues: this.onSearchForFacetValues.bind(this),
-        onSearchStateChange: this.onSearchStateChange.bind(this),
-        onSearchParameters: this.onSearchParameters.bind(this),
-        store: this.aisManager.store,
-        widgetsManager: this.aisManager.widgetsManager,
-        mainTargetedIndex: this.props.indexName,
-      },
-    };
-  }
+  state = {
+    isControlled: isControlled(this.props),
+    contextValue: {
+      onInternalStateUpdate: this.onWidgetsInternalStateUpdate.bind(this),
+      createHrefForState: this.createHrefForState.bind(this),
+      onSearchForFacetValues: this.onSearchForFacetValues.bind(this),
+      onSearchStateChange: this.onSearchStateChange.bind(this),
+      onSearchParameters: this.onSearchParameters.bind(this),
+      store: this.aisManager.store,
+      widgetsManager: this.aisManager.widgetsManager,
+      mainTargetedIndex: this.props.indexName,
+    },
+  };
 
   componentDidUpdate() {
     if (this.props.refresh) {
