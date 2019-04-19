@@ -14,13 +14,13 @@ const createFakeInstantSearchManager = (rest = {}) => ({
   ...rest,
 });
 
-// jest.mock('../../core/createInstantSearchManager', () =>
-//   jest.fn(() => ({
-//     context: {},
-//     updateIndex: () => {},
-//     updateClient: () => {},
-//   }))
-// );
+jest.mock('../../core/createInstantSearchManager', () =>
+  jest.fn(() => ({
+    context: {},
+    updateIndex: () => {},
+    updateClient: () => {},
+  }))
+);
 
 const DEFAULT_PROPS = {
   appId: 'foo',
@@ -34,9 +34,9 @@ const DEFAULT_PROPS = {
 };
 
 describe('InstantSearch', () => {
-  // afterEach(() => {
-  //   createInstantSearchManager.mockClear();
-  // });
+  afterEach(() => {
+    createInstantSearchManager.mockClear();
+  });
 
   it('validates its props', () => {
     expect(() => {
@@ -259,11 +259,11 @@ describe('InstantSearch', () => {
   });
 
   it('onSearchStateChange should not be called and search should be skipped if the widget is unmounted', () => {
-    // const ism = createFakeInstantSearchManager({
-    //   skipSearch: jest.fn(),
-    // });
+    const ism = createFakeInstantSearchManager({
+      skipSearch: jest.fn(),
+    });
     let childContext;
-    // createInstantSearchManager.mockImplementation(() => ism);
+    createInstantSearchManager.mockImplementation(() => ism);
     const onSearchStateChangeMock = jest.fn();
     const wrapper = mount(
       <InstantSearch
@@ -293,7 +293,7 @@ describe('InstantSearch', () => {
 
     createInstantSearchManager.mockImplementation(() => ism);
 
-    const wrapper = shallow(
+    const wrapper = mount(
       <InstantSearch {...DEFAULT_PROPS}>
         <div />
       </InstantSearch>
@@ -331,19 +331,27 @@ describe('InstantSearch', () => {
       </InstantSearch>
     );
 
-    expect(wrapper.html()).toMatchInlineSnapshot(`"foobar"`);
+    expect(ism.updateIndex).toHaveBeenCalledWith(DEFAULT_PROPS.indexName);
 
+    expect(wrapper.text()).toMatchInlineSnapshot(`"foobar"`);
+
+    // setting the same prop
     wrapper.setProps({
       indexName: 'foobar',
     });
 
-    expect(wrapper.html()).toMatchInlineSnapshot(`"foobar"`);
+    expect(ism.updateIndex).toHaveBeenCalledWith('foobar');
 
+    expect(wrapper.text()).toMatchInlineSnapshot(`"foobar"`);
+
+    // changing the prop
     wrapper.setProps({
       indexName: 'newIndexName',
     });
 
-    expect(wrapper.html()).toMatchInlineSnapshot(`"newIndexName"`);
+    expect(ism.updateIndex).toHaveBeenCalledWith('newIndexName');
+
+    expect(wrapper.text()).toMatchInlineSnapshot(`"newIndexName"`);
   });
 
   it('calls onSearchParameters with the right values if function provided', () => {

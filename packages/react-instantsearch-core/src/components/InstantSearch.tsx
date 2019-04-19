@@ -8,18 +8,6 @@ function isControlled(props: Props) {
   return Boolean(props.searchState);
 }
 
-function validateNextProps(props, nextProps) {
-  if (!props.searchState && nextProps.searchState) {
-    throw new Error(
-      "You can't switch <InstantSearch> from being uncontrolled to controlled"
-    );
-  } else if (props.searchState && !nextProps.searchState) {
-    throw new Error(
-      "You can't switch <InstantSearch> from being controlled to uncontrolled"
-    );
-  }
-}
-
 // @TODO: move this to the helper?
 type SearchParameters = any; // algoliaHelper.SearchParameters
 type SearchResults = any; // algoliaHelper.SearchResults
@@ -137,24 +125,31 @@ class InstantSearch extends Component<Props, State> {
     stalledSearchDelay: PropTypes.number,
   };
 
-  static getDerivedStateFromProps(nextProps: Props, prevState: State) {
-    const nextState = {
-      isControlled: isControlled(nextProps),
-    };
+  static getDerivedStateFromProps(
+    nextProps: Props,
+    prevState: State
+  ): Partial<State> {
+    const nextIsControlled = isControlled(nextProps);
 
-    if (!prevState.isControlled && nextState.isControlled) {
+    if (!prevState.isControlled && nextIsControlled) {
       throw new Error(
         "You can't switch <InstantSearch> from being uncontrolled to controlled"
       );
     }
 
-    if (prevState.isControlled && !nextState.isControlled) {
+    if (prevState.isControlled && !nextIsControlled) {
       throw new Error(
         "You can't switch <InstantSearch> from being controlled to uncontrolled"
       );
     }
 
-    return nextState;
+    return {
+      isControlled: nextIsControlled,
+      contextValue: {
+        ...prevState.contextValue,
+        mainTargetedIndex: nextProps.indexName,
+      },
+    };
   }
 
   isUnmounting: boolean;
