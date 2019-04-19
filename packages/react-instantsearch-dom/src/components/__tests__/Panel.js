@@ -91,7 +91,9 @@ describe('Panel', () => {
       <Panel>
         <PanelConsumer>
           {setCanRefine => (
-            <button onClick={() => setCanRefine(false)}>call setCanRefine</button>
+            <button onClick={() => setCanRefine(false)}>
+              call setCanRefine
+            </button>
           )}
         </PanelConsumer>
       </Panel>
