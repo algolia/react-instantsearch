@@ -9,18 +9,13 @@ class PanelCallbackHandler extends Component {
     setCanRefine: PropTypes.func.isRequired,
   };
 
-  componentWillMount() {
-    if (this.props.setCanRefine) {
-      this.props.setCanRefine(this.props.canRefine);
-    }
+  componentDidMount() {
+    this.props.setCanRefine(this.props.canRefine);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (
-      this.props.setCanRefine &&
-      this.props.canRefine !== nextProps.canRefine
-    ) {
-      this.props.setCanRefine(nextProps.canRefine);
+  componentDidUpdate(prevProps) {
+    if (prevProps.canRefine !== this.props.canRefine) {
+      this.props.setCanRefine(this.props.canRefine);
     }
   }
 
@@ -29,7 +24,7 @@ class PanelCallbackHandler extends Component {
   }
 }
 
-const Wrapper = ({ canRefine, children }) => (
+const PanelWrapper = ({ canRefine, children }) => (
   <PanelConsumer>
     {setCanRefine => (
       <PanelCallbackHandler setCanRefine={setCanRefine} canRefine={canRefine}>
@@ -39,9 +34,9 @@ const Wrapper = ({ canRefine, children }) => (
   </PanelConsumer>
 );
 
-Wrapper.propTypes = {
+PanelWrapper.propTypes = {
   canRefine: PropTypes.bool.isRequired,
   children: PropTypes.node.isRequired,
 };
 
-export default Wrapper;
+export default PanelWrapper;

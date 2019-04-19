@@ -8,22 +8,35 @@ Enzyme.configure({ adapter: new Adapter() });
 
 describe('PanelCallbackHandler', () => {
   it('expect to render', () => {
-    const wrapper = shallow(
-      <PanelCallbackHandler canRefine={true}>
+    const wrapper = mount(
+      <PanelCallbackHandler canRefine>
         <div>Hello content</div>
       </PanelCallbackHandler>
     );
 
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper).toMatchInlineSnapshot(`
+      <PanelWrapper
+        canRefine={true}
+      >
+        <PanelCallbackHandler
+          canRefine={true}
+          setCanRefine={[Function]}
+        >
+          <div>
+            Hello content
+          </div>
+        </PanelCallbackHandler>
+      </PanelWrapper>
+    `);
   });
 
-  describe('willMount', () => {
+  describe('didMount', () => {
     it('expect to call setCanRefine when the context is given', () => {
       const setCanRefine = jest.fn();
 
       mount(
         <PanelProvider value={setCanRefine}>
-          <PanelCallbackHandler canRefine={true}>
+          <PanelCallbackHandler canRefine>
             <div>Hello content</div>
           </PanelCallbackHandler>
         </PanelProvider>
@@ -36,7 +49,7 @@ describe('PanelCallbackHandler', () => {
     it('expect to not throw when the context is not given', () => {
       expect(() =>
         shallow(
-          <PanelCallbackHandler canRefine={true}>
+          <PanelCallbackHandler canRefine>
             <div>Hello content</div>
           </PanelCallbackHandler>
         )
@@ -44,13 +57,13 @@ describe('PanelCallbackHandler', () => {
     });
   });
 
-  describe('willReceiveProps', () => {
+  describe('didUpdate', () => {
     it('expect to call setCanRefine when the context is given', () => {
       const setCanRefine = jest.fn();
 
       const wrapper = mount(
         <PanelProvider value={setCanRefine}>
-          <PanelCallbackHandler canRefine={true}>
+          <PanelCallbackHandler canRefine>
             <div>Hello content</div>
           </PanelCallbackHandler>
         </PanelProvider>
@@ -73,7 +86,7 @@ describe('PanelCallbackHandler', () => {
 
       const wrapper = mount(
         <PanelProvider value={setCanRefine}>
-          <PanelCallbackHandler canRefine={true}>
+          <PanelCallbackHandler canRefine>
             <div>Hello content</div>
           </PanelCallbackHandler>
         </PanelProvider>
@@ -81,7 +94,7 @@ describe('PanelCallbackHandler', () => {
 
       wrapper.setProps({
         children: (
-          <PanelCallbackHandler canRefine={true}>
+          <PanelCallbackHandler canRefine>
             <div>Hello content</div>
           </PanelCallbackHandler>
         ),
@@ -93,7 +106,7 @@ describe('PanelCallbackHandler', () => {
     it('expect to not throw when the context is not given', () => {
       expect(() => {
         const wrapper = shallow(
-          <PanelCallbackHandler canRefine={true}>
+          <PanelCallbackHandler canRefine>
             <div>Hello content</div>
           </PanelCallbackHandler>
         );

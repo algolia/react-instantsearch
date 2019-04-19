@@ -103,9 +103,7 @@ describe('Panel', () => {
     // Simulate context call
     wrapper.find('button').simulate('click');
 
-    // wrapper.update();
-
     expect(wrapper.state('canRefine')).toBe(false);
     expect(wrapper).toMatchSnapshot();
   });
-}); // ok
+});
