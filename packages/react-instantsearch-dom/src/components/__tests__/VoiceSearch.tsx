@@ -1,71 +1,57 @@
 import React from 'react';
-import Enzyme, { mount, shallow } from 'enzyme';
+import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import VoiceSearch from '../VoiceSearch';
 
-Enzyme.configure({ adapter: new Adapter() });
+const mockGetState = jest.fn();
+const mockIsBrowserSupported = jest.fn();
+const mockIsListening = jest.fn();
+const mockToggleListening = jest.fn();
 
-const defaultProps = {
-  isBrowserSupported: true,
-  isListening: false,
-  toggleListening: () => {},
-  voiceListeningState: {
-    status: 'initial',
-    transcript: undefined,
-    isSpeechFinal: undefined,
-    errorCode: undefined,
-  },
-};
+jest.mock('../../lib/voiceSearchHelper', () => {
+  return () => {
+    return {
+      getState: mockGetState.mockImplementation(() => ({})),
+      isBrowserSupported: mockIsBrowserSupported,
+      isListening: mockIsListening,
+      toggleListening: mockToggleListening,
+    };
+  };
+});
+
+Enzyme.configure({ adapter: new Adapter() });
 
 describe('VoiceSearch', () => {
   describe('button', () => {
     it('calls toggleListening when button is clicked', () => {
-      const props = {
-        ...defaultProps,
-        toggleListening: jest.fn(),
-      };
-      const wrapper = mount(<VoiceSearch {...props} />);
+      const wrapper = mount(<VoiceSearch />);
       wrapper.find('button').simulate('click');
-      expect(props.toggleListening).toHaveBeenCalledTimes(1);
+      expect(mockToggleListening).toHaveBeenCalledTimes(1);
     });
   });
 
   describe('Rendering', () => {
     it('with default props', () => {
-      const wrapper = shallow(<VoiceSearch {...defaultProps} />);
+      const wrapper = mount(<VoiceSearch />);
       expect(wrapper).toMatchSnapshot();
     });
 
     it('with custom component for button with isListening: false', () => {
-      const customButton = ({ isListening }) => (
-        <button>{isListening ? 'Stop' : 'Start'}</button>
-      );
+      const customButton = ({ isListening }) =>
+        isListening ? 'Stop' : 'Start';
 
-      const wrapper = shallow(
-        <VoiceSearch {...defaultProps} buttonComponent={customButton} />
-      );
+      const wrapper = mount(<VoiceSearch buttonComponent={customButton} />);
+      expect(wrapper.find('button').text()).toBe('Start');
       expect(wrapper).toMatchSnapshot();
     });
 
     it('with custom component for button with isListening: true', () => {
-      const customButton = ({ isListening }) => (
-        <button>{isListening ? 'Stop' : 'Start'}</button>
-      );
+      const customButton = ({ isListening }) =>
+        isListening ? 'Stop' : 'Start';
+      mockIsListening.mockImplementationOnce(() => true);
 
-      const props = {
-        ...defaultProps,
-        isListening: true,
-        voiceListeningState: {
-          status: 'recognizing',
-          transcript: undefined,
-          isSpeechFinal: undefined,
-          errorCode: undefined,
-        },
-      };
-
-      const wrapper = shallow(
-        <VoiceSearch {...props} buttonComponent={customButton} />
-      );
+      const wrapper = mount(<VoiceSearch buttonComponent={customButton} />);
+      expect(wrapper.find('button').text()).toBe('Stop');
       expect(wrapper).toMatchSnapshot();
     });
 
@@ -81,27 +67,22 @@ describe('VoiceSearch', () => {
         <div>
           <p>status: {status}</p>
           <p>errorCode: {errorCode}</p>
-          <p>isListening: {isListening}</p>
+          <p>isListening: {isListening ? 'true' : 'false'}</p>
           <p>transcript: {transcript}</p>
-          <p>isSpeechFinal: {isSpeechFinal}</p>
-          <p>isBrowserSupported: {isBrowserSupported}</p>
+          <p>isSpeechFinal: {isSpeechFinal ? 'true' : 'false'}</p>
+          <p>isBrowserSupported: {isBrowserSupported ? 'true' : 'false'}</p>
         </div>
       );
 
-      const props = {
-        ...defaultProps,
-        isListening: true,
-        voiceListeningState: {
-          status: 'recognizing',
-          transcript: 'Hello',
-          isSpeechFinal: false,
-          errorCode: undefined,
-        },
-      };
+      mockIsListening.mockImplementationOnce(() => true);
+      mockGetState.mockImplementationOnce(() => ({
+        status: 'recognizing',
+        transcript: 'Hello',
+        isSpeechFinal: false,
+        errorCode: undefined,
+      }));
 
-      const wrapper = shallow(
-        <VoiceSearch {...props} statusComponent={customStatus} />
-      );
+      const wrapper = mount(<VoiceSearch statusComponent={customStatus} />);
       expect(wrapper).toMatchSnapshot();
     });
   });
