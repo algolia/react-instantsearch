@@ -94,23 +94,28 @@ export default createConnector({
     const hasPrevious = this._firstReceivedPage > 0;
     const lastPageIndex = nbPages - 1;
     const hasMore = page < lastPageIndex;
-    const refine = index => {
-      const id = getId();
-      const nextValue = { [id]: index };
-      const resetPage = false;
-      this.context.ais.onInternalStateUpdate(
-        refineValue(searchState, nextValue, this.context, resetPage)
-      );
-    };
+    const refinePrevious = () => this.refine(this._firstReceivedPage - 1);
+    const refineNext = () => this.refine(this._lastReceivedPage + 1);
 
     return {
       hits: this._allResults,
       hasPrevious,
       hasMore,
-      refine: () => refine(this._lastReceivedPage + 2),
-      refinePrevious: () => refine(this._firstReceivedPage),
-      refineNext: () => refine(this._lastReceivedPage + 2),
+      refine: refineNext,
+      refinePrevious,
+      refineNext,
     };
+  },
+
+  refine(
+    props,
+    searchState,
+    index = getCurrentRefinement(props, searchState, this.context)
+  ) {
+    const id = getId();
+    const nextValue = { [id]: index + 1 }; // `index` is indexed from 0 but page number is indexed from 1
+    const resetPage = false;
+    return refineValue(searchState, nextValue, this.context, resetPage);
   },
 
   getSearchParameters(searchParameters, props, searchState) {

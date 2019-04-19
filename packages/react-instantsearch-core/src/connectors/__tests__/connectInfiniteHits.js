@@ -11,6 +11,7 @@ describe('connectInfiniteHits', () => {
           onInternalStateUpdate: jest.fn(),
         },
       },
+      refine: jest.fn(),
     });
 
     it('provides the current hits to the component', () => {
@@ -415,7 +416,7 @@ describe('connectInfiniteHits', () => {
       expect(props.hasMore).toBe(false);
     });
 
-    it('adds 1 to page when calling refineNext', () => {
+    it('calls refine with next page when calling refineNext', () => {
       const context = createSingleIndexContext();
       const getProvidedProps = connect.getProvidedProps.bind(context);
 
@@ -436,14 +437,10 @@ describe('connectInfiniteHits', () => {
 
       props.refineNext.apply(context);
 
-      // `results.page` is indexed from 0, but `onInternalStateUpdate` receives `page` indexed from 1
-      // So next page index = `results.page` + 1 (to index from 1) + 1 (for next page) = 2 + 1 + 1 = 4
-      expect(
-        context.context.ais.onInternalStateUpdate.mock.calls[0][0]
-      ).toEqual({ page: 4 });
+      expect(context.refine.mock.calls[0][0]).toEqual(3);
     });
 
-    it('removes 1 from page when calling refinePrevious', () => {
+    it('calls refine with previous page when calling refinePrevious', () => {
       const context = createSingleIndexContext();
       const getProvidedProps = connect.getProvidedProps.bind(context);
 
@@ -464,11 +461,45 @@ describe('connectInfiniteHits', () => {
 
       props.refinePrevious.apply(context);
 
-      // `results.page` is indexed from 0, but `onInternalStateUpdate` receives `page` indexed from 1
-      // So previous page index = `results.page` + 1 (to index from 1) - 1 (for previous page) = 2 + 1 - 1 = 2
-      expect(
-        context.context.ais.onInternalStateUpdate.mock.calls[0][0]
-      ).toEqual({ page: 2 });
+      expect(context.refine.mock.calls[0][0]).toEqual(1);
+    });
+
+    it('adds 1 to page when calling refine without index', () => {
+      const context = createSingleIndexContext();
+      const refine = connect.refine.bind(context);
+
+      const props = {};
+      const state0 = {};
+
+      const state1 = refine(props, state0);
+      expect(state1).toEqual({ page: 2 });
+
+      const state2 = refine(props, state1);
+      expect(state2).toEqual({ page: 3 });
+    });
+
+    it('set page to the matching index', () => {
+      const context = createSingleIndexContext();
+      const refine = connect.refine.bind(context);
+
+      const props = {};
+      const state0 = {};
+      const index = 5;
+
+      const state1 = refine(props, state0, index);
+      // `index` is indexed from 0 but page number is indexed from 1
+      expect(state1).toEqual({ page: 6 });
+    });
+
+    it('automatically converts String state to Number', () => {
+      const context = createSingleIndexContext();
+      const refine = connect.refine.bind(context);
+
+      const props = {};
+      const state0 = { page: '0' };
+
+      const state1 = refine(props, state0);
+      expect(state1).toEqual({ page: 1 });
     });
 
     it('expect to always return an array of hits', () => {
