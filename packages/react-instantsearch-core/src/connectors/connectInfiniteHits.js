@@ -107,6 +107,12 @@ export default createConnector({
     };
   },
 
+  getSearchParameters(searchParameters, props, searchState) {
+    return searchParameters.setQueryParameters({
+      page: getCurrentRefinement(props, searchState, this.context) - 1,
+    });
+  },
+
   refine(
     props,
     searchState,
@@ -116,11 +122,5 @@ export default createConnector({
     const nextValue = { [id]: index + 1 }; // `index` is indexed from 0 but page number is indexed from 1
     const resetPage = false;
     return refineValue(searchState, nextValue, this.context, resetPage);
-  },
-
-  getSearchParameters(searchParameters, props, searchState) {
-    return searchParameters.setQueryParameters({
-      page: getCurrentRefinement(props, searchState, this.context) - 1,
-    });
   },
 });
