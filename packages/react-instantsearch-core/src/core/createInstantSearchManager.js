@@ -73,12 +73,20 @@ export default function createInstantSearchManager({
   }
 
   function updateClient(client) {
+    if (helper.getClient() === client) {
+      return;
+    }
     addAlgoliaAgents(client);
     helper.setClient(client);
     search();
   }
 
-  function clearCache() {
+  let lastRefreshValue;
+  function clearCache(refreshValue) {
+    if (lastRefreshValue === refreshValue) {
+      return;
+    }
+    lastRefreshValue = refreshValue;
     helper.clearCache();
     search();
   }
@@ -364,6 +372,9 @@ export default function createInstantSearchManager({
   }
 
   function updateIndex(newIndex) {
+    if (initialSearchParameters.index === newIndex) {
+      return;
+    }
     initialSearchParameters = initialSearchParameters.setIndex(newIndex);
     search();
   }

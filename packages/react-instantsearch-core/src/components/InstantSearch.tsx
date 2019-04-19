@@ -4,6 +4,10 @@ import createInstantSearchManager from '../core/createInstantSearchManager';
 import { InstantSearchProvider, InstantSearchContext } from '../core/context';
 import { Store } from '../core/createStore';
 
+function isControlled(props: Props) {
+  return Boolean(props.searchState);
+}
+
 function validateNextProps(props, nextProps) {
   if (!props.searchState && nextProps.searchState) {
     throw new Error(
@@ -65,6 +69,7 @@ type Props = {
 };
 
 type State = {
+  isControlled: boolean;
   contextValue: InstantSearchContext;
 };
 
@@ -132,14 +137,32 @@ class InstantSearch extends Component<Props, State> {
     stalledSearchDelay: PropTypes.number,
   };
 
-  isControlled: boolean;
+  static getDerivedStateFromProps(nextProps: Props, prevState: State) {
+    const nextState = {
+      isControlled: isControlled(nextProps),
+    };
+
+    if (!prevState.isControlled && nextState.isControlled) {
+      throw new Error(
+        "You can't switch <InstantSearch> from being uncontrolled to controlled"
+      );
+    }
+
+    if (prevState.isControlled && !nextState.isControlled) {
+      throw new Error(
+        "You can't switch <InstantSearch> from being controlled to uncontrolled"
+      );
+    }
+
+    return nextState;
+  }
+
   isUnmounting: boolean;
   aisManager: InstantSearchManager;
 
   constructor(props: Props) {
     super(props);
-    this.isControlled = Boolean(props.searchState);
-    const initialState = this.isControlled ? props.searchState : {};
+    const initialState = props.searchState || {};
     this.isUnmounting = false;
 
     this.aisManager = createInstantSearchManager({
@@ -151,6 +174,7 @@ class InstantSearch extends Component<Props, State> {
     });
 
     this.state = {
+      isControlled: isControlled(this.props),
       contextValue: {
         onInternalStateUpdate: this.onWidgetsInternalStateUpdate.bind(this),
         createHrefForState: this.createHrefForState.bind(this),
@@ -164,31 +188,13 @@ class InstantSearch extends Component<Props, State> {
     };
   }
 
-  componentWillReceiveProps(nextProps: Props) {
-    validateNextProps(this.props, nextProps);
-
-    if (this.props.indexName !== nextProps.indexName) {
-      this.aisManager.updateIndex(nextProps.indexName);
-      this.setState(state => ({
-        contextValue: {
-          ...state.contextValue,
-          mainTargetedIndex: nextProps.indexName,
-        },
-      }));
+  componentDidUpdate() {
+    if (this.props.refresh) {
+      this.aisManager.clearCache();
     }
 
-    if (this.props.refresh !== nextProps.refresh) {
-      if (nextProps.refresh) {
-        this.aisManager.clearCache();
-      }
-    }
-
-    if (this.props.searchClient !== nextProps.searchClient) {
-      this.aisManager.updateClient(nextProps.searchClient);
-    }
-
-    if (this.isControlled) {
-      this.aisManager.onExternalStateUpdate(nextProps.searchState);
+    if (this.state.isControlled) {
+      this.aisManager.onExternalStateUpdate(this.props.searchState);
     }
   }
 
@@ -199,7 +205,7 @@ class InstantSearch extends Component<Props, State> {
 
   createHrefForState(searchState: SearchState) {
     searchState = this.aisManager.transitionState(searchState);
-    return this.isControlled && this.props.createURL
+    return this.state.isControlled && this.props.createURL
       ? this.props.createURL(searchState, this.getKnownKeys())
       : '#';
   }
@@ -209,7 +215,7 @@ class InstantSearch extends Component<Props, State> {
 
     this.onSearchStateChange(searchState);
 
-    if (!this.isControlled) {
+    if (!this.state.isControlled) {
       this.aisManager.onExternalStateUpdate(searchState);
     }
   }
@@ -241,10 +247,14 @@ class InstantSearch extends Component<Props, State> {
   }
 
   render() {
-    const childrenCount = Children.count(this.props.children);
-    if (childrenCount === 0) {
+    if (Children.count(this.props.children) === 0) {
       return null;
     }
+
+    // @TODO: should this be in a different spot
+    this.aisManager.updateIndex(this.props.indexName);
+    this.aisManager.updateClient(this.props.searchClient);
+
     return (
       <InstantSearchProvider value={this.state.contextValue}>
         {this.props.children}
