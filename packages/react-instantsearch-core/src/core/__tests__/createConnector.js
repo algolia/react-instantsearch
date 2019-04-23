@@ -723,7 +723,7 @@ describe('createConnector', () => {
 
       expect(onSearchStateChange).toHaveBeenCalledTimes(1);
       expect(onSearchStateChange).toHaveBeenCalledWith({
-        hello: 'again', // the instance didn't have the next props yet
+        hello: 'again',
         contextValue: context,
       });
 
