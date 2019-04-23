@@ -22,7 +22,7 @@ class InfiniteHits extends Component {
 
     return (
       <div className={classNames(cx(''), className)}>
-        {showPrevious ? (
+        {showPrevious && (
           <button
             className={cx(
               'loadPrevious',
@@ -33,7 +33,7 @@ class InfiniteHits extends Component {
           >
             {translate('loadPrevious')}
           </button>
-        ) : null}
+        )}
         <ul className={cx('list')}>
           {hits.map(hit => (
             <li key={hit.objectID} className={cx('item')}>
