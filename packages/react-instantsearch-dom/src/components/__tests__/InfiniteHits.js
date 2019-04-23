@@ -45,24 +45,6 @@ describe('InfiniteHits', () => {
     expect(tree.toJSON()).toMatchSnapshot();
   });
 
-  it('calls refine when the load more button is clicked', () => {
-    const mockedRefine = jest.fn();
-    const hits = [{ objectID: 0 }, { objectID: 1 }, { objectID: 2 }];
-    const wrapped = mount(
-      <InfiniteHits
-        refinePrevious={() => undefined}
-        refineNext={mockedRefine}
-        hitComponent={Hit}
-        hits={hits}
-        hasMore={true}
-        hasPrevious={false}
-      />
-    );
-    expect(mockedRefine.mock.calls).toHaveLength(0);
-    wrapped.find('button').simulate('click');
-    expect(mockedRefine.mock.calls).toHaveLength(1);
-  });
-
   it('calls refineNext when the load more button is clicked', () => {
     const mockedRefine = jest.fn();
     const hits = [{ objectID: 0 }, { objectID: 1 }, { objectID: 2 }];
