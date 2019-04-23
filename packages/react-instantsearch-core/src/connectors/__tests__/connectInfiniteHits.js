@@ -27,7 +27,6 @@ describe('connectInfiniteHits', () => {
         hits: hits.map(hit => expect.objectContaining(hit)),
         hasPrevious: false,
         hasMore: true,
-        refine: expect.any(Function),
         refinePrevious: expect.any(Function),
         refineNext: expect.any(Function),
       });
@@ -421,6 +420,7 @@ describe('connectInfiniteHits', () => {
       const getProvidedProps = connect.getProvidedProps.bind(context);
 
       const hits = [{}, {}];
+      const event = new Event('click');
 
       const props = getProvidedProps(
         {},
@@ -435,9 +435,10 @@ describe('connectInfiniteHits', () => {
         }
       );
 
-      props.refineNext.apply(context);
+      props.refineNext.apply(context, [event]);
 
-      expect(context.refine.mock.calls[0][0]).toEqual(3);
+      expect(context.refine).toHaveBeenCalledTimes(1);
+      expect(context.refine).toHaveBeenLastCalledWith(event, 3);
     });
 
     it('calls refine with previous page when calling refinePrevious', () => {
@@ -445,6 +446,7 @@ describe('connectInfiniteHits', () => {
       const getProvidedProps = connect.getProvidedProps.bind(context);
 
       const hits = [{}, {}];
+      const event = new Event('click');
 
       const props = getProvidedProps(
         {},
@@ -459,10 +461,10 @@ describe('connectInfiniteHits', () => {
         }
       );
 
-      props.refinePrevious.apply(context);
+      props.refinePrevious.apply(context, [event]);
 
       expect(context.refine).toHaveBeenCalledTimes(1);
-      expect(context.refine).toHaveBeenLastCalledWith(1);
+      expect(context.refine).toHaveBeenLastCalledWith(event, 1);
     });
 
     it('adds 1 to page when calling refine without index', () => {
@@ -485,9 +487,10 @@ describe('connectInfiniteHits', () => {
 
       const props = {};
       const state0 = {};
+      const event = new Event('click');
       const index = 5;
 
-      const state1 = refine(props, state0, index);
+      const state1 = refine(props, state0, event, index);
       // `index` is indexed from 0 but page number is indexed from 1
       expect(state1).toEqual({ page: 6 });
     });
@@ -525,7 +528,6 @@ describe('connectInfiniteHits', () => {
         hits: [{}, {}, {}].map(hit => expect.objectContaining(hit)),
         hasPrevious: true,
         hasMore: true,
-        refine: expect.any(Function),
         refinePrevious: expect.any(Function),
         refineNext: expect.any(Function),
       };
@@ -561,7 +563,6 @@ describe('connectInfiniteHits', () => {
         hits: hits.map(hit => expect.objectContaining(hit)),
         hasPrevious: false,
         hasMore: true,
-        refine: expect.any(Function),
         refinePrevious: expect.any(Function),
         refineNext: expect.any(Function),
       });

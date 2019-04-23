@@ -94,14 +94,14 @@ export default createConnector({
     const hasPrevious = this._firstReceivedPage > 0;
     const lastPageIndex = nbPages - 1;
     const hasMore = page < lastPageIndex;
-    const refinePrevious = () => this.refine(this._firstReceivedPage - 1);
-    const refineNext = () => this.refine(this._lastReceivedPage + 1);
+    const refinePrevious = event =>
+      this.refine(event, this._firstReceivedPage - 1);
+    const refineNext = event => this.refine(event, this._lastReceivedPage + 1);
 
     return {
       hits: this._allResults,
       hasPrevious,
       hasMore,
-      refine: refineNext,
       refinePrevious,
       refineNext,
     };
@@ -116,6 +116,7 @@ export default createConnector({
   refine(
     props,
     searchState,
+    event,
     index = getCurrentRefinement(props, searchState, this.context)
   ) {
     const id = getId();
