@@ -686,7 +686,7 @@ describe('createConnector', () => {
       expect(update).toHaveBeenCalledTimes(0);
     });
 
-    it('triggers an onSearchStateChange on props change with transitationState', () => {
+    it('triggers an onSearchStateChange on props change with transitionState', () => {
       const transitionState = jest.fn(function() {
         return this.props;
       });
@@ -723,7 +723,7 @@ describe('createConnector', () => {
 
       expect(onSearchStateChange).toHaveBeenCalledTimes(1);
       expect(onSearchStateChange).toHaveBeenCalledWith({
-        hello: 'there', // the instance didn't have the next props yet
+        hello: 'again', // the instance didn't have the next props yet
         contextValue: context,
       });
 
@@ -735,7 +735,7 @@ describe('createConnector', () => {
       );
     });
 
-    it('does not trigger an onSearchStateChange on props change wihtout transitionState', () => {
+    it('does not trigger an onSearchStateChange on props change without transitionState', () => {
       const Connected = createConnectorWithoutContext({
         displayName: 'Connector',
         getProvidedProps: () => {},
