@@ -597,26 +597,41 @@ describe('connectInfiniteHits', () => {
       const context = createMultiIndexContext();
       const getProvidedProps = connect.getProvidedProps.bind(context);
 
-      const hits = [{}, {}];
-      const hits0 = [{}, {}];
-
-      const res1 = getProvidedProps(null, null, {
-        results: { second: { hits, page: 2, hitsPerPage: 2, nbPages: 3 } },
-      });
-
-      expect(res1.hits).toEqual(hits.map(hit => expect.objectContaining(hit)));
-      expect(res1.hasPrevious).toBe(true);
-
-      const res0 = getProvidedProps(null, null, {
+      const initialPageHits = [{}, {}];
+      const previousPageHits = [{}, {}];
+      const initialPageProps = getProvidedProps(null, null, {
         results: {
-          second: { hits: hits0, page: 1, hitsPerPage: 2, nbPages: 3 },
+          second: {
+            hits: initialPageHits,
+            page: 1,
+            hitsPerPage: 2,
+            nbPages: 3,
+          },
         },
       });
 
-      expect(res0.hits).toEqual(
-        [...hits0, ...hits].map(hit => expect.objectContaining(hit))
+      expect(initialPageProps.hits).toEqual(
+        initialPageHits.map(hit => expect.objectContaining(hit))
       );
-      expect(res0.hasPrevious).toBe(true);
+      expect(initialPageProps.hasPrevious).toBe(true);
+
+      const previousPageProps = getProvidedProps(null, null, {
+        results: {
+          second: {
+            hits: previousPageHits,
+            page: 0,
+            hitsPerPage: 2,
+            nbPages: 3,
+          },
+        },
+      });
+
+      expect(previousPageProps.hits).toEqual(
+        [...previousPageHits, ...initialPageHits].map(hit =>
+          expect.objectContaining(hit)
+        )
+      );
+      expect(previousPageProps.hasPrevious).toBe(false);
     });
 
     it('accumulate hits internally while changing hitsPerPage configuration', () => {
