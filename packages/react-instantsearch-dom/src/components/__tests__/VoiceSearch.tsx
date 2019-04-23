@@ -3,15 +3,15 @@ import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import VoiceSearch from '../VoiceSearch';
 
-const mockGetState = jest.fn();
-const mockIsBrowserSupported = jest.fn();
+const mockGetState = jest.fn().mockImplementation(() => ({}));
+const mockIsBrowserSupported = jest.fn().mockImplementation(() => true);
 const mockIsListening = jest.fn();
 const mockToggleListening = jest.fn();
 
 jest.mock('../../lib/voiceSearchHelper', () => {
   return () => {
     return {
-      getState: mockGetState.mockImplementation(() => ({})),
+      getState: mockGetState,
       isBrowserSupported: mockIsBrowserSupported,
       isListening: mockIsListening,
       toggleListening: mockToggleListening,
@@ -42,17 +42,25 @@ describe('VoiceSearch', () => {
 
       const wrapper = mount(<VoiceSearch buttonComponent={customButton} />);
       expect(wrapper.find('button').text()).toBe('Start');
-      expect(wrapper).toMatchSnapshot();
     });
 
     it('with custom component for button with isListening: true', () => {
       const customButton = ({ isListening }) =>
         isListening ? 'Stop' : 'Start';
-      mockIsListening.mockImplementationOnce(() => true);
+      mockIsListening.mockImplementation(() => true);
 
       const wrapper = mount(<VoiceSearch buttonComponent={customButton} />);
       expect(wrapper.find('button').text()).toBe('Stop');
-      expect(wrapper).toMatchSnapshot();
+      mockIsListening.mockClear();
+    });
+
+    it('renders a specific title when it is disabled', () => {
+      mockIsBrowserSupported.mockImplementation(() => false);
+      const wrapper = mount(<VoiceSearch />);
+      expect(wrapper.find('button').prop('title')).toBe(
+        'Search by voice (not supported on this browser)'
+      );
+      mockIsBrowserSupported.mockImplementation(() => true);
     });
 
     it('with custom template for status', () => {
@@ -74,8 +82,8 @@ describe('VoiceSearch', () => {
         </div>
       );
 
-      mockIsListening.mockImplementationOnce(() => true);
-      mockGetState.mockImplementationOnce(() => ({
+      mockIsListening.mockImplementation(() => true);
+      mockGetState.mockImplementation(() => ({
         status: 'recognizing',
         transcript: 'Hello',
         isSpeechFinal: false,
@@ -83,7 +91,9 @@ describe('VoiceSearch', () => {
       }));
 
       const wrapper = mount(<VoiceSearch statusComponent={customStatus} />);
-      expect(wrapper).toMatchSnapshot();
+      expect(wrapper.find('.ais-VoiceSearch-status')).toMatchSnapshot();
+      mockIsListening.mockClear();
+      mockGetState.mockClear();
     });
   });
 });

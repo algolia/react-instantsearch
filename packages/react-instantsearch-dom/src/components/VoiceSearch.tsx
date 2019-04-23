@@ -118,9 +118,13 @@ class VoiceSearch extends Component<VoiceSearchProps, VoiceListeningState> {
         <button
           className={cx('button')}
           type="button"
-          title={translate('buttonTitle')}
+          title={
+            isBrowserSupported()
+              ? translate('buttonTitle')
+              : translate('disabledButtonTitle')
+          }
           onClick={this.onClick}
-          disabled={!isBrowserSupported}
+          disabled={!isBrowserSupported()}
         >
           <Button {...innerProps} />
         </button>
@@ -140,4 +144,5 @@ class VoiceSearch extends Component<VoiceSearchProps, VoiceListeningState> {
 
 export default translatable({
   buttonTitle: 'Search by voice',
+  disabledButtonTitle: 'Search by voice (not supported on this browser)',
 })(VoiceSearch);
