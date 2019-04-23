@@ -77,9 +77,9 @@ describe('InfiniteHits', () => {
         hasPrevious={true}
       />
     );
-    expect(mockedRefinePrevious.mock.calls).toHaveLength(0);
+    expect(mockedRefinePrevious).toHaveBeenCalledTimes(0);
     wrapped.find('.ais-InfiniteHits-loadPrevious').simulate('click');
-    expect(mockedRefinePrevious.mock.calls).toHaveLength(1);
+    expect(mockedRefinePrevious).toHaveBeenCalledTimes(1);
   });
 
   it('render "Show previous" button depending of `showPrevious` prop', () => {
