@@ -23,29 +23,26 @@ const searchStateToUrl = (props, searchState) =>
 const urlToSearchState = location => qs.parse(location.search.slice(1));
 
 class App extends Component {
-  constructor(props) {
-    super(props);
+  state = {
+    searchState: urlToSearchState(this.props.location),
+  };
 
-    this.state = {
-      searchState: urlToSearchState(props.location),
-    };
-  }
-
-  componentWillReceiveProps(props) {
-    // @TODO: derived state
-    if (props.location !== this.props.location) {
-      this.setState({ searchState: urlToSearchState(props.location) });
+  componentDidUpdate(prevProps) {
+    if (prevProps.location !== this.props.location) {
+      this.setState({ searchState: urlToSearchState(this.props.location) });
     }
   }
 
   onSearchStateChange = searchState => {
     clearTimeout(this.debouncedSetState);
+
     this.debouncedSetState = setTimeout(() => {
       this.props.history.push(
         searchStateToUrl(this.props, searchState),
         searchState
       );
     }, updateAfter);
+
     this.setState({ searchState });
   };
 
@@ -72,6 +69,7 @@ class App extends Component {
             <SearchBox />
             <PoweredBy />
           </div>
+
           <div style={{ display: 'flex' }}>
             <div style={{ padding: '0px 20px' }}>
               <p>Hierarchical Menu</p>
@@ -90,6 +88,7 @@ class App extends Component {
               <p>Range Ratings</p>
               <RatingMenu attribute="rating" max={6} />
             </div>
+
             <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
               <div style={{ display: 'flex', justifyContent: 'space-around' }}>
                 <ClearRefinements />
