@@ -461,7 +461,8 @@ describe('connectInfiniteHits', () => {
 
       props.refinePrevious.apply(context);
 
-      expect(context.refine.mock.calls[0][0]).toEqual(1);
+      expect(context.refine).toHaveBeenCalledTimes(1);
+      expect(context.refine).toHaveBeenLastCalledWith(1);
     });
 
     it('adds 1 to page when calling refine without index', () => {
