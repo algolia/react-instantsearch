@@ -117,7 +117,9 @@ export default createConnector({
     props,
     searchState,
     event,
-    index = getCurrentRefinement(props, searchState, this.context)
+    index = this._lastReceivedPage !== undefined
+      ? this._lastReceivedPage + 1
+      : getCurrentRefinement(props, searchState, this.context)
   ) {
     const id = getId();
     const nextValue = { [id]: index + 1 }; // `index` is indexed from 0 but page number is indexed from 1
