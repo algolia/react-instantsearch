@@ -113,14 +113,12 @@ export default createConnector({
     });
   },
 
-  refine(
-    props,
-    searchState,
-    event,
-    index = this._lastReceivedPage !== undefined
-      ? this._lastReceivedPage + 1
-      : getCurrentRefinement(props, searchState, this.context)
-  ) {
+  refine(props, searchState, event, index) {
+    if (index === undefined && this._lastReceivedPage !== undefined) {
+      index = this._lastReceivedPage + 1;
+    } else if (index === undefined) {
+      index = getCurrentRefinement(props, searchState, this.context);
+    }
     const id = getId();
     const nextValue = { [id]: index + 1 }; // `index` is indexed from 0 but page number is indexed from 1
     const resetPage = false;
