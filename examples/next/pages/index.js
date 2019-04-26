@@ -1,3 +1,4 @@
+import { isEqual } from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 import Router from 'next/router';
@@ -31,17 +32,20 @@ export default class extends React.Component {
       ? qs.parse(params.asPath.substring(params.asPath.indexOf('?') + 1))
       : {};
     const resultsState = await findResultsState(App, { searchState });
+
     return { resultsState, searchState };
   }
 
   onSearchStateChange = searchState => {
     clearTimeout(this.debouncedSetState);
+
     this.debouncedSetState = setTimeout(() => {
       const href = searchStateToUrl(searchState);
       Router.push(href, href, {
         shallow: true,
       });
     }, updateAfter);
+
     this.setState({ searchState });
   };
 
@@ -49,9 +53,24 @@ export default class extends React.Component {
     this.setState({ searchState: qs.parse(window.location.search.slice(1)) });
   }
 
-  componentWillReceiveProps() {
-    // @TODO: probably derived state
-    this.setState({ searchState: qs.parse(window.location.search.slice(1)) });
+  // componentWillReceiveProps() {
+  //   this.setState({ searchState: qs.parse(window.location.search.slice(1)) });
+  // }
+
+  static getDerivedStateFromProps(_props, state) {
+    if (typeof window === 'undefined') {
+      return null;
+    }
+
+    const newSearchState = qs.parse(window.location.search.slice(1));
+
+    if (!isEqual(newSearchState, state.searchState)) {
+      return {
+        searchState: newSearchState,
+      };
+    }
+
+    return null;
   }
 
   render() {
