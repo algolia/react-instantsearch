@@ -11,15 +11,15 @@ import {
   Keyboard,
 } from 'react-native';
 import algoliasearch from 'algoliasearch/lite';
-import { InstantSearch } from 'react-instantsearch/native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import {
+  InstantSearch,
   connectMenu,
   connectRefinementList,
   connectSearchBox,
   connectRange,
-} from 'react-instantsearch/connectors';
+} from 'react-instantsearch-native';
 import Stats from './components/Stats';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import Highlight from './components/Highlight';
 import Spinner from './components/Spinner';
 
@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
 
 class Filters extends Component {
   static displayName = 'React Native example';
+
   constructor(props) {
     super(props);
     this.onSearchStateChange = this.onSearchStateChange.bind(this);
@@ -72,11 +73,13 @@ class Filters extends Component {
       searchState: props.searchState,
     };
   }
+
   onSearchStateChange(nextState) {
     const searchState = { ...this.state.searchState, ...nextState };
     this.setState({ searchState });
     this.props.onSearchStateChange(searchState);
   }
+
   render() {
     return (
       <View style={styles.mainContainer}>
@@ -116,9 +119,11 @@ class Menu extends Component {
       query: '',
     };
   }
+
   saveQuery(text) {
     this.setState({ query: text });
   }
+
   render() {
     const ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2,
@@ -133,6 +138,7 @@ class Menu extends Component {
         keyboardShouldPersistTaps={'always'}
       />
     ) : null;
+
     return (
       <View style={styles.searchBoxContainer}>
         <View style={{ flexDirection: 'row' }}>
@@ -163,6 +169,7 @@ class Menu extends Component {
     ) : (
       <Icon name="circle-thin" color="#000" />
     );
+
     const label = this.props.isFromSearch ? (
       <Highlight
         attribute="label"
@@ -172,6 +179,7 @@ class Menu extends Component {
     ) : (
       refinement.label
     );
+
     return (
       <TouchableHighlight
         onPress={() => {
