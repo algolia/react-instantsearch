@@ -16,7 +16,7 @@ import {
   connectSearchBox,
   connectRange,
   connectMenu,
-} from 'react-instantsearch-core';
+} from 'react-instantsearch-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Stats from './components/Stats';
 import Highlight from './components/Highlight';

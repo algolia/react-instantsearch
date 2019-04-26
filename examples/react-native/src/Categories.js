@@ -17,7 +17,7 @@ import {
   connectRefinementList,
   connectSearchBox,
   connectRange,
-} from 'react-instantsearch-core';
+} from 'react-instantsearch-native';
 import Stats from './components/Stats';
 import Highlight from './components/Highlight';
 import Spinner from './components/Spinner';

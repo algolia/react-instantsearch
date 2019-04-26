@@ -15,7 +15,7 @@ import {
   connectSearchBox,
   connectRange,
   connectMenu,
-} from 'react-instantsearch-core';
+} from 'react-instantsearch-native';
 import Stats from './components/Stats';
 
 const styles = StyleSheet.create({

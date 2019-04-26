@@ -16,7 +16,7 @@ import {
   connectRange,
   connectRefinementList,
   connectSearchBox,
-} from 'react-instantsearch-core';
+} from 'react-instantsearch-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const styles = StyleSheet.create({

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, View, Platform, Dimensions } from 'react-native';
-import { connectStats } from 'react-instantsearch-core';
+import { connectStats } from 'react-instantsearch-native';
 import { Actions } from 'react-native-router-flux';
 import Spinner from './Spinner';
 

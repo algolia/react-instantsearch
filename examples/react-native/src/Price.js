@@ -7,7 +7,7 @@ import {
   connectSearchBox,
   connectRange,
   connectMenu,
-} from 'react-instantsearch-core';
+} from 'react-instantsearch-native';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
 import Stats from './components/Stats';
 

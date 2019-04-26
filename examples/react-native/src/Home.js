@@ -22,7 +22,7 @@ import {
   connectSortBy,
   connectRange,
   connectCurrentRefinements,
-} from 'react-instantsearch-core';
+} from 'react-instantsearch-native';
 import RatingMenu from 'react-native-star-rating';
 import ModalDropdown from 'react-native-modal-dropdown';
 import IosIcon from 'react-native-vector-icons/Ionicons';
