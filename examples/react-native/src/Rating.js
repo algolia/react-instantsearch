@@ -9,13 +9,13 @@ import {
   TouchableHighlight,
 } from 'react-native';
 import algoliasearch from 'algoliasearch/lite';
-import { InstantSearch } from 'react-instantsearch/native';
 import {
+  InstantSearch,
   connectRefinementList,
   connectSearchBox,
   connectRange,
   connectMenu,
-} from 'react-instantsearch/connectors';
+} from 'react-instantsearch-native';
 import Stats from './components/Stats';
 
 const searchClient = algoliasearch(
