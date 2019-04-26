@@ -10,8 +10,8 @@ import {
   TouchableHighlight,
   Keyboard,
 } from 'react-native';
-import { InstantSearch } from 'react-instantsearch-native';
 import {
+  InstantSearch,
   connectRefinementList,
   connectSearchBox,
   connectRange,

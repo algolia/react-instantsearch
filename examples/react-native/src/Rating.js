@@ -9,8 +9,8 @@ import {
   View,
   TouchableHighlight,
 } from 'react-native';
-import { InstantSearch } from 'react-instantsearch-native';
 import {
+  InstantSearch,
   connectRefinementList,
   connectSearchBox,
   connectRange,

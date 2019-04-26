@@ -10,9 +10,9 @@ import {
   TouchableHighlight,
   Keyboard,
 } from 'react-native';
-import { InstantSearch } from 'react-instantsearch-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {
+  InstantSearch,
   connectMenu,
   connectRefinementList,
   connectSearchBox,

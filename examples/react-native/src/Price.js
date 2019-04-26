@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { InstantSearch } from 'react-instantsearch-native';
 import {
+  InstantSearch,
   connectRefinementList,
   connectSearchBox,
   connectRange,
