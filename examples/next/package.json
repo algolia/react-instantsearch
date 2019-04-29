@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "algoliasearch": "3.32.1",
-    "next": "8.0.4",
+    "next": "8.1.0",
     "prop-types": "15.6.2",
     "qs": "6.7.0",
     "react": "16.8.6",
