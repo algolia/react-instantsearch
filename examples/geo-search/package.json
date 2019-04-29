@@ -9,7 +9,7 @@
     "test": "CI=true react-scripts test"
   },
   "devDependencies": {
-    "react-scripts": "2.1.8",
+    "react-scripts": "3.0.0",
     "react-test-renderer": "16.8.6"
   },
   "dependencies": {
@@ -17,8 +17,8 @@
     "qs": "6.7.0",
     "react": "16.8.6",
     "react-dom": "16.8.6",
-    "react-instantsearch-dom": "5.4.0",
-    "react-instantsearch-dom-maps": "5.4.0"
+    "react-instantsearch-dom": "5.5.0",
+    "react-instantsearch-dom-maps": "5.5.0"
   },
   "browserslist": [
     ">0.2%",
