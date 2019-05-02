@@ -33,6 +33,7 @@ class HitsPerPage extends Component {
           selectedItem={currentRefinement}
           items={items}
           cx={cx}
+          ariaLabel={this.props['aria-label']}
         />
       </div>
     );
