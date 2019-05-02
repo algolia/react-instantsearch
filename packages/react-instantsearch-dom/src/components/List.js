@@ -95,7 +95,9 @@ class List extends Component {
 
     return (
       <button
+        type="button"
         disabled={disabled}
+        tabIndex={this.props['aria-hidden'] ? -1 : undefined}
         className={cx('showMore', disabled && 'showMore--disabled')}
         onClick={this.onShowMoreClick}
       >
@@ -135,6 +137,7 @@ class List extends Component {
               selectItem(items[0], this.resetQuery);
             }
           }}
+          aria-hidden={this.props['aria-hidden']}
         />
         {noResults}
       </div>
