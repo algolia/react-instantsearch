@@ -59,6 +59,7 @@ class RefinementList extends Component {
           type="checkbox"
           checked={item.isRefined}
           onChange={() => this.selectItem(item, resetQuery)}
+          tabIndex={this.props['aria-hidden'] ? -1 : undefined}
         />
         <span className={cx('labelText')}>{label}</span>{' '}
         <span className={cx('count')}>{item.count.toLocaleString()}</span>
@@ -83,6 +84,7 @@ class RefinementList extends Component {
           'searchable',
           'canRefine',
           'className',
+          'aria-hidden',
         ])}
         query={this.state.query}
       />
