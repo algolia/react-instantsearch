@@ -245,48 +245,50 @@ class SearchBox extends Component {
 
     /* eslint-disable max-len */
     const contents = (
-      <input
-        ref={this.onInputMount}
-        type="search"
-        placeholder={translate('placeholder')}
-        aria-label={translate('ariaLabel')}
-        autoFocus={autoFocus}
-        autoComplete="off"
-        autoCorrect="off"
-        autoCapitalize="off"
-        spellCheck="false"
-        required={this.props.form ? true : undefined}
-        maxLength="512"
-        value={query}
-        onChange={this.onChange}
-        tabIndex={this.props['aria-hidden'] ? -1 : undefined}
-        {...searchInputEvents}
-        className={cx('input')}
-      />
-      <button
-        type={this.props.form ? 'submit' : 'button'}
-        onClick={this.props.form ? undefined : (this.props.onSubmit ? this.props.onSubmit : this.onSubmit)}
-        title={translate('submitTitle')}
-        className={cx('submit')}
-        tabIndex={this.props['aria-hidden'] ? -1 : undefined}
-      >
-        {submit}
-      </button>
-      <button
-        type={this.props.form ? 'reset' : 'button'}
-        onClick={this.props.form ? undefined : this.onReset}
-        title={translate('resetTitle')}
-        className={cx('reset')}
-        hidden={!query || isSearchStalled}
-        tabIndex={this.props['aria-hidden'] ? -1 : undefined}
-      >
-        {reset}
-      </button>
-      {this.props.showLoadingIndicator && (
-        <span hidden={!isSearchStalled} className={cx('loadingIndicator')}>
-          {loadingIndicator}
-        </span>
-      )}
+      <React.Fragment>
+        <input
+          ref={this.onInputMount}
+          type="search"
+          placeholder={translate('placeholder')}
+          aria-label={translate('ariaLabel')}
+          autoFocus={autoFocus}
+          autoComplete="off"
+          autoCorrect="off"
+          autoCapitalize="off"
+          spellCheck="false"
+          required={this.props.form ? true : undefined}
+          maxLength="512"
+          value={query}
+          onChange={this.onChange}
+          tabIndex={this.props['aria-hidden'] ? -1 : undefined}
+          {...searchInputEvents}
+          className={cx('input')}
+        />
+        <button
+          type={this.props.form ? 'submit' : 'button'}
+          onClick={this.props.form ? undefined : (this.props.onSubmit ? this.props.onSubmit : this.onSubmit)}
+          title={translate('submitTitle')}
+          className={cx('submit')}
+          tabIndex={this.props['aria-hidden'] ? -1 : undefined}
+        >
+          {submit}
+        </button>
+        <button
+          type={this.props.form ? 'reset' : 'button'}
+          onClick={this.props.form ? undefined : this.onReset}
+          title={translate('resetTitle')}
+          className={cx('reset')}
+          hidden={!query || isSearchStalled}
+          tabIndex={this.props['aria-hidden'] ? -1 : undefined}
+        >
+          {reset}
+        </button>
+        {this.props.showLoadingIndicator && (
+          <span hidden={!isSearchStalled} className={cx('loadingIndicator')}>
+            {loadingIndicator}
+          </span>
+        )}
+      </React.Fragment>
     )
 
     if (this.props.form) {
