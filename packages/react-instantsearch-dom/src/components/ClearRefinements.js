@@ -25,6 +25,7 @@ class ClearRefinements extends Component {
     return (
       <div className={classNames(cx(''), className)}>
         <button
+          type="button"
           className={cx('button', !canRefine && 'button--disabled')}
           onClick={() => refine(items)}
           disabled={!canRefine}
