@@ -33,6 +33,7 @@ class SortBy extends Component {
           items={items}
           selectedItem={currentRefinement}
           onSelect={refine}
+          ariaLabel={this.props['aria-label']}
         />
       </div>
     );
