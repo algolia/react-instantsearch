@@ -250,7 +250,7 @@ class SearchBox extends Component {
           ref={this.onInputMount}
           type="search"
           placeholder={translate('placeholder')}
-          aria-label={translate('ariaLabel')}
+          aria-label={this.props['aria-label']}
           autoFocus={autoFocus}
           autoComplete="off"
           autoCorrect="off"
