@@ -1,9 +1,12 @@
-import VoiceSearchHelper, { VoiceSearchHelperParams } from '..';
+// copied from https://github.com/algolia/instantsearch.js/blob/e904ad689d8300b829aff928bbed8e4cdbe37b7b/src/lib/voiceSearchHelper/__tests__/index-test.ts
 
-// copied from InstantSearch.js
+import voiceSearchHelper, {
+  VoiceSearchHelper,
+  VoiceSearchHelperParams,
+} from '..';
 
-const getHelper = (opts?: VoiceSearchHelperParams) =>
-  VoiceSearchHelper(
+const getHelper = (opts?: VoiceSearchHelperParams): VoiceSearchHelper =>
+  voiceSearchHelper(
     opts || {
       searchAsYouSpeak: false,
       onQueryChange: () => {},
