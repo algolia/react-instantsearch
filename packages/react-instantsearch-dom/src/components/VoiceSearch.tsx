@@ -18,7 +18,6 @@ type InnerComponentProps = {
 
 type VoiceSearchProps = {
   searchAsYouSpeak?: boolean;
-
   refine: (query: string) => void;
   translate: Translate;
   buttonComponent?: React.FC<InnerComponentProps>;
