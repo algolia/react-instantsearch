@@ -1,6 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { boolean, number } from '@storybook/addon-knobs';
+import { action } from '@storybook/addon-actions';
 import { Panel, Pagination, SearchBox } from 'react-instantsearch-dom';
 import { WrapWithHits } from './util';
 
@@ -33,6 +34,7 @@ stories
         showNext={boolean('show Next', true)}
         padding={number('pages Padding', 2)}
         totalPages={number('max Pages', 3)}
+        onChange={action('onChange')}
       />
     </WrapWithHits>
   ))

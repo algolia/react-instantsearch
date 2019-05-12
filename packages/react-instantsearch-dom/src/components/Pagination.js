@@ -62,6 +62,7 @@ class Pagination extends Component {
     padding: PropTypes.number,
     totalPages: PropTypes.number,
     className: PropTypes.string,
+    onChange: PropTypes.func,
   };
 
   static defaultProps = {
@@ -87,6 +88,14 @@ class Pagination extends Component {
     };
   }
 
+  onSelect = page => {
+    const { currentRefinement, onChange, refine } = this.props;
+    refine(page);
+    if (page !== currentRefinement && onChange) {
+      this.props.onChange(page);
+    }
+  };
+
   render() {
     const {
       listComponent: ListComponent,
@@ -98,7 +107,6 @@ class Pagination extends Component {
       showPrevious,
       showNext,
       showLast,
-      refine,
       createURL,
       canRefine,
       translate,
@@ -170,7 +178,7 @@ class Pagination extends Component {
           {...otherProps}
           cx={cx}
           items={items}
-          onSelect={refine}
+          onSelect={this.onSelect}
           createURL={createURL}
           canRefine={canRefine}
         />
