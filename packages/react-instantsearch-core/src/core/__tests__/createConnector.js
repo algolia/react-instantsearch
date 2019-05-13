@@ -148,9 +148,7 @@ describe('createConnector', () => {
 
       const context = createFakeContext();
 
-      const wrapper = shallow(<Connected {...props} contextValue={context} />, {
-        disableLifecycleMethods: true,
-      });
+      const wrapper = shallow(<Connected {...props} contextValue={context} />);
 
       // Simulate props change before mount
       wrapper.setProps({ hello: 'again' });
@@ -337,16 +335,39 @@ describe('createConnector', () => {
 
       const props = { hello: 'there' };
       const context = createFakeContext();
-      const wrapper = shallow(<Connected {...props} contextValue={context} />);
+      const wrapper = mount(<Connected {...props} contextValue={context} />);
 
       expect(shouldComponentUpdate).toHaveBeenCalledTimes(0);
 
       wrapper.setProps({ hello: 'here' });
 
-      expect(shouldComponentUpdate).toHaveBeenCalledTimes(1);
+      expect(shouldComponentUpdate).toHaveBeenCalledTimes(2);
       expect(shouldComponentUpdate).toHaveBeenCalledWith(
         {
           hello: 'there',
+          contextValue: context,
+        },
+        {
+          hello: 'here',
+          contextValue: context,
+        },
+        {
+          providedProps: {
+            hello: 'there',
+            contextValue: context,
+          },
+        },
+        {
+          providedProps: {
+            hello: 'there',
+            contextValue: context,
+          },
+        }
+      );
+
+      expect(shouldComponentUpdate).toHaveBeenCalledWith(
+        {
+          hello: 'here',
           contextValue: context,
         },
         {
