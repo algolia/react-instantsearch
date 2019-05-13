@@ -36,11 +36,11 @@ export default class Select extends Component {
         {items.map(item => (
           <option
             className={cx('option')}
-            key={has(item, 'key') ? item.key : item.value}
+            key={item.key === undefined ? item.value : item.key}
             disabled={item.disabled}
             value={item.value}
           >
-            {has(item, 'label') ? item.label : item.value}
+            {item.label === undefined ? item.value : item.label}
           </option>
         ))}
       </select>

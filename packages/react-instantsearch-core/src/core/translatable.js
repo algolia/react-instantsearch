@@ -23,7 +23,7 @@ export default function translatable(defaultTranslations) {
         const { translations } = this.props;
 
         const translation =
-          translations && has(translations, key)
+          translations && translations[key] !== undefined
             ? translations[key]
             : defaultTranslations[key];
 

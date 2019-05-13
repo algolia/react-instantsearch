@@ -35,7 +35,7 @@ export default class LinkList extends Component {
       <ul className={cx('list', !canRefine && 'list--noRefinement')}>
         {items.map(item => (
           <li
-            key={has(item, 'key') ? item.key : item.value}
+            key={item.key === undefined ? item.value : item.key}
             className={cx(
               'item',
               item.selected && !item.disabled && 'item--selected',
@@ -45,7 +45,7 @@ export default class LinkList extends Component {
           >
             {item.disabled ? (
               <span className={cx('link')}>
-                {has(item, 'label') ? item.label : item.value}
+                {item.label === undefined ? item.value : item.label}
               </span>
             ) : (
               <Link
@@ -54,7 +54,7 @@ export default class LinkList extends Component {
                 href={createURL(item.value)}
                 onClick={() => onSelect(item.value)}
               >
-                {has(item, 'label') ? item.label : item.value}
+                {item.label === undefined ? item.value : item.label}
               </Link>
             )}
           </li>
