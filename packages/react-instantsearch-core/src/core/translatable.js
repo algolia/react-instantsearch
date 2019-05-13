@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { has } from 'lodash';
 
 const withKeysPropType = keys => (props, propName, componentName) => {
   const prop = props[propName];
