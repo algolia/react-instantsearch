@@ -27,7 +27,6 @@ class HierarchicalMenu extends Component {
     className: PropTypes.string,
     limit: PropTypes.number,
     showMoreLimit: PropTypes.number,
-    isEmpty: PropTypes.bool,
     transformItems: PropTypes.func,
   };
 
@@ -57,7 +56,6 @@ class HierarchicalMenu extends Component {
       showMore,
       limit,
       showMoreLimit,
-      isEmpty,
       canRefine,
       className,
     } = this.props;
@@ -70,7 +68,6 @@ class HierarchicalMenu extends Component {
         showMore={showMore}
         limit={limit}
         showMoreLimit={showMoreLimit}
-        isEmpty={isEmpty}
         canRefine={canRefine}
         className={className}
       />
