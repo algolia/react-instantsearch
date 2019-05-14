@@ -22,7 +22,7 @@ export default function translatable(defaultTranslations) {
         const { translations } = this.props;
 
         const translation =
-          translations && translations[key] !== undefined
+          translations && translations.hasOwnProperty(key)
             ? translations[key]
             : defaultTranslations[key];
 
