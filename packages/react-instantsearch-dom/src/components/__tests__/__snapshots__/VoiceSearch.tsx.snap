@@ -43,6 +43,8 @@ exports[`VoiceSearch Rendering with custom template for status 1`] = `
 exports[`VoiceSearch Rendering with default props 1`] = `
 <Translatable(VoiceSearch)>
   <VoiceSearch
+    buttonComponent={[Function]}
+    statusComponent={[Function]}
     translate={[Function]}
   >
     <div

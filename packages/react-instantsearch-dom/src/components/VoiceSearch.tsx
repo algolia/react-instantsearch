@@ -20,8 +20,8 @@ type VoiceSearchProps = {
   searchAsYouSpeak?: boolean;
   refine: (query: string) => void;
   translate: Translate;
-  buttonComponent?: React.FC<InnerComponentProps>;
-  statusComponent?: React.FC<InnerComponentProps>;
+  buttonComponent: React.FC<InnerComponentProps>;
+  statusComponent: React.FC<InnerComponentProps>;
 };
 
 const DefaultButton: React.FC<InnerComponentProps> = ({
@@ -75,6 +75,10 @@ const DefaultStatus: React.FC<InnerComponentProps> = ({ transcript }) => (
 );
 
 class VoiceSearch extends Component<VoiceSearchProps, VoiceListeningState> {
+  static defaultProps = {
+    buttonComponent: DefaultButton,
+    statusComponent: DefaultStatus,
+  };
   private voiceSearch: VoiceSearchHelper;
 
   constructor(props: VoiceSearchProps) {
@@ -95,8 +99,8 @@ class VoiceSearch extends Component<VoiceSearchProps, VoiceListeningState> {
     const { isListening, isBrowserSupported } = this.voiceSearch;
     const {
       translate,
-      buttonComponent: Button = DefaultButton,
-      statusComponent: Status = DefaultStatus,
+      buttonComponent: Button,
+      statusComponent: Status,
     } = this.props;
     const innerProps: InnerComponentProps = {
       status,
