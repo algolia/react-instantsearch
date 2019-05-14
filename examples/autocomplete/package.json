@@ -9,11 +9,11 @@
     "test": "CI=true react-scripts test"
   },
   "devDependencies": {
-    "react-scripts": "3.0.0",
+    "react-scripts": "3.0.1",
     "react-test-renderer": "16.8.6"
   },
   "dependencies": {
-    "antd": "3.16.6",
+    "antd": "3.18.1",
     "lodash": "4.17.11",
     "prop-types": "15.6.0",
     "react": "16.8.6",

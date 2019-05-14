@@ -1,1 +1,1 @@
-export type Translate = (key: string, ...params: string[]) => string;
+export type Translate = (key: string, ...params: any[]) => string;
