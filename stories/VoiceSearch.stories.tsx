@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { VoiceSearch, SearchBox } from 'react-instantsearch-dom';
+import { VoiceSearch, SearchBox } from '../packages/react-instantsearch-dom';
 import { WrapWithHits } from './util';
 
 const stories = storiesOf('VoiceSearch', module);
