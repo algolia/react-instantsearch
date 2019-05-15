@@ -148,9 +148,7 @@ describe('createConnector', () => {
 
       const context = createFakeContext();
 
-      const wrapper = shallow(<Connected {...props} contextValue={context} />, {
-        disableLifecycleMethods: true,
-      });
+      const wrapper = shallow(<Connected {...props} contextValue={context} />);
 
       // Simulate props change before mount
       wrapper.setProps({ hello: 'again' });
@@ -337,16 +335,39 @@ describe('createConnector', () => {
 
       const props = { hello: 'there' };
       const context = createFakeContext();
-      const wrapper = shallow(<Connected {...props} contextValue={context} />);
+      const wrapper = mount(<Connected {...props} contextValue={context} />);
 
       expect(shouldComponentUpdate).toHaveBeenCalledTimes(0);
 
       wrapper.setProps({ hello: 'here' });
 
-      expect(shouldComponentUpdate).toHaveBeenCalledTimes(1);
+      expect(shouldComponentUpdate).toHaveBeenCalledTimes(2);
       expect(shouldComponentUpdate).toHaveBeenCalledWith(
         {
           hello: 'there',
+          contextValue: context,
+        },
+        {
+          hello: 'here',
+          contextValue: context,
+        },
+        {
+          providedProps: {
+            hello: 'there',
+            contextValue: context,
+          },
+        },
+        {
+          providedProps: {
+            hello: 'there',
+            contextValue: context,
+          },
+        }
+      );
+
+      expect(shouldComponentUpdate).toHaveBeenCalledWith(
+        {
+          hello: 'here',
           contextValue: context,
         },
         {
@@ -686,7 +707,7 @@ describe('createConnector', () => {
       expect(update).toHaveBeenCalledTimes(0);
     });
 
-    it('triggers an onSearchStateChange on props change with transitationState', () => {
+    it('triggers an onSearchStateChange on props change with transitionState', () => {
       const transitionState = jest.fn(function() {
         return this.props;
       });
@@ -723,7 +744,7 @@ describe('createConnector', () => {
 
       expect(onSearchStateChange).toHaveBeenCalledTimes(1);
       expect(onSearchStateChange).toHaveBeenCalledWith({
-        hello: 'there', // the instance didn't have the next props yet
+        hello: 'again',
         contextValue: context,
       });
 
@@ -735,7 +756,7 @@ describe('createConnector', () => {
       );
     });
 
-    it('does not trigger an onSearchStateChange on props change wihtout transitionState', () => {
+    it('does not trigger an onSearchStateChange on props change without transitionState', () => {
       const Connected = createConnectorWithoutContext({
         displayName: 'Connector',
         getProvidedProps: () => {},
