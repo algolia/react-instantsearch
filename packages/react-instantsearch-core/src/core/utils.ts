@@ -62,3 +62,7 @@ export function addQueryID(hits, queryID) {
     __queryID: queryID,
   }));
 }
+
+export function objectHasKeys(object) {
+  return object && Object.keys(object).length > 0;
+}

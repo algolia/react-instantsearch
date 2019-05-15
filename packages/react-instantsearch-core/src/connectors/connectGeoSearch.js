@@ -1,4 +1,4 @@
-import { isEmpty } from 'lodash';
+import { objectHasKeys } from '../core/utils';
 import createConnector from '../core/createConnector';
 import {
   getResults,
@@ -73,7 +73,7 @@ const getCurrentRefinement = (props, searchState, context) => {
     {}
   );
 
-  if (isEmpty(refinement)) {
+  if (!objectHasKeys(refinement)) {
     return;
   }
 

@@ -1,5 +1,6 @@
-import { find, isEmpty } from 'lodash';
+import { find } from 'lodash';
 import PropTypes from 'prop-types';
+import { objectHasKeys } from '../core/utils';
 import createConnector from '../core/createConnector';
 import {
   cleanUpValue,
@@ -156,7 +157,7 @@ export default createConnector({
     if (!items.some(item => item.value === '')) {
       items.push({
         value: '',
-        isRefined: isEmpty(refinedItem),
+        isRefined: !objectHasKeys(refinedItem),
         noRefinement: !stats,
         label: 'All',
       });
