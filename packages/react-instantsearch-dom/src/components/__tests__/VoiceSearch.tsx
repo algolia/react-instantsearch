@@ -54,12 +54,13 @@ describe('VoiceSearch', () => {
       mockIsListening.mockClear();
     });
 
-    it('renders a specific title when it is disabled', () => {
+    it('renders a disabled button when the browser is not supported', () => {
       mockIsBrowserSupported.mockImplementation(() => false);
       const wrapper = mount(<VoiceSearch />);
       expect(wrapper.find('button').prop('title')).toBe(
         'Search by voice (not supported on this browser)'
       );
+      expect(wrapper.find('button').prop('disabled')).toBe(true);
       mockIsBrowserSupported.mockImplementation(() => true);
     });
 
