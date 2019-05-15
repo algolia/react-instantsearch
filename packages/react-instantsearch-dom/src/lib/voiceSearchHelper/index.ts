@@ -1,4 +1,4 @@
-// copied from https://github.com/algolia/instantsearch.js/blob/e904ad689d8300b829aff928bbed8e4cdbe37b7b/src/lib/voiceSearchHelper/index.ts
+// copied from https://github.com/algolia/instantsearch.js/blob/9788d816a7f2a979f75ffae81791c7d41361f772/src/lib/voiceSearchHelper/index.ts
 
 const STATUS_INITIAL = 'initial';
 const STATUS_ASKING_PERMISSION = 'askingPermission';
@@ -15,8 +15,8 @@ export type VoiceSearchHelperParams = {
 
 export type VoiceListeningState = {
   status: string;
-  transcript?: string;
-  isSpeechFinal?: boolean;
+  transcript: string;
+  isSpeechFinal: boolean;
   errorCode?: string;
 };
 
@@ -39,8 +39,8 @@ export default function voiceSearchHelper({
     (window as any).SpeechRecognition;
   const getDefaultState = (status: string): VoiceListeningState => ({
     status,
-    transcript: undefined,
-    isSpeechFinal: undefined,
+    transcript: '',
+    isSpeechFinal: false,
     errorCode: undefined,
   });
   let state: VoiceListeningState = getDefaultState(STATUS_INITIAL);
@@ -91,9 +91,10 @@ export default function voiceSearchHelper({
       setState({
         status: STATUS_RECOGNIZING,
         transcript:
-          event.results[0] &&
-          event.results[0][0] &&
-          event.results[0][0].transcript,
+          (event.results[0] &&
+            event.results[0][0] &&
+            event.results[0][0].transcript) ||
+          '',
         isSpeechFinal: event.results[0] && event.results[0].isFinal,
       });
       if (searchAsYouSpeak && state.transcript) {

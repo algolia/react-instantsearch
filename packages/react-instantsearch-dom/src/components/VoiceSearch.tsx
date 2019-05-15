@@ -11,8 +11,8 @@ type InnerComponentProps = {
   status: string;
   errorCode?: string;
   isListening: boolean;
-  transcript?: string;
-  isSpeechFinal?: boolean;
+  transcript: string;
+  isSpeechFinal: boolean;
   isBrowserSupported: boolean;
 };
 

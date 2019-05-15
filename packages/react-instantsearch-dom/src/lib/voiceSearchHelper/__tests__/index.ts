@@ -1,12 +1,14 @@
-// copied from https://github.com/algolia/instantsearch.js/blob/e904ad689d8300b829aff928bbed8e4cdbe37b7b/src/lib/voiceSearchHelper/__tests__/index-test.ts
+// copied from https://github.com/algolia/instantsearch.js/blob/e2717c1d46221e08d98f84e5d56ff70d5813d6bf/src/lib/voiceSearchHelper/__tests__/index-test.ts
 
-import voiceSearchHelper, {
+import createVoiceSearchHelper, {
   VoiceSearchHelper,
   VoiceSearchHelperParams,
 } from '..';
 
-const getHelper = (opts?: VoiceSearchHelperParams): VoiceSearchHelper =>
-  voiceSearchHelper(
+const getVoiceSearchHelper = (
+  opts?: VoiceSearchHelperParams
+): VoiceSearchHelper =>
+  createVoiceSearchHelper(
     opts || {
       searchAsYouSpeak: false,
       onQueryChange: () => {},
@@ -29,35 +31,35 @@ describe('VoiceSearchHelper', () => {
   });
 
   it('has initial state correctly', () => {
-    const helper = getHelper();
-    expect(helper.getState()).toEqual({
+    const voiceSearchHelper = getVoiceSearchHelper();
+    expect(voiceSearchHelper.getState()).toEqual({
       errorCode: undefined,
-      isSpeechFinal: undefined,
+      isSpeechFinal: false,
       status: 'initial',
-      transcript: undefined,
+      transcript: '',
     });
   });
 
   it('is not supported', () => {
-    const helper = getHelper();
-    expect(helper.isBrowserSupported()).toBe(false);
+    const voiceSearchHelper = getVoiceSearchHelper();
+    expect(voiceSearchHelper.isBrowserSupported()).toBe(false);
   });
 
   it('is not listening', () => {
-    const helper = getHelper();
-    expect(helper.isListening()).toBe(false);
+    const voiceSearchHelper = getVoiceSearchHelper();
+    expect(voiceSearchHelper.isListening()).toBe(false);
   });
 
   it('is supported with webkitSpeechRecognition', () => {
     window.webkitSpeechRecognition = () => {};
-    const helper = getHelper();
-    expect(helper.isBrowserSupported()).toBe(true);
+    const voiceSearchHelper = getVoiceSearchHelper();
+    expect(voiceSearchHelper.isBrowserSupported()).toBe(true);
   });
 
   it('is supported with SpeechRecognition', () => {
     window.SpeechRecognition = () => {};
-    const helper = getHelper();
-    expect(helper.isBrowserSupported()).toBe(true);
+    const voiceSearchHelper = getVoiceSearchHelper();
+    expect(voiceSearchHelper.isBrowserSupported()).toBe(true);
   });
 
   it('works with mock SpeechRecognition (searchAsYouSpeak:false)', () => {
@@ -70,17 +72,17 @@ describe('VoiceSearchHelper', () => {
     }));
     const onQueryChange = jest.fn();
     const onStateChange = jest.fn();
-    const helper = getHelper({
+    const voiceSearchHelper = getVoiceSearchHelper({
       searchAsYouSpeak: false,
       onQueryChange,
       onStateChange,
     });
-    const { getState } = helper;
-    helper.toggleListening();
+
+    voiceSearchHelper.toggleListening();
     expect(onStateChange).toHaveBeenCalledTimes(1);
-    expect(getState().status).toEqual('askingPermission');
+    expect(voiceSearchHelper.getState().status).toEqual('askingPermission');
     recognition.onstart();
-    expect(getState().status).toEqual('waiting');
+    expect(voiceSearchHelper.getState().status).toEqual('waiting');
     recognition.onresult({
       results: [
         (() => {
@@ -94,13 +96,13 @@ describe('VoiceSearchHelper', () => {
         })(),
       ],
     });
-    expect(getState().status).toEqual('recognizing');
-    expect(getState().transcript).toEqual('Hello World');
-    expect(getState().isSpeechFinal).toBe(true);
+    expect(voiceSearchHelper.getState().status).toEqual('recognizing');
+    expect(voiceSearchHelper.getState().transcript).toEqual('Hello World');
+    expect(voiceSearchHelper.getState().isSpeechFinal).toBe(true);
     expect(onQueryChange).toHaveBeenCalledTimes(0);
     recognition.onend();
     expect(onQueryChange).toHaveBeenCalledWith('Hello World');
-    expect(getState().status).toEqual('finished');
+    expect(voiceSearchHelper.getState().status).toEqual('finished');
   });
 
   it('works with mock SpeechRecognition (searchAsYouSpeak:true)', () => {
@@ -113,17 +115,17 @@ describe('VoiceSearchHelper', () => {
     }));
     const onQueryChange = jest.fn();
     const onStateChange = jest.fn();
-    const helper = getHelper({
+    const voiceSearchHelper = getVoiceSearchHelper({
       searchAsYouSpeak: true,
       onQueryChange,
       onStateChange,
     });
-    const { getState } = helper;
-    helper.toggleListening();
+
+    voiceSearchHelper.toggleListening();
     expect(onStateChange).toHaveBeenCalledTimes(1);
-    expect(getState().status).toEqual('askingPermission');
+    expect(voiceSearchHelper.getState().status).toEqual('askingPermission');
     recognition.onstart();
-    expect(getState().status).toEqual('waiting');
+    expect(voiceSearchHelper.getState().status).toEqual('waiting');
     recognition.onresult({
       results: [
         (() => {
@@ -137,13 +139,13 @@ describe('VoiceSearchHelper', () => {
         })(),
       ],
     });
-    expect(getState().status).toEqual('recognizing');
-    expect(getState().transcript).toEqual('Hello World');
-    expect(getState().isSpeechFinal).toBe(true);
+    expect(voiceSearchHelper.getState().status).toEqual('recognizing');
+    expect(voiceSearchHelper.getState().transcript).toEqual('Hello World');
+    expect(voiceSearchHelper.getState().isSpeechFinal).toBe(true);
     expect(onQueryChange).toHaveBeenCalledWith('Hello World');
     recognition.onend();
     expect(onQueryChange).toHaveBeenCalledTimes(1);
-    expect(getState().status).toEqual('finished');
+    expect(voiceSearchHelper.getState().status).toEqual('finished');
   });
 
   it('works with onerror', () => {
@@ -156,19 +158,18 @@ describe('VoiceSearchHelper', () => {
     }));
     const onQueryChange = jest.fn();
     const onStateChange = jest.fn();
-    const helper = getHelper({
+    const voiceSearchHelper = getVoiceSearchHelper({
       searchAsYouSpeak: true,
       onQueryChange,
       onStateChange,
     });
-    const { getState } = helper;
-    helper.toggleListening();
-    expect(getState().status).toEqual('askingPermission');
+    voiceSearchHelper.toggleListening();
+    expect(voiceSearchHelper.getState().status).toEqual('askingPermission');
     recognition.onerror({
       error: 'not-allowed',
     });
-    expect(getState().status).toEqual('error');
-    expect(getState().errorCode).toEqual('not-allowed');
+    expect(voiceSearchHelper.getState().status).toEqual('error');
+    expect(voiceSearchHelper.getState().errorCode).toEqual('not-allowed');
     recognition.onend();
     expect(onQueryChange).toHaveBeenCalledTimes(0);
   });
