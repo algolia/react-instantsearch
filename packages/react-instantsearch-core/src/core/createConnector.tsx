@@ -100,7 +100,9 @@ export function createConnectorWithoutContext(
         providedProps: this.getProvidedProps(this.props),
       };
 
-      componentWillMount() {
+      constructor(props: ConnectorProps) {
+        super(props);
+
         if (connectorDesc.getSearchParameters) {
           this.props.contextValue.onSearchParameters(
             connectorDesc.getSearchParameters.bind(this),
@@ -126,29 +128,6 @@ export function createConnectorWithoutContext(
           this.unregisterWidget = this.props.contextValue.widgetsManager.registerWidget(
             this
           );
-        }
-      }
-
-      componentWillReceiveProps(nextProps) {
-        if (!isEqual(this.props, nextProps)) {
-          this.setState({
-            providedProps: this.getProvidedProps(nextProps),
-          });
-
-          if (isWidget) {
-            this.props.contextValue.widgetsManager.update();
-
-            if (typeof connectorDesc.transitionState === 'function') {
-              this.props.contextValue.onSearchStateChange(
-                connectorDesc.transitionState.call(
-                  this,
-                  nextProps,
-                  this.props.contextValue.store.getState().widgets,
-                  this.props.contextValue.store.getState().widgets
-                )
-              );
-            }
-          }
         }
       }
 
@@ -179,6 +158,29 @@ export function createConnectorWithoutContext(
           !propsEqual ||
           !shallowEqual(this.state.providedProps, nextState.providedProps)
         );
+      }
+
+      componentDidUpdate(prevProps) {
+        if (!isEqual(prevProps, this.props)) {
+          this.setState({
+            providedProps: this.getProvidedProps(this.props),
+          });
+
+          if (isWidget) {
+            this.props.contextValue.widgetsManager.update();
+
+            if (typeof connectorDesc.transitionState === 'function') {
+              this.props.contextValue.onSearchStateChange(
+                connectorDesc.transitionState.call(
+                  this,
+                  this.props,
+                  this.props.contextValue.store.getState().widgets,
+                  this.props.contextValue.store.getState().widgets
+                )
+              );
+            }
+          }
+        }
       }
 
       componentWillUnmount() {
