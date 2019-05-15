@@ -75,7 +75,7 @@ const DefaultStatus: React.FC<InnerComponentProps> = ({ transcript }) => (
 );
 
 class VoiceSearch extends Component<VoiceSearchProps, VoiceListeningState> {
-  static defaultProps = {
+  protected static defaultProps = {
     buttonTextComponent: DefaultButtonText,
     statusComponent: DefaultStatus,
   };
