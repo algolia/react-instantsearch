@@ -137,4 +137,42 @@ describe('utils', () => {
       ]);
     });
   });
+
+  describe('find', () => {
+    test('returns the first match based on the comparator', () => {
+      expect(
+        utils.find([1], function() {
+          return true;
+        })
+      ).toBe(1);
+      expect(
+        utils.find([1, 2], function() {
+          return true;
+        })
+      ).toBe(1);
+
+      expect(
+        utils.find([{ nice: false }, { nice: true }], function(el) {
+          return el.nice;
+        })
+      ).toEqual({ nice: true });
+    });
+
+    test('returns undefined in non-found cases', () => {
+      expect(
+        utils.find([], function() {
+          return false;
+        })
+      ).toBeUndefined();
+      expect(
+        utils.find(undefined, function() {
+          return false;
+        })
+      ).toBeUndefined();
+
+      expect(function() {
+        utils.find([1, 2, 3], undefined);
+      }).toThrow();
+    });
+  });
 });
