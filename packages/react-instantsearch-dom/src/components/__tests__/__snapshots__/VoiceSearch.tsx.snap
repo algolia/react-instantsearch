@@ -43,7 +43,7 @@ exports[`VoiceSearch Rendering with custom template for status 1`] = `
 exports[`VoiceSearch Rendering with default props 1`] = `
 <Translatable(VoiceSearch)>
   <VoiceSearch
-    buttonComponent={[Function]}
+    buttonTextComponent={[Function]}
     statusComponent={[Function]}
     translate={[Function]}
   >
@@ -57,7 +57,7 @@ exports[`VoiceSearch Rendering with default props 1`] = `
         title="Search by voice"
         type="button"
       >
-        <DefaultButton
+        <DefaultButtonText
           isBrowserSupported={true}
         >
           <svg
@@ -91,7 +91,7 @@ exports[`VoiceSearch Rendering with default props 1`] = `
               y2="23"
             />
           </svg>
-        </DefaultButton>
+        </DefaultButtonText>
       </button>
       <div
         className="ais-VoiceSearch-status"

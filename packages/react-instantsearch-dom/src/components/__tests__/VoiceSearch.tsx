@@ -37,19 +37,23 @@ describe('VoiceSearch', () => {
     });
 
     it('with custom component for button with isListening: false', () => {
-      const customButton = ({ isListening }) =>
+      const customButtonText = ({ isListening }) =>
         isListening ? 'Stop' : 'Start';
 
-      const wrapper = mount(<VoiceSearch buttonComponent={customButton} />);
+      const wrapper = mount(
+        <VoiceSearch buttonTextComponent={customButtonText} />
+      );
       expect(wrapper.find('button').text()).toBe('Start');
     });
 
     it('with custom component for button with isListening: true', () => {
-      const customButton = ({ isListening }) =>
+      const customButtonText = ({ isListening }) =>
         isListening ? 'Stop' : 'Start';
       mockIsListening.mockImplementation(() => true);
 
-      const wrapper = mount(<VoiceSearch buttonComponent={customButton} />);
+      const wrapper = mount(
+        <VoiceSearch buttonTextComponent={customButtonText} />
+      );
       expect(wrapper.find('button').text()).toBe('Stop');
       mockIsListening.mockClear();
     });
