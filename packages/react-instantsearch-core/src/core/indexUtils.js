@@ -29,15 +29,16 @@ export function refineValue(
   namespace
 ) {
   if (hasMultipleIndices(context)) {
+    const indexId = getIndexId(context);
     return namespace
       ? refineMultiIndexWithNamespace(
           searchState,
           nextRefinement,
-          context,
+          indexId,
           resetPage,
           namespace
         )
-      : refineMultiIndex(searchState, nextRefinement, context, resetPage);
+      : refineMultiIndex(searchState, nextRefinement, indexId, resetPage);
   } else {
     // When we have a multi index page with shared widgets we should also
     // reset their page to 1 if the resetPage is provided. Otherwise the
@@ -66,9 +67,8 @@ export function refineValue(
   }
 }
 
-function refineMultiIndex(searchState, nextRefinement, context, resetPage) {
+function refineMultiIndex(searchState, nextRefinement, indexId, resetPage) {
   const page = resetPage ? { page: 1 } : undefined;
-  const indexId = getIndexId(context);
   const state =
     searchState &&
     searchState.indices &&
@@ -104,11 +104,10 @@ function refineSingleIndex(searchState, nextRefinement, resetPage) {
 function refineMultiIndexWithNamespace(
   searchState,
   nextRefinement,
-  context,
+  indexId,
   resetPage,
   namespace
 ) {
-  const indexId = getIndexId(context);
   const page = resetPage ? { page: 1 } : undefined;
   const state =
     searchState.indices && searchState.indices.hasOwnProperty(indexId)
@@ -160,15 +159,13 @@ function getNamespaceAndAttributeName(id) {
 }
 
 function hasRefinements({
-  context,
+  multiIndex,
   indexId,
   namespace,
   attributeName,
   id,
   searchState,
 }) {
-  const multiIndex = hasMultipleIndices(context);
-
   if (multiIndex && namespace) {
     return (
       searchState.indices &&
@@ -198,15 +195,13 @@ function hasRefinements({
 }
 
 function getRefinements({
-  context,
+  multiIndex,
   namespace,
   searchState,
   indexId,
   attributeName,
   id,
 }) {
-  const multiIndex = hasMultipleIndices(context);
-
   if (multiIndex && namespace) {
     return (
       searchState.indices[indexId][namespace] &&
@@ -232,8 +227,9 @@ export function getCurrentRefinementValue(
 ) {
   const indexId = getIndexId(context);
   const { namespace, attributeName } = getNamespaceAndAttributeName(id);
+  const multiIndex = hasMultipleIndices(context);
   const hasRefinementsValue = hasRefinements({
-    context,
+    multiIndex,
     indexId,
     namespace,
     attributeName,
@@ -243,7 +239,7 @@ export function getCurrentRefinementValue(
 
   if (hasRefinementsValue) {
     return getRefinements({
-      context,
+      multiIndex,
       namespace,
       searchState,
       indexId,
