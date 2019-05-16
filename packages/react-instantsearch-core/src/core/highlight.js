@@ -1,4 +1,5 @@
-import { get } from 'lodash';
+const getPropertyByPath = (object, path) =>
+  path.split('.').reduce((current, key) => current && current[key], object);
 
 export const HIGHLIGHT_TAGS = {
   highlightPreTag: `<ais-highlight-0000000000>`,
@@ -72,7 +73,8 @@ export function parseAlgoliaHit({
 }) {
   if (!hit) throw new Error('`hit`, the matching record, must be provided');
 
-  const highlightObject = get(hit[highlightProperty], attribute, {});
+  const highlightObject =
+    getPropertyByPath(hit[highlightProperty], attribute) || {};
 
   if (Array.isArray(highlightObject)) {
     return highlightObject.map(item =>
