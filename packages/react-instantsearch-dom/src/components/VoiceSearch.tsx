@@ -133,6 +133,10 @@ class VoiceSearch extends Component<VoiceSearchProps, VoiceListeningState> {
     );
   }
 
+  componentWillUnmount() {
+    this.voiceSearchHelper.dispose();
+  }
+
   private onClick = (event: React.MouseEvent<HTMLElement>) => {
     event.currentTarget.blur();
     const { toggleListening } = this.voiceSearchHelper;

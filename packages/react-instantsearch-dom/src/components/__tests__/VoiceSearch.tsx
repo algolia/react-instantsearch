@@ -7,6 +7,7 @@ const mockGetState = jest.fn().mockImplementation(() => ({}));
 const mockIsBrowserSupported = jest.fn().mockImplementation(() => true);
 const mockIsListening = jest.fn();
 const mockToggleListening = jest.fn();
+const mockDispose = jest.fn();
 
 jest.mock('../../lib/voiceSearchHelper', () => {
   return () => {
@@ -15,6 +16,7 @@ jest.mock('../../lib/voiceSearchHelper', () => {
       isBrowserSupported: mockIsBrowserSupported,
       isListening: mockIsListening,
       toggleListening: mockToggleListening,
+      dispose: mockDispose,
     };
   };
 });
@@ -102,6 +104,13 @@ describe('VoiceSearch', () => {
 
       const wrapper = mount(<VoiceSearch statusComponent={customStatus} />);
       expect(wrapper.find('.ais-VoiceSearch-status')).toMatchSnapshot();
+    });
+
+    it('calls voiceSearchHelper.dispose() on unmount', () => {
+      const wrapper = mount(<VoiceSearch />);
+      wrapper.find('button').simulate('click');
+      wrapper.unmount();
+      expect(mockDispose).toHaveBeenCalledTimes(1);
     });
   });
 });
