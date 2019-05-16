@@ -193,11 +193,11 @@ function hasRefinements({
 
 function getRefinements({
   multiIndex,
-  namespace,
-  searchState,
   indexId,
+  namespace,
   attributeName,
   id,
+  searchState,
 }) {
   if (multiIndex && namespace) {
     return searchState.indices[indexId][namespace][attributeName];
@@ -222,24 +222,18 @@ export function getCurrentRefinementValue(
   const indexId = getIndexId(context);
   const { namespace, attributeName } = getNamespaceAndAttributeName(id);
   const multiIndex = hasMultipleIndices(context);
-  const hasRefinementsValue = hasRefinements({
+  const args = {
     multiIndex,
     indexId,
     namespace,
     attributeName,
     id,
     searchState,
-  });
+  };
+  const hasRefinementsValue = hasRefinements(args);
 
   if (hasRefinementsValue) {
-    return getRefinements({
-      multiIndex,
-      namespace,
-      searchState,
-      indexId,
-      attributeName,
-      id,
-    });
+    return getRefinements(args);
   }
 
   if (props.defaultRefinement) {
