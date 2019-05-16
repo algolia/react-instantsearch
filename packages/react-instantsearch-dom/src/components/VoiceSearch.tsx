@@ -129,7 +129,7 @@ class VoiceSearch extends Component<VoiceSearchProps, VoiceListeningState> {
     );
   }
 
-  componentWillUnmount() {
+  public componentWillUnmount() {
     this.voiceSearchHelper.dispose();
   }
 
