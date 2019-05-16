@@ -1,4 +1,3 @@
-import { orderBy } from 'lodash';
 import PropTypes from 'prop-types';
 import createConnector from '../core/createConnector';
 import {
@@ -29,6 +28,82 @@ function getCurrentRefinement(props, searchState, context) {
       return currentRefinement;
     }
   );
+}
+
+function compareAscending(value, other) {
+  if (value !== other) {
+    const valIsDefined = value !== undefined;
+    const valIsNull = value === null;
+
+    const othIsDefined = other !== undefined;
+    const othIsNull = other === null;
+
+    if (
+      (!othIsNull && value > other) ||
+      (valIsNull && othIsDefined) ||
+      !valIsDefined
+    ) {
+      return 1;
+    }
+    if (
+      (!valIsNull && value < other) ||
+      (othIsNull && valIsDefined) ||
+      !othIsDefined
+    ) {
+      return -1;
+    }
+  }
+  return 0;
+}
+
+/**
+ * orderBy utility, same as lodash.orderBy, implementation taken from
+ * https://github.com/algolia/algoliasearch-helper-js/blob/2472e4c1b5f76b990a032104a08e90e76996032f/src/functions/orderBy.js
+ *
+ * @param {Array<object>} collection object with keys in attributes
+ * @param {Array<string>} iteratees attributes
+ * @param {Array<string>} orders asc | desc
+ */
+function orderBy(collection, iteratees, orders) {
+  if (!Array.isArray(collection)) {
+    return [];
+  }
+
+  if (!Array.isArray(orders)) {
+    orders = [];
+  }
+
+  const result = collection.map((value, index) => ({
+    criteria: iteratees.map(iteratee => value[iteratee]),
+    index,
+    value,
+  }));
+
+  result.sort(function comparer(object, other) {
+    let index = -1;
+
+    while (++index < object.criteria.length) {
+      const res = compareAscending(
+        object.criteria[index],
+        other.criteria[index]
+      );
+      if (res) {
+        if (index >= orders.length) {
+          return res;
+        }
+        if (orders[index] === 'desc') {
+          return -res;
+        }
+        return res;
+      }
+    }
+
+    // This ensures a stable sort in V8 and other engines.
+    // See https://bugs.chromium.org/p/v8/issues/detail?id=90 for more details.
+    return object.index - other.index;
+  });
+
+  return result.map(res => res.value);
 }
 
 function getValue(name, props, searchState, context) {
