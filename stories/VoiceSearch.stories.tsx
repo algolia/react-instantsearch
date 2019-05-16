@@ -38,28 +38,19 @@ stories
       <SearchBox />
     </WrapWithHits>
   ))
-  .add('with a custom button text', () => {
-    const style = window.document.createElement('style');
-    window.document.head.appendChild(style);
-    [
-      `.custom-button-story .ais-VoiceSearch-button:hover {
-        background: inherit;
-      }`,
-    ].forEach(rule => (style.sheet as CSSStyleSheet).insertRule(rule));
-    return (
-      <WrapWithHits
-        searchBox={false}
-        hasPlayground={true}
-        linkedStoryGroup="VoiceSearch"
-      >
-        <div className="custom-button-story">
-          <VoiceSearch
-            buttonComponent={({ isListening }) => (isListening ? '⏹' : '🎙')}
-          />
-        </div>
-      </WrapWithHits>
-    );
-  })
+  .add('with a custom button text', () => (
+    <WrapWithHits
+      searchBox={false}
+      hasPlayground={true}
+      linkedStoryGroup="VoiceSearch"
+    >
+      <div className="custom-button-story">
+        <VoiceSearch
+          buttonComponent={({ isListening }) => (isListening ? '⏹' : '🎙')}
+        />
+      </div>
+    </WrapWithHits>
+  ))
   .add('with full status', () => {
     const Status = ({
       status,
@@ -122,36 +113,6 @@ stories
     );
   })
   .add('example of dynamic UI working with SearchBox', () => {
-    const style = window.document.createElement('style');
-    window.document.head.appendChild(style);
-    [
-      `.custom-ui .ais-VoiceSearch-button {
-        position: absolute;
-        right: 43px;
-        top: 53px;
-        z-index: 3;
-      }`,
-      `.custom-ui .ais-VoiceSearch-status .layer {
-        position: absolute;
-        background: rgba(255, 255, 255, 0.95);
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        z-index: 2;
-        align-items: center;
-        justify-content: center;
-        display: none;
-      }`,
-      `.custom-ui .ais-VoiceSearch-status .layer.listening-true {
-        display: flex;
-      }`,
-      `.custom-ui .ais-VoiceSearch-status .layer span {
-        font-size: 2rem;
-        color: #555;
-      }`,
-    ].forEach(rule => (style.sheet as CSSStyleSheet).insertRule(rule));
-
     const Status = ({ isListening, transcript }) => {
       return (
         <div className={`layer listening-${isListening}`}>
