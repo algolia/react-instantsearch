@@ -22,6 +22,13 @@ jest.mock('../../lib/voiceSearchHelper', () => {
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('VoiceSearch', () => {
+  afterEach(() => {
+    mockGetState.mockClear();
+    mockIsBrowserSupported.mockImplementation(() => true);
+    mockIsListening.mockClear();
+    mockToggleListening.mockClear();
+  });
+
   describe('button', () => {
     it('calls toggleListening when button is clicked', () => {
       const wrapper = mount(<VoiceSearch />);
@@ -55,7 +62,6 @@ describe('VoiceSearch', () => {
         <VoiceSearch buttonTextComponent={customButtonText} />
       );
       expect(wrapper.find('button').text()).toBe('Stop');
-      mockIsListening.mockClear();
     });
 
     it('renders a disabled button when the browser is not supported', () => {
@@ -65,7 +71,6 @@ describe('VoiceSearch', () => {
         'Search by voice (not supported on this browser)'
       );
       expect(wrapper.find('button').prop('disabled')).toBe(true);
-      mockIsBrowserSupported.mockImplementation(() => true);
     });
 
     it('with custom template for status', () => {
@@ -97,8 +102,6 @@ describe('VoiceSearch', () => {
 
       const wrapper = mount(<VoiceSearch statusComponent={customStatus} />);
       expect(wrapper.find('.ais-VoiceSearch-status')).toMatchSnapshot();
-      mockIsListening.mockClear();
-      mockGetState.mockClear();
     });
   });
 });
