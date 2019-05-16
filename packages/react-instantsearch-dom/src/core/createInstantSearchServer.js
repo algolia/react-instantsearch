@@ -81,6 +81,9 @@ const multiIndexSearch = (
     })
   );
 
+  // We attach `indexId` on the results to be able to reconstruct the
+  // object client side. We cannot rely on `state.index` anymore because
+  // we may have multiple times the same index.
   return Promise.all(search).then(results =>
     [indexName, ...indexIds].map((indexId, i) => ({
       ...results[i],
