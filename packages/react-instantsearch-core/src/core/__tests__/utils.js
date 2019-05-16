@@ -38,7 +38,7 @@ describe('utils', () => {
     });
   });
 
-  describe.only('remove empty key', () => {
+  describe('remove empty key', () => {
     it('empty key should be removed', () => {
       const state = {
         query: '',
