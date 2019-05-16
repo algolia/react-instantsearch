@@ -150,12 +150,8 @@ function refine(props, searchState, nextRefinement, currentRange, context) {
   const nextMinAsNumber = !isMinReset ? parseFloat(nextMin) : undefined;
   const nextMaxAsNumber = !isMaxReset ? parseFloat(nextMax) : undefined;
 
-  const isNextMinValid =
-    isMinReset ||
-    (typeof nextMinAsNumber === 'number' && isFinite(nextMinAsNumber));
-  const isNextMaxValid =
-    isMaxReset ||
-    (typeof nextMaxAsNumber === 'number' && isFinite(nextMaxAsNumber));
+  const isNextMinValid = isMinReset || isFinite(nextMinAsNumber);
+  const isNextMaxValid = isMaxReset || isFinite(nextMaxAsNumber);
 
   if (!isNextMinValid || !isNextMaxValid) {
     throw Error("You can't provide non finite values to the range connector.");
