@@ -23,16 +23,15 @@ function getCurrentRefinement(props, searchState, context) {
     []
   );
 
-  if (typeof currentRefinement === 'string') {
-    // All items were unselected
-    if (currentRefinement === '') {
-      return [];
-    }
+  if (typeof currentRefinement !== 'string') {
+    return currentRefinement;
+  }
 
-    // Only one item was in the searchState but we know it should be an array
+  if (currentRefinement) {
     return [currentRefinement];
   }
-  return currentRefinement;
+
+  return [];
 }
 
 function getValue(name, props, searchState, context) {
