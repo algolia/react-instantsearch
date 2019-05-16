@@ -83,11 +83,9 @@ function refineMultiIndex(searchState, nextRefinement, context, resetPage) {
         }
       : {
           ...searchState.indices,
-          ...{
-            [indexId]: {
-              ...nextRefinement,
-              ...page,
-            },
+          [indexId]: {
+            ...nextRefinement,
+            ...page,
           },
         };
 
@@ -113,29 +111,23 @@ function refineMultiIndexWithNamespace(
   const indexId = getIndexId(context);
   const page = resetPage ? { page: 1 } : undefined;
   const state =
-    searchState &&
-    searchState.indices &&
-    searchState.indices.hasOwnProperty(indexId)
+    searchState.indices && searchState.indices.hasOwnProperty(indexId)
       ? {
           ...searchState.indices,
           [indexId]: {
             ...searchState.indices[indexId],
-            ...{
-              [namespace]: {
-                ...searchState.indices[indexId][namespace],
-                ...nextRefinement,
-              },
-              page: 1,
+            [namespace]: {
+              ...searchState.indices[indexId][namespace],
+              ...nextRefinement,
             },
+            page: 1,
           },
         }
       : {
           ...searchState.indices,
-          ...{
-            [indexId]: {
-              [namespace]: nextRefinement,
-              ...page,
-            },
+          [indexId]: {
+            [namespace]: nextRefinement,
+            ...page,
           },
         };
 
@@ -179,7 +171,6 @@ function hasRefinements({
 
   if (multiIndex && namespace) {
     return (
-      searchState &&
       searchState.indices &&
       searchState.indices[indexId] &&
       searchState.indices[indexId][namespace] &&
@@ -189,7 +180,6 @@ function hasRefinements({
 
   if (multiIndex) {
     return (
-      searchState &&
       searchState.indices &&
       searchState.indices[indexId] &&
       searchState.indices[indexId].hasOwnProperty(id)

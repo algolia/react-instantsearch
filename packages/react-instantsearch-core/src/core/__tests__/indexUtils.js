@@ -411,7 +411,7 @@ describe('utility method for manipulating the search state', () => {
       expect(value).toEqual('defaultRefinement');
     });
 
-    it('retrieve the current refinement value when impossible', () => {
+    it('retrieve the default refinement value there is no current refinement', () => {
       const searchState = {
         page: 1,
         refinement: 'refinement',
@@ -428,7 +428,7 @@ describe('utility method for manipulating the search state', () => {
         defaultRefinement
       );
 
-      expect(value).toEqual(defaultRefinement);
+      expect(value).toBe(defaultRefinement);
     });
 
     it('clean up values', () => {
