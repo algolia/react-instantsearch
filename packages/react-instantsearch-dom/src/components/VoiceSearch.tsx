@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { translatable, Translate } from 'react-instantsearch-core';
 import { createClassNames } from '../core/utils';
-import voiceSearchHelper, {
+import createVoiceSearchHelper, {
   VoiceSearchHelper,
   VoiceListeningState,
 } from '../lib/voiceSearchHelper';
@@ -79,24 +79,24 @@ class VoiceSearch extends Component<VoiceSearchProps, VoiceListeningState> {
     buttonTextComponent: DefaultButtonText,
     statusComponent: DefaultStatus,
   };
-  private voiceSearch: VoiceSearchHelper;
+  private voiceSearchHelper: VoiceSearchHelper;
 
   constructor(props: VoiceSearchProps) {
     super(props);
     const { searchAsYouSpeak = false, refine } = props;
-    this.voiceSearch = voiceSearchHelper({
+    this.voiceSearchHelper = createVoiceSearchHelper({
       searchAsYouSpeak,
       onQueryChange: query => refine(query),
       onStateChange: () => {
-        this.setState(this.voiceSearch.getState());
+        this.setState(this.voiceSearchHelper.getState());
       },
     });
-    this.state = this.voiceSearch.getState();
+    this.state = this.voiceSearchHelper.getState();
   }
 
   public render() {
     const { status, transcript, isSpeechFinal, errorCode } = this.state;
-    const { isListening, isBrowserSupported } = this.voiceSearch;
+    const { isListening, isBrowserSupported } = this.voiceSearchHelper;
     const {
       translate,
       buttonTextComponent: ButtonText,
@@ -135,7 +135,7 @@ class VoiceSearch extends Component<VoiceSearchProps, VoiceListeningState> {
 
   private onClick = (event: React.MouseEvent<HTMLElement>) => {
     event.currentTarget.blur();
-    const { toggleListening } = this.voiceSearch;
+    const { toggleListening } = this.voiceSearchHelper;
     toggleListening();
   };
 }
