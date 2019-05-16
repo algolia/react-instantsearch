@@ -70,9 +70,7 @@ export function refineValue(
 function refineMultiIndex(searchState, nextRefinement, indexId, resetPage) {
   const page = resetPage ? { page: 1 } : undefined;
   const state =
-    searchState &&
-    searchState.indices &&
-    searchState.indices.hasOwnProperty(indexId)
+    searchState.indices && searchState.indices.hasOwnProperty(indexId)
       ? {
           ...searchState.indices,
           [indexId]: {
@@ -185,13 +183,12 @@ function hasRefinements({
 
   if (namespace) {
     return (
-      searchState &&
       searchState[namespace] &&
       searchState[namespace].hasOwnProperty(attributeName)
     );
   }
 
-  return searchState && searchState.hasOwnProperty(id);
+  return searchState.hasOwnProperty(id);
 }
 
 function getRefinements({
