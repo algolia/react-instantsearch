@@ -1,4 +1,4 @@
-import { isEmpty, zipWith } from 'lodash';
+import { isEmpty } from 'lodash';
 import React, { Component } from 'react';
 import { renderToString } from 'react-dom/server';
 import PropTypes from 'prop-types';
@@ -82,15 +82,10 @@ const multiIndexSearch = (
   );
 
   return Promise.all(search).then(results =>
-    zipWith([indexName, ...indexIds], results, (indexId, result) =>
-      // We attach `indexId` on the results to be able to reconstruct the
-      // object client side. We cannot rely on `state.index` anymore because
-      // we may have multiple times the same index.
-      ({
-        ...result,
-        _internalIndexId: indexId,
-      })
-    )
+    [indexName, ...indexIds].map((indexId, i) => ({
+      ...results[i],
+      _internalIndexId: indexId,
+    }))
   );
 };
 
