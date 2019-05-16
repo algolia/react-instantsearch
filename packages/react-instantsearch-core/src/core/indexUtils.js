@@ -70,7 +70,7 @@ export function refineValue(
 function refineMultiIndex(searchState, nextRefinement, indexId, resetPage) {
   const page = resetPage ? { page: 1 } : undefined;
   const state =
-    searchState.indices && searchState.indices.hasOwnProperty(indexId)
+    searchState.indices && searchState.indices[indexId]
       ? {
           ...searchState.indices,
           [indexId]: {
@@ -108,7 +108,7 @@ function refineMultiIndexWithNamespace(
 ) {
   const page = resetPage ? { page: 1 } : undefined;
   const state =
-    searchState.indices && searchState.indices.hasOwnProperty(indexId)
+    searchState.indices && searchState.indices[indexId]
       ? {
           ...searchState.indices,
           [indexId]: {
@@ -200,19 +200,16 @@ function getRefinements({
   id,
 }) {
   if (multiIndex && namespace) {
-    return (
-      searchState.indices[indexId][namespace] &&
-      searchState.indices[indexId][namespace][attributeName]
-    );
+    return searchState.indices[indexId][namespace][attributeName];
   }
   if (multiIndex) {
-    return searchState.indices[indexId] && searchState.indices[indexId][id];
+    return searchState.indices[indexId][id];
   }
   if (namespace) {
-    return searchState[namespace] && searchState[namespace][attributeName];
+    return searchState[namespace][attributeName];
   }
 
-  return searchState && searchState[id];
+  return searchState[id];
 }
 
 export function getCurrentRefinementValue(
