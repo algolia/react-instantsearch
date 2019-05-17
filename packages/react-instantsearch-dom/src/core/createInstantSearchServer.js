@@ -1,4 +1,4 @@
-import { isEmpty, zipWith } from 'lodash';
+import { zipWith } from 'lodash';
 import React, { Component } from 'react';
 import { renderToString } from 'react-dom/server';
 import PropTypes from 'prop-types';
@@ -118,7 +118,7 @@ const createInstantSearchServer = algoliasearch => {
 
     const helper = algoliasearchHelper(client, sharedParameters.index);
 
-    if (isEmpty(derivedParameters)) {
+    if (Object.keys(derivedParameters).length === 0) {
       return singleIndexSearch(helper, sharedParameters);
     }
 
