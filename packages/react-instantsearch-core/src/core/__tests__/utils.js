@@ -98,6 +98,25 @@ describe('utils', () => {
         },
       });
     });
+
+    it('does not do anything on empty root', () => {
+      expect(utils.removeEmptyKey({})).toEqual({});
+    });
+
+    it('does empty out objects', () => {
+      expect(utils.removeEmptyKey({ test: {} })).toEqual({});
+      expect(utils.removeEmptyKey({ test: { dog: {} } })).toEqual({
+        // this one stays, because we have no multipass algorithm
+        test: {},
+      });
+    });
+
+    it('does not empty out arrays', () => {
+      expect(utils.removeEmptyKey({ test: [] })).toEqual({ test: [] });
+      expect(utils.removeEmptyKey({ test: { dog: [] } })).toEqual({
+        test: { dog: [] },
+      });
+    });
   });
 
   describe('addAbsolutePositions', () => {
