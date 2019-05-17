@@ -1,4 +1,4 @@
-import { has, omit as lodashOmit, get } from 'lodash';
+import { has, get } from 'lodash';
 import { omit } from './utils';
 
 export function getIndexId(context) {
@@ -269,5 +269,15 @@ function cleanUpValueWithMultiIndex({
     };
   }
 
-  return lodashOmit(searchState, `indices.${indexId}.${id}`);
+  if (indexSearchState) {
+    return {
+      ...searchState,
+      indices: {
+        ...searchState.indices,
+        [indexId]: omit(indexSearchState, [id]),
+      },
+    };
+  }
+
+  return searchState;
 }
