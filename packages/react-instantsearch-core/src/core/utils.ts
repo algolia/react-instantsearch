@@ -33,19 +33,21 @@ export const defer = f => {
   resolved.then(f);
 };
 
-const isPlainObject = (value: any): value is object =>
+const isPlainObject = (value: unknown): value is object =>
   typeof value === 'object' && value !== null && !Array.isArray(value);
 
 export const removeEmptyKey = (obj: object) => {
   Object.keys(obj).forEach(key => {
-    if (!isPlainObject(obj[key])) {
+    const value = obj[key];
+
+    if (!isPlainObject(value)) {
       return;
     }
 
-    if (isEmpty(obj[key])) {
+    if (isEmpty(value)) {
       delete obj[key];
     } else {
-      removeEmptyKey(obj[key]);
+      removeEmptyKey(value);
     }
   });
 
