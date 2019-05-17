@@ -63,6 +63,6 @@ export function addQueryID(hits, queryID) {
   }));
 }
 
-export function objectHasKeys(object) {
+export function objectHasKeys(object: object | undefined) {
   return object && Object.keys(object).length > 0;
 }
