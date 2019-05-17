@@ -1,6 +1,7 @@
-import { find, isEmpty } from 'lodash';
+import { isEmpty } from 'lodash';
 import PropTypes from 'prop-types';
 import createConnector from '../core/createConnector';
+import { find } from '../core/utils';
 import {
   cleanUpValue,
   refineValue,

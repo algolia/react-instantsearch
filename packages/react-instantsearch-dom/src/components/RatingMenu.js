@@ -1,9 +1,8 @@
-import { find } from 'lodash';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { translatable } from 'react-instantsearch-core';
-import { createClassNames, range } from '../core/utils';
+import { createClassNames, find, range } from '../core/utils';
 
 const cx = createClassNames('RatingMenu');
 
