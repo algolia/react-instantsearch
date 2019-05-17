@@ -50,3 +50,19 @@ export function range({ start = 0, end, step = 1 }: RangeOptions): number[] {
     (_, current) => (start + current) * limitStep
   );
 }
+
+export function find<T = any>(
+  array: T[],
+  comparator: (item: T) => boolean
+): T | undefined {
+  if (!Array.isArray(array)) {
+    return undefined;
+  }
+
+  for (let i = 0; i < array.length; i++) {
+    if (comparator(array[i])) {
+      return array[i];
+    }
+  }
+  return undefined;
+}
