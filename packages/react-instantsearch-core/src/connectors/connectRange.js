@@ -1,4 +1,3 @@
-import { isFinite as _isFinite } from 'lodash';
 import PropTypes from 'prop-types';
 import createConnector from '../core/createConnector';
 import {
@@ -41,18 +40,18 @@ function getCurrentRange(boundaries, stats, precision) {
   const pow = Math.pow(10, precision);
 
   let min;
-  if (_isFinite(boundaries.min)) {
+  if (typeof boundaries.min === 'number' && isFinite(boundaries.min)) {
     min = boundaries.min;
-  } else if (_isFinite(stats.min)) {
+  } else if (typeof stats.min === 'number' && isFinite(stats.min)) {
     min = stats.min;
   } else {
     min = undefined;
   }
 
   let max;
-  if (_isFinite(boundaries.max)) {
+  if (typeof boundaries.max === 'number' && isFinite(boundaries.max)) {
     max = boundaries.max;
-  } else if (_isFinite(stats.max)) {
+  } else if (typeof stats.max === 'number' && isFinite(stats.max)) {
     max = stats.max;
   } else {
     max = undefined;
@@ -151,8 +150,8 @@ function refine(props, searchState, nextRefinement, currentRange, context) {
   const nextMinAsNumber = !isMinReset ? parseFloat(nextMin) : undefined;
   const nextMaxAsNumber = !isMaxReset ? parseFloat(nextMax) : undefined;
 
-  const isNextMinValid = isMinReset || _isFinite(nextMinAsNumber);
-  const isNextMaxValid = isMaxReset || _isFinite(nextMaxAsNumber);
+  const isNextMinValid = isMinReset || isFinite(nextMinAsNumber);
+  const isNextMaxValid = isMaxReset || isFinite(nextMaxAsNumber);
 
   if (!isNextMinValid || !isNextMaxValid) {
     throw Error("You can't provide non finite values to the range connector.");

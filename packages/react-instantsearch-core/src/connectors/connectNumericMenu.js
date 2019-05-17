@@ -1,7 +1,6 @@
-import { find } from 'lodash';
 import PropTypes from 'prop-types';
-import { objectHasKeys } from '../core/utils';
 import createConnector from '../core/createConnector';
+import { objectHasKeys, find } from '../core/utils';
 import {
   cleanUpValue,
   refineValue,

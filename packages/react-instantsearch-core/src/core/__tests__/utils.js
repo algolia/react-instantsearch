@@ -98,6 +98,25 @@ describe('utils', () => {
         },
       });
     });
+
+    it('does not do anything on empty root', () => {
+      expect(utils.removeEmptyKey({})).toEqual({});
+    });
+
+    it('does empty out objects', () => {
+      expect(utils.removeEmptyKey({ test: {} })).toEqual({});
+      expect(utils.removeEmptyKey({ test: { dog: {} } })).toEqual({
+        // this one stays, because we have no multipass algorithm
+        test: {},
+      });
+    });
+
+    it('does not empty out arrays', () => {
+      expect(utils.removeEmptyKey({ test: [] })).toEqual({ test: [] });
+      expect(utils.removeEmptyKey({ test: { dog: [] } })).toEqual({
+        test: { dog: [] },
+      });
+    });
   });
 
   describe('addAbsolutePositions', () => {
@@ -135,6 +154,44 @@ describe('utils', () => {
         { objectID: '1', __queryID: 'theQueryID' },
         { objectID: '2', __queryID: 'theQueryID' },
       ]);
+    });
+  });
+
+  describe('find', () => {
+    test('returns the first match based on the comparator', () => {
+      expect(
+        utils.find([1], function() {
+          return true;
+        })
+      ).toBe(1);
+      expect(
+        utils.find([1, 2], function() {
+          return true;
+        })
+      ).toBe(1);
+
+      expect(
+        utils.find([{ nice: false }, { nice: true }], function(el) {
+          return el.nice;
+        })
+      ).toEqual({ nice: true });
+    });
+
+    test('returns undefined in non-found cases', () => {
+      expect(
+        utils.find([], function() {
+          return false;
+        })
+      ).toBeUndefined();
+      expect(
+        utils.find(undefined, function() {
+          return false;
+        })
+      ).toBeUndefined();
+
+      expect(function() {
+        utils.find([1, 2, 3], undefined);
+      }).toThrow();
     });
   });
 });

@@ -1,5 +1,3 @@
-import { isEmpty, isPlainObject } from 'lodash';
-
 // From https://github.com/reactjs/react-redux/blob/master/src/utils/shallowEqual.js
 export const shallowEqual = (objA, objB) => {
   if (objA === objB) {
@@ -15,7 +13,6 @@ export const shallowEqual = (objA, objB) => {
 
   // Test for A's keys different from B.
   const hasOwn = Object.prototype.hasOwnProperty;
-  // tslint:disable-next-line: prefer-for-of
   for (let i = 0; i < keysA.length; i++) {
     if (!hasOwn.call(objB, keysA[i]) || objA[keysA[i]] !== objB[keysA[i]]) {
       return false;
@@ -33,12 +30,20 @@ export const defer = f => {
   resolved.then(f);
 };
 
-export const removeEmptyKey = obj => {
+const isPlainObject = (value: unknown): value is object =>
+  typeof value === 'object' && value !== null && !Array.isArray(value);
+
+export const removeEmptyKey = (obj: object) => {
   Object.keys(obj).forEach(key => {
     const value = obj[key];
-    if (isEmpty(value) && isPlainObject(value)) {
+
+    if (!isPlainObject(value)) {
+      return;
+    }
+
+    if (!objectHasKeys(value)) {
       delete obj[key];
-    } else if (isPlainObject(value)) {
+    } else {
       removeEmptyKey(value);
     }
   });
@@ -61,6 +66,22 @@ export function addQueryID(hits, queryID) {
     ...hit,
     __queryID: queryID,
   }));
+}
+
+export function find<T = any>(
+  array: T[],
+  comparator: (item: T) => boolean
+): T | undefined {
+  if (!Array.isArray(array)) {
+    return undefined;
+  }
+
+  for (let i = 0; i < array.length; i++) {
+    if (comparator(array[i])) {
+      return array[i];
+    }
+  }
+  return undefined;
 }
 
 export function objectHasKeys(object: object | undefined) {
