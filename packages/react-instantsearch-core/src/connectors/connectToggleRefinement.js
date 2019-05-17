@@ -1,5 +1,5 @@
-import { find } from 'lodash';
 import PropTypes from 'prop-types';
+import { find } from '../core/utils';
 import createConnector from '../core/createConnector';
 import {
   cleanUpValue,

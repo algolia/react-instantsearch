@@ -15,7 +15,6 @@ export const shallowEqual = (objA, objB) => {
 
   // Test for A's keys different from B.
   const hasOwn = Object.prototype.hasOwnProperty;
-  // tslint:disable-next-line: prefer-for-of
   for (let i = 0; i < keysA.length; i++) {
     if (!hasOwn.call(objB, keysA[i]) || objA[keysA[i]] !== objB[keysA[i]]) {
       return false;
@@ -69,4 +68,20 @@ export function addQueryID(hits, queryID) {
     ...hit,
     __queryID: queryID,
   }));
+}
+
+export function find<T = any>(
+  array: T[],
+  comparator: (item: T) => boolean
+): T | undefined {
+  if (!Array.isArray(array)) {
+    return undefined;
+  }
+
+  for (let i = 0; i < array.length; i++) {
+    if (comparator(array[i])) {
+      return array[i];
+    }
+  }
+  return undefined;
 }
