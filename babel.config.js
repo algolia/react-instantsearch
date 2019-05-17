@@ -26,7 +26,7 @@ module.exports = api => {
       ],
       '@babel/preset-react',
     ],
-    plugins: ['@babel/plugin-proposal-class-properties', 'babel-plugin-lodash'],
+    plugins: ['@babel/plugin-proposal-class-properties'],
     overrides: [
       {
         test: 'packages/*',
