@@ -1,9 +1,25 @@
-import { isEqual } from 'lodash';
 import { Component } from 'react';
 import { polyfill } from 'react-lifecycles-compat';
 import PropTypes from 'prop-types';
 import { connectGeoSearch } from 'react-instantsearch-dom';
 import { LatLngPropType, BoundingBoxPropType } from './propTypes';
+
+function isEqualPosition(a, b) {
+  if (a === b) {
+    return true;
+  }
+  return a.lat === b.lat && a.lng === b.lng;
+}
+
+function isEqualCurrentRefinement(a, b) {
+  if (a === b) {
+    return true;
+  }
+  return (
+    isEqualPosition(a.northEast, b.northEast) &&
+    isEqualPosition(a.southWest, b.southWest)
+  );
+}
 
 export class Connector extends Component {
   static propTypes = {
@@ -20,8 +36,8 @@ export class Connector extends Component {
     const { position, currentRefinement } = props;
     const { previousPosition, previousCurrentRefinement } = state;
 
-    const positionChanged = !isEqual(previousPosition, position);
-    const currentRefinementChanged = !isEqual(
+    const positionChanged = !isEqualPosition(previousPosition, position);
+    const currentRefinementChanged = !isEqualCurrentRefinement(
       previousCurrentRefinement,
       currentRefinement
     );
