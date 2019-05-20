@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import createConnector from '../core/createConnector';
-import { objectHasKeys, find } from '../core/utils';
+import { find } from '../core/utils';
 import {
   cleanUpValue,
   refineValue,
@@ -156,7 +156,7 @@ export default createConnector({
     if (!items.some(item => item.value === '')) {
       items.push({
         value: '',
-        isRefined: !objectHasKeys(refinedItem),
+        isRefined: refinedItem && refinedItem.length > 0,
         noRefinement: !stats,
         label: 'All',
       });
