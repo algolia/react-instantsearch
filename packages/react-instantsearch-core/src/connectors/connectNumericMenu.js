@@ -156,7 +156,7 @@ export default createConnector({
     if (!items.some(item => item.value === '')) {
       items.push({
         value: '',
-        isRefined: refinedItem && refinedItem.length > 0,
+        isRefined: refinedItem && refinedItem.length === 0,
         noRefinement: !stats,
         label: 'All',
       });
