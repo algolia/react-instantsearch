@@ -1,4 +1,4 @@
-import { omit } from 'lodash';
+import { omit } from './utils';
 
 export function getIndexId(context) {
   return hasMultipleIndices(context)
@@ -274,11 +274,11 @@ function cleanUpValueWithSingleIndex({
   if (namespace) {
     return {
       ...searchState,
-      [namespace]: omit(searchState[namespace], attribute),
+      [namespace]: omit(searchState[namespace], [attribute]),
     };
   }
 
-  return omit(searchState, id);
+  return omit(searchState, [id]);
 }
 
 function cleanUpValueWithMultiIndex({
@@ -297,11 +297,21 @@ function cleanUpValueWithMultiIndex({
         ...searchState.indices,
         [indexId]: {
           ...indexSearchState,
-          [namespace]: omit(indexSearchState[namespace], attribute),
+          [namespace]: omit(indexSearchState[namespace], [attribute]),
         },
       },
     };
   }
 
-  return omit(searchState, `indices.${indexId}.${id}`);
+  if (indexSearchState) {
+    return {
+      ...searchState,
+      indices: {
+        ...searchState.indices,
+        [indexId]: omit(indexSearchState, [id]),
+      },
+    };
+  }
+
+  return searchState;
 }

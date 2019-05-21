@@ -156,7 +156,11 @@ describe('connectQueryRules', () => {
         };
 
         expect(() => {
-          getSearchParameters(SearchParameters.make({}), props, searchState);
+          connect.getSearchParameters(
+            SearchParameters.make({}),
+            props,
+            searchState
+          );
         }).not.toThrow();
       });
 
