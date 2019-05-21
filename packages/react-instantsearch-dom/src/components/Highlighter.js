@@ -83,7 +83,7 @@ const Highlighter = ({
 Highlighter.propTypes = {
   cx: PropTypes.func.isRequired,
   hit: PropTypes.object.isRequired,
-  attribute: PropTypes.oneOf([
+  attribute: PropTypes.oneOfType([
     PropTypes.array(PropTypes.string),
     PropTypes.string,
   ]).isRequired,
