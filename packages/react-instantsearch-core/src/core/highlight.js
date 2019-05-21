@@ -1,5 +1,4 @@
-const getPropertyByPath = (object, path) =>
-  path.split('.').reduce((current, key) => current && current[key], object);
+import { getPropertyByPath } from './utils';
 
 export const HIGHLIGHT_TAGS = {
   highlightPreTag: `<ais-highlight-0000000000>`,

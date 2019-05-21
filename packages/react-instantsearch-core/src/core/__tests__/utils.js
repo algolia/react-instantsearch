@@ -157,6 +157,98 @@ describe('utils', () => {
     });
   });
 
+  describe('getPropertyByPath', () => {
+    it('returns undefined on non-object root', () => {
+      expect(utils.getPropertyByPath(false, 'fake')).toBe(undefined);
+      expect(utils.getPropertyByPath(undefined, 'fake')).toBe(undefined);
+      expect(utils.getPropertyByPath(null, 'fake.nested')).toBe(undefined);
+    });
+
+    it('returns path if exists', () => {
+      expect(utils.getPropertyByPath({ dog: true }, 'dog')).toBe(true);
+      expect(
+        utils.getPropertyByPath(
+          { i: { like: { properties: false } } },
+          'i.like.properties'
+        )
+      ).toBe(false);
+      expect(
+        utils.getPropertyByPath({ true: { nested: 'ok' } }, 'true.nested')
+      ).toBe('ok');
+    });
+
+    it('accepts a pre-split path as array', () => {
+      expect(utils.getPropertyByPath({ dog: true }, ['dog'])).toBe(true);
+      expect(
+        utils.getPropertyByPath({ i: { like: { properties: false } } }, [
+          'i',
+          'like',
+          'properties',
+        ])
+      ).toBe(false);
+      expect(
+        utils.getPropertyByPath({ true: { nested: 'ok' } }, ['true', 'nested'])
+      ).toBe('ok');
+    });
+
+    it('returns undefined if does not exist', () => {
+      expect(
+        utils.getPropertyByPath(
+          { name: { known: { value: '' } } },
+          'name.unkown'
+        )
+      ).toBe(undefined);
+
+      expect(utils.getPropertyByPath({ name: false }, 'name.unkown')).toBe(
+        undefined
+      );
+    });
+
+    it('returns indexed path if exists', () => {
+      expect(
+        utils.getPropertyByPath({ array: ['a', 'b', 'c'] }, 'array.2')
+      ).toBe('c');
+      expect(
+        utils.getPropertyByPath(
+          { array: [{ letter: 'a' }, { letter: 'b' }, { letter: 'c' }] },
+          'array.2.letter'
+        )
+      ).toBe('c');
+
+      expect(
+        utils.getPropertyByPath({ array: ['a', 'b', 'c'] }, 'array[2]')
+      ).toBe('c');
+      expect(
+        utils.getPropertyByPath(
+          { array: [{ letter: 'a' }, { letter: 'b' }, { letter: 'c' }] },
+          'array[2].letter'
+        )
+      ).toBe('c');
+    });
+
+    it('returns undefined if indexed path does not exist', () => {
+      expect(
+        utils.getPropertyByPath({ array: ['a', 'b', 'c'] }, 'array.4')
+      ).toBe(undefined);
+      expect(
+        utils.getPropertyByPath(
+          { array: [{ letter: 'a' }, { letter: 'b' }, { letter: 'c' }] },
+          'array.5.letter'
+        )
+      ).toBe(undefined);
+
+      expect(
+        utils.getPropertyByPath({ array: ['a', 'b', 'c'] }, 'array[4]')
+      ).toBe(undefined);
+      expect(
+        utils.getPropertyByPath(
+          { array: [{ letter: 'a' }, { letter: 'b' }, { letter: 'c' }] },
+          'array[5]letter'
+        )
+      ).toBe(undefined);
+    });
+  });
+
   describe('find', () => {
     test('returns the first match based on the comparator', () => {
       expect(
