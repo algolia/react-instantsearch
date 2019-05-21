@@ -1,4 +1,3 @@
-import { omit } from 'lodash';
 import algoliasearchHelper from 'algoliasearch-helper';
 import createWidgetsManager from './createWidgetsManager';
 import createStore from './createStore';
@@ -214,18 +213,15 @@ export default function createInstantSearchManager({
         nextIsSearchStalled = false;
       }
 
-      const nextState = omit(
-        {
-          ...currentState,
-          results,
-          isSearchStalled: nextIsSearchStalled,
-          searching: false,
-          error: null,
-        },
-        'resultsFacetValues'
-      );
+      const { resultsFacetValues, ...partialState } = currentState;
 
-      store.setState(nextState);
+      store.setState({
+        ...partialState,
+        results,
+        isSearchStalled: nextIsSearchStalled,
+        searching: false,
+        error: null,
+      });
     };
   }
 
@@ -238,31 +234,25 @@ export default function createInstantSearchManager({
       nextIsSearchStalled = false;
     }
 
-    const nextState = omit(
-      {
-        ...currentState,
-        isSearchStalled: nextIsSearchStalled,
-        error,
-        searching: false,
-      },
-      'resultsFacetValues'
-    );
+    const { resultsFacetValues, ...partialState } = currentState;
 
-    store.setState(nextState);
+    store.setState({
+      ...partialState,
+      isSearchStalled: nextIsSearchStalled,
+      error,
+      searching: false,
+    });
   }
 
   function handleNewSearch() {
     if (!stalledSearchTimer) {
       stalledSearchTimer = setTimeout(() => {
-        const nextState = omit(
-          {
-            ...store.getState(),
-            isSearchStalled: true,
-          },
-          'resultsFacetValues'
-        );
+        const { resultsFacetValues, ...partialState } = store.getState();
 
-        store.setState(nextState);
+        store.setState({
+          ...partialState,
+          isSearchStalled: true,
+        });
       }, stalledSearchDelay);
     }
   }
