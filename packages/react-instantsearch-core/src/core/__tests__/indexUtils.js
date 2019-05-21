@@ -220,6 +220,7 @@ describe('utility method for manipulating the search state', () => {
         namespace: {},
       });
     });
+
     it('get results', () => {
       const searchResults = { results: { hits: ['some'] } };
 

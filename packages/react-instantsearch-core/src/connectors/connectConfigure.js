@@ -1,4 +1,4 @@
-import { omit } from 'lodash';
+import { omit } from '../core/utils';
 import createConnector from '../core/createConnector';
 import {
   refineValue,
