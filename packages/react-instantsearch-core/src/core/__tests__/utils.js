@@ -243,7 +243,7 @@ describe('utils', () => {
       expect(
         utils.getPropertyByPath(
           { array: [{ letter: 'a' }, { letter: 'b' }, { letter: 'c' }] },
-          'array[5]letter'
+          'array[5].letter'
         )
       ).toBe(undefined);
     });
