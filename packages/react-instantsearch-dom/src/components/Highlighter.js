@@ -84,7 +84,7 @@ Highlighter.propTypes = {
   cx: PropTypes.func.isRequired,
   hit: PropTypes.object.isRequired,
   attribute: PropTypes.oneOfType([
-    PropTypes.array(PropTypes.string),
+    PropTypes.arrayOf(PropTypes.string),
     PropTypes.string,
   ]).isRequired,
   highlight: PropTypes.func.isRequired,
