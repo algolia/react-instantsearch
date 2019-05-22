@@ -1,5 +1,6 @@
 import qs from 'qs';
 import React, { Component, Fragment } from 'react';
+import algoliasearch from 'algoliasearch/lite';
 import { InstantSearch, SearchBox, Configure } from 'react-instantsearch-dom';
 import {
   GoogleMapsLoader,
@@ -7,6 +8,11 @@ import {
   Control,
   Marker,
 } from 'react-instantsearch-dom-maps';
+
+const searchClient = algoliasearch(
+  'latency',
+  '6be0576ff61c053d5f9a3225e2a90f76'
+);
 
 const updateAfter = 700;
 const searchStateToUrl = searchState =>
@@ -72,8 +78,7 @@ class App extends Component {
 
     return (
       <InstantSearch
-        appId="latency"
-        apiKey="6be0576ff61c053d5f9a3225e2a90f76"
+        searchClient={searchClient}
         indexName="airbnb"
         searchState={searchState}
         onSearchStateChange={this.onSearchStateChange}

@@ -5,18 +5,19 @@ import version from './version';
 
 /**
  * Creates a specialized root InstantSearch component. It accepts
- * an algolia client and a specification of the root Element.
- * @param {function} defaultAlgoliaClient - a function that builds an Algolia client
+ * a specification of the root Element.
  * @param {object} root - the defininition of the root of an InstantSearch sub tree.
  * @returns {object} an InstantSearch root
  */
-export default function createInstantSearch(defaultAlgoliaClient, root) {
+export default function createInstantSearch(root) {
   return class CreateInstantSearch extends Component {
     static propTypes = {
-      algoliaClient: PropTypes.object,
-      searchClient: PropTypes.object,
-      appId: PropTypes.string,
-      apiKey: PropTypes.string,
+      searchClient: PropTypes.shape({
+        search: PropTypes.func.isRequired,
+        searchForFacetValues: PropTypes.func,
+        addAlgoliaAgent: PropTypes.func,
+        clearCache: PropTypes.func,
+      }).isRequired,
       children: PropTypes.oneOfType([
         PropTypes.arrayOf(PropTypes.node),
         PropTypes.node,
@@ -46,27 +47,7 @@ export default function createInstantSearch(defaultAlgoliaClient, root) {
     constructor(...args) {
       super(...args);
 
-      if (this.props.searchClient) {
-        if (this.props.appId || this.props.apiKey || this.props.algoliaClient) {
-          throw new Error(
-            'react-instantsearch:: `searchClient` cannot be used with `appId`, `apiKey` or `algoliaClient`.'
-          );
-        }
-      }
-
-      if (this.props.algoliaClient) {
-        // eslint-disable-next-line no-console
-        console.warn(
-          '`algoliaClient` option was renamed `searchClient`. Please use this new option before the next major version.'
-        );
-      }
-
-      this.client =
-        this.props.searchClient ||
-        this.props.algoliaClient ||
-        defaultAlgoliaClient(this.props.appId, this.props.apiKey, {
-          _useRequestCache: true,
-        });
+      this.client = this.props.searchClient;
 
       if (typeof this.client.addAlgoliaAgent === 'function') {
         this.client.addAlgoliaAgent(`react (${React.version})`);
@@ -75,18 +56,7 @@ export default function createInstantSearch(defaultAlgoliaClient, root) {
     }
 
     componentWillReceiveProps(nextProps) {
-      const props = this.props;
-
-      if (nextProps.searchClient) {
-        this.client = nextProps.searchClient;
-      } else if (nextProps.algoliaClient) {
-        this.client = nextProps.algoliaClient;
-      } else if (
-        props.appId !== nextProps.appId ||
-        props.apiKey !== nextProps.apiKey
-      ) {
-        this.client = defaultAlgoliaClient(nextProps.appId, nextProps.apiKey);
-      }
+      this.client = nextProps.searchClient;
 
       if (typeof this.client.addAlgoliaAgent === 'function') {
         this.client.addAlgoliaAgent(`react (${React.version})`);
@@ -104,7 +74,6 @@ export default function createInstantSearch(defaultAlgoliaClient, root) {
           onSearchParameters={this.props.onSearchParameters}
           root={this.props.root}
           searchClient={this.client}
-          algoliaClient={this.client}
           refresh={this.props.refresh}
           resultsState={this.props.resultsState}
         >

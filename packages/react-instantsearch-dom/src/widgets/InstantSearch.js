@@ -1,7 +1,6 @@
-import algoliasearch from 'algoliasearch/lite';
 import { createInstantSearch } from 'react-instantsearch-core';
 
-const InstantSearch = createInstantSearch(algoliasearch, {
+const InstantSearch = createInstantSearch({
   Root: 'div',
   props: {
     className: 'ais-InstantSearch__root',

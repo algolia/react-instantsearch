@@ -92,8 +92,8 @@ const multiIndexSearch = (
   );
 };
 
-const createInstantSearchServer = algoliasearch => {
-  const InstantSearch = createInstantSearch(algoliasearch, {
+const createInstantSearchServer = () => {
+  const InstantSearch = createInstantSearch({
     Root: 'div',
     props: {
       className: 'ais-InstantSearch__root',
@@ -131,10 +131,12 @@ const createInstantSearchServer = algoliasearch => {
 
   class CreateInstantSearchServer extends Component {
     static propTypes = {
-      algoliaClient: PropTypes.object,
-      searchClient: PropTypes.object,
-      appId: PropTypes.string,
-      apiKey: PropTypes.string,
+      searchClient: PropTypes.shape({
+        search: PropTypes.func.isRequired,
+        searchForFacetValues: PropTypes.func,
+        addAlgoliaAgent: PropTypes.func,
+        clearCache: PropTypes.func,
+      }).isRequired,
       indexName: PropTypes.string.isRequired,
       resultsState: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     };
@@ -142,25 +144,7 @@ const createInstantSearchServer = algoliasearch => {
     constructor(...args) {
       super(...args);
 
-      if (this.props.searchClient) {
-        if (this.props.appId || this.props.apiKey || this.props.algoliaClient) {
-          throw new Error(
-            'react-instantsearch:: `searchClient` cannot be used with `appId`, `apiKey` or `algoliaClient`.'
-          );
-        }
-      }
-
-      if (this.props.algoliaClient) {
-        // eslint-disable-next-line no-console
-        console.warn(
-          '`algoliaClient` option was renamed `searchClient`. Please use this new option before the next major version.'
-        );
-      }
-
-      client =
-        this.props.searchClient ||
-        this.props.algoliaClient ||
-        algoliasearch(this.props.appId, this.props.apiKey);
+      client = this.props.searchClient;
 
       if (typeof client.addAlgoliaAgent === 'function') {
         client.addAlgoliaAgent(`react (${React.version})`);

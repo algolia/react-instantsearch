@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@ptomasroos/react-native-multi-slider": "1.0.0",
+    "algoliasearch": "3.32.1",
     "expo": "25.1.2",
     "lodash": "4.17.15",
     "prop-types": "15.6.0",
