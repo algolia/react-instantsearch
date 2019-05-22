@@ -227,6 +227,7 @@ describe('utility method for manipulating the search state', () => {
         namespace: {},
       });
     });
+
     it('get results', () => {
       const searchResults = { results: { hits: ['some'] } };
 
@@ -235,6 +236,7 @@ describe('utility method for manipulating the search state', () => {
       expect(results).toEqual({ hits: ['some'] });
     });
   });
+
   describe('when there are multiple index', () => {
     let context = { multiIndexContext: { targetedIndex: 'first' } };
     it('refine with no namespace', () => {

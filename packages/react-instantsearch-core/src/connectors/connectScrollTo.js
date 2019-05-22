@@ -1,4 +1,3 @@
-import { omit } from 'lodash';
 import PropTypes from 'prop-types';
 import createConnector from '../core/createConnector';
 import {
@@ -6,7 +5,7 @@ import {
   hasMultipleIndices,
   getIndexId,
 } from '../core/indexUtils';
-import { shallowEqual } from '../core/utils';
+import { shallowEqual, omit } from '../core/utils';
 
 /**
  * connectScrollTo connector provides the logic to build a widget that will
@@ -67,10 +66,10 @@ export default createConnector({
     // using ScrollTo in combination of Pagination. As pagination can be change
     // by every widget, we want to scroll only if it cames from the pagination
     // widget itself. We also remove the configure key from the search state to
-    // do this comparaison because for now configure values are not present in the
+    // do this comparison because for now configure values are not present in the
     // search state before a first refinement has been made and will false the results.
     // See: https://github.com/algolia/react-instantsearch/issues/164
-    const cleanedSearchState = omit(omit(searchState, 'configure'), id);
+    const cleanedSearchState = omit(searchState, ['configure', id]);
 
     const hasNotChanged = shallowEqual(
       this._prevSearchState,
