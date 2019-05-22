@@ -121,6 +121,9 @@ class InstantSearch extends Component<Props, State> {
 
     searchClient: PropTypes.shape({
       search: PropTypes.func.isRequired,
+      searchForFacetValues: PropTypes.func,
+      addAlgoliaAgent: PropTypes.func,
+      clearCache: PropTypes.func,
     }).isRequired,
 
     createURL: PropTypes.func,

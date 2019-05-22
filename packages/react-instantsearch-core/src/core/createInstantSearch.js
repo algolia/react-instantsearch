@@ -14,6 +14,9 @@ export default function createInstantSearch(root) {
     static propTypes = {
       searchClient: PropTypes.shape({
         search: PropTypes.func.isRequired,
+        searchForFacetValues: PropTypes.func,
+        addAlgoliaAgent: PropTypes.func,
+        clearCache: PropTypes.func,
       }).isRequired,
       children: PropTypes.oneOfType([
         PropTypes.arrayOf(PropTypes.node),
