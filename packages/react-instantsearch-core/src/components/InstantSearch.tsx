@@ -81,11 +81,8 @@ type State = {
  * @name <InstantSearch>
  * @requirements You will need to have an Algolia account to be able to use this widget.
  * [Create one now](https://www.algolia.com/users/sign_up).
- * @propType {string} appId - Your Algolia application id.
- * @propType {string} apiKey - Your Algolia search-only API key.
  * @propType {string} indexName - Main index in which to search.
  * @propType {boolean} [refresh=false] - Flag to activate when the cache needs to be cleared so that the front-end is updated when a change occurs in the index.
- * @propType {object} [algoliaClient] - Provide a custom Algolia client instead of the internal one (deprecated in favor of `searchClient`).
  * @propType {object} [searchClient] - Provide a custom search client.
  * @propType {func} [onSearchStateChange] - Function to be called everytime a new search is done. Useful for [URL Routing](guide/Routing.html).
  * @propType {object} [searchState] - Object to inject some search state. Switches the InstantSearch component in controlled mode. Useful for [URL Routing](guide/Routing.html).
@@ -95,12 +92,17 @@ type State = {
  * @propType {{ Root: string|function, props: object }} [root] - Use this to customize the root element. Default value: `{ Root: 'div' }`
  * @example
  * import React from 'react';
+ * import algoliasearch from 'algoliasearch/lite';
  * import { InstantSearch, SearchBox, Hits } from 'react-instantsearch-dom';
+ *
+ * const searchClient = algoliasearch(
+ *   'latency',
+ *   '6be0576ff61c053d5f9a3225e2a90f76'
+ * );
  *
  * const App = () => (
  *   <InstantSearch
- *     appId="latency"
- *     apiKey="6be0576ff61c053d5f9a3225e2a90f76"
+ *     searchClient={searchClient}
  *     indexName="instant_search"
  *   >
  *     <SearchBox />
@@ -117,7 +119,12 @@ class InstantSearch extends Component<Props, State> {
     // @TODO: These props are currently constant.
     indexName: PropTypes.string.isRequired,
 
-    searchClient: PropTypes.object.isRequired,
+    searchClient: PropTypes.shape({
+      search: PropTypes.func.isRequired,
+      searchForFacetValues: PropTypes.func,
+      addAlgoliaAgent: PropTypes.func,
+      clearCache: PropTypes.func,
+    }).isRequired,
 
     createURL: PropTypes.func,
 

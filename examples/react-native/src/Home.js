@@ -12,6 +12,7 @@ import {
   Platform,
   Dimensions,
 } from 'react-native';
+import algoliasearch from 'algoliasearch/lite';
 import { InstantSearch } from 'react-instantsearch/native';
 import {
   connectSearchBox,
@@ -30,6 +31,11 @@ import ModalDropdown from 'react-native-modal-dropdown';
 import IosIcon from 'react-native-vector-icons/Ionicons';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import { Actions } from 'react-native-router-flux';
+
+const searchClient = algoliasearch(
+  'latency',
+  '6be0576ff61c053d5f9a3225e2a90f76'
+);
 
 const { height } = Dimensions.get('window');
 
@@ -131,8 +137,7 @@ class Home extends Component {
     return (
       <View style={styles.maincontainer}>
         <InstantSearch
-          appId="latency"
-          apiKey="6be0576ff61c053d5f9a3225e2a90f76"
+          searchClient={searchClient}
           indexName="instant_search"
           searchState={this.state.searchState}
           onSearchStateChange={this.onSearchStateChange}

@@ -19,8 +19,13 @@ import { addAbsolutePositions, addQueryID } from '../core/utils';
  * @providedPropType {array.<object>} hits - the records that matched the search state
  * @example
  * import React from 'react';
+ * import algoliasearch from 'algoliasearch/lite';
  * import { InstantSearch, Highlight, connectHits } from 'react-instantsearch-dom';
  *
+ * const searchClient = algoliasearch(
+ *   'latency',
+ *   '6be0576ff61c053d5f9a3225e2a90f76'
+ * );
  * const CustomHits = connectHits(({ hits }) => (
  *   <div>
  *     {hits.map(hit =>
@@ -33,8 +38,7 @@ import { addAbsolutePositions, addQueryID } from '../core/utils';
  *
  * const App = () => (
  *   <InstantSearch
- *     appId="latency"
- *     apiKey="6be0576ff61c053d5f9a3225e2a90f76"
+ *     searchClient={searchClient}
  *     indexName="instant_search"
  *   >
  *     <CustomHits />

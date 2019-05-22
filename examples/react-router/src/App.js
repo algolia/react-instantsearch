@@ -13,6 +13,12 @@ import {
   SearchBox,
   ClearRefinements,
 } from 'react-instantsearch-dom';
+import algoliasearch from 'algoliasearch/lite';
+
+const searchClient = algoliasearch(
+  'latency',
+  '6be0576ff61c053d5f9a3225e2a90f76'
+);
 
 const updateAfter = 700;
 
@@ -51,8 +57,7 @@ class App extends Component {
   render() {
     return (
       <InstantSearch
-        appId="latency"
-        apiKey="6be0576ff61c053d5f9a3225e2a90f76"
+        searchClient={searchClient}
         indexName="instant_search"
         searchState={this.state.searchState}
         onSearchStateChange={this.onSearchStateChange}

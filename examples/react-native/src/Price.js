@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import algoliasearch from 'algoliasearch/lite';
 import { InstantSearch } from 'react-instantsearch/native';
 import {
   connectRefinementList,
@@ -10,6 +11,11 @@ import {
 } from 'react-instantsearch/connectors';
 import Stats from './components/Stats';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
+
+const searchClient = algoliasearch(
+  'latency',
+  '6be0576ff61c053d5f9a3225e2a90f76'
+);
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -41,8 +47,7 @@ class Filters extends Component {
     return (
       <View style={styles.mainContainer}>
         <InstantSearch
-          appId="latency"
-          apiKey="6be0576ff61c053d5f9a3225e2a90f76"
+          searchClient={searchClient}
           indexName="instant_search"
           onSearchStateChange={this.onSearchStateChange}
           searchState={this.state.searchState}
