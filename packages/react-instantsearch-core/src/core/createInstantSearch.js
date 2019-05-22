@@ -12,7 +12,9 @@ import version from './version';
 export default function createInstantSearch(root) {
   return class CreateInstantSearch extends Component {
     static propTypes = {
-      searchClient: PropTypes.object.isRequired,
+      searchClient: PropTypes.shape({
+        search: PropTypes.func.isRequired,
+      }).isRequired,
       children: PropTypes.oneOfType([
         PropTypes.arrayOf(PropTypes.node),
         PropTypes.node,
