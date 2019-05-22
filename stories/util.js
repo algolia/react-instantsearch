@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { linkTo } from '@storybook/addon-links';
 import algoliasearch from 'algoliasearch/lite';
@@ -50,28 +50,6 @@ Hits.propTypes = {
 
 export const CustomHits = connectHits(Hits);
 
-export const Wrap = ({ appId, apiKey, indexName, children }) => (
-  <InstantSearch
-    searchClient={algoliasearch(appId, apiKey)}
-    indexName={indexName}
-  >
-    {children}
-  </InstantSearch>
-);
-
-Wrap.propTypes = {
-  children: PropTypes.node.isRequired,
-  appId: PropTypes.string,
-  apiKey: PropTypes.string,
-  indexName: PropTypes.string,
-};
-
-Wrap.defaultProps = {
-  appId: 'latency',
-  apiKey: '6be0576ff61c053d5f9a3225e2a90f76',
-  indexName: 'instant_search',
-};
-
 export const WrapWithHits = ({
   searchParameters: askedSearchParameters = {},
   children,
@@ -84,6 +62,10 @@ export const WrapWithHits = ({
   indexName,
   hitsElement,
 }) => {
+  const searchClient = useMemo(() => {
+    return algoliasearch(appId, apiKey);
+  }, [appId, apiKey]);
+
   const sourceCodeUrl = `https://github.com/algolia/react-instantsearch/tree/master/stories/${linkedStoryGroup}.stories.js`;
   const playgroundLink = hasPlayground ? (
     <button
@@ -116,10 +98,7 @@ export const WrapWithHits = ({
   };
 
   return (
-    <InstantSearch
-      searchClient={algoliasearch(appId, apiKey)}
-      indexName={indexName}
-    >
+    <InstantSearch searchClient={searchClient} indexName={indexName}>
       <Configure {...searchParameters} />
       <div>
         <div className="container widget-container">{children}</div>
