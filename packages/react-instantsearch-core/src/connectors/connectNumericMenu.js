@@ -1,4 +1,3 @@
-import { isEmpty } from 'lodash';
 import PropTypes from 'prop-types';
 import createConnector from '../core/createConnector';
 import { find } from '../core/utils';
@@ -157,7 +156,7 @@ export default createConnector({
     if (!items.some(item => item.value === '')) {
       items.push({
         value: '',
-        isRefined: isEmpty(refinedItem),
+        isRefined: refinedItem === undefined,
         noRefinement: !stats,
         label: 'All',
       });

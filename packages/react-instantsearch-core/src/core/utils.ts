@@ -1,5 +1,3 @@
-import { isEmpty } from 'lodash';
-
 // From https://github.com/reactjs/react-redux/blob/master/src/utils/shallowEqual.js
 export const shallowEqual = (objA, objB) => {
   if (objA === objB) {
@@ -43,7 +41,7 @@ export const removeEmptyKey = (obj: object) => {
       return;
     }
 
-    if (isEmpty(value)) {
+    if (!objectHasKeys(value)) {
       delete obj[key];
     } else {
       removeEmptyKey(value);
@@ -84,6 +82,10 @@ export function find<T = any>(
     }
   }
   return undefined;
+}
+
+export function objectHasKeys(object: object | undefined) {
+  return object && Object.keys(object).length > 0;
 }
 
 // https://github.com/babel/babel/blob/3aaafae053fa75febb3aa45d45b6f00646e30ba4/packages/babel-helpers/src/helpers.js#L604-L620
