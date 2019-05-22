@@ -109,7 +109,12 @@ class InstantSearch extends Component<Props, State> {
     // @TODO: These props are currently constant.
     indexName: PropTypes.string.isRequired,
 
-    searchClient: PropTypes.object.isRequired,
+    searchClient: PropTypes.shape({
+      search: PropTypes.func.isRequired,
+      searchForFacetValues: PropTypes.func,
+      addAlgoliaAgent: PropTypes.func,
+      clearCache: PropTypes.func,
+    }).isRequired,
 
     createURL: PropTypes.func,
 

@@ -5,25 +5,21 @@ import { InstantSearch, SearchBox, Hits } from 'react-instantsearch-dom';
 
 const stories = storiesOf('<InstantSearch>', module);
 
+const searchClient = algoliasearch(
+  'latency',
+  '6be0576ff61c053d5f9a3225e2a90f76'
+);
+
 stories
   .add('default', () => (
-    <InstantSearch
-      searchClient={algoliasearch(
-        'latency',
-        '6be0576ff61c053d5f9a3225e2a90f76'
-      )}
-      indexName="instant_search"
-    >
+    <InstantSearch searchClient={searchClient} indexName="instant_search">
       <SearchBox />
       <Hits />
     </InstantSearch>
   ))
   .add('with custom root', () => (
     <InstantSearch
-      searchClient={algoliasearch(
-        'latency',
-        '6be0576ff61c053d5f9a3225e2a90f76'
-      )}
+      searchClient={searchClient}
       indexName="instant_search"
       root={{
         Root: 'div',

@@ -122,7 +122,12 @@ const createInstantSearchServer = () => {
 
   class CreateInstantSearchServer extends Component {
     static propTypes = {
-      searchClient: PropTypes.object,
+      searchClient: PropTypes.shape({
+        search: PropTypes.func.isRequired,
+        searchForFacetValues: PropTypes.func,
+        addAlgoliaAgent: PropTypes.func,
+        clearCache: PropTypes.func,
+      }).isRequired,
       indexName: PropTypes.string.isRequired,
       resultsState: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     };
