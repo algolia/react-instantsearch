@@ -9,15 +9,14 @@ import {
   TouchableHighlight,
 } from 'react-native';
 import algoliasearch from 'algoliasearch/lite';
-import { InstantSearch } from 'react-instantsearch/native';
 import {
+  InstantSearch,
   connectRefinementList,
   connectSearchBox,
   connectRange,
   connectMenu,
-} from 'react-instantsearch/connectors';
+} from 'react-instantsearch-native';
 import Stats from './components/Stats';
-import { isEmpty } from 'lodash';
 
 const searchClient = algoliasearch(
   'latency',
@@ -151,7 +150,8 @@ class Rating extends Component {
     const { refine, min, max, count, createURL } = this.props;
     const items = [];
     for (let i = max; i >= min; i--) {
-      const hasCount = !isEmpty(count.filter(item => Number(item.value) === i));
+      const hasCount =
+        count.filter(item => Number(item.value) === i).length > 0;
       const lastSelectableItem = count.reduce(
         (acc, item) =>
           item.value < acc.value || (!acc.value && hasCount) ? item : acc,

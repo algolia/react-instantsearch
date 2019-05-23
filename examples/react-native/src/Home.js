@@ -13,8 +13,8 @@ import {
   Dimensions,
 } from 'react-native';
 import algoliasearch from 'algoliasearch/lite';
-import { InstantSearch } from 'react-instantsearch/native';
 import {
+  InstantSearch,
   connectSearchBox,
   connectInfiniteHits,
   connectRefinementList,
@@ -23,14 +23,14 @@ import {
   connectSortBy,
   connectRange,
   connectCurrentRefinements,
-} from 'react-instantsearch/connectors';
-import Highlight from './components/Highlight';
-import Spinner from './components/Spinner';
+} from 'react-instantsearch-native';
 import RatingMenu from 'react-native-star-rating';
 import ModalDropdown from 'react-native-modal-dropdown';
 import IosIcon from 'react-native-vector-icons/Ionicons';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import { Actions } from 'react-native-router-flux';
+import Highlight from './components/Highlight';
+import Spinner from './components/Spinner';
 
 const searchClient = algoliasearch(
   'latency',
@@ -126,8 +126,6 @@ class Home extends Component {
       searchState: this.props.searchState ? this.props.searchState : {},
     };
   }
-
-  componentWillReceiveProps() {}
 
   onSearchStateChange = nextState => {
     this.setState({ searchState: { ...this.state.searchState, ...nextState } });

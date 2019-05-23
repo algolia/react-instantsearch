@@ -1,4 +1,4 @@
-import { omit, difference } from 'lodash';
+import { omit } from '../core/utils';
 import createConnector from '../core/createConnector';
 import {
   refineValue,
@@ -22,8 +22,9 @@ export default createConnector({
   transitionState(props, prevSearchState, nextSearchState) {
     const id = getId();
     const { children, contextValue, indexContextValue, ...items } = props;
+    const propKeys = Object.keys(props);
     const nonPresentKeys = this._props
-      ? difference(Object.keys(this._props), Object.keys(props))
+      ? Object.keys(this._props).filter(prop => propKeys.indexOf(prop) === -1)
       : [];
     this._props = props;
     const nextValue = {
