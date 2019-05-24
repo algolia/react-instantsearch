@@ -14,6 +14,11 @@ const createFakeInstantSearchManager = (rest = {}) => ({
   ...rest,
 });
 
+const createFakeSearchClient = (rest = {}) => ({
+  search: jest.fn(() => {}),
+  ...rest,
+});
+
 jest.mock('../../core/createInstantSearchManager', () =>
   jest.fn(() => ({
     context: {},
@@ -26,7 +31,7 @@ const DEFAULT_PROPS = {
   appId: 'foo',
   apiKey: 'bar',
   indexName: 'foobar',
-  searchClient: {},
+  searchClient: createFakeSearchClient(),
   root: {
     Root: 'div',
   },
@@ -124,7 +129,7 @@ describe('InstantSearch', () => {
     expect(createInstantSearchManager.mock.calls[0][0]).toEqual({
       indexName: DEFAULT_PROPS.indexName,
       initialState: {},
-      searchClient: {},
+      searchClient: DEFAULT_PROPS.searchClient,
       stalledSearchDelay: 200,
     });
   });
@@ -134,8 +139,6 @@ describe('InstantSearch', () => {
       updateClient: jest.fn(),
     });
 
-    // const updateClientSpy = jest.spyOn(ism, )
-
     createInstantSearchManager.mockImplementation(() => ism);
 
     const wrapper = mount(
@@ -144,13 +147,14 @@ describe('InstantSearch', () => {
       </InstantSearch>
     );
 
-    // expect(ism.updateClient).toHaveBeenCalledTimes(1);
+    expect(ism.updateClient).toHaveBeenCalledTimes(1);
+
     wrapper.setProps({
       ...DEFAULT_PROPS,
-      searchClient: {},
+      searchClient: createFakeSearchClient(),
     });
 
-    // expect(ism.updateClient).toHaveBeenCalledTimes(2);
+    expect(ism.updateClient).toHaveBeenCalledTimes(2);
   });
 
   it('works as a controlled input', () => {
