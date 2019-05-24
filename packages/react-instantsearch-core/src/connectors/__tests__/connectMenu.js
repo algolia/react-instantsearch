@@ -425,14 +425,14 @@ describe('connectMenu', () => {
       results.getFacetValues.mockClear();
       results.getFacetValues.mockImplementation(() => [
         {
-          name: 'wat',
-          isRefined: false,
-          count: 20,
-        },
-        {
           name: 'oy',
           isRefined: true,
           count: 10,
+        },
+        {
+          name: 'wat',
+          isRefined: false,
+          count: 20,
         },
       ]);
 
