@@ -25,7 +25,7 @@ Enzyme.configure({ adapter: new Adapter() });
 
 describe('VoiceSearch', () => {
   afterEach(() => {
-    mockGetState.mockClear();
+    mockGetState.mockImplementation(() => ({}));
     mockIsBrowserSupported.mockImplementation(() => true);
     mockIsListening.mockClear();
     mockToggleListening.mockClear();
