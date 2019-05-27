@@ -17,7 +17,7 @@ type InnerComponentProps = {
 };
 
 type VoiceSearchProps = {
-  searchAsYouSpeak?: boolean;
+  searchAsYouSpeak: boolean;
   refine: (query: string) => void;
   translate: Translate;
   buttonTextComponent: React.FC<InnerComponentProps>;
@@ -72,6 +72,7 @@ const DefaultStatus: React.FC<InnerComponentProps> = ({ transcript }) => (
 
 class VoiceSearch extends Component<VoiceSearchProps, VoiceListeningState> {
   protected static defaultProps = {
+    searchAsYouSpeak: false,
     buttonTextComponent: DefaultButtonText,
     statusComponent: DefaultStatus,
   };
@@ -79,7 +80,7 @@ class VoiceSearch extends Component<VoiceSearchProps, VoiceListeningState> {
 
   constructor(props: VoiceSearchProps) {
     super(props);
-    const { searchAsYouSpeak = false, refine } = props;
+    const { searchAsYouSpeak, refine } = props;
     this.voiceSearchHelper = createVoiceSearchHelper({
       searchAsYouSpeak,
       onQueryChange: query => refine(query),

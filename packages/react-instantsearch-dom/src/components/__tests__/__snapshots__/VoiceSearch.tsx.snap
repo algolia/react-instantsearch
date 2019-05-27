@@ -44,6 +44,7 @@ exports[`VoiceSearch Rendering with default props 1`] = `
 <Translatable(VoiceSearch)>
   <VoiceSearch
     buttonTextComponent={[Function]}
+    searchAsYouSpeak={false}
     statusComponent={[Function]}
     translate={[Function]}
   >
