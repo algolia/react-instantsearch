@@ -8,13 +8,20 @@ export function getIndexId(context) {
 }
 
 export function getResults(searchResults, context) {
-  if (searchResults.results && !searchResults.results.hits) {
-    return searchResults.results[getIndexId(context)]
-      ? searchResults.results[getIndexId(context)]
-      : null;
-  } else {
-    return searchResults.results ? searchResults.results : null;
+  if (!searchResults.results) {
+    return null;
   }
+
+  if (searchResults.results.hits) {
+    return searchResults.results;
+  }
+
+  const indexId = getIndexId(context);
+  if (searchResults.results[indexId]) {
+    return searchResults.results[indexId];
+  }
+
+  return null;
 }
 
 export function hasMultipleIndices(context) {
