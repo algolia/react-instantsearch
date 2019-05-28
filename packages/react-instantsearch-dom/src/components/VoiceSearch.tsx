@@ -78,22 +78,25 @@ class VoiceSearch extends Component<VoiceSearchProps, VoiceListeningState> {
     buttonTextComponent: DefaultButtonText,
     statusComponent: DefaultStatus,
   };
-  private voiceSearchHelper: VoiceSearchHelper;
+  private voiceSearchHelper?: VoiceSearchHelper;
 
-  constructor(props: VoiceSearchProps) {
-    super(props);
-    const { searchAsYouSpeak, refine } = props;
+  public componentDidMount() {
+    const { searchAsYouSpeak, refine } = this.props;
     this.voiceSearchHelper = createVoiceSearchHelper({
       searchAsYouSpeak,
       onQueryChange: query => refine(query),
       onStateChange: () => {
-        this.setState(this.voiceSearchHelper.getState());
+        this.setState(this.voiceSearchHelper!.getState());
       },
     });
-    this.state = this.voiceSearchHelper.getState();
+    this.setState(this.voiceSearchHelper.getState());
   }
 
   public render() {
+    if (!this.voiceSearchHelper) {
+      return null;
+    }
+
     const { status, transcript, isSpeechFinal, errorCode } = this.state;
     const { isListening, isBrowserSupported } = this.voiceSearchHelper;
     const {
@@ -133,10 +136,15 @@ class VoiceSearch extends Component<VoiceSearchProps, VoiceListeningState> {
   }
 
   public componentWillUnmount() {
-    this.voiceSearchHelper.dispose();
+    if (this.voiceSearchHelper) {
+      this.voiceSearchHelper.dispose();
+    }
   }
 
   private onClick = (event: React.MouseEvent<HTMLElement>) => {
+    if (!this.voiceSearchHelper) {
+      return;
+    }
     event.currentTarget.blur();
     const { toggleListening } = this.voiceSearchHelper;
     toggleListening();
