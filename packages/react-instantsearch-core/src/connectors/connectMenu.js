@@ -134,30 +134,33 @@ export default createConnector({
       };
     }
 
-    const items = isFromSearch
-      ? searchForFacetValuesResults[attribute].map(v => ({
-          label: v.value,
-          value: getValue(v.value, props, searchState, {
+    let items;
+    if (isFromSearch) {
+      items = searchForFacetValuesResults[attribute].map(v => ({
+        label: v.value,
+        value: getValue(v.value, props, searchState, {
+          ais: props.contextValue,
+          multiIndexContext: props.indexContextValue,
+        }),
+        _highlightResult: { label: { value: v.highlighted } },
+        count: v.count,
+        isRefined: v.isRefined,
+      }));
+    } else {
+      items = results
+        .getFacetValues(attribute, {
+          sortBy: searchable ? undefined : defaultSortBy,
+        })
+        .map(v => ({
+          label: v.name,
+          value: getValue(v.name, props, searchState, {
             ais: props.contextValue,
             multiIndexContext: props.indexContextValue,
           }),
-          _highlightResult: { label: { value: v.highlighted } },
           count: v.count,
           isRefined: v.isRefined,
-        }))
-      : results
-          .getFacetValues(attribute, {
-            sortBy: searchable ? undefined : defaultSortBy,
-          })
-          .map(v => ({
-            label: v.name,
-            value: getValue(v.name, props, searchState, {
-              ais: props.contextValue,
-              multiIndexContext: props.indexContextValue,
-            }),
-            count: v.count,
-            isRefined: v.isRefined,
-          }));
+        }));
+    }
 
     const transformedItems = props.transformItems
       ? props.transformItems(items)
