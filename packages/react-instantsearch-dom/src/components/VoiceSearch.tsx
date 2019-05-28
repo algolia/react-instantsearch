@@ -4,12 +4,14 @@ import { createClassNames } from '../core/utils';
 import createVoiceSearchHelper, {
   VoiceSearchHelper,
   VoiceListeningState,
+  Status,
+  ErrorCode,
 } from '../lib/voiceSearchHelper';
 const cx = createClassNames('VoiceSearch');
 
 type InnerComponentProps = {
-  status: string;
-  errorCode?: string;
+  status: Status;
+  errorCode?: ErrorCode;
   isListening: boolean;
   transcript: string;
   isSpeechFinal: boolean;
@@ -96,8 +98,8 @@ class VoiceSearch extends Component<VoiceSearchProps, VoiceListeningState> {
     const { isListening, isBrowserSupported } = this.voiceSearchHelper;
     const {
       translate,
-      buttonTextComponent: ButtonText,
-      statusComponent: Status,
+      buttonTextComponent: ButtonTextComponent,
+      statusComponent: StatusComponent,
     } = this.props;
     const innerProps: InnerComponentProps = {
       status,
@@ -121,10 +123,10 @@ class VoiceSearch extends Component<VoiceSearchProps, VoiceListeningState> {
           onClick={this.onClick}
           disabled={!isBrowserSupported()}
         >
-          <ButtonText {...innerProps} />
+          <ButtonTextComponent {...innerProps} />
         </button>
         <div className={cx('status')}>
-          <Status {...innerProps} />
+          <StatusComponent {...innerProps} />
         </div>
       </div>
     );
