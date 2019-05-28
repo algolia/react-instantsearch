@@ -111,10 +111,7 @@ export default function createVoiceSearchHelper({
   };
 
   const stop = (): void => {
-    if (recognition) {
-      recognition.stop();
-      recognition = undefined;
-    }
+    dispose();
     resetState();
   };
 
