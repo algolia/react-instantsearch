@@ -46,7 +46,7 @@ stories
     >
       <div className="custom-button-story">
         <VoiceSearch
-          buttonComponent={({ isListening }) => (isListening ? '⏹' : '🎙')}
+          buttonTextComponent={({ isListening }) => (isListening ? '⏹' : '🎙')}
         />
       </div>
     </WrapWithHits>
