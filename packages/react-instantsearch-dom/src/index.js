@@ -65,3 +65,6 @@ export { default as QueryRuleCustomData } from './widgets/QueryRuleCustomData';
 
 // Utils
 export { createClassNames } from './core/utils';
+
+// voiceSearchHelper
+export { default as createVoiceSearchHelper } from './lib/voiceSearchHelper';
