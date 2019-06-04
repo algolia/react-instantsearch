@@ -9,8 +9,8 @@ export { default as translatable } from './core/translatable';
 // Widgets
 export { default as Configure } from './widgets/Configure';
 export { default as QueryRuleContext } from './widgets/QueryRuleContext';
-export { default as Index } from './components/Index';
-export { default as InstantSearch } from './components/InstantSearch';
+export { default as Index } from './widgets/Index';
+export { default as InstantSearch } from './widgets/InstantSearch';
 
 // Connectors
 export {
