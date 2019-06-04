@@ -80,7 +80,7 @@ class Index extends Component<InnerProps, State> {
       this.getSearchParameters.bind(this),
       {
         ais: this.props.contextValue,
-        multiIndexContext: getIndexContext(props),
+        multiIndexContext: this.state.indexContext,
       },
       this.props
     );
