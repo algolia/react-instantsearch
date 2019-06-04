@@ -3,12 +3,6 @@
 
 ### Bug Fixes
 
-* **deps:** update dependency antd to v3.18.2 ([#2471](https://github.com/algolia/react-instantsearch/issues/2471)) ([389611b](https://github.com/algolia/react-instantsearch/commit/389611b))
-* **deps:** update dependency antd to v3.19.0 ([#2486](https://github.com/algolia/react-instantsearch/issues/2486)) ([9aced73](https://github.com/algolia/react-instantsearch/commit/9aced73))
-* **deps:** update dependency antd to v3.19.1 ([#2489](https://github.com/algolia/react-instantsearch/issues/2489)) ([56e3854](https://github.com/algolia/react-instantsearch/commit/56e3854))
-* **deps:** update dependency antd to v3.19.2 ([#2498](https://github.com/algolia/react-instantsearch/issues/2498)) ([432e2a3](https://github.com/algolia/react-instantsearch/commit/432e2a3))
-* **deps:** update dependency express to v4.17.0 ([#2463](https://github.com/algolia/react-instantsearch/issues/2463)) ([395ec97](https://github.com/algolia/react-instantsearch/commit/395ec97))
-* **deps:** update dependency express to v4.17.1 ([#2485](https://github.com/algolia/react-instantsearch/issues/2485)) ([f066a37](https://github.com/algolia/react-instantsearch/commit/f066a37))
 * **highlight:** allow array as "attribute" ([#2474](https://github.com/algolia/react-instantsearch/issues/2474)) ([9dc829a](https://github.com/algolia/react-instantsearch/commit/9dc829a)), closes [#2461](https://github.com/algolia/react-instantsearch/issues/2461)
 * **indexUtils:** allow index with dots in it ([#2350](https://github.com/algolia/react-instantsearch/issues/2350)) ([f91906f](https://github.com/algolia/react-instantsearch/commit/f91906f))
 
