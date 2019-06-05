@@ -72,9 +72,6 @@ export default function createInstantSearchManager({
   }
 
   function updateClient(client) {
-    if (helper.getClient() === client) {
-      return;
-    }
     addAlgoliaAgents(client);
     helper.setClient(client);
     search();
