@@ -134,22 +134,7 @@ class InstantSearch extends Component<Props, State> {
     nextProps: Props,
     prevState: State
   ): Partial<State> {
-    const nextIsControlled = isControlled(nextProps);
-
-    if (!prevState.isControlled && nextIsControlled) {
-      throw new Error(
-        "You can't switch <InstantSearch> from being uncontrolled to controlled"
-      );
-    }
-
-    if (prevState.isControlled && !nextIsControlled) {
-      throw new Error(
-        "You can't switch <InstantSearch> from being controlled to uncontrolled"
-      );
-    }
-
     return {
-      isControlled: nextIsControlled,
       contextValue: {
         ...prevState.contextValue,
         mainTargetedIndex: nextProps.indexName,
@@ -181,6 +166,20 @@ class InstantSearch extends Component<Props, State> {
   };
 
   componentDidUpdate() {
+    const nextIsControlled = isControlled(this.props);
+
+    if (!this.state.isControlled && nextIsControlled) {
+      throw new Error(
+        "You can't switch <InstantSearch> from being uncontrolled to controlled"
+      );
+    }
+
+    if (this.state.isControlled && !nextIsControlled) {
+      throw new Error(
+        "You can't switch <InstantSearch> from being controlled to uncontrolled"
+      );
+    }
+
     if (this.props.refresh) {
       this.aisManager.clearCache();
     }
