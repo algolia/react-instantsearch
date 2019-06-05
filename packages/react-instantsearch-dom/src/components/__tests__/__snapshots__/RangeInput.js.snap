@@ -8,33 +8,37 @@ exports[`RangeInput render with translations 1`] = `
     className="ais-RangeInput-form"
     onSubmit={[Function]}
   >
-    <input
-      className="ais-RangeInput-input ais-RangeInput-input--min"
-      disabled={false}
-      max=""
-      min=""
-      onChange={[Function]}
-      placeholder=""
-      step={1}
-      type="number"
-      value=""
-    />
-    <span
-      className="ais-RangeInput-separator"
+    <label
+      className="ais-RangeInput-label"
     >
-      SEPARATOR
-    </span>
-    <input
-      className="ais-RangeInput-input ais-RangeInput-input--max"
-      disabled={false}
-      max=""
-      min=""
-      onChange={[Function]}
-      placeholder=""
-      step={1}
-      type="number"
-      value=""
-    />
+      <input
+        className="ais-RangeInput-input ais-RangeInput-input--min"
+        disabled={false}
+        max=""
+        min=""
+        onChange={[Function]}
+        placeholder=""
+        step={1}
+        type="number"
+        value=""
+      />
+      <span
+        className="ais-RangeInput-separator"
+      >
+        SEPARATOR
+      </span>
+      <input
+        className="ais-RangeInput-input ais-RangeInput-input--max"
+        disabled={false}
+        max=""
+        min=""
+        onChange={[Function]}
+        placeholder=""
+        step={1}
+        type="number"
+        value=""
+      />
+    </label>
     <button
       className="ais-RangeInput-submit"
       type="submit"
@@ -53,33 +57,37 @@ exports[`RawRangeInput onChange expect to update max onChange 1`] = `
     className="ais-RangeInput-form"
     onSubmit={[Function]}
   >
-    <input
-      className="ais-RangeInput-input ais-RangeInput-input--min"
-      disabled={false}
-      max=""
-      min=""
-      onChange={[Function]}
-      placeholder=""
-      step={1}
-      type="number"
-      value=""
-    />
-    <span
-      className="ais-RangeInput-separator"
+    <label
+      className="ais-RangeInput-label"
     >
-      separator
-    </span>
-    <input
-      className="ais-RangeInput-input ais-RangeInput-input--max"
-      disabled={false}
-      max=""
-      min=""
-      onChange={[Function]}
-      placeholder=""
-      step={1}
-      type="number"
-      value={490}
-    />
+      <input
+        className="ais-RangeInput-input ais-RangeInput-input--min"
+        disabled={false}
+        max=""
+        min=""
+        onChange={[Function]}
+        placeholder=""
+        step={1}
+        type="number"
+        value=""
+      />
+      <span
+        className="ais-RangeInput-separator"
+      >
+        separator
+      </span>
+      <input
+        className="ais-RangeInput-input ais-RangeInput-input--max"
+        disabled={false}
+        max=""
+        min=""
+        onChange={[Function]}
+        placeholder=""
+        step={1}
+        type="number"
+        value={490}
+      />
+    </label>
     <button
       className="ais-RangeInput-submit"
       type="submit"
@@ -98,33 +106,37 @@ exports[`RawRangeInput onChange expect to update min onChange 1`] = `
     className="ais-RangeInput-form"
     onSubmit={[Function]}
   >
-    <input
-      className="ais-RangeInput-input ais-RangeInput-input--min"
-      disabled={false}
-      max=""
-      min=""
-      onChange={[Function]}
-      placeholder=""
-      step={1}
-      type="number"
-      value={10}
-    />
-    <span
-      className="ais-RangeInput-separator"
+    <label
+      className="ais-RangeInput-label"
     >
-      separator
-    </span>
-    <input
-      className="ais-RangeInput-input ais-RangeInput-input--max"
-      disabled={false}
-      max=""
-      min=""
-      onChange={[Function]}
-      placeholder=""
-      step={1}
-      type="number"
-      value=""
-    />
+      <input
+        className="ais-RangeInput-input ais-RangeInput-input--min"
+        disabled={false}
+        max=""
+        min=""
+        onChange={[Function]}
+        placeholder=""
+        step={1}
+        type="number"
+        value={10}
+      />
+      <span
+        className="ais-RangeInput-separator"
+      >
+        separator
+      </span>
+      <input
+        className="ais-RangeInput-input ais-RangeInput-input--max"
+        disabled={false}
+        max=""
+        min=""
+        onChange={[Function]}
+        placeholder=""
+        step={1}
+        type="number"
+        value=""
+      />
+    </label>
     <button
       className="ais-RangeInput-submit"
       type="submit"
@@ -143,33 +155,37 @@ exports[`RawRangeInput render when can't refine 1`] = `
     className="ais-RangeInput-form"
     onSubmit={[Function]}
   >
-    <input
-      className="ais-RangeInput-input ais-RangeInput-input--min"
-      disabled={true}
-      max=""
-      min=""
-      onChange={[Function]}
-      placeholder=""
-      step={1}
-      type="number"
-      value=""
-    />
-    <span
-      className="ais-RangeInput-separator"
+    <label
+      className="ais-RangeInput-label"
     >
-      separator
-    </span>
-    <input
-      className="ais-RangeInput-input ais-RangeInput-input--max"
-      disabled={true}
-      max=""
-      min=""
-      onChange={[Function]}
-      placeholder=""
-      step={1}
-      type="number"
-      value=""
-    />
+      <input
+        className="ais-RangeInput-input ais-RangeInput-input--min"
+        disabled={true}
+        max=""
+        min=""
+        onChange={[Function]}
+        placeholder=""
+        step={1}
+        type="number"
+        value=""
+      />
+      <span
+        className="ais-RangeInput-separator"
+      >
+        separator
+      </span>
+      <input
+        className="ais-RangeInput-input ais-RangeInput-input--max"
+        disabled={true}
+        max=""
+        min=""
+        onChange={[Function]}
+        placeholder=""
+        step={1}
+        type="number"
+        value=""
+      />
+    </label>
     <button
       className="ais-RangeInput-submit"
       type="submit"
@@ -188,33 +204,37 @@ exports[`RawRangeInput render with custom className 1`] = `
     className="ais-RangeInput-form"
     onSubmit={[Function]}
   >
-    <input
-      className="ais-RangeInput-input ais-RangeInput-input--min"
-      disabled={false}
-      max=""
-      min=""
-      onChange={[Function]}
-      placeholder=""
-      step={1}
-      type="number"
-      value=""
-    />
-    <span
-      className="ais-RangeInput-separator"
+    <label
+      className="ais-RangeInput-label"
     >
-      separator
-    </span>
-    <input
-      className="ais-RangeInput-input ais-RangeInput-input--max"
-      disabled={false}
-      max=""
-      min=""
-      onChange={[Function]}
-      placeholder=""
-      step={1}
-      type="number"
-      value=""
-    />
+      <input
+        className="ais-RangeInput-input ais-RangeInput-input--min"
+        disabled={false}
+        max=""
+        min=""
+        onChange={[Function]}
+        placeholder=""
+        step={1}
+        type="number"
+        value=""
+      />
+      <span
+        className="ais-RangeInput-separator"
+      >
+        separator
+      </span>
+      <input
+        className="ais-RangeInput-input ais-RangeInput-input--max"
+        disabled={false}
+        max=""
+        min=""
+        onChange={[Function]}
+        placeholder=""
+        step={1}
+        type="number"
+        value=""
+      />
+    </label>
     <button
       className="ais-RangeInput-submit"
       type="submit"
@@ -233,33 +253,37 @@ exports[`RawRangeInput render with empty values 1`] = `
     className="ais-RangeInput-form"
     onSubmit={[Function]}
   >
-    <input
-      className="ais-RangeInput-input ais-RangeInput-input--min"
-      disabled={false}
-      max=""
-      min=""
-      onChange={[Function]}
-      placeholder=""
-      step={1}
-      type="number"
-      value=""
-    />
-    <span
-      className="ais-RangeInput-separator"
+    <label
+      className="ais-RangeInput-label"
     >
-      separator
-    </span>
-    <input
-      className="ais-RangeInput-input ais-RangeInput-input--max"
-      disabled={false}
-      max=""
-      min=""
-      onChange={[Function]}
-      placeholder=""
-      step={1}
-      type="number"
-      value=""
-    />
+      <input
+        className="ais-RangeInput-input ais-RangeInput-input--min"
+        disabled={false}
+        max=""
+        min=""
+        onChange={[Function]}
+        placeholder=""
+        step={1}
+        type="number"
+        value=""
+      />
+      <span
+        className="ais-RangeInput-separator"
+      >
+        separator
+      </span>
+      <input
+        className="ais-RangeInput-input ais-RangeInput-input--max"
+        disabled={false}
+        max=""
+        min=""
+        onChange={[Function]}
+        placeholder=""
+        step={1}
+        type="number"
+        value=""
+      />
+    </label>
     <button
       className="ais-RangeInput-submit"
       type="submit"
@@ -278,33 +302,37 @@ exports[`RawRangeInput render with empty values when refinement is equal to min 
     className="ais-RangeInput-form"
     onSubmit={[Function]}
   >
-    <input
-      className="ais-RangeInput-input ais-RangeInput-input--min"
-      disabled={false}
-      max={500}
-      min={0}
-      onChange={[Function]}
-      placeholder={0}
-      step={1}
-      type="number"
-      value=""
-    />
-    <span
-      className="ais-RangeInput-separator"
+    <label
+      className="ais-RangeInput-label"
     >
-      separator
-    </span>
-    <input
-      className="ais-RangeInput-input ais-RangeInput-input--max"
-      disabled={false}
-      max={500}
-      min={0}
-      onChange={[Function]}
-      placeholder={500}
-      step={1}
-      type="number"
-      value=""
-    />
+      <input
+        className="ais-RangeInput-input ais-RangeInput-input--min"
+        disabled={false}
+        max={500}
+        min={0}
+        onChange={[Function]}
+        placeholder={0}
+        step={1}
+        type="number"
+        value=""
+      />
+      <span
+        className="ais-RangeInput-separator"
+      >
+        separator
+      </span>
+      <input
+        className="ais-RangeInput-input ais-RangeInput-input--max"
+        disabled={false}
+        max={500}
+        min={0}
+        onChange={[Function]}
+        placeholder={500}
+        step={1}
+        type="number"
+        value=""
+      />
+    </label>
     <button
       className="ais-RangeInput-submit"
       type="submit"
@@ -323,33 +351,37 @@ exports[`RawRangeInput render with max only 1`] = `
     className="ais-RangeInput-form"
     onSubmit={[Function]}
   >
-    <input
-      className="ais-RangeInput-input ais-RangeInput-input--min"
-      disabled={false}
-      max=""
-      min=""
-      onChange={[Function]}
-      placeholder=""
-      step={1}
-      type="number"
-      value=""
-    />
-    <span
-      className="ais-RangeInput-separator"
+    <label
+      className="ais-RangeInput-label"
     >
-      separator
-    </span>
-    <input
-      className="ais-RangeInput-input ais-RangeInput-input--max"
-      disabled={false}
-      max=""
-      min=""
-      onChange={[Function]}
-      placeholder=""
-      step={1}
-      type="number"
-      value=""
-    />
+      <input
+        className="ais-RangeInput-input ais-RangeInput-input--min"
+        disabled={false}
+        max=""
+        min=""
+        onChange={[Function]}
+        placeholder=""
+        step={1}
+        type="number"
+        value=""
+      />
+      <span
+        className="ais-RangeInput-separator"
+      >
+        separator
+      </span>
+      <input
+        className="ais-RangeInput-input ais-RangeInput-input--max"
+        disabled={false}
+        max=""
+        min=""
+        onChange={[Function]}
+        placeholder=""
+        step={1}
+        type="number"
+        value=""
+      />
+    </label>
     <button
       className="ais-RangeInput-submit"
       type="submit"
@@ -368,33 +400,37 @@ exports[`RawRangeInput render with min / max 1`] = `
     className="ais-RangeInput-form"
     onSubmit={[Function]}
   >
-    <input
-      className="ais-RangeInput-input ais-RangeInput-input--min"
-      disabled={false}
-      max={500}
-      min={0}
-      onChange={[Function]}
-      placeholder={0}
-      step={1}
-      type="number"
-      value=""
-    />
-    <span
-      className="ais-RangeInput-separator"
+    <label
+      className="ais-RangeInput-label"
     >
-      separator
-    </span>
-    <input
-      className="ais-RangeInput-input ais-RangeInput-input--max"
-      disabled={false}
-      max={500}
-      min={0}
-      onChange={[Function]}
-      placeholder={500}
-      step={1}
-      type="number"
-      value=""
-    />
+      <input
+        className="ais-RangeInput-input ais-RangeInput-input--min"
+        disabled={false}
+        max={500}
+        min={0}
+        onChange={[Function]}
+        placeholder={0}
+        step={1}
+        type="number"
+        value=""
+      />
+      <span
+        className="ais-RangeInput-separator"
+      >
+        separator
+      </span>
+      <input
+        className="ais-RangeInput-input ais-RangeInput-input--max"
+        disabled={false}
+        max={500}
+        min={0}
+        onChange={[Function]}
+        placeholder={500}
+        step={1}
+        type="number"
+        value=""
+      />
+    </label>
     <button
       className="ais-RangeInput-submit"
       type="submit"
@@ -413,33 +449,37 @@ exports[`RawRangeInput render with min only 1`] = `
     className="ais-RangeInput-form"
     onSubmit={[Function]}
   >
-    <input
-      className="ais-RangeInput-input ais-RangeInput-input--min"
-      disabled={false}
-      max=""
-      min=""
-      onChange={[Function]}
-      placeholder=""
-      step={1}
-      type="number"
-      value=""
-    />
-    <span
-      className="ais-RangeInput-separator"
+    <label
+      className="ais-RangeInput-label"
     >
-      separator
-    </span>
-    <input
-      className="ais-RangeInput-input ais-RangeInput-input--max"
-      disabled={false}
-      max=""
-      min=""
-      onChange={[Function]}
-      placeholder=""
-      step={1}
-      type="number"
-      value=""
-    />
+      <input
+        className="ais-RangeInput-input ais-RangeInput-input--min"
+        disabled={false}
+        max=""
+        min=""
+        onChange={[Function]}
+        placeholder=""
+        step={1}
+        type="number"
+        value=""
+      />
+      <span
+        className="ais-RangeInput-separator"
+      >
+        separator
+      </span>
+      <input
+        className="ais-RangeInput-input ais-RangeInput-input--max"
+        disabled={false}
+        max=""
+        min=""
+        onChange={[Function]}
+        placeholder=""
+        step={1}
+        type="number"
+        value=""
+      />
+    </label>
     <button
       className="ais-RangeInput-submit"
       type="submit"
@@ -458,33 +498,37 @@ exports[`RawRangeInput render with precision of 1 1`] = `
     className="ais-RangeInput-form"
     onSubmit={[Function]}
   >
-    <input
-      className="ais-RangeInput-input ais-RangeInput-input--min"
-      disabled={false}
-      max=""
-      min=""
-      onChange={[Function]}
-      placeholder=""
-      step={0.1}
-      type="number"
-      value=""
-    />
-    <span
-      className="ais-RangeInput-separator"
+    <label
+      className="ais-RangeInput-label"
     >
-      separator
-    </span>
-    <input
-      className="ais-RangeInput-input ais-RangeInput-input--max"
-      disabled={false}
-      max=""
-      min=""
-      onChange={[Function]}
-      placeholder=""
-      step={0.1}
-      type="number"
-      value=""
-    />
+      <input
+        className="ais-RangeInput-input ais-RangeInput-input--min"
+        disabled={false}
+        max=""
+        min=""
+        onChange={[Function]}
+        placeholder=""
+        step={0.1}
+        type="number"
+        value=""
+      />
+      <span
+        className="ais-RangeInput-separator"
+      >
+        separator
+      </span>
+      <input
+        className="ais-RangeInput-input ais-RangeInput-input--max"
+        disabled={false}
+        max=""
+        min=""
+        onChange={[Function]}
+        placeholder=""
+        step={0.1}
+        type="number"
+        value=""
+      />
+    </label>
     <button
       className="ais-RangeInput-submit"
       type="submit"
@@ -503,33 +547,37 @@ exports[`RawRangeInput render with precision of 2 1`] = `
     className="ais-RangeInput-form"
     onSubmit={[Function]}
   >
-    <input
-      className="ais-RangeInput-input ais-RangeInput-input--min"
-      disabled={false}
-      max=""
-      min=""
-      onChange={[Function]}
-      placeholder=""
-      step={0.01}
-      type="number"
-      value=""
-    />
-    <span
-      className="ais-RangeInput-separator"
+    <label
+      className="ais-RangeInput-label"
     >
-      separator
-    </span>
-    <input
-      className="ais-RangeInput-input ais-RangeInput-input--max"
-      disabled={false}
-      max=""
-      min=""
-      onChange={[Function]}
-      placeholder=""
-      step={0.01}
-      type="number"
-      value=""
-    />
+      <input
+        className="ais-RangeInput-input ais-RangeInput-input--min"
+        disabled={false}
+        max=""
+        min=""
+        onChange={[Function]}
+        placeholder=""
+        step={0.01}
+        type="number"
+        value=""
+      />
+      <span
+        className="ais-RangeInput-separator"
+      >
+        separator
+      </span>
+      <input
+        className="ais-RangeInput-input ais-RangeInput-input--max"
+        disabled={false}
+        max=""
+        min=""
+        onChange={[Function]}
+        placeholder=""
+        step={0.01}
+        type="number"
+        value=""
+      />
+    </label>
     <button
       className="ais-RangeInput-submit"
       type="submit"
@@ -548,33 +596,37 @@ exports[`RawRangeInput render with refinement 1`] = `
     className="ais-RangeInput-form"
     onSubmit={[Function]}
   >
-    <input
-      className="ais-RangeInput-input ais-RangeInput-input--min"
-      disabled={false}
-      max=""
-      min=""
-      onChange={[Function]}
-      placeholder=""
-      step={1}
-      type="number"
-      value={10}
-    />
-    <span
-      className="ais-RangeInput-separator"
+    <label
+      className="ais-RangeInput-label"
     >
-      separator
-    </span>
-    <input
-      className="ais-RangeInput-input ais-RangeInput-input--max"
-      disabled={false}
-      max=""
-      min=""
-      onChange={[Function]}
-      placeholder=""
-      step={1}
-      type="number"
-      value={490}
-    />
+      <input
+        className="ais-RangeInput-input ais-RangeInput-input--min"
+        disabled={false}
+        max=""
+        min=""
+        onChange={[Function]}
+        placeholder=""
+        step={1}
+        type="number"
+        value={10}
+      />
+      <span
+        className="ais-RangeInput-separator"
+      >
+        separator
+      </span>
+      <input
+        className="ais-RangeInput-input ais-RangeInput-input--max"
+        disabled={false}
+        max=""
+        min=""
+        onChange={[Function]}
+        placeholder=""
+        step={1}
+        type="number"
+        value={490}
+      />
+    </label>
     <button
       className="ais-RangeInput-submit"
       type="submit"

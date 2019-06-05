@@ -97,29 +97,32 @@ export class RawRangeInput extends Component {
         className={classNames(cx('', !canRefine && '-noRefinement'), className)}
       >
         <form className={cx('form')} onSubmit={this.onSubmit}>
-          <input
-            className={cx('input', 'input--min')}
-            type="number"
-            min={min}
-            max={max}
-            value={from}
-            step={step}
-            placeholder={min}
-            disabled={!canRefine}
-            onChange={e => this.setState({ from: e.currentTarget.value })}
-          />
-          <span className={cx('separator')}>{translate('separator')}</span>
-          <input
-            className={cx('input', 'input--max')}
-            type="number"
-            min={min}
-            max={max}
-            value={to}
-            step={step}
-            placeholder={max}
-            disabled={!canRefine}
-            onChange={e => this.setState({ to: e.currentTarget.value })}
-          />
+          <label className={cx('label')}>
+            <input
+              className={cx('input', 'input--min')}
+              type="number"
+              min={min}
+              max={max}
+              value={from}
+              step={step}
+              placeholder={min}
+              disabled={!canRefine}
+              onChange={e => this.setState({ from: e.currentTarget.value })}
+            />
+            <span className={cx('separator')}>{translate('separator')}</span>
+            <input
+              className={cx('input', 'input--max')}
+              type="number"
+              min={min}
+              max={max}
+              value={to}
+              step={step}
+              placeholder={max}
+              disabled={!canRefine}
+              onChange={e => this.setState({ to: e.currentTarget.value })}
+            />
+          </label>
+
           <button className={cx('submit')} type="submit">
             {translate('submit')}
           </button>
