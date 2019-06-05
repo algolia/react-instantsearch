@@ -77,12 +77,7 @@ export default function createInstantSearchManager({
     search();
   }
 
-  let lastRefreshValue;
-  function clearCache(refreshValue) {
-    if (lastRefreshValue === refreshValue) {
-      return;
-    }
-    lastRefreshValue = refreshValue;
+  function clearCache() {
     helper.clearCache();
     search();
   }
