@@ -165,7 +165,7 @@ class InstantSearch extends Component<Props, State> {
     },
   };
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps: Props) {
     const nextIsControlled = isControlled(this.props);
 
     if (!this.state.isControlled && nextIsControlled) {
@@ -186,6 +186,14 @@ class InstantSearch extends Component<Props, State> {
 
     if (this.state.isControlled) {
       this.aisManager.onExternalStateUpdate(this.props.searchState);
+    }
+
+    if (prevProps.indexName !== this.props.indexName) {
+      this.aisManager.updateIndex(this.props.indexName);
+    }
+
+    if (prevProps.searchClient !== this.props.searchClient) {
+      this.aisManager.updateClient(this.props.searchClient);
     }
   }
 
@@ -241,10 +249,6 @@ class InstantSearch extends Component<Props, State> {
     if (Children.count(this.props.children) === 0) {
       return null;
     }
-
-    // @TODO: should this be in a different spot
-    this.aisManager.updateIndex(this.props.indexName);
-    this.aisManager.updateClient(this.props.searchClient);
 
     return (
       <InstantSearchProvider value={this.state.contextValue}>

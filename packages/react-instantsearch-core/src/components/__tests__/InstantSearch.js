@@ -147,14 +147,14 @@ describe('InstantSearch', () => {
       </InstantSearch>
     );
 
-    expect(ism.updateClient).toHaveBeenCalledTimes(1);
+    expect(ism.updateClient).toHaveBeenCalledTimes(0);
 
     wrapper.setProps({
       ...DEFAULT_PROPS,
       searchClient: createFakeSearchClient(),
     });
 
-    expect(ism.updateClient).toHaveBeenCalledTimes(2);
+    expect(ism.updateClient).toHaveBeenCalledTimes(1);
   });
 
   it('works as a controlled input', () => {
@@ -335,8 +335,6 @@ describe('InstantSearch', () => {
       </InstantSearch>
     );
 
-    expect(ism.updateIndex).toHaveBeenCalledWith(DEFAULT_PROPS.indexName);
-
     expect(wrapper.text()).toMatchInlineSnapshot(`"foobar"`);
 
     // setting the same prop
@@ -344,7 +342,7 @@ describe('InstantSearch', () => {
       indexName: 'foobar',
     });
 
-    expect(ism.updateIndex).toHaveBeenCalledWith('foobar');
+    expect(ism.updateIndex).not.toHaveBeenCalled();
 
     expect(wrapper.text()).toMatchInlineSnapshot(`"foobar"`);
 
