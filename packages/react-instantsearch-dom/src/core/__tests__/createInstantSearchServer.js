@@ -67,7 +67,9 @@ describe('createInstantSearchServer', () => {
 
       mount(<InstantSearch {...props} />);
 
+      // Is called 2 times by the Helper and 2 times by `createInstantSearchManager` in `InstantSearch`
       expect(searchClient.addAlgoliaAgent).toHaveBeenCalledTimes(4);
+
       expect(searchClient.addAlgoliaAgent).toHaveBeenCalledWith(
         `react (${React.version})`
       );
