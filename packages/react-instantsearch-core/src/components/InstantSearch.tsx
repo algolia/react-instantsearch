@@ -180,7 +180,11 @@ class InstantSearch extends Component<Props, State> {
       );
     }
 
-    if (this.props.refresh) {
+    /*
+     * Clear cache when `refresh` changes to `true`.
+     * Prevents users to always clear the cache on render if they forget to revert it to `false`.
+     */
+    if (this.props.refresh !== prevProps.refresh && this.props.refresh) {
       this.aisManager.clearCache();
     }
 
