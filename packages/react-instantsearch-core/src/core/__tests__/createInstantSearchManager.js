@@ -1,3 +1,4 @@
+import algoliasearch from 'algoliasearch/lite';
 import { SearchResults } from 'algoliasearch-helper';
 import createInstantSearchManager from '../createInstantSearchManager';
 
@@ -50,35 +51,54 @@ describe('createInstantSearchManager', () => {
     expect(ism.getWidgetsIds()).toEqual([]);
   });
 
-  it('initializes the manager with a single index results', () => {
-    const ism = createInstantSearchManager({
-      indexName: 'index',
-      searchClient: createSearchClient(),
-      resultsState: {
+  describe('client hydratation', () => {
+    it('hydrates the `searchClient` for a single index results', () => {
+      const searchClient = algoliasearch('appId', 'apiKey', {
+        _cache: true, // cache is not enabled by default inside Node
+      });
+
+      const resultsState = {
         _originalResponse: {
           results: [
             {
-              index: 'indexName',
+              index: 'index',
               query: 'query',
             },
           ],
         },
         state: {
-          index: 'indexName',
+          index: 'index',
           query: 'query',
         },
-      },
+      };
+
+      expect(Object.keys(searchClient.cache)).toHaveLength(0);
+
+      createInstantSearchManager({
+        indexName: 'index',
+        searchClient,
+        resultsState,
+      });
+
+      expect(Object.keys(searchClient.cache)).toHaveLength(1);
+      Object.keys(searchClient.cache).forEach(key => {
+        expect(searchClient.cache[key]).toEqual({
+          results: [
+            {
+              index: 'index',
+              query: 'query',
+            },
+          ],
+        });
+      });
     });
 
-    expect(ism.store.getState().results).toBeInstanceOf(SearchResults);
-    expect(ism.store.getState().results.query).toEqual('query');
-  });
+    it('hydrates the `searchClient` for a multi index results', () => {
+      const searchClient = algoliasearch('appId', 'apiKey', {
+        _cache: true, // cache is not enabled by default inside Node
+      });
 
-  it('initializes the manager with a multi index results', () => {
-    const ism = createInstantSearchManager({
-      indexName: 'index',
-      searchClient: createSearchClient(),
-      resultsState: [
+      const resultsState = [
         {
           _internalIndexId: 'index1',
           _originalResponse: {
@@ -109,13 +129,146 @@ describe('createInstantSearchManager', () => {
             query: 'query2',
           },
         },
-      ],
+      ];
+
+      expect(Object.keys(searchClient.cache)).toHaveLength(0);
+
+      createInstantSearchManager({
+        indexName: 'index',
+        searchClient,
+        resultsState,
+      });
+
+      expect(Object.keys(searchClient.cache)).toHaveLength(1);
+      Object.keys(searchClient.cache).forEach(key => {
+        expect(searchClient.cache[key]).toEqual({
+          results: [
+            {
+              index: 'index1',
+              query: 'query1',
+            },
+            {
+              index: 'index2',
+              query: 'query2',
+            },
+          ],
+        });
+      });
     });
 
-    expect(ism.store.getState().results.index1.query).toBe('query1');
-    expect(ism.store.getState().results.index1).toBeInstanceOf(SearchResults);
-    expect(ism.store.getState().results.index2.query).toBe('query2');
-    expect(ism.store.getState().results.index2).toBeInstanceOf(SearchResults);
+    it('does not hydrate the `searchClient` without results', () => {
+      const searchClient = algoliasearch('appId', 'apiKey');
+
+      expect(Object.keys(searchClient.cache)).toHaveLength(0);
+
+      createInstantSearchManager({
+        indexName: 'index',
+        searchClient,
+      });
+
+      expect(Object.keys(searchClient.cache)).toHaveLength(0);
+    });
+
+    it('does not hydrate the `searchClient` without cache enabled', () => {
+      const searchClient = algoliasearch('appId', 'apiKey', {
+        _cache: false,
+      });
+
+      const resultsState = {
+        _originalResponse: {
+          results: [
+            {
+              index: 'indexName',
+              query: 'query',
+            },
+          ],
+        },
+        state: {
+          index: 'indexName',
+          query: 'query',
+        },
+      };
+
+      expect(Object.keys(searchClient.cache)).toHaveLength(0);
+
+      createInstantSearchManager({
+        indexName: 'index',
+        searchClient,
+        resultsState,
+      });
+
+      expect(Object.keys(searchClient.cache)).toHaveLength(0);
+    });
+  });
+
+  describe('results hydratation', () => {
+    it('initializes the manager with a single index hydrated results', () => {
+      const ism = createInstantSearchManager({
+        indexName: 'index',
+        searchClient: createSearchClient(),
+        resultsState: {
+          _originalResponse: {
+            results: [
+              {
+                index: 'indexName',
+                query: 'query',
+              },
+            ],
+          },
+          state: {
+            index: 'indexName',
+            query: 'query',
+          },
+        },
+      });
+
+      expect(ism.store.getState().results).toBeInstanceOf(SearchResults);
+      expect(ism.store.getState().results.query).toEqual('query');
+    });
+
+    it('initializes the manager with a multi index hydrated results', () => {
+      const ism = createInstantSearchManager({
+        indexName: 'index',
+        searchClient: createSearchClient(),
+        resultsState: [
+          {
+            _internalIndexId: 'index1',
+            _originalResponse: {
+              results: [
+                {
+                  index: 'index1',
+                  query: 'query1',
+                },
+              ],
+            },
+            state: {
+              index: 'index1',
+              query: 'query1',
+            },
+          },
+          {
+            _internalIndexId: 'index2',
+            _originalResponse: {
+              results: [
+                {
+                  index: 'index2',
+                  query: 'query2',
+                },
+              ],
+            },
+            state: {
+              index: 'index2',
+              query: 'query2',
+            },
+          },
+        ],
+      });
+
+      expect(ism.store.getState().results.index1.query).toBe('query1');
+      expect(ism.store.getState().results.index1).toBeInstanceOf(SearchResults);
+      expect(ism.store.getState().results.index2.query).toBe('query2');
+      expect(ism.store.getState().results.index2).toBeInstanceOf(SearchResults);
+    });
   });
 
   describe('widget manager', () => {

@@ -46,6 +46,8 @@ export default function createInstantSearchManager({
 
   const widgetsManager = createWidgetsManager(onWidgetsUpdate);
 
+  hydrateSearchClient(searchClient, resultsState);
+
   const store = createStore({
     widgets: initialState,
     metadata: [],
@@ -255,6 +257,68 @@ export default function createInstantSearchManager({
         });
       }, stalledSearchDelay);
     }
+  }
+
+  function hydrateSearchClient(client, results) {
+    if (!results) {
+      return;
+    }
+
+    if (!client._useCache) {
+      // This condition avoid hydrating a `searchClient` different from the
+      // Algolia one. Unless the implementation uses the exact same approach
+      // for the cache (the property `_useCache`). The implementation is brittle
+      // but we don't have a proper way to detect the Algolia client at the moment.
+      return;
+    }
+
+    if (Array.isArray(results)) {
+      hydrateSearchClientWithMultiIndexRequest(client, results);
+      return;
+    }
+
+    hydrateSearchClientWithSingleIndexRequest(client, results);
+  }
+
+  function hydrateSearchClientWithMultiIndexRequest(client, results) {
+    // https://github.com/algolia/algoliasearch-client-javascript/blob/c27e89ff92b2a854ae6f40dc524bffe0f0cbc169/src/AlgoliaSearchCore.js#L232-L240
+    const key = `/1/indexes/*/queries_body_${JSON.stringify({
+      requests: results.reduce(
+        (acc, result) =>
+          acc.concat(
+            result._originalResponse.results.map(request => ({
+              indexName: request.index,
+              params: request.params,
+            }))
+          ),
+        []
+      ),
+    })}`;
+
+    client.cache = {
+      ...client.cache,
+      [key]: {
+        results: results.reduce(
+          (acc, result) => acc.concat(result._originalResponse.results),
+          []
+        ),
+      },
+    };
+  }
+
+  function hydrateSearchClientWithSingleIndexRequest(client, results) {
+    // https://github.com/algolia/algoliasearch-client-javascript/blob/c27e89ff92b2a854ae6f40dc524bffe0f0cbc169/src/AlgoliaSearchCore.js#L232-L240
+    const key = `/1/indexes/*/queries_body_${JSON.stringify({
+      requests: results._originalResponse.results.map(request => ({
+        indexName: request.index,
+        params: request.params,
+      })),
+    })}`;
+
+    client.cache = {
+      ...client.cache,
+      [key]: results._originalResponse,
+    };
   }
 
   function hydrateResultsState(results) {
