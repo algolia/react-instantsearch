@@ -67,14 +67,14 @@ exports[`Server-side rendering recipes App renders without crashing 1`] = `
     </form>
   </div>
   <div
+    className="ais-RefinementList ais-RefinementList--noRefinement"
+  />
+  <div
     className="ais-Hits"
   >
     <ul
       className="ais-Hits-list"
     />
   </div>
-  <div
-    className="ais-RefinementList ais-RefinementList--noRefinement"
-  />
 </div>
 `;
