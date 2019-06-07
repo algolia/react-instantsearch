@@ -12,6 +12,4 @@
 
 var server = require('./dist/cjs/server');
 
-module.exports = {
-  createInstantSearch: server.createInstantSearch,
-};
+module.exports = server;
