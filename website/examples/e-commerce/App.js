@@ -6,6 +6,7 @@ import {
   SortBy,
   Pagination,
   ClearRefinements,
+  Highlight,
   Hits,
   HitsPerPage,
   Panel,
@@ -71,7 +72,7 @@ const App = props => (
     </header>
 
     <Configure
-      attributesToSnippet={['name:10', 'description:10']}
+      attributesToSnippet={['description:10']}
       snippetEllipsisText="…"
     />
 
