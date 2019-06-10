@@ -11,6 +11,7 @@ import {
   HitsPerPage,
   Panel,
   Configure,
+  ScrollTo,
   SearchBox,
   Snippet,
   ToggleRefinement,
@@ -113,166 +114,167 @@ const App = props => (
       snippetEllipsisText="…"
     />
 
-    <main className="container">
-      <section className="container-filters">
-        <div className="container-header">
-          <h2>Filters</h2>
+    <ScrollTo>
+      <main className="container">
+        <section className="container-filters">
+          <div className="container-header">
+            <h2>Filters</h2>
 
-          <ClearRefinements
-            translations={{
-              reset: (
-                <div className="clear-filters">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="11"
-                    height="11"
-                    viewBox="0 0 11 11"
-                  >
-                    <g fill="none" fillRule="evenodd" opacity=".4">
-                      <path d="M0 0h11v11H0z" />
-                      <path
-                        fill="#000"
-                        fillRule="nonzero"
-                        d="M8.26 2.75a3.896 3.896 0 1 0 1.102 3.262l.007-.056a.49.49 0 0 1 .485-.456c.253 0 .451.206.437.457 0 0 .012-.109-.006.061a4.813 4.813 0 1 1-1.348-3.887v-.987a.458.458 0 1 1 .917.002v2.062a.459.459 0 0 1-.459.459H7.334a.458.458 0 1 1-.002-.917h.928z"
-                      />
-                    </g>
-                  </svg>
-                  Clear filters
-                </div>
-              ),
-            }}
-          />
-        </div>
-
-        <div className="container-body">
-          <Panel header="Brands">
-            <RefinementList
-              attribute="brand"
-              searchable={true}
+            <ClearRefinements
               translations={{
-                placeholder: 'Search for brands…',
+                reset: (
+                  <div className="clear-filters">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="11"
+                      height="11"
+                      viewBox="0 0 11 11"
+                    >
+                      <g fill="none" fillRule="evenodd" opacity=".4">
+                        <path d="M0 0h11v11H0z" />
+                        <path
+                          fill="#000"
+                          fillRule="nonzero"
+                          d="M8.26 2.75a3.896 3.896 0 1 0 1.102 3.262l.007-.056a.49.49 0 0 1 .485-.456c.253 0 .451.206.437.457 0 0 .012-.109-.006.061a4.813 4.813 0 1 1-1.348-3.887v-.987a.458.458 0 1 1 .917.002v2.062a.459.459 0 0 1-.459.459H7.334a.458.458 0 1 1-.002-.917h.928z"
+                        />
+                      </g>
+                    </svg>
+                    Clear filters
+                  </div>
+                ),
               }}
             />
-          </Panel>
+          </div>
 
-          <Panel header="Category">
-            <HierarchicalMenu
-              attributes={[
-                'hierarchicalCategories.lvl0',
-                'hierarchicalCategories.lvl1',
+          <div className="container-body">
+            <Panel header="Brands">
+              <RefinementList
+                attribute="brand"
+                searchable={true}
+                translations={{
+                  placeholder: 'Search for brands…',
+                }}
+              />
+            </Panel>
+
+            <Panel header="Category">
+              <HierarchicalMenu
+                attributes={[
+                  'hierarchicalCategories.lvl0',
+                  'hierarchicalCategories.lvl1',
+                ]}
+              />
+            </Panel>
+
+            <Panel header="Price">
+              <PriceSlider attribute="price" />
+            </Panel>
+
+            <Panel header="Free shipping">
+              <ToggleRefinement
+                attribute="free_shipping"
+                label="Display only items with free shipping"
+                value={true}
+              />
+            </Panel>
+
+            <Panel header="Ratings">
+              <Ratings attribute="rating" />
+            </Panel>
+          </div>
+        </section>
+
+        <section className="container-results">
+          <header className="container-header container-options">
+            <SortBy
+              defaultRefinement="instant_search"
+              items={[
+                {
+                  label: 'Sort by featured',
+                  value: 'instant_search',
+                },
+                {
+                  label: 'Price ascending',
+                  value: 'instant_search_price_asc',
+                },
+                {
+                  label: 'Price descending',
+                  value: 'instant_search_price_desc',
+                },
               ]}
             />
-          </Panel>
 
-          <Panel header="Price">
-            <PriceSlider attribute="price" />
-          </Panel>
-
-          <Panel header="Free shipping">
-            <ToggleRefinement
-              attribute="free_shipping"
-              label="Display only items with free shipping"
-              value={true}
+            <HitsPerPage
+              items={[
+                {
+                  label: '16 hits per page',
+                  value: 16,
+                },
+                {
+                  label: '32 hits per page',
+                  value: 32,
+                },
+                {
+                  label: '64 hits per page',
+                  value: 64,
+                },
+              ]}
+              defaultRefinement={16}
             />
-          </Panel>
+          </header>
 
-          <Panel header="Ratings">
-            <Ratings attribute="rating" />
-          </Panel>
-        </div>
-      </section>
+          <Hits hitComponent={Hit} />
 
-      <section className="container-results">
-        <header className="container-header container-options">
-          <SortBy
-            attribute="price"
-            defaultRefinement="instant_search"
-            items={[
-              {
-                label: 'Sort by featured',
-                value: 'instant_search',
-              },
-              {
-                label: 'Price ascending',
-                value: 'instant_search_price_asc',
-              },
-              {
-                label: 'Price descending',
-                value: 'instant_search_price_desc',
-              },
-            ]}
-          />
-
-          <HitsPerPage
-            items={[
-              {
-                label: '16 hits per page',
-                value: 16,
-              },
-              {
-                label: '32 hits per page',
-                value: 32,
-              },
-              {
-                label: '64 hits per page',
-                value: 64,
-              },
-            ]}
-            defaultRefinement={16}
-          />
-        </header>
-
-        <Hits hitComponent={Hit} />
-
-        <footer className="container-footer">
-          <Pagination
-            padding={2}
-            showFirst={false}
-            showLast={false}
-            translations={{
-              previous: (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="10"
-                  height="10"
-                  viewBox="0 0 10 10"
-                >
-                  <g
-                    fill="none"
-                    fillRule="evenodd"
-                    stroke="#000"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="1.143"
+          <footer className="container-footer">
+            <Pagination
+              padding={2}
+              showFirst={false}
+              showLast={false}
+              translations={{
+                previous: (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="10"
+                    height="10"
+                    viewBox="0 0 10 10"
                   >
-                    <path d="M9 5H1M5 9L1 5l4-4" />
-                  </g>
-                </svg>
-              ),
-              next: (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="10"
-                  height="10"
-                  viewBox="0 0 10 10"
-                >
-                  <g
-                    fill="none"
-                    fillRule="evenodd"
-                    stroke="#000"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="1.143"
+                    <g
+                      fill="none"
+                      fillRule="evenodd"
+                      stroke="#000"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="1.143"
+                    >
+                      <path d="M9 5H1M5 9L1 5l4-4" />
+                    </g>
+                  </svg>
+                ),
+                next: (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="10"
+                    height="10"
+                    viewBox="0 0 10 10"
                   >
-                    <path d="M1 5h8M5 9l4-4-4-4" />
-                  </g>
-                </svg>
-              ),
-            }}
-          />
-        </footer>
-      </section>
-    </main>
+                    <g
+                      fill="none"
+                      fillRule="evenodd"
+                      stroke="#000"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="1.143"
+                    >
+                      <path d="M1 5h8M5 9l4-4-4-4" />
+                    </g>
+                  </svg>
+                ),
+              }}
+            />
+          </footer>
+        </section>
+      </main>
+    </ScrollTo>
   </InstantSearch>
 );
 
