@@ -26,12 +26,12 @@
     "prop-types": "15.6.0",
     "react": "16.8.6",
     "react-dom": "16.8.6",
-    "react-instantsearch": "5.6.0",
+    "react-instantsearch": "5.7.0",
     "react-native": "0.52.0",
     "react-native-modal-dropdown": "0.6.2",
     "react-native-router-flux": "4.0.6",
     "react-native-star-rating": "1.1.0",
-    "react-native-vector-icons": "6.4.2"
+    "react-native-vector-icons": "6.5.0"
   },
   "jest": {
     "preset": "jest-expo",
