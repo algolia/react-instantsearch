@@ -354,9 +354,6 @@ export default function createInstantSearchManager({
   }
 
   function updateIndex(newIndex) {
-    if (initialSearchParameters.index === newIndex) {
-      return;
-    }
     initialSearchParameters = initialSearchParameters.setIndex(newIndex);
     search();
   }
