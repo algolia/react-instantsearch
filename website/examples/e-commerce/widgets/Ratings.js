@@ -3,50 +3,59 @@ import { connectRange } from 'react-instantsearch-dom';
 import cx from 'classnames';
 
 const Ratings = ({ currentRefinement, refine, createURL, count }) => {
-  const ratings = new Array(4).fill(null);
+  const ratings = new Array(4).fill(null).map((_, ratingIndex) => {
+    const value = 4 - ratingIndex;
+
+    const itemsCount = count
+      .filter(countObj => value <= parseInt(countObj.value, 10))
+      .map(countObj => countObj.count)
+      .reduce((sum, currentCount) => sum + currentCount, 0);
+
+    return {
+      value,
+      count: itemsCount,
+    };
+  });
   const stars = new Array(5).fill(null);
 
   return (
     <div className="ais-RatingMenu">
       <ul className="ais-RatingMenu-list">
-        {ratings.map((_, ratingIndex) => {
-          const ratingValue = 4 - ratingIndex;
-
-          const itemsCount = count
-            .filter(countObj => ratingValue <= parseInt(countObj.value, 10))
-            .map(countObj => countObj.count)
-            .reduce((sum, currentCount) => sum + currentCount, 0);
+        {ratings.map((rating, ratingIndex) => {
+          const isRatingSelected =
+            ratings.every(
+              currentRating => currentRating.value !== currentRefinement.min
+            ) || rating.value === currentRefinement.min;
 
           return (
             <li
               className={cx('ais-RatingMenu-item', {
-                'ais-RatingMenu-item--selected':
-                  ratingValue === currentRefinement.min,
-                'ais-RatingMenu-item--disabled': itemsCount === 0,
+                'ais-RatingMenu-item--selected': isRatingSelected,
+                'ais-RatingMenu-item--disabled': rating.count === 0,
               })}
-              key={ratingValue}
+              key={rating.value}
             >
               <a
                 className="ais-RatingMenu-link"
-                aria-label={`${ratingValue} & up`}
-                href={createURL(ratingValue)}
+                aria-label={`${rating.value} & up`}
+                href={createURL(rating.value)}
                 onClick={event => {
                   event.preventDefault();
 
-                  if (currentRefinement.min === ratingValue) {
+                  if (currentRefinement.min === rating.value) {
                     refine({ min: 0 });
                   } else {
-                    refine({ min: ratingValue });
+                    refine({ min: rating.value });
                   }
                 }}
               >
-                {stars.map((__, index) => {
-                  const starIndex = index + 1;
-                  const isStarFull = starIndex < 5 - ratingIndex;
+                {stars.map((_, starIndex) => {
+                  const starNumber = starIndex + 1;
+                  const isStarFull = starNumber < 5 - ratingIndex;
 
                   return (
                     <svg
-                      key={index}
+                      key={starIndex}
                       className={cx('ais-RatingMenu-starIcon', {
                         'ais-RatingMenu-starIcon--full': isStarFull,
                         'ais-RatingMenu-starIcon--empty': !isStarFull,
@@ -63,7 +72,7 @@ const Ratings = ({ currentRefinement, refine, createURL, count }) => {
                   );
                 })}
 
-                <span className="ais-RatingMenu-count">{itemsCount}</span>
+                <span className="ais-RatingMenu-count">{rating.count}</span>
               </a>
             </li>
           );
