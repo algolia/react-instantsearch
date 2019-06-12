@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connectRange } from 'react-instantsearch-dom';
 import { Slider, Rail, Handles, Tracks, Ticks } from 'react-compound-slider';
 
@@ -55,37 +55,29 @@ const PriceSlider = ({ min, max, refine, currentRefinement, canRefine }) => {
   }
 
   const domain = [min, max];
-  const [draggedValues, setDraggedValues] = useState([
-    currentRefinement.min,
-    currentRefinement.max,
-  ]);
+
   const [tickValues, setTickValues] = useState([
     currentRefinement.min,
     currentRefinement.max,
   ]);
 
-  const onSlideEnd = values => {
-    setDraggedValues(values);
-  };
-
   const onChange = values => {
     refine({ min: values[0], max: values[1] });
   };
 
-  const onUpdate = values => {
-    setTickValues(values);
-  };
+  useEffect(() => {
+    setTickValues([currentRefinement.min, currentRefinement.max]);
+  }, [currentRefinement]);
 
   return (
     <Slider
       mode={2}
       step={1}
       domain={domain}
-      values={draggedValues}
+      values={[currentRefinement.min, currentRefinement.max]}
       disabled={!canRefine}
-      onSlideEnd={onSlideEnd}
       onChange={onChange}
-      onUpdate={onUpdate}
+      onUpdate={setTickValues}
       rootStyle={{ position: 'relative', marginTop: '1.5rem' }}
     >
       <Rail>
