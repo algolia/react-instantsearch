@@ -6,7 +6,7 @@ import { hasMultipleIndices } from './indexUtils';
 import { version as ReactVersion } from 'react';
 import version from './version';
 
-export function addAlgoliaAgents(searchClient) {
+function addAlgoliaAgents(searchClient) {
   if (typeof searchClient.addAlgoliaAgent === 'function') {
     searchClient.addAlgoliaAgent(`react (${ReactVersion})`);
     searchClient.addAlgoliaAgent(`react-instantsearch (${version})`);

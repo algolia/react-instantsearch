@@ -25,12 +25,9 @@ type State = {
 };
 
 /**
- * @description
- * `<Index>` is the component that allows you to apply widgets to a dedicated index. It's
+ * The component that allows you to apply widgets to a dedicated index. It's
  * useful if you want to build an interface that targets multiple indices.
- * @kind widget
- * @name <Index>
- * @propType {string} indexName - index in which to search.
+ *
  * @example
  * import React from 'react';
  * import algoliasearch from 'algoliasearch/lite';
@@ -83,7 +80,7 @@ class Index extends Component<InnerProps, State> {
       this.getSearchParameters.bind(this),
       {
         ais: this.props.contextValue,
-        multiIndexContext: getIndexContext(props),
+        multiIndexContext: this.state.indexContext,
       },
       this.props
     );

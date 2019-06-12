@@ -6,8 +6,8 @@ export { translatable } from 'react-instantsearch-core';
 // Widget
 export { Configure } from 'react-instantsearch-core';
 export { QueryRuleContext } from 'react-instantsearch-core';
-export { default as InstantSearch } from './widgets/InstantSearch';
 export { Index } from 'react-instantsearch-core';
+export { InstantSearch } from 'react-instantsearch-core';
 
 // Connectors
 export { connectAutoComplete } from 'react-instantsearch-core';
