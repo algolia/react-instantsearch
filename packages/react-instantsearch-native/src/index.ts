@@ -7,6 +7,7 @@ export { translatable } from 'react-instantsearch-core';
 export { Configure } from 'react-instantsearch-core';
 export { QueryRuleContext } from 'react-instantsearch-core';
 export { Index } from 'react-instantsearch-core';
+export { InstantSearch } from 'react-instantsearch-core';
 
 // Connectors
 export { connectAutoComplete } from 'react-instantsearch-core';
