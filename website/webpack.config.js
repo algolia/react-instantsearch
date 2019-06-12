@@ -55,25 +55,6 @@ module.exports = {
           },
         ],
       },
-      {
-        test: /\.webmanifest$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              publicPath: 'assets',
-              context: __dirname,
-              outputPath(_url, resourcePath, context) {
-                return path.relative(context, resourcePath);
-              },
-              name: '[name].[ext]',
-            },
-          },
-          {
-            loader: 'webmanifest-loader',
-          },
-        ],
-      },
     ],
   },
   performance: {
@@ -88,11 +69,21 @@ module.exports = {
           chunks: [example],
         })
     ),
+    ...examples.map(
+      example =>
+        new CopyWebpackPlugin([
+          {
+            from: path.join(__dirname, example, 'assets'),
+            to: path.join(outputPath, example, 'assets'),
+          },
+        ])
+    ),
     new CopyWebpackPlugin([
       {
         from: path.join(__dirname, 'assets'),
         to: 'assets/',
       },
+      path.join(__dirname, '_redirects'),
     ]),
   ],
 };
