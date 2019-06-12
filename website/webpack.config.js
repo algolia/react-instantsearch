@@ -69,16 +69,11 @@ module.exports = {
           chunks: [example],
         })
     ),
-    ...examples.map(
-      example =>
-        new CopyWebpackPlugin([
-          {
-            from: path.join(__dirname, example, 'assets'),
-            to: path.join(outputPath, example, 'assets'),
-          },
-        ])
-    ),
     new CopyWebpackPlugin([
+      ...examples.map(example => ({
+        from: path.join(__dirname, example, 'assets'),
+        to: path.join(outputPath, example, 'assets'),
+      })),
       {
         from: path.join(__dirname, 'assets'),
         to: 'assets/',
