@@ -320,6 +320,35 @@ describe('InstantSearch', () => {
     expect(ism.clearCache).toHaveBeenCalledTimes(1);
   });
 
+  it('refreshes the cache only once if the refresh prop stay to true', () => {
+    const ism = createFakeInstantSearchManager({
+      clearCache: jest.fn(),
+    });
+
+    createInstantSearchManager.mockImplementation(() => ism);
+
+    const wrapper = mount(
+      <InstantSearch {...DEFAULT_PROPS}>
+        <div />
+      </InstantSearch>
+    );
+
+    expect(ism.clearCache).not.toHaveBeenCalled();
+
+    wrapper.setProps({
+      ...DEFAULT_PROPS,
+      refresh: true,
+    });
+
+    expect(ism.clearCache).toHaveBeenCalledTimes(1);
+
+    wrapper.setProps({
+      indexName: DEFAULT_PROPS.indexName,
+    });
+
+    expect(ism.clearCache).toHaveBeenCalledTimes(1);
+  });
+
   it('updates the index when the the index changes', () => {
     const ism = createFakeInstantSearchManager({
       updateIndex: jest.fn(),
