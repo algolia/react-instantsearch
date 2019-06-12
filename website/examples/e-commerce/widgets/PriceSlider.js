@@ -10,7 +10,7 @@ function Handle({
 }) {
   return (
     <>
-      {/* Dummy component to make the tooltip draggable */}
+      {/* Dummy element to make the tooltip draggable */}
       <div
         style={{
           position: 'absolute',
@@ -55,8 +55,7 @@ const PriceSlider = ({ min, max, refine, currentRefinement, canRefine }) => {
   }
 
   const domain = [min, max];
-
-  const [tickValues, setTickValues] = useState([
+  const [ticksValues, setTicksValues] = useState([
     currentRefinement.min,
     currentRefinement.max,
   ]);
@@ -66,7 +65,7 @@ const PriceSlider = ({ min, max, refine, currentRefinement, canRefine }) => {
   };
 
   useEffect(() => {
-    setTickValues([currentRefinement.min, currentRefinement.max]);
+    setTicksValues([currentRefinement.min, currentRefinement.max]);
   }, [currentRefinement]);
 
   return (
@@ -77,7 +76,7 @@ const PriceSlider = ({ min, max, refine, currentRefinement, canRefine }) => {
       values={[currentRefinement.min, currentRefinement.max]}
       disabled={!canRefine}
       onChange={onChange}
-      onUpdate={setTickValues}
+      onUpdate={setTicksValues}
       rootStyle={{ position: 'relative', marginTop: '1.5rem' }}
     >
       <Rail>
@@ -133,7 +132,7 @@ const PriceSlider = ({ min, max, refine, currentRefinement, canRefine }) => {
         )}
       </Handles>
 
-      <Ticks values={tickValues}>
+      <Ticks values={ticksValues}>
         {({ ticks }) => (
           <div>
             {ticks.map(({ id, count, value, percent }) => (
@@ -154,7 +153,7 @@ const PriceSlider = ({ min, max, refine, currentRefinement, canRefine }) => {
                   left: `${percent}%`,
                 }}
               >
-                <span style={{ color: '#e2a400', marginRight: 4 }}>$</span>{' '}
+                <span style={{ color: '#e2a400', marginRight: 4 }}>$</span>
                 {value}
               </div>
             ))}
