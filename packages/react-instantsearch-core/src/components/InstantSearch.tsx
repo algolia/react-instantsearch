@@ -57,7 +57,6 @@ type Props = {
 };
 
 type State = {
-  isControlled: boolean;
   contextValue: InstantSearchContext;
 };
 
@@ -150,9 +149,9 @@ class InstantSearch extends Component<Props, State> {
     resultsState: this.props.resultsState,
     stalledSearchDelay: this.props.stalledSearchDelay,
   });
+  isControlled: boolean = isControlled(this.props);
 
   state = {
-    isControlled: isControlled(this.props),
     contextValue: {
       onInternalStateUpdate: this.onWidgetsInternalStateUpdate.bind(this),
       createHrefForState: this.createHrefForState.bind(this),
@@ -168,13 +167,13 @@ class InstantSearch extends Component<Props, State> {
   componentDidUpdate(prevProps: Props) {
     const nextIsControlled = isControlled(this.props);
 
-    if (!this.state.isControlled && nextIsControlled) {
+    if (!this.isControlled && nextIsControlled) {
       throw new Error(
         "You can't switch <InstantSearch> from being uncontrolled to controlled"
       );
     }
 
-    if (this.state.isControlled && !nextIsControlled) {
+    if (this.isControlled && !nextIsControlled) {
       throw new Error(
         "You can't switch <InstantSearch> from being controlled to uncontrolled"
       );
@@ -188,7 +187,7 @@ class InstantSearch extends Component<Props, State> {
       this.aisManager.clearCache();
     }
 
-    if (this.state.isControlled) {
+    if (this.isControlled) {
       this.aisManager.onExternalStateUpdate(this.props.searchState);
     }
 
@@ -208,7 +207,7 @@ class InstantSearch extends Component<Props, State> {
 
   createHrefForState(searchState: SearchState) {
     searchState = this.aisManager.transitionState(searchState);
-    return this.state.isControlled && this.props.createURL
+    return this.isControlled && this.props.createURL
       ? this.props.createURL(searchState, this.getKnownKeys())
       : '#';
   }
@@ -218,7 +217,7 @@ class InstantSearch extends Component<Props, State> {
 
     this.onSearchStateChange(searchState);
 
-    if (!this.state.isControlled) {
+    if (!this.isControlled) {
       this.aisManager.onExternalStateUpdate(searchState);
     }
   }
