@@ -83,6 +83,7 @@ module.exports = {
         from: path.join(__dirname, 'assets'),
         to: 'assets/',
       },
+      path.join(__dirname, '_redirects'),
     ]),
   ],
 };
