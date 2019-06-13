@@ -343,7 +343,6 @@ export default function createInstantSearchManager({
 
   function updateIndex(newIndex) {
     initialSearchParameters = initialSearchParameters.setIndex(newIndex);
-    search();
   }
 
   function getWidgetsIds() {
