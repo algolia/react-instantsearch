@@ -265,7 +265,7 @@ export default function createInstantSearchManager({
     }
 
     if (!client._useCache) {
-      // This condition avoid hydrating a `searchClient` different from the
+      // This condition avoids hydrating a `searchClient` different from the
       // Algolia one. Unless the implementation uses the exact same approach
       // for the cache (the property `_useCache`). The implementation is brittle
       // but we don't have a proper way to detect the Algolia client at the moment.
