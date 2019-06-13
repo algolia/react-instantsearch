@@ -343,6 +343,7 @@ export default function createInstantSearchManager({
 
   function updateIndex(newIndex) {
     initialSearchParameters = initialSearchParameters.setIndex(newIndex);
+    // No need to trigger a new search here as the widgets will also update and trigger it if needed.
   }
 
   function getWidgetsIds() {
