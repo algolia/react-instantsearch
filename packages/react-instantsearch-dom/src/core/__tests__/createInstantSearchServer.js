@@ -49,10 +49,6 @@ describe('findResultsState', () => {
 
   const requiredProps = {
     indexName: 'indexName',
-  };
-
-  const requiredPropsWithSearchClient = {
-    ...requiredProps,
     searchClient: createSearchClient(),
   };
 
@@ -69,9 +65,7 @@ describe('findResultsState', () => {
   it('throws an error if props does not have a `searchClient`', () => {
     const App = () => <div />;
 
-    const props = {
-      ...requiredProps,
-    };
+    const props = {};
 
     const trigger = () => findResultsState(App, props);
 
@@ -132,7 +126,7 @@ describe('findResultsState', () => {
       );
 
       const props = {
-        ...requiredPropsWithSearchClient,
+        ...requiredProps,
       };
 
       const results = await findResultsState(App, props);
@@ -154,7 +148,7 @@ describe('findResultsState', () => {
       );
 
       const props = {
-        ...requiredPropsWithSearchClient,
+        ...requiredProps,
       };
 
       await findResultsState(App, props);
@@ -178,7 +172,7 @@ describe('findResultsState', () => {
       );
 
       const props = {
-        ...requiredPropsWithSearchClient,
+        ...requiredProps,
       };
 
       const data = await findResultsState(App, props);
@@ -199,7 +193,7 @@ describe('findResultsState', () => {
       );
 
       const props = {
-        ...requiredPropsWithSearchClient,
+        ...requiredProps,
         searchState: {
           query: 'iPhone',
         },
@@ -229,7 +223,7 @@ describe('findResultsState', () => {
       );
 
       const props = {
-        ...requiredPropsWithSearchClient,
+        ...requiredProps,
       };
 
       const results = await findResultsState(App, props);
@@ -255,7 +249,7 @@ describe('findResultsState', () => {
       );
 
       const props = {
-        ...requiredPropsWithSearchClient,
+        ...requiredProps,
       };
 
       await findResultsState(App, props);
@@ -284,7 +278,7 @@ describe('findResultsState', () => {
       );
 
       const props = {
-        ...requiredPropsWithSearchClient,
+        ...requiredProps,
         indexName: 'index1',
       };
 
@@ -318,7 +312,7 @@ describe('findResultsState', () => {
       );
 
       const props = {
-        ...requiredPropsWithSearchClient,
+        ...requiredProps,
         indexName: 'index1',
       };
 
@@ -352,7 +346,7 @@ describe('findResultsState', () => {
       );
 
       const props = {
-        ...requiredPropsWithSearchClient,
+        ...requiredProps,
         indexName: 'index1',
       };
 
@@ -388,7 +382,7 @@ describe('findResultsState', () => {
       );
 
       const props = {
-        ...requiredPropsWithSearchClient,
+        ...requiredProps,
         indexName: 'index1',
         searchState: {
           indices: {
@@ -432,7 +426,7 @@ describe('findResultsState', () => {
       );
 
       const props = {
-        ...requiredPropsWithSearchClient,
+        ...requiredProps,
         indexName: 'index1',
         searchState: {
           query: 'iPhone',
@@ -474,7 +468,7 @@ describe('findResultsState', () => {
       );
 
       const props = {
-        ...requiredPropsWithSearchClient,
+        ...requiredProps,
         indexName: 'index1',
         searchState: {
           query: 'iPhone',
