@@ -281,6 +281,10 @@ export default function createInstantSearchManager({
   }
 
   function hydrateSearchClientWithMultiIndexRequest(client, results) {
+    // At the moment we don't have a proper API to hydrate the client cache from
+    // the outside (it should come with the V4). The following code populates the
+    // cache with a multi-index results. You can find more information about the
+    // computation of the key inside the client (see link below).
     // https://github.com/algolia/algoliasearch-client-javascript/blob/c27e89ff92b2a854ae6f40dc524bffe0f0cbc169/src/AlgoliaSearchCore.js#L232-L240
     const key = `/1/indexes/*/queries_body_${JSON.stringify({
       requests: results.reduce(
@@ -307,6 +311,10 @@ export default function createInstantSearchManager({
   }
 
   function hydrateSearchClientWithSingleIndexRequest(client, results) {
+    // At the moment we don't have a proper API to hydrate the client cache from
+    // the outside (it should come with the V4). The following code populates the
+    // cache with a single-index result. You can find more information about the
+    // computation of the key inside the client (see link below).
     // https://github.com/algolia/algoliasearch-client-javascript/blob/c27e89ff92b2a854ae6f40dc524bffe0f0cbc169/src/AlgoliaSearchCore.js#L232-L240
     const key = `/1/indexes/*/queries_body_${JSON.stringify({
       requests: results._originalResponse.results.map(request => ({
