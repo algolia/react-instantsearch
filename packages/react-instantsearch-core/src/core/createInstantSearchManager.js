@@ -264,11 +264,11 @@ export default function createInstantSearchManager({
       return;
     }
 
-    if (!client._useCache) {
+    if (!client._useCache || typeof client.addAlgoliaAgent !== 'function') {
       // This condition avoids hydrating a `searchClient` different from the
-      // Algolia one. Unless the implementation uses the exact same approach
-      // for the cache (the property `_useCache`). The implementation is brittle
-      // but we don't have a proper way to detect the Algolia client at the moment.
+      // Algolia one. We also avoid to hydrate the client when the cache is
+      // disabled. The implementation is brittle but we don't have a proper way
+      // to detect the Algolia client at the moment.
       return;
     }
 

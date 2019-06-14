@@ -169,6 +169,38 @@ describe('createInstantSearchManager', () => {
       expect(Object.keys(searchClient.cache)).toHaveLength(0);
     });
 
+    it("does not hydrate the `searchClient` if it's not an Algolia client", () => {
+      const searchClient = {
+        _useCache: true,
+        cache: {},
+      };
+
+      const resultsState = {
+        _originalResponse: {
+          results: [
+            {
+              index: 'indexName',
+              query: 'query',
+            },
+          ],
+        },
+        state: {
+          index: 'indexName',
+          query: 'query',
+        },
+      };
+
+      expect(Object.keys(searchClient.cache)).toHaveLength(0);
+
+      createInstantSearchManager({
+        indexName: 'index',
+        searchClient,
+        resultsState,
+      });
+
+      expect(Object.keys(searchClient.cache)).toHaveLength(0);
+    });
+
     it('does not hydrate the `searchClient` without cache enabled', () => {
       const searchClient = algoliasearch('appId', 'apiKey', {
         _cache: false,
