@@ -326,7 +326,7 @@ describe('InstantSearch', () => {
       indexName: 'foobar',
     });
 
-    expect(wrapper.html()).toMatchInlineSnapshot(`"<div>foobar</div>"`);
+    expect(wrapper.html()).toMatchInlineSnapshot(`"foobar"`);
 
     expect(ism.updateIndex).not.toHaveBeenCalled();
 
@@ -334,7 +334,7 @@ describe('InstantSearch', () => {
       indexName: 'newIndexName',
     });
 
-    expect(wrapper.html()).toMatchInlineSnapshot(`"<div>newIndexName</div>"`);
+    expect(wrapper.html()).toMatchInlineSnapshot(`"newIndexName"`);
 
     expect(ism.updateIndex).toHaveBeenCalledTimes(1);
   });

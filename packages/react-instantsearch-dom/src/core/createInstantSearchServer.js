@@ -113,11 +113,6 @@ export const findResultsState = function(App, props) {
 
   const { indexName, searchClient } = props;
 
-  if (typeof searchClient.addAlgoliaAgent === 'function') {
-    searchClient.addAlgoliaAgent(`react (${React.version})`);
-    searchClient.addAlgoliaAgent(`react-instantsearch-server (${version})`);
-  }
-
   const searchParameters = [];
 
   renderToString(
@@ -133,6 +128,10 @@ export const findResultsState = function(App, props) {
   );
 
   const helper = algoliasearchHelper(searchClient, sharedParameters.index);
+
+  if (typeof searchClient.addAlgoliaAgent === 'function') {
+    searchClient.addAlgoliaAgent(`react-instantsearch-server (${version})`);
+  }
 
   if (Object.keys(derivedParameters).length === 0) {
     return singleIndexSearch(helper, sharedParameters);

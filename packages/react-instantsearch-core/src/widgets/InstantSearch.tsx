@@ -1,4 +1,4 @@
-import React, { Component, Children, ReactType } from 'react';
+import React, { Component, Children } from 'react';
 import PropTypes from 'prop-types';
 import createInstantSearchManager from '../core/createInstantSearchManager';
 import { InstantSearchProvider, InstantSearchContext } from '../core/context';
@@ -61,10 +61,6 @@ type Props = {
     searchState: SearchState
   ) => void;
   stalledSearchDelay?: number;
-  root: {
-    Root: ReactType;
-    props: {};
-  };
   resultsState: SearchResults | { [indexId: string]: SearchResults };
 };
 
@@ -113,6 +109,7 @@ type State = {
 class InstantSearch extends Component<Props, State> {
   static defaultProps = {
     stalledSearchDelay: 200,
+    refresh: false,
   };
 
   static propTypes = {
@@ -128,7 +125,7 @@ class InstantSearch extends Component<Props, State> {
 
     createURL: PropTypes.func,
 
-    refresh: PropTypes.bool.isRequired,
+    refresh: PropTypes.bool,
 
     searchState: PropTypes.object,
     onSearchStateChange: PropTypes.func,
@@ -137,16 +134,6 @@ class InstantSearch extends Component<Props, State> {
     resultsState: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
 
     children: PropTypes.node,
-
-    root: PropTypes.shape({
-      Root: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.func,
-        PropTypes.object,
-      ]),
-      props: PropTypes.object,
-    }).isRequired,
-
     stalledSearchDelay: PropTypes.number,
   };
 
@@ -261,16 +248,13 @@ class InstantSearch extends Component<Props, State> {
 
   render() {
     const childrenCount = Children.count(this.props.children);
-    const { Root, props } = this.props.root;
     if (childrenCount === 0) {
       return null;
     }
     return (
-      <Root {...props}>
-        <InstantSearchProvider value={this.state.contextValue}>
-          {this.props.children}
-        </InstantSearchProvider>
-      </Root>
+      <InstantSearchProvider value={this.state.contextValue}>
+        {this.props.children}
+      </InstantSearchProvider>
     );
   }
 }

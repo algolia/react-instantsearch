@@ -3,6 +3,15 @@ import createWidgetsManager from './createWidgetsManager';
 import createStore from './createStore';
 import { HIGHLIGHT_TAGS } from './highlight';
 import { hasMultipleIndices } from './indexUtils';
+import { version as ReactVersion } from 'react';
+import version from './version';
+
+function addAlgoliaAgents(searchClient) {
+  if (typeof searchClient.addAlgoliaAgent === 'function') {
+    searchClient.addAlgoliaAgent(`react (${ReactVersion})`);
+    searchClient.addAlgoliaAgent(`react-instantsearch (${version})`);
+  }
+}
 
 const isMultiIndexContext = widget => hasMultipleIndices(widget.context);
 const isTargetedIndexEqualIndex = (widget, indexId) =>
@@ -35,6 +44,8 @@ export default function createInstantSearchManager({
     ...HIGHLIGHT_TAGS,
   });
 
+  addAlgoliaAgents(searchClient);
+
   helper
     .on('search', handleNewSearch)
     .on('result', handleSearchSuccess({ indexId: indexName }))
@@ -63,6 +74,7 @@ export default function createInstantSearchManager({
   }
 
   function updateClient(client) {
+    addAlgoliaAgents(client);
     helper.setClient(client);
     search();
   }
