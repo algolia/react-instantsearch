@@ -3,8 +3,8 @@ import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { SearchParameters, SearchResults } from 'algoliasearch-helper';
 import {
-  createIndex,
-  createInstantSearch,
+  Index,
+  InstantSearch,
   createConnector,
   version,
 } from 'react-instantsearch-core';
@@ -19,8 +19,6 @@ describe('findResultsState', () => {
         results: [{ query: 'query' }],
       }),
   });
-
-  const InstantSearch = createInstantSearch({ Root: 'div' });
 
   const createWidget = ({ getSearchParameters = () => {} } = {}) =>
     createConnector({
@@ -75,7 +73,7 @@ describe('findResultsState', () => {
   });
 
   it('adds expected Algolia agents', () => {
-    const App = () => <div />;
+    const App = props => <InstantSearch {...props} />;
 
     const searchClient = {
       ...createSearchClient(),
@@ -89,13 +87,17 @@ describe('findResultsState', () => {
 
     findResultsState(App, props);
 
-    // The `addAlgoliaAgent` method is called 4 times:
-    // - 2 times with react-instantsearch-dom/server
-    // - 2 times with the AlgoliasearchHelper
+    // The `addAlgoliaAgent` method is called 7 times:
+    // - 1 times with react-instantsearch-dom/server
+    // - 2 times with react-instantsearch-core/InstantSearch
+    // - 4 times with the AlgoliasearchHelper
 
-    expect(searchClient.addAlgoliaAgent).toHaveBeenCalledTimes(4);
+    expect(searchClient.addAlgoliaAgent).toHaveBeenCalledTimes(7);
     expect(searchClient.addAlgoliaAgent).toHaveBeenCalledWith(
       `react (${React.version})`
+    );
+    expect(searchClient.addAlgoliaAgent).toHaveBeenCalledWith(
+      `react-instantsearch (${version})`
     );
     expect(searchClient.addAlgoliaAgent).toHaveBeenCalledWith(
       `react-instantsearch-server (${version})`
@@ -209,8 +211,6 @@ describe('findResultsState', () => {
   });
 
   describe('multi index', () => {
-    const Index = createIndex({ Root: 'div' });
-
     it('results should be instance of SearchResults and SearchParameters', async () => {
       const Connected = createWidget();
 
