@@ -87,7 +87,7 @@ describe('findResultsState', () => {
 
     findResultsState(App, props);
 
-    // The `addAlgoliaAgent` method is called 4 times:
+    // The `addAlgoliaAgent` method is called 7 times:
     // - 1 times with react-instantsearch-dom/server
     // - 2 times with react-instantsearch-core/InstantSearch
     // - 4 times with the AlgoliasearchHelper
