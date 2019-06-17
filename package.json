@@ -129,11 +129,11 @@
     },
     {
       "path": "packages/react-instantsearch/dist/umd/Connectors.min.js",
-      "maxSize": "41.25 kB"
+      "maxSize": "41.75 kB"
     },
     {
       "path": "packages/react-instantsearch/dist/umd/Dom.min.js",
-      "maxSize": "51.75 kB"
+      "maxSize": "52 kB"
     },
     {
       "path": "packages/react-instantsearch-core/dist/umd/ReactInstantSearchCore.min.js",
