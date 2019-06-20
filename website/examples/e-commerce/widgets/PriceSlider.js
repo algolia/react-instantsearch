@@ -41,7 +41,7 @@ function Handle({
           width: 16,
           boxShadow:
             '0 4px 11px 0 rgba(37, 44, 97, 0.15), 0 2px 3px 0 rgba(93, 100, 148, 0.2)',
-          zIndex: 2,
+          zIndex: 1,
         }}
         {...getHandleProps(id)}
       />
