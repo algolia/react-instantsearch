@@ -23,12 +23,6 @@ h2 {
   font-weight: bold;
 }
 
-@media (min-width: 900px) {
-  [data-layout='mobile'] {
-    display: none;
-  }
-}
-
 /* Header */
 
 .header {
@@ -288,4 +282,12 @@ mark {
 
 .ais-RatingMenu-starIcon {
   margin-right: 0.5rem;
+}
+
+/* Hide all mobile-specific design on desktop */
+
+@media (min-width: 900px) {
+  [data-layout='mobile'] {
+    display: none;
+  }
 }
