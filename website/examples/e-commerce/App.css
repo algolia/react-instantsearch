@@ -232,15 +232,6 @@ mark {
   padding: 0 4px;
 }
 
-/* RangeSlider */
-
-.ais-RangeSlider .rheostat-tooltip::before {
-  color: #e2a400;
-  content: '$';
-  font-size: 0.6;
-  margin-right: 4px;
-}
-
 /* ToggleRefinement */
 
 .ais-ToggleRefinement-label {
