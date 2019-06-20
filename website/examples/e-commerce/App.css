@@ -28,8 +28,8 @@ h2 {
 .header {
   align-items: center;
   background: linear-gradient(to bottom, #fbc300, #c98a00);
-  background-image: url('./images/cover.png');
-  background-image: url('./images/cover.png'),
+  background-image: url('./assets/cover.png');
+  background-image: url('./assets/cover.png'),
     linear-gradient(to bottom, #fbc300, #c98a00);
   background-position: center;
   background-size: cover;
@@ -90,7 +90,7 @@ h2 {
   padding: 30px 0;
 }
 
-.container-options > div:not(:first-of-type) {
+.container-options div:not(:first-of-type) {
   margin-left: 48px;
 }
 

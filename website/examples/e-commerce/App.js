@@ -21,6 +21,7 @@ import {
   Ratings,
   PriceSlider,
   ResultsNumberMobile,
+  SaveFiltersMobile,
 } from './widgets';
 import withURLSync from './URLSync';
 import './Theme.css';
@@ -219,21 +220,12 @@ const App = props => {
           </div>
 
           <footer className="container-filters-footer" data-layout="mobile">
-            <div
-              className="container-filters-footer-button-wrapper"
-              data-layout="mobile"
-            >
+            <div className="container-filters-footer-button-wrapper">
               <ClearFiltersMobile containerRef={containerRef} />
             </div>
 
             <div className="container-filters-footer-button-wrapper">
-              <button
-                className="button button-primary"
-                data-action="close-overlay"
-                onClick={closeFilters}
-              >
-                Save and close
-              </button>
+              <SaveFiltersMobile onClick={closeFilters} />
             </div>
           </footer>
         </section>
