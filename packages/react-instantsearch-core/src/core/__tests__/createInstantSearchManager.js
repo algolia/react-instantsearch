@@ -575,7 +575,6 @@ describe('createInstantSearchManager', () => {
         getSearchParameters(state) {
           return state.setIndex('index');
         },
-        context: {},
         props: {
           indexId: 'index_with_refinement',
         },
@@ -588,12 +587,11 @@ describe('createInstantSearchManager', () => {
         getSearchParameters(state) {
           return state.setQuery('derived');
         },
-        context: {
-          multiIndexContext: {
+        props: {
+          indexContextValue: {
             targetedIndex: 'index_with_refinement',
           },
         },
-        props: {},
       });
 
       const { mainParameters, derivedParameters } = ism.getSearchParameters();
