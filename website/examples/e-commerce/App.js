@@ -183,6 +183,15 @@ const App = props => {
           </div>
 
           <div className="container-body">
+            <Panel header="Category">
+              <HierarchicalMenu
+                attributes={[
+                  'hierarchicalCategories.lvl0',
+                  'hierarchicalCategories.lvl1',
+                ]}
+              />
+            </Panel>
+
             <Panel header="Brands">
               <RefinementList
                 attribute="brand"
@@ -190,15 +199,6 @@ const App = props => {
                 translations={{
                   placeholder: 'Search for brands…',
                 }}
-              />
-            </Panel>
-
-            <Panel header="Category">
-              <HierarchicalMenu
-                attributes={[
-                  'hierarchicalCategories.lvl0',
-                  'hierarchicalCategories.lvl1',
-                ]}
               />
             </Panel>
 
