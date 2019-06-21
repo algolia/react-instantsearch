@@ -24,10 +24,9 @@ const isTargetedIndexEqualIndex = (widget, indexId) =>
 // Relying on the `indexId` is a bit brittle to detect the `Index` widget.
 // Since it's a class we could rely on `instanceof` or similar. We never
 // had an issue though. Works for now.
-const isIndexWidget = widget =>
-  Boolean(widget.props.indexId || widget.props.indexName);
+const isIndexWidget = widget => Boolean(widget.props.indexId);
 const isIndexWidgetEqualIndex = (widget, indexId) =>
-  widget.props.indexId === indexId || widget.props.indexName === indexId;
+  widget.props.indexId === indexId;
 
 const sortIndexWidgetsFirst = (firstWidget, secondWidget) => {
   if (isIndexWidget(firstWidget)) {
@@ -156,7 +155,7 @@ export default function createInstantSearchManager({
       .reduce((indices, widget) => {
         const indexId = isMultiIndexContext(widget)
           ? widget.props.indexContextValue.targetedIndex
-          : widget.props.indexId || widget.props.indexName;
+          : widget.props.indexId;
 
         const widgets = indices[indexId] || [];
 
