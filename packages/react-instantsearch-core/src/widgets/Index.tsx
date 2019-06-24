@@ -123,13 +123,20 @@ class Index extends Component<InnerProps, State> {
   }
 }
 
-const IndexWrapper: React.FC<Props> = props => (
-  <InstantSearchConsumer>
-    {contextValue => (
-      <Index contextValue={contextValue} indexId={props.indexName} {...props} />
-    )}
-  </InstantSearchConsumer>
-);
+const IndexWrapper: React.FC<Props> = props => {
+  const inferredIndexId = props.indexName;
+  return (
+    <InstantSearchConsumer>
+      {contextValue => (
+        <Index
+          contextValue={contextValue}
+          indexId={inferredIndexId}
+          {...props}
+        />
+      )}
+    </InstantSearchConsumer>
+  );
+};
 
 export const IndexComponentWithoutContext = Index;
 export default IndexWrapper;
