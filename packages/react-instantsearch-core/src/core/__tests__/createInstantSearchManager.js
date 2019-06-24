@@ -1,6 +1,17 @@
+import React from 'react';
+import Adapter from 'enzyme-adapter-react-16';
+import Enzyme, { mount } from 'enzyme';
 import algoliasearch from 'algoliasearch/lite';
 import { SearchResults } from 'algoliasearch-helper';
 import createInstantSearchManager from '../createInstantSearchManager';
+import {
+  InstantSearch,
+  Index,
+  SortBy,
+  Configure,
+} from 'react-instantsearch-dom';
+
+Enzyme.configure({ adapter: new Adapter() });
 
 jest.useFakeTimers();
 
@@ -612,6 +623,134 @@ describe('createInstantSearchManager', () => {
           }),
         },
       ]);
+    });
+
+    it('expects widgets main parameters and derived parameters to be correctly calculated within a multi index context', () => {
+      const wrapper = mount(
+        <InstantSearch indexName="index1" searchClient={createSearchClient()}>
+          <Index indexName="bestbuy" />
+          <Index indexName="instant_search" />
+
+          <Index indexId="instant_search_apple" indexName="instant_search">
+            <Configure filters="brand:Apple" />
+          </Index>
+
+          <Index indexId="instant_search_samsung" indexName="instant_search">
+            <Configure filters="brand:Samsung" />
+          </Index>
+
+          <Index indexId="instant_search_microsoft" indexName="instant_search">
+            <Configure filters="brand:Microsoft" />
+          </Index>
+        </InstantSearch>
+      );
+
+      const {
+        mainParameters,
+        derivedParameters,
+      } = wrapper.instance().aisManager.getSearchParameters();
+
+      expect(mainParameters).toEqual(
+        expect.objectContaining({
+          index: 'index1',
+        })
+      );
+
+      expect(derivedParameters).toHaveLength(5);
+
+      expect(derivedParameters).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            indexId: 'bestbuy',
+            parameters: expect.objectContaining({
+              index: 'bestbuy',
+            }),
+          }),
+          expect.objectContaining({
+            indexId: 'instant_search',
+            parameters: expect.objectContaining({
+              index: 'instant_search',
+            }),
+          }),
+          expect.objectContaining({
+            indexId: 'instant_search_apple',
+            parameters: expect.objectContaining({
+              index: 'instant_search',
+              filters: 'brand:Apple',
+            }),
+          }),
+          expect.objectContaining({
+            indexId: 'instant_search_samsung',
+            parameters: expect.objectContaining({
+              index: 'instant_search',
+              filters: 'brand:Samsung',
+            }),
+          }),
+          expect.objectContaining({
+            indexId: 'instant_search_microsoft',
+            parameters: expect.objectContaining({
+              index: 'instant_search',
+              filters: 'brand:Microsoft',
+            }),
+          }),
+        ])
+      );
+    });
+
+    it('expects widgets main parameters and derived parameters to be correctly calculated with SortBy within a multi index context', () => {
+      const wrapper = mount(
+        <InstantSearch indexName="index1" searchClient={createSearchClient()}>
+          <Index indexName="categories">
+            <SortBy
+              defaultRefinement="bestbuy"
+              items={[
+                { value: 'categories', label: 'Categories' },
+                { value: 'bestbuy', label: 'Best buy' },
+              ]}
+            />
+          </Index>
+
+          <Index indexName="products">
+            <SortBy
+              defaultRefinement="brands"
+              items={[
+                { value: 'products', label: 'Products' },
+                { value: 'brands', label: 'Brands' },
+              ]}
+            />
+          </Index>
+        </InstantSearch>
+      );
+
+      const {
+        mainParameters,
+        derivedParameters,
+      } = wrapper.instance().aisManager.getSearchParameters();
+
+      expect(mainParameters).toEqual(
+        expect.objectContaining({
+          index: 'index1',
+        })
+      );
+
+      expect(derivedParameters).toHaveLength(2);
+
+      expect(derivedParameters).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            indexId: 'categories',
+            parameters: expect.objectContaining({
+              index: 'bestbuy',
+            }),
+          }),
+          expect.objectContaining({
+            indexId: 'products',
+            parameters: expect.objectContaining({
+              index: 'brands',
+            }),
+          }),
+        ])
+      );
     });
   });
 
