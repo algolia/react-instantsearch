@@ -1,4 +1,3 @@
-import { orderBy } from 'lodash';
 import PropTypes from 'prop-types';
 import createConnector from '../core/createConnector';
 import {
@@ -50,7 +49,7 @@ function cleanUp(props, searchState, context) {
   return cleanUpValue(searchState, context, `${namespace}.${getId(props)}`);
 }
 
-const sortBy = ['count:desc', 'name:asc'];
+const defaultSortBy = ['count:desc', 'name:asc'];
 
 /**
  * connectMenu connector provides the logic to build a widget that will
@@ -134,18 +133,24 @@ export default createConnector({
       };
     }
 
-    const items = isFromSearch
-      ? searchForFacetValuesResults[attribute].map(v => ({
-          label: v.value,
-          value: getValue(v.value, props, searchState, {
-            ais: props.contextValue,
-            multiIndexContext: props.indexContextValue,
-          }),
-          _highlightResult: { label: { value: v.highlighted } },
-          count: v.count,
-          isRefined: v.isRefined,
-        }))
-      : results.getFacetValues(attribute, { sortBy }).map(v => ({
+    let items;
+    if (isFromSearch) {
+      items = searchForFacetValuesResults[attribute].map(v => ({
+        label: v.value,
+        value: getValue(v.value, props, searchState, {
+          ais: props.contextValue,
+          multiIndexContext: props.indexContextValue,
+        }),
+        _highlightResult: { label: { value: v.highlighted } },
+        count: v.count,
+        isRefined: v.isRefined,
+      }));
+    } else {
+      items = results
+        .getFacetValues(attribute, {
+          sortBy: searchable ? undefined : defaultSortBy,
+        })
+        .map(v => ({
           label: v.name,
           value: getValue(v.name, props, searchState, {
             ais: props.contextValue,
@@ -154,19 +159,11 @@ export default createConnector({
           count: v.count,
           isRefined: v.isRefined,
         }));
-
-    const sortedItems =
-      searchable && !isFromSearch
-        ? orderBy(
-            items,
-            ['isRefined', 'count', 'label'],
-            ['desc', 'desc', 'asc']
-          )
-        : items;
+    }
 
     const transformedItems = props.transformItems
-      ? props.transformItems(sortedItems)
-      : sortedItems;
+      ? props.transformItems(items)
+      : items;
 
     return {
       items: transformedItems.slice(0, getLimit(props)),
