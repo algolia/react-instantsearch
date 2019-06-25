@@ -729,24 +729,20 @@ describe('createInstantSearchManager', () => {
         })
       );
 
-      expect(derivedParameters).toHaveLength(2);
-
-      expect(derivedParameters).toEqual(
-        expect.arrayContaining([
-          expect.objectContaining({
-            indexId: 'categories',
-            parameters: expect.objectContaining({
-              index: 'bestbuy',
-            }),
+      expect(derivedParameters).toEqual([
+        expect.objectContaining({
+          indexId: 'categories',
+          parameters: expect.objectContaining({
+            index: 'bestbuy',
           }),
-          expect.objectContaining({
-            indexId: 'products',
-            parameters: expect.objectContaining({
-              index: 'brands',
-            }),
+        }),
+        expect.objectContaining({
+          indexId: 'products',
+          parameters: expect.objectContaining({
+            index: 'brands',
           }),
-        ])
-      );
+        }),
+      ]);
     });
   });
 
