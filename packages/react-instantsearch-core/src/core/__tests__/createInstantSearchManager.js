@@ -656,45 +656,41 @@ describe('createInstantSearchManager', () => {
         })
       );
 
-      expect(derivedParameters).toHaveLength(5);
-
-      expect(derivedParameters).toEqual(
-        expect.arrayContaining([
-          expect.objectContaining({
-            indexId: 'bestbuy',
-            parameters: expect.objectContaining({
-              index: 'bestbuy',
-            }),
+      expect(derivedParameters).toEqual([
+        expect.objectContaining({
+          indexId: 'bestbuy',
+          parameters: expect.objectContaining({
+            index: 'bestbuy',
           }),
-          expect.objectContaining({
-            indexId: 'instant_search',
-            parameters: expect.objectContaining({
-              index: 'instant_search',
-            }),
+        }),
+        expect.objectContaining({
+          indexId: 'instant_search',
+          parameters: expect.objectContaining({
+            index: 'instant_search',
           }),
-          expect.objectContaining({
-            indexId: 'instant_search_apple',
-            parameters: expect.objectContaining({
-              index: 'instant_search',
-              filters: 'brand:Apple',
-            }),
+        }),
+        expect.objectContaining({
+          indexId: 'instant_search_apple',
+          parameters: expect.objectContaining({
+            index: 'instant_search',
+            filters: 'brand:Apple',
           }),
-          expect.objectContaining({
-            indexId: 'instant_search_samsung',
-            parameters: expect.objectContaining({
-              index: 'instant_search',
-              filters: 'brand:Samsung',
-            }),
+        }),
+        expect.objectContaining({
+          indexId: 'instant_search_samsung',
+          parameters: expect.objectContaining({
+            index: 'instant_search',
+            filters: 'brand:Samsung',
           }),
-          expect.objectContaining({
-            indexId: 'instant_search_microsoft',
-            parameters: expect.objectContaining({
-              index: 'instant_search',
-              filters: 'brand:Microsoft',
-            }),
+        }),
+        expect.objectContaining({
+          indexId: 'instant_search_microsoft',
+          parameters: expect.objectContaining({
+            index: 'instant_search',
+            filters: 'brand:Microsoft',
           }),
-        ])
-      );
+        }),
+      ]);
     });
 
     it('expects widgets main parameters and derived parameters to be correctly calculated with SortBy within a multi index context', () => {
