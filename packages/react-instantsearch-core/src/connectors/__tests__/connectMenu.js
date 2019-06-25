@@ -464,23 +464,21 @@ describe('connectMenu', () => {
 
     it('if searchable: use the default sortBy order', () => {
       const results = {
-        getFacetValues: jest.fn(() => []),
+        getFacetValues: jest.fn(() => [
+          {
+            name: 'oy',
+            isRefined: true,
+            count: 10,
+          },
+          {
+            name: 'wat',
+            isRefined: false,
+            count: 20,
+          },
+        ]),
         getFacetByName: () => true,
         hits: [],
       };
-      results.getFacetValues.mockClear();
-      results.getFacetValues.mockImplementation(() => [
-        {
-          name: 'oy',
-          isRefined: true,
-          count: 10,
-        },
-        {
-          name: 'wat',
-          isRefined: false,
-          count: 20,
-        },
-      ]);
 
       props = connect.getProvidedProps(
         { attribute: 'ok', searchable: true, contextValue },
