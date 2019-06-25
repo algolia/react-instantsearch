@@ -416,31 +416,77 @@ describe('connectMenu', () => {
       });
     });
 
-    it('when search for facets values is activated order the item by isRefined first', () => {
+    it('if not searchable: uses a static sortBy order', () => {
       const results = {
-        getFacetValues: jest.fn(() => []),
+        getFacetValues: jest.fn(() => [
+          {
+            name: 'oy',
+            isRefined: true,
+            count: 10,
+          },
+          {
+            name: 'wat',
+            isRefined: false,
+            count: 20,
+          },
+        ]),
         getFacetByName: () => true,
         hits: [],
       };
-      results.getFacetValues.mockClear();
-      results.getFacetValues.mockImplementation(() => [
+
+      props = connect.getProvidedProps(
+        { attribute: 'ok', contextValue },
+        {},
+        { results }
+      );
+
+      expect(results.getFacetValues).toHaveBeenCalledWith('ok', {
+        sortBy: ['count:desc', 'name:asc'],
+      });
+
+      expect(props.items).toEqual([
         {
-          name: 'wat',
-          isRefined: false,
-          count: 20,
-        },
-        {
-          name: 'oy',
+          value: 'oy',
+          label: 'oy',
           isRefined: true,
           count: 10,
         },
+        {
+          value: 'wat',
+          label: 'wat',
+          isRefined: false,
+          count: 20,
+        },
       ]);
+    });
+
+    it('if searchable: use the default sortBy order', () => {
+      const results = {
+        getFacetValues: jest.fn(() => [
+          {
+            name: 'oy',
+            isRefined: true,
+            count: 10,
+          },
+          {
+            name: 'wat',
+            isRefined: false,
+            count: 20,
+          },
+        ]),
+        getFacetByName: () => true,
+        hits: [],
+      };
 
       props = connect.getProvidedProps(
         { attribute: 'ok', searchable: true, contextValue },
         {},
         { results }
       );
+
+      expect(results.getFacetValues).toHaveBeenCalledWith('ok', {
+        sortBy: undefined,
+      });
 
       expect(props.items).toEqual([
         {
