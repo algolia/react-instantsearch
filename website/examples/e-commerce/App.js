@@ -24,6 +24,7 @@ import {
   SaveFiltersMobile,
 } from './widgets';
 import withURLSync from './URLSync';
+import { formatNumber } from './utils';
 import './Theme.css';
 import './App.css';
 import './App.mobile.css';
@@ -51,7 +52,8 @@ const Hit = ({ hit }) => (
 
       <footer>
         <p>
-          <span className="hit-em">$</span> <strong>{hit.price}</strong>{' '}
+          <span className="hit-em">$</span>{' '}
+          <strong>{formatNumber(hit.price)}</strong>{' '}
           <span className="hit-em hit-rating">
             <svg
               xmlns="http://www.w3.org/2000/svg"

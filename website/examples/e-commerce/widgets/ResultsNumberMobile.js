@@ -1,9 +1,10 @@
 import React from 'react';
 import { connectStats } from 'react-instantsearch-dom';
+import { formatNumber } from '../utils';
 
 const ResultsNumberMobile = ({ nbHits }) => (
   <div>
-    <strong>{nbHits}</strong> results
+    <strong>{formatNumber(nbHits)}</strong> results
   </div>
 );
 

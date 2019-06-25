@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connectRange } from 'react-instantsearch-dom';
 import { Slider, Rail, Handles, Tracks, Ticks } from 'react-compound-slider';
+import { formatNumber } from '../utils';
 import './PriceSlider.css';
 
 function Handle({
@@ -125,7 +126,7 @@ const PriceSlider = ({ min, max, refine, currentRefinement, canRefine }) => {
                 }}
               >
                 <span style={{ color: '#e2a400', marginRight: 4 }}>$</span>
-                {value}
+                {formatNumber(value)}
               </div>
             ))}
           </div>
