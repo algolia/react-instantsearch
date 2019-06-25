@@ -9,13 +9,13 @@ import {
 
 function getIndexContext(props: Props): IndexContext {
   return {
-    targetedIndex: props.indexId || props.indexName,
+    targetedIndex: props.indexId,
   };
 }
 
 type Props = {
   indexName: string;
-  indexId?: string;
+  indexId: string;
 };
 
 type InnerProps = Props & { contextValue: InstantSearchContext };
@@ -57,7 +57,7 @@ type State = {
 class Index extends Component<InnerProps, State> {
   static propTypes = {
     indexName: PropTypes.string.isRequired,
-    indexId: PropTypes.string,
+    indexId: PropTypes.string.isRequired,
     children: PropTypes.node,
   };
 
@@ -123,11 +123,20 @@ class Index extends Component<InnerProps, State> {
   }
 }
 
-const IndexWrapper: React.FC<Props> = props => (
-  <InstantSearchConsumer>
-    {contextValue => <Index contextValue={contextValue} {...props} />}
-  </InstantSearchConsumer>
-);
+const IndexWrapper: React.FC<Props> = props => {
+  const inferredIndexId = props.indexName;
+  return (
+    <InstantSearchConsumer>
+      {contextValue => (
+        <Index
+          contextValue={contextValue}
+          indexId={inferredIndexId}
+          {...props}
+        />
+      )}
+    </InstantSearchConsumer>
+  );
+};
 
 export const IndexComponentWithoutContext = Index;
 export default IndexWrapper;
