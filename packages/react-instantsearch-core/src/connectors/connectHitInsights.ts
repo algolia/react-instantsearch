@@ -1,11 +1,10 @@
 import createConnector from '../core/createConnector';
 import { getResults } from '../core/indexUtils';
 
-type Without<T, K> = Pick<T, Exclude<keyof T, K>>;
 type Results = { index: string };
 type Hit = { objectID: string; __position: number; __queryID: string };
 
-type InsightsClient = (
+export type InsightsClient = (
   method: InsightsClientMethod,
   payload: InsightsClientPayload
 ) => void;
@@ -22,6 +21,15 @@ type InsightsClientPayload = {
   positions?: number[];
 };
 
+type WrappedInsightsClient = (
+  aa: InsightsClient,
+  results: Results,
+  currentHit: Hit
+) => (
+  method: InsightsClientMethod,
+  payload: Partial<InsightsClientPayload>
+) => void;
+
 function inferPayload({
   method,
   results,
@@ -30,7 +38,7 @@ function inferPayload({
   method: InsightsClientMethod;
   results: Results;
   currentHit: Hit;
-}): Without<InsightsClientPayload, 'eventName'> {
+}): Omit<InsightsClientPayload, 'eventName'> {
   const { index } = results;
   const queryID = currentHit.__queryID;
   const objectIDs = [currentHit.objectID];
@@ -50,13 +58,9 @@ function inferPayload({
   }
 }
 
-const wrapInsightsClient = (
-  aa: InsightsClient,
-  results: Results,
-  currentHit: Hit
-) => (
-  method: InsightsClientMethod,
-  payload: Partial<InsightsClientPayload>
+const wrapInsightsClient: WrappedInsightsClient = (aa, results, currentHit) => (
+  method,
+  payload
 ) => {
   if (typeof aa !== 'function') {
     throw new TypeError(`Expected insightsClient to be a Function`);

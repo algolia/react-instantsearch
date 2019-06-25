@@ -1,11 +1,27 @@
-import connect from '../connectHitInsights';
+import connect, { InsightsClient } from '../connectHitInsights';
 
 jest.mock('../../core/createConnector', () => x => x);
 
-function setup() {
+interface MultiIndexContext {
+  context: {
+    ais: {
+      mainTargetedIndex: string;
+    };
+    multiIndexContext: {
+      targetedIndex: string;
+    };
+  };
+}
+
+function setup(): {
+  insightsClient: jest.Mock<any>;
+  props: {
+    insights: InsightsClient;
+  };
+} {
   const insightsClient = jest.fn();
 
-  const createMultiIndexContext = () => ({
+  const createMultiIndexContext = (): MultiIndexContext => ({
     context: {
       ais: {
         mainTargetedIndex: 'theFirstIndex',
@@ -49,6 +65,9 @@ describe('connectHitInsights', () => {
       insightsClient = aa;
       props.insights('clickedObjectIDsAfterSearch', {
         eventName: 'Add to cart',
+        objectIDs: ['objectID_42'],
+        queryID: 'theQueryID',
+        index: 'theIndex',
       });
     });
 
@@ -73,6 +92,9 @@ describe('connectHitInsights', () => {
       insightsClient = aa;
       props.insights('convertedObjectIDsAfterSearch', {
         eventName: 'Add to cart',
+        objectIDs: ['objectID_42'],
+        queryID: 'theQueryID',
+        index: 'theIndex',
       });
     });
 

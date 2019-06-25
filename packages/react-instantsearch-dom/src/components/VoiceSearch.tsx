@@ -8,7 +8,11 @@ import createVoiceSearchHelper, {
 } from '../lib/voiceSearchHelper';
 const cx = createClassNames('VoiceSearch');
 
-type InnerComponentProps = {
+type ButtonSvgProps = {
+  children: React.ReactNode;
+};
+
+export type InnerComponentProps = {
   status: Status;
   errorCode?: SpeechRecognitionErrorCode;
   isListening: boolean;
@@ -25,7 +29,7 @@ type VoiceSearchProps = {
   statusComponent: React.FC<InnerComponentProps>;
 };
 
-const ButtonSvg = ({ children }) => (
+const ButtonSvg = ({ children }: ButtonSvgProps): JSX.Element => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="16"
@@ -41,11 +45,11 @@ const ButtonSvg = ({ children }) => (
   </svg>
 );
 
-const DefaultButtonText: React.FC<InnerComponentProps> = ({
+const DefaultButtonText = ({
   status,
   errorCode,
   isListening,
-}) => {
+}: InnerComponentProps): JSX.Element => {
   return status === 'error' && errorCode === 'not-allowed' ? (
     <ButtonSvg>
       <line x1="1" y1="1" x2="23" y2="23" />
@@ -67,7 +71,7 @@ const DefaultButtonText: React.FC<InnerComponentProps> = ({
   );
 };
 
-const DefaultStatus: React.FC<InnerComponentProps> = ({ transcript }) => (
+const DefaultStatus = ({ transcript }: InnerComponentProps): JSX.Element => (
   <p>{transcript}</p>
 );
 
@@ -79,7 +83,7 @@ class VoiceSearch extends Component<VoiceSearchProps, VoiceListeningState> {
   };
   private voiceSearchHelper?: VoiceSearchHelper;
 
-  public componentDidMount() {
+  public componentDidMount(): void {
     const { searchAsYouSpeak, refine } = this.props;
     this.voiceSearchHelper = createVoiceSearchHelper({
       searchAsYouSpeak,
@@ -91,7 +95,7 @@ class VoiceSearch extends Component<VoiceSearchProps, VoiceListeningState> {
     this.setState(this.voiceSearchHelper.getState());
   }
 
-  public render() {
+  public render(): React.ReactNode {
     if (!this.voiceSearchHelper) {
       return null;
     }
@@ -134,7 +138,7 @@ class VoiceSearch extends Component<VoiceSearchProps, VoiceListeningState> {
     );
   }
 
-  public componentWillUnmount() {
+  public componentWillUnmount(): void {
     if (this.voiceSearchHelper) {
       this.voiceSearchHelper.dispose();
     }
