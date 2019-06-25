@@ -69,7 +69,7 @@
     "conventional-changelog-cli": "2.0.12",
     "copy-webpack-plugin": "5.0.2",
     "css-loader": "2.1.1",
-    "enzyme": "3.9.0",
+    "enzyme": "3.10.0",
     "enzyme-adapter-react-16": "1.12.1",
     "enzyme-to-json": "3.3.5",
     "eslint": "5.16.0",
@@ -129,11 +129,11 @@
     },
     {
       "path": "packages/react-instantsearch/dist/umd/Connectors.min.js",
-      "maxSize": "41.5 kB"
+      "maxSize": "41.75 kB"
     },
     {
       "path": "packages/react-instantsearch/dist/umd/Dom.min.js",
-      "maxSize": "51.75 kB"
+      "maxSize": "52 kB"
     },
     {
       "path": "packages/react-instantsearch-core/dist/umd/ReactInstantSearchCore.min.js",

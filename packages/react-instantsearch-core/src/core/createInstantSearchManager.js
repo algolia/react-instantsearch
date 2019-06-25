@@ -3,6 +3,15 @@ import createWidgetsManager from './createWidgetsManager';
 import createStore from './createStore';
 import { HIGHLIGHT_TAGS } from './highlight';
 import { hasMultipleIndices } from './indexUtils';
+import { version as ReactVersion } from 'react';
+import version from './version';
+
+function addAlgoliaAgents(searchClient) {
+  if (typeof searchClient.addAlgoliaAgent === 'function') {
+    searchClient.addAlgoliaAgent(`react (${ReactVersion})`);
+    searchClient.addAlgoliaAgent(`react-instantsearch (${version})`);
+  }
+}
 
 const isMultiIndexContext = widget => hasMultipleIndices(widget.context);
 const isTargetedIndexEqualIndex = (widget, indexId) =>
@@ -35,6 +44,8 @@ export default function createInstantSearchManager({
     ...HIGHLIGHT_TAGS,
   });
 
+  addAlgoliaAgents(searchClient);
+
   helper
     .on('search', handleNewSearch)
     .on('result', handleSearchSuccess({ indexId: indexName }))
@@ -46,10 +57,12 @@ export default function createInstantSearchManager({
 
   const widgetsManager = createWidgetsManager(onWidgetsUpdate);
 
+  hydrateSearchClient(searchClient, resultsState);
+
   const store = createStore({
     widgets: initialState,
     metadata: [],
-    results: resultsState || null,
+    results: hydrateResultsState(resultsState),
     error: null,
     searching: false,
     isSearchStalled: true,
@@ -61,6 +74,7 @@ export default function createInstantSearchManager({
   }
 
   function updateClient(client) {
+    addAlgoliaAgents(client);
     helper.setClient(client);
     search();
   }
@@ -257,6 +271,100 @@ export default function createInstantSearchManager({
     }
   }
 
+  function hydrateSearchClient(client, results) {
+    if (!results) {
+      return;
+    }
+
+    if (!client._useCache || typeof client.addAlgoliaAgent !== 'function') {
+      // This condition avoids hydrating a `searchClient` different from the
+      // Algolia one. We also avoid to hydrate the client when the cache is
+      // disabled. The implementation is brittle but we don't have a proper way
+      // to detect the Algolia client at the moment.
+      return;
+    }
+
+    if (Array.isArray(results)) {
+      hydrateSearchClientWithMultiIndexRequest(client, results);
+      return;
+    }
+
+    hydrateSearchClientWithSingleIndexRequest(client, results);
+  }
+
+  function hydrateSearchClientWithMultiIndexRequest(client, results) {
+    // At the moment we don't have a proper API to hydrate the client cache from
+    // the outside (it should come with the V4). The following code populates the
+    // cache with a multi-index results. You can find more information about the
+    // computation of the key inside the client (see link below).
+    // https://github.com/algolia/algoliasearch-client-javascript/blob/c27e89ff92b2a854ae6f40dc524bffe0f0cbc169/src/AlgoliaSearchCore.js#L232-L240
+    const key = `/1/indexes/*/queries_body_${JSON.stringify({
+      requests: results.reduce(
+        (acc, result) =>
+          acc.concat(
+            result._originalResponse.results.map(request => ({
+              indexName: request.index,
+              params: request.params,
+            }))
+          ),
+        []
+      ),
+    })}`;
+
+    client.cache = {
+      ...client.cache,
+      [key]: {
+        results: results.reduce(
+          (acc, result) => acc.concat(result._originalResponse.results),
+          []
+        ),
+      },
+    };
+  }
+
+  function hydrateSearchClientWithSingleIndexRequest(client, results) {
+    // At the moment we don't have a proper API to hydrate the client cache from
+    // the outside (it should come with the V4). The following code populates the
+    // cache with a single-index result. You can find more information about the
+    // computation of the key inside the client (see link below).
+    // https://github.com/algolia/algoliasearch-client-javascript/blob/c27e89ff92b2a854ae6f40dc524bffe0f0cbc169/src/AlgoliaSearchCore.js#L232-L240
+    const key = `/1/indexes/*/queries_body_${JSON.stringify({
+      requests: results._originalResponse.results.map(request => ({
+        indexName: request.index,
+        params: request.params,
+      })),
+    })}`;
+
+    client.cache = {
+      ...client.cache,
+      [key]: results._originalResponse,
+    };
+  }
+
+  function hydrateResultsState(results) {
+    if (!results) {
+      return null;
+    }
+
+    if (Array.isArray(results)) {
+      return results.reduce(
+        (acc, result) => ({
+          ...acc,
+          [result._internalIndexId]: new algoliasearchHelper.SearchResults(
+            new algoliasearchHelper.SearchParameters(result.state),
+            result._originalResponse.results
+          ),
+        }),
+        {}
+      );
+    }
+
+    return new algoliasearchHelper.SearchResults(
+      new algoliasearchHelper.SearchParameters(results.state),
+      results._originalResponse.results
+    );
+  }
+
   // Called whenever a widget has been rendered with new props.
   function onWidgetsUpdate() {
     const metadata = getMetadata(store.getState().widgets);
@@ -343,7 +451,7 @@ export default function createInstantSearchManager({
 
   function updateIndex(newIndex) {
     initialSearchParameters = initialSearchParameters.setIndex(newIndex);
-    search();
+    // No need to trigger a new search here as the widgets will also update and trigger it if needed.
   }
 
   function getWidgetsIds() {
