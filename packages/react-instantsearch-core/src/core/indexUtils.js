@@ -8,17 +8,15 @@ export function getIndexId(context) {
 }
 
 export function getResults(searchResults, context) {
-  if (!searchResults.results) {
-    return null;
-  }
+  if (searchResults.results) {
+    if (searchResults.results.hits) {
+      return searchResults.results;
+    }
 
-  if (searchResults.results.hits) {
-    return searchResults.results;
-  }
-
-  const indexId = getIndexId(context);
-  if (searchResults.results[indexId]) {
-    return searchResults.results[indexId];
+    const indexId = getIndexId(context);
+    if (searchResults.results[indexId]) {
+      return searchResults.results[indexId];
+    }
   }
 
   return null;
