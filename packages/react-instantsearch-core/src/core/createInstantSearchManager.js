@@ -13,9 +13,13 @@ function addAlgoliaAgents(searchClient) {
   }
 }
 
-const isMultiIndexContext = widget => hasMultipleIndices(widget.context);
+const isMultiIndexContext = widget =>
+  hasMultipleIndices({
+    ais: widget.props.contextValue,
+    multiIndexContext: widget.props.indexContextValue,
+  });
 const isTargetedIndexEqualIndex = (widget, indexId) =>
-  widget.context.multiIndexContext.targetedIndex === indexId;
+  widget.props.indexContextValue.targetedIndex === indexId;
 
 // Relying on the `indexId` is a bit brittle to detect the `Index` widget.
 // Since it's a class we could rely on `instanceof` or similar. We never
@@ -23,6 +27,16 @@ const isTargetedIndexEqualIndex = (widget, indexId) =>
 const isIndexWidget = widget => Boolean(widget.props.indexId);
 const isIndexWidgetEqualIndex = (widget, indexId) =>
   widget.props.indexId === indexId;
+
+const sortIndexWidgetsFirst = (firstWidget, secondWidget) => {
+  if (isIndexWidget(firstWidget)) {
+    return -1;
+  }
+  if (isIndexWidget(secondWidget)) {
+    return 1;
+  }
+  return 0;
+};
 
 /**
  * Creates a new instance of the InstantSearchManager which controls the widgets and
@@ -114,6 +128,9 @@ export default function createInstantSearchManager({
 
         return targetedIndexEqualMainIndex || subIndexEqualMainIndex;
       })
+      // We have to sort the `Index` widgets first so the `index` parameter
+      // is correctly set in the `reduce` function for the following widgets
+      .sort(sortIndexWidgetsFirst)
       .reduce(
         (res, widget) => widget.getSearchParameters(res),
         sharedParameters
@@ -132,9 +149,12 @@ export default function createInstantSearchManager({
 
         return targetedIndexNotEqualMainIndex || subIndexNotEqualMainIndex;
       })
+      // We have to sort the `Index` widgets first so the `index` parameter
+      // is correctly set in the `reduce` function for the following widgets
+      .sort(sortIndexWidgetsFirst)
       .reduce((indices, widget) => {
         const indexId = isMultiIndexContext(widget)
-          ? widget.context.multiIndexContext.targetedIndex
+          ? widget.props.indexContextValue.targetedIndex
           : widget.props.indexId;
 
         const widgets = indices[indexId] || [];
