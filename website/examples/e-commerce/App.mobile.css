@@ -33,6 +33,15 @@
     padding: 2rem 2rem 0 2rem;
   }
 
+  .filtering .header {
+    /*
+      Closing panel on outter click didn't work on mobile safari.
+      This is one of the workarounds from the following: 
+      https://developer.mozilla.org/en-US/docs/Web/API/Element/click_event#Safari_Mobile 
+    */
+    cursor: pointer;
+  }
+
   .filtering .header-logo {
     left: 50%;
     position: absolute;
