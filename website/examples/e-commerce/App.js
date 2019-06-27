@@ -250,6 +250,7 @@ const App = props => {
         <section className="container-results">
           <header className="container-header container-options">
             <SortBy
+              className="container-option"
               defaultRefinement="instant_search"
               items={[
                 {
@@ -268,6 +269,7 @@ const App = props => {
             />
 
             <HitsPerPage
+              className="container-option"
               items={[
                 {
                   label: '16 hits per page',
