@@ -28,6 +28,7 @@ import { formatNumber } from './utils';
 import './Theme.css';
 import './App.css';
 import './App.mobile.css';
+import './widgets/Pagination.css';
 import AlgoliaSvg from './AlgoliaSvg';
 
 const searchClient = algoliasearch(

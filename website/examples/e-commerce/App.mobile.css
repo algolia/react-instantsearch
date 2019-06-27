@@ -24,8 +24,8 @@
   .filtering .header {
     /*
       Closing panel on outter click didn't work on mobile safari.
-      This is one of the workarounds from the following: 
-      https://developer.mozilla.org/en-US/docs/Web/API/Element/click_event#Safari_Mobile 
+      This is one of the workarounds from the following:
+      https://developer.mozilla.org/en-US/docs/Web/API/Element/click_event#Safari_Mobile
     */
     cursor: pointer;
   }
@@ -66,7 +66,7 @@
     width: calc(50% - 0.5rem);
   }
 
-  .ais-ClearRefinements-button,
+  .container-filters-footer .ais-ClearRefinements-button,
   .container-filters-footer .button {
     background-color: rgba(65, 66, 71, 0.08);
     border: none;
