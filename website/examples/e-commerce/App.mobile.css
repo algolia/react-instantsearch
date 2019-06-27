@@ -252,6 +252,10 @@
     flex: 2;
   }
 
+  .hits-empty-state-image {
+    display: none;
+  }
+
   /* Hide all desktop-specific design on mobile */
 
   [data-layout='desktop'] {
