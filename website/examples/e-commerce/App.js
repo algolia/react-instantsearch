@@ -18,8 +18,9 @@ import {
 import algoliasearch from 'algoliasearch/lite';
 import {
   ClearFiltersMobile,
-  Ratings,
   PriceSlider,
+  NoResults,
+  Ratings,
   ResultsNumberMobile,
   SaveFiltersMobile,
 } from './widgets';
@@ -285,6 +286,7 @@ const App = props => {
           </header>
 
           <Hits hitComponent={Hit} />
+          <NoResults />
 
           <footer className="container-footer">
             <Pagination
