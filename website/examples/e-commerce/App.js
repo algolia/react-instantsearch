@@ -77,21 +77,32 @@ const Hit = ({ hit }) => (
 
 const App = props => {
   const containerRef = useRef(null);
+  const headerRef = useRef(null);
 
   function openFilters() {
     document.body.classList.add('filtering');
     window.scrollTo(0, 0);
     window.addEventListener('keyup', onKeyUp);
+    window.addEventListener('click', onClick);
   }
 
   function closeFilters() {
     document.body.classList.remove('filtering');
     containerRef.current.scrollIntoView();
     window.removeEventListener('keyup', onKeyUp);
+    window.removeEventListener('click', onClick);
   }
 
   function onKeyUp(event) {
     if (event.key !== 'Escape') {
+      return;
+    }
+
+    closeFilters();
+  }
+
+  function onClick(event) {
+    if (event.target !== headerRef.current) {
       return;
     }
 
@@ -106,7 +117,7 @@ const App = props => {
       createURL={props.createURL}
       onSearchStateChange={props.onSearchStateChange}
     >
-      <header className="header">
+      <header className="header" ref={headerRef}>
         <p className="header-logo">
           <AlgoliaSvg />
         </p>
