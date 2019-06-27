@@ -115,7 +115,7 @@ const App = props => {
 
         <SearchBox
           translations={{
-            placeholder: 'Search for a product, brand, color, …',
+            placeholder: 'Product, brand, color, …',
           }}
           submit={
             <svg
@@ -138,7 +138,6 @@ const App = props => {
               </g>
             </svg>
           }
-          showLoadingIndicator={false}
         />
       </header>
 
@@ -148,78 +147,80 @@ const App = props => {
       />
 
       <main className="container" ref={containerRef}>
-        <section className="container-filters" onKeyUp={onKeyUp}>
-          <div className="container-header">
-            <h2>Filters</h2>
+        <div className="container-wrapper">
+          <section className="container-filters" onKeyUp={onKeyUp}>
+            <div className="container-header">
+              <h2>Filters</h2>
 
-            <div className="clear-filters" data-layout="desktop">
-              <ClearRefinements
-                translations={{
-                  reset: (
-                    <>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="11"
-                        height="11"
-                        viewBox="0 0 11 11"
-                      >
-                        <g fill="none" fillRule="evenodd" opacity=".4">
-                          <path d="M0 0h11v11H0z" />
-                          <path
-                            fill="#000"
-                            fillRule="nonzero"
-                            d="M8.26 2.75a3.896 3.896 0 1 0 1.102 3.262l.007-.056a.49.49 0 0 1 .485-.456c.253 0 .451.206.437.457 0 0 .012-.109-.006.061a4.813 4.813 0 1 1-1.348-3.887v-.987a.458.458 0 1 1 .917.002v2.062a.459.459 0 0 1-.459.459H7.334a.458.458 0 1 1-.002-.917h.928z"
-                          />
-                        </g>
-                      </svg>
-                      Clear filters
-                    </>
-                  ),
-                }}
-              />
+              <div className="clear-filters" data-layout="desktop">
+                <ClearRefinements
+                  translations={{
+                    reset: (
+                      <>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="11"
+                          height="11"
+                          viewBox="0 0 11 11"
+                        >
+                          <g fill="none" fillRule="evenodd" opacity=".4">
+                            <path d="M0 0h11v11H0z" />
+                            <path
+                              fill="#000"
+                              fillRule="nonzero"
+                              d="M8.26 2.75a3.896 3.896 0 1 0 1.102 3.262l.007-.056a.49.49 0 0 1 .485-.456c.253 0 .451.206.437.457 0 0 .012-.109-.006.061a4.813 4.813 0 1 1-1.348-3.887v-.987a.458.458 0 1 1 .917.002v2.062a.459.459 0 0 1-.459.459H7.334a.458.458 0 1 1-.002-.917h.928z"
+                            />
+                          </g>
+                        </svg>
+                        Clear filters
+                      </>
+                    ),
+                  }}
+                />
+              </div>
+
+              <div className="clear-filters" data-layout="mobile">
+                <ResultsNumberMobile />
+              </div>
             </div>
 
-            <div className="clear-filters" data-layout="mobile">
-              <ResultsNumberMobile />
+            <div className="container-body">
+              <Panel header="Category">
+                <HierarchicalMenu
+                  attributes={[
+                    'hierarchicalCategories.lvl0',
+                    'hierarchicalCategories.lvl1',
+                  ]}
+                />
+              </Panel>
+
+              <Panel header="Brands">
+                <RefinementList
+                  attribute="brand"
+                  searchable={true}
+                  translations={{
+                    placeholder: 'Search for brands…',
+                  }}
+                />
+              </Panel>
+
+              <Panel header="Price">
+                <PriceSlider attribute="price" />
+              </Panel>
+
+              <Panel header="Free shipping">
+                <ToggleRefinement
+                  attribute="free_shipping"
+                  label="Display only items with free shipping"
+                  value={true}
+                />
+              </Panel>
+
+              <Panel header="Ratings">
+                <Ratings attribute="rating" />
+              </Panel>
             </div>
-          </div>
-
-          <div className="container-body">
-            <Panel header="Category">
-              <HierarchicalMenu
-                attributes={[
-                  'hierarchicalCategories.lvl0',
-                  'hierarchicalCategories.lvl1',
-                ]}
-              />
-            </Panel>
-
-            <Panel header="Brands">
-              <RefinementList
-                attribute="brand"
-                searchable={true}
-                translations={{
-                  placeholder: 'Search for brands…',
-                }}
-              />
-            </Panel>
-
-            <Panel header="Price">
-              <PriceSlider attribute="price" />
-            </Panel>
-
-            <Panel header="Free shipping">
-              <ToggleRefinement
-                attribute="free_shipping"
-                label="Display only items with free shipping"
-                value={true}
-              />
-            </Panel>
-
-            <Panel header="Ratings">
-              <Ratings attribute="rating" />
-            </Panel>
-          </div>
+          </section>
 
           <footer className="container-filters-footer" data-layout="mobile">
             <div className="container-filters-footer-button-wrapper">
@@ -230,7 +231,7 @@ const App = props => {
               <SaveFiltersMobile onClick={closeFilters} />
             </div>
           </footer>
-        </section>
+        </div>
 
         <section className="container-results">
           <header className="container-header container-options">

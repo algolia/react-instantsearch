@@ -6,6 +6,7 @@
     border-radius: 16px;
     left: 0;
     max-width: initial;
+    padding-bottom: 4rem;
     position: fixed;
     top: 0;
     transform: translateY(120vh);
@@ -13,19 +14,6 @@
     width: 100%;
     will-change: transform;
     z-index: 1;
-  }
-
-  .container-filters .container-body,
-  .container-filters .container-filters-footer {
-    opacity: 0;
-    transition: opacity 300ms ease-in;
-    transition-delay: 200ms;
-  }
-
-  .filtering .container-filters .container-body,
-  .filtering .container-filters .container-filters-footer {
-    opacity: 1;
-    transition-delay: 0;
   }
 
   .container-filters .container-header,
@@ -44,12 +32,15 @@
 
   .filtering .header-logo {
     left: 50%;
+    pointer-events: none;
     position: absolute;
     top: 1.5rem;
     transform: translateX(-50%);
   }
 
-  .filtering .header-title {
+  .filtering .header-title,
+  .filtering .container-results,
+  .container-filters-footer {
     display: none;
   }
 
@@ -58,18 +49,15 @@
     transform: translateY(4rem);
   }
 
-  .filtering .container-results {
-    display: none;
-  }
-
-  .container-filters-footer {
+  .filtering .container-filters-footer {
     background-color: #fff;
     border-top: 1px solid #ebecf3;
-    bottom: 4rem;
+    bottom: 0;
     display: flex;
     justify-content: space-between;
+    margin: 0 -2rem;
     padding: 1rem;
-    position: sticky;
+    position: fixed;
     width: 100%;
     z-index: 1;
   }
@@ -167,11 +155,21 @@
     max-width: 90%;
   }
 
+  .ais-SearchBox .ais-SearchBox-input,
+  .ais-RefinementList .ais-SearchBox-input {
+    font-size: 1rem;
+  }
+
+  .ais-RefinementList .ais-SearchBox-input {
+    min-height: 48px;
+  }
+
   /* RefinementList */
 
   .ais-RefinementList-list {
     display: grid;
     grid-auto-flow: column;
+    grid-gap: 0 2rem;
     grid-template-rows: repeat(5, 1fr);
   }
 
@@ -181,7 +179,7 @@
 
   .ais-RefinementList-checkbox {
     height: 1.5rem;
-    width: 1.5rem;
+    min-width: 1.5rem;
   }
 
   .ais-RefinementList-item--selected .ais-RefinementList-checkbox::after {
@@ -204,6 +202,14 @@
     background-color: rgba(65, 66, 71, 0.08);
     border-radius: 50%;
     padding: 8px;
+  }
+
+  /* RangeSlider */
+
+  .ais-RangeSlider .rheostat-handle {
+    height: 1.5rem;
+    top: -12px;
+    width: 1.5rem;
   }
 
   /* ToggleRefinement */

@@ -104,6 +104,11 @@ h2 {
 
 /* Styles the SFFV highlightings */
 
+em {
+  font-style: normal;
+}
+
+em,
 mark {
   background: rgba(226, 164, 0, 0.4);
 }
@@ -148,7 +153,12 @@ mark {
     The "Hind" font family is vertically off-balance.
     Adding 4px of padding top makes it more vertically aligned.
   */
-  padding: 4px 48px 0 58px;
+  padding: 4px 48px 0 64px;
+}
+
+.header .ais-SearchBox-submit {
+  padding: 0 1rem 0 2rem;
+  width: 64px;
 }
 
 .header .ais-SearchBox .ais-SearchBox-input::placeholder {
@@ -166,7 +176,6 @@ mark {
 
 .ais-SearchBox-submit {
   color: #e2a400;
-  height: 16px;
 }
 
 .ais-RefinementList .ais-SearchBox-input {
@@ -232,6 +241,15 @@ mark {
   padding: 0 4px;
 }
 
+/* RangeSlider */
+
+.ais-RangeSlider .rheostat-tooltip::before {
+  color: #e2a400;
+  content: '$';
+  font-size: 0.6;
+  margin-right: 4px;
+}
+
 /* ToggleRefinement */
 
 .ais-ToggleRefinement-label {
@@ -244,6 +262,7 @@ mark {
   font: inherit;
   margin-left: 1rem;
   margin-right: 0;
+  position: relative;
 }
 
 .ais-ToggleRefinement-checkbox:checked::before {
@@ -263,6 +282,10 @@ mark {
 
 .ais-ToggleRefinement-checkbox:checked::before {
   content: 'Yes';
+}
+
+.ais-ToggleRefinement-count {
+  display: none;
 }
 
 /* RatingMenu */

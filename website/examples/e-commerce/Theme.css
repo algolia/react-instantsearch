@@ -10,7 +10,15 @@ a[class^='ais-'] {
   text-decoration: none;
 }
 
+/*
+  We need to target the root element because Angular InstantSearch
+  creates web components which are not targetable with the `*` selector.
+*/
 [class^='ais-'][class$='--disabled'],
+/*
+  We need to target all elements for widgets containing
+  multiple sub elements (e.g. RangeSlider)
+*/
 [class^='ais-'][class$='--disabled'] * {
   cursor: not-allowed;
 }
@@ -157,6 +165,10 @@ a[class^='ais-'] {
 
 /* Search box */
 
+.ais-SearchBox-form {
+  position: relative;
+}
+
 .ais-SearchBox-input {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -188,36 +200,31 @@ a[class^='ais-'] {
 .ais-SearchBox-reset,
 .ais-SearchBox-loadingIndicator,
 .ais-SearchBox-submit {
+  align-items: center;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+  display: flex;
+  height: 100%;
+  justify-content: center;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+  width: 48px;
+}
+
+.ais-SearchBox-reset[hidden],
+.ais-SearchBox-loadingIndicator[hidden] {
+  display: none;
 }
 
 .ais-SearchBox-submit {
-  left: 26px;
+  left: 0;
 }
 
 .ais-SearchBox-reset,
 .ais-SearchBox-loadingIndicator {
-  right: 26px;
-}
-
-.ais-SearchBox-form {
-  position: relative;
-}
-
-.ais-SearchBox-loadingIndicator,
-.ais-SearchBox-reset,
-.ais-SearchBox-submit {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  right: 0;
 }
 
 /* SFFV search box */
@@ -227,16 +234,7 @@ a[class^='ais-'] {
   color: rgba(33, 36, 61, 0.8);
   font-size: 0.8rem;
   min-height: 40px;
-  padding-left: 36px;
-}
-
-.ais-RefinementList .ais-SearchBox-submit {
-  left: 1rem;
-}
-
-.ais-RefinementList .ais-SearchBox-loadingIndicator,
-.ais-RefinementList .ais-SearchBox-reset {
-  right: 1rem;
+  padding: 0 44px;
 }
 
 .ais-RefinementList .ais-SearchBox-form {
@@ -523,7 +521,7 @@ a[class^='ais-'] {
   color: #fff;
 }
 
-.ais-Pagination-item:not(:last-of-type) {
+.ais-Pagination-item.ais-Pagination-item--page {
   margin-right: 4px;
 }
 
@@ -532,7 +530,7 @@ a[class^='ais-'] {
 }
 
 .ais-Pagination-item.ais-Pagination-item--nextPage {
-  margin-left: 1rem;
+  margin-left: calc(1rem - 4px);
 }
 
 .ais-Pagination-link {
