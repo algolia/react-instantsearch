@@ -157,6 +157,7 @@ const App = props => {
       <Configure
         attributesToSnippet={['description:10']}
         snippetEllipsisText="…"
+        removeWordsIfNoResults="allOptional"
       />
 
       <main className="container" ref={containerRef}>
