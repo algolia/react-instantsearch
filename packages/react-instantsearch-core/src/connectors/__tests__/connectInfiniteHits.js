@@ -448,7 +448,7 @@ describe('connectInfiniteHits', () => {
     });
 
     it('calls refine with next page when calling refineNext', () => {
-      const instance = {refine: jest.fn()};
+      const instance = { refine: jest.fn() };
       const hits = [{}, {}];
       const event = new Event('click');
 
@@ -473,7 +473,7 @@ describe('connectInfiniteHits', () => {
     });
 
     it('calls refine with previous page when calling refinePrevious', () => {
-      const instance = {refine: jest.fn()};
+      const instance = { refine: jest.fn() };
       const hits = [{}, {}];
       const event = new Event('click');
 
