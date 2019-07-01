@@ -39,7 +39,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.1.2",
-    "algoliasearch-helper": "^2.26.0",
+    "algoliasearch-helper": "0.0.0-8ee79ed",
     "fast-deep-equal": "^2.0.1",
     "prop-types": "^15.5.10"
   },

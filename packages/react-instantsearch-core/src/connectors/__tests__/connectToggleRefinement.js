@@ -343,7 +343,7 @@ describe('connectToggleRefinement', () => {
         }
       );
 
-      expect(params.query).toEqual('');
+      expect(params.query).toBeUndefined();
     });
 
     it('registers its filter in metadata', () => {
@@ -831,7 +831,7 @@ describe('connectToggleRefinement', () => {
         }
       );
 
-      expect(params.query).toEqual('');
+      expect(params.query).toBeUndefined();
     });
 
     it('registers its filter in metadata', () => {

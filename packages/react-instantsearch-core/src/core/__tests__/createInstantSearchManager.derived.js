@@ -108,7 +108,6 @@ describe('createInstantSearchManager with multi index', () => {
       expect.objectContaining({
         query: 'second query 1',
         index: 'second',
-        page: 0,
       })
     );
 
@@ -140,7 +139,6 @@ describe('createInstantSearchManager with multi index', () => {
       expect.objectContaining({
         query: 'second query 2',
         index: 'second',
-        page: 0,
       })
     );
   });
@@ -207,7 +205,6 @@ describe('createInstantSearchManager with multi index', () => {
       expect.objectContaining({
         index: 'third',
         query: 'query',
-        page: 0,
       })
     );
 
@@ -215,7 +212,6 @@ describe('createInstantSearchManager with multi index', () => {
       expect.objectContaining({
         index: 'second',
         query: 'query',
-        page: 0,
       })
     );
   });
@@ -459,7 +455,6 @@ describe('createInstantSearchManager with multi index', () => {
       expect.objectContaining({
         index: 'second',
         query: 'second query 1',
-        page: 0,
       })
     );
 
@@ -477,7 +472,6 @@ describe('createInstantSearchManager with multi index', () => {
       expect.objectContaining({
         index: 'first',
         query: 'first query 2',
-        page: 0,
       })
     );
 
@@ -537,7 +531,6 @@ describe('createInstantSearchManager with multi index', () => {
       expect.objectContaining({
         index: 'second',
         query: 'second query 2',
-        page: 0,
       })
     );
   });

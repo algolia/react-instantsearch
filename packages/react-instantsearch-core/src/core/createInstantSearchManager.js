@@ -222,7 +222,7 @@ export default function createInstantSearchManager({
   }
 
   function handleSearchSuccess({ indexId }) {
-    return content => {
+    return event => {
       const state = store.getState();
       const isDerivedHelpersEmpty = !helper.derivedHelpers.length;
 
@@ -234,9 +234,9 @@ export default function createInstantSearchManager({
       results = !isDerivedHelpersEmpty && results.getFacetByName ? {} : results;
 
       if (!isDerivedHelpersEmpty) {
-        results[indexId] = content;
+        results[indexId] = event.results;
       } else {
-        results = content;
+        results = event.results;
       }
 
       const currentState = store.getState();
@@ -259,7 +259,7 @@ export default function createInstantSearchManager({
     };
   }
 
-  function handleSearchError(error) {
+  function handleSearchError({ error }) {
     const currentState = store.getState();
 
     let nextIsSearchStalled = currentState.isSearchStalled;

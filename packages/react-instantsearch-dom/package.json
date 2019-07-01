@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.1.2",
-    "algoliasearch-helper": "^2.26.0",
+    "algoliasearch-helper": "0.0.0-8ee79ed",
     "classnames": "^2.2.5",
     "prop-types": "^15.5.10",
     "react-instantsearch-core": "^5.7.0"
