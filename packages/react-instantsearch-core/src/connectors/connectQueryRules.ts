@@ -82,7 +82,7 @@ function getRuleContextsFromTrackedFilters({
 }: {
   searchState: SearchState;
   trackedFilters: QueryRulesProps['trackedFilters'];
-}): string[] {
+}) {
   const ruleContexts = Object.keys(trackedFilters).reduce<string[]>(
     (facets, facetName) => {
       const facetRefinements: TrackedFilterRefinement[] = getRefinements(

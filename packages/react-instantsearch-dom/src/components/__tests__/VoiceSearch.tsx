@@ -46,7 +46,7 @@ describe('VoiceSearch', () => {
     });
 
     it('with custom component for button with isListening: false', () => {
-      const customButtonText = ({ isListening }: InnerComponentProps): string =>
+      const customButtonText = ({ isListening }) =>
         isListening ? 'Stop' : 'Start';
 
       const wrapper = mount(
@@ -56,7 +56,7 @@ describe('VoiceSearch', () => {
     });
 
     it('with custom component for button with isListening: true', () => {
-      const customButtonText = ({ isListening }: InnerComponentProps): string =>
+      const customButtonText = ({ isListening }) =>
         isListening ? 'Stop' : 'Start';
       mockIsListening.mockImplementation(() => true);
 
@@ -83,7 +83,7 @@ describe('VoiceSearch', () => {
         transcript,
         isSpeechFinal,
         isBrowserSupported,
-      }: InnerComponentProps): React.ReactNode => (
+      }: InnerComponentProps) => (
         <div>
           <p>status: {status}</p>
           <p>errorCode: {errorCode}</p>

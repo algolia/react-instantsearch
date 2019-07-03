@@ -5,7 +5,7 @@ import Hits from '../Hits';
 describe('Hits', () => {
   type Props = { hit: any };
 
-  const Hit = ({ hit }: Props): JSX.Element => <div id={hit.objectID} />;
+  const Hit = ({ hit }: Props) => <div id={hit.objectID} />;
 
   it('accepts a hitComponent prop', () => {
     const hits = [{ objectID: 0 }, { objectID: 1 }, { objectID: 2 }];

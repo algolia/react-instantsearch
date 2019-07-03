@@ -29,7 +29,7 @@ type VoiceSearchProps = {
   statusComponent: React.FC<InnerComponentProps>;
 };
 
-const ButtonSvg = ({ children }: ButtonSvgProps): JSX.Element => (
+const ButtonSvg = ({ children }: ButtonSvgProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="16"
@@ -49,7 +49,7 @@ const DefaultButtonText = ({
   status,
   errorCode,
   isListening,
-}: InnerComponentProps): JSX.Element => {
+}: InnerComponentProps) => {
   return status === 'error' && errorCode === 'not-allowed' ? (
     <ButtonSvg>
       <line x1="1" y1="1" x2="23" y2="23" />
@@ -71,7 +71,7 @@ const DefaultButtonText = ({
   );
 };
 
-const DefaultStatus = ({ transcript }: InnerComponentProps): JSX.Element => (
+const DefaultStatus = ({ transcript }: InnerComponentProps) => (
   <p>{transcript}</p>
 );
 
@@ -83,7 +83,7 @@ class VoiceSearch extends Component<VoiceSearchProps, VoiceListeningState> {
   };
   private voiceSearchHelper?: VoiceSearchHelper;
 
-  public componentDidMount(): void {
+  public componentDidMount() {
     const { searchAsYouSpeak, refine } = this.props;
     this.voiceSearchHelper = createVoiceSearchHelper({
       searchAsYouSpeak,
@@ -95,7 +95,7 @@ class VoiceSearch extends Component<VoiceSearchProps, VoiceListeningState> {
     this.setState(this.voiceSearchHelper.getState());
   }
 
-  public render(): React.ReactNode {
+  public render() {
     if (!this.voiceSearchHelper) {
       return null;
     }
@@ -138,7 +138,7 @@ class VoiceSearch extends Component<VoiceSearchProps, VoiceListeningState> {
     );
   }
 
-  public componentWillUnmount(): void {
+  public componentWillUnmount() {
     if (this.voiceSearchHelper) {
       this.voiceSearchHelper.dispose();
     }

@@ -4,7 +4,7 @@ import { getResults } from '../core/indexUtils';
 type Results = { index: string };
 type Hit = { objectID: string; __position: number; __queryID: string };
 
-export type InsightsClient = (
+type InsightsClient = (
   method: InsightsClientMethod,
   payload: InsightsClientPayload
 ) => void;
@@ -20,15 +20,6 @@ type InsightsClientPayload = {
   objectIDs: string[];
   positions?: number[];
 };
-
-type WrappedInsightsClient = (
-  aa: InsightsClient,
-  results: Results,
-  currentHit: Hit
-) => (
-  method: InsightsClientMethod,
-  payload: Partial<InsightsClientPayload>
-) => void;
 
 function inferPayload({
   method,
@@ -58,9 +49,13 @@ function inferPayload({
   }
 }
 
-const wrapInsightsClient: WrappedInsightsClient = (aa, results, currentHit) => (
-  method,
-  payload
+const wrapInsightsClient = (
+  aa: InsightsClient,
+  results: Results,
+  currentHit: Hit
+) => (
+  method: InsightsClientMethod,
+  payload: Partial<InsightsClientPayload>
 ) => {
   if (typeof aa !== 'function') {
     throw new TypeError(`Expected insightsClient to be a Function`);
