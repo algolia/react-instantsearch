@@ -60,7 +60,7 @@ stories
       transcript,
       isSpeechFinal,
       isBrowserSupported,
-    }: InnerComponentProps): JSX.Element => {
+    }: InnerComponentProps) => {
       return (
         <div>
           <p>status: {status}</p>
@@ -91,7 +91,7 @@ stories
       transcript,
       isSpeechFinal,
       isBrowserSupported,
-    }: InnerComponentProps): JSX.Element => {
+    }: InnerComponentProps) => {
       return (
         <div>
           <p>status: {status}</p>
@@ -114,10 +114,7 @@ stories
     );
   })
   .add('example of dynamic UI working with SearchBox', () => {
-    const Status = ({
-      isListening,
-      transcript,
-    }: InnerComponentProps): JSX.Element => {
+    const Status = ({ isListening, transcript }: InnerComponentProps) => {
       return (
         <div className={`layer listening-${isListening}`}>
           <span>{transcript}</span>
