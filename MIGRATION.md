@@ -146,3 +146,11 @@ const App = () => (
 +  <section>
 );
 ```
+
+### `algoliasearch-helper` 3.x.x
+
+In this major release we also migrate to the next major release of the `algoliasearch-helper`. This means if at any point you interact with a `SearchResults` or `SearchParameters` object, the breaking changes there will also take effect here. For use in React InstantSearch this should be only when creating a custom connector using `createConnector`.
+
+There will no longer be the default value of page (0) or query ('') in `SearchParameters`. Both of those will now be undefined if no value is given.
+
+The function `getQueryParameter` has been removed in favor of simply calling the getter for that parameter.
