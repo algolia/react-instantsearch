@@ -98,6 +98,28 @@ You can notice that we have some duplication inside the module `server` and `bro
 
 We've removed the support for `appId` & `apiKey` on `InstantSearch`. Those props were not documented anymore but they were still supported. The preferred solution is to use the prop [`searchClient`](https://www.algolia.com/doc/api-reference/widgets/instantsearch/react/#widget-param-searchclient) with the package the [`algoliasearch`](https://www.algolia.com/doc/api-client/getting-started/install/javascript/). The benefit of this change is that we don't ship `algoliasearch` anymore with React InstantSearch. When the `searchClient` used is not the Algolia one you don't pay the cost of it anymore.
 
+```diff
+import React from "react";
++import algoliasearch from "algoliasearch/lite";
+import { InstantSearch, SearchBox } from "react-instantsearch-dom";
+
++const searchClient = algoliasearch(
++  "latency",
++  "6be0576ff61c053d5f9a3225e2a90f76"
++);
+
+const App = () => (
+  <InstantSearch
+-    appId="latency"
+-    apiKey="6be0576ff61c053d5f9a3225e2a90f76"
+    indexName="instant_search"
++    searchClient={searchClient}
+  >
+    <SearchBox />
+  </InstantSearch>
+);
+```
+
 ### Remove support for `root` in `InstantSearch` and `Index`
 
 We have introduced the support of the prop `root` in `InstantSearch` & `Index` to be able to render a specific element, with specific props at the root. Its usage is not useful anymore because we don't have a root element. The top-level element is the `Context.Provider` which does not render anything. You can move the element provided to `root` directly around `InstantSearch`. This is great news for our React Native users!
