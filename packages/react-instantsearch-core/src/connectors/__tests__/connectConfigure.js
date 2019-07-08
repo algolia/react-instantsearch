@@ -27,21 +27,10 @@ describe('connectConfigure', () => {
           contextValue,
         })
       );
-      expect(searchParameters.getQueryParameter('distinct')).toEqual(1);
-      expect(searchParameters.getQueryParameter('whatever')).toEqual('please');
-      expect(
-        searchParameters.getQueryParameter.bind(searchParameters, 'children')
-      ).toThrowErrorMatchingInlineSnapshot(
-        `"Parameter 'children' is not an attribute of SearchParameters (http://algolia.github.io/algoliasearch-helper-js/docs/SearchParameters.html)"`
-      );
-      expect(
-        searchParameters.getQueryParameter.bind(
-          searchParameters,
-          'contextValue'
-        )
-      ).toThrowErrorMatchingInlineSnapshot(
-        `"Parameter 'contextValue' is not an attribute of SearchParameters (http://algolia.github.io/algoliasearch-helper-js/docs/SearchParameters.html)"`
-      );
+      expect(searchParameters.distinct).toEqual(1);
+      expect(searchParameters.whatever).toEqual('please');
+      expect(searchParameters.children).toBeUndefined();
+      expect(searchParameters.contextValue).toBeUndefined();
     });
 
     it('calling transitionState should add configure parameters to the search state', () => {
@@ -116,31 +105,11 @@ describe('connectConfigure', () => {
         },
         {}
       );
-      expect(searchParameters.getQueryParameter('distinct')).toEqual(1);
-      expect(searchParameters.getQueryParameter('whatever')).toEqual('please');
-      expect(
-        searchParameters.getQueryParameter.bind(searchParameters, 'children')
-      ).toThrowErrorMatchingInlineSnapshot(
-        `"Parameter 'children' is not an attribute of SearchParameters (http://algolia.github.io/algoliasearch-helper-js/docs/SearchParameters.html)"`
-      );
-
-      expect(
-        searchParameters.getQueryParameter.bind(
-          searchParameters,
-          'contextValue'
-        )
-      ).toThrowErrorMatchingInlineSnapshot(
-        `"Parameter 'contextValue' is not an attribute of SearchParameters (http://algolia.github.io/algoliasearch-helper-js/docs/SearchParameters.html)"`
-      );
-
-      expect(
-        searchParameters.getQueryParameter.bind(
-          searchParameters,
-          'indexContextValue'
-        )
-      ).toThrowErrorMatchingInlineSnapshot(
-        `"Parameter 'indexContextValue' is not an attribute of SearchParameters (http://algolia.github.io/algoliasearch-helper-js/docs/SearchParameters.html)"`
-      );
+      expect(searchParameters.distinct).toEqual(1);
+      expect(searchParameters.whatever).toEqual('please');
+      expect(searchParameters.children).toBeUndefined();
+      expect(searchParameters.contextValue).toBeUndefined();
+      expect(searchParameters.indexContextValue).toBeUndefined();
     });
 
     it('calling transitionState should add configure parameters to the search state', () => {
