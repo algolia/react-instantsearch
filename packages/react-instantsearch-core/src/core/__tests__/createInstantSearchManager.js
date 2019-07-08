@@ -610,7 +610,6 @@ describe('createInstantSearchManager', () => {
       expect(mainParameters).toEqual(
         expect.objectContaining({
           index: 'index',
-          query: '',
         })
       );
 
