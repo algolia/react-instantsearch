@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import { polyfill } from 'react-lifecycles-compat';
 import PropTypes from 'prop-types';
 import { connectGeoSearch } from 'react-instantsearch-dom';
 import { LatLngPropType, BoundingBoxPropType } from './propTypes';
@@ -106,7 +105,5 @@ export class Connector extends Component {
     });
   }
 }
-
-polyfill(Connector);
 
 export default connectGeoSearch(Connector);
