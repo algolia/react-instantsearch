@@ -17,23 +17,6 @@ stories
       <Hits />
     </InstantSearch>
   ))
-  .add('with custom root', () => (
-    <InstantSearch
-      searchClient={searchClient}
-      indexName="instant_search"
-      root={{
-        Root: 'div',
-        props: {
-          style: {
-            border: '1px solid red',
-          },
-        },
-      }}
-    >
-      <SearchBox />
-      <Hits />
-    </InstantSearch>
-  ))
   .add('with custom search client', () => (
     <InstantSearch
       indexName="instant_search"
