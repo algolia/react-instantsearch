@@ -8,6 +8,10 @@ function isEqualPosition(a, b) {
   if (a === b) {
     return true;
   }
+  if (a === undefined || b === undefined) {
+    return false;
+  }
+
   return a.lat === b.lat && a.lng === b.lng;
 }
 
@@ -15,6 +19,11 @@ function isEqualCurrentRefinement(a, b) {
   if (a === b) {
     return true;
   }
+
+  if (a === undefined || b === undefined) {
+    return false;
+  }
+
   return (
     isEqualPosition(a.northEast, b.northEast) &&
     isEqualPosition(a.southWest, b.southWest)
