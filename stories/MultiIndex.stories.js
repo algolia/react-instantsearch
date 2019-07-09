@@ -169,26 +169,6 @@ stories
         <Pagination />
       </Index>
     </InstantSearch>
-  ))
-  .add('with custom root', () => (
-    <InstantSearch searchClient={searchClient} indexName="instant_search">
-      <Configure hitsPerPage={5} />
-
-      <SearchBox />
-      <Index
-        indexName="products"
-        root={{
-          Root: 'div',
-          props: {
-            style: {
-              border: '1px solid red',
-            },
-          },
-        }}
-      >
-        <CustomProducts />
-      </Index>
-    </InstantSearch>
   ));
 
 const AutoComplete = connectAutoComplete(
