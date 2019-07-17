@@ -41,7 +41,7 @@
     "@storybook/addon-actions": "5.0.11",
     "@storybook/addon-knobs": "5.0.11",
     "@storybook/addon-links": "5.0.11",
-    "@storybook/addons": "5.0.11",
+    "@storybook/addons": "5.1.9",
     "@storybook/react": "5.0.11",
     "@storybook/theming": "5.0.11",
     "@types/classnames": "^2.2.7",
