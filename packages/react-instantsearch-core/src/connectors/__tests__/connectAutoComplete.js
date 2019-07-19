@@ -13,11 +13,11 @@ describe('connectAutoComplete', () => {
         { contextValue },
         {},
         {
-          results: { hits },
+          results: { hits, page: 0, hitsPerPage: 20 },
         }
       );
       expect(props).toEqual({
-        hits,
+        hits: [{ __position: 1 }],
         currentRefinement: '',
       });
 
@@ -25,11 +25,11 @@ describe('connectAutoComplete', () => {
         { contextValue },
         { query: 'query' },
         {
-          results: { hits },
+          results: { hits, page: 0, hitsPerPage: 20 },
         }
       );
       expect(props).toEqual({
-        hits,
+        hits: [{ __position: 1 }],
         currentRefinement: 'query',
       });
 
@@ -37,27 +37,27 @@ describe('connectAutoComplete', () => {
         { defaultRefinement: 'query', contextValue },
         {},
         {
-          results: { hits },
+          results: { hits, page: 0, hitsPerPage: 20 },
         }
       );
       expect(props).toEqual({
-        hits,
+        hits: [{ __position: 1 }],
         currentRefinement: 'query',
       });
     });
 
-    it('provides current hits to the component with queryID', () => {
+    it('provides current hits to the component with extra info', () => {
       const hits = [{}];
-      const hitsWithQueryID = [{ __queryID: 'zombo.com' }];
+      const hitsWithExtraInfo = [{ __queryID: 'zombo.com', __position: 1 }];
       let props = connect.getProvidedProps(
         { contextValue },
         {},
         {
-          results: { hits, queryID: 'zombo.com' },
+          results: { hits, page: 0, hitsPerPage: 20, queryID: 'zombo.com' },
         }
       );
       expect(props).toEqual({
-        hits: hitsWithQueryID,
+        hits: hitsWithExtraInfo,
         currentRefinement: '',
       });
 
@@ -65,11 +65,11 @@ describe('connectAutoComplete', () => {
         { contextValue },
         { query: 'query' },
         {
-          results: { hits, queryID: 'zombo.com' },
+          results: { hits, page: 0, hitsPerPage: 20, queryID: 'zombo.com' },
         }
       );
       expect(props).toEqual({
-        hits: hitsWithQueryID,
+        hits: hitsWithExtraInfo,
         currentRefinement: 'query',
       });
 
@@ -77,11 +77,11 @@ describe('connectAutoComplete', () => {
         { defaultRefinement: 'query', contextValue },
         {},
         {
-          results: { hits, queryID: 'zombo.com' },
+          results: { hits, page: 0, hitsPerPage: 20, queryID: 'zombo.com' },
         }
       );
       expect(props).toEqual({
-        hits: hitsWithQueryID,
+        hits: hitsWithExtraInfo,
         currentRefinement: 'query',
       });
     });
@@ -127,22 +127,43 @@ describe('connectAutoComplete', () => {
     it('provides current hits to the component', () => {
       const firstHits = [{}];
       const secondHits = [{}];
-      const firstHitsWithQueryID = [{ __queryID: 'zombo.com' }];
-      const secondHitsWithQueryID = [{ __queryID: 'html5zombo.com' }];
+      const firstHitsWithExtraInfo = [
+        { __queryID: 'zombo.com', __position: 1 },
+      ];
+      const secondHitsWithExtraInfo = [
+        { __queryID: 'html5zombo.com', __position: 1 },
+      ];
       let props = connect.getProvidedProps(
         { contextValue, indexContextValue },
         {},
         {
           results: {
-            first: { hits: firstHits, queryID: 'zombo.com' },
-            second: { hits: secondHits, queryID: 'html5zombo.com' },
+            first: {
+              hits: firstHits,
+              page: 0,
+              hitsPerPage: 20,
+              queryID: 'zombo.com',
+            },
+            second: {
+              hits: secondHits,
+              page: 0,
+              hitsPerPage: 20,
+              queryID: 'html5zombo.com',
+            },
           },
         }
       );
       expect(props).toEqual({
         hits: [
-          { hits: firstHitsWithQueryID, index: 'first' },
-          { hits: secondHitsWithQueryID, index: 'second' },
+          {
+            hits: firstHitsWithExtraInfo,
+            index: 'first',
+          },
+          {
+            hits: secondHitsWithExtraInfo,
+
+            index: 'second',
+          },
         ],
         currentRefinement: '',
       });
@@ -152,15 +173,25 @@ describe('connectAutoComplete', () => {
         { indices: { second: { query: 'query' } } },
         {
           results: {
-            first: { hits: firstHits, queryID: 'zombo.com' },
-            second: { hits: secondHits, queryID: 'html5zombo.com' },
+            first: {
+              hits: firstHits,
+              page: 0,
+              hitsPerPage: 20,
+              queryID: 'zombo.com',
+            },
+            second: {
+              hits: secondHits,
+              page: 0,
+              hitsPerPage: 20,
+              queryID: 'html5zombo.com',
+            },
           },
         }
       );
       expect(props).toEqual({
         hits: [
-          { hits: firstHitsWithQueryID, index: 'first' },
-          { hits: secondHitsWithQueryID, index: 'second' },
+          { hits: firstHitsWithExtraInfo, index: 'first' },
+          { hits: secondHitsWithExtraInfo, index: 'second' },
         ],
         currentRefinement: 'query',
       });
@@ -170,15 +201,25 @@ describe('connectAutoComplete', () => {
         {},
         {
           results: {
-            first: { hits: firstHits, queryID: 'zombo.com' },
-            second: { hits: secondHits, queryID: 'html5zombo.com' },
+            first: {
+              hits: firstHits,
+              page: 0,
+              hitsPerPage: 20,
+              queryID: 'zombo.com',
+            },
+            second: {
+              hits: secondHits,
+              page: 0,
+              hitsPerPage: 20,
+              queryID: 'html5zombo.com',
+            },
           },
         }
       );
       expect(props).toEqual({
         hits: [
-          { hits: firstHitsWithQueryID, index: 'first' },
-          { hits: secondHitsWithQueryID, index: 'second' },
+          { hits: firstHitsWithExtraInfo, index: 'first' },
+          { hits: secondHitsWithExtraInfo, index: 'second' },
         ],
         currentRefinement: 'query',
       });
