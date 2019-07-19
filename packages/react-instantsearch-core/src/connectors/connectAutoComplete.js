@@ -4,6 +4,7 @@ import {
   refineValue,
   getCurrentRefinementValue,
 } from '../core/indexUtils';
+import { addQueryID } from '../core/utils';
 
 const getId = () => 'query';
 
@@ -29,14 +30,20 @@ function getHits(searchResults) {
       searchResults.results.hits &&
       Array.isArray(searchResults.results.hits)
     ) {
-      return searchResults.results.hits;
+      return addQueryID(
+        searchResults.results.hits,
+        searchResults.results.queryID
+      );
     } else {
       return Object.keys(searchResults.results).reduce(
         (hits, index) => [
           ...hits,
           {
             index,
-            hits: searchResults.results[index].hits,
+            hits: addQueryID(
+              searchResults.results[index].hits,
+              searchResults.results[index].queryID
+            ),
           },
         ],
         []
