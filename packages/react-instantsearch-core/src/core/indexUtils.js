@@ -174,7 +174,10 @@ function hasRefinements({
       searchState.indices &&
       searchState.indices[indexId] &&
       searchState.indices[indexId][namespace] &&
-      Object.hasOwnProperty.call(searchState.indices[indexId][namespace], attributeName)
+      Object.hasOwnProperty.call(
+        searchState.indices[indexId][namespace],
+        attributeName
+      )
     );
   }
 
