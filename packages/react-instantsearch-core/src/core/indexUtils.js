@@ -174,7 +174,7 @@ function hasRefinements({
       searchState.indices &&
       searchState.indices[indexId] &&
       searchState.indices[indexId][namespace] &&
-      searchState.indices[indexId][namespace].hasOwnProperty(attributeName)
+      Object.hasOwnProperty.call(searchState.indices[indexId][namespace], attributeName)
     );
   }
 
@@ -182,18 +182,18 @@ function hasRefinements({
     return (
       searchState.indices &&
       searchState.indices[indexId] &&
-      searchState.indices[indexId].hasOwnProperty(id)
+      Object.hasOwnProperty.call(searchState.indices[indexId], id)
     );
   }
 
   if (namespace) {
     return (
       searchState[namespace] &&
-      searchState[namespace].hasOwnProperty(attributeName)
+      Object.hasOwnProperty.call(searchState[namespace], attributeName)
     );
   }
 
-  return searchState.hasOwnProperty(id);
+  return Object.hasOwnProperty.call(searchState, id);
 }
 
 function getRefinements({
