@@ -13,11 +13,11 @@ describe('connectAutoComplete', () => {
         { contextValue },
         {},
         {
-          results: { hits },
+          results: { hits, page: 0, hitsPerPage: 20 },
         }
       );
       expect(props).toEqual({
-        hits,
+        hits: [{ __position: 1 }],
         currentRefinement: '',
       });
 
@@ -25,11 +25,11 @@ describe('connectAutoComplete', () => {
         { contextValue },
         { query: 'query' },
         {
-          results: { hits },
+          results: { hits, page: 0, hitsPerPage: 20 },
         }
       );
       expect(props).toEqual({
-        hits,
+        hits: [{ __position: 1 }],
         currentRefinement: 'query',
       });
 
@@ -37,14 +37,55 @@ describe('connectAutoComplete', () => {
         { defaultRefinement: 'query', contextValue },
         {},
         {
-          results: { hits },
+          results: { hits, page: 0, hitsPerPage: 20 },
         }
       );
       expect(props).toEqual({
-        hits,
+        hits: [{ __position: 1 }],
         currentRefinement: 'query',
       });
     });
+
+    it('provides current hits to the component with queryID & position', () => {
+      const hits = [{}];
+      const hitsWithExtraInfo = [{ __queryID: 'zombo.com', __position: 1 }];
+      let props = connect.getProvidedProps(
+        { contextValue },
+        {},
+        {
+          results: { hits, page: 0, hitsPerPage: 20, queryID: 'zombo.com' },
+        }
+      );
+      expect(props).toEqual({
+        hits: hitsWithExtraInfo,
+        currentRefinement: '',
+      });
+
+      props = connect.getProvidedProps(
+        { contextValue },
+        { query: 'query' },
+        {
+          results: { hits, page: 0, hitsPerPage: 20, queryID: 'zombo.com' },
+        }
+      );
+      expect(props).toEqual({
+        hits: hitsWithExtraInfo,
+        currentRefinement: 'query',
+      });
+
+      props = connect.getProvidedProps(
+        { defaultRefinement: 'query', contextValue },
+        {},
+        {
+          results: { hits, page: 0, hitsPerPage: 20, queryID: 'zombo.com' },
+        }
+      );
+      expect(props).toEqual({
+        hits: hitsWithExtraInfo,
+        currentRefinement: 'query',
+      });
+    });
+
     it('refines the query parameter', () => {
       const params = connect.getSearchParameters(
         new SearchParameters(),
@@ -86,17 +127,43 @@ describe('connectAutoComplete', () => {
     it('provides current hits to the component', () => {
       const firstHits = [{}];
       const secondHits = [{}];
+      const firstHitsWithExtraInfo = [
+        { __queryID: 'zombo.com', __position: 1 },
+      ];
+      const secondHitsWithExtraInfo = [
+        { __queryID: 'html5zombo.com', __position: 1 },
+      ];
       let props = connect.getProvidedProps(
         { contextValue, indexContextValue },
         {},
         {
-          results: { first: { hits: firstHits }, second: { hits: secondHits } },
+          results: {
+            first: {
+              hits: firstHits,
+              page: 0,
+              hitsPerPage: 20,
+              queryID: 'zombo.com',
+            },
+            second: {
+              hits: secondHits,
+              page: 0,
+              hitsPerPage: 20,
+              queryID: 'html5zombo.com',
+            },
+          },
         }
       );
       expect(props).toEqual({
         hits: [
-          { hits: firstHits, index: 'first' },
-          { hits: secondHits, index: 'second' },
+          {
+            hits: firstHitsWithExtraInfo,
+            index: 'first',
+          },
+          {
+            hits: secondHitsWithExtraInfo,
+
+            index: 'second',
+          },
         ],
         currentRefinement: '',
       });
@@ -105,13 +172,26 @@ describe('connectAutoComplete', () => {
         { contextValue, indexContextValue },
         { indices: { second: { query: 'query' } } },
         {
-          results: { first: { hits: firstHits }, second: { hits: secondHits } },
+          results: {
+            first: {
+              hits: firstHits,
+              page: 0,
+              hitsPerPage: 20,
+              queryID: 'zombo.com',
+            },
+            second: {
+              hits: secondHits,
+              page: 0,
+              hitsPerPage: 20,
+              queryID: 'html5zombo.com',
+            },
+          },
         }
       );
       expect(props).toEqual({
         hits: [
-          { hits: firstHits, index: 'first' },
-          { hits: secondHits, index: 'second' },
+          { hits: firstHitsWithExtraInfo, index: 'first' },
+          { hits: secondHitsWithExtraInfo, index: 'second' },
         ],
         currentRefinement: 'query',
       });
@@ -120,13 +200,26 @@ describe('connectAutoComplete', () => {
         { defaultRefinement: 'query', contextValue, indexContextValue },
         {},
         {
-          results: { first: { hits: firstHits }, second: { hits: secondHits } },
+          results: {
+            first: {
+              hits: firstHits,
+              page: 0,
+              hitsPerPage: 20,
+              queryID: 'zombo.com',
+            },
+            second: {
+              hits: secondHits,
+              page: 0,
+              hitsPerPage: 20,
+              queryID: 'html5zombo.com',
+            },
+          },
         }
       );
       expect(props).toEqual({
         hits: [
-          { hits: firstHits, index: 'first' },
-          { hits: secondHits, index: 'second' },
+          { hits: firstHitsWithExtraInfo, index: 'first' },
+          { hits: secondHitsWithExtraInfo, index: 'second' },
         ],
         currentRefinement: 'query',
       });
