@@ -46,7 +46,7 @@ describe('connectAutoComplete', () => {
       });
     });
 
-    it('provides current hits to the component with extra info', () => {
+    it('provides current hits to the component with queryID & position', () => {
       const hits = [{}];
       const hitsWithExtraInfo = [{ __queryID: 'zombo.com', __position: 1 }];
       let props = connect.getProvidedProps(
