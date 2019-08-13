@@ -322,7 +322,7 @@ export default function createInstantSearchManager({
       requests: results.reduce(
         (acc, result) =>
           acc.concat(
-            result._originalResponse.results.map(request => ({
+            result.rawResults.map(request => ({
               indexName: request.index,
               params: request.params,
             }))
@@ -335,7 +335,7 @@ export default function createInstantSearchManager({
       ...client.cache,
       [key]: {
         results: results.reduce(
-          (acc, result) => acc.concat(result._originalResponse.results),
+          (acc, result) => acc.concat(result.rawResults),
           []
         ),
       },
@@ -349,7 +349,7 @@ export default function createInstantSearchManager({
     // computation of the key inside the client (see link below).
     // https://github.com/algolia/algoliasearch-client-javascript/blob/c27e89ff92b2a854ae6f40dc524bffe0f0cbc169/src/AlgoliaSearchCore.js#L232-L240
     const key = `/1/indexes/*/queries_body_${JSON.stringify({
-      requests: results._originalResponse.results.map(request => ({
+      requests: results.rawResults.map(request => ({
         indexName: request.index,
         params: request.params,
       })),
@@ -357,7 +357,9 @@ export default function createInstantSearchManager({
 
     client.cache = {
       ...client.cache,
-      [key]: results._originalResponse,
+      [key]: {
+        results: results.rawResults,
+      },
     };
   }
 
@@ -372,7 +374,7 @@ export default function createInstantSearchManager({
           ...acc,
           [result._internalIndexId]: new algoliasearchHelper.SearchResults(
             new algoliasearchHelper.SearchParameters(result.state),
-            result._originalResponse.results
+            result.rawResults
           ),
         }),
         {}
@@ -381,7 +383,7 @@ export default function createInstantSearchManager({
 
     return new algoliasearchHelper.SearchResults(
       new algoliasearchHelper.SearchParameters(results.state),
-      results._originalResponse.results
+      results.rawResults
     );
   }
 

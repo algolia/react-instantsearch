@@ -3552,6 +3552,11 @@
     "@svgr/plugin-svgo" "^4.0.3"
     loader-utils "^1.1.0"
 
+"@types/algoliasearch@^3.30.16":
+  version "3.30.16"
+  resolved "https://registry.yarnpkg.com/@types/algoliasearch/-/algoliasearch-3.30.16.tgz#df71aa3eee3648441075ee6dcc428e54dd861196"
+  integrity sha512-47FcMwJuW5NJnzjgkX6O9LKyUeNuVFaeU5iEjCAPH21LQNqev1l6PL/LhGSkme89YIcT0DAl27dqA/woq4BBrw==
+
 "@types/babel__core@^7.1.0":
   version "7.1.0"
   resolved "https://registry.yarnpkg.com/@types/babel__core/-/babel__core-7.1.0.tgz#710f2487dda4dcfd010ca6abb2b4dc7394365c51"
@@ -4253,6 +4258,13 @@ algoliasearch-helper@0.0.0-27095c0:
   version "0.0.0-27095c0"
   resolved "https://registry.yarnpkg.com/algoliasearch-helper/-/algoliasearch-helper-0.0.0-27095c0.tgz#8aa246e23fc665403917eeaf9cf7beeea70866f1"
   integrity sha512-d0wlSReMpnz7sT5ibojXucYsWHTigu83ge+qktQ9m0u+kG7bHqRErzBUOZ03BMr9zd1sWSNR1TMR9l6AHHrqow==
+  dependencies:
+    events "^1.1.1"
+
+algoliasearch-helper@0.0.0-6ac260d:
+  version "0.0.0-6ac260d"
+  resolved "https://registry.yarnpkg.com/algoliasearch-helper/-/algoliasearch-helper-0.0.0-6ac260d.tgz#9f4a0f2c8f89eafe23559375907b4070afa4cbb1"
+  integrity sha512-wG1oVPEq4bXmNUeF2voio+0UpNRtDLTG7+OPCvTxMDIQvD2Exc0s2UsWl5fh6/Dc7O++b8Ic2g+YSVo5l+nBFg==
   dependencies:
     events "^1.1.1"
 
