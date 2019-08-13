@@ -59,7 +59,11 @@ const getSearchParameters = (indexName, searchParameters) => {
   };
 };
 
-const singleIndexSearch = (helper, parameters) => helper.searchOnce(parameters);
+const singleIndexSearch = (helper, parameters) =>
+  helper.searchOnce(parameters).then(res => ({
+    rawResults: res.content._rawResults,
+    state: res.content._state,
+  }));
 
 const multiIndexSearch = (
   indexName,
@@ -68,31 +72,29 @@ const multiIndexSearch = (
   sharedParameters,
   { [indexName]: mainParameters, ...derivedParameters }
 ) => {
-  const search = [
+  const indexIds = Object.keys(derivedParameters);
+
+  const searches = [
     helper.searchOnce({
       ...sharedParameters,
       ...mainParameters,
     }),
-  ];
-
-  const indexIds = Object.keys(derivedParameters);
-
-  search.push(
     ...indexIds.map(indexId => {
       const parameters = derivedParameters[indexId];
 
       return algoliasearchHelper(client, parameters.index).searchOnce(
         parameters
       );
-    })
-  );
+    }),
+  ];
 
   // We attach `indexId` on the results to be able to reconstruct the object
   // on the client side. We cannot rely on `state.index` anymore because we
   // may have multiple times the same index.
-  return Promise.all(search).then(results =>
+  return Promise.all(searches).then(results =>
     [indexName, ...indexIds].map((indexId, i) => ({
-      ...results[i],
+      rawResults: results[i].content._rawResults,
+      state: results[i].content._state,
       _internalIndexId: indexId,
     }))
   );

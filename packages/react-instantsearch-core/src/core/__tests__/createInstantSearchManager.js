@@ -69,14 +69,12 @@ describe('createInstantSearchManager', () => {
       });
 
       const resultsState = {
-        _originalResponse: {
-          results: [
-            {
-              index: 'index',
-              query: 'query',
-            },
-          ],
-        },
+        rawResults: [
+          {
+            index: 'index',
+            query: 'query',
+          },
+        ],
         state: {
           index: 'index',
           query: 'query',
@@ -112,14 +110,12 @@ describe('createInstantSearchManager', () => {
       const resultsState = [
         {
           _internalIndexId: 'index1',
-          _originalResponse: {
-            results: [
-              {
-                index: 'index1',
-                query: 'query1',
-              },
-            ],
-          },
+          rawResults: [
+            {
+              index: 'index1',
+              query: 'query1',
+            },
+          ],
           state: {
             index: 'index1',
             query: 'query1',
@@ -127,14 +123,12 @@ describe('createInstantSearchManager', () => {
         },
         {
           _internalIndexId: 'index2',
-          _originalResponse: {
-            results: [
-              {
-                index: 'index2',
-                query: 'query2',
-              },
-            ],
-          },
+          rawResults: [
+            {
+              index: 'index2',
+              query: 'query2',
+            },
+          ],
           state: {
             index: 'index2',
             query: 'query2',
@@ -187,14 +181,12 @@ describe('createInstantSearchManager', () => {
       };
 
       const resultsState = {
-        _originalResponse: {
-          results: [
-            {
-              index: 'indexName',
-              query: 'query',
-            },
-          ],
-        },
+        rawResults: [
+          {
+            index: 'indexName',
+            query: 'query',
+          },
+        ],
         state: {
           index: 'indexName',
           query: 'query',
@@ -218,14 +210,12 @@ describe('createInstantSearchManager', () => {
       });
 
       const resultsState = {
-        _originalResponse: {
-          results: [
-            {
-              index: 'indexName',
-              query: 'query',
-            },
-          ],
-        },
+        rawResults: [
+          {
+            index: 'indexName',
+            query: 'query',
+          },
+        ],
         state: {
           index: 'indexName',
           query: 'query',
@@ -250,14 +240,12 @@ describe('createInstantSearchManager', () => {
         indexName: 'index',
         searchClient: createSearchClient(),
         resultsState: {
-          _originalResponse: {
-            results: [
-              {
-                index: 'indexName',
-                query: 'query',
-              },
-            ],
-          },
+          rawResults: [
+            {
+              index: 'indexName',
+              query: 'query',
+            },
+          ],
           state: {
             index: 'indexName',
             query: 'query',
@@ -276,14 +264,12 @@ describe('createInstantSearchManager', () => {
         resultsState: [
           {
             _internalIndexId: 'index1',
-            _originalResponse: {
-              results: [
-                {
-                  index: 'index1',
-                  query: 'query1',
-                },
-              ],
-            },
+            rawResults: [
+              {
+                index: 'index1',
+                query: 'query1',
+              },
+            ],
             state: {
               index: 'index1',
               query: 'query1',
@@ -291,14 +277,12 @@ describe('createInstantSearchManager', () => {
           },
           {
             _internalIndexId: 'index2',
-            _originalResponse: {
-              results: [
-                {
-                  index: 'index2',
-                  query: 'query2',
-                },
-              ],
-            },
+            rawResults: [
+              {
+                index: 'index2',
+                query: 'query2',
+              },
+            ],
             state: {
               index: 'index2',
               query: 'query2',

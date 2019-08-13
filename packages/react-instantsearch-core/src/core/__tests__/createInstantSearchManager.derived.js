@@ -5,13 +5,15 @@ const runAllMicroTasks = () => new Promise(setImmediate);
 const createSearchClient = () => ({
   search: jest.fn(requests =>
     Promise.resolve({
-      results: requests.map(request => ({
-        index: request.indexName,
-        query: request.params.query,
-        page: request.params.page,
-        hitsPerPage: request.params.hitsPerPage,
-        hits: [],
-      })),
+      results: requests.map(
+        ({ indexName, params: { page, query, hitsPerPage } }) => ({
+          index: indexName,
+          query,
+          page,
+          hitsPerPage,
+          hits: [],
+        })
+      ),
     })
   ),
   searchForFacetValues() {

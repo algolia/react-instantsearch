@@ -3,14 +3,13 @@ import PropTypes from 'prop-types';
 import createInstantSearchManager from '../core/createInstantSearchManager';
 import { InstantSearchProvider, InstantSearchContext } from '../core/context';
 import { Store } from '../core/createStore';
+import { PlainSearchParameters, SearchParameters } from 'algoliasearch-helper';
+import { MultiResponse } from 'algoliasearch';
 
-function isControlled(props: Props) {
-  return Boolean(props.searchState);
-}
-
-// @TODO: move this to the helper?
-type SearchParameters = any; // algoliaHelper.SearchParameters
-type SearchResults = any; // algoliaHelper.SearchResults
+type ResultsState = {
+  state: PlainSearchParameters;
+  rawResults: MultiResponse;
+};
 
 // @TODO: move to createInstantSearchManager when it's TS
 type InstantSearchManager = {
@@ -53,12 +52,16 @@ type Props = {
     searchState: SearchState
   ) => void;
   stalledSearchDelay?: number;
-  resultsState: SearchResults | { [indexId: string]: SearchResults };
+  resultsState: ResultsState | { [indexId: string]: ResultsState };
 };
 
 type State = {
   contextValue: InstantSearchContext;
 };
+
+function isControlled(props: Props) {
+  return Boolean(props.searchState);
+}
 
 /**
  * @description

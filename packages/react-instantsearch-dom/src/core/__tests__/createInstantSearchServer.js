@@ -1,7 +1,7 @@
 import React from 'react';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import { SearchParameters, SearchResults } from 'algoliasearch-helper';
+import { SearchParameters } from 'algoliasearch-helper';
 import {
   Index,
   InstantSearch,
@@ -14,9 +14,12 @@ Enzyme.configure({ adapter: new Adapter() });
 
 describe('findResultsState', () => {
   const createSearchClient = () => ({
-    search: () =>
+    search: requests =>
       Promise.resolve({
-        results: [{ query: 'query' }],
+        results: requests.map(({ indexName, params: { query } }) => ({
+          query,
+          index: indexName,
+        })),
       }),
   });
 
@@ -118,7 +121,7 @@ describe('findResultsState', () => {
   });
 
   describe('single index', () => {
-    it('results should be instance of SearchResults and SearchParameters', async () => {
+    it('results should be state & results', async () => {
       const Connected = createWidget();
 
       const App = props => (
@@ -133,8 +136,12 @@ describe('findResultsState', () => {
 
       const results = await findResultsState(App, props);
 
-      expect(results.content).toBeInstanceOf(SearchResults);
-      expect(results.state).toBeInstanceOf(SearchParameters);
+      expect(results).toEqual({
+        state: expect.any(SearchParameters),
+        rawResults: expect.arrayContaining([
+          expect.objectContaining({ query: expect.any(String) }),
+        ]),
+      });
     });
 
     it('searchParameters should be cleaned each time', async () => {
@@ -179,10 +186,12 @@ describe('findResultsState', () => {
 
       const data = await findResultsState(App, props);
 
-      expect(data._originalResponse).toBeDefined();
-      expect(data.content).toBeDefined();
-      expect(data.state.index).toBe('indexName');
-      expect(data.state.query).toBe('Apple');
+      expect(data).toEqual({
+        rawResults: [
+          expect.objectContaining({ index: 'indexName', query: 'Apple' }),
+        ],
+        state: expect.objectContaining({ index: 'indexName', query: 'Apple' }),
+      });
     });
 
     it('with search state', async () => {
@@ -203,10 +212,12 @@ describe('findResultsState', () => {
 
       const data = await findResultsState(App, props);
 
-      expect(data._originalResponse).toBeDefined();
-      expect(data.content).toBeDefined();
-      expect(data.state.index).toBe('indexName');
-      expect(data.state.query).toBe('iPhone');
+      expect(data).toEqual({
+        rawResults: [
+          expect.objectContaining({ index: 'indexName', query: 'iPhone' }),
+        ],
+        state: expect.objectContaining({ index: 'indexName', query: 'iPhone' }),
+      });
     });
   });
 
@@ -229,8 +240,8 @@ describe('findResultsState', () => {
       const results = await findResultsState(App, props);
 
       results.forEach(result => {
-        expect(result.content).toBeInstanceOf(SearchResults);
         expect(result.state).toBeInstanceOf(SearchParameters);
+        expect(result.rawResults).toBeInstanceOf(Array);
       });
     });
 
@@ -286,17 +297,23 @@ describe('findResultsState', () => {
 
       expect(data).toHaveLength(2);
 
-      const [first] = data;
+      const [first, second] = data;
 
-      expect(first._internalIndexId).toBe('index1');
-      expect(first.state.index).toBe('index1');
-      expect(first.state.query).toBe('Apple');
+      expect(first).toEqual({
+        _internalIndexId: 'index1',
+        state: expect.objectContaining({ index: 'index1', query: 'Apple' }),
+        rawResults: [
+          expect.objectContaining({ index: 'index1', query: 'Apple' }),
+        ],
+      });
 
-      const [, second] = data;
-
-      expect(second._internalIndexId).toBe('index2');
-      expect(second.state.index).toBe('index2');
-      expect(second.state.query).toBe('Apple');
+      expect(second).toEqual({
+        _internalIndexId: 'index2',
+        state: expect.objectContaining({ index: 'index2', query: 'Apple' }),
+        rawResults: [
+          expect.objectContaining({ index: 'index2', query: 'Apple' }),
+        ],
+      });
     });
 
     it('without search state - second API', async () => {
@@ -320,17 +337,23 @@ describe('findResultsState', () => {
 
       expect(data).toHaveLength(2);
 
-      const [first] = data;
+      const [first, second] = data;
 
-      expect(first._internalIndexId).toBe('index1');
-      expect(first.state.index).toBe('index1');
-      expect(first.state.query).toBe('Apple');
+      expect(first).toEqual({
+        _internalIndexId: 'index1',
+        state: expect.objectContaining({ index: 'index1', query: 'Apple' }),
+        rawResults: [
+          expect.objectContaining({ index: 'index1', query: 'Apple' }),
+        ],
+      });
 
-      const [, second] = data;
-
-      expect(second._internalIndexId).toBe('index2');
-      expect(second.state.index).toBe('index2');
-      expect(second.state.query).toBe('Apple');
+      expect(second).toEqual({
+        _internalIndexId: 'index2',
+        state: expect.objectContaining({ index: 'index2', query: 'Apple' }),
+        rawResults: [
+          expect.objectContaining({ index: 'index2', query: 'Apple' }),
+        ],
+      });
     });
 
     it('without search state - same index', async () => {
@@ -354,17 +377,23 @@ describe('findResultsState', () => {
 
       expect(data).toHaveLength(2);
 
-      const [first] = data;
+      const [first, second] = data;
 
-      expect(first._internalIndexId).toBe('index1');
-      expect(first.state.index).toBe('index1');
-      expect(first.state.query).toBe('Apple');
+      expect(first).toEqual({
+        _internalIndexId: 'index1',
+        state: expect.objectContaining({ index: 'index1', query: 'Apple' }),
+        rawResults: [
+          expect.objectContaining({ index: 'index1', query: 'Apple' }),
+        ],
+      });
 
-      const [, second] = data;
-
-      expect(second._internalIndexId).toBe('index1_with_refinement');
-      expect(second.state.index).toBe('index1');
-      expect(second.state.query).toBe('iWatch');
+      expect(second).toEqual({
+        _internalIndexId: 'index1_with_refinement',
+        state: expect.objectContaining({ index: 'index1', query: 'iWatch' }),
+        rawResults: [
+          expect.objectContaining({ index: 'index1', query: 'iWatch' }),
+        ],
+      });
     });
 
     it('with search state - first API', async () => {
@@ -400,17 +429,23 @@ describe('findResultsState', () => {
 
       expect(data).toHaveLength(2);
 
-      const [first] = data;
+      const [first, second] = data;
 
-      expect(first._internalIndexId).toBe('index1');
-      expect(first.state.index).toBe('index1');
-      expect(first.state.query).toBe('iPhone');
+      expect(first).toEqual({
+        _internalIndexId: 'index1',
+        state: expect.objectContaining({ index: 'index1', query: 'iPhone' }),
+        rawResults: [
+          expect.objectContaining({ index: 'index1', query: 'iPhone' }),
+        ],
+      });
 
-      const [, second] = data;
-
-      expect(second._internalIndexId).toBe('index2');
-      expect(second.state.index).toBe('index2');
-      expect(second.state.query).toBe('iPad');
+      expect(second).toEqual({
+        _internalIndexId: 'index2',
+        state: expect.objectContaining({ index: 'index2', query: 'iPad' }),
+        rawResults: [
+          expect.objectContaining({ index: 'index2', query: 'iPad' }),
+        ],
+      });
     });
 
     it('with search state - second API', async () => {
@@ -442,17 +477,23 @@ describe('findResultsState', () => {
 
       expect(data).toHaveLength(2);
 
-      const [first] = data;
+      const [first, second] = data;
 
-      expect(first._internalIndexId).toBe('index1');
-      expect(first.state.index).toBe('index1');
-      expect(first.state.query).toBe('iPhone');
+      expect(first).toEqual({
+        _internalIndexId: 'index1',
+        state: expect.objectContaining({ index: 'index1', query: 'iPhone' }),
+        rawResults: [
+          expect.objectContaining({ index: 'index1', query: 'iPhone' }),
+        ],
+      });
 
-      const [, second] = data;
-
-      expect(second._internalIndexId).toBe('index2');
-      expect(second.state.index).toBe('index2');
-      expect(second.state.query).toBe('iPad');
+      expect(second).toEqual({
+        _internalIndexId: 'index2',
+        state: expect.objectContaining({ index: 'index2', query: 'iPad' }),
+        rawResults: [
+          expect.objectContaining({ index: 'index2', query: 'iPad' }),
+        ],
+      });
     });
 
     it('with search state - same index', async () => {
@@ -484,17 +525,22 @@ describe('findResultsState', () => {
 
       expect(data).toHaveLength(2);
 
-      const [first] = data;
+      const [first, second] = data;
 
-      expect(first._internalIndexId).toBe('index1');
-      expect(first.state.index).toBe('index1');
-      expect(first.state.query).toBe('iPhone');
-
-      const [, second] = data;
-
-      expect(second._internalIndexId).toBe('index1WithRefinement');
-      expect(second.state.index).toBe('index1');
-      expect(second.state.query).toBe('iPad');
+      expect(first).toEqual({
+        _internalIndexId: 'index1',
+        state: expect.objectContaining({ index: 'index1', query: 'iPhone' }),
+        rawResults: [
+          expect.objectContaining({ index: 'index1', query: 'iPhone' }),
+        ],
+      });
+      expect(second).toEqual({
+        _internalIndexId: 'index1WithRefinement',
+        state: expect.objectContaining({ index: 'index1', query: 'iPad' }),
+        rawResults: [
+          expect.objectContaining({ index: 'index1', query: 'iPad' }),
+        ],
+      });
     });
   });
 });
