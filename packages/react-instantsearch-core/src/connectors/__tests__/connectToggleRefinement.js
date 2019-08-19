@@ -56,11 +56,16 @@ describe('connectToggleRefinement', () => {
     });
 
     it('expect `currentRefinement` to be `false` when searchState is a string considered falsy', () => {
-      const props = { attribute: 'shipping', value: true };
+      const props = { attribute: 'shipping', value: true, contextValue };
       const searchState = { toggle: { shipping: 'false' } };
       const searchResults = {};
 
-      const actual = getProvidedProps(props, searchState, searchResults);
+      const actual = connect.getProvidedProps.call(
+        {},
+        props,
+        searchState,
+        searchResults
+      );
 
       expect(actual.currentRefinement).toBe(false);
     });
@@ -353,7 +358,7 @@ describe('connectToggleRefinement', () => {
         }
       );
 
-      expect(params.query).toBeUndefined();
+      expect(params.query).toBe('');
     });
 
     it('registers its filter in metadata', () => {
@@ -480,13 +485,22 @@ describe('connectToggleRefinement', () => {
     });
 
     it('expect `currentRefinement` to be `false` when searchState is a string considered falsy', () => {
-      const props = { attribute: 'shipping', value: true };
+      const props = {
+        attribute: 'shipping',
+        value: true,
+        contextValue,
+        indexContextValue,
+      };
       const searchState = createMultiIndexSearchState({
         toggle: { shipping: 'false' },
       });
       const searchResults = {};
 
-      const actual = getProvidedProps(props, searchState, searchResults);
+      const actual = connect.getProvidedProps(
+        props,
+        searchState,
+        searchResults
+      );
 
       expect(actual.currentRefinement).toBe(false);
     });
@@ -853,7 +867,7 @@ describe('connectToggleRefinement', () => {
         }
       );
 
-      expect(params.query).toBeUndefined();
+      expect(params.query).toBe('');
     });
 
     it('registers its filter in metadata', () => {
