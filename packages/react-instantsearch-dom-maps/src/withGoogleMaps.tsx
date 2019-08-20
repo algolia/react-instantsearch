@@ -15,7 +15,7 @@ const withGoogleMaps = <TProps extends WithGoogleMapsProps>(
   Wrapped: React.ComponentType<TProps>
 ) => {
   const WithGoogleMaps: React.FC<
-    Subtract<Props, WithGoogleMapsProps>
+    Subtract<TProps, WithGoogleMapsProps>
   > = props => (
     <GoogleMapsContext.Consumer>
       {({ google, instance }) => (
