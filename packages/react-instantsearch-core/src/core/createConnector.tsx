@@ -53,7 +53,7 @@ type ConnectorProps = {
   indexContextValue?: IndexContext;
 };
 
-export type ConnectedProps<WidgetProps> = WidgetProps & ConnectorProps;
+export type ConnectedProps<TWidgetProps> = TWidgetProps & ConnectorProps;
 
 type ConnectorState = {
   providedProps: {};

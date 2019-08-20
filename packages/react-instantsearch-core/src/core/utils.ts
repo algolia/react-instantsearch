@@ -68,10 +68,10 @@ export function addQueryID(hits, queryID) {
   }));
 }
 
-export function find<T = any>(
-  array: T[],
-  comparator: (item: T) => boolean
-): T | undefined {
+export function find<TItem = any>(
+  array: TItem[],
+  comparator: (item: TItem) => boolean
+): TItem | undefined {
   if (!Array.isArray(array)) {
     return undefined;
   }
@@ -98,6 +98,7 @@ export function omit(source: { [key: string]: any }, excluded: string[]) {
   for (let i = 0; i < sourceKeys.length; i++) {
     const key = sourceKeys[i];
     if (excluded.indexOf(key) >= 0) {
+      // eslint-disable-next-line no-continue
       continue;
     }
     target[key] = source[key];

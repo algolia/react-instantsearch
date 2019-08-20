@@ -138,5 +138,10 @@ const IndexWrapper: React.FC<Props> = props => {
   );
 };
 
+IndexWrapper.propTypes = {
+  indexName: PropTypes.string.isRequired,
+  indexId: PropTypes.string.isRequired,
+};
+
 export const IndexComponentWithoutContext = Index;
 export default IndexWrapper;

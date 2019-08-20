@@ -51,10 +51,10 @@ export function range({ start = 0, end, step = 1 }: RangeOptions): number[] {
   );
 }
 
-export function find<T = any>(
-  array: T[],
-  comparator: (item: T) => boolean
-): T | undefined {
+export function find<TItem = any>(
+  array: TItem[],
+  comparator: (item: TItem) => boolean
+): TItem | undefined {
   if (!Array.isArray(array)) {
     return undefined;
   }
