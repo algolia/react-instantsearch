@@ -1,16 +1,18 @@
 import React from 'react';
 import GoogleMapsContext from './GoogleMapsContext';
 
-type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
-type Subtract<T, K> = Omit<T, keyof K>;
+type Subtract<TProps, TSubstractedProps> = Omit<
+  TProps,
+  keyof TSubstractedProps
+>;
 
 export interface WithGoogleMapsProps {
-  google: typeof google;
+  google: typeof google; // eslint-disable-line no-undef
   googleMapsInstance: google.maps.Map;
 }
 
-const withGoogleMaps = <Props extends WithGoogleMapsProps>(
-  Wrapped: React.ComponentType<Props>
+const withGoogleMaps = <TProps extends WithGoogleMapsProps>(
+  Wrapped: React.ComponentType<TProps>
 ) => {
   const WithGoogleMaps: React.FC<
     Subtract<Props, WithGoogleMapsProps>
@@ -20,7 +22,7 @@ const withGoogleMaps = <Props extends WithGoogleMapsProps>(
         <Wrapped
           // @TODO: remove the cast once TypeScript fixes the issue
           // https://github.com/Microsoft/TypeScript/issues/28938
-          {...(props as Props)}
+          {...(props as TProps)}
           google={google}
           googleMapsInstance={instance}
         />
