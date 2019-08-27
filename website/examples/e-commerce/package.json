@@ -6,9 +6,9 @@
     "algoliasearch": "3.33.0",
     "classnames": "2.2.6",
     "qs": "6.8.0",
-    "react": "16.8.6",
+    "react": "16.9.0",
     "react-compound-slider": "2.2.0",
-    "react-dom": "16.8.6",
+    "react-dom": "16.9.0",
     "react-instantsearch-dom": "5.7.0"
   }
 }

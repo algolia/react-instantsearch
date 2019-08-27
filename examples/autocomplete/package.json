@@ -10,15 +10,15 @@
   },
   "devDependencies": {
     "react-scripts": "3.1.1",
-    "react-test-renderer": "16.8.6"
+    "react-test-renderer": "16.9.0"
   },
   "dependencies": {
     "antd": "3.22.0",
     "lodash": "4.17.15",
     "prop-types": "15.6.0",
-    "react": "16.8.6",
+    "react": "16.9.0",
     "react-autosuggest": "9.4.3",
-    "react-dom": "16.8.6",
+    "react-dom": "16.9.0",
     "react-instantsearch-dom": "5.7.0"
   },
   "browserslist": [
