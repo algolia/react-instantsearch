@@ -1,6 +1,6 @@
 [build]
   command = "yarn run storybook:build && yarn run website:build"
-  publish = "website/dist"
+  publish = "website"
 
 [build.environment]
   YARN_VERSION = "1.16.0"
