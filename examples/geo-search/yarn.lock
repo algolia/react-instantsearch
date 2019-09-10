@@ -8860,10 +8860,8 @@ react-instantsearch-core@^5.7.0:
     lodash "^4.17.4"
     prop-types "^15.5.10"
 
-react-instantsearch-dom-maps@5.7.0:
+"react-instantsearch-dom-maps@file:../../packages/react-instantsearch-dom-maps":
   version "5.7.0"
-  resolved "https://registry.yarnpkg.com/react-instantsearch-dom-maps/-/react-instantsearch-dom-maps-5.7.0.tgz#5d5db7be76de7c8db2182c06d0cd1c649e0f019b"
-  integrity sha512-qlTolTBFYcIPZT9Qnbg2vhukPjPMCuZxxsUKBRFojgl8nNok7rplvmK4/KnNv56qP7p5U5MA7jdcQxPI/JTy6g==
   dependencies:
     "@babel/runtime" "^7.1.2"
     lodash "^4.17.4"
@@ -8871,10 +8869,8 @@ react-instantsearch-dom-maps@5.7.0:
     react-lifecycles-compat "^3.0.4"
     scriptjs "^2.5.8"
 
-react-instantsearch-dom@5.7.0:
+"react-instantsearch-dom@file:../../packages/react-instantsearch-dom":
   version "5.7.0"
-  resolved "https://registry.yarnpkg.com/react-instantsearch-dom/-/react-instantsearch-dom-5.7.0.tgz#5a9b0cfb461c08a349a5fdc5d1cff50b8f5fcf56"
-  integrity sha512-FwFZZXwgaYtLrXD9KJNlrPVkfw8JOqVgpDBvra547udF4zbacZUuX7/qTyMHjVW/Lz59t5T25vCGLzmQiO89YA==
   dependencies:
     "@babel/runtime" "^7.1.2"
     algoliasearch "^3.27.1"

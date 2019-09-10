@@ -26,7 +26,7 @@
     "test:size": "bundlesize",
     "storybook": "start-storybook -p 6006 -c storybook -s storybook/public",
     "storybook:build": "build-storybook -s storybook/public -o website/dist/storybook -c storybook",
-    "website:build": "yarn storybook:build --quiet && yarn webpack --config website/webpack.config.js"
+    "website:build": "yarn build && yarn webpack --config website/webpack.config.js"
   },
   "devDependencies": {
     "@babel/cli": "7.4.4",

@@ -17,8 +17,8 @@
     "qs": "6.8.0",
     "react": "16.8.6",
     "react-dom": "16.8.6",
-    "react-instantsearch-dom": "5.7.0",
-    "react-instantsearch-dom-maps": "5.7.0"
+    "react-instantsearch-dom": "file:../../packages/react-instantsearch-dom",
+    "react-instantsearch-dom-maps": "file:../../packages/react-instantsearch-dom-maps"
   },
   "browserslist": [
     ">0.2%",
