@@ -6,12 +6,13 @@ type State = {
   widgets: SearchState;
   metadata: any[];
   results: ResultsState | null;
-  resultsFacetValues: ResultsFacetsValues | null;
   error: Error | null;
   searching: boolean;
   isSearchStalled: boolean;
-  searchingForFacetValues: boolean;
+  resultsFacetValues?: ResultsFacetsValues | null;
+  searchingForFacetValues?: boolean;
 };
+
 export default function createStore(initialState: State) {
   let state = initialState;
   const listeners: Listener[] = [];
