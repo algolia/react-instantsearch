@@ -5532,8 +5532,10 @@ react-instantsearch-native@^5.7.0:
     algoliasearch "^3.27.1"
     react-instantsearch-core "^5.7.0"
 
-"react-instantsearch@file:../../packages/react-instantsearch":
+react-instantsearch@5.7.0:
   version "5.7.0"
+  resolved "https://registry.yarnpkg.com/react-instantsearch/-/react-instantsearch-5.7.0.tgz#d31660e8b53f6b204107ef5db18a7e72cd1299de"
+  integrity sha512-CLlIX3/gXEaWXsjBAaTcnpcUoIfNXA8cVHSGj4Er+sB5dBOges6rrTvJlyQNX0K7YYdDDnMzyQ5BCjjYlHndWQ==
   dependencies:
     "@babel/runtime" "^7.1.2"
     react-instantsearch-core "^5.7.0"
