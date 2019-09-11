@@ -11,6 +11,7 @@ preview.zip
 
 # Generated files
 /website/examples
+/website/storybook
 
 # Argos CI screenshots
 integration/screenshots/
