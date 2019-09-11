@@ -61,8 +61,9 @@ module.exports = {
           {
             loader: 'file-loader',
             options: {
-              publicPath: 'assets',
-              context: __dirname,
+              publicPath: (filename, absolutePath, context) =>
+                `/${path.relative(context, absolutePath)}`,
+              context: path.join(__dirname, '..'),
               outputPath(_url, resourcePath, context) {
                 return path.relative(context, resourcePath);
               },
