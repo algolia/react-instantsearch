@@ -4,7 +4,7 @@
   "license": "MIT",
   "workspaces": [
     "packages/*",
-    "website/examples/*"
+    "examples/@(default-theme|e-commerce|media|tourism)"
   ],
   "scripts": {
     "postinstall": "lerna run build:cjs --scope react-instantsearch-*",
@@ -117,10 +117,6 @@
     "typescript": "3.5.3",
     "webpack": "4.39.3",
     "webpack-cli": "3.3.7"
-  },
-  "engines": {
-    "node": "8.16.1",
-    "yarn": "1.16.0"
   },
   "bundlesize": [
     {
