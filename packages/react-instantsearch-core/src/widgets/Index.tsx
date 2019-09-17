@@ -123,7 +123,12 @@ class Index extends Component<InnerProps, State> {
   }
 }
 
-const IndexWrapper: React.FC<Props> = props => {
+type IndexWrapperProps = {
+  indexName: string;
+  indexId?: string;
+};
+
+const IndexWrapper: React.FC<IndexWrapperProps> = props => {
   const inferredIndexId = props.indexName;
   return (
     <InstantSearchConsumer>
