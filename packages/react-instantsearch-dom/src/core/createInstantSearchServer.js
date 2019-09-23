@@ -113,6 +113,12 @@ export const findResultsState = function(App, props) {
     );
   }
 
+  if (!props.indexName) {
+    throw new Error(
+      'The props provided to `findResultsState` must have an `indexName`'
+    );
+  }
+
   const { indexName, searchClient } = props;
 
   const searchParameters = [];
