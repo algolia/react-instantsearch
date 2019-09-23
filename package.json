@@ -71,7 +71,7 @@
     "@wdio/spec-reporter": "5.12.1",
     "@wdio/static-server-service": "5.12.1",
     "algoliasearch": "3.33.0",
-    "argos-cli": "0.1.1",
+    "argos-cli": "0.1.2",
     "babel-eslint": "10.0.2",
     "babel-jest": "24.9.0",
     "babel-loader": "8.0.6",
@@ -107,7 +107,7 @@
     "places.js": "1.16.4",
     "prettier": "1.18.2",
     "prop-types": "15.6.2",
-    "puppeteer": "1.19.0",
+    "puppeteer": "1.20.0",
     "react": "16.8.6",
     "react-autosuggest": "9.4.3",
     "react-dom": "16.8.6",
@@ -126,7 +126,7 @@
     "rollup-plugin-uglify": "6.0.3",
     "style-loader": "1.0.0",
     "typescript": "3.5.3",
-    "webpack": "4.39.3",
+    "webpack": "4.40.2",
     "webpack-cli": "3.3.7"
   },
   "bundlesize": [
