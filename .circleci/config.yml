@@ -23,7 +23,7 @@ aliases:
 defaults: &defaults
   working_directory: ~/react-instantsearch
   docker:
-    - image: circleci/node:8.16.1@sha256:0e6beda8d9e1adb4b1ad6056213925f03285b90e8b652bcda925a25c45070d7d
+    - image: circleci/node:8.16.1@sha256:9e83d4b3b046d1c7591952865bc4d803d2ddeaf1c6352f76c2133bbe96606d40
 
 version: 2
 jobs:
@@ -57,10 +57,10 @@ jobs:
           name: Unit Tests
           command: yarn test --maxWorkers=4
 
-  test_e2e:
+  test_integration:
     <<: *defaults
     docker:
-      - image: circleci/node:8.16.1-browsers@sha256:a3e48a87dc238fd9b167a96a1cdf366d9ee7d73d4b468aeb94c9ec03935eab70
+      - image: circleci/node:8.16.1-browsers@sha256:e2f01766ecc1e133ca4873b7a0fa292da2d39e756783f6a7f90d4d5c2a59ccb7
     steps:
       - checkout
       - run: *install_yarn_version
@@ -68,8 +68,22 @@ jobs:
       - run: *run_yarn_install
       - save_cache: *save_yarn_cache
       - run:
-          name: E2E Tests
-          command: yarn test:e2e
+          name: Integration Tests
+          command: yarn test:integration
+
+  test_e2e:
+    <<: *defaults
+    steps:
+      - checkout
+      - run: *install_yarn_version
+      - restore_cache: *restore_yarn_cache
+      - run: *run_yarn_install
+      - save_cache: *save_yarn_cache
+      - run:
+          name: End-2-End tests
+          command: |
+            yarn run website:build
+            yarn run test:e2e:saucelabs
 
   test_examples:
     <<: *defaults
@@ -89,5 +103,6 @@ workflows:
     jobs:
       - test_build
       - test_unit
+      - test_integration
       - test_e2e
       - test_examples

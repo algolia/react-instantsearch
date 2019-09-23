@@ -13,6 +13,7 @@ const config = {
     // https://github.com/benmosher/eslint-plugin-import/issues/1103
     // https://github.com/benmosher/eslint-plugin-import/issues/1174
     'import/no-extraneous-dependencies': 'off',
+    '@typescript-eslint/explicit-member-accessibility': ['off'],
   },
   settings: {
     react: {
