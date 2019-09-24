@@ -160,10 +160,6 @@ export default class App extends React.Component {
           indexName="instant_search"
           onSearchStateChange={this.onSearchStateChange}
           searchState={this.state.searchState}
-          root={{
-            Root: View,
-            props: { flex: 1 },
-          }}
         >
           <ConnectedSearchBox
             displaySuggestions={this.displaySuggestions}
@@ -176,13 +172,7 @@ export default class App extends React.Component {
             <Configure hitsPerPage={5} />
             {suggestions}
           </Index>
-          <Index
-            indexName="instant_search"
-            root={{
-              Root: View,
-              props: { flex: 1 },
-            }}
-          >
+          <Index indexName="instant_search">
             <Configure hitsPerPage={15} />
             <VirtualRefinementList
               attribute="categories"

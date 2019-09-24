@@ -9,6 +9,8 @@ const config = {
     'valid-jsdoc': 'off',
     // @TODO: remove once this is in `eslint-config-algolia`
     '@typescript-eslint/explicit-member-accessibility': 'off',
+    // @TODO: re-enable this once the code base is made for it
+    '@typescript-eslint/consistent-type-assertions': 'off',
     // @TODO: re-enable once the rule is properly setup for monorepos
     // https://github.com/benmosher/eslint-plugin-import/issues/1103
     // https://github.com/benmosher/eslint-plugin-import/issues/1174
