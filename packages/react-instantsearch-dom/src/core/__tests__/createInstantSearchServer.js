@@ -75,6 +75,20 @@ describe('findResultsState', () => {
     );
   });
 
+  it('throws an error if props does not have an `indexName`', () => {
+    const App = () => <div />;
+
+    const props = {
+      searchClient: createSearchClient(),
+    };
+
+    const trigger = () => findResultsState(App, props);
+
+    expect(() => trigger()).toThrowErrorMatchingInlineSnapshot(
+      `"The props provided to \`findResultsState\` must have an \`indexName\`"`
+    );
+  });
+
   it('adds expected Algolia agents', () => {
     const App = props => <InstantSearch {...props} />;
 
