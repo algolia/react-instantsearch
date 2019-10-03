@@ -7,25 +7,33 @@ import { InstantSearchConsumer } from '../../core/context';
 
 Enzyme.configure({ adapter: new Adapter() });
 
+jest.mock('../../core/createInstantSearchManager');
+
+const createFakeStore = (rest = {}) => ({
+  getState: jest.fn(() => ({})),
+  setState: jest.fn(),
+  subscribe: jest.fn(),
+  ...rest,
+});
+
 const createFakeInstantSearchManager = (rest = {}) => ({
   context: {},
-  updateIndex: jest.fn(() => {}),
-  updateClient: jest.fn(() => {}),
+  store: createFakeStore(),
+  clearCache: jest.fn(),
+  updateIndex: jest.fn(),
+  updateClient: jest.fn(),
+  skipSearch: jest.fn(),
+  getWidgetsIds: jest.fn(),
+  onExternalStateUpdate: jest.fn(),
+  onSearchForFacetValues: jest.fn(),
+  transitionState: jest.fn(),
   ...rest,
 });
 
 const createFakeSearchClient = (rest = {}) => ({
-  search: jest.fn(() => {}),
+  search: jest.fn(),
   ...rest,
 });
-
-jest.mock('../../core/createInstantSearchManager', () =>
-  jest.fn(() => ({
-    context: {},
-    updateIndex: () => {},
-    updateClient: () => {},
-  }))
-);
 
 const DEFAULT_PROPS = {
   appId: 'foo',
@@ -39,6 +47,12 @@ const DEFAULT_PROPS = {
 };
 
 describe('InstantSearch', () => {
+  beforeEach(() => {
+    createInstantSearchManager.mockImplementation(() =>
+      createFakeInstantSearchManager()
+    );
+  });
+
   afterEach(() => {
     createInstantSearchManager.mockClear();
   });
@@ -135,9 +149,7 @@ describe('InstantSearch', () => {
   });
 
   it('updates Algolia client when new one is given in props', () => {
-    const ism = createFakeInstantSearchManager({
-      updateClient: jest.fn(),
-    });
+    const ism = createFakeInstantSearchManager();
 
     createInstantSearchManager.mockImplementation(() => ism);
 
@@ -160,7 +172,6 @@ describe('InstantSearch', () => {
   it('works as a controlled input', () => {
     const ism = createFakeInstantSearchManager({
       transitionState: searchState => ({ ...searchState, transitioned: true }),
-      onExternalStateUpdate: jest.fn(),
     });
     createInstantSearchManager.mockImplementation(() => ism);
     const initialState = { a: 0 };
@@ -204,7 +215,6 @@ describe('InstantSearch', () => {
   it('works as an uncontrolled input', () => {
     const ism = createFakeInstantSearchManager({
       transitionState: searchState => ({ ...searchState, transitioned: true }),
-      onExternalStateUpdate: jest.fn(),
     });
     createInstantSearchManager.mockImplementation(() => ism);
 
@@ -241,10 +251,7 @@ describe('InstantSearch', () => {
   });
 
   it("exposes the isManager's store and widgetsManager in context", () => {
-    const ism = createFakeInstantSearchManager({
-      store: {},
-      widgetsManager: {},
-    });
+    const ism = createFakeInstantSearchManager();
     createInstantSearchManager.mockImplementation(() => ism);
     let childContext = false;
     mount(
@@ -263,9 +270,7 @@ describe('InstantSearch', () => {
   });
 
   it('onSearchStateChange should not be called and search should be skipped if the widget is unmounted', () => {
-    const ism = createFakeInstantSearchManager({
-      skipSearch: jest.fn(),
-    });
+    const ism = createFakeInstantSearchManager();
     let childContext;
     createInstantSearchManager.mockImplementation(() => ism);
     const onSearchStateChangeMock = jest.fn();
@@ -291,9 +296,7 @@ describe('InstantSearch', () => {
   });
 
   it('refreshes the cache when the refresh prop is set to true', () => {
-    const ism = createFakeInstantSearchManager({
-      clearCache: jest.fn(),
-    });
+    const ism = createFakeInstantSearchManager();
 
     createInstantSearchManager.mockImplementation(() => ism);
 
@@ -321,9 +324,7 @@ describe('InstantSearch', () => {
   });
 
   it('refreshes the cache only once if the refresh prop stay to true', () => {
-    const ism = createFakeInstantSearchManager({
-      clearCache: jest.fn(),
-    });
+    const ism = createFakeInstantSearchManager();
 
     createInstantSearchManager.mockImplementation(() => ism);
 
@@ -350,9 +351,7 @@ describe('InstantSearch', () => {
   });
 
   it('updates the index when the the index changes', () => {
-    const ism = createFakeInstantSearchManager({
-      updateIndex: jest.fn(),
-    });
+    const ism = createFakeInstantSearchManager();
 
     createInstantSearchManager.mockImplementation(() => ism);
 
@@ -386,10 +385,7 @@ describe('InstantSearch', () => {
   });
 
   it('calls onSearchParameters with the right values if function provided', () => {
-    const ism = createFakeInstantSearchManager({
-      store: {},
-      widgetsManager: {},
-    });
+    const ism = createFakeInstantSearchManager();
     createInstantSearchManager.mockImplementation(() => ism);
     const onSearchParametersMock = jest.fn();
     const getSearchParameters = jest.fn();
@@ -511,9 +507,7 @@ describe('InstantSearch', () => {
     });
 
     it('search for facet values should be called if triggered', () => {
-      const ism = createFakeInstantSearchManager({
-        onSearchForFacetValues: jest.fn(),
-      });
+      const ism = createFakeInstantSearchManager();
       createInstantSearchManager.mockImplementation(() => ism);
       let childContext;
       mount(
