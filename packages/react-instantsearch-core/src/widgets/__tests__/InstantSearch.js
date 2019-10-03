@@ -197,17 +197,72 @@ describe('InstantSearch', () => {
         </InstantSearchConsumer>
       </InstantSearch>
     );
-    expect(createInstantSearchManager.mock.calls[0][0].initialState).toBe(
-      initialState
+
+    expect(createInstantSearchManager).toHaveBeenCalledWith(
+      expect.objectContaining({
+        initialState,
+      })
     );
 
     wrapper.find('button').simulate('click');
 
-    expect(onSearchStateChange.mock.calls[0][0]).toEqual({
+    expect(onSearchStateChange).toHaveBeenLastCalledWith({
       transitioned: true,
       a: 1,
     });
-    expect(ism.onExternalStateUpdate.mock.calls[0][0]).toEqual({
+
+    expect(ism.onExternalStateUpdate).toHaveBeenLastCalledWith({
+      a: 2,
+    });
+  });
+
+  it('keeps the `searchState` up to date as a controlled input', () => {
+    createInstantSearchManager.mockImplementation((...args) => {
+      const module = require.requireActual(
+        '../../core/createInstantSearchManager'
+      );
+
+      return module.default(...args);
+    });
+
+    const widget = jest.fn(() => null);
+    const initialState = { a: 0 };
+    const onSearchStateChange = searchState => {
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
+      wrapper.setProps({
+        searchState: { a: searchState.a + 1 },
+      });
+    };
+
+    const wrapper = mount(
+      <InstantSearch
+        {...DEFAULT_PROPS}
+        searchState={initialState}
+        onSearchStateChange={onSearchStateChange}
+        createURL={() => '#'}
+      >
+        <InstantSearchConsumer>
+          {contextValue => (
+            <React.Fragment>
+              {widget(contextValue.store.getState().widgets)}
+              <button
+                onClick={() => contextValue.onInternalStateUpdate({ a: 1 })}
+              />
+            </React.Fragment>
+          )}
+        </InstantSearchConsumer>
+      </InstantSearch>
+    );
+
+    expect(widget).toHaveBeenCalledTimes(1);
+    expect(widget).toHaveBeenLastCalledWith({
+      a: 0,
+    });
+
+    wrapper.find('button').simulate('click');
+
+    expect(widget).toHaveBeenCalledTimes(2);
+    expect(widget).toHaveBeenLastCalledWith({
       a: 2,
     });
   });
