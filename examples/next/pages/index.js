@@ -4,8 +4,6 @@ import Router from 'next/router';
 import qs from 'qs';
 import { Head, App, findResultsState } from '../components';
 
-const updateAfter = 700;
-
 const createURL = state => `?${qs.stringify(state)}`;
 
 const searchStateToUrl = searchState =>
@@ -15,10 +13,6 @@ export default class extends React.Component {
   static propTypes = {
     resultsState: PropTypes.object,
     searchState: PropTypes.object,
-  };
-
-  state = {
-    searchState: this.props.searchState,
   };
 
   /*
@@ -35,23 +29,10 @@ export default class extends React.Component {
   }
 
   onSearchStateChange = searchState => {
-    clearTimeout(this.debouncedSetState);
-    this.debouncedSetState = setTimeout(() => {
-      const href = searchStateToUrl(searchState);
-      Router.push(href, href, {
-        shallow: true,
-      });
-    }, updateAfter);
-    this.setState({ searchState });
+    const href = searchStateToUrl(searchState);
+    Router.push(href, href);
   };
 
-  componentDidMount() {
-    this.setState({ searchState: qs.parse(window.location.search.slice(1)) });
-  }
-
-  componentWillReceiveProps() {
-    this.setState({ searchState: qs.parse(window.location.search.slice(1)) });
-  }
 
   render() {
     return (
@@ -59,7 +40,7 @@ export default class extends React.Component {
         <Head title="Home" />
         <div>
           <App
-            searchState={this.state.searchState}
+            searchState={this.props.searchState}
             resultsState={this.props.resultsState}
             onSearchStateChange={this.onSearchStateChange}
             createURL={createURL}
