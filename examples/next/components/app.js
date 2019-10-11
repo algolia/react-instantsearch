@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
   RefinementList,
-  SearchBox,
   Hits,
   Configure,
   Highlight,
   Pagination,
   InstantSearch,
 } from 'react-instantsearch-dom';
+import SearchBox from './searchbox';
 
 const HitComponent = ({ hit }) => (
   <div className="hit">

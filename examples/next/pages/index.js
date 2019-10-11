@@ -1,4 +1,3 @@
-import { isEqual } from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'next/router';
@@ -11,8 +10,6 @@ const searchClient = algoliasearch(
   'latency',
   '6be0576ff61c053d5f9a3225e2a90f76'
 );
-
-const updateAfter = 700;
 
 const createURL = state => `?${qs.stringify(state)}`;
 
@@ -34,11 +31,6 @@ class Page extends React.Component {
     searchState: PropTypes.object,
   };
 
-  state = {
-    searchState: this.props.searchState,
-    lastRouter: this.props.router,
-  };
-
   static async getInitialProps({ asPath }) {
     const searchState = pathToSearchState(asPath);
     const resultsState = await findResultsState(App, {
@@ -52,29 +44,9 @@ class Page extends React.Component {
     };
   }
 
-  static getDerivedStateFromProps(props, state) {
-    if (!isEqual(state.lastRouter, props.router)) {
-      return {
-        searchState: pathToSearchState(props.router.asPath),
-        lastRouter: props.router,
-      };
-    }
-
-    return null;
-  }
-
   onSearchStateChange = searchState => {
-    clearTimeout(this.debouncedSetState);
-
-    this.debouncedSetState = setTimeout(() => {
-      const href = searchStateToURL(searchState);
-
-      this.props.router.push(href, href, {
-        shallow: true,
-      });
-    }, updateAfter);
-
-    this.setState({ searchState });
+    const href = searchStateToURL(searchState);
+    this.props.router.push(href, href);
   };
 
   render() {
@@ -83,7 +55,7 @@ class Page extends React.Component {
         <Head title="Home" />
         <App
           {...DEFAULT_PROPS}
-          searchState={this.state.searchState}
+          searchState={this.props.searchState}
           resultsState={this.props.resultsState}
           onSearchStateChange={this.onSearchStateChange}
           createURL={createURL}
