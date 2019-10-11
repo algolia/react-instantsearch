@@ -631,7 +631,7 @@ describe('createInstantSearchManager', () => {
       const {
         mainParameters,
         derivedParameters,
-      } = wrapper.instance().aisManager.getSearchParameters();
+      } = wrapper.instance().state.instantSearchManager.getSearchParameters();
 
       expect(mainParameters).toEqual(
         expect.objectContaining({
@@ -704,7 +704,7 @@ describe('createInstantSearchManager', () => {
       const {
         mainParameters,
         derivedParameters,
-      } = wrapper.instance().aisManager.getSearchParameters();
+      } = wrapper.instance().state.instantSearchManager.getSearchParameters();
 
       expect(mainParameters).toEqual(
         expect.objectContaining({

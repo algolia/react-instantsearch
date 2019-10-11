@@ -1,4 +1,5 @@
 import React, { Component, Children } from 'react';
+import isEqual from 'fast-deep-equal';
 import PropTypes from 'prop-types';
 import createInstantSearchManager from '../core/createInstantSearchManager';
 import { InstantSearchProvider, InstantSearchContext } from '../core/context';
@@ -56,6 +57,8 @@ type Props = {
 };
 
 type State = {
+  isControlled: boolean;
+  instantSearchManager: InstantSearchManager;
   contextValue: InstantSearchContext;
 };
 
@@ -136,7 +139,19 @@ class InstantSearch extends Component<Props, State> {
     nextProps: Props,
     prevState: State
   ): Partial<State> {
+    const nextIsControlled = isControlled(nextProps);
+    const previousSearchState = prevState.instantSearchManager.store.getState()
+      .widgets;
+    const nextSearchState = nextProps.searchState;
+
+    if (nextIsControlled && !isEqual(previousSearchState, nextSearchState)) {
+      prevState.instantSearchManager.onExternalStateUpdate(
+        nextProps.searchState
+      );
+    }
+
     return {
+      isControlled: nextIsControlled,
       contextValue: {
         ...prevState.contextValue,
         mainTargetedIndex: nextProps.indexName,
@@ -145,83 +160,83 @@ class InstantSearch extends Component<Props, State> {
   }
 
   isUnmounting: boolean = false;
-  aisManager: InstantSearchManager = createInstantSearchManager({
-    indexName: this.props.indexName,
-    searchClient: this.props.searchClient,
-    initialState: this.props.searchState || {},
-    resultsState: this.props.resultsState,
-    stalledSearchDelay: this.props.stalledSearchDelay,
-  });
-  isControlled: boolean = isControlled(this.props);
 
-  state = {
-    contextValue: {
+  constructor(props: Props) {
+    super(props);
+
+    const instantSearchManager = createInstantSearchManager({
+      indexName: this.props.indexName,
+      searchClient: this.props.searchClient,
+      initialState: this.props.searchState || {},
+      resultsState: this.props.resultsState,
+      stalledSearchDelay: this.props.stalledSearchDelay,
+    });
+
+    const contextValue = {
+      store: instantSearchManager.store,
+      widgetsManager: instantSearchManager.widgetsManager,
+      mainTargetedIndex: this.props.indexName,
       onInternalStateUpdate: this.onWidgetsInternalStateUpdate.bind(this),
       createHrefForState: this.createHrefForState.bind(this),
       onSearchForFacetValues: this.onSearchForFacetValues.bind(this),
       onSearchStateChange: this.onSearchStateChange.bind(this),
       onSearchParameters: this.onSearchParameters.bind(this),
-      store: this.aisManager.store,
-      widgetsManager: this.aisManager.widgetsManager,
-      mainTargetedIndex: this.props.indexName,
-    },
-  };
+    };
+
+    this.state = {
+      isControlled: isControlled(this.props),
+      instantSearchManager,
+      contextValue,
+    };
+  }
 
   componentDidUpdate(prevProps: Props) {
-    const nextIsControlled = isControlled(this.props);
+    const prevIsControlled = isControlled(prevProps);
 
-    if (!this.isControlled && nextIsControlled) {
-      throw new Error(
-        "You can't switch <InstantSearch> from being uncontrolled to controlled"
-      );
-    }
-
-    if (this.isControlled && !nextIsControlled) {
+    if (prevIsControlled && !this.state.isControlled) {
       throw new Error(
         "You can't switch <InstantSearch> from being controlled to uncontrolled"
       );
     }
 
-    /*
-     * Clear cache when `refresh` changes to `true`.
-     * Prevents users to always clear the cache on render if they forget to revert it to `false`.
-     */
-    if (this.props.refresh !== prevProps.refresh && this.props.refresh) {
-      this.aisManager.clearCache();
+    if (!prevIsControlled && this.state.isControlled) {
+      throw new Error(
+        "You can't switch <InstantSearch> from being uncontrolled to controlled"
+      );
     }
 
-    if (this.isControlled) {
-      this.aisManager.onExternalStateUpdate(this.props.searchState);
+    if (this.props.refresh !== prevProps.refresh && this.props.refresh) {
+      this.state.instantSearchManager.clearCache();
     }
 
     if (prevProps.indexName !== this.props.indexName) {
-      this.aisManager.updateIndex(this.props.indexName);
+      this.state.instantSearchManager.updateIndex(this.props.indexName);
     }
 
     if (prevProps.searchClient !== this.props.searchClient) {
-      this.aisManager.updateClient(this.props.searchClient);
+      this.state.instantSearchManager.updateClient(this.props.searchClient);
     }
   }
 
   componentWillUnmount() {
     this.isUnmounting = true;
-    this.aisManager.skipSearch();
+    this.state.instantSearchManager.skipSearch();
   }
 
   createHrefForState(searchState: SearchState) {
-    searchState = this.aisManager.transitionState(searchState);
-    return this.isControlled && this.props.createURL
+    searchState = this.state.instantSearchManager.transitionState(searchState);
+    return this.state.isControlled && this.props.createURL
       ? this.props.createURL(searchState, this.getKnownKeys())
       : '#';
   }
 
   onWidgetsInternalStateUpdate(searchState: SearchState) {
-    searchState = this.aisManager.transitionState(searchState);
+    searchState = this.state.instantSearchManager.transitionState(searchState);
 
     this.onSearchStateChange(searchState);
 
-    if (!this.isControlled) {
-      this.aisManager.onExternalStateUpdate(searchState);
+    if (!this.state.isControlled) {
+      this.state.instantSearchManager.onExternalStateUpdate(searchState);
     }
   }
 
@@ -244,11 +259,11 @@ class InstantSearch extends Component<Props, State> {
   }
 
   onSearchForFacetValues(searchState) {
-    this.aisManager.onSearchForFacetValues(searchState);
+    this.state.instantSearchManager.onSearchForFacetValues(searchState);
   }
 
   getKnownKeys() {
-    return this.aisManager.getWidgetsIds();
+    return this.state.instantSearchManager.getWidgetsIds();
   }
 
   render() {
