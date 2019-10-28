@@ -5,7 +5,7 @@
     ":automergePr",
     "algolia"
   ],
-  "rebaseStalePRs": false,
+  "rebaseStalePrs": false,
   "ignorePresets": [
     ":ignoreModulesAndTests"
   ],
