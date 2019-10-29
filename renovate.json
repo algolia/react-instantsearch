@@ -2,8 +2,10 @@
   "extends": [
     "config:js-lib",
     ":automergeMinor",
-    ":automergePr"
+    ":automergePr",
+    "algolia"
   ],
+  "rebaseStalePrs": false,
   "ignorePresets": [
     ":ignoreModulesAndTests"
   ],

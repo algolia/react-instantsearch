@@ -19,17 +19,18 @@
     "babel-jest": "24.9.0",
     "babel-loader": "8.0.6",
     "jest": "24.9.0",
-    "nodemon": "1.19.1",
+    "nodemon": "1.19.3",
     "react-test-renderer": "16.8.6",
     "webpack": "4.40.2",
     "webpack-cli": "3.3.7",
     "webpack-node-externals": "1.7.2"
   },
   "dependencies": {
+    "algoliasearch": "3.32.1",
     "express": "4.17.1",
     "prop-types": "15.6.0",
     "react": "16.8.6",
     "react-dom": "16.8.6",
-    "react-instantsearch-dom": "5.7.0"
+    "react-instantsearch-dom": "6.0.0"
   }
 }
