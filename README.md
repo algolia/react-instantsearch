@@ -58,6 +58,8 @@ const App = () => (
     <Hits />
   </InstantSearch>
 );
+
+ReactDOM.render(<App />, document.querySelector('#container'))
 ```
 
 <p align="center">
