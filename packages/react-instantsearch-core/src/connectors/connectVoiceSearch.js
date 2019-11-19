@@ -50,21 +50,24 @@ function getCurrentRefinementAdditional(props, searchState, context) {
 function refine(props, searchState, nextRefinement, context) {
   const id = getId();
   const voiceParams = getAdditionalId();
-
+  const queryLanguages = props.language
+    ? { queryLanguages: [props.language.split('-')[0]] }
+    : {};
+  const additionalQueryParameters =
+    typeof props.additionalQueryParameters === 'function'
+      ? {
+          ignorePlurals: true,
+          removeStopWords: true,
+          optionalWords: nextRefinement,
+          ...props.additionalQueryParameters({ query: nextRefinement }),
+        }
+      : {};
   const nextValue = {
     [id]: nextRefinement,
-    [voiceParams]:
-      typeof props.additionalQueryParameters === 'function'
-        ? {
-            queryLanguages: props.language
-              ? [props.language.split('-')[0]]
-              : undefined,
-            ignorePlurals: true,
-            removeStopWords: true,
-            optionalWords: nextRefinement,
-            ...props.additionalQueryParameters({ query: nextRefinement }),
-          }
-        : {},
+    [voiceParams]: {
+      ...queryLanguages,
+      ...additionalQueryParameters,
+    },
   };
   const resetPage = true;
   return refineValue(searchState, nextValue, context, resetPage);
