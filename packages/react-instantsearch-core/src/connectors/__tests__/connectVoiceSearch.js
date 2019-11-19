@@ -30,6 +30,15 @@ describe('connectVoiceSearch', () => {
         });
       });
 
+      it('refines and get additionalVoiceParameters', () => {
+        const { additionalVoiceParameters } = connect.refine(
+          { contextValue },
+          {},
+          'abc'
+        );
+        expect(additionalVoiceParameters).toEqual(expect.objectContaining({}));
+      });
+
       it('refines with additionalQueryParameters', () => {
         const props = {
           contextValue,
