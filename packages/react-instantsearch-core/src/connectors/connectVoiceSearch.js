@@ -129,7 +129,7 @@ export default createConnector({
   },
 
   getMetadata(props, searchState) {
-    const id = getId(props);
+    const id = getId();
     const currentRefinement = getCurrentRefinementQuery(props, searchState, {
       ais: props.contextValue,
       multiIndexContext: props.indexContextValue,
