@@ -36,7 +36,7 @@ function inferPayload({
 
   if (!queryID) {
     throw new Error(`Could not infer \`queryID\`. Ensure \`clickAnalytics: true\` was added with the Configure widget.
-See: https://alg.li/lNiZZ7`);
+See: https://alg.li/VpPpLt`);
   }
 
   switch (method) {
