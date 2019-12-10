@@ -8,6 +8,10 @@ export { default as translatable } from './core/translatable';
 
 // Widgets
 export { default as Configure } from './widgets/Configure';
+export {
+  // eslint-disable-next-line @typescript-eslint/camelcase
+  default as EXPERIMENTAL_ConfigureRelatedItems,
+} from './widgets/ConfigureRelatedItems';
 export { default as QueryRuleContext } from './widgets/QueryRuleContext';
 export { default as Index } from './widgets/Index';
 export { default as InstantSearch } from './widgets/InstantSearch';
@@ -18,6 +22,10 @@ export {
 } from './connectors/connectAutoComplete';
 export { default as connectBreadcrumb } from './connectors/connectBreadcrumb';
 export { default as connectConfigure } from './connectors/connectConfigure';
+export {
+  // eslint-disable-next-line @typescript-eslint/camelcase
+  default as EXPERIMENTAL_connectConfigureRelatedItems,
+} from './connectors/connectConfigureRelatedItems';
 export {
   default as connectCurrentRefinements,
 } from './connectors/connectCurrentRefinements';

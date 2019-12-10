@@ -3,6 +3,8 @@ export { Index } from 'react-instantsearch-dom';
 export { Breadcrumb } from 'react-instantsearch-dom';
 export { ClearRefinements } from 'react-instantsearch-dom';
 export { Configure } from 'react-instantsearch-dom';
+// eslint-disable-next-line @typescript-eslint/camelcase
+export { EXPERIMENTAL_ConfigureRelatedItems } from 'react-instantsearch-dom';
 export { CurrentRefinements } from 'react-instantsearch-dom';
 export { HierarchicalMenu } from 'react-instantsearch-dom';
 export { Highlight } from 'react-instantsearch-dom';
