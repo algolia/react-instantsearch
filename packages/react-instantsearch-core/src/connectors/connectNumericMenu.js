@@ -199,14 +199,14 @@ export default createConnector({
     );
     searchParameters = searchParameters.addDisjunctiveFacet(attribute);
 
-    if (start) {
+    if (typeof start === 'number') {
       searchParameters = searchParameters.addNumericRefinement(
         attribute,
         '>=',
         start
       );
     }
-    if (end) {
+    if (typeof end === 'number') {
       searchParameters = searchParameters.addNumericRefinement(
         attribute,
         '<=',

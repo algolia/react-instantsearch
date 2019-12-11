@@ -279,6 +279,34 @@ describe('connectNumericMenu', () => {
         '>=': [100],
         '<=': [200],
       });
+
+      params = connect.getSearchParameters(
+        initSP,
+        { attribute: 'facet', contextValue },
+        { multiRange: { facet: '0:' } }
+      );
+      expect(params.getNumericRefinements('facet')).toEqual({
+        '>=': [0],
+      });
+
+      params = connect.getSearchParameters(
+        initSP,
+        { attribute: 'facet', contextValue },
+        { multiRange: { facet: ':0' } }
+      );
+      expect(params.getNumericRefinements('facet')).toEqual({
+        '<=': [0],
+      });
+
+      params = connect.getSearchParameters(
+        initSP,
+        { attribute: 'facet', contextValue },
+        { multiRange: { facet: '0:0' } }
+      );
+      expect(params.getNumericRefinements('facet')).toEqual({
+        '>=': [0],
+        '<=': [0],
+      });
     });
 
     it('registers its id in metadata', () => {
