@@ -72,9 +72,9 @@ function getSearchParametersFromProps(
   const optionalFilters = Object.keys(props.matchingPatterns).reduce<
     Array<string | string[]>
   >((acc, attributeName) => {
-    const attribute = props.matchingPatterns[attributeName];
+    const attributePattern = props.matchingPatterns[attributeName];
     const attributeValue = props.hit[attributeName];
-    const attributeScore = attribute.score;
+    const attributeScore = attributePattern.score;
 
     if (Array.isArray(attributeValue)) {
       return [
