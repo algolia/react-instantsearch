@@ -1,5 +1,3 @@
-/* eslint react/prop-types: 0 */
-
 import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import {

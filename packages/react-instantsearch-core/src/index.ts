@@ -9,7 +9,6 @@ export { default as translatable } from './core/translatable';
 // Widgets
 export { default as Configure } from './widgets/Configure';
 export {
-  // eslint-disable-next-line @typescript-eslint/camelcase
   default as EXPERIMENTAL_ConfigureRelatedItems,
 } from './widgets/ConfigureRelatedItems';
 export { default as QueryRuleContext } from './widgets/QueryRuleContext';
@@ -23,7 +22,6 @@ export {
 export { default as connectBreadcrumb } from './connectors/connectBreadcrumb';
 export { default as connectConfigure } from './connectors/connectConfigure';
 export {
-  // eslint-disable-next-line @typescript-eslint/camelcase
   default as EXPERIMENTAL_connectConfigureRelatedItems,
 } from './connectors/connectConfigureRelatedItems';
 export {

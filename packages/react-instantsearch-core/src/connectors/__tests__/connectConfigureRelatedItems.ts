@@ -17,7 +17,6 @@ const hit = {
     lvl1: 'TV & Home Theater > Streaming Media Players',
   },
   price: 39.99,
-  // eslint-disable-next-line @typescript-eslint/camelcase
   free_shipping: false,
   rating: 4,
   _snippetResult: {
