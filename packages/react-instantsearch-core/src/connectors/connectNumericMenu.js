@@ -13,7 +13,9 @@ function stringifyItem(item) {
   if (typeof item.start === 'undefined' && typeof item.end === 'undefined') {
     return '';
   }
-  return `${item.start ? item.start : ''}:${item.end ? item.end : ''}`;
+  const start = typeof item.start !== 'undefined' ? item.start : '';
+  const end = typeof item.end !== 'undefined' ? item.end : '';
+  return `${start}:${end}`;
 }
 
 function parseItem(value) {
