@@ -122,7 +122,7 @@ See https://www.algolia.com/doc/api-reference/api-parameters/optionalFilters/`
       // `sumOrFiltersScores`.
       // See https://github.com/algolia/algoliasearch-helper-js/pull/753
       sumOrFiltersScores: true,
-      filters: `NOT objectID:${props.hit.objectID}`,
+      facetFilters: [`objectID:-${props.hit.objectID}`],
       optionalFilters,
     })
   );
