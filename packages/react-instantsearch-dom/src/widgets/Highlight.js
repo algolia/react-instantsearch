@@ -1,4 +1,5 @@
-import { connectHighlight } from 'react-instantsearch-core';
+import { connectHits } from 'react-instantsearch-core';
+
 import Highlight from '../components/Highlight';
 
 /**
@@ -42,4 +43,4 @@ import Highlight from '../components/Highlight';
  * );
  */
 
-export default connectHighlight(Highlight);
+export default connectHits(Highlight);

@@ -1,7 +1,8 @@
-import React from 'react';
 import { connectHierarchicalMenu } from 'react-instantsearch-core';
-import PanelCallbackHandler from '../components/PanelCallbackHandler';
+import { connectBreadcrumb as originalConnectBreadcrumb } from 'react-instantsearch-dom-original';
+
 import HierarchicalMenu from '../components/HierarchicalMenu';
+import compareConnectors from '../core/compareConnectors';
 
 /**
  * The hierarchical menu lets the user browse attributes using a tree-like structure.
@@ -93,10 +94,10 @@ import HierarchicalMenu from '../components/HierarchicalMenu';
  * );
  */
 
-const HierarchicalMenuWidget = props => (
-  <PanelCallbackHandler {...props}>
-    <HierarchicalMenu {...props} />
-  </PanelCallbackHandler>
-);
+// export default compareConnectors(
+//   connectHierarchicalMenu,
+//   originalConnectBreadcrumb,
+//   HierarchicalMenu
+// );
 
-export default connectHierarchicalMenu(HierarchicalMenuWidget);
+export default connectHierarchicalMenu(HierarchicalMenu);

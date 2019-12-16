@@ -66,3 +66,26 @@ export function find<TItem = any>(
   }
   return undefined;
 }
+
+/**
+ * Retrieve the value at a path of the object:
+ *
+ * @example
+ * getPropertyByPath(
+ *   { test: { this: { function: [{ now: { everyone: true } }] } } },
+ *   'test.this.function[0].now.everyone'
+ * ); // true
+ *
+ * getPropertyByPath(
+ *   { test: { this: { function: [{ now: { everyone: true } }] } } },
+ *   ['test', 'this', 'function', 0, 'now', 'everyone']
+ * ); // true
+ *
+ * @param object Source object to query
+ * @param path either an array of properties, or a string form of the properties, separated by .
+ */
+export const getPropertyByPath = (object: object, path: string[] | string) =>
+  (Array.isArray(path)
+    ? path
+    : path.replace(/\[(\d+)]/g, '.$1').split('.')
+  ).reduce((current, key) => (current ? current[key] : undefined), object);

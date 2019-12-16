@@ -1,6 +1,5 @@
-import React from 'react';
 import { connectPagination } from 'react-instantsearch-core';
-import PanelCallbackHandler from '../components/PanelCallbackHandler';
+
 import Pagination from '../components/Pagination';
 
 /**
@@ -57,10 +56,4 @@ import Pagination from '../components/Pagination';
  * );
  */
 
-const PaginationWidget = props => (
-  <PanelCallbackHandler {...props}>
-    <Pagination {...props} />
-  </PanelCallbackHandler>
-);
-
-export default connectPagination(PaginationWidget);
+export default connectPagination(Pagination);

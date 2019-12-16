@@ -1,6 +1,5 @@
-import React from 'react';
 import { connectCurrentRefinements } from 'react-instantsearch-core';
-import PanelCallbackHandler from '../components/PanelCallbackHandler';
+
 import CurrentRefinements from '../components/CurrentRefinements';
 
 /**
@@ -45,10 +44,4 @@ import CurrentRefinements from '../components/CurrentRefinements';
  * );
  */
 
-const CurrentRefinementsWidget = props => (
-  <PanelCallbackHandler {...props}>
-    <CurrentRefinements {...props} />
-  </PanelCallbackHandler>
-);
-
-export default connectCurrentRefinements(CurrentRefinementsWidget);
+export default connectCurrentRefinements(CurrentRefinements);

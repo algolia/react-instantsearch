@@ -5,8 +5,6 @@ import { PlainSearchParameters } from 'algoliasearch-helper';
 import { MultiResponse } from 'algoliasearch';
 import instantsearch from 'instantsearch.js';
 
-import { deepEqual } from 'fast-equals/dist/fast-equals.esm';
-
 type ResultsState = {
   state: PlainSearchParameters;
   rawResults: MultiResponse;
@@ -40,7 +38,7 @@ type State = {
   instantSearchInstance: Record<string, any>;
 };
 
-export default class InstantSearch extends Component<Props, State> {
+export class InstantSearch extends Component<Props, State> {
   static defaultProps = {
     stalledSearchDelay: 200,
     refresh: false,
@@ -71,18 +69,12 @@ export default class InstantSearch extends Component<Props, State> {
     stalledSearchDelay: PropTypes.number,
   };
 
-  instantSearchInstance;
-  _change;
-
   constructor(props: Props) {
     super(props);
 
     this.instantSearchInstance = instantsearch({
       indexName: props.indexName,
       searchClient: props.searchClient,
-      initialUiState: {
-        [props.indexName]: props.searchState,
-      },
     });
 
     this.state = {
@@ -91,24 +83,7 @@ export default class InstantSearch extends Component<Props, State> {
   }
 
   componentDidMount() {
-    this.instantSearchInstance.start(this.props.searchState);
-
-    this._change = this.instantSearchInstance.helper._change;
-
-    this.instantSearchInstance.helper._change = event => {
-      this.props.onSearchStateChange(event.state);
-    };
-  }
-
-  componentDidUpdate(prevProps) {
-    if (deepEqual(this.props.searchState, prevProps.searchState)) {
-      return;
-    }
-    this._change.call(this.instantSearchInstance.helper, {
-      state: this.props.searchState,
-      isPageReset: true,
-    });
-    this.instantSearchInstance.helper.search();
+    this.instantSearchInstance.start();
   }
 
   render() {

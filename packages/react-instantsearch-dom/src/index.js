@@ -4,9 +4,7 @@ export { HIGHLIGHT_TAGS } from 'react-instantsearch-core';
 export { translatable } from 'react-instantsearch-core';
 
 // Widget
-export { Configure } from 'react-instantsearch-core';
 export { QueryRuleContext } from 'react-instantsearch-core';
-export { Index } from 'react-instantsearch-core';
 export { InstantSearch } from 'react-instantsearch-core';
 
 // Connectors
@@ -37,6 +35,8 @@ export { connectToggleRefinement } from 'react-instantsearch-core';
 
 // DOM
 export { default as Breadcrumb } from './widgets/Breadcrumb';
+export { default as Configure } from './widgets/Configure';
+export { default as Index } from './widgets/Index';
 export { default as ClearRefinements } from './widgets/ClearRefinements';
 export { default as CurrentRefinements } from './widgets/CurrentRefinements';
 export { default as HierarchicalMenu } from './widgets/HierarchicalMenu';

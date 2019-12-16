@@ -12,7 +12,7 @@ const examples = glob.sync(
 );
 
 module.exports = {
-  mode: 'production',
+  mode: 'development',
   entry: examples.reduce(
     (acc, example) => ({
       ...acc,

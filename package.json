@@ -99,6 +99,7 @@
     "jest": "24.9.0",
     "jest-watch-typeahead": "0.4.0",
     "json": "9.0.6",
+    "jsondiffpatch": "0.3.11",
     "lerna": "3.16.4",
     "lodash.orderby": "4.6.0",
     "mversion": "1.13.0",
@@ -153,5 +154,11 @@
       "path": "packages/react-instantsearch-dom-maps/dist/umd/ReactInstantSearchDOMMaps.min.js",
       "maxSize": "6 kB"
     }
-  ]
+  ],
+  "dependencies": {
+    "diff": "4.0.1",
+    "fast-equals": "2.0.0",
+    "flatted": "2.0.1",
+    "react-instantsearch-dom-original": "npm:react-instantsearch-dom"
+  }
 }

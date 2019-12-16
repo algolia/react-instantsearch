@@ -1,70 +1,26 @@
-import { omit } from '../core/utils';
+import React from 'react';
+
+import { connectConfigure } from 'instantsearch.js/es/connectors';
+
 import createConnector from '../core/createConnector';
-import {
-  refineValue,
-  getIndexId,
-  hasMultipleIndices,
-} from '../core/indexUtils';
 
-function getId() {
-  return 'configure';
-}
+export default component => {
+  const ConnectedConfigure = createConnector(connectConfigure, component);
 
-export default createConnector({
-  displayName: 'AlgoliaConfigure',
-  getProvidedProps() {
-    return {};
-  },
-  getSearchParameters(searchParameters, props) {
-    const { children, contextValue, indexContextValue, ...items } = props;
-    return searchParameters.setQueryParameters(items);
-  },
-  transitionState(props, prevSearchState, nextSearchState) {
-    const id = getId();
-    const { children, contextValue, indexContextValue, ...items } = props;
-    const propKeys = Object.keys(props);
-    const nonPresentKeys = this._props
-      ? Object.keys(this._props).filter(prop => propKeys.indexOf(prop) === -1)
-      : [];
-    this._props = props;
-    const nextValue = {
-      [id]: { ...omit(nextSearchState[id], nonPresentKeys), ...items },
+  /**
+   * Compatibility layer
+   *
+   * Ensures compatibility between InstantSearch.js connectors and react-instantsearch API
+   */
+
+  const CompatibleConnectedConfigure = props => {
+    const newProps = {
+      searchParameters: props,
     };
-    return refineValue(nextSearchState, nextValue, {
-      ais: props.contextValue,
-      multiIndexContext: props.indexContextValue,
-    });
-  },
-  cleanUp(props, searchState) {
-    const id = getId();
-    const indexId = getIndexId({
-      ais: props.contextValue,
-      multiIndexContext: props.indexContextValue,
-    });
+    return <ConnectedConfigure {...newProps} />;
+  };
 
-    const subState =
-      hasMultipleIndices({
-        ais: props.contextValue,
-        multiIndexContext: props.indexContextValue,
-      }) && searchState.indices
-        ? searchState.indices[indexId]
-        : searchState;
+  component.getProvidedProps = props => props;
 
-    const configureKeys =
-      subState && subState[id] ? Object.keys(subState[id]) : [];
-
-    const configureState = configureKeys.reduce((acc, item) => {
-      if (!props[item]) {
-        acc[item] = subState[id][item];
-      }
-      return acc;
-    }, {});
-
-    const nextValue = { [id]: configureState };
-
-    return refineValue(searchState, nextValue, {
-      ais: props.contextValue,
-      multiIndexContext: props.indexContextValue,
-    });
-  },
-});
+  return CompatibleConnectedConfigure;
+};

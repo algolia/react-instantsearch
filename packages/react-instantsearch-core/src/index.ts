@@ -16,6 +16,7 @@ export { default as InstantSearch } from './widgets/InstantSearch';
 export {
   default as connectAutoComplete,
 } from './connectors/connectAutoComplete';
+export { default as connectIndex } from './connectors/connectIndex';
 export { default as connectBreadcrumb } from './connectors/connectBreadcrumb';
 export { default as connectConfigure } from './connectors/connectConfigure';
 export {

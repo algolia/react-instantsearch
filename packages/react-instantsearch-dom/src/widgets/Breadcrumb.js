@@ -1,7 +1,8 @@
-import React from 'react';
 import { connectBreadcrumb } from 'react-instantsearch-core';
-import PanelCallbackHandler from '../components/PanelCallbackHandler';
+import { connectBreadcrumb as originalConnectBreadcrumb } from 'react-instantsearch-dom-original';
+
 import Breadcrumb from '../components/Breadcrumb';
+import compareConnectors from '../core/compareConnectors';
 
 /**
  * A breadcrumb is a secondary navigation scheme that allows the user to see where the current page
@@ -91,10 +92,10 @@ import Breadcrumb from '../components/Breadcrumb';
  * );
  */
 
-const BreadcrumbWidget = props => (
-  <PanelCallbackHandler {...props}>
-    <Breadcrumb {...props} />
-  </PanelCallbackHandler>
-);
+// export default compareConnectors(
+//   connectBreadcrumb,
+//   originalConnectBreadcrumb,
+//   Breadcrumb
+// );
 
-export default connectBreadcrumb(BreadcrumbWidget);
+export default connectBreadcrumb(Breadcrumb);

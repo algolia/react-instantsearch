@@ -1,369 +1,149 @@
-import React, { Component, ReactType } from 'react';
-import isEqual from 'fast-deep-equal';
-import { shallowEqual, getDisplayName, removeEmptyKey } from './utils';
+import React, { PureComponent } from 'react';
+
+import { getDisplayName } from './utils';
+
+import equal from 'fast-deep-equal/es6/react';
+
 import {
   InstantSearchConsumer,
-  InstantSearchContext,
+  IndexProvider,
   IndexConsumer,
-  IndexContext,
-} from './context';
+} from '../core/context';
 
-export type ConnectorDescription = {
-  displayName: string;
-  /**
-   * a function to filter the local state
-   */
-  refine?: (...args: any[]) => any;
-  /**
-   * function transforming the local state to a SearchParameters
-   */
-  getSearchParameters?: (...args: any[]) => any;
-  /**
-   * metadata of the widget (for current refinements)
-   */
-  getMetadata?: (...args: any[]) => any;
-  /**
-   * hook after the state has changed
-   */
-  transitionState?: (...args: any[]) => any;
-  /**
-   * transform the state into props passed to the wrapped component.
-   * Receives (props, widgetStates, searchState, metadata) and returns the local state.
-   */
-  getProvidedProps: (...args: any[]) => any;
-  /**
-   * Receives props and return the id that will be used to identify the widget
-   */
-  getId?: (...args: any[]) => string;
-  /**
-   * hook when the widget will unmount. Receives (props, searchState) and return a cleaned state.
-   */
-  cleanUp?: (...args: any[]) => any;
-  searchForFacetValues?: (...args: any[]) => any;
-  shouldComponentUpdate?: (...args: any[]) => boolean;
-  /**
-   * PropTypes forwarded to the wrapped component.
-   */
-  propTypes?: {}; // I can't find a definition for a propTypes object
-  defaultProps?: {};
+type State = {
+  [key: string]: any;
 };
 
-type ConnectorProps = {
-  contextValue: InstantSearchContext;
-  indexContextValue?: IndexContext;
+type Props = {
+  instantSearchInstance: any;
+  indexInstance?: any;
+  defaultRefinement: string;
 };
 
-export type ConnectedProps<TWidgetProps> = TWidgetProps & ConnectorProps;
+export default (connector, WidgetComponent) => {
+  class ConnectedWidgetComponent extends PureComponent<Props, State> {
+    static displayName = `${connector.name}(${getDisplayName(
+      WidgetComponent
+    )})`;
 
-type ConnectorState = {
-  providedProps: {};
-};
+    factory: any;
 
-/**
- * Connectors are the HOC used to transform React components
- * into InstantSearch widgets.
- * In order to simplify the construction of such connectors
- * `createConnector` takes a description and transform it into
- * a connector.
- * @param {ConnectorDescription} connectorDesc the description of the connector
- * @return {Connector} a function that wraps a component into
- * an instantsearch connected one.
- */
-export function createConnectorWithoutContext(
-  connectorDesc: ConnectorDescription
-) {
-  if (!connectorDesc.displayName) {
-    throw new Error(
-      '`createConnector` requires you to provide a `displayName` property.'
-    );
-  }
+    widget: any;
 
-  const isWidget =
-    typeof connectorDesc.getSearchParameters === 'function' ||
-    typeof connectorDesc.getMetadata === 'function' ||
-    typeof connectorDesc.transitionState === 'function';
+    constructor(props) {
+      super(props);
 
-  return (Composed: ReactType) => {
-    class Connector extends Component<ConnectorProps, ConnectorState> {
-      static displayName = `${connectorDesc.displayName}(${getDisplayName(
-        Composed
-      )})`;
-      static propTypes = connectorDesc.propTypes;
-      static defaultProps = connectorDesc.defaultProps;
+      this._updateState = this._updateState.bind(this);
 
-      unsubscribe?: () => void;
-      unregisterWidget?: () => void;
+      this.factory = connector(this._updateState);
 
-      isUnmounting = false;
+      const widgetParams = WidgetComponent.getWidgetParams
+        ? WidgetComponent.getWidgetParams(this.props)
+        : this.props;
 
-      state: ConnectorState = {
-        providedProps: this.getProvidedProps(this.props),
-      };
+      this.widget = this.factory(widgetParams);
 
-      constructor(props: ConnectorProps) {
-        super(props);
+      this._updateInitialUiState();
 
-        if (connectorDesc.getSearchParameters) {
-          this.props.contextValue.onSearchParameters(
-            connectorDesc.getSearchParameters.bind(this),
-            {
-              ais: this.props.contextValue,
-              multiIndexContext: this.props.indexContextValue,
-            },
-            this.props
-          );
-        }
+      this._getParentIndex().addWidgets([this.widget]);
+    }
+
+    componentDidUpdate(prevProps) {
+      if (equal(prevProps, this.props)) {
+        return;
       }
 
-      componentDidMount() {
-        this.unsubscribe = this.props.contextValue.store.subscribe(() => {
-          if (!this.isUnmounting) {
-            this.setState({
-              providedProps: this.getProvidedProps(this.props),
-            });
-          }
-        });
+      this._getParentIndex().removeWidgets([this.widget]);
 
-        if (isWidget) {
-          this.unregisterWidget = this.props.contextValue.widgetsManager.registerWidget(
-            this
-          );
-        }
-      }
+      const widgetParams = WidgetComponent.getWidgetParams
+        ? WidgetComponent.getWidgetParams(this.props)
+        : this.props;
 
-      shouldComponentUpdate(nextProps, nextState) {
-        if (typeof connectorDesc.shouldComponentUpdate === 'function') {
-          return connectorDesc.shouldComponentUpdate.call(
-            this,
-            this.props,
-            nextProps,
-            this.state,
-            nextState
-          );
-        }
+      this.widget = this.factory(widgetParams);
 
-        const propsEqual = shallowEqual(this.props, nextProps);
+      this._updateInitialUiState();
 
-        if (
-          this.state.providedProps === null ||
-          nextState.providedProps === null
-        ) {
-          if (this.state.providedProps === nextState.providedProps) {
-            return !propsEqual;
-          }
-          return true;
-        }
+      this._getParentIndex().addWidgets([this.widget]);
+    }
 
-        return (
-          !propsEqual ||
-          !shallowEqual(this.state.providedProps, nextState.providedProps)
-        );
-      }
+    componentWillUnmount() {
+      this._getParentIndex().removeWidgets([this.widget]);
+    }
 
-      componentDidUpdate(prevProps) {
-        if (!isEqual(prevProps, this.props)) {
-          this.setState({
-            providedProps: this.getProvidedProps(this.props),
-          });
-
-          if (isWidget) {
-            this.props.contextValue.widgetsManager.update();
-
-            if (typeof connectorDesc.transitionState === 'function') {
-              this.props.contextValue.onSearchStateChange(
-                connectorDesc.transitionState.call(
-                  this,
-                  this.props,
-                  this.props.contextValue.store.getState().widgets,
-                  this.props.contextValue.store.getState().widgets
-                )
-              );
-            }
-          }
-        }
-      }
-
-      componentWillUnmount() {
-        this.isUnmounting = true;
-
-        if (this.unsubscribe) {
-          this.unsubscribe();
-        }
-
-        if (this.unregisterWidget) {
-          this.unregisterWidget();
-
-          if (typeof connectorDesc.cleanUp === 'function') {
-            const nextState = connectorDesc.cleanUp.call(
-              this,
-              this.props,
-              this.props.contextValue.store.getState().widgets
-            );
-
-            this.props.contextValue.store.setState({
-              ...this.props.contextValue.store.getState(),
-              widgets: nextState,
-            });
-
-            this.props.contextValue.onSearchStateChange(
-              removeEmptyKey(nextState)
-            );
-          }
-        }
-      }
-
-      getProvidedProps(props) {
-        const {
-          widgets,
-          results,
-          resultsFacetValues,
-          searching,
-          searchingForFacetValues,
-          isSearchStalled,
-          metadata,
-          error,
-        } = this.props.contextValue.store.getState();
-
-        const searchResults = {
-          results,
-          searching,
-          searchingForFacetValues,
-          isSearchStalled,
-          error,
-        };
-
-        return connectorDesc.getProvidedProps.call(
-          this,
-          props,
-          widgets,
-          searchResults,
-          metadata,
-          // @MAJOR: move this attribute on the `searchResults` it doesn't
-          // makes sense to have it into a separate argument. The search
-          // flags are on the object why not the results?
-          resultsFacetValues
-        );
-      }
-
-      getSearchParameters(searchParameters) {
-        if (typeof connectorDesc.getSearchParameters === 'function') {
-          return connectorDesc.getSearchParameters.call(
-            this,
-            searchParameters,
-            this.props,
-            this.props.contextValue.store.getState().widgets
-          );
-        }
-
+    render() {
+      if (!this.state && ConnectedWidgetComponent.displayName !== 'Index') {
         return null;
       }
 
-      getMetadata(nextWidgetsState) {
-        if (typeof connectorDesc.getMetadata === 'function') {
-          return connectorDesc.getMetadata.call(
-            this,
-            this.props,
-            nextWidgetsState
-          );
-        }
-
-        return {};
-      }
-
-      transitionState(prevWidgetsState, nextWidgetsState) {
-        if (typeof connectorDesc.transitionState === 'function') {
-          return connectorDesc.transitionState.call(
-            this,
-            this.props,
-            prevWidgetsState,
-            nextWidgetsState
-          );
-        }
-
-        return nextWidgetsState;
-      }
-
-      refine = (...args) => {
-        this.props.contextValue.onInternalStateUpdate(
-          // refine will always be defined here because the prop is only given conditionally
-          connectorDesc.refine!.call(
-            this,
-            this.props,
-            this.props.contextValue.store.getState().widgets,
-            ...args
-          )
-        );
-      };
-
-      createURL = (...args) =>
-        this.props.contextValue.createHrefForState(
-          // refine will always be defined here because the prop is only given conditionally
-          connectorDesc.refine!.call(
-            this,
-            this.props,
-            this.props.contextValue.store.getState().widgets,
-            ...args
-          )
-        );
-
-      searchForFacetValues = (...args) => {
-        this.props.contextValue.onSearchForFacetValues(
-          // searchForFacetValues will always be defined here because the prop is only given conditionally
-          connectorDesc.searchForFacetValues!.call(
-            this,
-            this.props,
-            this.props.contextValue.store.getState().widgets,
-            ...args
-          )
-        );
-      };
-
-      render() {
-        const { contextValue, ...props } = this.props;
-        const { providedProps } = this.state;
-
-        if (providedProps === null) {
-          return null;
-        }
-
-        const refineProps =
-          typeof connectorDesc.refine === 'function'
-            ? { refine: this.refine, createURL: this.createURL }
-            : {};
-
-        const searchForFacetValuesProps =
-          typeof connectorDesc.searchForFacetValues === 'function'
-            ? { searchForItems: this.searchForFacetValues }
-            : {};
-
+      const renderParams = WidgetComponent.getRenderParams
+        ? WidgetComponent.getRenderParams(this.state)
+        : this.state;
+      if (ConnectedWidgetComponent.displayName === 'Index') {
         return (
-          <Composed
-            {...props}
-            {...providedProps}
-            {...refineProps}
-            {...searchForFacetValuesProps}
-          />
+          <IndexProvider value={this.widget}>
+            <WidgetComponent {...renderParams} />
+          </IndexProvider>
         );
+      } else {
+        return <WidgetComponent {...renderParams} />;
       }
     }
 
-    return Connector;
-  };
-}
+    _updateState(newState) {
+      // First synchronous call made to the widget render function in the constructor
+      // so it is correct to directly mutate the state here
+      if (!this.state) {
+        // eslint-disable-next-line react/no-direct-mutation-state
+        this.state = newState;
+        return;
+      }
+      // Subsequent calls to the render function
+      this.setState(newState);
+    }
 
-const createConnectorWithContext = (connectorDesc: ConnectorDescription) => (
-  Composed: ReactType
-) => {
-  const Connector = createConnectorWithoutContext(connectorDesc)(Composed);
+    _updateInitialUiState() {
+      if (!this.props.defaultRefinement) {
+        return;
+      }
 
-  const ConnectorWrapper: React.FC<any> = props => (
+      if (!WidgetComponent.getDefaultRefinement) {
+        console.warn(`defaultRefinement is not handled for ${connector.name}`);
+        return;
+      }
+
+      const { indexName } = this.props.instantSearchInstance;
+
+      const originalState = this.props.instantSearchInstance._initialUiState;
+
+      const defaultRefinementState = WidgetComponent.getDefaultRefinement(
+        this.props.defaultRefinement
+      );
+
+      const newState = {
+        ...originalState,
+        [indexName]: {
+          ...originalState[indexName],
+          ...defaultRefinementState,
+        },
+      };
+
+      this.props.instantSearchInstance._initialUiState = newState;
+    }
+
+    _getParentIndex() {
+      const { instantSearchInstance, indexInstance } = this.props;
+      return indexInstance || instantSearchInstance;
+    }
+  }
+
+  return props => (
     <InstantSearchConsumer>
-      {contextValue => (
+      {instantSearchInstance => (
         <IndexConsumer>
-          {indexContextValue => (
-            <Connector
-              contextValue={contextValue}
-              indexContextValue={indexContextValue}
+          {indexInstance => (
+            <ConnectedWidgetComponent
+              indexInstance={indexInstance}
+              instantSearchInstance={instantSearchInstance}
               {...props}
             />
           )}
@@ -371,8 +151,4 @@ const createConnectorWithContext = (connectorDesc: ConnectorDescription) => (
       )}
     </InstantSearchConsumer>
   );
-
-  return ConnectorWrapper;
 };
-
-export default createConnectorWithContext;
