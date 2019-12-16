@@ -68,7 +68,7 @@ describe('connectConfigure', () => {
 
       expect(searchParameters).toEqual(
         expect.objectContaining({
-          filters: 'NOT objectID:1',
+          facetFilters: ['objectID:-1'],
           sumOrFiltersScores: true,
           optionalFilters: [
             'brand:Amazon<score=3>',
@@ -103,7 +103,7 @@ describe('connectConfigure', () => {
 
       expect(searchParameters).toEqual(
         expect.objectContaining({
-          filters: 'NOT objectID:1',
+          facetFilters: ['objectID:-1'],
           sumOrFiltersScores: true,
           optionalFilters: [
             'brand:Amazon<score=3>',
@@ -159,7 +159,7 @@ describe('connectConfigure', () => {
 
       expect(searchParameters).toEqual(
         expect.objectContaining({
-          filters: 'NOT objectID:1',
+          facetFilters: ['objectID:-1'],
           sumOrFiltersScores: true,
           optionalFilters: [
             'brand:Amazon<score=3>',
@@ -194,7 +194,7 @@ describe('connectConfigure', () => {
 
       expect(searchState).toEqual({
         configure: {
-          filters: 'NOT objectID:1',
+          facetFilters: ['objectID:-1'],
           sumOrFiltersScores: true,
           optionalFilters: [
             'brand:Amazon<score=3>',
@@ -215,16 +215,16 @@ describe('connectConfigure', () => {
             brand: { score: 3 },
           },
         },
-        { configure: { facetFilters: ['categories'] } },
-        { configure: { facetFilters: ['categories'] } }
+        { configure: { facets: ['categories'] } },
+        { configure: { facets: ['categories'] } }
       );
 
       expect(searchState).toEqual({
         configure: {
-          filters: 'NOT objectID:1',
+          facetFilters: ['objectID:-1'],
           sumOrFiltersScores: true,
           optionalFilters: ['brand:Amazon<score=3>'],
-          facetFilters: ['categories'],
+          facets: ['categories'],
         },
       });
     });
@@ -260,17 +260,17 @@ describe('connectConfigure', () => {
         },
         {
           configure: {
-            filters: 'NOT objectID:1',
+            facetFilters: ['objectID:-1'],
             sumOrFiltersScores: true,
             optionalFilters: ['brand:Amazon<score=3>'],
-            facetFilters: ['categories'],
+            facets: ['categories'],
           },
         }
       );
 
       expect(searchState).toEqual({
         configure: {
-          facetFilters: ['categories'],
+          facets: ['categories'],
         },
       });
 
@@ -286,7 +286,7 @@ describe('connectConfigure', () => {
         },
         {
           configure: {
-            filters: 'NOT objectID:1',
+            facetFilters: ['objectID:-1'],
             sumOrFiltersScores: true,
             optionalFilters: ['brand:Amazon<score=3>'],
           },
@@ -330,7 +330,7 @@ describe('connectConfigure', () => {
 
       expect(searchParameters).toEqual(
         expect.objectContaining({
-          filters: 'NOT objectID:1',
+          facetFilters: ['objectID:-1'],
           sumOrFiltersScores: true,
           optionalFilters: [
             'brand:Amazon<score=3>',
@@ -365,7 +365,7 @@ describe('connectConfigure', () => {
 
       expect(searchParameters).toEqual(
         expect.objectContaining({
-          filters: 'NOT objectID:1',
+          facetFilters: ['objectID:-1'],
           sumOrFiltersScores: true,
           optionalFilters: [
             'brand:Amazon<score=3>',
@@ -421,7 +421,7 @@ describe('connectConfigure', () => {
 
       expect(searchParameters).toEqual(
         expect.objectContaining({
-          filters: 'NOT objectID:1',
+          facetFilters: ['objectID:-1'],
           sumOrFiltersScores: true,
           optionalFilters: [
             'brand:Amazon<score=3>',
@@ -458,7 +458,7 @@ describe('connectConfigure', () => {
         indices: {
           second: {
             configure: {
-              filters: 'NOT objectID:1',
+              facetFilters: ['objectID:-1'],
               sumOrFiltersScores: true,
               optionalFilters: [
                 'brand:Amazon<score=3>',
@@ -506,10 +506,10 @@ describe('connectConfigure', () => {
           indices: {
             second: {
               configure: {
-                filters: 'NOT objectID:1',
+                facetFilters: ['objectID:-1'],
                 sumOrFiltersScores: true,
                 optionalFilters: ['brand:Amazon<score=3>'],
-                facetFilters: ['categories'],
+                facets: ['categories'],
               },
             },
           },
@@ -520,7 +520,7 @@ describe('connectConfigure', () => {
         indices: {
           second: {
             configure: {
-              facetFilters: ['categories'],
+              facets: ['categories'],
             },
           },
         },
@@ -540,7 +540,7 @@ describe('connectConfigure', () => {
           indices: {
             second: {
               configure: {
-                filters: 'NOT objectID:1',
+                facetFilters: ['objectID:-1'],
                 sumOrFiltersScores: true,
                 optionalFilters: ['brand:Amazon<score=3>'],
               },
