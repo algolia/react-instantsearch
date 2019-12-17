@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import {
   Configure,
-  // eslint-disable-next-line @typescript-eslint/camelcase
   EXPERIMENTAL_ConfigureRelatedItems,
   Hits,
   Index,
