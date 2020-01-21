@@ -5,8 +5,8 @@
   "dependencies": {
     "algoliasearch": "3.35.1",
     "qs": "6.8.0",
-    "react": "16.8.6",
-    "react-dom": "16.8.6",
+    "react": "16.12.0",
+    "react-dom": "16.12.0",
     "react-instantsearch-dom": "6.2.0",
     "rheostat": "2.2.0"
   }

@@ -20,7 +20,7 @@
     "babel-loader": "8.0.6",
     "jest": "24.9.0",
     "nodemon": "1.19.3",
-    "react-test-renderer": "16.8.6",
+    "react-test-renderer": "16.12.0",
     "webpack": "4.40.2",
     "webpack-cli": "3.3.7",
     "webpack-node-externals": "1.7.2"
@@ -29,8 +29,8 @@
     "algoliasearch": "3.35.1",
     "express": "4.17.1",
     "prop-types": "15.6.0",
-    "react": "16.8.6",
-    "react-dom": "16.8.6",
+    "react": "16.12.0",
+    "react-dom": "16.12.0",
     "react-instantsearch-dom": "6.2.0"
   }
 }
