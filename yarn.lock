@@ -4536,10 +4536,10 @@ algolia-aerial@^1.5.3:
   resolved "https://registry.yarnpkg.com/algolia-aerial/-/algolia-aerial-1.5.3.tgz#c8b8ca6bc484164ffc7b36717689a424ea6bfe6c"
   integrity sha512-LZTpVlYnhqNFd+ru/Spm73omhsagiRQLmjrosa5bJ6/I9OMRp4Sb9pYZkAxcx3RSr+ZNXZqthL7rpXqMFdrnPA==
 
-algoliasearch-helper@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/algoliasearch-helper/-/algoliasearch-helper-3.0.0.tgz#830f0017408df16d47618400bed9eed00930b27b"
-  integrity sha512-urO9Yq6gMj93qfuCK5wFK250LfRSVFanJrSyOevJWgN6o6H3Km3wl04er0NaiHGZorqOyEAEU1us1aqFLO3YSA==
+algoliasearch-helper@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/algoliasearch-helper/-/algoliasearch-helper-3.1.0.tgz#f8725bd6f0d1f515955d720ccd617a3af4ac695f"
+  integrity sha512-d48U2GIsGJr/fVV+W7Z1Ud6GWLSblKQgA71M254YNtxvniKFsbI0Z6hQZ/8yodfGWHjJ4dETeb7ihGKQaXihUw==
   dependencies:
     events "^1.1.1"
 
