@@ -38,8 +38,8 @@ const sortIndexWidgetsFirst = (firstWidget, secondWidget) => {
   return 0;
 };
 
-// This function  is copy/pasted from the algoliasearch v4 API Client. Once modified,
-// consider update it also here: `serializeQueryParameters` from `@algolia/transporter`.
+// This function is copied from the algoliasearch v4 API Client. If modified,
+// consider updating it also in `serializeQueryParameters` from `@algolia/transporter`.
 function serializeQueryParameters(parameters) {
   const isObjectOrArray = value =>
     Object.prototype.toString.call(value) === '[object Object]' ||
@@ -397,7 +397,7 @@ export default function createInstantSearchManager({
     }
 
     // Algoliasearch API Client < v4
-    // Prior to client v4 we didn't had a proper API to hydrate the client
+    // Prior to client v4 we didn't have a proper API to hydrate the client
     // cache from the outside. The following code populates the cache with
     // a single-index result. You can find more information about the
     // computation of the key inside the client (see link below).
@@ -447,7 +447,7 @@ export default function createInstantSearchManager({
       return;
     }
     // Algoliasearch API Client < v4
-    // Prior to client v4 we didn't had a proper API to hydrate the client
+    // Prior to client v4 we didn't have a proper API to hydrate the client
     // cache from the outside. The following code populates the cache with
     // a single-index result. You can find more information about the
     // computation of the key inside the client (see link below).
