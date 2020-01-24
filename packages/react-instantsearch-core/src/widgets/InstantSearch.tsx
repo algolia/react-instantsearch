@@ -5,7 +5,26 @@ import createInstantSearchManager from '../core/createInstantSearchManager';
 import { InstantSearchProvider, InstantSearchContext } from '../core/context';
 import { Store } from '../core/createStore';
 import { PlainSearchParameters, SearchParameters } from 'algoliasearch-helper';
-import { SearchResponse } from '@algolia/client-search';
+
+import algoliasearch, {
+  // @ts-ignore
+  Response as SearchResponseV3,
+} from 'algoliasearch';
+import {
+  SearchResponse as SearchResponseV4,
+  // @ts-ignore
+  // eslint-disable-next-line import/no-unresolved
+} from '@algolia/client-search';
+
+type DummySearchClientV4 = {
+  readonly addAlgoliaAgent: (segment: string, version?: string) => void;
+};
+
+type SearchResponse<THit> = ReturnType<
+  typeof algoliasearch
+> extends DummySearchClientV4
+  ? SearchResponseV4<THit>
+  : SearchResponseV3<THit>;
 
 interface MultiResponse<THit = any> {
   results: Array<SearchResponse<THit>>;

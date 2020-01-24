@@ -67,7 +67,12 @@ jobs:
       - save_cache: *save_yarn_cache
       - run:
           name: Install algoliasearch v3
-          command: yarn add -D -W "algoliasearch@3.35.1"
+          command: |
+            yarn remove -W @algolia/client-search
+            yarn add -W @types/algoliasearch@3.34.8 algoliasearch@3.35.1
+      - run:
+          name: Type checking
+          command: yarn type-check
       - run:
           name: Unit Tests
           command: yarn test --maxWorkers=4
