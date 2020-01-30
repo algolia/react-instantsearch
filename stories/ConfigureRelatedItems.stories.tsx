@@ -66,12 +66,12 @@ stories.add('with optionalFilters', () => (
       matchingPatterns: {
         sport_en: { score: 2 },
         nature_id_en: { score: 1 },
-        gender_id_en: { score: 3 },
+        gender_id_en: { score: 2 },
       },
     }}
   />
 ));
-stories.add('with personalization', () => (
+stories.add('with personalization 1', () => (
   <ConfigureRelatedItemsExample
     relatedItemsConfig={{
       hit: baseHit,
@@ -86,20 +86,54 @@ stories.add('with personalization', () => (
     }}
   />
 ));
-stories.add('with optionaFilters and personalization', () => (
+stories.add('with personalization 2', () => (
+  <ConfigureRelatedItemsExample
+    relatedItemsConfig={{
+      hit: baseHit,
+      matchingPatterns: {},
+      transformSearchParameters: searchParameters => {
+        return {
+          ...searchParameters,
+          enablePersonalization: true,
+          userToken: 'anonymous-93595985-5820-45de-ac62-0ab34ba6a4b5',
+        };
+      },
+    }}
+  />
+));
+stories.add('with optionaFilters and personalization 1', () => (
   <ConfigureRelatedItemsExample
     relatedItemsConfig={{
       hit: baseHit,
       matchingPatterns: {
         sport_en: { score: 2 },
         nature_id_en: { score: 1 },
-        gender_id_en: { score: 3 },
+        gender_id_en: { score: 2 },
       },
       transformSearchParameters: searchParameters => {
         return {
           ...searchParameters,
           enablePersonalization: true,
           userToken: 'anonymous-4c418333-3964-4f7d-ae27-02ea7729c439',
+        };
+      },
+    }}
+  />
+));
+stories.add('with optionaFilters and personalization 2', () => (
+  <ConfigureRelatedItemsExample
+    relatedItemsConfig={{
+      hit: baseHit,
+      matchingPatterns: {
+        sport_en: { score: 2 },
+        nature_id_en: { score: 1 },
+        gender_id_en: { score: 2 },
+      },
+      transformSearchParameters: searchParameters => {
+        return {
+          ...searchParameters,
+          enablePersonalization: true,
+          userToken: 'anonymous-93595985-5820-45de-ac62-0ab34ba6a4b5',
         };
       },
     }}
