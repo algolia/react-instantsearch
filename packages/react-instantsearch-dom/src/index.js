@@ -4,6 +4,7 @@ export { HIGHLIGHT_TAGS } from 'react-instantsearch-core';
 export { translatable } from 'react-instantsearch-core';
 
 // Widget
+export { ExperimentalConfigureRelatedItems } from 'react-instantsearch-core';
 export { QueryRuleContext } from 'react-instantsearch-core';
 export { InstantSearch } from 'react-instantsearch-core';
 
@@ -11,6 +12,9 @@ export { InstantSearch } from 'react-instantsearch-core';
 export { connectAutoComplete } from 'react-instantsearch-core';
 export { connectBreadcrumb } from 'react-instantsearch-core';
 export { connectConfigure } from 'react-instantsearch-core';
+export {
+  EXPERIMENTAL_connectConfigureRelatedItems,
+} from 'react-instantsearch-core';
 export { connectCurrentRefinements } from 'react-instantsearch-core';
 export { connectGeoSearch } from 'react-instantsearch-core';
 export { connectHierarchicalMenu } from 'react-instantsearch-core';
@@ -68,3 +72,8 @@ export { createClassNames } from './core/utils';
 
 // voiceSearchHelper
 export { default as createVoiceSearchHelper } from './lib/voiceSearchHelper';
+
+// insights
+export {
+  default as getInsightsAnonymousUserToken,
+} from './core/getInsightsAnonymousUserToken';

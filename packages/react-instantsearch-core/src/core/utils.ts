@@ -51,6 +51,18 @@ export const removeEmptyKey = (obj: object) => {
   return obj;
 };
 
+export const removeEmptyArraysFromObject = (obj: object) => {
+  Object.keys(obj).forEach(key => {
+    const value = obj[key];
+
+    if (Array.isArray(value) && value.length === 0) {
+      delete obj[key];
+    }
+  });
+
+  return obj;
+};
+
 export function addAbsolutePositions(hits, hitsPerPage, page) {
   return hits.map((hit, index) => ({
     ...hit,
@@ -162,4 +174,8 @@ export function isEqual(first: any, second: any): boolean {
   }
 
   return true;
+}
+
+export function getObjectType(object: unknown): string {
+  return Object.prototype.toString.call(object).slice(8, -1);
 }

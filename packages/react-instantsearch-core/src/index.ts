@@ -8,6 +8,9 @@ export { default as translatable } from './core/translatable';
 
 // Widgets
 export { default as Configure } from './widgets/Configure';
+export {
+  default as ExperimentalConfigureRelatedItems,
+} from './widgets/ConfigureRelatedItems';
 export { default as QueryRuleContext } from './widgets/QueryRuleContext';
 export { default as Index } from './widgets/Index';
 export { default as InstantSearch } from './widgets/InstantSearch';
@@ -19,6 +22,9 @@ export {
 export { default as connectIndex } from './connectors/connectIndex';
 export { default as connectBreadcrumb } from './connectors/connectBreadcrumb';
 export { default as connectConfigure } from './connectors/connectConfigure';
+export {
+  default as EXPERIMENTAL_connectConfigureRelatedItems,
+} from './connectors/connectConfigureRelatedItems';
 export {
   default as connectCurrentRefinements,
 } from './connectors/connectCurrentRefinements';

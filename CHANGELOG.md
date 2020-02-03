@@ -1,3 +1,45 @@
+# [6.3.0](https://github.com/algolia/react-instantsearch/compare/v6.2.0...v6.3.0) (2020-01-30)
+
+
+### Features
+
+* **algoliasearch:** add support for algoliasearch v4 ([#2890](https://github.com/algolia/react-instantsearch/issues/2890)) ([c6c7382](https://github.com/algolia/react-instantsearch/commit/c6c7382))
+
+
+
+# [6.2.0](https://github.com/algolia/react-instantsearch/compare/v6.1.0...v6.2.0) (2020-01-20)
+
+
+### Bug Fixes
+
+* **deps:** update dependency algoliasearch to v3.35.1 ([#2802](https://github.com/algolia/react-instantsearch/issues/2802)) ([cfb91f0](https://github.com/algolia/react-instantsearch/commit/cfb91f0))
+* **widgets:** rename `ExperimentalConfigureRelatedItems` compon… ([#2891](https://github.com/algolia/react-instantsearch/issues/2891)) ([b910df2](https://github.com/algolia/react-instantsearch/commit/b910df2))
+
+
+### Features
+
+* **insights:** add getInsightsAnonymousUserToken helper ([#2887](https://github.com/algolia/react-instantsearch/issues/2887)) ([b5fe4f7](https://github.com/algolia/react-instantsearch/commit/b5fe4f7))
+* **widgets:** introduce `ConfigureRelatedItems` as experimental ([#2880](https://github.com/algolia/react-instantsearch/issues/2880)) ([923cd43](https://github.com/algolia/react-instantsearch/commit/923cd43))
+
+
+
+# [6.1.0](https://github.com/algolia/react-instantsearch/compare/v6.0.0...v6.1.0) (2019-12-17)
+
+
+### Bug Fixes
+
+* **connectNumericMenu:** support numeric refinement 0 ([#2882](https://github.com/algolia/react-instantsearch/issues/2882)) ([30bd9fd](https://github.com/algolia/react-instantsearch/commit/30bd9fd))
+* **deps:** update dependency next to v9.1.1 ([9d49d33](https://github.com/algolia/react-instantsearch/commit/9d49d33))
+* **helper:** rely on stable version of algoliasearch-helper ([#2871](https://github.com/algolia/react-instantsearch/issues/2871)) ([e3531a1](https://github.com/algolia/react-instantsearch/commit/e3531a1))
+
+
+### Features
+
+* **insights:** show an error when 'clickAnalytics: true' is missing. ([#2877](https://github.com/algolia/react-instantsearch/issues/2877)) ([621656a](https://github.com/algolia/react-instantsearch/commit/621656a))
+* **voice:** add additionalQueryParameters ([#2366](https://github.com/algolia/react-instantsearch/issues/2366)) ([3a45b2c](https://github.com/algolia/react-instantsearch/commit/3a45b2c))
+
+
+
 # [6.0.0](https://github.com/algolia/react-instantsearch/compare/v6.0.0-beta.2...v6.0.0) (2019-10-28)
 
 

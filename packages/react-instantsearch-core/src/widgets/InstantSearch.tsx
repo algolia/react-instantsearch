@@ -2,10 +2,9 @@ import React, { Component, Children } from 'react';
 import PropTypes from 'prop-types';
 import { InstantSearchProvider } from '../core/context';
 import { PlainSearchParameters } from 'algoliasearch-helper';
-import { MultiResponse } from 'algoliasearch';
 import instantsearch from 'instantsearch.js';
-
 import { deepEqual } from 'fast-equals/dist/fast-equals.esm';
+import { MultiResponse } from '../types/algoliasearch';
 
 type ResultsState = {
   state: PlainSearchParameters;
