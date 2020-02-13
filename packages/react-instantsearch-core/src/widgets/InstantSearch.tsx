@@ -1,7 +1,7 @@
 import React, { Component, Children } from 'react';
 import PropTypes from 'prop-types';
 import { InstantSearchProvider } from '../core/context';
-import { PlainSearchParameters } from 'algoliasearch-helper';
+import { PlainSearchParameters, SearchResults } from 'algoliasearch-helper';
 import instantsearch from 'instantsearch.js';
 import { deepEqual } from 'fast-equals/dist/fast-equals.esm';
 import { MultiResponse } from '../types/algoliasearch';
@@ -79,14 +79,22 @@ export default class InstantSearch extends Component<Props, State> {
     this.instantSearchInstance = instantsearch({
       indexName: props.indexName,
       searchClient: props.searchClient,
-      initialUiState: {
-        [props.indexName]: props.searchState,
-      },
     });
 
     this.state = {
       instantSearchInstance: this.instantSearchInstance,
     };
+
+    if (!this.instantSearchInstance.started) {
+      this.instantSearchInstance.start(props.searchState);
+    }
+    if (props.resultsState) {
+      this.instantSearchInstance.helper.lastResults = new SearchResults(
+        props.resultsState.state,
+        props.resultsState.rawResults
+      );
+      this.instantSearchInstance.helper.state = props.resultsState.state;
+    }
   }
 
   componentDidMount() {

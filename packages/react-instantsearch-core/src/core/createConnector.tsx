@@ -30,6 +30,8 @@ export default (connector, WidgetComponent) => {
 
     widget: any;
 
+    mounted: boolean = false;
+
     constructor(props) {
       super(props);
 
@@ -46,6 +48,34 @@ export default (connector, WidgetComponent) => {
       this._updateInitialUiState();
 
       this._getParentIndex().addWidgets([this.widget]);
+
+      if (
+        typeof window !== 'undefined' ||
+        !this._getParentIndex().helper.lastResults
+      ) {
+        return;
+      }
+
+      this.widget.init({
+        state: this._getParentIndex().helper.lastResults._state,
+        helper: this._getParentIndex().helper,
+        templatesConfig: {},
+        createURL: () => '#',
+        onHistoryChange: () => {},
+        instantSearchInstance: this._getParentIndex(),
+      });
+
+      this.widget.render({
+        state: this._getParentIndex().helper.lastResults._state,
+        results: this._getParentIndex().helper.lastResults,
+        helper: this._getParentIndex().helper,
+        templatesConfig: {},
+        createURL: () => '#',
+        instantSearchInstance: this._getParentIndex(),
+        searchMetadata: {
+          isSearchStalled: false,
+        },
+      });
     }
 
     componentDidUpdate(prevProps) {
@@ -68,12 +98,15 @@ export default (connector, WidgetComponent) => {
 
     componentWillUnmount() {
       this._getParentIndex().removeWidgets([this.widget]);
+      this.mounted = false;
     }
 
     render() {
       if (!this.state && ConnectedWidgetComponent.displayName !== 'Index') {
         return null;
       }
+
+      this.mounted = true;
 
       const renderParams = WidgetComponent.getRenderParams
         ? WidgetComponent.getRenderParams(this.state)
@@ -92,7 +125,7 @@ export default (connector, WidgetComponent) => {
     _updateState(newState) {
       // First synchronous call made to the widget render function in the constructor
       // so it is correct to directly mutate the state here
-      if (!this.state) {
+      if (!this.mounted) {
         // eslint-disable-next-line react/no-direct-mutation-state
         this.state = newState;
         return;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import algoliasearchHelper from 'algoliasearch-helper';
+import algoliasearchHelper, { SearchParameters } from 'algoliasearch-helper';
 import { version, HIGHLIGHT_TAGS } from 'react-instantsearch-core';
 
 const hasMultipleIndices = context => context && context.multiIndexContext;
@@ -59,8 +59,8 @@ const getSearchParameters = (indexName, searchParameters) => {
   };
 };
 
-const singleIndexSearch = (helper, parameters) =>
-  helper.searchOnce(parameters).then(res => ({
+const singleIndexSearch = helper =>
+  helper.searchOnce().then(res => ({
     rawResults: res.content._rawResults,
     state: res.content._state,
   }));
@@ -135,21 +135,23 @@ export const findResultsState = function(App, props) {
     searchParameters
   );
 
-  const helper = algoliasearchHelper(searchClient, sharedParameters.index);
+  const helper = algoliasearchHelper(searchClient, indexName, {
+    ...props.searchState,
+  });
 
   if (typeof searchClient.addAlgoliaAgent === 'function') {
     searchClient.addAlgoliaAgent(`react-instantsearch-server (${version})`);
   }
 
   if (Object.keys(derivedParameters).length === 0) {
-    return singleIndexSearch(helper, sharedParameters);
+    return singleIndexSearch(helper, new SearchParameters(props.searchState));
   }
 
   return multiIndexSearch(
     indexName,
     searchClient,
     helper,
-    sharedParameters,
+    new SearchParameters(props.searchState),
     derivedParameters
   );
 };

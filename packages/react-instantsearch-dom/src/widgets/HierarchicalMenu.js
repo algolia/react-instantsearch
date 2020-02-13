@@ -1,8 +1,6 @@
 import { connectHierarchicalMenu } from 'react-instantsearch-core';
-import { connectBreadcrumb as originalConnectBreadcrumb } from 'react-instantsearch-dom-original';
 
 import HierarchicalMenu from '../components/HierarchicalMenu';
-import compareConnectors from '../core/compareConnectors';
 
 /**
  * The hierarchical menu lets the user browse attributes using a tree-like structure.
@@ -93,11 +91,5 @@ import compareConnectors from '../core/compareConnectors';
  *   </InstantSearch>
  * );
  */
-
-// export default compareConnectors(
-//   connectHierarchicalMenu,
-//   originalConnectBreadcrumb,
-//   HierarchicalMenu
-// );
 
 export default connectHierarchicalMenu(HierarchicalMenu);
