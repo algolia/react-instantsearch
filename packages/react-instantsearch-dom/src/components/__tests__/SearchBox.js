@@ -297,12 +297,9 @@ describe('SearchBox', () => {
   });
 
   it('should point created refs to its input element', () => {
-    let inputRef = React.createRef();
+    const inputRef = React.createRef();
     const wrapper = mount(
-      <SearchBox
-        refine={() => null}
-        inputRef={inputRef}
-      />
+      <SearchBox refine={() => null} inputRef={inputRef} />
     );
 
     const refSpy = jest.spyOn(inputRef.current, 'focus');
