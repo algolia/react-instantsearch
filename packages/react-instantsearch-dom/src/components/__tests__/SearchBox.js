@@ -174,7 +174,7 @@ describe('SearchBox', () => {
       <SearchBox
         refine={() => null}
         focusShortcuts={['s', 84]}
-        __inputRef={node => {
+        inputRef={node => {
           input = node;
         }}
       />
@@ -294,5 +294,25 @@ describe('SearchBox', () => {
     expect(refine).toHaveBeenCalledWith('');
     expect(wrapper.instance().input.focus).toHaveBeenCalled();
     expect(wrapper.state()).toEqual({ query: '' });
+  });
+
+  it('should provide a ref to its input element', () => {
+    let inputRef;
+    const wrapper = mount(
+      <SearchBox
+        refine={() => null}
+        inputRef={ref => {
+          inputRef = ref;
+        }}
+      />
+    );
+
+    const refSpy = jest.spyOn(inputRef, 'focus');
+
+    // Trigger input.focus()
+    wrapper.find('form').simulate('reset');
+
+    expect(refSpy).toHaveBeenCalled();
+    expect(inputRef.tagName).toEqual('INPUT');
   });
 });
