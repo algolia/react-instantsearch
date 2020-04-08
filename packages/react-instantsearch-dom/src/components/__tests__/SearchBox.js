@@ -296,7 +296,25 @@ describe('SearchBox', () => {
     expect(wrapper.state()).toEqual({ query: '' });
   });
 
-  it('should provide a ref to its input element', () => {
+  it('should point created refs to its input element', () => {
+    let inputRef = React.createRef();
+    const wrapper = mount(
+      <SearchBox
+        refine={() => null}
+        inputRef={inputRef}
+      />
+    );
+
+    const refSpy = jest.spyOn(inputRef.current, 'focus');
+
+    // Trigger input.focus()
+    wrapper.find('form').simulate('reset');
+
+    expect(refSpy).toHaveBeenCalled();
+    expect(inputRef.current.tagName).toEqual('INPUT');
+  });
+
+  it('should return a ref when given a callback', () => {
     let inputRef;
     const wrapper = mount(
       <SearchBox

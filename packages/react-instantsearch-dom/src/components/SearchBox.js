@@ -82,7 +82,12 @@ class SearchBox extends Component {
     isSearchStalled: PropTypes.bool,
     showLoadingIndicator: PropTypes.bool,
 
-    inputRef: PropTypes.func,
+    inputRef: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.shape({
+        current: PropTypes.instanceOf(HTMLInputElement),
+      }),
+    ]),
   };
 
   static defaultProps = {
@@ -132,8 +137,11 @@ class SearchBox extends Component {
 
   onInputMount = input => {
     this.input = input;
-    if (this.props.inputRef) {
+    if (!this.props.inputRef) return;
+    if (typeof this.props.inputRef === 'function') {
       this.props.inputRef(input);
+    } else {
+      this.props.inputRef.current = input;
     }
   };
 
