@@ -84,9 +84,7 @@ class SearchBox extends Component {
 
     inputRef: PropTypes.oneOfType([
       PropTypes.func,
-      PropTypes.shape({
-        current: PropTypes.instanceOf(HTMLInputElement),
-      }),
+      PropTypes.exact({ current: PropTypes.object }),
     ]),
   };
 
