@@ -43,7 +43,12 @@ class Panel extends Component {
         {header && <div className={cx('header')}>{header}</div>}
 
         <div className={cx('body')}>
-          <PanelProvider value={this.setCanRefine}>{children}</PanelProvider>
+          {React.Children.map(children, child => {
+            if (!child.type || typeof child.type === 'string') return child;
+            return React.cloneElement(child, {
+              setCanRefine: this.setCanRefine,
+            });
+          })}
         </div>
 
         {footer && <div className={cx('footer')}>{footer}</div>}

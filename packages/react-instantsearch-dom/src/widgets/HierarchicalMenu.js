@@ -1,6 +1,4 @@
-import React from 'react';
 import { connectHierarchicalMenu } from 'react-instantsearch-core';
-import PanelCallbackHandler from '../components/PanelCallbackHandler';
 import HierarchicalMenu from '../components/HierarchicalMenu';
 
 /**
@@ -93,10 +91,4 @@ import HierarchicalMenu from '../components/HierarchicalMenu';
  * );
  */
 
-const HierarchicalMenuWidget = props => (
-  <PanelCallbackHandler {...props}>
-    <HierarchicalMenu {...props} />
-  </PanelCallbackHandler>
-);
-
-export default connectHierarchicalMenu(HierarchicalMenuWidget);
+export default connectHierarchicalMenu(HierarchicalMenu);

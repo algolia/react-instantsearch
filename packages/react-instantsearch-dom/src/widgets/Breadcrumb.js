@@ -1,6 +1,4 @@
-import React from 'react';
 import { connectBreadcrumb } from 'react-instantsearch-core';
-import PanelCallbackHandler from '../components/PanelCallbackHandler';
 import Breadcrumb from '../components/Breadcrumb';
 
 /**
@@ -91,10 +89,4 @@ import Breadcrumb from '../components/Breadcrumb';
  * );
  */
 
-const BreadcrumbWidget = props => (
-  <PanelCallbackHandler {...props}>
-    <Breadcrumb {...props} />
-  </PanelCallbackHandler>
-);
-
-export default connectBreadcrumb(BreadcrumbWidget);
+export default connectBreadcrumb(Breadcrumb);

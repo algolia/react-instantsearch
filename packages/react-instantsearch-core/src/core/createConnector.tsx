@@ -51,12 +51,15 @@ export type ConnectorDescription = {
 type ConnectorProps = {
   contextValue: InstantSearchContext;
   indexContextValue?: IndexContext;
+  setCanRefine: (canRefine: boolean) => void;
 };
 
 export type ConnectedProps<TWidgetProps> = TWidgetProps & ConnectorProps;
 
 type ConnectorState = {
-  providedProps: {};
+  providedProps: {
+    [key: string]: any;
+  };
 };
 
 /**
@@ -160,7 +163,7 @@ export function createConnectorWithoutContext(
         );
       }
 
-      componentDidUpdate(prevProps) {
+      componentDidUpdate(prevProps, prevState) {
         if (!isEqual(prevProps, this.props)) {
           this.setState({
             providedProps: this.getProvidedProps(this.props),
@@ -180,6 +183,15 @@ export function createConnectorWithoutContext(
               );
             }
           }
+        }
+
+        if (
+          typeof this.props.setCanRefine === 'function' &&
+          prevState.providedProps &&
+          prevState.providedProps.canRefine !== this.state.providedProps &&
+          this.state.providedProps.canRefine
+        ) {
+          this.props.setCanRefine(this.state.providedProps.canRefine);
         }
       }
 
