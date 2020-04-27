@@ -62,7 +62,12 @@ class Provider extends Component {
     const { google } = this.props;
 
     const latLngBounds = hits.reduce(
-      (acc, hit) => acc.extend(hit._geoloc),
+      (acc, hit) => {
+        if (!hit._geoloc || (Array.isArray(hit._geoloc) && hit._geoloc.lenght === 0) return acc;
+
+        const _geoloc = Array.isArray(hit._geoloc) ? hit._geoloc[0] : hit._geoloc;
+        return acc.extend(_geoloc);
+      },
       new google.maps.LatLngBounds()
     );
 
