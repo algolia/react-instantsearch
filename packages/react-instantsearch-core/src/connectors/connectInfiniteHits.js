@@ -38,12 +38,12 @@ function getInMemoryCache() {
   let cachedHits = undefined;
   let cachedState = undefined;
   return {
-    read: ({ state }) => {
+    read({ state }) {
       return isEqual(cachedState, getStateWithoutPage(state))
         ? cachedHits
         : null;
     },
-    write: ({ state, hits }) => {
+    write({ state, hits }) {
       cachedState = getStateWithoutPage(state);
       cachedHits = hits;
     },
