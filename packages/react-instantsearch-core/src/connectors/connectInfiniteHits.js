@@ -71,6 +71,11 @@ export default createConnector({
 
     this._prevState = this._prevState || {};
 
+    const cache = props.cache || getInMemoryCache();
+    if (this._cachedHits === undefined) {
+      this._cachedHits = cache.read({ state: searchState }) || {};
+    }
+
     if (!results) {
       return {
         hits: [],
@@ -96,13 +101,8 @@ export default createConnector({
       results.queryID
     );
 
-    const cache = props.cache || getInMemoryCache();
-    const stateForCache = results._state || {};
-    if (
-      this._cachedHits === undefined ||
-      !isEqual(currentState, this._prevState)
-    ) {
-      this._cachedHits = cache.read({ state: stateForCache }) || {};
+    if (!isEqual(currentState, this._prevState)) {
+      this._cachedHits = cache.read({ state: searchState }) || {};
     }
     if (this._cachedHits[page] === undefined) {
       this._cachedHits[page] = hitsWithPositionsAndQueryID;
