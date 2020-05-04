@@ -106,7 +106,7 @@ export default createConnector({
     }
     if (this._cachedHits[page] === undefined) {
       this._cachedHits[page] = hitsWithPositionsAndQueryID;
-      cache.write({ state: stateForCache, hits: this._cachedHits });
+      cache.write({ state: searchState, hits: this._cachedHits });
     }
 
     this._prevState = currentState;
