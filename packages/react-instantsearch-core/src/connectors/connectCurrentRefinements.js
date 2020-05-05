@@ -21,29 +21,76 @@ export default createConnector({
   },
 
   getProvidedProps(props, searchState, searchResults, metadata) {
-    const items = metadata.reduce((res, meta) => {
-      if (typeof meta.items !== 'undefined') {
-        if (!props.clearsQuery && meta.id === 'query') {
-          return res;
-        } else {
-          if (
-            props.clearsQuery &&
-            meta.id === 'query' &&
-            meta.items[0].currentRefinement === ''
-          ) {
+    let items;
+    if (metadata.length > 0) {
+      items = metadata.reduce((res, meta) => {
+        if (typeof meta.items !== 'undefined') {
+          if (!props.clearsQuery && meta.id === 'query') {
             return res;
+          } else {
+            if (
+              props.clearsQuery &&
+              meta.id === 'query' &&
+              meta.items[0].currentRefinement === ''
+            ) {
+              return res;
+            }
+            return res.concat(
+              meta.items.map(item => ({
+                ...item,
+                id: meta.id,
+                index: meta.index,
+              }))
+            );
           }
-          return res.concat(
-            meta.items.map(item => ({
-              ...item,
-              id: meta.id,
-              index: meta.index,
-            }))
-          );
         }
-      }
-      return res;
-    }, []);
+        return res;
+      }, []);
+    } else {
+      // custom handling for empty metadata, falling back to search state
+      // metadata is empty on first render (so also on server)
+      items = Object.keys(searchState).reduce((acc, key) => {
+        const val = searchState[key];
+        if (typeof val === 'object') {
+          return acc.concat(
+            Object.keys(val).reduce((accc, attribute) => {
+              return accc.concat({
+                attribute,
+                id: attribute,
+                currentRefinement: val[attribute],
+                label: `${attribute}: `,
+                items: val[attribute].map(item => ({
+                  label: item,
+                  value() {},
+                })),
+                value() {},
+              });
+            }, [])
+          );
+        } else if (key === 'query') {
+          if (props.clearsQuery) {
+            return acc.concat([
+              {
+                currentRefinement: val,
+                id: 'query',
+                label: `query: ${val}`,
+              },
+            ]);
+          }
+          return acc;
+        } else if (key === 'page' || key === 'configure') {
+          return acc;
+        } else {
+          return acc.concat([
+            {
+              currentRefinement: val,
+              id: key,
+              label: `${key}: ${val}`,
+            },
+          ]);
+        }
+      }, []);
+    }
 
     const transformedItems = props.transformItems
       ? props.transformItems(items)

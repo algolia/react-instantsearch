@@ -42,7 +42,7 @@ server.get('/', async (_, res) => {
   );
 });
 
-server.listen(8080, () => {
+server.listen(3030, () => {
   // eslint-disable-next-line no-console
-  console.log('Listening on: http://localhost:8080');
+  console.log('Listening on: http://localhost:3030');
 });
