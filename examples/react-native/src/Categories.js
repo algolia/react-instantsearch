@@ -178,7 +178,6 @@ class Menu extends Component {
           this.props.refine(refinement.value);
           Keyboard.dismiss();
         }}
-        key={rowId}
       >
         <View style={styles.item}>
           <Text style={refinement.isRefined ? styles.itemRefined : {}}>
