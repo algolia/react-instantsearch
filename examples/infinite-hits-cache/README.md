@@ -1,4 +1,4 @@
-This example shows how to synchronize your instantsearch url if you are using react-router.
+This example shows how to use session storage to cache InfiniteHits and restore the hits and the scroll position.
 
 ## Clone the example
 
