@@ -42,7 +42,7 @@ export default function getInfiniteHitsSessionStorageCache() {
           })
         );
       } catch (error) {
-        console.error(error); // eslint-disable-line no-console
+        // do nothing
       }
     },
   };
