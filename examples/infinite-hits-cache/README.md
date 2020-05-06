@@ -3,7 +3,7 @@ This example shows how to synchronize your instantsearch url if you are using re
 ## Clone the example
 
 ```
-curl https://codeload.github.com/algolia/react-instantsearch/tar.gz/master | tar -xz --strip=2 react-instantsearch-master/examples/react-router
+curl https://codeload.github.com/algolia/react-instantsearch/tar.gz/master | tar -xz --strip=2 react-instantsearch-master/examples/infinite-hits-cache
 ```
 
 ## Start the example
