@@ -5,7 +5,7 @@ function getStateWithoutPage(state) {
   return rest;
 }
 
-const KEY = 'ais.infinitehits';
+const KEY = 'ais.infiniteHits';
 
 function hasSessionStorage() {
   return (
