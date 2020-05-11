@@ -50,7 +50,7 @@ function getInMemoryCache() {
   };
 }
 
-function flattenHits(cachedHits) {
+function extractHitsFromCachedHits(cachedHits) {
   return Object.keys(cachedHits)
     .sort()
     .reduce((acc, page) => {
@@ -86,7 +86,7 @@ export default createConnector({
 
     if (!results) {
       return {
-        hits: flattenHits(this._cachedHits),
+        hits: extractHitsFromCachedHits(this._cachedHits),
         hasPrevious: false,
         hasMore: false,
         refine: () => {},
@@ -132,7 +132,7 @@ export default createConnector({
     const refineNext = event => this.refine(event, lastReceivedPage + 1);
 
     return {
-      hits: flattenHits(this._cachedHits),
+      hits: extractHitsFromCachedHits(this._cachedHits),
       hasPrevious,
       hasMore,
       refinePrevious,
