@@ -30,7 +30,7 @@ function getCurrentRefinement(props, searchState, context) {
 }
 
 function getStateWithoutPage(state) {
-  const { page, ...rest } = state;
+  const { page, ...rest } = state || {};
   return rest;
 }
 

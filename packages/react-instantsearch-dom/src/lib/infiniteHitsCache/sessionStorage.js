@@ -1,7 +1,7 @@
 import isEqual from 'react-fast-compare';
 
 function getStateWithoutPage(state) {
-  const { page, ...rest } = state;
+  const { page, ...rest } = state || {};
   return rest;
 }
 
