@@ -81,7 +81,7 @@ jobs:
   test_integration:
     <<: *defaults
     docker:
-      - image: circleci/node:12.14.1-browsers
+      - image: circleci/node:12.14.1-browsers@sha256:e50f174a64b0cc2622bd9c3202ef2e1c3495ff281ed653da344350745ac606a2
     steps:
       - checkout
       - run: *install_yarn_version
