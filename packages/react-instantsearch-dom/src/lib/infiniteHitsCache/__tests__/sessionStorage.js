@@ -4,11 +4,12 @@ const KEY = 'ais.infiniteHits';
 
 describe('createInfiniteHitsSessionStorageCache', () => {
   let sessionStorageBackup;
-  const store = {};
+  let store = {};
   beforeAll(() => {
     sessionStorageBackup = window.sessionStorage;
   });
   beforeEach(() => {
+    store = {};
     window.sessionStorage = {
       getItem(key) {
         return store[key];
@@ -55,5 +56,27 @@ describe('createInfiniteHitsSessionStorageCache', () => {
     cache.read({ state: {} });
     expect(removeItem).toHaveBeenCalledTimes(1);
     expect(removeItem).toHaveBeenCalledWith(KEY);
+  });
+
+  it('returns null if sessionStorage.getItem() throws', () => {
+    window.sessionStorage = {
+      getItem() {
+        throw new Error();
+      },
+    };
+    const cache = createInfiniteHitsSessionStorageCache();
+    expect(cache.read({ state: {} })).toBeNull();
+  });
+
+  it('does nothing if sessionStorage.setItem() throws', () => {
+    window.sessionStorage = {
+      setItem() {
+        throw new Error();
+      },
+    };
+    const cache = createInfiniteHitsSessionStorageCache();
+    expect(() => {
+      cache.write({ state: {}, hits: [] });
+    }).not.toThrow();
   });
 });
