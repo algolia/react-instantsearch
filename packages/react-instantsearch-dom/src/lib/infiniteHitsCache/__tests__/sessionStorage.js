@@ -1,6 +1,6 @@
-import getInfiniteHitsSessionStorageCache from '../sessionStorage';
+import createInfiniteHitsSessionStorageCache from '../sessionStorage';
 
-describe('getInfiniteHitsSessionStorageCache', () => {
+describe('createInfiniteHitsSessionStorageCache', () => {
   let sessionStorageBackup;
   const store = {};
   beforeAll(() => {
@@ -21,12 +21,12 @@ describe('getInfiniteHitsSessionStorageCache', () => {
   });
 
   it('returns null initially', () => {
-    const cache = getInfiniteHitsSessionStorageCache();
+    const cache = createInfiniteHitsSessionStorageCache();
     expect(cache.read({})).toBeNull();
   });
 
   it('returns what it was assigned before', () => {
-    const cache = getInfiniteHitsSessionStorageCache();
+    const cache = createInfiniteHitsSessionStorageCache();
     const state = { q: 'hello' };
     const hits = { 1: ['a', 'b', 'c'] };
     cache.write({ state, hits });
@@ -34,7 +34,7 @@ describe('getInfiniteHitsSessionStorageCache', () => {
   });
 
   it('returns null if the state is different', () => {
-    const cache = getInfiniteHitsSessionStorageCache();
+    const cache = createInfiniteHitsSessionStorageCache();
     const state = { q: 'hello' };
     const newState = { q: 'world' };
     const hits = { 1: ['a', 'b', 'c'] };

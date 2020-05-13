@@ -79,4 +79,4 @@ export {
 } from './core/getInsightsAnonymousUserToken';
 
 // InfiniteHits Cache
-export { getInfiniteHitsSessionStorageCache } from './lib/infiniteHitsCache';
+export { createInfiniteHitsSessionStorageCache } from './lib/infiniteHitsCache';

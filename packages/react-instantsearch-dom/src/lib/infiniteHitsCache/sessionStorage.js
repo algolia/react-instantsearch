@@ -14,7 +14,7 @@ function hasSessionStorage() {
   );
 }
 
-export default function getInfiniteHitsSessionStorageCache() {
+export default function createInfiniteHitsSessionStorageCache() {
   return {
     read({ state }) {
       if (!hasSessionStorage()) {

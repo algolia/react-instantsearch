@@ -8,7 +8,7 @@ import {
   Snippet,
   Configure,
   connectInfiniteHits,
-  getInfiniteHitsSessionStorageCache,
+  createInfiniteHitsSessionStorageCache,
 } from 'react-instantsearch-dom';
 import { WrapWithHits } from './util';
 import { action } from '@storybook/addon-actions';
@@ -170,7 +170,7 @@ stories
         <Configure hitsPerPage={16} />
         <InfiniteHits
           hitComponent={Product}
-          cache={getInfiniteHitsSessionStorageCache()}
+          cache={createInfiniteHitsSessionStorageCache()}
         />
       </WrapWithHits>
     );
