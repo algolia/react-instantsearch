@@ -3,24 +3,38 @@ import createInfiniteHitsSessionStorageCache from '../sessionStorage';
 const KEY = 'ais.infiniteHits';
 
 describe('createInfiniteHitsSessionStorageCache', () => {
-  let sessionStorageBackup;
+  const originalSessionStorage = window.sessionStorage;
+  delete window.sessionStorage;
+
   let store = {};
-  beforeAll(() => {
-    sessionStorageBackup = window.sessionStorage;
+  const getItem = jest.fn(key => store[key]);
+  const setItem = jest.fn((key, value) => {
+    store[key] = value;
   });
+  const removeItem = jest.fn(key => delete store[key]);
+
+  beforeAll(() => {
+    Object.defineProperty(window, 'sessionStorage', {
+      value: {
+        getItem,
+        setItem,
+        removeItem,
+      },
+    });
+  });
+
   beforeEach(() => {
     store = {};
-    window.sessionStorage = {
-      getItem(key) {
-        return store[key];
-      },
-      setItem(key, value) {
-        store[key] = value;
-      },
-    };
   });
+
+  afterEach(() => {
+    getItem.mockClear();
+    setItem.mockClear();
+    removeItem.mockClear();
+  });
+
   afterAll(() => {
-    window.sessionStorage = sessionStorageBackup;
+    window.sessionStorage = originalSessionStorage;
   });
 
   it('returns null initially', () => {
@@ -46,12 +60,7 @@ describe('createInfiniteHitsSessionStorageCache', () => {
   });
 
   it('clears cache if fails to read', () => {
-    const getItem = jest.fn(() => '{invalid_json}');
-    const removeItem = jest.fn();
-    window.sessionStorage = {
-      getItem,
-      removeItem,
-    };
+    getItem.mockImplementation(() => '{invalid_json}');
     const cache = createInfiniteHitsSessionStorageCache();
     cache.read({ state: {} });
     expect(removeItem).toHaveBeenCalledTimes(1);
@@ -59,21 +68,17 @@ describe('createInfiniteHitsSessionStorageCache', () => {
   });
 
   it('returns null if sessionStorage.getItem() throws', () => {
-    window.sessionStorage = {
-      getItem() {
-        throw new Error();
-      },
-    };
+    getItem.mockImplementation(() => {
+      throw new Error();
+    });
     const cache = createInfiniteHitsSessionStorageCache();
     expect(cache.read({ state: {} })).toBeNull();
   });
 
   it('does nothing if sessionStorage.setItem() throws', () => {
-    window.sessionStorage = {
-      setItem() {
-        throw new Error();
-      },
-    };
+    setItem.mockImplementation(() => {
+      throw new Error();
+    });
     const cache = createInfiniteHitsSessionStorageCache();
     expect(() => {
       cache.write({ state: {}, hits: [] });
