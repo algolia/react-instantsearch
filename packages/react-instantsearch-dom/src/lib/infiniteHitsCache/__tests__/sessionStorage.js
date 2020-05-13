@@ -1,5 +1,7 @@
 import createInfiniteHitsSessionStorageCache from '../sessionStorage';
 
+const KEY = 'ais.infiniteHits';
+
 describe('createInfiniteHitsSessionStorageCache', () => {
   let sessionStorageBackup;
   const store = {};
@@ -40,5 +42,18 @@ describe('createInfiniteHitsSessionStorageCache', () => {
     const hits = { 1: ['a', 'b', 'c'] };
     cache.write({ state, hits });
     expect(cache.read({ state: newState })).toBeNull();
+  });
+
+  it('clears cache if fails to read', () => {
+    const getItem = jest.fn(() => '{invalid_json}');
+    const removeItem = jest.fn();
+    window.sessionStorage = {
+      getItem,
+      removeItem,
+    };
+    const cache = createInfiniteHitsSessionStorageCache();
+    cache.read({ state: {} });
+    expect(removeItem).toHaveBeenCalledTimes(1);
+    expect(removeItem).toHaveBeenCalledWith(KEY);
   });
 });

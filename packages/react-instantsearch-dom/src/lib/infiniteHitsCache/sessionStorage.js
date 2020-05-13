@@ -25,7 +25,14 @@ export default function createInfiniteHitsSessionStorageCache() {
         return isEqual(cache.state, getStateWithoutPage(state))
           ? cache.hits
           : null;
-      } catch (_error) {
+      } catch (error) {
+        if (error instanceof SyntaxError) {
+          try {
+            window.sessionStorage.removeItem(KEY);
+          } catch (err) {
+            // do nothing
+          }
+        }
         return null;
       }
     },
