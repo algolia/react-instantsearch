@@ -12,6 +12,11 @@ describe('createInfiniteHitsSessionStorageCache', () => {
     store[key] = value;
   });
   const removeItem = jest.fn(key => delete store[key]);
+  const defaultHits = [
+    { objectID: 'a', __position: 0 },
+    { objectID: 'b', __position: 1 },
+    { objectID: 'c', __position: 2 },
+  ];
 
   beforeAll(() => {
     Object.defineProperty(window, 'sessionStorage', {
@@ -39,22 +44,24 @@ describe('createInfiniteHitsSessionStorageCache', () => {
 
   it('returns null initially', () => {
     const cache = createInfiniteHitsSessionStorageCache();
-    expect(cache.read({})).toBeNull();
+    expect(cache.read({ state: {} })).toBeNull();
   });
 
   it('returns what it was assigned before', () => {
     const cache = createInfiniteHitsSessionStorageCache();
-    const state = { q: 'hello' };
-    const hits = { 1: ['a', 'b', 'c'] };
+    const state = { query: 'hello' };
+    const hits = {
+      1: defaultHits,
+    };
     cache.write({ state, hits });
     expect(cache.read({ state })).toEqual(hits);
   });
 
   it('returns null if the state is different', () => {
     const cache = createInfiniteHitsSessionStorageCache();
-    const state = { q: 'hello' };
-    const newState = { q: 'world' };
-    const hits = { 1: ['a', 'b', 'c'] };
+    const state = { query: 'hello' };
+    const newState = { query: 'world' };
+    const hits = { 1: defaultHits };
     cache.write({ state, hits });
     expect(cache.read({ state: newState })).toBeNull();
   });
