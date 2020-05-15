@@ -52,7 +52,7 @@ function getInMemoryCache() {
 
 function extractHitsFromCachedHits(cachedHits) {
   return Object.keys(cachedHits)
-    .sort()
+    .sort((a, b) => a - b)
     .reduce((acc, page) => {
       return acc.concat(cachedHits[page]);
     }, []);
