@@ -22,7 +22,7 @@ export default function createInfiniteHitsSessionStorageCache() {
       }
       try {
         const cache = JSON.parse(window.sessionStorage.getItem(KEY));
-        return isEqual(cache.state, getStateWithoutPage(state))
+        return cache && isEqual(cache.state, getStateWithoutPage(state))
           ? cache.hits
           : null;
       } catch (error) {
