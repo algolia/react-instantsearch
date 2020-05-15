@@ -52,6 +52,7 @@ function getInMemoryCache() {
 
 function extractHitsFromCachedHits(cachedHits) {
   return Object.keys(cachedHits)
+    .map(Number)
     .sort((a, b) => a - b)
     .reduce((acc, page) => {
       return acc.concat(cachedHits[page]);
@@ -122,8 +123,12 @@ export default createConnector({
       Math.min() and Math.max() returns Infinity or -Infinity when no argument is given.
       But there is always something in this point because of `this._cachedHits[page]`.
     */
-    const firstReceivedPage = Math.min(...Object.keys(this._cachedHits));
-    const lastReceivedPage = Math.max(...Object.keys(this._cachedHits));
+    const firstReceivedPage = Math.min(
+      ...Object.keys(this._cachedHits).map(Number)
+    );
+    const lastReceivedPage = Math.max(
+      ...Object.keys(this._cachedHits).map(Number)
+    );
 
     const hasPrevious = firstReceivedPage > 0;
     const lastPageIndex = nbPages - 1;
@@ -151,7 +156,7 @@ export default createConnector({
   },
 
   refine(props, searchState, event, index) {
-    const pages = Object.keys(this._cachedHits || {});
+    const pages = Object.keys(this._cachedHits || {}).map(Number);
     const lastReceivedPage =
       pages.length === 0 ? undefined : Math.max(...pages);
     // If there is no key in `this._cachedHits`,
