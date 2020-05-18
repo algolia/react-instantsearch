@@ -327,6 +327,7 @@ export default function createInstantSearchManager({
     // Disable cache hydration on:
     // - Algoliasearch API Client < v4 with cache disabled
     // - Third party clients (detected by the `addAlgoliaAgent` function missing)
+
     if (
       (!client.transporter || client._cacheHydrated) &&
       (!client._useCache || typeof client.addAlgoliaAgent !== 'function')
@@ -341,7 +342,7 @@ export default function createInstantSearchManager({
     // for us to compute the key the same way as `algoliasearch-client` we need
     // to populate it on a custom key and override the `search` method to
     // search on it first.
-    if (client.transporter) {
+    if (client.transporter && !client._cacheHydrated) {
       client._cacheHydrated = true;
 
       const baseMethod = client.search;

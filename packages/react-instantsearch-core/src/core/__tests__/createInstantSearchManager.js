@@ -264,6 +264,51 @@ describe('createInstantSearchManager', () => {
 
       expect(Object.keys(searchClient.cache)).toHaveLength(0);
     });
+
+    it('when using algoliasearch@v4, it overrides search only once', () => {
+      const searchClient = algoliasearch('appId', 'apiKey', {
+        _cache: true,
+      });
+
+      // Skip this test with Algoliasearch API Client < v4, as
+      // search does not need to be overridden.
+      if (!searchClient.transporter) {
+        return;
+      }
+
+      const resultsState = {
+        rawResults: [
+          {
+            index: 'indexName',
+            query: 'query',
+          },
+        ],
+        state: {
+          index: 'indexName',
+          query: 'query',
+        },
+      };
+
+      const originalSearch = algoliasearch.search;
+
+      createInstantSearchManager({
+        indexName: 'index',
+        searchClient,
+        resultsState,
+      });
+
+      expect(searchClient.search).not.toBe(originalSearch);
+
+      searchClient.search = 'already-overridden';
+
+      createInstantSearchManager({
+        indexName: 'index',
+        searchClient,
+        resultsState,
+      });
+
+      expect(searchClient.search).toEqual('already-overridden');
+    });
   });
 
   describe('results hydratation', () => {
