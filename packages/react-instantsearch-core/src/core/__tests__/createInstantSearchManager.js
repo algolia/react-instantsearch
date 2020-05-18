@@ -299,7 +299,8 @@ describe('createInstantSearchManager', () => {
 
       expect(searchClient.search).not.toBe(originalSearch);
 
-      searchClient.search = 'already-overridden';
+      const alreadyOverridden = jest.fn();
+      searchClient.search = alreadyOverridden;
 
       createInstantSearchManager({
         indexName: 'index',
@@ -307,7 +308,7 @@ describe('createInstantSearchManager', () => {
         resultsState,
       });
 
-      expect(searchClient.search).toEqual('already-overridden');
+      expect(searchClient.search).toBe(alreadyOverridden);
     });
   });
 
