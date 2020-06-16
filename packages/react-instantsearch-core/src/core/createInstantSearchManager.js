@@ -319,6 +319,19 @@ export default function createInstantSearchManager({
     }
   }
 
+  function removeDuplicateQuery(params) {
+    let previousIndex = undefined;
+    const queryParamRegex = /&?query=[^&]*/g;
+    return params.replace(queryParamRegex, function replacer(match, offset) {
+      if (previousIndex && offset > previousIndex) {
+        previousIndex = offset;
+        return '';
+      }
+      previousIndex = offset;
+      return match;
+    });
+  }
+
   function hydrateSearchClient(client, results) {
     if (!results) {
       return;
@@ -385,7 +398,7 @@ export default function createInstantSearchManager({
                 acc.concat(
                   result.rawResults.map(request => ({
                     indexName: request.index,
-                    params: request.params,
+                    params: removeDuplicateQuery(request.params),
                   }))
                 ),
               []
@@ -414,7 +427,7 @@ export default function createInstantSearchManager({
           acc.concat(
             result.rawResults.map(request => ({
               indexName: request.index,
-              params: request.params,
+              params: removeDuplicateQuery(request.params),
             }))
           ),
         []
@@ -442,7 +455,7 @@ export default function createInstantSearchManager({
           args: [
             results.rawResults.map(request => ({
               indexName: request.index,
-              params: request.params,
+              params: removeDuplicateQuery(request.params),
             })),
           ],
         },
@@ -461,7 +474,7 @@ export default function createInstantSearchManager({
     const key = `/1/indexes/*/queries_body_${JSON.stringify({
       requests: results.rawResults.map(request => ({
         indexName: request.index,
-        params: request.params,
+        params: removeDuplicateQuery(request.params),
       })),
     })}`;
 
