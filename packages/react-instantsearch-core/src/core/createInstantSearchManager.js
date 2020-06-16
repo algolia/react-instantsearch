@@ -323,7 +323,7 @@ export default function createInstantSearchManager({
     let previousIndex = undefined;
     const queryParamRegex = /&?query=[^&]*/g;
     return params.replace(queryParamRegex, function replacer(match, offset) {
-      if (previousIndex && offset > previousIndex) {
+      if (previousIndex !== undefined && offset > previousIndex) {
         previousIndex = offset;
         return '';
       }
