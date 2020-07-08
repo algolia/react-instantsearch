@@ -13,13 +13,13 @@ import { findResultsState } from '../createInstantSearchServer';
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('findResultsState', () => {
-  const createSearchClient = responseParams => ({
+  const createSearchClient = ({ transformResponseParams } = {}) => ({
     search: requests =>
       Promise.resolve({
         results: requests.map(({ indexName, params: { query } }) => ({
           query,
-          params: responseParams
-            ? responseParams(query)
+          params: transformResponseParams
+            ? transformResponseParams(query)
             : `query=${encodeURIComponent(query)}`,
           index: indexName,
         })),
@@ -297,9 +297,10 @@ describe('findResultsState', () => {
 
         const props = {
           ...requiredProps,
-          searchClient: createSearchClient(
-            query => `query=${encodeURIComponent(query)}&query=modified`
-          ),
+          searchClient: createSearchClient({
+            transformResponseParams: query =>
+              `query=${encodeURIComponent(query)}&query=modified`,
+          }),
           searchState: {
             query: 'iPhone',
           },
@@ -323,9 +324,10 @@ describe('findResultsState', () => {
 
         const props = {
           ...requiredProps,
-          searchClient: createSearchClient(
-            query => `query=${encodeURIComponent(query)}&query=modified`
-          ),
+          searchClient: createSearchClient({
+            transformResponseParams: query =>
+              `query=${encodeURIComponent(query)}&query=modified`,
+          }),
           searchState: {
             query: 'iPhone&query=iphone',
           },
@@ -349,10 +351,10 @@ describe('findResultsState', () => {
 
         const props = {
           ...requiredProps,
-          searchClient: createSearchClient(
-            query =>
-              `test=1&query=${encodeURIComponent(query)}&boo=ba&query=modified`
-          ),
+          searchClient: createSearchClient({
+            transformResponseParams: query =>
+              `test=1&query=${encodeURIComponent(query)}&boo=ba&query=modified`,
+          }),
           searchState: {
             query: 'iPhone&query=iphone',
           },
@@ -376,7 +378,9 @@ describe('findResultsState', () => {
 
         const props = {
           ...requiredProps,
-          searchClient: createSearchClient(() => ''),
+          searchClient: createSearchClient({
+            transformResponseParams: () => '',
+          }),
           searchState: {
             query: 'iPhone&query=iphone',
           },
@@ -398,7 +402,9 @@ describe('findResultsState', () => {
 
         const props = {
           ...requiredProps,
-          searchClient: createSearchClient(() => 'lol=lol'),
+          searchClient: createSearchClient({
+            transformResponseParams: () => 'lol=lol',
+          }),
           searchState: {
             query: 'iPhone&query=iphone',
           },
@@ -786,9 +792,10 @@ describe('findResultsState', () => {
 
         const props = {
           ...requiredProps,
-          searchClient: createSearchClient(
-            query => `query=${encodeURIComponent(query)}&query=modified`
-          ),
+          searchClient: createSearchClient({
+            transformResponseParams: query =>
+              `query=${encodeURIComponent(query)}&query=modified`,
+          }),
           indexName: 'index1',
           searchState: {
             query: 'iPhone',
