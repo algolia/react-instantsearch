@@ -65,14 +65,13 @@ const getSearchParameters = (indexName, searchParameters) => {
  * only the first query (always the one from the parameters).
  */
 function removeDuplicateQuery(params) {
-  let previousIndex = undefined;
+  let hasFoundQuery = false;
   const queryParamRegex = /&?query=[^&]*/g;
-  return params.replace(queryParamRegex, function replacer(match, offset) {
-    if (previousIndex !== undefined && offset > previousIndex) {
-      previousIndex = offset;
+  return params.replace(queryParamRegex, function replacer(match) {
+    if (hasFoundQuery) {
       return '';
     }
-    previousIndex = offset;
+    hasFoundQuery = true;
     return match;
   });
 }
