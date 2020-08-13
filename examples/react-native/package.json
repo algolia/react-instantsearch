@@ -15,6 +15,7 @@
     "@ptomasroos/react-native-multi-slider": "2.2.2",
     "algoliasearch": "4.2.0",
     "expo": "37.0.3",
+    "expo-cli": "^3.24.0",
     "lodash": "4.17.15",
     "prop-types": "15.7.2",
     "react": "16.9.0",
@@ -29,7 +30,8 @@
     "react-native-screens": "2.2.0",
     "react-native-star-rating": "1.1.0",
     "react-native-vector-icons": "6.6.0",
-    "react-native-web": "~0.11.7"
+    "react-native-web": "~0.11.7",
+    "search-insights": "1.6.0"
   },
   "devDependencies": {
     "@babel/core": "7.8.6",

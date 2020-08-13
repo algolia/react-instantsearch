@@ -29,7 +29,7 @@ export default class App extends Component {
           <Scene
             key="Home"
             component={Home}
-            title="AEKI"
+            title="Home"
             initial={true}
             hideBackImage={Platform.OS === 'android'}
           />

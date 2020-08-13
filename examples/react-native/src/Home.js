@@ -15,6 +15,7 @@ import {
 import algoliasearch from 'algoliasearch/lite';
 import {
   InstantSearch,
+  Configure,
   connectSearchBox,
   connectInfiniteHits,
   connectRefinementList,
@@ -31,11 +32,28 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import { Actions } from 'react-native-router-flux';
 import Highlight from './components/Highlight';
 import Spinner from './components/Spinner';
+import AlgoliaAnalytics from 'search-insights/lib/insights';
 
 const searchClient = algoliasearch(
   'latency',
   '6be0576ff61c053d5f9a3225e2a90f76'
 );
+
+const aa = new AlgoliaAnalytics({
+  requestFn(url, data) {
+    return fetch(url, {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  },
+});
+
+aa.init({
+  appId: 'latency',
+  apiKey: '6be0576ff61c053d5f9a3225e2a90f76',
+});
+
+aa.setUserToken('myUserToken');
 
 const { height } = Dimensions.get('window');
 
@@ -158,6 +176,7 @@ class Home extends Component {
               onSearchStateChange={this.onSearchStateChange}
             />
           </View>
+          <Configure clickAnalytics />
           <ConnectedHits />
           <VirtualRefinementList attribute="type" />
           <VirtualRange attribute="price" />
@@ -224,6 +243,45 @@ class Hits extends Component {
     <View style={styles.item}>
       <Image style={{ height: 70, width: 70 }} source={{ uri: hit.image }} />
       <View style={styles.itemContent}>
+        <Button
+          onPress={() => {
+            aa.clickedObjectIDsAfterSearch({
+              // user token is fine to retrieve synchronously in a synchronous environment like RN
+              userToken: aa._userToken,
+              index: 'instant_search',
+              eventName: 'Result Clicked',
+              queryID: hit.__queryID,
+              objectIDs: [hit.objectID],
+              positions: [hit.__position],
+            });
+          }}
+          title="click"
+        />
+        <Button
+          onPress={() => {
+            aa.convertedObjectIDsAfterSearch({
+              // user token is fine to retrieve synchronously in a synchronous environment like RN
+              userToken: aa._userToken,
+              index: 'instant_search',
+              eventName: 'Result Converted',
+              queryID: hit.__queryID,
+              objectIDs: [hit.objectID],
+            });
+          }}
+          title="convert"
+        />
+        <Button
+          onPress={() => {
+            aa.convertedObjectIDs({
+              // user token is fine to retrieve synchronously in a synchronous environment like RN
+              userToken: aa._userToken,
+              index: 'instant_search',
+              eventName: 'Converted',
+              objectIDs: [hit.objectID],
+            });
+          }}
+          title="convert (outside of hits)"
+        />
         <Text style={styles.itemName}>
           <Highlight
             attribute="name"
