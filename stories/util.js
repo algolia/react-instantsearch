@@ -52,7 +52,7 @@ export function Content({
   hasPlayground,
   linkedStoryGroup,
   children,
-  defaultView,
+  resultsView,
 }) {
   const sourceCodeUrl = `https://github.com/algolia/react-instantsearch/tree/master/stories/${linkedStoryGroup}`;
   const playgroundLink = hasPlayground ? (
@@ -78,12 +78,12 @@ export function Content({
     </div>
   ) : null;
 
-  const results = defaultView ? (
+  const results = resultsView ? (
     <div
       style={linkedStoryGroup ? {} : { borderRadius: '0px 0px 5px 5px' }}
       className="container hits-container"
     >
-      {defaultView}
+      {resultsView}
     </div>
   ) : null;
 
@@ -100,7 +100,7 @@ Content.propTypes = {
   linkedStoryGroup: PropTypes.string,
   hasPlayground: PropTypes.bool,
   children: PropTypes.node,
-  defaultView: PropTypes.node,
+  resultsView: PropTypes.node,
 };
 
 export function WrapWithHits({
@@ -146,7 +146,7 @@ export function WrapWithHits({
       <Content
         linkedStoryGroup={linkedStoryGroup}
         hasPlayground={hasPlayground}
-        defaultView={
+        resultsView={
           <div>
             <div className="hit-actions">
               {searchBox ? (
