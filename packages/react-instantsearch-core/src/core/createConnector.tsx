@@ -115,8 +115,9 @@ export function createConnectorWithoutContext(
         }
 
         if (isWidget) {
+          const isServer = true; // TODO: find a real value for this
           this.unregisterWidget = this.props.contextValue.widgetsManager.registerWidget(
-            this
+            this, isServer
           );
         }
       }
