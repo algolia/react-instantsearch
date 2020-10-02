@@ -113,6 +113,12 @@ export function createConnectorWithoutContext(
             this.props
           );
         }
+
+        if (isWidget) {
+          this.unregisterWidget = this.props.contextValue.widgetsManager.registerWidget(
+            this
+          );
+        }
       }
 
       componentDidMount() {
@@ -123,12 +129,6 @@ export function createConnectorWithoutContext(
             });
           }
         });
-
-        if (isWidget) {
-          this.unregisterWidget = this.props.contextValue.widgetsManager.registerWidget(
-            this
-          );
-        }
       }
 
       shouldComponentUpdate(nextProps, nextState) {
