@@ -67,6 +67,9 @@ export { default as ToggleRefinement } from './widgets/ToggleRefinement';
 export { default as VoiceSearch } from './widgets/VoiceSearch';
 export { default as QueryRuleCustomData } from './widgets/QueryRuleCustomData';
 
+// Hooks
+export { useSearch } from './hooks';
+
 // Utils
 export { createClassNames } from './core/utils';
 

@@ -6,6 +6,12 @@ export { HIGHLIGHT_TAGS } from './core/highlight';
 export { default as version } from './core/version';
 export { default as translatable } from './core/translatable';
 
+export {
+  InstantSearchContext,
+  InstantSearchConsumer,
+  InstantSearchProvider,
+} from './core/context';
+
 // Widgets
 export { default as Configure } from './widgets/Configure';
 export {

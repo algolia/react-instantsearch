@@ -95,6 +95,7 @@ export function createConnectorWithoutContext(
       unregisterWidget?: () => void;
 
       isUnmounting = false;
+      name = Connector.displayName;
 
       state: ConnectorState = {
         providedProps: this.getProvidedProps(this.props),
