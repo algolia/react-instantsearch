@@ -11,9 +11,10 @@ const getIndexId = context =>
     : context.ais.mainTargetedIndex;
 
 const createSearchParametersCollector = accumulator => {
-  return (getWidgetSearchParameters, context, props, searchState) => {
+  return (getSearchParameters, context, props, searchState, getMetadata) => {
     accumulator.push({
-      getSearchParameters: getWidgetSearchParameters,
+      getSearchParameters,
+      getMetadata,
       index: getIndexId(context),
       context,
       props,
@@ -22,40 +23,43 @@ const createSearchParametersCollector = accumulator => {
   };
 };
 
-const getSearchParameters = (indexName, searchParameters) => {
-  const sharedParameters = searchParameters
-    .filter(searchParameter => !hasMultipleIndices(searchParameter.context))
+const getSearchParameters = (indexName, widgets) => {
+  const sharedParameters = widgets
+    .filter(widget => !hasMultipleIndices(widget.context))
     .reduce(
-      (acc, searchParameter) =>
-        searchParameter.getSearchParameters(
-          acc,
-          searchParameter.props,
-          searchParameter.searchState
-        ),
+      (acc, widget) =>
+        widget.getSearchParameters(acc, widget.props, widget.searchState),
       new algoliasearchHelper.SearchParameters({
         ...HIGHLIGHT_TAGS,
         index: indexName,
       })
     );
 
-  const derivedParameters = searchParameters
-    .filter(searchParameter => hasMultipleIndices(searchParameter.context))
-    .reduce((acc, searchParameter) => {
-      const indexId = getIndexId(searchParameter.context);
+  const derivedParameters = widgets
+    .filter(widget => hasMultipleIndices(widget.context))
+    .reduce((acc, widget) => {
+      const indexId = getIndexId(widget.context);
 
       return {
         ...acc,
-        [indexId]: searchParameter.getSearchParameters(
+        [indexId]: widget.getSearchParameters(
           acc[indexId] || sharedParameters,
-          searchParameter.props,
-          searchParameter.searchState
+          widget.props,
+          widget.searchState
         ),
       };
     }, {});
 
+  const metadata = widgets
+    .filter(widget => widget.getMetadata)
+    .map(widget => {
+      return widget.getMetadata(widget.props, widget.searchState);
+    });
+
   return {
     sharedParameters,
     derivedParameters,
+    metadata,
   };
 };
 
@@ -159,7 +163,7 @@ export const findResultsState = function(App, props) {
     />
   );
 
-  const { sharedParameters, derivedParameters } = getSearchParameters(
+  const { sharedParameters, derivedParameters, metadata } = getSearchParameters(
     indexName,
     searchParameters
   );
@@ -171,7 +175,12 @@ export const findResultsState = function(App, props) {
   }
 
   if (Object.keys(derivedParameters).length === 0) {
-    return singleIndexSearch(helper, sharedParameters);
+    return singleIndexSearch(helper, sharedParameters).then(res => {
+      return {
+        metadata,
+        ...res,
+      };
+    });
   }
 
   return multiIndexSearch(
@@ -180,5 +189,5 @@ export const findResultsState = function(App, props) {
     helper,
     sharedParameters,
     derivedParameters
-  );
+  ).then(res => ({ ...res, metadata }));
 };

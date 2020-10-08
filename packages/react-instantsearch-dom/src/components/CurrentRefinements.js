@@ -49,7 +49,7 @@ export const CurrentRefinements = ({
 const itemPropTypes = PropTypes.arrayOf(
   PropTypes.shape({
     label: PropTypes.string.isRequired,
-    value: PropTypes.func.isRequired,
+    value: PropTypes.func,
     items: (...args) => itemPropTypes(...args),
   })
 );

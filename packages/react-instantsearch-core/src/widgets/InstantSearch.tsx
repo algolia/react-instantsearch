@@ -6,6 +6,7 @@ import { InstantSearchProvider, InstantSearchContext } from '../core/context';
 import { Store } from '../core/createStore';
 import { PlainSearchParameters, SearchParameters } from 'algoliasearch-helper';
 import { MultiResponse } from '../types/algoliasearch';
+import { ConnectorDescription } from '../core/createConnector';
 
 type ResultsState = {
   state: PlainSearchParameters;
@@ -47,10 +48,11 @@ type Props = {
   onSearchStateChange?: (searchState: SearchState) => void;
   searchState?: SearchState;
   onSearchParameters?: (
-    getSearchParameters: (...args: any) => any,
+    getSearchParameters: ConnectorDescription['getSearchParameters'],
     context: any,
     props: any,
-    searchState: SearchState
+    searchState: SearchState,
+    getMetadata: ConnectorDescription['getMetadata']
   ) => void;
   stalledSearchDelay?: number;
   resultsState: ResultsState | { [indexId: string]: ResultsState };
@@ -246,14 +248,15 @@ class InstantSearch extends Component<Props, State> {
     }
   }
 
-  onSearchParameters(getSearchParameters, context, props) {
+  onSearchParameters(getSearchParameters, context, props, getMetadata) {
     if (this.props.onSearchParameters) {
       const searchState = this.props.searchState ? this.props.searchState : {};
       this.props.onSearchParameters(
         getSearchParameters,
         context,
         props,
-        searchState
+        searchState,
+        getMetadata
       );
     }
   }

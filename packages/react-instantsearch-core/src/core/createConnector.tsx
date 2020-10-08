@@ -110,14 +110,8 @@ export function createConnectorWithoutContext(
               ais: this.props.contextValue,
               multiIndexContext: this.props.indexContextValue,
             },
-            this.props
-          );
-        }
-
-        if (isWidget) {
-          const isServer = true; // TODO: find a real value for this
-          this.unregisterWidget = this.props.contextValue.widgetsManager.registerWidget(
-            this, isServer
+            this.props,
+            connectorDesc.getMetadata && connectorDesc.getMetadata.bind(this)
           );
         }
       }
@@ -130,6 +124,12 @@ export function createConnectorWithoutContext(
             });
           }
         });
+
+        if (isWidget) {
+          this.unregisterWidget = this.props.contextValue.widgetsManager.registerWidget(
+            this
+          );
+        }
       }
 
       shouldComponentUpdate(nextProps, nextState) {

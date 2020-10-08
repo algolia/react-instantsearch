@@ -103,7 +103,7 @@ export default function createInstantSearchManager({
 
   const store = createStore({
     widgets: initialState,
-    metadata: [],
+    metadata: resultsState ? resultsState.metadata : [],
     results: hydrateResultsState(resultsState),
     error: null,
     searching: false,

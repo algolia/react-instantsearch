@@ -7,11 +7,7 @@ export default function createWidgetsManager(onWidgetsUpdate) {
 
   // The state manager's updates need to be batched since more than one
   // component can register or unregister widgets during the same tick.
-  function scheduleUpdate(sync) {
-    if (sync) {
-      onWidgetsUpdate();
-      return;
-    }
+  function scheduleUpdate() {
     if (scheduled) {
       return;
     }
@@ -23,9 +19,9 @@ export default function createWidgetsManager(onWidgetsUpdate) {
   }
 
   return {
-    registerWidget(widget, sync) {
+    registerWidget(widget) {
       widgets.push(widget);
-      scheduleUpdate(sync);
+      scheduleUpdate();
       return function unregisterWidget() {
         widgets.splice(widgets.indexOf(widget), 1);
         scheduleUpdate();

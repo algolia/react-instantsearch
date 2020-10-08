@@ -6,6 +6,7 @@ import {
   SearchBox,
   Hits,
   Configure,
+  CurrentRefinements,
 } from 'react-instantsearch-dom';
 
 class App extends Component {
@@ -39,6 +40,7 @@ class App extends Component {
         searchState={searchState}
         onSearchStateChange={this.onSearchStateChange}
       >
+        <CurrentRefinements />
         <Configure hitsPerPage={3} />
         <SearchBox />
         <RefinementList attribute="brand" />
