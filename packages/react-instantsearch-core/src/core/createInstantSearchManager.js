@@ -103,7 +103,7 @@ export default function createInstantSearchManager({
 
   const store = createStore({
     widgets: initialState,
-    metadata: resultsState ? resultsState.metadata : [],
+    metadata: hydrateMetadata(resultsState),
     results: hydrateResultsState(resultsState),
     error: null,
     searching: false,
@@ -609,4 +609,14 @@ export default function createInstantSearchManager({
     clearCache,
     skipSearch,
   };
+}
+
+function hydrateMetadata(resultsState) {
+  if (!resultsState) {
+    return [];
+  }
+  if (Array.isArray(resultsState)) {
+    return resultsState[0].metadata;
+  }
+  return resultsState;
 }
