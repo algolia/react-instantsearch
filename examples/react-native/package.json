@@ -31,7 +31,7 @@
     "react-native-star-rating": "1.1.0",
     "react-native-vector-icons": "6.6.0",
     "react-native-web": "~0.11.7",
-    "search-insights": "1.6.0"
+    "search-insights": "1.6.2"
   },
   "devDependencies": {
     "@babel/core": "7.8.6",

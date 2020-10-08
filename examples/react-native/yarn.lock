@@ -13071,10 +13071,10 @@ schema-utils@^2.6.5, schema-utils@^2.6.6, schema-utils@^2.7.0:
     ajv "^6.12.2"
     ajv-keywords "^3.4.1"
 
-search-insights@1.6.0:
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/search-insights/-/search-insights-1.6.0.tgz#d277ca952196839c501ffb3fa4ee4534e61d9758"
-  integrity sha512-JBbu9WDL72gSgjFTaCeHntsXiOk+E0N1h6WLlWlWnjb1p/fLzza1wFx4hh1t1DrweEGfrU29+3J5ORkcHMI7Kg==
+search-insights@1.6.2:
+  version "1.6.2"
+  resolved "https://registry.yarnpkg.com/search-insights/-/search-insights-1.6.2.tgz#a592c0fcafdb628e37db92d6a3fbd113304521da"
+  integrity sha512-mpy+57HZVMZH5HsMHYMCLvkf+tUvhy+ycP2tDy1j7wmj+mQsNZ3LC61IcMYomok02NozaMR3GiGyfH6uc+ibdA==
 
 select-hose@^2.0.0:
   version "2.0.0"
