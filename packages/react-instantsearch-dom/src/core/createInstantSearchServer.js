@@ -154,18 +154,18 @@ export const findResultsState = function(App, props) {
 
   const { indexName, searchClient } = props;
 
-  const searchParameters = [];
+  const widgets = [];
 
   renderToString(
     <App
       {...props}
-      onSearchParameters={createSearchParametersCollector(searchParameters)}
+      onSearchParameters={createSearchParametersCollector(widgets)}
     />
   );
 
   const { sharedParameters, derivedParameters, metadata } = getSearchParameters(
     indexName,
-    searchParameters
+    widgets
   );
 
   const helper = algoliasearchHelper(searchClient, sharedParameters.index);
