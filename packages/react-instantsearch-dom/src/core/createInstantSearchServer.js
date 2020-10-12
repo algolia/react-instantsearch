@@ -23,6 +23,14 @@ const createSearchParametersCollector = accumulator => {
   };
 };
 
+function getMetadata(widgets) {
+  return widgets
+    .filter(widget => widget.getMetadata)
+    .map(widget => {
+      return widget.getMetadata(widget.props, widget.searchState);
+    });
+}
+
 const getSearchParameters = (indexName, widgets) => {
   const sharedParameters = widgets
     .filter(widget => !hasMultipleIndices(widget.context))
@@ -50,16 +58,9 @@ const getSearchParameters = (indexName, widgets) => {
       };
     }, {});
 
-  const metadata = widgets
-    .filter(widget => widget.getMetadata)
-    .map(widget => {
-      return widget.getMetadata(widget.props, widget.searchState);
-    });
-
   return {
     sharedParameters,
     derivedParameters,
-    metadata,
   };
 };
 
@@ -163,10 +164,12 @@ export const findResultsState = function(App, props) {
     />
   );
 
-  const { sharedParameters, derivedParameters, metadata } = getSearchParameters(
+  const { sharedParameters, derivedParameters } = getSearchParameters(
     indexName,
     widgets
   );
+
+  const metadata = getMetadata(widgets);
 
   const helper = algoliasearchHelper(searchClient, sharedParameters.index);
 
