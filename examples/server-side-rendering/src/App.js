@@ -40,9 +40,9 @@ class App extends Component {
         searchState={searchState}
         onSearchStateChange={this.onSearchStateChange}
       >
-        <CurrentRefinements />
         <Configure hitsPerPage={3} />
         <SearchBox />
+        <CurrentRefinements />
         <RefinementList attribute="brand" />
         <Hits />
       </InstantSearch>
