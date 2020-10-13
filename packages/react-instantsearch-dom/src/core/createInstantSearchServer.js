@@ -11,10 +11,10 @@ const getIndexId = context =>
     : context.ais.mainTargetedIndex;
 
 const createSearchParametersCollector = accumulator => {
-  return (getSearchParameters, context, props, searchState, getMetadata) => {
+  return (getSearchParameters, context, props, searchState, getMeta) => {
     accumulator.push({
       getSearchParameters,
-      getMetadata,
+      getMetadata: getMeta,
       index: getIndexId(context),
       context,
       props,

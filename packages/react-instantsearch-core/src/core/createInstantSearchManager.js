@@ -611,7 +611,7 @@ export default function createInstantSearchManager({
   };
 }
 
-function getMetadata(resultsState) {
+function extractMetadata(resultsState) {
   if (!resultsState) {
     return [];
   }
@@ -622,7 +622,7 @@ function getMetadata(resultsState) {
 }
 
 function hydrateMetadata(resultsState) {
-  return getMetadata(resultsState).map(datum => ({
+  return extractMetadata(resultsState).map(datum => ({
     ...datum,
     // add a value noop, which gets replaced once the widgets are mounted
     value() {},
