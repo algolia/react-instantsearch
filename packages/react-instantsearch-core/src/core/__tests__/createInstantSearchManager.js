@@ -75,6 +75,7 @@ describe('createInstantSearchManager', () => {
       }
 
       const resultsState = {
+        metadata: [],
         rawResults: [
           {
             index: 'index',
@@ -122,6 +123,7 @@ describe('createInstantSearchManager', () => {
 
       const resultsState = [
         {
+          metadata: [],
           _internalIndexId: 'index1',
           rawResults: [
             {
@@ -207,6 +209,7 @@ describe('createInstantSearchManager', () => {
       }
 
       const resultsState = {
+        metadata: [],
         rawResults: [
           {
             index: 'indexName',
@@ -242,6 +245,7 @@ describe('createInstantSearchManager', () => {
       }
 
       const resultsState = {
+        metadata: [],
         rawResults: [
           {
             index: 'indexName',
@@ -277,6 +281,7 @@ describe('createInstantSearchManager', () => {
       }
 
       const resultsState = {
+        metadata: [],
         rawResults: [
           {
             index: 'indexName',
@@ -318,6 +323,7 @@ describe('createInstantSearchManager', () => {
         indexName: 'index',
         searchClient: createSearchClient(),
         resultsState: {
+          metadata: [],
           rawResults: [
             {
               index: 'indexName',
@@ -341,6 +347,7 @@ describe('createInstantSearchManager', () => {
         searchClient: createSearchClient(),
         resultsState: [
           {
+            metadata: [],
             _internalIndexId: 'index1',
             rawResults: [
               {

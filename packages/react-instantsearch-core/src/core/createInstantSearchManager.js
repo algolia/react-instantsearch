@@ -618,7 +618,7 @@ function extractMetadata(resultsState) {
   if (Array.isArray(resultsState)) {
     return resultsState[0].metadata;
   }
-  return resultsState;
+  return resultsState.metadata;
 }
 
 function hydrateMetadata(resultsState) {
