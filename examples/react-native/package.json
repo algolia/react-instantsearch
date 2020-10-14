@@ -1,7 +1,7 @@
 {
   "name": "example-react-native",
   "version": "1.0.0",
-  "main": "node_modules/expo/AppEntry.js",
+  "main": "__generated__/AppEntry.js",
   "scripts": {
     "build": "echo \"Error: no build specified\" && exit 0",
     "start": "expo start",
@@ -9,17 +9,18 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "test": "jest"
+    "test": "jest",
+    "postinstall": "expo-yarn-workspaces postinstall"
   },
   "dependencies": {
     "@ptomasroos/react-native-multi-slider": "2.2.2",
-    "algoliasearch": "4.2.0",
+    "algoliasearch": "4.5.1",
     "expo": "37.0.3",
     "lodash": "4.17.15",
     "prop-types": "15.7.2",
     "react": "16.9.0",
     "react-dom": "16.9.0",
-    "react-instantsearch": "6.7.0",
+    "react-instantsearch": "6.8.1",
     "react-instantsearch-native": "6.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-37.0.1.tar.gz",
     "react-native-gesture-handler": "1.6.1",
@@ -34,6 +35,7 @@
   "devDependencies": {
     "@babel/core": "7.8.6",
     "babel-preset-expo": "8.1.0",
+    "expo-yarn-workspaces": "1.2.1",
     "jest-expo": "37.0.0",
     "react-test-renderer": "16.13.1"
   },
