@@ -263,7 +263,7 @@ class InstantSearch extends Component<Props, State> {
       multiIndexContext: IndexContext;
     },
     props: object,
-    getMetadata?: ConnectorDescription['getMetadata']
+    getMetadata: ConnectorDescription['getMetadata']
   ) {
     if (this.props.onSearchParameters) {
       const searchState = this.props.searchState ? this.props.searchState : {};
