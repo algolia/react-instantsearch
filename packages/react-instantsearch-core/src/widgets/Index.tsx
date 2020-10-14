@@ -6,6 +6,7 @@ import {
   IndexProvider,
   IndexContext,
 } from '../core/context';
+import { Widget } from '../core/createWidgetsManager';
 
 function getIndexContext(props: Props): IndexContext {
   return {
@@ -89,7 +90,7 @@ class Index extends Component<InnerProps, State> {
 
   componentDidMount() {
     this.unregisterWidget = this.props.contextValue.widgetsManager.registerWidget(
-      this
+      (this as any) as Widget
     );
   }
 

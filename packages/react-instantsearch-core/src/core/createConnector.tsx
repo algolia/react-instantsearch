@@ -7,40 +7,50 @@ import {
   IndexConsumer,
   IndexContext,
 } from './context';
+import { Metadata, SearchState } from './createStore';
 
 export type ConnectorDescription = {
   displayName: string;
   /**
    * a function to filter the local state
    */
-  refine?: (...args: any[]) => any;
+  refine?(...args: any[]): any;
   /**
    * function transforming the local state to a SearchParameters
    */
-  getSearchParameters?: (...args: any[]) => any;
+  getSearchParameters?(...args: any[]): any;
   /**
    * metadata of the widget (for current refinements)
    */
-  getMetadata?: (...args: any[]) => any;
+  getMetadata?(...args: any[]): Metadata;
   /**
    * hook after the state has changed
    */
-  transitionState?: (...args: any[]) => any;
+  transitionState?(...args: any[]): any;
   /**
    * transform the state into props passed to the wrapped component.
    * Receives (props, widgetStates, searchState, metadata) and returns the local state.
    */
-  getProvidedProps: (...args: any[]) => any;
+  getProvidedProps?(
+    props: { [key: string]: any } & {
+      contextValue: InstantSearchContext;
+      indexContextValue?: IndexContext;
+    },
+    widgets: SearchState,
+    searchResults,
+    metadata: Metadata[],
+    resultsFacetValues
+  ): Record<string, any>;
   /**
    * Receives props and return the id that will be used to identify the widget
    */
-  getId?: (...args: any[]) => string;
+  getId?(...args: any[]): string;
   /**
    * hook when the widget will unmount. Receives (props, searchState) and return a cleaned state.
    */
-  cleanUp?: (...args: any[]) => any;
-  searchForFacetValues?: (...args: any[]) => any;
-  shouldComponentUpdate?: (...args: any[]) => boolean;
+  cleanUp?(...args: any[]): any;
+  searchForFacetValues?(...args: any[]): any;
+  shouldComponentUpdate?(...args: any[]): boolean;
   /**
    * PropTypes forwarded to the wrapped component.
    */
@@ -213,7 +223,7 @@ export function createConnectorWithoutContext(
         }
       }
 
-      getProvidedProps(props) {
+      getProvidedProps(props: ConnectorProps) {
         const {
           widgets,
           results,
@@ -233,7 +243,7 @@ export function createConnectorWithoutContext(
           error,
         };
 
-        return connectorDesc.getProvidedProps.call(
+        return connectorDesc.getProvidedProps!.call(
           this,
           props,
           widgets,

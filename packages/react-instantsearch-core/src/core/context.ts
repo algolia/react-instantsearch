@@ -1,6 +1,7 @@
 import { createContext } from 'react';
 import { Store } from '../core/createStore';
 import InstantSearch from '../widgets/InstantSearch';
+import { WidgetsManager } from './createWidgetsManager';
 
 export type InstantSearchContext = {
   onInternalStateUpdate: InstantSearch['onWidgetsInternalStateUpdate'];
@@ -9,7 +10,7 @@ export type InstantSearchContext = {
   onSearchStateChange: InstantSearch['onSearchStateChange'];
   onSearchParameters: InstantSearch['onSearchParameters'];
   store: Store;
-  widgetsManager: any;
+  widgetsManager: WidgetsManager;
   mainTargetedIndex: string;
 };
 
@@ -23,7 +24,11 @@ export const {
   onSearchStateChange: () => undefined,
   onSearchParameters: () => undefined,
   store: {} as Store,
-  widgetsManager: {},
+  widgetsManager: {
+    registerWidget: () => () => {},
+    update() {},
+    getWidgets: () => [],
+  },
   mainTargetedIndex: '',
 });
 

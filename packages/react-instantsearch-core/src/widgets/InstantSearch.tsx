@@ -1,42 +1,37 @@
 import React, { Component, Children } from 'react';
 import isEqual from 'react-fast-compare';
 import PropTypes from 'prop-types';
-import createInstantSearchManager from '../core/createInstantSearchManager';
+import createInstantSearchManager, {
+  InstantSearchManager,
+} from '../core/createInstantSearchManager';
 import {
   InstantSearchProvider,
   InstantSearchContext,
   IndexContext,
 } from '../core/context';
-import { Store } from '../core/createStore';
-import { PlainSearchParameters, SearchParameters } from 'algoliasearch-helper';
+import { PlainSearchParameters } from 'algoliasearch-helper';
 import { MultiResponse } from '../types/algoliasearch';
 import { ConnectorDescription } from '../core/createConnector';
+import { Metadata } from '../core/createStore';
 
-type ResultsState = {
-  state: PlainSearchParameters;
-  rawResults: MultiResponse;
-};
+type ResultsState =
+  | {
+      metadata: Metadata[];
+      state: PlainSearchParameters;
+      rawResults: MultiResponse;
+    }
+  | {
+      metadata: Metadata[];
+      results: Array<{
+        state: PlainSearchParameters;
+        rawResults: MultiResponse;
+      }>;
+    };
 
-// @TODO: move to createInstantSearchManager when it's TS
-type InstantSearchManager = {
-  store: Store;
-  widgetsManager: any;
-  getWidgetsIds(): any;
-  getSearchParameters(
-    ...args: any[]
-  ): { mainParameters: SearchParameters; derivedParameters: SearchParameters };
-  onSearchForFacetValues(...args: any[]): any;
-  onExternalStateUpdate(...args: any[]): any;
-  transitionState: any;
-  updateClient: any;
-  updateIndex: any;
-  clearCache(): void;
-  skipSearch(...args: any[]): any;
-};
-
-type SearchClient = {
-  search: (requests: Array<{}>) => Promise<{}>;
-  searchForFacetValues: (requests: Array<{}>) => Promise<{}>;
+export type SearchClient = {
+  search(requests: Array<{}>): Promise<{}>;
+  searchForFacetValues(requests: Array<{}>): Promise<{}>;
+  addAlgoliaAgent?: (part: string) => void;
 };
 
 type SearchState = any;
@@ -62,7 +57,7 @@ type Props = {
     props: object;
   }) => void;
   stalledSearchDelay?: number;
-  resultsState: ResultsState | { [indexId: string]: ResultsState };
+  resultsState: ResultsState;
 };
 
 type State = {
@@ -139,7 +134,7 @@ class InstantSearch extends Component<Props, State> {
 
     onSearchParameters: PropTypes.func,
     widgetsCollector: PropTypes.func,
-    resultsState: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+    resultsState: PropTypes.object,
 
     children: PropTypes.node,
     stalledSearchDelay: PropTypes.number,

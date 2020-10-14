@@ -1,31 +1,59 @@
-import algoliasearchHelper from 'algoliasearch-helper';
-import createWidgetsManager from './createWidgetsManager';
-import createStore from './createStore';
+import algoliasearchHelper, { SearchParameters } from 'algoliasearch-helper';
+import createWidgetsManager, {
+  Widget,
+  WidgetsManager,
+} from './createWidgetsManager';
+import createStore, { Store } from './createStore';
 import { HIGHLIGHT_TAGS } from './highlight';
 import { hasMultipleIndices } from './indexUtils';
 import { version as ReactVersion } from 'react';
 import version from './version';
+import { SearchClient } from '../widgets/InstantSearch';
 
-function addAlgoliaAgents(searchClient) {
+export type InstantSearchManager = {
+  store: Store;
+  widgetsManager: WidgetsManager;
+  getWidgetsIds(): string[];
+  getSearchParameters(): {
+    mainParameters: SearchParameters;
+    derivedParameters: Array<{ parameters: SearchParameters; indexId: string }>;
+  };
+  onSearchForFacetValues(...args: any[]): any;
+  onExternalStateUpdate(...args: any[]): any;
+  transitionState: any;
+  updateClient(client: SearchClient): void;
+  updateIndex(index: string): void;
+  clearCache(): void;
+  skipSearch(): void;
+};
+
+function addAlgoliaAgents(searchClient: SearchClient) {
   if (typeof searchClient.addAlgoliaAgent === 'function') {
     searchClient.addAlgoliaAgent(`react (${ReactVersion})`);
     searchClient.addAlgoliaAgent(`react-instantsearch (${version})`);
   }
 }
 
-const isMultiIndexContext = widget =>
+const isMultiIndexContext = (
+  widget: Widget
+): widget is Widget & {
+  props: {
+    indexContextValue: string;
+  };
+} =>
   hasMultipleIndices({
     ais: widget.props.contextValue,
     multiIndexContext: widget.props.indexContextValue,
   });
-const isTargetedIndexEqualIndex = (widget, indexId) =>
+
+const isTargetedIndexEqualIndex = (widget, indexId: string) =>
   widget.props.indexContextValue.targetedIndex === indexId;
 
 // Relying on the `indexId` is a bit brittle to detect the `Index` widget.
 // Since it's a class we could rely on `instanceof` or similar. We never
 // had an issue though. Works for now.
 const isIndexWidget = widget => Boolean(widget.props.indexId);
-const isIndexWidgetEqualIndex = (widget, indexId) =>
+const isIndexWidgetEqualIndex = (widget, indexId: string) =>
   widget.props.indexId === indexId;
 
 const sortIndexWidgetsFirst = (firstWidget, secondWidget) => {
@@ -81,7 +109,7 @@ export default function createInstantSearchManager({
   searchClient,
   resultsState,
   stalledSearchDelay,
-}) {
+}): InstantSearchManager {
   const helper = algoliasearchHelper(searchClient, indexName, {
     ...HIGHLIGHT_TAGS,
   });
@@ -94,7 +122,7 @@ export default function createInstantSearchManager({
     .on('error', handleSearchError);
 
   let skip = false;
-  let stalledSearchTimer = null;
+  let stalledSearchTimer: any = null;
   let initialSearchParameters = helper.state;
 
   const widgetsManager = createWidgetsManager(onWidgetsUpdate);
@@ -183,7 +211,7 @@ export default function createInstantSearchManager({
       .reduce((indices, widget) => {
         const indexId = isMultiIndexContext(widget)
           ? widget.props.indexContextValue.targetedIndex
-          : widget.props.indexId;
+          : (widget.props as any).indexId;
 
         const widgets = indices[indexId] || [];
 
@@ -209,9 +237,7 @@ export default function createInstantSearchManager({
 
   function search() {
     if (!skip) {
-      const { mainParameters, derivedParameters } = getSearchParameters(
-        helper.state
-      );
+      const { mainParameters, derivedParameters } = getSearchParameters();
 
       // We have to call `slice` because the method `detach` on the derived
       // helpers mutates the value `derivedHelpers`. The `forEach` loop does
@@ -581,7 +607,7 @@ export default function createInstantSearchManager({
       });
   }
 
-  function updateIndex(newIndex) {
+  function updateIndex(newIndex: string) {
     initialSearchParameters = initialSearchParameters.setIndex(newIndex);
     // No need to trigger a new search here as the widgets will also update and trigger it if needed.
   }
@@ -589,7 +615,7 @@ export default function createInstantSearchManager({
   function getWidgetsIds() {
     return store
       .getState()
-      .metadata.reduce(
+      .metadata.reduce<string[]>(
         (res, meta) =>
           typeof meta.id !== 'undefined' ? res.concat(meta.id) : res,
         []
