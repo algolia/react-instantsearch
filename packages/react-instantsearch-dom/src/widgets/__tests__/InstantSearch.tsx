@@ -109,28 +109,30 @@ describe('InstantSearch', () => {
         }
       );
 
-      const resultsState = [
-        {
-          metadata: [],
-          rawResults: EMPTY_RESPONSE.results,
-          state: {
-            index: 'instant_search',
-            query: '',
-          },
-        },
-        {
-          rawResults: [
-            {
-              ...EMPTY_RESPONSE.results[0],
-              index: 'instant_search2',
+      const resultsState = {
+        metadata: [],
+        results: [
+          {
+            rawResults: EMPTY_RESPONSE.results,
+            state: {
+              index: 'instant_search',
+              query: '',
             },
-          ],
-          state: {
-            index: 'instant_search2',
-            query: '',
           },
-        },
-      ];
+          {
+            rawResults: [
+              {
+                ...EMPTY_RESPONSE.results[0],
+                index: 'instant_search2',
+              },
+            ],
+            state: {
+              index: 'instant_search2',
+              query: '',
+            },
+          },
+        ],
+      };
 
       render(
         <InstantSearch

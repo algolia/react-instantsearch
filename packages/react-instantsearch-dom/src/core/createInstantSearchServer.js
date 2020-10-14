@@ -202,7 +202,6 @@ export const findResultsState = function(App, props) {
     sharedParameters,
     derivedParameters
   ).then(results => {
-    results[0].metadata = metadata;
-    return results;
+    return { metadata, results };
   });
 };
