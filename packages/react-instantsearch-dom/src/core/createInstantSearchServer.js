@@ -10,8 +10,14 @@ const getIndexId = context =>
     ? context.multiIndexContext.targetedIndex
     : context.ais.mainTargetedIndex;
 
-const createSearchParametersCollector = accumulator => {
-  return (getSearchParameters, context, props, searchState, getMeta) => {
+function createWidgetsCollector(accumulator) {
+  return ({
+    getSearchParameters,
+    getMetadata: getMeta,
+    context,
+    props,
+    searchState,
+  }) => {
     accumulator.push({
       getSearchParameters,
       getMetadata: getMeta,
@@ -21,7 +27,7 @@ const createSearchParametersCollector = accumulator => {
       searchState,
     });
   };
-};
+}
 
 function getMetadata(widgets) {
   return widgets
@@ -158,11 +164,14 @@ export const findResultsState = function(App, props) {
   const widgets = [];
 
   renderToString(
-    <App
-      {...props}
-      onSearchParameters={createSearchParametersCollector(widgets)}
-    />
+    <App {...props} widgetsCollector={createWidgetsCollector(widgets)} />
   );
+
+  if (widgets.length === 0) {
+    throw new Error(
+      '[ssr]: no widgets were added, you likely did not pass the `widgetsCollector` down to the InstantSearch component.'
+    );
+  }
 
   const { sharedParameters, derivedParameters } = getSearchParameters(
     indexName,

@@ -9,6 +9,7 @@ import {
   version,
 } from 'react-instantsearch-core';
 import { findResultsState } from '../createInstantSearchServer';
+import { SearchBox } from 'react-instantsearch-dom';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -95,7 +96,11 @@ describe('findResultsState', () => {
   });
 
   it('adds expected Algolia agents', () => {
-    const App = props => <InstantSearch {...props} />;
+    const App = props => (
+      <InstantSearch {...props}>
+        <SearchBox />
+      </InstantSearch>
+    );
 
     const searchClient = {
       ...createSearchClient(),
@@ -127,7 +132,11 @@ describe('findResultsState', () => {
   });
 
   it('does not throw if `searchClient` does not have a `addAlgoliaAgent()` method', () => {
-    const App = () => <div />;
+    const App = props => (
+      <InstantSearch {...props}>
+        <SearchBox />
+      </InstantSearch>
+    );
 
     const props = {
       ...requiredProps,
@@ -137,6 +146,21 @@ describe('findResultsState', () => {
     const trigger = () => findResultsState(App, props);
 
     expect(() => trigger()).not.toThrow();
+  });
+
+  it('throws if no widgets are added', () => {
+    const App = props => <InstantSearch {...props} />;
+
+    const props = {
+      ...requiredProps,
+      searchClient: createSearchClient(),
+    };
+
+    expect(() =>
+      findResultsState(App, props)
+    ).toThrowErrorMatchingInlineSnapshot(
+      `"[ssr]: no widgets were added, you likely did not pass the \`widgetsCollector\` down to the InstantSearch component."`
+    );
   });
 
   describe('single index', () => {
