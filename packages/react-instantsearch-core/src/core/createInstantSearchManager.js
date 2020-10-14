@@ -364,8 +364,8 @@ export default function createInstantSearchManager({
       };
     }
 
-    if (Array.isArray(results)) {
-      hydrateSearchClientWithMultiIndexRequest(client, results);
+    if (Array.isArray(results.results)) {
+      hydrateSearchClientWithMultiIndexRequest(client, results.results);
       return;
     }
 
@@ -478,8 +478,8 @@ export default function createInstantSearchManager({
       return null;
     }
 
-    if (Array.isArray(results)) {
-      return results.reduce(
+    if (Array.isArray(results.results)) {
+      return results.results.reduce(
         (acc, result) => ({
           ...acc,
           [result._internalIndexId]: new algoliasearchHelper.SearchResults(
@@ -611,18 +611,12 @@ export default function createInstantSearchManager({
   };
 }
 
-function extractMetadata(resultsState) {
+function hydrateMetadata(resultsState) {
   if (!resultsState) {
     return [];
   }
-  if (Array.isArray(resultsState)) {
-    return resultsState[0].metadata;
-  }
-  return resultsState.metadata;
-}
 
-function hydrateMetadata(resultsState) {
-  return extractMetadata(resultsState).map(datum => ({
+  return resultsState.metadata.map(datum => ({
     ...datum,
     // add a value noop, which gets replaced once the widgets are mounted
     value() {},

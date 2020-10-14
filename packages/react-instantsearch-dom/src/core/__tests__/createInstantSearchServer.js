@@ -521,7 +521,7 @@ describe('findResultsState', () => {
         ...requiredProps,
       };
 
-      const results = await findResultsState(App, props);
+      const { results } = await findResultsState(App, props);
 
       results.forEach(result => {
         expect(result.state).toBeInstanceOf(SearchParameters);
@@ -579,15 +579,17 @@ describe('findResultsState', () => {
 
       const data = await findResultsState(App, props);
 
-      expect(data).toHaveLength(2);
+      expect(data.results).toHaveLength(2);
 
-      const [first, second] = data;
+      const { metadata, results } = data;
+      const [first, second] = results;
+
+      expect(metadata).toEqual([
+        expect.objectContaining({ id: 'cool' }),
+        expect.objectContaining({ id: 'cool' }),
+      ]);
 
       expect(first).toEqual({
-        metadata: [
-          expect.objectContaining({ id: 'cool' }),
-          expect.objectContaining({ id: 'cool' }),
-        ],
         _internalIndexId: 'index1',
         state: expect.objectContaining({ index: 'index1', query: 'Apple' }),
         rawResults: [
@@ -621,17 +623,18 @@ describe('findResultsState', () => {
         indexName: 'index1',
       };
 
-      const data = await findResultsState(App, props);
+      const { results, metadata } = await findResultsState(App, props);
 
-      expect(data).toHaveLength(2);
+      expect(metadata).toEqual([
+        expect.objectContaining({ id: 'cool' }),
+        expect.objectContaining({ id: 'cool' }),
+      ]);
 
-      const [first, second] = data;
+      expect(results).toHaveLength(2);
+
+      const [first, second] = results;
 
       expect(first).toEqual({
-        metadata: [
-          expect.objectContaining({ id: 'cool' }),
-          expect.objectContaining({ id: 'cool' }),
-        ],
         _internalIndexId: 'index1',
         state: expect.objectContaining({ index: 'index1', query: 'Apple' }),
         rawResults: [
@@ -665,17 +668,18 @@ describe('findResultsState', () => {
         indexName: 'index1',
       };
 
-      const data = await findResultsState(App, props);
+      const { results, metadata } = await findResultsState(App, props);
 
-      expect(data).toHaveLength(2);
+      expect(metadata).toEqual([
+        expect.objectContaining({ id: 'cool' }),
+        expect.objectContaining({ id: 'cool' }),
+      ]);
 
-      const [first, second] = data;
+      expect(results).toHaveLength(2);
+
+      const [first, second] = results;
 
       expect(first).toEqual({
-        metadata: [
-          expect.objectContaining({ id: 'cool' }),
-          expect.objectContaining({ id: 'cool' }),
-        ],
         _internalIndexId: 'index1',
         state: expect.objectContaining({ index: 'index1', query: 'Apple' }),
         rawResults: [
@@ -721,17 +725,18 @@ describe('findResultsState', () => {
         },
       };
 
-      const data = await findResultsState(App, props);
+      const { results, metadata } = await findResultsState(App, props);
 
-      expect(data).toHaveLength(2);
+      expect(metadata).toEqual([
+        expect.objectContaining({ id: 'cool' }),
+        expect.objectContaining({ id: 'cool' }),
+      ]);
 
-      const [first, second] = data;
+      expect(results).toHaveLength(2);
+
+      const [first, second] = results;
 
       expect(first).toEqual({
-        metadata: [
-          expect.objectContaining({ id: 'cool' }),
-          expect.objectContaining({ id: 'cool' }),
-        ],
         _internalIndexId: 'index1',
         state: expect.objectContaining({ index: 'index1', query: 'iPhone' }),
         rawResults: [
@@ -773,17 +778,18 @@ describe('findResultsState', () => {
         },
       };
 
-      const data = await findResultsState(App, props);
+      const { results, metadata } = await findResultsState(App, props);
 
-      expect(data).toHaveLength(2);
+      expect(metadata).toEqual([
+        expect.objectContaining({ id: 'cool' }),
+        expect.objectContaining({ id: 'cool' }),
+      ]);
 
-      const [first, second] = data;
+      expect(results).toHaveLength(2);
+
+      const [first, second] = results;
 
       expect(first).toEqual({
-        metadata: [
-          expect.objectContaining({ id: 'cool' }),
-          expect.objectContaining({ id: 'cool' }),
-        ],
         _internalIndexId: 'index1',
         state: expect.objectContaining({ index: 'index1', query: 'iPhone' }),
         rawResults: [
@@ -825,17 +831,18 @@ describe('findResultsState', () => {
         },
       };
 
-      const data = await findResultsState(App, props);
+      const { results, metadata } = await findResultsState(App, props);
 
-      expect(data).toHaveLength(2);
+      expect(metadata).toEqual([
+        expect.objectContaining({ id: 'cool' }),
+        expect.objectContaining({ id: 'cool' }),
+      ]);
 
-      const [first, second] = data;
+      expect(results).toHaveLength(2);
+
+      const [first, second] = results;
 
       expect(first).toEqual({
-        metadata: [
-          expect.objectContaining({ id: 'cool' }),
-          expect.objectContaining({ id: 'cool' }),
-        ],
         _internalIndexId: 'index1',
         state: expect.objectContaining({ index: 'index1', query: 'iPhone' }),
         rawResults: [
@@ -878,25 +885,26 @@ describe('findResultsState', () => {
         searchState,
       };
 
-      const data = await findResultsState(App, props);
+      const { results, metadata } = await findResultsState(App, props);
 
-      expect(data).toHaveLength(2);
+      expect(metadata).toEqual([
+        {
+          id: 'cool',
+          searchState,
+          props: expect.objectContaining({ prop: 'value1' }),
+        },
+        {
+          id: 'cool',
+          searchState,
+          props: expect.objectContaining({ prop: 'value2' }),
+        },
+      ]);
 
-      const [first, second] = data;
+      expect(results).toHaveLength(2);
+
+      const [first, second] = results;
 
       expect(first).toEqual({
-        metadata: [
-          {
-            id: 'cool',
-            searchState,
-            props: expect.objectContaining({ prop: 'value1' }),
-          },
-          {
-            id: 'cool',
-            searchState,
-            props: expect.objectContaining({ prop: 'value2' }),
-          },
-        ],
         _internalIndexId: 'index1',
         state: expect.objectContaining({ index: 'index1', query: 'iPhone' }),
         rawResults: [
@@ -938,11 +946,11 @@ describe('findResultsState', () => {
           },
         };
 
-        const data = await findResultsState(App, props);
+        const { results } = await findResultsState(App, props);
 
-        expect(data).toHaveLength(2);
+        expect(results).toHaveLength(2);
 
-        const [first, second] = data;
+        const [first, second] = results;
 
         expect(first.rawResults[0].params).toMatchInlineSnapshot(
           `"query=iPhone"`
@@ -981,11 +989,11 @@ describe('findResultsState', () => {
           },
         };
 
-        const data = await findResultsState(App, props);
+        const { results } = await findResultsState(App, props);
 
-        expect(data).toHaveLength(2);
+        expect(results).toHaveLength(2);
 
-        const [first, second] = data;
+        const [first, second] = results;
 
         expect(first.rawResults[0].params).toBeUndefined();
         expect(second.rawResults[0].params).toBeUndefined();
@@ -1019,11 +1027,11 @@ describe('findResultsState', () => {
           },
         };
 
-        const data = await findResultsState(App, props);
+        const { results } = await findResultsState(App, props);
 
-        expect(data).toHaveLength(2);
+        expect(results).toHaveLength(2);
 
-        const [first, second] = data;
+        const [first, second] = results;
 
         expect(first.rawResults[0].params).toMatchInlineSnapshot(
           `"query=iPhone"`

@@ -121,35 +121,37 @@ describe('createInstantSearchManager', () => {
         return;
       }
 
-      const resultsState = [
-        {
-          metadata: [],
-          _internalIndexId: 'index1',
-          rawResults: [
-            {
+      const resultsState = {
+        metadata: [],
+        results: [
+          {
+            _internalIndexId: 'index1',
+            rawResults: [
+              {
+                index: 'index1',
+                query: 'query1',
+              },
+            ],
+            state: {
               index: 'index1',
               query: 'query1',
             },
-          ],
-          state: {
-            index: 'index1',
-            query: 'query1',
           },
-        },
-        {
-          _internalIndexId: 'index2',
-          rawResults: [
-            {
+          {
+            _internalIndexId: 'index2',
+            rawResults: [
+              {
+                index: 'index2',
+                query: 'query2',
+              },
+            ],
+            state: {
               index: 'index2',
               query: 'query2',
             },
-          ],
-          state: {
-            index: 'index2',
-            query: 'query2',
           },
-        },
-      ];
+        ],
+      };
 
       expect(Object.keys(searchClient.cache)).toHaveLength(0);
 
@@ -345,35 +347,37 @@ describe('createInstantSearchManager', () => {
       const ism = createInstantSearchManager({
         indexName: 'index',
         searchClient: createSearchClient(),
-        resultsState: [
-          {
-            metadata: [],
-            _internalIndexId: 'index1',
-            rawResults: [
-              {
+        resultsState: {
+          metadata: [],
+          results: [
+            {
+              _internalIndexId: 'index1',
+              rawResults: [
+                {
+                  index: 'index1',
+                  query: 'query1',
+                },
+              ],
+              state: {
                 index: 'index1',
                 query: 'query1',
               },
-            ],
-            state: {
-              index: 'index1',
-              query: 'query1',
             },
-          },
-          {
-            _internalIndexId: 'index2',
-            rawResults: [
-              {
+            {
+              _internalIndexId: 'index2',
+              rawResults: [
+                {
+                  index: 'index2',
+                  query: 'query2',
+                },
+              ],
+              state: {
                 index: 'index2',
                 query: 'query2',
               },
-            ],
-            state: {
-              index: 'index2',
-              query: 'query2',
             },
-          },
-        ],
+          ],
+        },
       });
 
       expect(ism.store.getState().results.index1.query).toBe('query1');
