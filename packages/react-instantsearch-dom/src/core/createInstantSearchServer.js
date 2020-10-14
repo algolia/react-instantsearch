@@ -10,7 +10,7 @@ const getIndexId = context =>
     ? context.multiIndexContext.targetedIndex
     : context.ais.mainTargetedIndex;
 
-const createSearchParametersCollector = accumulator => {
+export const createSearchParametersCollector = accumulator => {
   return (getWidgetSearchParameters, context, props, searchState) => {
     accumulator.push({
       getSearchParameters: getWidgetSearchParameters,
@@ -129,6 +129,31 @@ const multiIndexSearch = (
   );
 };
 
+export const getResultsStateFromSearchParameters = function(indexName, searchClient, searchParameters) {
+  const { sharedParameters, derivedParameters } = getSearchParameters(
+    indexName,
+    searchParameters
+  );
+
+  const helper = algoliasearchHelper(searchClient, sharedParameters.index);
+
+  if (typeof searchClient.addAlgoliaAgent === 'function') {
+    searchClient.addAlgoliaAgent(`react-instantsearch-server (${version})`);
+  }
+
+  if (Object.keys(derivedParameters).length === 0) {
+    return singleIndexSearch(helper, sharedParameters);
+  }
+
+  return multiIndexSearch(
+    indexName,
+    searchClient,
+    helper,
+    sharedParameters,
+    derivedParameters
+  );
+}
+
 export const findResultsState = function(App, props) {
   if (!props) {
     throw new Error(
@@ -159,26 +184,5 @@ export const findResultsState = function(App, props) {
     />
   );
 
-  const { sharedParameters, derivedParameters } = getSearchParameters(
-    indexName,
-    searchParameters
-  );
-
-  const helper = algoliasearchHelper(searchClient, sharedParameters.index);
-
-  if (typeof searchClient.addAlgoliaAgent === 'function') {
-    searchClient.addAlgoliaAgent(`react-instantsearch-server (${version})`);
-  }
-
-  if (Object.keys(derivedParameters).length === 0) {
-    return singleIndexSearch(helper, sharedParameters);
-  }
-
-  return multiIndexSearch(
-    indexName,
-    searchClient,
-    helper,
-    sharedParameters,
-    derivedParameters
-  );
+  return getResultsStateFromSearchParameters(indexName, searchClient, searchParameters);
 };
