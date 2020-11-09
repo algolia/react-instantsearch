@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  RefinementList,
   SearchBox,
   Hits,
   Configure,
@@ -9,6 +8,7 @@ import {
   Pagination,
   InstantSearch,
 } from 'react-instantsearch-dom';
+import Filters from './filters';
 
 const HitComponent = ({ hit }) => (
   <div className="hit">
@@ -66,7 +66,7 @@ export default class extends React.Component {
         </header>
         <main>
           <div className="menu">
-            <RefinementList attribute="categories" />
+            <Filters />
           </div>
           <div className="results">
             <Hits hitComponent={HitComponent} />
