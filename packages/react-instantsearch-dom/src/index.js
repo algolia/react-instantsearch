@@ -66,6 +66,7 @@ export { default as Stats } from './widgets/Stats';
 export { default as ToggleRefinement } from './widgets/ToggleRefinement';
 export { default as VoiceSearch } from './widgets/VoiceSearch';
 export { default as QueryRuleCustomData } from './widgets/QueryRuleCustomData';
+export { default as EXPERIMENTAL_Answers } from './widgets/Answers';
 
 // Utils
 export { createClassNames } from './core/utils';
