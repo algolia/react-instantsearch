@@ -14,8 +14,8 @@ function DefaultAnswersComponent({ isLoading, hits = [] }) {
 
 export default function Answers({
   searchClient,
+  queryLanguages,
   attributesForPrediction = ['*'],
-  queryLanguages = ['en'],
   nbHits = 1,
   answersComponent: AnswersComponent = DefaultAnswersComponent,
 }) {
