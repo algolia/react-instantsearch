@@ -17,6 +17,7 @@ export default function Answers({
   queryLanguages,
   attributesForPrediction = ['*'],
   nbHits = 1,
+  extraParameters = {},
   answersComponent: AnswersComponent = DefaultAnswersComponent,
 }) {
   const context = useContext(instantSearchContext);
@@ -64,6 +65,7 @@ export default function Answers({
     setIsLoading(true);
     runConcurrentSafePromise(
       searchIndex.findAnswers(_query, queryLanguages, {
+        ...extraParameters,
         nbHits,
         attributesForPrediction,
       })
