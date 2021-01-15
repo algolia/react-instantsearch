@@ -17,8 +17,8 @@ export default function Answers({
   queryLanguages,
   attributesForPrediction = ['*'],
   nbHits = 1,
-  extraParameters = {},
   answersComponent: AnswersComponent = DefaultAnswersComponent,
+  ...extraParameters = {},
 }) {
   const context = useContext(instantSearchContext);
   const [query, setQuery] = useState();
