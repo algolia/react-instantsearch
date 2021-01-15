@@ -34,7 +34,7 @@ export default function Answers({
     queryLanguages,
     attributesForPrediction,
     nbHits,
-    extraParameters,
+    ...extraParameters,
   });
 
   return <AnswersComponent hits={hits} isLoading={isLoading} />;

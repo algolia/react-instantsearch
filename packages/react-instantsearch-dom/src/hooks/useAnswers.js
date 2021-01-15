@@ -8,7 +8,7 @@ export default function useAnswers({
   queryLanguages,
   attributesForPrediction,
   nbHits,
-  extraParameters,
+  ...extraParameters
 }) {
   const context = useContext(instantSearchContext);
   const [query, setQuery] = useState();
