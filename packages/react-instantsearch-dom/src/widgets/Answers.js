@@ -15,10 +15,10 @@ function DefaultAnswersComponent({ isLoading, hits = [] }) {
 export default function Answers({
   searchClient,
   queryLanguages,
-  attributesForPrediction = ['*'],
+  attributesForPrediction,
   nbHits = 1,
   answersComponent: AnswersComponent = DefaultAnswersComponent,
-  ...extraParameters = {},
+  ...extraParameters
 }) {
   const context = useContext(instantSearchContext);
   const [query, setQuery] = useState();
