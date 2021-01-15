@@ -12,13 +12,12 @@ function DefaultAnswersComponent({ isLoading, hits = [] }) {
   );
 }
 
-export default function Answers({
+function useAnswers({
   searchClient,
   queryLanguages,
   attributesForPrediction,
-  nbHits = 1,
-  answersComponent: AnswersComponent = DefaultAnswersComponent,
-  ...extraParameters
+  nbHits,
+  extraParameters,
 }) {
   const context = useContext(instantSearchContext);
   const [query, setQuery] = useState();
@@ -75,6 +74,25 @@ export default function Answers({
   useEffect(() => {
     fetchAnswers(query);
   }, [query]);
+
+  return { hits, isLoading };
+}
+
+export default function Answers({
+  searchClient,
+  queryLanguages,
+  attributesForPrediction,
+  nbHits = 1,
+  answersComponent: AnswersComponent = DefaultAnswersComponent,
+  ...extraParameters
+}) {
+  const { hits, isLoading } = useAnswers({
+    searchClient,
+    queryLanguages,
+    attributesForPrediction,
+    nbHits,
+    extraParameters,
+  });
 
   return <AnswersComponent hits={hits} isLoading={isLoading} />;
 }
