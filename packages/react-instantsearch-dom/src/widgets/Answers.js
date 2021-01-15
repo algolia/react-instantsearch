@@ -2,13 +2,24 @@ import React, { useState, useEffect, useMemo, useContext } from 'react';
 import { instantSearchContext } from 'react-instantsearch-core';
 import { createConcurrentSafePromise } from '../lib/createConcurrentSafePromise';
 import { debounce } from '../lib/debounce';
+import { createClassNames } from '../core/utils';
+
+const cx = createClassNames('Answers');
 
 /* eslint-disable react/prop-types */
 function DefaultAnswersComponent({ isLoading, hits = [] }) {
-  return isLoading ? (
-    <p>loading...</p>
-  ) : (
-    hits && hits.length > 0 && <pre>{JSON.stringify(hits, null, 2)}</pre>
+  return (
+    <div className={cx('', hits.length === 0 && '-empty')}>
+      <div className={cx('header')}>Algolia Answers</div>
+      {isLoading && <div className={cx('loader')}>loading...</div>}
+      <ul className={cx('list')}>
+        {hits.map((hit, index) => (
+          <li key={index} className={cx('item')}>
+            {JSON.stringify(hit)}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
