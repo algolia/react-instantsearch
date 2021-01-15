@@ -34,13 +34,6 @@ export default function Answers({
     index,
   ]);
   useEffect(() => {
-    // eslint-disable-next-line no-warning-comments
-    // FIXME: remove this customization once the engine accepts url encoded query params
-    if (searchClient.transporter) {
-      searchClient.transporter.userAgent.value = 'answers-test';
-    }
-  }, [searchClient]);
-  useEffect(() => {
     const unsubcribe = context.store.subscribe(() => {
       const { widgets, results } = context.store.getState();
       setQuery(widgets.query);
@@ -68,6 +61,11 @@ export default function Answers({
         ...extraParameters,
         nbHits,
         attributesForPrediction,
+        // eslint-disable-next-line no-warning-comments
+        // FIXME: remove this x-algolia-agent once the engine accepts url encoded query params
+        queryParameters: {
+          'x-algolia-agent': 'answers-test',
+        },
       })
     ).then(result => {
       setDebouncedResult(result);
