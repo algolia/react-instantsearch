@@ -69,7 +69,7 @@ export { default as QueryRuleCustomData } from './widgets/QueryRuleCustomData';
 export { default as EXPERIMENTAL_Answers } from './widgets/Answers';
 
 // hooks
-export { default as useAnswers } from './hooks/useAnswers';
+export { default as EXPERIMENTAL_useAnswers } from './hooks/useAnswers';
 
 // Utils
 export { createClassNames } from './core/utils';
