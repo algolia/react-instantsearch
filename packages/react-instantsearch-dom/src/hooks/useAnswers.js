@@ -3,6 +3,18 @@ import { instantSearchContext } from 'react-instantsearch-core';
 import { createConcurrentSafePromise } from '../lib/createConcurrentSafePromise';
 import { debounce, debounceAsync } from '../lib/debounce';
 
+function hasReactHooks() {
+  // >= 16.8.0
+  const [major, minor] = React.version.split('.').map(Number);
+  if (major >= 17) {
+    return true;
+  }
+  if (major === 16 && minor >= 8) {
+    return true;
+  }
+  return false;
+}
+
 export default function useAnswers({
   searchClient,
   queryLanguages,
@@ -12,6 +24,11 @@ export default function useAnswers({
   searchDebounceTime = 100,
   ...extraParameters
 }) {
+  if (!hasReactHooks()) {
+    throw new Error(
+      `\`Answers\` component and \`useAnswers\` hook require all React packages to be 16.8.0 or higher.`
+    );
+  }
   const context = useContext(instantSearchContext);
   const [query, setQuery] = useState();
   const [index, setIndex] = useState();
