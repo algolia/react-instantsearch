@@ -42,10 +42,18 @@ export default function useAnswers({
     searchClient,
     index,
   ]);
-  const debouncedSearch = useMemo(
-    () => debounceAsync(searchIndex.findAnswers, searchDebounceTime),
-    [searchIndex]
-  );
+  const debouncedSearch = useMemo(() => {
+    if (!searchIndex) {
+      // eslint-disable-next-line prefer-promise-reject-errors
+      return () => Promise.reject();
+    }
+    if (!searchIndex.findAnswers) {
+      throw new Error(
+        '`Answers` component and `useAnswers` hook require `algoliasearch` to be 4.8.0 or higher.'
+      );
+    }
+    return debounceAsync(searchIndex.findAnswers, searchDebounceTime);
+  }, [searchIndex]);
   useEffect(() => {
     const unsubcribe = context.store.subscribe(() => {
       const { widgets, results } = context.store.getState();
@@ -81,6 +89,10 @@ export default function useAnswers({
         },
       })
     ).then(result => {
+      if (!result) {
+        // It's undefined when it's debounced.
+        return;
+      }
       setDebouncedResult(result);
     });
   };
