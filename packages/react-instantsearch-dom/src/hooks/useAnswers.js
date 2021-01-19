@@ -1,13 +1,15 @@
 import React, { useState, useEffect, useMemo, useContext } from 'react';
 import { instantSearchContext } from 'react-instantsearch-core';
 import { createConcurrentSafePromise } from '../lib/createConcurrentSafePromise';
-import { debounce } from '../lib/debounce';
+import { debounce, debounceAsync } from '../lib/debounce';
 
 export default function useAnswers({
   searchClient,
   queryLanguages,
   attributesForPrediction,
   nbHits,
+  renderDebounceTime = 100,
+  searchDebounceTime = 100,
   ...extraParameters
 }) {
   const context = useContext(instantSearchContext);
@@ -23,6 +25,10 @@ export default function useAnswers({
     searchClient,
     index,
   ]);
+  const debouncedSearch = useMemo(
+    () => debounceAsync(searchIndex.findAnswers, searchDebounceTime),
+    [searchIndex]
+  );
   useEffect(() => {
     const unsubcribe = context.store.subscribe(() => {
       const { widgets, results } = context.store.getState();
@@ -36,7 +42,7 @@ export default function useAnswers({
       debounce(result => {
         setIsLoading(false);
         setHits(result.hits);
-      }, 200),
+      }, renderDebounceTime),
     [setIsLoading, setHits]
   );
   const fetchAnswers = _query => {
@@ -47,7 +53,7 @@ export default function useAnswers({
     }
     setIsLoading(true);
     runConcurrentSafePromise(
-      searchIndex.findAnswers(_query, queryLanguages, {
+      debouncedSearch(_query, queryLanguages, {
         ...extraParameters,
         nbHits,
         attributesForPrediction,
