@@ -8,15 +8,17 @@ const cx = createClassNames('Answers');
 function DefaultAnswersComponent({ isLoading, hits = [] }) {
   return (
     <div className={cx('', hits.length === 0 && '-empty')}>
-      <div className={cx('header')}>Algolia Answers</div>
-      {isLoading && <div className={cx('loader')}>loading...</div>}
-      <ul className={cx('list')}>
-        {hits.map((hit, index) => (
-          <li key={index} className={cx('item')}>
-            {JSON.stringify(hit)}
-          </li>
-        ))}
-      </ul>
+      <div className={cx('header')}></div>
+      {isLoading && <div className={cx('loader')}></div>}
+      {!isLoading && (
+        <ul className={cx('list')}>
+          {hits.map((hit, index) => (
+            <li key={index} className={cx('item')}>
+              {JSON.stringify(hit)}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
