@@ -9,8 +9,9 @@ function DefaultAnswersComponent({ isLoading, hits = [] }) {
   return (
     <div className={cx('', hits.length === 0 && '-empty')}>
       <div className={cx('header')}></div>
-      {isLoading && <div className={cx('loader')}></div>}
-      {!isLoading && (
+      {isLoading ? (
+        <div className={cx('loader')}></div>
+      ) : (
         <ul className={cx('list')}>
           {hits.map((hit, index) => (
             <li key={index} className={cx('item')}>
