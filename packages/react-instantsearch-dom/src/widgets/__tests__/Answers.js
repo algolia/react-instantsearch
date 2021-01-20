@@ -1,17 +1,23 @@
 import React from 'react';
-import algoliasearch from 'algoliasearch';
 import { InstantSearch, SearchBox } from 'react-instantsearch-dom';
 import { render, fireEvent, waitFor } from '@testing-library/react';
 import MutationObserver from '@sheerun/mutationobserver-shim';
 import Answers from '../Answers';
 
+const createSearchClient = () => ({
+  initIndex: () => ({
+    findAnswers: jest.fn(() =>
+      Promise.resolve({
+        hits: [{ title: 'hello' }],
+      })
+    ),
+  }),
+});
+
 describe('Answers', () => {
   let searchClient;
   beforeEach(() => {
-    searchClient = algoliasearch(
-      'CKOEQ4XGMU',
-      '6560d3886292a5aec86d63b9a2cba447'
-    );
+    searchClient = createSearchClient();
   });
 
   it('renders empty Answers widget', () => {
@@ -74,7 +80,7 @@ describe('Answers', () => {
     // https://github.com/testing-library/dom-testing-library/releases/tag/v7.0.0
     window.MutationObserver = MutationObserver;
 
-    const { getByText, getByPlaceholderText } = render(
+    const { container, getByText, getByPlaceholderText } = render(
       <InstantSearch indexName="ted" searchClient={searchClient}>
         <SearchBox />
         <Answers
@@ -93,9 +99,13 @@ describe('Answers', () => {
         />
       </InstantSearch>
     );
+    expect(() => {
+      getByText('hits received');
+    }).toThrow();
+
     fireEvent.change(getByPlaceholderText('Search here…'), {
       target: { value: 'sarah' },
     });
-    await waitFor(() => getByText('hits received'), { timeout: 5000 });
+    await waitFor(() => getByText('hits received'));
   });
 });
