@@ -55,10 +55,11 @@ export default function useAnswers({
     return debounceAsync(searchIndex.findAnswers, searchDebounceTime);
   }, [searchIndex]);
   useEffect(() => {
+    setIndex(context.mainTargetedIndex);
+
     const unsubcribe = context.store.subscribe(() => {
-      const { widgets, results } = context.store.getState();
+      const { widgets } = context.store.getState();
       setQuery(widgets.query);
-      setIndex(results && results.index);
     });
     return unsubcribe;
   }, [context]);
@@ -88,13 +89,15 @@ export default function useAnswers({
           'x-algolia-agent': 'answers-test',
         },
       })
-    ).then(result => {
-      if (!result) {
-        // It's undefined when it's debounced.
-        return;
-      }
-      setDebouncedResult(result);
-    });
+    )
+      .then(result => {
+        if (!result) {
+          // It's undefined when it's debounced.
+          return;
+        }
+        setDebouncedResult(result);
+      })
+      .catch(_error => {});
   };
 
   useEffect(() => {
