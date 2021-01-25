@@ -6,13 +6,7 @@ import { debounce, debounceAsync } from '../lib/debounce';
 function hasReactHooks() {
   // >= 16.8.0
   const [major, minor] = React.version.split('.').map(Number);
-  if (major >= 17) {
-    return true;
-  }
-  if (major === 16 && minor >= 8) {
-    return true;
-  }
-  return false;
+  return Boolean(major >= 17 || (major === 16 && minor >= 8));
 }
 
 export default function useAnswers({
