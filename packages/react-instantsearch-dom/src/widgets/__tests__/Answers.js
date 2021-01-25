@@ -80,7 +80,7 @@ describe('Answers', () => {
     // https://github.com/testing-library/dom-testing-library/releases/tag/v7.0.0
     window.MutationObserver = MutationObserver;
 
-    const { container, getByText, getByPlaceholderText } = render(
+    const { getByText, getByPlaceholderText } = render(
       <InstantSearch indexName="ted" searchClient={searchClient}>
         <SearchBox />
         <Answers
