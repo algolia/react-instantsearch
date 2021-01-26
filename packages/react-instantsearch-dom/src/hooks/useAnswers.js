@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo, useContext } from 'react';
 import { instantSearchContext } from 'react-instantsearch-core';
 import { createConcurrentSafePromise } from '../lib/createConcurrentSafePromise';
-import { debounce, debounceAsync } from '../lib/debounce';
+import { debounce } from '../lib/debounce';
 
 function hasReactHooks() {
   // >= 16.8.0
@@ -46,7 +46,7 @@ export default function useAnswers({
         '`Answers` component and `useAnswers` hook require `algoliasearch` to be 4.8.0 or higher.'
       );
     }
-    return debounceAsync(searchIndex.findAnswers, searchDebounceTime);
+    return debounce(searchIndex.findAnswers, searchDebounceTime);
   }, [searchIndex]);
   useEffect(() => {
     setIndex(context.mainTargetedIndex);
