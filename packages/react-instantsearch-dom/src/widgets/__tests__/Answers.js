@@ -1,8 +1,10 @@
 import React from 'react';
 import { InstantSearch, SearchBox } from 'react-instantsearch-dom';
-import { render, fireEvent, waitFor } from '@testing-library/react';
-import MutationObserver from '@sheerun/mutationobserver-shim';
+import { render, fireEvent } from '@testing-library/react';
 import Answers from '../Answers';
+
+const runAllMicroTasks = (time = 0) =>
+  new Promise(resolve => setTimeout(resolve, time));
 
 const createSearchClient = () => ({
   initIndex: () => ({
@@ -76,10 +78,6 @@ describe('Answers', () => {
   });
 
   it('renders an answer', async () => {
-    // It's required for `waitFor` method.
-    // https://github.com/testing-library/dom-testing-library/releases/tag/v7.0.0
-    window.MutationObserver = MutationObserver;
-
     const { getByText, getByPlaceholderText } = render(
       <InstantSearch indexName="ted" searchClient={searchClient}>
         <SearchBox />
@@ -96,6 +94,8 @@ describe('Answers', () => {
               <pre>{JSON.stringify({ isLoading, hits })}</pre>
             )
           }
+          renderDebounceTime={0}
+          searchDebounceTime={0}
         />
       </InstantSearch>
     );
@@ -106,6 +106,7 @@ describe('Answers', () => {
     fireEvent.change(getByPlaceholderText('Search here…'), {
       target: { value: 'sarah' },
     });
-    await waitFor(() => getByText('hits received'));
+    await runAllMicroTasks(10);
+    getByText('hits received');
   });
 });
