@@ -41,18 +41,20 @@ export default function useAnswers({
       '`Answers` component and `useAnswers` hook require `algoliasearch` to be 4.8.0 or higher.'
     );
   }
+
   const debouncedSearch = useMemo(() => {
     return debounce(searchIndex.findAnswers, searchDebounceTime);
   }, [searchIndex]);
+
   useEffect(() => {
     setIndex(context.mainTargetedIndex);
 
-    const unsubcribe = context.store.subscribe(() => {
+    return context.store.subscribe(() => {
       const { widgets } = context.store.getState();
       setQuery(widgets.query);
     });
-    return unsubcribe;
   }, [context]);
+
   const setDebouncedResult = useMemo(
     () =>
       debounce(result => {
@@ -61,6 +63,7 @@ export default function useAnswers({
       }, renderDebounceTime),
     [setIsLoading, setHits]
   );
+
   const fetchAnswers = _query => {
     if (!_query) {
       setIsLoading(false);
