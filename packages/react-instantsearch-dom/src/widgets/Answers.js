@@ -29,6 +29,8 @@ export default function Answers({
   queryLanguages,
   attributesForPrediction,
   nbHits = 1,
+  renderDebounceTime,
+  searchDebounceTime,
   answersComponent: AnswersComponent = DefaultAnswersComponent,
   ...extraParameters
 }) {
@@ -37,6 +39,8 @@ export default function Answers({
     queryLanguages,
     attributesForPrediction,
     nbHits,
+    renderDebounceTime,
+    searchDebounceTime,
     ...extraParameters,
   });
 
