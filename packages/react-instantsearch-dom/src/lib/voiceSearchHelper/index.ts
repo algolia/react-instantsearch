@@ -1,6 +1,6 @@
 // copied from https://github.com/algolia/instantsearch.js/blob/688e36a67bb4c63d008d8abc02257a7b7c04e513/src/lib/voiceSearchHelper/index.ts
 
-// begin - wrong SpeechRecognition-related types
+// #region wrong SpeechRecognition-related types
 // This is not released in typescript yet, so we're copy&pasting the type definition from
 // https://github.com/microsoft/TypeScript-DOM-lib-generator/pull/924
 export type SpeechRecognitionErrorCode =
@@ -17,7 +17,7 @@ interface SpeechRecognitionErrorEvent extends Event {
   readonly error: SpeechRecognitionErrorCode;
   readonly message: string;
 }
-// end - wrong SpeechRecognition-related types
+// #endregion wrong SpeechRecognition-related types
 
 export type VoiceSearchHelperParams = {
   searchAsYouSpeak: boolean;
