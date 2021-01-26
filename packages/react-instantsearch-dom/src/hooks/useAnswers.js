@@ -82,15 +82,13 @@ export default function useAnswers({
           'x-algolia-agent': 'answers-test',
         },
       })
-    )
-      .then(result => {
-        if (!result) {
-          // It's undefined when it's debounced.
-          return;
-        }
-        setDebouncedResult(result);
-      })
-      .catch(_error => {});
+    ).then(result => {
+      if (!result) {
+        // It's undefined when it's debounced.
+        return;
+      }
+      setDebouncedResult(result);
+    });
   };
 
   useEffect(() => {
