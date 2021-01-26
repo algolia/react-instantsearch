@@ -36,16 +36,12 @@ export default function useAnswers({
     searchClient,
     index,
   ]);
+  if (!searchIndex.findAnswers) {
+    throw new Error(
+      '`Answers` component and `useAnswers` hook require `algoliasearch` to be 4.8.0 or higher.'
+    );
+  }
   const debouncedSearch = useMemo(() => {
-    if (!searchIndex) {
-      // eslint-disable-next-line prefer-promise-reject-errors
-      return () => Promise.reject();
-    }
-    if (!searchIndex.findAnswers) {
-      throw new Error(
-        '`Answers` component and `useAnswers` hook require `algoliasearch` to be 4.8.0 or higher.'
-      );
-    }
     return debounce(searchIndex.findAnswers, searchDebounceTime);
   }, [searchIndex]);
   useEffect(() => {
