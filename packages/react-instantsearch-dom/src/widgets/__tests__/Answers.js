@@ -2,9 +2,7 @@ import React from 'react';
 import { InstantSearch, SearchBox } from 'react-instantsearch-dom';
 import { render, fireEvent } from '@testing-library/react';
 import Answers from '../Answers';
-
-const runAllMicroTasks = (time = 0) =>
-  new Promise(resolve => setTimeout(resolve, time));
+import { wait } from '../../../../../test/utils';
 
 const createSearchClient = () => ({
   initIndex: () => ({
@@ -106,7 +104,7 @@ describe('Answers', () => {
     fireEvent.change(getByPlaceholderText('Search here…'), {
       target: { value: 'sarah' },
     });
-    await runAllMicroTasks(10);
+    await wait(10);
     getByText('hits received');
   });
 });
