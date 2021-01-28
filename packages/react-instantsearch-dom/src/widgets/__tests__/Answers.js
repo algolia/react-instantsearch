@@ -104,7 +104,7 @@ describe('Answers', () => {
     fireEvent.change(getByPlaceholderText('Search here…'), {
       target: { value: 'sarah' },
     });
-    await wait(10);
+    await wait(20);
     getByText('hits received');
   });
 });
