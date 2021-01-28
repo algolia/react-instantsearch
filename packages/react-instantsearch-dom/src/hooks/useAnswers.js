@@ -24,10 +24,10 @@ export default function useAnswers({
     );
   }
   const context = useContext(instantSearchContext);
-  const [query, setQuery] = useState();
-  const [index, setIndex] = useState();
-  const [isLoading, setIsLoading] = useState();
-  const [hits, setHits] = useState();
+  const [query, setQuery] = useState(context.store.getState().widgets.query);
+  const [index, setIndex] = useState(context.mainTargetedIndex);
+  const [isLoading, setIsLoading] = useState(false);
+  const [hits, setHits] = useState([]);
   const runConcurrentSafePromise = useMemo(
     () => createConcurrentSafePromise(),
     []

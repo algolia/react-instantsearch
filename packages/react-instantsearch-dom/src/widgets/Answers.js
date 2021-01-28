@@ -5,7 +5,7 @@ import useAnswers from '../hooks/useAnswers';
 const cx = createClassNames('Answers');
 
 /* eslint-disable react/prop-types */
-function DefaultAnswersComponent({ isLoading, hits = [] }) {
+function DefaultAnswersComponent({ isLoading, hits }) {
   return (
     <div className={cx('', hits.length === 0 && '-empty')}>
       <div className={cx('header')}></div>
