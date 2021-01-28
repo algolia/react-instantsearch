@@ -64,15 +64,15 @@ export default function useAnswers({
     [setIsLoading, setHits]
   );
 
-  const fetchAnswers = _query => {
-    if (!_query) {
+  const fetchAnswers = () => {
+    if (!query) {
       setIsLoading(false);
       setHits([]);
       return;
     }
     setIsLoading(true);
     runConcurrentSafePromise(
-      debouncedSearch(_query, queryLanguages, {
+      debouncedSearch(query, queryLanguages, {
         ...extraParameters,
         nbHits,
         attributesForPrediction,
@@ -92,7 +92,7 @@ export default function useAnswers({
   };
 
   useEffect(() => {
-    fetchAnswers(query);
+    fetchAnswers();
   }, [query]);
 
   return { hits, isLoading };
