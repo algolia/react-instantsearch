@@ -42,12 +42,10 @@ export default createConnector({
     }
 
     return {
-      isVirtualReplica: results.appliedRelevancyStrictness 
-      !== undefined,
-      isSmartSorted: (
+      isVirtualReplica: results.appliedRelevancyStrictness !== undefined,
+      isSmartSorted:
         results.appliedRelevancyStrictness !== undefined &&
-        results.appliedRelevancyStrictness > 0
-      ),
+        results.appliedRelevancyStrictness > 0,
     };
   },
 

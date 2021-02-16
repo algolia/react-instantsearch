@@ -17,8 +17,8 @@ stories.add('default', () => (
       textComponent={({ isSmartSorted }) => (
         <div>
           {isSmartSorted
-            ? 'We are filtering unrelevant results'
-            : 'We are not filtering unrelevant results'}
+            ? 'We removed some search results to show you the most relevant ones'
+            : 'Currently showing all results'}
         </div>
       )}
       buttonTextComponent={({ isSmartSorted }) => (

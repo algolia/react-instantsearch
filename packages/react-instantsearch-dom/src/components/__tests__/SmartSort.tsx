@@ -1,37 +1,28 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import renderer from 'react-test-renderer';
-import SmartSort from '../SmartSort';
+import SmartSort, { SmartSortComponentProps } from '../SmartSort';
 
-const textComponent = ({ isSmartSorted }) => (
+const TextComponent = ({ isSmartSorted }: SmartSortComponentProps) => (
   <div>
     {isSmartSorted
-      ? 'We are filtering unrelevant results'
-      : 'We are not filtering unrelevant results'}
+      ? 'We removed some search results to show you the most relevant ones'
+      : 'Currently showing all results'}
   </div>
 );
 
-const buttonTextComponent = ({ isSmartSorted }) => (
+const ButtonTextComponent = ({ isSmartSorted }: SmartSortComponentProps) => (
   <div>{isSmartSorted ? 'See all results' : 'See relevant results'}</div>
 );
-
-textComponent.propTypes = {
-  isSmartSorted: PropTypes.bool.isRequired,
-};
-
-buttonTextComponent.propTypes = {
-  isSmartSorted: PropTypes.bool.isRequired,
-};
 
 describe('SmartSort', () => {
   it("returns null if it's not a virtual replica", () => {
     const tree = renderer.create(
       <SmartSort
-        buttonTextComponent={buttonTextComponent}
+        buttonTextComponent={ButtonTextComponent}
         isVirtualReplica={false}
         isSmartSorted={false}
         refine={() => {}}
-        textComponent={textComponent}
+        textComponent={TextComponent}
       />
     );
 
@@ -41,12 +32,12 @@ describe('SmartSort', () => {
   it('accepts a custom className', () => {
     const tree = renderer.create(
       <SmartSort
-        buttonTextComponent={buttonTextComponent}
+        buttonTextComponent={ButtonTextComponent}
         className="MyCustomSmartSort"
         isVirtualReplica={true}
         isSmartSorted={false}
         refine={() => {}}
-        textComponent={textComponent}
+        textComponent={TextComponent}
       />
     );
 
@@ -56,11 +47,11 @@ describe('SmartSort', () => {
   it('forward isSmartSorted to props components', () => {
     const tree = renderer.create(
       <SmartSort
-        buttonTextComponent={buttonTextComponent}
+        buttonTextComponent={ButtonTextComponent}
         isVirtualReplica={true}
         isSmartSorted={true}
         refine={() => {}}
-        textComponent={textComponent}
+        textComponent={TextComponent}
       />
     );
 

@@ -5,24 +5,24 @@ import { createClassNames } from '../core/utils';
 
 const cx = createClassNames('SmartSort');
 
-type ComponentProps = {
+export type SmartSortComponentProps = {
   isSmartSorted: boolean;
 };
 
-export type SmartSortComponent = {
-  buttonTextComponent: React.FunctionComponent<ComponentProps>;
+export type SmartSortProps = {
   className?: string;
   isVirtualReplica: boolean;
   isSmartSorted: boolean;
-  textComponent: React.FunctionComponent<ComponentProps>;
+  buttonTextComponent: React.FunctionComponent<SmartSortComponentProps>;
+  textComponent: React.FunctionComponent<SmartSortComponentProps>;
   refine(relevancyStrictness: number | undefined): void;
 };
 
-const SmartSort: React.FC<SmartSortComponent> = ({
-  buttonTextComponent: ButtonTextComponent,
+const SmartSort: React.FC<SmartSortProps> = ({
   className = '',
   isVirtualReplica,
   isSmartSorted,
+  buttonTextComponent: ButtonTextComponent,
   textComponent: TextComponent,
   refine,
 }) => {

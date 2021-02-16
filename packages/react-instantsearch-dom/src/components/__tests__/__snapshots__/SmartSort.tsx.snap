@@ -8,7 +8,7 @@ exports[`SmartSort accepts a custom className 1`] = `
     className="ais-SmartSort-text"
   >
     <div>
-      We are not filtering unrelevant results
+      Currently showing all results
     </div>
   </div>
   <button
@@ -22,7 +22,7 @@ exports[`SmartSort accepts a custom className 1`] = `
 </div>
 `;
 
-exports[`SmartSort forward isSmartSorted to components 1`] = `
+exports[`SmartSort forward isSmartSorted to props components 1`] = `
 <div
   className="ais-SmartSort"
 >
@@ -30,7 +30,7 @@ exports[`SmartSort forward isSmartSorted to components 1`] = `
     className="ais-SmartSort-text"
   >
     <div>
-      We are filtering unrelevant results
+      We removed some search results to show you the most relevant ones
     </div>
   </div>
   <button
