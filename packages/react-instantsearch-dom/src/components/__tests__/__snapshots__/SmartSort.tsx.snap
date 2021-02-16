@@ -1,45 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SmartSort accepts a custom className 1`] = `
-<div
-  className="ais-SmartSort MyCustomSmartSort"
->
-  <div
-    className="ais-SmartSort-text"
-  >
-    <div>
-      Currently showing all results
-    </div>
-  </div>
-  <button
-    className="ais-SmartSort-button"
-    onClick={[Function]}
-  >
-    <div>
-      See relevant results
-    </div>
-  </button>
-</div>
-`;
-
 exports[`SmartSort forward isSmartSorted to props components 1`] = `
 <div
   className="ais-SmartSort"
 >
   <div
     className="ais-SmartSort-text"
-  >
-    <div>
-      We removed some search results to show you the most relevant ones
-    </div>
-  </div>
+  />
   <button
     className="ais-SmartSort-button"
     onClick={[Function]}
-  >
-    <div>
-      See all results
-    </div>
-  </button>
+  />
 </div>
 `;

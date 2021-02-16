@@ -41,20 +41,36 @@ describe('SmartSort', () => {
       />
     );
 
-    expect(tree.toJSON()).toMatchSnapshot();
+    expect(tree.root.props.className.includes('MyCustomSmartSort')).toBe(true);
   });
 
   it('forward isSmartSorted to props components', () => {
+    const mockTextComponent = jest.fn(() => null);
+
+    const mockButtonTextComponent = jest.fn(() => null);
+
     const tree = renderer.create(
       <SmartSort
-        buttonTextComponent={ButtonTextComponent}
+        buttonTextComponent={mockTextComponent}
         isVirtualReplica={true}
         isSmartSorted={true}
         refine={() => {}}
-        textComponent={TextComponent}
+        textComponent={mockButtonTextComponent}
       />
     );
 
+    expect(mockTextComponent).toHaveBeenCalledWith(
+      {
+        isSmartSorted: true,
+      },
+      {}
+    );
+    expect(mockButtonTextComponent).toHaveBeenCalledWith(
+      {
+        isSmartSorted: true,
+      },
+      {}
+    );
     expect(tree.toJSON()).toMatchSnapshot();
   });
 });
