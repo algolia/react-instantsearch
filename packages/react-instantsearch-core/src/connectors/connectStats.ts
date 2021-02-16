@@ -13,7 +13,7 @@ import { getResults } from '../core/indexUtils';
 export default createConnector({
   displayName: 'AlgoliaStats',
 
-  getProvidedProps(props, searchState, searchResults) {
+  getProvidedProps(props, _searchState, searchResults) {
     const results = getResults(searchResults, {
       ais: props.contextValue,
       multiIndexContext: props.indexContextValue,
@@ -23,14 +23,10 @@ export default createConnector({
       return null;
     }
 
-    const isSmartSorted = !(
-      results.appliedRelevancyStrictness === undefined ||
-      results.appliedRelevancyStrictness <= 0 ||
-      results.appliedRelevancyStrictness > 100
-    );
-
     return {
-      isSmartSorted,
+      isSmartSorted:
+        results.appliedRelevancyStrictness !== undefined &&
+        results.appliedRelevancyStrictness > 0,
       nbHits: results.nbHits,
       nbSortedHits: results.nbSortedHits,
       processingTimeMS: results.processingTimeMS,
