@@ -24,7 +24,7 @@ buttonTextComponent.propTypes = {
 };
 
 describe('SmartSort', () => {
-  it("returns null if it's a virtual replica", () => {
+  it("returns null if it's not a virtual replica", () => {
     const tree = renderer.create(
       <SmartSort
         buttonTextComponent={buttonTextComponent}
@@ -53,7 +53,7 @@ describe('SmartSort', () => {
     expect(tree.toJSON()).toMatchSnapshot();
   });
 
-  it('forward isSmartSorted to components', () => {
+  it('forward isSmartSorted to props components', () => {
     const tree = renderer.create(
       <SmartSort
         buttonTextComponent={buttonTextComponent}
