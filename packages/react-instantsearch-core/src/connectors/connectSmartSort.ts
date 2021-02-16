@@ -42,7 +42,8 @@ export default createConnector({
     }
 
     return {
-      isVirtualReplica: !(results.appliedRelevancyStrictness === undefined),
+      isVirtualReplica: results.appliedRelevancyStrictness 
+      !== undefined,
       isSmartSorted: !(
         results.appliedRelevancyStrictness === undefined ||
         results.appliedRelevancyStrictness <= 0 ||
