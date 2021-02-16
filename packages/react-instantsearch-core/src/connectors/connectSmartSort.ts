@@ -28,7 +28,7 @@ function getCurrentRefinement(
 export default createConnector({
   displayName: 'AlgoliaSmartSort',
 
-  getProvidedProps(props, searchState, searchResults) {
+  getProvidedProps(props, _searchState, searchResults) {
     const results = getResults(searchResults, {
       ais: props.contextValue,
       multiIndexContext: props.indexContextValue,
