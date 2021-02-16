@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Stats accepts a custom className 1`] = `
+<div
+  className="ais-Stats MyCustomStats"
+>
+  <span
+    className="ais-Stats-text"
+  >
+    42 results found in 0ms
+  </span>
+</div>
+`;
+
+exports[`Stats renders default implementation if nbHits is equal to nbSortedHits 1`] = `
+<div
+  className="ais-Stats"
+>
+  <span
+    className="ais-Stats-text"
+  >
+    42 results found in 0ms
+  </span>
+</div>
+`;
+
+exports[`Stats renders rely on isSmartSorted 1`] = `
+<div
+  className="ais-Stats"
+>
+  <span
+    className="ais-Stats-text"
+  >
+    21 relevant results sorted out of 42 in 0ms
+  </span>
+</div>
+`;
+
+exports[`Stats renders with default props 1`] = `
+<div
+  className="ais-Stats"
+>
+  <span
+    className="ais-Stats-text"
+  >
+    42 results found in 0ms
+  </span>
+</div>
+`;
