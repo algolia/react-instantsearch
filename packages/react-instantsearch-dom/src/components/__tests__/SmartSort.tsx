@@ -49,7 +49,7 @@ describe('SmartSort', () => {
 
     const mockButtonTextComponent = jest.fn(() => null);
 
-    const tree = renderer.create(
+    renderer.create(
       <SmartSort
         buttonTextComponent={mockTextComponent}
         isVirtualReplica={true}
@@ -71,6 +71,5 @@ describe('SmartSort', () => {
       },
       {}
     );
-    expect(tree.toJSON()).toMatchSnapshot();
   });
 });
