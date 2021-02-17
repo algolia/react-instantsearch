@@ -7,7 +7,7 @@ import Stats from '../components/Stats';
  * @kind widget
  * @themeKey ais-Stats - the root div of the widget
  * @themeKey ais-Stats-text - the text of the widget - the count of items for each item
- * @translationkey stats - The string displayed by the stats widget. You get function({ n, nSorted, isSmartSorted, ms }) and you need to return a string. `n` is a number of hits retrieved, `nSorted` is a number of sorted hits retrieved, `isSmartSorted` is a boolean translating a `relevancyStrictness` set between 0 and 100, `ms` is a processed time.
+ * @translationkey stats - The string displayed by the stats widget. You get function(n, ms, nSorted, isSmartSorted) and you need to return a string. `n` is a number of hits retrieved, `ms` is a processed time, `nSorted` is a number of sorted hits retrieved, `isSmartSorted` is a boolean translating a `relevancyStrictness` set between 0 and 100.
  * @example
  * import React from 'react';
  * import { InstantSearch, Stats, Hits } from 'react-instantsearch-dom';

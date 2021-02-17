@@ -6,20 +6,19 @@ import { createClassNames } from '../core/utils';
 
 const cx = createClassNames('Stats');
 
-export type StatsTranslationKeyProps = {
-  isSmartSorted?: boolean;
-  n: number;
-  nSorted?: number;
-  ms: number;
-};
-
 export type StatsComponent = {
   className?: string;
   isSmartSorted: boolean;
   nbHits: number;
   nbSortedHits?: number;
   processingTimeMS: number;
-  translate(key: string, props: StatsTranslationKeyProps): string;
+  translate(
+    key: string,
+    n: number,
+    ms: number,
+    nSorted?: number,
+    isSmartSorted?: boolean
+  ): string;
 };
 
 const Stats: React.FC<StatsComponent> = ({
@@ -33,12 +32,13 @@ const Stats: React.FC<StatsComponent> = ({
   return (
     <div className={classNames(cx(''), className)}>
       <span className={cx('text')}>
-        {translate('stats', {
-          n: nbHits,
-          nSorted: nbSortedHits,
-          isSmartSorted,
-          ms: processingTimeMS,
-        })}
+        {translate(
+          'stats',
+          nbHits,
+          processingTimeMS,
+          nbSortedHits,
+          isSmartSorted
+        )}
       </span>
     </div>
   );
@@ -54,12 +54,12 @@ Stats.propTypes = {
 };
 
 export default translatable({
-  stats: ({
-    n,
-    nSorted,
-    isSmartSorted = false,
-    ms,
-  }: StatsTranslationKeyProps): string =>
+  stats: (
+    n: number,
+    ms: number,
+    nSorted?: number,
+    isSmartSorted?: boolean
+  ): string =>
     isSmartSorted && nSorted !== undefined && n !== nSorted
       ? `${nSorted.toLocaleString()} relevant results sorted out of ${n.toLocaleString()} in ${ms.toLocaleString()}ms`
       : `${n.toLocaleString()} results found in ${ms.toLocaleString()}ms`,
