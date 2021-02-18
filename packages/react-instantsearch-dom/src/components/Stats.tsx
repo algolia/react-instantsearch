@@ -6,7 +6,7 @@ import { createClassNames } from '../core/utils';
 
 const cx = createClassNames('Stats');
 
-export type StatsComponent = {
+export type StatsProps = {
   className?: string;
   isSmartSorted: boolean;
   nbHits: number;
@@ -21,7 +21,7 @@ export type StatsComponent = {
   ): string;
 };
 
-const Stats: React.FC<StatsComponent> = ({
+const Stats: React.FC<StatsProps> = ({
   className = '',
   isSmartSorted,
   nbHits,
