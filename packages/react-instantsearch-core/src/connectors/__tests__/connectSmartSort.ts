@@ -29,6 +29,8 @@ describe('connectSmartSort', () => {
       const props = connect.getProvidedProps({ contextValue }, null, {
         results: {
           hits: [],
+          nbHits: 300,
+          nbSortedHits: 1,
           appliedRelevancyStrictness: 30,
         },
       });
@@ -68,6 +70,8 @@ describe('connectSmartSort', () => {
       let props = connect.getProvidedProps({ contextValue }, null, {
         results: {
           hits: [],
+          nbHits: 300,
+          nbSortedHits: 1,
           appliedRelevancyStrictness: 98,
         },
       });
@@ -125,6 +129,8 @@ describe('connectSmartSort', () => {
           results: {
             second: {
               hits: [],
+              nbHits: 300,
+              nbSortedHits: 1,
               appliedRelevancyStrictness: 30,
             },
           },
@@ -180,6 +186,8 @@ describe('connectSmartSort', () => {
           results: {
             second: {
               hits: [],
+              nbHits: 300,
+              nbSortedHits: 1,
               appliedRelevancyStrictness: 30,
             },
           },

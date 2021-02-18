@@ -25,12 +25,8 @@ const SmartSort: React.FC<SmartSortProps> = ({
   buttonTextComponent: ButtonTextComponent,
   textComponent: TextComponent,
   refine,
-}) => {
-  if (!isVirtualReplica) {
-    return null;
-  }
-
-  return (
+}) =>
+  !isVirtualReplica ? null : (
     <div className={classNames(cx(''), className)}>
       <div className={cx('text')}>
         <TextComponent isSmartSorted={isSmartSorted} />
@@ -43,7 +39,6 @@ const SmartSort: React.FC<SmartSortProps> = ({
       </button>
     </div>
   );
-};
 
 SmartSort.propTypes = {
   buttonTextComponent: PropTypes.func.isRequired,

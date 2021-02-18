@@ -70,7 +70,7 @@ describe('Stats', () => {
   it('renders default implementation if nbHits is equal to nbSortedHits', () => {
     const tree = renderer.create(
       <Stats
-        isSmartSorted={true}
+        isSmartSorted={false}
         nbHits={42}
         nbSortedHits={42}
         processingTimeMS={0}

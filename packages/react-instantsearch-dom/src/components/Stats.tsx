@@ -60,7 +60,7 @@ export default translatable({
     nSorted?: number,
     isSmartSorted?: boolean
   ): string =>
-    isSmartSorted && n !== nSorted
+    isSmartSorted
       ? `${nSorted!.toLocaleString()} relevant results sorted out of ${n.toLocaleString()} in ${ms.toLocaleString()}ms`
       : `${n.toLocaleString()} results found in ${ms.toLocaleString()}ms`,
 })(Stats);
