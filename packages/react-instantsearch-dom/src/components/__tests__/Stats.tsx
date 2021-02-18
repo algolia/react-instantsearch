@@ -8,7 +8,17 @@ describe('Stats', () => {
       <Stats nbHits={42} isSmartSorted={false} processingTimeMS={0} />
     );
 
-    expect(tree.toJSON()).toMatchSnapshot();
+    expect(tree.toJSON()).toMatchInlineSnapshot(`
+      <div
+        className="ais-Stats"
+      >
+        <span
+          className="ais-Stats-text"
+        >
+          42 results found in 0ms
+        </span>
+      </div>
+    `);
   });
 
   it('accepts a custom className', () => {
@@ -21,7 +31,17 @@ describe('Stats', () => {
       />
     );
 
-    expect(tree.toJSON()).toMatchSnapshot();
+    expect(tree.toJSON()).toMatchInlineSnapshot(`
+      <div
+        className="ais-Stats MyCustomStats"
+      >
+        <span
+          className="ais-Stats-text"
+        >
+          42 results found in 0ms
+        </span>
+      </div>
+    `);
   });
 
   it('renders rely on isSmartSorted', () => {
@@ -34,7 +54,17 @@ describe('Stats', () => {
       />
     );
 
-    expect(tree.toJSON()).toMatchSnapshot();
+    expect(tree.toJSON()).toMatchInlineSnapshot(`
+      <div
+        className="ais-Stats"
+      >
+        <span
+          className="ais-Stats-text"
+        >
+          21 relevant results sorted out of 42 in 0ms
+        </span>
+      </div>
+    `);
   });
 
   it('renders default implementation if nbHits is equal to nbSortedHits', () => {
@@ -47,6 +77,16 @@ describe('Stats', () => {
       />
     );
 
-    expect(tree.toJSON()).toMatchSnapshot();
+    expect(tree.toJSON()).toMatchInlineSnapshot(`
+      <div
+        className="ais-Stats"
+      >
+        <span
+          className="ais-Stats-text"
+        >
+          42 results found in 0ms
+        </span>
+      </div>
+    `);
   });
 });
