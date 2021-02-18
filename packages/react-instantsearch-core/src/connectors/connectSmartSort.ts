@@ -44,9 +44,9 @@ export default createConnector({
     return {
       isVirtualReplica: results.appliedRelevancyStrictness !== undefined,
       isSmartSorted:
-         results.nbHits !== results.nbSortedHits &&
-           results.appliedRelevancyStrictness !== undefined &&
-           results.appliedRelevancyStrictness > 0,
+        results.nbHits !== results.nbSortedHits &&
+        results.appliedRelevancyStrictness !== undefined &&
+        results.appliedRelevancyStrictness > 0,
     };
   },
 
