@@ -8,7 +8,7 @@ const cx = createClassNames('Stats');
 
 export type StatsProps = {
   className?: string;
-  isSmartSorted: boolean;
+  areHitsSorted: boolean;
   nbHits: number;
   nbSortedHits?: number;
   processingTimeMS: number;
@@ -17,13 +17,13 @@ export type StatsProps = {
     n: number,
     ms: number,
     nSorted?: number,
-    isSmartSorted?: boolean
+    areHitsSorted?: boolean
   ): string;
 };
 
 const Stats: React.FC<StatsProps> = ({
   className = '',
-  isSmartSorted,
+  areHitsSorted,
   nbHits,
   nbSortedHits,
   processingTimeMS,
@@ -37,7 +37,7 @@ const Stats: React.FC<StatsProps> = ({
           nbHits,
           processingTimeMS,
           nbSortedHits,
-          isSmartSorted
+          areHitsSorted
         )}
       </span>
     </div>
@@ -46,7 +46,7 @@ const Stats: React.FC<StatsProps> = ({
 
 Stats.propTypes = {
   className: PropTypes.string,
-  isSmartSorted: PropTypes.bool.isRequired,
+  areHitsSorted: PropTypes.bool.isRequired,
   nbHits: PropTypes.number.isRequired,
   nbSortedHits: PropTypes.number,
   processingTimeMS: PropTypes.number.isRequired,
@@ -58,9 +58,9 @@ export default translatable({
     n: number,
     ms: number,
     nSorted?: number,
-    isSmartSorted?: boolean
+    areHitsSorted?: boolean
   ): string =>
-    isSmartSorted
+    areHitsSorted && n !== nSorted
       ? `${nSorted!.toLocaleString()} relevant results sorted out of ${n.toLocaleString()} in ${ms.toLocaleString()}ms`
       : `${n.toLocaleString()} results found in ${ms.toLocaleString()}ms`,
 })(Stats);

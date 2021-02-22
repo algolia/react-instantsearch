@@ -31,7 +31,7 @@ describe('connectStats', () => {
         nbHits: 666,
         processingTimeMS: 1,
         nbSortedHits: undefined,
-        isSmartSorted: false,
+        areHitsSorted: false,
       });
     });
   });
@@ -66,7 +66,7 @@ describe('connectStats', () => {
         nbHits: 666,
         processingTimeMS: 1,
         nbSortedHits: undefined,
-        isSmartSorted: false,
+        areHitsSorted: false,
       });
     });
   });

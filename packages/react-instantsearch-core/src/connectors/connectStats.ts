@@ -24,9 +24,10 @@ export default createConnector({
     }
 
     return {
-      isSmartSorted:
+      areHitsSorted:
         results.appliedRelevancyStrictness !== undefined &&
-        results.appliedRelevancyStrictness > 0,
+        results.appliedRelevancyStrictness > 0 &&
+        results.nbHits !== results.nbSortedHits,
       nbHits: results.nbHits,
       nbSortedHits: results.nbSortedHits,
       processingTimeMS: results.processingTimeMS,

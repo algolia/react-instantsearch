@@ -5,7 +5,7 @@ import Stats from '../Stats';
 describe('Stats', () => {
   it('renders with default props', () => {
     const tree = renderer.create(
-      <Stats nbHits={42} isSmartSorted={false} processingTimeMS={0} />
+      <Stats nbHits={42} areHitsSorted={false} processingTimeMS={0} />
     );
 
     expect(tree.toJSON()).toMatchInlineSnapshot(`
@@ -24,7 +24,7 @@ describe('Stats', () => {
   it('accepts a custom className', () => {
     const tree = renderer.create(
       <Stats
-        isSmartSorted={false}
+        areHitsSorted={false}
         className="MyCustomStats"
         nbHits={42}
         processingTimeMS={0}
@@ -44,10 +44,10 @@ describe('Stats', () => {
     `);
   });
 
-  it('renders rely on isSmartSorted', () => {
+  it('renders rely on areHitsSorted', () => {
     const tree = renderer.create(
       <Stats
-        isSmartSorted={true}
+        areHitsSorted={true}
         nbHits={42}
         nbSortedHits={21}
         processingTimeMS={0}
@@ -70,7 +70,7 @@ describe('Stats', () => {
   it('renders default implementation if nbHits is equal to nbSortedHits', () => {
     const tree = renderer.create(
       <Stats
-        isSmartSorted={false}
+        areHitsSorted={true}
         nbHits={42}
         nbSortedHits={42}
         processingTimeMS={0}
