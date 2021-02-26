@@ -11,7 +11,7 @@
     "start": "yarn storybook",
     "build": "lerna run build --scope react-*",
     "watch": "lerna run watch --scope react-instantsearch-* --parallel",
-    "release": "scripts/release.sh",
+    "release": "shipjs prepare",
     "lint": "eslint --ext .js,.ts,.tsx .",
     "lint:fix": "eslint --ext .js,.ts,.tsx --fix .",
     "type-check": "tsc",
@@ -29,7 +29,8 @@
     "test:size": "bundlesize",
     "storybook": "start-storybook -p 6006 -c storybook -s storybook/public",
     "storybook:build": "build-storybook -s storybook/public -o website/storybook -c storybook",
-    "website:build": "yarn build && yarn webpack --config website/webpack.config.js"
+    "website:build": "yarn build && yarn webpack --config website/webpack.config.js",
+    "update_examples": "node scripts/update-examples.js"
   },
   "devDependencies": {
     "@algolia/client-search": "4.8.5",
@@ -126,6 +127,7 @@
     "rollup-plugin-node-resolve": "5.2.0",
     "rollup-plugin-replace": "2.2.0",
     "rollup-plugin-uglify": "6.0.3",
+    "shipjs": "0.23.0",
     "style-loader": "1.0.0",
     "typescript": "3.8.3",
     "webpack": "4.40.2",
