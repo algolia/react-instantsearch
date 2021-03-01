@@ -77,9 +77,9 @@ describe('SmartSort', () => {
           className="ais-SmartSort-button"
           onClick={[Function]}
         >
-          <div>
+          <span>
             See all results
-          </div>
+          </span>
         </button>
       </div>
     `);
@@ -89,9 +89,9 @@ describe('SmartSort', () => {
     const tree = renderer.create(
       <SmartSort
         buttonTextComponent={({ isSmartSorted }: SmartSortComponentProps) => (
-          <div>
+          <span>
             {isSmartSorted ? 'See all results' : 'See relevant results'}
-          </div>
+          </span>
         )}
         isVirtualReplica={true}
         isSmartSorted={true}
@@ -110,9 +110,9 @@ describe('SmartSort', () => {
           className="ais-SmartSort-button"
           onClick={[Function]}
         >
-          <div>
+          <span>
             See all results
-          </div>
+          </span>
         </button>
       </div>
     `);
@@ -138,9 +138,9 @@ describe('SmartSort', () => {
           className="ais-SmartSort-button"
           onClick={[Function]}
         >
-          <div>
+          <span>
             See relevant results
-          </div>
+          </span>
         </button>
       </div>
     `);
@@ -153,11 +153,11 @@ describe('SmartSort', () => {
         isSmartSorted={false}
         refine={() => {}}
         textComponent={({ isSmartSorted }: SmartSortComponentProps) => (
-          <div>
+          <p>
             {isSmartSorted
               ? 'We removed some search results to show you the most relevant ones'
               : 'Currently showing all results'}
-          </div>
+          </p>
         )}
       />
     );
@@ -169,17 +169,17 @@ describe('SmartSort', () => {
         <div
           className="ais-SmartSort-text"
         >
-          <div>
+          <p>
             Currently showing all results
-          </div>
+          </p>
         </div>
         <button
           className="ais-SmartSort-button"
           onClick={[Function]}
         >
-          <div>
+          <span>
             See relevant results
-          </div>
+          </span>
         </button>
       </div>
     `);
