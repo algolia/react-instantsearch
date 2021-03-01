@@ -46,6 +46,16 @@ module.exports = {
   pullRequestTeamReviewers: ['instantsearch-for-websites'],
   buildCommand: ({ version }) =>
     `NODE_ENV=production VERSION=${version} yarn build`,
+  afterPublish: async ({ exec, version }) => {
+    await waitUntil(() => {
+      return (
+        exec(`npm view react-instantsearch@${version}`)
+          .toString()
+          .trim() !== ''
+      );
+    });
+    exec('node scripts/update-examples.js');
+  },
   slack: {
     // disable slack notification for `prepared` lifecycle.
     // Ship.js will send slack message only for `releaseSuccess`.
@@ -58,11 +68,9 @@ module.exports = {
       latestCommitUrl,
       repoURL,
     }) => ({
-      pretext: [
-        `:tada: Successfully released *${appName}@${version}*`,
-        '',
-        `Make sure to run \`yarn run update_examples ${version}\` in \`react-instantsearch\`.`,
-      ].join('\n'),
+      pretext: [`:tada: Successfully released *${appName}@${version}*`].join(
+        '\n'
+      ),
       fields: [
         {
           title: 'Branch',
@@ -87,3 +95,14 @@ module.exports = {
     }),
   },
 };
+
+function waitUntil(checkFn) {
+  return new Promise(resolve => {
+    const intervalId = setInterval(async () => {
+      if (await checkFn()) {
+        clearInterval(intervalId);
+        resolve();
+      }
+    }, 3000);
+  });
+}
