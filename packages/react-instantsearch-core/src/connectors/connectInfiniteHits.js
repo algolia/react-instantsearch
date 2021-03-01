@@ -78,9 +78,14 @@ export default createConnector({
       multiIndexContext: props.indexContextValue,
     });
 
+    this._prevState = this._prevState || {};
+
+    this._cache = props.cache ? props.cache : this._cache || getInMemoryCache();
+    let cachedHits = this._cache.read({ state: searchState }) || {};
+
     if (!results) {
       return {
-        hits: [],
+        hits: extractHitsFromCachedHits(cachedHits),
         hasPrevious: false,
         hasMore: false,
         refine: () => {},
@@ -96,8 +101,6 @@ export default createConnector({
       nbPages,
       _state: { page: p, ...currentState } = {},
     } = results;
-    this._cache = props.cache ? props.cache : this._cache || getInMemoryCache();
-    const cachedHits = this._cache.read({ state: currentState }) || {};
 
     const hitsWithPositions = addAbsolutePositions(hits, hitsPerPage, page);
     const hitsWithPositionsAndQueryID = addQueryID(
@@ -105,11 +108,15 @@ export default createConnector({
       results.queryID
     );
 
+    if (!isEqual(currentState, this._prevState)) {
+      cachedHits = this._cache.read({ state: searchState }) || {};
+    }
     if (cachedHits[page] === undefined) {
       cachedHits[page] = hitsWithPositionsAndQueryID;
-      this._cache.write({ state: currentState, hits: cachedHits });
+      this._cache.write({ state: searchState, hits: cachedHits });
     }
 
+    this._prevState = currentState;
     /*
       Math.min() and Math.max() returns Infinity or -Infinity when no argument is given.
       But there is always something in this point because of `cachedHits[page]`.
