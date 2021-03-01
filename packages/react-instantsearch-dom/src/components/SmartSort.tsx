@@ -21,7 +21,7 @@ export type SmartSortProps = {
 const DefaultButtonTextComponent = ({
   isSmartSorted,
 }: SmartSortComponentProps) => (
-  <div>{isSmartSorted ? 'See all results' : 'See relevant results'}</div>
+  <span>{isSmartSorted ? 'See all results' : 'See relevant results'}</span>
 );
 
 const SmartSort: React.FC<SmartSortProps> = ({
