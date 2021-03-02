@@ -1,6 +1,6 @@
 {
   "name": "react-instantsearch-dom-maps",
-  "version": "6.10.0",
+  "version": "6.10.1",
   "description": "⚡ Lightning-fast search for React DOM & Google Maps, by Algolia",
   "main": "dist/cjs/index.js",
   "module": "dist/es/index.js",
@@ -26,19 +26,14 @@
     "geo search",
     "google maps"
   ],
-  "files": [
-    "README.md",
-    "dist"
-  ],
+  "files": ["README.md", "dist"],
   "scripts": {
     "clean": "rm -rf dist",
     "watch": "yarn build:cjs --watch",
     "build": "yarn build:cjs && yarn build:es && yarn build:umd",
     "build:cjs": "babel src --root-mode upward --extensions '.js,.ts,.tsx' --out-dir dist/cjs --ignore '**/__tests__/**/*','**/__mocks__/**/*' --quiet",
     "build:es": "BABEL_ENV=es babel src --root-mode upward --extensions '.js,.ts,.tsx' --out-dir dist/es --ignore '**/__tests__/**/*','**/__mocks__/**/*' --quiet",
-    "build:umd": "BABEL_ENV=rollup rollup -c rollup.config.js",
-    "release": "yarn clean && yarn build && yarn publish --non-interactive",
-    "release:beta": "yarn clean && yarn build && yarn publish --tag beta --non-interactive"
+    "build:umd": "BABEL_ENV=rollup rollup -c rollup.config.js"
   },
   "dependencies": {
     "@babel/runtime": "^7.1.2",
@@ -48,6 +43,6 @@
   "peerDependencies": {
     "react": ">= 16.3.0 < 18",
     "react-dom": ">= 16.3.0 < 18",
-    "react-instantsearch-dom": ">= 5.2.0"
+    "react-instantsearch-dom": "6.10.1"
   }
 }
