@@ -88,7 +88,7 @@ export default createConnector({
 
     if (!results) {
       return {
-        hits: extractHitsFromCachedHits(cachedHits),
+        hits: [],
         hasPrevious: false,
         hasMore: false,
         refine: () => {},
