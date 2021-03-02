@@ -89,10 +89,10 @@ export default createConnector({
       };
     }
 
-    const { page, hits, hitsPerPage, nbPages, _state } = results;
+    const { page, hits, hitsPerPage, nbPages, _state: state } = results;
 
     this._cache = props.cache ? props.cache : this._cache || getInMemoryCache();
-    const cachedHits = this._cache.read({ state: _state }) || {};
+    const cachedHits = this._cache.read({ state }) || {};
 
     const hitsWithPositions = addAbsolutePositions(hits, hitsPerPage, page);
     const hitsWithPositionsAndQueryID = addQueryID(
@@ -101,7 +101,7 @@ export default createConnector({
     );
 
     cachedHits[page] = hitsWithPositionsAndQueryID;
-    this._cache.write({ state: results._state, hits: cachedHits });
+    this._cache.write({ state, hits: cachedHits });
 
     /*
       Math.min() and Math.max() returns Infinity or -Infinity when no argument is given.
