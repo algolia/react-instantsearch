@@ -78,10 +78,13 @@ export default createConnector({
       multiIndexContext: props.indexContextValue,
     });
 
-    this._prevState = this._prevState || {};
-
     this._cache = props.cache ? props.cache : this._cache || getInMemoryCache();
-    let cachedHits = this._cache.read({ state: searchState }) || {};
+    let cachedHits;
+    if (results === null) {
+      cachedHits = {};
+    } else {
+      cachedHits = this._cache.read({ state: results._state }) || {};
+    }
 
     if (!results) {
       return {
@@ -94,13 +97,7 @@ export default createConnector({
       };
     }
 
-    const {
-      page,
-      hits,
-      hitsPerPage,
-      nbPages,
-      _state: { page: p, ...currentState } = {},
-    } = results;
+    const { page, hits, hitsPerPage, nbPages } = results;
 
     const hitsWithPositions = addAbsolutePositions(hits, hitsPerPage, page);
     const hitsWithPositionsAndQueryID = addQueryID(
@@ -108,15 +105,9 @@ export default createConnector({
       results.queryID
     );
 
-    if (!isEqual(currentState, this._prevState)) {
-      cachedHits = this._cache.read({ state: searchState }) || {};
-    }
-    if (cachedHits[page] === undefined) {
-      cachedHits[page] = hitsWithPositionsAndQueryID;
-      this._cache.write({ state: searchState, hits: cachedHits });
-    }
+    cachedHits[page] = hitsWithPositionsAndQueryID;
+    this._cache.write({ state: results._state, hits: cachedHits });
 
-    this._prevState = currentState;
     /*
       Math.min() and Math.max() returns Infinity or -Infinity when no argument is given.
       But there is always something in this point because of `cachedHits[page]`.
@@ -150,22 +141,6 @@ export default createConnector({
   },
 
   refine(props, searchState, event, index) {
-    this._cache = props.cache ? props.cache : this._cache || getInMemoryCache();
-    const cachedHits = this._cache.read({ state: searchState }) || {};
-    const pages = Object.keys(cachedHits).map(Number);
-    const lastReceivedPage =
-      pages.length === 0 ? undefined : Math.max(...pages);
-    // If there is no key in `this._cachedHits`,
-    // then `lastReceivedPage` should be `undefined`.
-    if (index === undefined && lastReceivedPage !== undefined) {
-      index = lastReceivedPage + 1;
-    } else if (index === undefined) {
-      index = getCurrentRefinement(props, searchState, {
-        ais: props.contextValue,
-        multiIndexContext: props.indexContextValue,
-      });
-    }
-
     const id = getId();
     const nextValue = { [id]: index + 1 };
     const resetPage = false;
