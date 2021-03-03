@@ -1,3 +1,7 @@
+## [6.10.3](https://github.com/algolia/react-instantsearch/compare/v6.10.2...v6.10.3) (2021-03-03)
+
+
+
 ## [6.10.2](https://github.com/algolia/react-instantsearch/compare/v6.10.1...v6.10.2) (2021-03-03)
 
 
