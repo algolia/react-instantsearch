@@ -8,7 +8,72 @@ import {
   Highlight,
   Pagination,
   InstantSearch,
+  createConnector,
+  Menu,
 } from 'react-instantsearch-dom';
+import { getDisplayName } from 'react-instantsearch-core/dist/cjs/core/utils';
+
+const connectDynamicWidgets = createConnector({
+  displayName: 'AlgoliaDynamicWidgets',
+
+  defaultProps: { transformItems: items => items },
+
+  getProvidedProps(props, searchState, results) {
+    if (!results || !results.results) {
+      return { attributesToRender: [], isFirstRender: true };
+    }
+
+    // retrieve the facet order out of the results:
+    // results.facetOrder.map(facet => facet.attribute)
+    const facetOrder = [];
+
+    return {
+      attributesToRender: props.transformItems(facetOrder, results.results),
+    };
+  },
+});
+
+function getAttribute(component) {
+  if (component.props.attribute) {
+    return component.props.attribute;
+  }
+  if (Array.isArray(component.props.attributes)) {
+    return component.props.attributes[0];
+  }
+  if (component.props.children) {
+    return getAttribute(React.Children.only(component.props.children));
+  }
+
+  throw new Error(
+    `attribute could not be found for ${getDisplayName(component)}`
+  );
+}
+
+function RenderDynamicWidgets({ children, attributesToRender, isFirstRender }) {
+  if (isFirstRender) {
+    return (
+      <div className="ais-DynamicWidgets" hidden>
+        {children}
+      </div>
+    );
+  }
+
+  const widgets = new Map();
+
+  React.Children.forEach(children, child => {
+    const attribute = getAttribute(child);
+    widgets.set(attribute, child);
+  });
+
+  // on initial render this will be empty, but React InstantSearch keeps search state for unmounted components in place, so routing works as expected here.
+  return (
+    <div className="ais-DynamicWidgets">
+      {attributesToRender.map(attribute => widgets.get(attribute))}
+    </div>
+  );
+}
+
+const DynamicWidgets = connectDynamicWidgets(RenderDynamicWidgets);
 
 const HitComponent = ({ hit }) => (
   <div className="hit">
@@ -65,8 +130,21 @@ export default class extends React.Component {
           <SearchBox />
         </header>
         <main>
-          <div className="menu">
-            <RefinementList attribute="categories" />
+          <div className="filters">
+            <DynamicWidgets
+              transformItems={(_attributes, results) => {
+                if (results._state.query === 'dog') {
+                  return ['categories'];
+                }
+                if (results._state.query === 'lego') {
+                  return ['categories', 'brand'];
+                }
+                return ['brand', 'hierarchicalCategories.lvl0', 'categories'];
+              }}
+            >
+              <RefinementList attribute="brand" />
+              <Menu attribute="categories" />
+            </DynamicWidgets>
           </div>
           <div className="results">
             <Hits hitComponent={HitComponent} />
