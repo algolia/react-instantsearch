@@ -10,6 +10,7 @@ import {
   InstantSearch,
   createConnector,
   Menu,
+  ToggleRefinement,
 } from 'react-instantsearch-dom';
 import { getDisplayName } from 'react-instantsearch-core/dist/cjs/core/utils';
 
@@ -132,8 +133,13 @@ export default class extends React.Component {
         </header>
         <main>
           <div className="filters">
+            <Configure facets={['*']} />
             <DynamicWidgets
               transformItems={(_attributes, results) => {
+                if (results._state.query === 'auto') {
+                  // demo using * and the engine's default order
+                  return Object.keys(results._rawResults[0].facets);
+                }
                 if (results._state.query === 'dog') {
                   return ['categories'];
                 }
@@ -145,6 +151,12 @@ export default class extends React.Component {
             >
               <RefinementList attribute="brand" />
               <Menu attribute="categories" />
+              <Menu attribute="type" />
+              <ToggleRefinement
+                attribute="free_shipping"
+                label="Free shipping"
+                value={true}
+              />
             </DynamicWidgets>
           </div>
           <div className="results">
