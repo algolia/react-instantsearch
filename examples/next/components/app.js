@@ -20,7 +20,7 @@ const connectDynamicWidgets = createConnector({
 
   getProvidedProps(props, searchState, results) {
     if (!results || !results.results) {
-      return { attributesToRender: [], isFirstRender: true };
+      return { attributesToRender: [], results: null };
     }
 
     // retrieve the facet order out of the results:
@@ -29,6 +29,7 @@ const connectDynamicWidgets = createConnector({
 
     return {
       attributesToRender: props.transformItems(facetOrder, results.results),
+      results,
     };
   },
 });
@@ -49,8 +50,8 @@ function getAttribute(component) {
   );
 }
 
-function RenderDynamicWidgets({ children, attributesToRender, isFirstRender }) {
-  if (isFirstRender) {
+function RenderDynamicWidgets({ children, attributesToRender, results }) {
+  if (!results) {
     return (
       <div className="ais-DynamicWidgets" hidden>
         {children}
