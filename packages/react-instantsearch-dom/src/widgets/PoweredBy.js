@@ -7,6 +7,7 @@ import PoweredBy from '../components/PoweredBy';
  * Algolia requires that you use this widget if you are on a [community or free plan](https://www.algolia.com/pricing).
  * @name PoweredBy
  * @kind widget
+ * @propType {string} theme - change the color of the logo if 'dark' is passed
  * @themeKey ais-PoweredBy - the root div of the widget
  * @themeKey ais-PoweredBy-text - the text of the widget
  * @themeKey ais-PoweredBy-link - the link of the logo
