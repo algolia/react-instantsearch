@@ -24,7 +24,6 @@ exports[`RefinementList applies translations 1`] = `
           autoCorrect="off"
           autoFocus={false}
           className="ais-SearchBox-input"
-          dir="auto"
           maxLength="512"
           onChange={[Function]}
           placeholder="placeholder"
