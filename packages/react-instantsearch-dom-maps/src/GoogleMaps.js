@@ -68,13 +68,23 @@ class GoogleMaps extends Component {
 
     if (boundingBox) {
       this.lockUserInteration(() => {
-        this.instance.fitBounds(
-          new google.maps.LatLngBounds(
-            boundingBox.southWest,
-            boundingBox.northEast
-          ),
-          boundingBoxPadding
+        const oldBounds = this.instance.getBounds();
+        const newBounds = new google.maps.LatLngBounds(
+          boundingBox.southWest,
+          boundingBox.northEast
         );
+
+        if (
+          !oldBounds ||
+          !oldBounds.Ua ||
+          !oldBounds.La ||
+          oldBounds.Ua.g !== newBounds.Ua.g ||
+          oldBounds.Ua.i !== newBounds.Ua.i ||
+          oldBounds.La.g !== newBounds.La.g ||
+          oldBounds.La.i !== newBounds.La.i
+        ) {
+          this.instance.fitBounds(newBounds, boundingBoxPadding);
+        }
       });
     } else {
       this.lockUserInteration(() => {
