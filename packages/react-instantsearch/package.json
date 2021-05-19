@@ -3,7 +3,11 @@
   "version": "6.11.0",
   "description": "⚡ Lightning-fast search for React and React Native apps, by Algolia",
   "main": "index.js",
-  "module": "es/index.js",
+  "module": "dist/es/index.js",
+  "files": [
+    "index.js",
+    "dist"
+  ],
   "sideEffects": false,
   "license": "MIT",
   "homepage": "https://www.algolia.com/doc/guides/building-search-ui/what-is-instantsearch/react/",
