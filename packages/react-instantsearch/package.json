@@ -5,7 +5,11 @@
   "main": "index.js",
   "module": "dist/es/index.js",
   "files": [
+    "connectors.js",
+    "dom.js",
     "index.js",
+    "native.js",
+    "server.js",
     "dist"
   ],
   "sideEffects": false,
