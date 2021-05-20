@@ -135,7 +135,7 @@ describe('DynamicWidgets', () => {
     test('renders from results', () => {
       const searchClient = createSearchClient();
 
-      const results = [
+      const RESULTS = [
         {
           ...resultsState,
           rawResults: [
@@ -167,15 +167,22 @@ describe('DynamicWidgets', () => {
         },
       ];
 
-      const Component = ({ resultsState }) => (
+      const Component = ({
+        result,
+      }: {
+        result: React.ComponentProps<typeof InstantSearch>['resultsState'];
+      }) => (
         <InstantSearch
           searchClient={searchClient}
           indexName="test"
-          resultsState={resultsState}
+          resultsState={result}
         >
           <DynamicWidgets
             transformItems={(_items, { results }) =>
-              results && results.userData && results.userData[0].MOCK_ORDERING || []
+              (results &&
+                results.userData &&
+                results.userData[0].MOCK_ORDERING) ||
+              []
             }
           >
             <RefinementList attribute="test1" />
@@ -184,21 +191,36 @@ describe('DynamicWidgets', () => {
         </InstantSearch>
       );
       {
-        const { container } = render(<Component resultsState={results[0]} />);
+        const { container } = render(
+          <Component
+            // @ts-ignore resultsState in InstantSearch is typed wrongly to deal with multi-index
+            result={RESULTS[0]}
+          />
+        );
 
         expect(container.innerHTML).toMatchInlineSnapshot(
           `"RefinementList(test1)HierarchicalMenu(test2,test3)"`
         );
       }
       {
-        const { container } = render(<Component resultsState={results[1]} />);
+        const { container } = render(
+          <Component
+            // @ts-ignore resultsState in InstantSearch is typed wrongly to deal with multi-index
+            result={RESULTS[1]}
+          />
+        );
 
         expect(container.innerHTML).toMatchInlineSnapshot(
           `"HierarchicalMenu(test2,test3)RefinementList(test1)"`
         );
       }
       {
-        const { container } = render(<Component resultsState={results[2]} />);
+        const { container } = render(
+          <Component
+            // @ts-ignore resultsState in InstantSearch is typed wrongly to deal with multi-index
+            result={RESULTS[2]}
+          />
+        );
 
         expect(container.innerHTML).toMatchInlineSnapshot(
           `"RefinementList(test1)"`
