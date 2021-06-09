@@ -1,8 +1,13 @@
+import PropTypes from 'prop-types';
 import createConnector from '../core/createConnector';
 import { getResults } from '../core/indexUtils';
 
 export default createConnector({
   displayName: 'AlgoliaDynamicWidgets',
+
+  propTypes: {
+    transformItems: PropTypes.func,
+  },
 
   getProvidedProps(props, _searchState, searchResults) {
     const results = getResults(searchResults, {
@@ -14,9 +19,12 @@ export default createConnector({
       return { attributesToRender: [] };
     }
 
-    // retrieve the facet order out of the results:
-    // results.facetOrder.map(facet => facet.attribute)
-    const facetOrder = [];
+    const facetOrder =
+      (results.renderingContent &&
+        results.renderingContent.facetOrdering &&
+        results.renderingContent.facetOrdering.facet &&
+        results.renderingContent.facetOrdering.facet.order) ||
+      [];
 
     return {
       attributesToRender: props.transformItems(facetOrder, { results }),
