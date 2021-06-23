@@ -1,6 +1,16 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import { render } from '@testing-library/react';
 import React from 'react';
-import { connectHierarchicalMenu, connectRefinementList } from '../..';
+import { ErrorBoundary } from 'react-error-boundary';
+import {
+  connectHierarchicalMenu,
+  connectPagination,
+  connectRefinementList,
+} from '../..';
+import { Panel } from 'react-instantsearch-dom';
 import DynamicWidgets from '../DynamicWidgets';
 import InstantSearch from '../InstantSearch';
 
@@ -63,34 +73,6 @@ describe('DynamicWidgets', () => {
       },
     };
 
-    test('transformItems is required', () => {
-      // Prevent writing to stderr during this render.
-      const spy = jest.spyOn(window.console, 'error');
-      spy.mockImplementation(() => {});
-
-      const searchClient = createSearchClient();
-
-      expect(() =>
-        render(
-          <InstantSearch
-            searchClient={searchClient}
-            indexName="test"
-            // @ts-ignore resultsState in InstantSearch is typed wrongly to deal with multi-index
-            resultsState={resultsState}
-          >
-            <DynamicWidgets>
-              <RefinementList attribute="test1" />
-            </DynamicWidgets>
-          </InstantSearch>
-        )
-      ).toThrowErrorMatchingInlineSnapshot(
-        `"props.transformItems is not a function"`
-      );
-
-      // Restore writing to stderr.
-      spy.mockRestore();
-    });
-
     test('default items is empty', () => {
       const searchClient = createSearchClient();
 
@@ -141,7 +123,9 @@ describe('DynamicWidgets', () => {
           rawResults: [
             {
               ...resultsState.rawResults[0],
-              userData: [{ MOCK_ORDERING: ['test1', 'test2'] }],
+              renderingContent: {
+                facetOrdering: { facet: { order: ['test1', 'test2'] } },
+              },
             },
           ],
         },
@@ -151,7 +135,9 @@ describe('DynamicWidgets', () => {
           rawResults: [
             {
               ...resultsState.rawResults[0],
-              userData: [{ MOCK_ORDERING: ['test2', 'test1'] }],
+              renderingContent: {
+                facetOrdering: { facet: { order: ['test2', 'test1'] } },
+              },
             },
           ],
         },
@@ -161,7 +147,9 @@ describe('DynamicWidgets', () => {
           rawResults: [
             {
               ...resultsState.rawResults[0],
-              userData: [{ MOCK_ORDERING: ['test1'] }],
+              renderingContent: {
+                facetOrdering: { facet: { order: ['test1'] } },
+              },
             },
           ],
         },
@@ -177,14 +165,7 @@ describe('DynamicWidgets', () => {
           indexName="test"
           resultsState={result}
         >
-          <DynamicWidgets
-            transformItems={(_items, { results }) =>
-              (results &&
-                results.userData &&
-                results.userData[0].MOCK_ORDERING) ||
-              []
-            }
-          >
+          <DynamicWidgets>
             <RefinementList attribute="test1" />
             <HierarchicalMenu attributes={['test2', 'test3']} />
           </DynamicWidgets>
@@ -226,6 +207,106 @@ describe('DynamicWidgets', () => {
           `"RefinementList(test1)"`
         );
       }
+    });
+
+    test('renders items in panel', () => {
+      const searchClient = createSearchClient();
+
+      const { container } = render(
+        <InstantSearch
+          searchClient={searchClient}
+          indexName="test"
+          // @ts-ignore resultsState in InstantSearch is typed wrongly to deal with multi-index
+          resultsState={resultsState}
+        >
+          <DynamicWidgets transformItems={() => ['test1', 'test3']}>
+            <RefinementList attribute="test1" />
+            <RefinementList attribute="test2" />
+            <Panel>
+              <RefinementList attribute="test3" />
+            </Panel>
+            <Panel>
+              <RefinementList attribute="test4" />
+            </Panel>
+          </DynamicWidgets>
+        </InstantSearch>
+      );
+
+      expect(container.innerHTML).toMatchInlineSnapshot(
+        `"RefinementList(test1)<div class=\\"ais-Panel\\"><div class=\\"ais-Panel-body\\">RefinementList(test3)</div></div>"`
+      );
+    });
+
+    test("does not render items that aren't directly in children", () => {
+      const fallbackRender = jest.fn(() => null);
+
+      // prevent duplicate console errors still showing up
+      const spy = jest.spyOn(console, 'error');
+      spy.mockImplementation(() => {});
+
+      const searchClient = createSearchClient();
+
+      const Wrapped = ({ attr }: { attr: string }) => (
+        <div>
+          <HierarchicalMenu attributes={[attr, `${attr}.1`]} />
+        </div>
+      );
+
+      render(
+        <ErrorBoundary fallbackRender={fallbackRender}>
+          <InstantSearch
+            searchClient={searchClient}
+            indexName="test"
+            // @ts-ignore resultsState in InstantSearch is typed wrongly to deal with multi-index
+            resultsState={resultsState}
+          >
+            <DynamicWidgets transformItems={() => ['test1']}>
+              <Wrapped attr="test1" />
+            </DynamicWidgets>
+          </InstantSearch>
+        </ErrorBoundary>
+      );
+
+      expect(
+        (fallbackRender.mock.calls[0] as any)[0].error
+      ).toMatchInlineSnapshot(
+        `[Error: Could not find "attribute" prop for UnknownComponent.]`
+      );
+    });
+
+    test('does not render items non-attribute widgets', () => {
+      const fallbackRender = jest.fn(() => null);
+
+      // prevent duplicate console errors still showing up
+      const spy = jest.spyOn(console, 'error');
+      spy.mockImplementation(() => {});
+
+      const searchClient = createSearchClient();
+
+      const Pagination = connectPagination(() => {
+        return <div>pagination</div>;
+      });
+
+      render(
+        <ErrorBoundary fallbackRender={fallbackRender}>
+          <InstantSearch
+            searchClient={searchClient}
+            indexName="test"
+            // @ts-ignore resultsState in InstantSearch is typed wrongly to deal with multi-index
+            resultsState={resultsState}
+          >
+            <DynamicWidgets transformItems={() => ['test1']}>
+              <Pagination />
+            </DynamicWidgets>
+          </InstantSearch>
+        </ErrorBoundary>
+      );
+
+      expect(
+        (fallbackRender.mock.calls[0] as any)[0].error
+      ).toMatchInlineSnapshot(
+        `[Error: Could not find "attribute" prop for UnknownComponent.]`
+      );
     });
   });
 });

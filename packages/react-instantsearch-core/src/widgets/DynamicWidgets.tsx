@@ -32,7 +32,7 @@ function DynamicWidgets({ children, attributesToRender }: DynamicWidgetsProps) {
     const attribute = getAttribute(child);
     if (!attribute) {
       throw new Error(
-        `attribute could not be found for ${getDisplayName(child)}`
+        `Could not find "attribute" prop for ${getDisplayName(child)}.`
       );
     }
     widgets.set(attribute, child);

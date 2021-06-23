@@ -16731,6 +16731,13 @@ react-draggable@^3.1.1:
     classnames "^2.2.5"
     prop-types "^15.6.0"
 
+react-error-boundary@3.1.3:
+  version "3.1.3"
+  resolved "https://registry.yarnpkg.com/react-error-boundary/-/react-error-boundary-3.1.3.tgz#276bfa05de8ac17b863587c9e0647522c25e2a0b"
+  integrity sha512-A+F9HHy9fvt9t8SNDlonq01prnU8AmkjvGKV4kk8seB9kU3xMEO8J/PQlLVmoOIDODl5U2kufSBs4vrWIqhsAA==
+  dependencies:
+    "@babel/runtime" "^7.12.5"
+
 react-error-overlay@^5.1.4:
   version "5.1.4"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-5.1.4.tgz#88dfb88857c18ceb3b9f95076f850d7121776991"
