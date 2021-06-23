@@ -58,18 +58,6 @@ describe('connectDynamicWidgets', () => {
         expect(actual).toEqual(expectation);
       });
 
-      it('error without transformItems', () => {
-        const props = { contextValue };
-        const searchState = {};
-        const searchResults = createSingleIndexSearchResults();
-
-        expect(() => {
-          connector.getProvidedProps(props, searchState, searchResults);
-        }).toThrowErrorMatchingInlineSnapshot(
-          `"props.transformItems is not a function"`
-        );
-      });
-
       it('attributesToRender is the return value of transformItems', () => {
         const returnValue = ['test1', 'test2'];
         const props = { contextValue, transformItems: () => returnValue };
@@ -97,6 +85,27 @@ describe('connectDynamicWidgets', () => {
         );
 
         expect(actual.attributesToRender).toEqual([]);
+      });
+
+      it('reads from facetOrdering by default', () => {
+        const props = {
+          contextValue,
+          ...connector.defaultProps,
+        };
+        const searchState = {};
+        const searchResults = createSingleIndexSearchResults({
+          renderingContent: {
+            facetOrdering: { facet: { order: ['one', 'two'] } },
+          },
+        });
+
+        const actual = connector.getProvidedProps(
+          props,
+          searchState,
+          searchResults
+        );
+
+        expect(actual.attributesToRender).toEqual(['one', 'two']);
       });
 
       it('transformItems gets called with results', () => {
@@ -234,6 +243,28 @@ describe('connectDynamicWidgets', () => {
         );
 
         expect(actual.attributesToRender).toEqual([]);
+      });
+
+      it('reads from facetOrdering by default', () => {
+        const props = {
+          contextValue,
+          indexContextValue,
+          transformItems: items => items,
+        };
+        const searchState = createMultiIndexSearchState();
+        const searchResults = createMultiIndexSearchResults({
+          renderingContent: {
+            facetOrdering: { facet: { order: ['one', 'two'] } },
+          },
+        });
+
+        const actual = connector.getProvidedProps(
+          props,
+          searchState,
+          searchResults
+        );
+
+        expect(actual.attributesToRender).toEqual(['one', 'two']);
       });
 
       it('transformItems gets called with results', () => {

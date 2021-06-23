@@ -5,6 +5,10 @@ import { getResults } from '../core/indexUtils';
 export default createConnector({
   displayName: 'AlgoliaDynamicWidgets',
 
+  defaultProps: {
+    transformItems: items => items,
+  },
+
   propTypes: {
     transformItems: PropTypes.func,
   },
