@@ -6,7 +6,6 @@ export { translatable } from 'react-instantsearch-core';
 // Widget
 export { Configure } from 'react-instantsearch-core';
 export { ExperimentalConfigureRelatedItems } from 'react-instantsearch-core';
-export { ExperimentalDynamicWidgets } from 'react-instantsearch-core';
 export { QueryRuleContext } from 'react-instantsearch-core';
 export { Index } from 'react-instantsearch-core';
 export { InstantSearch } from 'react-instantsearch-core';
@@ -71,6 +70,9 @@ export { default as ToggleRefinement } from './widgets/ToggleRefinement';
 export { default as VoiceSearch } from './widgets/VoiceSearch';
 export { default as QueryRuleCustomData } from './widgets/QueryRuleCustomData';
 export { default as EXPERIMENTAL_Answers } from './widgets/Answers';
+export {
+  default as ExperimentalDynamicWidgets,
+} from './widgets/DynamicWidgets';
 
 // hooks
 export { default as EXPERIMENTAL_useAnswers } from './hooks/useAnswers';

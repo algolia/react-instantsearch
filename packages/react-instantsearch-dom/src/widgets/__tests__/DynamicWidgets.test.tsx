@@ -2,13 +2,13 @@ import { render } from '@testing-library/react';
 import React from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import {
-  connectHierarchicalMenu,
-  connectPagination,
+  HierarchicalMenu,
+  Pagination,
   connectRefinementList,
+  Panel,
+  InstantSearch,
 } from '../..';
-import { Panel } from 'react-instantsearch-dom';
 import DynamicWidgets from '../DynamicWidgets';
-import InstantSearch from '../InstantSearch';
 
 const EMPTY_RESPONSE = {
   results: [
@@ -38,14 +38,6 @@ const RefinementList = connectRefinementList(
   ({ attribute }) => `RefinementList(${attribute})`
 );
 
-const HierarchicalMenu = connectHierarchicalMenu(
-  ({ attributes }) => `HierarchicalMenu(${attributes.join(',')})`
-);
-
-const Pagination = connectPagination(() => {
-  return <div>pagination</div>;
-});
-
 describe('DynamicWidgets', () => {
   describe('before results', () => {
     test('does not render the result of transformItems', () => {
@@ -59,7 +51,13 @@ describe('DynamicWidgets', () => {
         </InstantSearch>
       );
 
-      expect(container).toMatchInlineSnapshot(`<div />`);
+      expect(container).toMatchInlineSnapshot(`
+        <div>
+          <div
+            class="ais-DynamicWidgets"
+          />
+        </div>
+      `);
     });
   });
 
@@ -89,7 +87,13 @@ describe('DynamicWidgets', () => {
         </InstantSearch>
       );
 
-      expect(container).toMatchInlineSnapshot(`<div />`);
+      expect(container).toMatchInlineSnapshot(`
+        <div>
+          <div
+            class="ais-DynamicWidgets"
+          />
+        </div>
+      `);
     });
 
     test('renders return of transformItems', () => {
@@ -111,7 +115,11 @@ describe('DynamicWidgets', () => {
 
       expect(container).toMatchInlineSnapshot(`
         <div>
-          RefinementList(test1)
+          <div
+            class="ais-DynamicWidgets"
+          >
+            RefinementList(test1)
+          </div>
         </div>
       `);
     });
@@ -183,8 +191,14 @@ describe('DynamicWidgets', () => {
 
         expect(container).toMatchInlineSnapshot(`
           <div>
-            RefinementList(test1)
-            HierarchicalMenu(test2,test3)
+            <div
+              class="ais-DynamicWidgets"
+            >
+              RefinementList(test1)
+              <div
+                class="ais-HierarchicalMenu ais-HierarchicalMenu--noRefinement"
+              />
+            </div>
           </div>
         `);
       }
@@ -198,8 +212,14 @@ describe('DynamicWidgets', () => {
 
         expect(container).toMatchInlineSnapshot(`
           <div>
-            HierarchicalMenu(test2,test3)
-            RefinementList(test1)
+            <div
+              class="ais-DynamicWidgets"
+            >
+              <div
+                class="ais-HierarchicalMenu ais-HierarchicalMenu--noRefinement"
+              />
+              RefinementList(test1)
+            </div>
           </div>
         `);
       }
@@ -213,7 +233,11 @@ describe('DynamicWidgets', () => {
 
         expect(container).toMatchInlineSnapshot(`
           <div>
-            RefinementList(test1)
+            <div
+              class="ais-DynamicWidgets"
+            >
+              RefinementList(test1)
+            </div>
           </div>
         `);
       }
@@ -244,14 +268,18 @@ describe('DynamicWidgets', () => {
 
       expect(container).toMatchInlineSnapshot(`
         <div>
-          RefinementList(test1)
           <div
-            class="ais-Panel"
+            class="ais-DynamicWidgets"
           >
+            RefinementList(test1)
             <div
-              class="ais-Panel-body"
+              class="ais-Panel"
             >
-              RefinementList(test3)
+              <div
+                class="ais-Panel-body"
+              >
+                RefinementList(test3)
+              </div>
             </div>
           </div>
         </div>
