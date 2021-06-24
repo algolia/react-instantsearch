@@ -3,6 +3,7 @@ import React from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import {
   HierarchicalMenu,
+  Menu,
   Pagination,
   connectRefinementList,
   Panel,
@@ -177,10 +178,14 @@ describe('DynamicWidgets', () => {
         >
           <DynamicWidgets>
             <RefinementList attribute="test1" />
-            <HierarchicalMenu attributes={['test2', 'test3']} />
+            <HierarchicalMenu
+              attributes={['test2', 'test3']}
+              className={'test2-test3'}
+            />
           </DynamicWidgets>
         </InstantSearch>
       );
+
       {
         const { container } = render(
           <Component
@@ -196,7 +201,7 @@ describe('DynamicWidgets', () => {
             >
               RefinementList(test1)
               <div
-                class="ais-HierarchicalMenu ais-HierarchicalMenu--noRefinement"
+                class="ais-HierarchicalMenu ais-HierarchicalMenu--noRefinement test2-test3"
               />
             </div>
           </div>
@@ -216,7 +221,7 @@ describe('DynamicWidgets', () => {
               class="ais-DynamicWidgets"
             >
               <div
-                class="ais-HierarchicalMenu ais-HierarchicalMenu--noRefinement"
+                class="ais-HierarchicalMenu ais-HierarchicalMenu--noRefinement test2-test3"
               />
               RefinementList(test1)
             </div>
@@ -253,7 +258,7 @@ describe('DynamicWidgets', () => {
           // @ts-ignore resultsState in InstantSearch is typed wrongly to deal with multi-index
           resultsState={resultsState}
         >
-          <DynamicWidgets transformItems={() => ['test1', 'test3']}>
+          <DynamicWidgets transformItems={() => ['test1', 'test3', 'test5']}>
             <RefinementList attribute="test1" />
             <RefinementList attribute="test2" />
             <Panel>
@@ -261,6 +266,18 @@ describe('DynamicWidgets', () => {
             </Panel>
             <Panel>
               <RefinementList attribute="test4" />
+            </Panel>
+            <Panel>
+              <HierarchicalMenu
+                attributes={['test5', 'test5.1']}
+                className="test5"
+              />
+            </Panel>
+            <Panel>
+              <HierarchicalMenu
+                attributes={['test6', 'test6.1']}
+                className="test6"
+              />
             </Panel>
           </DynamicWidgets>
         </InstantSearch>
@@ -279,6 +296,17 @@ describe('DynamicWidgets', () => {
                 class="ais-Panel-body"
               >
                 RefinementList(test3)
+              </div>
+            </div>
+            <div
+              class="ais-Panel ais-Panel--noRefinement"
+            >
+              <div
+                class="ais-Panel-body"
+              >
+                <div
+                  class="ais-HierarchicalMenu ais-HierarchicalMenu--noRefinement test5"
+                />
               </div>
             </div>
           </div>
@@ -352,6 +380,107 @@ describe('DynamicWidgets', () => {
       ).toMatchInlineSnapshot(
         `[Error: Could not find "attribute" prop for UnknownComponent.]`
       );
+    });
+
+    test('does not render attributes without widget by default', () => {
+      const searchClient = createSearchClient();
+
+      const { container } = render(
+        <InstantSearch
+          searchClient={searchClient}
+          indexName="test"
+          // @ts-ignore resultsState in InstantSearch is typed wrongly to deal with multi-index
+          resultsState={resultsState}
+        >
+          <DynamicWidgets transformItems={() => ['test1', 'test2', 'test3']}>
+            <RefinementList attribute="test1" />
+          </DynamicWidgets>
+        </InstantSearch>
+      );
+
+      expect(container).toMatchInlineSnapshot(`
+        <div>
+          <div
+            class="ais-DynamicWidgets"
+          >
+            RefinementList(test1)
+          </div>
+        </div>
+      `);
+    });
+
+    test("uses fallbackWidget component to create widgets that aren't explicitly declared", () => {
+      const searchClient = createSearchClient();
+
+      const { container } = render(
+        <InstantSearch
+          searchClient={searchClient}
+          indexName="test"
+          // @ts-ignore resultsState in InstantSearch is typed wrongly to deal with multi-index
+          resultsState={resultsState}
+        >
+          <DynamicWidgets
+            transformItems={() => ['test1', 'test2', 'test3']}
+            fallbackWidget={Menu}
+          >
+            <RefinementList attribute="test1" />
+          </DynamicWidgets>
+        </InstantSearch>
+      );
+
+      expect(container).toMatchInlineSnapshot(`
+        <div>
+          <div
+            class="ais-DynamicWidgets"
+          >
+            RefinementList(test1)
+            <div
+              class="ais-Menu ais-Menu--noRefinement"
+            />
+            <div
+              class="ais-Menu ais-Menu--noRefinement"
+            />
+          </div>
+        </div>
+      `);
+    });
+
+    test("uses fallbackWidget callback to create widgets that aren't explicitly declared", () => {
+      const searchClient = createSearchClient();
+
+      const { container } = render(
+        <InstantSearch
+          searchClient={searchClient}
+          indexName="test"
+          // @ts-ignore resultsState in InstantSearch is typed wrongly to deal with multi-index
+          resultsState={resultsState}
+        >
+          <DynamicWidgets
+            transformItems={() => ['test1', 'test2', 'test3']}
+            fallbackWidget={({ attribute }) => (
+              <Menu attribute={attribute} className={attribute} />
+            )}
+          >
+            <RefinementList attribute="test1" />
+          </DynamicWidgets>
+        </InstantSearch>
+      );
+
+      expect(container).toMatchInlineSnapshot(`
+        <div>
+          <div
+            class="ais-DynamicWidgets"
+          >
+            RefinementList(test1)
+            <div
+              class="ais-Menu ais-Menu--noRefinement test2"
+            />
+            <div
+              class="ais-Menu ais-Menu--noRefinement test3"
+            />
+          </div>
+        </div>
+      `);
     });
   });
 });
