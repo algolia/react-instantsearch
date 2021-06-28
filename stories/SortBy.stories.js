@@ -9,7 +9,6 @@ stories
   .add('default', () => (
     <WrapWithHits linkedStoryGroup="SortBy.stories.js">
       <SortBy
-        id="sort-by"
         items={[
           { value: 'instant_search', label: 'Featured' },
           { value: 'instant_search_price_asc', label: 'Price asc.' },
