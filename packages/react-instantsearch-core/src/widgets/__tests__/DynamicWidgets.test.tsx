@@ -288,6 +288,8 @@ describe('DynamicWidgets', () => {
         </ErrorBoundary>
       );
 
+      // note: this test now expects a failure, but if we ever implement deep
+      // fetching of attribute, we expect this to render Wrapped
       expect(
         (fallbackRender.mock.calls[0] as any)[0].error
       ).toMatchInlineSnapshot(
