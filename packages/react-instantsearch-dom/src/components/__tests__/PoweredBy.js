@@ -38,4 +38,9 @@ describe('PoweredBy', () => {
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
+
+  it("accepts a 'dark' theme", () => {
+    const tree = renderer.create(<PoweredBy url="url" theme="dark" />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 });

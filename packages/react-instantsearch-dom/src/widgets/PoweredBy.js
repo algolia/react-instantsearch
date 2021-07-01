@@ -7,6 +7,7 @@ import PoweredBy from '../components/PoweredBy';
  * Algolia requires that you use this widget if you are on a [community or free plan](https://www.algolia.com/pricing).
  * @name PoweredBy
  * @kind widget
+ * @propType {string} theme - The version of the logo to use, legible on light or dark backgrounds
  * @themeKey ais-PoweredBy - the root div of the widget
  * @themeKey ais-PoweredBy-text - the text of the widget
  * @themeKey ais-PoweredBy-link - the link of the logo
