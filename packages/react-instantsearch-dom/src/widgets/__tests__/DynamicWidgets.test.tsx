@@ -1,14 +1,18 @@
 import { render } from '@testing-library/react';
 import React from 'react';
-import { ErrorBoundary } from 'react-error-boundary';
 import {
-  HierarchicalMenu,
-  Pagination,
-  connectRefinementList,
-  Panel,
+  ExperimentalDynamicWidgets as CoreDynamicWidgets,
   InstantSearch,
-} from '../..';
+} from 'react-instantsearch-core';
 import DynamicWidgets from '../DynamicWidgets';
+
+jest.mock('react-instantsearch-core', () => {
+  const original = jest.requireActual('react-instantsearch-core');
+  return {
+    ...original,
+    ExperimentalDynamicWidgets: jest.fn(() => null),
+  };
+});
 
 const EMPTY_RESPONSE = {
   results: [
@@ -34,324 +38,70 @@ const createSearchClient = () => ({
   searchForFacetValues: jest.fn(() => Promise.resolve({})),
 });
 
-const RefinementList = connectRefinementList(
-  ({ attribute }) => `RefinementList(${attribute})`
-);
+beforeEach(() => {
+  jest.clearAllMocks();
+});
 
 describe('DynamicWidgets', () => {
-  describe('before results', () => {
-    test('does not render the result of transformItems', () => {
-      const searchClient = createSearchClient();
+  it('sets a className', () => {
+    const searchClient = createSearchClient();
 
-      const { container } = render(
-        <InstantSearch searchClient={searchClient} indexName="test">
-          <DynamicWidgets transformItems={() => ['test1']}>
-            <RefinementList attribute="test1" />
-          </DynamicWidgets>
-        </InstantSearch>
-      );
+    const { container } = render(
+      <InstantSearch searchClient={searchClient} indexName="test">
+        <DynamicWidgets></DynamicWidgets>
+      </InstantSearch>
+    );
 
-      expect(container).toMatchInlineSnapshot(`
-        <div>
-          <div
-            class="ais-DynamicWidgets"
-          />
-        </div>
-      `);
-    });
+    expect(container).toMatchInlineSnapshot(`
+      <div>
+        <div
+          class="ais-DynamicWidgets"
+        />
+      </div>
+    `);
   });
 
-  describe('with results', () => {
-    const resultsState = {
-      metadata: [],
-      rawResults: EMPTY_RESPONSE.results,
-      state: {
-        index: 'instant_search',
-        query: '',
-      },
-    };
+  it('allows a custom className', () => {
+    const searchClient = createSearchClient();
 
-    test('default items is empty', () => {
-      const searchClient = createSearchClient();
+    const { container } = render(
+      <InstantSearch searchClient={searchClient} indexName="test">
+        <DynamicWidgets className="extra"></DynamicWidgets>
+      </InstantSearch>
+    );
 
-      const { container } = render(
-        <InstantSearch
-          searchClient={searchClient}
-          indexName="test"
-          // @ts-ignore resultsState in InstantSearch is typed wrongly to deal with multi-index
-          resultsState={resultsState}
+    expect(container).toMatchInlineSnapshot(`
+      <div>
+        <div
+          class="ais-DynamicWidgets extra"
+        />
+      </div>
+    `);
+  });
+
+  it('forwards props to core widget', () => {
+    const searchClient = createSearchClient();
+
+    const children = [<div key={1}>testing</div>, <div key={2}>testing2</div>];
+
+    const transformItems = () => {};
+
+    render(
+      <InstantSearch searchClient={searchClient} indexName="test">
+        <DynamicWidgets
+          className="extra"
+          transformItems={transformItems}
+          unknownOption
         >
-          <DynamicWidgets transformItems={items => items}>
-            <RefinementList attribute="test1" />
-          </DynamicWidgets>
-        </InstantSearch>
-      );
+          {children}
+        </DynamicWidgets>
+      </InstantSearch>
+    );
 
-      expect(container).toMatchInlineSnapshot(`
-        <div>
-          <div
-            class="ais-DynamicWidgets"
-          />
-        </div>
-      `);
-    });
-
-    test('renders return of transformItems', () => {
-      const searchClient = createSearchClient();
-
-      const { container } = render(
-        <InstantSearch
-          searchClient={searchClient}
-          indexName="test"
-          // @ts-ignore resultsState in InstantSearch is typed wrongly to deal with multi-index
-          resultsState={resultsState}
-        >
-          <DynamicWidgets transformItems={() => ['test1']}>
-            <RefinementList attribute="test1" />
-            <HierarchicalMenu attributes={['test2', 'test3']} />
-          </DynamicWidgets>
-        </InstantSearch>
-      );
-
-      expect(container).toMatchInlineSnapshot(`
-        <div>
-          <div
-            class="ais-DynamicWidgets"
-          >
-            RefinementList(test1)
-          </div>
-        </div>
-      `);
-    });
-
-    test('renders from results', () => {
-      const searchClient = createSearchClient();
-
-      const RESULTS = [
-        {
-          ...resultsState,
-          rawResults: [
-            {
-              ...resultsState.rawResults[0],
-              renderingContent: {
-                facetOrdering: { facet: { order: ['test1', 'test2'] } },
-              },
-            },
-          ],
-        },
-
-        {
-          ...resultsState,
-          rawResults: [
-            {
-              ...resultsState.rawResults[0],
-              renderingContent: {
-                facetOrdering: { facet: { order: ['test2', 'test1'] } },
-              },
-            },
-          ],
-        },
-
-        {
-          ...resultsState,
-          rawResults: [
-            {
-              ...resultsState.rawResults[0],
-              renderingContent: {
-                facetOrdering: { facet: { order: ['test1'] } },
-              },
-            },
-          ],
-        },
-      ];
-
-      const Component = ({
-        result,
-      }: {
-        result: React.ComponentProps<typeof InstantSearch>['resultsState'];
-      }) => (
-        <InstantSearch
-          searchClient={searchClient}
-          indexName="test"
-          resultsState={result}
-        >
-          <DynamicWidgets>
-            <RefinementList attribute="test1" />
-            <HierarchicalMenu attributes={['test2', 'test3']} />
-          </DynamicWidgets>
-        </InstantSearch>
-      );
-      {
-        const { container } = render(
-          <Component
-            // @ts-ignore resultsState in InstantSearch is typed wrongly to deal with multi-index
-            result={RESULTS[0]}
-          />
-        );
-
-        expect(container).toMatchInlineSnapshot(`
-          <div>
-            <div
-              class="ais-DynamicWidgets"
-            >
-              RefinementList(test1)
-              <div
-                class="ais-HierarchicalMenu ais-HierarchicalMenu--noRefinement"
-              />
-            </div>
-          </div>
-        `);
-      }
-      {
-        const { container } = render(
-          <Component
-            // @ts-ignore resultsState in InstantSearch is typed wrongly to deal with multi-index
-            result={RESULTS[1]}
-          />
-        );
-
-        expect(container).toMatchInlineSnapshot(`
-          <div>
-            <div
-              class="ais-DynamicWidgets"
-            >
-              <div
-                class="ais-HierarchicalMenu ais-HierarchicalMenu--noRefinement"
-              />
-              RefinementList(test1)
-            </div>
-          </div>
-        `);
-      }
-      {
-        const { container } = render(
-          <Component
-            // @ts-ignore resultsState in InstantSearch is typed wrongly to deal with multi-index
-            result={RESULTS[2]}
-          />
-        );
-
-        expect(container).toMatchInlineSnapshot(`
-          <div>
-            <div
-              class="ais-DynamicWidgets"
-            >
-              RefinementList(test1)
-            </div>
-          </div>
-        `);
-      }
-    });
-
-    test('renders items in panel', () => {
-      const searchClient = createSearchClient();
-
-      const { container } = render(
-        <InstantSearch
-          searchClient={searchClient}
-          indexName="test"
-          // @ts-ignore resultsState in InstantSearch is typed wrongly to deal with multi-index
-          resultsState={resultsState}
-        >
-          <DynamicWidgets transformItems={() => ['test1', 'test3']}>
-            <RefinementList attribute="test1" />
-            <RefinementList attribute="test2" />
-            <Panel>
-              <RefinementList attribute="test3" />
-            </Panel>
-            <Panel>
-              <RefinementList attribute="test4" />
-            </Panel>
-          </DynamicWidgets>
-        </InstantSearch>
-      );
-
-      expect(container).toMatchInlineSnapshot(`
-        <div>
-          <div
-            class="ais-DynamicWidgets"
-          >
-            RefinementList(test1)
-            <div
-              class="ais-Panel"
-            >
-              <div
-                class="ais-Panel-body"
-              >
-                RefinementList(test3)
-              </div>
-            </div>
-          </div>
-        </div>
-      `);
-    });
-
-    test("does not render items that aren't directly in children", () => {
-      const fallbackRender = jest.fn(() => null);
-
-      // prevent duplicate console errors still showing up
-      const spy = jest.spyOn(console, 'error');
-      spy.mockImplementation(() => {});
-
-      const searchClient = createSearchClient();
-
-      const Wrapped = ({ attr }: { attr: string }) => (
-        <div>
-          <HierarchicalMenu attributes={[attr, `${attr}.1`]} />
-        </div>
-      );
-
-      render(
-        <ErrorBoundary fallbackRender={fallbackRender}>
-          <InstantSearch
-            searchClient={searchClient}
-            indexName="test"
-            // @ts-ignore resultsState in InstantSearch is typed wrongly to deal with multi-index
-            resultsState={resultsState}
-          >
-            <DynamicWidgets transformItems={() => ['test1']}>
-              <Wrapped attr="test1" />
-            </DynamicWidgets>
-          </InstantSearch>
-        </ErrorBoundary>
-      );
-
-      expect(
-        (fallbackRender.mock.calls[0] as any)[0].error
-      ).toMatchInlineSnapshot(
-        `[Error: Could not find "attribute" prop for UnknownComponent.]`
-      );
-    });
-
-    test('does not render items non-attribute widgets', () => {
-      const fallbackRender = jest.fn(() => null);
-
-      // prevent duplicate console errors still showing up
-      const spy = jest.spyOn(console, 'error');
-      spy.mockImplementation(() => {});
-
-      const searchClient = createSearchClient();
-
-      render(
-        <ErrorBoundary fallbackRender={fallbackRender}>
-          <InstantSearch
-            searchClient={searchClient}
-            indexName="test"
-            // @ts-ignore resultsState in InstantSearch is typed wrongly to deal with multi-index
-            resultsState={resultsState}
-          >
-            <DynamicWidgets transformItems={() => ['test1']}>
-              <Pagination />
-            </DynamicWidgets>
-          </InstantSearch>
-        </ErrorBoundary>
-      );
-
-      expect(
-        (fallbackRender.mock.calls[0] as any)[0].error
-      ).toMatchInlineSnapshot(
-        `[Error: Could not find "attribute" prop for UnknownComponent.]`
-      );
-    });
+    expect(CoreDynamicWidgets).toHaveBeenCalledTimes(1);
+    expect(CoreDynamicWidgets).toHaveBeenCalledWith(
+      { children, transformItems, unknownOption: true },
+      {}
+    );
   });
 });

@@ -195,19 +195,6 @@ describe('connectDynamicWidgets', () => {
         expect(actual).toEqual(expectation);
       });
 
-      it('error without transformItems', () => {
-        const props = {
-          contextValue,
-          indexContextValue,
-        };
-        const searchState = createMultiIndexSearchState();
-        const searchResults = createMultiIndexSearchResults();
-
-        expect(() =>
-          connector.getProvidedProps(props, searchState, searchResults)
-        ).toMatchInlineSnapshot(`[Function]`);
-      });
-
       it('attributesToRender is the return value of transformItems', () => {
         const returnValue = ['one', 'two'];
         const props = {
