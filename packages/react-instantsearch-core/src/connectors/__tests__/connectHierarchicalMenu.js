@@ -307,6 +307,7 @@ describe('connectHierarchicalMenu', () => {
           count: 20,
           isRefined: true,
           items: [
+            // default ordering: alphabetical
             {
               label: 'wot',
               value: 'wat > wot',
