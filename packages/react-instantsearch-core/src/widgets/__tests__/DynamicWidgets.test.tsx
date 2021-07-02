@@ -372,7 +372,7 @@ describe('DynamicWidgets', () => {
       `);
     });
 
-    test("uses fallbackWidget component to create widgets that aren't explicitly declared", () => {
+    test("uses fallbackComponent component to create widgets that aren't explicitly declared", () => {
       const searchClient = createSearchClient();
 
       const { container } = render(
@@ -384,7 +384,7 @@ describe('DynamicWidgets', () => {
         >
           <DynamicWidgets
             transformItems={() => ['test1', 'test2', 'test3']}
-            fallbackWidget={Menu}
+            fallbackComponent={Menu}
           >
             <RefinementList attribute="test1" />
           </DynamicWidgets>
@@ -400,7 +400,7 @@ describe('DynamicWidgets', () => {
       `);
     });
 
-    test("uses fallbackWidget callback to create widgets that aren't explicitly declared", () => {
+    test("uses fallbackComponent callback to create widgets that aren't explicitly declared", () => {
       const searchClient = createSearchClient();
 
       const { container } = render(
@@ -412,7 +412,7 @@ describe('DynamicWidgets', () => {
         >
           <DynamicWidgets
             transformItems={() => ['test1', 'test2', 'test3']}
-            fallbackWidget={({ attribute }) => (
+            fallbackComponent={({ attribute }) => (
               <Menu attribute={attribute} otherProp />
             )}
           >

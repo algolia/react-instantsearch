@@ -23,13 +23,13 @@ function getAttribute(component: ReactChild): string | undefined {
 type DynamicWidgetsProps = {
   children: ReactNode;
   attributesToRender: string[];
-  fallbackWidget?: ComponentType<{ attribute: string }>;
+  fallbackComponent?: ComponentType<{ attribute: string }>;
 };
 
 function DynamicWidgets({
   children,
   attributesToRender,
-  fallbackWidget: Fallback = () => null,
+  fallbackComponent: Fallback = () => null,
 }: DynamicWidgetsProps) {
   const widgets: Map<string, ReactChild> = new Map();
 
