@@ -3,7 +3,6 @@
 
 ### Bug Fixes
 
-* **DynamicWidgets:** read from facets.order ([5835c19](https://github.com/algolia/react-instantsearch/commit/5835c19))
 * **HitsPerPage:** Adds id prop to HitsPerPage, Select components ([#3072](https://github.com/algolia/react-instantsearch/issues/3072)) ([bc75d75](https://github.com/algolia/react-instantsearch/commit/bc75d75))
 * **MenuSelect:** Adds id prop to MenuSelect ([#3073](https://github.com/algolia/react-instantsearch/issues/3073)) ([fddaaef](https://github.com/algolia/react-instantsearch/commit/fddaaef))
 * **SearchBox:** Adds inputId prop to SearchBox ([#3074](https://github.com/algolia/react-instantsearch/issues/3074)) ([a05f6a4](https://github.com/algolia/react-instantsearch/commit/a05f6a4))
