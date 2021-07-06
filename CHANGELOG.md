@@ -11,7 +11,6 @@
 
 ### Features
 
-* **DynamicWidgets:** add fallbackComponent ([#3066](https://github.com/algolia/react-instantsearch/issues/3066)) ([1217694](https://github.com/algolia/react-instantsearch/commit/1217694))
 * **DynamicWidgets:** add implementation ([#3056](https://github.com/algolia/react-instantsearch/issues/3056)) ([691ef87](https://github.com/algolia/react-instantsearch/commit/691ef87))
 * **facets:** add a new option "facetOrdering" to Menu, RefinementList & HierarchicalMenu ([#3067](https://github.com/algolia/react-instantsearch/issues/3067)) ([731d9ba](https://github.com/algolia/react-instantsearch/commit/731d9ba))
 
