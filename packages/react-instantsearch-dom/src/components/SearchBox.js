@@ -273,6 +273,7 @@ class SearchBox extends Component {
             onChange={this.onChange}
             {...searchInputEvents}
             className={cx('input')}
+            dir="auto"
           />
           <button
             type="submit"
