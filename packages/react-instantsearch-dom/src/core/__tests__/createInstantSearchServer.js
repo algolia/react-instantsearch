@@ -252,6 +252,7 @@ describe('findResultsState', () => {
         ...requiredProps,
         searchState: {
           query: 'iPhone',
+          page: 3,
         },
       };
 
@@ -260,9 +261,17 @@ describe('findResultsState', () => {
       expect(data).toEqual({
         metadata: [expect.objectContaining({ id: 'cool' })],
         rawResults: [
-          expect.objectContaining({ index: 'indexName', query: 'iPhone' }),
+          expect.objectContaining({
+            index: 'indexName',
+            query: 'iPhone',
+            page: 3,
+          }),
         ],
-        state: expect.objectContaining({ index: 'indexName', query: 'iPhone' }),
+        state: expect.objectContaining({
+          index: 'indexName',
+          query: 'iPhone',
+          page: 3,
+        }),
       });
     });
 
