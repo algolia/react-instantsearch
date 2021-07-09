@@ -14,7 +14,7 @@
   "dependencies": {
     "algoliasearch": "4.9.3",
     "expo": "37.0.3",
-    "lodash": "4.17.15",
+    "lodash": "4.17.21",
     "prop-types": "15.6.2",
     "react": "16.9.0",
     "react-dom": "16.9.0",
