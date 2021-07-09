@@ -10,7 +10,7 @@ const getIndexId = context =>
     ? context.multiIndexContext.targetedIndex
     : context.ais.mainTargetedIndex;
 
-function createWidgetsCollector(accumulator) {
+export function createWidgetsCollector(accumulator) {
   return ({
     getSearchParameters,
     getMetadata: getMeta,
@@ -140,6 +140,40 @@ const multiIndexSearch = (
   );
 };
 
+export function getResultsStateFromWidgets(indexName, searchClient, widgets) {
+  const { sharedParameters, derivedParameters } = getSearchParameters(
+    indexName,
+    widgets
+  );
+
+  const metadata = getMetadata(widgets);
+
+  const helper = algoliasearchHelper(searchClient, sharedParameters.index);
+
+  if (typeof searchClient.addAlgoliaAgent === 'function') {
+    searchClient.addAlgoliaAgent(`react-instantsearch-server (${version})`);
+  }
+
+  if (Object.keys(derivedParameters).length === 0) {
+    return singleIndexSearch(helper, sharedParameters).then(res => {
+      return {
+        metadata,
+        ...res,
+      };
+    });
+  }
+
+  return multiIndexSearch(
+    indexName,
+    searchClient,
+    helper,
+    sharedParameters,
+    derivedParameters
+  ).then(results => {
+    return { metadata, results };
+  });
+}
+
 export const findResultsState = function(App, props) {
   if (!props) {
     throw new Error(
@@ -173,35 +207,5 @@ export const findResultsState = function(App, props) {
     );
   }
 
-  const { sharedParameters, derivedParameters } = getSearchParameters(
-    indexName,
-    widgets
-  );
-
-  const metadata = getMetadata(widgets);
-
-  const helper = algoliasearchHelper(searchClient, sharedParameters.index);
-
-  if (typeof searchClient.addAlgoliaAgent === 'function') {
-    searchClient.addAlgoliaAgent(`react-instantsearch-server (${version})`);
-  }
-
-  if (Object.keys(derivedParameters).length === 0) {
-    return singleIndexSearch(helper, sharedParameters).then(res => {
-      return {
-        metadata,
-        ...res,
-      };
-    });
-  }
-
-  return multiIndexSearch(
-    indexName,
-    searchClient,
-    helper,
-    sharedParameters,
-    derivedParameters
-  ).then(results => {
-    return { metadata, results };
-  });
+  return getResultsStateFromWidgets(indexName, searchClient, widgets);
 };
