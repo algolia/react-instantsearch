@@ -61,10 +61,11 @@ class Provider extends Component {
   createBoundingBoxFromHits(hits) {
     const { google } = this.props;
 
-    const latLngBounds = hits.reduce(
-      (acc, hit) => acc.extend(hit._geoloc),
-      new google.maps.LatLngBounds()
-    );
+    const latLngBounds = hits.reduce((acc, hit) => {
+      const geoLocs = Array.isArray(hit._geoloc) ? hit._geoloc : [hit._geoloc];
+
+      return geoLocs.reduce((bounds, current) => bounds.extend(current), acc);
+    }, new google.maps.LatLngBounds());
 
     return {
       northEast: latLngBounds.getNorthEast().toJSON(),
