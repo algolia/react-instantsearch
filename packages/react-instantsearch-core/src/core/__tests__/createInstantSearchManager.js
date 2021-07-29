@@ -388,7 +388,7 @@ describe('createInstantSearchManager', () => {
   });
 
   describe('metadata hydration', () => {
-    test.only('replaces value with a function returning empty search state', () => {
+    test('replaces value with a function returning empty search state', () => {
       const ism = createInstantSearchManager({
         indexName: 'index',
         searchClient: createSearchClient(),
