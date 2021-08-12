@@ -60,7 +60,7 @@ Hits.propTypes = {
   hitComponent: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.func,
-    PropTypes.object
+    PropTypes.object,
   ]),
 };
 
