@@ -62,7 +62,7 @@ InfiniteHits.propTypes = {
   refineNext: PropTypes.func.isRequired,
   translate: PropTypes.func.isRequired,
   className: PropTypes.string,
-  hitComponent: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+  hitComponent: PropTypes.oneOfType([PropTypes.string, PropTypes.func, PropTypes.object]),
 };
 
 InfiniteHits.defaultProps = {
