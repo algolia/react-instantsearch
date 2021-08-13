@@ -14,7 +14,10 @@ type HitProps = {
 type Props = {
   hits: Hit[];
   className?: string;
-  hitComponent?: React.FunctionComponent<HitProps>;
+  hitComponent?:
+    | string
+    | React.ReactType<HitProps>
+    | React.ExoticComponent<HitProps>;
 };
 
 const cx = createClassNames('Hits');
@@ -57,10 +60,12 @@ const HitPropTypes = PropTypes.shape({
 Hits.propTypes = {
   hits: PropTypes.arrayOf(HitPropTypes.isRequired).isRequired,
   className: PropTypes.string,
+  // PropTypes.elementType would be more correct, but it has more dependencies
+  // and bumps up the bundle size too much.
   hitComponent: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.func,
-    PropTypes.object,
+    PropTypes.any,
   ]),
 };
 
