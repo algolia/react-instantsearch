@@ -62,10 +62,12 @@ InfiniteHits.propTypes = {
   refineNext: PropTypes.func.isRequired,
   translate: PropTypes.func.isRequired,
   className: PropTypes.string,
+
+  // this is actually PropTypes.elementType, but our prop-types version is outdated
   hitComponent: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.func,
-    PropTypes.any,
+    PropTypes.any, // TypeScript won't accept PropTypes.object as a react element (memo)
   ]),
 };
 

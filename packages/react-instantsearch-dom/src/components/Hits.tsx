@@ -60,12 +60,12 @@ const HitPropTypes = PropTypes.shape({
 Hits.propTypes = {
   hits: PropTypes.arrayOf(HitPropTypes.isRequired).isRequired,
   className: PropTypes.string,
-  // PropTypes.elementType would be more correct, but it has more dependencies
-  // and bumps up the bundle size too much.
+
+  // this is actually PropTypes.elementType, but our prop-types version is outdated
   hitComponent: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.func,
-    PropTypes.any,
+    PropTypes.any, // TypeScript won't accept PropTypes.object as a react element (memo)
   ]),
 };
 
