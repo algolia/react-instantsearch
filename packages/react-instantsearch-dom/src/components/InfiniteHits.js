@@ -64,11 +64,7 @@ InfiniteHits.propTypes = {
   className: PropTypes.string,
 
   // this is actually PropTypes.elementType, but our prop-types version is outdated
-  hitComponent: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.func,
-    PropTypes.any, // TypeScript won't accept PropTypes.object as a react element (memo)
-  ]),
+  hitComponent: PropTypes.any,
 };
 
 InfiniteHits.defaultProps = {
