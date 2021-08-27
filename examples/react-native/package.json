@@ -24,7 +24,7 @@
     "react-native": "https://github.com/expo/react-native/archive/sdk-37.0.1.tar.gz",
     "react-native-gesture-handler": "1.6.1",
     "react-native-modal-dropdown": "0.7.0",
-    "react-native-reanimated": "1.7.0",
+    "react-native-reanimated": "1.13.3",
     "react-native-router-flux": "4.2.0",
     "react-native-screens": "2.2.0",
     "react-native-star-rating": "1.1.0",
