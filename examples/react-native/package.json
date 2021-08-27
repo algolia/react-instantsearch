@@ -28,7 +28,7 @@
     "react-native-router-flux": "4.2.0",
     "react-native-screens": "2.2.0",
     "react-native-star-rating": "1.1.0",
-    "react-native-vector-icons": "6.6.0",
+    "react-native-vector-icons": "6.7.0",
     "react-native-web": "~0.11.7"
   },
   "devDependencies": {
