@@ -17,6 +17,7 @@ function createWidgetsCollector(accumulator) {
     context,
     props,
     searchState,
+    connector,
   }) => {
     accumulator.push({
       getSearchParameters,
@@ -25,6 +26,7 @@ function createWidgetsCollector(accumulator) {
       context,
       props,
       searchState,
+      requiresInitialResults: connector.requiresInitialResults,
     });
   };
 }
@@ -37,14 +39,14 @@ function getMetadata(widgets) {
     });
 }
 
-const getSearchParameters = (indexName, widgets) => {
+const getSearchParameters = (indexName, widgets, defaultParameters) => {
   const sharedParameters = widgets
     .filter(widget => !hasMultipleIndices(widget.context))
     .reduce(
       (acc, widget) =>
         widget.getSearchParameters(acc, widget.props, widget.searchState),
       new algoliasearchHelper.SearchParameters({
-        ...HIGHLIGHT_TAGS,
+        ...defaultParameters,
         index: indexName,
       })
     );
@@ -173,9 +175,38 @@ export const findResultsState = function(App, props) {
     );
   }
 
+  const requiresInitialResults =
+    !props.resultsState &&
+    widgets.some(widget => widget.requiresInitialResults);
+
+  const defaultParameters = requiresInitialResults
+    ? {
+        hitsPerPage: 1,
+        page: 0,
+        attributesToRetrieve: [],
+        attributesToHighlight: [],
+        attributesToSnippet: [],
+        analytics: false,
+        clickAnalytics: false,
+        ...HIGHLIGHT_TAGS,
+      }
+    : HIGHLIGHT_TAGS;
+
+  function possiblyRefetch(resultsState) {
+    if (requiresInitialResults) {
+      return findResultsState(App, {
+        ...props,
+        resultsState,
+      });
+    }
+
+    return resultsState;
+  }
+
   const { sharedParameters, derivedParameters } = getSearchParameters(
     indexName,
-    widgets
+    widgets,
+    defaultParameters
   );
 
   const metadata = getMetadata(widgets);
@@ -187,12 +218,12 @@ export const findResultsState = function(App, props) {
   }
 
   if (Object.keys(derivedParameters).length === 0) {
-    return singleIndexSearch(helper, sharedParameters).then(res => {
-      return {
+    return singleIndexSearch(helper, sharedParameters)
+      .then(result => ({
         metadata,
-        ...res,
-      };
-    });
+        ...result,
+      }))
+      .then(possiblyRefetch);
   }
 
   return multiIndexSearch(
@@ -201,7 +232,7 @@ export const findResultsState = function(App, props) {
     helper,
     sharedParameters,
     derivedParameters
-  ).then(results => {
-    return { metadata, results };
-  });
+  )
+    .then(results => ({ metadata, results }))
+    .then(possiblyRefetch);
 };

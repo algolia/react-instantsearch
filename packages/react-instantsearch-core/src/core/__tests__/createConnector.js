@@ -578,12 +578,15 @@ describe('createConnector', () => {
     });
 
     it('calls onSearchParameters on mount with getSearchParameters', () => {
-      const Connected = createConnectorWithoutContext({
+      const connectorDescription = {
         displayName: 'CoolConnector',
         getProvidedProps: () => {},
         getSearchParameters: () => null,
         getMetadata: () => null,
-      })(() => null);
+      };
+      const Connected = createConnectorWithoutContext(connectorDescription)(
+        () => null
+      );
 
       const onSearchParameters = jest.fn();
 
@@ -602,7 +605,8 @@ describe('createConnector', () => {
         expect.any(Function),
         { ais: context },
         { ...props, contextValue: context },
-        expect.any(Function)
+        expect.any(Function),
+        connectorDescription
       );
     });
 

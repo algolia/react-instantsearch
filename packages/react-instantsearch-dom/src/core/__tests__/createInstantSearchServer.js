@@ -27,7 +27,10 @@ describe('findResultsState', () => {
       }),
   });
 
-  const createWidget = ({ getSearchParameters = () => {} } = {}) =>
+  const createWidget = ({
+    getSearchParameters = () => {},
+    ...connectorKeys
+  } = {}) =>
     createConnector({
       displayName: 'CoolConnector',
       getProvidedProps: () => null,
@@ -52,6 +55,7 @@ describe('findResultsState', () => {
         return { id: 'cool', props, searchState };
       },
       getId: () => 'id',
+      ...connectorKeys,
     })(() => null);
 
   const requiredProps = {
@@ -297,6 +301,35 @@ describe('findResultsState', () => {
           expect.objectContaining({ query: expect.any(String) }),
         ]),
       });
+    });
+
+    it('should search twice for a widget requesting initial results', async () => {
+      const getSearchParameters = jest.fn();
+      const getSearchParameters2 = jest.fn();
+
+      const Connected = createWidget({
+        getSearchParameters,
+      });
+      const Dynamic = createWidget({
+        getSearchParameters: getSearchParameters2,
+        requiresInitialResults: true,
+      });
+
+      const App = props => (
+        <InstantSearch {...props}>
+          <Dynamic />
+          <Connected />
+        </InstantSearch>
+      );
+
+      const props = {
+        ...requiredProps,
+      };
+
+      await findResultsState(App, props);
+
+      expect(getSearchParameters).toHaveBeenCalledTimes(2);
+      expect(getSearchParameters2).toHaveBeenCalledTimes(2);
     });
 
     describe('cleaning "params"', () => {
@@ -918,6 +951,40 @@ describe('findResultsState', () => {
           expect.objectContaining({ index: 'index1', query: 'iPad' }),
         ],
       });
+    });
+
+    it('should search twice for a widget requesting initial results', async () => {
+      const getSearchParameters = jest.fn();
+      const getSearchParameters2 = jest.fn();
+
+      const Connected = createWidget({
+        getSearchParameters,
+      });
+      const Dynamic = createWidget({
+        getSearchParameters: getSearchParameters2,
+        requiresInitialResults: true,
+      });
+
+      const App = props => (
+        <InstantSearch {...props}>
+          <Dynamic />
+
+          <Index indexId="index1WithRefinement" indexName="index1">
+            <Dynamic />
+            <Connected prop="value2" />
+          </Index>
+        </InstantSearch>
+      );
+
+      const props = {
+        ...requiredProps,
+      };
+
+      await findResultsState(App, props);
+
+      // twice for every widget
+      expect(getSearchParameters).toHaveBeenCalledTimes(2);
+      expect(getSearchParameters2).toHaveBeenCalledTimes(4);
     });
 
     describe('cleaning "params"', () => {

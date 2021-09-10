@@ -13,6 +13,11 @@ export default createConnector({
     transformItems: PropTypes.func,
   },
 
+  // count as a widget for server-side rendering
+  getSearchParameters(searchParameters) {
+    return searchParameters;
+  },
+
   getProvidedProps(props, _searchState, searchResults) {
     const results = getResults(searchResults, {
       ais: props.contextValue,
@@ -34,4 +39,6 @@ export default createConnector({
       attributesToRender: props.transformItems(facetOrder, { results }),
     };
   },
+
+  requiresInitialResults: true,
 });

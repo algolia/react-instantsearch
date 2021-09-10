@@ -56,7 +56,6 @@ export default class extends React.Component {
         searchState={this.props.searchState}
         createURL={this.props.createURL}
         indexName={this.props.indexName}
-        onSearchParameters={this.props.onSearchParameters}
         {...this.props}
       >
         <Configure hitsPerPage={12} />

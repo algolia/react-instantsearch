@@ -46,6 +46,12 @@ export type ConnectorDescription = {
    */
   propTypes?: {}; // I can't find a definition for a propTypes object
   defaultProps?: {};
+
+  /**
+   * this is true for conditional widgets that require search results before
+   * knowing the search parameters required. Example: dynamic widgets.
+   */
+  requiresInitialResults?: boolean;
 };
 
 type ConnectorProps = {
@@ -111,7 +117,8 @@ export function createConnectorWithoutContext(
               multiIndexContext: this.props.indexContextValue,
             },
             this.props,
-            connectorDesc.getMetadata && connectorDesc.getMetadata.bind(this)
+            connectorDesc.getMetadata && connectorDesc.getMetadata.bind(this),
+            connectorDesc
           );
         }
       }
