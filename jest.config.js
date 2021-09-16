@@ -7,4 +7,8 @@ module.exports = {
     'jest-watch-typeahead/filename',
     'jest-watch-typeahead/testname',
   ],
+  moduleNameMapper: {
+    '^react-instantsearch-(.*)$':
+      '<rootDir>/packages/react-instantsearch-$1/src/',
+  },
 };

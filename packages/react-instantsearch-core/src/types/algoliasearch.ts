@@ -5,11 +5,8 @@ import algoliasearch, {
   // @ts-ignore
   Response as SearchResponseV3,
 } from 'algoliasearch';
-import {
-  SearchResponse as SearchResponseV4,
-  // @ts-ignore
-  // eslint-disable-next-line import/no-unresolved
-} from '@algolia/client-search';
+// eslint-disable-next-line import/named
+import { SearchResponse as SearchResponseV4 } from '@algolia/client-search';
 
 type DummySearchClientV4 = {
   readonly addAlgoliaAgent: (segment: string, version?: string) => void;

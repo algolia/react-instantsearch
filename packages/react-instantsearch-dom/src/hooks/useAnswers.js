@@ -44,6 +44,7 @@ export default function useAnswers({
 
   const debouncedSearch = useMemo(() => {
     return debounce(searchIndex.findAnswers, searchDebounceTime);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchIndex]);
 
   useEffect(() => {
@@ -61,6 +62,7 @@ export default function useAnswers({
         setIsLoading(false);
         setHits(result.hits);
       }, renderDebounceTime),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [setIsLoading, setHits]
   );
 
@@ -88,6 +90,7 @@ export default function useAnswers({
 
   useEffect(() => {
     fetchAnswers();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
 
   return { hits, isLoading };

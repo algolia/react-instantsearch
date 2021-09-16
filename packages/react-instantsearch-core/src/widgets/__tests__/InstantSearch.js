@@ -218,7 +218,7 @@ describe('InstantSearch', () => {
 
   it('keeps the `searchState` up to date as a controlled input', () => {
     createInstantSearchManager.mockImplementation((...args) => {
-      const module = require.requireActual(
+      const module = jest.requireActual(
         '../../core/createInstantSearchManager'
       );
 

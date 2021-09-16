@@ -42,6 +42,7 @@ describe('Answers', () => {
     `);
   });
 
+  // eslint-disable-next-line jest/expect-expect
   it('renders loader when a query is given', () => {
     const { getByText, getByPlaceholderText } = render(
       <InstantSearch indexName="ted" searchClient={searchClient}>

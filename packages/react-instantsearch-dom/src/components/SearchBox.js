@@ -246,7 +246,6 @@ class SearchBox extends Component {
     const isSearchStalled =
       this.props.showLoadingIndicator && this.props.isSearchStalled;
 
-    /* eslint-disable max-len */
     return (
       <div className={classNames(cx(''), className)}>
         <form
@@ -297,7 +296,6 @@ class SearchBox extends Component {
         </form>
       </div>
     );
-    /* eslint-enable */
   }
 }
 

@@ -28,7 +28,6 @@ export function hasMultipleIndices(context) {
   return context && context.multiIndexContext;
 }
 
-// eslint-disable-next-line max-params
 export function refineValue(
   searchState,
   nextRefinement,
@@ -106,7 +105,6 @@ function refineSingleIndex(searchState, nextRefinement, resetPage) {
   return { ...searchState, ...nextRefinement, ...page };
 }
 
-// eslint-disable-next-line max-params
 function refineMultiIndexWithNamespace(
   searchState,
   nextRefinement,

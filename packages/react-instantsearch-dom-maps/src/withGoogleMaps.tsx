@@ -7,7 +7,7 @@ type Subtract<TProps, TSubstractedProps> = Omit<
 >;
 
 export interface WithGoogleMapsProps {
-  google: typeof google; // eslint-disable-line no-undef
+  google: typeof google;
   googleMapsInstance: google.maps.Map;
 }
 

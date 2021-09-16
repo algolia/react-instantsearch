@@ -36,7 +36,7 @@ describe('withGoogleMaps', () => {
 
     const Fake = withGoogleMaps(({ google }: Props) => {
       const heatmap = new google.maps.visualization.HeatmapLayer({
-        data: [10, 20, 30],
+        data: [10, 20, 30] as any,
         radius: 50,
       });
 

@@ -168,7 +168,7 @@ describe('RawRangeInput', () => {
   });
 
   describe('didUpdate', () => {
-    it('expect to update state when props have changed ', () => {
+    it('expect to update state when props have changed', () => {
       const props = {
         canRefine: false,
         currentRefinement: {

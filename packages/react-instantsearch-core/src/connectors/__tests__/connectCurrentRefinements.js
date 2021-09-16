@@ -99,7 +99,6 @@ describe('connectCurrentRefinements', () => {
           (current, index, array) =>
             index === 0 || current.__dedupe !== array[index - 1].__dedupe
         )
-        // eslint-disable-next-line no-unused-vars
         .map(({ __dedupe, ...item }) => item);
 
     const props = connect.getProvidedProps({ transformItems }, null, null, [

@@ -2,7 +2,26 @@
  * @type {import('eslint').Linter.Config}
  */
 const config = {
-  extends: ['algolia', 'algolia/jest', 'algolia/react', 'algolia/typescript'],
+  extends: [
+    'algolia',
+    'algolia/jest',
+    'algolia/react',
+    'algolia/typescript',
+    'plugin:react-hooks/recommended',
+  ],
+  settings: {
+    react: {
+      version: 'detect',
+    },
+    'import/resolver': {
+      node: {
+        // The migration is an incremental process so we import TypeScript modules
+        // from JavaScript files.
+        // By default, `import/resolver` only supports JavaScript modules.
+        extensions: ['.js', '.ts', '.tsx'],
+      },
+    },
+  },
   rules: {
     'no-param-reassign': 'off',
     // @TODO: to remove once `eslint-config-algolia` ships the change
@@ -20,19 +39,8 @@ const config = {
       'error',
       { allow: ['^EXPERIMENTAL_', 'free_shipping'] },
     ],
-  },
-  settings: {
-    react: {
-      version: 'detect',
-    },
-    'import/resolver': {
-      node: {
-        // The migration is an incremental process so we import TypeScript modules
-        // from JavaScript files.
-        // By default, `import/resolver` only supports JavaScript modules.
-        extensions: ['.js', '.ts', '.tsx'],
-      },
-    },
+    'import/extensions': 'off',
+    'eslint-comments/disable-enable-pair': 'off',
   },
   overrides: [
     {
@@ -48,6 +56,31 @@ const config = {
       files: ['*.stories.tsx'],
       rules: {
         'react/prop-types': 'off',
+      },
+    },
+    {
+      files: ['packages/react-instantsearch-core-next/**/*'],
+      rules: {
+        'react/prop-types': 'off',
+        'import/order': [
+          'error',
+          {
+            alphabetize: {
+              order: 'asc',
+              caseInsensitive: true,
+            },
+            'newlines-between': 'always',
+            groups: ['builtin', 'external', 'parent', 'sibling', 'index'],
+            pathGroups: [
+              {
+                pattern: '@/**/*',
+                group: 'parent',
+                position: 'before',
+              },
+            ],
+            pathGroupsExcludedImportTypes: ['builtin'],
+          },
+        ],
       },
     },
   ],
