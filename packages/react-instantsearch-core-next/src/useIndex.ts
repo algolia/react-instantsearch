@@ -8,16 +8,16 @@ import type { IndexWidgetParams } from 'instantsearch.js/es/widgets/index/index'
 export type UseIndexProps = IndexWidgetParams;
 
 export function useIndex(props: UseIndexProps) {
-  const searchIndex = useIndexContext();
+  const parentIndex = useIndexContext();
   const indexWidget = useMemo(() => index(props), [props]);
 
   useEffect(() => {
-    searchIndex.addWidgets([indexWidget]);
+    parentIndex.addWidgets([indexWidget]);
 
     return () => {
-      searchIndex.removeWidgets([indexWidget]);
+      parentIndex.removeWidgets([indexWidget]);
     };
-  }, [searchIndex, indexWidget]);
+  }, [parentIndex, indexWidget]);
 
   return indexWidget;
 }
