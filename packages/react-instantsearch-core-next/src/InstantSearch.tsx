@@ -6,7 +6,7 @@ import { useInstantSearch } from './useInstantSearch';
 
 import type { UseInstantSearchProps } from './useInstantSearch';
 
-type InstantSearchProps = UseInstantSearchProps & {
+export type InstantSearchProps = UseInstantSearchProps & {
   children?: React.ReactNode;
 };
 

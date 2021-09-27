@@ -81,7 +81,7 @@ describe('InstantSearch', () => {
 
     render(<InstantSearch indexName="indexName" searchClient={searchClient} />);
 
-    // @TODO once props are stable:
+    // @TODO: figure out why it's called 6 times instead of 3.
     // expect(searchClient.addAlgoliaAgent).toHaveBeenCalledTimes(3);
     expect(searchClient.addAlgoliaAgent).toHaveBeenCalledWith(
       `react (${ReactVersion})`
