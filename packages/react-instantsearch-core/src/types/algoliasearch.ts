@@ -7,7 +7,10 @@ import type {
   Response as SearchResponseV3,
 } from 'algoliasearch';
 
-import type { SearchResponse as SearchResponseV4 } from '@algolia/client-search';
+import type {
+  // @ts-ignore
+  SearchResponse as SearchResponseV4,
+} from '@algolia/client-search';
 
 type DummySearchClientV4 = {
   readonly addAlgoliaAgent: (segment: string, version?: string) => void;
