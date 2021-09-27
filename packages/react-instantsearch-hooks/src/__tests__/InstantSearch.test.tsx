@@ -87,7 +87,7 @@ describe('InstantSearch', () => {
       `react (${ReactVersion})`
     );
     expect(searchClient.addAlgoliaAgent).toHaveBeenCalledWith(
-      `react-instantsearch-core (${version})`
+      `react-instantsearch (${version})`
     );
   });
 
