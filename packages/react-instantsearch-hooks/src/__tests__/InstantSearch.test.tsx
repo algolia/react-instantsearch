@@ -1,7 +1,4 @@
 import { render } from '@testing-library/react';
-import { InstantSearch as InstantSearchType } from 'instantsearch.js';
-// eslint-disable-next-line import/named
-import { IndexWidget } from 'instantsearch.js/es/widgets/index/index';
 import React, { version as ReactVersion } from 'react';
 
 import { createSearchClient } from '../../../../test/mock';
@@ -9,6 +6,9 @@ import { IndexContext } from '../IndexContext';
 import { InstantSearch } from '../InstantSearch';
 import { InstantSearchContext } from '../InstantSearchContext';
 import version from '../version';
+
+import type { InstantSearch as InstantSearchType } from 'instantsearch.js';
+import type { IndexWidget } from 'instantsearch.js/es/widgets/index/index';
 
 describe('InstantSearch', () => {
   test('renders children', () => {
@@ -34,7 +34,7 @@ describe('InstantSearch', () => {
     render(
       <InstantSearch indexName="indexName" searchClient={searchClient}>
         <InstantSearchContext.Consumer>
-          {context => {
+          {(context) => {
             searchContext = context;
             return null;
           }}
@@ -59,7 +59,7 @@ describe('InstantSearch', () => {
     render(
       <InstantSearch indexName="indexName" searchClient={searchClient}>
         <IndexContext.Consumer>
-          {context => {
+          {(context) => {
             indexContext = context;
             return null;
           }}
@@ -96,7 +96,7 @@ describe('InstantSearch', () => {
     render(
       <InstantSearch indexName="indexName" searchClient={searchClient}>
         <InstantSearchContext.Consumer>
-          {context => {
+          {(context) => {
             searchContext = context;
             return null;
           }}
@@ -114,7 +114,7 @@ describe('InstantSearch', () => {
     const { unmount } = render(
       <InstantSearch indexName="indexName" searchClient={searchClient}>
         <InstantSearchContext.Consumer>
-          {context => {
+          {(context) => {
             searchContext = context;
             return null;
           }}

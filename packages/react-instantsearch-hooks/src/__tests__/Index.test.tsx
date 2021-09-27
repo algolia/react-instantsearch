@@ -1,12 +1,12 @@
 import { render } from '@testing-library/react';
-// eslint-disable-next-line import/named
-import { IndexWidget } from 'instantsearch.js/es/widgets/index/index';
 import React from 'react';
 
 import { createSearchClient } from '../../../../test/mock';
 import { IndexContext } from '../IndexContext';
 import { InstantSearch } from '../InstantSearch';
 import { Index } from '../SearchIndex';
+
+import type { IndexWidget } from 'instantsearch.js/es/widgets/index/index';
 
 describe('Index', () => {
   test('renders children', () => {
@@ -33,7 +33,7 @@ describe('Index', () => {
       <InstantSearch indexName="indexName" searchClient={searchClient}>
         <Index indexName="childIndex">
           <IndexContext.Consumer>
-            {context => {
+            {(context) => {
               indexContext = context;
               return null;
             }}
@@ -61,7 +61,7 @@ describe('Index', () => {
         <Index indexName="childIndex">
           <Index indexName="subchildIndex">
             <IndexContext.Consumer>
-              {context => {
+              {(context) => {
                 indexContext = context;
                 return null;
               }}
