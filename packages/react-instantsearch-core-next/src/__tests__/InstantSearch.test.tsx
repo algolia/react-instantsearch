@@ -82,12 +82,15 @@ describe('InstantSearch', () => {
     render(<InstantSearch indexName="indexName" searchClient={searchClient} />);
 
     // @TODO once props are stable:
-    // expect(searchClient.addAlgoliaAgent).toHaveBeenCalledTimes(2);
+    // expect(searchClient.addAlgoliaAgent).toHaveBeenCalledTimes(3);
     expect(searchClient.addAlgoliaAgent).toHaveBeenCalledWith(
       `react (${ReactVersion})`
     );
     expect(searchClient.addAlgoliaAgent).toHaveBeenCalledWith(
       `react-instantsearch (${version})`
+    );
+    expect(searchClient.addAlgoliaAgent).toHaveBeenCalledWith(
+      `react-instantsearch-hooks (${version})`
     );
   });
 
