@@ -73,12 +73,12 @@ describe('utils', () => {
   describe('find', () => {
     test('returns the first match based on the comparator', () => {
       expect(
-        utils.find([1], function () {
+        utils.find([1], () => {
           return true;
         })
       ).toBe(1);
       expect(
-        utils.find([1, 2], function () {
+        utils.find([1, 2], () => {
           return true;
         })
       ).toBe(1);
@@ -92,17 +92,17 @@ describe('utils', () => {
 
     test('returns undefined in non-found cases', () => {
       expect(
-        utils.find([], function () {
+        utils.find([], () => {
           return false;
         })
       ).toBeUndefined();
       expect(
-        utils.find(undefined, function () {
+        utils.find(undefined, () => {
           return false;
         })
       ).toBeUndefined();
 
-      expect(function () {
+      expect(() => {
         utils.find([1, 2, 3], undefined);
       }).toThrow();
     });
