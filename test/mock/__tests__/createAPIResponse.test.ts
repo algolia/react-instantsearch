@@ -1,7 +1,10 @@
-import { createSingleSearchResponse } from '../createAPIResponse';
+import {
+  createSFFVResponse,
+  createSingleSearchResponse,
+} from '../createAPIResponse';
 
 describe('createSingleSearchResponse', () => {
-  it('calculates nbHits from hits', () => {
+  test('calculates nbHits from hits', () => {
     expect(
       createSingleSearchResponse({
         hits: Array.from({ length: 100 }),
@@ -13,7 +16,7 @@ describe('createSingleSearchResponse', () => {
     );
   });
 
-  it('calculates nbPages from nbHits & hitsPerPage', () => {
+  test('calculates nbPages from nbHits and hitsPerPage', () => {
     expect(
       createSingleSearchResponse({
         nbHits: 100,
@@ -26,10 +29,38 @@ describe('createSingleSearchResponse', () => {
     );
   });
 
-  it('calculates nbPages from default nbHits & hitsPerPage', () => {
+  test('calculates nbPages from default nbHits and hitsPerPage', () => {
     expect(createSingleSearchResponse({})).toEqual(
       expect.objectContaining({
         nbPages: 0,
+      })
+    );
+  });
+
+  test('allows to override params', () => {
+    expect(
+      createSingleSearchResponse({
+        query: 'custom query',
+        processingTimeMS: 10,
+      })
+    ).toEqual(
+      expect.objectContaining({
+        query: 'custom query',
+        processingTimeMS: 10,
+      })
+    );
+  });
+});
+
+describe('createSFFVResponse', () => {
+  test('allows to override params', () => {
+    expect(
+      createSFFVResponse({
+        processingTimeMS: 10,
+      })
+    ).toEqual(
+      expect.objectContaining({
+        processingTimeMS: 10,
       })
     );
   });
