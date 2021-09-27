@@ -1,4 +1,7 @@
-import type { SearchClient } from 'algoliasearch/lite';
+import type {
+  // @ts-ignore Search client v3 doesn't have this type and errors on the CI v3 job
+  SearchClient,
+} from 'algoliasearch/lite';
 import {
   createSingleSearchResponse,
   createMultiSearchResponse,
