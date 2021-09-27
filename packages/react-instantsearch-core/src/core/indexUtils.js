@@ -53,7 +53,7 @@ export function refineValue(
     // see: https://github.com/algolia/react-instantsearch/issues/310
     // see: https://github.com/algolia/react-instantsearch/issues/637
     if (searchState.indices && resetPage) {
-      Object.keys(searchState.indices).forEach(targetedIndex => {
+      Object.keys(searchState.indices).forEach((targetedIndex) => {
         searchState = refineValue(
           searchState,
           { page: 1 },

@@ -1,12 +1,13 @@
 // Custom types to support both algoliasearch
 // `v3` and algoliasearch `v4` clients.
 
-import algoliasearch, {
+import type algoliasearch from 'algoliasearch';
+import type {
   // @ts-ignore
   Response as SearchResponseV3,
 } from 'algoliasearch';
-// eslint-disable-next-line import/named
-import { SearchResponse as SearchResponseV4 } from '@algolia/client-search';
+
+import type { SearchResponse as SearchResponseV4 } from '@algolia/client-search';
 
 type DummySearchClientV4 = {
   readonly addAlgoliaAgent: (segment: string, version?: string) => void;

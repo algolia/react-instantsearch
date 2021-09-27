@@ -46,7 +46,7 @@ describe('RawRangeInput', () => {
       canRefine: true,
       precision: 0,
       refine: () => {},
-      translate: x => x,
+      translate: (x) => x,
       min: undefined,
       max: undefined,
     };

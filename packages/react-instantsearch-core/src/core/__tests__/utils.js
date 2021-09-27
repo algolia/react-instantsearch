@@ -287,18 +287,18 @@ describe('utils', () => {
   describe('find', () => {
     test('returns the first match based on the comparator', () => {
       expect(
-        utils.find([1], function() {
+        utils.find([1], function () {
           return true;
         })
       ).toBe(1);
       expect(
-        utils.find([1, 2], function() {
+        utils.find([1, 2], function () {
           return true;
         })
       ).toBe(1);
 
       expect(
-        utils.find([{ nice: false }, { nice: true }], function(el) {
+        utils.find([{ nice: false }, { nice: true }], function (el) {
           return el.nice;
         })
       ).toEqual({ nice: true });
@@ -306,17 +306,17 @@ describe('utils', () => {
 
     test('returns undefined in non-found cases', () => {
       expect(
-        utils.find([], function() {
+        utils.find([], function () {
           return false;
         })
       ).toBeUndefined();
       expect(
-        utils.find(undefined, function() {
+        utils.find(undefined, function () {
           return false;
         })
       ).toBeUndefined();
 
-      expect(function() {
+      expect(function () {
         utils.find([1, 2, 3], undefined);
       }).toThrow();
     });
@@ -349,7 +349,7 @@ describe('utils', () => {
     });
 
     test('returns the type of a function', () => {
-      expect(utils.getObjectType(function() {})).toEqual('Function');
+      expect(utils.getObjectType(function () {})).toEqual('Function');
     });
 
     test('returns the type of undefined', () => {

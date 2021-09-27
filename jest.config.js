@@ -1,8 +1,7 @@
-/* eslint-disable import/no-commonjs */
-
 module.exports = {
   roots: ['<rootDir>/packages'],
   snapshotSerializers: ['enzyme-to-json/serializer'],
+  testEnvironment: 'jsdom',
   watchPlugins: [
     'jest-watch-typeahead/filename',
     'jest-watch-typeahead/testname',

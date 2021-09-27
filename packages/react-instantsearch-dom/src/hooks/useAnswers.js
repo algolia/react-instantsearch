@@ -32,10 +32,10 @@ export default function useAnswers({
     () => createConcurrentSafePromise(),
     []
   );
-  const searchIndex = useMemo(() => searchClient.initIndex(index), [
-    searchClient,
-    index,
-  ]);
+  const searchIndex = useMemo(
+    () => searchClient.initIndex(index),
+    [searchClient, index]
+  );
   if (!searchIndex.findAnswers) {
     throw new Error(
       '`Answers` component and `useAnswers` hook require `algoliasearch` to be 4.8.0 or higher.'
@@ -58,7 +58,7 @@ export default function useAnswers({
 
   const setDebouncedResult = useMemo(
     () =>
-      debounce(result => {
+      debounce((result) => {
         setIsLoading(false);
         setHits(result.hits);
       }, renderDebounceTime),
@@ -79,7 +79,7 @@ export default function useAnswers({
         nbHits,
         attributesForPrediction,
       })
-    ).then(result => {
+    ).then((result) => {
       if (!result) {
         // It's undefined when it's debounced.
         return;

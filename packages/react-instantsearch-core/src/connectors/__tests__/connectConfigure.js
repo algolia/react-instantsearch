@@ -1,7 +1,7 @@
 import { SearchParameters } from 'algoliasearch-helper';
 import connect from '../connectConfigure';
 
-jest.mock('../../core/createConnector', () => x => x);
+jest.mock('../../core/createConnector', () => (x) => x);
 
 describe('connectConfigure', () => {
   describe('single index', () => {

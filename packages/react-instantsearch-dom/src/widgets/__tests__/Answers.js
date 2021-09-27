@@ -3,21 +3,23 @@ import { InstantSearch, SearchBox } from 'react-instantsearch-dom';
 import { render, fireEvent } from '@testing-library/react';
 import Answers from '../Answers';
 import { wait } from '../../../../../test/utils';
+import { createSearchClient } from '../../../../../test/mock/createSearchClient';
 
-const createSearchClient = () => ({
-  initIndex: () => ({
-    findAnswers: jest.fn(() =>
-      Promise.resolve({
-        hits: [{ title: 'hello' }],
-      })
-    ),
-  }),
-});
+const createAnswersSearchClient = () =>
+  createSearchClient({
+    initIndex: () => ({
+      findAnswers: jest.fn(() =>
+        Promise.resolve({
+          hits: [{ title: 'hello' }],
+        })
+      ),
+    }),
+  });
 
 describe('Answers', () => {
   let searchClient;
   beforeEach(() => {
-    searchClient = createSearchClient();
+    searchClient = createAnswersSearchClient();
   });
 
   it('renders empty Answers widget', () => {

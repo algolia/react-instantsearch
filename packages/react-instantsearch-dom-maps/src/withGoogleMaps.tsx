@@ -14,9 +14,9 @@ export interface WithGoogleMapsProps {
 const withGoogleMaps = <TProps extends WithGoogleMapsProps>(
   Wrapped: React.ComponentType<TProps>
 ) => {
-  const WithGoogleMaps: React.FC<
-    Subtract<TProps, WithGoogleMapsProps>
-  > = props => (
+  const WithGoogleMaps: React.FC<Subtract<TProps, WithGoogleMapsProps>> = (
+    props
+  ) => (
     <GoogleMapsContext.Consumer>
       {({ google, instance }) => (
         <Wrapped
