@@ -9,15 +9,15 @@ export type UseIndexProps = IndexWidgetParams;
 
 export function useIndex(props: UseIndexProps) {
   const searchIndex = useIndexContext();
-  const widget = useMemo(() => index(props), [props]);
+  const indexWidget = useMemo(() => index(props), [props]);
 
   useEffect(() => {
-    searchIndex.addWidgets([widget]);
+    searchIndex.addWidgets([indexWidget]);
 
     return () => {
-      searchIndex.removeWidgets([widget]);
+      searchIndex.removeWidgets([indexWidget]);
     };
-  }, [searchIndex, widget]);
+  }, [searchIndex, indexWidget]);
 
-  return widget;
+  return indexWidget;
 }
