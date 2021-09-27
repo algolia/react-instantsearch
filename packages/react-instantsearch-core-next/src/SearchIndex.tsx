@@ -1,7 +1,9 @@
 import React from 'react';
 
 import { IndexContext } from './IndexContext';
-import { useIndex, UseIndexProps } from './useIndex';
+import { useIndex } from './useIndex';
+
+import type { UseIndexProps } from './useIndex';
 
 export type IndexProps = UseIndexProps & {
   children?: React.ReactNode;

@@ -1,7 +1,9 @@
-import instantsearch, { InstantSearchOptions } from 'instantsearch.js';
+import instantsearch from 'instantsearch.js';
 import { useEffect, useMemo, version as ReactVersion } from 'react';
 
 import version from './version';
+
+import type { InstantSearchOptions } from 'instantsearch.js';
 
 export type UseInstantSearchProps = InstantSearchOptions;
 

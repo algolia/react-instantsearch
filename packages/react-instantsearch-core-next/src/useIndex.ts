@@ -1,9 +1,9 @@
 import index from 'instantsearch.js/cjs/widgets/index/index';
-// eslint-disable-next-line import/named
-import { IndexWidgetParams } from 'instantsearch.js/es/widgets/index/index';
 import { useEffect, useMemo } from 'react';
 
 import { useIndexContext } from './useIndexContext';
+
+import type { IndexWidgetParams } from 'instantsearch.js/es/widgets/index/index';
 
 export type UseIndexProps = IndexWidgetParams;
 
