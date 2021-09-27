@@ -1,5 +1,5 @@
 module.exports = {
-  roots: ['<rootDir>/packages'],
+  testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/examples/'],
   snapshotSerializers: ['enzyme-to-json/serializer'],
   testEnvironment: 'jsdom',
   watchPlugins: [
