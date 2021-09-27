@@ -13,9 +13,7 @@ export function useInstantSearch(props: UseInstantSearchProps) {
   useEffect(() => {
     if (typeof props.searchClient.addAlgoliaAgent === 'function') {
       props.searchClient.addAlgoliaAgent(`react (${ReactVersion})`);
-      props.searchClient.addAlgoliaAgent(
-        `react-instantsearch-core (${version})`
-      );
+      props.searchClient.addAlgoliaAgent(`react-instantsearch (${version})`);
     }
   }, [props.searchClient]);
 
