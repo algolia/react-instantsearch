@@ -1,1 +1,1 @@
-export default '7.0.0-alpha.0';
+export default '6.12.1';
