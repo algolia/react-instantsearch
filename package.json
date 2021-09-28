@@ -155,7 +155,7 @@
       "maxSize": "28.25 kB"
     },
     {
-      "path": "packages/react-instantsearch-hooks/dist/umd/ReactInstantSearchCore.min.js",
+      "path": "packages/react-instantsearch-hooks/dist/umd/ReactInstantSearchHooks.min.js",
       "maxSize": "28.25 kB"
     },
     {
