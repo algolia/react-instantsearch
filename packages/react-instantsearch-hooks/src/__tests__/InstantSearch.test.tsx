@@ -81,8 +81,6 @@ describe('InstantSearch', () => {
 
     render(<InstantSearch indexName="indexName" searchClient={searchClient} />);
 
-    // @TODO: figure out why it's called 6 times instead of 3.
-    // expect(searchClient.addAlgoliaAgent).toHaveBeenCalledTimes(3);
     expect(searchClient.addAlgoliaAgent).toHaveBeenCalledWith(
       `react (${ReactVersion})`
     );
