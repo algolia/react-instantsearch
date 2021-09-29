@@ -3,25 +3,17 @@ import { useEffect, useState } from 'react';
 import { useIndexContext } from './useIndexContext';
 import { useStableValue } from './useStableValue';
 
-import type {
-  Connector,
-  WidgetDescription,
-  WidgetRenderState,
-} from 'instantsearch.js';
-
-type ConnectorState<TProps> = Omit<
-  WidgetRenderState<any, TProps>,
-  'widgetParams'
->;
+import type { Connector, WidgetDescription } from 'instantsearch.js';
 
 export function useConnector<
   TProps extends Record<string, unknown>,
-  TState extends ConnectorState<TProps>,
   TDescription extends WidgetDescription
 >(
   connector: Connector<TDescription, TProps>,
   props: TProps = {} as TProps,
-  initialState: TState | (() => TState)
+  initialState:
+    | TDescription['renderState']
+    | (() => TDescription['renderState'])
 ) {
   const parentIndex = useIndexContext();
   const [state, setState] = useState(initialState);
@@ -39,7 +31,7 @@ export function useConnector<
       const { instantSearchInstance, widgetParams, ...renderState } =
         connectorState;
 
-      setState(renderState as ConnectorState<TProps>);
+      setState(renderState);
     });
     const widget = createWidget(stableProps);
 
