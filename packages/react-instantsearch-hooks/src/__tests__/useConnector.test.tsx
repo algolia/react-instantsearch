@@ -16,6 +16,7 @@ type CustomSearchBoxConnector = {
   $$type: 'test.searchBox';
   renderState: {
     query: string;
+    refine(value: string): void;
   };
 };
 
@@ -24,21 +25,46 @@ const connectCustomSearchBox: Connector<
   Record<string, never>
 > =
   (renderFn, unmountFn = noop) =>
-  (widgetParams) => ({
-    $$type: 'test.searchBox',
-    init({ instantSearchInstance }) {
-      renderFn(
-        { query: 'query at init', instantSearchInstance, widgetParams },
-        true
-      );
-    },
-    render({ instantSearchInstance }) {
-      renderFn({ query: 'query', instantSearchInstance, widgetParams }, false);
-    },
-    dispose() {
-      unmountFn();
-    },
-  });
+  (widgetParams) => {
+    const refineRef = { current: noop };
+
+    return {
+      $$type: 'test.searchBox',
+      init({ instantSearchInstance }) {
+        renderFn(
+          {
+            query: 'query at init',
+            refine: refineRef.current,
+            instantSearchInstance,
+            widgetParams,
+          },
+          true
+        );
+      },
+      render({ instantSearchInstance, helper }) {
+        refineRef.current = (value) => helper.setQuery(value).search();
+
+        renderFn(
+          {
+            query: 'query',
+            refine: refineRef.current,
+            instantSearchInstance,
+            widgetParams,
+          },
+          false
+        );
+      },
+      dispose() {
+        unmountFn();
+      },
+      getWidgetUiState(uiState, { searchParameters }) {
+        return {
+          ...uiState,
+          query: searchParameters.query,
+        };
+      },
+    };
+  };
 
 describe('useConnector', () => {
   test('returns the connector render state', async () => {
@@ -51,21 +77,28 @@ describe('useConnector', () => {
           {},
           {
             query: '',
+            refine: noop,
           }
         ),
       { wrapper }
     );
 
     // Initial render state
-    expect(result.current).toEqual({ query: '' });
+    expect(result.current).toEqual({ query: '', refine: noop });
 
     await waitForNextUpdate();
 
     // It should never be "query at init" because we skip the `init` step.
-    expect(result.current).not.toEqual({ query: 'query at init' });
+    expect(result.current).not.toEqual({
+      query: 'query at init',
+      refine: expect.any(Function),
+    });
 
     // Render state provided by InstantSearch Core during `render`.
-    expect(result.current).toEqual({ query: 'query' });
+    expect(result.current).toEqual({
+      query: 'query',
+      refine: expect.any(Function),
+    });
   });
 
   test('adds the widget to the parent index', () => {
@@ -78,6 +111,7 @@ describe('useConnector', () => {
         {},
         {
           query: '',
+          refine: noop,
         }
       );
 
