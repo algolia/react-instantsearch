@@ -1,6 +1,6 @@
 import React from 'react';
-import type { InstantSearchProps } from '../../packages/react-instantsearch-core-next/src';
-import { InstantSearch } from '../../packages/react-instantsearch-core-next/src';
+import type { InstantSearchProps } from '../../packages/react-instantsearch-hooks/src';
+import { InstantSearch } from '../../packages/react-instantsearch-hooks/src';
 
 import { createSearchClient } from '../mock';
 
