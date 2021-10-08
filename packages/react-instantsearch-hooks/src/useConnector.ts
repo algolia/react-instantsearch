@@ -44,14 +44,15 @@ export function useConnector<
       const scopedResults = parentIndex
         .getScopedResults()
         .map((scopedResult) => {
+          const fallbackResults =
+            scopedResult.indexId === parentIndex.getIndexId()
+              ? results
+              : createSearchResults(scopedResult.helper.state);
+
           return {
             ...scopedResult,
             // We avoid all `results` being `null`.
-            results:
-              scopedResult.results ||
-              scopedResult.indexId === parentIndex.getIndexId()
-                ? results
-                : createSearchResults(scopedResult.helper.state),
+            results: scopedResult.results || fallbackResults,
           };
         });
 
