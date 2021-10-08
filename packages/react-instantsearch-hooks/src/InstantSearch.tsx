@@ -13,6 +13,10 @@ export type InstantSearchProps = UseInstantSearchProps & {
 export function InstantSearch({ children, ...props }: InstantSearchProps) {
   const search = useInstantSearch(props);
 
+  if (!search.started) {
+    return null;
+  }
+
   return (
     <InstantSearchContext.Provider value={search}>
       <IndexContext.Provider value={search.mainIndex}>

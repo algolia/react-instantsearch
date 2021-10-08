@@ -6,10 +6,14 @@ import { createSearchClient } from '../../../../test/mock';
 import { createInstantSearchTestWrapper } from '../../../../test/utils';
 import { IndexContext } from '../IndexContext';
 import { InstantSearch } from '../InstantSearch';
+import { InstantSearchContext } from '../InstantSearchContext';
 import { useConnector } from '../useConnector';
 import { noop } from '../utils';
 
-import type { Connector } from 'instantsearch.js';
+import type {
+  InstantSearch as InstantSearchType,
+  Connector,
+} from 'instantsearch.js';
 import type { IndexWidget } from 'instantsearch.js/es/widgets/index/index';
 
 type CustomSearchBoxConnector = {
@@ -30,25 +34,75 @@ const connectCustomSearchBox: Connector<
 
     return {
       $$type: 'test.searchBox',
-      init({ instantSearchInstance }) {
+      init(params) {
+        renderFn(
+          {
+            ...this.getWidgetRenderState!(params),
+            instantSearchInstance: params.instantSearchInstance,
+          },
+          true
+        );
+      },
+      render(params) {
+        renderFn(
+          {
+            ...this.getWidgetRenderState!(params),
+            query: 'query',
+            instantSearchInstance: params.instantSearchInstance,
+          },
+          false
+        );
+      },
+      dispose() {
+        unmountFn();
+      },
+      getWidgetRenderState({ helper, state }) {
+        refineRef.current = (value) => helper.setQuery(value).search();
+
+        return {
+          query: state.query || '',
+          refine: refineRef.current,
+          widgetParams,
+        };
+      },
+      getWidgetUiState(uiState, { searchParameters }) {
+        return {
+          ...uiState,
+          query: searchParameters.query,
+        };
+      },
+    };
+  };
+
+const connectCustomSearchBoxWithoutRenderState: Connector<
+  CustomSearchBoxConnector,
+  Record<string, never>
+> =
+  (renderFn, unmountFn = noop) =>
+  (widgetParams) => {
+    const refineRef = { current: noop };
+
+    return {
+      $$type: 'test.searchBox',
+      init(params) {
         renderFn(
           {
             query: 'query at init',
             refine: refineRef.current,
-            instantSearchInstance,
+            instantSearchInstance: params.instantSearchInstance,
             widgetParams,
           },
           true
         );
       },
-      render({ instantSearchInstance, helper }) {
-        refineRef.current = (value) => helper.setQuery(value).search();
+      render(params) {
+        refineRef.current = (value) => params.helper.setQuery(value).search();
 
         renderFn(
           {
             query: 'query',
             refine: refineRef.current,
-            instantSearchInstance,
+            instantSearchInstance: params.instantSearchInstance,
             widgetParams,
           },
           false
@@ -71,20 +125,12 @@ describe('useConnector', () => {
     const wrapper = createInstantSearchTestWrapper();
 
     const { result, waitForNextUpdate } = renderHook(
-      () =>
-        useConnector(
-          connectCustomSearchBox,
-          {},
-          {
-            query: '',
-            refine: noop,
-          }
-        ),
+      () => useConnector(connectCustomSearchBox, {}),
       { wrapper }
     );
 
     // Initial render state
-    expect(result.current).toEqual({ query: '', refine: noop });
+    expect(result.current).toEqual({ query: '', refine: expect.any(Function) });
 
     await waitForNextUpdate();
 
@@ -101,21 +147,90 @@ describe('useConnector', () => {
     });
   });
 
+  test('returns empty connector initial render state without getWidgetRenderState', async () => {
+    const wrapper = createInstantSearchTestWrapper();
+
+    const { result, waitForNextUpdate } = renderHook(
+      () => useConnector(connectCustomSearchBoxWithoutRenderState, {}),
+      { wrapper }
+    );
+
+    expect(result.current).toEqual({});
+
+    await waitForNextUpdate();
+  });
+
+  test('calls getWidgetRenderState with the InstantSearch render options', () => {
+    const getWidgetRenderState = jest.fn();
+    const connectCustomSearchBoxMock =
+      (renderFn, unmountFn) => (widgetParams) => ({
+        ...connectCustomSearchBox(renderFn, unmountFn)(widgetParams),
+        getWidgetRenderState,
+      });
+    const searchClient = createSearchClient();
+    let searchContext: InstantSearchType | null = null;
+    let indexContext: IndexWidget | null = null;
+
+    function SearchProvider({ children }) {
+      return (
+        <InstantSearch searchClient={searchClient} indexName="indexName">
+          <InstantSearchContext.Consumer>
+            {(searchContextValue) => {
+              searchContext = searchContextValue;
+
+              return (
+                <IndexContext.Consumer>
+                  {(indexContextValue) => {
+                    indexContext = indexContextValue;
+
+                    return children;
+                  }}
+                </IndexContext.Consumer>
+              );
+            }}
+          </InstantSearchContext.Consumer>
+        </InstantSearch>
+      );
+    }
+
+    renderHook(() => useConnector(connectCustomSearchBoxMock, {}), {
+      wrapper: SearchProvider,
+    });
+
+    expect(getWidgetRenderState).toHaveBeenCalledTimes(1);
+    expect(getWidgetRenderState).toHaveBeenCalledWith({
+      helper: expect.any(Object),
+      parent: indexContext!,
+      instantSearchInstance: searchContext!,
+      results: expect.objectContaining({ hitsPerPage: 20 }),
+      scopedResults: [
+        {
+          indexId: 'indexName',
+          results: expect.objectContaining({ hitsPerPage: 20 }),
+          helper: expect.any(Object),
+        },
+      ],
+      state: expect.any(Object),
+      renderState: searchContext!.renderState,
+      templatesConfig: searchContext!.templatesConfig,
+      createURL: indexContext!.createURL,
+      searchMetadata: {
+        isSearchStalled: false,
+      },
+    });
+  });
+
   test('adds the widget to the parent index', () => {
     const searchClient = createSearchClient();
     let indexContext: IndexWidget | null = null;
 
     function CustomSearchBox() {
-      const { query } = useConnector(
+      useConnector<Record<never, never>, CustomSearchBoxConnector>(
         connectCustomSearchBox,
-        {},
-        {
-          query: '',
-          refine: noop,
-        }
+        {}
       );
 
-      return <div>{query}</div>;
+      return null;
     }
 
     function InstantSearchMock({ children }) {
