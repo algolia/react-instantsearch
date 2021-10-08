@@ -7,10 +7,20 @@ export default createConnector({
 
   defaultProps: {
     transformItems: items => items,
+    wildcardFacets: true,
   },
 
   propTypes: {
     transformItems: PropTypes.func,
+    wildcardFacets: PropTypes.bool,
+  },
+
+  getSearchParameters(searchParameters, props) {
+    if (!props.wildcardFacets) {
+      return searchParameters;
+    }
+
+    return searchParameters.setQueryParameter('facets', '*');
   },
 
   getProvidedProps(props, _searchState, searchResults) {
