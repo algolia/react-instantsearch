@@ -1,6 +1,8 @@
 import instantsearch from 'instantsearch.js';
 import { useEffect, useMemo, version as ReactVersion } from 'react';
 
+import { useForceUpdate } from '../useForceUpdate';
+
 import { useStableValue } from './useStableValue';
 import version from './version';
 
@@ -11,6 +13,7 @@ export type UseInstantSearchProps = InstantSearchOptions;
 export function useInstantSearch(props: UseInstantSearchProps) {
   const stableProps = useStableValue(props);
   const search = useMemo(() => instantsearch(stableProps), [stableProps]);
+  const forceUpdate = useForceUpdate();
 
   useEffect(() => {
     if (typeof stableProps.searchClient.addAlgoliaAgent === 'function') {
@@ -26,11 +29,13 @@ export function useInstantSearch(props: UseInstantSearchProps) {
 
   useEffect(() => {
     search.start();
+    forceUpdate();
 
     return () => {
       search.dispose();
+      forceUpdate();
     };
-  }, [search]);
+  }, [search, forceUpdate]);
 
   return search;
 }
