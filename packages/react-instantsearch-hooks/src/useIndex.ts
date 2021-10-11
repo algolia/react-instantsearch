@@ -18,9 +18,7 @@ export function useIndex(props: UseIndexProps) {
   const forceUpdate = useForceUpdate();
 
   useEffect(() => {
-    if (!helper) {
-      forceUpdate();
-    }
+    forceUpdate();
   }, [helper, forceUpdate]);
 
   useEffect(() => {
