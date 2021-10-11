@@ -6,6 +6,7 @@ const packages = [
   'packages/react-instantsearch-core',
   'packages/react-instantsearch-dom-maps',
   'packages/react-instantsearch-dom',
+  'packages/react-instantsearch-hooks',
   'packages/react-instantsearch-native',
   'packages/react-instantsearch',
 ];
