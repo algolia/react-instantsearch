@@ -24,12 +24,11 @@ const EMPTY_RESPONSE = {
 
 describe('connectDynamicWidgets', () => {
   const empty = {};
+  const contextValue = {
+    mainTargetedIndex: 'first',
+  };
 
   describe('single index', () => {
-    const contextValue = {
-      mainTargetedIndex: 'index',
-    };
-
     const createSingleIndexSearchResults = (result = {}, state) => ({
       results: new SearchResults(new SearchParameters(state), [
         {
@@ -155,7 +154,6 @@ describe('connectDynamicWidgets', () => {
   });
 
   describe('multi index', () => {
-    const contextValue = { mainTargetedIndex: 'first' };
     const indexContextValue = { targetedIndex: 'second' };
 
     const createMultiIndexSearchState = (state = {}) => ({
@@ -297,6 +295,38 @@ describe('connectDynamicWidgets', () => {
 
         expect(actual.attributesToRender).toEqual(['one', 'two']);
       });
+    });
+  });
+
+  describe('getSearchParameters', () => {
+    it('overrides facets', () => {
+      const props = { contextValue, ...connector.defaultProps };
+
+      const actual = connector.getSearchParameters(
+        new SearchParameters({ facets: ['yo'] }),
+        props
+      );
+
+      const expectation = new SearchParameters({ facets: ['*'] });
+
+      expect(actual).toEqual(expectation);
+    });
+
+    it('does not override facets if not requested', () => {
+      const props = {
+        contextValue,
+        ...connector.defaultProps,
+        requestAllFacets: false,
+      };
+
+      const actual = connector.getSearchParameters(
+        new SearchParameters({ facets: ['something'] }),
+        props
+      );
+
+      const expectation = new SearchParameters({ facets: ['something'] });
+
+      expect(actual).toEqual(expectation);
     });
   });
 });
