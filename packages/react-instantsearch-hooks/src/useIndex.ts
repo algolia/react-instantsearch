@@ -1,6 +1,8 @@
 import index from 'instantsearch.js/es/widgets/index/index';
 import { useEffect, useMemo } from 'react';
 
+import { useForceUpdate } from '../useForceUpdate';
+
 import { useIndexContext } from './useIndexContext';
 import { useStableValue } from './useStableValue';
 
@@ -12,6 +14,12 @@ export function useIndex(props: UseIndexProps) {
   const parentIndex = useIndexContext();
   const stableProps = useStableValue(props);
   const indexWidget = useMemo(() => index(stableProps), [stableProps]);
+  const helper = indexWidget.getHelper();
+  const forceUpdate = useForceUpdate();
+
+  useEffect(() => {
+    forceUpdate();
+  }, [helper, forceUpdate]);
 
   useEffect(() => {
     parentIndex.addWidgets([indexWidget]);

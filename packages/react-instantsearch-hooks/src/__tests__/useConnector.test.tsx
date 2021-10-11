@@ -7,6 +7,7 @@ import { createInstantSearchTestWrapper } from '../../../../test/utils';
 import { IndexContext } from '../IndexContext';
 import { InstantSearch } from '../InstantSearch';
 import { InstantSearchContext } from '../InstantSearchContext';
+import { Index } from '../SearchIndex';
 import { useConnector } from '../useConnector';
 import { noop } from '../utils';
 
@@ -16,7 +17,7 @@ import type {
 } from 'instantsearch.js';
 import type { IndexWidget } from 'instantsearch.js/es/widgets/index/index';
 
-type CustomSearchBoxConnector = {
+type CustomSearchBoxWidgetDescription = {
   $$type: 'test.searchBox';
   renderState: {
     query: string;
@@ -25,7 +26,7 @@ type CustomSearchBoxConnector = {
 };
 
 const connectCustomSearchBox: Connector<
-  CustomSearchBoxConnector,
+  CustomSearchBoxWidgetDescription,
   Record<string, never>
 > =
   (renderFn, unmountFn = noop) =>
@@ -75,7 +76,7 @@ const connectCustomSearchBox: Connector<
   };
 
 const connectCustomSearchBoxWithoutRenderState: Connector<
-  CustomSearchBoxConnector,
+  CustomSearchBoxWidgetDescription,
   Record<string, never>
 > =
   (renderFn, unmountFn = noop) =>
@@ -130,7 +131,47 @@ describe('useConnector', () => {
     );
 
     // Initial render state
-    expect(result.current).toEqual({ query: '', refine: expect.any(Function) });
+    expect(result.current).toEqual({
+      query: '',
+      refine: expect.any(Function),
+    });
+
+    await waitForNextUpdate();
+
+    // It should never be "query at init" because we skip the `init` step.
+    expect(result.current).not.toEqual({
+      query: 'query at init',
+      refine: expect.any(Function),
+    });
+
+    // Render state provided by InstantSearch Core during `render`.
+    expect(result.current).toEqual({
+      query: 'query',
+      refine: expect.any(Function),
+    });
+  });
+
+  test('returns the connector render state in a child index', async () => {
+    const searchClient = createSearchClient();
+
+    function Wrapper({ children }) {
+      return (
+        <InstantSearch searchClient={searchClient} indexName="indexName">
+          <Index indexName="childIndex">{children}</Index>
+        </InstantSearch>
+      );
+    }
+
+    const { result, waitForNextUpdate } = renderHook(
+      () => useConnector(connectCustomSearchBox, {}),
+      { wrapper: Wrapper }
+    );
+
+    // Initial render state
+    expect(result.current).toEqual({
+      query: '',
+      refine: expect.any(Function),
+    });
 
     await waitForNextUpdate();
 
@@ -225,7 +266,7 @@ describe('useConnector', () => {
     let indexContext: IndexWidget | null = null;
 
     function CustomSearchBox() {
-      useConnector<Record<never, never>, CustomSearchBoxConnector>(
+      useConnector<Record<never, never>, CustomSearchBoxWidgetDescription>(
         connectCustomSearchBox,
         {}
       );

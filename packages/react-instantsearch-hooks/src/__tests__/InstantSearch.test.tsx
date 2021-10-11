@@ -110,7 +110,7 @@ describe('InstantSearch', () => {
     expect(searchContext!.started).toEqual(true);
   });
 
-  test('diposes the search on unmount', () => {
+  test('disposes the search on unmount', () => {
     const searchClient = createSearchClient();
     let searchContext: InstantSearchType | null = null;
 
