@@ -16,7 +16,7 @@ import type {
 } from 'instantsearch.js';
 import type { IndexWidget } from 'instantsearch.js/es/widgets/index/index';
 
-type CustomSearchBoxConnector = {
+type CustomSearchBoxWidgetDescription = {
   $$type: 'test.searchBox';
   renderState: {
     query: string;
@@ -25,7 +25,7 @@ type CustomSearchBoxConnector = {
 };
 
 const connectCustomSearchBox: Connector<
-  CustomSearchBoxConnector,
+  CustomSearchBoxWidgetDescription,
   Record<string, never>
 > =
   (renderFn, unmountFn = noop) =>
@@ -75,7 +75,7 @@ const connectCustomSearchBox: Connector<
   };
 
 const connectCustomSearchBoxWithoutRenderState: Connector<
-  CustomSearchBoxConnector,
+  CustomSearchBoxWidgetDescription,
   Record<string, never>
 > =
   (renderFn, unmountFn = noop) =>
@@ -225,7 +225,7 @@ describe('useConnector', () => {
     let indexContext: IndexWidget | null = null;
 
     function CustomSearchBox() {
-      useConnector<Record<never, never>, CustomSearchBoxConnector>(
+      useConnector<Record<never, never>, CustomSearchBoxWidgetDescription>(
         connectCustomSearchBox,
         {}
       );
