@@ -5,7 +5,9 @@ import { useSearchBox } from 'react-instantsearch-hooks';
 
 import { ControlledSearchBox } from './ControlledSearchBox';
 
-export function SearchBox(props?: UseSearchBoxProps) {
+export type SearchBoxProps = React.ComponentProps<'div'> & UseSearchBoxProps;
+
+export function SearchBox(props?: SearchBoxProps) {
   const { query, refine, isSearchStalled } = useSearchBox(props);
   const [value, setValue] = useState(query);
   const inputRef = useRef<HTMLInputElement>(null);

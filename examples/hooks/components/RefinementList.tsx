@@ -6,8 +6,8 @@ import { useRefinementList } from 'react-instantsearch-hooks';
 import { ControlledSearchBox } from './ControlledSearchBox';
 import { cx } from '../cx';
 
-export type RefinementListProps = UseRefinementListProps &
-  React.ComponentProps<'div'>;
+export type RefinementListProps = React.ComponentProps<'div'> &
+  UseRefinementListProps;
 
 export function RefinementList(props: RefinementListProps) {
   const {
