@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-expressions */
 import React from 'react';
 import type { ChangeEvent, FormEvent, RefObject } from 'react';
 
@@ -26,8 +25,13 @@ export function ControlledSearchBox({
     event.preventDefault();
     event.stopPropagation();
 
-    onSubmit?.(event);
-    inputRef.current?.blur();
+    if (onSubmit) {
+      onSubmit(event);
+    }
+
+    if (inputRef.current) {
+      inputRef.current.blur();
+    }
   }
 
   function handleReset(event: FormEvent) {
@@ -35,7 +39,10 @@ export function ControlledSearchBox({
     event.stopPropagation();
 
     onReset(event);
-    inputRef.current?.focus();
+
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
   }
 
   return (
