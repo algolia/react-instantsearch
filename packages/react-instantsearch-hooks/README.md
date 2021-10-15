@@ -344,6 +344,304 @@ An identifier for the `Index` widget. Providing an `indexId` allows different in
 </Index>
 ```
 
+### `useSearchBox`
+
+> `(props: UseSearchBoxProps) => SearchBoxRenderState`
+
+Hook to use a search box.
+
+**Types**
+
+<details>
+<summary>
+
+`UseSearchBoxProps`
+
+</summary>
+
+```ts
+type UseSearchBoxProps = {
+  /**
+   * Function called every time the query changes.
+   */
+  queryHook?: (query: string, hook: (value: string) => void) => void;
+};
+```
+
+</details>
+
+<details>
+<summary>
+
+`SearchBoxRenderState`
+
+</summary>
+
+```ts
+type SearchBoxRenderState = {
+  /**
+   * The query from the last search.
+   */
+  query: string;
+  /**
+   * Sets a new query and searches.
+   */
+  refine: (value: string) => void;
+  /**
+   * Clears the query and searches.
+   */
+  clear: () => void;
+  /**
+   * Whether the search results take more than a certain time to come back from
+   * Algolia servers.
+   * This can be configured on <InstantSearch /> with the `stalledSearchDelay`
+   * props which defaults to 200ms.
+   */
+  isSearchStalled: boolean;
+};
+```
+
+</details>
+
+**Example**
+
+```jsx
+function SearchBox(props) {
+  const { query, refine } = useSearchBox(props);
+
+  return {
+    /* Markup */
+  };
+}
+```
+
+### `useHits`
+
+> `(props: UseHitsProps) => HitsRenderState`
+
+Hook to use hits.
+
+**Types**
+
+<details>
+<summary>
+
+`UseHitsProps`
+
+</summary>
+
+```ts
+type UseHitsProps = {
+  /**
+   * Whether to escape HTML tags from hits string values.
+   * @default true
+   */
+  escapeHTML?: boolean;
+  /**
+   * Function to transform the items passed to the templates.
+   */
+  transformItems?: (items: TItem[]) => TItem[];
+};
+```
+
+</details>
+
+<details>
+<summary>
+
+`HitsRenderState`
+
+</summary>
+
+```ts
+type HitsRenderState = {
+  /**
+   * The matched hits from Algolia API.
+   */
+  hits: Hits;
+  /**
+   * The response from the Algolia API.
+   */
+  results?: SearchResults;
+  /**
+   * Sends an event to the Insights middleware.
+   */
+  sendEvent: (eventType: string, hits: Hit | Hits, eventName?: string) => void;
+};
+```
+
+</details>
+
+**Example**
+
+```jsx
+function Hits(props) {
+  const { hits } = useHits(props);
+
+  return {
+    /* Markup */
+  };
+}
+```
+
+### `useRefinementList`
+
+> `(props: UseRefinementListProps) => RefinementListRenderState`
+
+Hook to use a refinement list.
+
+**Types**
+
+<details>
+<summary>
+
+`UseRefinementListProps`
+
+</summary>
+
+```ts
+type UseRefinementListProps = {
+  /**
+   * The name of the attribute in the records.
+   */
+  attribute: string;
+  /**
+   * How the filters are combined together.
+   */
+  operator?: 'and' | 'or';
+  /**
+   * The max number of items to display when
+   * `showMoreLimit` is not set or if the widget is showing less value.
+   */
+  limit?: number;
+  /**
+   * Whether to display a button that expands the number of items.
+   */
+  showMore?: boolean;
+  /**
+   * The max number of items to display if the widget
+   * is showing more items.
+   */
+  showMoreLimit?: number;
+  /**
+   * How to sort refinements. Possible values: `count|isRefined|name:asc|name:desc`.
+   *
+   * You can also use a sort function that behaves like the standard Javascript [compareFunction](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#Syntax).
+   *
+   * If a facetOrdering is set in the index settings, it is used when sortBy isn't passed
+   */
+  sortBy?: SortBy<RefinementListItem>;
+  /**
+   * Escapes the content of the facet values.
+   */
+  escapeFacetValues?: boolean;
+  /**
+   * Function to transform the items passed to the templates.
+   */
+  transformItems?: TransformItems<RefinementListItem>;
+};
+```
+
+</details>
+
+<details>
+<summary>
+
+`RefinementListRenderState`
+
+</summary>
+
+```ts
+export type RefinementListItem = {
+  /**
+   * The value of the refinement list item.
+   */
+  value: string;
+  /**
+   * Human-readable value of the refinement list item.
+   */
+  label: string;
+  /**
+   * Human-readable value of the searched refinement list item.
+   */
+  highlighted?: string;
+  /**
+   * Number of matched results after refinement is applied.
+   */
+  count: number;
+  /**
+   * Indicates if the list item is refined.
+   */
+  isRefined: boolean;
+};
+
+type RefinementListRenderState = {
+  /**
+   * The list of filtering values returned from Algolia API.
+   */
+  items: RefinementListItem[];
+  /**
+   * indicates whether the results are exhaustive (complete)
+   */
+  hasExhaustiveItems: boolean;
+  /**
+   * Creates the next state url for a selected refinement.
+   */
+  createURL: (value: string) => string;
+  /**
+   * Action to apply selected refinements.
+   */
+  refine(value: string): void;
+  /**
+   * Send event to insights middleware
+   */
+  sendEvent: (
+    eventType: string,
+    facetValue: string,
+    eventName?: string
+  ) => void;
+  /**
+   * Searches for values inside the list.
+   */
+  searchForItems: (query: string) => void;
+  /**
+   * `true` if the values are from an index search.
+   */
+  isFromSearch: boolean;
+  /**
+   * `true` if a refinement can be applied.
+   */
+  canRefine: boolean;
+  /**
+   * `true` if the toggleShowMore button can be activated (enough items to display more or
+   * already displaying more than `limit` items)
+   */
+  canToggleShowMore: boolean;
+  /**
+   * True if the menu is displaying all the menu items.
+   */
+  isShowingMore: boolean;
+  /**
+   * Toggles the number of values displayed between `limit` and `showMoreLimit`.
+   */
+  toggleShowMore: () => void;
+};
+```
+
+</details>
+
+**Example**
+
+```jsx
+function RefinementList(props) {
+  const { items } = useRefinementList(props);
+
+  return {
+    /* Markup */
+  };
+}
+```
+
 ### `useConnector`
 
 > `<TProps, TWidgetDescription>(connector: Connector<TWidgetDescription, TProps>, props: TProps) => TWidgetDescription['renderState']`
