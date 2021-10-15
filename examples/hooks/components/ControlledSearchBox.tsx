@@ -48,6 +48,7 @@ export function ControlledSearchBox({
   return (
     <div className="ais-SearchBox" {...props}>
       <form
+        action=""
         className="ais-SearchBox-form"
         noValidate
         onSubmit={handleSubmit}
