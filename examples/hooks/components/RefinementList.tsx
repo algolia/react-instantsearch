@@ -1,7 +1,8 @@
-import type { ChangeEvent } from 'react';
-import React, { useEffect, useRef, useState } from 'react';
-import type { UseRefinementListProps } from 'react-instantsearch-hooks';
-import { useRefinementList } from 'react-instantsearch-hooks';
+import React, { useEffect, useRef, useState, ChangeEvent } from 'react';
+import {
+  useRefinementList,
+  UseRefinementListProps,
+} from 'react-instantsearch-hooks';
 
 import { ControlledSearchBox } from './ControlledSearchBox';
 import { cx } from '../cx';

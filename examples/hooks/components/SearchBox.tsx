@@ -1,7 +1,5 @@
-import type { ChangeEvent } from 'react';
-import React, { useEffect, useRef, useState } from 'react';
-import type { UseSearchBoxProps } from 'react-instantsearch-hooks';
-import { useSearchBox } from 'react-instantsearch-hooks';
+import React, { useEffect, useRef, useState, ChangeEvent } from 'react';
+import { useSearchBox, UseSearchBoxProps } from 'react-instantsearch-hooks';
 
 import { ControlledSearchBox } from './ControlledSearchBox';
 

@@ -1,4 +1,4 @@
-import type { Hit as AlgoliaHit } from '@algolia/client-search';
+import { Hit as AlgoliaHit } from '@algolia/client-search';
 import algoliasearch from 'algoliasearch/lite';
 import React from 'react';
 import { InstantSearch } from 'react-instantsearch-hooks';

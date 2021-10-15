@@ -1,7 +1,6 @@
-import type { Hit as AlgoliaHit } from '@algolia/client-search';
+import { Hit as AlgoliaHit } from '@algolia/client-search';
 import React from 'react';
-import type { UseHitsProps } from 'react-instantsearch-hooks';
-import { useHits } from 'react-instantsearch-hooks';
+import { useHits, UseHitsProps } from 'react-instantsearch-hooks';
 
 import { cx } from '../cx';
 
