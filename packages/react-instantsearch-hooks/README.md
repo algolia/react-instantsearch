@@ -333,7 +333,7 @@ The index to search into.
 
 > `string`
 
-An identifier for the `Index` widget. Providing an `indexId` allows different index widgets to target the same Algolia index. It’s especially useful for the [routing](#routing) feature, and lets you find the refinements that match an [`Index](#index)` widget.
+An identifier for the `Index` widget. Providing an `indexId` allows different index widgets to target the same Algolia index. It’s especially useful for the [routing](#routing) feature, and lets you find the refinements that match an [`Index`](#index) widget.
 
 ```jsx
 <Index
