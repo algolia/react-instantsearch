@@ -26,6 +26,8 @@ export function SearchBox(props?: SearchBoxProps) {
     if (query !== value) {
       setValue(query);
     }
+    // We want to track when the query coming from InstantSearch.js changes
+    // to update the React state, so we don't need to track the state value.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
 
