@@ -367,11 +367,7 @@ type UseSearchBoxProps = {
 </details>
 
 <details>
-<summary>
-
-`SearchBoxRenderState`
-
-</summary>
+<summary><code>SearchBoxRenderState</code></summary>
 
 ```ts
 type SearchBoxRenderState = {
@@ -420,11 +416,7 @@ Hook to use [hits](https://www.algolia.com/doc/api-reference/widgets/hits/js/).
 **Types**
 
 <details>
-<summary>
-
-`UseHitsProps`
-
-</summary>
+<summary><code>UseHitsProps</code></summary>
 
 ```ts
 type UseHitsProps = {
@@ -443,11 +435,7 @@ type UseHitsProps = {
 </details>
 
 <details>
-<summary>
-
-`HitsRenderState`
-
-</summary>
+<summary><code>HitsRenderState</code></summary>
 
 ```ts
 type HitsRenderState = {
@@ -489,11 +477,7 @@ Hook to use a [refinement list](https://www.algolia.com/doc/api-reference/widget
 **Types**
 
 <details>
-<summary>
-
-`UseRefinementListProps`
-
-</summary>
+<summary><code>UseRefinementListProps</code></summary>
 
 ```ts
 type UseRefinementListProps = {
@@ -541,11 +525,7 @@ type UseRefinementListProps = {
 </details>
 
 <details>
-<summary>
-
-`RefinementListRenderState`
-
-</summary>
+<summary><code>RefinementListRenderState</code></summary>
 
 ```ts
 export type RefinementListItem = {
