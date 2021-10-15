@@ -16,9 +16,9 @@ npm install react-instantsearch-hooks algoliasearch
 
 ## Getting started
 
-This packages exposes Hooks but no components (yet!). You first need to create components based on the exposed Hooks.
+This package exposes [Hooks](https://reactjs.org/docs/hooks-intro.html) but no UI components (yet!). **You're in charge of building components based on the exposed Hooks.**
 
-Let's start with a `SearchBox` component based on `useSearchBox`:
+Let's start with a `SearchBox` component based on [`useSearchBox`](#usesearchbox):
 
 ```jsx
 import React, { useEffect, useRef, useState } from 'react';
@@ -66,7 +66,7 @@ export function SearchBox(props) {
   return (
     <div className="ais-SearchBox">
       <form
-      action="
+        action=""
         className="ais-SearchBox-form"
         noValidate
         onSubmit={onSubmit}
@@ -122,7 +122,7 @@ export function SearchBox(props) {
 }
 ```
 
-Then, you can create a `Hits` component with `useHits`:
+Then, you can create a `Hits` component with [`useHits`](#usehits):
 
 ```jsx
 import React from 'react';
@@ -176,7 +176,7 @@ function App() {
   </a>
 </p>
 
-You can use any [InstantSearch.js connector](https://www.algolia.com/doc/api-reference/widgets/js/) with the [`useConnector`](#useconnector) function.
+You can build any InstantSearch widget using [InstantSearch.js connectors](https://www.algolia.com/doc/api-reference/widgets/js/) with the [`useConnector`](#useconnector) Hook.
 
 ## API
 
@@ -209,12 +209,12 @@ The main index to search into.
 
 > `object` | **required**
 
-Provides a search client to `InstantSearch`.
+Provides a search client to [`InstantSearch`](#instantsearch).
 
 ```jsx
 const searchClient = algoliasearch(
-  'RPF6V4143M',
-  '3b24c36fac8bb7c1ee0cce05474849cc'
+  'latency',
+  '6be0576ff61c053d5f9a3225e2a90f76'
 );
 
 <InstantSearch
@@ -229,7 +229,7 @@ const searchClient = algoliasearch(
 
 > `object`
 
-Adds a [uiState](https://www.algolia.com/doc/api-reference/widgets/ui-state/js/) to InstantSearch, which provides an initial state to your widgets. To apply the `uiState` to the search parameters, you must add the corresponding widgets to InstantSearch.
+Provides an initial state to your React InstantSearch widgets using InstantSearch.js' [`uiState`](https://www.algolia.com/doc/api-reference/widgets/ui-state/js/). To provide an initial state, you must add the corresponding widgets to your implementation.
 
 ```jsx
 <InstantSearch
@@ -251,9 +251,9 @@ Adds a [uiState](https://www.algolia.com/doc/api-reference/widgets/ui-state/js/)
 
 Triggers when the state changes.
 
-By using option, the instance becomes controlled. This means that **you become responsible for updating the UI state** with `setUiState`.
+When using this option, the instance becomes controlled. This means that **you become responsible for updating the UI state** with `setUiState`.
 
-This can be useful to perform custom logic whenever the state changes.
+This is useful to perform custom logic whenever the state changes.
 
 ```jsx
 <InstantSearch
@@ -315,7 +315,7 @@ Removes the console warning about the experimental version. Note that this warni
 
 ### `Index`
 
-The provider component for an Algolia index. It's useful when you want to build a federated search interface.
+The provider component for an Algolia index. It's useful when you want to build a [federated search interface](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/multi-index-search/js/).
 
 It accepts all [props from the InstantSearch.js `index` widget](https://www.algolia.com/doc/api-reference/widgets/index-widget/js/#options).
 
@@ -333,7 +333,7 @@ The index to search into.
 
 > `string`
 
-An identifier for the `Index` widget. Providing an `indexId` allows different index widgets to target the same Algolia index. It’s especially useful for the [routing](#routing) feature. It lets you find the refinements that match an `index` widget.
+An identifier for the `Index` widget. Providing an `indexId` allows different index widgets to target the same Algolia index. It’s especially useful for the [routing](#routing) feature, and lets you find the refinements that match an [`Index](#index)` widget.
 
 ```jsx
 <Index
@@ -348,16 +348,12 @@ An identifier for the `Index` widget. Providing an `indexId` allows different in
 
 > `(props: UseSearchBoxProps) => SearchBoxRenderState`
 
-Hook to use a search box.
+Hook to use a [search box](https://www.algolia.com/doc/api-reference/widgets/search-box/js/).
 
 **Types**
 
 <details>
-<summary>
-
-`UseSearchBoxProps`
-
-</summary>
+<summary><code>UseSearchBoxProps</code></summary>
 
 ```ts
 type UseSearchBoxProps = {
@@ -419,7 +415,7 @@ function SearchBox(props) {
 
 > `(props: UseHitsProps) => HitsRenderState`
 
-Hook to use hits.
+Hook to use [hits](https://www.algolia.com/doc/api-reference/widgets/hits/js/).
 
 **Types**
 
@@ -488,7 +484,7 @@ function Hits(props) {
 
 > `(props: UseRefinementListProps) => RefinementListRenderState`
 
-Hook to use a refinement list.
+Hook to use a [refinement list](https://www.algolia.com/doc/api-reference/widgets/refinement-list/js/).
 
 **Types**
 
