@@ -1,6 +1,6 @@
 # react-instantsearch-hooks
 
-> 🚧 This version is not production-ready.
+> 🚧 This version is not yet production-ready.
 
 React InstantSearch Hooks is an open-source, **experimental UI library** for React that lets you quickly build a search interface in your front-end application.
 
@@ -66,6 +66,7 @@ export function SearchBox(props) {
   return (
     <div className="ais-SearchBox">
       <form
+      action="
         className="ais-SearchBox-form"
         noValidate
         onSubmit={onSubmit}
@@ -228,7 +229,7 @@ const searchClient = algoliasearch(
 
 > `object`
 
-Adds a [uiState](https://www.algolia.com/doc/api-reference/widgets/ui-state/js/) to InstantSearch, which provides an initial state to your widgets. To apply the `uiState` to the search parameters, you must add your widgets to InstantSearch.
+Adds a [uiState](https://www.algolia.com/doc/api-reference/widgets/ui-state/js/) to InstantSearch, which provides an initial state to your widgets. To apply the `uiState` to the search parameters, you must add the corresponding widgets to InstantSearch.
 
 ```jsx
 <InstantSearch
@@ -250,7 +251,7 @@ Adds a [uiState](https://www.algolia.com/doc/api-reference/widgets/ui-state/js/)
 
 Triggers when the state changes.
 
-Whenever you start using this option, the instance becomes controlled. This means that **you become responsible for updating the UI state** with `setUiState`.
+By using option, the instance becomes controlled. This means that **you become responsible for updating the UI state** with `setUiState`.
 
 This can be useful to perform custom logic whenever the state changes.
 
@@ -292,21 +293,6 @@ The router configuration used to save the UI state into the URL, or any client-s
 <InstantSearch
   // ...
   routing={true}
->
-  {/* Widgets */}
-</InstantSearch>
-```
-
-### `insightsClient`
-
-> `function`
-
-The function exposed by the [search-insights](https://www.npmjs.com/package/search-insights) (usually `window.aa`). This is needed if you want to [send `click` and `conversion` events with InstantSearch](https://www.algolia.com/doc/guides/building-search-ui/going-further/send-insights-events/js/).
-
-```jsx
-<InstantSearch
-  // ...
-  insightsClient={window.aa}
 >
   {/* Widgets */}
 </InstantSearch>
