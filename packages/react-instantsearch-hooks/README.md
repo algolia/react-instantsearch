@@ -346,6 +346,8 @@ An identifier for the `Index` widget. Providing an `indexId` allows different in
 
 ### `useConnector`
 
+> `<TProps, TWidgetDescription>(connector: Connector<TWidgetDescription, TProps>, props: TProps) => TWidgetDescription['renderState']`
+
 React Hook to plug an InstantSearch.js connector to React InstantSearch.
 
 Here's an example to use [`connectMenu`](https://www.algolia.com/doc/api-reference/widgets/menu/js/#connector):
