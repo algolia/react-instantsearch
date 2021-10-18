@@ -4,6 +4,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import React from 'react';
 import { connectHits, connectRefinementList, Index } from '../../index';
 import InstantSearch from '../InstantSearch';
+import { createSearchClient } from '../../../../../test/mock/createSearchClient';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -36,7 +37,7 @@ describe('metadata', () => {
     const Hits = connectHits(() => null);
 
     mount(
-      <InstantSearch searchClient={{ search() {} }} indexName="root">
+      <InstantSearch searchClient={createSearchClient()} indexName="root">
         <RefinementList attribute="brand" />
         <Index indexName="test">
           <Hits />
@@ -54,7 +55,7 @@ describe('metadata', () => {
     const Hits = connectHits(() => null);
 
     mount(
-      <InstantSearch searchClient={{ search() {} }} indexName="root">
+      <InstantSearch searchClient={createSearchClient()} indexName="root">
         <RefinementList attribute="brand" />
         <Index indexName="test">
           <Hits />
@@ -104,7 +105,7 @@ describe('metadata', () => {
 
       mount(
         <InstantSearch
-          searchClient={{ search() {}, _ua: 'user agent v3' }}
+          searchClient={createSearchClient({ _ua: 'user agent v3' })}
           indexName="root"
         />
       );
@@ -151,7 +152,9 @@ describe('metadata', () => {
     test('extracts user agent from custom client', () => {
       navigator.userAgent = algoliaUserAgent;
 
-      mount(<InstantSearch searchClient={{ search() {} }} indexName="root" />);
+      mount(
+        <InstantSearch searchClient={createSearchClient()} indexName="root" />
+      );
 
       expect(document.head).toMatchInlineSnapshot(`
         <head>
