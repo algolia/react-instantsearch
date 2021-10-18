@@ -1,5 +1,5 @@
-import { Component } from 'react';
-import { ConnectorDescription } from './createConnector';
+import type { Component } from 'react';
+import type { ConnectorDescription } from './createConnector';
 import { defer } from './utils';
 
 export type Widget = Component & {

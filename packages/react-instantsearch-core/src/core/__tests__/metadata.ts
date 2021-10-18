@@ -1,26 +1,13 @@
 import algoliasearch from 'algoliasearch/lite';
-import { SearchClient } from '../../widgets/InstantSearch';
+import type { SearchClient } from '../../widgets/InstantSearch';
 import createWidgetsManager from '../createWidgetsManager';
 import { isMetadataEnabled, getMetadataPayload } from '../metadata';
-
-declare global {
-  // using namespace so it's only in this file
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace NodeJS {
-    interface Global {
-      navigator: {
-        userAgent: string;
-      };
-      window: Window;
-    }
-  }
-}
 
 const { window } = global;
 Object.defineProperty(
   window.navigator,
   'userAgent',
-  (value => ({
+  ((value) => ({
     get() {
       return value;
     },
@@ -34,15 +21,20 @@ const defaultUserAgent =
   'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1 Safari/605.1.15';
 const algoliaUserAgent = 'Algolia Crawler 5.3.2';
 
+function setUserAgent(userAgent: string) {
+  // casting to any, as userAgent is set as readonly by TypeScript
+  (global.navigator as any).userAgent = userAgent;
+}
+
 describe('isMetadataEnabled', () => {
   it('does not enable on normal user agent', () => {
-    global.navigator.userAgent = defaultUserAgent;
+    (global.navigator as any).userAgent = defaultUserAgent;
 
     expect(isMetadataEnabled()).toBe(false);
   });
 
   it("does not enable when there's no window", () => {
-    global.navigator.userAgent = algoliaUserAgent;
+    setUserAgent(algoliaUserAgent);
 
     // @ts-expect-error
     delete global.window;
@@ -53,7 +45,7 @@ describe('isMetadataEnabled', () => {
   });
 
   it('metadata enabled returns true', () => {
-    global.navigator.userAgent = algoliaUserAgent;
+    setUserAgent(algoliaUserAgent);
 
     expect(isMetadataEnabled()).toBe(true);
   });
@@ -63,10 +55,10 @@ describe('getMetadataPayload', () => {
   describe('user agent', () => {
     test('extracts user agent from algoliasearch', () => {
       const widgetsManager = createWidgetsManager(() => {});
-      const searchClient = (algoliasearch(
+      const searchClient = algoliasearch(
         'appId',
         'apiKey'
-      ) as unknown) as SearchClient;
+      ) as unknown as SearchClient;
 
       const { ua } = getMetadataPayload(widgetsManager, searchClient);
 
@@ -114,10 +106,10 @@ describe('getMetadataPayload', () => {
   describe('widgets', () => {
     test('detects empty widgets', () => {
       const widgetsManager = createWidgetsManager(() => {});
-      const searchClient = (algoliasearch(
+      const searchClient = algoliasearch(
         'appId',
         'apiKey'
-      ) as unknown) as SearchClient;
+      ) as unknown as SearchClient;
 
       const { widgets } = getMetadataPayload(widgetsManager, searchClient);
 

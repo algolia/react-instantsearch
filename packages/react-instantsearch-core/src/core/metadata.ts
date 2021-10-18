@@ -1,5 +1,5 @@
-import { SearchClient } from '../widgets/InstantSearch';
-import { WidgetsManager } from './createWidgetsManager';
+import type { SearchClient } from '../widgets/InstantSearch';
+import type { WidgetsManager } from './createWidgetsManager';
 
 export function isMetadataEnabled() {
   return (
@@ -21,7 +21,7 @@ export function getMetadataPayload(
     return {
       displayName,
       params: Object.keys(props).filter(
-        prop =>
+        (prop) =>
           !internalProps.includes(prop) &&
           defaultProps[prop] !== props[prop] &&
           props[prop] !== undefined

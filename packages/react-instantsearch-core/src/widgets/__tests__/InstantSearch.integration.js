@@ -16,7 +16,7 @@ describe('metadata', () => {
   Object.defineProperty(
     window.navigator,
     'userAgent',
-    (value => ({
+    ((value) => ({
       get() {
         return value;
       },
@@ -99,7 +99,7 @@ describe('metadata', () => {
   });
 
   describe('algoliaAgent', () => {
-    test('client v3', () => {
+    test('extracts user agent from algoliasearch v3', () => {
       navigator.userAgent = algoliaUserAgent;
 
       mount(
@@ -127,7 +127,7 @@ describe('metadata', () => {
       `);
     });
 
-    test('algoliasearch', () => {
+    test('extracts user agent from algoliasearch', () => {
       navigator.userAgent = algoliaUserAgent;
 
       mount(
@@ -148,7 +148,7 @@ describe('metadata', () => {
       });
     });
 
-    test('custom client', () => {
+    test('extracts user agent from custom client', () => {
       navigator.userAgent = algoliaUserAgent;
 
       mount(<InstantSearch searchClient={{ search() {} }} indexName="root" />);
