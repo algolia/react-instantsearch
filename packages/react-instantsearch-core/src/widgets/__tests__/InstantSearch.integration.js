@@ -63,17 +63,18 @@ describe('metadata', () => {
       </InstantSearch>
     );
 
-    expect(document.head).toMatchInlineSnapshot(`
-      <head>
-        <meta
-          content="{\\"widgets\\":[{\\"displayName\\":\\"AlgoliaRefinementList\\",\\"params\\":[\\"attribute\\"]},{\\"displayName\\":\\"AlgoliaHits\\",\\"params\\":[]},{\\"displayName\\":\\"AlgoliaIndex\\",\\"params\\":[\\"indexId\\",\\"indexName\\",\\"children\\"]}]}"
-          name="algolia:metadata"
-        />
-      </head>
-    `);
+    expect(document.head.children).toHaveLength(1);
 
-    expect(JSON.parse(document.head.querySelector('meta').content))
-      .toMatchInlineSnapshot(`
+    const meta = document.head.querySelector('meta');
+
+    expect(meta).toEqual(
+      expect.objectContaining({
+        name: 'algolia:metadata',
+        content: expect.any(String),
+      })
+    );
+
+    expect(JSON.parse(meta.content)).toMatchInlineSnapshot(`
       Object {
         "widgets": Array [
           Object {
@@ -110,17 +111,16 @@ describe('metadata', () => {
         />
       );
 
-      expect(document.head).toMatchInlineSnapshot(`
-        <head>
-          <meta
-            content="{\\"ua\\":\\"user agent v3\\",\\"widgets\\":[]}"
-            name="algolia:metadata"
-          />
-        </head>
-      `);
+      const meta = document.head.querySelector('meta');
 
-      expect(JSON.parse(document.head.querySelector('meta').content))
-        .toMatchInlineSnapshot(`
+      expect(meta).toEqual(
+        expect.objectContaining({
+          name: 'algolia:metadata',
+          content: expect.any(String),
+        })
+      );
+
+      expect(JSON.parse(meta.content)).toMatchInlineSnapshot(`
         Object {
           "ua": "user agent v3",
           "widgets": Array [],
