@@ -634,3 +634,22 @@ function useMenu(props) {
   return useConnector(connectMenu, props);
 }
 ```
+
+If you use TypeScript:
+
+```ts
+import connectMenu, {
+  MenuConnectorParams,
+  MenuWidgetDescription,
+} from 'instantsearch.js/es/connectors/menu/connectMenu';
+import { useConnector } from './useConnector';
+
+type UseMenuProps = MenuConnectorParams;
+
+function useMenu(props: UseMenuProps) {
+  return useConnector<MenuConnectorParams, MenuWidgetDescription>(
+    connectMenu,
+    props
+  );
+}
+```
