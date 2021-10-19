@@ -1,5 +1,7 @@
 # [6.13.0](https://github.com/algolia/react-instantsearch/compare/v6.11.0...v6.13.0) (2021-10-19)
 
+This is the initial release of the experimental **React InstantSearch Hooks** package. Check out the [**Getting Started**](https://github.com/algolia/react-instantsearch/blob/e8d72cb1c7c45300ef7c273f1f163beb6dc57622/packages/react-instantsearch-hooks/README.md#getting-started) guide.
+
 ### Bug Fixes
 
 - **core:** accept objects for `hitComponent` ([#3087](https://github.com/algolia/react-instantsearch/issues/3087)) ([4ae23d4](https://github.com/algolia/react-instantsearch/commit/4ae23d432a01ccbefff1fcdc865120aeca4d3efc))
