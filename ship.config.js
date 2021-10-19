@@ -58,6 +58,7 @@ module.exports = {
   pullRequestTeamReviewers: ['instantsearch-for-websites'],
   buildCommand: ({ version }) =>
     `NODE_ENV=production VERSION=${version} yarn build`,
+  publishCommand: ({ tag }) => `yarn publish --access public --tag ${tag}`,
   afterPublish: async ({ exec, version }) => {
     await waitUntil(async () => {
       const latestVersion = await getLatestVersion('react-instantsearch', {
