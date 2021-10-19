@@ -27,8 +27,13 @@ function setUserAgent(userAgent: string) {
 }
 
 describe('isMetadataEnabled', () => {
+  afterEach(() => {
+    setUserAgent(defaultUserAgent);
+    global.window = window;
+  });
+
   it('does not enable on normal user agent', () => {
-    (global.navigator as any).userAgent = defaultUserAgent;
+    setUserAgent(defaultUserAgent);
 
     expect(isMetadataEnabled()).toBe(false);
   });
