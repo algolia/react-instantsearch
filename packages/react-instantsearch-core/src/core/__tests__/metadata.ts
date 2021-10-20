@@ -46,8 +46,6 @@ describe('isMetadataEnabled', () => {
     delete global.window;
 
     expect(isMetadataEnabled()).toBe(false);
-
-    global.window = window;
   });
 
   it('metadata enabled returns true', () => {
@@ -66,7 +64,10 @@ describe('getMetadataPayload', () => {
         'apiKey'
       ) as unknown as SearchClient;
 
-      const { ua } = getMetadataPayload(widgetsManager, searchClient);
+      const { ua } = getMetadataPayload(
+        widgetsManager.getWidgets(),
+        searchClient
+      );
 
       expect(ua).toEqual(
         expect.stringMatching(
@@ -87,7 +88,10 @@ describe('getMetadataPayload', () => {
         _ua: 'v3 style user agent',
       };
 
-      const { ua } = getMetadataPayload(widgetsManager, searchClient);
+      const { ua } = getMetadataPayload(
+        widgetsManager.getWidgets(),
+        searchClient
+      );
 
       expect(ua).toEqual('v3 style user agent');
     });
@@ -103,7 +107,10 @@ describe('getMetadataPayload', () => {
         },
       };
 
-      const { ua } = getMetadataPayload(widgetsManager, searchClient);
+      const { ua } = getMetadataPayload(
+        widgetsManager.getWidgets(),
+        searchClient
+      );
 
       expect(ua).toBe(undefined);
     });
@@ -117,7 +124,10 @@ describe('getMetadataPayload', () => {
         'apiKey'
       ) as unknown as SearchClient;
 
-      const { widgets } = getMetadataPayload(widgetsManager, searchClient);
+      const { widgets } = getMetadataPayload(
+        widgetsManager.getWidgets(),
+        searchClient
+      );
 
       expect(widgets).toEqual([]);
     });
