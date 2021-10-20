@@ -12,7 +12,7 @@ import type {
 import type { MultiResponse } from '../types/algoliasearch';
 import type { ConnectorDescription } from '../core/createConnector';
 import type { WidgetsManager } from '../core/createWidgetsManager';
-import { isMetadataEnabled, metadata } from '../core/metadata';
+import { isMetadataEnabled, injectMetadata } from '../core/metadata';
 
 type ResultsState = {
   metadata: never[];
@@ -234,8 +234,8 @@ class InstantSearch extends Component<Props, State> {
 
   componentDidMount() {
     if (isMetadataEnabled()) {
-      metadata(
-        this.state.instantSearchManager.widgetsManager,
+      injectMetadata(
+        this.state.instantSearchManager.widgetsManager.getWidgets(),
         this.props.searchClient
       );
     }

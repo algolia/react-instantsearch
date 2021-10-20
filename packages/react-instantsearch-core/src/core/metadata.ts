@@ -1,20 +1,20 @@
 import type { SearchClient } from '../widgets/InstantSearch';
-import type { WidgetsManager } from './createWidgetsManager';
+import type { Widget } from './createWidgetsManager';
 
 export function isMetadataEnabled() {
   return (
     typeof window !== 'undefined' &&
-    window.navigator.userAgent.indexOf('Algolia Crawler') > -1
+    window.navigator.userAgent.includes('Algolia Crawler')
   );
 }
 
 export function getMetadataPayload(
-  widgetsManager: WidgetsManager,
+  widgets: Widget[],
   searchClient: SearchClient
 ) {
   const internalProps = ['contextValue', 'indexContextValue'];
 
-  const widgets = widgetsManager.getWidgets().map(({ props, constructor }) => {
+  const widgetsPayload = widgets.map(({ props, constructor }) => {
     const { defaultProps = {}, displayName = constructor.displayName } =
       constructor._connectorDesc || {};
 
@@ -37,19 +37,16 @@ export function getMetadataPayload(
 
   return {
     ua,
-    widgets,
+    widgets: widgetsPayload,
   };
 }
 
-export function metadata(
-  widgetsManager: WidgetsManager,
-  searchClient: SearchClient
-) {
+export function injectMetadata(widgets: Widget[], searchClient: SearchClient) {
   const payloadContainer = document.createElement('meta');
   const refNode = document.querySelector('head')!;
   payloadContainer.name = 'algolia:metadata';
 
-  const payload = getMetadataPayload(widgetsManager, searchClient);
+  const payload = getMetadataPayload(widgets, searchClient);
 
   payloadContainer.content = JSON.stringify(payload);
   refNode.appendChild(payloadContainer);

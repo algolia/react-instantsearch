@@ -3,7 +3,8 @@ import type { SearchClient } from '../../widgets/InstantSearch';
 import createWidgetsManager from '../createWidgetsManager';
 import { isMetadataEnabled, getMetadataPayload } from '../metadata';
 
-const { window } = global;
+const { window: originalWindow } = global;
+
 Object.defineProperty(
   window.navigator,
   'userAgent',
@@ -29,7 +30,7 @@ function setUserAgent(userAgent: string) {
 describe('isMetadataEnabled', () => {
   afterEach(() => {
     setUserAgent(defaultUserAgent);
-    global.window = window;
+    global.window = originalWindow;
   });
 
   it('does not enable on normal user agent', () => {
