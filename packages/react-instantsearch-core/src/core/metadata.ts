@@ -3,8 +3,10 @@ import type { Widget } from './createWidgetsManager';
 
 export function isMetadataEnabled() {
   return (
-    typeof window !== 'undefined' &&
-    window.navigator.userAgent.includes('Algolia Crawler')
+    typeof window !== 'undefined' && 
+    window.navigator && 
+    window.navigator.userAgent && 
+    window.navigator.userAgent.includes('Algolia Crawler');
   );
 }
 
