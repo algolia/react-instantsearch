@@ -3,7 +3,7 @@ import { renderHook } from '@testing-library/react-hooks';
 import { createInstantSearchTestWrapper } from '../../../../test/utils';
 import { useSortBy } from '../useSortBy';
 
-const getSortByTestItems = () => [
+const getSortByTestItems = [
   { label: 'Featured', value: 'indexName' },
   { label: 'Price (asc)', value: 'indexName_price_asc' },
   { label: 'Price (desc)', value: 'indexName_price_desc' },
@@ -15,7 +15,7 @@ describe('useSortBy', () => {
     const { result, waitForNextUpdate } = renderHook(
       () =>
         useSortBy({
-          items: getSortByTestItems(),
+          items: getSortByTestItems,
         }),
       {
         wrapper,
@@ -24,7 +24,7 @@ describe('useSortBy', () => {
 
     expect(result.current).toEqual({
       currentRefinement: 'indexName',
-      options: getSortByTestItems(),
+      options: getSortByTestItems,
       refine: expect.any(Function),
       hasNoResults: expect.any(Boolean),
     });
@@ -33,7 +33,7 @@ describe('useSortBy', () => {
 
     expect(result.current).toEqual({
       currentRefinement: 'indexName',
-      options: getSortByTestItems(),
+      options: getSortByTestItems,
       refine: expect.any(Function),
       hasNoResults: expect.any(Boolean),
     });
