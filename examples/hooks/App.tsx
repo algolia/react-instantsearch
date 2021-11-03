@@ -45,14 +45,7 @@ export function App() {
     <InstantSearch searchClient={searchClient} indexName="instant_search">
       <Configure hitsPerPage={15} />
 
-      <div
-        style={{
-          display: 'grid',
-          alignItems: 'flex-start',
-          gridTemplateColumns: '200px 1fr',
-          gap: '0.5rem',
-        }}
-      >
+      <div className="Container">
         <div>
           <RefinementList
             attribute="brand"
@@ -61,9 +54,9 @@ export function App() {
             showMore={true}
           />
         </div>
-        <div style={{ display: 'grid', gap: '.5rem' }}>
-          <div style={{ display: 'flex' }}>
-            <SearchBox className="SearchBox" placeholder="Search" />
+        <div className="Search">
+          <div className="Search-header">
+            <SearchBox className="Search-box" placeholder="Search" />
             <SortBy
               items={[
                 { label: 'Relevance', value: 'instant_search' },
