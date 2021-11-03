@@ -32,7 +32,7 @@ body {
   display: flex;
 }
 
-.Search-box {
+.SearchBox {
   flex: 1;
   margin-right: .5rem;
 }
