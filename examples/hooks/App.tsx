@@ -56,7 +56,7 @@ export function App() {
         </div>
         <div className="Search">
           <div className="Search-header">
-            <SearchBox className="Search-box" placeholder="Search" />
+            <SearchBox placeholder="Search" />
             <SortBy
               items={[
                 { label: 'Relevance', value: 'instant_search' },

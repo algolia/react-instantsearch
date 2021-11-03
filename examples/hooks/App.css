@@ -20,7 +20,7 @@ body {
   display: grid;
   align-items: flex-start;
   grid-template-columns: 200px 1fr;
-  gap: 0.5rem;
+  gap: .5rem;
 }
 
 .Search {
@@ -29,12 +29,10 @@ body {
 }
 
 .Search-header {
-  display: flex;
-}
-
-.SearchBox {
-  flex: 1;
-  margin-right: .5rem;
+  display: grid;
+  align-items: flex-start;
+  grid-template-columns: 1fr auto;
+  gap: .5rem;
 }
 
 .Hit-label {
