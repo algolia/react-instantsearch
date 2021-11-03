@@ -9,6 +9,7 @@ import {
   Pagination,
   RefinementList,
   SearchBox,
+  SortBy,
 } from './components';
 
 import './App.css';
@@ -21,16 +22,21 @@ const searchClient = algoliasearch(
 type HitProps = {
   hit: AlgoliaHit<{
     name: string;
+    price: number;
   }>;
 };
 
 function Hit({ hit }: HitProps) {
   return (
-    <span
-      dangerouslySetInnerHTML={{
-        __html: (hit._highlightResult as any).name.value,
-      }}
-    />
+    <>
+      <span
+        className="Hit-label"
+        dangerouslySetInnerHTML={{
+          __html: (hit._highlightResult as any).name.value,
+        }}
+      />
+      <span className="Hit-price">${hit.price}</span>
+    </>
   );
 }
 
@@ -56,7 +62,16 @@ export function App() {
           />
         </div>
         <div style={{ display: 'grid', gap: '.5rem' }}>
-          <SearchBox placeholder="Search" />
+          <div style={{ display: 'flex' }}>
+            <SearchBox className="SearchBox" placeholder="Search" />
+            <SortBy
+              items={[
+                { label: 'Relevance', value: 'instant_search' },
+                { label: 'Price (asc)', value: 'instant_search_price_asc' },
+                { label: 'Price (desc)', value: 'instant_search_price_desc' },
+              ]}
+            />
+          </div>
           <Hits hitComponent={Hit} />
           <Pagination className="Pagination" />
         </div>
