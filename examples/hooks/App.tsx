@@ -3,7 +3,14 @@ import algoliasearch from 'algoliasearch/lite';
 import React from 'react';
 import { InstantSearch } from 'react-instantsearch-hooks';
 
-import { Hits, SearchBox, RefinementList } from './components';
+import {
+  Configure,
+  Hits,
+  Pagination,
+  RefinementList,
+  SearchBox,
+  SortBy,
+} from './components';
 
 import './App.css';
 
@@ -15,30 +22,30 @@ const searchClient = algoliasearch(
 type HitProps = {
   hit: AlgoliaHit<{
     name: string;
+    price: number;
   }>;
 };
 
 function Hit({ hit }: HitProps) {
   return (
-    <span
-      dangerouslySetInnerHTML={{
-        __html: (hit._highlightResult as any).name.value,
-      }}
-    />
+    <>
+      <span
+        className="Hit-label"
+        dangerouslySetInnerHTML={{
+          __html: (hit._highlightResult as any).name.value,
+        }}
+      />
+      <span className="Hit-price">${hit.price}</span>
+    </>
   );
 }
 
 export function App() {
   return (
     <InstantSearch searchClient={searchClient} indexName="instant_search">
-      <div
-        style={{
-          display: 'grid',
-          alignItems: 'flex-start',
-          gridTemplateColumns: '200px 1fr',
-          gap: '0.5rem',
-        }}
-      >
+      <Configure hitsPerPage={15} />
+
+      <div className="Container">
         <div>
           <RefinementList
             attribute="brand"
@@ -47,9 +54,19 @@ export function App() {
             showMore={true}
           />
         </div>
-        <div style={{ display: 'grid', gap: '.5rem' }}>
-          <SearchBox placeholder="Search" />
+        <div className="Search">
+          <div className="Search-header">
+            <SearchBox placeholder="Search" />
+            <SortBy
+              items={[
+                { label: 'Relevance', value: 'instant_search' },
+                { label: 'Price (asc)', value: 'instant_search_price_asc' },
+                { label: 'Price (desc)', value: 'instant_search_price_desc' },
+              ]}
+            />
+          </div>
           <Hits hitComponent={Hit} />
+          <Pagination className="Pagination" />
         </div>
       </div>
     </InstantSearch>

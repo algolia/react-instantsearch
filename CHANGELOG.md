@@ -1,4 +1,54 @@
-## [6.12.1](https://github.com/algolia/react-instantsearch/compare/v6.11.0...v6.12.1) (2021-08-02)
+# [6.15.0](https://github.com/algolia/react-instantsearch/compare/v6.13.0...v6.15.0) (2021-10-27)
+
+
+### Bug Fixes
+
+* **metadata:** stricter detection of user agent ([#3184](https://github.com/algolia/react-instantsearch/issues/3184)) ([994c8ae](https://github.com/algolia/react-instantsearch/commit/994c8ae055fc23a1a067d111d2f4727b1c7bf8ca))
+
+
+### Features
+
+* **hooks:** introduce `useConfigure` ([#3181](https://github.com/algolia/react-instantsearch/issues/3181)) ([aa2eb9b](https://github.com/algolia/react-instantsearch/commit/aa2eb9baec6335f8a3523ee8b9b761a217cfc734))
+
+
+
+# [6.14.0](https://github.com/algolia/react-instantsearch/compare/v6.13.0...v6.14.0) (2021-10-26)
+
+
+### Features
+
+* **dependencies:** update algoliasearch-helper ([#3176](https://github.com/algolia/react-instantsearch/issues/3176)) ([a8708a3](https://github.com/algolia/react-instantsearch/commit/a8708a33f31632000bc827b076539b1cca7adf6f))
+* **metadata:** expose widget information ([#3145](https://github.com/algolia/react-instantsearch/issues/3145)) ([46cddf8](https://github.com/algolia/react-instantsearch/commit/46cddf8fcc0291beaa34b04da7aaaa7f2566e52e))
+
+
+
+# [6.13.0](https://github.com/algolia/react-instantsearch/compare/v6.12.1...v6.13.0) (2021-10-19)
+
+This is the initial release of the experimental **React InstantSearch Hooks** package. Check out the [**Getting Started**](https://github.com/algolia/react-instantsearch/blob/e8d72cb1c7c45300ef7c273f1f163beb6dc57622/packages/react-instantsearch-hooks/README.md#getting-started) guide.
+
+### Bug Fixes
+
+- **core:** accept objects for `hitComponent` ([#3087](https://github.com/algolia/react-instantsearch/issues/3087)) ([4ae23d4](https://github.com/algolia/react-instantsearch/commit/4ae23d432a01ccbefff1fcdc865120aeca4d3efc))
+
+### Features
+
+- **hooks:** add InstantSearch and Index components ([#3133](https://github.com/algolia/react-instantsearch/issues/3133)) ([8e3370d](https://github.com/algolia/react-instantsearch/commit/8e3370ddb7d5e42b8b9a5ff6a1e4255490de7dbe))
+- **hooks:** bootstrap Core package ([#3132](https://github.com/algolia/react-instantsearch/issues/3132)) ([d459e62](https://github.com/algolia/react-instantsearch/commit/d459e62f5cae4c98427ab302531873f5ee23d149))
+- **hooks:** display experimental warning ([#3149](https://github.com/algolia/react-instantsearch/issues/3149)) ([623577c](https://github.com/algolia/react-instantsearch/commit/623577c50cd0c04cd87f719edafdcfa04b5527b6))
+- **hooks:** export types ([#3159](https://github.com/algolia/react-instantsearch/issues/3159)) ([182348b](https://github.com/algolia/react-instantsearch/commit/182348b4a901823a7a41aee5d2b3bdc025cce48f))
+- **hooks:** expose `displayName` on Contexts ([#3168](https://github.com/algolia/react-instantsearch/issues/3168)) ([dafd3c6](https://github.com/algolia/react-instantsearch/commit/dafd3c66d05fbec09ebf907209ac25f55804e6f5))
+- **hooks:** friendly error when using Hooks with Core ([#3150](https://github.com/algolia/react-instantsearch/issues/3150)) ([d547ccf](https://github.com/algolia/react-instantsearch/commit/d547ccf7951299e2f6b1771e02fce052696ff65a))
+- **hooks:** introduce `useConnector` ([#3137](https://github.com/algolia/react-instantsearch/issues/3137)) ([53e8afd](https://github.com/algolia/react-instantsearch/commit/53e8afd093b9950351467a16b82d528207ac34d2))
+- **hooks:** introduce `useHits` ([#3147](https://github.com/algolia/react-instantsearch/issues/3147)) ([cc25cff](https://github.com/algolia/react-instantsearch/commit/cc25cff06e5ec216cba40fb8261372bc327001b6))
+- **hooks:** introduce `useRefinementList` ([#3152](https://github.com/algolia/react-instantsearch/issues/3152)) ([0385cd9](https://github.com/algolia/react-instantsearch/commit/0385cd971635a8423ad687fab451d0778358389e))
+- **hooks:** introduce `useSearchBox` ([#3146](https://github.com/algolia/react-instantsearch/issues/3146)) ([0d2c7f9](https://github.com/algolia/react-instantsearch/commit/0d2c7f9bd25b88cf725a1babd3b228ac804644c7))
+- **hooks:** trigger single network request on load ([#3167](https://github.com/algolia/react-instantsearch/issues/3167)) ([ff1ea49](https://github.com/algolia/react-instantsearch/commit/ff1ea49079a7800fd61ba99ceeb74b9f513eb99d))
+- **hooks:** type `useConnector` return as render state ([#3169](https://github.com/algolia/react-instantsearch/issues/3169)) ([a801468](https://github.com/algolia/react-instantsearch/commit/a80146860164a092d2c90ee0aa4fcef88d5b675f))
+- **hooks:** update GitHub bug reports link ([#3157](https://github.com/algolia/react-instantsearch/issues/3157)) ([568b5c8](https://github.com/algolia/react-instantsearch/commit/568b5c83849a3927417907706656c3835163f216))
+
+
+
+## [6.12.1](https://github.com/algolia/react-instantsearch/compare/v6.12.0...v6.12.1) (2021-08-02)
 
 
 ### Bug Fixes
@@ -7,7 +57,7 @@
 
 
 
-# [6.12.0](https://github.com/algolia/react-instantsearch/compare/v6.11.0...v6.12.0) (2021-07-06)
+# [6.12.0](https://github.com/algolia/react-instantsearch/compare/v6.11.2...v6.12.0) (2021-07-06)
 
 
 ### Bug Fixes
@@ -25,7 +75,7 @@
 
 
 
-## [6.11.2](https://github.com/algolia/react-instantsearch/compare/v6.11.0...v6.11.2) (2021-06-28)
+## [6.11.2](https://github.com/algolia/react-instantsearch/compare/v6.11.1...v6.11.2) (2021-06-28)
 
 
 ### Bug Fixes
