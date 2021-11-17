@@ -48,7 +48,7 @@ function Hit({ hit }: HitProps) {
 
 export function App() {
   return (
-    <InstantSearch searchClient={searchClient} indexName="instant_search" routing>
+    <InstantSearch searchClient={searchClient} indexName="instant_search">
       <Configure hitsPerPage={15} />
 
       <div className="Container">
