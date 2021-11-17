@@ -9,6 +9,7 @@ import {
   Pagination,
   Panel,
   RefinementList,
+  Menu,
   SearchBox,
   SortBy,
 } from './components';
@@ -55,6 +56,9 @@ export function App() {
               searchablePlaceholder="Search brands"
               showMore={true}
             />
+          </Panel>
+          <Panel header="Categories">
+            <Menu attribute="categories" showMore={true} />
           </Panel>
         </div>
         <div className="Search">
