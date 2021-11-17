@@ -9,6 +9,7 @@ import {
   Hits,
   Pagination,
   Panel,
+  RangeInput,
   RefinementList,
   SearchBox,
   SortBy,
@@ -47,7 +48,7 @@ function Hit({ hit }: HitProps) {
 
 export function App() {
   return (
-    <InstantSearch searchClient={searchClient} indexName="instant_search">
+    <InstantSearch searchClient={searchClient} indexName="instant_search" routing>
       <Configure hitsPerPage={15} />
 
       <div className="Container">
@@ -69,6 +70,9 @@ export function App() {
               ]}
               showMore={true}
             />
+          </Panel>
+          <Panel header="price">
+            <RangeInput attribute="price" />
           </Panel>
         </div>
         <div className="Search">
