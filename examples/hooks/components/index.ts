@@ -1,6 +1,7 @@
 export * from './Configure';
 export * from './Hits';
 export * from './Pagination';
+export * from './HitsPerPage'
 export * from './RefinementList';
 export * from './SearchBox';
 export * from './SortBy';

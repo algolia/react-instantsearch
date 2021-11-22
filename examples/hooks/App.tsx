@@ -10,6 +10,7 @@ import {
   RefinementList,
   SearchBox,
   SortBy,
+  HitsPerPage,
 } from './components';
 
 import './App.css';
@@ -62,6 +63,12 @@ export function App() {
                 { label: 'Relevance', value: 'instant_search' },
                 { label: 'Price (asc)', value: 'instant_search_price_asc' },
                 { label: 'Price (desc)', value: 'instant_search_price_desc' },
+              ]}
+            />
+            <HitsPerPage
+              items={[
+                { label: '4 hits per page', value: 4, default: true },
+                { label: '8 hits per page', value: 8 },
               ]}
             />
           </div>

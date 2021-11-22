@@ -5,6 +5,7 @@ export * from './useConfigure';
 export * from './useConnector';
 export * from './useHits';
 export * from './usePagination';
+export * from './useHitsPerPage';
 export * from './useRefinementList';
 export * from './useSearchBox';
 export * from './useSortBy';
