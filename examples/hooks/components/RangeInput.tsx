@@ -55,7 +55,7 @@ export function RangeInput(props: RangeProps) {
           min={min}
           max={max}
           value={from}
-          placeholder={min?.toString()}
+          placeholder={min ? min.toString() : ''}
           disabled={!canRefine}
           onChange={(e) =>
             setState({ from: Number(e.currentTarget.value), to })
@@ -68,7 +68,7 @@ export function RangeInput(props: RangeProps) {
           min={min}
           max={max}
           value={to}
-          placeholder={max?.toString()}
+          placeholder={max ? max.toString() : ''}
           disabled={!canRefine}
           onChange={(e) =>
             setState({ from, to: Number(e.currentTarget.value) })
