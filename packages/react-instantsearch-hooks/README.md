@@ -472,7 +472,7 @@ function Hits(props) {
 
 > `(props: UseHierarchicalMenuProps) => HierarchicalMenuRenderState`
 
-Hook to use a [refinement list](https://www.algolia.com/doc/api-reference/widgets/refinement-list/js/).
+Hook to use a [hierarchical menu](https://www.algolia.com/doc/api-reference/widgets/hierarchical-menu/js/).
 
 **Types**
 
