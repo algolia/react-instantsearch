@@ -9,7 +9,7 @@ import type {
 
 export type UseRangeProps = RangeConnectorParams;
 
-export function useRange(props?: UseRangeProps) {
+export function useRange(props: UseRangeProps) {
   return useConnector<RangeConnectorParams, RangeWidgetDescription>(
     connectRange,
     props
