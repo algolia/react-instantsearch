@@ -33,9 +33,12 @@ const examplesPath = path.join(__dirname, '..', 'examples');
   examples.forEach((example) => {
     console.log('updating in', example);
     // @TODO: update to react-instantsearch-native
-    execSync(`cd ${example} && yarn upgrade react-instantsearch@${version}`, {
-      stdio: 'inherit',
-    });
+    execSync(
+      `cd ${example} && yarn upgrade react-instantsearch-native@${version}`,
+      {
+        stdio: 'inherit',
+      }
+    );
   });
 }
 
@@ -47,6 +50,21 @@ const examplesPath = path.join(__dirname, '..', 'examples');
     console.log('updating in', example);
     execSync(
       `cd ${example} && yarn upgrade react-instantsearch-dom-maps@${version}`,
+      {
+        stdio: 'inherit',
+      }
+    );
+  });
+}
+
+{
+  // Update React InstantSearch Hooks
+  const examples = glob.sync(path.join(examplesPath, 'hooks'));
+
+  examples.forEach((example) => {
+    console.log('updating in', example);
+    execSync(
+      `cd ${example} && yarn upgrade react-instantsearch-hooks@${version}`,
       {
         stdio: 'inherit',
       }
