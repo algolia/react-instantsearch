@@ -39,12 +39,12 @@ export function SearchBox(props?: SearchBoxProps) {
 
   return (
     <ControlledSearchBox
-      className={props.className}
+      className={props && props.className}
       inputRef={inputRef}
       isSearchStalled={isSearchStalled}
       onChange={onChange}
       onReset={onReset}
-      placeholder={props.placeholder}
+      placeholder={props && props.placeholder}
       value={value}
     />
   );
