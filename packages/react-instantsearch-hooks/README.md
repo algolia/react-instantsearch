@@ -656,7 +656,7 @@ type UseSortByProps = {
   /**
    * Function to transform the items passed to the templates.
    */
-  transformItems?: TransformItems<SortByItem>;
+  transformItems?: TransformItems<SortByItem[]>;
 }
 ```
 
