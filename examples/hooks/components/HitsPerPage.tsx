@@ -21,7 +21,7 @@ export function HitsPerPage(props: HitsPerPageProps) {
       <select
         className="ais-HitsPerPage-select"
         onChange={handleChange}
-        value={`${currentValue}`}
+        value={String(currentValue)}
       >
         {items.map((item) => (
           <option
