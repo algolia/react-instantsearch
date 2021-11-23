@@ -5,8 +5,10 @@ import { InstantSearch } from 'react-instantsearch-hooks';
 
 import {
   Configure,
+  HierarchicalMenu,
   Hits,
   Pagination,
+  Panel,
   RefinementList,
   SearchBox,
   SortBy,
@@ -50,12 +52,24 @@ export function App() {
 
       <div className="Container">
         <div>
-          <RefinementList
-            attribute="brand"
-            searchable={true}
-            searchablePlaceholder="Search brands"
-            showMore={true}
-          />
+          <Panel header="Brands">
+            <RefinementList
+              attribute="brand"
+              searchable={true}
+              searchablePlaceholder="Search brands"
+              showMore={true}
+            />
+          </Panel>
+          <Panel header="Hierarchy">
+            <HierarchicalMenu
+              attributes={[
+                'hierarchicalCategories.lvl0',
+                'hierarchicalCategories.lvl1',
+                'hierarchicalCategories.lvl2',
+              ]}
+              showMore={true}
+            />
+          </Panel>
         </div>
         <div className="Search">
           <div className="Search-header">
