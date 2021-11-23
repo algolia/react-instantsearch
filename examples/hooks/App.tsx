@@ -71,7 +71,7 @@ export function App() {
               showMore={true}
             />
           </Panel>
-          <Panel header="price">
+          <Panel header="Price">
             <RangeInput attribute="price" />
           </Panel>
         </div>

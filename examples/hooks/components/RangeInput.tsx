@@ -6,7 +6,7 @@ import { cx } from '../cx';
 export type RangeProps = React.ComponentProps<'div'> & UseRangeProps;
 
 // if the default value is undefined, React considers the component uncontrolled initially, which we don't want 0 or NaN as the default value
-const controlledUndefined = '' as unknown as number;
+const unsetNumberInputValue = '' as unknown as number;
 
 export function RangeInput(props: RangeProps) {
   const {
@@ -19,19 +19,19 @@ export function RangeInput(props: RangeProps) {
     min:
       minValue !== -Infinity && minValue !== min
         ? minValue
-        : controlledUndefined,
+        : unsetNumberInputValue,
     max:
       maxValue !== Infinity && maxValue !== max
         ? maxValue
-        : controlledUndefined,
+        : unsetNumberInputValue,
   };
-  const [{ from, to }, setState] = useState({
+  const [{ from, to }, setRange] = useState({
     from: values.min,
     to: values.max,
   });
 
   useEffect(() => {
-    setState({ from: values.min, to: values.max });
+    setRange({ from: values.min, to: values.max });
   }, [values.min, values.max]);
 
   return (
@@ -43,39 +43,39 @@ export function RangeInput(props: RangeProps) {
       )}
     >
       <form
-        className={'ais-RangeInput-form'}
-        onSubmit={(e) => {
-          e.preventDefault();
+        className="ais-RangeInput-form"
+        onSubmit={(event) => {
+          event.preventDefault();
           refine([from, to]);
         }}
       >
         <input
-          className={'ais-RangeInput-input ais-RangeInput-input--min'}
+          className="ais-RangeInput-input ais-RangeInput-input--min"
           type="number"
           min={min}
           max={max}
           value={from}
           placeholder={min ? min.toString() : ''}
           disabled={!canRefine}
-          onChange={(e) =>
-            setState({ from: Number(e.currentTarget.value), to })
+          onChange={(event) =>
+            setRange({ from: Number(event.currentTarget.value), to })
           }
         />
-        <span className={'ais-RangeInput-separator'}> - </span>
+        <span className="ais-RangeInput-separator"> - </span>
         <input
-          className={'ais-RangeInput-input ais-RangeInput-input--max'}
+          className="ais-RangeInput-input ais-RangeInput-input--max"
           type="number"
           min={min}
           max={max}
           value={to}
           placeholder={max ? max.toString() : ''}
           disabled={!canRefine}
-          onChange={(e) =>
-            setState({ from, to: Number(e.currentTarget.value) })
+          onChange={(event) =>
+            setRange({ from, to: Number(event.currentTarget.value) })
           }
         />
-        <button className={'ais-RangeInput-submit'} type="submit">
-          Apply
+        <button className="ais-RangeInput-submit" type="submit">
+          Go
         </button>
       </form>
     </div>
