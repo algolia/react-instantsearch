@@ -620,7 +620,7 @@ function RefinementList(props) {
 
 ### `useSortBy`
 
-> `(props: UseSortByProps) => SortByRenderState `
+> `(props: UseSortByProps) => SortByRenderState`
 
 Hook to [sort by](https://www.algolia.com/doc/api-reference/widgets/sort-by/js/) specified indices.
 
