@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { useHitsPerPage, UseHitsPerPageProps } from 'react-instantsearch-hooks';
 import { cx } from '../cx';
 
@@ -10,22 +10,18 @@ export function HitsPerPage(props: HitsPerPageProps) {
   const { value: currentValue } =
     items.find(({ isRefined }) => isRefined) || {};
 
-  const handleChange = useCallback(
-    (event) => {
-      refine(event.target.value);
-    },
-    [refine]
-  );
   return (
     <div className={cx('ais-HitsPerPage', props.className)}>
       <select
         className="ais-HitsPerPage-select"
-        onChange={handleChange}
+        onChange={(event) => {
+          refine(Number(event.target.value));
+        }}
         value={String(currentValue)}
       >
         {items.map((item) => (
           <option
-            key={item.label + item.value}
+            key={item.value}
             className="ais-HitsPerPage-option"
             value={item.value}
           >
