@@ -5,6 +5,7 @@ import { InstantSearch } from 'react-instantsearch-hooks';
 
 import {
   Configure,
+  HierarchicalMenu,
   Hits,
   Pagination,
   Panel,
@@ -59,6 +60,16 @@ export function App() {
           </Panel>
           <Panel header="Categories">
             <Menu attribute="categories" showMore={true} />
+          </Panel>
+          <Panel header="Hierarchy">
+            <HierarchicalMenu
+              attributes={[
+                'hierarchicalCategories.lvl0',
+                'hierarchicalCategories.lvl1',
+                'hierarchicalCategories.lvl2',
+              ]}
+              showMore={true}
+            />
           </Panel>
         </div>
         <div className="Search">
