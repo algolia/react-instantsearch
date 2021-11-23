@@ -41,7 +41,7 @@ describe('useHitsPerPage', () => {
 
     await waitForNextUpdate();
 
-    // Initial render state from manual `getWidgetRenderState`
+    // InstantSearch.js state from the `render` lifecycle step
     expect(result.current).toEqual({
       refine: expect.any(Function),
       createURL: expect.any(Function),
