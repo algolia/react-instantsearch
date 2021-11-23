@@ -3,15 +3,14 @@ import {
   useRefinementList,
   UseRefinementListProps,
 } from 'react-instantsearch-hooks';
+import { RefinementListWidgetParams } from 'instantsearch.js/es/widgets/refinement-list/refinement-list';
 
 import { ControlledSearchBox } from './ControlledSearchBox';
 import { cx } from '../cx';
 
 export type RefinementListProps = React.ComponentProps<'div'> &
-  UseRefinementListProps & {
-    searchable?: boolean;
-    searchablePlaceholder?: string;
-  };
+  UseRefinementListProps &
+  Pick<RefinementListWidgetParams, 'searchable' | 'searchablePlaceholder'>;
 
 export function RefinementList(props: RefinementListProps) {
   const {
