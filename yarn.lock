@@ -2824,9 +2824,9 @@
     universal-user-agent "^6.0.0"
 
 "@octokit/endpoint@^6.0.1":
-  version "6.0.11"
-  resolved "https://registry.yarnpkg.com/@octokit/endpoint/-/endpoint-6.0.11.tgz#082adc2aebca6dcefa1fb383f5efb3ed081949d1"
-  integrity sha512-fUIPpx+pZyoLW4GCs3yMnlj2LfoXTWDUVPTC4V3MUEKZm48W+XYpeWSZCv+vYF1ZABUm2CqnDVf1sFtIYrj7KQ==
+  version "6.0.12"
+  resolved "https://registry.yarnpkg.com/@octokit/endpoint/-/endpoint-6.0.12.tgz#3b4d47a4b0e79b1027fb8d75d4221928b2d05658"
+  integrity sha512-lF3puPwkQWGfkMClXb4k/eUT/nZKQfxinRWJrdZaJO85Dqwo/G0yOC434Jr2ojwafWJMYqFGFa5ms4jJUgujdA==
   dependencies:
     "@octokit/types" "^6.0.3"
     is-plain-object "^5.0.0"
@@ -18280,6 +18280,16 @@ react-instantsearch-dom@6.12.0:
     prop-types "^15.6.2"
     react-fast-compare "^3.0.0"
     react-instantsearch-core "^6.12.0"
+
+react-instantsearch-hooks@6.15.0:
+  version "6.15.0"
+  resolved "https://registry.yarnpkg.com/react-instantsearch-hooks/-/react-instantsearch-hooks-6.15.0.tgz#8fbf3cac8ea5177f6e3a9ed9186fb92584acb37d"
+  integrity sha512-IOdmkhtrF7wtCp78skb5zsssfYsxHn/919W7BLRCU4Q3qWxvSnwo0Ys0sJr1tSMbqqOkCxE+Z0vkFUjsJmCRaQ==
+  dependencies:
+    "@babel/runtime" "^7.1.2"
+    algoliasearch-helper "^3.6.2"
+    dequal "^2.0.0"
+    instantsearch.js "^4.32.0"
 
 react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.6:
   version "16.13.1"

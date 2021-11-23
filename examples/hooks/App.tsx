@@ -5,8 +5,10 @@ import { InstantSearch } from 'react-instantsearch-hooks';
 
 import {
   Configure,
+  HierarchicalMenu,
   Hits,
   Pagination,
+  Panel,
   RefinementList,
   SearchBox,
   SortBy,
@@ -33,7 +35,10 @@ function Hit({ hit }: HitProps) {
       <span
         className="Hit-label"
         dangerouslySetInnerHTML={{
-          __html: (hit._highlightResult as any).name.value,
+          __html:
+            hit._highlightResult && hit._highlightResult.name
+              ? hit._highlightResult.name.value
+              : '',
         }}
       />
       <span className="Hit-price">${hit.price}</span>
@@ -48,12 +53,24 @@ export function App() {
 
       <div className="Container">
         <div>
-          <RefinementList
-            attribute="brand"
-            searchable={true}
-            searchablePlaceholder="Search brands"
-            showMore={true}
-          />
+          <Panel header="Brands">
+            <RefinementList
+              attribute="brand"
+              searchable={true}
+              searchablePlaceholder="Search brands"
+              showMore={true}
+            />
+          </Panel>
+          <Panel header="Hierarchy">
+            <HierarchicalMenu
+              attributes={[
+                'hierarchicalCategories.lvl0',
+                'hierarchicalCategories.lvl1',
+                'hierarchicalCategories.lvl2',
+              ]}
+              showMore={true}
+            />
+          </Panel>
         </div>
         <div className="Search">
           <div className="Search-header">
