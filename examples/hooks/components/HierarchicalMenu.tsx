@@ -30,8 +30,8 @@ function HierarchicalList({
           <a
             className="ais-HierarchicalMenu-link"
             href={createURL(item.value)}
-            onClick={(e) => {
-              e.preventDefault();
+            onClick={(event) => {
+              event.preventDefault();
               refine(item.value);
             }}
           >
