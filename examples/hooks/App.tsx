@@ -10,6 +10,7 @@ import {
   Pagination,
   Panel,
   RefinementList,
+  Menu,
   SearchBox,
   SortBy,
   HitsPerPage,
@@ -60,6 +61,9 @@ export function App() {
               searchablePlaceholder="Search brands"
               showMore={true}
             />
+          </Panel>
+          <Panel header="Categories">
+            <Menu attribute="categories" showMore={true} />
           </Panel>
           <Panel header="Hierarchy">
             <HierarchicalMenu
