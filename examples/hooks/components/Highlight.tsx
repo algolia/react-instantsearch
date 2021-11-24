@@ -9,8 +9,8 @@ import { cx } from '../cx';
 
 type HighlightPartProps = {
   children: React.ReactNode;
-  highlightedTagName: string;
-  nonHighlightedTagName: string;
+  highlightedTagName: React.ReactType;
+  nonHighlightedTagName: React.ReactType;
   isHighlighted: boolean;
 };
 
@@ -20,9 +20,7 @@ function HighlightPart({
   isHighlighted,
   nonHighlightedTagName,
 }: HighlightPartProps) {
-  const TagName = isHighlighted
-    ? (highlightedTagName as 'span')
-    : (nonHighlightedTagName as 'span');
+  const TagName = isHighlighted ? highlightedTagName : nonHighlightedTagName;
 
   return (
     <TagName
@@ -40,8 +38,8 @@ function HighlightPart({
 export type HighlightProps<THit> = {
   hit: THit;
   attribute: keyof THit | string[];
-  highlightedTagName?: string;
-  nonHighlightedTagName?: string;
+  highlightedTagName?: React.ReactType;
+  nonHighlightedTagName?: React.ReactType;
   className?: string;
   separator?: string;
 };
