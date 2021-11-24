@@ -12567,6 +12567,22 @@ instantsearch.css@7.3.1:
   resolved "https://registry.yarnpkg.com/instantsearch.css/-/instantsearch.css-7.3.1.tgz#7ab74a8f355091ae040947a9cf5438f379026622"
   integrity sha512-/kaMDna5D+Q9mImNBHEhb9HgHATDOFKYii7N1Iwvrj+lmD9gBJLqVhUw67gftq2O0QI330pFza+CRscIwB1wQQ==
 
+instantsearch.js@4.33.2:
+  version "4.33.2"
+  resolved "https://registry.yarnpkg.com/instantsearch.js/-/instantsearch.js-4.33.2.tgz#d3e75bc6bb5bb40c68c36e0a159649969e5a113f"
+  integrity sha512-klQdP6G0wokCPuCyjsar3xPLZGKg+r3eUlW2vKZ6NBi8Ke9pC22ewjVNaJ6revWP/RsXxDMgTWfQKnYHRBddEg==
+  dependencies:
+    "@types/google.maps" "^3.45.3"
+    "@types/hogan.js" "^3.0.0"
+    "@types/qs" "^6.5.3"
+    algoliasearch-helper "^3.6.2"
+    classnames "^2.2.5"
+    events "^1.1.0"
+    hogan.js "^3.0.2"
+    preact "^10.0.0"
+    qs "^6.5.1 < 6.10"
+    search-insights "^2.1.0"
+
 instantsearch.js@^4.32.0:
   version "4.32.0"
   resolved "https://registry.yarnpkg.com/instantsearch.js/-/instantsearch.js-4.32.0.tgz#76763fe781a1f81934f63b965b675c4ffe511714"
@@ -19534,6 +19550,11 @@ search-insights@^2.0.5:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/search-insights/-/search-insights-2.0.5.tgz#42fbe4d42d9f68f58bfc7c6e4519e8961b07dd2b"
   integrity sha512-Mx3PmspHRhiW8eMFrT0coYCtoK6QqUjyNGqtlCpZcKTYflQEzYngx4obIRahc0arXBDzOR2tE/t8k8VgzfJe/g==
+
+search-insights@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/search-insights/-/search-insights-2.1.0.tgz#42822fa325062ec5bf050c5f8cad58f0c5b21310"
+  integrity sha512-mWIVsZ5igQnlM2tC0HJCtGWKQcBhLhkasZoZZS2exUfZPpRowVWEvyyYTWU3M0rUKWlWLWFCYvJ3HGTSSCsOcw==
 
 section-iterator@^2.0.0:
   version "2.0.0"
