@@ -1067,6 +1067,83 @@ function SortBy(props) {
 }
 ```
 
+### `useQueryRules`
+
+> `(props?: UseQueryRulesProps) => QueryRulesRenderState`
+
+Hook to [query rules](https://www.algolia.com/doc/api-reference/widgets/query-rule-context/js/).
+
+**Types**
+
+<details>
+<summary><code>UseQueryRulesProps</code></summary>
+
+```ts
+type UseQueryRulesProps = {
+    trackedFilters?: ParamTrackedFilters;
+    transformRuleContexts?: ParamTransformRuleContexts;
+    transformItems?: ParamTransformItems;
+}
+```
+</details>
+
+<details>
+<summary><code>QueryRulesRenderState</code></summary>
+
+```ts
+type QueryRulesRenderState = {
+    items: any[];
+};
+```
+</details>
+
+<details>
+<summary><code>ParamTrackedFilters</code></summary>
+
+```ts
+type ParamTrackedFilters = {
+    [facetName: string]: (facetValues: TrackedFilterRefinement[]) => TrackedFilterRefinement[];
+};
+```
+</details>
+
+<details>
+<summary><code>TrackedFilterRefinement</code></summary>
+
+```ts
+type TrackedFilterRefinement = string | number | boolean;
+```
+</details>
+
+<details>
+<summary><code>ParamTransformRuleContexts</code></summary>
+
+```ts
+type ParamTransformRuleContexts = (ruleContexts: string[]) => string[];
+```
+</details>
+
+<details>
+<summary><code>ParamTransformItems</code></summary>
+
+```ts
+type ParamTransformItems = TransformItems<any>;
+```
+</details>
+
+
+```jsx
+function Banner(props) {
+  const { items } = useQueryRules({
+    genre: () => ['Comedy', 'Thriller'],
+  });
+
+  return <>
+    { items.map(item => <a href={item.link}>{item.title}</a>) }
+  </>
+}
+```
+
 ### `useHitsPerPage`
 
 > `(props: UseHitsPerPageProps) => HitsPerPageRenderState`
