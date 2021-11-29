@@ -35,7 +35,13 @@ describe('useQueryRules', () => {
 
     // InstantSearch.js state from the `render` lifecycle step
     expect(result.current).toEqual({
-      items: [],
+      items: [
+        {
+          title: 'Banner title',
+          banner: 'https://banner.jpg',
+          link: 'https://banner.com/link/',
+        },
+      ],
     });
   });
 });
