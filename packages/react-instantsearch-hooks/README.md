@@ -1102,7 +1102,9 @@ type QueryRulesRenderState = {
 
 ```ts
 type ParamTrackedFilters = {
-  [facetName: string]: (facetValues: TrackedFilterRefinement[]) => TrackedFilterRefinement[];
+  [facetName: string]: (
+    facetValues: TrackedFilterRefinement[]
+  ) => TrackedFilterRefinement[];
 };
 ```
 </details>
@@ -1133,16 +1135,25 @@ type ParamTransformItems = TransformItems<any>;
 
 
 ```jsx
-function Banner(props) {
+function QueryRuleContext(props) {
   const { items } = useQueryRules({
     trackedFilters: {
       genre: () => ['Comedy', 'Thriller'],
-    }
+    },
   });
+  return null;
+}
 
-  return <>
-    { items.map(item => <a href={item.link}>{item.title}</a>) }
-  </>
+function QueryRuleCustomData(props) {
+  const { items } = useQueryRules(props);
+
+  return (
+    <>
+      {items.map((item) => (
+        <a href={item.link}>{item.title}</a>
+      ))}
+    </>
+  );
 }
 ```
 
