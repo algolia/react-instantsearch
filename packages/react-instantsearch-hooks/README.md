@@ -1080,9 +1080,9 @@ Hook to [query rules](https://www.algolia.com/doc/api-reference/widgets/query-ru
 
 ```ts
 type UseQueryRulesProps = {
-    trackedFilters?: ParamTrackedFilters;
-    transformRuleContexts?: ParamTransformRuleContexts;
-    transformItems?: ParamTransformItems;
+  trackedFilters?: ParamTrackedFilters;
+  transformRuleContexts?: ParamTransformRuleContexts;
+  transformItems?: ParamTransformItems;
 }
 ```
 </details>
@@ -1092,7 +1092,7 @@ type UseQueryRulesProps = {
 
 ```ts
 type QueryRulesRenderState = {
-    items: any[];
+  items: any[];
 };
 ```
 </details>
@@ -1102,7 +1102,7 @@ type QueryRulesRenderState = {
 
 ```ts
 type ParamTrackedFilters = {
-    [facetName: string]: (facetValues: TrackedFilterRefinement[]) => TrackedFilterRefinement[];
+  [facetName: string]: (facetValues: TrackedFilterRefinement[]) => TrackedFilterRefinement[];
 };
 ```
 </details>
