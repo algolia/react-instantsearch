@@ -9,7 +9,7 @@ export type QueryRuleCustomDataProps = React.ComponentProps<'div'> &
   };
 
 export function QueryRuleCustomData(props: QueryRuleCustomDataProps) {
-  const { items } = useQueryRules();
+  const { items } = useQueryRules(props);
   return (
     <div className={cx('ais-QueryRuleCustomData', props.className)}>
       {props.children({ items })}
