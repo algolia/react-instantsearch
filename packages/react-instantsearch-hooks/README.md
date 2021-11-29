@@ -1135,7 +1135,9 @@ type ParamTransformItems = TransformItems<any>;
 ```jsx
 function Banner(props) {
   const { items } = useQueryRules({
-    genre: () => ['Comedy', 'Thriller'],
+    trackedFilters: {
+      genre: () => ['Comedy', 'Thriller'],
+    }
   });
 
   return <>
