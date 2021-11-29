@@ -15,11 +15,18 @@ describe('useQueryRules', () => {
     const transformRuleContexts = (ruleContexts) =>
       ruleContexts.map((ruleContext) => ruleContext.replace('ais-', 'custom-'));
 
+    const transformItems = (items) =>
+      items.map((item) => ({
+        ...item,
+        title: `${item.title} (transformed)`,
+      }));
+
     const { result, waitForNextUpdate } = renderHook(
       () =>
         useQueryRules({
           trackedFilters,
           transformRuleContexts,
+          transformItems,
         }),
       {
         wrapper,
@@ -37,7 +44,7 @@ describe('useQueryRules', () => {
     expect(result.current).toEqual({
       items: [
         {
-          title: 'Banner title',
+          title: 'Banner title (transformed)',
           banner: 'https://banner.jpg',
           link: 'https://banner.com/link/',
         },
