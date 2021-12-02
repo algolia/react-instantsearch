@@ -7139,7 +7139,7 @@ browserslist@4.4.1:
     electron-to-chromium "^1.3.103"
     node-releases "^1.1.3"
 
-browserslist@^4.0.0, browserslist@^4.12.0, browserslist@^4.17.5, browserslist@^4.18.1, browserslist@^4.3.4, browserslist@^4.6.0, browserslist@^4.6.6:
+browserslist@^4.0.0, browserslist@^4.12.0, browserslist@^4.17.5, browserslist@^4.17.6, browserslist@^4.3.4, browserslist@^4.6.0, browserslist@^4.6.6:
   version "4.18.1"
   resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.18.1.tgz#60d3920f25b6860eb917c6c7b185576f4d8b017f"
   integrity sha512-8ScCzdpPwR2wQh8IT82CA2VgDwjHyqMovPBZSNH54+tm4Jk2pCuv90gmAdH6J84OCRWi0b4gMe6O6XPXuJnjgQ==
@@ -8558,11 +8558,11 @@ copy-webpack-plugin@5.0.4:
     webpack-log "^2.0.0"
 
 core-js-compat@^3.1.1, core-js-compat@^3.16.0, core-js-compat@^3.16.2:
-  version "3.19.3"
-  resolved "https://registry.yarnpkg.com/core-js-compat/-/core-js-compat-3.19.3.tgz#de75e5821c5ce924a0a1e7b7d5c2cb973ff388aa"
-  integrity sha512-59tYzuWgEEVU9r+SRgceIGXSSUn47JknoiXW6Oq7RW8QHjXWz3/vp8pa7dbtuVu40sewz3OP3JmQEcDdztrLhA==
+  version "3.19.1"
+  resolved "https://registry.yarnpkg.com/core-js-compat/-/core-js-compat-3.19.1.tgz#fe598f1a9bf37310d77c3813968e9f7c7bb99476"
+  integrity sha512-Q/VJ7jAF/y68+aUsQJ/afPOewdsGkDtcMb40J8MbuWKlK3Y+wtHq8bTHKPj2WKWLIqmS5JhHs4CzHtz6pT2W6g==
   dependencies:
-    browserslist "^4.18.1"
+    browserslist "^4.17.6"
     semver "7.0.0"
 
 core-js-pure@^3.0.0:
@@ -18193,6 +18193,15 @@ react-dom@17.0.2:
     object-assign "^4.1.1"
     scheduler "^0.20.2"
 
+react-dom@18.0.0-beta-4729ff6d1-20211202:
+  version "18.0.0-beta-4729ff6d1-20211202"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-18.0.0-beta-4729ff6d1-20211202.tgz#b8efa747b704da0632f8bb2b14842ec846cad39e"
+  integrity sha512-/U2OjvuGTptM1alZs0prxqTVs8XAAICVQ4l+arHbMiwDGsJ51PpoG3k7quTpCvG9N6mYSgpQJVQWJWC5knpkFw==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    scheduler "0.21.0-beta-4729ff6d1-20211202"
+
 react-dom@^16.8.1:
   version "16.14.0"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.14.0.tgz#7ad838ec29a777fb3c75c3a190f661cf92ab8b89"
@@ -18536,6 +18545,14 @@ react@17.0.2:
   version "17.0.2"
   resolved "https://registry.yarnpkg.com/react/-/react-17.0.2.tgz#d0b5cc516d29eb3eee383f75b62864cfb6800037"
   integrity sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+
+react@18.0.0-beta-4729ff6d1-20211202:
+  version "18.0.0-beta-4729ff6d1-20211202"
+  resolved "https://registry.yarnpkg.com/react/-/react-18.0.0-beta-4729ff6d1-20211202.tgz#e11d739b03a02ee3a3c1e198fd1c082b5678d217"
+  integrity sha512-wrt3gfwezAL0cGRSnBCeRs6UqTLL0QmETd3+EPQZs1Wq2ufpr29xLJL/VNn+TXrz05wWGAODHudm+C+HTwP1bw==
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
@@ -19542,6 +19559,14 @@ saxes@^5.0.1:
   integrity sha512-5LBh1Tls8c9xgGjw3QrMwETmTMVk0oFgvrFSvWx62llR2hcEInrKNZ2GZCCuuy2lvWrdl5jhbpeqc5hRYKFOcw==
   dependencies:
     xmlchars "^2.2.0"
+
+scheduler@0.21.0-beta-4729ff6d1-20211202:
+  version "0.21.0-beta-4729ff6d1-20211202"
+  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.21.0-beta-4729ff6d1-20211202.tgz#c3ece567e80ebbba0af03d2c20500807c7688db3"
+  integrity sha512-S2FcDIo49H/16JJVosSpdn+kdSIiJsjoRwXFGwJ8KUaxoHZiy6PUzX3qpsgKkB9crYrSpwinsKEaOrV4EBCZFA==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
 
 scheduler@^0.13.6:
   version "0.13.6"

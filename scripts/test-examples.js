@@ -7,7 +7,7 @@ const examples = glob.sync(
     __dirname,
     '..',
     'examples',
-    '!(default-theme|e-commerce|media|tourism|hooks|hooks-ssr)'
+    '!(default-theme|e-commerce|media|tourism|hooks|hooks-ssr|hooks-ssr-stream)'
   )
 );
 
