@@ -2,11 +2,25 @@ import instantsearch from 'instantsearch.js';
 import { useEffect, useMemo, version as ReactVersion } from 'react';
 
 import { useForceUpdate } from './useForceUpdate';
+import { useInstantSearchServerContext } from './useInstantSearchServerContext';
+import { useInstantSearchSSRContext } from './useInstantSearchSSRContext';
 import { useStableValue } from './useStableValue';
 import { warn } from './utils';
 import version from './version';
 
-import type { InstantSearchOptions } from 'instantsearch.js';
+import type { InstantSearchServerApi } from './InstantSearchServerContext';
+import type { InstantSearchServerState } from './InstantSearchSSRProvider';
+import type {
+  InstantSearchOptions,
+  InstantSearch,
+  SearchClient,
+} from 'instantsearch.js';
+
+const defaultUserAgents = [
+  `react (${ReactVersion})`,
+  `react-instantsearch (${version})`,
+  `react-instantsearch-hooks (${version})`,
+];
 
 export type UseInstantSearchProps = InstantSearchOptions & {
   /**
@@ -23,8 +37,19 @@ export function useInstantSearch({
   suppressExperimentalWarning = false,
   ...props
 }: UseInstantSearchProps) {
+  const serverContext = useInstantSearchServerContext();
+  const serverState = useInstantSearchSSRContext();
   const stableProps = useStableValue(props);
-  const search = useMemo(() => instantsearch(stableProps), [stableProps]);
+  const search = useMemo(
+    () =>
+      serverAdapter(
+        instantsearch(stableProps),
+        stableProps,
+        serverContext,
+        serverState
+      ),
+    [stableProps, serverContext, serverState]
+  );
   const forceUpdate = useForceUpdate();
 
   useEffect(() => {
@@ -32,31 +57,69 @@ export function useInstantSearch({
       suppressExperimentalWarning,
       'This version is experimental and not production-ready.\n\n' +
         'Please report any bugs at https://github.com/algolia/react-instantsearch/issues/new?template=Bug_report_Hooks.md&labels=Scope%3A%20Hooks\n\n' +
-        '(To disable this warning, pass `suppressExperimentalWarning` to <InstantSearch />.)'
+        '(To disable this warning, pass `suppressExperimentalWarning` to <InstantSearch>.)'
     );
   }, [suppressExperimentalWarning]);
 
   useEffect(() => {
-    if (typeof stableProps.searchClient.addAlgoliaAgent === 'function') {
-      stableProps.searchClient.addAlgoliaAgent(`react (${ReactVersion})`);
-      stableProps.searchClient.addAlgoliaAgent(
-        `react-instantsearch (${version})`
-      );
-      stableProps.searchClient.addAlgoliaAgent(
-        `react-instantsearch-hooks (${version})`
-      );
-    }
+    addAlgoliaAgents(stableProps.searchClient, defaultUserAgents);
   }, [stableProps.searchClient]);
 
   useEffect(() => {
-    search.start();
-    forceUpdate();
+    // On SSR, the instance is already started so we don't start it again here.
+    if (!search.started) {
+      search.start();
+      forceUpdate();
+    }
 
     return () => {
       search.dispose();
-      forceUpdate();
     };
-  }, [search, forceUpdate]);
+  }, [search, serverState, forceUpdate]);
 
   return search;
+}
+
+function serverAdapter(
+  search: InstantSearch,
+  props: UseInstantSearchProps,
+  serverContext: InstantSearchServerApi | null,
+  serverState: Partial<InstantSearchServerState> | null
+): InstantSearch {
+  const initialResults = serverState?.initialResults;
+
+  if (serverContext || initialResults) {
+    // InstantSearch.js has a private Initial Results API that lets us inject
+    // results on the search instance.
+    // On the server, we default the initial results to an empty object so that
+    // InstantSearch.js doesn't triggers a search that isn't used.
+    // (This is equivalent to monkey-patching `scheduleSearch` to a noop.)
+    search._initialResults = initialResults || {};
+    search.start();
+  }
+
+  if (serverContext) {
+    // On the browser, we add user agents in an effect. Since effects are not
+    // run on the server, we need to add user agents directly here.
+    addAlgoliaAgents(props.searchClient, [
+      ...defaultUserAgents,
+      `react-instantsearch-server (${version})`,
+    ]);
+
+    // We notify `getServerState()` of the InstantSearch internals to retrieve
+    // the server state and pass it to the render on SSR.
+    serverContext.notifyServer({ search });
+  }
+
+  return search;
+}
+
+function addAlgoliaAgents(searchClient: SearchClient, userAgents: string[]) {
+  if (typeof searchClient.addAlgoliaAgent !== 'function') {
+    return;
+  }
+
+  userAgents.forEach((userAgent) => {
+    searchClient.addAlgoliaAgent!(userAgent);
+  });
 }
