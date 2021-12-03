@@ -41,7 +41,7 @@ export async function getServerState(
   // We decide to go with a strict behavior in that case; throwing. If users have
   // some routes that don't mount the <InstantSearch> component, they would need
   // to try/catch the `getServerState()` call.
-  // If this behavior turns as to be too strict for many users, we can decide
+  // If this behavior turns out to be too strict for many users, we can decide
   // to warn instead of throwing.
   if (!ssrClient.search) {
     throw new Error(
