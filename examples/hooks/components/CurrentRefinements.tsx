@@ -35,7 +35,7 @@ export function CurrentRefinements(props: CurrentRefinementsProps) {
         {refinements.map((refinement) => (
           <li key={refinement.label} className="ais-CurrentRefinements-item">
             <span className="ais-CurrentRefinements-label">
-              {getCategoryName(refinement)}:
+              {refinement.attribute}:
             </span>
             <span className="ais-CurrentRefinements-category">
               <span className="ais-CurrentRefinements-categoryLabel">
@@ -62,14 +62,4 @@ export function CurrentRefinements(props: CurrentRefinementsProps) {
       </ul>
     </div>
   );
-}
-
-function getCategoryName({
-  attribute,
-}: CurrentRefinementsConnectorParamsRefinement) {
-  if (attribute.startsWith('hierarchicalCategories')) {
-    return 'Hierarchy';
-  }
-
-  return attribute;
 }
