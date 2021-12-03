@@ -32,7 +32,7 @@ export function useIndex(props: UseIndexProps) {
     // On SSR, we also add the Index here to synchronize the search state associated
     // to the widgets.
     // In these environments, we flag that we've added the widgets early to skip
-    // the initial browser effect that would otherwise add the Index another time.
+    // the initial browser effect that would otherwise add the Index a second time.
     if (serverContext || ssrContext?.initialResults) {
       parentIndex.addWidgets([instance]);
       shouldAddIndexRef.current = false;

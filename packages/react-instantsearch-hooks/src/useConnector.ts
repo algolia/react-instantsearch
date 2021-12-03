@@ -116,7 +116,7 @@ export function useConnector<
   });
 
   // Using a layout effect adds the widget at the same time as rendering, which
-  // triggers a single network request, instead of two with as regular effect.
+  // triggers a single network request, instead of two with a regular effect.
   useIsomorphicLayoutEffect(() => {
     parentIndex.addWidgets([widget]);
 
