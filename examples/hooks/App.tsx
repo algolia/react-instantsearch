@@ -18,6 +18,7 @@ import {
   HitsPerPage,
   QueryRuleContext,
   QueryRuleCustomData,
+  CurrentRefinements,
 } from './components';
 
 import './App.css';
@@ -98,6 +99,8 @@ export function App() {
               ]}
             />
           </div>
+
+          <CurrentRefinements />
 
           <QueryRuleContext
             trackedFilters={{
