@@ -92,9 +92,13 @@ function serverAdapter(
     // InstantSearch.js has a private Initial Results API that lets us inject
     // results on the search instance.
     // On the server, we default the initial results to an empty object so that
-    // InstantSearch.js doesn't triggers a search that isn't used.
-    // (This is equivalent to monkey-patching `scheduleSearch` to a noop.)
+    // InstantSearch.js doesn't schedule a search that isn't used, leading to
+    // an additional network request. (This is equivalent to monkey-patching
+    // `scheduleSearch` to a noop.)
     search._initialResults = initialResults || {};
+    // On the server, we start the search early to compute the search parameters.
+    // On SSR, we start the search early to directly catch up with the lifecycle
+    // and render.
     search.start();
   }
 
