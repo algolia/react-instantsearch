@@ -15,7 +15,7 @@ export function CurrentRefinements(props: CurrentRefinementsProps) {
   const { items, refine, canRefine } = useCurrentRefinements(props);
   const refinements = items.reduce(
     (acc, item) => [...acc, ...item.refinements],
-    []
+    [] as CurrentRefinementsConnectorParamsRefinement[]
   );
 
   return (
