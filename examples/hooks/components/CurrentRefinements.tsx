@@ -8,10 +8,10 @@ import { CurrentRefinementsConnectorParamsRefinement } from 'instantsearch.js/es
 import { cx } from '../cx';
 import { isSpecialClick } from '../isSpecialClick';
 
-export type CurrentRefinements = React.ComponentProps<'div'> &
+export type CurrentRefinementsProps = React.ComponentProps<'div'> &
   UseCurrentRefinementsProps;
 
-export function CurrentRefinements(props: CurrentRefinements) {
+export function CurrentRefinements(props: CurrentRefinementsProps) {
   const { items, refine, canRefine } = useCurrentRefinements(props);
   const refinements = items.reduce(
     (acc, item) => [...acc, ...item.refinements],
