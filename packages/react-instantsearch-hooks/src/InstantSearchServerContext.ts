@@ -8,7 +8,8 @@ export type InstantSearchSSRClient = {
 
 export type InstantSearchServerApi = {
   /**
-   * Returns search internals to access them in `getServerState()`.
+   * Notifies search internals to the server execution context to access them
+   * in `getServerState()`.
    */
   notifyServer(params: Required<InstantSearchSSRClient>): void;
 };
