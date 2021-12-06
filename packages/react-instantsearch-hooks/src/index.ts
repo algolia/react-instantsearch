@@ -8,6 +8,7 @@ export * from './useDynamicWidgets';
 export * from './useHierarchicalMenu';
 export * from './useHits';
 export * from './useHitsPerPage';
+export * from './useInfiniteHits';
 export * from './useMenu';
 export * from './usePagination';
 export * from './useQueryRules';
