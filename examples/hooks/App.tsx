@@ -8,6 +8,7 @@ import {
   HierarchicalMenu,
   Highlight,
   Hits,
+  InfiniteHits,
   Pagination,
   Panel,
   RangeInput,
@@ -21,6 +22,7 @@ import {
 } from './components';
 
 import './App.css';
+import { Tab, Tabs } from './components/layout';
 
 const searchClient = algoliasearch(
   'latency',
@@ -117,8 +119,15 @@ export function App() {
             )}
           </QueryRuleCustomData>
 
-          <Hits hitComponent={Hit} />
-          <Pagination className="Pagination" />
+          <Tabs>
+            <Tab title="Show Hits">
+              <Hits hitComponent={Hit} />
+              <Pagination className="Pagination" />
+            </Tab>
+            <Tab title="Show InfiniteHits">
+              <InfiniteHits showPrevious hitComponent={Hit} />
+            </Tab>
+          </Tabs>
         </div>
       </div>
     </InstantSearch>
