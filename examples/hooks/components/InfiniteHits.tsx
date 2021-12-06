@@ -18,7 +18,7 @@ export function InfiniteHits<THit extends AlgoliaHit<Record<string, unknown>>>({
   ...props
 }: InfiniteHitsProps<THit>) {
   const { hits, isFirstPage, isLastPage, showMore, showPrevious } =
-    useInfiniteHits();
+    useInfiniteHits(props);
 
   return (
     <div className={cx('ais-InfiniteHits', props.className)}>
