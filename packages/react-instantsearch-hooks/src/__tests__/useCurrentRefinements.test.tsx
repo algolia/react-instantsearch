@@ -1,5 +1,5 @@
-import React from 'react';
 import { renderHook } from '@testing-library/react-hooks';
+import React from 'react';
 
 import { RefinementList } from '../../../../examples/hooks/components';
 import { createInstantSearchTestWrapper } from '../../../../test/utils';
