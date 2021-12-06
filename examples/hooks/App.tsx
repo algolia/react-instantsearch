@@ -20,9 +20,9 @@ import {
   QueryRuleContext,
   QueryRuleCustomData,
 } from './components';
+import { Tab, Tabs } from './components/layout';
 
 import './App.css';
-import { Tab, Tabs } from './components/layout';
 
 const searchClient = algoliasearch(
   'latency',
@@ -120,11 +120,11 @@ export function App() {
           </QueryRuleCustomData>
 
           <Tabs>
-            <Tab title="Show Hits">
+            <Tab title="Hits">
               <Hits hitComponent={Hit} />
               <Pagination className="Pagination" />
             </Tab>
-            <Tab title="Show InfiniteHits">
+            <Tab title="InfiniteHits">
               <InfiniteHits showPrevious hitComponent={Hit} />
             </Tab>
           </Tabs>

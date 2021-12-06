@@ -4,22 +4,23 @@ import { cx } from '../../cx';
 import './Tabs.css';
 
 export type TabProps = {
+  children: React.ReactNode;
   title: string;
 };
 
-export const Tabs = ({ children }) => {
+export function Tabs({ children }) {
   const [currentTab, setCurrentTab] = useState(0);
 
   return (
-    <div className="ais-Tabs">
-      <ul className="ais-Tabs-header">
+    <div className="Tabs">
+      <ul className="Tabs-header">
         {React.Children.map<React.ReactChild, React.ReactElement<TabProps>>(
           children,
           (child, index) => (
             <li
               className={cx(
-                'ais-Tabs-title',
-                currentTab === index && 'ais-Tabs-title--active'
+                'Tabs-title',
+                currentTab === index && 'Tabs-title--active'
               )}
               key={index}
               onClick={() => setCurrentTab(index)}
@@ -29,12 +30,12 @@ export const Tabs = ({ children }) => {
           )
         )}
       </ul>
-      <ul className="ais-Tabs-list">
+      <ul className="Tabs-list">
         {React.Children.map(children, (child, index) => (
           <li
             className={cx(
-              'ais-Tabs-item',
-              currentTab === index && 'ais-Tabs-item--active'
+              'Tabs-item',
+              currentTab === index && 'Tabs-item--active'
             )}
             key={index}
           >
@@ -44,8 +45,8 @@ export const Tabs = ({ children }) => {
       </ul>
     </div>
   );
-};
+}
 
-export const Tab: React.FC<TabProps> = ({ children }) => {
+export function Tab({ children }: TabProps) {
   return <div>{children}</div>;
-};
+}
