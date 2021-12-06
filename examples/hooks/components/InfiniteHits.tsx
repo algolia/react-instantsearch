@@ -4,7 +4,7 @@ import type { Hit as AlgoliaHit } from '@algolia/client-search';
 import {
   useInfiniteHits,
   UseInfiniteHitsProps,
-} from 'react-instantsearch-hooks/src/useInfiniteHits';
+} from 'react-instantsearch-hooks';
 
 import { cx } from '../cx';
 
