@@ -3,7 +3,6 @@ import {
   useCurrentRefinements,
   UseCurrentRefinementsProps,
 } from 'react-instantsearch-hooks';
-import { CurrentRefinementsConnectorParamsRefinement } from 'instantsearch.js/es/connectors/current-refinements/connectCurrentRefinements';
 
 import { cx } from '../cx';
 import { isSpecialClick } from '../isSpecialClick';
@@ -13,16 +12,12 @@ export type CurrentRefinementsProps = React.ComponentProps<'div'> &
 
 export function CurrentRefinements(props: CurrentRefinementsProps) {
   const { items, refine, canRefine } = useCurrentRefinements(props);
-  const refinements = items.reduce(
-    (acc, item) => [...acc, ...item.refinements],
-    [] as CurrentRefinementsConnectorParamsRefinement[]
-  );
 
   return (
     <div
       className={cx(
         'ais-CurrentRefinements',
-        !canRefine && 'ais-CurrentRefinements-noRefinement',
+        !canRefine && 'ais-CurrentRefinements--noRefinement',
         props.className
       )}
     >
@@ -32,31 +27,35 @@ export function CurrentRefinements(props: CurrentRefinementsProps) {
           !canRefine && 'ais-CurrentRefinements-list--noRefinement'
         )}
       >
-        {refinements.map((refinement) => (
-          <li key={refinement.label} className="ais-CurrentRefinements-item">
+        {items.map((item) => (
+          <li key={item.label} className="ais-CurrentRefinements-item">
             <span className="ais-CurrentRefinements-label">
-              {refinement.attribute}:
+              {item.attribute}:
             </span>
-            <span className="ais-CurrentRefinements-category">
-              <span className="ais-CurrentRefinements-categoryLabel">
-                {refinement.label}
+            {item.refinements.map((refinement) => (
+              <span
+                key={refinement.label}
+                className="ais-CurrentRefinements-category"
+              >
+                <span className="ais-CurrentRefinements-categoryLabel">
+                  {refinement.label}
+                </span>
+                <button
+                  onClick={(event) => {
+                    if (isSpecialClick(event)) {
+                      return;
+                    }
+
+                    event.preventDefault();
+
+                    refine(refinement);
+                  }}
+                  className="ais-CurrentRefinements-delete"
+                >
+                  ✕
+                </button>
               </span>
-            </span>
-            <button
-              aria-label={`Remove ${refinement.label} from refinements`}
-              onClick={(event) => {
-                if (isSpecialClick(event)) {
-                  return;
-                }
-
-                event.preventDefault();
-
-                refine(refinement);
-              }}
-              className="ais-CurrentRefinements-delete"
-            >
-              ✕
-            </button>
+            ))}
           </li>
         ))}
       </ul>
