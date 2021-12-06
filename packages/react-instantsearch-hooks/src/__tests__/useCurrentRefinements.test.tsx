@@ -1,9 +1,9 @@
 import { renderHook } from '@testing-library/react-hooks';
 import React from 'react';
 
-import { useRefinementList } from '..';
 import { createInstantSearchTestWrapper } from '../../../../test/utils';
 import { useCurrentRefinements } from '../useCurrentRefinements';
+import { useRefinementList } from '../useRefinementList';
 
 import type { UseRefinementListProps } from '..';
 
