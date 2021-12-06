@@ -1,9 +1,11 @@
 import { renderHook } from '@testing-library/react-hooks';
 import React from 'react';
 
-import { RefinementList } from '../../../../examples/hooks/components';
+import { useRefinementList } from '..';
 import { createInstantSearchTestWrapper } from '../../../../test/utils';
 import { useCurrentRefinements } from '../useCurrentRefinements';
+
+import type { UseRefinementListProps } from '..';
 
 describe('useCurrentRefinements', () => {
   test('returns the connector render state', async () => {
@@ -94,3 +96,9 @@ describe('useCurrentRefinements', () => {
     });
   });
 });
+
+function RefinementList(props: UseRefinementListProps) {
+  useRefinementList(props);
+
+  return null;
+}
