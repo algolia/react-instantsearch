@@ -1,10 +1,3 @@
-.Tabs-header,
-.Tabs-list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
 .Tabs-header {
   display: flex;
 }
@@ -12,6 +5,7 @@
 .Tabs-title {
   padding: 0 1rem;
   flex: 1;
+  font-family: inherit;
   font-size: .875rem;
   color: #23263b;
   background: linear-gradient(-180deg, #fff, #fcfcfd);
@@ -32,14 +26,13 @@
 
 .Tabs-title:hover {
   background: linear-gradient(-180deg, #fff, #f5f5fa);
-  z-index: 1;
 }
 
 .Tabs-title + .Tabs-title {
   margin-left: -1px;
 }
 
-.Tabs-title.Tabs-title--active {
+.Tabs-title--active {
   font-weight: bold;
   box-shadow: inset 0 1px 4px 0 rgb(119 122 175 / 40%), inset 0 1px 1px 0 rgb(119 122 175 / 40%), 0 1px 0 0 rgb(35 38 59 / 5%);
   z-index: 1;
@@ -47,12 +40,4 @@
 
 .Tabs-list {
   margin-top: 1rem;
-}
-
-.Tabs-item {
-  display: none;
-}
-
-.Tabs-item.Tabs-item--active {
-  display: block;
 }
