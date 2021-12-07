@@ -89,7 +89,7 @@ describe('InstantSearchSSRProvider', () => {
     });
   });
 
-  test('renders UI state with initialUiState', async () => {
+  test('renders initial results state with initialUiState', async () => {
     const searchClient = createSearchClient();
     const initialResults = {
       indexName: {
@@ -146,7 +146,7 @@ describe('InstantSearchSSRProvider', () => {
     });
   });
 
-  test('with router provides initial UI state to InstantSearch', async () => {
+  test('renders initial results state with router', async () => {
     const searchClient = createSearchClient();
     const initialResults = {
       indexName: {
