@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { cx } from '../../cx';
 
 import './Tabs.css';
@@ -13,9 +13,11 @@ const getTabKey = (index: number, suffix?: string) =>
 
 export function Tabs({ children }) {
   const [currentTab, setCurrentTab] = useState(0);
-  const tabsRefs: HTMLElement[] = [];
+  const tabsRefs = useRef<HTMLElement[]>([]);
 
-  const onKeyPress = (event: React.KeyboardEvent) => {
+  useEffect(() => tabsRefs.current?.[currentTab].focus(), [currentTab]);
+
+  const onKeyDown = (event: React.KeyboardEvent) => {
     let tabIndex;
     switch (event.key) {
       case 'ArrowLeft':
@@ -28,7 +30,6 @@ export function Tabs({ children }) {
         return;
     }
 
-    tabsRefs[tabIndex].focus();
     setCurrentTab(tabIndex);
   };
 
@@ -37,25 +38,25 @@ export function Tabs({ children }) {
       <div role="tablist" className="Tabs-header">
         {React.Children.map<React.ReactChild, React.ReactElement<TabProps>>(
           children,
-          (child, index) => (
-            <button
-              role="tab"
-              aria-selected={currentTab === index}
-              aria-controls={getTabKey(index, 'item')}
-              id={getTabKey(index, 'title')}
-              tabIndex={currentTab !== index ? -1 : 0}
-              className={cx(
-                'Tabs-title',
-                currentTab === index && 'Tabs-title--active'
-              )}
-              ref={(element) => (tabsRefs[index] = element!)}
-              key={getTabKey(index)}
-              onClick={() => setCurrentTab(index)}
-              onKeyDown={(event) => onKeyPress(event)}
-            >
-              {child.props.title}
-            </button>
-          )
+          (child, index) => {
+            const isSelected = currentTab === index;
+            return (
+              <button
+                role="tab"
+                aria-selected={isSelected}
+                aria-controls={getTabKey(index, 'item')}
+                id={getTabKey(index, 'title')}
+                tabIndex={isSelected ? 0 : -1}
+                className={cx('Tabs-title', isSelected && 'Tabs-title--active')}
+                ref={(element) => (tabsRefs.current[index] = element!)}
+                key={getTabKey(index)}
+                onClick={() => setCurrentTab(index)}
+                onKeyDown={onKeyDown}
+              >
+                {child.props.title}
+              </button>
+            );
+          }
         )}
       </div>
       <div className="Tabs-list">
@@ -77,5 +78,5 @@ export function Tabs({ children }) {
 }
 
 export function Tab({ children }: TabProps) {
-  return <div>{children}</div>;
+  return <>{children}</>;
 }
