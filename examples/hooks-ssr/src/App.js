@@ -61,7 +61,7 @@ function App({ serverState, location }) {
               showMore={true}
             />
           </div>
-          <div style={{ display: 'grid', gap: '.5rem' }}>
+          <div style={{ display: 'grid', gap: '0.5rem' }}>
             <SearchBox placeholder="Search" />
             <Hits hitComponent={Hit} />
 
@@ -82,7 +82,7 @@ function App({ serverState, location }) {
                     showMore={true}
                   />
                 </div>
-                <div style={{ display: 'grid', gap: '.5rem' }}>
+                <div style={{ display: 'grid', gap: '0.5rem' }}>
                   <Hits hitComponent={Hit} />
                 </div>
               </div>
