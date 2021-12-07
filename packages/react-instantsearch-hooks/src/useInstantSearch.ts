@@ -8,7 +8,7 @@ import { useStableValue } from './useStableValue';
 import { warn } from './utils';
 import version from './version';
 
-import type { InstantSearchServerApi } from './InstantSearchServerContext';
+import type { InstantSearchServerContextApi } from './InstantSearchServerContext';
 import type { InstantSearchServerState } from './InstantSearchSSRProvider';
 import type {
   InstantSearchOptions,
@@ -83,7 +83,7 @@ export function useInstantSearch({
 function serverAdapter(
   search: InstantSearch,
   props: UseInstantSearchProps,
-  serverContext: InstantSearchServerApi | null,
+  serverContext: InstantSearchServerContextApi | null,
   serverState: Partial<InstantSearchServerState> | null
 ): InstantSearch {
   const initialResults = serverState?.initialResults;

@@ -5,8 +5,7 @@ import ReactDOM from 'react-dom/server';
 import { InstantSearchServerContext } from 'react-instantsearch-hooks';
 
 import type {
-  InstantSearchServerApi,
-  InstantSearchSSRClient,
+  InstantSearchServerContextApi,
   InstantSearchServerState,
 } from 'react-instantsearch-hooks';
 import type { InitialResults, InstantSearch } from 'instantsearch.js';
@@ -19,12 +18,14 @@ import type { ReactNode } from 'react';
 export async function getServerState(
   children: ReactNode
 ): Promise<InstantSearchServerState> {
-  const ssrClient: InstantSearchSSRClient = {
-    search: undefined,
+  const searchRef: { current: InstantSearch | undefined } = {
+    current: undefined,
   };
 
-  const notifyServer: InstantSearchServerApi['notifyServer'] = ({ search }) => {
-    ssrClient.search = search;
+  const notifyServer: InstantSearchServerContextApi['notifyServer'] = ({
+    search,
+  }) => {
+    searchRef.current = search;
   };
 
   ReactDOM.renderToString(
@@ -43,15 +44,15 @@ export async function getServerState(
   // to try/catch the `getServerState()` call.
   // If this behavior turns out to be too strict for many users, we can decide
   // to warn instead of throwing.
-  if (!ssrClient.search) {
+  if (!searchRef.current) {
     throw new Error(
       "Unable to retrieve InstantSearch's server state in `getServerState()`. Did you mount the <InstantSearch> component?"
     );
   }
 
-  await waitForResults(ssrClient.search);
+  await waitForResults(searchRef.current);
 
-  const initialResults = getInitialResults(ssrClient.search.mainIndex);
+  const initialResults = getInitialResults(searchRef.current.mainIndex);
 
   return {
     initialResults,
