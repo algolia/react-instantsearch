@@ -122,7 +122,7 @@ server.get('/', async (req, res) => {
 });
 ```
 
-In your `<App>`, you can provide `getLocation()` to the [`history`](https://www.algolia.com/doc/api-reference/widgets/history-router/js/) router and return the location coming from the server when you're rendering on the server:
+In your `<App>`, you can provide `getLocation()` to the [`history`](https://www.algolia.com/doc/api-reference/widgets/history-router/js/) router. This lets you return either the location coming from the server when you're rendering on the server, or the one from `window` once on the client:
 
 ```js
 function App({ serverState, location }) {
@@ -157,7 +157,7 @@ function App({ serverState, location }) {
 
 > `(children: React.ReactNode) => Promise<InstantSearchServerState>`
 
-Function that returns the server state.
+Function that takes the component that mounts `<InstantSearchSSRProvider>` and returns the server state.
 
 **Types**
 

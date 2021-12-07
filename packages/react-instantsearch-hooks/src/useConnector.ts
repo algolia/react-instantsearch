@@ -86,7 +86,7 @@ export function useConnector<
 
           return {
             ...scopedResult,
-            // We avoid all `results` to be `null`.
+            // We keep `results` from being `null`.
             results: scopedResult.results || fallbackResults,
           };
         });

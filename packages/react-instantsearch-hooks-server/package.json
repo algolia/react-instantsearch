@@ -1,7 +1,7 @@
 {
   "name": "react-instantsearch-hooks-server",
   "version": "6.16.0",
-  "description": "⚡ Lightning-fast search for React, by Algolia",
+  "description": "⚡ Server-side support for React InstantSearch Hooks, by Algolia",
   "source": "src/index.ts",
   "types": "dist/es/index.d.ts",
   "main": "dist/cjs/index.js",
