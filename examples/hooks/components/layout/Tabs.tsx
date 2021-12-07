@@ -15,7 +15,10 @@ export function Tabs({ children }) {
   const [currentTab, setCurrentTab] = useState(0);
   const tabsRefs = useRef<HTMLElement[]>([]);
 
-  useEffect(() => tabsRefs.current?.[currentTab].focus(), [currentTab]);
+  useEffect(
+    () => tabsRefs.current && tabsRefs.current[currentTab].focus(),
+    [currentTab]
+  );
 
   const onKeyDown = (event: React.KeyboardEvent) => {
     let tabIndex;

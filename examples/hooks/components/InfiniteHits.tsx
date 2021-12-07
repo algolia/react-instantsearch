@@ -1,6 +1,6 @@
 import React from 'react';
 
-import type { Hit as AlgoliaHit } from '@algolia/client-search';
+import { Hit as AlgoliaHit } from '@algolia/client-search';
 import {
   useInfiniteHits,
   UseInfiniteHitsProps,
