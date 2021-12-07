@@ -159,8 +159,6 @@ function App({ serverState, location }) {
 
 Function that takes the component that mounts `<InstantSearch>` and returns the server state.
 
-> > > > > > > 410f5897 (feat(hooks): add SSR support)
-
 **Types**
 
 <details>
