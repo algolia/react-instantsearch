@@ -157,7 +157,7 @@ function App({ serverState, location }) {
 
 > `(children: React.ReactNode) => Promise<InstantSearchServerState>`
 
-Function that takes the component that mounts `<InstantSearchSSRProvider>` and returns the server state.
+Function that takes the component that mounts `<InstantSearch>` and returns the server state.
 
 **Types**
 
