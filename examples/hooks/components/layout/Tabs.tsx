@@ -8,7 +8,7 @@ export type TabProps = {
   title: string;
 };
 
-const getTabKey = (index: number, suffix?: string) =>
+const getTabId = (index: number, suffix?: string) =>
   [`tab-${index}`, suffix].filter(Boolean).join('-');
 
 export function Tabs({ children }) {
@@ -20,20 +20,14 @@ export function Tabs({ children }) {
     [currentTab]
   );
 
-  const onKeyDown = (event: React.KeyboardEvent) => {
-    let tabIndex;
-    switch (event.key) {
-      case 'ArrowLeft':
-        tabIndex = Math.max(0, currentTab - 1);
-        break;
-      case 'ArrowRight':
-        tabIndex = Math.min(currentTab + 1, React.Children.count(children) - 1);
-        break;
-      default:
-        return;
+  const onKeyDown = ({ key }: React.KeyboardEvent) => {
+    if (key === 'ArrowLeft') {
+      setCurrentTab(Math.max(0, currentTab - 1));
+    } else if (key === 'ArrowRight') {
+      setCurrentTab(
+        Math.min(currentTab + 1, React.Children.count(children) - 1)
+      );
     }
-
-    setCurrentTab(tabIndex);
   };
 
   return (
@@ -47,12 +41,12 @@ export function Tabs({ children }) {
               <button
                 role="tab"
                 aria-selected={isSelected}
-                aria-controls={getTabKey(index, 'item')}
-                id={getTabKey(index, 'title')}
+                aria-controls={getTabId(index, 'item')}
+                id={getTabId(index, 'title')}
                 tabIndex={isSelected ? 0 : -1}
                 className={cx('Tabs-title', isSelected && 'Tabs-title--active')}
                 ref={(element) => (tabsRefs.current[index] = element!)}
-                key={getTabKey(index)}
+                key={getTabId(index)}
                 onClick={() => setCurrentTab(index)}
                 onKeyDown={onKeyDown}
               >
@@ -67,10 +61,10 @@ export function Tabs({ children }) {
           <div
             tabIndex={0}
             role="tabpanel"
-            id={getTabKey(index, 'item')}
-            aria-labelledby={getTabKey(index, 'title')}
+            id={getTabId(index, 'item')}
+            aria-labelledby={getTabId(index, 'title')}
             hidden={currentTab !== index}
-            key={getTabKey(index)}
+            key={getTabId(index)}
           >
             {child}
           </div>
