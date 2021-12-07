@@ -42,7 +42,7 @@
     "@babel/runtime": "^7.1.2",
     "algoliasearch-helper": "^3.6.2",
     "dequal": "^2.0.0",
-    "instantsearch.js": "https://pkg.csb.dev/algolia/instantsearch.js/commit/3f954126/instantsearch.js"
+    "instantsearch.js": "^4.34.0"
   },
   "peerDependencies": {
     "algoliasearch": ">= 3.1 < 5",

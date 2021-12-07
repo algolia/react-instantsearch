@@ -40,7 +40,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.1.2",
-    "instantsearch.js": "https://pkg.csb.dev/algolia/instantsearch.js/commit/3f954126/instantsearch.js",
+    "instantsearch.js": "^4.34.0",
     "react-instantsearch-hooks": "6.16.0"
   },
   "peerDependencies": {
