@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 
-import { warn } from '../warn';
+import { warn } from '../warn.js';
 
 describe('warn', () => {
   if (__DEV__) {

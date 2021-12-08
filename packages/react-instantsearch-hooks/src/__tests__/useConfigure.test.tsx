@@ -1,7 +1,7 @@
 import { renderHook } from '@testing-library/react-hooks';
 
-import { createInstantSearchTestWrapper } from '../../../../test/utils';
-import { useConfigure } from '../useConfigure';
+import { createInstantSearchTestWrapper } from '../../../../test/utils/index.js';
+import { useConfigure } from '../useConfigure.js';
 
 describe('useConfigure', () => {
   test('returns the connector render state', async () => {

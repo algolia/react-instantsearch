@@ -1,7 +1,7 @@
 import { renderHook } from '@testing-library/react-hooks';
 
-import { createInstantSearchTestWrapper } from '../../../../test/utils';
-import { useHierarchicalMenu } from '../useHierarchicalMenu';
+import { createInstantSearchTestWrapper } from '../../../../test/utils/index.js';
+import { useHierarchicalMenu } from '../useHierarchicalMenu.js';
 
 describe('useHierarchicalMenu', () => {
   test('returns the connector render state', async () => {

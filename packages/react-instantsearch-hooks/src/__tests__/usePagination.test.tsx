@@ -1,7 +1,7 @@
 import { renderHook } from '@testing-library/react-hooks';
 
-import { createInstantSearchTestWrapper } from '../../../../test/utils';
-import { usePagination } from '../usePagination';
+import { createInstantSearchTestWrapper } from '../../../../test/utils/index.js';
+import { usePagination } from '../usePagination.js';
 
 describe('usePagination', () => {
   test('returns the connector render state', async () => {

@@ -1,13 +1,13 @@
 import { render } from '@testing-library/react';
 import React, { createRef } from 'react';
 
-import { createSearchClient } from '../../../../test/mock';
-import { IndexContext } from '../IndexContext';
-import { InstantSearch } from '../InstantSearch';
-import { InstantSearchSSRProvider } from '../InstantSearchSSRProvider';
-import { Index } from '../SearchIndex';
-import { useConfigure } from '../useConfigure';
-import { noop } from '../utils';
+import { createSearchClient } from '../../../../test/mock/index.js';
+import { IndexContext } from '../IndexContext.js';
+import { InstantSearch } from '../InstantSearch.js';
+import { InstantSearchSSRProvider } from '../InstantSearchSSRProvider.js';
+import { Index } from '../SearchIndex.js';
+import { useConfigure } from '../useConfigure.js';
+import { noop } from '../utils.js';
 
 import type { IndexWidget } from 'instantsearch.js/es/widgets/index/index.js';
 

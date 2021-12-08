@@ -1,4 +1,4 @@
-import { invariant } from '../invariant';
+import { invariant } from '../invariant.js';
 
 describe('invariant', () => {
   if (!__DEV__) {

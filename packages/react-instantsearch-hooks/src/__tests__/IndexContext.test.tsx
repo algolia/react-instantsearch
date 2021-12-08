@@ -1,4 +1,4 @@
-import { IndexContext } from '../IndexContext';
+import { IndexContext } from '../IndexContext.js';
 
 describe('IndexContext', () => {
   test('exposes a displayName', () => {

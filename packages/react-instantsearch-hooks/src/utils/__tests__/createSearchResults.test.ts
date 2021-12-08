@@ -1,6 +1,6 @@
 import { SearchParameters } from 'algoliasearch-helper';
 
-import { createSearchResults } from '../createSearchResults';
+import { createSearchResults } from '../createSearchResults.js';
 
 describe('createSearchResults', () => {
   test('returns search results with an empty state', () => {

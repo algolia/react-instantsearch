@@ -3,12 +3,12 @@ import { history } from 'instantsearch.js/es/lib/routers';
 import { simple } from 'instantsearch.js/es/lib/stateMappings';
 import React from 'react';
 
-import { createSearchClient } from '../../../../test/mock';
-import { wait } from '../../../../test/utils';
-import { InstantSearch } from '../InstantSearch';
-import { InstantSearchSSRProvider } from '../InstantSearchSSRProvider';
-import { useHits } from '../useHits';
-import { useSearchBox } from '../useSearchBox';
+import { createSearchClient } from '../../../../test/mock/index.js';
+import { wait } from '../../../../test/utils/index.js';
+import { InstantSearch } from '../InstantSearch.js';
+import { InstantSearchSSRProvider } from '../InstantSearchSSRProvider.js';
+import { useHits } from '../useHits.js';
+import { useSearchBox } from '../useSearchBox.js';
 
 function SearchBox() {
   const { query } = useSearchBox();

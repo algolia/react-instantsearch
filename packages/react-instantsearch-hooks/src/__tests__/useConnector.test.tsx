@@ -2,14 +2,14 @@ import { render } from '@testing-library/react';
 import { renderHook } from '@testing-library/react-hooks';
 import React from 'react';
 
-import { createSearchClient } from '../../../../test/mock';
-import { createInstantSearchTestWrapper } from '../../../../test/utils';
-import { IndexContext } from '../IndexContext';
-import { InstantSearch } from '../InstantSearch';
-import { InstantSearchContext } from '../InstantSearchContext';
-import { Index } from '../SearchIndex';
-import { useConnector } from '../useConnector';
-import { noop } from '../utils';
+import { createSearchClient } from '../../../../test/mock/index.js';
+import { createInstantSearchTestWrapper } from '../../../../test/utils/index.js';
+import { IndexContext } from '../IndexContext.js';
+import { InstantSearch } from '../InstantSearch.js';
+import { InstantSearchContext } from '../InstantSearchContext.js';
+import { Index } from '../SearchIndex.js';
+import { useConnector } from '../useConnector.js';
+import { noop } from '../utils.js';
 
 import type {
   InstantSearch as InstantSearchType,

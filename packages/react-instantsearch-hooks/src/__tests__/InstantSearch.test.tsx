@@ -1,17 +1,17 @@
 import { act, render, waitFor } from '@testing-library/react';
 import React, { version as ReactVersion } from 'react';
 
-import { createSearchClient } from '../../../../test/mock';
-import { wait } from '../../../../test/utils';
-import { IndexContext } from '../IndexContext';
-import { InstantSearch } from '../InstantSearch';
-import { InstantSearchContext } from '../InstantSearchContext';
-import { Index } from '../SearchIndex';
-import { useRefinementList } from '../useRefinementList';
-import { useSearchBox } from '../useSearchBox';
-import version from '../version';
+import { createSearchClient } from '../../../../test/mock/index.js';
+import { wait } from '../../../../test/utils/index.js';
+import { IndexContext } from '../IndexContext.js';
+import { InstantSearch } from '../InstantSearch.js';
+import { InstantSearchContext } from '../InstantSearchContext.js';
+import { Index } from '../SearchIndex.js';
+import { useRefinementList } from '../useRefinementList.js';
+import { useSearchBox } from '../useSearchBox.js';
+import version from '../version.js';
 
-import type { UseRefinementListProps } from '../useRefinementList';
+import type { UseRefinementListProps } from '../useRefinementList.js';
 import type { InstantSearch as InstantSearchType } from 'instantsearch.js';
 import type { IndexWidget } from 'instantsearch.js/es/widgets/index/index.js';
 

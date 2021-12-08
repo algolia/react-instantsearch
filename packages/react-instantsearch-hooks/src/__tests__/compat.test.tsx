@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 
-import { createSearchClient } from '../../../../test/mock';
-import { InstantSearch as InstantSearchCore } from '../../../react-instantsearch-core';
-import { useSearchBox } from '../useSearchBox';
-import { noop } from '../utils';
+import { createSearchClient } from '../../../../test/mock/index.js';
+import { InstantSearch as InstantSearchCore } from '../../../react-instantsearch-core.js';
+import { useSearchBox } from '../useSearchBox.js';
+import { noop } from '../utils.js';
 
 function SearchBox() {
   useSearchBox({});

@@ -1,22 +1,22 @@
 import { act, render, waitFor } from '@testing-library/react';
 import React, { createRef } from 'react';
 
-import { createSearchClient } from '../../../../test/mock';
-import { wait } from '../../../../test/utils';
-import { DynamicWidgets } from '../DynamicWidgets';
-import { IndexContext } from '../IndexContext';
-import { InstantSearch } from '../InstantSearch';
-import { Index } from '../SearchIndex';
-import { useHierarchicalMenu } from '../useHierarchicalMenu';
-import { useMenu } from '../useMenu';
-import { usePagination } from '../usePagination';
-import { useRefinementList } from '../useRefinementList';
+import { createSearchClient } from '../../../../test/mock/index.js';
+import { wait } from '../../../../test/utils/index.js';
+import { DynamicWidgets } from '../DynamicWidgets.js';
+import { IndexContext } from '../IndexContext.js';
+import { InstantSearch } from '../InstantSearch.js';
+import { Index } from '../SearchIndex.js';
+import { useHierarchicalMenu } from '../useHierarchicalMenu.js';
+import { useMenu } from '../useMenu.js';
+import { usePagination } from '../usePagination.js';
+import { useRefinementList } from '../useRefinementList.js';
 
-import type { InstantSearchProps } from '../InstantSearch';
-import type { UseHierarchicalMenuProps } from '../useHierarchicalMenu';
-import type { UseMenuProps } from '../useMenu';
-import type { UsePaginationProps } from '../usePagination';
-import type { UseRefinementListProps } from '../useRefinementList';
+import type { InstantSearchProps } from '../InstantSearch.js';
+import type { UseHierarchicalMenuProps } from '../useHierarchicalMenu.js';
+import type { UseMenuProps } from '../useMenu.js';
+import type { UsePaginationProps } from '../usePagination.js';
+import type { UseRefinementListProps } from '../useRefinementList.js';
 import type { IndexWidget } from 'instantsearch.js/es/widgets/index/index.js';
 
 function Pagination(props: UsePaginationProps) {

@@ -1,7 +1,7 @@
 import { renderHook } from '@testing-library/react-hooks';
 
-import { createInstantSearchTestWrapper } from '../../../../test/utils';
-import { useSortBy } from '../useSortBy';
+import { createInstantSearchTestWrapper } from '../../../../test/utils/index.js';
+import { useSortBy } from '../useSortBy.js';
 
 const items = [
   { label: 'Featured', value: 'indexName' },

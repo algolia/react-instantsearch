@@ -1,7 +1,7 @@
 import { renderHook } from '@testing-library/react-hooks';
 
-import { createInstantSearchTestWrapper } from '../../../../test/utils';
-import { useQueryRules } from '../useQueryRules';
+import { createInstantSearchTestWrapper } from '../../../../test/utils/index.js';
+import { useQueryRules } from '../useQueryRules.js';
 
 describe('useQueryRules', () => {
   test('returns the connector render state', async () => {
