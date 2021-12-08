@@ -1,6 +1,6 @@
 import { act, render, screen, waitFor } from '@testing-library/react';
-import { history } from 'instantsearch.js/es/lib/routers';
-import { simple } from 'instantsearch.js/es/lib/stateMappings';
+import { history } from 'instantsearch.js/es/lib/routers/index.js';
+import { simple } from 'instantsearch.js/es/lib/stateMappings/index.js';
 import React from 'react';
 
 import { createSearchClient } from '../../../../test/mock/index.js';

@@ -1,5 +1,8 @@
 import React from 'react';
 import type { InstantSearchProps } from '../../packages/react-instantsearch-hooks/src';
+// this exists, but eslint doesn't know due to not using the typescript resolver
+// that's done to ensure .js extensions are allowed to import .ts files
+// eslint-disable-next-line import/named
 import { InstantSearch } from '../../packages/react-instantsearch-hooks/src';
 
 import { createSearchClient } from '../mock';
