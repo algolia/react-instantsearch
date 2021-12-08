@@ -3,8 +3,8 @@ import commonjs from 'rollup-plugin-commonjs';
 import filesize from 'rollup-plugin-filesize';
 import globals from 'rollup-plugin-node-globals';
 import resolve from 'rollup-plugin-node-resolve';
-import typescriptResolve from 'rollup-plugin-typescript-resolve';
 import replace from 'rollup-plugin-replace';
+import typescriptResolve from 'rollup-plugin-typescript-resolve';
 import { uglify } from 'rollup-plugin-uglify';
 
 const clear = (x) => x.filter(Boolean);
