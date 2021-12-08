@@ -8,8 +8,8 @@
 
 ### Features
 
-* **hooks:** add useMenu ([#3197](https://github.com/algolia/react-instantsearch/issues/3197)) ([15d1cc9](https://github.com/algolia/react-instantsearch/commit/15d1cc993437b111cd5a32f43ee1d2065c639ed4))
-* **hooks:** add useRange ([#3198](https://github.com/algolia/react-instantsearch/issues/3198)) ([df1f1c8](https://github.com/algolia/react-instantsearch/commit/df1f1c8109dc684e74d3aee1bf0359f2a0e1b9f4))
+* **hooks:** introduce `useMenu` ([#3197](https://github.com/algolia/react-instantsearch/issues/3197)) ([15d1cc9](https://github.com/algolia/react-instantsearch/commit/15d1cc993437b111cd5a32f43ee1d2065c639ed4))
+* **hooks:** introduce `useRange` ([#3198](https://github.com/algolia/react-instantsearch/issues/3198)) ([df1f1c8](https://github.com/algolia/react-instantsearch/commit/df1f1c8109dc684e74d3aee1bf0359f2a0e1b9f4))
 * **hooks:** introduce `<DynamicWidgets>` ([#3216](https://github.com/algolia/react-instantsearch/issues/3216)) ([d99aea6](https://github.com/algolia/react-instantsearch/commit/d99aea6cfe9dea86ae6b98ee3762373f4b3843f1))
 * **hooks:** introduce `useDynamicWidgets` ([#3210](https://github.com/algolia/react-instantsearch/issues/3210)) ([29c2ea2](https://github.com/algolia/react-instantsearch/commit/29c2ea22b91a39d9eb40a044ae9aab85f2612db8))
 * **hooks:** introduce `useQueryRules` ([#3212](https://github.com/algolia/react-instantsearch/issues/3212)) ([3ef1e1e](https://github.com/algolia/react-instantsearch/commit/3ef1e1e4116b3e58b2c2134d0c60fbb9f40c1501))
