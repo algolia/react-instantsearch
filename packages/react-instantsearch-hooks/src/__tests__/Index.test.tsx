@@ -7,7 +7,7 @@ import { InstantSearch } from '../InstantSearch.js';
 import { InstantSearchSSRProvider } from '../InstantSearchSSRProvider.js';
 import { Index } from '../SearchIndex.js';
 import { useConfigure } from '../useConfigure.js';
-import { noop } from '../utils.js';
+import { noop } from '../utils/index.js';
 
 import type { IndexWidget } from 'instantsearch.js/es/widgets/index/index.js';
 

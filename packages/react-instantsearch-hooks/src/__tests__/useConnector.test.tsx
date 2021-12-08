@@ -9,7 +9,7 @@ import { InstantSearch } from '../InstantSearch.js';
 import { InstantSearchContext } from '../InstantSearchContext.js';
 import { Index } from '../SearchIndex.js';
 import { useConnector } from '../useConnector.js';
-import { noop } from '../utils.js';
+import { noop } from '../utils/index.js';
 
 import type {
   InstantSearch as InstantSearchType,
