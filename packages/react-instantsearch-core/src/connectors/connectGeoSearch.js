@@ -173,9 +173,10 @@ export default createConnector({
 
     const position =
       currentPositionFromSearchState || currentPositionFromSearchParameters;
+    const theHits = !results ? [] : results.hits;
 
     return {
-      hits: !results ? [] : results.hits.filter((_) => Boolean(_._geoloc)),
+      hits: theHits.every(x => Boolean(x._geoloc)) ? theHits : theHits.filter((_) => Boolean(_._geoloc)), //save on rerenders and effects further down the line
       isRefinedWithMap: Boolean(currentRefinement),
       currentRefinement,
       position,
