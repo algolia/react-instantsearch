@@ -13,6 +13,9 @@ module.exports = {
   moduleNameMapper: {
     '^react-instantsearch-(.*)$':
       '<rootDir>/packages/react-instantsearch-$1/src/',
+    // for es modules we import .js of TS files, which jest-resolve doesn't deal with by default
+    // to solve this, we strip the extension, and it can be resolved
+    '^(\\..*)\\.js$': '$1',
   },
   transformIgnorePatterns: ['node_modules/(?!(instantsearch.js)/)'],
   globals: {
