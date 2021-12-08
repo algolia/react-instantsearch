@@ -5,7 +5,7 @@ import { createInstantSearchTestWrapper } from '../../../../test/utils/index.js'
 import { useCurrentRefinements } from '../useCurrentRefinements.js';
 import { useRefinementList } from '../useRefinementList.js';
 
-import type { UseRefinementListProps } from '...js';
+import type { UseRefinementListProps } from '../index.js';
 
 describe('useCurrentRefinements', () => {
   test('returns the connector render state', async () => {
