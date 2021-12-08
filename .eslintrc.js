@@ -145,7 +145,7 @@ const config = {
         ],
         'import/extensions': ['error', 'always'],
         // conflicts with import/extensions
-        // 'import/no-unresolved': ['off'],
+        'import/no-unresolved': ['off'],
       },
       settings: {
         'import/parsers': {
