@@ -1,11 +1,11 @@
-import connectRefinementList from 'instantsearch.js/es/connectors/refinement-list/connectRefinementList';
+import connectRefinementList from 'instantsearch.js/es/connectors/refinement-list/connectRefinementList.js';
 
-import { useConnector } from './useConnector';
+import { useConnector } from './useConnector.js';
 
 import type {
   RefinementListConnectorParams,
   RefinementListWidgetDescription,
-} from 'instantsearch.js/es/connectors/refinement-list/connectRefinementList';
+} from 'instantsearch.js/es/connectors/refinement-list/connectRefinementList.js';
 
 export type UseRefinementListProps = RefinementListConnectorParams;
 

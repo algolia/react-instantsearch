@@ -9,7 +9,7 @@ import { Index } from '../SearchIndex';
 import { useConfigure } from '../useConfigure';
 import { noop } from '../utils';
 
-import type { IndexWidget } from 'instantsearch.js/es/widgets/index/index';
+import type { IndexWidget } from 'instantsearch.js/es/widgets/index/index.js';
 
 function Configure(props) {
   useConfigure(props);

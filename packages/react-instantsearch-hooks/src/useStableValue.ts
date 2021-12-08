@@ -1,4 +1,4 @@
-import { dequal } from 'dequal/lite';
+import { dequal } from 'dequal/lite/index.js';
 import { useEffect, useState } from 'react';
 
 export function useStableValue<TValue>(value: TValue) {

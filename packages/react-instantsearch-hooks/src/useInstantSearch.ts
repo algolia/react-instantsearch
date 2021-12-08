@@ -1,15 +1,15 @@
 import instantsearch from 'instantsearch.js';
 import { useEffect, useMemo, version as ReactVersion } from 'react';
 
-import { useForceUpdate } from './useForceUpdate';
-import { useInstantSearchServerContext } from './useInstantSearchServerContext';
-import { useInstantSearchSSRContext } from './useInstantSearchSSRContext';
-import { useStableValue } from './useStableValue';
-import { warn } from './utils';
-import version from './version';
+import { useForceUpdate } from './useForceUpdate.js';
+import { useInstantSearchServerContext } from './useInstantSearchServerContext.js';
+import { useInstantSearchSSRContext } from './useInstantSearchSSRContext.js';
+import { useStableValue } from './useStableValue.js';
+import { warn } from './utils/index.js';
+import version from './version.js';
 
-import type { InstantSearchServerContextApi } from './InstantSearchServerContext';
-import type { InstantSearchServerState } from './InstantSearchSSRProvider';
+import type { InstantSearchServerContextApi } from './InstantSearchServerContext.js';
+import type { InstantSearchServerState } from './InstantSearchSSRProvider.js';
 import type {
   InstantSearchOptions,
   InstantSearch,

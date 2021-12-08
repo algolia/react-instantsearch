@@ -1,11 +1,11 @@
-import connectConfigure from 'instantsearch.js/es/connectors/configure/connectConfigure';
+import connectConfigure from 'instantsearch.js/es/connectors/configure/connectConfigure.js';
 
-import { useConnector } from './useConnector';
+import { useConnector } from './useConnector.js';
 
 import type {
   ConfigureConnectorParams,
   ConfigureWidgetDescription,
-} from 'instantsearch.js/es/connectors/configure/connectConfigure';
+} from 'instantsearch.js/es/connectors/configure/connectConfigure.js';
 
 export type UseConfigureProps = ConfigureConnectorParams['searchParameters'];
 

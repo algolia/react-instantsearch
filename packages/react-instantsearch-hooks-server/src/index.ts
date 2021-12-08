@@ -1,1 +1,1 @@
-export * from './getServerState';
+export * from './getServerState.js';

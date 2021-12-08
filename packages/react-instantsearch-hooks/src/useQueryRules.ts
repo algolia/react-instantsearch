@@ -1,11 +1,11 @@
-import connectQueryRules from 'instantsearch.js/es/connectors/query-rules/connectQueryRules';
+import connectQueryRules from 'instantsearch.js/es/connectors/query-rules/connectQueryRules.js';
 
-import { useConnector } from './useConnector';
+import { useConnector } from './useConnector.js';
 
 import type {
   QueryRulesConnectorParams,
   QueryRulesWidgetDescription,
-} from 'instantsearch.js/es/connectors/query-rules/connectQueryRules';
+} from 'instantsearch.js/es/connectors/query-rules/connectQueryRules.js';
 
 export type UseQueryRulesProps = QueryRulesConnectorParams;
 

@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 
-import type { IndexWidget } from 'instantsearch.js/es/widgets/index/index';
+import type { IndexWidget } from 'instantsearch.js/es/widgets/index/index.js';
 
 export const IndexContext = createContext<IndexWidget | null>(null);
 

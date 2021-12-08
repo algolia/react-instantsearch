@@ -6,6 +6,13 @@
   "types": "dist/es/index.d.ts",
   "main": "dist/cjs/index.js",
   "module": "dist/es/index.js",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/es/index.js",
+      "require": "./dist/cjs/index.js"
+    }
+  },
   "sideEffects": false,
   "license": "MIT",
   "homepage": "https://www.algolia.com/doc/guides/building-search-ui/what-is-instantsearch/react/",

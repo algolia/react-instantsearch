@@ -13,7 +13,7 @@ import version from '../version';
 
 import type { UseRefinementListProps } from '../useRefinementList';
 import type { InstantSearch as InstantSearchType } from 'instantsearch.js';
-import type { IndexWidget } from 'instantsearch.js/es/widgets/index/index';
+import type { IndexWidget } from 'instantsearch.js/es/widgets/index/index.js';
 
 function SearchBox() {
   useSearchBox();

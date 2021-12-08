@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
 
-import { useDynamicWidgets } from './useDynamicWidgets';
-import { invariant } from './utils';
+import { useDynamicWidgets } from './useDynamicWidgets.js';
+import { invariant } from './utils/index.js';
 
-import type { DynamicWidgetsConnectorParams } from 'instantsearch.js/es/connectors/dynamic-widgets/connectDynamicWidgets';
+import type { DynamicWidgetsConnectorParams } from 'instantsearch.js/es/connectors/dynamic-widgets/connectDynamicWidgets.js';
 import type { ReactChild, ComponentType, ReactNode } from 'react';
 
 function FallbackComponent() {

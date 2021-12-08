@@ -1,11 +1,11 @@
-import connectRange from 'instantsearch.js/es/connectors/range/connectRange';
+import connectRange from 'instantsearch.js/es/connectors/range/connectRange.js';
 
-import { useConnector } from './useConnector';
+import { useConnector } from './useConnector.js';
 
 import type {
   RangeConnectorParams,
   RangeWidgetDescription,
-} from 'instantsearch.js/es/connectors/range/connectRange';
+} from 'instantsearch.js/es/connectors/range/connectRange.js';
 
 export type UseRangeProps = RangeConnectorParams;
 

@@ -17,7 +17,7 @@ import type { UseHierarchicalMenuProps } from '../useHierarchicalMenu';
 import type { UseMenuProps } from '../useMenu';
 import type { UsePaginationProps } from '../usePagination';
 import type { UseRefinementListProps } from '../useRefinementList';
-import type { IndexWidget } from 'instantsearch.js/es/widgets/index/index';
+import type { IndexWidget } from 'instantsearch.js/es/widgets/index/index.js';
 
 function Pagination(props: UsePaginationProps) {
   usePagination(props);

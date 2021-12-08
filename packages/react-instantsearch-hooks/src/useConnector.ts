@@ -1,11 +1,11 @@
 import { useMemo, useRef, useState } from 'react';
 
-import { useIndexContext } from './useIndexContext';
-import { useInstantSearchContext } from './useInstantSearchContext';
-import { useInstantSearchServerContext } from './useInstantSearchServerContext';
-import { useStableValue } from './useStableValue';
-import { useIsomorphicLayoutEffect } from './utils';
-import { createSearchResults } from './utils/createSearchResults';
+import { useIndexContext } from './useIndexContext.js';
+import { useInstantSearchContext } from './useInstantSearchContext.js';
+import { useInstantSearchServerContext } from './useInstantSearchServerContext.js';
+import { useStableValue } from './useStableValue.js';
+import { createSearchResults } from './utils/createSearchResults.js';
+import { useIsomorphicLayoutEffect } from './utils/index.js';
 
 import type { Connector, WidgetDescription } from 'instantsearch.js';
 

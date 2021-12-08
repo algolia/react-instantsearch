@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { InstantSearchContext } from './InstantSearchContext';
+import { InstantSearchContext } from './InstantSearchContext.js';
 
 export function useInstantSearchContext() {
   const context = useContext(InstantSearchContext);

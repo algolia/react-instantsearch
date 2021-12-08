@@ -1,10 +1,11 @@
-import { isIndexWidget } from 'instantsearch.js/es/widgets/index/index';
+import { isIndexWidget } from 'instantsearch.js/es/widgets/index/index.js';
 import React from 'react';
+// eslint-disable-next-line import/extensions
 import ReactDOM from 'react-dom/server';
 import { InstantSearchServerContext } from 'react-instantsearch-hooks';
 
 import type { InitialResults, InstantSearch } from 'instantsearch.js';
-import type { IndexWidget } from 'instantsearch.js/es/widgets/index/index';
+import type { IndexWidget } from 'instantsearch.js/es/widgets/index/index.js';
 import type { ReactNode } from 'react';
 import type {
   InstantSearchServerContextApi,

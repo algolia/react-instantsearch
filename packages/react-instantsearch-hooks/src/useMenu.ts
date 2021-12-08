@@ -1,11 +1,11 @@
-import connectMenu from 'instantsearch.js/es/connectors/menu/connectMenu';
+import connectMenu from 'instantsearch.js/es/connectors/menu/connectMenu.js';
 
-import { useConnector } from './useConnector';
+import { useConnector } from './useConnector.js';
 
 import type {
   MenuConnectorParams,
   MenuWidgetDescription,
-} from 'instantsearch.js/es/connectors/menu/connectMenu';
+} from 'instantsearch.js/es/connectors/menu/connectMenu.js';
 
 export type UseMenuProps = MenuConnectorParams;
 

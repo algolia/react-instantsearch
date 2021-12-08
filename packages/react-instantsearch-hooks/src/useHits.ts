@@ -1,11 +1,11 @@
-import connectHits from 'instantsearch.js/es/connectors/hits/connectHits';
+import connectHits from 'instantsearch.js/es/connectors/hits/connectHits.js';
 
-import { useConnector } from './useConnector';
+import { useConnector } from './useConnector.js';
 
 import type {
   HitsConnectorParams,
   HitsWidgetDescription,
-} from 'instantsearch.js/es/connectors/hits/connectHits';
+} from 'instantsearch.js/es/connectors/hits/connectHits.js';
 
 export type UseHitsProps = HitsConnectorParams;
 
