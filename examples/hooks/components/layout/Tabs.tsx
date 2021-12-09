@@ -12,13 +12,19 @@ const getTabId = (index: number, suffix?: string) =>
   [`tab-${index}`, suffix].filter(Boolean).join('-');
 
 export function Tabs({ children }) {
+  const firstRender = useRef(true);
   const [currentTab, setCurrentTab] = useState(0);
   const tabsRefs = useRef<HTMLElement[]>([]);
 
-  useEffect(
-    () => tabsRefs.current && tabsRefs.current[currentTab].focus(),
-    [currentTab]
-  );
+  useEffect(() => {
+    if (!firstRender.current && tabsRefs.current) {
+      tabsRefs.current[currentTab].focus();
+    }
+  }, [currentTab]);
+
+  useEffect(() => {
+    firstRender.current = false;
+  }, []);
 
   const onKeyDown = ({ key }: React.KeyboardEvent) => {
     if (key === 'ArrowLeft') {
