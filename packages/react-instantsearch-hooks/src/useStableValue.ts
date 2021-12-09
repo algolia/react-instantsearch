@@ -1,4 +1,5 @@
-import { dequal } from 'dequal/lite/index.js';
+// eslint-disable-next-line import/extensions
+import { dequal } from 'dequal/lite';
 import { useEffect, useState } from 'react';
 
 export function useStableValue<TValue>(value: TValue) {
