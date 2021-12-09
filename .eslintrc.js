@@ -53,7 +53,8 @@ const config = {
         format: ['camelCase', 'PascalCase', 'UPPER_CASE'],
         leadingUnderscore: 'allow',
         filter: {
-          regex: '^EXPERIMENTAL_|__DEV__|__APP_INITIAL_STATE__|free_shipping',
+          regex:
+            '^EXPERIMENTAL_|__DEV__|__APP_INITIAL_STATE__|__SERVER_STATE__|free_shipping',
           match: false,
         },
       },
@@ -109,7 +110,10 @@ const config = {
       },
     },
     {
-      files: ['packages/react-instantsearch-hooks/**/*'],
+      files: [
+        'packages/react-instantsearch-hooks/**/*',
+        'packages/react-instantsearch-hooks-server/**/*',
+      ],
       rules: {
         // We don't ship PropTypes in the next version of the library.
         'react/prop-types': 'off',
