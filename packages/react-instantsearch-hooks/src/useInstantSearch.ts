@@ -1,4 +1,4 @@
-import instantsearch from 'instantsearch.js';
+import instantsearch from 'instantsearch.js/es/index.js';
 import { useEffect, useMemo, version as ReactVersion } from 'react';
 
 import { useForceUpdate } from './useForceUpdate.js';
