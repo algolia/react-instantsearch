@@ -4,8 +4,8 @@ import { useIndexContext } from './useIndexContext';
 import { useInstantSearchContext } from './useInstantSearchContext';
 import { useInstantSearchServerContext } from './useInstantSearchServerContext';
 import { useStableValue } from './useStableValue';
-import { createSearchResults } from './utils/createSearchResults';
 import { useIsomorphicLayoutEffect } from './utils';
+import { createSearchResults } from './utils/createSearchResults';
 
 import type { Connector, WidgetDescription } from 'instantsearch.js';
 

@@ -1,11 +1,11 @@
-import connectSortBy from 'instantsearch.js/es/connectors/sort-by/connectSortBy.js';
+import connectSortBy from 'instantsearch.js/es/connectors/sort-by/connectSortBy';
 
 import { useConnector } from './useConnector';
 
 import type {
   SortByConnectorParams,
   SortByWidgetDescription,
-} from 'instantsearch.js/es/connectors/sort-by/connectSortBy.js';
+} from 'instantsearch.js/es/connectors/sort-by/connectSortBy';
 
 export type UseSortByProps = SortByConnectorParams;
 

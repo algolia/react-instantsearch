@@ -1,11 +1,11 @@
-import connectSearchBox from 'instantsearch.js/es/connectors/search-box/connectSearchBox.js';
+import connectSearchBox from 'instantsearch.js/es/connectors/search-box/connectSearchBox';
 
 import { useConnector } from './useConnector';
 
 import type {
   SearchBoxConnectorParams,
   SearchBoxWidgetDescription,
-} from 'instantsearch.js/es/connectors/search-box/connectSearchBox.js';
+} from 'instantsearch.js/es/connectors/search-box/connectSearchBox';
 
 export type UseSearchBoxProps = SearchBoxConnectorParams;
 

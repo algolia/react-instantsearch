@@ -1,11 +1,11 @@
-import connectDynamicWidgets from 'instantsearch.js/es/connectors/dynamic-widgets/connectDynamicWidgets.js';
+import connectDynamicWidgets from 'instantsearch.js/es/connectors/dynamic-widgets/connectDynamicWidgets';
 
 import { useConnector } from './useConnector';
 
 import type {
   DynamicWidgetsConnectorParams,
   DynamicWidgetsWidgetDescription,
-} from 'instantsearch.js/es/connectors/dynamic-widgets/connectDynamicWidgets.js';
+} from 'instantsearch.js/es/connectors/dynamic-widgets/connectDynamicWidgets';
 
 export type UseDynamicWidgetsProps = Omit<
   DynamicWidgetsConnectorParams,

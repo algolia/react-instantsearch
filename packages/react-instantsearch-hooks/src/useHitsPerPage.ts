@@ -1,11 +1,11 @@
-import connectHitsPerPage from 'instantsearch.js/es/connectors/hits-per-page/connectHitsPerPage.js';
+import connectHitsPerPage from 'instantsearch.js/es/connectors/hits-per-page/connectHitsPerPage';
 
 import { useConnector } from './useConnector';
 
 import type {
   HitsPerPageConnectorParams,
   HitsPerPageWidgetDescription,
-} from 'instantsearch.js/es/connectors/hits-per-page/connectHitsPerPage.js';
+} from 'instantsearch.js/es/connectors/hits-per-page/connectHitsPerPage';
 
 export type UseHitsPerPageProps = HitsPerPageConnectorParams;
 

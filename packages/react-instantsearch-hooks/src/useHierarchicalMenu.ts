@@ -1,11 +1,11 @@
-import connectHierarchicalMenu from 'instantsearch.js/es/connectors/hierarchical-menu/connectHierarchicalMenu.js';
+import connectHierarchicalMenu from 'instantsearch.js/es/connectors/hierarchical-menu/connectHierarchicalMenu';
 
 import { useConnector } from './useConnector';
 
 import type {
   HierarchicalMenuConnectorParams,
   HierarchicalMenuWidgetDescription,
-} from 'instantsearch.js/es/connectors/hierarchical-menu/connectHierarchicalMenu.js';
+} from 'instantsearch.js/es/connectors/hierarchical-menu/connectHierarchicalMenu';
 
 export type UseHierarchicalMenuProps = HierarchicalMenuConnectorParams;
 

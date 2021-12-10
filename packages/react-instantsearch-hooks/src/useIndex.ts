@@ -1,4 +1,4 @@
-import index from 'instantsearch.js/es/widgets/index/index.js';
+import index from 'instantsearch.js/es/widgets/index/index';
 import { useEffect, useMemo, useRef } from 'react';
 
 import { useForceUpdate } from './useForceUpdate';
@@ -8,7 +8,7 @@ import { useInstantSearchSSRContext } from './useInstantSearchSSRContext';
 import { useStableValue } from './useStableValue';
 import { useIsomorphicLayoutEffect } from './utils';
 
-import type { IndexWidgetParams } from 'instantsearch.js/es/widgets/index/index.js';
+import type { IndexWidgetParams } from 'instantsearch.js/es/widgets/index/index';
 
 export type UseIndexProps = IndexWidgetParams;
 

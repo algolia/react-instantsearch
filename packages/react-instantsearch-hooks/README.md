@@ -1269,7 +1269,7 @@ React Hook to plug an InstantSearch.js connector to React InstantSearch.
 Here's an example to use [`connectMenu`](https://www.algolia.com/doc/api-reference/widgets/menu/js/#connector):
 
 ```jsx
-import connectMenu from 'instantsearch.js/es/connectors/menu/connectMenu.js';
+import connectMenu from 'instantsearch.js/es/connectors/menu/connectMenu';
 import { useConnector } from 'react-instantsearch-hooks';
 
 function useMenu(props) {
@@ -1283,7 +1283,7 @@ If you use TypeScript:
 import connectMenu, {
   MenuConnectorParams,
   MenuWidgetDescription,
-} from 'instantsearch.js/es/connectors/menu/connectMenu.js';
+} from 'instantsearch.js/es/connectors/menu/connectMenu';
 import { useConnector } from './useConnector';
 
 type UseMenuProps = MenuConnectorParams;

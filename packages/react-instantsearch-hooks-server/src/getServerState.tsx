@@ -1,10 +1,10 @@
-import { isIndexWidget } from 'instantsearch.js/es/widgets/index/index.js';
+import { isIndexWidget } from 'instantsearch.js/es/widgets/index/index';
 import React from 'react';
-import ReactDOM from 'react-dom/server.js';
+import ReactDOM from 'react-dom/server';
 import { InstantSearchServerContext } from 'react-instantsearch-hooks';
 
 import type { InitialResults, InstantSearch } from 'instantsearch.js';
-import type { IndexWidget } from 'instantsearch.js/es/widgets/index/index.js';
+import type { IndexWidget } from 'instantsearch.js/es/widgets/index/index';
 import type { ReactNode } from 'react';
 import type {
   InstantSearchServerContextApi,

@@ -15,7 +15,7 @@ import type {
   InstantSearch as InstantSearchType,
   Connector,
 } from 'instantsearch.js';
-import type { IndexWidget } from 'instantsearch.js/es/widgets/index/index.js';
+import type { IndexWidget } from 'instantsearch.js/es/widgets/index/index';
 
 type CustomSearchBoxWidgetDescription = {
   $$type: 'test.searchBox';
