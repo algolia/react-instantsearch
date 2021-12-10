@@ -1,12 +1,12 @@
 import index from 'instantsearch.js/es/widgets/index/index.js';
 import { useEffect, useMemo, useRef } from 'react';
 
-import { useForceUpdate } from './useForceUpdate.js';
-import { useIndexContext } from './useIndexContext.js';
-import { useInstantSearchServerContext } from './useInstantSearchServerContext.js';
-import { useInstantSearchSSRContext } from './useInstantSearchSSRContext.js';
-import { useStableValue } from './useStableValue.js';
-import { useIsomorphicLayoutEffect } from './utils/index.js';
+import { useForceUpdate } from './useForceUpdate';
+import { useIndexContext } from './useIndexContext';
+import { useInstantSearchServerContext } from './useInstantSearchServerContext';
+import { useInstantSearchSSRContext } from './useInstantSearchSSRContext';
+import { useStableValue } from './useStableValue';
+import { useIsomorphicLayoutEffect } from './utils';
 
 import type { IndexWidgetParams } from 'instantsearch.js/es/widgets/index/index.js';
 

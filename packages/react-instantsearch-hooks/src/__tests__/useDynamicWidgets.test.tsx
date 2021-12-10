@@ -1,7 +1,7 @@
 import { renderHook } from '@testing-library/react-hooks';
 
-import { createInstantSearchTestWrapper } from '../../../../test/utils/index.js';
-import { useDynamicWidgets } from '../useDynamicWidgets.js';
+import { createInstantSearchTestWrapper } from '../../../../test/utils';
+import { useDynamicWidgets } from '../useDynamicWidgets';
 
 describe('useDynamicWidgets', () => {
   test('returns the connector render state', async () => {

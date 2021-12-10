@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/extensions
 import { dequal } from 'dequal/lite';
 import { useEffect, useState } from 'react';
 

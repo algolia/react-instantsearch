@@ -1,6 +1,6 @@
 import connectHits from 'instantsearch.js/es/connectors/hits/connectHits.js';
 
-import { useConnector } from './useConnector.js';
+import { useConnector } from './useConnector';
 
 import type {
   HitsConnectorParams,

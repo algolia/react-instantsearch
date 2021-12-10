@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { IndexContext } from './IndexContext.js';
-import { InstantSearchContext } from './InstantSearchContext.js';
-import { useInstantSearch } from './useInstantSearch.js';
+import { IndexContext } from './IndexContext';
+import { InstantSearchContext } from './InstantSearchContext';
+import { useInstantSearch } from './useInstantSearch';
 
-import type { UseInstantSearchProps } from './useInstantSearch.js';
+import type { UseInstantSearchProps } from './useInstantSearch';
 
 export type InstantSearchProps = UseInstantSearchProps & {
   children?: React.ReactNode;

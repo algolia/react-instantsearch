@@ -1,7 +1,7 @@
 import { renderHook } from '@testing-library/react-hooks';
 
-import { createInstantSearchTestWrapper } from '../../../../test/utils/index.js';
-import { useHitsPerPage } from '../useHitsPerPage.js';
+import { createInstantSearchTestWrapper } from '../../../../test/utils';
+import { useHitsPerPage } from '../useHitsPerPage';
 
 describe('useHitsPerPage', () => {
   test('returns the connector render state', async () => {

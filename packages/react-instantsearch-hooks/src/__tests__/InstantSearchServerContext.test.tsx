@@ -1,4 +1,4 @@
-import { InstantSearchServerContext } from '../InstantSearchServerContext.js';
+import { InstantSearchServerContext } from '../InstantSearchServerContext';
 
 describe('InstantSearchServerContext', () => {
   test('exposes a displayName', () => {

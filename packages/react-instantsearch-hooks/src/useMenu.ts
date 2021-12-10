@@ -1,6 +1,6 @@
 import connectMenu from 'instantsearch.js/es/connectors/menu/connectMenu.js';
 
-import { useConnector } from './useConnector.js';
+import { useConnector } from './useConnector';
 
 import type {
   MenuConnectorParams,

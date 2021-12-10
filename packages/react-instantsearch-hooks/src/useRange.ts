@@ -1,6 +1,6 @@
 import connectRange from 'instantsearch.js/es/connectors/range/connectRange.js';
 
-import { useConnector } from './useConnector.js';
+import { useConnector } from './useConnector';
 
 import type {
   RangeConnectorParams,

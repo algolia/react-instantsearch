@@ -13,15 +13,15 @@ import {
   version,
 } from 'react-instantsearch-hooks';
 
-import { createSearchClient } from '../../../../test/mock/index.js';
-import { getServerState } from '../getServerState.js';
+import { createSearchClient } from '../../../../test/mock';
+import { getServerState } from '../getServerState';
 
-// eslint-disable-next-line import/extensions
 import type algoliasearch from 'algoliasearch/lite';
 import type {
   InstantSearchServerState,
   UseRefinementListProps,
 } from 'react-instantsearch-hooks';
+
 type SearchClient = ReturnType<typeof algoliasearch>;
 
 type CreateTestEnvironmentProps = {

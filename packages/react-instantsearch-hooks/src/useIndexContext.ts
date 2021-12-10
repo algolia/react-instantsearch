@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { IndexContext } from './IndexContext.js';
+import { IndexContext } from './IndexContext';
 
 export function useIndexContext() {
   const context = useContext(IndexContext);

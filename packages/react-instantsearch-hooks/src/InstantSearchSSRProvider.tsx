@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { InstantSearchSSRContext } from './InstantSearchSSRContext.js';
+import { InstantSearchSSRContext } from './InstantSearchSSRContext';
 
 import type { InitialResults } from 'instantsearch.js';
 import type { ReactNode } from 'react';

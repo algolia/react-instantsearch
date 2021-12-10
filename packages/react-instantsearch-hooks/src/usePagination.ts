@@ -1,6 +1,6 @@
 import connectPagination from 'instantsearch.js/es/connectors/pagination/connectPagination.js';
 
-import { useConnector } from './useConnector.js';
+import { useConnector } from './useConnector';
 
 import type {
   PaginationConnectorParams,

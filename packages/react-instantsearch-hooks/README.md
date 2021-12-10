@@ -152,8 +152,8 @@ import React from 'react';
 import algoliasearch from 'algoliasearch/lite';
 import { InstantSearch, useConnector } from 'react-instantsearch-hooks';
 
-import { SearchBox } from './SearchBox.js';
-import { Hits } from './Hits.js';
+import { SearchBox } from './SearchBox';
+import { Hits } from './Hits';
 
 const searchClient = algoliasearch(
   'latency',
@@ -1284,7 +1284,7 @@ import connectMenu, {
   MenuConnectorParams,
   MenuWidgetDescription,
 } from 'instantsearch.js/es/connectors/menu/connectMenu.js';
-import { useConnector } from './useConnector.js';
+import { useConnector } from './useConnector';
 
 type UseMenuProps = MenuConnectorParams;
 

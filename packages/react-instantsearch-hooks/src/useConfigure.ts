@@ -1,6 +1,6 @@
 import connectConfigure from 'instantsearch.js/es/connectors/configure/connectConfigure.js';
 
-import { useConnector } from './useConnector.js';
+import { useConnector } from './useConnector';
 
 import type {
   ConfigureConnectorParams,
