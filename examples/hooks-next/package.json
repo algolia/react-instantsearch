@@ -1,0 +1,30 @@
+{
+  "name": "hooks-next-example",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "algoliasearch": "^4.11.0",
+    "instantsearch.css": "^7.4.5",
+    "next": "12.0.7",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-instantsearch-hooks": "^6.17.0",
+    "react-instantsearch-hooks-server": "^6.17.0"
+  },
+  "resolutions": {
+    "react-instantsearch-hooks": "https://pkg.csb.dev/algolia/react-instantsearch/commit/2d6a4c8c/react-instantsearch-hooks",
+    "react-instantsearch-hooks-server": "https://pkg.csb.dev/algolia/react-instantsearch/commit/2d6a4c8c/react-instantsearch-hooks-server",
+    "instantsearch.js": "https://pkg.csb.dev/algolia/instantsearch.js/commit/80b84145/instantsearch.js"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.37",
+    "eslint": "8.4.0",
+    "eslint-config-next": "12.0.7",
+    "typescript": "^4.5.2"
+  }
+}
