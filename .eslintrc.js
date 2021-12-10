@@ -143,9 +143,7 @@ const config = {
             pathGroupsExcludedImportTypes: ['builtin'],
           },
         ],
-        'import/extensions': ['error', 'always'],
-        // conflicts with import/extensions
-        'import/no-unresolved': ['off'],
+        'import/extensions': ['error', 'never'],
       },
       settings: {
         'import/parsers': {

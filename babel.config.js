@@ -1,4 +1,5 @@
 const wrapWarningWithDevCheck = require('./scripts/babel/wrap-warning-with-dev-check');
+const extensionResolver = require('./scripts/babel/extension-resolver');
 
 const isES = process.env.BABEL_ENV === 'es';
 const isRollup = process.env.BABEL_ENV === 'rollup';
@@ -40,6 +41,7 @@ module.exports = (api) => {
           },
         },
       ],
+      isES && extensionResolver,
     ]),
     overrides: [
       {
