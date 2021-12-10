@@ -83,6 +83,20 @@ describe('babel-plugin-extension-resolver', () => {
     ).toHaveProperty('code', 'import other from "./other/index.js";');
   });
 
+  it('uses node_modules', async () => {
+    fs.__setMockFiles(['/path/to/src/other/index.js']);
+
+    expect(
+      await transformAsync(
+        'import other from "instantsearch.js/es/widgets/index/index";',
+        options
+      )
+    ).toHaveProperty(
+      'code',
+      'import other from "instantsearch.js/es/widgets/index/index.js";'
+    );
+  });
+
   it('works with multiple imports', async () => {
     fs.__setMockFiles(['/path/to/src/other.js', '/path/to/src/another.js']);
 
@@ -122,13 +136,26 @@ describe('babel-plugin-extension-resolver', () => {
     ).toHaveProperty('code', 'requireOOPS("./other");');
   });
 
-  it('leaves as-is if file not found', async () => {
+  it('errors if file not found', async () => {
     fs.__setMockFiles([]);
 
     await expect(() =>
       transformAsync('import other from "./other";', options)
     ).rejects.toThrow(
-      '/path/to/src/file.js: local import for "./other" could not be resolved'
+      '/path/to/src/file.js: import for "./other" could not be resolved'
+    );
+  });
+
+  it('errors if module file not found', async () => {
+    fs.__setMockFiles([]);
+
+    await expect(() =>
+      transformAsync(
+        'import other from "instantsearch.js/non-existing-folder-this-can-never-exist/qsdf/gh/jklm";',
+        options
+      )
+    ).rejects.toThrow(
+      "/path/to/src/file.js: Cannot find module 'instantsearch.js/non-existing-folder-this-can-never-exist/qsdf/gh/jklm' from 'scripts/babel/extension-resolver.js'"
     );
   });
 });

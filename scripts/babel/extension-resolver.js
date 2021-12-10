@@ -9,6 +9,7 @@ const path = require('path');
 
 const PLUGIN_NAME = 'babel-plugin-extension-resolver';
 
+const importStartsWith = ['instantsearch.js/', 'react-dom/'];
 const srcExtensions = ['.js', '.ts', '.tsx'];
 const dstExtension = '.js';
 
@@ -55,26 +56,48 @@ function replaceSource(types, source, fileName) {
     return;
   }
   const sourcePath = source.node.value;
-  if (sourcePath[0] !== '.') {
+  if (
+    importStartsWith.every((prefix) => !sourcePath.startsWith(prefix)) &&
+    !isRelativeDependency(sourcePath)
+  ) {
     return;
   }
   const baseDir = path.dirname(fileName);
-  const resolvedPath = resolvePath(baseDir, sourcePath);
-  const normalizedPath = normalizePath(resolvedPath);
+
+  let normalizedPath;
+  if (isRelativeDependency(sourcePath)) {
+    const resolvedPath = resolveRelativePath(baseDir, sourcePath);
+    normalizedPath = normalizeRelativePath(resolvedPath);
+  } else {
+    const resolvedPath = resolveAbsolutePath(sourcePath);
+    normalizedPath = normalizeAbsolutePath(resolvedPath);
+  }
+
   source.replaceWith(types.stringLiteral(normalizedPath));
 }
 
-function resolvePath(baseDir, sourcePath) {
-  for (const title of [sourcePath, path.join(sourcePath, 'index')]) {
-    const resolvedPath = resolveExtension(baseDir, title);
-    if (resolvedPath !== null) {
-      return resolvedPath;
-    }
+function resolveRelativePath(baseDir, sourcePath) {
+  let resolvedPath = resolveRelativeExtension(baseDir, sourcePath);
+
+  if (resolvedPath === null) {
+    resolvedPath = resolveRelativeExtension(
+      baseDir,
+      path.join(sourcePath, 'index')
+    );
   }
-  throw new Error(`local import for "${sourcePath}" could not be resolved`);
+
+  if (resolvedPath === null) {
+    throw new Error(`import for "${sourcePath}" could not be resolved`);
+  }
+
+  return resolvedPath;
 }
 
-function resolveExtension(baseDir, sourcePath) {
+function resolveAbsolutePath(sourcePath) {
+  return require.resolve(sourcePath).split(['node_modules/'])[1];
+}
+
+function resolveRelativeExtension(baseDir, sourcePath) {
   const absolutePath = path.join(baseDir, sourcePath);
   if (isFile(absolutePath)) {
     return sourcePath;
@@ -87,7 +110,7 @@ function resolveExtension(baseDir, sourcePath) {
   return null;
 }
 
-function normalizePath(originalPath) {
+function normalizeRelativePath(originalPath) {
   let normalizedPath = originalPath;
   if (path.sep === '\\') {
     normalizedPath = normalizedPath.split(path.sep).join('/');
@@ -98,10 +121,22 @@ function normalizePath(originalPath) {
   return normalizedPath;
 }
 
+function normalizeAbsolutePath(originalPath) {
+  let normalizedPath = originalPath;
+  if (path.sep === '\\') {
+    normalizedPath = normalizedPath.split(path.sep).join('/');
+  }
+  return normalizedPath;
+}
+
 function isFile(pathName) {
   try {
     return fs.statSync(pathName).isFile();
   } catch (err) {
     return false;
   }
+}
+
+function isRelativeDependency(sourcePath) {
+  return sourcePath[0] === '.';
 }
