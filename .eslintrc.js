@@ -147,7 +147,7 @@ const config = {
     },
     {
       files: 'packages/**/*',
-      excludedFiles: '*.test.*',
+      excludedFiles: ['*.test.*', '**/__tests__/**'],
       rules: {
         'no-restricted-syntax': [
           'error',
