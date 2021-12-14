@@ -23,7 +23,7 @@
     "test:e2e:saucelabs": "wdio wdio.saucelabs.conf.js",
     "test:integration": "NODE_ENV=development yarn test:regressions && yarn test:argos",
     "test:examples": "node scripts/test-examples.js",
-    "test:build": "yarn build && yarn test:size",
+    "test:build": "yarn build && yarn test:size && lerna run test:build --scope react-*",
     "test:regressions": "webpack --config integration/webpack.config.js && node integration/runTest.js",
     "test:argos": "argos upload integration/screenshots --token $ARGOS_TOKEN || true",
     "test:size": "bundlesize",
