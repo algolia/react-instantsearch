@@ -9,6 +9,9 @@ const path = require('path');
 
 const PLUGIN_NAME = 'babel-plugin-extension-resolver';
 
+// InstantSearch.js/es is an ES Module, so needs complete paths,
+// React-DOM also fails if the paths are incomplete
+// For verification, see test/module/packages-are-es-modules.mjs
 const importStartsWith = ['instantsearch.js/', 'react-dom/'];
 const srcExtensions = ['.js', '.ts', '.tsx'];
 const dstExtension = '.js';
