@@ -1,16 +1,22 @@
+import type { SearchParameters } from 'algoliasearch-helper';
 import PropTypes from 'prop-types';
 import createConnector from '../core/createConnector';
 import { getResults } from '../core/indexUtils';
+
+const MAX_WILDCARD_FACETS = 20;
 
 export default createConnector({
   displayName: 'AlgoliaDynamicWidgets',
 
   defaultProps: {
     transformItems: (items) => items,
+    maxValuesPerFacet: 20,
   },
 
   propTypes: {
     transformItems: PropTypes.func,
+    facets: PropTypes.arrayOf(PropTypes.string),
+    maxValuesPerFacet: PropTypes.number,
   },
 
   getProvidedProps(props, _searchState, searchResults) {
@@ -30,8 +36,36 @@ export default createConnector({
         results.renderingContent.facetOrdering.facets.order) ||
       [];
 
+    const attributesToRender = props.transformItems(facetOrder, { results });
+
+    if (attributesToRender.length > MAX_WILDCARD_FACETS && !props.facets) {
+      // eslint-disable-next-line no-console
+      console.warn(
+        `More than ${MAX_WILDCARD_FACETS} facets are requested to be displayed without explicitly setting which facets to retrieve. This could have a performance impact. Set "facets" to [] to do two smaller network requests, or explicitly to ['*'] to avoid this warning.`
+      );
+    }
+
+    if (props.maxValuesPerFacet < results._state.maxValuesPerFacet) {
+      // eslint-disable-next-line no-console
+      console.warn(
+        `The maxValuesPerFacet set by dynamic widgets (${props.maxValuesPerFacet}) is smaller than one of the limits set by a widget (${results._state.maxValuesPerFacet}). This causes a mismatch in query parameters and thus an extra network request when that widget is mounted.`
+      );
+    }
+
     return {
-      attributesToRender: props.transformItems(facetOrder, { results }),
+      attributesToRender,
     };
+  },
+
+  getSearchParameters(searchParameters, props) {
+    return (props.facets || ['*']).reduce(
+      (acc: SearchParameters, curr: string) => acc.addFacet(curr),
+      searchParameters.setQueryParameters({
+        maxValuesPerFacet: Math.max(
+          props.maxValuesPerFacet || 0,
+          searchParameters.maxValuesPerFacet || 0
+        ),
+      })
+    );
   },
 });
