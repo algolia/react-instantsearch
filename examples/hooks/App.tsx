@@ -4,6 +4,7 @@ import React from 'react';
 import { InstantSearch, DynamicWidgets } from 'react-instantsearch-hooks';
 
 import {
+  Breadcrumb,
   Configure,
   CurrentRefinements,
   HierarchicalMenu,
@@ -97,6 +98,14 @@ export function App() {
           </DynamicWidgets>
         </div>
         <div className="Search">
+          <Breadcrumb
+            attributes={[
+              'hierarchicalCategories.lvl0',
+              'hierarchicalCategories.lvl1',
+              'hierarchicalCategories.lvl2',
+            ]}
+          />
+
           <div className="Search-header">
             <SearchBox placeholder="Search" />
             <SortBy
