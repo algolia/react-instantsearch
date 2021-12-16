@@ -25,6 +25,21 @@ export default createConnector({
       multiIndexContext: props.indexContextValue,
     });
 
+    if (
+      props.facets &&
+      !(
+        Array.isArray(props.facets) &&
+        props.facets.length <= 1 &&
+        (props.facets[0] === '*' || props.facets[0] === undefined)
+      )
+    ) {
+      throw new Error(
+        `The \`facets\` prop only accepts [] or ["*"], you passed ${JSON.stringify(
+          props.facets
+        )}`
+      );
+    }
+
     if (!results) {
       return { attributesToRender: [] };
     }

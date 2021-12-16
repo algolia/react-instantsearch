@@ -221,6 +221,66 @@ describe('connectDynamicWidgets', () => {
         expect(actual.attributesToRender).toEqual(['one', 'two']);
       });
 
+      it('fails when a non-star facet is given', () => {
+        const props = {
+          contextValue,
+          ...connector.defaultProps,
+          facets: ['lol'],
+        };
+        const searchState = {};
+        const searchResults = createSingleIndexSearchResults({});
+
+        expect(() =>
+          connector.getProvidedProps(props, searchState, searchResults)
+        ).toThrowErrorMatchingInlineSnapshot(
+          `"The \`facets\` prop only accepts [] or [\\"*\\"], you passed [\\"lol\\"]"`
+        );
+      });
+
+      it('fails when a multiple star facets are given', () => {
+        const props = {
+          contextValue,
+          ...connector.defaultProps,
+          facets: ['*', '*'],
+        };
+        const searchState = {};
+        const searchResults = createSingleIndexSearchResults({});
+
+        expect(() =>
+          connector.getProvidedProps(props, searchState, searchResults)
+        ).toThrowErrorMatchingInlineSnapshot(
+          `"The \`facets\` prop only accepts [] or [\\"*\\"], you passed [\\"*\\",\\"*\\"]"`
+        );
+      });
+
+      it('does not fail when only star facet is given', () => {
+        const props = {
+          contextValue,
+          ...connector.defaultProps,
+          facets: ['*'],
+        };
+        const searchState = {};
+        const searchResults = createSingleIndexSearchResults({});
+
+        expect(() =>
+          connector.getProvidedProps(props, searchState, searchResults)
+        ).not.toThrow();
+      });
+
+      it('does not fail when no facet is given', () => {
+        const props = {
+          contextValue,
+          ...connector.defaultProps,
+          facets: [],
+        };
+        const searchState = {};
+        const searchResults = createSingleIndexSearchResults({});
+
+        expect(() =>
+          connector.getProvidedProps(props, searchState, searchResults)
+        ).not.toThrow();
+      });
+
       it('warns if maxValuesPerFacet is lower than set by another widget', () => {
         const spy = jest.spyOn(console, 'warn');
         const props = {
