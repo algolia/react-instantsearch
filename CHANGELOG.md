@@ -1,11 +1,6 @@
 # [6.18.0](https://github.com/algolia/react-instantsearch/compare/v6.17.0...v6.18.0) (2021-12-16)
 
 
-### Bug Fixes
-
-* **hooks:** clear current refinement for hierarchical menu not working ([#3241](https://github.com/algolia/react-instantsearch/issues/3241)) ([a1fa596](https://github.com/algolia/react-instantsearch/commit/a1fa5960a05c70a4c2d52dc8c660b61d80b7133f))
-
-
 ### Features
 
 * **dynamicWidgets:** send facets * and maxValuesPerFacet by default ([#3242](https://github.com/algolia/react-instantsearch/issues/3242)) ([c071776](https://github.com/algolia/react-instantsearch/commit/c07177670ac30dced55250774654e8b2a77b6739))
