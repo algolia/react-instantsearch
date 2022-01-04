@@ -1,4 +1,4 @@
-import type { SearchClient } from '@algolia/client-search';
+import type { SearchClient } from 'algoliasearch/lite';
 import React from 'react';
 import type { InstantSearchProps } from '../../packages/react-instantsearch-hooks/src';
 import { InstantSearch } from '../../packages/react-instantsearch-hooks/src';
