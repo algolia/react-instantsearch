@@ -5,11 +5,14 @@ import fs from 'fs';
 jest.mock('fs');
 
 describe('babel-plugin-extension-resolver', () => {
+  const pluginOptions = {
+    modulesToResolve: ['instantsearch.js'],
+  };
   const options = {
     filename: '/path/to/src/file.js',
     configFile: false,
     babelrc: false,
-    plugins: [plugin],
+    plugins: [[plugin, pluginOptions]],
   };
 
   afterEach(() => {
@@ -83,17 +86,21 @@ describe('babel-plugin-extension-resolver', () => {
     ).toHaveProperty('code', 'import other from "./other/index.js";');
   });
 
-  it('uses node_modules', async () => {
+  it('uses modulesToResolve', async () => {
     fs.__setMockFiles(['/path/to/src/other/index.js']);
 
     expect(
       await transformAsync(
-        'import other from "instantsearch.js/es/widgets/index/index";',
+        'import index from "instantsearch.js/es/widgets/index/index";\n' +
+          'import root from "instantsearch.js";\n' +
+          'import other from "different-module/other";',
         options
       )
     ).toHaveProperty(
       'code',
-      'import other from "instantsearch.js/es/widgets/index/index.js";'
+      'import index from "instantsearch.js/es/widgets/index/index.js";\n' +
+        'import root from "instantsearch.js";\n' +
+        'import other from "different-module/other";'
     );
   });
 
