@@ -41,7 +41,18 @@ module.exports = (api) => {
           },
         },
       ],
-      isES && extensionResolver,
+      isES && [
+        extensionResolver,
+        {
+          // For verification, see test/module/packages-are-es-modules.mjs
+          modulesToResolve: [
+            // InstantSearch.js/es is an ES Module, so needs complete paths,
+            'instantsearch.js',
+            // React-DOM also fails if the paths are incomplete
+            'react-dom',
+          ],
+        },
+      ],
     ]),
     overrides: [
       {

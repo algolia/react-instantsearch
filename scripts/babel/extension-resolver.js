@@ -9,28 +9,41 @@ const path = require('path');
 
 const PLUGIN_NAME = 'babel-plugin-extension-resolver';
 
-// InstantSearch.js/es is an ES Module, so needs complete paths,
-// React-DOM also fails if the paths are incomplete
-// For verification, see test/module/packages-are-es-modules.mjs
-const importStartsWith = ['instantsearch.js/', 'react-dom/'];
-const srcExtensions = ['.js', '.ts', '.tsx'];
-const dstExtension = '.js';
-
-module.exports = function extensionResolver(babel) {
-  const { types } = babel;
+module.exports = function extensionResolver(
+  { types },
+  {
+    modulesToResolve = [],
+    srcExtensions = ['.js', '.ts', '.tsx'],
+    dstExtension = '.js',
+  }
+) {
   return {
     name: PLUGIN_NAME,
     visitor: {
       Program: {
         enter: (programPath, state) => {
-          const { filename } = state;
+          const fileName = state.filename;
           programPath.traverse(
             {
               ImportDeclaration(declaration) {
-                handleImportDeclaration(types, declaration, filename);
+                handleImportDeclaration({
+                  types,
+                  declaration,
+                  fileName,
+                  modulesToResolve,
+                  srcExtensions,
+                  dstExtension,
+                });
               },
               ExportDeclaration(declaration) {
-                handleExportDeclaration(types, declaration, filename);
+                handleExportDeclaration({
+                  types,
+                  declaration,
+                  fileName,
+                  modulesToResolve,
+                  srcExtensions,
+                  dstExtension,
+                });
               },
             },
             state
@@ -41,26 +54,61 @@ module.exports = function extensionResolver(babel) {
   };
 };
 
-function handleImportDeclaration(types, declaration, fileName) {
+function handleImportDeclaration({
+  types,
+  declaration,
+  fileName,
+  modulesToResolve,
+  srcExtensions,
+  dstExtension,
+}) {
   const source = declaration.get('source');
-  replaceSource(types, source, fileName);
+  replaceSource({
+    types,
+    source,
+    fileName,
+    modulesToResolve,
+    srcExtensions,
+    dstExtension,
+  });
 }
 
-function handleExportDeclaration(types, declaration, fileName) {
+function handleExportDeclaration({
+  types,
+  declaration,
+  fileName,
+  modulesToResolve,
+  srcExtensions,
+  dstExtension,
+}) {
   const source = declaration.get('source');
   if (Array.isArray(source)) {
     return;
   }
-  replaceSource(types, source, fileName);
+  replaceSource({
+    types,
+    source,
+    fileName,
+    modulesToResolve,
+    srcExtensions,
+    dstExtension,
+  });
 }
 
-function replaceSource(types, source, fileName) {
+function replaceSource({
+  types,
+  source,
+  fileName,
+  modulesToResolve,
+  srcExtensions,
+  dstExtension,
+}) {
   if (!source.isStringLiteral()) {
     return;
   }
   const sourcePath = source.node.value;
   if (
-    importStartsWith.every((prefix) => !sourcePath.startsWith(prefix)) &&
+    modulesToResolve.every((prefix) => !sourcePath.startsWith(`${prefix}/`)) &&
     !isRelativeDependency(sourcePath)
   ) {
     return;
@@ -69,7 +117,12 @@ function replaceSource(types, source, fileName) {
 
   let normalizedPath;
   if (isRelativeDependency(sourcePath)) {
-    const resolvedPath = resolveRelativePath(baseDir, sourcePath);
+    const resolvedPath = resolveRelativePath(
+      baseDir,
+      sourcePath,
+      srcExtensions,
+      dstExtension
+    );
     normalizedPath = normalizeRelativePath(resolvedPath);
   } else {
     const resolvedPath = resolveAbsolutePath(sourcePath);
@@ -79,13 +132,20 @@ function replaceSource(types, source, fileName) {
   source.replaceWith(types.stringLiteral(normalizedPath));
 }
 
-function resolveRelativePath(baseDir, sourcePath) {
-  let resolvedPath = resolveRelativeExtension(baseDir, sourcePath);
+function resolveRelativePath(baseDir, sourcePath, srcExtensions, dstExtension) {
+  let resolvedPath = resolveRelativeExtension(
+    baseDir,
+    sourcePath,
+    srcExtensions,
+    dstExtension
+  );
 
   if (resolvedPath === null) {
     resolvedPath = resolveRelativeExtension(
       baseDir,
-      path.join(sourcePath, 'index')
+      path.join(sourcePath, 'index'),
+      srcExtensions,
+      dstExtension
     );
   }
 
@@ -100,7 +160,12 @@ function resolveAbsolutePath(sourcePath) {
   return require.resolve(sourcePath).split(['node_modules/'])[1];
 }
 
-function resolveRelativeExtension(baseDir, sourcePath) {
+function resolveRelativeExtension(
+  baseDir,
+  sourcePath,
+  srcExtensions,
+  dstExtension
+) {
   const absolutePath = path.join(baseDir, sourcePath);
   if (isFile(absolutePath)) {
     return sourcePath;
