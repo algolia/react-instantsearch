@@ -1,14 +1,19 @@
 import { renderHook } from '@testing-library/react-hooks';
 import React from 'react';
 
-import { useConfigure, useHierarchicalMenu } from '..';
+import { useHierarchicalMenu } from '..';
+import { createSearchClient } from '../../../../test/mock';
+import {
+  createMultiSearchResponse,
+  createSingleSearchResponse,
+} from '../../../../test/mock/createAPIResponse';
 import { createInstantSearchTestWrapper } from '../../../../test/utils';
 import { useBreadcrumb } from '../useBreadcrumb';
 
-import type { UseHierarchicalMenuProps, UseConfigureProps } from '..';
+import type { UseHierarchicalMenuProps } from '..';
 
 describe('useBreadcrumb', () => {
-  test('returns the connector render state', async () => {
+  it('returns the connector render state', async () => {
     const wrapper = createInstantSearchTestWrapper();
     const { result, waitForNextUpdate } = renderHook(
       () =>
@@ -43,8 +48,58 @@ describe('useBreadcrumb', () => {
     });
   });
 
-  test('returns the connector render state with initial UI state', async () => {
-    const wrapper = createInstantSearchTestWrapper();
+  it('returns the connector render state with initial UI state', async () => {
+    const wrapper = createInstantSearchTestWrapper(
+      {
+        initialUiState: {
+          indexName: {
+            hierarchicalMenu: {
+              'hierarchicalCategories.lvl0': [
+                'Appliances',
+                'Small Kitchen Appliances',
+                'Coffee, Tea & Espresso',
+              ],
+            },
+          },
+        },
+      },
+      {
+        searchClient: createSearchClient({
+          search: jest.fn((requests) =>
+            Promise.resolve(
+              createMultiSearchResponse(
+                ...requests.map((request) =>
+                  createSingleSearchResponse({
+                    index: request.indexName,
+                    facets: {
+                      'hierarchicalCategories.lvl0': {
+                        Appliances: 382,
+                      },
+                      'hierarchicalCategories.lvl1': {
+                        'Appliances > Small Kitchen Appliances': 382,
+                      },
+                      'hierarchicalCategories.lvl2': {
+                        'Appliances > Small Kitchen Appliances > Coffee, Tea & Espresso': 382,
+                      },
+                    },
+                    hits: [
+                      {
+                        objectID: '1',
+                        hierarchicalCategories: {
+                          lvl0: 'Appliances',
+                          lvl1: 'Appliances > Small Kitchen Appliances',
+                          lvl2: 'Appliances > Small Kitchen Appliances > Coffee, Tea & Espresso',
+                        },
+                      },
+                    ],
+                  })
+                )
+              )
+            )
+          ),
+        }),
+      }
+    );
     const { result, waitForNextUpdate } = renderHook(
       () =>
         useBreadcrumb({
@@ -59,25 +114,12 @@ describe('useBreadcrumb', () => {
           wrapper({
             children: (
               <>
-                <Configure
-                  hierarchicalFacets={[
-                    {
-                      name: 'hierarchicalCategories.lvl0',
-                      attributes: [
-                        'hierarchicalCategories.lvl0',
-                        'hierarchicalCategories.lvl1',
-                        'hierarchicalCategories.lvl2',
-                      ],
-                      separator: ' > ',
-                      rootPath: null,
-                      showParentLevel: true,
-                    },
+                <HierarchicalMenu
+                  attributes={[
+                    'hierarchicalCategories.lvl0',
+                    'hierarchicalCategories.lvl1',
+                    'hierarchicalCategories.lvl2',
                   ]}
-                  hierarchicalFacetsRefinements={{
-                    'hierarchicalCategories.lvl0': [
-                      'Appliances > Air Conditioners > In-Wall Air Conditioners',
-                    ],
-                  }}
                 />
                 {children}
               </>
@@ -98,19 +140,27 @@ describe('useBreadcrumb', () => {
 
     // InstantSearch.js state from the `render` lifecycle step
     expect(result.current).toEqual({
-      canRefine: false,
+      canRefine: true,
       createURL: expect.any(Function),
-      items: [],
+      items: [
+        {
+          label: 'Appliances',
+          value: 'Appliances > Small Kitchen Appliances',
+        },
+        {
+          label: 'Small Kitchen Appliances',
+          value:
+            'Appliances > Small Kitchen Appliances > Coffee, Tea & Espresso',
+        },
+        {
+          label: 'Coffee, Tea & Espresso',
+          value: null,
+        },
+      ],
       refine: expect.any(Function),
     });
   });
 });
-
-function Configure(props: UseConfigureProps) {
-  useConfigure(props);
-
-  return null;
-}
 
 function HierarchicalMenu(props: UseHierarchicalMenuProps) {
   useHierarchicalMenu(props);
