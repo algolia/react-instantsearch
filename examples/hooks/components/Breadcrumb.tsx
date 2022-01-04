@@ -24,7 +24,7 @@ export function Breadcrumb(props: BreadcrumbProps) {
           )}
         >
           <a
-            href="#"
+            href={createURL(undefined)}
             onClick={(event) => {
               event.preventDefault();
               refine(undefined);
