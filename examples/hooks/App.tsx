@@ -5,21 +5,24 @@ import { InstantSearch, DynamicWidgets } from 'react-instantsearch-hooks';
 
 import {
   Configure,
+  CurrentRefinements,
   HierarchicalMenu,
   Highlight,
   Hits,
+  HitsPerPage,
+  InfiniteHits,
+  Menu,
+  NumericMenu,
   Pagination,
   Panel,
-  RangeInput,
-  RefinementList,
-  Menu,
-  SearchBox,
-  SortBy,
-  HitsPerPage,
   QueryRuleContext,
   QueryRuleCustomData,
-  CurrentRefinements,
+  RangeInput,
+  RefinementList,
+  SearchBox,
+  SortBy,
 } from './components';
+import { Tab, Tabs } from './components/layout';
 
 import './App.css';
 
@@ -51,7 +54,7 @@ export function App() {
       indexName="instant_search"
       routing={true}
     >
-      <Configure hitsPerPage={15} />
+      <Configure ruleContexts={[]} />
 
       <div className="Container">
         <div>
@@ -80,6 +83,17 @@ export function App() {
             <Panel header="Price">
               <RangeInput attribute="price" />
             </Panel>
+            <Panel header="Price range">
+              <NumericMenu
+                attribute="price"
+                items={[
+                  { label: 'All' },
+                  { label: 'Less than $500', end: 500 },
+                  { label: 'Between $500 - $1000', start: 500, end: 1000 },
+                  { label: 'More than $1000', start: 1000 },
+                ]}
+              />
+            </Panel>
           </DynamicWidgets>
         </div>
         <div className="Search">
@@ -94,8 +108,8 @@ export function App() {
             />
             <HitsPerPage
               items={[
-                { label: '4 hits per page', value: 4, default: true },
-                { label: '8 hits per page', value: 8 },
+                { label: '20 hits per page', value: 20, default: true },
+                { label: '40 hits per page', value: 40 },
               ]}
             />
           </div>
@@ -103,19 +117,13 @@ export function App() {
           <CurrentRefinements
             transformItems={(items) =>
               items.map((item) => {
-                const attribute = item.attribute.startsWith(
-                  'hierarchicalCategories'
-                )
+                const label = item.label.startsWith('hierarchicalCategories')
                   ? 'Hierarchy'
-                  : item.attribute;
+                  : item.label;
 
                 return {
                   ...item,
-                  attribute,
-                  refinements: item.refinements.map((refinement) => ({
-                    ...refinement,
-                    attribute,
-                  })),
+                  attribute: label,
                 };
               })
             }
@@ -139,8 +147,15 @@ export function App() {
             )}
           </QueryRuleCustomData>
 
-          <Hits hitComponent={Hit} />
-          <Pagination className="Pagination" />
+          <Tabs>
+            <Tab title="Hits">
+              <Hits hitComponent={Hit} />
+              <Pagination className="Pagination" />
+            </Tab>
+            <Tab title="InfiniteHits">
+              <InfiniteHits showPrevious hitComponent={Hit} />
+            </Tab>
+          </Tabs>
         </div>
       </div>
     </InstantSearch>
