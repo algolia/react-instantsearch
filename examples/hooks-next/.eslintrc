@@ -1,4 +1,5 @@
 {
+  "extends": ["plugin:@next/next/recommended"],
   "rules": {
     "react/react-in-jsx-scope": "off",
     "spaced-comment": ["error", "always", { "markers": ["/"] }]
