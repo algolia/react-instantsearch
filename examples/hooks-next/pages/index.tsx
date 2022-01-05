@@ -45,7 +45,7 @@ export default function Home({
           router: history({
             getLocation() {
               if (typeof window === 'undefined') {
-                return new URL(url) as unknown as Location;
+                return new URL(url!) as unknown as Location;
               }
 
               return window.location;
