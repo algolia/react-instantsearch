@@ -34,7 +34,7 @@ export default function Home({
   url,
 }: {
   serverState?: InstantSearchServerState;
-  url?: URL;
+  url?: string;
 }) {
   return (
     <InstantSearchSSRProvider {...serverState}>
@@ -45,7 +45,7 @@ export default function Home({
           router: history({
             getLocation() {
               if (typeof window === 'undefined') {
-                return url as unknown as Location;
+                return new URL(url) as unknown as Location;
               }
 
               return window.location;
@@ -63,7 +63,7 @@ export default function Home({
 export async function getServerSideProps({ req }) {
   const url = new URL(
     req.headers.referer || `https://${req.headers.host}${req.url}`
-  );
+  ).toString();
 
   const serverState = await getServerState(<Home url={url} />);
   return {
