@@ -29,13 +29,12 @@ function Hit({ hit }: HitProps) {
   );
 }
 
-export default function Home({
-  serverState,
-  url,
-}: {
+type HomePageProps = {
   serverState?: InstantSearchServerState;
   url?: string;
-}) {
+};
+
+export default function HomePage({ serverState, url }: HomePageProps) {
   return (
     <InstantSearchSSRProvider {...serverState}>
       <InstantSearch
@@ -64,8 +63,8 @@ export async function getServerSideProps({ req }) {
   const url = new URL(
     req.headers.referer || `https://${req.headers.host}${req.url}`
   ).toString();
+  const serverState = await getServerState(<HomePage url={url} />);
 
-  const serverState = await getServerState(<Home url={url} />);
   return {
     props: {
       serverState,
