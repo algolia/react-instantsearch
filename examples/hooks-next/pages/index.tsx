@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import algoliasearch from 'algoliasearch/lite';
 import { Hit as AlgoliaHit } from '@algolia/client-search';
 import {
@@ -37,6 +38,10 @@ type HomePageProps = {
 export default function HomePage({ serverState, url }: HomePageProps) {
   return (
     <InstantSearchSSRProvider {...serverState}>
+      <Head>
+        <title>React InstantSearch - Next.js</title>
+      </Head>
+
       <InstantSearch
         searchClient={client}
         indexName="instant_search"
