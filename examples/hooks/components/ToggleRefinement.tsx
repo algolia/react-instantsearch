@@ -1,20 +1,20 @@
 import React from 'react';
 import {
-  useToggleRefinements,
-  UseToggleRefinementsProps,
+  useToggleRefinement,
+  UseToggleRefinementProps,
 } from 'react-instantsearch-hooks';
 
 import { cx } from '../cx';
 
-export type ToggleRefinementsProps = React.ComponentProps<'div'> &
-  UseToggleRefinementsProps;
+export type ToggleRefinementProps = React.ComponentProps<'div'> &
+  UseToggleRefinementProps;
 
-export function ToggleRefinements(props: ToggleRefinementsProps) {
-  const { refine, currentRefinement } = useToggleRefinements(props);
+export function ToggleRefinement(props: ToggleRefinementProps) {
+  const { refine, currentRefinement } = useToggleRefinement(props);
 
   return (
-    <div className={cx('ais-ToggleRefinements', props.className)}>
-      <label className="ais-ToggleRefinements-label">
+    <div className={cx('ais-ToggleRefinement', props.className)}>
+      <label className="ais-ToggleRefinement-label">
         <input
           className="ais-ToggleRefinement-checkbox"
           type="checkbox"

@@ -9,7 +9,7 @@ import type {
 
 export type UseToggleRefinementProps = ToggleRefinementConnectorParams;
 
-export function useToggleRefinement(props?: UseToggleRefinementProps) {
+export function useToggleRefinement(props: UseToggleRefinementProps) {
   return useConnector<
     ToggleRefinementConnectorParams,
     ToggleRefinementWidgetDescription
