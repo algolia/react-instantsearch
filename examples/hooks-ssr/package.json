@@ -19,7 +19,7 @@
     "nodemon": "1.19.3",
     "webpack": "4.40.2",
     "webpack-cli": "3.3.7",
-    "webpack-node-externals": "1.7.2"
+    "webpack-node-externals": "2.5.2"
   },
   "dependencies": {
     "algoliasearch": "4.11.0",
