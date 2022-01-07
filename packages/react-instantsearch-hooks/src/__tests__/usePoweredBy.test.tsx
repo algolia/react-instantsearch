@@ -1,7 +1,7 @@
 import { usePoweredBy } from '../usePoweredBy';
 
 describe('usePoweredBy', () => {
-  test('returns the connector render state', async () => {
+  test('returns the connector render state', () => {
     const { url } = usePoweredBy();
 
     expect(url).toBe(
