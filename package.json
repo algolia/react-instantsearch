@@ -98,7 +98,7 @@
     "eslint-plugin-import": "2.24.2",
     "eslint-plugin-jest": "25.3.4",
     "eslint-plugin-prettier": "3.4.0",
-    "eslint-plugin-react": "7.26.0",
+    "eslint-plugin-react": "7.28.0",
     "eslint-plugin-react-hooks": "4.3.0",
     "file-loader": "4.2.0",
     "glob": "7.1.4",
