@@ -60,7 +60,7 @@
     "@types/prop-types": "^15.5.8",
     "@types/react": "^16.7.18",
     "@types/react-dom": "^16.0.11",
-    "@types/react-test-renderer": "^16.0.3",
+    "@types/react-test-renderer": "^17.0.0",
     "@types/storybook__addon-a11y": "^5.0.0",
     "@types/storybook__addon-actions": "^3.4.1",
     "@types/storybook__addon-knobs": "^5.0.0",
