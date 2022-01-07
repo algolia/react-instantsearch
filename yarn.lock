@@ -8528,6 +8528,13 @@ brotli-size@0.1.0:
     duplexer "^0.1.1"
     iltorb "^2.4.3"
 
+brotli-size@4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/brotli-size/-/brotli-size-4.0.0.tgz#a05ee3faad3c0e700a2f2da826ba6b4d76e69e5e"
+  integrity sha512-uA9fOtlTRC0iqKfzff1W34DXUA3GyVqbUaeo3Rw3d4gd1eavKVCETXrn3NzO74W+UVkG3UHu8WxUi+XvKI/huA==
+  dependencies:
+    duplexer "0.1.1"
+
 browser-process-hrtime@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/browser-process-hrtime/-/browser-process-hrtime-1.0.0.tgz#3c9b4b7d782c8121e56f10106d84c0d0ffc94626"
@@ -11551,7 +11558,7 @@ duplexer3@^0.1.4:
   resolved "https://registry.yarnpkg.com/duplexer3/-/duplexer3-0.1.4.tgz#ee01dd1cac0ed3cbc7fdbea37dc0a8f1ce002ce2"
   integrity sha1-7gHdHKwO08vH/b6jfcCo8c4ALOI=
 
-duplexer@^0.1.1:
+duplexer@0.1.1, duplexer@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/duplexer/-/duplexer-0.1.1.tgz#ace6ff808c1ce66b57d1ebf97977acb02334cfc1"
   integrity sha1-rOb/gIwc5mtX0ev5eXessCM0z8E=
@@ -24625,18 +24632,18 @@ rollup-plugin-commonjs@10.1.0:
     resolve "^1.11.0"
     rollup-pluginutils "^2.8.1"
 
-rollup-plugin-filesize@6.1.1:
-  version "6.1.1"
-  resolved "https://registry.yarnpkg.com/rollup-plugin-filesize/-/rollup-plugin-filesize-6.1.1.tgz#43c90120c6120fc3450ef34daadf5467c8821ad7"
-  integrity sha512-rvLvYXiKJVAPS2pbxzH72B72lnDMR3wM1O2seTWY/8xM6v9I6sO4f+/FrEo0TT2KsTTmCtlnueTFuiWRBKcIZw==
+rollup-plugin-filesize@6.2.1:
+  version "6.2.1"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-filesize/-/rollup-plugin-filesize-6.2.1.tgz#552eebc88dd69db3321d99c27dbd49e550812e54"
+  integrity sha512-JQ2+NMoka81lCR2caGWyngqMKpvJCl7EkFYU7A+T0dA7U1Aml13FW5Ky0aiZIeU3/13cjsKQLRr35SQVmk6i/A==
   dependencies:
     boxen "^4.1.0"
-    brotli-size "0.1.0"
+    brotli-size "4.0.0"
     colors "^1.3.3"
-    deep-assign "^3.0.0"
     filesize "^4.1.2"
     gzip-size "^5.1.1"
-    terser "^4.0.0"
+    lodash.merge "^4.6.2"
+    terser "^4.1.3"
 
 rollup-plugin-node-globals@1.4.0:
   version "1.4.0"
@@ -26585,7 +26592,7 @@ terser@^3.7.3:
     source-map "~0.6.1"
     source-map-support "~0.5.10"
 
-terser@^4.0.0, terser@^4.1.2, terser@^4.3.0, terser@^4.6.3:
+terser@^4.1.2, terser@^4.1.3, terser@^4.3.0, terser@^4.6.3:
   version "4.8.0"
   resolved "https://registry.yarnpkg.com/terser/-/terser-4.8.0.tgz#63056343d7c70bb29f3af665865a46fe03a0df17"
   integrity sha512-EAPipTNeWsb/3wLPeup1tVPaXfIaU68xMnVdPafIL1TV05OhASArYyIfFvnvJCNrR2NIOvDVNNTFRa+Re2MWyw==
