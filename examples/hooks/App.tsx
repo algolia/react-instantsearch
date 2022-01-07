@@ -15,6 +15,7 @@ import {
   NumericMenu,
   Pagination,
   Panel,
+  PoweredBy,
   QueryRuleContext,
   QueryRuleCustomData,
   RangeInput,
@@ -113,6 +114,7 @@ export function App() {
               ]}
             />
           </div>
+          <PoweredBy />
 
           <CurrentRefinements
             transformItems={(items) =>
