@@ -1,5 +1,6 @@
-import type { PoweredByRenderState } from 'instantsearch.js/es/connectors/powered-by/connectPoweredBy';
 import { safelyRunOnBrowser } from 'instantsearch.js/es/lib/utils';
+
+import type { PoweredByRenderState } from 'instantsearch.js/es/connectors/powered-by/connectPoweredBy';
 
 export function usePoweredBy(): PoweredByRenderState {
   return {
