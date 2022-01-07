@@ -10,7 +10,7 @@ export type ToggleRefinementProps = React.ComponentProps<'div'> &
   UseToggleRefinementProps;
 
 export function ToggleRefinement(props: ToggleRefinementProps) {
-  const { refine, currentRefinement } = useToggleRefinement(props);
+  const { refine, value } = useToggleRefinement(props);
 
   return (
     <div className={cx('ais-ToggleRefinement', props.className)}>
@@ -18,13 +18,11 @@ export function ToggleRefinement(props: ToggleRefinementProps) {
         <input
           className="ais-ToggleRefinement-checkbox"
           type="checkbox"
-          checked={currentRefinement.isRefined}
+          checked={value.isRefined}
           onChange={(event) => refine({ isRefined: !event.target.checked })}
         />
 
-        <span className="ais-ToggleRefinement-labelText">
-          {currentRefinement}
-        </span>
+        <span className="ais-ToggleRefinement-labelText">{value.name}</span>
       </label>
     </div>
   );
