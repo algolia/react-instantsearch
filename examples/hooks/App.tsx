@@ -22,6 +22,7 @@ import {
   RefinementList,
   SearchBox,
   SortBy,
+  ToggleRefinement,
 } from './components';
 import { Tab, Tabs } from './components/layout';
 
@@ -94,6 +95,9 @@ export function App() {
                   { label: 'More than $1000', start: 1000 },
                 ]}
               />
+            </Panel>
+            <Panel header="Free Shipping">
+              <ToggleRefinement attribute="free_shipping" />
             </Panel>
           </DynamicWidgets>
         </div>
