@@ -6,12 +6,11 @@ export function PoweredBy() {
 
   return (
     <div className="ais-PoweredBy">
-      <span className="ais-PoweredBy-text">Search by</span>
       <a
         href={url}
         target="_blank"
         className="ais-PoweredBy-link"
-        aria-label="Algolia"
+        aria-label="Search by Algolia"
         rel="noopener noreferrer"
       >
         <svg viewBox="0 0 168 24" className="ais-PoweredBy-logo">
