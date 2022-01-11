@@ -110,8 +110,6 @@ jobs:
       - run:
           name: Integration Tests
           command: yarn test:integration
-      - store_test_results:
-          path: junit/wdio/
 
   test_e2e:
     <<: *defaults
@@ -126,6 +124,8 @@ jobs:
           command: |
             yarn run website:build
             yarn run test:e2e:saucelabs
+      - store_test_results:
+          path: junit/wdio/
 
   test_examples:
     <<: *defaults
