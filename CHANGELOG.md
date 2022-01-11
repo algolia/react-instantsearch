@@ -1,3 +1,13 @@
+# [6.20.0](https://github.com/algolia/react-instantsearch/compare/v6.19.0...v6.20.0) (2022-01-11)
+
+
+### Features
+
+* **hooks:** introduce `usePoweredBy` ([#3251](https://github.com/algolia/react-instantsearch/issues/3251)) ([a97230b](https://github.com/algolia/react-instantsearch/commit/a97230b89e3ba1df9bf2d21a6a9f9a70b45f41b8))
+* **hooks:** introduce useToggleRefinement ([#3248](https://github.com/algolia/react-instantsearch/issues/3248)) ([a561c09](https://github.com/algolia/react-instantsearch/commit/a561c090a268e1c6ca1fa2d5bf72263cc47aa273))
+
+
+
 # [6.19.0](https://github.com/algolia/react-instantsearch/compare/v6.18.0...v6.19.0) (2022-01-05)
 
 
