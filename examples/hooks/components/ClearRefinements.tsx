@@ -19,7 +19,7 @@ export function ClearRefinements(props: ClearRefinementsProps) {
           !canRefine && 'ais-ClearRefinements-button--disabled'
         )}
         disabled={!canRefine}
-        onClick={() ⇒ refine()}
+        onClick={() => refine()}
       >
         Clear Refinements
       </button>
