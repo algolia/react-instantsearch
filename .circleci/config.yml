@@ -110,6 +110,8 @@ jobs:
       - run:
           name: Integration Tests
           command: yarn test:integration
+      - store_test_results:
+          path: junit/wdio/
 
   test_e2e:
     <<: *defaults
