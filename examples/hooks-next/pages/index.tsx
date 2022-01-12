@@ -2,9 +2,11 @@ import Head from 'next/head';
 import algoliasearch from 'algoliasearch/lite';
 import { Hit as AlgoliaHit } from '@algolia/client-search';
 import {
+  DynamicWidgets,
   InstantSearch,
   InstantSearchServerState,
   InstantSearchSSRProvider,
+  useRefinementList,
 } from 'react-instantsearch-hooks';
 import { getServerState } from 'react-instantsearch-hooks-server';
 import { Highlight } from '../components/Highlight';
@@ -58,9 +60,26 @@ export default function HomePage({ serverState, url }: HomePageProps) {
         }}
       >
         <SearchBox />
+        <DynamicWidgets fallbackComponent={FallbackComponent} />
         <Hits hitComponent={Hit} />
       </InstantSearch>
     </InstantSearchSSRProvider>
+  );
+}
+
+function FallbackComponent({ attribute }: { attribute: string }) {
+  const { items, refine } = useRefinementList({ attribute });
+  return (
+    <div>
+      <p>{attribute}</p>
+      <ul>
+        {items.map((item) => (
+          <li key={item.label}>
+            <button onClick={() => refine(item.value)}>{item.label}</button>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
@@ -68,7 +87,11 @@ export async function getServerSideProps({ req }) {
   const url = new URL(
     req.headers.referer || `https://${req.headers.host}${req.url}`
   ).toString();
-  const serverState = await getServerState(<HomePage url={url} />);
+  const initialServerState = await getServerState(<HomePage url={url} />);
+  // const initialServerState = {};
+  const serverState = await getServerState(
+    <HomePage url={url} serverState={initialServerState} />
+  );
 
   return {
     props: {
