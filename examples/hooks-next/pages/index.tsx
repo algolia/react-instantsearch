@@ -75,7 +75,9 @@ function FallbackComponent({ attribute }: { attribute: string }) {
       <ul>
         {items.map((item) => (
           <li key={item.label}>
-            <button onClick={() => refine(item.value)}>{item.label}</button>
+            <button onClick={() => refine(item.value)}>
+              {item.isRefined ? <strong>{item.label}</strong> : item.label}
+            </button>
           </li>
         ))}
       </ul>
@@ -87,11 +89,7 @@ export async function getServerSideProps({ req }) {
   const url = new URL(
     req.headers.referer || `https://${req.headers.host}${req.url}`
   ).toString();
-  const initialServerState = await getServerState(<HomePage url={url} />);
-  // const initialServerState = {};
-  const serverState = await getServerState(
-    <HomePage url={url} serverState={initialServerState} />
-  );
+  const serverState = await getServerState(<HomePage url={url} />);
 
   return {
     props: {

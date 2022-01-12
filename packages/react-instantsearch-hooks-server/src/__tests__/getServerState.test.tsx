@@ -267,6 +267,10 @@ describe('getServerState', () => {
     expect(Object.keys(serverState.initialResults)).toHaveLength(4);
     expect(serverState.initialResults).toMatchSnapshot();
   });
+
+  test.todo('searches twice (cached) with dynamic widgets');
+
+  test.todo('searches twice with dynamic widgets and a refinement');
 });
 
 function SearchBox() {
