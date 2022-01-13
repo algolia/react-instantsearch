@@ -8,8 +8,6 @@ import {
   Highlight,
   Pagination,
   InstantSearch,
-  Panel,
-  DynamicWidgets,
 } from 'react-instantsearch-dom';
 
 const HitComponent = ({ hit }) => (
@@ -68,7 +66,7 @@ export default class extends React.Component {
         </header>
         <main>
           <div className="menu">
-            <DynamicWidgets fallbackComponent={FallbackWidget} />
+            <RefinementList attribute="categories" />
           </div>
           <div className="results">
             <Hits hitComponent={HitComponent} />
@@ -87,12 +85,4 @@ export default class extends React.Component {
       </InstantSearch>
     );
   }
-}
-
-function FallbackWidget({ attribute }) {
-  return (
-    <Panel header={attribute}>
-      <RefinementList attribute={attribute} />
-    </Panel>
-  );
 }

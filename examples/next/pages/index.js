@@ -41,14 +41,9 @@ class Page extends React.Component {
 
   static async getInitialProps({ asPath }) {
     const searchState = pathToSearchState(asPath);
-    const initialResultsState = await findResultsState(App, {
-      ...DEFAULT_PROPS,
-      searchState,
-    });
     const resultsState = await findResultsState(App, {
       ...DEFAULT_PROPS,
       searchState,
-      resultsState: initialResultsState,
     });
 
     return {
