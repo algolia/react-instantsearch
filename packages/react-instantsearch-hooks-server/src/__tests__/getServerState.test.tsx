@@ -7,6 +7,7 @@ import {
   InstantSearch,
   InstantSearchSSRProvider,
   Index,
+  DynamicWidgets,
   useHits,
   useRefinementList,
   useSearchBox,
@@ -16,39 +17,43 @@ import {
 import { createSearchClient } from '../../../../test/mock';
 import { getServerState } from '../getServerState';
 
-import type algoliasearch from 'algoliasearch/lite';
 import type {
   InstantSearchServerState,
+  InstantSearchProps,
   UseRefinementListProps,
 } from 'react-instantsearch-hooks';
+import { createMultiSearchResponse } from '../../../../test/mock/createAPIResponse';
 
-type SearchClient = ReturnType<typeof algoliasearch>;
+type CreateTestEnvironmentProps = Pick<
+  InstantSearchProps,
+  'searchClient' | 'initialUiState'
+>;
 
-type CreateTestEnvironmentProps = {
-  searchClient: SearchClient;
-};
-
-function createTestEnvironment({ searchClient }: CreateTestEnvironmentProps) {
-  function Search() {
+function createTestEnvironment({
+  searchClient,
+  initialUiState = {
+    instant_search: {
+      query: 'iphone',
+      refinementList: {
+        brand: ['Apple'],
+      },
+    },
+    instant_search_price_asc: {
+      query: 'iphone',
+      refinementList: {
+        brand: ['Apple'],
+      },
+    },
+  },
+}: CreateTestEnvironmentProps) {
+  function Search({ children }: { children?: React.ReactNode }) {
     return (
       <InstantSearch
         searchClient={searchClient}
         indexName="instant_search"
-        initialUiState={{
-          instant_search: {
-            query: 'iphone',
-            refinementList: {
-              brand: ['Apple'],
-            },
-          },
-          instant_search_price_asc: {
-            query: 'iphone',
-            refinementList: {
-              brand: ['Apple'],
-            },
-          },
-        }}
+        initialUiState={initialUiState}
       >
+        {children}
         <RefinementList attribute="brand" />
         <SearchBox />
         <Hits />
@@ -68,10 +73,16 @@ function createTestEnvironment({ searchClient }: CreateTestEnvironmentProps) {
     );
   }
 
-  function App({ serverState }: { serverState?: InstantSearchServerState }) {
+  function App({
+    serverState,
+    children,
+  }: {
+    serverState?: InstantSearchServerState;
+    children?: React.ReactNode;
+  }) {
     return (
       <InstantSearchSSRProvider {...serverState}>
-        <Search />
+        <Search>{children}</Search>
       </InstantSearchSSRProvider>
     );
   }
@@ -268,9 +279,71 @@ describe('getServerState', () => {
     expect(serverState.initialResults).toMatchSnapshot();
   });
 
-  test.todo('searches twice (cached) with dynamic widgets');
+  test('searches twice (cached) with dynamic widgets', async () => {
+    const searchClient = createSearchClient();
+    const { App } = createTestEnvironment({ searchClient });
 
-  test.todo('searches twice with dynamic widgets and a refinement');
+    await getServerState(
+      <App>
+        <DynamicWidgets fallbackComponent={RefinementList} />
+      </App>
+    );
+
+    expect(searchClient.search).toHaveBeenCalledTimes(2);
+    // both calls are the same, so they're cached
+    expect(searchClient.search.mock.calls[0][0]).toEqual(
+      searchClient.search.mock.calls[1][0]
+    );
+  });
+
+  test('searches twice with dynamic widgets and a refinement', async () => {
+    const searchClient = createSearchClient();
+    const { App } = createTestEnvironment({
+      searchClient,
+      initialUiState: {
+        instant_search: {
+          refinementList: {
+            categories: ['refined!'],
+          },
+        },
+      },
+    });
+
+    await getServerState(
+      <App>
+        <DynamicWidgets fallbackComponent={RefinementList} />
+      </App>
+    );
+
+    expect(searchClient.search).toHaveBeenCalledTimes(2);
+
+    // first query doesn't have the fallback widget mounted yet
+    expect((searchClient.search as jest.Mock).mock.calls[0][0][0]).toEqual({
+      indexName: 'instant_search',
+      params: {
+        facets: ['*'],
+        highlightPostTag: '__/ais-highlight__',
+        highlightPreTag: '__ais-highlight__',
+        maxValuesPerFacet: 20,
+        query: '',
+        tagFilters: '',
+      },
+    });
+
+    // second query does have the fallback widget mounted, and thus also the refinement
+    expect((searchClient.search as jest.Mock).mock.calls[1][0][0]).toEqual({
+      indexName: 'instant_search',
+      params: {
+        facetFilters: [['categories:refined!']],
+        facets: ['*'],
+        highlightPostTag: '__/ais-highlight__',
+        highlightPreTag: '__ais-highlight__',
+        maxValuesPerFacet: 20,
+        query: '',
+        tagFilters: '',
+      },
+    });
+  });
 });
 
 function SearchBox() {
