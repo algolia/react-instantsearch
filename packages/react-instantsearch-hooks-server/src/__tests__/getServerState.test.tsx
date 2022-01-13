@@ -22,7 +22,6 @@ import type {
   InstantSearchProps,
   UseRefinementListProps,
 } from 'react-instantsearch-hooks';
-import { createMultiSearchResponse } from '../../../../test/mock/createAPIResponse';
 
 type CreateTestEnvironmentProps = Pick<
   InstantSearchProps,
@@ -291,8 +290,8 @@ describe('getServerState', () => {
 
     expect(searchClient.search).toHaveBeenCalledTimes(2);
     // both calls are the same, so they're cached
-    expect(searchClient.search.mock.calls[0][0]).toEqual(
-      searchClient.search.mock.calls[1][0]
+    expect((searchClient.search as jest.Mock).mock.calls[0][0]).toEqual(
+      (searchClient.search as jest.Mock).mock.calls[1][0]
     );
   });
 
