@@ -19,7 +19,7 @@ export type InstantSearchSSRProviderProps =
  * <InstantSearch>.
  */
 export function InstantSearchSSRProvider({
-  children,
+  children = null,
   ...props
 }: InstantSearchSSRProviderProps) {
   // If there's no server state passed, we don't want to override something
