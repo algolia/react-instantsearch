@@ -126,10 +126,6 @@ function waitForResults(search: InstantSearch) {
 
 /**
  * Recurse over all child indices
- *
- * @param indexWidget initial index widget
- * @param callback gets called for each index widget
- * @returns void
  */
 function walkIndex(
   indexWidget: IndexWidget,
