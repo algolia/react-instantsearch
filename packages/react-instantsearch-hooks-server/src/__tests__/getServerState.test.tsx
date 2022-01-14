@@ -23,10 +23,10 @@ import type {
   UseRefinementListProps,
 } from 'react-instantsearch-hooks';
 
-type CreateTestEnvironmentProps = Pick<
-  InstantSearchProps,
-  'searchClient' | 'initialUiState'
->;
+type CreateTestEnvironmentProps = {
+  searchClient: InstantSearchProps['searchClient'];
+  initialUiState?: InstantSearchProps['initialUiState'];
+};
 
 function createTestEnvironment({
   searchClient,
