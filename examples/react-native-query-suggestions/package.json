@@ -1,6 +1,6 @@
 {
   "name": "example-react-native-query-suggestions",
-  "version": "6.19.0",
+  "version": "6.20.0",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "build": "echo \"Error: no build specified\" && exit 0",

@@ -1,3 +1,20 @@
+# [6.20.0](https://github.com/algolia/react-instantsearch/compare/v6.19.0...v6.20.0) (2022-01-18)
+
+
+### Bug Fixes
+
+* **hooks:** allow importing via require ([#3257](https://github.com/algolia/react-instantsearch/issues/3257)) ([6aa80b3](https://github.com/algolia/react-instantsearch/commit/6aa80b3647567199c3df1b90a07d708b223ce1fd))
+
+
+### Features
+
+* **hooks:** implement useClearRefinements ([#3256](https://github.com/algolia/react-instantsearch/issues/3256)) ([930b83d](https://github.com/algolia/react-instantsearch/commit/930b83df4c4bbccbc3118f6ea1001f6a30a3d464)), closes [#3252](https://github.com/algolia/react-instantsearch/issues/3252)
+* **hooks:** introduce `<Configure>` ([#3261](https://github.com/algolia/react-instantsearch/issues/3261)) ([3527b94](https://github.com/algolia/react-instantsearch/commit/3527b9422de48a4a6b4bd752bd643e01cd5011d8))
+* **hooks:** introduce `usePoweredBy` ([#3251](https://github.com/algolia/react-instantsearch/issues/3251)) ([a97230b](https://github.com/algolia/react-instantsearch/commit/a97230b89e3ba1df9bf2d21a6a9f9a70b45f41b8))
+* **hooks:** introduce useToggleRefinement ([#3248](https://github.com/algolia/react-instantsearch/issues/3248)) ([a561c09](https://github.com/algolia/react-instantsearch/commit/a561c090a268e1c6ca1fa2d5bf72263cc47aa273))
+
+
+
 # [6.19.0](https://github.com/algolia/react-instantsearch/compare/v6.18.0...v6.19.0) (2022-01-05)
 
 
