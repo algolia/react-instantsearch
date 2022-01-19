@@ -28,6 +28,10 @@ React InstantSearch Hooks is a headless React library that lets you create an in
 
 Check out our [**Getting Started guide**](https://algolia.com/doc/guides/building-search-ui/getting-started/react-hooks/) to start implementing a full-featured search experience with React InstantSearch Hooks.
 
+## API reference
+
+Check out the [**API reference**](https://www.algolia.com/doc/api-reference/widgets/react-hooks/).
+
 ## Documentation
 
 The documentation is available on [algolia.com/doc](https://algolia.com/doc/guides/building-search-ui/what-is-instantsearch/react-hooks/).
