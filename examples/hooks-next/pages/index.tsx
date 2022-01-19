@@ -6,7 +6,6 @@ import {
   InstantSearch,
   InstantSearchServerState,
   InstantSearchSSRProvider,
-  useRefinementList,
 } from 'react-instantsearch-hooks';
 import { getServerState } from 'react-instantsearch-hooks-server';
 import { Highlight } from '../components/Highlight';
