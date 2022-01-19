@@ -34,7 +34,7 @@ The documentation is available on [algolia.com/doc](https://algolia.com/doc/guid
 
 ## Troubleshooting
 
-React InstantSearch Hooks is an experimental library, and might contain bugs. If you're experiencing issue, please refer to the [**Need help?**](https://algolia.com/doc/guides/building-search-ui/what-is-instantsearch/react-hooks/#need-help) section of the docs, or [open a new issue](https://github.com/algolia/react-instantsearch/issues/new?template=Bug_report_Hooks.md&labels=Scope%3A%20Hooks).
+React InstantSearch Hooks is an experimental library, and might contain bugs. If you're experiencing issues, please refer to the [**Need help?**](https://algolia.com/doc/guides/building-search-ui/what-is-instantsearch/react-hooks/#need-help) section of the docs, or [open a new issue](https://github.com/algolia/react-instantsearch/issues/new?template=Bug_report_Hooks.md&labels=Scope%3A%20Hooks).
 
 ## Contributing
 
