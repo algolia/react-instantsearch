@@ -22,8 +22,9 @@ export function InstantSearchSSRProvider({
   children,
   ...props
 }: InstantSearchSSRProviderProps) {
-  // If there's no server state passed, we don't want to override something
-  // passed from higher in the tree
+  // When there is dynamic widgets on the page, a second Provider is used
+  // above the user-land InstantSearchSSRProvider. To avoid the user's provider
+  // overriding the value with an empty object, this provider is skipped
   if (Object.keys(props).length === 0) {
     return <>{children}</>;
   }
