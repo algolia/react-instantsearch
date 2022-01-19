@@ -20,18 +20,6 @@ import type {
 export function getServerState(
   children: ReactNode
 ): Promise<InstantSearchServerState> {
-  return renderAndFetch(children, false);
-}
-
-/**
- * Implementation of getServerState
- * @param children the application
- * @param refetching pass true if this is the second time being called
- */
-function renderAndFetch(
-  children: ReactNode,
-  refetching: boolean
-): Promise<InstantSearchServerState> {
   const searchRef: { current: InstantSearch | undefined } = {
     current: undefined,
   };
@@ -42,60 +30,64 @@ function renderAndFetch(
     searchRef.current = search;
   };
 
-  ReactDOM.renderToString(
-    <InstantSearchServerContext.Provider value={{ notifyServer }}>
-      {children}
-    </InstantSearchServerContext.Provider>
-  );
+  // eslint-disable-next-line no-shadow
+  function execute(children: ReactNode) {
+    ReactDOM.renderToString(
+      <InstantSearchServerContext.Provider value={{ notifyServer }}>
+        {children}
+      </InstantSearchServerContext.Provider>
+    );
 
-  // We wait for the component to mount so that `notifyServer()` is called.
-  return new Promise((resolve) => setTimeout(resolve, 0))
-    .then(() => {
-      // If `notifyServer()` is not called by then, it means that <InstantSearch>
-      // wasn't within the `children`.
-      // We decide to go with a strict behavior in that case; throwing. If users have
-      // some routes that don't mount the <InstantSearch> component, they would need
-      // to try/catch the `getServerState()` call.
-      // If this behavior turns out to be too strict for many users, we can decide
-      // to warn instead of throwing.
-      if (!searchRef.current) {
-        throw new Error(
-          "Unable to retrieve InstantSearch's server state in `getServerState()`. Did you mount the <InstantSearch> component?"
-        );
-      }
+    // We wait for the component to mount so that `notifyServer()` is called.
+    return new Promise((resolve) => setTimeout(resolve, 0))
+      .then(() => {
+        // If `notifyServer()` is not called by then, it means that <InstantSearch>
+        // wasn't within the `children`.
+        // We decide to go with a strict behavior in that case; throwing. If users have
+        // some routes that don't mount the <InstantSearch> component, they would need
+        // to try/catch the `getServerState()` call.
+        // If this behavior turns out to be too strict for many users, we can decide
+        // to warn instead of throwing.
+        if (!searchRef.current) {
+          throw new Error(
+            "Unable to retrieve InstantSearch's server state in `getServerState()`. Did you mount the <InstantSearch> component?"
+          );
+        }
 
-      return waitForResults(searchRef.current);
-    })
-    .then(() => {
-      const initialResults = getInitialResults(searchRef.current!.mainIndex);
+        return waitForResults(searchRef.current);
+      })
+      .then(() => {
+        const initialResults = getInitialResults(searchRef.current!.mainIndex);
 
-      return {
-        initialResults,
-      };
-    })
-    .then((serverState) => {
-      let hasDynamicWidgets = false;
-      if (!refetching) {
-        walkIndex(searchRef.current!.mainIndex, (index) => {
-          hasDynamicWidgets =
-            hasDynamicWidgets ||
-            index
-              .getWidgets()
-              .some((widget) => widget.$$type === 'ais.dynamicWidgets');
-        });
-      }
+        return {
+          initialResults,
+        };
+      });
+  }
 
-      if (!refetching && hasDynamicWidgets) {
-        return renderAndFetch(
-          <InstantSearchSSRProvider {...serverState}>
-            {children}
-          </InstantSearchSSRProvider>,
-          true
-        );
-      }
+  return execute(children).then((serverState) => {
+    let shouldRefetch = false;
 
-      return serverState;
+    // <DynamicWidgets> requires another query to retrieve the dynamic widgets
+    // to render.
+    walkIndex(searchRef.current!.mainIndex, (index) => {
+      shouldRefetch =
+        shouldRefetch ||
+        index
+          .getWidgets()
+          .some((widget) => widget.$$type === 'ais.dynamicWidgets');
     });
+
+    if (shouldRefetch) {
+      return execute(
+        <InstantSearchSSRProvider {...serverState}>
+          {children}
+        </InstantSearchSSRProvider>
+      );
+    }
+
+    return serverState;
+  });
 }
 
 /**
