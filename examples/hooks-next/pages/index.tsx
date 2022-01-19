@@ -13,6 +13,8 @@ import { Highlight } from '../components/Highlight';
 import { Hits } from '../components/Hits';
 import { SearchBox } from '../components/SearchBox';
 import { history } from 'instantsearch.js/es/lib/routers/index.js';
+import { RefinementList } from '../components/RefinementList';
+import { Panel } from '../components/Panel';
 
 const client = algoliasearch('latency', '6be0576ff61c053d5f9a3225e2a90f76');
 
@@ -59,29 +61,25 @@ export default function HomePage({ serverState, url }: HomePageProps) {
           }),
         }}
       >
-        <SearchBox />
-        <DynamicWidgets fallbackComponent={FallbackComponent} />
-        <Hits hitComponent={Hit} />
+        <div className="Container">
+          <div>
+            <DynamicWidgets fallbackComponent={FallbackComponent} />
+          </div>
+          <div>
+            <SearchBox />
+            <Hits hitComponent={Hit} />
+          </div>
+        </div>
       </InstantSearch>
     </InstantSearchSSRProvider>
   );
 }
 
 function FallbackComponent({ attribute }: { attribute: string }) {
-  const { items, refine } = useRefinementList({ attribute });
   return (
-    <div>
-      <p>{attribute}</p>
-      <ul>
-        {items.map((item) => (
-          <li key={item.label}>
-            <button onClick={() => refine(item.value)}>
-              {item.isRefined ? <strong>{item.label}</strong> : item.label}
-            </button>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <Panel header={attribute}>
+      <RefinementList attribute={attribute} />
+    </Panel>
   );
 }
 
