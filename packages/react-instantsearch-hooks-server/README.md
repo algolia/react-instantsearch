@@ -22,9 +22,14 @@ React InstantSearch Hooks is compatible with server-side rendering. The library 
 
 Check out our [**Server-side rendering guide**](https://algolia.com/doc/guides/building-search-ui/going-further/server-side-rendering/react-hooks/) to start rendering your React InstantSearch Hooks app on the server.
 
+## API reference
+
+- [`getServerState()`](https://algolia.com/doc/api-reference/widgets/server-state/react-hooks/)
+- [`<InstantSearchSSRProvider>`](https://algolia.com/doc/api-reference/widgets/ssr-provider/react-hooks/)
+
 ## Documentation
 
-The documentation is available on [algolia.com/doc](https://algolia.com/doc/guides/building-search-ui/what-is-instantsearch/react-hooks/).
+The full documentation is available on [algolia.com/doc](https://algolia.com/doc/guides/building-search-ui/what-is-instantsearch/react-hooks/).
 
 ## Troubleshooting
 
