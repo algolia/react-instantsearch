@@ -26,7 +26,7 @@ npm install react-instantsearch-hooks algoliasearch
 
 React InstantSearch Hooks is a headless React library that lets you create an instant search results experience using Algolia’s search API.
 
-Check out our [**Getting Started guide**](https://algolia.com/doc/guides/building-search-ui/getting-started/react-hooks/) to start implementing a full-featured search experience with react InstantSearch Hooks.
+Check out our [**Getting Started guide**](https://algolia.com/doc/guides/building-search-ui/getting-started/react-hooks/) to start implementing a full-featured search experience with React InstantSearch Hooks.
 
 ## Documentation
 
