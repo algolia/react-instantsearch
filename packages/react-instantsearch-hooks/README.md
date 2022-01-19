@@ -42,4 +42,4 @@ We welcome all contributors, from casual to regular. You are only one command aw
 
 ## License
 
-React InstantSearch Hooks is MIT licensed.
+React InstantSearch Hooks is [MIT licensed](../../LICENSE).
