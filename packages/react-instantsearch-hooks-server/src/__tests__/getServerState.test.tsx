@@ -295,6 +295,32 @@ describe('getServerState', () => {
     );
   });
 
+  test('searches twice (cached) with two dynamic widgets', async () => {
+    const searchClient = createSearchClient();
+    const { App } = createTestEnvironment({ searchClient });
+
+    await getServerState(
+      <App>
+        <DynamicWidgets fallbackComponent={RefinementList} />
+        <Index indexName="something">
+          {/*
+           * also add a static RefinementList here,
+           * otherwise we are in the "and a refinement" case,
+           * as in the next test.
+           */}
+          <RefinementList attribute="brand" />
+          <DynamicWidgets fallbackComponent={RefinementList} />
+        </Index>
+      </App>
+    );
+
+    expect(searchClient.search).toHaveBeenCalledTimes(2);
+    // both calls are the same, so they're cached
+    expect((searchClient.search as jest.Mock).mock.calls[0][0]).toEqual(
+      (searchClient.search as jest.Mock).mock.calls[1][0]
+    );
+  });
+
   test('searches twice with dynamic widgets and a refinement', async () => {
     const searchClient = createSearchClient();
     const { App } = createTestEnvironment({
