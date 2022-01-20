@@ -295,13 +295,12 @@ describe('getServerState', () => {
     );
   });
 
-  test('searches twice (cached) with two dynamic widgets', async () => {
+  test('searches twice (cached) with nested dynamic widgets', async () => {
     const searchClient = createSearchClient();
     const { App } = createTestEnvironment({ searchClient });
 
     await getServerState(
       <App>
-        <DynamicWidgets fallbackComponent={RefinementList} />
         <Index indexName="something">
           {/*
            * also add a static RefinementList here,
