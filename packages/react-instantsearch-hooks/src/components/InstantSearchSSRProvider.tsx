@@ -22,9 +22,10 @@ export function InstantSearchSSRProvider({
   children,
   ...props
 }: InstantSearchSSRProviderProps) {
-  // When there is dynamic widgets on the page, a second Provider is used
-  // above the user-land InstantSearchSSRProvider. To avoid the user's provider
-  // overriding the value with an empty object, this provider is skipped
+  // When <DynamicWidgets> is mounted, a second provider is used above the user-land
+  // <InstantSearchSSRProvider> in `getServerState()`.
+  // To avoid the user's provider overriding the context value with an empty object,
+  // we skip this provider.
   if (Object.keys(props).length === 0) {
     return <>{children}</>;
   }
