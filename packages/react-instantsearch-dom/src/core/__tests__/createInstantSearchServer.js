@@ -5,8 +5,10 @@ import { SearchParameters } from 'algoliasearch-helper';
 import {
   Index,
   InstantSearch,
+  DynamicWidgets,
   createConnector,
   version,
+  connectRefinementList,
 } from 'react-instantsearch-core';
 import { findResultsState } from '../createInstantSearchServer';
 import { SearchBox } from 'react-instantsearch-dom';
@@ -15,16 +17,35 @@ Enzyme.configure({ adapter: new Adapter() });
 
 describe('findResultsState', () => {
   const createSearchClient = ({ transformResponseParams } = {}) => ({
-    search: (requests) =>
+    search: jest.fn((requests) =>
       Promise.resolve({
         results: requests.map(({ indexName, params: { query } }) => ({
           query,
+          renderingContent: {
+            facetOrdering: {
+              facets: {
+                order: ['brand', 'hierarchicalCategories.lvl0', 'categories'],
+              },
+              values: {
+                brand: {
+                  sortRemainingBy: 'count',
+                },
+                categories: {
+                  sortRemainingBy: 'count',
+                },
+                'hierarchicalCategories.lvl0': {
+                  sortRemainingBy: 'count',
+                },
+              },
+            },
+          },
           params: transformResponseParams
             ? transformResponseParams(query)
             : `query=${encodeURIComponent(query)}`,
           index: indexName,
         })),
-      }),
+      })
+    ),
   });
 
   const createWidget = ({ getSearchParameters = () => {} } = {}) =>
@@ -501,6 +522,80 @@ describe('findResultsState', () => {
         const data = await findResultsState(App, props);
 
         expect(data.rawResults[0].params).toMatchInlineSnapshot(`"lol=lol"`);
+      });
+    });
+
+    it('searches twice (cached) with dynamic widgets', async () => {
+      const RefinementList = connectRefinementList(() => null);
+      const App = (props) => (
+        <InstantSearch {...props}>
+          <DynamicWidgets fallbackComponent={RefinementList} />
+        </InstantSearch>
+      );
+
+      const props = {
+        searchClient: createSearchClient(),
+        indexName: 'abc',
+        searchState: {
+          query: 'iPhone',
+        },
+      };
+
+      await findResultsState(App, props);
+
+      expect(props.searchClient.search).toHaveBeenCalledTimes(2);
+      // both calls are the same, so they're cached
+      expect(props.searchClient.search.mock.calls[0][0]).toEqual(
+        props.searchClient.search.mock.calls[1][0]
+      );
+    });
+
+    it.only('searches twice with dynamic widgets and a refinement', async () => {
+      const RefinementList = connectRefinementList(() => null);
+      const App = (props) => (
+        <InstantSearch {...props}>
+          <DynamicWidgets fallbackComponent={RefinementList} />
+        </InstantSearch>
+      );
+
+      const props = {
+        searchClient: createSearchClient(),
+        indexName: 'instant_search',
+        searchState: {
+          query: 'iPhone',
+          refinementList: {
+            categories: ['refined!'],
+          },
+        },
+      };
+
+      await findResultsState(App, props);
+
+      expect(props.searchClient.search).toHaveBeenCalledTimes(2);
+
+      // first query doesn't have the fallback widget mounted yet
+      expect(props.searchClient.search.mock.calls[0][0][0]).toEqual({
+        indexName: 'instant_search',
+        params: {
+          facets: ['*'],
+          highlightPostTag: '</ais-highlight-0000000000>',
+          highlightPreTag: '<ais-highlight-0000000000>',
+          maxValuesPerFacet: 20,
+          tagFilters: '',
+        },
+      });
+
+      // second query does have the fallback widget mounted, and thus also the refinement
+      expect(props.searchClient.search.mock.calls[1][0][0]).toEqual({
+        indexName: 'instant_search',
+        params: {
+          facetFilters: [['categories:refined!']],
+          facets: ['*'],
+          highlightPostTag: '</ais-highlight-0000000000>',
+          highlightPreTag: '<ais-highlight-0000000000>',
+          maxValuesPerFacet: 20,
+          tagFilters: '',
+        },
       });
     });
   });
