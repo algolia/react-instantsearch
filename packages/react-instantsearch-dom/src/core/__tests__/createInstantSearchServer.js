@@ -550,7 +550,7 @@ describe('findResultsState', () => {
       );
     });
 
-    it.only('searches twice with dynamic widgets and a refinement', async () => {
+    it('searches twice with dynamic widgets and a refinement', async () => {
       const RefinementList = connectRefinementList(() => null);
       const App = (props) => (
         <InstantSearch {...props}>
@@ -563,9 +563,7 @@ describe('findResultsState', () => {
         indexName: 'instant_search',
         searchState: {
           query: 'iPhone',
-          refinementList: {
-            categories: ['refined!'],
-          },
+          refinementList: { categories: ['refined!'] },
         },
       };
 
@@ -1134,6 +1132,92 @@ describe('findResultsState', () => {
         expect(second.rawResults[0].params).toMatchInlineSnapshot(
           `"query=iPad%26query%3Dtest"`
         );
+      });
+    });
+
+    it('searches twice (cached) with dynamic widgets', async () => {
+      const RefinementList = connectRefinementList(() => null);
+      const App = (props) => (
+        <InstantSearch {...props}>
+          <Index indexName="index1WithRefinement">
+            <DynamicWidgets fallbackComponent={RefinementList} />
+          </Index>
+        </InstantSearch>
+      );
+
+      const props = {
+        searchClient: createSearchClient(),
+        indexName: 'abc',
+        searchState: {
+          query: 'iPhone',
+        },
+      };
+
+      await findResultsState(App, props);
+
+      // [search (index 1), search (index 2), dynamic (index 1), dynamic (index 2)]
+      expect(props.searchClient.search).toHaveBeenCalledTimes(4);
+
+      // both calls are the same, so they're cached
+      expect(props.searchClient.search.mock.calls[0][0]).toEqual(
+        props.searchClient.search.mock.calls[2][0]
+      );
+      expect(props.searchClient.search.mock.calls[1][0]).toEqual(
+        props.searchClient.search.mock.calls[3][0]
+      );
+    });
+
+    it('searches twice with dynamic widgets and a refinement', async () => {
+      const RefinementList = connectRefinementList(() => null);
+      const App = (props) => (
+        <InstantSearch {...props}>
+          <Index indexName="index1WithRefinement">
+            <DynamicWidgets fallbackComponent={RefinementList} />
+          </Index>
+        </InstantSearch>
+      );
+
+      const props = {
+        searchClient: createSearchClient(),
+        indexName: 'instant_search',
+        searchState: {
+          query: 'iPhone',
+          indices: {
+            index1WithRefinement: {
+              refinementList: { categories: ['refined!'] },
+            },
+          },
+        },
+      };
+
+      await findResultsState(App, props);
+
+      // [search (index 1), search (index 2), dynamic (index 1), dynamic (index 2)]
+      expect(props.searchClient.search).toHaveBeenCalledTimes(4);
+
+      // first query doesn't have the fallback widget mounted yet
+      expect(props.searchClient.search.mock.calls[1][0][0]).toEqual({
+        indexName: 'index1WithRefinement',
+        params: {
+          facets: ['*'],
+          highlightPostTag: '</ais-highlight-0000000000>',
+          highlightPreTag: '<ais-highlight-0000000000>',
+          maxValuesPerFacet: 20,
+          tagFilters: '',
+        },
+      });
+
+      // second query does have the fallback widget mounted, and thus also the refinement
+      expect(props.searchClient.search.mock.calls[3][0][0]).toEqual({
+        indexName: 'index1WithRefinement',
+        params: {
+          facetFilters: [['categories:refined!']],
+          facets: ['*'],
+          highlightPostTag: '</ais-highlight-0000000000>',
+          highlightPreTag: '<ais-highlight-0000000000>',
+          maxValuesPerFacet: 20,
+          tagFilters: '',
+        },
       });
     });
   });
