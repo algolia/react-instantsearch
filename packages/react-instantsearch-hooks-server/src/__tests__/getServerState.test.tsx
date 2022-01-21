@@ -280,7 +280,7 @@ describe('getServerState', () => {
 
   test('searches twice (cached) with dynamic widgets', async () => {
     const searchClient = createSearchClient();
-    const { App } = createTestEnvironment({ searchClient });
+    const { App } = createTestEnvironment({ searchClient, initialUiState: {} });
 
     await getServerState(
       <App>
@@ -295,19 +295,13 @@ describe('getServerState', () => {
     );
   });
 
-  test('searches twice (cached) with nested dynamic widgets', async () => {
+  test('searches twice (cached) with dynamic widgets inside index', async () => {
     const searchClient = createSearchClient();
-    const { App } = createTestEnvironment({ searchClient });
+    const { App } = createTestEnvironment({ searchClient, initialUiState: {} });
 
     await getServerState(
       <App>
         <Index indexName="something">
-          {/*
-           * also add a static RefinementList here,
-           * otherwise we are in the "and a refinement" case,
-           * as in the next test.
-           */}
-          <RefinementList attribute="brand" />
           <DynamicWidgets fallbackComponent={RefinementList} />
         </Index>
       </App>
