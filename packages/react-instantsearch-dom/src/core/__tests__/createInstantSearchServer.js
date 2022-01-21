@@ -21,6 +21,7 @@ describe('findResultsState', () => {
       Promise.resolve({
         results: requests.map(({ indexName, params: { query } }) => ({
           query,
+          hits: [],
           renderingContent: {
             facetOrdering: {
               facets: {
