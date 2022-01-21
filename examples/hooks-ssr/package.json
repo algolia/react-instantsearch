@@ -17,7 +17,7 @@
     "babel-jest": "24.9.0",
     "babel-loader": "8.0.6",
     "nodemon": "1.19.3",
-    "webpack": "4.40.2",
+    "webpack": "5.67.0",
     "webpack-cli": "3.3.7",
     "webpack-node-externals": "1.7.2"
   },
