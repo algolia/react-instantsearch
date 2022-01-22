@@ -9,13 +9,13 @@
     "build": "webpack --mode=production"
   },
   "devDependencies": {
-    "@babel/core": "7.4.5",
-    "@babel/polyfill": "7.4.4",
-    "@babel/preset-env": "7.4.5",
-    "@babel/preset-react": "7.0.0",
+    "@babel/core": "7.16.12",
+    "@babel/polyfill": "7.12.1",
+    "@babel/preset-env": "7.16.11",
+    "@babel/preset-react": "7.16.7",
     "babel-core": "6.26.3",
     "babel-jest": "24.9.0",
-    "babel-loader": "8.0.6",
+    "babel-loader": "8.2.3",
     "nodemon": "1.19.3",
     "webpack": "4.40.2",
     "webpack-cli": "3.3.7",
