@@ -100,7 +100,13 @@ export function useConnector<
         instantSearchInstance: search,
         results,
         scopedResults,
-        state: results._state,
+        state: widget.getWidgetSearchParameters
+          ? widget.getWidgetSearchParameters(results._state, {
+              uiState: parentIndex.getWidgetUiState({})[
+                parentIndex.getIndexId()
+              ],
+            })
+          : results._state,
         renderState: search.renderState,
         templatesConfig: search.templatesConfig,
         createURL: parentIndex.createURL,
