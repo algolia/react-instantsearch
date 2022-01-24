@@ -14,7 +14,8 @@ const packages = [
 module.exports = {
   monorepo: {
     mainVersionFile: 'lerna.json',
-    packagesToBump: packages,
+    // We rely on Lerna to bump our dependencies.
+    packagesToBump: [],
     packagesToPublish: packages,
   },
   versionUpdated: ({ version, exec, dir }) => {
@@ -42,17 +43,9 @@ module.exports = {
       `export default '${version}';\n`
     );
 
-    // update version in top level package
-    exec(`mversion ${version}`);
-
-    // update version in packages & dependencies
-    exec(`lerna version ${version} --no-git-tag-version --no-push --yes`);
-
-    // @TODO: We can remove after initial npm release of `react-instantsearch-hooks-server`
-    // We update the Hooks and Hooks Server package dependency in the example because Lerna doesn't
-    // and releasing fails because the Hooks Server package has not yet been released on npm.
+    // Update version in packages and dependencies
     exec(
-      `yarn workspace hooks-ssr-example upgrade react-instantsearch-hooks-server@${version}`
+      `yarn lerna version ${version} --exact --no-git-tag-version --no-push --yes`
     );
   },
   shouldPrepare: ({ releaseType, commitNumbersPerType }) => {
@@ -77,9 +70,11 @@ module.exports = {
       latestCommitUrl,
       repoURL,
     }) => ({
-      pretext: [`:tada: Successfully released *${appName}@${version}*`].join(
-        '\n'
-      ),
+      pretext: [
+        `:tada: Successfully released *${appName}@${version}*`,
+        '',
+        `Make sure to run \`yarn run release-templates\` in \`create-instantsearch-app\`.`,
+      ].join('\n'),
       fields: [
         {
           title: 'Branch',
