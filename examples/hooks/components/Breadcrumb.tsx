@@ -6,13 +6,13 @@ import { cx } from '../cx';
 export type BreadcrumbProps = React.ComponentProps<'div'> & UseBreadcrumbProps;
 
 export function Breadcrumb(props: BreadcrumbProps) {
-  const { items, refine, createURL } = useBreadcrumb(props);
+  const { items, refine, canRefine, createURL } = useBreadcrumb(props);
 
   return (
     <div
       className={cx(
         'ais-Breadcrumb',
-        items.length === 0 && 'ais-Breadcrumb--noRefinement',
+        !canRefine && 'ais-Breadcrumb--noRefinement',
         props.className
       )}
     >
@@ -20,14 +20,14 @@ export function Breadcrumb(props: BreadcrumbProps) {
         <li
           className={cx(
             'ais-Breadcrumb-item',
-            items.length === 0 && 'ais-Breadcrumb-item--selected'
+            !canRefine && 'ais-Breadcrumb-item--selected'
           )}
         >
           <a
-            href={createURL(null)}
+            href={createURL(undefined)}
             onClick={(event) => {
               event.preventDefault();
-              refine(null);
+              refine(undefined);
             }}
             className="ais-Breadcrumb-link"
           >
