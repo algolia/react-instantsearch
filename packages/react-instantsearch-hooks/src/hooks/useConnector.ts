@@ -75,7 +75,16 @@ export function useConnector<
       // The helper exists because we've started InstantSearch.
       const helper = parentIndex.getHelper()!;
       const results =
-        parentIndex.getResults() || createSearchResults(helper.state);
+        parentIndex.getResults() ||
+        createSearchResults(
+          widget.getWidgetSearchParameters
+            ? widget.getWidgetSearchParameters(helper.state, {
+                uiState: parentIndex.getWidgetUiState({})[
+                  parentIndex.getIndexId()
+                ],
+              })
+            : helper.state
+        );
       const scopedResults = parentIndex
         .getScopedResults()
         .map((scopedResult) => {
@@ -100,13 +109,7 @@ export function useConnector<
         instantSearchInstance: search,
         results,
         scopedResults,
-        state: widget.getWidgetSearchParameters
-          ? widget.getWidgetSearchParameters(results._state, {
-              uiState: parentIndex.getWidgetUiState({})[
-                parentIndex.getIndexId()
-              ],
-            })
-          : results._state,
+        state: results._state,
         renderState: search.renderState,
         templatesConfig: search.templatesConfig,
         createURL: parentIndex.createURL,
