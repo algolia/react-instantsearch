@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 import React from 'react';
+import { InstantSearch as InstantSearchCore } from 'react-instantsearch-core';
 
 import { createSearchClient } from '../../../../test/mock';
-import { InstantSearch as InstantSearchCore } from '../../../react-instantsearch-core';
-import { useSearchBox } from '../useSearchBox';
-import { noop } from '../utils';
+import { useSearchBox } from '../connectors/useSearchBox';
+import { noop } from '../lib/noop';
 
 function SearchBox() {
   useSearchBox({});
@@ -26,7 +26,7 @@ describe('Compat', () => {
         </InstantSearchCore>
       );
     }).toThrowErrorMatchingInlineSnapshot(`
-      "Hooks must be used inside the <InstantSearch> component.
+      "[InstantSearch] Hooks must be used inside the <InstantSearch> component.
 
       They are not compatible with the \`react-instantsearch-core\` and \`react-instantsearch-dom\` packages, so make sure to use the <InstantSearch> component from \`react-instantsearch-hooks\`."
     `);

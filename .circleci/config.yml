@@ -23,12 +23,14 @@ aliases:
 defaults: &defaults
   working_directory: ~/react-instantsearch
   docker:
-    - image: cimg/node:12.14.1
+    - image: cimg/node:12.22.7
 
 version: 2
 jobs:
   test_build:
     <<: *defaults
+    docker:
+      - image: cimg/node:14.18.2
     steps:
       - checkout
       - run: *install_yarn_version
@@ -38,6 +40,20 @@ jobs:
       - run:
           name: Build & Test packages size
           command: yarn test:build
+      - store_artifacts:
+          path: packages/react-instantsearch/dist
+      - store_artifacts:
+          path: packages/react-instantsearch-core/dist
+      - store_artifacts:
+          path: packages/react-instantsearch-dom/dist
+      - store_artifacts:
+          path: packages/react-instantsearch-dom-maps/dist
+      - store_artifacts:
+          path: packages/react-instantsearch-hooks/dist
+      - store_artifacts:
+          path: packages/react-instantsearch-hooks-server/dist
+      - store_artifacts:
+          path: packages/react-instantsearch-native/dist
 
   test_unit:
     <<: *defaults
@@ -84,7 +100,7 @@ jobs:
   test_integration:
     <<: *defaults
     docker:
-      - image: cimg/node:12.15.0-browsers
+      - image: cimg/node:12.22.7-browsers
     steps:
       - checkout
       - run: *install_yarn_version
@@ -108,6 +124,8 @@ jobs:
           command: |
             yarn run website:build
             yarn run test:e2e:saucelabs
+      - store_test_results:
+          path: junit/wdio/
 
   test_examples:
     <<: *defaults
@@ -117,6 +135,9 @@ jobs:
       - restore_cache: *restore_yarn_cache
       - run: *run_yarn_install
       - save_cache: *save_yarn_cache
+      - run:
+          name: Build libraries
+          command: yarn build
       - run:
           name: Build & Test examples
           command: yarn test:examples

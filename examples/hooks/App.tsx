@@ -1,11 +1,15 @@
 import { Hit as AlgoliaHit } from '@algolia/client-search';
 import algoliasearch from 'algoliasearch/lite';
 import React from 'react';
-import { InstantSearch, DynamicWidgets } from 'react-instantsearch-hooks';
+import {
+  InstantSearch,
+  Configure,
+  DynamicWidgets,
+} from 'react-instantsearch-hooks';
 
 import {
   Breadcrumb,
-  Configure,
+  ClearRefinements,
   CurrentRefinements,
   HierarchicalMenu,
   Highlight,
@@ -16,12 +20,14 @@ import {
   NumericMenu,
   Pagination,
   Panel,
+  PoweredBy,
   QueryRuleContext,
   QueryRuleCustomData,
   RangeInput,
   RefinementList,
   SearchBox,
   SortBy,
+  ToggleRefinement,
 } from './components';
 import { Tab, Tabs } from './components/layout';
 
@@ -95,6 +101,9 @@ export function App() {
                 ]}
               />
             </Panel>
+            <Panel header="Free Shipping">
+              <ToggleRefinement attribute="free_shipping" />
+            </Panel>
           </DynamicWidgets>
         </div>
         <div className="Search">
@@ -122,21 +131,25 @@ export function App() {
               ]}
             />
           </div>
+          <PoweredBy />
 
-          <CurrentRefinements
-            transformItems={(items) =>
-              items.map((item) => {
-                const label = item.label.startsWith('hierarchicalCategories')
-                  ? 'Hierarchy'
-                  : item.label;
+          <div className="CurrentRefinements">
+            <ClearRefinements />
+            <CurrentRefinements
+              transformItems={(items) =>
+                items.map((item) => {
+                  const label = item.label.startsWith('hierarchicalCategories')
+                    ? 'Hierarchy'
+                    : item.label;
 
-                return {
-                  ...item,
-                  attribute: label,
-                };
-              })
-            }
-          />
+                  return {
+                    ...item,
+                    attribute: label,
+                  };
+                })
+              }
+            />
+          </div>
 
           <QueryRuleContext
             trackedFilters={{
