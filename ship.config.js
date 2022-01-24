@@ -61,7 +61,6 @@ module.exports = {
     // Ship.js will send slack message only for `releaseSuccess`.
     prepared: null,
     releaseSuccess: ({
-      appName,
       version,
       tagName,
       latestCommitHash,
@@ -69,7 +68,7 @@ module.exports = {
       repoURL,
     }) => ({
       pretext: [
-        `:tada: Successfully released *${appName}@${version}*`,
+        `:tada: Successfully released *React InstantSearch v${version}*`,
         '',
         `Make sure to run \`yarn run release-templates\` in \`create-instantsearch-app\`.`,
       ].join('\n'),
