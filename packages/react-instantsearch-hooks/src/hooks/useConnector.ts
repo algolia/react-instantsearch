@@ -77,13 +77,9 @@ export function useConnector<
       const results =
         parentIndex.getResults() ||
         createSearchResults(
-          widget.getWidgetSearchParameters
-            ? widget.getWidgetSearchParameters(helper.state, {
-                uiState: parentIndex.getWidgetUiState({})[
-                  parentIndex.getIndexId()
-                ],
-              })
-            : helper.state
+          widget.getWidgetSearchParameters?.(helper.state, {
+            uiState: parentIndex.getWidgetUiState({})[parentIndex.getIndexId()],
+          }) || helper.state
         );
       const scopedResults = parentIndex
         .getScopedResults()
