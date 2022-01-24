@@ -75,7 +75,11 @@ export function useConnector<
       // The helper exists because we've started InstantSearch.
       const helper = parentIndex.getHelper()!;
       const results =
+        // On SSR, we get the results injected on the Index.
         parentIndex.getResults() ||
+        // On the browser, we create fallback results based on the widget's
+        // `getWidgetSearchParameters()` method to inject the initial UI state,
+        // or fall back to the helper state.
         createSearchResults(
           widget.getWidgetSearchParameters?.(helper.state, {
             uiState: parentIndex.getWidgetUiState({})[parentIndex.getIndexId()],

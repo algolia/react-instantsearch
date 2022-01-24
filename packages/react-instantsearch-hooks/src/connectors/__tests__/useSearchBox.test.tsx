@@ -29,7 +29,7 @@ describe('useSearchBox', () => {
     });
   });
 
-  test('returns the connector render state with ui state', async () => {
+  test('returns the connector render state with initialUiState', async () => {
     const wrapper = createInstantSearchTestWrapper({
       initialUiState: {
         indexName: {
