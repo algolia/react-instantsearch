@@ -1,6 +1,6 @@
 {
   "name": "hooks-next-example",
-  "version": "6.20.0",
+  "version": "6.21.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
