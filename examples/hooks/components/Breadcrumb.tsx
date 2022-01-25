@@ -40,7 +40,7 @@ export function Breadcrumb(props: BreadcrumbProps) {
 
           return (
             <li
-              key={item.label + idx}
+              key={idx}
               className={cx(
                 'ais-Breadcrumb-item',
                 isLast && 'ais-Breadcrumb-item--selected'
