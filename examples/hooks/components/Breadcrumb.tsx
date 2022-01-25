@@ -2,6 +2,7 @@ import React from 'react';
 import { useBreadcrumb, UseBreadcrumbProps } from 'react-instantsearch-hooks';
 
 import { cx } from '../cx';
+import { isModifierClick } from '../isModifierClick';
 
 export type BreadcrumbProps = React.ComponentProps<'div'> & UseBreadcrumbProps;
 
@@ -26,8 +27,10 @@ export function Breadcrumb(props: BreadcrumbProps) {
           <a
             href={createURL(null)}
             onClick={(event) => {
-              event.preventDefault();
-              refine(null);
+              if (!isModifierClick(event)) {
+                event.preventDefault();
+                refine(null);
+              }
             }}
             className="ais-Breadcrumb-link"
           >
@@ -57,8 +60,10 @@ export function Breadcrumb(props: BreadcrumbProps) {
                   className="ais-Breadcrumb-link"
                   href={createURL(item.value)}
                   onClick={(event) => {
-                    event.preventDefault();
-                    refine(item.value);
+                    if (!isModifierClick(event)) {
+                      event.preventDefault();
+                      refine(item.value);
+                    }
                   }}
                 >
                   {item.label}
