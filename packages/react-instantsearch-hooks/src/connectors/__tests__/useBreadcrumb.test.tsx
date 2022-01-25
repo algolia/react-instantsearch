@@ -49,57 +49,53 @@ describe('useBreadcrumb', () => {
   });
 
   it('returns the connector render state with initial UI state', async () => {
-    const wrapper = createInstantSearchTestWrapper(
-      {
-        initialUiState: {
-          indexName: {
-            hierarchicalMenu: {
-              'hierarchicalCategories.lvl0': [
-                'Appliances',
-                'Small Kitchen Appliances',
-                'Coffee, Tea & Espresso',
-              ],
-            },
+    const wrapper = createInstantSearchTestWrapper({
+      initialUiState: {
+        indexName: {
+          hierarchicalMenu: {
+            'hierarchicalCategories.lvl0': [
+              'Appliances',
+              'Small Kitchen Appliances',
+              'Coffee, Tea & Espresso',
+            ],
           },
         },
       },
-      {
-        searchClient: createSearchClient({
-          search: jest.fn((requests) =>
-            Promise.resolve(
-              createMultiSearchResponse(
-                ...requests.map((request) =>
-                  createSingleSearchResponse({
-                    index: request.indexName,
-                    facets: {
-                      'hierarchicalCategories.lvl0': {
-                        Appliances: 382,
-                      },
-                      'hierarchicalCategories.lvl1': {
-                        'Appliances > Small Kitchen Appliances': 382,
-                      },
-                      'hierarchicalCategories.lvl2': {
-                        'Appliances > Small Kitchen Appliances > Coffee, Tea & Espresso': 382,
+      searchClient: createSearchClient({
+        search: jest.fn((requests) =>
+          Promise.resolve(
+            createMultiSearchResponse(
+              ...requests.map((request) =>
+                createSingleSearchResponse({
+                  index: request.indexName,
+                  facets: {
+                    'hierarchicalCategories.lvl0': {
+                      Appliances: 382,
+                    },
+                    'hierarchicalCategories.lvl1': {
+                      'Appliances > Small Kitchen Appliances': 382,
+                    },
+                    'hierarchicalCategories.lvl2': {
+                      'Appliances > Small Kitchen Appliances > Coffee, Tea & Espresso': 382,
+                    },
+                  },
+                  hits: [
+                    {
+                      objectID: '1',
+                      hierarchicalCategories: {
+                        lvl0: 'Appliances',
+                        lvl1: 'Appliances > Small Kitchen Appliances',
+                        lvl2: 'Appliances > Small Kitchen Appliances > Coffee, Tea & Espresso',
                       },
                     },
-                    hits: [
-                      {
-                        objectID: '1',
-                        hierarchicalCategories: {
-                          lvl0: 'Appliances',
-                          lvl1: 'Appliances > Small Kitchen Appliances',
-                          lvl2: 'Appliances > Small Kitchen Appliances > Coffee, Tea & Espresso',
-                        },
-                      },
-                    ],
-                  })
-                )
+                  ],
+                })
               )
             )
-          ),
-        }),
-      }
-    );
+          )
+        ),
+      }),
+    });
     const { result, waitForNextUpdate } = renderHook(
       () =>
         useBreadcrumb({
