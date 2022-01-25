@@ -1,7 +1,6 @@
 import { renderHook } from '@testing-library/react-hooks';
 import React from 'react';
 
-import { useHierarchicalMenu } from '../..';
 import { createSearchClient } from '../../../../../test/mock';
 import {
   createMultiSearchResponse,
@@ -9,8 +8,9 @@ import {
 } from '../../../../../test/mock/createAPIResponse';
 import { createInstantSearchTestWrapper } from '../../../../../test/utils';
 import { useBreadcrumb } from '../useBreadcrumb';
+import { useHierarchicalMenu } from '../useHierarchicalMenu';
 
-import type { UseHierarchicalMenuProps } from '../..';
+import type { UseHierarchicalMenuProps } from '../useHierarchicalMenu';
 
 describe('useBreadcrumb', () => {
   it('returns the connector render state', async () => {
