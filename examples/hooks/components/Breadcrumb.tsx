@@ -24,10 +24,10 @@ export function Breadcrumb(props: BreadcrumbProps) {
           )}
         >
           <a
-            href={createURL(undefined)}
+            href={createURL(null)}
             onClick={(event) => {
               event.preventDefault();
-              refine(undefined);
+              refine(null);
             }}
             className="ais-Breadcrumb-link"
           >
