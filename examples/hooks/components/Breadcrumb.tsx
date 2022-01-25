@@ -24,13 +24,10 @@ export function Breadcrumb(props: BreadcrumbProps) {
           )}
         >
           <a
-            // We need to fix the type in IS.js
-            // @ts-expect-error
-            href={createURL(undefined)}
+            href={createURL(null)}
             onClick={(event) => {
               event.preventDefault();
-              // @ts-expect-error
-              refine(undefined);
+              refine(null);
             }}
             className="ais-Breadcrumb-link"
           >
