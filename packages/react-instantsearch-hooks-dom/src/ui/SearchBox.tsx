@@ -6,7 +6,7 @@ import type { ChangeEvent, FormEvent, RefObject } from 'react';
 
 export type SearchBoxProps = React.ComponentProps<'div'> & {
   inputRef: RefObject<HTMLInputElement>;
-  isSearchStalled: boolean;
+  isSearchStalled?: boolean;
   onChange(event: ChangeEvent): void;
   onReset(event: FormEvent): void;
   onSubmit?(event: FormEvent): void;

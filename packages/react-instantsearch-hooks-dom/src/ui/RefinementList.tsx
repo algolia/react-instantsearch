@@ -54,7 +54,6 @@ export function RefinementList({
           <SearchBox
             inputRef={inputRef}
             placeholder={searchablePlaceholder}
-            isSearchStalled={false}
             onChange={onInputChange}
             onReset={onReset}
             onSubmit={onSubmit}
