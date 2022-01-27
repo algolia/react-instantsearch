@@ -6,6 +6,7 @@ import {
   Configure,
   DynamicWidgets,
 } from 'react-instantsearch-hooks';
+import { Hits, SearchBox, RefinementList } from 'react-instantsearch-hooks-dom';
 
 import {
   Breadcrumb,
@@ -13,7 +14,7 @@ import {
   CurrentRefinements,
   HierarchicalMenu,
   Highlight,
-  Hits,
+  // Hits,
   HitsPerPage,
   InfiniteHits,
   Menu,
@@ -24,8 +25,8 @@ import {
   QueryRuleContext,
   QueryRuleCustomData,
   RangeInput,
-  RefinementList,
-  SearchBox,
+  // RefinementList,
+  // SearchBox,
   SortBy,
   ToggleRefinement,
 } from './components';
