@@ -10,7 +10,7 @@
   },
   "devDependencies": {
     "babel-core": "7.0.0-bridge.0",
-    "babel-jest": "23.6.0",
+    "babel-jest": "24.9.0",
     "css-loader": "3.2.0",
     "style-loader": "1.0.0"
   },
