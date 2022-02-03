@@ -9,9 +9,10 @@ import type {
 
 export type UseHitsProps = HitsConnectorParams;
 
-export function useHits(props?: UseHitsProps) {
+export function useHits(props?: UseHitsProps, widgetType?: string) {
   return useConnector<HitsConnectorParams, HitsWidgetDescription>(
     connectHits,
-    props
+    props,
+    widgetType
   );
 }

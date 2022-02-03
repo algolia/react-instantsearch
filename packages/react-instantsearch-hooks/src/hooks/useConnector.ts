@@ -14,7 +14,8 @@ export function useConnector<
   TDescription extends WidgetDescription
 >(
   connector: Connector<TDescription, TProps>,
-  props: TProps = {} as TProps
+  props: TProps = {} as TProps,
+  widgetType?: string
 ): TDescription['renderState'] {
   const serverContext = useInstantSearchServerContext();
   const search = useInstantSearchContext();
@@ -60,6 +61,7 @@ export function useConnector<
     );
 
     const instance = createWidget(stableProps);
+    instance.$$widgetType = widgetType;
 
     // On the server, we add the widget early in the memo to retrieve its search
     // parameters in the render pass.
@@ -68,7 +70,7 @@ export function useConnector<
     }
 
     return instance;
-  }, [connector, parentIndex, serverContext, stableProps]);
+  }, [connector, parentIndex, serverContext, stableProps, widgetType]);
 
   const [state, setState] = useState<TDescription['renderState']>(() => {
     if (widget.getWidgetRenderState) {

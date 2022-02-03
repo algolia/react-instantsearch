@@ -9,9 +9,10 @@ import type {
 
 export type UseConfigureProps = ConfigureConnectorParams['searchParameters'];
 
-export function useConfigure(props: UseConfigureProps) {
+export function useConfigure(props: UseConfigureProps, widgetType?: string) {
   return useConnector<ConfigureConnectorParams, ConfigureWidgetDescription>(
     connectConfigure,
-    { searchParameters: props }
+    { searchParameters: props },
+    widgetType
   );
 }
