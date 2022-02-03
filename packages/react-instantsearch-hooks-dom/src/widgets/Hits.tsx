@@ -20,5 +20,5 @@ export function Hits<THit extends AlgoliaHit<Record<string, unknown>>>({
 }: HitsProps<THit>) {
   const { hits } = useHits(props);
 
-  return <HitsUiComponent {...props} hits={hits} getHitId={getHitId} />;
+  return <HitsUiComponent<THit> {...props} hits={hits} getHitId={getHitId} />;
 }
