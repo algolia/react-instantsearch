@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { cx } from '../lib/cx';
+import { cx } from './lib/cx';
 
 export type HitsProps<THit> = React.ComponentProps<'div'> & {
   hits: THit[];

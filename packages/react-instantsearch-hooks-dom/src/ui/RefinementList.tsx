@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { cx } from '../lib/cx';
-import { SearchBox } from '../ui/SearchBox';
+import { cx } from './lib/cx';
+import { SearchBox } from './SearchBox';
 
 import type { ChangeEvent, RefObject, FormEventHandler } from 'react';
 

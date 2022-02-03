@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { cx } from '../lib/cx';
-import { isModifierClick } from '../lib/isModifierClick';
+import { cx } from './lib/cx';
+import { isModifierClick } from './lib/isModifierClick';
 
 export type BreadcrumbItem = {
   label: string;

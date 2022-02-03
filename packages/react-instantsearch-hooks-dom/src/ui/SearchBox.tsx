@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { cx } from '../lib/cx';
+import { cx } from './lib/cx';
 
 import type { ChangeEvent, FormEvent, RefObject } from 'react';
 
