@@ -17,16 +17,16 @@ const searchClient = algoliasearch(
 export default function App() {
   const listRef = useRef<FlatList>(null);
 
-  function scrollToTop() {
-    listRef.current?.scrollToOffset({ animated: false, offset: 0 });
-  }
-
   return (
     <SafeAreaView style={styles.safe}>
       <StatusBar style="light" />
       <View style={styles.container}>
         <InstantSearch searchClient={searchClient} indexName="instant_search">
-          <SearchBox onChange={scrollToTop} />
+          <SearchBox
+            onChange={() =>
+              listRef.current?.scrollToOffset({ animated: false, offset: 0 })
+            }
+          />
           <InfiniteHits ref={listRef} hitComponent={Hit} />
         </InstantSearch>
       </View>

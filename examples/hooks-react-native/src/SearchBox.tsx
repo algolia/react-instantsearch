@@ -17,6 +17,8 @@ export function SearchBox({ onChange, ...props }: SearchBoxProps) {
     if (query !== value) {
       refine(value);
     }
+    // We don't want to track when the InstantSearch query changes.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value, refine]);
 
   // Track when the InstantSearch query changes to synchronize it with
@@ -27,6 +29,8 @@ export function SearchBox({ onChange, ...props }: SearchBoxProps) {
     if (!inputRef.current?.isFocused() && query !== value) {
       setValue(query);
     }
+    // We don't want to track when the React state value changes.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
 
   return (

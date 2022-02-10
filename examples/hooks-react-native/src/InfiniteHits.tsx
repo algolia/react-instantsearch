@@ -49,7 +49,8 @@ const styles = StyleSheet.create({
 });
 
 declare module 'react' {
-  function forwardRef<T, P = {}>(
-    render: (props: P, ref: React.Ref<T>) => React.ReactElement | null
-  ): (props: P & React.RefAttributes<T>) => React.ReactElement | null;
+  // eslint-disable-next-line no-shadow
+  function forwardRef<TRef, TProps = unknown>(
+    render: (props: TProps, ref: React.Ref<TRef>) => React.ReactElement | null
+  ): (props: TProps & React.RefAttributes<TRef>) => React.ReactElement | null;
 }
