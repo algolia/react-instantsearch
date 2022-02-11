@@ -114,7 +114,7 @@
     "lerna": "4.0.0",
     "lodash.orderby": "4.6.0",
     "mversion": "1.13.0",
-    "nock": "11.7.2",
+    "nock": "11.9.1",
     "null-loader": "3.0.0",
     "places.js": "1.16.4",
     "prettier": "2.4.1",
