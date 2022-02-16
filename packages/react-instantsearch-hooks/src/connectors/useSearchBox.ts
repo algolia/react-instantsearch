@@ -9,9 +9,10 @@ import type {
 
 export type UseSearchBoxProps = SearchBoxConnectorParams;
 
-export function useSearchBox(props?: UseSearchBoxProps) {
+export function useSearchBox(props?: UseSearchBoxProps, widgetType?: string) {
   return useConnector<SearchBoxConnectorParams, SearchBoxWidgetDescription>(
     connectSearchBox,
-    props
+    props,
+    widgetType
   );
 }

@@ -9,9 +9,10 @@ import type {
 
 export type UseQueryRulesProps = QueryRulesConnectorParams;
 
-export function useQueryRules(props?: UseQueryRulesProps) {
+export function useQueryRules(props?: UseQueryRulesProps, widgetType?: string) {
   return useConnector<QueryRulesConnectorParams, QueryRulesWidgetDescription>(
     connectQueryRules,
-    props
+    props,
+    widgetType
   );
 }

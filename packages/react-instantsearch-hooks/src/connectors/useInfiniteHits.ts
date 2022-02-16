@@ -9,9 +9,12 @@ import type {
 
 export type UseInfiniteHitsProps = InfiniteHitsConnectorParams;
 
-export function useInfiniteHits(props?: UseInfiniteHitsProps) {
+export function useInfiniteHits(
+  props?: UseInfiniteHitsProps,
+  widgetType?: string
+) {
   return useConnector<
     InfiniteHitsConnectorParams,
     InfiniteHitsWidgetDescription
-  >(connectInfiniteHits, props);
+  >(connectInfiniteHits, props, widgetType);
 }

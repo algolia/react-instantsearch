@@ -9,9 +9,10 @@ import type {
 
 export type UseRangeProps = RangeConnectorParams;
 
-export function useRange(props: UseRangeProps) {
+export function useRange(props: UseRangeProps, widgetType?: string) {
   return useConnector<RangeConnectorParams, RangeWidgetDescription>(
     connectRange,
-    props
+    props,
+    widgetType
   );
 }

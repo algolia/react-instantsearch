@@ -9,9 +9,12 @@ import type {
 
 export type UseClearRefinementsProps = ClearRefinementsConnectorParams;
 
-export function useClearRefinements(props?: UseClearRefinementsProps) {
+export function useClearRefinements(
+  props?: UseClearRefinementsProps,
+  widgetType?: string
+) {
   return useConnector<
     ClearRefinementsConnectorParams,
     ClearRefinementsWidgetDescription
-  >(connectClearRefinements, props);
+  >(connectClearRefinements, props, widgetType);
 }

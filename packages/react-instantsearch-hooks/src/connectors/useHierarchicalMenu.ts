@@ -9,9 +9,12 @@ import type {
 
 export type UseHierarchicalMenuProps = HierarchicalMenuConnectorParams;
 
-export function useHierarchicalMenu(props: UseHierarchicalMenuProps) {
+export function useHierarchicalMenu(
+  props: UseHierarchicalMenuProps,
+  widgetType?: string
+) {
   return useConnector<
     HierarchicalMenuConnectorParams,
     HierarchicalMenuWidgetDescription
-  >(connectHierarchicalMenu, props);
+  >(connectHierarchicalMenu, props, widgetType);
 }

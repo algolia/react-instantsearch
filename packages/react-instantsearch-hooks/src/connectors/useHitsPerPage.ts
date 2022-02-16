@@ -9,9 +9,13 @@ import type {
 
 export type UseHitsPerPageProps = HitsPerPageConnectorParams;
 
-export function useHitsPerPage(props: UseHitsPerPageProps) {
+export function useHitsPerPage(
+  props: UseHitsPerPageProps,
+  widgetType?: string
+) {
   return useConnector<HitsPerPageConnectorParams, HitsPerPageWidgetDescription>(
     connectHitsPerPage,
-    props
+    props,
+    widgetType
   );
 }

@@ -9,9 +9,12 @@ import type {
 
 export type UseCurrentRefinementsProps = CurrentRefinementsConnectorParams;
 
-export function useCurrentRefinements(props?: UseCurrentRefinementsProps) {
+export function useCurrentRefinements(
+  props?: UseCurrentRefinementsProps,
+  widgetType?: string
+) {
   return useConnector<
     CurrentRefinementsConnectorParams,
     CurrentRefinementsWidgetDescription
-  >(connectCurrentRefinements, props);
+  >(connectCurrentRefinements, props, widgetType);
 }

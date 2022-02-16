@@ -9,9 +9,12 @@ import type {
 
 export type UseRefinementListProps = RefinementListConnectorParams;
 
-export function useRefinementList(props: UseRefinementListProps) {
+export function useRefinementList(
+  props: UseRefinementListProps,
+  widgetType?: string
+) {
   return useConnector<
     RefinementListConnectorParams,
     RefinementListWidgetDescription
-  >(connectRefinementList, props);
+  >(connectRefinementList, props, widgetType);
 }

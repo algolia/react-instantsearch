@@ -12,14 +12,21 @@ export type UseDynamicWidgetsProps = Omit<
   'widgets' | 'fallbackWidget'
 >;
 
-export function useDynamicWidgets(props?: UseDynamicWidgetsProps) {
+export function useDynamicWidgets(
+  props?: UseDynamicWidgetsProps,
+  widgetType?: string
+) {
   return useConnector<
     DynamicWidgetsConnectorParams,
     DynamicWidgetsWidgetDescription
-  >(connectDynamicWidgets, {
-    ...props,
-    // We don't rely on InstantSearch.js for rendering widgets because React
-    // directly manipulates the children.
-    widgets: [],
-  });
+  >(
+    connectDynamicWidgets,
+    {
+      ...props,
+      // We don't rely on InstantSearch.js for rendering widgets because React
+      // directly manipulates the children.
+      widgets: [],
+    },
+    widgetType
+  );
 }

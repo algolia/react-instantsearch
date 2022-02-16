@@ -9,9 +9,10 @@ import type {
 
 export type UsePaginationProps = PaginationConnectorParams;
 
-export function usePagination(props?: UsePaginationProps) {
+export function usePagination(props?: UsePaginationProps, widgetType?: string) {
   return useConnector<PaginationConnectorParams, PaginationWidgetDescription>(
     connectPagination,
-    props
+    props,
+    widgetType
   );
 }

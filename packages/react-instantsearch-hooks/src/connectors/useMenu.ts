@@ -9,9 +9,10 @@ import type {
 
 export type UseMenuProps = MenuConnectorParams;
 
-export function useMenu(props: UseMenuProps) {
+export function useMenu(props: UseMenuProps, widgetType?: string) {
   return useConnector<MenuConnectorParams, MenuWidgetDescription>(
     connectMenu,
-    props
+    props,
+    widgetType
   );
 }

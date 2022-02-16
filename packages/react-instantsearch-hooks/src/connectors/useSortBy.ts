@@ -9,9 +9,10 @@ import type {
 
 export type UseSortByProps = SortByConnectorParams;
 
-export function useSortBy(props: UseSortByProps) {
+export function useSortBy(props: UseSortByProps, widgetType?: string) {
   return useConnector<SortByConnectorParams, SortByWidgetDescription>(
     connectSortBy,
-    props
+    props,
+    widgetType
   );
 }

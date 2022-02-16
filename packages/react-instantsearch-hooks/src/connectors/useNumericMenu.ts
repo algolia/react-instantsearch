@@ -9,9 +9,13 @@ import type {
 
 export type UseNumericMenuProps = NumericMenuConnectorParams;
 
-export function useNumericMenu(props: UseNumericMenuProps) {
+export function useNumericMenu(
+  props: UseNumericMenuProps,
+  widgetType?: string
+) {
   return useConnector<NumericMenuConnectorParams, NumericMenuWidgetDescription>(
     connectNumericMenu,
-    props
+    props,
+    widgetType
   );
 }

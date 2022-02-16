@@ -9,9 +9,10 @@ import type {
 
 export type UseBreadcrumbProps = BreadcrumbConnectorParams;
 
-export function useBreadcrumb(props: UseBreadcrumbProps) {
+export function useBreadcrumb(props: UseBreadcrumbProps, widgetType?: string) {
   return useConnector<BreadcrumbConnectorParams, BreadcrumbWidgetDescription>(
     connectBreadcrumb,
-    props
+    props,
+    widgetType
   );
 }
