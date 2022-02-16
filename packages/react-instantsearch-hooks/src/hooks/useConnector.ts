@@ -15,7 +15,7 @@ export function useConnector<
 >(
   connector: Connector<TDescription, TProps>,
   props: TProps = {} as TProps,
-  widgetType?: string
+  widgetType: string | undefined
 ): TDescription['renderState'] {
   const serverContext = useInstantSearchServerContext();
   const search = useInstantSearchContext();
