@@ -1,13 +1,13 @@
 import { act, render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
+import { InstantSearch } from 'react-instantsearch-hooks';
 
 import { createSearchClient } from '../../../../../test/mock';
-import { InstantSearch } from '../../index';
 import { SearchBox } from '../SearchBox';
 
-import type { InstantSearchProps } from '../../index';
 import type { UiState } from 'instantsearch.js';
+import type { InstantSearchProps } from 'react-instantsearch-hooks';
 
 const searchClient = createSearchClient();
 
