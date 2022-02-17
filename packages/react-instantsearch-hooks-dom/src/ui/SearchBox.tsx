@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { cx } from './lib/cx';
+
 import type { ChangeEvent, FormEvent, RefObject } from 'react';
 
 export type SearchBoxProps = React.ComponentProps<'div'> & {
@@ -47,7 +49,7 @@ export function SearchBox({
   }
 
   return (
-    <div className="ais-SearchBox" {...props}>
+    <div {...props} className={cx('ais-SearchBox', props.className)}>
       <form
         action=""
         className="ais-SearchBox-form"

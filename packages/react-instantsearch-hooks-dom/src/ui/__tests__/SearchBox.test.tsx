@@ -2,8 +2,9 @@ import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React, { createRef } from 'react';
 
-// eslint-disable-next-line @typescript-eslint/consistent-type-imports
-import { SearchBox, SearchBoxProps } from '../SearchBox';
+import { SearchBox } from '../SearchBox';
+
+import type { SearchBoxProps } from '../SearchBox';
 
 describe('SearchBox', () => {
   function createProps(props: Partial<SearchBoxProps>) {

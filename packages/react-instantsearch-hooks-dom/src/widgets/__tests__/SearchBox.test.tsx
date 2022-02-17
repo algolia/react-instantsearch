@@ -3,9 +3,11 @@ import userEvent from '@testing-library/user-event';
 import React from 'react';
 
 import { createSearchClient } from '../../../../../test/mock';
-// eslint-disable-next-line @typescript-eslint/consistent-type-imports
-import { InstantSearch, InstantSearchProps } from '../../index';
+import { InstantSearch } from '../../index';
 import { SearchBox } from '../SearchBox';
+
+import type { InstantSearchProps } from '../../index';
+import type { UiState } from 'instantsearch.js';
 
 const searchClient = createSearchClient();
 
@@ -158,14 +160,58 @@ describe('SearchBox', () => {
     });
   });
 
-  test('resets query on reset event', () => {
-    // let lastUiState = {};
+  test('sets query on change event', async () => {
+    let lastUiState: UiState = {};
 
     const { container } = render(
       <SearchProvider
-      // onStateChange={({ uiState }) => {
-      // lastUiState = uiState;
-      // }}
+        initialUiState={{
+          indexName: {
+            query: 'something',
+          },
+        }}
+        onStateChange={({ uiState }) => {
+          lastUiState = uiState;
+        }}
+      >
+        <SearchBox />
+      </SearchProvider>
+    );
+
+    const input = container.querySelector<HTMLInputElement>(
+      '.ais-SearchBox-input'
+    )!;
+    input.focus();
+
+    await waitFor(() => {
+      expect(input).toHaveValue('something');
+    });
+
+    ' else'.split('').forEach((letter) => {
+      act(() => {
+        userEvent.type(input, letter);
+      });
+    });
+
+    await waitFor(() => {
+      expect(lastUiState.indexName.query).toEqual('something else');
+      expect(input).toHaveValue('something else');
+    });
+  });
+
+  test('resets query on reset event', async () => {
+    let lastUiState: UiState = {};
+
+    const { container } = render(
+      <SearchProvider
+        initialUiState={{
+          indexName: {
+            query: 'something',
+          },
+        }}
+        onStateChange={({ uiState }) => {
+          lastUiState = uiState;
+        }}
       >
         <SearchBox />
       </SearchProvider>
@@ -177,28 +223,21 @@ describe('SearchBox', () => {
     const input = container.querySelector<HTMLInputElement>(
       '.ais-SearchBox-input'
     )!;
-    input.focus();
 
-    act(() => {
-      userEvent.type(input, 'query');
+    await waitFor(() => {
+      expect(input.value).toEqual('something');
     });
-
-    // await waitFor(() => {
-    //   expect(lastUiState.indexName.query).toEqual('query');
-    // });
 
     act(() => {
       userEvent.click(resetButton);
     });
 
-    // await waitFor(() => {
-    //   expect(lastUiState.indexName.query).toEqual('');
-    // });
+    await waitFor(() => {
+      expect(lastUiState.indexName.query).toEqual(undefined);
+    });
   });
 
-  test.todo('sets query on change event');
-
-  test('restore InstantSearch query when out of sync on input is blurred', () => {
+  test('restore InstantSearch query when out of sync on input is blurred', async () => {
     let localSetUiState;
 
     const { container } = render(
@@ -213,13 +252,19 @@ describe('SearchBox', () => {
     const input = container.querySelector<HTMLInputElement>(
       '.ais-SearchBox-input'
     )!;
-
-    // Trigger a change to get the `setUiState` reference
-    userEvent.type(input, 'q');
+    input.focus();
 
     act(() => {
-      localSetUiState({ indexName: { query: 'new query' } });
+      // Trigger a change to get the `setUiState` reference
+      userEvent.type(input, 'q');
+    });
 
+    act(() => {
+      input.blur();
+      localSetUiState({ indexName: { query: 'new query' } });
+    });
+
+    await waitFor(() => {
       expect(input).toHaveValue('new query');
     });
   });

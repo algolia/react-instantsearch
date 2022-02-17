@@ -47,12 +47,11 @@ export function SearchBox(props: SearchBoxProps) {
 
   return (
     <SearchBoxUiComponent
-      className={props.className}
+      {...props}
       inputRef={inputRef}
       isSearchStalled={isSearchStalled}
       onChange={onChange}
       onReset={onReset}
-      placeholder={props.placeholder}
       value={value}
     />
   );
