@@ -53,5 +53,8 @@
   "peerDependencies": {
     "react": ">= 16.8.0 < 19",
     "react-dom": ">= 16.8.0 < 19"
+  },
+  "devDependencies": {
+    "@testing-library/user-event": "^13.5.0"
   }
 }

@@ -1,6 +1,8 @@
-import React, { ChangeEvent, FormEvent, RefObject } from 'react';
+import React from 'react';
 
-export type ControlledSearchBoxProps = React.ComponentProps<'div'> & {
+import type { ChangeEvent, FormEvent, RefObject } from 'react';
+
+export type SearchBoxProps = React.ComponentProps<'div'> & {
   inputRef: RefObject<HTMLInputElement>;
   isSearchStalled: boolean;
   onChange(event: ChangeEvent): void;
@@ -10,7 +12,7 @@ export type ControlledSearchBoxProps = React.ComponentProps<'div'> & {
   value: string;
 };
 
-export function ControlledSearchBox({
+export function SearchBox({
   inputRef,
   isSearchStalled,
   onChange,
@@ -19,7 +21,7 @@ export function ControlledSearchBox({
   placeholder,
   value,
   ...props
-}: ControlledSearchBoxProps) {
+}: SearchBoxProps) {
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
     event.stopPropagation();

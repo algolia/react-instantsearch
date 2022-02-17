@@ -1,12 +1,17 @@
-import React, { useEffect, useRef, useState, ChangeEvent } from 'react';
-import { useSearchBox, UseSearchBoxProps } from 'react-instantsearch-hooks';
+import React, { useEffect, useRef, useState } from 'react';
+import { useSearchBox } from 'react-instantsearch-hooks';
 
-import { ControlledSearchBox } from './ControlledSearchBox';
+import { SearchBox as SearchBoxUiComponent } from '../ui/SearchBox';
+
+import type { ChangeEvent } from 'react';
+import type { UseSearchBoxProps } from 'react-instantsearch-hooks';
 
 export type SearchBoxProps = React.ComponentProps<'div'> & UseSearchBoxProps;
 
 export function SearchBox(props: SearchBoxProps) {
-  const { query, refine, isSearchStalled } = useSearchBox(props);
+  const { query, refine, isSearchStalled } = useSearchBox(props, {
+    $$widgetType: 'ais.searchBox',
+  });
   const [value, setValue] = useState(query);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -41,7 +46,7 @@ export function SearchBox(props: SearchBoxProps) {
   }, [query]);
 
   return (
-    <ControlledSearchBox
+    <SearchBoxUiComponent
       className={props.className}
       inputRef={inputRef}
       isSearchStalled={isSearchStalled}
