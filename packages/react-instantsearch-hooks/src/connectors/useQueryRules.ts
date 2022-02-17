@@ -2,6 +2,7 @@ import connectQueryRules from 'instantsearch.js/es/connectors/query-rules/connec
 
 import { useConnector } from '../hooks/useConnector';
 
+import type { AdditionalWidgetProperties } from '../hooks/useConnector';
 import type {
   QueryRulesConnectorParams,
   QueryRulesWidgetDescription,
@@ -9,10 +10,13 @@ import type {
 
 export type UseQueryRulesProps = QueryRulesConnectorParams;
 
-export function useQueryRules(props?: UseQueryRulesProps, widgetType?: string) {
+export function useQueryRules(
+  props?: UseQueryRulesProps,
+  additionalWidgetProperties?: AdditionalWidgetProperties
+) {
   return useConnector<QueryRulesConnectorParams, QueryRulesWidgetDescription>(
     connectQueryRules,
     props,
-    widgetType
+    additionalWidgetProperties
   );
 }

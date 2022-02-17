@@ -2,6 +2,7 @@ import connectCurrentRefinements from 'instantsearch.js/es/connectors/current-re
 
 import { useConnector } from '../hooks/useConnector';
 
+import type { AdditionalWidgetProperties } from '../hooks/useConnector';
 import type {
   CurrentRefinementsConnectorParams,
   CurrentRefinementsWidgetDescription,
@@ -11,10 +12,10 @@ export type UseCurrentRefinementsProps = CurrentRefinementsConnectorParams;
 
 export function useCurrentRefinements(
   props?: UseCurrentRefinementsProps,
-  widgetType?: string
+  additionalWidgetProperties?: AdditionalWidgetProperties
 ) {
   return useConnector<
     CurrentRefinementsConnectorParams,
     CurrentRefinementsWidgetDescription
-  >(connectCurrentRefinements, props, widgetType);
+  >(connectCurrentRefinements, props, additionalWidgetProperties);
 }

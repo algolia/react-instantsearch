@@ -2,6 +2,7 @@ import connectHitsPerPage from 'instantsearch.js/es/connectors/hits-per-page/con
 
 import { useConnector } from '../hooks/useConnector';
 
+import type { AdditionalWidgetProperties } from '../hooks/useConnector';
 import type {
   HitsPerPageConnectorParams,
   HitsPerPageWidgetDescription,
@@ -11,11 +12,11 @@ export type UseHitsPerPageProps = HitsPerPageConnectorParams;
 
 export function useHitsPerPage(
   props: UseHitsPerPageProps,
-  widgetType?: string
+  additionalWidgetProperties?: AdditionalWidgetProperties
 ) {
   return useConnector<HitsPerPageConnectorParams, HitsPerPageWidgetDescription>(
     connectHitsPerPage,
     props,
-    widgetType
+    additionalWidgetProperties
   );
 }

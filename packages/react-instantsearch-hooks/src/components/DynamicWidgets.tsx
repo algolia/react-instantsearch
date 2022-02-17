@@ -29,7 +29,9 @@ export function DynamicWidgets({
   fallbackComponent: Fallback = FallbackComponent,
   ...props
 }: DynamicWidgetsProps) {
-  const { attributesToRender } = useDynamicWidgets(props, 'ais.dynamicWidgets');
+  const { attributesToRender } = useDynamicWidgets(props, {
+    $$widgetType: 'ais.dynamicWidgets',
+  });
   const widgets: Map<string, ReactChild> = new Map();
 
   React.Children.forEach(children, (child) => {

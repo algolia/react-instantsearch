@@ -126,7 +126,7 @@ describe('useConnector', () => {
     const wrapper = createInstantSearchTestWrapper();
 
     const { result, waitForNextUpdate } = renderHook(
-      () => useConnector(connectCustomSearchBox, {}, undefined),
+      () => useConnector(connectCustomSearchBox, {}, {}),
       { wrapper }
     );
 
@@ -163,7 +163,7 @@ describe('useConnector', () => {
     }
 
     const { result, waitForNextUpdate } = renderHook(
-      () => useConnector(connectCustomSearchBox, {}, undefined),
+      () => useConnector(connectCustomSearchBox, {}, {}),
       { wrapper: Wrapper }
     );
 
@@ -192,8 +192,7 @@ describe('useConnector', () => {
     const wrapper = createInstantSearchTestWrapper();
 
     const { result, waitForNextUpdate } = renderHook(
-      () =>
-        useConnector(connectCustomSearchBoxWithoutRenderState, {}, undefined),
+      () => useConnector(connectCustomSearchBoxWithoutRenderState, {}, {}),
       { wrapper }
     );
 
@@ -235,7 +234,7 @@ describe('useConnector', () => {
       );
     }
 
-    renderHook(() => useConnector(connectCustomSearchBoxMock, {}, undefined), {
+    renderHook(() => useConnector(connectCustomSearchBoxMock, {}, {}), {
       wrapper: SearchProvider,
     });
 
@@ -270,7 +269,7 @@ describe('useConnector', () => {
       useConnector<Record<never, never>, CustomSearchBoxWidgetDescription>(
         connectCustomSearchBox,
         {},
-        'test.customSearchBox'
+        { $$widgetType: 'test.customSearchBox' }
       );
 
       return null;

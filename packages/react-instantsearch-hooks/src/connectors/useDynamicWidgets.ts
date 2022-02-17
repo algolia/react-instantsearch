@@ -2,6 +2,7 @@ import connectDynamicWidgets from 'instantsearch.js/es/connectors/dynamic-widget
 
 import { useConnector } from '../hooks/useConnector';
 
+import type { AdditionalWidgetProperties } from '../hooks/useConnector';
 import type {
   DynamicWidgetsConnectorParams,
   DynamicWidgetsWidgetDescription,
@@ -14,7 +15,7 @@ export type UseDynamicWidgetsProps = Omit<
 
 export function useDynamicWidgets(
   props?: UseDynamicWidgetsProps,
-  widgetType?: string
+  additionalWidgetProperties?: AdditionalWidgetProperties
 ) {
   return useConnector<
     DynamicWidgetsConnectorParams,
@@ -27,6 +28,6 @@ export function useDynamicWidgets(
       // directly manipulates the children.
       widgets: [],
     },
-    widgetType
+    additionalWidgetProperties
   );
 }
