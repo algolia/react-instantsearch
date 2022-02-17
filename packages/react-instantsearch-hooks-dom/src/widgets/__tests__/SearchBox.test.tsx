@@ -183,8 +183,6 @@ describe('SearchBox', () => {
       userEvent.type(input, 'query');
     });
 
-    console.log(lastUiState);
-
     await waitFor(() => {
       expect(lastUiState.indexName.query).toEqual('query');
     });
