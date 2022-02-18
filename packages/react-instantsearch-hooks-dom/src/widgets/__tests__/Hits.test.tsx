@@ -46,7 +46,6 @@ describe('Hits', () => {
     });
   });
 
-  // TODO: assert with right search response
   test('renders with custom hitComponent', async () => {
     const client = createSearchClient({
       search: (requests) =>
@@ -69,27 +68,57 @@ describe('Hits', () => {
     );
 
     await waitFor(() => {
+      expect(container.querySelectorAll('strong')).toHaveLength(3);
       expect(container.querySelector('.ais-Hits')).toMatchInlineSnapshot(`
         <div
           class="ais-Hits"
         >
           <ol
             class="ais-Hits-list"
-          />
+          >
+            <li
+              class="ais-Hits-item"
+            >
+              <strong>
+                1
+              </strong>
+            </li>
+            <li
+              class="ais-Hits-item"
+            >
+              <strong>
+                2
+              </strong>
+            </li>
+            <li
+              class="ais-Hits-item"
+            >
+              <strong>
+                3
+              </strong>
+            </li>
+          </ol>
         </div>
       `);
     });
   });
 
-  // TODO: assert with right search response
   test('renders with a non-default hit shape', async () => {
+    type CustomHit = {
+      somethingSpecial: number;
+    };
+
     const client = createSearchClient({
       search: (requests) =>
         Promise.resolve(
           createMultiSearchResponse(
             ...requests.map((request) =>
-              createSingleSearchResponse<Record<string, any>>({
-                hits: [{ objectID: '1' }, { objectID: '2' }, { objectID: '3' }],
+              createSingleSearchResponse<CustomHit>({
+                hits: [
+                  { objectID: '1', somethingSpecial: 1 },
+                  { objectID: '2', somethingSpecial: 2 },
+                  { objectID: '3', somethingSpecial: 3 },
+                ],
                 index: request.indexName,
               })
             )
@@ -99,22 +128,43 @@ describe('Hits', () => {
 
     const { container } = render(
       <SearchProvider searchClient={client}>
-        <Hits<{
-          somethingSpecial: boolean;
-        }>
+        <Hits<CustomHit>
           hitComponent={({ hit }) => <strong>{hit.somethingSpecial}</strong>}
         />
       </SearchProvider>
     );
 
     await waitFor(() => {
+      expect(container.querySelectorAll('strong')).toHaveLength(3);
       expect(container.querySelector('.ais-Hits')).toMatchInlineSnapshot(`
         <div
           class="ais-Hits"
         >
           <ol
             class="ais-Hits-list"
-          />
+          >
+            <li
+              class="ais-Hits-item"
+            >
+              <strong>
+                1
+              </strong>
+            </li>
+            <li
+              class="ais-Hits-item"
+            >
+              <strong>
+                2
+              </strong>
+            </li>
+            <li
+              class="ais-Hits-item"
+            >
+              <strong>
+                3
+              </strong>
+            </li>
+          </ol>
         </div>
       `);
     });
