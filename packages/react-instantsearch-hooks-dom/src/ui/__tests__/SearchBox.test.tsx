@@ -130,6 +130,63 @@ describe('SearchBox', () => {
     `);
   });
 
+  test('renders with component slots', () => {
+    const props = createProps({
+      resetIconComponent: () => <>reset</>,
+      submitIconComponent: () => <>submit</>,
+      loadingIconComponent: () => <>loading</>,
+    });
+
+    const { container } = render(<SearchBox {...props} />);
+
+    expect(container).toMatchInlineSnapshot(`
+      <div>
+        <div
+          class="ais-SearchBox"
+        >
+          <form
+            action=""
+            class="ais-SearchBox-form"
+            novalidate=""
+          >
+            <input
+              autocapitalize="off"
+              autocomplete="off"
+              autocorrect="off"
+              class="ais-SearchBox-input"
+              maxlength="512"
+              placeholder=""
+              spellcheck="false"
+              type="search"
+              value=""
+            />
+            <button
+              class="ais-SearchBox-submit"
+              title="Submit the search query."
+              type="submit"
+            >
+              submit
+            </button>
+            <button
+              class="ais-SearchBox-reset"
+              hidden=""
+              title="Clear the search query."
+              type="reset"
+            >
+              reset
+            </button>
+            <span
+              class="ais-SearchBox-loadingIndicator"
+              hidden=""
+            >
+              loading
+            </span>
+          </form>
+        </div>
+      </div>
+    `);
+  });
+
   test('merges provided class names', () => {
     const props = createProps({ className: 'MySearchBox' });
 

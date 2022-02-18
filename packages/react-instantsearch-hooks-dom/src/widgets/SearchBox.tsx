@@ -3,10 +3,15 @@ import { useSearchBox } from 'react-instantsearch-hooks';
 
 import { SearchBox as SearchBoxUiComponent } from '../ui/SearchBox';
 
+import type { SearchBoxProps as SearchBoxUiComponentProps } from '../ui/SearchBox';
 import type { ChangeEvent } from 'react';
 import type { UseSearchBoxProps } from 'react-instantsearch-hooks';
 
-export type SearchBoxProps = React.ComponentProps<'div'> & UseSearchBoxProps;
+export type SearchBoxProps = Omit<
+  SearchBoxUiComponentProps,
+  'inputRef' | 'isSearchStalled' | 'onChange' | 'onReset' | 'value'
+> &
+  UseSearchBoxProps;
 
 export function SearchBox(props: SearchBoxProps) {
   const { query, refine, isSearchStalled } = useSearchBox(props, {
