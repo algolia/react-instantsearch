@@ -13,7 +13,7 @@ export type UseHitsProps<
   THit extends Record<string, unknown> = Record<string, unknown>
 > = InfiniteHitsConnectorParams<THit>;
 
-export function useHits<
+export function useInfiniteHits<
   THit extends Record<string, unknown> = Record<string, unknown>
 >(
   props?: UseHitsProps<THit>,
