@@ -6,16 +6,21 @@ import type { AdditionalWidgetProperties } from '../hooks/useConnector';
 import type {
   HitsConnectorParams,
   HitsWidgetDescription,
+  HitsConnector,
 } from 'instantsearch.js/es/connectors/hits/connectHits';
 
-export type UseHitsProps = HitsConnectorParams;
+export type UseHitsProps<
+  THit extends Record<string, unknown> = Record<string, unknown>
+> = HitsConnectorParams<THit>;
 
-export function useHits(
-  props?: UseHitsProps,
+export function useHits<
+  THit extends Record<string, unknown> = Record<string, unknown>
+>(
+  props?: UseHitsProps<THit>,
   additionalWidgetProperties?: AdditionalWidgetProperties
 ) {
-  return useConnector<HitsConnectorParams, HitsWidgetDescription>(
-    connectHits,
+  return useConnector<HitsConnectorParams<THit>, HitsWidgetDescription<THit>>(
+    connectHits as HitsConnector<THit>,
     props,
     additionalWidgetProperties
   );
