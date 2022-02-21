@@ -9,14 +9,14 @@ import type {
   InfiniteHitsConnector,
 } from 'instantsearch.js/es/connectors/infinite-hits/connectInfiniteHits';
 
-export type UseHitsProps<
+export type UseInfiniteHitsProps<
   THit extends Record<string, unknown> = Record<string, unknown>
 > = InfiniteHitsConnectorParams<THit>;
 
 export function useInfiniteHits<
   THit extends Record<string, unknown> = Record<string, unknown>
 >(
-  props?: UseHitsProps<THit>,
+  props?: UseInfiniteHitsProps<THit>,
   additionalWidgetProperties?: AdditionalWidgetProperties
 ) {
   return useConnector<
