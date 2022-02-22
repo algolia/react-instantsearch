@@ -1,3 +1,13 @@
+# [6.23.0](https://github.com/algolia/react-instantsearch/compare/v6.22.0...v6.23.0) (2022-02-22)
+
+
+### Features
+
+* **hooks-dom:** introduce Hooks DOM package ([#3358](https://github.com/algolia/react-instantsearch/issues/3358)) ([f6420e9](https://github.com/algolia/react-instantsearch/commit/f6420e9e504bb52575356dadd779755daa2a57b8))
+* **hooks:** allow additional widget properties to be passed from hooks ([#3359](https://github.com/algolia/react-instantsearch/issues/3359)) ([a047be4](https://github.com/algolia/react-instantsearch/commit/a047be45c7fce7ee28f7d6f61d2fbfa79e3ed2d0))
+
+
+
 # [6.22.0](https://github.com/algolia/react-instantsearch/compare/v6.21.1...v6.22.0) (2022-02-01)
 
 
