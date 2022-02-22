@@ -19,9 +19,13 @@ import {
   createSFFVResponse,
 } from './createAPIResponse';
 
-export function createSearchClient(
-  options: Partial<SearchClient> = {}
-): SearchClient {
+type OverrideKeys<TTarget, TOptions> = TOptions extends Record<string, never>
+  ? TTarget
+  : Omit<TTarget, keyof TOptions> & TOptions;
+
+export function createSearchClient<
+  TOptions extends Partial<SearchClient> = Record<string, never>
+>(options: TOptions = {} as TOptions): OverrideKeys<SearchClient, TOptions> {
   const appId = options.appId || 'appId';
   const transporter = createTransporter({
     timeouts: {
@@ -72,5 +76,5 @@ export function createSearchClient(
       Promise.resolve([createSFFVResponse()])
     ),
     ...options,
-  };
+  } as SearchClient as OverrideKeys<SearchClient, TOptions>;
 }
