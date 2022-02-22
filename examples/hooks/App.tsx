@@ -7,6 +7,7 @@ import {
   ClearRefinements,
   DynamicWidgets,
   Hits,
+  InfiniteHits,
   SearchBox,
 } from 'react-instantsearch-hooks-dom';
 
@@ -16,7 +17,6 @@ import {
   HierarchicalMenu,
   Highlight,
   HitsPerPage,
-  InfiniteHits,
   Menu,
   NumericMenu,
   Pagination,

@@ -2,7 +2,6 @@ export * from './Breadcrumb';
 export * from './CurrentRefinements';
 export * from './HierarchicalMenu';
 export * from './Highlight';
-export * from './InfiniteHits';
 export * from './Menu';
 export * from './NumericMenu';
 export * from './Pagination';
