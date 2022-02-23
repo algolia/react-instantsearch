@@ -20,11 +20,16 @@ export function ClearRefinements(props: ClearRefinementsProps) {
     transformItems,
     ...otherProps
   } = props;
-  const { canRefine, refine } = useClearRefinements({
-    includedAttributes,
-    excludedAttributes,
-    transformItems,
-  });
+  const { canRefine, refine } = useClearRefinements(
+    {
+      includedAttributes,
+      excludedAttributes,
+      transformItems,
+    },
+    {
+      $$widgetType: 'ais.clearRefinements',
+    }
+  );
 
   return (
     <ClearRefinementsUiComponent
