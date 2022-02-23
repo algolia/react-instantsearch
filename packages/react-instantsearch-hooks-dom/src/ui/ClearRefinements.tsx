@@ -7,11 +7,11 @@ export type ClearRefinementsProps = React.HTMLAttributes<HTMLDivElement> &
     React.ButtonHTMLAttributes<HTMLButtonElement>,
     'disabled' | 'onClick'
   > & {
-    children?: React.ReactNode;
+    resetLabel?: string;
   };
 
 export function ClearRefinements({
-  children = 'Clear refinements',
+  resetLabel = 'Clear refinements',
   disabled = false,
   onClick = () => {},
   ...props
@@ -26,7 +26,7 @@ export function ClearRefinements({
           disabled ? 'ais-ClearRefinements-button--disabled' : ''
         )}
       >
-        {children}
+        {resetLabel}
       </button>
     </div>
   );
