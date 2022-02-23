@@ -4,13 +4,13 @@ import React from 'react';
 import {
   InstantSearch,
   Configure,
+  ClearRefinements,
   DynamicWidgets,
   Hits,
 } from 'react-instantsearch-hooks-dom';
 
 import {
   Breadcrumb,
-  ClearRefinements,
   CurrentRefinements,
   HierarchicalMenu,
   Highlight,
