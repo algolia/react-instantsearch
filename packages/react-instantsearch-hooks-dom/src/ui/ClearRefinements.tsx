@@ -23,7 +23,7 @@ export function ClearRefinements({
         onClick={onClick}
         className={cx(
           'ais-ClearRefinements-button',
-          disabled ? 'ais-ClearRefinements-button--disabled' : ''
+          disabled && 'ais-ClearRefinements-button--disabled'
         )}
       >
         {resetLabel}
