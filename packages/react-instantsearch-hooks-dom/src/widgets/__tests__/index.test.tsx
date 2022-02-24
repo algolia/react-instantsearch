@@ -50,6 +50,7 @@ function initializeWidgets() {
 
 describe('widgets', () => {
   const widgets = initializeWidgets();
+
   test('renders one widget', () => {
     widgets.forEach(({ name, renderedWidgets }) => {
       expect({ name, renderedWidgets }).toEqual({
@@ -62,7 +63,7 @@ describe('widgets', () => {
   });
 
   describe('$$type', () => {
-    test('present in every widget', () => {
+    test('is present in every widget', () => {
       widgets.forEach(({ name, renderedWidgets }) => {
         renderedWidgets.forEach((widget) =>
           expect([name, widget.$$type]).toEqual([name, expect.any(String)])
@@ -70,7 +71,7 @@ describe('widgets', () => {
       });
     });
 
-    test('starts with ais.', () => {
+    test('starts with "ais."', () => {
       widgets.forEach(({ name, widget }) =>
         expect([name, widget.$$type.substr(0, 4)]).toEqual([name, 'ais.'])
       );
@@ -78,13 +79,13 @@ describe('widgets', () => {
   });
 
   describe('$$widgetType', () => {
-    test('present in every widget', () => {
+    test('is present in every widget', () => {
       widgets.forEach(({ name, widget }) =>
         expect([name, widget.$$widgetType]).toEqual([name, expect.any(String)])
       );
     });
 
-    test('starts with ais.', () => {
+    test('starts with "ais."', () => {
       widgets.forEach(({ name, widget }) =>
         expect([name, widget.$$widgetType!.substr(0, 4)]).toEqual([
           name,
