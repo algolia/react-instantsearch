@@ -9,7 +9,7 @@ import type {
   JSXElementConstructor,
 } from 'react';
 
-export type SearchBoxProps = React.ComponentProps<'div'> & {
+export type SearchBoxProps = React.HTMLAttributes<HTMLDivElement> & {
   inputRef: RefObject<HTMLInputElement>;
   isSearchStalled: boolean;
   onChange(event: ChangeEvent): void;
