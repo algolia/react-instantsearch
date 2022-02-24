@@ -124,6 +124,11 @@ describe('widgets', () => {
           "$$widgetType": "ais.hits",
           "name": "Hits",
         },
+        Object {
+          "$$type": "ais.searchBox",
+          "$$widgetType": "ais.searchBox",
+          "name": "SearchBox",
+        },
       ]
     `);
   });

@@ -7,6 +7,7 @@ import {
   ClearRefinements,
   DynamicWidgets,
   Hits,
+  SearchBox,
 } from 'react-instantsearch-hooks-dom';
 
 import {
@@ -25,7 +26,6 @@ import {
   QueryRuleCustomData,
   RangeInput,
   RefinementList,
-  SearchBox,
   SortBy,
   ToggleRefinement,
 } from './components';
