@@ -105,7 +105,7 @@ describe('widgets', () => {
     });
   });
 
-  test('name, type and widgetType are equivalent', () => {
+  test('name, $$type and $$widgetType are equivalent', () => {
     expect(
       widgets.map(({ name, widget: { $$type, $$widgetType } }) => ({
         name,
