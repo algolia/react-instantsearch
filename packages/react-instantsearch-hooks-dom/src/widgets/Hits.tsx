@@ -7,16 +7,14 @@ import type { HitsProps as HitsUiComponentProps } from '../ui/Hits';
 import type { Hit, BaseHit } from 'instantsearch.js';
 import type { UseHitsProps } from 'react-instantsearch-hooks';
 
-export type HitsProps<THit> = Omit<HitsUiComponentProps<Hit & THit>, 'hits'> &
-  UseHitsProps;
+export type HitsProps<THit extends BaseHit> = Omit<
+  HitsUiComponentProps<Hit<THit>>,
+  'hits'
+> &
+  UseHitsProps<THit>;
 
 export function Hits<THit extends BaseHit = BaseHit>(props: HitsProps<THit>) {
-  // @TODO: make useHit generic so this cast is no longer needed.
-  // for that, connectHits needs to be generic too,
-  // and therefore Connector as well
-  const hits = useHits(props, { $$widgetType: 'ais.hits' }).hits as Array<
-    THit & Hit
-  >;
+  const { hits } = useHits<THit>(props, { $$widgetType: 'ais.hits' });
 
   return <HitsUiComponent {...props} hits={hits} />;
 }
