@@ -2,26 +2,17 @@ import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import {
-  InstantSearch,
   useCurrentRefinements,
   useRefinementList,
 } from 'react-instantsearch-hooks';
 
-import { createSearchClient } from '../../../../../test/mock';
-import { wait } from '../../../../../test/utils';
+import { InstantSearchHooksTestWrapper, wait } from '../../../../../test/utils';
 import { ClearRefinements } from '../ClearRefinements';
 
 import type {
-  InstantSearchProps,
   UseRefinementListProps,
   UseCurrentRefinementsProps,
 } from 'react-instantsearch-hooks';
-
-const searchClient = createSearchClient();
-
-type SearchProviderProps = {
-  children: React.ReactNode;
-} & Partial<InstantSearchProps>;
 
 const consoleError = jest.spyOn(console, 'error');
 
@@ -36,7 +27,7 @@ afterAll(() => {
 describe('ClearRefinements', () => {
   test('renders with default props', async () => {
     const { container } = render(
-      <SearchProvider
+      <InstantSearchHooksTestWrapper
         initialUiState={{
           indexName: {
             refinementList: {
@@ -47,7 +38,7 @@ describe('ClearRefinements', () => {
       >
         <RefinementList attribute="brand" />
         <ClearRefinements />
-      </SearchProvider>
+      </InstantSearchHooksTestWrapper>
     );
 
     await wait(0);
@@ -69,9 +60,9 @@ describe('ClearRefinements', () => {
 
   test('renders with a disabled button when there are no refinements', async () => {
     const { container } = render(
-      <SearchProvider>
+      <InstantSearchHooksTestWrapper>
         <ClearRefinements />
-      </SearchProvider>
+      </InstantSearchHooksTestWrapper>
     );
 
     await wait(0);
@@ -98,7 +89,7 @@ describe('ClearRefinements', () => {
 
   test('renders with a custom label', async () => {
     const { container } = render(
-      <SearchProvider
+      <InstantSearchHooksTestWrapper
         initialUiState={{
           indexName: {
             refinementList: {
@@ -109,7 +100,7 @@ describe('ClearRefinements', () => {
       >
         <RefinementList attribute="brand" />
         <ClearRefinements resetLabel="Clear" />
-      </SearchProvider>
+      </InstantSearchHooksTestWrapper>
     );
 
     await wait(0);
@@ -134,7 +125,7 @@ describe('ClearRefinements', () => {
 
   test('clears all refinements', async () => {
     const { container, queryAllByRole } = render(
-      <SearchProvider
+      <InstantSearchHooksTestWrapper
         initialUiState={{
           indexName: {
             refinementList: {
@@ -146,7 +137,7 @@ describe('ClearRefinements', () => {
         <RefinementList attribute="brand" />
         <CurrentRefinements />
         <ClearRefinements />
-      </SearchProvider>
+      </InstantSearchHooksTestWrapper>
     );
 
     await wait(0);
@@ -205,7 +196,7 @@ describe('ClearRefinements', () => {
 
   test('inclusively restricts what refinements to clear', async () => {
     const { container, queryAllByRole } = render(
-      <SearchProvider
+      <InstantSearchHooksTestWrapper
         initialUiState={{
           indexName: {
             refinementList: {
@@ -219,7 +210,7 @@ describe('ClearRefinements', () => {
         <RefinementList attribute="categories" />
         <CurrentRefinements />
         <ClearRefinements includedAttributes={['categories']} />
-      </SearchProvider>
+      </InstantSearchHooksTestWrapper>
     );
 
     await wait(0);
@@ -298,7 +289,7 @@ describe('ClearRefinements', () => {
 
   test('exclusively restricts what refinements to clear', async () => {
     const { container, queryAllByRole } = render(
-      <SearchProvider
+      <InstantSearchHooksTestWrapper
         initialUiState={{
           indexName: {
             refinementList: {
@@ -312,7 +303,7 @@ describe('ClearRefinements', () => {
         <RefinementList attribute="categories" />
         <CurrentRefinements />
         <ClearRefinements excludedAttributes={['categories']} />
-      </SearchProvider>
+      </InstantSearchHooksTestWrapper>
     );
 
     await wait(0);
@@ -391,7 +382,7 @@ describe('ClearRefinements', () => {
 
   test('restricts what refinements to clear with custom logic', async () => {
     const { container, queryAllByRole } = render(
-      <SearchProvider
+      <InstantSearchHooksTestWrapper
         initialUiState={{
           indexName: {
             refinementList: {
@@ -407,7 +398,7 @@ describe('ClearRefinements', () => {
         <ClearRefinements
           transformItems={(items) => items.filter((item) => item !== 'brand')}
         />
-      </SearchProvider>
+      </InstantSearchHooksTestWrapper>
     );
 
     await wait(0);
@@ -486,12 +477,12 @@ describe('ClearRefinements', () => {
 
   test('forwards `div` props to the root element', async () => {
     const { container } = render(
-      <SearchProvider>
+      <InstantSearchHooksTestWrapper>
         <ClearRefinements
           className="MyClearsRefinements"
           title="Some custom title"
         />
-      </SearchProvider>
+      </InstantSearchHooksTestWrapper>
     );
 
     await wait(0);
@@ -517,14 +508,6 @@ describe('ClearRefinements', () => {
     `);
   });
 });
-
-function SearchProvider({ children, ...props }: SearchProviderProps) {
-  return (
-    <InstantSearch searchClient={searchClient} indexName="indexName" {...props}>
-      {children}
-    </InstantSearch>
-  );
-}
 
 function CurrentRefinements(props: UseCurrentRefinementsProps) {
   const { items } = useCurrentRefinements(props);
