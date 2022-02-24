@@ -14,16 +14,6 @@ import type {
   UseCurrentRefinementsProps,
 } from 'react-instantsearch-hooks';
 
-const consoleError = jest.spyOn(console, 'error');
-
-beforeAll(() => {
-  consoleError.mockImplementation(() => {});
-});
-
-afterAll(() => {
-  consoleError.mockRestore();
-});
-
 describe('ClearRefinements', () => {
   test('renders with default props', async () => {
     const { container } = render(
