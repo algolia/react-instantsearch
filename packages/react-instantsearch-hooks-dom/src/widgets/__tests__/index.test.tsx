@@ -125,6 +125,11 @@ describe('widgets', () => {
           "name": "Hits",
         },
         Object {
+          "$$type": "ais.infiniteHits",
+          "$$widgetType": "ais.infiniteHits",
+          "name": "InfiniteHits",
+        },
+        Object {
           "$$type": "ais.searchBox",
           "$$widgetType": "ais.searchBox",
           "name": "SearchBox",
