@@ -13,6 +13,14 @@ import { createSearchClient } from '../../../../../test/mock';
 
 import type { InstantSearch as InstantSearchClass } from 'instantsearch.js';
 
+function getMinimalProps(name: keyof typeof allWidgets) {
+  switch (name) {
+    default: {
+      return {};
+    }
+  }
+}
+
 /**
  * Uses the SSR APIs to access the InstantSearch widgets rendered by all React InstantSearch
  * components/widgets.
@@ -20,6 +28,8 @@ import type { InstantSearch as InstantSearchClass } from 'instantsearch.js';
 function initializeWidgets() {
   return Object.entries(allWidgets).map(([name, Component]) => {
     let instantSearchInstance: InstantSearchClass | undefined = undefined;
+
+    const props = getMinimalProps(name as keyof typeof allWidgets);
 
     renderToString(
       <InstantSearchServerContext.Provider
@@ -33,7 +43,7 @@ function initializeWidgets() {
           searchClient={createSearchClient()}
           indexName="indexName"
         >
-          <Component />
+          <Component {...props} />
         </InstantSearch>
       </InstantSearchServerContext.Provider>
     );
@@ -50,7 +60,6 @@ function initializeWidgets() {
 
 describe('widgets', () => {
   const widgets = initializeWidgets();
-
   test('renders one widget', () => {
     widgets.forEach(({ name, renderedWidgets }) => {
       expect({ name, renderedWidgets }).toEqual({
@@ -93,5 +102,23 @@ describe('widgets', () => {
         ])
       );
     });
+  });
+
+  test('name, type and widgetType are equivalent', () => {
+    expect(
+      widgets.map(({ name, widget: { $$type, $$widgetType } }) => ({
+        name,
+        $$type,
+        $$widgetType,
+      }))
+    ).toMatchInlineSnapshot(`
+      Array [
+        Object {
+          "$$type": "ais.hits",
+          "$$widgetType": "ais.hits",
+          "name": "Hits",
+        },
+      ]
+    `);
   });
 });
