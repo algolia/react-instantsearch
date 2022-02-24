@@ -60,6 +60,7 @@ function initializeWidgets() {
 
 describe('widgets', () => {
   const widgets = initializeWidgets();
+
   test('renders one widget', () => {
     widgets.forEach(({ name, renderedWidgets }) => {
       expect({ name, renderedWidgets }).toEqual({
