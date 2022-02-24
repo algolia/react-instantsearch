@@ -1,36 +1,20 @@
 import { render, waitFor } from '@testing-library/react';
 import React from 'react';
-import { InstantSearch } from 'react-instantsearch-hooks';
 
-import { createSearchClient } from '../../../../../test/mock';
 import {
+  createSearchClient,
   createMultiSearchResponse,
   createSingleSearchResponse,
-} from '../../../../../test/mock/createAPIResponse';
+} from '../../../../../test/mock';
+import { InstantSearchHooksTestWrapper } from '../../../../../test/utils';
 import { Hits } from '../Hits';
-
-import type { InstantSearchProps } from 'react-instantsearch-hooks';
-
-const searchClient = createSearchClient();
-
-type SearchProviderProps = {
-  children: React.ReactNode;
-} & Partial<InstantSearchProps>;
-
-function SearchProvider({ children, ...props }: SearchProviderProps) {
-  return (
-    <InstantSearch searchClient={searchClient} indexName="indexName" {...props}>
-      {children}
-    </InstantSearch>
-  );
-}
 
 describe('Hits', () => {
   test('renders with default props', async () => {
     const { container } = render(
-      <SearchProvider>
+      <InstantSearchHooksTestWrapper>
         <Hits />
-      </SearchProvider>
+      </InstantSearchHooksTestWrapper>
     );
 
     await waitFor(() => {
@@ -70,13 +54,13 @@ describe('Hits', () => {
     });
 
     const { container } = render(
-      <SearchProvider searchClient={client}>
+      <InstantSearchHooksTestWrapper searchClient={client}>
         <Hits<CustomHit>
           hitComponent={({ hit }) => (
             <strong>{`${hit.__position} - ${hit.somethingSpecial}`}</strong>
           )}
         />
-      </SearchProvider>
+      </InstantSearchHooksTestWrapper>
     );
 
     await waitFor(() => {
@@ -117,9 +101,9 @@ describe('Hits', () => {
 
   test('renders with custom className', () => {
     const { container } = render(
-      <SearchProvider>
+      <InstantSearchHooksTestWrapper>
         <Hits className="custom" />
-      </SearchProvider>
+      </InstantSearchHooksTestWrapper>
     );
 
     expect(container.querySelector('.ais-Hits')!.className).toBe(
@@ -129,9 +113,9 @@ describe('Hits', () => {
 
   test('renders with custom div props', () => {
     const { container } = render(
-      <SearchProvider>
+      <InstantSearchHooksTestWrapper>
         <Hits hidden={true} />
-      </SearchProvider>
+      </InstantSearchHooksTestWrapper>
     );
 
     expect(container.querySelector<HTMLDivElement>('.ais-Hits')!.hidden).toBe(
