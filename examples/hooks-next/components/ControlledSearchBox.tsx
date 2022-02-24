@@ -1,6 +1,4 @@
-import React from 'react';
-
-import type { ChangeEvent, FormEvent, RefObject } from 'react';
+import React, { ChangeEvent, FormEvent, RefObject } from 'react';
 
 export type ControlledSearchBoxProps = React.ComponentProps<'div'> & {
   inputRef: RefObject<HTMLInputElement>;
