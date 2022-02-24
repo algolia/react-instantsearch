@@ -1,2 +1,2 @@
 export * from 'react-instantsearch-hooks';
-export * from './widgets/Hits';
+export * from './widgets';
