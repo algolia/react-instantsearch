@@ -14,7 +14,7 @@ describe('Hits', () => {
       hits: [
         { objectID: 'abc', __position: 1 },
         { objectID: 'def', __position: 2 },
-      ],
+      ] as THit[],
       ...props,
     };
   }
@@ -36,7 +36,7 @@ describe('Hits', () => {
               class="ais-Hits-item"
             >
               <div
-                style="border-bottom: 1px solid #bbb; padding-bottom: 5px; margin-bottom: 5px; word-break: break-all;"
+                style="word-break: break-all;"
               >
                 {"objectID":"abc","__position":1}
                 …
@@ -46,7 +46,7 @@ describe('Hits', () => {
               class="ais-Hits-item"
             >
               <div
-                style="border-bottom: 1px solid #bbb; padding-bottom: 5px; margin-bottom: 5px; word-break: break-all;"
+                style="word-break: break-all;"
               >
                 {"objectID":"def","__position":2}
                 …
@@ -60,7 +60,13 @@ describe('Hits', () => {
 
   test('renders with custom hitComponent', () => {
     const props = createProps({
-      hitComponent: ({ hit }) => <strong>{hit.objectID}</strong>,
+      hits: [
+        { objectID: 'abc', __position: 1, something: true },
+        { objectID: 'def', __position: 2, something: false },
+      ],
+      hitComponent: ({ hit }) => (
+        <strong>{`${hit.objectID} - ${hit.something}`}</strong>
+      ),
     });
 
     const { container } = render(<Hits {...props} />);
@@ -79,19 +85,39 @@ describe('Hits', () => {
               class="ais-Hits-item"
             >
               <strong>
-                abc
+                abc - true
               </strong>
             </li>
             <li
               class="ais-Hits-item"
             >
               <strong>
-                def
+                def - false
               </strong>
             </li>
           </ol>
         </div>
       </div>
     `);
+  });
+
+  test('renders with custom className', () => {
+    const props = createProps({ className: 'custom' });
+
+    const { container } = render(<Hits {...props} />);
+
+    expect(container.querySelector('.ais-Hits')!.className).toBe(
+      'ais-Hits custom'
+    );
+  });
+
+  test('renders with custom div props', () => {
+    const props = createProps({ hidden: true });
+
+    const { container } = render(<Hits {...props} />);
+
+    expect(container.querySelector<HTMLDivElement>('.ais-Hits')!.hidden).toBe(
+      true
+    );
   });
 });
