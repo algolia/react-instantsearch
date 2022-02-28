@@ -9,7 +9,7 @@ type CurrentRefinementCategory = Pick<
 
 type CurrentRefinement = {
   label: string;
-  category: CurrentRefinementCategory[];
+  categories: CurrentRefinementCategory[];
 };
 
 export type CurrentRefinementsProps = React.HTMLAttributes<HTMLDivElement> & {
@@ -40,7 +40,7 @@ export function CurrentRefinements({
         {items.map((item) => (
           <li key={item.label} className="ais-CurrentRefinements-item">
             <span className="ais-CurrentRefinements-label">{item.label}:</span>
-            {item.category.map(({ label, onClick }) => (
+            {item.categories.map(({ label, onClick }) => (
               <span key={label} className="ais-CurrentRefinements-category">
                 <span className="ais-CurrentRefinements-categoryLabel">
                   {label}

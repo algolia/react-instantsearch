@@ -30,7 +30,7 @@ describe('CurrentRefinements', () => {
         items={[
           {
             label: 'Brand',
-            category: [
+            categories: [
               { label: 'Apple', onClick: onClick1 },
               { label: 'Samsung', onClick: onClick2 },
             ],

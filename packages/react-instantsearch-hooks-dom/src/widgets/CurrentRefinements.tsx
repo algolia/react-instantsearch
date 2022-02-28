@@ -38,7 +38,7 @@ export function CurrentRefinements(props: CurrentRefinementsProps) {
       hasRefinements={canRefine}
       items={items.map((item) => ({
         label: item.label,
-        category: item.refinements.map((refinement) => ({
+        categories: item.refinements.map((refinement) => ({
           label: refinement.label,
           onClick: (event) => {
             if (isModifierClick(event)) {
