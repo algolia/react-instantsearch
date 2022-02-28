@@ -6,7 +6,7 @@ import { Highlight } from '..';
 describe('Highlight', () => {
   test('renders only wrapper with empty match', () => {
     const { container } = render(
-      <Highlight baseClassName="ais-Highlight" parts={[]} partsMultiple={[]} />
+      <Highlight baseClassName="ais-Highlight" parts={[]} />
     );
 
     expect(container).toMatchInlineSnapshot(`
@@ -23,10 +23,12 @@ describe('Highlight', () => {
       <Highlight
         baseClassName="ais-Highlight"
         parts={[
-          { isHighlighted: true, value: 'te' },
-          { isHighlighted: false, value: 'st' },
+          [
+            { isHighlighted: true, value: 'te' },
+            { isHighlighted: false, value: 'st' },
+          ],
+          [{ isHighlighted: false, value: 'nothing' }],
         ]}
-        partsMultiple={[]}
       />
     );
 
@@ -45,54 +47,15 @@ describe('Highlight', () => {
           >
             st
           </span>
-        </span>
-      </div>
-    `);
-  });
-
-  test('renders partsMultiple', () => {
-    const { container } = render(
-      <Highlight
-        baseClassName="ais-Highlight"
-        parts={[]}
-        partsMultiple={[
-          [
-            { isHighlighted: true, value: 'te' },
-            { isHighlighted: false, value: 'st' },
-          ],
-          [{ isHighlighted: false, value: 'nothing' }],
-        ]}
-      />
-    );
-
-    expect(container).toMatchInlineSnapshot(`
-      <div>
-        <span
-          class="ais-Highlight"
-        >
-          <span>
-            <mark
-              class="ais-Highlight-highlighted"
-            >
-              te
-            </mark>
-            <span
-              class="ais-Highlight-nonHighlighted"
-            >
-              st
-            </span>
-            <span
-              class="ais-Highlight-separator"
-            >
-              , 
-            </span>
+          <span
+            class="ais-Highlight-separator"
+          >
+            , 
           </span>
-          <span>
-            <span
-              class="ais-Highlight-nonHighlighted"
-            >
-              nothing
-            </span>
+          <span
+            class="ais-Highlight-nonHighlighted"
+          >
+            nothing
           </span>
         </span>
       </div>
@@ -113,8 +76,7 @@ describe('Highlight', () => {
         highlightedTagName={Highlighted}
         nonHighlightedTagName={NonHighlighted}
         separator={<strong> - </strong>}
-        parts={[]}
-        partsMultiple={[
+        parts={[
           [
             { isHighlighted: true, value: 'te' },
             { isHighlighted: false, value: 'st' },
@@ -129,26 +91,22 @@ describe('Highlight', () => {
         <span
           class="ais-Highlight"
         >
-          <span>
+          <strong>
+            te
+          </strong>
+          <small>
+            st
+          </small>
+          <span
+            class="ais-Highlight-separator"
+          >
             <strong>
-              te
+               - 
             </strong>
-            <small>
-              st
-            </small>
-            <span
-              class="ais-Highlight-separator"
-            >
-              <strong>
-                 - 
-              </strong>
-            </span>
           </span>
-          <span>
-            <small>
-              nothing
-            </small>
-          </span>
+          <small>
+            nothing
+          </small>
         </span>
       </div>
     `);
@@ -159,7 +117,6 @@ describe('Highlight', () => {
       <Highlight
         baseClassName="ais-Highlight"
         parts={[]}
-        partsMultiple={[]}
         className="custom-root"
         aria-hidden="true"
       />

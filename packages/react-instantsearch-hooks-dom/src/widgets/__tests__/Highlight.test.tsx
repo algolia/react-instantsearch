@@ -70,29 +70,25 @@ describe('Highlight', () => {
         <span
           class="ais-Highlight"
         >
-          <span>
-            <mark
-              class="ais-Highlight-highlighted"
-            >
-              te
-            </mark>
-            <span
-              class="ais-Highlight-nonHighlighted"
-            >
-              st
-            </span>
-            <span
-              class="ais-Highlight-separator"
-            >
-              , 
-            </span>
+          <mark
+            class="ais-Highlight-highlighted"
+          >
+            te
+          </mark>
+          <span
+            class="ais-Highlight-nonHighlighted"
+          >
+            st
           </span>
-          <span>
-            <span
-              class="ais-Highlight-nonHighlighted"
-            >
-              nothing
-            </span>
+          <span
+            class="ais-Highlight-separator"
+          >
+            , 
+          </span>
+          <span
+            class="ais-Highlight-nonHighlighted"
+          >
+            nothing
           </span>
         </span>
       </div>
@@ -264,26 +260,22 @@ describe('Highlight', () => {
         <span
           class="ais-Highlight"
         >
-          <span>
+          <strong>
+            it
+          </strong>
+          <small>
+            em1
+          </small>
+          <span
+            class="ais-Highlight-separator"
+          >
             <strong>
-              it
+               - 
             </strong>
-            <small>
-              em1
-            </small>
-            <span
-              class="ais-Highlight-separator"
-            >
-              <strong>
-                 - 
-              </strong>
-            </span>
           </span>
-          <span>
-            <small>
-              item2
-            </small>
-          </span>
+          <small>
+            item2
+          </small>
         </span>
       </div>
     `);

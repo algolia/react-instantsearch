@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import { cx } from './lib/cx';
 
@@ -42,14 +42,12 @@ export type HighlightProps = React.HTMLAttributes<HTMLSpanElement> & {
   highlightedTagName?: React.ReactType;
   nonHighlightedTagName?: React.ReactType;
   separator?: React.ReactNode;
-  parts: HighlightedPart[];
-  partsMultiple: HighlightedPart[][];
+  parts: HighlightedPart[][];
 };
 
 export function Highlight({
   baseClassName,
   parts,
-  partsMultiple,
   highlightedTagName = 'mark',
   nonHighlightedTagName = 'span',
   separator = ', ',
@@ -57,11 +55,11 @@ export function Highlight({
 }: HighlightProps) {
   return (
     <span {...props} className={cx(baseClassName, props.className)}>
-      {partsMultiple.map((part, partIndex) => {
-        const isLastPart = partIndex === partsMultiple.length - 1;
+      {parts.map((part, partIndex) => {
+        const isLastPart = partIndex === parts.length - 1;
 
         return (
-          <span key={partIndex}>
+          <Fragment key={partIndex}>
             {part.map((subPart, subPartIndex) => (
               <HighlightPart
                 key={subPartIndex}
@@ -77,20 +75,7 @@ export function Highlight({
             {!isLastPart && (
               <span className={`${baseClassName}-separator`}>{separator}</span>
             )}
-          </span>
-        );
-      })}
-      {parts.map((part, partIndex) => {
-        return (
-          <HighlightPart
-            key={partIndex}
-            baseClassName={baseClassName}
-            highlightedTagName={highlightedTagName}
-            nonHighlightedTagName={nonHighlightedTagName}
-            isHighlighted={part.isHighlighted}
-          >
-            {part.value}
-          </HighlightPart>
+          </Fragment>
         );
       })}
     </span>

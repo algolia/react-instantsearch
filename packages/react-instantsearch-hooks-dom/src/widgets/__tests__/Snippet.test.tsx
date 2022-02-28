@@ -26,18 +26,7 @@ describe('Snippet', () => {
       <div>
         <span
           class="ais-Snippet"
-        >
-          <mark
-            class="ais-Snippet-highlighted"
-          >
-            te
-          </mark>
-          <span
-            class="ais-Snippet-nonHighlighted"
-          >
-            st
-          </span>
-        </span>
+        />
       </div>
     `);
   });
@@ -67,32 +56,7 @@ describe('Snippet', () => {
       <div>
         <span
           class="ais-Snippet"
-        >
-          <span>
-            <mark
-              class="ais-Snippet-highlighted"
-            >
-              te
-            </mark>
-            <span
-              class="ais-Snippet-nonHighlighted"
-            >
-              st
-            </span>
-            <span
-              class="ais-Snippet-separator"
-            >
-              , 
-            </span>
-          </span>
-          <span>
-            <span
-              class="ais-Snippet-nonHighlighted"
-            >
-              nothing
-            </span>
-          </span>
-        </span>
+        />
       </div>
     `);
   });
@@ -122,18 +86,7 @@ describe('Snippet', () => {
       <div>
         <span
           class="ais-Snippet"
-        >
-          <mark
-            class="ais-Snippet-highlighted"
-          >
-            te
-          </mark>
-          <span
-            class="ais-Snippet-nonHighlighted"
-          >
-            st
-          </span>
-        </span>
+        />
       </div>
     `);
   });
@@ -162,18 +115,7 @@ describe('Snippet', () => {
       <div>
         <span
           class="ais-Snippet"
-        >
-          <mark
-            class="ais-Snippet-highlighted"
-          >
-            te
-          </mark>
-          <span
-            class="ais-Snippet-nonHighlighted"
-          >
-            st
-          </span>
-        </span>
+        />
       </div>
     `);
   });
@@ -258,28 +200,7 @@ describe('Snippet', () => {
       <div>
         <span
           class="ais-Snippet"
-        >
-          <span>
-            <strong>
-              it
-            </strong>
-            <small>
-              em1
-            </small>
-            <span
-              class="ais-Snippet-separator"
-            >
-              <strong>
-                 - 
-              </strong>
-            </span>
-          </span>
-          <span>
-            <small>
-              item2
-            </small>
-          </span>
-        </span>
+        />
       </div>
     `);
   });

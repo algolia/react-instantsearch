@@ -19,7 +19,7 @@ export type HighlightProps<THit extends Hit<BaseHit>> = {
   hit: THit;
   attribute: keyof THit | string[];
 } & PartialKeys<
-  Omit<HighlightUiComponentProps, 'baseClassName' | 'parts' | 'partsMultiple'>,
+  Omit<HighlightUiComponentProps, 'baseClassName' | 'parts'>,
   'highlightedTagName' | 'nonHighlightedTagName' | 'separator'
 >;
 
@@ -32,34 +32,18 @@ export function Highlight<THit extends Hit<BaseHit>>({
   ...props
 }: HighlightProps<THit>) {
   const property =
-    getPropertyByPath(hit._highlightResult, attribute as string) || {};
+    getPropertyByPath(hit._highlightResult, attribute as string) || [];
+  const properties = Array.isArray(property) ? property : [property];
 
-  if (Array.isArray(property)) {
-    const parts = property.map((singleValue) =>
-      getHighlightedParts(singleValue.value || '')
-    );
-
-    return (
-      <HighlightUiComponent
-        {...props}
-        baseClassName="ais-Highlight"
-        partsMultiple={parts}
-        parts={[]}
-        highlightedTagName={highlightedTagName}
-        nonHighlightedTagName={nonHighlightedTagName}
-        separator={separator}
-      />
-    );
-  }
-
-  const parts = getHighlightedParts(property.value || '');
+  const parts = properties.map((singleValue) =>
+    getHighlightedParts(singleValue.value || '')
+  );
 
   return (
     <HighlightUiComponent
       {...props}
       baseClassName="ais-Highlight"
       parts={parts}
-      partsMultiple={[]}
       highlightedTagName={highlightedTagName}
       nonHighlightedTagName={nonHighlightedTagName}
       separator={separator}
