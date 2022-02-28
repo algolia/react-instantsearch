@@ -21,8 +21,8 @@ describe('CurrentRefinements', () => {
           },
         }}
       >
-        <RefinementList attribute="brand" />
-        <RefinementList attribute="categories" />
+        <VirtualRefinementList attribute="brand" />
+        <VirtualRefinementList attribute="categories" />
         <CurrentRefinements />
       </InstantSearchHooksTestWrapper>
     );
@@ -145,8 +145,8 @@ describe('CurrentRefinements', () => {
           },
         }}
       >
-        <RefinementList attribute="brand" />
-        <RefinementList attribute="categories" />
+        <VirtualRefinementList attribute="brand" />
+        <VirtualRefinementList attribute="categories" />
         <CurrentRefinements />
       </InstantSearchHooksTestWrapper>
     );
@@ -296,7 +296,7 @@ describe('CurrentRefinements', () => {
             },
           }}
         >
-          <RefinementList attribute="brand" />
+          <VirtualRefinementList attribute="brand" />
           <CurrentRefinements />
         </InstantSearchHooksTestWrapper>
       </form>
@@ -326,7 +326,7 @@ describe('CurrentRefinements', () => {
           },
         }}
       >
-        <RefinementList attribute="brand" />
+        <VirtualRefinementList attribute="brand" />
         <CurrentRefinements />
       </InstantSearchHooksTestWrapper>
     );
@@ -438,8 +438,8 @@ describe('CurrentRefinements', () => {
           },
         }}
       >
-        <RefinementList attribute="brand" />
-        <RefinementList attribute="categories" />
+        <VirtualRefinementList attribute="brand" />
+        <VirtualRefinementList attribute="categories" />
         <CurrentRefinements includedAttributes={['categories']} />
       </InstantSearchHooksTestWrapper>
     );
@@ -498,8 +498,8 @@ describe('CurrentRefinements', () => {
           },
         }}
       >
-        <RefinementList attribute="brand" />
-        <RefinementList attribute="categories" />
+        <VirtualRefinementList attribute="brand" />
+        <VirtualRefinementList attribute="categories" />
         <CurrentRefinements excludedAttributes={['brand']} />
       </InstantSearchHooksTestWrapper>
     );
@@ -558,8 +558,8 @@ describe('CurrentRefinements', () => {
           },
         }}
       >
-        <RefinementList attribute="brand" />
-        <RefinementList attribute="categories" />
+        <VirtualRefinementList attribute="brand" />
+        <VirtualRefinementList attribute="categories" />
         <CurrentRefinements
           transformItems={(items) =>
             items.filter((item) => item.attribute !== 'brand')
@@ -641,7 +641,7 @@ describe('CurrentRefinements', () => {
   });
 });
 
-function RefinementList(props: UseRefinementListProps) {
+function VirtualRefinementList(props: UseRefinementListProps) {
   useRefinementList(props);
 
   return null;
