@@ -62,6 +62,7 @@ describe('CurrentRefinements', () => {
                 </span>
                 <button
                   class="ais-CurrentRefinements-delete"
+                  type="button"
                 >
                   ✕
                 </button>
@@ -76,6 +77,7 @@ describe('CurrentRefinements', () => {
                 </span>
                 <button
                   class="ais-CurrentRefinements-delete"
+                  type="button"
                 >
                   ✕
                 </button>
@@ -100,6 +102,7 @@ describe('CurrentRefinements', () => {
                 </span>
                 <button
                   class="ais-CurrentRefinements-delete"
+                  type="button"
                 >
                   ✕
                 </button>
@@ -186,6 +189,7 @@ describe('CurrentRefinements', () => {
                 </span>
                 <button
                   class="ais-CurrentRefinements-delete"
+                  type="button"
                 >
                   ✕
                 </button>
@@ -200,6 +204,7 @@ describe('CurrentRefinements', () => {
                 </span>
                 <button
                   class="ais-CurrentRefinements-delete"
+                  type="button"
                 >
                   ✕
                 </button>
@@ -224,6 +229,7 @@ describe('CurrentRefinements', () => {
                 </span>
                 <button
                   class="ais-CurrentRefinements-delete"
+                  type="button"
                 >
                   ✕
                 </button>
@@ -363,6 +369,7 @@ describe('CurrentRefinements', () => {
                 </span>
                 <button
                   class="ais-CurrentRefinements-delete"
+                  type="button"
                 >
                   ✕
                 </button>
@@ -415,6 +422,7 @@ describe('CurrentRefinements', () => {
                 </span>
                 <button
                   class="ais-CurrentRefinements-delete"
+                  type="button"
                 >
                   ✕
                 </button>
@@ -475,6 +483,7 @@ describe('CurrentRefinements', () => {
                 </span>
                 <button
                   class="ais-CurrentRefinements-delete"
+                  type="button"
                 >
                   ✕
                 </button>
@@ -535,6 +544,7 @@ describe('CurrentRefinements', () => {
                 </span>
                 <button
                   class="ais-CurrentRefinements-delete"
+                  type="button"
                 >
                   ✕
                 </button>
@@ -599,6 +609,7 @@ describe('CurrentRefinements', () => {
                 </span>
                 <button
                   class="ais-CurrentRefinements-delete"
+                  type="button"
                 >
                   ✕
                 </button>

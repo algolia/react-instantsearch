@@ -1,24 +1,25 @@
 import React from 'react';
 
 import { cx } from './lib/cx';
+import { isModifierClick } from './lib/isModifierClick';
 
-type CurrentRefinementCategory = Pick<
-  React.ButtonHTMLAttributes<HTMLButtonElement>,
-  'onClick'
-> & { label: string };
-
-type CurrentRefinement = {
-  label: string;
-  categories: CurrentRefinementCategory[];
-};
+import type {
+  CurrentRefinementsConnectorParamsItem,
+  CurrentRefinementsConnectorParamsRefinement,
+} from 'instantsearch.js/es/connectors/current-refinements/connectCurrentRefinements';
 
 export type CurrentRefinementsProps = React.HTMLAttributes<HTMLDivElement> & {
-  items?: CurrentRefinement[];
+  items?: Array<
+    Pick<CurrentRefinementsConnectorParamsItem, 'label' | 'refinements'> &
+      Record<string, unknown>
+  >;
+  onRemove?(refinement: CurrentRefinementsConnectorParamsRefinement): void;
   hasRefinements?: boolean;
 };
 
 export function CurrentRefinements({
   items = [],
+  onRemove = () => {},
   hasRefinements = false,
   ...props
 }: CurrentRefinementsProps) {
@@ -40,13 +41,23 @@ export function CurrentRefinements({
         {items.map((item) => (
           <li key={item.label} className="ais-CurrentRefinements-item">
             <span className="ais-CurrentRefinements-label">{item.label}:</span>
-            {item.categories.map(({ label, onClick }) => (
-              <span key={label} className="ais-CurrentRefinements-category">
+            {item.refinements.map((refinement) => (
+              <span
+                key={refinement.label}
+                className="ais-CurrentRefinements-category"
+              >
                 <span className="ais-CurrentRefinements-categoryLabel">
-                  {label}
+                  {refinement.label}
                 </span>
                 <button
-                  onClick={onClick}
+                  type="button"
+                  onClick={(event) => {
+                    if (isModifierClick(event)) {
+                      return;
+                    }
+
+                    onRemove(refinement);
+                  }}
                   className="ais-CurrentRefinements-delete"
                 >
                   ✕

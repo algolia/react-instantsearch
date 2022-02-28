@@ -22,21 +22,31 @@ describe('CurrentRefinements', () => {
   });
 
   test('renders with clickable refinements', () => {
-    const onClick1 = jest.fn();
-    const onClick2 = jest.fn();
+    const onRemove = jest.fn();
 
     const { container } = render(
       <CurrentRefinements
         items={[
           {
             label: 'Brand',
-            categories: [
-              { label: 'Apple', onClick: onClick1 },
-              { label: 'Samsung', onClick: onClick2 },
+            refinements: [
+              {
+                label: 'Apple',
+                attribute: 'brand',
+                type: 'facet',
+                value: 'Apple',
+              },
+              {
+                label: 'Samsung',
+                attribute: 'brand',
+                type: 'facet',
+                value: 'Samsung',
+              },
             ],
           },
         ]}
         hasRefinements={true}
+        onRemove={onRemove}
       />
     );
 
@@ -67,6 +77,7 @@ describe('CurrentRefinements', () => {
                 </span>
                 <button
                   class="ais-CurrentRefinements-delete"
+                  type="button"
                 >
                   ✕
                 </button>
@@ -81,6 +92,7 @@ describe('CurrentRefinements', () => {
                 </span>
                 <button
                   class="ais-CurrentRefinements-delete"
+                  type="button"
                 >
                   ✕
                 </button>
@@ -97,11 +109,22 @@ describe('CurrentRefinements', () => {
 
     userEvent.click(button1);
 
-    expect(onClick1).toHaveBeenCalledTimes(1);
+    expect(onRemove).toHaveBeenLastCalledWith({
+      attribute: 'brand',
+      label: 'Apple',
+      type: 'facet',
+      value: 'Apple',
+    });
 
     userEvent.click(button2);
 
-    expect(onClick2).toHaveBeenCalledTimes(1);
+    expect(onRemove).toHaveBeenLastCalledWith({
+      attribute: 'brand',
+      label: 'Samsung',
+      type: 'facet',
+      value: 'Samsung',
+    });
+    expect(onRemove).toHaveBeenCalledTimes(2);
   });
 
   test('forwards a custom class name to the root element', () => {
