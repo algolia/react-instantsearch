@@ -1,100 +1,129 @@
 import React from 'react';
 
 import { cx } from './lib/cx';
+import { isModifierClick } from './lib/isModifierClick';
 
 import type { CreateURL } from 'instantsearch.js';
 
-export type PaginationItem = {
-  label: string;
-  value: number;
-};
-
 export type PaginationProps = React.HTMLAttributes<HTMLDivElement> & {
-  items: PaginationItem[];
+  pages: number[];
   currentPage: number;
   isFirstPage: boolean;
   isLastPage: boolean;
   nbPages: number;
+  showFirst?: boolean;
+  showPrevious?: boolean;
+  showNext?: boolean;
+  showLast?: boolean;
   createURL: CreateURL<number>;
-  onClick: React.AnchorHTMLAttributes<HTMLAnchorElement>['onClick'];
+  onNavigate: (page: number) => void;
 };
 
 export function Pagination({
-  items,
+  pages,
   currentPage,
   nbPages,
   isFirstPage,
   isLastPage,
+  showFirst = true,
+  showPrevious = true,
+  showNext = true,
+  showLast = true,
   createURL,
-  onClick,
+  onNavigate,
   ...props
 }: PaginationProps) {
+  const firstPageIndex = 0;
+  const previousPageIndex = currentPage - 1;
+  const nextPageIndex = currentPage + 1;
+  const lastPageIndex = nbPages - 1;
+
   return (
     <div
       {...props}
       className={cx(
         'ais-Pagination',
-        items.length === 0 && 'ais-Pagination--noRefinement',
+        nbPages <= 1 && 'ais-Pagination--noRefinement',
         props.className
       )}
     >
       <ul className="ais-Pagination-list">
-        <PaginationItem
-          isDisabled={isFirstPage}
-          className="ais-Pagination-item--firstPage"
-          aria-label="First"
-          href={createURL(0)}
-          onClick={onClick}
-        >
-          ‹‹
-        </PaginationItem>
-        <PaginationItem
-          isDisabled={isFirstPage}
-          className="ais-Pagination-item--previousPage"
-          aria-label="Previous"
-          href={createURL(currentPage - 1)}
-          onClick={onClick}
-        >
-          ‹
-        </PaginationItem>
-        {items.map(({ label }, index) => (
+        {showFirst && (
           <PaginationItem
-            key={index}
-            isDisabled={false}
-            className={cx(
-              index === currentPage && 'ais-Pagination-item--selected'
-            )}
-            aria-label={label}
-            href={createURL(index)}
-            onClick={onClick}
+            isDisabled={isFirstPage}
+            className="ais-Pagination-item--firstPage"
+            aria-label="First"
+            href={createURL(firstPageIndex)}
+            onClick={() => onNavigate(firstPageIndex)}
           >
-            {label}
+            ‹‹
           </PaginationItem>
-        ))}
-        <PaginationItem
-          isDisabled={isLastPage}
-          className="ais-Pagination-item--nextPage"
-          aria-label="Next"
-          href={createURL(currentPage + 1)}
-          onClick={onClick}
-        >
-          ›
-        </PaginationItem>
-        <PaginationItem
-          isDisabled={isLastPage}
-          className="ais-Pagination-item--lastPage"
-          aria-label="Last"
-          href={createURL(nbPages - 1)}
-          onClick={onClick}
-        >
-          ››
-        </PaginationItem>
+        )}
+        {showPrevious && (
+          <PaginationItem
+            isDisabled={isFirstPage}
+            className="ais-Pagination-item--previousPage"
+            aria-label="Previous"
+            href={createURL(previousPageIndex)}
+            onClick={() => onNavigate(previousPageIndex)}
+          >
+            ‹
+          </PaginationItem>
+        )}
+        {pages.map((page) => {
+          const label = String(page + 1);
+
+          return (
+            <PaginationItem
+              key={page}
+              isDisabled={false}
+              className={cx(
+                'ais-Pagination-item--page',
+                page === currentPage && 'ais-Pagination-item--selected'
+              )}
+              aria-label={label}
+              href={createURL(page)}
+              onClick={() => onNavigate(page)}
+            >
+              {label}
+            </PaginationItem>
+          );
+        })}
+        {showNext && (
+          <PaginationItem
+            isDisabled={isLastPage}
+            className="ais-Pagination-item--nextPage"
+            aria-label="Next"
+            href={createURL(nextPageIndex)}
+            onClick={() => onNavigate(nextPageIndex)}
+          >
+            ›
+          </PaginationItem>
+        )}
+        {showLast && (
+          <PaginationItem
+            isDisabled={isLastPage}
+            className="ais-Pagination-item--lastPage"
+            aria-label="Last"
+            href={createURL(lastPageIndex)}
+            onClick={() => onNavigate(lastPageIndex)}
+          >
+            ››
+          </PaginationItem>
+        )}
       </ul>
     </div>
   );
 }
 
-type PaginationItemProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & {
+type PaginationItemProps = Omit<
+  React.AnchorHTMLAttributes<HTMLAnchorElement>,
+  'onClick'
+> & {
+  onClick: NonNullable<
+    React.AnchorHTMLAttributes<HTMLAnchorElement>['onClick']
+  >;
+} & {
   isDisabled: boolean;
 };
 
@@ -123,7 +152,15 @@ function PaginationItem({
       <a
         className="ais-Pagination-link"
         href={href}
-        onClick={onClick}
+        onClick={(event) => {
+          if (isModifierClick(event)) {
+            return;
+          }
+
+          event.preventDefault();
+
+          onClick(event);
+        }}
         {...props}
       />
     </li>
