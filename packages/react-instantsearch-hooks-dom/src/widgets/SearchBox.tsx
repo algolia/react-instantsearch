@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useSearchBox } from 'react-instantsearch-hooks';
 
-import { SearchBox as SearchBoxUiComponent } from '../ui/SearchBox';
+import { SearchBox as SearchBoxUiComponent } from '../ui';
 
-import type { SearchBoxProps as SearchBoxUiComponentProps } from '../ui/SearchBox';
+import type { SearchBoxProps as SearchBoxUiComponentProps } from '../ui';
 import type { ChangeEvent } from 'react';
 import type { UseSearchBoxProps } from 'react-instantsearch-hooks';
 

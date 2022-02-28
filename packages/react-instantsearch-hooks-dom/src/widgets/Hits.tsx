@@ -1,9 +1,9 @@
 import React from 'react';
 import { useHits } from 'react-instantsearch-hooks';
 
-import { Hits as HitsUiComponent } from '../ui/Hits';
+import { Hits as HitsUiComponent } from '../ui';
 
-import type { HitsProps as HitsUiComponentProps } from '../ui/Hits';
+import type { HitsProps as HitsUiComponentProps } from '../ui';
 import type { Hit, BaseHit } from 'instantsearch.js';
 import type { UseHitsProps } from 'react-instantsearch-hooks';
 

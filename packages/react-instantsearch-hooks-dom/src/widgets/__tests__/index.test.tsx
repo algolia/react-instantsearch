@@ -13,7 +13,9 @@ import { createSearchClient } from '../../../../../test/mock';
 
 import type { InstantSearch as InstantSearchClass } from 'instantsearch.js';
 
-function getMinimalProps(name: keyof typeof allWidgets) {
+type RegularWidgets = Omit<typeof allWidgets, 'Highlight' | 'Snippet'>;
+
+function getMinimalProps(name: keyof RegularWidgets) {
   switch (name) {
     default: {
       return {};
@@ -26,36 +28,45 @@ function getMinimalProps(name: keyof typeof allWidgets) {
  * components/widgets.
  */
 function initializeWidgets() {
-  return Object.entries(allWidgets).map(([name, Component]) => {
-    let instantSearchInstance: InstantSearchClass | undefined = undefined;
+  return Object.entries(allWidgets)
+    .filter(
+      (
+        regularWidget
+      ): regularWidget is [
+        keyof RegularWidgets,
+        RegularWidgets[keyof RegularWidgets]
+      ] => ['Highlight', 'Snippet'].includes(regularWidget[0]) === false
+    )
+    .map(([name, Component]) => {
+      let instantSearchInstance: InstantSearchClass | undefined = undefined;
 
-    const props = getMinimalProps(name as keyof typeof allWidgets);
+      const props = getMinimalProps(name);
 
-    renderToString(
-      <InstantSearchServerContext.Provider
-        value={{
-          notifyServer: ({ search }) => {
-            instantSearchInstance = search;
-          },
-        }}
-      >
-        <InstantSearch
-          searchClient={createSearchClient()}
-          indexName="indexName"
+      renderToString(
+        <InstantSearchServerContext.Provider
+          value={{
+            notifyServer: ({ search }) => {
+              instantSearchInstance = search;
+            },
+          }}
         >
-          <Component {...props} />
-        </InstantSearch>
-      </InstantSearchServerContext.Provider>
-    );
+          <InstantSearch
+            searchClient={createSearchClient()}
+            indexName="indexName"
+          >
+            <Component {...props} />
+          </InstantSearch>
+        </InstantSearchServerContext.Provider>
+      );
 
-    const renderedWidgets = instantSearchInstance!.mainIndex.getWidgets();
+      const renderedWidgets = instantSearchInstance!.mainIndex.getWidgets();
 
-    return {
-      name,
-      renderedWidgets,
-      widget: renderedWidgets[0],
-    };
-  });
+      return {
+        name,
+        renderedWidgets,
+        widget: renderedWidgets[0],
+      };
+    });
 }
 
 describe('widgets', () => {
