@@ -12,13 +12,12 @@ export type CurrentRefinementsProps = Omit<
 > &
   UseCurrentRefinementsProps;
 
-export function CurrentRefinements(props: CurrentRefinementsProps) {
-  const {
-    includedAttributes,
-    excludedAttributes,
-    transformItems,
-    ...otherProps
-  } = props;
+export function CurrentRefinements({
+  includedAttributes,
+  excludedAttributes,
+  transformItems,
+  ...props
+}: CurrentRefinementsProps) {
   const { items, refine, canRefine } = useCurrentRefinements(
     {
       includedAttributes,
@@ -32,7 +31,7 @@ export function CurrentRefinements(props: CurrentRefinementsProps) {
 
   return (
     <CurrentRefinementsUiComponent
-      {...otherProps}
+      {...props}
       hasRefinements={canRefine}
       items={items}
       onRemove={refine}
