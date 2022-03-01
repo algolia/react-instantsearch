@@ -624,7 +624,7 @@ describe('Pagination', () => {
     expect(props.onNavigate).not.toHaveBeenCalled();
   });
 
-  test('hides the "First" item', () => {
+  test('hides the "First" item when `showFirst` is `false`', () => {
     const props = createProps({
       showFirst: false,
     });
@@ -702,7 +702,7 @@ describe('Pagination', () => {
     `);
   });
 
-  test('hides the "Previous" item', () => {
+  test('hides the "Previous" item when `showPrevious` is `false`', () => {
     const props = createProps({
       showPrevious: false,
     });
@@ -780,7 +780,7 @@ describe('Pagination', () => {
     `);
   });
 
-  test('hides the "Next" item', () => {
+  test('hides the "Next" item when `showNext` is `false`', () => {
     const props = createProps({
       showNext: false,
     });
@@ -855,7 +855,7 @@ describe('Pagination', () => {
     `);
   });
 
-  test('hides the "Last" item', () => {
+  test('hides the "Last" item when `showLast` is `false`', () => {
     const props = createProps({
       showLast: false,
     });

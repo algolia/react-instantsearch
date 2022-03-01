@@ -1751,7 +1751,7 @@ describe('Pagination', () => {
     `);
   });
 
-  test('hides the "First" item', async () => {
+  test('hides the "First" item when `showFirst` is `false`', async () => {
     const { container } = render(
       <InstantSearchHooksTestWrapper>
         <Pagination showFirst={false} />
@@ -1818,7 +1818,7 @@ describe('Pagination', () => {
     `);
   });
 
-  test('hides the "Previous" item', async () => {
+  test('hides the "Previous" item when `showPrevious` is `false`', async () => {
     const { container } = render(
       <InstantSearchHooksTestWrapper>
         <Pagination showPrevious={false} />
@@ -1885,7 +1885,7 @@ describe('Pagination', () => {
     `);
   });
 
-  test('hides the "Next" item', async () => {
+  test('hides the "Next" item when `showNext` is `false`', async () => {
     const { container } = render(
       <InstantSearchHooksTestWrapper>
         <Pagination showNext={false} />
@@ -1950,7 +1950,7 @@ describe('Pagination', () => {
     `);
   });
 
-  test('hides the "Last" item', async () => {
+  test('hides the "Last" item when `showLast` is `false`', async () => {
     const { container } = render(
       <InstantSearchHooksTestWrapper>
         <Pagination showLast={false} />
