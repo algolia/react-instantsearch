@@ -5,21 +5,21 @@ import {
   InstantSearch,
   Configure,
   ClearRefinements,
+  CurrentRefinements,
   DynamicWidgets,
   Hits,
   InfiniteHits,
+  Pagination,
   SearchBox,
 } from 'react-instantsearch-hooks-dom';
 
 import {
   Breadcrumb,
-  CurrentRefinements,
   HierarchicalMenu,
   Highlight,
   HitsPerPage,
   Menu,
   NumericMenu,
-  Pagination,
   Panel,
   PoweredBy,
   QueryRuleContext,

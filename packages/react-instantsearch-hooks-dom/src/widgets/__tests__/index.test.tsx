@@ -120,6 +120,11 @@ describe('widgets', () => {
           "name": "ClearRefinements",
         },
         Object {
+          "$$type": "ais.currentRefinements",
+          "$$widgetType": "ais.currentRefinements",
+          "name": "CurrentRefinements",
+        },
+        Object {
           "$$type": "ais.hits",
           "$$widgetType": "ais.hits",
           "name": "Hits",
@@ -128,6 +133,11 @@ describe('widgets', () => {
           "$$type": "ais.infiniteHits",
           "$$widgetType": "ais.infiniteHits",
           "name": "InfiniteHits",
+        },
+        Object {
+          "$$type": "ais.pagination",
+          "$$widgetType": "ais.pagination",
+          "name": "Pagination",
         },
         Object {
           "$$type": "ais.searchBox",
