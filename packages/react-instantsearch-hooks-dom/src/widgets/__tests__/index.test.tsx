@@ -15,6 +15,9 @@ import type { InstantSearch as InstantSearchClass } from 'instantsearch.js';
 
 function getMinimalProps(name: keyof typeof allWidgets) {
   switch (name) {
+    case 'SortBy': {
+      return { items: [] };
+    }
     default: {
       return {};
     }
@@ -138,6 +141,11 @@ describe('widgets', () => {
           "$$type": "ais.searchBox",
           "$$widgetType": "ais.searchBox",
           "name": "SearchBox",
+        },
+        Object {
+          "$$type": "ais.sortBy",
+          "$$widgetType": "ais.sortBy",
+          "name": "SortBy",
         },
       ]
     `);
