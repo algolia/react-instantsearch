@@ -26,7 +26,18 @@ describe('Snippet', () => {
       <div>
         <span
           class="ais-Snippet"
-        />
+        >
+          <mark
+            class="ais-Snippet-highlighted"
+          >
+            te
+          </mark>
+          <span
+            class="ais-Snippet-nonHighlighted"
+          >
+            st
+          </span>
+        </span>
       </div>
     `);
   });
@@ -56,7 +67,28 @@ describe('Snippet', () => {
       <div>
         <span
           class="ais-Snippet"
-        />
+        >
+          <mark
+            class="ais-Snippet-highlighted"
+          >
+            te
+          </mark>
+          <span
+            class="ais-Snippet-nonHighlighted"
+          >
+            st
+          </span>
+          <span
+            class="ais-Snippet-separator"
+          >
+            , 
+          </span>
+          <span
+            class="ais-Snippet-nonHighlighted"
+          >
+            nothing
+          </span>
+        </span>
       </div>
     `);
   });
@@ -86,7 +118,18 @@ describe('Snippet', () => {
       <div>
         <span
           class="ais-Snippet"
-        />
+        >
+          <mark
+            class="ais-Snippet-highlighted"
+          >
+            te
+          </mark>
+          <span
+            class="ais-Snippet-nonHighlighted"
+          >
+            st
+          </span>
+        </span>
       </div>
     `);
   });
@@ -115,7 +158,18 @@ describe('Snippet', () => {
       <div>
         <span
           class="ais-Snippet"
-        />
+        >
+          <mark
+            class="ais-Snippet-highlighted"
+          >
+            te
+          </mark>
+          <span
+            class="ais-Snippet-nonHighlighted"
+          >
+            st
+          </span>
+        </span>
       </div>
     `);
   });
@@ -141,7 +195,7 @@ describe('Snippet', () => {
     `);
   });
 
-  test('forwards className and root props', () => {
+  test('forwards `className` and root props', () => {
     const { container } = render(
       <Snippet
         className="custom-rootclass"
@@ -200,7 +254,24 @@ describe('Snippet', () => {
       <div>
         <span
           class="ais-Snippet"
-        />
+        >
+          <strong>
+            it
+          </strong>
+          <small>
+            em1
+          </small>
+          <span
+            class="ais-Snippet-separator"
+          >
+            <strong>
+               - 
+            </strong>
+          </span>
+          <small>
+            item2
+          </small>
+        </span>
       </div>
     `);
   });

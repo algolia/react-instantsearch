@@ -32,7 +32,7 @@ export function Snippet<THit extends Hit<BaseHit>>({
   ...props
 }: SnippetProps<THit>) {
   const property =
-    getPropertyByPath(hit._highlightResult, attribute as string) || [];
+    getPropertyByPath(hit._snippetResult, attribute as string) || [];
   const properties = Array.isArray(property) ? property : [property];
 
   const parts = properties.map((singleValue) =>

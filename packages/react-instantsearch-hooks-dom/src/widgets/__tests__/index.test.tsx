@@ -13,6 +13,7 @@ import { createSearchClient } from '../../../../../test/mock';
 
 import type { InstantSearch as InstantSearchClass } from 'instantsearch.js';
 
+// We only track widgets that use connectors.
 type RegularWidgets = Omit<typeof allWidgets, 'Highlight' | 'Snippet'>;
 
 function getMinimalProps(name: keyof RegularWidgets) {

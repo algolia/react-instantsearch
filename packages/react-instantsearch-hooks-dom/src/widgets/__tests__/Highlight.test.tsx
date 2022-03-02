@@ -185,7 +185,7 @@ describe('Highlight', () => {
           objectID: '1',
           __position: 1,
         }}
-        // @ts-expect-error TS doesn't allow an attribute which doesn't exist
+        // @ts-expect-error TypeScript doesn't allow an attribute which doesn't exist
         attribute="something-that-doesnt-exist"
       />
     );
@@ -199,7 +199,7 @@ describe('Highlight', () => {
     `);
   });
 
-  test('forwards className and root props', () => {
+  test('forwards `className` and root props', () => {
     const { container } = render(
       <Highlight
         className="custom-rootclass"

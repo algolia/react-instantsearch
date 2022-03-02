@@ -112,7 +112,7 @@ describe('Highlight', () => {
     `);
   });
 
-  test('forwards className and root props', () => {
+  test('forwards `className` and root props', () => {
     const { container } = render(
       <Highlight
         baseClassName="ais-Highlight"
