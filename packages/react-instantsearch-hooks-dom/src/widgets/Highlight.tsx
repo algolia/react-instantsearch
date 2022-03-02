@@ -6,14 +6,9 @@ import React from 'react';
 
 import { Highlight as HighlightUiComponent } from '../ui/Highlight';
 
+import type { PartialKeys } from '../types';
 import type { HighlightProps as HighlightUiComponentProps } from '../ui/Highlight';
 import type { BaseHit, Hit } from 'instantsearch.js';
-
-/**
- * Make certain keys of an object optional
- */
-type PartialKeys<TObj, TKeys extends keyof TObj> = Omit<TObj, TKeys> &
-  Partial<Pick<TObj, TKeys>>;
 
 export type HighlightProps<THit extends Hit<BaseHit>> = {
   hit: THit;
