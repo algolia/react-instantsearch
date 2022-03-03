@@ -19,13 +19,13 @@ type SingleWidget = {
   [name in keyof AllWidgets]: { name: name; Component: AllWidgets[name] };
 }[keyof AllWidgets];
 
-function renderComponent(tuple: SingleWidget) {
-  switch (tuple.name) {
+function renderComponent(widget: SingleWidget) {
+  switch (widget.name) {
     case 'SortBy': {
-      return <tuple.Component items={[]} />;
+      return <widget.Component items={[]} />;
     }
     default: {
-      return <tuple.Component />;
+      return <widget.Component />;
     }
   }
 }
