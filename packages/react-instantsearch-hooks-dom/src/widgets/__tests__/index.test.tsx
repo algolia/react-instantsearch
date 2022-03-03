@@ -13,13 +13,22 @@ import { createSearchClient } from '../../../../../test/mock';
 
 import type { InstantSearch as InstantSearchClass } from 'instantsearch.js';
 
-function getMinimalProps(name: keyof typeof allWidgets) {
-  switch (name) {
+type AllWidgets = typeof allWidgets;
+
+type SingleWidget = {
+  [name in keyof AllWidgets]: {
+    name: name;
+    Component: AllWidgets[name];
+  };
+};
+
+function renderComponent(tuple: SingleWidget[keyof AllWidgets]) {
+  switch (tuple.name) {
     case 'SortBy': {
-      return { items: [] };
+      return <tuple.Component items={[]} />;
     }
     default: {
-      return {};
+      return <tuple.Component />;
     }
   }
 }
@@ -32,7 +41,10 @@ function initializeWidgets() {
   return Object.entries(allWidgets).map(([name, Component]) => {
     let instantSearchInstance: InstantSearchClass | undefined = undefined;
 
-    const props = getMinimalProps(name as keyof typeof allWidgets);
+    const children = renderComponent({
+      name,
+      Component,
+    } as SingleWidget[keyof AllWidgets]);
 
     renderToString(
       <InstantSearchServerContext.Provider
@@ -46,7 +58,7 @@ function initializeWidgets() {
           searchClient={createSearchClient()}
           indexName="indexName"
         >
-          <Component {...props} />
+          {children}
         </InstantSearch>
       </InstantSearchServerContext.Provider>
     );
