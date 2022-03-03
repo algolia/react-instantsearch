@@ -15,7 +15,7 @@ export type SortByProps = Omit<
   };
 
 export function SortBy({
-  items = [],
+  items,
   value,
   onChange = () => {},
   ...props
