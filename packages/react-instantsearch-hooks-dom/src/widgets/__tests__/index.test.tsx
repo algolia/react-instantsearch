@@ -19,7 +19,7 @@ type SingleWidget = {
   [name in keyof AllWidgets]: { name: name; Component: AllWidgets[name] };
 }[keyof AllWidgets];
 
-function renderComponent(widget: SingleWidget) {
+function Widget({ widget }: { widget: SingleWidget }) {
   switch (widget.name) {
     case 'SortBy': {
       return <widget.Component items={[]} />;
@@ -38,6 +38,8 @@ function initializeWidgets() {
   return Object.entries(allWidgets).map(([name, Component]) => {
     let instantSearchInstance: InstantSearchClass | undefined = undefined;
 
+    const widget = { name, Component } as SingleWidget;
+
     renderToString(
       <InstantSearchServerContext.Provider
         value={{
@@ -50,7 +52,7 @@ function initializeWidgets() {
           searchClient={createSearchClient()}
           indexName="indexName"
         >
-          {renderComponent({ name, Component } as SingleWidget)}
+          <Widget widget={widget} />
         </InstantSearch>
       </InstantSearchServerContext.Provider>
     );
