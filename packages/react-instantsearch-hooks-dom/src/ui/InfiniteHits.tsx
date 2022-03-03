@@ -16,14 +16,7 @@ export type InfiniteHitsProps<THit> = React.ComponentProps<'div'> & {
 
 function DefaultHitComponent({ hit }: { hit: Hit }) {
   return (
-    <div
-      style={{
-        borderBottom: '1px solid #bbb',
-        paddingBottom: '5px',
-        marginBottom: '5px',
-        wordBreak: 'break-all',
-      }}
-    >
+    <div style={{ wordBreak: 'break-all' }}>
       {JSON.stringify(hit).slice(0, 100)}…
     </div>
   );

@@ -46,7 +46,7 @@ describe('InfiniteHits', () => {
               class="ais-InfiniteHits-item"
             >
               <div
-                style="border-bottom: 1px solid #bbb; padding-bottom: 5px; margin-bottom: 5px; word-break: break-all;"
+                style="word-break: break-all;"
               >
                 {"objectID":"abc","__position":1}
                 …
@@ -56,7 +56,7 @@ describe('InfiniteHits', () => {
               class="ais-InfiniteHits-item"
             >
               <div
-                style="border-bottom: 1px solid #bbb; padding-bottom: 5px; margin-bottom: 5px; word-break: break-all;"
+                style="word-break: break-all;"
               >
                 {"objectID":"def","__position":2}
                 …
@@ -152,7 +152,7 @@ describe('InfiniteHits', () => {
               class="ais-InfiniteHits-item"
             >
               <div
-                style="border-bottom: 1px solid #bbb; padding-bottom: 5px; margin-bottom: 5px; word-break: break-all;"
+                style="word-break: break-all;"
               >
                 {"objectID":"abc","__position":1}
                 …
@@ -162,7 +162,7 @@ describe('InfiniteHits', () => {
               class="ais-InfiniteHits-item"
             >
               <div
-                style="border-bottom: 1px solid #bbb; padding-bottom: 5px; margin-bottom: 5px; word-break: break-all;"
+                style="word-break: break-all;"
               >
                 {"objectID":"def","__position":2}
                 …
