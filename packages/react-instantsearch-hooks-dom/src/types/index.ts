@@ -22,7 +22,7 @@ export type Join<
 /**
  * Bug fix in regular `keyof` for tuples which includes array prototype, unlike keyof for object
  */
-type KeyOf<TValue extends object> = TValue extends unknown[]
+type KeyOf<TValue extends Record<string, unknown> | unknown[]> = TValue extends unknown[]
   ? Exclude<keyof TValue, Exclude<keyof [], number>>
   : keyof TValue;
 
@@ -46,8 +46,10 @@ type KeyOf<TValue extends object> = TValue extends unknown[]
  *   | ['array', number]
  *   | ['array', number, 'inside'];
  */
-export type Path<TObj extends object> = {
-  [TKey in KeyOf<TObj>]-?: TObj[TKey] extends object
+export type Path<TObj extends Record<string, unknown> | unknown[]> = {
+  [TKey in KeyOf<TObj>]-?: TObj[TKey] extends
+    | Record<string, unknown>
+    | unknown[]
     ? [TKey] | [TKey, ...Path<TObj[TKey]>]
     : [TKey];
 }[KeyOf<TObj>];
@@ -61,6 +63,6 @@ export type Path<TObj extends object> = {
  *   | ['item']
  *   | ['item', 'nested']
  */
-export type PathTupleOrString<TObj extends object> =
+export type PathTupleOrString<TObj extends Record<string, unknown>> =
   | Path<TObj>
   | Join<Path<TObj>, '.'>;

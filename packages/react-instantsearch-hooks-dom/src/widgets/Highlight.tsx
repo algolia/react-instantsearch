@@ -27,7 +27,8 @@ export function Highlight<THit extends Hit<BaseHit>>({
   ...props
 }: HighlightProps<THit>) {
   const property =
-    getPropertyByPath(hit._highlightResult, attribute as unknown as string) || [];
+    getPropertyByPath(hit._highlightResult, attribute as unknown as string) ||
+    [];
   const properties = Array.isArray(property) ? property : [property];
 
   const parts = properties.map((singleValue) =>
