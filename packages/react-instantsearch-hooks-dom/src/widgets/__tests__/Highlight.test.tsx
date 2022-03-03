@@ -112,7 +112,6 @@ describe('Highlight', () => {
             },
           },
         }}
-        // @ts-expect-error TypeScript type does not accept string, as a way to discourage it
         attribute="data.subdata"
       />
     );

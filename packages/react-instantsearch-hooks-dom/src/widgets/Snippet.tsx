@@ -6,13 +6,13 @@ import React from 'react';
 
 import { Highlight as HighlightUiComponent } from '../ui/Highlight';
 
-import type { PartialKeys } from '../types';
+import type { PartialKeys, PathTupleOrString } from '../types';
 import type { HighlightProps as HighlightUiComponentProps } from '../ui/Highlight';
 import type { BaseHit, Hit } from 'instantsearch.js';
 
 export type SnippetProps<THit extends Hit<BaseHit>> = {
   hit: THit;
-  attribute: keyof THit | string[];
+  attribute: PathTupleOrString<THit>;
 } & PartialKeys<
   Omit<HighlightUiComponentProps, 'baseClassName' | 'parts'>,
   'highlightedTagName' | 'nonHighlightedTagName' | 'separator'
@@ -27,7 +27,7 @@ export function Snippet<THit extends Hit<BaseHit>>({
   ...props
 }: SnippetProps<THit>) {
   const property =
-    getPropertyByPath(hit._snippetResult, attribute as string) || [];
+    getPropertyByPath(hit._snippetResult, attribute as unknown as string) || [];
   const properties = Array.isArray(property) ? property : [property];
 
   const parts = properties.map((singleValue) =>
