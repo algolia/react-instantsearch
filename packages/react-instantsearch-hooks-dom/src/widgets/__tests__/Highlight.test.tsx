@@ -208,8 +208,7 @@ describe('Highlight', () => {
           objectID: '1',
           __position: 1,
         }}
-        // @ts-expect-error TS doesn't allow an attribute which doesn't exist
-        attribute="something-that-doesnt-exist"
+        attribute="objectID"
       />
     );
 
