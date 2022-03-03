@@ -2,6 +2,7 @@ import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
+import { createSearchClient } from '../../../../../test/mock';
 import { InstantSearchHooksTestWrapper, wait } from '../../../../../test/utils';
 import { SortBy } from '../SortBy';
 
@@ -110,8 +111,13 @@ describe('SortBy', () => {
   });
 
   test('updates the selected index', async () => {
+    const client = createSearchClient();
+
     const { getByRole } = render(
-      <InstantSearchHooksTestWrapper>
+      <InstantSearchHooksTestWrapper
+        searchClient={client}
+        indexName="instant_search"
+      >
         <SortBy
           items={[
             { label: 'Featured', value: 'instant_search' },
@@ -124,6 +130,12 @@ describe('SortBy', () => {
 
     await wait(0);
 
+    expect(client.search).toHaveBeenCalledWith(
+      expect.arrayContaining([
+        expect.objectContaining({ indexName: 'instant_search' }),
+      ])
+    );
+
     userEvent.selectOptions(
       document.querySelector('.ais-SortBy-select') as HTMLSelectElement,
       getByRole('option', { name: 'Price (asc)' })
@@ -133,6 +145,11 @@ describe('SortBy', () => {
 
     expect(document.querySelector('.ais-SortBy-select')).toHaveValue(
       'instant_search_price_asc'
+    );
+    expect(client.search).toHaveBeenCalledWith(
+      expect.arrayContaining([
+        expect.objectContaining({ indexName: 'instant_search_price_asc' }),
+      ])
     );
   });
 
