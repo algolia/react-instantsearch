@@ -16,6 +16,8 @@ export function createSearchResults<THit>(state: SearchParameters) {
       exhaustiveFacetsCount: true,
       processingTimeMS: 0,
       index: state.index,
+      /** used by connectors to prevent persisting these results */
+      __isArtificial: true,
     },
   ]);
 }
