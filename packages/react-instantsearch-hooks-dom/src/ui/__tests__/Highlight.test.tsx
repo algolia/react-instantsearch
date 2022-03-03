@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 
-import { Highlight } from '..';
+import { Highlight } from '../Highlight';
 
 describe('Highlight', () => {
   test('renders only wrapper with empty match', () => {
