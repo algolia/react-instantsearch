@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react';
 
-import { CSSClass, cx } from './lib/cx';
+import { cx } from './lib/cx';
+
+import type { CSSClass } from './lib/cx';
 
 type HighlightPartProps = {
   children: React.ReactNode;

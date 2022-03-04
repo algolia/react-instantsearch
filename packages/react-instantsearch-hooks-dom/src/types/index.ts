@@ -1,4 +1,4 @@
-import { CSSClass } from '../ui/lib/cx';
+import type { CSSClass } from '../ui/lib/cx';
 
 /**
  * Make certain keys of an object optional
