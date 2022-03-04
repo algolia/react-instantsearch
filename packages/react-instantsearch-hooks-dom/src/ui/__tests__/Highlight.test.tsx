@@ -6,13 +6,21 @@ import { Highlight } from '../Highlight';
 describe('Highlight', () => {
   test('renders only wrapper with empty match', () => {
     const { container } = render(
-      <Highlight baseClassName="ais-Highlight" parts={[]} />
+      <Highlight
+        cssClasses={{
+          root: 'ROOT',
+          highlighted: 'HIGHLIGHTED',
+          nonHighlighted: 'NON-HIGHLIGHTED',
+          separator: 'SEPARATOR',
+        }}
+        parts={[]}
+      />
     );
 
     expect(container).toMatchInlineSnapshot(`
       <div>
         <span
-          class="ais-Highlight"
+          class="ROOT"
         />
       </div>
     `);
@@ -21,7 +29,12 @@ describe('Highlight', () => {
   test('renders parts', () => {
     const { container } = render(
       <Highlight
-        baseClassName="ais-Highlight"
+        cssClasses={{
+          root: 'ROOT',
+          highlighted: 'HIGHLIGHTED',
+          nonHighlighted: 'NON-HIGHLIGHTED',
+          separator: 'SEPARATOR',
+        }}
         parts={[
           [
             { isHighlighted: true, value: 'te' },
@@ -35,25 +48,25 @@ describe('Highlight', () => {
     expect(container).toMatchInlineSnapshot(`
       <div>
         <span
-          class="ais-Highlight"
+          class="ROOT"
         >
           <mark
-            class="ais-Highlight-highlighted"
+            class="HIGHLIGHTED"
           >
             te
           </mark>
           <span
-            class="ais-Highlight-nonHighlighted"
+            class="NON-HIGHLIGHTED"
           >
             st
           </span>
           <span
-            class="ais-Highlight-separator"
+            class="SEPARATOR"
           >
             , 
           </span>
           <span
-            class="ais-Highlight-nonHighlighted"
+            class="NON-HIGHLIGHTED"
           >
             nothing
           </span>
@@ -72,7 +85,12 @@ describe('Highlight', () => {
 
     const { container } = render(
       <Highlight
-        baseClassName="ais-Highlight"
+        cssClasses={{
+          root: 'ROOT',
+          highlighted: 'HIGHLIGHTED',
+          nonHighlighted: 'NON-HIGHLIGHTED',
+          separator: 'SEPARATOR',
+        }}
         highlightedTagName={Highlighted}
         nonHighlightedTagName={NonHighlighted}
         separator={<strong> - </strong>}
@@ -89,7 +107,7 @@ describe('Highlight', () => {
     expect(container).toMatchInlineSnapshot(`
       <div>
         <span
-          class="ais-Highlight"
+          class="ROOT"
         >
           <strong>
             te
@@ -98,7 +116,7 @@ describe('Highlight', () => {
             st
           </small>
           <span
-            class="ais-Highlight-separator"
+            class="SEPARATOR"
           >
             <strong>
                - 
@@ -115,7 +133,12 @@ describe('Highlight', () => {
   test('forwards `className` and root props', () => {
     const { container } = render(
       <Highlight
-        baseClassName="ais-Highlight"
+        cssClasses={{
+          root: 'ROOT',
+          highlighted: 'HIGHLIGHTED',
+          nonHighlighted: 'NON-HIGHLIGHTED',
+          separator: 'SEPARATOR',
+        }}
         parts={[]}
         className="custom-root"
         aria-hidden="true"
@@ -126,7 +149,32 @@ describe('Highlight', () => {
       <div>
         <span
           aria-hidden="true"
-          class="ais-Highlight custom-root"
+          class="ROOT custom-root"
+        />
+      </div>
+    `);
+  });
+
+  test('accepts array of classes for cssClasses', () => {
+    const { container } = render(
+      <Highlight
+        cssClasses={{
+          root: ['ROOT', 'EXTRA', false],
+          highlighted: 'HIGHLIGHTED',
+          nonHighlighted: 'NON-HIGHLIGHTED',
+          separator: 'SEPARATOR',
+        }}
+        parts={[]}
+        className="custom-root"
+        aria-hidden="true"
+      />
+    );
+
+    expect(container).toMatchInlineSnapshot(`
+      <div>
+        <span
+          aria-hidden="true"
+          class="ROOT EXTRA custom-root"
         />
       </div>
     `);
