@@ -60,7 +60,6 @@ export type HighlightCSSClasses = {
 
 export type HighlightProps = React.HTMLAttributes<HTMLSpanElement> & {
   cssClasses: HighlightCSSClasses;
-  userCssClasses: HighlightCSSClasses;
   highlightedTagName?: React.ReactType;
   nonHighlightedTagName?: React.ReactType;
   separator?: React.ReactNode;
