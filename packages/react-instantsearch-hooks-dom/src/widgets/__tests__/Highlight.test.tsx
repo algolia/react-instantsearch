@@ -222,6 +222,29 @@ describe('Highlight', () => {
     `);
   });
 
+  test('forwards `cssClasses`', () => {
+    const { container } = render(
+      <Highlight
+        cssClasses={{
+          root: 'custom-rootclass',
+        }}
+        hit={{
+          objectID: '1',
+          __position: 1,
+        }}
+        attribute="objectID"
+      />
+    );
+
+    expect(container).toMatchInlineSnapshot(`
+      <div>
+        <span
+          class="ais-Highlight custom-rootclass"
+        />
+      </div>
+    `);
+  });
+
   test('forwards tag names and separator', () => {
     function Highlighted({ children }) {
       return <strong>{children}</strong>;

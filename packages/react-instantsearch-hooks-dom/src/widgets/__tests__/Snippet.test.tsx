@@ -204,8 +204,7 @@ describe('Snippet', () => {
           objectID: '1',
           __position: 1,
         }}
-        // @ts-expect-error TS doesn't allow an attribute which doesn't exist
-        attribute="something-that-doesnt-exist"
+        attribute="objectID"
       />
     );
 
@@ -214,6 +213,29 @@ describe('Snippet', () => {
         <span
           class="ais-Snippet custom-rootclass"
           hidden=""
+        />
+      </div>
+    `);
+  });
+
+  test('forwards `cssClasses`', () => {
+    const { container } = render(
+      <Snippet
+        cssClasses={{
+          root: 'custom-rootclass',
+        }}
+        hit={{
+          objectID: '1',
+          __position: 1,
+        }}
+        attribute="objectID"
+      />
+    );
+
+    expect(container).toMatchInlineSnapshot(`
+      <div>
+        <span
+          class="ais-Snippet custom-rootclass"
         />
       </div>
     `);
