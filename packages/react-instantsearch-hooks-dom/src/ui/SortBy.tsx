@@ -2,14 +2,13 @@ import React from 'react';
 
 import { cx } from './lib/cx';
 
-import type { PartialKeys } from '../types';
 import type { UseSortByProps } from 'react-instantsearch-hooks';
 
 export type SortByProps = Omit<
   React.HTMLAttributes<HTMLDivElement>,
   'onChange'
 > &
-  PartialKeys<UseSortByProps, 'items'> &
+  Pick<UseSortByProps, 'items'> &
   Pick<React.SelectHTMLAttributes<HTMLSelectElement>, 'value'> & {
     onChange?(value: string): void;
   };
