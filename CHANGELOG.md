@@ -1,3 +1,20 @@
+# [6.23.0](https://github.com/algolia/react-instantsearch/compare/v6.22.0...v6.23.0) (2022-03-08)
+
+
+### Features
+
+* **hooks-dom:** introduce Hooks DOM package ([#3358](https://github.com/algolia/react-instantsearch/issues/3358)) ([f6420e9](https://github.com/algolia/react-instantsearch/commit/f6420e9e504bb52575356dadd779755daa2a57b8))
+* **hooks:** allow additional widget properties to be passed from hooks ([#3359](https://github.com/algolia/react-instantsearch/issues/3359)) ([a047be4](https://github.com/algolia/react-instantsearch/commit/a047be45c7fce7ee28f7d6f61d2fbfa79e3ed2d0))
+* **hooks:** allow useHits and useInfiniteHit to be generic ([#3364](https://github.com/algolia/react-instantsearch/issues/3364)) ([8e66ad3](https://github.com/algolia/react-instantsearch/commit/8e66ad3ad587197c4811c60a5cab475137ca5afb))
+* **hooks:** implement ClearRefinements component ([#3367](https://github.com/algolia/react-instantsearch/issues/3367)) ([70e7844](https://github.com/algolia/react-instantsearch/commit/70e7844310b507cbcda68fb5137903dfb14523b8))
+* **hooks:** implement CurrentRefinements component ([#3368](https://github.com/algolia/react-instantsearch/issues/3368)) ([114a9c4](https://github.com/algolia/react-instantsearch/commit/114a9c447df43bb33a964820bb8c702697a14ea3))
+* **hooks:** implement Hits component ([#3363](https://github.com/algolia/react-instantsearch/issues/3363)) ([73f5167](https://github.com/algolia/react-instantsearch/commit/73f5167614e19554a94e6cf09ea82cd1b8397dd9))
+* **hooks:** implement Pagination component ([#3371](https://github.com/algolia/react-instantsearch/issues/3371)) ([629b242](https://github.com/algolia/react-instantsearch/commit/629b2427948430e2060238915e69111a823f0325))
+* **hooks:** implement SearchBox ([#3360](https://github.com/algolia/react-instantsearch/issues/3360)) ([9b096a8](https://github.com/algolia/react-instantsearch/commit/9b096a83120396639d490000d9803f2a5bd55fb3))
+* **hooks:** implement SortBy component ([#3373](https://github.com/algolia/react-instantsearch/issues/3373)) ([39767bb](https://github.com/algolia/react-instantsearch/commit/39767bb3e5e4dfada1f8a3deb3236fd0da900dab))
+
+
+
 # [6.22.0](https://github.com/algolia/react-instantsearch/compare/v6.21.1...v6.22.0) (2022-02-01)
 
 
