@@ -17468,6 +17468,21 @@ instantsearch.js@4.40.1, instantsearch.js@^4.40.1:
     qs "^6.5.1 < 6.10"
     search-insights "^2.1.0"
 
+"instantsearch.js@https://pkg.csb.dev/algolia/instantsearch.js/commit/70fb1c6d/instantsearch.js":
+  version "4.39.1"
+  resolved "https://pkg.csb.dev/algolia/instantsearch.js/commit/70fb1c6d/instantsearch.js#0e0b2d481a893ca24e76af8077a94bf7204803ac"
+  dependencies:
+    "@algolia/events" "^4.0.1"
+    "@types/google.maps" "^3.45.3"
+    "@types/hogan.js" "^3.0.0"
+    "@types/qs" "^6.5.3"
+    algoliasearch-helper "^3.7.0"
+    classnames "^2.2.5"
+    hogan.js "^3.0.2"
+    preact "^10.6.0"
+    qs "^6.5.1 < 6.10"
+    search-insights "^2.1.0"
+
 internal-ip@4.3.0, internal-ip@^4.2.0, internal-ip@^4.3.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/internal-ip/-/internal-ip-4.3.0.tgz#845452baad9d2ca3b69c635a137acb9a0dad0907"
