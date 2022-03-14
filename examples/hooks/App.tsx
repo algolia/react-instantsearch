@@ -3,6 +3,7 @@ import algoliasearch from 'algoliasearch/lite';
 import React from 'react';
 import {
   InstantSearch,
+  Breadcrumb,
   Configure,
   ClearRefinements,
   CurrentRefinements,
@@ -18,7 +19,6 @@ import {
 } from 'react-instantsearch-hooks-dom';
 
 import {
-  Breadcrumb,
   HierarchicalMenu,
   InfiniteHits,
   Menu,

@@ -1,0 +1,337 @@
+import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import React from 'react';
+import { useHierarchicalMenu } from 'react-instantsearch-hooks';
+
+import {
+  createMultiSearchResponse,
+  createSearchClient,
+  createSingleSearchResponse,
+} from '../../../../../test/mock';
+import { InstantSearchHooksTestWrapper, wait } from '../../../../../test/utils';
+import { Breadcrumb } from '../Breadcrumb';
+
+import type { UseHierarchicalMenuProps } from 'react-instantsearch-hooks';
+
+describe('Breadcrumb', () => {
+  function getBreadcrumbSearchClient(
+    hierarchicalFacets: Record<string, Record<string, number>> = {
+      'hierarchicalCategories.lvl0': {
+        'Cameras & Camcorders': 1369,
+      },
+      'hierarchicalCategories.lvl1': {
+        'Cameras & Camcorders > Digital Cameras': 170,
+      },
+    }
+  ) {
+    const hierarchicalAttributes = Object.keys(hierarchicalFacets);
+    const search = jest.fn((requests) =>
+      Promise.resolve(
+        createMultiSearchResponse(
+          ...requests.map(() =>
+            createSingleSearchResponse({
+              facets: hierarchicalFacets,
+            })
+          )
+        )
+      )
+    );
+    const searchClient = createSearchClient({ search });
+
+    return { search, searchClient, hierarchicalAttributes };
+  }
+
+  test('renders at root level', async () => {
+    const { container } = render(
+      <InstantSearchHooksTestWrapper>
+        <Breadcrumb
+          attributes={[
+            'hierarchicalCategories.lvl0',
+            'hierarchicalCategories.lvl1',
+          ]}
+        />
+      </InstantSearchHooksTestWrapper>
+    );
+
+    await wait(0);
+
+    expect(container).toMatchInlineSnapshot(`
+      <div>
+        <div
+          class="ais-Breadcrumb ais-Breadcrumb--noRefinement"
+        >
+          <ul
+            class="ais-Breadcrumb-list"
+          >
+            <li
+              class="ais-Breadcrumb-item ais-Breadcrumb-item--selected"
+            >
+              <a
+                class="ais-Breadcrumb-link"
+                href="#"
+              >
+                Home
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    `);
+  });
+
+  test('renders with items', async () => {
+    const { searchClient, hierarchicalAttributes } =
+      getBreadcrumbSearchClient();
+
+    const { container } = render(
+      <InstantSearchHooksTestWrapper
+        searchClient={searchClient}
+        initialUiState={{
+          indexName: {
+            hierarchicalMenu: {
+              'hierarchicalCategories.lvl0': [
+                'Cameras & Camcorders > Digital Cameras',
+              ],
+            },
+          },
+        }}
+      >
+        <VirtualHierarchicalMenu attributes={hierarchicalAttributes} />
+        <Breadcrumb attributes={hierarchicalAttributes} />
+      </InstantSearchHooksTestWrapper>
+    );
+
+    await wait(0);
+
+    expect(container).toMatchInlineSnapshot(`
+      <div>
+        <div
+          class="ais-Breadcrumb"
+        >
+          <ul
+            class="ais-Breadcrumb-list"
+          >
+            <li
+              class="ais-Breadcrumb-item"
+            >
+              <a
+                class="ais-Breadcrumb-link"
+                href="#"
+              >
+                Home
+              </a>
+            </li>
+            <li
+              class="ais-Breadcrumb-item"
+            >
+              <span
+                aria-hidden="true"
+                class="ais-Breadcrumb-separator"
+              >
+                &gt;
+              </span>
+              <a
+                class="ais-Breadcrumb-link"
+                href="#"
+              >
+                Cameras & Camcorders
+              </a>
+            </li>
+            <li
+              class="ais-Breadcrumb-item ais-Breadcrumb-item--selected"
+            >
+              <span
+                aria-hidden="true"
+                class="ais-Breadcrumb-separator"
+              >
+                &gt;
+              </span>
+              Digital Cameras
+            </li>
+          </ul>
+        </div>
+      </div>
+    `);
+  });
+
+  test('transform the passed items', async () => {
+    const { searchClient, hierarchicalAttributes } =
+      getBreadcrumbSearchClient();
+
+    const { container } = render(
+      <InstantSearchHooksTestWrapper
+        searchClient={searchClient}
+        initialUiState={{
+          indexName: {
+            hierarchicalMenu: {
+              'hierarchicalCategories.lvl0': [
+                'Cameras & Camcorders > Digital Cameras',
+              ],
+            },
+          },
+        }}
+      >
+        <VirtualHierarchicalMenu attributes={hierarchicalAttributes} />
+        <Breadcrumb
+          attributes={hierarchicalAttributes}
+          transformItems={(items) =>
+            items.map((item) => ({ ...item, label: item.label.toUpperCase() }))
+          }
+        />
+      </InstantSearchHooksTestWrapper>
+    );
+
+    await wait(0);
+
+    expect(container).toMatchInlineSnapshot(`
+      <div>
+        <div
+          class="ais-Breadcrumb"
+        >
+          <ul
+            class="ais-Breadcrumb-list"
+          >
+            <li
+              class="ais-Breadcrumb-item"
+            >
+              <a
+                class="ais-Breadcrumb-link"
+                href="#"
+              >
+                Home
+              </a>
+            </li>
+            <li
+              class="ais-Breadcrumb-item"
+            >
+              <span
+                aria-hidden="true"
+                class="ais-Breadcrumb-separator"
+              >
+                &gt;
+              </span>
+              <a
+                class="ais-Breadcrumb-link"
+                href="#"
+              >
+                CAMERAS & CAMCORDERS
+              </a>
+            </li>
+            <li
+              class="ais-Breadcrumb-item ais-Breadcrumb-item--selected"
+            >
+              <span
+                aria-hidden="true"
+                class="ais-Breadcrumb-separator"
+              >
+                &gt;
+              </span>
+              DIGITAL CAMERAS
+            </li>
+          </ul>
+        </div>
+      </div>
+    `);
+  });
+
+  test('navigates to a parent category', async () => {
+    const { search, searchClient, hierarchicalAttributes } =
+      getBreadcrumbSearchClient();
+
+    const { getByText } = render(
+      <InstantSearchHooksTestWrapper
+        searchClient={searchClient}
+        initialUiState={{
+          indexName: {
+            hierarchicalMenu: {
+              'hierarchicalCategories.lvl0': [
+                'Cameras & Camcorders > Digital Cameras',
+              ],
+            },
+          },
+        }}
+      >
+        <VirtualHierarchicalMenu attributes={hierarchicalAttributes} />
+        <Breadcrumb attributes={hierarchicalAttributes} />
+      </InstantSearchHooksTestWrapper>
+    );
+
+    await wait(0);
+
+    search.mockClear();
+
+    expect(
+      document.querySelector('.ais-Breadcrumb-item--selected')
+    ).toHaveTextContent('>Digital Cameras');
+
+    userEvent.click(getByText('Cameras & Camcorders'));
+
+    await wait(0);
+
+    expect(search).toHaveBeenLastCalledWith(
+      expect.arrayContaining([
+        expect.objectContaining({
+          params: expect.objectContaining({
+            facetFilters: [
+              ['hierarchicalCategories.lvl0:Cameras & Camcorders'],
+            ],
+          }),
+        }),
+      ])
+    );
+  });
+
+  test('sets a different separator', async () => {
+    //
+  });
+
+  test('sets a different root path', async () => {
+    //
+  });
+
+  test('forwards `div` props to the root element', async () => {
+    const { container } = render(
+      <InstantSearchHooksTestWrapper>
+        <Breadcrumb
+          className="MyBreadcrumb"
+          title="Some custom title"
+          attributes={[
+            'hierarchicalCategories.lvl0',
+            'hierarchicalCategories.lvl1',
+          ]}
+        />
+      </InstantSearchHooksTestWrapper>
+    );
+
+    await wait(0);
+
+    expect(container).toMatchInlineSnapshot(`
+      <div>
+        <div
+          class="ais-Breadcrumb ais-Breadcrumb--noRefinement MyBreadcrumb"
+          title="Some custom title"
+        >
+          <ul
+            class="ais-Breadcrumb-list"
+          >
+            <li
+              class="ais-Breadcrumb-item ais-Breadcrumb-item--selected"
+            >
+              <a
+                class="ais-Breadcrumb-link"
+                href="#"
+              >
+                Home
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    `);
+  });
+});
+
+function VirtualHierarchicalMenu(props: UseHierarchicalMenuProps) {
+  useHierarchicalMenu(props);
+  return null;
+}
