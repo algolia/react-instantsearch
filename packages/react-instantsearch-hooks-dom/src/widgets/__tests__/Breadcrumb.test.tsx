@@ -41,15 +41,14 @@ describe('Breadcrumb', () => {
     return { search, searchClient, hierarchicalAttributes };
   }
 
-  test('renders at root level', async () => {
+  test('renders default state', async () => {
+    const { searchClient, hierarchicalAttributes } =
+      getBreadcrumbSearchClient();
+
     const { container } = render(
-      <InstantSearchHooksTestWrapper>
-        <Breadcrumb
-          attributes={[
-            'hierarchicalCategories.lvl0',
-            'hierarchicalCategories.lvl1',
-          ]}
-        />
+      <InstantSearchHooksTestWrapper searchClient={searchClient}>
+        <VirtualHierarchicalMenu attributes={hierarchicalAttributes} />
+        <Breadcrumb attributes={hierarchicalAttributes} />
       </InstantSearchHooksTestWrapper>
     );
 
@@ -238,7 +237,7 @@ describe('Breadcrumb', () => {
     const { search, searchClient, hierarchicalAttributes } =
       getBreadcrumbSearchClient();
 
-    const { getByText } = render(
+    const { container, getByText } = render(
       <InstantSearchHooksTestWrapper
         searchClient={searchClient}
         initialUiState={{
@@ -260,9 +259,55 @@ describe('Breadcrumb', () => {
 
     search.mockClear();
 
-    expect(
-      document.querySelector('.ais-Breadcrumb-item--selected')
-    ).toHaveTextContent('>Digital Cameras');
+    expect(container).toMatchInlineSnapshot(`
+      <div>
+        <div
+          class="ais-Breadcrumb"
+        >
+          <ul
+            class="ais-Breadcrumb-list"
+          >
+            <li
+              class="ais-Breadcrumb-item"
+            >
+              <a
+                class="ais-Breadcrumb-link"
+                href="#"
+              >
+                Home
+              </a>
+            </li>
+            <li
+              class="ais-Breadcrumb-item"
+            >
+              <span
+                aria-hidden="true"
+                class="ais-Breadcrumb-separator"
+              >
+                &gt;
+              </span>
+              <a
+                class="ais-Breadcrumb-link"
+                href="#"
+              >
+                Cameras & Camcorders
+              </a>
+            </li>
+            <li
+              class="ais-Breadcrumb-item ais-Breadcrumb-item--selected"
+            >
+              <span
+                aria-hidden="true"
+                class="ais-Breadcrumb-separator"
+              >
+                &gt;
+              </span>
+              Digital Cameras
+            </li>
+          </ul>
+        </div>
+      </div>
+    `);
 
     userEvent.click(getByText('Cameras & Camcorders'));
 
@@ -281,24 +326,17 @@ describe('Breadcrumb', () => {
     );
   });
 
-  test('sets a different separator', async () => {
-    //
-  });
-
-  test('sets a different root path', async () => {
-    //
-  });
-
   test('forwards `div` props to the root element', async () => {
+    const { searchClient, hierarchicalAttributes } =
+      getBreadcrumbSearchClient();
+
     const { container } = render(
-      <InstantSearchHooksTestWrapper>
+      <InstantSearchHooksTestWrapper searchClient={searchClient}>
+        <VirtualHierarchicalMenu attributes={hierarchicalAttributes} />
         <Breadcrumb
           className="MyBreadcrumb"
           title="Some custom title"
-          attributes={[
-            'hierarchicalCategories.lvl0',
-            'hierarchicalCategories.lvl1',
-          ]}
+          attributes={hierarchicalAttributes}
         />
       </InstantSearchHooksTestWrapper>
     );
