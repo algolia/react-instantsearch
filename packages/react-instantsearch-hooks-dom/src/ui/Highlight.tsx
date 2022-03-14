@@ -6,14 +6,14 @@ import type { CSSClass } from './lib/cx';
 
 type HighlightPartProps = {
   children: React.ReactNode;
-  cssClasses: HighlightCSSClasses;
+  classNames: HighlightClassNames;
   highlightedTagName: React.ReactType;
   nonHighlightedTagName: React.ReactType;
   isHighlighted: boolean;
 };
 
 function HighlightPart({
-  cssClasses,
+  classNames,
   children,
   highlightedTagName,
   isHighlighted,
@@ -25,8 +25,8 @@ function HighlightPart({
     <TagName
       className={
         isHighlighted
-          ? cx(cssClasses.highlighted)
-          : cx(cssClasses.nonHighlighted)
+          ? cx(classNames.highlighted)
+          : cx(classNames.nonHighlighted)
       }
     >
       {children}
@@ -39,7 +39,7 @@ type HighlightedPart = {
   value: string;
 };
 
-export type HighlightCSSClasses = {
+export type HighlightClassNames = {
   /**
    * Class names to apply to the root element
    */
@@ -59,7 +59,7 @@ export type HighlightCSSClasses = {
 };
 
 export type HighlightProps = React.HTMLAttributes<HTMLSpanElement> & {
-  cssClasses: HighlightCSSClasses;
+  classNames: HighlightClassNames;
   highlightedTagName?: React.ReactType;
   nonHighlightedTagName?: React.ReactType;
   separator?: React.ReactNode;
@@ -71,11 +71,11 @@ export function Highlight({
   highlightedTagName = 'mark',
   nonHighlightedTagName = 'span',
   separator = ', ',
-  cssClasses,
+  classNames,
   ...props
 }: HighlightProps) {
   return (
-    <span {...props} className={cx(cssClasses.root, props.className)}>
+    <span {...props} className={cx(classNames.root, props.className)}>
       {parts.map((part, partIndex) => {
         const isLastPart = partIndex === parts.length - 1;
 
@@ -84,7 +84,7 @@ export function Highlight({
             {part.map((subPart, subPartIndex) => (
               <HighlightPart
                 key={subPartIndex}
-                cssClasses={cssClasses}
+                classNames={classNames}
                 highlightedTagName={highlightedTagName}
                 nonHighlightedTagName={nonHighlightedTagName}
                 isHighlighted={subPart.isHighlighted}
@@ -94,7 +94,7 @@ export function Highlight({
             ))}
 
             {!isLastPart && (
-              <span className={cx(cssClasses.separator)}>{separator}</span>
+              <span className={cx(classNames.separator)}>{separator}</span>
             )}
           </Fragment>
         );

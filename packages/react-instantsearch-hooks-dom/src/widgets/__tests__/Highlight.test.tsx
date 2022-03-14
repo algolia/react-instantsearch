@@ -222,10 +222,10 @@ describe('Highlight', () => {
     `);
   });
 
-  test('forwards `cssClasses`', () => {
+  test('forwards `classNames`', () => {
     const { container } = render(
       <Highlight
-        cssClasses={{
+        classNames={{
           root: 'custom-rootclass',
         }}
         hit={{

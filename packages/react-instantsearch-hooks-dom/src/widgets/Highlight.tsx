@@ -6,7 +6,7 @@ import React from 'react';
 
 import { Highlight as HighlightUiComponent } from '../ui/Highlight';
 
-import type { PartialKeys, CSSClasses } from '../types';
+import type { PartialKeys, ClassNames } from '../types';
 import type { HighlightProps as HighlightUiComponentProps } from '../ui/Highlight';
 import type { BaseHit, Hit } from 'instantsearch.js';
 
@@ -14,15 +14,15 @@ export type HighlightProps<THit extends Hit<BaseHit>> = {
   hit: THit;
   attribute: keyof THit | string[];
 } & PartialKeys<
-  Omit<HighlightUiComponentProps, 'parts' | 'cssClasses'>,
+  Omit<HighlightUiComponentProps, 'parts' | 'classNames'>,
   'highlightedTagName' | 'nonHighlightedTagName' | 'separator'
 > &
-  CSSClasses<HighlightUiComponentProps>;
+  ClassNames<HighlightUiComponentProps>;
 
 export function Highlight<THit extends Hit<BaseHit>>({
   hit,
   attribute,
-  cssClasses = {},
+  classNames = {},
   highlightedTagName,
   nonHighlightedTagName,
   separator,
@@ -39,14 +39,14 @@ export function Highlight<THit extends Hit<BaseHit>>({
   return (
     <HighlightUiComponent
       {...props}
-      cssClasses={{
-        root: ['ais-Highlight', cssClasses.root],
-        highlighted: ['ais-Highlight-highlighted', cssClasses.highlighted],
+      classNames={{
+        root: ['ais-Highlight', classNames.root],
+        highlighted: ['ais-Highlight-highlighted', classNames.highlighted],
         nonHighlighted: [
           'ais-Highlight-nonHighlighted',
-          cssClasses.nonHighlighted,
+          classNames.nonHighlighted,
         ],
-        separator: ['ais-Highlight-separator', cssClasses.separator],
+        separator: ['ais-Highlight-separator', classNames.separator],
       }}
       parts={parts}
       highlightedTagName={highlightedTagName}

@@ -218,10 +218,10 @@ describe('Snippet', () => {
     `);
   });
 
-  test('forwards `cssClasses`', () => {
+  test('forwards `classNames`', () => {
     const { container } = render(
       <Snippet
-        cssClasses={{
+        classNames={{
           root: 'custom-rootclass',
         }}
         hit={{

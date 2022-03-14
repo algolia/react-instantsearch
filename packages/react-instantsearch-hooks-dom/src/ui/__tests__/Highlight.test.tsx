@@ -7,7 +7,7 @@ describe('Highlight', () => {
   test('renders only wrapper with empty match', () => {
     const { container } = render(
       <Highlight
-        cssClasses={{
+        classNames={{
           root: 'ROOT',
           highlighted: 'HIGHLIGHTED',
           nonHighlighted: 'NON-HIGHLIGHTED',
@@ -29,7 +29,7 @@ describe('Highlight', () => {
   test('renders parts', () => {
     const { container } = render(
       <Highlight
-        cssClasses={{
+        classNames={{
           root: 'ROOT',
           highlighted: 'HIGHLIGHTED',
           nonHighlighted: 'NON-HIGHLIGHTED',
@@ -85,7 +85,7 @@ describe('Highlight', () => {
 
     const { container } = render(
       <Highlight
-        cssClasses={{
+        classNames={{
           root: 'ROOT',
           highlighted: 'HIGHLIGHTED',
           nonHighlighted: 'NON-HIGHLIGHTED',
@@ -133,7 +133,7 @@ describe('Highlight', () => {
   test('forwards `className` and root props', () => {
     const { container } = render(
       <Highlight
-        cssClasses={{
+        classNames={{
           root: 'ROOT',
           highlighted: 'HIGHLIGHTED',
           nonHighlighted: 'NON-HIGHLIGHTED',
@@ -155,10 +155,10 @@ describe('Highlight', () => {
     `);
   });
 
-  test('accepts array of classes for cssClasses', () => {
+  test('accepts array of classes for classNames', () => {
     const { container } = render(
       <Highlight
-        cssClasses={{
+        classNames={{
           root: ['ROOT', 'EXTRA', false],
           highlighted: 'HIGHLIGHTED',
           nonHighlighted: 'NON-HIGHLIGHTED',

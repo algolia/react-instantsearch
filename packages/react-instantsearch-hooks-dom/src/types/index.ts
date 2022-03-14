@@ -9,6 +9,6 @@ export type PartialKeys<TObj, TKeys extends keyof TObj> = Omit<TObj, TKeys> &
 /**
  * Map from CSS Classes used internally by `ui` to the classes passed by users
  */
-export type CSSClasses<
-  TProps extends { cssClasses: Record<string, CSSClass> }
-> = { cssClasses?: { [className in keyof TProps['cssClasses']]?: string } };
+export type ClassNames<
+  TProps extends { classNames: Record<string, CSSClass> }
+> = { classNames?: { [className in keyof TProps['classNames']]?: string } };
