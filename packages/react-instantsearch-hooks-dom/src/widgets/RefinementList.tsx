@@ -13,7 +13,7 @@ import type { UseRefinementListProps } from 'react-instantsearch-hooks';
 
 export type RefinementListProps = Omit<
   RefinementListUiComponentProps,
-  'items' | 'onRefine' | 'searchBox' | 'showMoreButton'
+  'items' | 'onRefine' | 'searchBox' | 'noResults' | 'showMoreButton'
 > &
   UseRefinementListProps &
   Pick<RefinementListWidgetParams, 'searchable' | 'searchablePlaceholder'>;
