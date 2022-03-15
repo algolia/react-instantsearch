@@ -27,7 +27,7 @@ export function getServerState(
   const notifyServer: InstantSearchServerContextApi['notifyServer'] = ({
     search,
   }) => {
-    searchRef.current = search;
+    searchRef.current = search as InstantSearch;
   };
 
   // eslint-disable-next-line no-shadow
