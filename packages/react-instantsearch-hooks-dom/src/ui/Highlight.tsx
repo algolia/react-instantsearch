@@ -45,15 +45,15 @@ export type HighlightClassNames = {
    */
   root: CSSClass;
   /**
-   * Class names to apply to the matching parts
+   * Class names to apply to the highlighted parts
    */
   highlighted: CSSClass;
   /**
-   * Class names to apply to the non-matching parts
+   * Class names to apply to the non-highlighted parts
    */
   nonHighlighted: CSSClass;
   /**
-   * Class names to apply to the separator between different matches
+   * Class names to apply to the separator between highlighted parts
    */
   separator: CSSClass;
 };
