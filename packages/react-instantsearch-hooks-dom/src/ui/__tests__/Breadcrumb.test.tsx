@@ -6,7 +6,7 @@ import { Breadcrumb } from '../Breadcrumb';
 
 import type { BreadcrumbProps } from '../Breadcrumb';
 
-describe('Breadcrumb UI', () => {
+describe('Breadcrumb', () => {
   function createProps(props: Partial<BreadcrumbProps> = {}) {
     const createURL = jest.fn((value) => `#${value}`);
     const onNavigate = jest.fn();
