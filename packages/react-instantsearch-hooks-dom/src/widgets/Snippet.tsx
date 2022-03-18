@@ -5,6 +5,7 @@ import {
 import React from 'react';
 
 import { Highlight as HighlightUiComponent } from '../ui/Highlight';
+import { cx } from '../ui/lib/cx';
 
 import type { ClassNames, PartialKeys } from '../types';
 import type { HighlightProps as HighlightUiComponentProps } from '../ui/Highlight';
@@ -40,13 +41,13 @@ export function Snippet<THit extends Hit<BaseHit>>({
     <HighlightUiComponent
       {...props}
       classNames={{
-        root: ['ais-Snippet', classNames.root],
-        highlighted: ['ais-Snippet-highlighted', classNames.highlighted],
-        nonHighlighted: [
+        root: cx('ais-Snippet', classNames.root),
+        highlighted: cx('ais-Snippet-highlighted', classNames.highlighted),
+        nonHighlighted: cx(
           'ais-Snippet-nonHighlighted',
-          classNames.nonHighlighted,
-        ],
-        separator: ['ais-Snippet-separator', classNames.separator],
+          classNames.nonHighlighted
+        ),
+        separator: cx('ais-Snippet-separator', classNames.separator),
       }}
       parts={parts}
       highlightedTagName={highlightedTagName}
