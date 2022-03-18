@@ -15,10 +15,9 @@ export type SnippetProps<THit extends Hit<BaseHit>> = {
   hit: THit;
   attribute: keyof THit | string[];
 } & PartialKeys<
-  Omit<HighlightUiComponentProps, 'parts' | 'classNames'>,
+  Omit<ClassNames<HighlightUiComponentProps>, 'parts'>,
   'highlightedTagName' | 'nonHighlightedTagName' | 'separator'
-> &
-  ClassNames<HighlightUiComponentProps>;
+>;
 
 export function Snippet<THit extends Hit<BaseHit>>({
   hit,
