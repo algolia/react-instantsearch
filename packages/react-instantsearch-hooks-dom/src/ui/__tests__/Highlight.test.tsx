@@ -159,7 +159,7 @@ describe('Highlight', () => {
     const { container } = render(
       <Highlight
         classNames={{
-          root: ['ROOT', 'EXTRA', false],
+          root: 'ROOT',
           highlighted: 'HIGHLIGHTED',
           nonHighlighted: 'NON-HIGHLIGHTED',
           separator: 'SEPARATOR',
@@ -174,7 +174,7 @@ describe('Highlight', () => {
       <div>
         <span
           aria-hidden="true"
-          class="ROOT EXTRA custom-root"
+          class="ROOT custom-root"
         />
       </div>
     `);

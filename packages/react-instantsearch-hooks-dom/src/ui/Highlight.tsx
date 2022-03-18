@@ -71,11 +71,12 @@ export function Highlight({
   highlightedTagName = 'mark',
   nonHighlightedTagName = 'span',
   separator = ', ',
+  className,
   classNames,
   ...props
 }: HighlightProps) {
   return (
-    <span {...props} className={cx(classNames.root, props.className)}>
+    <span {...props} className={cx(classNames.root, className)}>
       {parts.map((part, partIndex) => {
         const isLastPart = partIndex === parts.length - 1;
 
