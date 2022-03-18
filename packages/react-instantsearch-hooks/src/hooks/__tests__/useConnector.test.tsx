@@ -1,8 +1,12 @@
 import { render } from '@testing-library/react';
 import { renderHook } from '@testing-library/react-hooks';
+import { SearchParameters, SearchResults } from 'algoliasearch-helper';
 import React from 'react';
 
-import { createSearchClient } from '../../../../../test/mock';
+import {
+  createSearchClient,
+  createSingleSearchResponse,
+} from '../../../../../test/mock';
 import { createInstantSearchTestWrapper } from '../../../../../test/utils';
 import { Index } from '../../components/Index';
 import { InstantSearch } from '../../components/InstantSearch';
@@ -201,7 +205,7 @@ describe('useConnector', () => {
     await waitForNextUpdate();
   });
 
-  test('calls getWidgetRenderState with the InstantSearch render options', () => {
+  test('calls getWidgetRenderState with the InstantSearch render options and artificial results', () => {
     const getWidgetRenderState = jest.fn();
     const connectCustomSearchBoxMock =
       (renderFn, unmountFn) => (widgetParams) => ({
@@ -243,7 +247,10 @@ describe('useConnector', () => {
       helper: expect.any(Object),
       parent: indexContext!,
       instantSearchInstance: searchContext!,
-      results: expect.objectContaining({ hitsPerPage: 20 }),
+      results: expect.objectContaining({
+        hitsPerPage: 20,
+        __isArtificial: true,
+      }),
       scopedResults: [
         {
           indexId: 'indexName',
@@ -252,6 +259,73 @@ describe('useConnector', () => {
         },
       ],
       state: expect.any(Object),
+      renderState: searchContext!.renderState,
+      templatesConfig: searchContext!.templatesConfig,
+      createURL: indexContext!.createURL,
+      searchMetadata: {
+        isSearchStalled: false,
+      },
+    });
+  });
+
+  test('calls getWidgetRenderState with existing result from index', () => {
+    const getWidgetRenderState = jest.fn();
+    const connectCustomSearchBoxMock =
+      (renderFn, unmountFn) => (widgetParams) => ({
+        ...connectCustomSearchBox(renderFn, unmountFn)(widgetParams),
+        getWidgetRenderState,
+      });
+    const searchClient = createSearchClient();
+    let searchContext: InstantSearchType | null = null;
+    let indexContext: IndexWidget | null = null;
+
+    const results = new SearchResults(new SearchParameters(), [
+      createSingleSearchResponse(),
+    ]);
+
+    function SearchProvider({ children }) {
+      return (
+        <InstantSearch searchClient={searchClient} indexName="indexName">
+          <InstantSearchContext.Consumer>
+            {(searchContextValue) => {
+              searchContext = searchContextValue;
+
+              return (
+                <IndexContext.Consumer>
+                  {(indexContextValue) => {
+                    indexContextValue!.getResults = function getResults() {
+                      return results;
+                    };
+                    indexContext = indexContextValue;
+
+                    return children;
+                  }}
+                </IndexContext.Consumer>
+              );
+            }}
+          </InstantSearchContext.Consumer>
+        </InstantSearch>
+      );
+    }
+
+    renderHook(() => useConnector(connectCustomSearchBoxMock, {}, {}), {
+      wrapper: SearchProvider,
+    });
+
+    expect(getWidgetRenderState).toHaveBeenCalledTimes(1);
+    expect(getWidgetRenderState).toHaveBeenCalledWith({
+      helper: expect.any(Object),
+      parent: indexContext!,
+      instantSearchInstance: searchContext!,
+      results,
+      scopedResults: [
+        {
+          indexId: 'indexName',
+          results,
+          helper: expect.any(Object),
+        },
+      ],
+      state: results._state,
       renderState: searchContext!.renderState,
       templatesConfig: searchContext!.templatesConfig,
       createURL: indexContext!.createURL,
