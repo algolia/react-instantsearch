@@ -1,5 +1,5 @@
-export type CSSClass = string | number | boolean | undefined | null;
-
-export function cx(...classNames: CSSClass[]) {
+export function cx(
+  ...classNames: Array<string | number | boolean | undefined | null>
+) {
   return classNames.filter(Boolean).join(' ');
 }

@@ -2,8 +2,6 @@ import React, { Fragment } from 'react';
 
 import { cx } from './lib/cx';
 
-import type { CSSClass } from './lib/cx';
-
 type HighlightPartProps = {
   children: React.ReactNode;
   classNames: HighlightClassNames;
@@ -24,9 +22,7 @@ function HighlightPart({
   return (
     <TagName
       className={
-        isHighlighted
-          ? cx(classNames.highlighted)
-          : cx(classNames.nonHighlighted)
+        isHighlighted ? classNames.highlighted : classNames.nonHighlighted
       }
     >
       {children}
@@ -43,19 +39,19 @@ export type HighlightClassNames = {
   /**
    * Class names to apply to the root element
    */
-  root: CSSClass;
+  root: string;
   /**
    * Class names to apply to the highlighted parts
    */
-  highlighted: CSSClass;
+  highlighted: string;
   /**
    * Class names to apply to the non-highlighted parts
    */
-  nonHighlighted: CSSClass;
+  nonHighlighted: string;
   /**
    * Class names to apply to the separator between highlighted parts
    */
-  separator: CSSClass;
+  separator: string;
 };
 
 export type HighlightProps = React.HTMLAttributes<HTMLSpanElement> & {
@@ -95,7 +91,7 @@ export function Highlight({
             ))}
 
             {!isLastPart && (
-              <span className={cx(classNames.separator)}>{separator}</span>
+              <span className={classNames.separator}>{separator}</span>
             )}
           </Fragment>
         );
