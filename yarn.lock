@@ -17452,7 +17452,23 @@ instantsearch.css@7.4.5:
   resolved "https://registry.yarnpkg.com/instantsearch.css/-/instantsearch.css-7.4.5.tgz#2a521aa634329bf1680f79adf87c79d67669ec8d"
   integrity sha512-iIGBYjCokU93DDB8kbeztKtlu4qVEyTg1xvS6iSO1YvqRwkIZgf0tmsl/GytsLdZhuw8j4wEaeYsCzNbeJ/zEQ==
 
-instantsearch.js@4.39.0, instantsearch.js@^4.39.0:
+instantsearch.js@4.39.2:
+  version "4.39.2"
+  resolved "https://registry.yarnpkg.com/instantsearch.js/-/instantsearch.js-4.39.2.tgz#998860df758cd20c53b2f959675baaf147c6ed6d"
+  integrity sha512-N21Ipu/dBfPUgMwDDXY7y3nYu+8cEIkaF1YwoGoIuRZ5Nl5uw42LiJTzWdZWwt0DDydfADGE9T7TR5N5/p9+FA==
+  dependencies:
+    "@algolia/events" "^4.0.1"
+    "@types/google.maps" "^3.45.3"
+    "@types/hogan.js" "^3.0.0"
+    "@types/qs" "^6.5.3"
+    algoliasearch-helper "^3.7.0"
+    classnames "^2.2.5"
+    hogan.js "^3.0.2"
+    preact "^10.6.0"
+    qs "^6.5.1 < 6.10"
+    search-insights "^2.1.0"
+
+instantsearch.js@^4.39.0:
   version "4.39.0"
   resolved "https://registry.yarnpkg.com/instantsearch.js/-/instantsearch.js-4.39.0.tgz#edb4b9ccdaf7e1736c7d59285d01ec23d528097d"
   integrity sha512-dFPiNmsj9xt3ltVjEFlXe+BLs+C8AT00vG0ZUQDZHoznVlKOdPjyd8IHhtyspJUD13yqkMrvm+JL5dyHZIZFuA==
