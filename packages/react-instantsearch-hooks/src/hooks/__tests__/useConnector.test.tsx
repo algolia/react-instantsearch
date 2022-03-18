@@ -4,10 +4,7 @@ import { SearchParameters, SearchResults } from 'algoliasearch-helper';
 import connectHits from 'instantsearch.js/es/connectors/hits/connectHits';
 import React from 'react';
 
-import {
-  createSearchClient,
-  createSingleSearchResponse,
-} from '../../../../../test/mock';
+import { createSearchClient } from '../../../../../test/mock';
 import { createInstantSearchTestWrapper } from '../../../../../test/utils';
 import { Index } from '../../components/Index';
 import { InstantSearch } from '../../components/InstantSearch';
@@ -308,9 +305,7 @@ describe('useConnector', () => {
   test('returns state from existing index results', () => {
     const searchClient = createSearchClient();
 
-    const results = new SearchResults(new SearchParameters(), [
-      createSingleSearchResponse(),
-    ]);
+    const results = new SearchResults(new SearchParameters(), [{ hits: [] }]);
 
     function SearchProvider({ children }) {
       return (
