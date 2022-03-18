@@ -1,6 +1,7 @@
 import { render } from '@testing-library/react';
 import { renderHook } from '@testing-library/react-hooks';
 import { SearchParameters, SearchResults } from 'algoliasearch-helper';
+import connectHits from 'instantsearch.js/es/connectors/hits/connectHits';
 import React from 'react';
 
 import {
@@ -19,6 +20,10 @@ import type {
   InstantSearch as InstantSearchType,
   Connector,
 } from 'instantsearch.js';
+import type {
+  HitsConnectorParams,
+  HitsWidgetDescription,
+} from 'instantsearch.js/es/connectors/hits/connectHits';
 import type { IndexWidget } from 'instantsearch.js/es/widgets/index/index';
 
 type CustomSearchBoxWidgetDescription = {
@@ -268,16 +273,40 @@ describe('useConnector', () => {
     });
   });
 
-  test('calls getWidgetRenderState with existing result from index', () => {
-    const getWidgetRenderState = jest.fn();
-    const connectCustomSearchBoxMock =
-      (renderFn, unmountFn) => (widgetParams) => ({
-        ...connectCustomSearchBox(renderFn, unmountFn)(widgetParams),
-        getWidgetRenderState,
-      });
+  test('returns state from artificial results', () => {
     const searchClient = createSearchClient();
-    let searchContext: InstantSearchType | null = null;
-    let indexContext: IndexWidget | null = null;
+
+    function SearchProvider({ children }) {
+      return (
+        <InstantSearch searchClient={searchClient} indexName="indexName">
+          {children}
+        </InstantSearch>
+      );
+    }
+
+    function CustomWidget() {
+      const state = useConnector<HitsConnectorParams, HitsWidgetDescription>(
+        connectHits
+      );
+
+      return <>{`artificial results: ${state.results!.__isArtificial}`}</>;
+    }
+
+    const { container } = render(
+      <SearchProvider>
+        <CustomWidget />
+      </SearchProvider>
+    );
+
+    expect(container).toMatchInlineSnapshot(`
+      <div>
+        artificial results: true
+      </div>
+    `);
+  });
+
+  test('returns state from existing index results', () => {
+    const searchClient = createSearchClient();
 
     const results = new SearchResults(new SearchParameters(), [
       createSingleSearchResponse(),
@@ -286,53 +315,46 @@ describe('useConnector', () => {
     function SearchProvider({ children }) {
       return (
         <InstantSearch searchClient={searchClient} indexName="indexName">
-          <InstantSearchContext.Consumer>
-            {(searchContextValue) => {
-              searchContext = searchContextValue;
-
+          <IndexContext.Consumer>
+            {(indexContextValue) => {
               return (
-                <IndexContext.Consumer>
-                  {(indexContextValue) => {
-                    indexContextValue!.getResults = function getResults() {
+                <IndexContext.Provider
+                  value={{
+                    ...indexContextValue!,
+                    // fake results, to simulate SSR, or a widget added after results
+                    getResults() {
                       return results;
-                    };
-                    indexContext = indexContextValue;
-
-                    return children;
+                    },
                   }}
-                </IndexContext.Consumer>
+                >
+                  {children}
+                </IndexContext.Provider>
               );
             }}
-          </InstantSearchContext.Consumer>
+          </IndexContext.Consumer>
         </InstantSearch>
       );
     }
 
-    renderHook(() => useConnector(connectCustomSearchBoxMock, {}, {}), {
-      wrapper: SearchProvider,
-    });
+    function CustomWidget() {
+      const state = useConnector<HitsConnectorParams, HitsWidgetDescription>(
+        connectHits
+      );
 
-    expect(getWidgetRenderState).toHaveBeenCalledTimes(1);
-    expect(getWidgetRenderState).toHaveBeenCalledWith({
-      helper: expect.any(Object),
-      parent: indexContext!,
-      instantSearchInstance: searchContext!,
-      results,
-      scopedResults: [
-        {
-          indexId: 'indexName',
-          results,
-          helper: expect.any(Object),
-        },
-      ],
-      state: results._state,
-      renderState: searchContext!.renderState,
-      templatesConfig: searchContext!.templatesConfig,
-      createURL: indexContext!.createURL,
-      searchMetadata: {
-        isSearchStalled: false,
-      },
-    });
+      return <>{`artificial results: ${state.results!.__isArtificial}`}</>;
+    }
+
+    const { container } = render(
+      <SearchProvider>
+        <CustomWidget />
+      </SearchProvider>
+    );
+
+    expect(container).toMatchInlineSnapshot(`
+      <div>
+        artificial results: undefined
+      </div>
+    `);
   });
 
   test('adds the widget to the parent index', () => {
