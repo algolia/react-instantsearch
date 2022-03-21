@@ -116,6 +116,8 @@ describe('RefinementList', () => {
 
     await wait(0);
 
+    expect(client.search).toHaveBeenCalledTimes(1);
+
     expect(container.querySelectorAll('.ais-RefinementList-item')).toHaveLength(
       10
     );
@@ -373,6 +375,8 @@ describe('RefinementList', () => {
     await wait(0);
 
     expect(firstCheckbox).toBeChecked();
+    // Once on load, once on check.
+    expect(client.search).toHaveBeenCalledTimes(2);
     expect(client.search).toHaveBeenLastCalledWith(
       expect.arrayContaining([
         expect.objectContaining({
