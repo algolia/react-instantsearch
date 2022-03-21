@@ -305,7 +305,19 @@ describe('useConnector', () => {
   test('returns state from existing index results', () => {
     const searchClient = createSearchClient();
 
-    const results = new SearchResults(new SearchParameters(), [{ hits: [] }]);
+    const results = new SearchResults(new SearchParameters(), [
+      {
+        hits: [],
+        page: 0,
+        nbPages: 0,
+        nbHits: 0,
+        hitsPerPage: 20,
+        processingTimeMS: 0,
+        exhaustiveNbHits: true,
+        query: '',
+        params: '',
+      },
+    ]);
 
     function SearchProvider({ children }) {
       return (
