@@ -13,14 +13,13 @@ export type ClearRefinementsProps = Omit<
 > &
   UseClearRefinementsProps;
 
-export function ClearRefinements(props: ClearRefinementsProps) {
-  const {
-    includedAttributes,
-    excludedAttributes,
-    transformItems,
-    translations,
-    ...otherProps
-  } = props;
+export function ClearRefinements({
+  includedAttributes,
+  excludedAttributes,
+  transformItems,
+  translations,
+  ...props
+}: ClearRefinementsProps) {
   const { canRefine, refine } = useClearRefinements(
     {
       includedAttributes,
@@ -34,7 +33,7 @@ export function ClearRefinements(props: ClearRefinementsProps) {
 
   return (
     <ClearRefinementsUiComponent
-      {...otherProps}
+      {...props}
       translations={{
         resetLabel: 'Clear refinements',
         ...translations,
