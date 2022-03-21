@@ -9,7 +9,7 @@ import { ShowMoreButton } from '../ShowMoreButton';
 import type { RefinementListProps } from '../RefinementList';
 
 describe('RefinementList', () => {
-  function createProps({ ...props }: Partial<RefinementListProps>) {
+  function createProps(props: Partial<RefinementListProps>) {
     return {
       items: [
         {
