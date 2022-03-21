@@ -3,21 +3,22 @@ import { useClearRefinements } from 'react-instantsearch-hooks';
 
 import { ClearRefinements as ClearRefinementsUiComponent } from '../ui/ClearRefinements';
 
+import type { Translatable } from '../types';
 import type { ClearRefinementsProps as ClearRefinementsUiComponentProps } from '../ui/ClearRefinements';
 import type { UseClearRefinementsProps } from 'react-instantsearch-hooks';
 
 export type ClearRefinementsProps = Omit<
-  ClearRefinementsUiComponentProps,
+  Translatable<ClearRefinementsUiComponentProps>,
   'disabled' | 'onClick'
 > &
   UseClearRefinementsProps;
 
 export function ClearRefinements(props: ClearRefinementsProps) {
   const {
-    resetLabel,
     includedAttributes,
     excludedAttributes,
     transformItems,
+    translations,
     ...otherProps
   } = props;
   const { canRefine, refine } = useClearRefinements(
@@ -34,7 +35,10 @@ export function ClearRefinements(props: ClearRefinementsProps) {
   return (
     <ClearRefinementsUiComponent
       {...otherProps}
-      resetLabel={resetLabel}
+      translations={{
+        resetLabel: 'Clear refinements',
+        ...translations,
+      }}
       onClick={refine}
       disabled={!canRefine}
     />
