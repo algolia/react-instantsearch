@@ -186,9 +186,9 @@ describe('RefinementList', () => {
 
   test('triggers an `onRefine` callback when clicking a checkbox', () => {
     const props = createProps({});
-    render(<RefinementList {...props} />);
+    const { container } = render(<RefinementList {...props} />);
 
-    document
+    container
       .querySelectorAll(
         '.ais-RefinementList-checkbox, .ais-RefinementList-label'
       )
@@ -468,137 +468,18 @@ describe('RefinementList', () => {
     const props = createProps({ className: 'MyRefinementList' });
     const { container } = render(<RefinementList {...props} />);
 
-    expect(document.querySelector('.ais-RefinementList')).toHaveClass(
-      'MyRefinementList'
+    expect(container.querySelector('.ais-RefinementList')).toHaveClass(
+      'ais-RefinementList MyRefinementList'
     );
-    expect(container).toMatchInlineSnapshot(`
-      <div>
-        <div
-          class="ais-RefinementList MyRefinementList"
-        >
-          <ul
-            class="ais-RefinementList-list"
-          >
-            <li
-              class="ais-RefinementList-item ais-RefinementList-item--selected"
-            >
-              <label
-                class="ais-RefinementList-label"
-              >
-                <input
-                  checked=""
-                  class="ais-RefinementList-checkbox"
-                  type="checkbox"
-                  value="Insignia™"
-                />
-                <span
-                  class="ais-RefinementList-labelText"
-                >
-                  Insignia™
-                </span>
-                <span
-                  class="ais-RefinementList-count"
-                >
-                  746
-                </span>
-              </label>
-            </li>
-            <li
-              class="ais-RefinementList-item"
-            >
-              <label
-                class="ais-RefinementList-label"
-              >
-                <input
-                  class="ais-RefinementList-checkbox"
-                  type="checkbox"
-                  value="Samsung"
-                />
-                <span
-                  class="ais-RefinementList-labelText"
-                >
-                  Samsung
-                </span>
-                <span
-                  class="ais-RefinementList-count"
-                >
-                  633
-                </span>
-              </label>
-            </li>
-          </ul>
-        </div>
-      </div>
-    `);
   });
 
   test('forwards `div` props to the root element', () => {
     const props = createProps({ title: 'Some custom title' });
     const { container } = render(<RefinementList {...props} />);
 
-    expect(document.querySelector('.ais-RefinementList')).toHaveAttribute(
+    expect(container.querySelector('.ais-RefinementList')).toHaveAttribute(
       'title',
       'Some custom title'
     );
-    expect(container).toMatchInlineSnapshot(`
-      <div>
-        <div
-          class="ais-RefinementList"
-          title="Some custom title"
-        >
-          <ul
-            class="ais-RefinementList-list"
-          >
-            <li
-              class="ais-RefinementList-item ais-RefinementList-item--selected"
-            >
-              <label
-                class="ais-RefinementList-label"
-              >
-                <input
-                  checked=""
-                  class="ais-RefinementList-checkbox"
-                  type="checkbox"
-                  value="Insignia™"
-                />
-                <span
-                  class="ais-RefinementList-labelText"
-                >
-                  Insignia™
-                </span>
-                <span
-                  class="ais-RefinementList-count"
-                >
-                  746
-                </span>
-              </label>
-            </li>
-            <li
-              class="ais-RefinementList-item"
-            >
-              <label
-                class="ais-RefinementList-label"
-              >
-                <input
-                  class="ais-RefinementList-checkbox"
-                  type="checkbox"
-                  value="Samsung"
-                />
-                <span
-                  class="ais-RefinementList-labelText"
-                >
-                  Samsung
-                </span>
-                <span
-                  class="ais-RefinementList-count"
-                >
-                  633
-                </span>
-              </label>
-            </li>
-          </ul>
-        </div>
-      </div>
-    `);
   });
 });
