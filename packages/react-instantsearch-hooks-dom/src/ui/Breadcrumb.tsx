@@ -10,16 +10,16 @@ export type BreadcrumbProps = React.HTMLAttributes<HTMLDivElement> & {
   items: BreadcrumbItem[];
   createURL: CreateURL<BreadcrumbItem['value']>;
   onNavigate: (value: BreadcrumbItem['value']) => void;
-  rootComponent?: React.ReactNode;
-  separatorComponent?: React.ReactNode;
+  rootElement?: React.ReactNode;
+  separatorElement?: React.ReactNode;
 };
 
 export function Breadcrumb({
   items = [],
   createURL,
   onNavigate,
-  rootComponent: RootComponent = 'Home',
-  separatorComponent: SeparatorComponent = '>',
+  rootElement = 'Home',
+  separatorElement = '>',
   ...props
 }: BreadcrumbProps) {
   const hasItems = items.length > 0;
@@ -53,7 +53,7 @@ export function Breadcrumb({
             onClick={handleClick(null)}
             className="ais-Breadcrumb-link"
           >
-            {RootComponent}
+            {rootElement}
           </a>
         </li>
 
@@ -69,7 +69,7 @@ export function Breadcrumb({
               )}
             >
               <span aria-hidden="true" className="ais-Breadcrumb-separator">
-                {SeparatorComponent}
+                {separatorElement}
               </span>
 
               {isLast ? (

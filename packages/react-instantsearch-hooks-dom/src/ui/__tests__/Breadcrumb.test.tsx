@@ -79,8 +79,8 @@ describe('Breadcrumb', () => {
 
   test('renders with component slots', () => {
     const props = createProps({
-      rootComponent: <span style={{ fontStyle: 'italic' }}>Home</span>,
-      separatorComponent: '/',
+      rootElement: <span style={{ fontStyle: 'italic' }}>Home</span>,
+      separatorElement: '/',
     });
     const { container } = render(<Breadcrumb {...props} />);
 
