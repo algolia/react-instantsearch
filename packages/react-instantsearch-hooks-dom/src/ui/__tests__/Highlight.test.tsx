@@ -154,29 +154,4 @@ describe('Highlight', () => {
       </div>
     `);
   });
-
-  test('accepts array of classes for classNames', () => {
-    const { container } = render(
-      <Highlight
-        classNames={{
-          root: 'ROOT',
-          highlighted: 'HIGHLIGHTED',
-          nonHighlighted: 'NON-HIGHLIGHTED',
-          separator: 'SEPARATOR',
-        }}
-        parts={[]}
-        className="custom-root"
-        aria-hidden="true"
-      />
-    );
-
-    expect(container).toMatchInlineSnapshot(`
-      <div>
-        <span
-          aria-hidden="true"
-          class="ROOT custom-root"
-        />
-      </div>
-    `);
-  });
 });

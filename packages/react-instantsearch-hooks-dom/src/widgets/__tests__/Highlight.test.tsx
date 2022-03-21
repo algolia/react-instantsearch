@@ -202,7 +202,10 @@ describe('Highlight', () => {
   test('forwards `className` and root props', () => {
     const { container } = render(
       <Highlight
-        className="custom-rootclass"
+        className="custom-className"
+        classNames={{
+          root: 'custom-rootClass',
+        }}
         hidden={true}
         hit={{
           objectID: '1',
@@ -215,7 +218,7 @@ describe('Highlight', () => {
     expect(container).toMatchInlineSnapshot(`
       <div>
         <span
-          class="ais-Highlight custom-rootclass"
+          class="ais-Highlight custom-rootClass custom-className"
           hidden=""
         />
       </div>

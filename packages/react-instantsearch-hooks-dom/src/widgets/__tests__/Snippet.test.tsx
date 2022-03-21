@@ -198,7 +198,10 @@ describe('Snippet', () => {
   test('forwards `className` and root props', () => {
     const { container } = render(
       <Snippet
-        className="custom-rootclass"
+        className="custom-className"
+        classNames={{
+          root: 'custom-rootClass',
+        }}
         hidden={true}
         hit={{
           objectID: '1',
@@ -211,7 +214,7 @@ describe('Snippet', () => {
     expect(container).toMatchInlineSnapshot(`
       <div>
         <span
-          class="ais-Snippet custom-rootclass"
+          class="ais-Snippet custom-rootClass custom-className"
           hidden=""
         />
       </div>
