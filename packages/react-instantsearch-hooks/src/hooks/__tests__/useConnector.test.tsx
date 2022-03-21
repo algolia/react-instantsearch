@@ -4,7 +4,10 @@ import { SearchParameters, SearchResults } from 'algoliasearch-helper';
 import connectHits from 'instantsearch.js/es/connectors/hits/connectHits';
 import React from 'react';
 
-import { createSearchClient } from '../../../../../test/mock';
+import {
+  createSearchClient,
+  createSingleSearchResponse,
+} from '../../../../../test/mock';
 import { createInstantSearchTestWrapper } from '../../../../../test/utils';
 import { Index } from '../../components/Index';
 import { InstantSearch } from '../../components/InstantSearch';
@@ -306,17 +309,7 @@ describe('useConnector', () => {
     const searchClient = createSearchClient();
 
     const results = new SearchResults(new SearchParameters(), [
-      {
-        hits: [],
-        page: 0,
-        nbPages: 0,
-        nbHits: 0,
-        hitsPerPage: 20,
-        processingTimeMS: 0,
-        exhaustiveNbHits: true,
-        query: '',
-        params: '',
-      },
+      createSingleSearchResponse(),
     ]);
 
     function SearchProvider({ children }) {
