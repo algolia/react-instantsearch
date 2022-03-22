@@ -9,6 +9,7 @@ import type { RefinementListItem } from 'instantsearch.js/es/connectors/refineme
 export type RefinementListProps = React.HTMLAttributes<HTMLDivElement> & {
   items: RefinementListItem[];
   onRefine(item: RefinementListItem): void;
+  query: string;
   searchBox?: React.ReactNode;
   noResults?: React.ReactNode;
   showMoreButton?: React.ReactNode;
@@ -17,6 +18,7 @@ export type RefinementListProps = React.HTMLAttributes<HTMLDivElement> & {
 export function RefinementList({
   items,
   onRefine,
+  query,
   searchBox,
   noResults,
   showMoreButton,
@@ -50,17 +52,21 @@ export function RefinementList({
                   }}
                 />
                 <span className="ais-RefinementList-labelText">
-                  <Highlight
-                    parts={[
-                      getHighlightedParts(unescape(item.highlighted || '')),
-                    ]}
-                    classNames={{
-                      root: 'ais-Highlight',
-                      highlighted: 'ais-Highlight-highlighted',
-                      nonHighlighted: 'ais-Highlight-nonHighlighted',
-                      separator: 'ais-Highlight-separator',
-                    }}
-                  />
+                  {searchBox && query.length > 0 ? (
+                    <Highlight
+                      parts={[
+                        getHighlightedParts(unescape(item.highlighted || '')),
+                      ]}
+                      classNames={{
+                        root: 'ais-Highlight',
+                        highlighted: 'ais-Highlight-highlighted',
+                        nonHighlighted: 'ais-Highlight-nonHighlighted',
+                        separator: 'ais-Highlight-separator',
+                      }}
+                    />
+                  ) : (
+                    item.label
+                  )}
                 </span>
                 <span className="ais-RefinementList-count">{item.count}</span>
               </label>

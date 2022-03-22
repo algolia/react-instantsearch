@@ -28,6 +28,7 @@ describe('RefinementList', () => {
         },
       ],
       onRefine: jest.fn(),
+      query: '',
       searchBox: null,
       showMoreButton: null,
       ...props,
@@ -61,15 +62,7 @@ describe('RefinementList', () => {
                 <span
                   class="ais-RefinementList-labelText"
                 >
-                  <span
-                    class="ais-Highlight"
-                  >
-                    <span
-                      class="ais-Highlight-nonHighlighted"
-                    >
-                      Insignia™
-                    </span>
-                  </span>
+                  Insignia™
                 </span>
                 <span
                   class="ais-RefinementList-count"
@@ -92,118 +85,7 @@ describe('RefinementList', () => {
                 <span
                   class="ais-RefinementList-labelText"
                 >
-                  <span
-                    class="ais-Highlight"
-                  >
-                    <span
-                      class="ais-Highlight-nonHighlighted"
-                    >
-                      Samsung
-                    </span>
-                  </span>
-                </span>
-                <span
-                  class="ais-RefinementList-count"
-                >
-                  633
-                </span>
-              </label>
-            </li>
-          </ul>
-        </div>
-      </div>
-    `);
-  });
-
-  test('highlights items', () => {
-    const props = createProps({
-      items: [
-        {
-          value: 'Insignia™',
-          label: 'Insignia™',
-          highlighted: 'Insignia™',
-          count: 746,
-          isRefined: true,
-        },
-        {
-          value: 'Samsung',
-          label: 'Samsung',
-          highlighted: '<mark>Sam</mark>sung',
-          count: 633,
-          isRefined: false,
-        },
-      ],
-    });
-    const { container } = render(<RefinementList {...props} />);
-
-    expect(container).toMatchInlineSnapshot(`
-      <div>
-        <div
-          class="ais-RefinementList"
-        >
-          <ul
-            class="ais-RefinementList-list"
-          >
-            <li
-              class="ais-RefinementList-item ais-RefinementList-item--selected"
-            >
-              <label
-                class="ais-RefinementList-label"
-              >
-                <input
-                  checked=""
-                  class="ais-RefinementList-checkbox"
-                  type="checkbox"
-                  value="Insignia™"
-                />
-                <span
-                  class="ais-RefinementList-labelText"
-                >
-                  <span
-                    class="ais-Highlight"
-                  >
-                    <span
-                      class="ais-Highlight-nonHighlighted"
-                    >
-                      Insignia™
-                    </span>
-                  </span>
-                </span>
-                <span
-                  class="ais-RefinementList-count"
-                >
-                  746
-                </span>
-              </label>
-            </li>
-            <li
-              class="ais-RefinementList-item"
-            >
-              <label
-                class="ais-RefinementList-label"
-              >
-                <input
-                  class="ais-RefinementList-checkbox"
-                  type="checkbox"
-                  value="Samsung"
-                />
-                <span
-                  class="ais-RefinementList-labelText"
-                >
-                  <span
-                    class="ais-Highlight"
-                  >
-                    <mark
-                      class="ais-Highlight-highlighted"
-                    >
-                      Sam
-                    </mark>
-                    <span
-                      class="ais-Highlight-nonHighlighted"
-                    >
-                      sung
-                    </span>
-                  </span>
+                  Samsung
                 </span>
                 <span
                   class="ais-RefinementList-count"
@@ -262,15 +144,7 @@ describe('RefinementList', () => {
                 <span
                   class="ais-RefinementList-labelText"
                 >
-                  <span
-                    class="ais-Highlight"
-                  >
-                    <span
-                      class="ais-Highlight-nonHighlighted"
-                    >
-                      Insignia™
-                    </span>
-                  </span>
+                  Insignia™
                 </span>
                 <span
                   class="ais-RefinementList-count"
@@ -293,15 +167,7 @@ describe('RefinementList', () => {
                 <span
                   class="ais-RefinementList-labelText"
                 >
-                  <span
-                    class="ais-Highlight"
-                  >
-                    <span
-                      class="ais-Highlight-nonHighlighted"
-                    >
-                      Samsung
-                    </span>
-                  </span>
+                  Samsung
                 </span>
                 <span
                   class="ais-RefinementList-count"
@@ -457,15 +323,7 @@ describe('RefinementList', () => {
                 <span
                   class="ais-RefinementList-labelText"
                 >
-                  <span
-                    class="ais-Highlight"
-                  >
-                    <span
-                      class="ais-Highlight-nonHighlighted"
-                    >
-                      Insignia™
-                    </span>
-                  </span>
+                  Insignia™
                 </span>
                 <span
                   class="ais-RefinementList-count"
@@ -488,15 +346,7 @@ describe('RefinementList', () => {
                 <span
                   class="ais-RefinementList-labelText"
                 >
-                  <span
-                    class="ais-Highlight"
-                  >
-                    <span
-                      class="ais-Highlight-nonHighlighted"
-                    >
-                      Samsung
-                    </span>
-                  </span>
+                  Samsung
                 </span>
                 <span
                   class="ais-RefinementList-count"
@@ -508,6 +358,116 @@ describe('RefinementList', () => {
           </ul>
         </div>
       </div>
+    `);
+  });
+
+  test('highlights items when there is a search box and query', () => {
+    const props = createProps({
+      items: [
+        {
+          value: 'Insignia™',
+          label: 'Insignia™',
+          highlighted: 'Insignia™',
+          count: 746,
+          isRefined: true,
+        },
+        {
+          value: 'Samsung',
+          label: 'Samsung',
+          highlighted: '<mark>Sam</mark>sung',
+          count: 633,
+          isRefined: false,
+        },
+      ],
+      searchBox: (
+        <SearchBox
+          inputRef={createRef<HTMLInputElement>()}
+          placeholder="Search brands"
+          isSearchStalled={false}
+          value="sam"
+          onChange={jest.fn}
+          onReset={jest.fn}
+          onSubmit={jest.fn}
+        />
+      ),
+      query: 'sam',
+    });
+    const { container } = render(<RefinementList {...props} />);
+
+    expect(container.querySelector('.ais-RefinementList-list'))
+      .toMatchInlineSnapshot(`
+      <ul
+        class="ais-RefinementList-list"
+      >
+        <li
+          class="ais-RefinementList-item ais-RefinementList-item--selected"
+        >
+          <label
+            class="ais-RefinementList-label"
+          >
+            <input
+              checked=""
+              class="ais-RefinementList-checkbox"
+              type="checkbox"
+              value="Insignia™"
+            />
+            <span
+              class="ais-RefinementList-labelText"
+            >
+              <span
+                class="ais-Highlight"
+              >
+                <span
+                  class="ais-Highlight-nonHighlighted"
+                >
+                  Insignia™
+                </span>
+              </span>
+            </span>
+            <span
+              class="ais-RefinementList-count"
+            >
+              746
+            </span>
+          </label>
+        </li>
+        <li
+          class="ais-RefinementList-item"
+        >
+          <label
+            class="ais-RefinementList-label"
+          >
+            <input
+              class="ais-RefinementList-checkbox"
+              type="checkbox"
+              value="Samsung"
+            />
+            <span
+              class="ais-RefinementList-labelText"
+            >
+              <span
+                class="ais-Highlight"
+              >
+                <mark
+                  class="ais-Highlight-highlighted"
+                >
+                  Sam
+                </mark>
+                <span
+                  class="ais-Highlight-nonHighlighted"
+                >
+                  sung
+                </span>
+              </span>
+            </span>
+            <span
+              class="ais-RefinementList-count"
+            >
+              633
+            </span>
+          </label>
+        </li>
+      </ul>
     `);
   });
 

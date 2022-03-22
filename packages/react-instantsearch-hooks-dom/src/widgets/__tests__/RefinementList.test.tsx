@@ -143,15 +143,7 @@ describe('RefinementList', () => {
                 <span
                   class="ais-RefinementList-labelText"
                 >
-                  <span
-                    class="ais-Highlight"
-                  >
-                    <span
-                      class="ais-Highlight-nonHighlighted"
-                    >
-                      Insignia™
-                    </span>
-                  </span>
+                  Insignia™
                 </span>
                 <span
                   class="ais-RefinementList-count"
@@ -174,15 +166,7 @@ describe('RefinementList', () => {
                 <span
                   class="ais-RefinementList-labelText"
                 >
-                  <span
-                    class="ais-Highlight"
-                  >
-                    <span
-                      class="ais-Highlight-nonHighlighted"
-                    >
-                      Samsung
-                    </span>
-                  </span>
+                  Samsung
                 </span>
                 <span
                   class="ais-RefinementList-count"
@@ -205,15 +189,7 @@ describe('RefinementList', () => {
                 <span
                   class="ais-RefinementList-labelText"
                 >
-                  <span
-                    class="ais-Highlight"
-                  >
-                    <span
-                      class="ais-Highlight-nonHighlighted"
-                    >
-                      Metra
-                    </span>
-                  </span>
+                  Metra
                 </span>
                 <span
                   class="ais-RefinementList-count"
@@ -236,15 +212,7 @@ describe('RefinementList', () => {
                 <span
                   class="ais-RefinementList-labelText"
                 >
-                  <span
-                    class="ais-Highlight"
-                  >
-                    <span
-                      class="ais-Highlight-nonHighlighted"
-                    >
-                      HP
-                    </span>
-                  </span>
+                  HP
                 </span>
                 <span
                   class="ais-RefinementList-count"
@@ -267,15 +235,7 @@ describe('RefinementList', () => {
                 <span
                   class="ais-RefinementList-labelText"
                 >
-                  <span
-                    class="ais-Highlight"
-                  >
-                    <span
-                      class="ais-Highlight-nonHighlighted"
-                    >
-                      Apple
-                    </span>
-                  </span>
+                  Apple
                 </span>
                 <span
                   class="ais-RefinementList-count"
@@ -298,15 +258,7 @@ describe('RefinementList', () => {
                 <span
                   class="ais-RefinementList-labelText"
                 >
-                  <span
-                    class="ais-Highlight"
-                  >
-                    <span
-                      class="ais-Highlight-nonHighlighted"
-                    >
-                      GE
-                    </span>
-                  </span>
+                  GE
                 </span>
                 <span
                   class="ais-RefinementList-count"
@@ -329,15 +281,7 @@ describe('RefinementList', () => {
                 <span
                   class="ais-RefinementList-labelText"
                 >
-                  <span
-                    class="ais-Highlight"
-                  >
-                    <span
-                      class="ais-Highlight-nonHighlighted"
-                    >
-                      Sony
-                    </span>
-                  </span>
+                  Sony
                 </span>
                 <span
                   class="ais-RefinementList-count"
@@ -360,15 +304,7 @@ describe('RefinementList', () => {
                 <span
                   class="ais-RefinementList-labelText"
                 >
-                  <span
-                    class="ais-Highlight"
-                  >
-                    <span
-                      class="ais-Highlight-nonHighlighted"
-                    >
-                      Incipio
-                    </span>
-                  </span>
+                  Incipio
                 </span>
                 <span
                   class="ais-RefinementList-count"
@@ -391,15 +327,7 @@ describe('RefinementList', () => {
                 <span
                   class="ais-RefinementList-labelText"
                 >
-                  <span
-                    class="ais-Highlight"
-                  >
-                    <span
-                      class="ais-Highlight-nonHighlighted"
-                    >
-                      KitchenAid
-                    </span>
-                  </span>
+                  KitchenAid
                 </span>
                 <span
                   class="ais-RefinementList-count"
@@ -422,15 +350,7 @@ describe('RefinementList', () => {
                 <span
                   class="ais-RefinementList-labelText"
                 >
-                  <span
-                    class="ais-Highlight"
-                  >
-                    <span
-                      class="ais-Highlight-nonHighlighted"
-                    >
-                      Whirlpool
-                    </span>
-                  </span>
+                  Whirlpool
                 </span>
                 <span
                   class="ais-RefinementList-count"
@@ -535,15 +455,7 @@ describe('RefinementList', () => {
                 <span
                   class="ais-RefinementList-labelText"
                 >
-                  <span
-                    class="ais-Highlight"
-                  >
-                    <span
-                      class="ais-Highlight-nonHighlighted"
-                    >
-                      Insignia™
-                    </span>
-                  </span>
+                  Insignia™
                 </span>
                 <span
                   class="ais-RefinementList-count"
@@ -566,15 +478,7 @@ describe('RefinementList', () => {
                 <span
                   class="ais-RefinementList-labelText"
                 >
-                  <span
-                    class="ais-Highlight"
-                  >
-                    <span
-                      class="ais-Highlight-nonHighlighted"
-                    >
-                      Samsung
-                    </span>
-                  </span>
+                  Samsung
                 </span>
                 <span
                   class="ais-RefinementList-count"
@@ -597,15 +501,7 @@ describe('RefinementList', () => {
                 <span
                   class="ais-RefinementList-labelText"
                 >
-                  <span
-                    class="ais-Highlight"
-                  >
-                    <span
-                      class="ais-Highlight-nonHighlighted"
-                    >
-                      Metra
-                    </span>
-                  </span>
+                  Metra
                 </span>
                 <span
                   class="ais-RefinementList-count"
@@ -628,15 +524,7 @@ describe('RefinementList', () => {
                 <span
                   class="ais-RefinementList-labelText"
                 >
-                  <span
-                    class="ais-Highlight"
-                  >
-                    <span
-                      class="ais-Highlight-nonHighlighted"
-                    >
-                      HP
-                    </span>
-                  </span>
+                  HP
                 </span>
                 <span
                   class="ais-RefinementList-count"
@@ -659,15 +547,7 @@ describe('RefinementList', () => {
                 <span
                   class="ais-RefinementList-labelText"
                 >
-                  <span
-                    class="ais-Highlight"
-                  >
-                    <span
-                      class="ais-Highlight-nonHighlighted"
-                    >
-                      Apple
-                    </span>
-                  </span>
+                  Apple
                 </span>
                 <span
                   class="ais-RefinementList-count"
@@ -722,15 +602,7 @@ describe('RefinementList', () => {
                 <span
                   class="ais-RefinementList-labelText"
                 >
-                  <span
-                    class="ais-Highlight"
-                  >
-                    <span
-                      class="ais-Highlight-nonHighlighted"
-                    >
-                      INSIGNIA™
-                    </span>
-                  </span>
+                  Insignia™
                 </span>
                 <span
                   class="ais-RefinementList-count"
@@ -753,15 +625,7 @@ describe('RefinementList', () => {
                 <span
                   class="ais-RefinementList-labelText"
                 >
-                  <span
-                    class="ais-Highlight"
-                  >
-                    <span
-                      class="ais-Highlight-nonHighlighted"
-                    >
-                      SAMSUNG
-                    </span>
-                  </span>
+                  Samsung
                 </span>
                 <span
                   class="ais-RefinementList-count"
@@ -784,15 +648,7 @@ describe('RefinementList', () => {
                 <span
                   class="ais-RefinementList-labelText"
                 >
-                  <span
-                    class="ais-Highlight"
-                  >
-                    <span
-                      class="ais-Highlight-nonHighlighted"
-                    >
-                      METRA
-                    </span>
-                  </span>
+                  Metra
                 </span>
                 <span
                   class="ais-RefinementList-count"
@@ -815,15 +671,7 @@ describe('RefinementList', () => {
                 <span
                   class="ais-RefinementList-labelText"
                 >
-                  <span
-                    class="ais-Highlight"
-                  >
-                    <span
-                      class="ais-Highlight-nonHighlighted"
-                    >
-                      HP
-                    </span>
-                  </span>
+                  HP
                 </span>
                 <span
                   class="ais-RefinementList-count"
@@ -846,15 +694,7 @@ describe('RefinementList', () => {
                 <span
                   class="ais-RefinementList-labelText"
                 >
-                  <span
-                    class="ais-Highlight"
-                  >
-                    <span
-                      class="ais-Highlight-nonHighlighted"
-                    >
-                      APPLE
-                    </span>
-                  </span>
+                  Apple
                 </span>
                 <span
                   class="ais-RefinementList-count"
@@ -877,15 +717,7 @@ describe('RefinementList', () => {
                 <span
                   class="ais-RefinementList-labelText"
                 >
-                  <span
-                    class="ais-Highlight"
-                  >
-                    <span
-                      class="ais-Highlight-nonHighlighted"
-                    >
-                      GE
-                    </span>
-                  </span>
+                  GE
                 </span>
                 <span
                   class="ais-RefinementList-count"
@@ -908,15 +740,7 @@ describe('RefinementList', () => {
                 <span
                   class="ais-RefinementList-labelText"
                 >
-                  <span
-                    class="ais-Highlight"
-                  >
-                    <span
-                      class="ais-Highlight-nonHighlighted"
-                    >
-                      SONY
-                    </span>
-                  </span>
+                  Sony
                 </span>
                 <span
                   class="ais-RefinementList-count"
@@ -939,15 +763,7 @@ describe('RefinementList', () => {
                 <span
                   class="ais-RefinementList-labelText"
                 >
-                  <span
-                    class="ais-Highlight"
-                  >
-                    <span
-                      class="ais-Highlight-nonHighlighted"
-                    >
-                      INCIPIO
-                    </span>
-                  </span>
+                  Incipio
                 </span>
                 <span
                   class="ais-RefinementList-count"
@@ -970,15 +786,7 @@ describe('RefinementList', () => {
                 <span
                   class="ais-RefinementList-labelText"
                 >
-                  <span
-                    class="ais-Highlight"
-                  >
-                    <span
-                      class="ais-Highlight-nonHighlighted"
-                    >
-                      KITCHENAID
-                    </span>
-                  </span>
+                  KitchenAid
                 </span>
                 <span
                   class="ais-RefinementList-count"
@@ -1001,15 +809,7 @@ describe('RefinementList', () => {
                 <span
                   class="ais-RefinementList-labelText"
                 >
-                  <span
-                    class="ais-Highlight"
-                  >
-                    <span
-                      class="ais-Highlight-nonHighlighted"
-                    >
-                      WHIRLPOOL
-                    </span>
-                  </span>
+                  Whirlpool
                 </span>
                 <span
                   class="ais-RefinementList-count"
@@ -1241,6 +1041,10 @@ describe('RefinementList', () => {
       ).toBeInTheDocument();
       expect(searchInput).toHaveAttribute('placeholder', 'Search brands');
       expect(
+        container.querySelector('.ais-Highlight-nonHighlighted')
+      ).toBeNull();
+      expect(container.querySelector('.ais-Highlight-highlighted')).toBeNull();
+      expect(
         Array.from(
           container.querySelectorAll('.ais-RefinementList-labelText')
         ).map((item) => item.textContent)
@@ -1273,6 +1077,12 @@ describe('RefinementList', () => {
           }),
         ])
       );
+      expect(
+        container.querySelector('.ais-Highlight-nonHighlighted')
+      ).not.toBeNull();
+      expect(
+        container.querySelector('.ais-Highlight-highlighted')
+      ).not.toBeNull();
       expect(
         Array.from(
           container.querySelectorAll('.ais-RefinementList-labelText')
@@ -1476,15 +1286,7 @@ describe('RefinementList', () => {
                   <span
                     class="ais-RefinementList-labelText"
                   >
-                    <span
-                      class="ais-Highlight"
-                    >
-                      <span
-                        class="ais-Highlight-nonHighlighted"
-                      >
-                        Insignia™
-                      </span>
-                    </span>
+                    Insignia™
                   </span>
                   <span
                     class="ais-RefinementList-count"
@@ -1507,15 +1309,7 @@ describe('RefinementList', () => {
                   <span
                     class="ais-RefinementList-labelText"
                   >
-                    <span
-                      class="ais-Highlight"
-                    >
-                      <span
-                        class="ais-Highlight-nonHighlighted"
-                      >
-                        Samsung
-                      </span>
-                    </span>
+                    Samsung
                   </span>
                   <span
                     class="ais-RefinementList-count"
@@ -1538,15 +1332,7 @@ describe('RefinementList', () => {
                   <span
                     class="ais-RefinementList-labelText"
                   >
-                    <span
-                      class="ais-Highlight"
-                    >
-                      <span
-                        class="ais-Highlight-nonHighlighted"
-                      >
-                        Metra
-                      </span>
-                    </span>
+                    Metra
                   </span>
                   <span
                     class="ais-RefinementList-count"
@@ -1569,15 +1355,7 @@ describe('RefinementList', () => {
                   <span
                     class="ais-RefinementList-labelText"
                   >
-                    <span
-                      class="ais-Highlight"
-                    >
-                      <span
-                        class="ais-Highlight-nonHighlighted"
-                      >
-                        HP
-                      </span>
-                    </span>
+                    HP
                   </span>
                   <span
                     class="ais-RefinementList-count"
@@ -1600,15 +1378,7 @@ describe('RefinementList', () => {
                   <span
                     class="ais-RefinementList-labelText"
                   >
-                    <span
-                      class="ais-Highlight"
-                    >
-                      <span
-                        class="ais-Highlight-nonHighlighted"
-                      >
-                        Apple
-                      </span>
-                    </span>
+                    Apple
                   </span>
                   <span
                     class="ais-RefinementList-count"
@@ -1631,15 +1401,7 @@ describe('RefinementList', () => {
                   <span
                     class="ais-RefinementList-labelText"
                   >
-                    <span
-                      class="ais-Highlight"
-                    >
-                      <span
-                        class="ais-Highlight-nonHighlighted"
-                      >
-                        GE
-                      </span>
-                    </span>
+                    GE
                   </span>
                   <span
                     class="ais-RefinementList-count"
@@ -1662,15 +1424,7 @@ describe('RefinementList', () => {
                   <span
                     class="ais-RefinementList-labelText"
                   >
-                    <span
-                      class="ais-Highlight"
-                    >
-                      <span
-                        class="ais-Highlight-nonHighlighted"
-                      >
-                        Sony
-                      </span>
-                    </span>
+                    Sony
                   </span>
                   <span
                     class="ais-RefinementList-count"
@@ -1693,15 +1447,7 @@ describe('RefinementList', () => {
                   <span
                     class="ais-RefinementList-labelText"
                   >
-                    <span
-                      class="ais-Highlight"
-                    >
-                      <span
-                        class="ais-Highlight-nonHighlighted"
-                      >
-                        Incipio
-                      </span>
-                    </span>
+                    Incipio
                   </span>
                   <span
                     class="ais-RefinementList-count"
@@ -1724,15 +1470,7 @@ describe('RefinementList', () => {
                   <span
                     class="ais-RefinementList-labelText"
                   >
-                    <span
-                      class="ais-Highlight"
-                    >
-                      <span
-                        class="ais-Highlight-nonHighlighted"
-                      >
-                        KitchenAid
-                      </span>
-                    </span>
+                    KitchenAid
                   </span>
                   <span
                     class="ais-RefinementList-count"
@@ -1755,15 +1493,7 @@ describe('RefinementList', () => {
                   <span
                     class="ais-RefinementList-labelText"
                   >
-                    <span
-                      class="ais-Highlight"
-                    >
-                      <span
-                        class="ais-Highlight-nonHighlighted"
-                      >
-                        Whirlpool
-                      </span>
-                    </span>
+                    Whirlpool
                   </span>
                   <span
                     class="ais-RefinementList-count"
@@ -1812,15 +1542,7 @@ describe('RefinementList', () => {
                   <span
                     class="ais-RefinementList-labelText"
                   >
-                    <span
-                      class="ais-Highlight"
-                    >
-                      <span
-                        class="ais-Highlight-nonHighlighted"
-                      >
-                        Insignia™
-                      </span>
-                    </span>
+                    Insignia™
                   </span>
                   <span
                     class="ais-RefinementList-count"
@@ -1843,15 +1565,7 @@ describe('RefinementList', () => {
                   <span
                     class="ais-RefinementList-labelText"
                   >
-                    <span
-                      class="ais-Highlight"
-                    >
-                      <span
-                        class="ais-Highlight-nonHighlighted"
-                      >
-                        Samsung
-                      </span>
-                    </span>
+                    Samsung
                   </span>
                   <span
                     class="ais-RefinementList-count"
@@ -1874,15 +1588,7 @@ describe('RefinementList', () => {
                   <span
                     class="ais-RefinementList-labelText"
                   >
-                    <span
-                      class="ais-Highlight"
-                    >
-                      <span
-                        class="ais-Highlight-nonHighlighted"
-                      >
-                        Metra
-                      </span>
-                    </span>
+                    Metra
                   </span>
                   <span
                     class="ais-RefinementList-count"
@@ -1905,15 +1611,7 @@ describe('RefinementList', () => {
                   <span
                     class="ais-RefinementList-labelText"
                   >
-                    <span
-                      class="ais-Highlight"
-                    >
-                      <span
-                        class="ais-Highlight-nonHighlighted"
-                      >
-                        HP
-                      </span>
-                    </span>
+                    HP
                   </span>
                   <span
                     class="ais-RefinementList-count"
@@ -1936,15 +1634,7 @@ describe('RefinementList', () => {
                   <span
                     class="ais-RefinementList-labelText"
                   >
-                    <span
-                      class="ais-Highlight"
-                    >
-                      <span
-                        class="ais-Highlight-nonHighlighted"
-                      >
-                        Apple
-                      </span>
-                    </span>
+                    Apple
                   </span>
                   <span
                     class="ais-RefinementList-count"
@@ -1967,15 +1657,7 @@ describe('RefinementList', () => {
                   <span
                     class="ais-RefinementList-labelText"
                   >
-                    <span
-                      class="ais-Highlight"
-                    >
-                      <span
-                        class="ais-Highlight-nonHighlighted"
-                      >
-                        GE
-                      </span>
-                    </span>
+                    GE
                   </span>
                   <span
                     class="ais-RefinementList-count"
@@ -1998,15 +1680,7 @@ describe('RefinementList', () => {
                   <span
                     class="ais-RefinementList-labelText"
                   >
-                    <span
-                      class="ais-Highlight"
-                    >
-                      <span
-                        class="ais-Highlight-nonHighlighted"
-                      >
-                        Sony
-                      </span>
-                    </span>
+                    Sony
                   </span>
                   <span
                     class="ais-RefinementList-count"
@@ -2029,15 +1703,7 @@ describe('RefinementList', () => {
                   <span
                     class="ais-RefinementList-labelText"
                   >
-                    <span
-                      class="ais-Highlight"
-                    >
-                      <span
-                        class="ais-Highlight-nonHighlighted"
-                      >
-                        Incipio
-                      </span>
-                    </span>
+                    Incipio
                   </span>
                   <span
                     class="ais-RefinementList-count"
@@ -2060,15 +1726,7 @@ describe('RefinementList', () => {
                   <span
                     class="ais-RefinementList-labelText"
                   >
-                    <span
-                      class="ais-Highlight"
-                    >
-                      <span
-                        class="ais-Highlight-nonHighlighted"
-                      >
-                        KitchenAid
-                      </span>
-                    </span>
+                    KitchenAid
                   </span>
                   <span
                     class="ais-RefinementList-count"
@@ -2091,15 +1749,7 @@ describe('RefinementList', () => {
                   <span
                     class="ais-RefinementList-labelText"
                   >
-                    <span
-                      class="ais-Highlight"
-                    >
-                      <span
-                        class="ais-Highlight-nonHighlighted"
-                      >
-                        Whirlpool
-                      </span>
-                    </span>
+                    Whirlpool
                   </span>
                   <span
                     class="ais-RefinementList-count"
@@ -2122,15 +1772,7 @@ describe('RefinementList', () => {
                   <span
                     class="ais-RefinementList-labelText"
                   >
-                    <span
-                      class="ais-Highlight"
-                    >
-                      <span
-                        class="ais-Highlight-nonHighlighted"
-                      >
-                        LG
-                      </span>
-                    </span>
+                    LG
                   </span>
                   <span
                     class="ais-RefinementList-count"
@@ -2153,15 +1795,7 @@ describe('RefinementList', () => {
                   <span
                     class="ais-RefinementList-labelText"
                   >
-                    <span
-                      class="ais-Highlight"
-                    >
-                      <span
-                        class="ais-Highlight-nonHighlighted"
-                      >
-                        Canon
-                      </span>
-                    </span>
+                    Canon
                   </span>
                   <span
                     class="ais-RefinementList-count"
@@ -2184,15 +1818,7 @@ describe('RefinementList', () => {
                   <span
                     class="ais-RefinementList-labelText"
                   >
-                    <span
-                      class="ais-Highlight"
-                    >
-                      <span
-                        class="ais-Highlight-nonHighlighted"
-                      >
-                        Frigidaire
-                      </span>
-                    </span>
+                    Frigidaire
                   </span>
                   <span
                     class="ais-RefinementList-count"
@@ -2215,15 +1841,7 @@ describe('RefinementList', () => {
                   <span
                     class="ais-RefinementList-labelText"
                   >
-                    <span
-                      class="ais-Highlight"
-                    >
-                      <span
-                        class="ais-Highlight-nonHighlighted"
-                      >
-                        Speck
-                      </span>
-                    </span>
+                    Speck
                   </span>
                   <span
                     class="ais-RefinementList-count"
@@ -2246,15 +1864,7 @@ describe('RefinementList', () => {
                   <span
                     class="ais-RefinementList-labelText"
                   >
-                    <span
-                      class="ais-Highlight"
-                    >
-                      <span
-                        class="ais-Highlight-nonHighlighted"
-                      >
-                        OtterBox
-                      </span>
-                    </span>
+                    OtterBox
                   </span>
                   <span
                     class="ais-RefinementList-count"
@@ -2277,15 +1887,7 @@ describe('RefinementList', () => {
                   <span
                     class="ais-RefinementList-labelText"
                   >
-                    <span
-                      class="ais-Highlight"
-                    >
-                      <span
-                        class="ais-Highlight-nonHighlighted"
-                      >
-                        Epson
-                      </span>
-                    </span>
+                    Epson
                   </span>
                   <span
                     class="ais-RefinementList-count"
@@ -2308,15 +1910,7 @@ describe('RefinementList', () => {
                   <span
                     class="ais-RefinementList-labelText"
                   >
-                    <span
-                      class="ais-Highlight"
-                    >
-                      <span
-                        class="ais-Highlight-nonHighlighted"
-                      >
-                        Dynex™
-                      </span>
-                    </span>
+                    Dynex™
                   </span>
                   <span
                     class="ais-RefinementList-count"
@@ -2339,15 +1933,7 @@ describe('RefinementList', () => {
                   <span
                     class="ais-RefinementList-labelText"
                   >
-                    <span
-                      class="ais-Highlight"
-                    >
-                      <span
-                        class="ais-Highlight-nonHighlighted"
-                      >
-                        Dell
-                      </span>
-                    </span>
+                    Dell
                   </span>
                   <span
                     class="ais-RefinementList-count"
@@ -2370,15 +1956,7 @@ describe('RefinementList', () => {
                   <span
                     class="ais-RefinementList-labelText"
                   >
-                    <span
-                      class="ais-Highlight"
-                    >
-                      <span
-                        class="ais-Highlight-nonHighlighted"
-                      >
-                        Hamilton Beach
-                      </span>
-                    </span>
+                    Hamilton Beach
                   </span>
                   <span
                     class="ais-RefinementList-count"
@@ -2401,15 +1979,7 @@ describe('RefinementList', () => {
                   <span
                     class="ais-RefinementList-labelText"
                   >
-                    <span
-                      class="ais-Highlight"
-                    >
-                      <span
-                        class="ais-Highlight-nonHighlighted"
-                      >
-                        Platinum
-                      </span>
-                    </span>
+                    Platinum
                   </span>
                   <span
                     class="ais-RefinementList-count"
@@ -2471,15 +2041,7 @@ describe('RefinementList', () => {
                   <span
                     class="ais-RefinementList-labelText"
                   >
-                    <span
-                      class="ais-Highlight"
-                    >
-                      <span
-                        class="ais-Highlight-nonHighlighted"
-                      >
-                        Insignia™
-                      </span>
-                    </span>
+                    Insignia™
                   </span>
                   <span
                     class="ais-RefinementList-count"
@@ -2502,15 +2064,7 @@ describe('RefinementList', () => {
                   <span
                     class="ais-RefinementList-labelText"
                   >
-                    <span
-                      class="ais-Highlight"
-                    >
-                      <span
-                        class="ais-Highlight-nonHighlighted"
-                      >
-                        Samsung
-                      </span>
-                    </span>
+                    Samsung
                   </span>
                   <span
                     class="ais-RefinementList-count"
@@ -2533,15 +2087,7 @@ describe('RefinementList', () => {
                   <span
                     class="ais-RefinementList-labelText"
                   >
-                    <span
-                      class="ais-Highlight"
-                    >
-                      <span
-                        class="ais-Highlight-nonHighlighted"
-                      >
-                        Metra
-                      </span>
-                    </span>
+                    Metra
                   </span>
                   <span
                     class="ais-RefinementList-count"
@@ -2564,15 +2110,7 @@ describe('RefinementList', () => {
                   <span
                     class="ais-RefinementList-labelText"
                   >
-                    <span
-                      class="ais-Highlight"
-                    >
-                      <span
-                        class="ais-Highlight-nonHighlighted"
-                      >
-                        HP
-                      </span>
-                    </span>
+                    HP
                   </span>
                   <span
                     class="ais-RefinementList-count"
@@ -2595,15 +2133,7 @@ describe('RefinementList', () => {
                   <span
                     class="ais-RefinementList-labelText"
                   >
-                    <span
-                      class="ais-Highlight"
-                    >
-                      <span
-                        class="ais-Highlight-nonHighlighted"
-                      >
-                        Apple
-                      </span>
-                    </span>
+                    Apple
                   </span>
                   <span
                     class="ais-RefinementList-count"
@@ -2626,15 +2156,7 @@ describe('RefinementList', () => {
                   <span
                     class="ais-RefinementList-labelText"
                   >
-                    <span
-                      class="ais-Highlight"
-                    >
-                      <span
-                        class="ais-Highlight-nonHighlighted"
-                      >
-                        GE
-                      </span>
-                    </span>
+                    GE
                   </span>
                   <span
                     class="ais-RefinementList-count"
@@ -2657,15 +2179,7 @@ describe('RefinementList', () => {
                   <span
                     class="ais-RefinementList-labelText"
                   >
-                    <span
-                      class="ais-Highlight"
-                    >
-                      <span
-                        class="ais-Highlight-nonHighlighted"
-                      >
-                        Sony
-                      </span>
-                    </span>
+                    Sony
                   </span>
                   <span
                     class="ais-RefinementList-count"
@@ -2688,15 +2202,7 @@ describe('RefinementList', () => {
                   <span
                     class="ais-RefinementList-labelText"
                   >
-                    <span
-                      class="ais-Highlight"
-                    >
-                      <span
-                        class="ais-Highlight-nonHighlighted"
-                      >
-                        Incipio
-                      </span>
-                    </span>
+                    Incipio
                   </span>
                   <span
                     class="ais-RefinementList-count"
@@ -2719,15 +2225,7 @@ describe('RefinementList', () => {
                   <span
                     class="ais-RefinementList-labelText"
                   >
-                    <span
-                      class="ais-Highlight"
-                    >
-                      <span
-                        class="ais-Highlight-nonHighlighted"
-                      >
-                        KitchenAid
-                      </span>
-                    </span>
+                    KitchenAid
                   </span>
                   <span
                     class="ais-RefinementList-count"
@@ -2750,15 +2248,7 @@ describe('RefinementList', () => {
                   <span
                     class="ais-RefinementList-labelText"
                   >
-                    <span
-                      class="ais-Highlight"
-                    >
-                      <span
-                        class="ais-Highlight-nonHighlighted"
-                      >
-                        Whirlpool
-                      </span>
-                    </span>
+                    Whirlpool
                   </span>
                   <span
                     class="ais-RefinementList-count"
@@ -2813,15 +2303,7 @@ describe('RefinementList', () => {
                   <span
                     class="ais-RefinementList-labelText"
                   >
-                    <span
-                      class="ais-Highlight"
-                    >
-                      <span
-                        class="ais-Highlight-nonHighlighted"
-                      >
-                        Insignia™
-                      </span>
-                    </span>
+                    Insignia™
                   </span>
                   <span
                     class="ais-RefinementList-count"
@@ -2844,15 +2326,7 @@ describe('RefinementList', () => {
                   <span
                     class="ais-RefinementList-labelText"
                   >
-                    <span
-                      class="ais-Highlight"
-                    >
-                      <span
-                        class="ais-Highlight-nonHighlighted"
-                      >
-                        Samsung
-                      </span>
-                    </span>
+                    Samsung
                   </span>
                   <span
                     class="ais-RefinementList-count"
@@ -2875,15 +2349,7 @@ describe('RefinementList', () => {
                   <span
                     class="ais-RefinementList-labelText"
                   >
-                    <span
-                      class="ais-Highlight"
-                    >
-                      <span
-                        class="ais-Highlight-nonHighlighted"
-                      >
-                        Metra
-                      </span>
-                    </span>
+                    Metra
                   </span>
                   <span
                     class="ais-RefinementList-count"
@@ -2906,15 +2372,7 @@ describe('RefinementList', () => {
                   <span
                     class="ais-RefinementList-labelText"
                   >
-                    <span
-                      class="ais-Highlight"
-                    >
-                      <span
-                        class="ais-Highlight-nonHighlighted"
-                      >
-                        HP
-                      </span>
-                    </span>
+                    HP
                   </span>
                   <span
                     class="ais-RefinementList-count"
@@ -2937,15 +2395,7 @@ describe('RefinementList', () => {
                   <span
                     class="ais-RefinementList-labelText"
                   >
-                    <span
-                      class="ais-Highlight"
-                    >
-                      <span
-                        class="ais-Highlight-nonHighlighted"
-                      >
-                        Apple
-                      </span>
-                    </span>
+                    Apple
                   </span>
                   <span
                     class="ais-RefinementList-count"
@@ -2968,15 +2418,7 @@ describe('RefinementList', () => {
                   <span
                     class="ais-RefinementList-labelText"
                   >
-                    <span
-                      class="ais-Highlight"
-                    >
-                      <span
-                        class="ais-Highlight-nonHighlighted"
-                      >
-                        GE
-                      </span>
-                    </span>
+                    GE
                   </span>
                   <span
                     class="ais-RefinementList-count"
@@ -2999,15 +2441,7 @@ describe('RefinementList', () => {
                   <span
                     class="ais-RefinementList-labelText"
                   >
-                    <span
-                      class="ais-Highlight"
-                    >
-                      <span
-                        class="ais-Highlight-nonHighlighted"
-                      >
-                        Sony
-                      </span>
-                    </span>
+                    Sony
                   </span>
                   <span
                     class="ais-RefinementList-count"
@@ -3030,15 +2464,7 @@ describe('RefinementList', () => {
                   <span
                     class="ais-RefinementList-labelText"
                   >
-                    <span
-                      class="ais-Highlight"
-                    >
-                      <span
-                        class="ais-Highlight-nonHighlighted"
-                      >
-                        Incipio
-                      </span>
-                    </span>
+                    Incipio
                   </span>
                   <span
                     class="ais-RefinementList-count"
@@ -3061,15 +2487,7 @@ describe('RefinementList', () => {
                   <span
                     class="ais-RefinementList-labelText"
                   >
-                    <span
-                      class="ais-Highlight"
-                    >
-                      <span
-                        class="ais-Highlight-nonHighlighted"
-                      >
-                        KitchenAid
-                      </span>
-                    </span>
+                    KitchenAid
                   </span>
                   <span
                     class="ais-RefinementList-count"
@@ -3092,15 +2510,7 @@ describe('RefinementList', () => {
                   <span
                     class="ais-RefinementList-labelText"
                   >
-                    <span
-                      class="ais-Highlight"
-                    >
-                      <span
-                        class="ais-Highlight-nonHighlighted"
-                      >
-                        Whirlpool
-                      </span>
-                    </span>
+                    Whirlpool
                   </span>
                   <span
                     class="ais-RefinementList-count"
@@ -3123,15 +2533,7 @@ describe('RefinementList', () => {
                   <span
                     class="ais-RefinementList-labelText"
                   >
-                    <span
-                      class="ais-Highlight"
-                    >
-                      <span
-                        class="ais-Highlight-nonHighlighted"
-                      >
-                        LG
-                      </span>
-                    </span>
+                    LG
                   </span>
                   <span
                     class="ais-RefinementList-count"
