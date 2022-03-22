@@ -20,9 +20,7 @@ export function HitsPerPage(props: HitsPerPageProps) {
       {...props}
       items={items}
       currentValue={currentValue}
-      onChange={(value) => {
-        refine(value);
-      }}
+      onChange={refine}
     />
   );
 }
