@@ -61,7 +61,15 @@ describe('RefinementList', () => {
                 <span
                   class="ais-RefinementList-labelText"
                 >
-                  Insignia™
+                  <span
+                    class="ais-Highlight"
+                  >
+                    <span
+                      class="ais-Highlight-nonHighlighted"
+                    >
+                      Insignia™
+                    </span>
+                  </span>
                 </span>
                 <span
                   class="ais-RefinementList-count"
@@ -84,7 +92,15 @@ describe('RefinementList', () => {
                 <span
                   class="ais-RefinementList-labelText"
                 >
-                  Samsung
+                  <span
+                    class="ais-Highlight"
+                  >
+                    <span
+                      class="ais-Highlight-nonHighlighted"
+                    >
+                      Samsung
+                    </span>
+                  </span>
                 </span>
                 <span
                   class="ais-RefinementList-count"
@@ -143,7 +159,15 @@ describe('RefinementList', () => {
                 <span
                   class="ais-RefinementList-labelText"
                 >
-                  Insignia™
+                  <span
+                    class="ais-Highlight"
+                  >
+                    <span
+                      class="ais-Highlight-nonHighlighted"
+                    >
+                      Insignia™
+                    </span>
+                  </span>
                 </span>
                 <span
                   class="ais-RefinementList-count"
@@ -166,10 +190,20 @@ describe('RefinementList', () => {
                 <span
                   class="ais-RefinementList-labelText"
                 >
-                  <mark>
-                    Sam
-                  </mark>
-                  sung
+                  <span
+                    class="ais-Highlight"
+                  >
+                    <mark
+                      class="ais-Highlight-highlighted"
+                    >
+                      Sam
+                    </mark>
+                    <span
+                      class="ais-Highlight-nonHighlighted"
+                    >
+                      sung
+                    </span>
+                  </span>
                 </span>
                 <span
                   class="ais-RefinementList-count"
@@ -228,7 +262,15 @@ describe('RefinementList', () => {
                 <span
                   class="ais-RefinementList-labelText"
                 >
-                  Insignia™
+                  <span
+                    class="ais-Highlight"
+                  >
+                    <span
+                      class="ais-Highlight-nonHighlighted"
+                    >
+                      Insignia™
+                    </span>
+                  </span>
                 </span>
                 <span
                   class="ais-RefinementList-count"
@@ -251,7 +293,15 @@ describe('RefinementList', () => {
                 <span
                   class="ais-RefinementList-labelText"
                 >
-                  Samsung
+                  <span
+                    class="ais-Highlight"
+                  >
+                    <span
+                      class="ais-Highlight-nonHighlighted"
+                    >
+                      Samsung
+                    </span>
+                  </span>
                 </span>
                 <span
                   class="ais-RefinementList-count"
@@ -407,7 +457,15 @@ describe('RefinementList', () => {
                 <span
                   class="ais-RefinementList-labelText"
                 >
-                  Insignia™
+                  <span
+                    class="ais-Highlight"
+                  >
+                    <span
+                      class="ais-Highlight-nonHighlighted"
+                    >
+                      Insignia™
+                    </span>
+                  </span>
                 </span>
                 <span
                   class="ais-RefinementList-count"
@@ -430,7 +488,15 @@ describe('RefinementList', () => {
                 <span
                   class="ais-RefinementList-labelText"
                 >
-                  Samsung
+                  <span
+                    class="ais-Highlight"
+                  >
+                    <span
+                      class="ais-Highlight-nonHighlighted"
+                    >
+                      Samsung
+                    </span>
+                  </span>
                 </span>
                 <span
                   class="ais-RefinementList-count"

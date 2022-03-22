@@ -1,5 +1,7 @@
+import { getHighlightedParts, unescape } from 'instantsearch.js/es/lib/utils';
 import React from 'react';
 
+import { Highlight } from './Highlight';
 import { cx } from './lib/cx';
 
 import type { RefinementListItem } from 'instantsearch.js/es/connectors/refinement-list/connectRefinementList';
@@ -47,10 +49,19 @@ export function RefinementList({
                     onRefine(item);
                   }}
                 />
-                <span
-                  className="ais-RefinementList-labelText"
-                  dangerouslySetInnerHTML={{ __html: item.highlighted! }}
-                />
+                <span className="ais-RefinementList-labelText">
+                  <Highlight
+                    parts={[
+                      getHighlightedParts(unescape(item.highlighted || '')),
+                    ]}
+                    classNames={{
+                      root: 'ais-Highlight',
+                      highlighted: 'ais-Highlight-highlighted',
+                      nonHighlighted: 'ais-Highlight-nonHighlighted',
+                      separator: 'ais-Highlight-separator',
+                    }}
+                  />
+                </span>
                 <span className="ais-RefinementList-count">{item.count}</span>
               </label>
             </li>
