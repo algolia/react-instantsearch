@@ -198,14 +198,40 @@ describe('Snippet', () => {
   test('forwards `className` and root props', () => {
     const { container } = render(
       <Snippet
-        className="custom-rootclass"
+        className="custom-className"
+        classNames={{
+          root: 'custom-rootClass',
+        }}
         hidden={true}
         hit={{
           objectID: '1',
           __position: 1,
         }}
-        // @ts-expect-error TS doesn't allow an attribute which doesn't exist
-        attribute="something-that-doesnt-exist"
+        attribute="objectID"
+      />
+    );
+
+    expect(container).toMatchInlineSnapshot(`
+      <div>
+        <span
+          class="ais-Snippet custom-rootClass custom-className"
+          hidden=""
+        />
+      </div>
+    `);
+  });
+
+  test('forwards `classNames`', () => {
+    const { container } = render(
+      <Snippet
+        classNames={{
+          root: 'custom-rootclass',
+        }}
+        hit={{
+          objectID: '1',
+          __position: 1,
+        }}
+        attribute="objectID"
       />
     );
 
@@ -213,7 +239,6 @@ describe('Snippet', () => {
       <div>
         <span
           class="ais-Snippet custom-rootclass"
-          hidden=""
         />
       </div>
     `);
