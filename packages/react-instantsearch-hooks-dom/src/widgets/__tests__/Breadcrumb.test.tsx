@@ -41,7 +41,7 @@ describe('Breadcrumb', () => {
     return { search, searchClient, hierarchicalAttributes };
   }
 
-  test('renders default state', async () => {
+  test('renders with attributes', async () => {
     const { searchClient, hierarchicalAttributes } =
       getBreadcrumbSearchClient();
 
@@ -78,7 +78,7 @@ describe('Breadcrumb', () => {
     `);
   });
 
-  test('renders with items', async () => {
+  test('renders with initial refinements', async () => {
     const { searchClient, hierarchicalAttributes } =
       getBreadcrumbSearchClient();
 
@@ -153,7 +153,7 @@ describe('Breadcrumb', () => {
     `);
   });
 
-  test('transform the passed items', async () => {
+  test('transforms the passed items', async () => {
     const { searchClient, hierarchicalAttributes } =
       getBreadcrumbSearchClient();
 
