@@ -8,7 +8,7 @@ import type { UseBreadcrumbProps } from 'react-instantsearch-hooks';
 
 export type BreadcrumbProps = Omit<
   BreadcrumbUiProps,
-  'items' | 'createURL' | 'onNavigate'
+  'items' | 'hasItems' | 'createURL' | 'onNavigate' | 'translations'
 > &
   UseBreadcrumbProps;
 
@@ -36,6 +36,10 @@ export function Breadcrumb({
       items={items}
       hasItems={canRefine}
       onNavigate={refine}
+      translations={{
+        root: 'Home',
+        separator: '>',
+      }}
     />
   );
 }

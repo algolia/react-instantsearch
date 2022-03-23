@@ -7,7 +7,10 @@ import { Breadcrumb } from '../Breadcrumb';
 import type { BreadcrumbProps } from '../Breadcrumb';
 
 describe('Breadcrumb', () => {
-  function createProps(props: Partial<BreadcrumbProps> = {}) {
+  function createProps({
+    translations,
+    ...props
+  }: Partial<BreadcrumbProps> = {}): BreadcrumbProps {
     const createURL = jest.fn((value) => `#${value}`);
     const onNavigate = jest.fn();
 
@@ -16,8 +19,14 @@ describe('Breadcrumb', () => {
         { label: 'Audio', value: 'Audio' },
         { label: 'Home audio', value: 'Home audio' },
       ],
+      hasItems: true,
       createURL,
       onNavigate,
+      translations: {
+        root: 'Home',
+        separator: '>',
+        ...translations,
+      },
       ...props,
     };
   }
@@ -77,10 +86,12 @@ describe('Breadcrumb', () => {
     `);
   });
 
-  test('renders with component slots', () => {
+  test('renders with translations', () => {
     const props = createProps({
-      rootElement: <span style={{ fontStyle: 'italic' }}>Home</span>,
-      separatorElement: '/',
+      translations: {
+        root: 'Index',
+        separator: '/',
+      },
     });
     const { container } = render(<Breadcrumb {...props} />);
 
@@ -99,11 +110,7 @@ describe('Breadcrumb', () => {
                 class="ais-Breadcrumb-link"
                 href="#null"
               >
-                <span
-                  style="font-style: italic;"
-                >
-                  Home
-                </span>
+                Index
               </a>
             </li>
             <li

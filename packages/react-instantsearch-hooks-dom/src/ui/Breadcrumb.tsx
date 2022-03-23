@@ -6,13 +6,23 @@ import { isModifierClick } from './lib/isModifierClick';
 import type { CreateURL } from 'instantsearch.js';
 import type { BreadcrumbConnectorParamsItem as BreadcrumbItem } from 'instantsearch.js/es/connectors/breadcrumb/connectBreadcrumb';
 
+export type BreadcrumbTranslations = {
+  /**
+   * The label of the root element.
+   */
+  root: string;
+  /**
+   * The character used to separate the elements of the breadcrumb.
+   */
+  separator: string;
+};
+
 export type BreadcrumbProps = React.HTMLAttributes<HTMLDivElement> & {
   items: BreadcrumbItem[];
   hasItems: boolean;
   createURL: CreateURL<BreadcrumbItem['value']>;
   onNavigate: (value: BreadcrumbItem['value']) => void;
-  rootElement?: React.ReactNode;
-  separatorElement?: React.ReactNode;
+  translations: BreadcrumbTranslations;
 };
 
 export function Breadcrumb({
@@ -20,8 +30,7 @@ export function Breadcrumb({
   hasItems,
   createURL,
   onNavigate,
-  rootElement = 'Home',
-  separatorElement = '>',
+  translations,
   ...props
 }: BreadcrumbProps) {
   const handleClick =
@@ -54,7 +63,7 @@ export function Breadcrumb({
             onClick={handleClick(null)}
             className="ais-Breadcrumb-link"
           >
-            {rootElement}
+            {translations.root}
           </a>
         </li>
 
@@ -70,7 +79,7 @@ export function Breadcrumb({
               )}
             >
               <span aria-hidden="true" className="ais-Breadcrumb-separator">
-                {separatorElement}
+                {translations.separator}
               </span>
 
               {isLast ? (
