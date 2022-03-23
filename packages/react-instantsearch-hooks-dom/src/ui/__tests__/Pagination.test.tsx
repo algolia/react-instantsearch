@@ -34,6 +34,17 @@ describe('Pagination', () => {
         ariaLast: 'Last',
         ariaPage: (currentPage: number) => `Page ${currentPage}`,
       },
+      classNames: {
+        root: 'ais-Pagination',
+        rootNoRefinement: 'ais-Pagination--noRefinement',
+        list: 'ais-Pagination-list',
+        itemFirstPage: 'ais-Pagination-item--firstPage',
+        itemPreviousPage: 'ais-Pagination-item--previousPage',
+        itemPage: 'ais-Pagination-item--page',
+        itemSelected: 'ais-Pagination-item--selected',
+        itemNextPage: 'ais-Pagination-item--nextPage',
+        itemLastPage: 'ais-Pagination-item--lastPage',
+      },
       ...props,
     };
   }

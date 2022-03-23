@@ -621,6 +621,39 @@ describe('CurrentRefinements', () => {
     `);
   });
 
+  test('accepts custom class names', () => {
+    const { container } = render(
+      <InstantSearchHooksTestWrapper>
+        <CurrentRefinements
+          className="MyCurrentRefinements"
+          classNames={{
+            root: 'ROOT',
+            rootNoRefinement: 'ROOTNOREFINEMENT',
+            list: 'LIST',
+            listNoRefinement: 'LISTNOREFINEMENT',
+            item: 'ITEM',
+            label: 'LABEL',
+            category: 'CATEGORY',
+            categoryLabel: 'CATEGORYLABEL',
+            delete: 'DELETE',
+          }}
+        />
+      </InstantSearchHooksTestWrapper>
+    );
+
+    expect(container).toMatchInlineSnapshot(`
+      <div>
+        <div
+          class="ais-CurrentRefinements ROOT ais-CurrentRefinements--noRefinement ROOTNOREFINEMENT MyCurrentRefinements"
+        >
+          <ul
+            class="ais-CurrentRefinements-list LIST ais-CurrentRefinements-list--noRefinement LISTNOREFINEMENT"
+          />
+        </div>
+      </div>
+    `);
+  });
+
   test('forwards `div` props to the root element', async () => {
     const { container } = render(
       <InstantSearchHooksTestWrapper>

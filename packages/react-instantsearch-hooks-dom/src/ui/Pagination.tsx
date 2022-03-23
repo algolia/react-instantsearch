@@ -49,6 +49,7 @@ export type PaginationTranslations = {
 };
 
 export type PaginationProps = React.HTMLAttributes<HTMLDivElement> & {
+  classNames: PaginationClassNames;
   pages: number[];
   currentPage: number;
   isFirstPage: boolean;
@@ -61,6 +62,45 @@ export type PaginationProps = React.HTMLAttributes<HTMLDivElement> & {
   createURL: CreateURL<number>;
   onNavigate: (page: number) => void;
 } & { translations: PaginationTranslations };
+
+export type PaginationClassNames = {
+  /**
+   * Class names to apply to the root element.
+   */
+  root: string;
+  /**
+   * Class names to apply to the root element, when there's no refinement possible.
+   */
+  rootNoRefinement: string;
+  /**
+   * Class names to apply to the list element.
+   */
+  list: string;
+  /**
+   * Class names to apply to the first page element.
+   */
+  itemFirstPage: string;
+  /**
+   * Class names to apply to the previous page element.
+   */
+  itemPreviousPage: string;
+  /**
+   * Class names to apply to any page element.
+   */
+  itemPage: string;
+  /**
+   * Class names to apply to a selected page element.
+   */
+  itemSelected: string;
+  /**
+   * Class names to apply to the next page element.
+   */
+  itemNextPage: string;
+  /**
+   * Class names to apply to the last page element.
+   */
+  itemLastPage: string;
+};
 
 export function Pagination({
   pages,
@@ -75,6 +115,7 @@ export function Pagination({
   createURL,
   onNavigate,
   translations,
+  classNames,
   ...props
 }: PaginationProps) {
   const firstPageIndex = 0;
@@ -86,17 +127,17 @@ export function Pagination({
     <div
       {...props}
       className={cx(
-        'ais-Pagination',
-        nbPages <= 1 && 'ais-Pagination--noRefinement',
+        classNames.root,
+        nbPages <= 1 && classNames.rootNoRefinement,
         props.className
       )}
     >
-      <ul className="ais-Pagination-list">
+      <ul className={classNames.list}>
         {showFirst && (
           <PaginationItem
             isDisabled={isFirstPage}
-            className="ais-Pagination-item--firstPage"
             aria-label={translations.ariaFirst}
+            className={classNames.itemFirstPage}
             href={createURL(firstPageIndex)}
             onClick={() => onNavigate(firstPageIndex)}
           >
@@ -106,8 +147,8 @@ export function Pagination({
         {showPrevious && (
           <PaginationItem
             isDisabled={isFirstPage}
-            className="ais-Pagination-item--previousPage"
             aria-label={translations.ariaPrevious}
+            className={classNames.itemPreviousPage}
             href={createURL(previousPageIndex)}
             onClick={() => onNavigate(previousPageIndex)}
           >
@@ -120,8 +161,8 @@ export function Pagination({
               key={page}
               isDisabled={false}
               className={cx(
-                'ais-Pagination-item--page',
-                page === currentPage && 'ais-Pagination-item--selected'
+                classNames.itemPage,
+                page === currentPage && classNames.itemSelected
               )}
               aria-label={translations.ariaPage(page + 1)}
               href={createURL(page)}
@@ -134,8 +175,8 @@ export function Pagination({
         {showNext && (
           <PaginationItem
             isDisabled={isLastPage}
-            className="ais-Pagination-item--nextPage"
             aria-label={translations.ariaNext}
+            className={classNames.itemNextPage}
             href={createURL(nextPageIndex)}
             onClick={() => onNavigate(nextPageIndex)}
           >
@@ -145,8 +186,8 @@ export function Pagination({
         {showLast && (
           <PaginationItem
             isDisabled={isLastPage}
-            className="ais-Pagination-item--lastPage"
             aria-label={translations.ariaLast}
+            className={classNames.itemLastPage}
             href={createURL(lastPageIndex)}
             onClick={() => onNavigate(lastPageIndex)}
           >

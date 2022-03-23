@@ -111,6 +111,33 @@ describe('Hits', () => {
     );
   });
 
+  test('accepts custom class names', () => {
+    const { container } = render(
+      <InstantSearchHooksTestWrapper>
+        <Hits
+          className="MyHits"
+          classNames={{
+            root: 'ROOT',
+            list: 'LIST',
+            item: 'ITEM',
+          }}
+        />
+      </InstantSearchHooksTestWrapper>
+    );
+
+    expect(container).toMatchInlineSnapshot(`
+      <div>
+        <div
+          class="ais-Hits ROOT MyHits"
+        >
+          <ol
+            class="ais-Hits-list LIST"
+          />
+        </div>
+      </div>
+    `);
+  });
+
   test('renders with custom div props', () => {
     const { container } = render(
       <InstantSearchHooksTestWrapper>

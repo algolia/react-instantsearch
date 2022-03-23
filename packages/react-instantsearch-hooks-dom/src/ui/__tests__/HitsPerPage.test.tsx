@@ -17,6 +17,11 @@ function createHitsPerPageProps(
     ],
     currentValue: 10,
     onChange: jest.fn(),
+    classNames: {
+      root: 'ais-HitsPerPage',
+      select: 'ais-HitsPerPage-select',
+      option: 'ais-HitsPerPage-option',
+    },
     ...props,
   };
 }

@@ -7,6 +7,7 @@ import type { Hit } from 'instantsearch.js';
 export type HitsProps<THit> = React.HTMLAttributes<HTMLDivElement> & {
   hits: THit[];
   hitComponent?: React.JSXElementConstructor<{ hit: THit }>;
+  classNames: HitsClassNames;
 };
 
 function DefaultHitComponent({ hit }: { hit: Hit }) {
@@ -17,16 +18,32 @@ function DefaultHitComponent({ hit }: { hit: Hit }) {
   );
 }
 
+export type HitsClassNames = {
+  /**
+   * Class names to apply to the root element
+   */
+  root: string;
+  /**
+   * Class names to apply to the list element
+   */
+  list: string;
+  /**
+   * Class names to apply to the individual hit element
+   */
+  item: string;
+};
+
 export function Hits<THit extends Hit>({
   hits,
   hitComponent: HitComponent = DefaultHitComponent,
+  classNames,
   ...props
 }: HitsProps<THit>) {
   return (
-    <div {...props} className={cx('ais-Hits', props.className)}>
-      <ol className="ais-Hits-list">
+    <div {...props} className={cx(classNames.root, props.className)}>
+      <ol className={classNames.list}>
         {hits.map((hit) => (
-          <li key={hit.objectID} className="ais-Hits-item">
+          <li key={hit.objectID} className={classNames.item}>
             <HitComponent hit={hit} />
           </li>
         ))}

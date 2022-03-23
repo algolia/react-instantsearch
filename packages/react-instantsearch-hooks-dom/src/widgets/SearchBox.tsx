@@ -1,19 +1,21 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useSearchBox } from 'react-instantsearch-hooks';
 
+import { cx } from '../ui/lib/cx';
 import { SearchBox as SearchBoxUiComponent } from '../ui/SearchBox';
 
+import type { ClassNames } from '../types';
 import type { SearchBoxProps as SearchBoxUiComponentProps } from '../ui/SearchBox';
 import type { ChangeEvent } from 'react';
 import type { UseSearchBoxProps } from 'react-instantsearch-hooks';
 
 export type SearchBoxProps = Omit<
-  SearchBoxUiComponentProps,
+  ClassNames<SearchBoxUiComponentProps>,
   'inputRef' | 'isSearchStalled' | 'onChange' | 'onReset' | 'value'
 > &
   UseSearchBoxProps;
 
-export function SearchBox(props: SearchBoxProps) {
+export function SearchBox({ classNames = {}, ...props }: SearchBoxProps) {
   const { query, refine, isSearchStalled } = useSearchBox(props, {
     $$widgetType: 'ais.searchBox',
   });
@@ -53,6 +55,20 @@ export function SearchBox(props: SearchBoxProps) {
   return (
     <SearchBoxUiComponent
       {...props}
+      classNames={{
+        root: cx('ais-SearchBox', classNames.root),
+        form: cx('ais-SearchBox-form', classNames.form),
+        input: cx('ais-SearchBox-input', classNames.input),
+        submit: cx('ais-SearchBox-submit', classNames.submit),
+        reset: cx('ais-SearchBox-reset', classNames.reset),
+        loadingIndicator: cx(
+          'ais-SearchBox-loadingIndicator',
+          classNames.loadingIndicator
+        ),
+        submitIcon: cx('ais-SearchBox-submitIcon', classNames.submitIcon),
+        resetIcon: cx('ais-SearchBox-resetIcon', classNames.resetIcon),
+        loadingIcon: cx('ais-SearchBox-loadingIcon', classNames.loadingIcon),
+      }}
       inputRef={inputRef}
       isSearchStalled={isSearchStalled}
       onChange={onChange}

@@ -9,6 +9,7 @@ import type {
 } from 'instantsearch.js/es/connectors/current-refinements/connectCurrentRefinements';
 
 export type CurrentRefinementsProps = React.HTMLAttributes<HTMLDivElement> & {
+  classNames: CurrentRefinementsClassNames;
   items?: Array<
     Pick<CurrentRefinementsConnectorParamsItem, 'label' | 'refinements'> &
       Record<string, unknown>
@@ -17,7 +18,47 @@ export type CurrentRefinementsProps = React.HTMLAttributes<HTMLDivElement> & {
   hasRefinements?: boolean;
 };
 
+export type CurrentRefinementsClassNames = {
+  /**
+   * Class names to apply to the root element
+   */
+  root: string;
+  /**
+   * Class names to apply to the root element when there is no refinement
+   */
+  rootNoRefinement: string;
+  /**
+   * Class names to apply to the list element
+   */
+  list: string;
+  /**
+   * Class names to apply to the list element when there is no refinement
+   */
+  listNoRefinement: string;
+  /**
+   * Class names to apply to the individual refinement
+   */
+  item: string;
+  /**
+   * Class names to apply to the individual refinement's label
+   */
+  label: string;
+  /**
+   * Class names to apply to the individual refinement value
+   */
+  category: string;
+  /**
+   * Class names to apply to the individual refinement value's label
+   */
+  categoryLabel: string;
+  /**
+   * Class names to apply to the remove button for a refinement
+   */
+  delete: string;
+};
+
 export function CurrentRefinements({
+  classNames,
   items = [],
   onRemove = () => {},
   hasRefinements = false,
@@ -27,26 +68,23 @@ export function CurrentRefinements({
     <div
       {...props}
       className={cx(
-        'ais-CurrentRefinements',
-        !hasRefinements && 'ais-CurrentRefinements--noRefinement',
+        classNames.root,
+        !hasRefinements && classNames.rootNoRefinement,
         props.className
       )}
     >
       <ul
         className={cx(
-          'ais-CurrentRefinements-list',
-          !hasRefinements && 'ais-CurrentRefinements-list--noRefinement'
+          classNames.list,
+          !hasRefinements && classNames.listNoRefinement
         )}
       >
         {items.map((item) => (
-          <li key={item.label} className="ais-CurrentRefinements-item">
-            <span className="ais-CurrentRefinements-label">{item.label}:</span>
+          <li key={item.label} className={classNames.item}>
+            <span className={classNames.label}>{item.label}:</span>
             {item.refinements.map((refinement) => (
-              <span
-                key={refinement.label}
-                className="ais-CurrentRefinements-category"
-              >
-                <span className="ais-CurrentRefinements-categoryLabel">
+              <span key={refinement.label} className={classNames.category}>
+                <span className={classNames.categoryLabel}>
                   {refinement.label}
                 </span>
                 <button
@@ -58,7 +96,7 @@ export function CurrentRefinements({
 
                     onRemove(refinement);
                   }}
-                  className="ais-CurrentRefinements-delete"
+                  className={classNames.delete}
                 >
                   ✕
                 </button>

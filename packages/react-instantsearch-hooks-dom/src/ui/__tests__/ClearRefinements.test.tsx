@@ -4,15 +4,28 @@ import React from 'react';
 
 import { ClearRefinements } from '../ClearRefinements';
 
+import type { ClearRefinementsProps } from '../ClearRefinements';
+
+function createProps(
+  props?: Partial<ClearRefinementsProps>
+): ClearRefinementsProps {
+  return {
+    translations: {
+      resetLabel: 'Clear refinements',
+    },
+    classNames: {
+      root: 'ais-ClearRefinements',
+      button: 'ais-ClearRefinements-button',
+      buttonDisabled: 'ais-ClearRefinements-button--disabled',
+    },
+    ...props,
+  };
+}
+
 describe('ClearRefinements', () => {
   test('renders with props', () => {
-    const { container } = render(
-      <ClearRefinements
-        translations={{
-          resetLabel: 'Clear refinements',
-        }}
-      />
-    );
+    const props = createProps({});
+    const { container } = render(<ClearRefinements {...props} />);
 
     expect(container).toMatchInlineSnapshot(`
       <div>
@@ -30,14 +43,10 @@ describe('ClearRefinements', () => {
   });
 
   test('passes an `onClick` callback to the button', () => {
+    const props = createProps({});
     const onClick = jest.fn();
     const { container } = render(
-      <ClearRefinements
-        translations={{
-          resetLabel: 'Clear refinements',
-        }}
-        onClick={onClick}
-      />
+      <ClearRefinements {...props} onClick={onClick} />
     );
 
     userEvent.click(
@@ -50,15 +59,10 @@ describe('ClearRefinements', () => {
   });
 
   test('disables the button', () => {
+    const props = createProps({});
     const onClick = jest.fn();
     const { container } = render(
-      <ClearRefinements
-        translations={{
-          resetLabel: 'Clear refinements',
-        }}
-        onClick={onClick}
-        disabled
-      />
+      <ClearRefinements {...props} onClick={onClick} disabled />
     );
 
     const button = container.querySelector('.ais-ClearRefinements-button');
@@ -90,13 +94,9 @@ describe('ClearRefinements', () => {
   });
 
   test('forwards a custom class name to the root element', () => {
+    const props = createProps({});
     const { container } = render(
-      <ClearRefinements
-        translations={{
-          resetLabel: 'Clear refinements',
-        }}
-        className="MyClearsRefinements"
-      />
+      <ClearRefinements {...props} className="MyClearsRefinements" />
     );
 
     expect(container.querySelector('.ais-ClearRefinements')).toHaveClass(
@@ -118,13 +118,9 @@ describe('ClearRefinements', () => {
   });
 
   test('forwards `div` props to the root element', () => {
+    const props = createProps({});
     const { container } = render(
-      <ClearRefinements
-        translations={{
-          resetLabel: 'Clear refinements',
-        }}
-        title="Some custom title"
-      />
+      <ClearRefinements {...props} title="Some custom title" />
     );
 
     expect(container.querySelector('.ais-ClearRefinements')).toHaveAttribute(

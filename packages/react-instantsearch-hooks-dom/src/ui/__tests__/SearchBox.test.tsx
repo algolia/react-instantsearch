@@ -20,6 +20,17 @@ describe('SearchBox', () => {
       onSubmit,
       placeholder: '',
       value: '',
+      classNames: {
+        root: 'ais-SearchBox',
+        form: 'ais-SearchBox-form',
+        input: 'ais-SearchBox-input',
+        submit: 'ais-SearchBox-submit',
+        reset: 'ais-SearchBox-reset',
+        loadingIndicator: 'ais-SearchBox-loadingIndicator',
+        submitIcon: 'ais-SearchBox-submitIcon',
+        resetIcon: 'ais-SearchBox-resetIcon',
+        loadingIcon: 'ais-SearchBox-loadingIcon',
+      },
       ...props,
     };
   }

@@ -4,9 +4,23 @@ import React from 'react';
 
 import { CurrentRefinements } from '../CurrentRefinements';
 
+const defaultClassNames = {
+  root: 'ais-CurrentRefinements',
+  rootNoRefinement: 'ais-CurrentRefinements--noRefinement',
+  list: 'ais-CurrentRefinements-list',
+  listNoRefinement: 'ais-CurrentRefinements-list--noRefinement',
+  item: 'ais-CurrentRefinements-item',
+  label: 'ais-CurrentRefinements-label',
+  category: 'ais-CurrentRefinements-category',
+  categoryLabel: 'ais-CurrentRefinements-categoryLabel',
+  delete: 'ais-CurrentRefinements-delete',
+};
+
 describe('CurrentRefinements', () => {
   test('renders with default props', () => {
-    const { container } = render(<CurrentRefinements />);
+    const { container } = render(
+      <CurrentRefinements classNames={defaultClassNames} />
+    );
 
     expect(container).toMatchInlineSnapshot(`
       <div>
@@ -26,6 +40,7 @@ describe('CurrentRefinements', () => {
 
     const { container } = render(
       <CurrentRefinements
+        classNames={defaultClassNames}
         items={[
           {
             label: 'Brand',
@@ -129,7 +144,10 @@ describe('CurrentRefinements', () => {
 
   test('forwards a custom class name to the root element', () => {
     const { container } = render(
-      <CurrentRefinements className="MyCurrentRefinements" />
+      <CurrentRefinements
+        classNames={defaultClassNames}
+        className="MyCurrentRefinements"
+      />
     );
 
     expect(document.querySelector('.ais-CurrentRefinements')).toHaveClass(
@@ -150,7 +168,10 @@ describe('CurrentRefinements', () => {
 
   test('forwards `div` props to the root element', () => {
     const { container } = render(
-      <CurrentRefinements title="Some custom title" />
+      <CurrentRefinements
+        classNames={defaultClassNames}
+        title="Some custom title"
+      />
     );
 
     expect(document.querySelector('.ais-CurrentRefinements')).toHaveAttribute(

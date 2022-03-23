@@ -15,6 +15,11 @@ describe('Hits', () => {
         { objectID: 'abc', __position: 1 },
         { objectID: 'def', __position: 2 },
       ] as THit[],
+      classNames: {
+        root: 'ais-Hits',
+        list: 'ais-Hits-list',
+        item: 'ais-Hits-item',
+      },
       ...props,
     };
   }

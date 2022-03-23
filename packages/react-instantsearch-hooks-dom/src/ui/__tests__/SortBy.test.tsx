@@ -4,10 +4,25 @@ import React from 'react';
 
 import { SortBy } from '../SortBy';
 
+import type { SortByProps } from '../SortBy';
+
 describe('SortBy', () => {
+  function createProps(props: Partial<SortByProps>) {
+    return {
+      classNames: {
+        root: 'ais-SortBy',
+        select: 'ais-SortBy-select',
+        option: 'ais-SortBy-option',
+      },
+      ...props,
+    };
+  }
+
   test('renders with items', () => {
+    const props = createProps({});
     const { container } = render(
       <SortBy
+        {...props}
         items={[
           { label: 'Featured', value: 'instant_search' },
           { label: 'Price (asc)', value: 'instant_search_price_asc' },
@@ -52,8 +67,11 @@ describe('SortBy', () => {
   });
 
   test('sets the value', () => {
+    const props = createProps({});
+
     render(
       <SortBy
+        {...props}
         value="instant_search_price_asc"
         items={[
           { label: 'Featured', value: 'instant_search' },
@@ -69,9 +87,12 @@ describe('SortBy', () => {
   });
 
   test('calls an `onChange` callback when selecting an option', () => {
+    const props = createProps({});
+
     const onChange = jest.fn();
     const { getByRole } = render(
       <SortBy
+        {...props}
         onChange={onChange}
         items={[
           { label: 'Featured', value: 'instant_search' },
@@ -93,8 +114,11 @@ describe('SortBy', () => {
   });
 
   test('forwards a custom class name to the root element', () => {
+    const props = createProps({});
+
     const { container } = render(
       <SortBy
+        {...props}
         className="MySortBy"
         items={[
           { label: 'Featured', value: 'instant_search' },
@@ -138,8 +162,11 @@ describe('SortBy', () => {
   });
 
   test('forwards `div` props to the root element', () => {
+    const props = createProps({});
+
     const { container } = render(
       <SortBy
+        {...props}
         title="Some custom title"
         items={[
           { label: 'Featured', value: 'instant_search' },
