@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSortBy } from 'react-instantsearch-hooks';
 
-import { cx } from '../../../../examples/hooks/cx';
+import { cx } from '../ui/lib/cx';
 import { SortBy as SortByUiComponent } from '../ui/SortBy';
 
 import type { ClassNames } from '../types';

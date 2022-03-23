@@ -1,8 +1,8 @@
 import React from 'react';
 import { useCurrentRefinements } from 'react-instantsearch-hooks';
 
-import { cx } from '../../../../examples/hooks/cx';
 import { CurrentRefinements as CurrentRefinementsUiComponent } from '../ui/CurrentRefinements';
+import { cx } from '../ui/lib/cx';
 
 import type { ClassNames } from '../types';
 import type { CurrentRefinementsProps as CurrentRefinementsUiComponentProps } from '../ui/CurrentRefinements';
