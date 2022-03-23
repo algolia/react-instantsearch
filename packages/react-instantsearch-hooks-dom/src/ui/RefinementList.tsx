@@ -52,7 +52,7 @@ export function RefinementList({
                   }}
                 />
                 <span className="ais-RefinementList-labelText">
-                  {searchBox && query.length > 0 ? (
+                  {query.length > 0 ? (
                     <Highlight
                       parts={[
                         getHighlightedParts(unescape(item.highlighted || '')),
