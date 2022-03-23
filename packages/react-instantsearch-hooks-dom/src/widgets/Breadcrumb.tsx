@@ -19,7 +19,7 @@ export function Breadcrumb({
   transformItems,
   ...props
 }: BreadcrumbProps) {
-  const { createURL, items, refine } = useBreadcrumb(
+  const { canRefine, createURL, items, refine } = useBreadcrumb(
     {
       attributes,
       rootPath,
@@ -34,6 +34,7 @@ export function Breadcrumb({
       {...props}
       createURL={createURL}
       items={items}
+      hasItems={canRefine}
       onNavigate={refine}
     />
   );

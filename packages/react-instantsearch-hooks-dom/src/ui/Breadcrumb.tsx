@@ -8,6 +8,7 @@ import type { BreadcrumbConnectorParamsItem as BreadcrumbItem } from 'instantsea
 
 export type BreadcrumbProps = React.HTMLAttributes<HTMLDivElement> & {
   items: BreadcrumbItem[];
+  hasItems: boolean;
   createURL: CreateURL<BreadcrumbItem['value']>;
   onNavigate: (value: BreadcrumbItem['value']) => void;
   rootElement?: React.ReactNode;
@@ -16,13 +17,13 @@ export type BreadcrumbProps = React.HTMLAttributes<HTMLDivElement> & {
 
 export function Breadcrumb({
   items = [],
+  hasItems,
   createURL,
   onNavigate,
   rootElement = 'Home',
   separatorElement = '>',
   ...props
 }: BreadcrumbProps) {
-  const hasItems = items.length > 0;
   const handleClick =
     (value: BreadcrumbItem['value']) =>
     (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
