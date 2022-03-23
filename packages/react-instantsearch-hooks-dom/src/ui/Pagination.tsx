@@ -25,7 +25,7 @@ export type PaginationTranslations = {
   /**
    * The label for a page's button.
    */
-  page: string | ((currentPage: number) => string);
+  page(currentPage: number): string;
   /**
    * The accessible label for the first page's button.
    */
@@ -45,7 +45,7 @@ export type PaginationTranslations = {
   /**
    * The accessible label for a page's button.
    */
-  ariaPage: string | ((currentPage: number) => string);
+  ariaPage(currentPage: number): string;
 };
 
 export type PaginationProps = React.HTMLAttributes<HTMLDivElement> & {
@@ -115,16 +115,6 @@ export function Pagination({
           </PaginationItem>
         )}
         {pages.map((page) => {
-          const label =
-            typeof translations.page === 'string'
-              ? translations.page
-              : translations.page(page);
-
-          const ariaLabel =
-            typeof translations.ariaPage === 'string'
-              ? translations.ariaPage
-              : translations.ariaPage(page);
-
           return (
             <PaginationItem
               key={page}
@@ -133,11 +123,11 @@ export function Pagination({
                 'ais-Pagination-item--page',
                 page === currentPage && 'ais-Pagination-item--selected'
               )}
-              aria-label={ariaLabel}
+              aria-label={translations.ariaPage(page + 1)}
               href={createURL(page)}
               onClick={() => onNavigate(page)}
             >
-              {label}
+              {translations.page(page + 1)}
             </PaginationItem>
           );
         })}

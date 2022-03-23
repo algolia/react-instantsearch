@@ -51,12 +51,12 @@ export function Pagination({
         previous: '‹',
         next: '›',
         last: '››',
-        page: (currentPage: number) => String(currentPage + 1),
+        page: (currentPage: number) => String(currentPage),
         ariaFirst: 'First',
         ariaPrevious: 'Previous',
         ariaNext: 'Next',
         ariaLast: 'Last',
-        ariaPage: (currentPage: number) => `Page ${currentPage + 1}`,
+        ariaPage: (currentPage: number) => `Page ${currentPage}`,
       }}
       showFirst={showFirst}
       showPrevious={showPrevious}
