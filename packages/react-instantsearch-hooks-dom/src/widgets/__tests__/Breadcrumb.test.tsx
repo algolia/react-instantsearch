@@ -14,37 +14,34 @@ import { Breadcrumb } from '../Breadcrumb';
 import type { UseHierarchicalMenuProps } from 'react-instantsearch-hooks';
 
 describe('Breadcrumb', () => {
-  function getBreadcrumbSearchClient(
-    hierarchicalFacets: Record<string, Record<string, number>> = {
-      'hierarchicalCategories.lvl0': {
-        'Cameras & Camcorders': 1369,
-      },
-      'hierarchicalCategories.lvl1': {
-        'Cameras & Camcorders > Digital Cameras': 170,
-      },
-    }
-  ) {
-    const hierarchicalAttributes = Object.keys(hierarchicalFacets);
-    const search = jest.fn((requests) =>
-      Promise.resolve(
-        createMultiSearchResponse(
-          ...requests.map(() =>
-            createSingleSearchResponse({
-              facets: hierarchicalFacets,
-            })
-          )
+  const hierarchicalFacets = {
+    'hierarchicalCategories.lvl0': {
+      'Cameras & Camcorders': 1369,
+    },
+    'hierarchicalCategories.lvl1': {
+      'Cameras & Camcorders > Digital Cameras': 170,
+    },
+  };
+  const hierarchicalAttributes = Object.keys(hierarchicalFacets);
+
+  const search = jest.fn((requests) =>
+    Promise.resolve(
+      createMultiSearchResponse(
+        ...requests.map(() =>
+          createSingleSearchResponse({
+            facets: hierarchicalFacets,
+          })
         )
       )
-    );
-    const searchClient = createSearchClient({ search });
+    )
+  );
+  const searchClient = createSearchClient({ search });
 
-    return { search, searchClient, hierarchicalAttributes };
-  }
+  beforeEach(() => {
+    search.mockClear();
+  });
 
   test('renders with attributes', async () => {
-    const { searchClient, hierarchicalAttributes } =
-      getBreadcrumbSearchClient();
-
     const { container } = render(
       <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <VirtualHierarchicalMenu attributes={hierarchicalAttributes} />
@@ -79,9 +76,6 @@ describe('Breadcrumb', () => {
   });
 
   test('renders with initial refinements', async () => {
-    const { searchClient, hierarchicalAttributes } =
-      getBreadcrumbSearchClient();
-
     const { container } = render(
       <InstantSearchHooksTestWrapper
         searchClient={searchClient}
@@ -154,9 +148,6 @@ describe('Breadcrumb', () => {
   });
 
   test('transforms the passed items', async () => {
-    const { searchClient, hierarchicalAttributes } =
-      getBreadcrumbSearchClient();
-
     const { container } = render(
       <InstantSearchHooksTestWrapper
         searchClient={searchClient}
@@ -234,9 +225,6 @@ describe('Breadcrumb', () => {
   });
 
   test('navigates to a parent category', async () => {
-    const { search, searchClient, hierarchicalAttributes } =
-      getBreadcrumbSearchClient();
-
     const { container, getByText } = render(
       <InstantSearchHooksTestWrapper
         searchClient={searchClient}
@@ -257,8 +245,7 @@ describe('Breadcrumb', () => {
 
     await wait(0);
 
-    search.mockClear();
-
+    expect(search).toHaveBeenCalledTimes(1);
     expect(container).toMatchInlineSnapshot(`
       <div>
         <div
@@ -313,6 +300,7 @@ describe('Breadcrumb', () => {
 
     await wait(0);
 
+    expect(search).toHaveBeenCalledTimes(2);
     expect(search).toHaveBeenLastCalledWith(
       expect.arrayContaining([
         expect.objectContaining({
@@ -327,9 +315,6 @@ describe('Breadcrumb', () => {
   });
 
   test('forwards `div` props to the root element', async () => {
-    const { searchClient, hierarchicalAttributes } =
-      getBreadcrumbSearchClient();
-
     const { container } = render(
       <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <VirtualHierarchicalMenu attributes={hierarchicalAttributes} />
