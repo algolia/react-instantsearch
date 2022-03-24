@@ -11,7 +11,7 @@ export type SortByProps = Omit<
   Pick<UseSortByProps, 'items'> &
   Pick<React.SelectHTMLAttributes<HTMLSelectElement>, 'value'> & {
     onChange?(value: string): void;
-    classNames: SortByClassNames;
+    classNames?: Partial<SortByClassNames>;
   };
 
 export type SortByClassNames = {
@@ -33,19 +33,22 @@ export function SortBy({
   items,
   value,
   onChange = () => {},
-  classNames,
+  classNames = {},
   ...props
 }: SortByProps) {
   return (
-    <div {...props} className={cx(classNames.root, props.className)}>
+    <div
+      {...props}
+      className={cx('ais-SortBy', classNames.root, props.className)}
+    >
       <select
-        className={classNames.select}
+        className={cx('ais-SortBy-select', classNames.select)}
         onChange={(event) => onChange(event.target.value)}
         value={value}
       >
         {items.map((item) => (
           <option
-            className={classNames.option}
+            className={cx('ais-SortBy-option', classNames.option)}
             key={item.value}
             value={item.value}
           >

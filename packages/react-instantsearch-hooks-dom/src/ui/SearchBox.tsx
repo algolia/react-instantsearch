@@ -20,11 +20,11 @@ export type SearchBoxProps = React.HTMLAttributes<HTMLDivElement> & {
   resetIconComponent?: JSXElementConstructor<IconProps>;
   submitIconComponent?: JSXElementConstructor<IconProps>;
   loadingIconComponent?: JSXElementConstructor<IconProps>;
-  classNames: SearchBoxClassNames;
+  classNames?: Partial<SearchBoxClassNames>;
 };
 
 export type IconProps = {
-  classNames: SearchBoxClassNames;
+  classNames: Partial<SearchBoxClassNames>;
 };
 
 export type SearchBoxClassNames = {
@@ -69,7 +69,7 @@ export type SearchBoxClassNames = {
 function DefaultSubmitIcon({ classNames }: IconProps) {
   return (
     <svg
-      className={classNames.submitIcon}
+      className={cx('ais-SearchBox-submitIcon', classNames.submitIcon)}
       width="10"
       height="10"
       viewBox="0 0 40 40"
@@ -82,7 +82,7 @@ function DefaultSubmitIcon({ classNames }: IconProps) {
 function DefaultResetIcon({ classNames }: IconProps) {
   return (
     <svg
-      className={classNames.resetIcon}
+      className={cx('ais-SearchBox-resetIcon', classNames.resetIcon)}
       viewBox="0 0 20 20"
       width="10"
       height="10"
@@ -99,7 +99,7 @@ function DefaultLoadingIcon({ classNames }: IconProps) {
       height="16"
       viewBox="0 0 38 38"
       stroke="#444"
-      className={classNames.loadingIcon}
+      className={cx('ais-SearchBox-loadingIcon', classNames.loadingIcon)}
     >
       <g fill="none" fillRule="evenodd">
         <g transform="translate(1 1)" strokeWidth="2">
@@ -131,7 +131,7 @@ export function SearchBox({
   resetIconComponent: ResetIcon = DefaultResetIcon,
   submitIconComponent: SubmitIcon = DefaultSubmitIcon,
   loadingIconComponent: LoadingIcon = DefaultLoadingIcon,
-  classNames,
+  classNames = {},
   ...props
 }: SearchBoxProps) {
   function handleSubmit(event: FormEvent) {
@@ -159,17 +159,20 @@ export function SearchBox({
   }
 
   return (
-    <div {...props} className={cx(classNames.root, props.className)}>
+    <div
+      {...props}
+      className={cx('ais-SearchBox', classNames.root, props.className)}
+    >
       <form
         action=""
-        className={classNames.form}
+        className={cx('ais-SearchBox-form', classNames.form)}
         noValidate
         onSubmit={handleSubmit}
         onReset={handleReset}
       >
         <input
           ref={inputRef}
-          className={classNames.input}
+          className={cx('ais-SearchBox-input', classNames.input)}
           autoComplete="off"
           autoCorrect="off"
           autoCapitalize="off"
@@ -181,21 +184,27 @@ export function SearchBox({
           onChange={onChange}
         />
         <button
-          className={classNames.submit}
+          className={cx('ais-SearchBox-submit', classNames.submit)}
           type="submit"
           title="Submit the search query."
         >
           <SubmitIcon classNames={classNames} />
         </button>
         <button
-          className={classNames.reset}
+          className={cx('ais-SearchBox-reset', classNames.reset)}
           type="reset"
           title="Clear the search query."
           hidden={value.length === 0 && !isSearchStalled}
         >
           <ResetIcon classNames={classNames} />
         </button>
-        <span className={classNames.loadingIndicator} hidden={!isSearchStalled}>
+        <span
+          className={cx(
+            'ais-SearchBox-loadingIndicator',
+            classNames.loadingIndicator
+          )}
+          hidden={!isSearchStalled}
+        >
           <LoadingIcon classNames={classNames} />
         </span>
       </form>

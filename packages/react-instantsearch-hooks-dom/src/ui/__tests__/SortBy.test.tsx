@@ -9,27 +9,18 @@ import type { SortByProps } from '../SortBy';
 describe('SortBy', () => {
   function createProps(props: Partial<SortByProps>) {
     return {
-      classNames: {
-        root: 'ais-SortBy',
-        select: 'ais-SortBy-select',
-        option: 'ais-SortBy-option',
-      },
+      items: [
+        { label: 'Featured', value: 'instant_search' },
+        { label: 'Price (asc)', value: 'instant_search_price_asc' },
+        { label: 'Price (desc)', value: 'instant_search_price_desc' },
+      ],
       ...props,
     };
   }
 
   test('renders with items', () => {
     const props = createProps({});
-    const { container } = render(
-      <SortBy
-        {...props}
-        items={[
-          { label: 'Featured', value: 'instant_search' },
-          { label: 'Price (asc)', value: 'instant_search_price_asc' },
-          { label: 'Price (desc)', value: 'instant_search_price_desc' },
-        ]}
-      />
-    );
+    const { container } = render(<SortBy {...props} />);
 
     expect(document.querySelector('.ais-SortBy-select')).toHaveValue(
       'instant_search'
@@ -69,17 +60,7 @@ describe('SortBy', () => {
   test('sets the value', () => {
     const props = createProps({});
 
-    render(
-      <SortBy
-        {...props}
-        value="instant_search_price_asc"
-        items={[
-          { label: 'Featured', value: 'instant_search' },
-          { label: 'Price (asc)', value: 'instant_search_price_asc' },
-          { label: 'Price (desc)', value: 'instant_search_price_desc' },
-        ]}
-      />
-    );
+    render(<SortBy {...props} value="instant_search_price_asc" />);
 
     expect(document.querySelector('.ais-SortBy-select')).toHaveValue(
       'instant_search_price_asc'
@@ -90,17 +71,7 @@ describe('SortBy', () => {
     const props = createProps({});
 
     const onChange = jest.fn();
-    const { getByRole } = render(
-      <SortBy
-        {...props}
-        onChange={onChange}
-        items={[
-          { label: 'Featured', value: 'instant_search' },
-          { label: 'Price (asc)', value: 'instant_search_price_asc' },
-          { label: 'Price (desc)', value: 'instant_search_price_desc' },
-        ]}
-      />
-    );
+    const { getByRole } = render(<SortBy {...props} onChange={onChange} />);
 
     userEvent.selectOptions(
       document.querySelector('.ais-SortBy-select') as HTMLSelectElement,
@@ -116,17 +87,7 @@ describe('SortBy', () => {
   test('forwards a custom class name to the root element', () => {
     const props = createProps({});
 
-    const { container } = render(
-      <SortBy
-        {...props}
-        className="MySortBy"
-        items={[
-          { label: 'Featured', value: 'instant_search' },
-          { label: 'Price (asc)', value: 'instant_search_price_asc' },
-          { label: 'Price (desc)', value: 'instant_search_price_desc' },
-        ]}
-      />
-    );
+    const { container } = render(<SortBy {...props} className="MySortBy" />);
 
     expect(document.querySelector('.ais-SortBy')).toHaveClass('MySortBy');
     expect(container).toMatchInlineSnapshot(`
@@ -161,19 +122,56 @@ describe('SortBy', () => {
     `);
   });
 
+  test('allows custom class names', () => {
+    const props = createProps({});
+    const { container } = render(
+      <SortBy
+        {...props}
+        classNames={{
+          root: 'ROOT',
+          select: 'SELECT',
+          option: 'OPTION',
+        }}
+      />
+    );
+
+    expect(container).toMatchInlineSnapshot(`
+      <div>
+        <div
+          class="ais-SortBy ROOT"
+        >
+          <select
+            class="ais-SortBy-select SELECT"
+          >
+            <option
+              class="ais-SortBy-option OPTION"
+              value="instant_search"
+            >
+              Featured
+            </option>
+            <option
+              class="ais-SortBy-option OPTION"
+              value="instant_search_price_asc"
+            >
+              Price (asc)
+            </option>
+            <option
+              class="ais-SortBy-option OPTION"
+              value="instant_search_price_desc"
+            >
+              Price (desc)
+            </option>
+          </select>
+        </div>
+      </div>
+    `);
+  });
+
   test('forwards `div` props to the root element', () => {
     const props = createProps({});
 
     const { container } = render(
-      <SortBy
-        {...props}
-        title="Some custom title"
-        items={[
-          { label: 'Featured', value: 'instant_search' },
-          { label: 'Price (asc)', value: 'instant_search_price_asc' },
-          { label: 'Price (desc)', value: 'instant_search_price_desc' },
-        ]}
-      />
+      <SortBy {...props} title="Some custom title" />
     );
 
     expect(document.querySelector('.ais-SortBy')).toHaveAttribute(

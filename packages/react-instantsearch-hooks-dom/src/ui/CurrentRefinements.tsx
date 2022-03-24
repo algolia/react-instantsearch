@@ -9,7 +9,7 @@ import type {
 } from 'instantsearch.js/es/connectors/current-refinements/connectCurrentRefinements';
 
 export type CurrentRefinementsProps = React.HTMLAttributes<HTMLDivElement> & {
-  classNames: CurrentRefinementsClassNames;
+  classNames?: Partial<CurrentRefinementsClassNames>;
   items?: Array<
     Pick<CurrentRefinementsConnectorParamsItem, 'label' | 'refinements'> &
       Record<string, unknown>
@@ -58,7 +58,7 @@ export type CurrentRefinementsClassNames = {
 };
 
 export function CurrentRefinements({
-  classNames,
+  classNames = {},
   items = [],
   onRemove = () => {},
   hasRefinements = false,
@@ -68,23 +68,45 @@ export function CurrentRefinements({
     <div
       {...props}
       className={cx(
+        'ais-CurrentRefinements',
         classNames.root,
+        !hasRefinements && 'ais-CurrentRefinements--noRefinement',
         !hasRefinements && classNames.rootNoRefinement,
         props.className
       )}
     >
       <ul
         className={cx(
+          'ais-CurrentRefinements-list',
           classNames.list,
+          !hasRefinements && 'ais-CurrentRefinements-list--noRefinement',
           !hasRefinements && classNames.listNoRefinement
         )}
       >
         {items.map((item) => (
-          <li key={item.label} className={classNames.item}>
-            <span className={classNames.label}>{item.label}:</span>
+          <li
+            key={item.label}
+            className={cx('ais-CurrentRefinements-item', classNames.item)}
+          >
+            <span
+              className={cx('ais-CurrentRefinements-label', classNames.label)}
+            >
+              {item.label}:
+            </span>
             {item.refinements.map((refinement) => (
-              <span key={refinement.label} className={classNames.category}>
-                <span className={classNames.categoryLabel}>
+              <span
+                key={refinement.label}
+                className={cx(
+                  'ais-CurrentRefinements-category',
+                  classNames.category
+                )}
+              >
+                <span
+                  className={cx(
+                    'ais-CurrentRefinements-categoryLabel',
+                    classNames.categoryLabel
+                  )}
+                >
                   {refinement.label}
                 </span>
                 <button
@@ -96,7 +118,10 @@ export function CurrentRefinements({
 
                     onRemove(refinement);
                   }}
-                  className={classNames.delete}
+                  className={cx(
+                    'ais-CurrentRefinements-delete',
+                    classNames.delete
+                  )}
                 >
                   ✕
                 </button>

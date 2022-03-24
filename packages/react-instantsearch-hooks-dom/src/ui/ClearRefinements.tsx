@@ -15,7 +15,7 @@ export type ClearRefinementsProps = React.HTMLAttributes<HTMLDivElement> &
     'disabled' | 'onClick'
   > & {
     translations: ClearRefinementsTranslations;
-    classNames: ClearRefinementsClassNames;
+    classNames?: Partial<ClearRefinementsClassNames>;
   };
 
 export type ClearRefinementsClassNames = {
@@ -34,18 +34,29 @@ export type ClearRefinementsClassNames = {
 };
 
 export function ClearRefinements({
-  classNames,
+  classNames = {},
   disabled = false,
   onClick = () => {},
   translations,
   ...props
 }: ClearRefinementsProps) {
   return (
-    <div {...props} className={cx(classNames.root, props.className)}>
+    <div
+      {...props}
+      className={cx('ais-ClearRefinements', classNames.root, props.className)}
+    >
       <button
         disabled={disabled}
         onClick={onClick}
-        className={cx(classNames.button, disabled && classNames.buttonDisabled)}
+        className={cx(
+          'ais-ClearRefinements-button',
+          classNames.button,
+          disabled &&
+            cx(
+              'ais-ClearRefinements-button--disabled',
+              classNames.buttonDisabled
+            )
+        )}
       >
         {translations.resetLabel}
       </button>

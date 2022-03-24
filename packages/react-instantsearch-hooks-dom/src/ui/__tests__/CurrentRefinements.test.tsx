@@ -4,23 +4,9 @@ import React from 'react';
 
 import { CurrentRefinements } from '../CurrentRefinements';
 
-const defaultClassNames = {
-  root: 'ais-CurrentRefinements',
-  rootNoRefinement: 'ais-CurrentRefinements--noRefinement',
-  list: 'ais-CurrentRefinements-list',
-  listNoRefinement: 'ais-CurrentRefinements-list--noRefinement',
-  item: 'ais-CurrentRefinements-item',
-  label: 'ais-CurrentRefinements-label',
-  category: 'ais-CurrentRefinements-category',
-  categoryLabel: 'ais-CurrentRefinements-categoryLabel',
-  delete: 'ais-CurrentRefinements-delete',
-};
-
 describe('CurrentRefinements', () => {
   test('renders with default props', () => {
-    const { container } = render(
-      <CurrentRefinements classNames={defaultClassNames} />
-    );
+    const { container } = render(<CurrentRefinements />);
 
     expect(container).toMatchInlineSnapshot(`
       <div>
@@ -40,7 +26,6 @@ describe('CurrentRefinements', () => {
 
     const { container } = render(
       <CurrentRefinements
-        classNames={defaultClassNames}
         items={[
           {
             label: 'Brand',
@@ -144,10 +129,7 @@ describe('CurrentRefinements', () => {
 
   test('forwards a custom class name to the root element', () => {
     const { container } = render(
-      <CurrentRefinements
-        classNames={defaultClassNames}
-        className="MyCurrentRefinements"
-      />
+      <CurrentRefinements className="MyCurrentRefinements" />
     );
 
     expect(document.querySelector('.ais-CurrentRefinements')).toHaveClass(
@@ -168,10 +150,7 @@ describe('CurrentRefinements', () => {
 
   test('forwards `div` props to the root element', () => {
     const { container } = render(
-      <CurrentRefinements
-        classNames={defaultClassNames}
-        title="Some custom title"
-      />
+      <CurrentRefinements title="Some custom title" />
     );
 
     expect(document.querySelector('.ais-CurrentRefinements')).toHaveAttribute(
@@ -186,6 +165,36 @@ describe('CurrentRefinements', () => {
         >
           <ul
             class="ais-CurrentRefinements-list ais-CurrentRefinements-list--noRefinement"
+          />
+        </div>
+      </div>
+    `);
+  });
+
+  test('allows custom class names', () => {
+    const { container } = render(
+      <CurrentRefinements
+        classNames={{
+          root: 'ROOT',
+          rootNoRefinement: 'ROOTNOREFINEMENT',
+          list: 'LIST',
+          listNoRefinement: 'LISTNOREFINEMENT',
+          item: 'ITEM',
+          label: 'LABEL',
+          category: 'CATEGORY',
+          categoryLabel: 'CATEGORYLABEL',
+          delete: 'DELETE',
+        }}
+      />
+    );
+
+    expect(container).toMatchInlineSnapshot(`
+      <div>
+        <div
+          class="ais-CurrentRefinements ROOT ais-CurrentRefinements--noRefinement ROOTNOREFINEMENT"
+        >
+          <ul
+            class="ais-CurrentRefinements-list LIST ais-CurrentRefinements-list--noRefinement LISTNOREFINEMENT"
           />
         </div>
       </div>

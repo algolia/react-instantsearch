@@ -34,17 +34,6 @@ describe('Pagination', () => {
         ariaLast: 'Last',
         ariaPage: (currentPage: number) => `Page ${currentPage}`,
       },
-      classNames: {
-        root: 'ais-Pagination',
-        rootNoRefinement: 'ais-Pagination--noRefinement',
-        list: 'ais-Pagination-list',
-        itemFirstPage: 'ais-Pagination-item--firstPage',
-        itemPreviousPage: 'ais-Pagination-item--previousPage',
-        itemPage: 'ais-Pagination-item--page',
-        itemSelected: 'ais-Pagination-item--selected',
-        itemNextPage: 'ais-Pagination-item--nextPage',
-        itemLastPage: 'ais-Pagination-item--lastPage',
-      },
       ...props,
     };
   }
@@ -1030,6 +1019,106 @@ describe('Pagination', () => {
               <a
                 aria-label="Last"
                 class="ais-Pagination-link"
+                href="/?page=2"
+              >
+                ››
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    `);
+  });
+
+  test('allows custom class names', () => {
+    const props = createProps({});
+    const { container } = render(
+      <Pagination
+        {...props}
+        classNames={{
+          root: 'ROOT',
+          rootNoRefinement: 'ROOTNOREFINEMENT',
+          list: 'LIST',
+          item: 'ITEM',
+          itemFirstPage: 'ITEMFIRSTPAGE',
+          itemPreviousPage: 'ITEMPREVIOUSPAGE',
+          itemPage: 'ITEMPAGE',
+          itemSelected: 'ITEMSELECTED',
+          itemDisabled: 'ITEMDISABLED',
+          itemNextPage: 'ITEMNEXTPAGE',
+          itemLastPage: 'ITEMLASTPAGE',
+          link: 'LINK',
+        }}
+      />
+    );
+
+    expect(container).toMatchInlineSnapshot(`
+      <div>
+        <div
+          class="ais-Pagination ROOT"
+        >
+          <ul
+            class="ais-Pagination-list LIST"
+          >
+            <li
+              class="ais-Pagination-item ITEM ais-Pagination-item--disabled ITEMDISABLED ais-Pagination-item--firstPage ITEMFIRSTPAGE"
+            >
+              <span
+                aria-label="First"
+                class="ais-Pagination-link LINK"
+              >
+                ‹‹
+              </span>
+            </li>
+            <li
+              class="ais-Pagination-item ITEM ais-Pagination-item--disabled ITEMDISABLED ais-Pagination-item--previousPage ITEMPREVIOUSPAGE"
+            >
+              <span
+                aria-label="Previous"
+                class="ais-Pagination-link LINK"
+              >
+                ‹
+              </span>
+            </li>
+            <li
+              class="ais-Pagination-item ITEM ais-Pagination-item--page ITEMPAGE ais-Pagination-item--selected ITEMSELECTED"
+            >
+              <a
+                aria-label="1"
+                class="ais-Pagination-link LINK"
+                href="/?page=1"
+              >
+                1
+              </a>
+            </li>
+            <li
+              class="ais-Pagination-item ITEM ais-Pagination-item--page ITEMPAGE"
+            >
+              <a
+                aria-label="2"
+                class="ais-Pagination-link LINK"
+                href="/?page=2"
+              >
+                2
+              </a>
+            </li>
+            <li
+              class="ais-Pagination-item ITEM ais-Pagination-item--nextPage ITEMNEXTPAGE"
+            >
+              <a
+                aria-label="Next"
+                class="ais-Pagination-link LINK"
+                href="/?page=2"
+              >
+                ›
+              </a>
+            </li>
+            <li
+              class="ais-Pagination-item ITEM ais-Pagination-item--lastPage ITEMLASTPAGE"
+            >
+              <a
+                aria-label="Last"
+                class="ais-Pagination-link LINK"
                 href="/?page=2"
               >
                 ››

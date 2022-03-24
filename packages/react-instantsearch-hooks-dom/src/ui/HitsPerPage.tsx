@@ -8,7 +8,7 @@ export type HitsPerPageProps = React.HTMLAttributes<HTMLDivElement> & {
   items: HitsPerPageItem[];
   onChange: (value: number) => void;
   currentValue: number;
-  classNames: HitsPerPageClassNames;
+  classNames?: Partial<HitsPerPageClassNames>;
 };
 
 export type HitsPerPageClassNames = {
@@ -30,13 +30,16 @@ export function HitsPerPage({
   items,
   onChange,
   currentValue,
-  classNames,
+  classNames = {},
   ...props
 }: HitsPerPageProps) {
   return (
-    <div {...props} className={cx(classNames.root, props.className)}>
+    <div
+      {...props}
+      className={cx('ais-HitsPerPage', classNames.root, props.className)}
+    >
       <select
-        className={classNames.select}
+        className={cx('ais-HitsPerPage-select', classNames.select)}
         onChange={(event) => {
           onChange(Number(event.target.value));
         }}
@@ -45,7 +48,7 @@ export function HitsPerPage({
         {items.map((item) => (
           <option
             key={item.value}
-            className={classNames.option}
+            className={cx('ais-HitsPerPage-option', classNames.option)}
             value={item.value}
           >
             {item.label}

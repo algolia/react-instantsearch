@@ -13,11 +13,6 @@ function createProps(
     translations: {
       resetLabel: 'Clear refinements',
     },
-    classNames: {
-      root: 'ais-ClearRefinements',
-      button: 'ais-ClearRefinements-button',
-      buttonDisabled: 'ais-ClearRefinements-button--disabled',
-    },
     ...props,
   };
 }
@@ -135,6 +130,36 @@ describe('ClearRefinements', () => {
         >
           <button
             class="ais-ClearRefinements-button"
+          >
+            Clear refinements
+          </button>
+        </div>
+      </div>
+    `);
+  });
+
+  test('allows custom class names', () => {
+    const props = createProps({});
+    const { container } = render(
+      <ClearRefinements
+        {...props}
+        disabled
+        classNames={{
+          root: 'ROOT',
+          button: 'BUTTON',
+          buttonDisabled: 'DISABLED',
+        }}
+      />
+    );
+
+    expect(container).toMatchInlineSnapshot(`
+      <div>
+        <div
+          class="ais-ClearRefinements ROOT"
+        >
+          <button
+            class="ais-ClearRefinements-button BUTTON ais-ClearRefinements-button--disabled DISABLED"
+            disabled=""
           >
             Clear refinements
           </button>
