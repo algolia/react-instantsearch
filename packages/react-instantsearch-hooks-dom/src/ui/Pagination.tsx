@@ -77,7 +77,7 @@ export type PaginationClassNames = {
    */
   list: string;
   /**
-   * Class names to apply to any item element
+   * Class names to apply to each item element
    */
   item: string;
   /**
@@ -89,7 +89,7 @@ export type PaginationClassNames = {
    */
   itemPreviousPage: string;
   /**
-   * Class names to apply to any page element
+   * Class names to apply to each page element
    */
   itemPage: string;
   /**

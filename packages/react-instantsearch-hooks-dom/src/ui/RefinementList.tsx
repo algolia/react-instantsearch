@@ -29,12 +29,33 @@ export type RefinementListClassNames = {
    * Class names to apply to the root element
    */
   noResults: string;
+  /**
+   * Class names to apply to the list element
+   */
   list: string;
+  /**
+   * Class names to apply to each item element
+   */
   item: string;
+  /**
+   * Class names to apply to each selected item element
+   */
   itemSelected: string;
+  /**
+   * Class names to apply to each label element
+   */
   label: string;
+  /**
+   * Class names to apply to each checkbox element
+   */
   checkbox: string;
+  /**
+   * Class names to apply to the text for each label
+   */
   labelText: string;
+  /**
+   * Class names to apply to the facet count of each item
+   */
   count: string;
 };
 

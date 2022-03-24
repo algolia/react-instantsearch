@@ -24,7 +24,7 @@ export type CurrentRefinementsClassNames = {
    */
   root: string;
   /**
-   * Class names to apply to the root element when there are no refinements
+   * Class names to apply to the root element when there are no refinements possible
    */
   rootNoRefinement: string;
   /**
@@ -32,11 +32,11 @@ export type CurrentRefinementsClassNames = {
    */
   list: string;
   /**
-   * Class names to apply to the list element when there are no refinements
+   * Class names to apply to the list element when there are no refinements possible
    */
   listNoRefinement: string;
   /**
-   * Class names to apply to the each refinement
+   * Class names to apply to each refinement
    */
   item: string;
   /**
