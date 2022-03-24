@@ -55,6 +55,9 @@ function Widget<TWidget extends SingleWidget>({
     case 'RefinementList': {
       return <widget.Component attribute="brand" {...props} />;
     }
+    case 'ToggleRefinement': {
+      return <widget.Component attribute="free_shipping" />;
+    }
     default: {
       return <widget.Component {...props} />;
     }
