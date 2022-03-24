@@ -3,14 +3,15 @@ import React from 'react';
 import { InternalHighlight } from './InternalHighlight';
 import { cx } from './lib/cx';
 
-import type { ClassNames } from '../types';
 import type {
   InternalHighlightProps,
   InternalHighlightClassNames,
 } from './InternalHighlight';
 
 export type HighlightClassNames = InternalHighlightClassNames;
-export type HighlightProps = ClassNames<InternalHighlightProps>;
+export type HighlightProps = Omit<InternalHighlightProps, 'classNames'> & {
+  classNames?: Partial<HighlightClassNames>;
+};
 
 export function Highlight({ classNames = {}, ...props }: HighlightProps) {
   return (

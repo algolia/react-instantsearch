@@ -3,14 +3,15 @@ import React from 'react';
 import { InternalHighlight } from './InternalHighlight';
 import { cx } from './lib/cx';
 
-import type { ClassNames } from '../types';
 import type {
   InternalHighlightProps,
   InternalHighlightClassNames,
 } from './InternalHighlight';
 
 export type SnippetClassNames = InternalHighlightClassNames;
-export type SnippetProps = ClassNames<InternalHighlightProps>;
+export type SnippetProps = Omit<InternalHighlightProps, 'classNames'> & {
+  classNames?: Partial<SnippetClassNames>;
+};
 
 export function Snippet({ classNames = {}, ...props }: SnippetProps) {
   return (
