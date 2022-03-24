@@ -5,14 +5,14 @@ import {
   DynamicWidgets,
   InstantSearch,
   Hits,
+  Highlight,
+  RefinementList,
   SearchBox,
   InstantSearchServerState,
   InstantSearchSSRProvider,
 } from 'react-instantsearch-hooks-dom';
 import { getServerState } from 'react-instantsearch-hooks-server';
-import { Highlight } from '../components/Highlight';
 import { history } from 'instantsearch.js/es/lib/routers/index.js';
-import { RefinementList } from '../components/RefinementList';
 import { Panel } from '../components/Panel';
 
 const client = algoliasearch('latency', '6be0576ff61c053d5f9a3225e2a90f76');
