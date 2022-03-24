@@ -65,51 +65,51 @@ export type PaginationProps = React.HTMLAttributes<HTMLDivElement> & {
 
 export type PaginationClassNames = {
   /**
-   * Class names to apply to the root element.
+   * Class names to apply to the root element
    */
   root: string;
   /**
-   * Class names to apply to the root element, when there's no refinement possible.
+   * Class names to apply to the root element, when there's no refinement possible
    */
   rootNoRefinement: string;
   /**
-   * Class names to apply to the list element.
+   * Class names to apply to the list element
    */
   list: string;
   /**
-   * Class names to apply to any item element.
+   * Class names to apply to any item element
    */
   item: string;
   /**
-   * Class names to apply to the first page element.
+   * Class names to apply to the first page element
    */
   itemFirstPage: string;
   /**
-   * Class names to apply to the previous page element.
+   * Class names to apply to the previous page element
    */
   itemPreviousPage: string;
   /**
-   * Class names to apply to any page element.
+   * Class names to apply to any page element
    */
   itemPage: string;
   /**
-   * Class names to apply to a selected page element.
+   * Class names to apply to a selected page element
    */
   itemSelected: string;
   /**
-   * Class names to apply to a disabled page element.
+   * Class names to apply to a disabled page element
    */
   itemDisabled: string;
   /**
-   * Class names to apply to the next page element.
+   * Class names to apply to the next page element
    */
   itemNextPage: string;
   /**
-   * Class names to apply to the last page element.
+   * Class names to apply to the last page element
    */
   itemLastPage: string;
   /**
-   * Class names to apply to the link element.
+   * Class names to apply to the link element
    */
   link: string;
 };

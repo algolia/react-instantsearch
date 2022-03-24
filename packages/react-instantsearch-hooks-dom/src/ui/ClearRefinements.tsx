@@ -4,7 +4,7 @@ import { cx } from './lib/cx';
 
 export type ClearRefinementsTranslations = {
   /**
-   * The label of the button.
+   * The label of the button
    */
   resetLabel: string;
 };

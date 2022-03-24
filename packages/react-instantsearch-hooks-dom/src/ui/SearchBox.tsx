@@ -29,39 +29,39 @@ export type IconProps = {
 
 export type SearchBoxClassNames = {
   /**
-   * Class names to apply to the root element.
+   * Class names to apply to the root element
    */
   root: string;
   /**
-   * Class names to apply to the form element.
+   * Class names to apply to the form element
    */
   form: string;
   /**
-   * Class names to apply to the input element.
+   * Class names to apply to the input element
    */
   input: string;
   /**
-   * Class names to apply to the submit button.
+   * Class names to apply to the submit button
    */
   submit: string;
   /**
-   * Class names to apply to the reset button.
+   * Class names to apply to the reset button
    */
   reset: string;
   /**
-   * Class names to apply to the loading indicator element.
+   * Class names to apply to the loading indicator element
    */
   loadingIndicator: string;
   /**
-   * Class names to apply to the submit icon.
+   * Class names to apply to the submit icon
    */
   submitIcon: string;
   /**
-   * Class names to apply to the reset icon.
+   * Class names to apply to the reset icon
    */
   resetIcon: string;
   /**
-   * Class names to apply to the loading icon.
+   * Class names to apply to the loading icon
    */
   loadingIcon: string;
 };
