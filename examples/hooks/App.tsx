@@ -7,6 +7,7 @@ import {
   ClearRefinements,
   CurrentRefinements,
   DynamicWidgets,
+  HierarchicalMenu,
   Hits,
   HitsPerPage,
   Pagination,
@@ -17,7 +18,6 @@ import {
 
 import {
   Breadcrumb,
-  HierarchicalMenu,
   Highlight,
   InfiniteHits,
   Menu,
@@ -85,6 +85,7 @@ export function App() {
                   'hierarchicalCategories.lvl2',
                 ]}
                 showMore={true}
+                limit={5}
               />
             </Panel>
             <Panel header="Price">

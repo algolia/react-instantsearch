@@ -1,5 +1,6 @@
 export * from './ClearRefinements';
 export * from './CurrentRefinements';
+export * from './HierarchicalMenu';
 export * from './Highlight';
 export * from './Hits';
 export * from './HitsPerPage';
