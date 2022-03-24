@@ -10,7 +10,6 @@ describe('PoweredBy', () => {
     return {
       url: 'https://www.algolia.com/',
       theme: 'light',
-      classNames: {},
       ...props,
     };
   }

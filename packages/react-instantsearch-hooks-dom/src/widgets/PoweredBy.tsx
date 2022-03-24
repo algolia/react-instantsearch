@@ -3,13 +3,12 @@ import { usePoweredBy } from 'react-instantsearch-hooks';
 
 import { PoweredBy as PoweredByUiComponent } from '../ui/PoweredBy';
 
-import type { ClassNames } from '../types';
 import type { PoweredByProps as PoweredByUiComponentProps } from '../ui/PoweredBy';
 
-export type PoweredByProps = Omit<ClassNames<PoweredByUiComponentProps>, 'url'>;
+export type PoweredByProps = Omit<PoweredByUiComponentProps, 'url'>;
 
-export function PoweredBy({ classNames = {}, ...props }: PoweredByProps) {
+export function PoweredBy(props: PoweredByProps) {
   const { url } = usePoweredBy();
 
-  return <PoweredByUiComponent {...props} url={url} classNames={classNames} />;
+  return <PoweredByUiComponent {...props} url={url} />;
 }

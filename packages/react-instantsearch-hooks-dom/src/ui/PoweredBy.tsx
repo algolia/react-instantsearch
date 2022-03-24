@@ -26,13 +26,13 @@ export type PoweredByClassNames = {
 };
 
 export type PoweredByProps = React.HTMLAttributes<HTMLDivElement> & {
-  classNames: Partial<PoweredByClassNames>;
+  classNames?: Partial<PoweredByClassNames>;
   url: string;
   theme?: 'light' | 'dark';
 };
 
 export function PoweredBy({
-  classNames,
+  classNames = {},
   url,
   theme = 'light',
   ...props
