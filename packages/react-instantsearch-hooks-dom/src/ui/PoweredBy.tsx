@@ -8,6 +8,14 @@ export type PoweredByClassNames = {
    */
   root: string;
   /**
+   * Class names to apply to the root element with the light theme
+   */
+  light: string;
+  /**
+   * Class names to apply to the root element with the dark theme
+   */
+  dark: string;
+  /**
    * Class names to apply to the link element
    */
   link: string;
@@ -34,7 +42,9 @@ export function PoweredBy({
       {...props}
       className={cx(
         'ais-PoweredBy',
-        theme === 'dark' ? 'ais-PoweredBy--dark' : 'ais-PoweredBy--light',
+        theme === 'dark'
+          ? cx('ais-PoweredBy--dark', classNames.dark)
+          : cx('ais-PoweredBy--light', classNames.light),
         classNames.root,
         props.className
       )}

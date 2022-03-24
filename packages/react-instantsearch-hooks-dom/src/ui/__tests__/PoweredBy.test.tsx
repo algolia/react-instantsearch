@@ -101,10 +101,11 @@ describe('PoweredBy', () => {
     `);
   });
 
-  test('customizes the class names', () => {
+  test('customizes the class names with the light theme', () => {
     const props = createProps({
       classNames: {
         root: 'MyCustomPoweredBy',
+        light: 'MyCustomPoweredByLight',
         link: 'MyCustomPoweredByLink',
         logo: 'MyCustomPoweredByLogo',
       },
@@ -114,7 +115,34 @@ describe('PoweredBy', () => {
     expect(container.firstChild).toHaveClass(
       'ais-PoweredBy',
       'ais-PoweredBy--light',
-      'MyCustomPoweredBy'
+      'MyCustomPoweredBy',
+      'MyCustomPoweredByLight'
+    );
+    expect(container.querySelector('.ais-PoweredBy-link')).toHaveClass(
+      'MyCustomPoweredByLink'
+    );
+    expect(container.querySelector('.ais-PoweredBy-logo')).toHaveClass(
+      'MyCustomPoweredByLogo'
+    );
+  });
+
+  test('customizes the class names with the dark theme', () => {
+    const props = createProps({
+      theme: 'dark',
+      classNames: {
+        root: 'MyCustomPoweredBy',
+        dark: 'MyCustomPoweredByDark',
+        link: 'MyCustomPoweredByLink',
+        logo: 'MyCustomPoweredByLogo',
+      },
+    });
+    const { container } = render(<PoweredBy {...props} />);
+
+    expect(container.firstChild).toHaveClass(
+      'ais-PoweredBy',
+      'ais-PoweredBy--dark',
+      'MyCustomPoweredBy',
+      'MyCustomPoweredByDark'
     );
     expect(container.querySelector('.ais-PoweredBy-link')).toHaveClass(
       'MyCustomPoweredByLink'

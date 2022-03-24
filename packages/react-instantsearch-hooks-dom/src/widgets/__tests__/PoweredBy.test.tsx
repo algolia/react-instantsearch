@@ -102,12 +102,13 @@ describe('PoweredBy', () => {
     `);
   });
 
-  test('customizes the class names', async () => {
+  test('customizes the class names with the light theme', async () => {
     const { container } = render(
       <InstantSearchHooksTestWrapper>
         <PoweredBy
           classNames={{
             root: 'MyCustomPoweredBy',
+            light: 'MyCustomPoweredByLight',
             link: 'MyCustomPoweredByLink',
             logo: 'MyCustomPoweredByLogo',
           }}
@@ -120,7 +121,39 @@ describe('PoweredBy', () => {
     expect(container.firstChild).toHaveClass(
       'ais-PoweredBy',
       'ais-PoweredBy--light',
-      'MyCustomPoweredBy'
+      'MyCustomPoweredBy',
+      'MyCustomPoweredByLight'
+    );
+    expect(container.querySelector('.ais-PoweredBy-link')).toHaveClass(
+      'MyCustomPoweredByLink'
+    );
+    expect(container.querySelector('.ais-PoweredBy-logo')).toHaveClass(
+      'MyCustomPoweredByLogo'
+    );
+  });
+
+  test('customizes the class names with the dark theme', async () => {
+    const { container } = render(
+      <InstantSearchHooksTestWrapper>
+        <PoweredBy
+          theme="dark"
+          classNames={{
+            root: 'MyCustomPoweredBy',
+            dark: 'MyCustomPoweredByDark',
+            link: 'MyCustomPoweredByLink',
+            logo: 'MyCustomPoweredByLogo',
+          }}
+        />
+      </InstantSearchHooksTestWrapper>
+    );
+
+    await wait(0);
+
+    expect(container.firstChild).toHaveClass(
+      'ais-PoweredBy',
+      'ais-PoweredBy--dark',
+      'MyCustomPoweredBy',
+      'MyCustomPoweredByDark'
     );
     expect(container.querySelector('.ais-PoweredBy-link')).toHaveClass(
       'MyCustomPoweredByLink'
