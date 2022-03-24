@@ -13,9 +13,7 @@ export type HitsProps<THit extends BaseHit> = Omit<
 > &
   UseHitsProps<THit>;
 
-export function Hits<THit extends BaseHit = BaseHit>({
-  ...props
-}: HitsProps<THit>) {
+export function Hits<THit extends BaseHit = BaseHit>(props: HitsProps<THit>) {
   const { hits } = useHits<THit>(props, { $$widgetType: 'ais.hits' });
 
   return <HitsUiComponent {...props} hits={hits} />;
