@@ -24,11 +24,11 @@ export type ClearRefinementsClassNames = {
    */
   root: string;
   /**
-   * Class names to apply to the clear refinements button
+   * Class names to apply to the button
    */
   button: string;
   /**
-   * Class names to apply to the clear refinements button when it's disabled
+   * Class names to apply to the button when it's disabled
    */
   buttonDisabled: string;
 };

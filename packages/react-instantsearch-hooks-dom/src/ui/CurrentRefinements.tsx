@@ -24,7 +24,7 @@ export type CurrentRefinementsClassNames = {
    */
   root: string;
   /**
-   * Class names to apply to the root element when there is no refinement
+   * Class names to apply to the root element when there are no refinements
    */
   rootNoRefinement: string;
   /**
@@ -32,27 +32,27 @@ export type CurrentRefinementsClassNames = {
    */
   list: string;
   /**
-   * Class names to apply to the list element when there is no refinement
+   * Class names to apply to the list element when there are no refinements
    */
   listNoRefinement: string;
   /**
-   * Class names to apply to the individual refinement
+   * Class names to apply to the each refinement
    */
   item: string;
   /**
-   * Class names to apply to the individual refinement's label
+   * Class names to apply to the label of each refinement
    */
   label: string;
   /**
-   * Class names to apply to the individual refinement value
+   * Class names to apply to the container of each refinement's value
    */
   category: string;
   /**
-   * Class names to apply to the individual refinement value's label
+   * Class names to apply to the text element of each refinement's value
    */
   categoryLabel: string;
   /**
-   * Class names to apply to the remove button for a refinement
+   * Class names to apply to the each refinement's delete button
    */
   delete: string;
 };
@@ -70,8 +70,7 @@ export function CurrentRefinements({
       className={cx(
         'ais-CurrentRefinements',
         classNames.root,
-        !hasRefinements && 'ais-CurrentRefinements--noRefinement',
-        !hasRefinements && classNames.rootNoRefinement,
+        !hasRefinements && cx('ais-CurrentRefinements--noRefinement', classNames.rootNoRefinement),
         props.className
       )}
     >
@@ -79,8 +78,7 @@ export function CurrentRefinements({
         className={cx(
           'ais-CurrentRefinements-list',
           classNames.list,
-          !hasRefinements && 'ais-CurrentRefinements-list--noRefinement',
-          !hasRefinements && classNames.listNoRefinement
+          !hasRefinements && cx('ais-CurrentRefinements-list--noRefinement', classNames.listNoRefinement),
         )}
       >
         {items.map((item) => (
