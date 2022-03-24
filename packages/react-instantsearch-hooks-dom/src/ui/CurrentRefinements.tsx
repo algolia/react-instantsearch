@@ -70,7 +70,11 @@ export function CurrentRefinements({
       className={cx(
         'ais-CurrentRefinements',
         classNames.root,
-        !hasRefinements && cx('ais-CurrentRefinements--noRefinement', classNames.rootNoRefinement),
+        !hasRefinements &&
+          cx(
+            'ais-CurrentRefinements--noRefinement',
+            classNames.rootNoRefinement
+          ),
         props.className
       )}
     >
@@ -78,7 +82,11 @@ export function CurrentRefinements({
         className={cx(
           'ais-CurrentRefinements-list',
           classNames.list,
-          !hasRefinements && cx('ais-CurrentRefinements-list--noRefinement', classNames.listNoRefinement),
+          !hasRefinements &&
+            cx(
+              'ais-CurrentRefinements-list--noRefinement',
+              classNames.listNoRefinement
+            )
         )}
       >
         {items.map((item) => (
