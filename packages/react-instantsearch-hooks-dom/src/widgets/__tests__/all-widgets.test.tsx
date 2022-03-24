@@ -86,6 +86,11 @@ describe('widgets', () => {
           "name": "Pagination",
         },
         Object {
+          "$$type": "ais.refinementList",
+          "$$widgetType": "ais.refinementList",
+          "name": "RefinementList",
+        },
+        Object {
           "$$type": "ais.searchBox",
           "$$widgetType": "ais.searchBox",
           "name": "SearchBox",

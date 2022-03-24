@@ -13,7 +13,8 @@ import type { ComponentProps } from 'react';
 
 type AllWidgets = typeof widgets;
 // We only track widgets that use connectors.
-type RegularWidgets = Omit<typeof widgets, 'Highlight' | 'Snippet'>;
+const NON_WIDGETS = ['Highlight', 'Snippet', 'PoweredBy'] as const;
+type RegularWidgets = Omit<typeof widgets, typeof NON_WIDGETS[number]>;
 
 export type SingleWidget = {
   [name in keyof AllWidgets]: {
@@ -51,6 +52,9 @@ function Widget<TWidget extends SingleWidget>({
         />
       );
     }
+    case 'RefinementList': {
+      return <widget.Component attribute="brand" {...props} />;
+    }
     default: {
       return <widget.Component {...props} />;
     }
@@ -69,7 +73,8 @@ export function getAllInstantSearchWidgets() {
       ): regularWidget is [
         keyof RegularWidgets,
         RegularWidgets[keyof RegularWidgets]
-      ] => ['Highlight', 'Snippet'].includes(regularWidget[0]) === false
+      ] =>
+        (NON_WIDGETS as readonly string[]).includes(regularWidget[0]) === false
     )
     .map(([name, Component]) => {
       let instantSearchInstance: InstantSearchClass | undefined = undefined;
