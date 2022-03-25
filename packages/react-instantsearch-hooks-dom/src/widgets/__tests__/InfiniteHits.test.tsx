@@ -323,15 +323,15 @@ describe('InfiniteHits', () => {
     expect(
       container.querySelector<HTMLButtonElement>(
         '.ais-InfiniteHits-loadPrevious'
-      )!.disabled
-    ).toBe(true);
+      )
+    ).toBeDisabled();
 
     expect(
       container.querySelector<HTMLButtonElement>(
         '.ais-InfiniteHits-loadPrevious'
-      )!.className
-    ).toBe(
-      'ais-InfiniteHits-loadPrevious ais-InfiniteHits-loadPrevious--disabled'
+      )
+    ).toHaveClass(
+      'ais-InfiniteHits-loadPrevious', 'ais-InfiniteHits-loadPrevious--disabled'
     );
   });
 
@@ -348,13 +348,11 @@ describe('InfiniteHits', () => {
     await wait(0);
 
     expect(
-      container.querySelector<HTMLButtonElement>('.ais-InfiniteHits-loadMore')!
-        .disabled
-    ).toBe(true);
+      container.querySelector<HTMLButtonElement>('.ais-InfiniteHits-loadMore')
+    ).toBeDisabled();
 
     expect(
-      container.querySelector<HTMLButtonElement>('.ais-InfiniteHits-loadMore')!
-        .className
-    ).toBe('ais-InfiniteHits-loadMore ais-InfiniteHits-loadMore--disabled');
+      container.querySelector<HTMLButtonElement>('.ais-InfiniteHits-loadMore')
+    ).toHaveClass('ais-InfiniteHits-loadMore', 'ais-InfiniteHits-loadMore--disabled');
   });
 });
