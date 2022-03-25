@@ -9,10 +9,7 @@ import {
 import type { HostOptions } from '@algolia/transporter';
 import { createNullLogger } from '@algolia/logger-common';
 import { createNodeHttpRequester } from '@algolia/requester-node-http';
-import type {
-  // @ts-ignore Search client v3 doesn't have this type and errors on the CI v3 job
-  SearchClient,
-} from 'algoliasearch/lite';
+import type algoliasearch from 'algoliasearch';
 import {
   createSingleSearchResponse,
   createMultiSearchResponse,
@@ -23,10 +20,12 @@ type OverrideKeys<TTarget, TOptions> = TOptions extends Record<string, never>
   ? TTarget
   : Omit<TTarget, keyof TOptions> & TOptions;
 
-export function createSearchClient<
-  TOptions extends Partial<SearchClient> = Record<string, never>
->(options: TOptions = {} as TOptions): OverrideKeys<SearchClient, TOptions> {
-  const appId = options.appId || 'appId';
+type SearchClient = ReturnType<typeof algoliasearch>;
+
+export function createSearchClient<TOptions extends Partial<SearchClient>>(
+  options: TOptions
+): OverrideKeys<SearchClient, TOptions> {
+  const appId = (options as Record<string, unknown>).appId || 'appId';
   const transporter = createTransporter({
     timeouts: {
       connect: 2,
