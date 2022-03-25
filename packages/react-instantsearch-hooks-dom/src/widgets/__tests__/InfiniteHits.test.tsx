@@ -331,7 +331,8 @@ describe('InfiniteHits', () => {
         '.ais-InfiniteHits-loadPrevious'
       )
     ).toHaveClass(
-      'ais-InfiniteHits-loadPrevious', 'ais-InfiniteHits-loadPrevious--disabled'
+      'ais-InfiniteHits-loadPrevious',
+      'ais-InfiniteHits-loadPrevious--disabled'
     );
   });
 
@@ -353,6 +354,9 @@ describe('InfiniteHits', () => {
 
     expect(
       container.querySelector<HTMLButtonElement>('.ais-InfiniteHits-loadMore')
-    ).toHaveClass('ais-InfiniteHits-loadMore', 'ais-InfiniteHits-loadMore--disabled');
+    ).toHaveClass(
+      'ais-InfiniteHits-loadMore',
+      'ais-InfiniteHits-loadMore--disabled'
+    );
   });
 });
