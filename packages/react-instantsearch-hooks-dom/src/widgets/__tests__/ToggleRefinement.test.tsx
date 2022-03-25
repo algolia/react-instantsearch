@@ -10,7 +10,7 @@ describe('ToggleRefinement', () => {
   test('renders with props', async () => {
     const { container } = render(
       <InstantSearchHooksTestWrapper>
-        <ToggleRefinement attribute="free_shipping" label="Free shipping" />
+        <ToggleRefinement attribute="free_shipping" />
       </InstantSearchHooksTestWrapper>
     );
 
@@ -31,12 +31,26 @@ describe('ToggleRefinement', () => {
             <span
               class="ais-ToggleRefinement-labelText"
             >
-              Free shipping
+              free_shipping
             </span>
           </label>
         </div>
       </div>
     `);
+  });
+
+  test('customizes the label', async () => {
+    const { container } = render(
+      <InstantSearchHooksTestWrapper>
+        <ToggleRefinement attribute="free_shipping" label="Free shipping" />
+      </InstantSearchHooksTestWrapper>
+    );
+
+    await wait(0);
+
+    expect(
+      container.querySelector('.ais-ToggleRefinement-labelText')
+    ).toHaveTextContent('Free shipping');
   });
 
   test('renders checked when the attribute is refined', async () => {
@@ -50,7 +64,7 @@ describe('ToggleRefinement', () => {
           },
         }}
       >
-        <ToggleRefinement attribute="free_shipping" label="Free shipping" />
+        <ToggleRefinement attribute="free_shipping" />
       </InstantSearchHooksTestWrapper>
     );
 
@@ -68,7 +82,7 @@ describe('ToggleRefinement', () => {
 
     const { container } = render(
       <InstantSearchHooksTestWrapper searchClient={client}>
-        <ToggleRefinement attribute="free_shipping" label="Free shipping" />
+        <ToggleRefinement attribute="free_shipping" />
       </InstantSearchHooksTestWrapper>
     );
 
@@ -123,12 +137,7 @@ describe('ToggleRefinement', () => {
 
     const { container } = render(
       <InstantSearchHooksTestWrapper searchClient={client}>
-        <ToggleRefinement
-          attribute="free_shipping"
-          label="Free shipping"
-          on="yes"
-          off="no"
-        />
+        <ToggleRefinement attribute="free_shipping" on="yes" off="no" />
       </InstantSearchHooksTestWrapper>
     );
 
@@ -178,7 +187,6 @@ describe('ToggleRefinement', () => {
       <InstantSearchHooksTestWrapper>
         <ToggleRefinement
           attribute="free_shipping"
-          label="Free shipping"
           classNames={{
             root: 'ROOT',
             label: 'LABEL',
@@ -206,7 +214,7 @@ describe('ToggleRefinement', () => {
             <span
               class="ais-ToggleRefinement-labelText LABELTEXT"
             >
-              Free shipping
+              free_shipping
             </span>
           </label>
         </div>
@@ -219,7 +227,6 @@ describe('ToggleRefinement', () => {
       <InstantSearchHooksTestWrapper>
         <ToggleRefinement
           attribute="free_shipping"
-          label="Free shipping"
           className="MyToggleRefinement"
           title="Some custom title"
         />
