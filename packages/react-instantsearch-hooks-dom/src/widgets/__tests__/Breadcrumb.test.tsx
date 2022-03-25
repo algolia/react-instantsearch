@@ -24,21 +24,22 @@ describe('Breadcrumb', () => {
   };
   const hierarchicalAttributes = Object.keys(hierarchicalFacets);
 
-  const search = jest.fn((requests) =>
-    Promise.resolve(
-      createMultiSearchResponse(
-        ...requests.map(() =>
-          createSingleSearchResponse({
-            facets: hierarchicalFacets,
-          })
+  const searchClient = createSearchClient({
+    search: jest.fn((requests) =>
+      Promise.resolve(
+        createMultiSearchResponse(
+          ...requests.map(() =>
+            createSingleSearchResponse({
+              facets: hierarchicalFacets,
+            })
+          )
         )
       )
-    )
-  );
-  const searchClient = createSearchClient({ search });
+    ),
+  });
 
   beforeEach(() => {
-    search.mockClear();
+    searchClient.search.mockClear();
   });
 
   test('renders with attributes', async () => {
@@ -245,7 +246,7 @@ describe('Breadcrumb', () => {
 
     await wait(0);
 
-    expect(search).toHaveBeenCalledTimes(1);
+    expect(searchClient.search).toHaveBeenCalledTimes(1);
     expect(container).toMatchInlineSnapshot(`
       <div>
         <div
@@ -300,8 +301,8 @@ describe('Breadcrumb', () => {
 
     await wait(0);
 
-    expect(search).toHaveBeenCalledTimes(2);
-    expect(search).toHaveBeenLastCalledWith(
+    expect(searchClient.search).toHaveBeenCalledTimes(2);
+    expect(searchClient.search).toHaveBeenLastCalledWith(
       expect.arrayContaining([
         expect.objectContaining({
           params: expect.objectContaining({
