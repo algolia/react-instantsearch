@@ -2146,7 +2146,7 @@ describe('Pagination', () => {
               class="ais-Pagination-item ais-Pagination-item--page ITEMPAGE ais-Pagination-item--selected ITEMSELECTED"
             >
               <a
-                aria-label="1"
+                aria-label="Page 1"
                 class="ais-Pagination-link"
                 href="#"
               >
