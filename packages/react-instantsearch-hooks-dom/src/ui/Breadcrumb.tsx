@@ -3,18 +3,13 @@ import React from 'react';
 import { cx } from './lib/cx';
 import { isModifierClick } from './lib/isModifierClick';
 
-import type { CreateURL } from 'instantsearch.js';
-import type { BreadcrumbConnectorParamsItem as BreadcrumbItem } from 'instantsearch.js/es/connectors/breadcrumb/connectBreadcrumb';
+import type { useBreadcrumb } from 'react-instantsearch-hooks';
 
 export type BreadcrumbTranslations = {
   /**
    * The label of the root element.
    */
   root: string;
-  /**
-   * The character used to separate the elements of the breadcrumb.
-   */
-  separator: string;
 };
 
 export type BreadcrumbClassNames = {
@@ -48,14 +43,16 @@ export type BreadcrumbClassNames = {
   link: string;
 };
 
-export type BreadcrumbProps = React.HTMLAttributes<HTMLDivElement> & {
-  classNames?: Partial<BreadcrumbClassNames>;
-  items: BreadcrumbItem[];
-  hasItems: boolean;
-  createURL: CreateURL<BreadcrumbItem['value']>;
-  onNavigate: (value: BreadcrumbItem['value']) => void;
-  translations: BreadcrumbTranslations;
-};
+type UseBreadcrumbRenderState = ReturnType<typeof useBreadcrumb>;
+
+export type BreadcrumbProps = React.HTMLAttributes<HTMLDivElement> &
+  Pick<UseBreadcrumbRenderState, 'items' | 'createURL'> & {
+    classNames?: Partial<BreadcrumbClassNames>;
+    hasItems: boolean;
+    onNavigate: UseBreadcrumbRenderState['refine'];
+    separator?: string;
+    translations: BreadcrumbTranslations;
+  };
 
 export function Breadcrumb({
   classNames = {},
@@ -63,11 +60,12 @@ export function Breadcrumb({
   hasItems,
   createURL,
   onNavigate,
+  separator = '>',
   translations,
   ...props
 }: BreadcrumbProps) {
   const handleClick =
-    (value: BreadcrumbItem['value']) =>
+    (value: BreadcrumbProps['items'][0]['value']) =>
     (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
       if (!isModifierClick(event)) {
         event.preventDefault();
@@ -121,7 +119,7 @@ export function Breadcrumb({
                 aria-hidden="true"
                 className={cx('ais-Breadcrumb-separator', classNames.separator)}
               >
-                {translations.separator}
+                {separator}
               </span>
 
               {isLast ? (

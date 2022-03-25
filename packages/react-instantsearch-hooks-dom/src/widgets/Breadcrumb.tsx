@@ -10,7 +10,7 @@ export type BreadcrumbProps = Omit<
   BreadcrumbUiProps,
   'items' | 'hasItems' | 'createURL' | 'onNavigate' | 'translations'
 > &
-  UseBreadcrumbProps;
+  Omit<UseBreadcrumbProps, 'separator'>;
 
 export function Breadcrumb({
   attributes,
@@ -23,7 +23,6 @@ export function Breadcrumb({
     {
       attributes,
       rootPath,
-      separator,
       transformItems,
     },
     { $$widgetType: 'ais.breadcrumb' }
@@ -36,9 +35,9 @@ export function Breadcrumb({
       items={items}
       hasItems={canRefine}
       onNavigate={refine}
+      separator={separator}
       translations={{
         root: 'Home',
-        separator: '>',
       }}
     />
   );

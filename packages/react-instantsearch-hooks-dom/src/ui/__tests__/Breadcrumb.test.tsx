@@ -22,9 +22,9 @@ describe('Breadcrumb', () => {
       hasItems: true,
       createURL,
       onNavigate,
+      separator: '>',
       translations: {
         root: 'Home',
-        separator: '>',
         ...translations,
       },
       ...props,
@@ -90,7 +90,6 @@ describe('Breadcrumb', () => {
     const props = createProps({
       translations: {
         root: 'Index',
-        separator: '/',
       },
     });
     const { container } = render(<Breadcrumb {...props} />);
@@ -120,7 +119,7 @@ describe('Breadcrumb', () => {
                 aria-hidden="true"
                 class="ais-Breadcrumb-separator"
               >
-                /
+                &gt;
               </span>
               <a
                 class="ais-Breadcrumb-link"
@@ -136,13 +135,36 @@ describe('Breadcrumb', () => {
                 aria-hidden="true"
                 class="ais-Breadcrumb-separator"
               >
-                /
+                &gt;
               </span>
               Home audio
             </li>
           </ul>
         </div>
       </div>
+    `);
+  });
+
+  test('renders with custom separator', () => {
+    const props = createProps({ separator: '/' });
+    const { container } = render(<Breadcrumb {...props} />);
+
+    expect(container.querySelectorAll('.ais-Breadcrumb-separator'))
+      .toMatchInlineSnapshot(`
+      NodeList [
+        <span
+          aria-hidden="true"
+          class="ais-Breadcrumb-separator"
+        >
+          /
+        </span>,
+        <span
+          aria-hidden="true"
+          class="ais-Breadcrumb-separator"
+        >
+          /
+        </span>,
+      ]
     `);
   });
 
