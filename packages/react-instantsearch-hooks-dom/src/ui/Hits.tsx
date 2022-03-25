@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { DefaultHitComponent } from '../internal/DefaultHitComponent';
+
 import { cx } from './lib/cx';
 
 import type { Hit } from 'instantsearch.js';
@@ -9,14 +11,6 @@ export type HitsProps<THit> = React.HTMLAttributes<HTMLDivElement> & {
   hitComponent?: React.JSXElementConstructor<{ hit: THit }>;
   classNames?: Partial<HitsClassNames>;
 };
-
-function DefaultHitComponent({ hit }: { hit: Hit }) {
-  return (
-    <div style={{ wordBreak: 'break-all' }}>
-      {JSON.stringify(hit).slice(0, 100)}…
-    </div>
-  );
-}
 
 export type HitsClassNames = {
   /**
