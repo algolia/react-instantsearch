@@ -86,6 +86,11 @@ describe('widgets', () => {
           "name": "HitsPerPage",
         },
         Object {
+          "$$type": "ais.infiniteHits",
+          "$$widgetType": "ais.infiniteHits",
+          "name": "InfiniteHits",
+        },
+        Object {
           "$$type": "ais.pagination",
           "$$widgetType": "ais.pagination",
           "name": "Pagination",
@@ -104,6 +109,11 @@ describe('widgets', () => {
           "$$type": "ais.sortBy",
           "$$widgetType": "ais.sortBy",
           "name": "SortBy",
+        },
+        Object {
+          "$$type": "ais.toggleRefinement",
+          "$$widgetType": "ais.toggleRefinement",
+          "name": "ToggleRefinement",
         },
       ]
     `);

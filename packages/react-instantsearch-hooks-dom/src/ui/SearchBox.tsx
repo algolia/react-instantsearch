@@ -2,27 +2,6 @@ import React from 'react';
 
 import { cx } from './lib/cx';
 
-import type {
-  ChangeEvent,
-  FormEvent,
-  RefObject,
-  JSXElementConstructor,
-} from 'react';
-
-export type SearchBoxProps = React.HTMLAttributes<HTMLDivElement> & {
-  inputRef: RefObject<HTMLInputElement>;
-  isSearchStalled: boolean;
-  onChange(event: ChangeEvent): void;
-  onReset(event: FormEvent): void;
-  onSubmit?(event: FormEvent): void;
-  placeholder?: string;
-  value: string;
-  resetIconComponent?: JSXElementConstructor<IconProps>;
-  submitIconComponent?: JSXElementConstructor<IconProps>;
-  loadingIconComponent?: JSXElementConstructor<IconProps>;
-  classNames?: Partial<SearchBoxClassNames>;
-};
-
 export type IconProps = {
   classNames: Partial<SearchBoxClassNames>;
 };
@@ -65,6 +44,34 @@ export type SearchBoxClassNames = {
    */
   loadingIcon: string;
 };
+
+export type SearchBoxTranslations = {
+  /**
+   * The alternative text of the submit button.
+   */
+  submitTitle: string;
+  /**
+   * The alternative text of the reset button.
+   */
+  resetTitle: string;
+};
+
+export type SearchBoxProps = React.HTMLAttributes<HTMLDivElement> &
+  Pick<React.HTMLAttributes<HTMLFormElement>, 'onSubmit'> &
+  Required<Pick<React.HTMLAttributes<HTMLFormElement>, 'onReset'>> &
+  Pick<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    'placeholder' | 'onChange'
+  > & {
+    inputRef: React.RefObject<HTMLInputElement>;
+    isSearchStalled: boolean;
+    value: string;
+    resetIconComponent?: React.JSXElementConstructor<IconProps>;
+    submitIconComponent?: React.JSXElementConstructor<IconProps>;
+    loadingIconComponent?: React.JSXElementConstructor<IconProps>;
+    classNames?: Partial<SearchBoxClassNames>;
+    translations: SearchBoxTranslations;
+  };
 
 function DefaultSubmitIcon({ classNames }: IconProps) {
   return (
@@ -132,9 +139,10 @@ export function SearchBox({
   submitIconComponent: SubmitIcon = DefaultSubmitIcon,
   loadingIconComponent: LoadingIcon = DefaultLoadingIcon,
   classNames = {},
+  translations,
   ...props
 }: SearchBoxProps) {
-  function handleSubmit(event: FormEvent) {
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     event.stopPropagation();
 
@@ -147,7 +155,7 @@ export function SearchBox({
     }
   }
 
-  function handleReset(event: FormEvent) {
+  function handleReset(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     event.stopPropagation();
 
@@ -186,14 +194,14 @@ export function SearchBox({
         <button
           className={cx('ais-SearchBox-submit', classNames.submit)}
           type="submit"
-          title="Submit the search query."
+          title={translations.submitTitle}
         >
           <SubmitIcon classNames={classNames} />
         </button>
         <button
           className={cx('ais-SearchBox-reset', classNames.reset)}
           type="reset"
-          title="Clear the search query."
+          title={translations.resetTitle}
           hidden={value.length === 0 && !isSearchStalled}
         >
           <ResetIcon classNames={classNames} />

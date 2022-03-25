@@ -55,8 +55,12 @@ function Widget<TWidget extends SingleWidget>({
         />
       );
     }
+    case 'ToggleRefinement':
     case 'RefinementList': {
       return <widget.Component attribute="brand" {...props} />;
+    }
+    case 'SearchBox': {
+      return <widget.Component onSubmit={undefined} {...props} />;
     }
     default: {
       return <widget.Component {...props} />;
@@ -93,7 +97,7 @@ export function getAllInstantSearchWidgets() {
           }}
         >
           <InstantSearch
-            searchClient={createSearchClient()}
+            searchClient={createSearchClient({})}
             indexName="indexName"
           >
             <Widget widget={widget} />
@@ -122,7 +126,7 @@ export function getAllWidgets() {
       name,
       Component: (props: Omit<ComponentProps<typeof Widget>, 'widget'>) => (
         <InstantSearch
-          searchClient={createSearchClient()}
+          searchClient={createSearchClient({})}
           indexName="indexName"
         >
           <Widget {...props} widget={widget} />

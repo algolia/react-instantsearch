@@ -11,23 +11,23 @@ import {
   Highlight,
   Hits,
   HitsPerPage,
+  InfiniteHits,
   Pagination,
   RefinementList,
   PoweredBy,
   SearchBox,
   SortBy,
+  ToggleRefinement,
 } from 'react-instantsearch-hooks-dom';
 
 import {
   HierarchicalMenu,
-  InfiniteHits,
   Menu,
   NumericMenu,
   Panel,
   QueryRuleContext,
   QueryRuleCustomData,
   RangeInput,
-  ToggleRefinement,
 } from './components';
 import { Tab, Tabs } from './components/layout';
 
@@ -102,7 +102,10 @@ export function App() {
               />
             </Panel>
             <Panel header="Free Shipping">
-              <ToggleRefinement attribute="free_shipping" />
+              <ToggleRefinement
+                attribute="free_shipping"
+                label="Free shipping"
+              />
             </Panel>
           </DynamicWidgets>
         </div>
