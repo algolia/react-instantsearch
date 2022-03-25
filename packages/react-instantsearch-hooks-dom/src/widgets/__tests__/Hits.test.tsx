@@ -6,7 +6,7 @@ import {
   createMultiSearchResponse,
   createSingleSearchResponse,
 } from '../../../../../test/mock';
-import { InstantSearchHooksTestWrapper } from '../../../../../test/utils';
+import { InstantSearchHooksTestWrapper, wait } from '../../../../../test/utils';
 import { Hits } from '../Hits';
 
 describe('Hits', () => {
@@ -111,9 +111,23 @@ describe('Hits', () => {
     );
   });
 
-  test('accepts custom class names', () => {
+  test('accepts custom class names', async () => {
+    const client = createSearchClient({
+      search: (requests) =>
+        Promise.resolve(
+          createMultiSearchResponse(
+            ...requests.map((request) =>
+              createSingleSearchResponse({
+                hits: [{ objectID: '1' }, { objectID: '2' }, { objectID: '3' }],
+                index: request.indexName,
+              })
+            )
+          )
+        ),
+    });
+
     const { container } = render(
-      <InstantSearchHooksTestWrapper>
+      <InstantSearchHooksTestWrapper searchClient={client}>
         <Hits
           className="MyHits"
           classNames={{
@@ -125,6 +139,8 @@ describe('Hits', () => {
       </InstantSearchHooksTestWrapper>
     );
 
+    await wait(0);
+
     expect(container).toMatchInlineSnapshot(`
       <div>
         <div
@@ -132,7 +148,38 @@ describe('Hits', () => {
         >
           <ol
             class="ais-Hits-list LIST"
-          />
+          >
+            <li
+              class="ais-Hits-item ITEM"
+            >
+              <div
+                style="word-break: break-all;"
+              >
+                {"objectID":"1","__position":1}
+                …
+              </div>
+            </li>
+            <li
+              class="ais-Hits-item ITEM"
+            >
+              <div
+                style="word-break: break-all;"
+              >
+                {"objectID":"2","__position":2}
+                …
+              </div>
+            </li>
+            <li
+              class="ais-Hits-item ITEM"
+            >
+              <div
+                style="word-break: break-all;"
+              >
+                {"objectID":"3","__position":3}
+                …
+              </div>
+            </li>
+          </ol>
         </div>
       </div>
     `);
