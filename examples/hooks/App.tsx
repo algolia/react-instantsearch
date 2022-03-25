@@ -9,7 +9,6 @@ import {
   DynamicWidgets,
   Highlight,
   Hits,
-  Highlight,
   HitsPerPage,
   Pagination,
   RefinementList,
