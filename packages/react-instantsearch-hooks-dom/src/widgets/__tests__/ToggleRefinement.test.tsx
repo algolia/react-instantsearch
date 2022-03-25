@@ -78,7 +78,7 @@ describe('ToggleRefinement', () => {
   });
 
   test('toggles when clicking the checkbox', async () => {
-    const client = createSearchClient();
+    const client = createSearchClient({});
 
     const { container } = render(
       <InstantSearchHooksTestWrapper searchClient={client}>
@@ -133,7 +133,7 @@ describe('ToggleRefinement', () => {
   });
 
   test('changes the value to filter on and off', async () => {
-    const client = createSearchClient();
+    const client = createSearchClient({});
 
     const { container } = render(
       <InstantSearchHooksTestWrapper searchClient={client}>
