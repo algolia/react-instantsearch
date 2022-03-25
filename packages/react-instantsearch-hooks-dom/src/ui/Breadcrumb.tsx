@@ -17,7 +17,39 @@ export type BreadcrumbTranslations = {
   separator: string;
 };
 
+export type BreadcrumbClassNames = {
+  /**
+   * Class names to apply to the root element
+   */
+  root: string;
+  /**
+   * Class names to apply to the root element, when there's no refinement possible
+   */
+  rootNoRefinement: string;
+  /**
+   * Class names to apply to the list element
+   */
+  list: string;
+  /**
+   * Class names to apply to each item element
+   */
+  item: string;
+  /**
+   * Class names to apply to a selected breadcrumb element
+   */
+  itemSelected: string;
+  /**
+   * Class names to apply to the separator between breadcrumb elements
+   */
+  separator: string;
+  /**
+   * Class names to apply to the link element
+   */
+  link: string;
+};
+
 export type BreadcrumbProps = React.HTMLAttributes<HTMLDivElement> & {
+  classNames?: Partial<BreadcrumbClassNames>;
   items: BreadcrumbItem[];
   hasItems: boolean;
   createURL: CreateURL<BreadcrumbItem['value']>;
@@ -26,6 +58,7 @@ export type BreadcrumbProps = React.HTMLAttributes<HTMLDivElement> & {
 };
 
 export function Breadcrumb({
+  classNames = {},
   items = [],
   hasItems,
   createURL,
@@ -47,21 +80,25 @@ export function Breadcrumb({
       {...props}
       className={cx(
         'ais-Breadcrumb',
-        !hasItems && 'ais-Breadcrumb--noRefinement',
+        classNames.root,
+        !hasItems &&
+          cx('ais-Breadcrumb--noRefinement', classNames.rootNoRefinement),
         props.className
       )}
     >
-      <ul className="ais-Breadcrumb-list">
+      <ul className={cx('ais-Breadcrumb-list', classNames.list)}>
         <li
           className={cx(
             'ais-Breadcrumb-item',
-            !hasItems && 'ais-Breadcrumb-item--selected'
+            classNames.item,
+            !hasItems &&
+              cx('ais-Breadcrumb-item--selected', classNames.itemSelected)
           )}
         >
           <a
             href={createURL(null)}
             onClick={handleClick(null)}
-            className="ais-Breadcrumb-link"
+            className={cx('ais-Breadcrumb-link', classNames.link)}
           >
             {translations.root}
           </a>
@@ -75,10 +112,15 @@ export function Breadcrumb({
               key={index}
               className={cx(
                 'ais-Breadcrumb-item',
-                isLast && 'ais-Breadcrumb-item--selected'
+                classNames.item,
+                isLast &&
+                  cx('ais-Breadcrumb-item--selected', classNames.itemSelected)
               )}
             >
-              <span aria-hidden="true" className="ais-Breadcrumb-separator">
+              <span
+                aria-hidden="true"
+                className={cx('ais-Breadcrumb-separator', classNames.separator)}
+              >
                 {translations.separator}
               </span>
 
@@ -86,7 +128,7 @@ export function Breadcrumb({
                 item.label
               ) : (
                 <a
-                  className="ais-Breadcrumb-link"
+                  className={cx('ais-Breadcrumb-link', classNames.link)}
                   href={createURL(item.value)}
                   onClick={handleClick(item.value)}
                 >

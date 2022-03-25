@@ -165,49 +165,65 @@ describe('Breadcrumb', () => {
       <Breadcrumb className="MyBreadcrumb" {...props} />
     );
 
-    expect(document.querySelector('.ais-Breadcrumb')).toHaveClass(
+    expect(container.querySelector('.ais-Breadcrumb')).toHaveClass(
       'MyBreadcrumb'
     );
+  });
+
+  test('allows custom class names', () => {
+    const props = createProps({
+      classNames: {
+        root: 'ROOT',
+        rootNoRefinement: 'ROOTNOREFINEMENT',
+        list: 'LIST',
+        item: 'ITEM',
+        itemSelected: 'ITEMSELECTED',
+        separator: 'SEPARATOR',
+        link: 'LINK',
+      },
+    });
+    const { container } = render(<Breadcrumb {...props} />);
+
     expect(container).toMatchInlineSnapshot(`
       <div>
         <div
-          class="ais-Breadcrumb MyBreadcrumb"
+          class="ais-Breadcrumb ROOT"
         >
           <ul
-            class="ais-Breadcrumb-list"
+            class="ais-Breadcrumb-list LIST"
           >
             <li
-              class="ais-Breadcrumb-item"
+              class="ais-Breadcrumb-item ITEM"
             >
               <a
-                class="ais-Breadcrumb-link"
+                class="ais-Breadcrumb-link LINK"
                 href="#null"
               >
                 Home
               </a>
             </li>
             <li
-              class="ais-Breadcrumb-item"
+              class="ais-Breadcrumb-item ITEM"
             >
               <span
                 aria-hidden="true"
-                class="ais-Breadcrumb-separator"
+                class="ais-Breadcrumb-separator SEPARATOR"
               >
                 &gt;
               </span>
               <a
-                class="ais-Breadcrumb-link"
+                class="ais-Breadcrumb-link LINK"
                 href="#Audio"
               >
                 Audio
               </a>
             </li>
             <li
-              class="ais-Breadcrumb-item ais-Breadcrumb-item--selected"
+              class="ais-Breadcrumb-item ITEM ais-Breadcrumb-item--selected ITEMSELECTED"
             >
               <span
                 aria-hidden="true"
-                class="ais-Breadcrumb-separator"
+                class="ais-Breadcrumb-separator SEPARATOR"
               >
                 &gt;
               </span>
@@ -225,59 +241,9 @@ describe('Breadcrumb', () => {
       <Breadcrumb title="Some custom title" {...props} />
     );
 
-    expect(document.querySelector('.ais-Breadcrumb')).toHaveAttribute(
+    expect(container.querySelector('.ais-Breadcrumb')).toHaveAttribute(
       'title',
       'Some custom title'
     );
-    expect(container).toMatchInlineSnapshot(`
-      <div>
-        <div
-          class="ais-Breadcrumb"
-          title="Some custom title"
-        >
-          <ul
-            class="ais-Breadcrumb-list"
-          >
-            <li
-              class="ais-Breadcrumb-item"
-            >
-              <a
-                class="ais-Breadcrumb-link"
-                href="#null"
-              >
-                Home
-              </a>
-            </li>
-            <li
-              class="ais-Breadcrumb-item"
-            >
-              <span
-                aria-hidden="true"
-                class="ais-Breadcrumb-separator"
-              >
-                &gt;
-              </span>
-              <a
-                class="ais-Breadcrumb-link"
-                href="#Audio"
-              >
-                Audio
-              </a>
-            </li>
-            <li
-              class="ais-Breadcrumb-item ais-Breadcrumb-item--selected"
-            >
-              <span
-                aria-hidden="true"
-                class="ais-Breadcrumb-separator"
-              >
-                &gt;
-              </span>
-              Home audio
-            </li>
-          </ul>
-        </div>
-      </div>
-    `);
   });
 });
