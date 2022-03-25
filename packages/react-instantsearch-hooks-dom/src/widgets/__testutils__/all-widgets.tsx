@@ -55,6 +55,9 @@ function Widget<TWidget extends SingleWidget>({
     case 'RefinementList': {
       return <widget.Component attribute="brand" {...props} />;
     }
+    case 'SearchBox': {
+      return <widget.Component />;
+    }
     default: {
       return <widget.Component {...props} />;
     }
