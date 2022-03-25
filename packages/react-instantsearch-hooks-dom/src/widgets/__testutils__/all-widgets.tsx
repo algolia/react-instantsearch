@@ -57,7 +57,7 @@ function Widget<TWidget extends SingleWidget>({
       return <widget.Component attribute="brand" {...props} />;
     }
     case 'SearchBox': {
-      return <widget.Component />;
+      return <widget.Component onSubmit={undefined} {...props} />;
     }
     default: {
       return <widget.Component {...props} />;
