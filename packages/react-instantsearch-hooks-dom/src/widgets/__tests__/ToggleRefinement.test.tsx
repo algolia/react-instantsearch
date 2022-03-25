@@ -180,10 +180,10 @@ describe('ToggleRefinement', () => {
           attribute="free_shipping"
           label="Free shipping"
           classNames={{
-            root: 'MyCustomToggleRefinement',
-            label: 'MyCustomToggleRefinementLabel',
-            checkbox: 'MyCustomToggleRefinementCheckbox',
-            labelText: 'MyCustomToggleRefinementLabelText',
+            root: 'ROOT',
+            label: 'LABEL',
+            checkbox: 'CHECKBOX',
+            labelText: 'LABELTEXT',
           }}
         />
       </InstantSearchHooksTestWrapper>
@@ -194,17 +194,17 @@ describe('ToggleRefinement', () => {
     expect(container).toMatchInlineSnapshot(`
       <div>
         <div
-          class="ais-ToggleRefinement MyCustomToggleRefinement"
+          class="ais-ToggleRefinement ROOT"
         >
           <label
-            class="ais-ToggleRefinement-label MyCustomToggleRefinementLabel"
+            class="ais-ToggleRefinement-label LABEL"
           >
             <input
-              class="ais-ToggleRefinement-checkbox MyCustomToggleRefinementCheckbox"
+              class="ais-ToggleRefinement-checkbox CHECKBOX"
               type="checkbox"
             />
             <span
-              class="ais-ToggleRefinement-labelText MyCustomToggleRefinementLabelText"
+              class="ais-ToggleRefinement-labelText LABELTEXT"
             >
               Free shipping
             </span>
