@@ -194,6 +194,7 @@ describe('Breadcrumb', () => {
 
   test('allows custom class names', () => {
     const props = createProps({
+      className: 'MyCustomBreadcrumb',
       classNames: {
         root: 'ROOT',
         rootNoRefinement: 'ROOTNOREFINEMENT',
@@ -209,7 +210,7 @@ describe('Breadcrumb', () => {
     expect(container).toMatchInlineSnapshot(`
       <div>
         <div
-          class="ais-Breadcrumb ROOT"
+          class="ais-Breadcrumb ROOT MyCustomBreadcrumb"
         >
           <ul
             class="ais-Breadcrumb-list LIST"
