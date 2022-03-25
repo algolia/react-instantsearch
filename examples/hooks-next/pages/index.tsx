@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import algoliasearch from 'algoliasearch/lite';
-import { Hit as AlgoliaHit } from '@algolia/client-search';
+import { Hit as AlgoliaHit } from 'instantsearch.js';
 import {
   DynamicWidgets,
   InstantSearch,
