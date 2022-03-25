@@ -7,7 +7,7 @@ import type { useBreadcrumb } from 'react-instantsearch-hooks';
 
 export type BreadcrumbTranslations = {
   /**
-   * The label of the root element.
+   * The label of the root element
    */
   root: string;
 };
@@ -18,7 +18,7 @@ export type BreadcrumbClassNames = {
    */
   root: string;
   /**
-   * Class names to apply to the root element, when there's no refinement possible
+   * Class names to apply to the root element when there are no refinements possible
    */
   rootNoRefinement: string;
   /**
@@ -30,15 +30,15 @@ export type BreadcrumbClassNames = {
    */
   item: string;
   /**
-   * Class names to apply to a selected breadcrumb element
+   * Class names to apply to the selected item
    */
   itemSelected: string;
   /**
-   * Class names to apply to the separator between breadcrumb elements
+   * Class names to apply to the separator between items
    */
   separator: string;
   /**
-   * Class names to apply to the link element
+   * Class names to apply to each link element
    */
   link: string;
 };
