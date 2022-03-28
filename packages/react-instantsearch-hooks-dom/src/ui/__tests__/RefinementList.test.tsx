@@ -4,12 +4,12 @@ import React, { createRef } from 'react';
 
 import { RefinementList } from '../RefinementList';
 import { SearchBox } from '../SearchBox';
-import { ShowMoreButton } from '../ShowMoreButton';
 
 import type { RefinementListProps } from '../RefinementList';
 
 describe('RefinementList', () => {
   function createProps(props: Partial<RefinementListProps>) {
+    let isShowingMore = false;
     return {
       items: [
         {
@@ -30,7 +30,11 @@ describe('RefinementList', () => {
       onRefine: jest.fn(),
       query: '',
       searchBox: null,
-      showMoreButton: null,
+      canToggleShowMore: true,
+      toggleShowMore: () => {
+        isShowingMore = !isShowingMore;
+      },
+      isShowingMore,
       ...props,
     };
   }
@@ -104,20 +108,21 @@ describe('RefinementList', () => {
     const props = createProps({});
     const { container } = render(<RefinementList {...props} />);
 
-    container
-      .querySelectorAll(
-        '.ais-RefinementList-checkbox, .ais-RefinementList-label'
-      )
-      .forEach((checkbox) => {
-        userEvent.click(checkbox);
-      });
+    const checkboxes = container.querySelectorAll(
+      '.ais-RefinementList-checkbox, .ais-RefinementList-label'
+    );
+    expect(checkboxes.length).toBe(4);
 
-    expect(props.onRefine).toHaveBeenCalledTimes(4);
+    checkboxes.forEach((checkbox) => {
+      userEvent.click(checkbox);
+    });
+
+    expect(props.onRefine).toHaveBeenCalledTimes(checkboxes.length);
   });
 
   test('displays a "Show more" button', () => {
     const props = createProps({
-      showMoreButton: <ShowMoreButton isShowingMore={false} />,
+      showMore: true,
     });
     const { container } = render(<RefinementList {...props} />);
 
@@ -177,7 +182,9 @@ describe('RefinementList', () => {
               </label>
             </li>
           </ul>
-          <button>
+          <button
+            class="ais-RefinementList-showMore"
+          >
             Show more
           </button>
         </div>
@@ -509,6 +516,8 @@ describe('RefinementList', () => {
 
   test('allows custom class names', () => {
     const props = createProps({
+      showMore: true,
+      canToggleShowMore: false,
       classNames: {
         root: 'ROOT',
         searchBox: 'SEARCHBOX',
@@ -520,6 +529,8 @@ describe('RefinementList', () => {
         checkbox: 'CHECKBOX',
         labelText: 'LABELTEXT',
         count: 'COUNT',
+        showMore: 'SHOWMORE',
+        showMoreDisabled: 'SHOWMOREDISABLED',
       },
     });
     const { container } = render(<RefinementList {...props} />);
@@ -580,6 +591,12 @@ describe('RefinementList', () => {
               </label>
             </li>
           </ul>
+          <button
+            class="ais-RefinementList-showMore SHOWMORE ais-RefinementList-showMore--disabled SHOWMOREDISABLED"
+            disabled=""
+          >
+            Show more
+          </button>
         </div>
       </div>
     `);
