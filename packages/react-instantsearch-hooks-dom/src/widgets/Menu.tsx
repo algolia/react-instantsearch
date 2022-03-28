@@ -13,7 +13,7 @@ export type MenuProps = Omit<
   | 'createURL'
   | 'noResults'
   | 'canToggleShowMore'
-  | 'toggleShowMore'
+  | 'onToggleShowMore'
   | 'isShowingMore'
 > &
   UseMenuProps;
@@ -58,7 +58,7 @@ export function Menu({
       }}
       showMore={showMore}
       canToggleShowMore={canToggleShowMore}
-      toggleShowMore={toggleShowMore}
+      onToggleShowMore={toggleShowMore}
       isShowingMore={isShowingMore}
     />
   );

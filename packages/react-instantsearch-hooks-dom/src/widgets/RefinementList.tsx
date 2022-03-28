@@ -17,7 +17,7 @@ export type RefinementListProps = Omit<
   | 'searchBox'
   | 'noResults'
   | 'canToggleShowMore'
-  | 'toggleShowMore'
+  | 'onToggleShowMore'
   | 'isShowingMore'
 > &
   UseRefinementListProps &
@@ -118,7 +118,7 @@ export function RefinementList({
       }
       showMore={showMore}
       canToggleShowMore={canToggleShowMore}
-      toggleShowMore={toggleShowMore}
+      onToggleShowMore={toggleShowMore}
       isShowingMore={isShowingMore}
     />
   );

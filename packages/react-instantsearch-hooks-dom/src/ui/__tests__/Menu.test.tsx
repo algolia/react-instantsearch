@@ -27,7 +27,7 @@ describe('Menu', () => {
       onRefine: jest.fn(),
       createURL: (value) => `#${value}`,
       canToggleShowMore: true,
-      toggleShowMore: () => {
+      onToggleShowMore: () => {
         isShowingMore = !isShowingMore;
       },
       isShowingMore,

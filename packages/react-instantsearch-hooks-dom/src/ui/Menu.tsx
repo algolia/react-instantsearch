@@ -11,7 +11,7 @@ export type MenuProps = React.HTMLAttributes<HTMLDivElement> & {
   classNames?: Partial<MenuCSSClasses>;
   showMore?: boolean;
   canToggleShowMore: boolean;
-  toggleShowMore: () => void;
+  onToggleShowMore: () => void;
   isShowingMore: boolean;
   createURL: CreateURL<MenuItem['value']>;
   onRefine: (item: MenuItem) => void;
@@ -47,11 +47,11 @@ export type MenuCSSClasses = {
    */
   count: string;
   /**
-   * Class names to apply to the show more button
+   * Class names to apply to the "Show more" button
    */
   showMore: string;
   /**
-   * Class names to apply to the show more button if it's disabled
+   * Class names to apply to the "Show more" button if it's disabled
    */
   showMoreDisabled: string;
 };
@@ -61,7 +61,7 @@ export function Menu({
   classNames = {},
   showMore,
   canToggleShowMore,
-  toggleShowMore,
+  onToggleShowMore,
   isShowingMore,
   createURL,
   onRefine,
@@ -86,8 +86,8 @@ export function Menu({
             <a
               className={cx('ais-Menu-link', classNames.link)}
               href={createURL(item.value)}
-              onClick={(e) => {
-                e.preventDefault();
+              onClick={(event) => {
+                event.preventDefault();
                 onRefine(item);
               }}
             >
@@ -110,7 +110,7 @@ export function Menu({
               cx('ais-Menu-showMore--disabled', classNames.showMoreDisabled)
           )}
           disabled={!canToggleShowMore}
-          onClick={toggleShowMore}
+          onClick={onToggleShowMore}
           isShowingMore={isShowingMore}
         />
       )}

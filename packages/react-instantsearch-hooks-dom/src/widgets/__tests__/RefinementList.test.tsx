@@ -1245,7 +1245,7 @@ describe('RefinementList', () => {
     });
   });
 
-  describe('toggling', () => {
+  describe('showMore', () => {
     test('displays a "Show more" button', async () => {
       const client = createSearchClient({ search });
       const { container } = render(

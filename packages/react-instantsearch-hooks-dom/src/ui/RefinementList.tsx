@@ -15,7 +15,7 @@ export type RefinementListProps = React.HTMLAttributes<HTMLDivElement> & {
   noResults?: React.ReactNode;
   showMore?: boolean;
   canToggleShowMore: boolean;
-  toggleShowMore: () => void;
+  onToggleShowMore: () => void;
   isShowingMore: boolean;
   classNames?: Partial<RefinementListClassNames>;
 };
@@ -62,11 +62,11 @@ export type RefinementListClassNames = {
    */
   count: string;
   /**
-   * Class names to apply to the show more button
+   * Class names to apply to the "Show more" button
    */
   showMore: string;
   /**
-   * Class names to apply to the show more button if it's disabled
+   * Class names to apply to the "Show more" button if it's disabled
    */
   showMoreDisabled: string;
 };
@@ -79,7 +79,7 @@ export function RefinementList({
   noResults,
   showMore,
   canToggleShowMore,
-  toggleShowMore,
+  onToggleShowMore,
   isShowingMore,
   className,
   classNames = {},
@@ -171,7 +171,7 @@ export function RefinementList({
               )
           )}
           disabled={!canToggleShowMore}
-          onClick={toggleShowMore}
+          onClick={onToggleShowMore}
           isShowingMore={isShowingMore}
         />
       )}
