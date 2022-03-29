@@ -1,4 +1,4 @@
-import { fireEvent, render } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React, { createRef } from 'react';
 
@@ -198,7 +198,7 @@ describe('RefinementList', () => {
 
       expect(props.onToggleShowMore).not.toHaveBeenCalled();
 
-      fireEvent.click(showMore);
+      userEvent.click(showMore);
 
       expect(props.onToggleShowMore).toHaveBeenCalledTimes(1);
     });
