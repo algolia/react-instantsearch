@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React, { createRef } from 'react';
 
@@ -9,7 +9,6 @@ import type { RefinementListProps } from '../RefinementList';
 
 describe('RefinementList', () => {
   function createProps(props: Partial<RefinementListProps>) {
-    let isShowingMore = false;
     return {
       items: [
         {
@@ -31,10 +30,8 @@ describe('RefinementList', () => {
       query: '',
       searchBox: null,
       canToggleShowMore: true,
-      toggleShowMore: () => {
-        isShowingMore = !isShowingMore;
-      },
-      isShowingMore,
+      isShowingMore: false,
+      onToggleShowMore: jest.fn(),
       ...props,
     };
   }
@@ -120,13 +117,14 @@ describe('RefinementList', () => {
     expect(props.onRefine).toHaveBeenCalledTimes(checkboxes.length);
   });
 
-  test('displays a "Show more" button', () => {
-    const props = createProps({
-      showMore: true,
-    });
-    const { container } = render(<RefinementList {...props} />);
+  describe('Show more / less', () => {
+    test('displays a "Show more" button', () => {
+      const props = createProps({
+        showMore: true,
+      });
+      const { container } = render(<RefinementList {...props} />);
 
-    expect(container).toMatchInlineSnapshot(`
+      expect(container).toMatchInlineSnapshot(`
       <div>
         <div
           class="ais-RefinementList"
@@ -190,6 +188,20 @@ describe('RefinementList', () => {
         </div>
       </div>
     `);
+    });
+
+    test('calls onToggleShowMore', () => {
+      const props = createProps({});
+      const { container } = render(<RefinementList {...props} showMore />);
+
+      const showMore = container.querySelector('.ais-RefinementList-showMore')!;
+
+      expect(props.onToggleShowMore).not.toHaveBeenCalled();
+
+      fireEvent.click(showMore);
+
+      expect(props.onToggleShowMore).toHaveBeenCalledTimes(1);
+    });
   });
 
   test('displays a search box', () => {

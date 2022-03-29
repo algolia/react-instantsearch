@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
@@ -8,7 +8,6 @@ import type { MenuProps } from '../Menu';
 
 describe('Menu', () => {
   function createProps(props: Partial<MenuProps>): MenuProps {
-    let isShowingMore = false;
     return {
       items: [
         {
@@ -26,11 +25,9 @@ describe('Menu', () => {
       ],
       onRefine: jest.fn(),
       createURL: (value) => `#${value}`,
+      onToggleShowMore: jest.fn(),
       canToggleShowMore: true,
-      onToggleShowMore: () => {
-        isShowingMore = !isShowingMore;
-      },
-      isShowingMore,
+      isShowingMore: false,
       ...props,
     };
   }
@@ -105,67 +102,80 @@ describe('Menu', () => {
     expect(props.onRefine).toHaveBeenCalledTimes(links.length);
   });
 
-  test('displays a "Show more" button', () => {
-    const props = createProps({
-      showMore: true,
-    });
-    const { container } = render(<Menu {...props} />);
+  describe('Show more / less', () => {
+    test('displays a "Show more" button', () => {
+      const props = createProps({});
+      const { container } = render(<Menu {...props} showMore />);
 
-    expect(container).toMatchInlineSnapshot(`
-      <div>
-        <div
-          class="ais-Menu"
-        >
-          <ul
-            class="ais-Menu-list"
+      expect(container).toMatchInlineSnapshot(`
+        <div>
+          <div
+            class="ais-Menu"
           >
-            <li
-              class="ais-Menu-item ais-Menu-item--selected"
+            <ul
+              class="ais-Menu-list"
             >
-              <a
-                class="ais-Menu-link"
-                href="#Insignia™"
+              <li
+                class="ais-Menu-item ais-Menu-item--selected"
               >
-                <span
-                  class="ais-Menu-label"
+                <a
+                  class="ais-Menu-link"
+                  href="#Insignia™"
                 >
-                  Insignia™
-                </span>
-                <span
-                  class="ais-Menu-count"
+                  <span
+                    class="ais-Menu-label"
+                  >
+                    Insignia™
+                  </span>
+                  <span
+                    class="ais-Menu-count"
+                  >
+                    746
+                  </span>
+                </a>
+              </li>
+              <li
+                class="ais-Menu-item"
+              >
+                <a
+                  class="ais-Menu-link"
+                  href="#Samsung"
                 >
-                  746
-                </span>
-              </a>
-            </li>
-            <li
-              class="ais-Menu-item"
+                  <span
+                    class="ais-Menu-label"
+                  >
+                    Samsung
+                  </span>
+                  <span
+                    class="ais-Menu-count"
+                  >
+                    633
+                  </span>
+                </a>
+              </li>
+            </ul>
+            <button
+              class="ais-Menu-showMore"
             >
-              <a
-                class="ais-Menu-link"
-                href="#Samsung"
-              >
-                <span
-                  class="ais-Menu-label"
-                >
-                  Samsung
-                </span>
-                <span
-                  class="ais-Menu-count"
-                >
-                  633
-                </span>
-              </a>
-            </li>
-          </ul>
-          <button
-            class="ais-Menu-showMore"
-          >
-            Show more
-          </button>
+              Show more
+            </button>
+          </div>
         </div>
-      </div>
-    `);
+      `);
+    });
+
+    test('calls onToggleShowMore', () => {
+      const props = createProps({});
+      const { container } = render(<Menu {...props} showMore />);
+
+      const showMore = container.querySelector('.ais-Menu-showMore')!;
+
+      expect(props.onToggleShowMore).not.toHaveBeenCalled();
+
+      fireEvent.click(showMore);
+
+      expect(props.onToggleShowMore).toHaveBeenCalledTimes(1);
+    });
   });
 
   test('forwards a custom class name to the root element', () => {
