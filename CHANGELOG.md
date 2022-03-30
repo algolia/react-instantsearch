@@ -6,18 +6,6 @@
 * **hooks:** compute initial search parameters from widget ([#3399](https://algolia/issues/3399)) ([b4bd933](https://algolia/commits/b4bd93358598bdc77a1aa858252e6eee23441345))
 
 
-### Features
-
-* **hooks:** implement "classNames" prop in all components ([#3394](https://algolia/issues/3394)) ([adf7796](https://algolia/commits/adf7796237d4d564cd2e2536beed88b2476a5359))
-* **hooks:** implement InfiniteHits component ([#3366](https://algolia/issues/3366)) ([1d4c5ed](https://algolia/commits/1d4c5edcba0ab7082a947a5826ad8635a0cf5b85))
-* **hooks:** implement Menu component ([#3405](https://algolia/issues/3405)) ([df9cbd8](https://algolia/commits/df9cbd8bce692175287f70b5ef1cdfb617f3758d))
-* **hooks:** implement PoweredBy component ([#3391](https://algolia/issues/3391)) ([2ca266a](https://algolia/commits/2ca266a87cd9f386ef34b882b8f0cdf59f3441a0))
-* **hooks:** implement RefinementList component ([#3381](https://algolia/issues/3381)) ([a525c89](https://algolia/commits/a525c89143ee0e6567854dd7f66519e1c33cde98))
-* **hooks:** implement ToggleRefinement component ([#3400](https://algolia/issues/3400)) ([3c996ee](https://algolia/commits/3c996eec52f02fede0039b5031e0e8e684dbbdc8))
-* **hooks:** translate Pagination widget ([#3387](https://algolia/issues/3387)) ([8f5b03c](https://algolia/commits/8f5b03c274c2e8d02436631a963b86f402049456))
-* **hooks:** translate SearchBox widget ([#3388](https://algolia/issues/3388)) ([0baf543](https://algolia/commits/0baf543f6d66c101c62819dd5b669324b571ce23))
-
-
 
 # [6.23.0](https://algolia/compare/v6.22.0...v6.23.0) (2022-03-23)
 
