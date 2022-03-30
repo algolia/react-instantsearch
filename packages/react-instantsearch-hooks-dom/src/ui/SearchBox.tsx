@@ -2,30 +2,81 @@ import React from 'react';
 
 import { cx } from './lib/cx';
 
-import type {
-  ChangeEvent,
-  FormEvent,
-  RefObject,
-  JSXElementConstructor,
-} from 'react';
-
-export type SearchBoxProps = React.HTMLAttributes<HTMLDivElement> & {
-  inputRef: RefObject<HTMLInputElement>;
-  isSearchStalled: boolean;
-  onChange(event: ChangeEvent): void;
-  onReset(event: FormEvent): void;
-  onSubmit?(event: FormEvent): void;
-  placeholder?: string;
-  value: string;
-  resetIconComponent?: JSXElementConstructor<Record<string, any>>;
-  submitIconComponent?: JSXElementConstructor<Record<string, any>>;
-  loadingIconComponent?: JSXElementConstructor<Record<string, any>>;
+export type IconProps = {
+  classNames: Partial<SearchBoxClassNames>;
 };
 
-function DefaultSubmitIcon() {
+export type SearchBoxClassNames = {
+  /**
+   * Class names to apply to the root element
+   */
+  root: string;
+  /**
+   * Class names to apply to the form element
+   */
+  form: string;
+  /**
+   * Class names to apply to the input element
+   */
+  input: string;
+  /**
+   * Class names to apply to the submit button
+   */
+  submit: string;
+  /**
+   * Class names to apply to the reset button
+   */
+  reset: string;
+  /**
+   * Class names to apply to the loading indicator element
+   */
+  loadingIndicator: string;
+  /**
+   * Class names to apply to the submit icon
+   */
+  submitIcon: string;
+  /**
+   * Class names to apply to the reset icon
+   */
+  resetIcon: string;
+  /**
+   * Class names to apply to the loading icon
+   */
+  loadingIcon: string;
+};
+
+export type SearchBoxTranslations = {
+  /**
+   * The alternative text of the submit button.
+   */
+  submitTitle: string;
+  /**
+   * The alternative text of the reset button.
+   */
+  resetTitle: string;
+};
+
+export type SearchBoxProps = React.HTMLAttributes<HTMLDivElement> &
+  Pick<React.HTMLAttributes<HTMLFormElement>, 'onSubmit'> &
+  Required<Pick<React.HTMLAttributes<HTMLFormElement>, 'onReset'>> &
+  Pick<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    'placeholder' | 'onChange'
+  > & {
+    inputRef: React.RefObject<HTMLInputElement>;
+    isSearchStalled: boolean;
+    value: string;
+    resetIconComponent?: React.JSXElementConstructor<IconProps>;
+    submitIconComponent?: React.JSXElementConstructor<IconProps>;
+    loadingIconComponent?: React.JSXElementConstructor<IconProps>;
+    classNames?: Partial<SearchBoxClassNames>;
+    translations: SearchBoxTranslations;
+  };
+
+function DefaultSubmitIcon({ classNames }: IconProps) {
   return (
     <svg
-      className="ais-SearchBox-submitIcon"
+      className={cx('ais-SearchBox-submitIcon', classNames.submitIcon)}
       width="10"
       height="10"
       viewBox="0 0 40 40"
@@ -35,10 +86,10 @@ function DefaultSubmitIcon() {
   );
 }
 
-function DefaultResetIcon() {
+function DefaultResetIcon({ classNames }: IconProps) {
   return (
     <svg
-      className="ais-SearchBox-resetIcon"
+      className={cx('ais-SearchBox-resetIcon', classNames.resetIcon)}
       viewBox="0 0 20 20"
       width="10"
       height="10"
@@ -48,14 +99,14 @@ function DefaultResetIcon() {
   );
 }
 
-function DefaultLoadingIcon() {
+function DefaultLoadingIcon({ classNames }: IconProps) {
   return (
     <svg
       width="16"
       height="16"
       viewBox="0 0 38 38"
       stroke="#444"
-      className="ais-SearchBox-loadingIcon"
+      className={cx('ais-SearchBox-loadingIcon', classNames.loadingIcon)}
     >
       <g fill="none" fillRule="evenodd">
         <g transform="translate(1 1)" strokeWidth="2">
@@ -87,9 +138,11 @@ export function SearchBox({
   resetIconComponent: ResetIcon = DefaultResetIcon,
   submitIconComponent: SubmitIcon = DefaultSubmitIcon,
   loadingIconComponent: LoadingIcon = DefaultLoadingIcon,
+  classNames = {},
+  translations,
   ...props
 }: SearchBoxProps) {
-  function handleSubmit(event: FormEvent) {
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     event.stopPropagation();
 
@@ -102,7 +155,7 @@ export function SearchBox({
     }
   }
 
-  function handleReset(event: FormEvent) {
+  function handleReset(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     event.stopPropagation();
 
@@ -114,17 +167,20 @@ export function SearchBox({
   }
 
   return (
-    <div {...props} className={cx('ais-SearchBox', props.className)}>
+    <div
+      {...props}
+      className={cx('ais-SearchBox', classNames.root, props.className)}
+    >
       <form
         action=""
-        className="ais-SearchBox-form"
+        className={cx('ais-SearchBox-form', classNames.form)}
         noValidate
         onSubmit={handleSubmit}
         onReset={handleReset}
       >
         <input
           ref={inputRef}
-          className="ais-SearchBox-input"
+          className={cx('ais-SearchBox-input', classNames.input)}
           autoComplete="off"
           autoCorrect="off"
           autoCapitalize="off"
@@ -136,25 +192,28 @@ export function SearchBox({
           onChange={onChange}
         />
         <button
-          className="ais-SearchBox-submit"
+          className={cx('ais-SearchBox-submit', classNames.submit)}
           type="submit"
-          title="Submit the search query."
+          title={translations.submitTitle}
         >
-          <SubmitIcon />
+          <SubmitIcon classNames={classNames} />
         </button>
         <button
-          className="ais-SearchBox-reset"
+          className={cx('ais-SearchBox-reset', classNames.reset)}
           type="reset"
-          title="Clear the search query."
+          title={translations.resetTitle}
           hidden={value.length === 0 && !isSearchStalled}
         >
-          <ResetIcon />
+          <ResetIcon classNames={classNames} />
         </button>
         <span
-          className="ais-SearchBox-loadingIndicator"
+          className={cx(
+            'ais-SearchBox-loadingIndicator',
+            classNames.loadingIndicator
+          )}
           hidden={!isSearchStalled}
         >
-          <LoadingIcon />
+          <LoadingIcon classNames={classNames} />
         </span>
       </form>
     </div>

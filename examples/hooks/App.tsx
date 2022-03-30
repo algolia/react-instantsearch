@@ -1,4 +1,4 @@
-import { Hit as AlgoliaHit } from '@algolia/client-search';
+import { Hit as AlgoliaHit } from 'instantsearch.js';
 import algoliasearch from 'algoliasearch/lite';
 import React from 'react';
 import {
@@ -8,26 +8,26 @@ import {
   CurrentRefinements,
   DynamicWidgets,
   HierarchicalMenu,
+  Highlight,
   Hits,
   HitsPerPage,
+  InfiniteHits,
+  Menu,
   Pagination,
   RefinementList,
+  PoweredBy,
   SearchBox,
   SortBy,
+  ToggleRefinement,
 } from 'react-instantsearch-hooks-dom';
 
 import {
   Breadcrumb,
-  Highlight,
-  InfiniteHits,
-  Menu,
   NumericMenu,
   Panel,
-  PoweredBy,
   QueryRuleContext,
   QueryRuleCustomData,
   RangeInput,
-  ToggleRefinement,
 } from './components';
 import { Tab, Tabs } from './components/layout';
 
@@ -103,7 +103,10 @@ export function App() {
               />
             </Panel>
             <Panel header="Free Shipping">
-              <ToggleRefinement attribute="free_shipping" />
+              <ToggleRefinement
+                attribute="free_shipping"
+                label="Free shipping"
+              />
             </Panel>
           </DynamicWidgets>
         </div>

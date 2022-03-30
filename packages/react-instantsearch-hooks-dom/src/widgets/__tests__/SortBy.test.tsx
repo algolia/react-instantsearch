@@ -111,7 +111,7 @@ describe('SortBy', () => {
   });
 
   test('updates the selected index', async () => {
-    const client = createSearchClient();
+    const client = createSearchClient({});
 
     const { getByRole } = render(
       <InstantSearchHooksTestWrapper
@@ -197,6 +197,57 @@ describe('SortBy', () => {
             </option>
             <option
               class="ais-SortBy-option"
+              value="instant_search_price_desc"
+            >
+              Price (desc)
+            </option>
+          </select>
+        </div>
+      </div>
+    `);
+  });
+
+  test('accepts custom class names', () => {
+    const { container } = render(
+      <InstantSearchHooksTestWrapper>
+        <SortBy
+          className="MySortBy"
+          classNames={{
+            root: 'ROOT',
+            select: 'SELECT',
+            option: 'OPTION',
+          }}
+          items={[
+            { label: 'Featured', value: 'instant_search' },
+            { label: 'Price (asc)', value: 'instant_search_price_asc' },
+            { label: 'Price (desc)', value: 'instant_search_price_desc' },
+          ]}
+        />
+      </InstantSearchHooksTestWrapper>
+    );
+
+    expect(container).toMatchInlineSnapshot(`
+      <div>
+        <div
+          class="ais-SortBy ROOT MySortBy"
+        >
+          <select
+            class="ais-SortBy-select SELECT"
+          >
+            <option
+              class="ais-SortBy-option OPTION"
+              value="instant_search"
+            >
+              Featured
+            </option>
+            <option
+              class="ais-SortBy-option OPTION"
+              value="instant_search_price_asc"
+            >
+              Price (asc)
+            </option>
+            <option
+              class="ais-SortBy-option OPTION"
               value="instant_search_price_desc"
             >
               Price (desc)
