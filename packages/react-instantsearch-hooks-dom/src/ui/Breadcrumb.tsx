@@ -45,6 +45,8 @@ export type BreadcrumbClassNames = {
 
 type UseBreadcrumbRenderState = ReturnType<typeof useBreadcrumb>;
 
+type BreadcrumbItem = UseBreadcrumbRenderState['items'][number];
+
 export type BreadcrumbProps = React.HTMLAttributes<HTMLDivElement> &
   Pick<UseBreadcrumbRenderState, 'items' | 'createURL'> & {
     classNames?: Partial<BreadcrumbClassNames>;
@@ -65,7 +67,7 @@ export function Breadcrumb({
   ...props
 }: BreadcrumbProps) {
   const handleClick =
-    (value: BreadcrumbProps['items'][0]['value']) =>
+    (value: BreadcrumbItem['value']) =>
     (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
       if (!isModifierClick(event)) {
         event.preventDefault();
