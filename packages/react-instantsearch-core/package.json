@@ -1,6 +1,6 @@
 {
   "name": "react-instantsearch-core",
-  "version": "6.23.0",
+  "version": "6.23.1",
   "description": "⚡ Lightning-fast search for React, by Algolia",
   "main": "dist/cjs/index.js",
   "module": "dist/es/index.js",
@@ -43,6 +43,6 @@
   },
   "peerDependencies": {
     "algoliasearch": ">= 3.1 < 5",
-    "react": ">= 16.3.0 < 18"
+    "react": ">= 16.3.0 < 19"
   }
 }

@@ -1,4 +1,3 @@
-export * from './Breadcrumb';
 export * from './NumericMenu';
 export * from './Panel';
 export * from './QueryRuleContext';
