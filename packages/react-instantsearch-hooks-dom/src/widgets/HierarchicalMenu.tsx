@@ -2,15 +2,19 @@ import React from 'react';
 import { useHierarchicalMenu } from 'react-instantsearch-hooks';
 
 import { HierarchicalMenu as HierarchicalMenuUiComponent } from '../ui/HierarchicalMenu';
-import { cx } from '../ui/lib/cx';
-import { ShowMoreButton } from '../ui/ShowMoreButton';
 
 import type { HierarchicalMenuProps as HierarchicalMenuUiComponentProps } from '../ui/HierarchicalMenu';
 import type { UseHierarchicalMenuProps } from 'react-instantsearch-hooks';
 
 export type HierarchicalMenuProps = Omit<
   HierarchicalMenuUiComponentProps,
-  'items' | 'createURL' | 'hasItems' | 'onNavigate' | 'showMoreButton'
+  | 'items'
+  | 'createURL'
+  | 'hasItems'
+  | 'onNavigate'
+  | 'canToggleShowMore'
+  | 'onToggleShowMore'
+  | 'isShowingMore'
 > &
   UseHierarchicalMenuProps;
 
@@ -58,19 +62,10 @@ export function HierarchicalMenu({
       hasItems={canRefine}
       createURL={createURL}
       onNavigate={refine}
-      showMoreButton={
-        showMore && (
-          <ShowMoreButton
-            className={cx(
-              'ais-HierarchicalMenu-showMore',
-              !canToggleShowMore && 'ais-HierarchicalMenu-showMore--disabled'
-            )}
-            disabled={!canToggleShowMore}
-            onClick={toggleShowMore}
-            isShowingMore={isShowingMore}
-          />
-        )
-      }
+      showMore={showMore}
+      canToggleShowMore={canToggleShowMore}
+      onToggleShowMore={toggleShowMore}
+      isShowingMore={isShowingMore}
     />
   );
 }

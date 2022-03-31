@@ -3,7 +3,6 @@ import userEvent from '@testing-library/user-event';
 import React from 'react';
 
 import { HierarchicalMenu } from '../HierarchicalMenu';
-import { ShowMoreButton } from '../ShowMoreButton';
 
 import type { HierarchicalMenuProps } from '../HierarchicalMenu';
 
@@ -46,6 +45,9 @@ describe('HierarchicalMenu', () => {
       hasItems: true,
       onNavigate: jest.fn(),
       createURL: jest.fn((value: string) => `#${value}`),
+      onToggleShowMore: jest.fn(),
+      canToggleShowMore: true,
+      isShowingMore: false,
       ...props,
     };
   }
@@ -159,107 +161,124 @@ describe('HierarchicalMenu', () => {
     expect(props.onNavigate).toHaveBeenCalledWith('iPad');
   });
 
-  test('displays a "Show more" button', () => {
-    const props = createProps({
-      showMoreButton: <ShowMoreButton isShowingMore={false} />,
-    });
-    const { container } = render(<HierarchicalMenu {...props} />);
+  describe('Show more / less', () => {
+    test('displays a "Show more" button', () => {
+      const props = createProps();
+      const { container } = render(<HierarchicalMenu {...props} showMore />);
 
-    expect(container).toMatchInlineSnapshot(`
-      <div>
-        <div
-          class="ais-HierarchicalMenu"
-        >
-          <ul
-            class="ais-HierarchicalMenu-list"
+      expect(container).toMatchInlineSnapshot(`
+        <div>
+          <div
+            class="ais-HierarchicalMenu"
           >
-            <li
-              class="ais-HierarchicalMenu-item ais-HierarchicalMenu-item--selected"
+            <ul
+              class="ais-HierarchicalMenu-list"
             >
-              <a
-                class="ais-HierarchicalMenu-link"
-                href="#Apple"
+              <li
+                class="ais-HierarchicalMenu-item ais-HierarchicalMenu-item--selected"
               >
-                <span
-                  class="ais-HierarchicalMenu-labelText"
+                <a
+                  class="ais-HierarchicalMenu-link"
+                  href="#Apple"
                 >
-                  Apple
-                </span>
-                <span
-                  class="ais-HierarchicalMenu-count"
+                  <span
+                    class="ais-HierarchicalMenu-labelText"
+                  >
+                    Apple
+                  </span>
+                  <span
+                    class="ais-HierarchicalMenu-count"
+                  >
+                    100
+                  </span>
+                </a>
+                <ul
+                  class="ais-HierarchicalMenu-list"
                 >
-                  100
-                </span>
-              </a>
-              <ul
-                class="ais-HierarchicalMenu-list"
+                  <li
+                    class="ais-HierarchicalMenu-item"
+                  >
+                    <a
+                      class="ais-HierarchicalMenu-link"
+                      href="#iPhone"
+                    >
+                      <span
+                        class="ais-HierarchicalMenu-labelText"
+                      >
+                        iPhone
+                      </span>
+                      <span
+                        class="ais-HierarchicalMenu-count"
+                      >
+                        50
+                      </span>
+                    </a>
+                  </li>
+                  <li
+                    class="ais-HierarchicalMenu-item"
+                  >
+                    <a
+                      class="ais-HierarchicalMenu-link"
+                      href="#iPad"
+                    >
+                      <span
+                        class="ais-HierarchicalMenu-labelText"
+                      >
+                        iPad
+                      </span>
+                      <span
+                        class="ais-HierarchicalMenu-count"
+                      >
+                        50
+                      </span>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li
+                class="ais-HierarchicalMenu-item"
               >
-                <li
-                  class="ais-HierarchicalMenu-item"
+                <a
+                  class="ais-HierarchicalMenu-link"
+                  href="#Samsung"
                 >
-                  <a
-                    class="ais-HierarchicalMenu-link"
-                    href="#iPhone"
+                  <span
+                    class="ais-HierarchicalMenu-labelText"
                   >
-                    <span
-                      class="ais-HierarchicalMenu-labelText"
-                    >
-                      iPhone
-                    </span>
-                    <span
-                      class="ais-HierarchicalMenu-count"
-                    >
-                      50
-                    </span>
-                  </a>
-                </li>
-                <li
-                  class="ais-HierarchicalMenu-item"
-                >
-                  <a
-                    class="ais-HierarchicalMenu-link"
-                    href="#iPad"
+                    Samsung
+                  </span>
+                  <span
+                    class="ais-HierarchicalMenu-count"
                   >
-                    <span
-                      class="ais-HierarchicalMenu-labelText"
-                    >
-                      iPad
-                    </span>
-                    <span
-                      class="ais-HierarchicalMenu-count"
-                    >
-                      50
-                    </span>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li
-              class="ais-HierarchicalMenu-item"
+                    100
+                  </span>
+                </a>
+              </li>
+            </ul>
+            <button
+              class="ais-HierarchicalMenu-showMore"
             >
-              <a
-                class="ais-HierarchicalMenu-link"
-                href="#Samsung"
-              >
-                <span
-                  class="ais-HierarchicalMenu-labelText"
-                >
-                  Samsung
-                </span>
-                <span
-                  class="ais-HierarchicalMenu-count"
-                >
-                  100
-                </span>
-              </a>
-            </li>
-          </ul>
-          <button>
-            Show more
-          </button>
+              Show more
+            </button>
+          </div>
         </div>
-      </div>
-    `);
+      `);
+    });
+
+    test('calls onToggleShowMore', () => {
+      const props = createProps();
+      const { container } = render(<HierarchicalMenu {...props} showMore />);
+
+      const showMore = container.querySelector(
+        '.ais-HierarchicalMenu-showMore'
+      ) as HTMLButtonElement;
+
+      expect(props.onToggleShowMore).not.toHaveBeenCalled();
+
+      userEvent.click(showMore);
+
+      expect(props.onToggleShowMore).toHaveBeenCalledTimes(1);
+    });
   });
 
   test('forwards a custom class name to the root element', () => {
@@ -273,6 +292,8 @@ describe('HierarchicalMenu', () => {
 
   test('allows custom class names', () => {
     const props = createProps({
+      showMore: true,
+      canToggleShowMore: false,
       classNames: {
         root: 'ROOT',
         rootNoRefinement: 'ROOTNOREFINEMENT',
@@ -282,6 +303,8 @@ describe('HierarchicalMenu', () => {
         link: 'LINK',
         label: 'LABEL',
         count: 'COUNT',
+        showMore: 'SHOWMORE',
+        showMoreDisabled: 'SHOWMOREDISABLED',
       },
     });
     const { container } = render(<HierarchicalMenu {...props} />);
@@ -375,6 +398,12 @@ describe('HierarchicalMenu', () => {
               </a>
             </li>
           </ul>
+          <button
+            class="ais-HierarchicalMenu-showMore SHOWMORE ais-HierarchicalMenu-showMore--disabled SHOWMOREDISABLED"
+            disabled=""
+          >
+            Show more
+          </button>
         </div>
       </div>
     `);

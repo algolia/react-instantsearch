@@ -85,7 +85,6 @@ export function App() {
                   'hierarchicalCategories.lvl2',
                 ]}
                 showMore={true}
-                limit={5}
               />
             </Panel>
             <Panel header="Price">

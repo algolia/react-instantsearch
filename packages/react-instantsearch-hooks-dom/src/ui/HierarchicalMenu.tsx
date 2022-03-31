@@ -2,6 +2,7 @@ import React from 'react';
 
 import { cx } from './lib/cx';
 import { isModifierClick } from './lib/isModifierClick';
+import { ShowMoreButton } from './ShowMoreButton';
 
 import type { useHierarchicalMenu } from 'react-instantsearch-hooks';
 
@@ -38,6 +39,14 @@ type HierarchicalMenuClassNames = {
    * Class names to apply to the count of an item element
    */
   count: string;
+  /**
+   * Class names to apply to the "Show more" button
+   */
+  showMore: string;
+  /**
+   * Class names to apply to the "Show more" button if it's disabled
+   */
+  showMoreDisabled: string;
 };
 
 type HierarchicalListProps = Pick<
@@ -51,7 +60,10 @@ type HierarchicalListProps = Pick<
 export type HierarchicalMenuProps = React.HTMLAttributes<HTMLDivElement> &
   HierarchicalListProps & {
     hasItems: boolean;
-    showMoreButton?: React.ReactNode;
+    showMore?: boolean;
+    canToggleShowMore: boolean;
+    onToggleShowMore: () => void;
+    isShowingMore: boolean;
   };
 
 function HierarchicalList({
@@ -114,7 +126,10 @@ export function HierarchicalMenu({
   hasItems,
   onNavigate,
   createURL,
-  showMoreButton,
+  showMore,
+  canToggleShowMore,
+  onToggleShowMore,
+  isShowingMore,
   ...props
 }: HierarchicalMenuProps) {
   return (
@@ -134,7 +149,22 @@ export function HierarchicalMenu({
         onNavigate={onNavigate}
         createURL={createURL}
       />
-      {showMoreButton}
+      {showMore && (
+        <ShowMoreButton
+          className={cx(
+            'ais-HierarchicalMenu-showMore',
+            classNames.showMore,
+            !canToggleShowMore &&
+              cx(
+                'ais-HierarchicalMenu-showMore--disabled',
+                classNames.showMoreDisabled
+              )
+          )}
+          disabled={!canToggleShowMore}
+          onClick={onToggleShowMore}
+          isShowingMore={isShowingMore}
+        />
+      )}
     </div>
   );
 }
