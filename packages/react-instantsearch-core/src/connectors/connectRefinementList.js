@@ -161,7 +161,6 @@ export default createConnector({
     const items = isFromSearch
       ? searchForFacetValuesResults[attribute].map((v) => ({
           label: v.value,
-          // TODO: does this need to be escaped?
           value: getValue(v.value, props, searchState, {
             ais: props.contextValue,
             multiIndexContext: props.indexContextValue,
