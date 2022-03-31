@@ -7,35 +7,35 @@ import type { useHierarchicalMenu } from 'react-instantsearch-hooks';
 
 type HierarchicalMenuClassNames = {
   /**
-   * Class names to apply to the root element.
+   * Class names to apply to the root element
    */
   root: string;
   /**
-   * Class names to apply to the root element, when there's no refinement possible.
+   * Class names to apply to the root element when there are no refinements possible
    */
   rootNoRefinement: string;
   /**
-   * Class names to apply to the list element.
+   * Class names to apply to the list element
    */
   list: string;
   /**
-   * Class names to apply to any item element.
+   * Class names to apply to each item element
    */
   item: string;
   /**
-   * Class names to apply to a selected item element.
+   * Class names to apply to the selected item
    */
-  selectedItem: string;
+  itemSelected: string;
   /**
-   * Class names to apply to the link element.
+   * Class names to apply to each link element
    */
   link: string;
   /**
-   * Class names to apply to the label of an item element.
+   * Class names to apply to the label of an item element
    */
   label: string;
   /**
-   * Class names to apply to the count of an item element.
+   * Class names to apply to the count of an item element
    */
   count: string;
 };
@@ -69,7 +69,7 @@ function HierarchicalList({
             'ais-HierarchicalMenu-item',
             classNames.item,
             item.isRefined &&
-              cx('ais-HierarchicalMenu-item--selected', classNames.selectedItem)
+              cx('ais-HierarchicalMenu-item--selected', classNames.itemSelected)
           )}
         >
           <a
