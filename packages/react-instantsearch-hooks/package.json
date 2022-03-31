@@ -47,7 +47,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.1.2",
-    "algoliasearch-helper": "https://pkg.csb.dev/algolia/algoliasearch-helper-js/commit/493f99a3/algoliasearch-helper",
+    "algoliasearch-helper": "https://pkg.csb.dev/algolia/algoliasearch-helper-js/commit/a74fc213/algoliasearch-helper",
     "dequal": "^2.0.0",
     "instantsearch.js": "^4.40.1"
   },

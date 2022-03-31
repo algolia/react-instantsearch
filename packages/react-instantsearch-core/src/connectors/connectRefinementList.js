@@ -173,7 +173,7 @@ export default createConnector({
           .getFacetValues(attribute, { sortBy, facetOrdering })
           .map((v) => ({
             label: v.name,
-            value: getValue(v.value, props, searchState, {
+            value: getValue(v.safeValue, props, searchState, {
               ais: props.contextValue,
               multiIndexContext: props.indexContextValue,
             }),
