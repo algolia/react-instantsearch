@@ -7699,6 +7699,13 @@ algoliasearch-helper@^3.7.4:
   dependencies:
     "@algolia/events" "^4.0.1"
 
+"algoliasearch-helper@https://pkg.csb.dev/algolia/algoliasearch-helper-js/commit/493f99a3/algoliasearch-helper":
+  version "3.7.4"
+  uid ef4ddbf32d08675e0f4a77ae3fac7ee87945a095
+  resolved "https://pkg.csb.dev/algolia/algoliasearch-helper-js/commit/493f99a3/algoliasearch-helper#ef4ddbf32d08675e0f4a77ae3fac7ee87945a095"
+  dependencies:
+    "@algolia/events" "^4.0.1"
+
 algoliasearch@4.11.0, "algoliasearch@>= 3.27.1 < 5":
   version "4.11.0"
   resolved "https://registry.yarnpkg.com/algoliasearch/-/algoliasearch-4.11.0.tgz#234befb3ac355c094077f0edf3777240b1ee013c"

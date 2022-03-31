@@ -86,11 +86,13 @@ describe('connectMenu', () => {
       results.getFacetValues.mockImplementation(() => [
         {
           name: 'wat',
+          value: 'wat',
           isRefined: true,
           count: 20,
         },
         {
           name: 'oy',
+          value: 'oy',
           isRefined: false,
           count: 10,
         },
@@ -224,6 +226,7 @@ describe('connectMenu', () => {
       results.getFacetValues.mockImplementation(() => [
         {
           name: 'wat',
+          value: 'wat',
           isRefined: true,
           count: 20,
         },
@@ -531,11 +534,13 @@ describe('connectMenu', () => {
         getFacetValues: jest.fn(() => [
           {
             name: 'oy',
+            value: 'oy',
             isRefined: true,
             count: 10,
           },
           {
             name: 'wat',
+            value: 'wat',
             isRefined: false,
             count: 20,
           },
@@ -576,11 +581,13 @@ describe('connectMenu', () => {
         getFacetValues: jest.fn(() => [
           {
             name: 'oy',
+            value: 'oy',
             isRefined: true,
             count: 10,
           },
           {
             name: 'wat',
+            value: 'wat',
             isRefined: false,
             count: 20,
           },
@@ -727,11 +734,13 @@ describe('connectMenu', () => {
       results.second.getFacetValues.mockImplementation(() => [
         {
           name: 'wat',
+          value: 'wat',
           isRefined: true,
           count: 20,
         },
         {
           name: 'oy',
+          value: 'oy',
           isRefined: false,
           count: 10,
         },
@@ -867,6 +876,7 @@ describe('connectMenu', () => {
       results.second.getFacetValues.mockImplementation(() => [
         {
           name: 'wat',
+          value: 'wat',
           isRefined: true,
           count: 20,
         },

@@ -82,11 +82,13 @@ describe('connectRefinementList', () => {
       results.getFacetValues.mockImplementation(() => [
         {
           name: 'wat',
+          value: 'wat',
           isRefined: true,
           count: 20,
         },
         {
           name: 'oy',
+          value: 'oy',
           isRefined: false,
           count: 10,
         },
