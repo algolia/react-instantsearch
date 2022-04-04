@@ -161,7 +161,7 @@ export default createConnector({
     const items = isFromSearch
       ? searchForFacetValuesResults[attribute].map((v) => ({
           label: v.value,
-          value: getValue(v.value, props, searchState, {
+          value: getValue(v.escapedValue, props, searchState, {
             ais: props.contextValue,
             multiIndexContext: props.indexContextValue,
           }),

@@ -32,21 +32,21 @@ describe('connectBreadcrumb', () => {
           {
             name: 'wat',
             path: 'wat',
-            value: 'wat',
+            escapedValue: 'wat',
             count: 20,
             isRefined: true,
             data: [
               {
                 name: 'wot',
                 path: 'wat > wot',
-                value: 'wat > wot',
+                escapedValue: 'wat > wot',
                 isRefined: true,
                 count: 15,
               },
               {
                 name: 'wut',
                 path: 'wat > wut',
-                value: 'wat > wut',
+                escapedValue: 'wat > wut',
                 isRefined: false,
                 count: 5,
               },
@@ -55,7 +55,7 @@ describe('connectBreadcrumb', () => {
           {
             name: 'oy',
             path: 'oy',
-            value: 'oy',
+            escapedValue: 'oy',
             isRefined: false,
             count: 10,
           },
@@ -152,21 +152,21 @@ describe('connectBreadcrumb', () => {
           {
             name: 'wat',
             path: 'wat',
-            value: 'wat',
+            escapedValue: 'wat',
             count: 20,
             isRefined: true,
             data: [
               {
                 name: 'wot',
                 path: 'wat > wot',
-                value: 'wat > wot',
+                escapedValue: 'wat > wot',
                 isRefined: true,
                 count: 15,
               },
               {
                 name: 'wut',
                 path: 'wat > wut',
-                value: 'wat > wut',
+                escapedValue: 'wat > wut',
                 isRefined: false,
                 count: 5,
               },
@@ -175,7 +175,7 @@ describe('connectBreadcrumb', () => {
           {
             name: 'oy',
             path: 'oy',
-            value: 'oy',
+            escapedValue: 'oy',
             isRefined: false,
             count: 10,
           },

@@ -82,13 +82,13 @@ describe('connectRefinementList', () => {
       results.getFacetValues.mockImplementation(() => [
         {
           name: 'wat',
-          value: 'wat',
+          escapedValue: 'wat',
           isRefined: true,
           count: 20,
         },
         {
           name: 'oy',
-          value: 'oy',
+          escapedValue: 'oy',
           isRefined: false,
           count: 10,
         },
@@ -137,6 +137,7 @@ describe('connectRefinementList', () => {
           ok: [
             {
               value: 'wat',
+              escapedValue: 'wat',
               count: 10,
               highlighted: 'wat',
               isRefined: false,
@@ -222,7 +223,8 @@ describe('connectRefinementList', () => {
         {
           ok: [
             {
-              value: ['wat'],
+              value: 'wat',
+              escapedValue: 'wat',
               label: 'wat',
               isRefined: true,
               count: 20,
@@ -236,8 +238,8 @@ describe('connectRefinementList', () => {
           _highlightResult: { label: { value: 'wat' } },
           count: 20,
           isRefined: true,
-          label: ['wat'],
-          value: [['wat']],
+          label: 'wat',
+          value: ['wat'],
         },
       ]);
       expect(props.isFromSearch).toBe(true);

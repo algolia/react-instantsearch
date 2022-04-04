@@ -61,7 +61,7 @@ function getValue(value, props, searchState, context) {
 function transformValue(value, props, searchState, context) {
   return value.map((v) => ({
     label: v.name,
-    value: getValue(v.value, props, searchState, context),
+    value: getValue(v.escapedValue, props, searchState, context),
     count: v.count,
     isRefined: v.isRefined,
     items: v.data && transformValue(v.data, props, searchState, context),

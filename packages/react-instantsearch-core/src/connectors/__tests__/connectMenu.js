@@ -86,13 +86,13 @@ describe('connectMenu', () => {
       results.getFacetValues.mockImplementation(() => [
         {
           name: 'wat',
-          value: 'wat',
+          escapedValue: 'wat',
           isRefined: true,
           count: 20,
         },
         {
           name: 'oy',
-          value: 'oy',
+          escapedValue: 'oy',
           isRefined: false,
           count: 10,
         },
@@ -161,6 +161,7 @@ describe('connectMenu', () => {
           ok: [
             {
               value: 'wat',
+              escapedValue: 'wat',
               count: 10,
               highlighted: 'wat',
               isRefined: false,
@@ -226,7 +227,7 @@ describe('connectMenu', () => {
       results.getFacetValues.mockImplementation(() => [
         {
           name: 'wat',
-          value: 'wat',
+          escapedValue: 'wat',
           isRefined: true,
           count: 20,
         },
@@ -534,13 +535,13 @@ describe('connectMenu', () => {
         getFacetValues: jest.fn(() => [
           {
             name: 'oy',
-            value: 'oy',
+            escapedValue: 'oy',
             isRefined: true,
             count: 10,
           },
           {
             name: 'wat',
-            value: 'wat',
+            escapedValue: 'wat',
             isRefined: false,
             count: 20,
           },
@@ -581,13 +582,13 @@ describe('connectMenu', () => {
         getFacetValues: jest.fn(() => [
           {
             name: 'oy',
-            value: 'oy',
+            escapedValue: 'oy',
             isRefined: true,
             count: 10,
           },
           {
             name: 'wat',
-            value: 'wat',
+            escapedValue: 'wat',
             isRefined: false,
             count: 20,
           },
@@ -734,13 +735,13 @@ describe('connectMenu', () => {
       results.second.getFacetValues.mockImplementation(() => [
         {
           name: 'wat',
-          value: 'wat',
+          escapedValue: 'wat',
           isRefined: true,
           count: 20,
         },
         {
           name: 'oy',
-          value: 'oy',
+          escapedValue: 'oy',
           isRefined: false,
           count: 10,
         },
@@ -810,6 +811,7 @@ describe('connectMenu', () => {
           ok: [
             {
               value: 'wat',
+              escapedValue: 'wat',
               count: 10,
               highlighted: 'wat',
               isRefined: false,
@@ -876,7 +878,7 @@ describe('connectMenu', () => {
       results.second.getFacetValues.mockImplementation(() => [
         {
           name: 'wat',
-          value: 'wat',
+          escapedValue: 'wat',
           isRefined: true,
           count: 20,
         },

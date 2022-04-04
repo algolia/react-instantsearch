@@ -20,7 +20,7 @@ function transformValue(values) {
         label: item.name,
         // If dealing with a nested "items", "value" is equal to the previous value concatenated with the current value
         // If dealing with the first level, "value" is equal to the current value
-        value: item.value,
+        value: item.escapedValue,
       });
       // Create a variable in order to keep the same acc for the recursion, otherwise "reduce" returns a new one
       if (item.data) {

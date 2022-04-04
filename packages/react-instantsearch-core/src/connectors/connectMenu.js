@@ -155,7 +155,7 @@ export default createConnector({
         })
         .map((v) => ({
           label: v.name,
-          value: getValue(v.value, props, searchState, {
+          value: getValue(v.escapedValue, props, searchState, {
             ais: props.contextValue,
             multiIndexContext: props.indexContextValue,
           }),
