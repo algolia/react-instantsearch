@@ -1,3 +1,19 @@
+## [6.23.2](https://github.com/algolia/react-instantsearch/compare/v6.23.1...v6.23.2) (2022-04-04)
+
+
+### Bug Fixes
+
+* **refinements:** use escaped value for refining ([#3412](https://github.com/algolia/react-instantsearch/issues/3412)) ([f2f5f6c](https://github.com/algolia/react-instantsearch/commit/f2f5f6cbfaed48a5c494daeb8789e8deebc64293))
+* support React 18 as peer dependency ([#3411](https://github.com/algolia/react-instantsearch/issues/3411)) ([38eb5a6](https://github.com/algolia/react-instantsearch/commit/38eb5a6a8fe92cb763a25f452bea78b189a6a82a))
+
+
+### Features
+
+* **hooks:** implement `Breadcrumb` component ([#3382](https://github.com/algolia/react-instantsearch/issues/3382)) ([7cd357d](https://github.com/algolia/react-instantsearch/commit/7cd357d0271a52b74375d6565fd8f64ebbb934b0))
+* **hooks:** implement <HierarchicalMenu> ([#3408](https://github.com/algolia/react-instantsearch/issues/3408)) ([1699159](https://github.com/algolia/react-instantsearch/commit/1699159a4ccfaab7a77da3283abb9857316cfb97))
+
+
+
 ## [6.23.1](https://algolia/compare/v6.23.0...v6.23.1) (2022-03-30)
 
 
