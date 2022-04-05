@@ -15,6 +15,7 @@ import {
   InfiniteHits,
   Menu,
   Pagination,
+  RangeInput,
   RefinementList,
   PoweredBy,
   SearchBox,
@@ -27,7 +28,6 @@ import {
   Panel,
   QueryRuleContext,
   QueryRuleCustomData,
-  RangeInput,
 } from './components';
 import { Tab, Tabs } from './components/layout';
 
