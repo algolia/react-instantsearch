@@ -132,8 +132,7 @@ export function RangeInput({
           }
         />
         <span className={cx('ais-RangeInput-separator', classNames.separator)}>
-          {' '}
-          {translations.separator}{' '}
+          {translations.separator}
         </span>
         <input
           className={cx(
