@@ -14,6 +14,7 @@ export type RangeInputProps = Omit<
     classNames?: Partial<RangeInputClassNames>;
     disabled: boolean;
     onSubmit: RangeRenderState['refine'];
+    step?: number;
     translations: RangeInputTranslations;
   };
 
@@ -74,6 +75,7 @@ export function RangeInput({
   classNames = {},
   range: { min, max },
   start: [minValue, maxValue],
+  step = 1,
   disabled,
   onSubmit,
   translations,
@@ -99,6 +101,15 @@ export function RangeInput({
     setRange({ from: values.min, to: values.max });
   }, [values.min, values.max]);
 
+  const onInput =
+    (key: string) =>
+    ({ currentTarget }: React.SyntheticEvent<HTMLInputElement>) => {
+      const value = Number(currentTarget.value);
+
+      currentTarget.value = value.toString();
+      setRange({ from, to, [key]: value });
+    };
+
   return (
     <div
       {...props}
@@ -116,39 +127,41 @@ export function RangeInput({
           onSubmit([from, to]);
         }}
       >
-        <input
-          className={cx(
-            cx('ais-RangeInput-input', classNames.input),
-            cx('ais-RangeInput-input--min', classNames.inputMin)
-          )}
-          type="number"
-          min={min}
-          max={max}
-          value={from}
-          placeholder={min ? min.toString() : ''}
-          disabled={disabled}
-          onChange={(event) =>
-            setRange({ from: Number(event.currentTarget.value), to })
-          }
-        />
+        <label className={cx('ais-RangeInput-label', classNames.label)}>
+          <input
+            className={cx(
+              cx('ais-RangeInput-input', classNames.input),
+              cx('ais-RangeInput-input--min', classNames.inputMin)
+            )}
+            type="number"
+            min={min}
+            max={max}
+            value={from}
+            step={step}
+            placeholder={min?.toString()}
+            disabled={disabled}
+            onInput={onInput('from')}
+          />
+        </label>
         <span className={cx('ais-RangeInput-separator', classNames.separator)}>
           {translations.separator}
         </span>
-        <input
-          className={cx(
-            cx('ais-RangeInput-input', classNames.input),
-            cx('ais-RangeInput-input--max', classNames.inputMax)
-          )}
-          type="number"
-          min={min}
-          max={max}
-          value={to}
-          placeholder={max ? max.toString() : ''}
-          disabled={disabled}
-          onChange={(event) =>
-            setRange({ from, to: Number(event.currentTarget.value) })
-          }
-        />
+        <label className={cx('ais-RangeInput-label', classNames.label)}>
+          <input
+            className={cx(
+              cx('ais-RangeInput-input', classNames.input),
+              cx('ais-RangeInput-input--max', classNames.inputMax)
+            )}
+            type="number"
+            min={min}
+            max={max}
+            value={to}
+            step={step}
+            placeholder={max?.toString()}
+            disabled={disabled}
+            onInput={onInput('to')}
+          />
+        </label>
         <button
           className={cx('ais-RangeInput-submit', classNames.submit)}
           type="submit"

@@ -30,27 +30,37 @@ describe('RangeInput', () => {
           <form
             class="ais-RangeInput-form"
           >
-            <input
-              class="ais-RangeInput-input ais-RangeInput-input--min"
-              max="5000"
-              min="1"
-              placeholder="1"
-              type="number"
-              value=""
-            />
+            <label
+              class="ais-RangeInput-label"
+            >
+              <input
+                class="ais-RangeInput-input ais-RangeInput-input--min"
+                max="5000"
+                min="1"
+                placeholder="1"
+                step="1"
+                type="number"
+                value=""
+              />
+            </label>
             <span
               class="ais-RangeInput-separator"
             >
               to
             </span>
-            <input
-              class="ais-RangeInput-input ais-RangeInput-input--max"
-              max="5000"
-              min="1"
-              placeholder="5000"
-              type="number"
-              value=""
-            />
+            <label
+              class="ais-RangeInput-label"
+            >
+              <input
+                class="ais-RangeInput-input ais-RangeInput-input--max"
+                max="5000"
+                min="1"
+                placeholder="5000"
+                step="1"
+                type="number"
+                value=""
+              />
+            </label>
             <button
               class="ais-RangeInput-submit"
               type="submit"
@@ -170,29 +180,39 @@ describe('RangeInput', () => {
           <form
             class="ais-RangeInput-form FORM"
           >
-            <input
-              class="ais-RangeInput-input INPUT ais-RangeInput-input--min INPUTMIN"
-              disabled=""
-              max="5000"
-              min="1"
-              placeholder="1"
-              type="number"
-              value=""
-            />
+            <label
+              class="ais-RangeInput-label LABEL"
+            >
+              <input
+                class="ais-RangeInput-input INPUT ais-RangeInput-input--min INPUTMIN"
+                disabled=""
+                max="5000"
+                min="1"
+                placeholder="1"
+                step="1"
+                type="number"
+                value=""
+              />
+            </label>
             <span
               class="ais-RangeInput-separator SEPARATOR"
             >
               to
             </span>
-            <input
-              class="ais-RangeInput-input INPUT ais-RangeInput-input--max INPUTMAX"
-              disabled=""
-              max="5000"
-              min="1"
-              placeholder="5000"
-              type="number"
-              value=""
-            />
+            <label
+              class="ais-RangeInput-label LABEL"
+            >
+              <input
+                class="ais-RangeInput-input INPUT ais-RangeInput-input--max INPUTMAX"
+                disabled=""
+                max="5000"
+                min="1"
+                placeholder="5000"
+                step="1"
+                type="number"
+                value=""
+              />
+            </label>
             <button
               class="ais-RangeInput-submit SUBMIT"
               type="submit"

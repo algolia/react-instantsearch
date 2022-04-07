@@ -8,7 +8,7 @@ import type { UseRangeProps } from 'react-instantsearch-hooks';
 
 export type RangeInputProps = Omit<
   RangeInputUiProps,
-  'disabled' | 'onSubmit' | 'range' | 'start' | 'translations'
+  'disabled' | 'onSubmit' | 'range' | 'start' | 'step' | 'translations'
 > &
   UseRangeProps;
 
@@ -24,11 +24,14 @@ export function RangeInput({
     { $$widgetType: 'ais.rangeInput' }
   );
 
+  const step = 1 / Math.pow(10, precision || 0);
+
   return (
     <RangeInputUiComponent
       {...props}
       range={range}
       start={start}
+      step={step}
       disabled={!canRefine}
       onSubmit={refine}
       translations={{ separator: 'to', submit: 'Go' }}

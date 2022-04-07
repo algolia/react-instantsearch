@@ -10,35 +10,35 @@ import {
 import { InstantSearchHooksTestWrapper, wait } from '../../../../../test/utils';
 import { RangeInput } from '../RangeInput';
 
-const search = jest.fn((requests) => {
-  return Promise.resolve(
-    createMultiSearchResponse(
-      ...requests.map(() =>
-        createSingleSearchResponse({
-          facets: {
-            price: {},
-          },
-          facets_stats: {
-            price: {
-              min: 1,
-              max: 1000,
-              avg: 0,
-              sum: 0,
-            },
-          },
-        })
-      )
-    )
-  );
-});
-
-beforeEach(() => {
-  search.mockClear();
-});
+function getSearchClient() {
+  return createSearchClient({
+    search: jest.fn((requests) => {
+      return Promise.resolve(
+        createMultiSearchResponse(
+          ...requests.map(() =>
+            createSingleSearchResponse({
+              facets: {
+                price: {},
+              },
+              facets_stats: {
+                price: {
+                  min: 1,
+                  max: 1000,
+                  avg: 0,
+                  sum: 0,
+                },
+              },
+            })
+          )
+        )
+      );
+    }),
+  });
+}
 
 describe('RangeInput', () => {
   test('renders with default attributes', async () => {
-    const client = createSearchClient({ search });
+    const client = getSearchClient();
     const { container } = render(
       <InstantSearchHooksTestWrapper searchClient={client}>
         <RangeInput attribute="price" />
@@ -57,27 +57,37 @@ describe('RangeInput', () => {
           <form
             class="ais-RangeInput-form"
           >
-            <input
-              class="ais-RangeInput-input ais-RangeInput-input--min"
-              max="1000"
-              min="1"
-              placeholder="1"
-              type="number"
-              value=""
-            />
+            <label
+              class="ais-RangeInput-label"
+            >
+              <input
+                class="ais-RangeInput-input ais-RangeInput-input--min"
+                max="1000"
+                min="1"
+                placeholder="1"
+                step="1"
+                type="number"
+                value=""
+              />
+            </label>
             <span
               class="ais-RangeInput-separator"
             >
               to
             </span>
-            <input
-              class="ais-RangeInput-input ais-RangeInput-input--max"
-              max="1000"
-              min="1"
-              placeholder="1000"
-              type="number"
-              value=""
-            />
+            <label
+              class="ais-RangeInput-label"
+            >
+              <input
+                class="ais-RangeInput-input ais-RangeInput-input--max"
+                max="1000"
+                min="1"
+                placeholder="1000"
+                step="1"
+                type="number"
+                value=""
+              />
+            </label>
             <button
               class="ais-RangeInput-submit"
               type="submit"
@@ -91,7 +101,7 @@ describe('RangeInput', () => {
   });
 
   test('renders with initial values', async () => {
-    const client = createSearchClient({ search });
+    const client = getSearchClient();
     const { container } = render(
       <InstantSearchHooksTestWrapper
         searchClient={client}
@@ -118,7 +128,7 @@ describe('RangeInput', () => {
   });
 
   test('refines on submit', async () => {
-    const client = createSearchClient({ search });
+    const client = getSearchClient();
     const { container } = render(
       <InstantSearchHooksTestWrapper searchClient={client}>
         <RangeInput attribute="price" />
@@ -155,7 +165,7 @@ describe('RangeInput', () => {
   });
 
   test('forwards `div` props to the root element', async () => {
-    const client = createSearchClient({ search });
+    const client = getSearchClient();
     const { container } = render(
       <InstantSearchHooksTestWrapper searchClient={client}>
         <RangeInput

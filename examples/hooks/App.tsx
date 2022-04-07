@@ -90,17 +90,6 @@ export function App() {
             <Panel header="Price">
               <RangeInput attribute="price" />
             </Panel>
-            <Panel header="Price range">
-              <NumericMenu
-                attribute="price"
-                items={[
-                  { label: 'All' },
-                  { label: 'Less than $500', end: 500 },
-                  { label: 'Between $500 - $1000', start: 500, end: 1000 },
-                  { label: 'More than $1000', start: 1000 },
-                ]}
-              />
-            </Panel>
             <Panel header="Free Shipping">
               <ToggleRefinement
                 attribute="free_shipping"
