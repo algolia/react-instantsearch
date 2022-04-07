@@ -23,12 +23,7 @@ import {
   ToggleRefinement,
 } from 'react-instantsearch-hooks-dom';
 
-import {
-  NumericMenu,
-  Panel,
-  QueryRuleContext,
-  QueryRuleCustomData,
-} from './components';
+import { Panel, QueryRuleContext, QueryRuleCustomData } from './components';
 import { Tab, Tabs } from './components/layout';
 
 import './App.css';
