@@ -101,15 +101,6 @@ export function RangeInput({
     setRange({ from: values.min, to: values.max });
   }, [values.min, values.max]);
 
-  const onInput =
-    (key: string) =>
-    ({ currentTarget }: React.SyntheticEvent<HTMLInputElement>) => {
-      const value = Number(currentTarget.value);
-
-      currentTarget.value = value.toString();
-      setRange({ from, to, [key]: value });
-    };
-
   return (
     <div
       {...props}
@@ -138,11 +129,13 @@ export function RangeInput({
             type="number"
             min={min}
             max={max}
-            value={from}
+            value={from?.toString()} // Strips leading `0` from a positive number value
             step={step}
             placeholder={min?.toString()}
             disabled={disabled}
-            onInput={onInput('from')}
+            onInput={({ currentTarget }) =>
+              setRange({ from: Number(currentTarget.value), to })
+            }
           />
         </label>
         <span className={cx('ais-RangeInput-separator', classNames.separator)}>
@@ -159,11 +152,13 @@ export function RangeInput({
             type="number"
             min={min}
             max={max}
-            value={to}
+            value={to?.toString()} // Strips leading `0` from a positive number value
             step={step}
             placeholder={max?.toString()}
             disabled={disabled}
-            onInput={onInput('to')}
+            onInput={({ currentTarget }) =>
+              setRange({ from, to: Number(currentTarget.value) })
+            }
           />
         </label>
         <button
