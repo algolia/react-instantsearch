@@ -10,7 +10,7 @@ import {
 import { InstantSearchHooksTestWrapper, wait } from '../../../../../test/utils';
 import { RangeInput } from '../RangeInput';
 
-function getSearchClient() {
+function createSearchClientWithFacetsStats() {
   return createSearchClient({
     search: jest.fn((requests) => {
       return Promise.resolve(
@@ -38,7 +38,7 @@ function getSearchClient() {
 
 describe('RangeInput', () => {
   test('renders with default attributes', async () => {
-    const client = getSearchClient();
+    const client = createSearchClientWithFacetsStats();
     const { container } = render(
       <InstantSearchHooksTestWrapper searchClient={client}>
         <RangeInput attribute="price" />
@@ -101,7 +101,7 @@ describe('RangeInput', () => {
   });
 
   test('renders with initial values', async () => {
-    const client = getSearchClient();
+    const client = createSearchClientWithFacetsStats();
     const { container } = render(
       <InstantSearchHooksTestWrapper
         searchClient={client}
@@ -128,7 +128,7 @@ describe('RangeInput', () => {
   });
 
   test('refines on submit', async () => {
-    const client = getSearchClient();
+    const client = createSearchClientWithFacetsStats();
     const { container } = render(
       <InstantSearchHooksTestWrapper searchClient={client}>
         <RangeInput attribute="price" />
@@ -165,7 +165,7 @@ describe('RangeInput', () => {
   });
 
   test('forwards `div` props to the root element', async () => {
-    const client = getSearchClient();
+    const client = createSearchClientWithFacetsStats();
     const { container } = render(
       <InstantSearchHooksTestWrapper searchClient={client}>
         <RangeInput

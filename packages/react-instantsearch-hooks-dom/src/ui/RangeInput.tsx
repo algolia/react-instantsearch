@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { cx } from './lib/cx';
 
@@ -92,12 +92,12 @@ export function RangeInput({
         : unsetNumberInputValue,
   };
 
-  const [{ from, to }, setRange] = React.useState({
+  const [{ from, to }, setRange] = useState({
     from: values.min,
     to: values.max,
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
     setRange({ from: values.min, to: values.max });
   }, [values.min, values.max]);
 
@@ -130,8 +130,10 @@ export function RangeInput({
         <label className={cx('ais-RangeInput-label', classNames.label)}>
           <input
             className={cx(
-              cx('ais-RangeInput-input', classNames.input),
-              cx('ais-RangeInput-input--min', classNames.inputMin)
+              'ais-RangeInput-input',
+              classNames.input,
+              'ais-RangeInput-input--min',
+              classNames.inputMin
             )}
             type="number"
             min={min}
@@ -149,8 +151,10 @@ export function RangeInput({
         <label className={cx('ais-RangeInput-label', classNames.label)}>
           <input
             className={cx(
-              cx('ais-RangeInput-input', classNames.input),
-              cx('ais-RangeInput-input--max', classNames.inputMax)
+              'ais-RangeInput-input',
+              classNames.input,
+              'ais-RangeInput-input--max',
+              classNames.inputMax
             )}
             type="number"
             min={min}
