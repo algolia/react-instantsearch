@@ -126,6 +126,24 @@ describe('RangeInput', () => {
         ).map((input) => input.value)
       ).toEqual(['100', '1000']);
     });
+
+    test('steps with specific value', () => {
+      const props = createProps({ start: [100, 100], step: 0.01 });
+      render(<RangeInput {...props} />);
+
+      ['min', 'max'].forEach((target) => {
+        const input = document.querySelector(
+          `.ais-RangeInput-input--${target}`
+        ) as HTMLInputElement;
+
+        expect(input).toHaveAttribute('step', '0.01');
+        expect(input).toHaveValue(100);
+
+        input.stepUp();
+
+        expect(input).toHaveValue(100.01);
+      });
+    });
   });
 
   test('calls `onSubmit` callback when submitting form', () => {

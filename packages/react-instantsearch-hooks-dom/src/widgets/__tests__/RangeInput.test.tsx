@@ -127,6 +127,23 @@ describe('RangeInput', () => {
     );
   });
 
+  test('renders with precision', async () => {
+    const client = createSearchClientWithFacetsStats();
+    const { container } = render(
+      <InstantSearchHooksTestWrapper searchClient={client}>
+        <RangeInput attribute="price" precision={2} />
+      </InstantSearchHooksTestWrapper>
+    );
+
+    await wait(0);
+
+    ['min', 'max'].forEach((target) => {
+      expect(
+        container.querySelector(`.ais-RangeInput-input--${target}`)
+      ).toHaveAttribute('step', '0.01');
+    });
+  });
+
   test('refines on submit', async () => {
     const client = createSearchClientWithFacetsStats();
     const { container } = render(
