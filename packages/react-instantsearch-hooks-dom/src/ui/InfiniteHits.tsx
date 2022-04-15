@@ -21,6 +21,10 @@ export type InfiniteHitsClassNames = {
    */
   root: string;
   /**
+   * Class names to apply to the root element without results
+   */
+  emptyRoot: string;
+  /**
    * Class names to apply to the "load previous" button
    */
   loadPrevious: string;
@@ -73,7 +77,13 @@ export function InfiniteHits<THit extends Hit>({
   return (
     <div
       {...props}
-      className={cx('ais-InfiniteHits', classNames.root, props.className)}
+      className={cx(
+        'ais-InfiniteHits',
+        classNames.root,
+        hits.length === 0 &&
+          cx('ais-InfiniteHits--empty', classNames.emptyRoot),
+        props.className
+      )}
     >
       {onShowPrevious && (
         <button
@@ -82,8 +92,8 @@ export function InfiniteHits<THit extends Hit>({
             classNames.loadPrevious,
             isFirstPage &&
               cx(
-                classNames.disabledLoadPrevious,
-                'ais-InfiniteHits-loadPrevious--disabled'
+                'ais-InfiniteHits-loadPrevious--disabled',
+                classNames.disabledLoadPrevious
               )
           )}
           onClick={onShowPrevious}

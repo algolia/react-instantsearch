@@ -23,6 +23,10 @@ export type MenuCSSClasses = {
    */
   root: string;
   /**
+   * Class names to apply to the root element when there are no refinements possible
+   */
+  noRefinementRoot: string;
+  /**
    * Class names to apply to the list element
    */
   list: string;
@@ -70,7 +74,13 @@ export function Menu({
   return (
     <div
       {...props}
-      className={cx('ais-Menu', classNames.root, props.className)}
+      className={cx(
+        'ais-Menu',
+        classNames.root,
+        items.length === 0 &&
+          cx('ais-Menu--noRefinement', classNames.noRefinementRoot),
+        props.className
+      )}
     >
       <ul className={cx('ais-Menu-list', classNames.list)}>
         {items.map((item) => (

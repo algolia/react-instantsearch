@@ -261,6 +261,28 @@ describe('Menu', () => {
     `);
   });
 
+  test('allows custom class names (empty)', () => {
+    const props = createProps({ items: [] });
+    const { container } = render(
+      <Menu
+        {...props}
+        classNames={{ root: 'ROOT', noRefinementRoot: 'NOREFINEMENTROOT' }}
+      />
+    );
+
+    expect(container).toMatchInlineSnapshot(`
+      <div>
+        <div
+          class="ais-Menu ROOT ais-Menu--noRefinement NOREFINEMENTROOT"
+        >
+          <ul
+            class="ais-Menu-list"
+          />
+        </div>
+      </div>
+    `);
+  });
+
   test('forwards `div` props to the root element', () => {
     const props = createProps({ title: 'Some custom title' });
     const { container } = render(<Menu {...props} />);

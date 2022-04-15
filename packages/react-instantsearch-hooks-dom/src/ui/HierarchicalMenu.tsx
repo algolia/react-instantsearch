@@ -20,6 +20,10 @@ type HierarchicalMenuClassNames = {
    */
   list: string;
   /**
+   * Class names to apply to the child list element
+   */
+  childList: string;
+  /**
    * Class names to apply to each item element
    */
   item: string;
@@ -27,6 +31,10 @@ type HierarchicalMenuClassNames = {
    * Class names to apply to the selected item
    */
   selectedItem: string;
+  /**
+   * Class names to apply to the parent item of the list
+   */
+  parentItem: string;
   /**
    * Class names to apply to each link element
    */
@@ -53,6 +61,7 @@ type HierarchicalListProps = Pick<
   ReturnType<typeof useHierarchicalMenu>,
   'items' | 'createURL'
 > & {
+  className?: string;
   classNames?: Partial<HierarchicalMenuClassNames>;
   onNavigate: (value: string) => void;
 };
@@ -67,19 +76,22 @@ export type HierarchicalMenuProps = React.HTMLAttributes<HTMLDivElement> &
   };
 
 function HierarchicalList({
+  className,
   classNames = {},
   items,
   createURL,
   onNavigate,
 }: HierarchicalListProps) {
   return (
-    <ul className={cx('ais-HierarchicalMenu-list', classNames.list)}>
+    <ul className={cx('ais-HierarchicalMenu-list', classNames.list, className)}>
       {items.map((item) => (
         <li
           key={item.value}
           className={cx(
             'ais-HierarchicalMenu-item',
             classNames.item,
+            Boolean(item.data) &&
+              cx('ais-HierarchicalMenu-item--parent', classNames.parentItem),
             item.isRefined &&
               cx('ais-HierarchicalMenu-item--selected', classNames.selectedItem)
           )}
@@ -108,6 +120,10 @@ function HierarchicalList({
           </a>
           {Boolean(item.data) && (
             <HierarchicalList
+              className={cx(
+                'ais-HierarchicalMenu-list--child',
+                classNames.childList
+              )}
               classNames={classNames}
               items={item.data!}
               onNavigate={onNavigate}

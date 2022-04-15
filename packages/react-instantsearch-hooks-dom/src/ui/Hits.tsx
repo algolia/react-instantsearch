@@ -24,6 +24,10 @@ export type HitsClassNames = {
    */
   root: string;
   /**
+   * Class names to apply to the root element without results
+   */
+  emptyRoot: string;
+  /**
    * Class names to apply to the list element
    */
   list: string;
@@ -42,7 +46,12 @@ export function Hits<THit extends Hit>({
   return (
     <div
       {...props}
-      className={cx('ais-Hits', classNames.root, props.className)}
+      className={cx(
+        'ais-Hits',
+        classNames.root,
+        hits.length === 0 && cx('ais-Hits--empty', classNames.emptyRoot),
+        props.className
+      )}
     >
       <ol className={cx('ais-Hits-list', classNames.list)}>
         {hits.map((hit) => (

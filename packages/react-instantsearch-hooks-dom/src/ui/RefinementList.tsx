@@ -26,6 +26,10 @@ export type RefinementListClassNames = {
    */
   root: string;
   /**
+   * Class names to apply to the root element when there are no refinements possible
+   */
+  noRefinementRoot: string;
+  /**
    * Class names to apply to the search box wrapper element
    */
   searchBox: string;
@@ -88,7 +92,13 @@ export function RefinementList({
   return (
     <div
       {...props}
-      className={cx('ais-RefinementList', classNames.root, className)}
+      className={cx(
+        'ais-RefinementList',
+        classNames.root,
+        items.length === 0 &&
+          cx('ais-RefinementList--noRefinement', classNames.noRefinementRoot),
+        className
+      )}
     >
       {searchBox && (
         <div
