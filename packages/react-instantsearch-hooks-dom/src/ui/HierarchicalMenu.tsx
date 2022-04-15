@@ -14,7 +14,7 @@ type HierarchicalMenuClassNames = {
   /**
    * Class names to apply to the root element when there are no refinements possible
    */
-  rootNoRefinement: string;
+  noRefinementRoot: string;
   /**
    * Class names to apply to the list element
    */
@@ -26,7 +26,7 @@ type HierarchicalMenuClassNames = {
   /**
    * Class names to apply to the selected item
    */
-  itemSelected: string;
+  selectedItem: string;
   /**
    * Class names to apply to each link element
    */
@@ -46,7 +46,7 @@ type HierarchicalMenuClassNames = {
   /**
    * Class names to apply to the "Show more" button if it's disabled
    */
-  showMoreDisabled: string;
+  disabledShowMore: string;
 };
 
 type HierarchicalListProps = Pick<
@@ -81,7 +81,7 @@ function HierarchicalList({
             'ais-HierarchicalMenu-item',
             classNames.item,
             item.isRefined &&
-              cx('ais-HierarchicalMenu-item--selected', classNames.itemSelected)
+              cx('ais-HierarchicalMenu-item--selected', classNames.selectedItem)
           )}
         >
           <a
@@ -139,7 +139,7 @@ export function HierarchicalMenu({
         'ais-HierarchicalMenu',
         classNames.root,
         !hasItems &&
-          cx('ais-HierarchicalMenu--noRefinement', classNames.rootNoRefinement),
+          cx('ais-HierarchicalMenu--noRefinement', classNames.noRefinementRoot),
         props.className
       )}
     >
@@ -157,7 +157,7 @@ export function HierarchicalMenu({
             !canToggleShowMore &&
               cx(
                 'ais-HierarchicalMenu-showMore--disabled',
-                classNames.showMoreDisabled
+                classNames.disabledShowMore
               )
           )}
           disabled={!canToggleShowMore}

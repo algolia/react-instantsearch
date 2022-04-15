@@ -2101,14 +2101,14 @@ describe('Pagination', () => {
           className="MyPagination"
           classNames={{
             root: 'ROOT',
-            rootNoRefinement: 'ROOTNOREFINEMENT',
+            noRefinementRoot: 'ROOTNOREFINEMENT',
             list: 'LIST',
-            itemFirstPage: 'ITEMFIRSTPAGE',
-            itemPreviousPage: 'ITEMPREVIOUSPAGE',
-            itemPage: 'ITEMPAGE',
-            itemSelected: 'ITEMSELECTED',
-            itemNextPage: 'ITEMNEXTPAGE',
-            itemLastPage: 'ITEMLASTPAGE',
+            firstPageItem: 'ITEMFIRSTPAGE',
+            previousPageItem: 'ITEMPREVIOUSPAGE',
+            pageItem: 'ITEMPAGE',
+            selectedItem: 'ITEMSELECTED',
+            nextPageItem: 'ITEMNEXTPAGE',
+            lastPageItem: 'ITEMLASTPAGE',
           }}
         />
       </InstantSearchHooksTestWrapper>

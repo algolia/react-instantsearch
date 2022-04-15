@@ -99,9 +99,9 @@ describe('InfiniteHits', () => {
         classNames={{
           root: 'ROOT',
           loadPrevious: 'LOADPREVIOUS',
-          loadPreviousDisabled: 'LOADPREVIOUSDISABLED',
+          disabledLoadPrevious: 'LOADPREVIOUSDISABLED',
           loadMore: 'LOADMORE',
-          loadMoreDisabled: 'LOADMOREDISABLED',
+          disabledLoadMore: 'LOADMOREDISABLED',
           list: 'LIST',
           item: 'ITEM',
         }}

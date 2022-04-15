@@ -536,13 +536,13 @@ describe('RefinementList', () => {
         noResults: 'NORESULTS',
         list: 'LIST',
         item: 'ITEM',
-        itemSelected: 'ITEMSELECTED',
+        selectedItem: 'ITEMSELECTED',
         label: 'LABEL',
         checkbox: 'CHECKBOX',
         labelText: 'LABELTEXT',
         count: 'COUNT',
         showMore: 'SHOWMORE',
-        showMoreDisabled: 'SHOWMOREDISABLED',
+        disabledShowMore: 'SHOWMOREDISABLED',
       },
     });
     const { container } = render(<RefinementList {...props} />);

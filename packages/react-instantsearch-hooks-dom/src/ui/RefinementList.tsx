@@ -44,7 +44,7 @@ export type RefinementListClassNames = {
   /**
    * Class names to apply to each selected item element
    */
-  itemSelected: string;
+  selectedItem: string;
   /**
    * Class names to apply to each label element
    */
@@ -68,7 +68,7 @@ export type RefinementListClassNames = {
   /**
    * Class names to apply to the "Show more" button if it's disabled
    */
-  showMoreDisabled: string;
+  disabledShowMore: string;
 };
 
 export function RefinementList({
@@ -114,7 +114,7 @@ export function RefinementList({
                 item.isRefined &&
                   cx(
                     'ais-RefinementList-item--selected',
-                    classNames.itemSelected
+                    classNames.selectedItem
                   )
               )}
             >
@@ -167,7 +167,7 @@ export function RefinementList({
             !canToggleShowMore &&
               cx(
                 'ais-RefinementList-showMore--disabled',
-                classNames.showMoreDisabled
+                classNames.disabledShowMore
               )
           )}
           disabled={!canToggleShowMore}

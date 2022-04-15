@@ -197,10 +197,10 @@ describe('Breadcrumb', () => {
       className: 'MyCustomBreadcrumb',
       classNames: {
         root: 'ROOT',
-        rootNoRefinement: 'ROOTNOREFINEMENT',
+        noRefinementRoot: 'ROOTNOREFINEMENT',
         list: 'LIST',
         item: 'ITEM',
-        itemSelected: 'ITEMSELECTED',
+        selectedItem: 'ITEMSELECTED',
         separator: 'SEPARATOR',
         link: 'LINK',
       },

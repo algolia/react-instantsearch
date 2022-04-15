@@ -193,12 +193,12 @@ describe('Menu', () => {
         root: 'ROOT',
         list: 'LIST',
         item: 'ITEM',
-        itemSelected: 'ITEMSELECTED',
+        selectedItem: 'ITEMSELECTED',
         label: 'LABEL',
         link: 'LINK',
         count: 'COUNT',
         showMore: 'SHOWMORE',
-        showMoreDisabled: 'SHOWMOREDISABLED',
+        disabledShowMore: 'SHOWMOREDISABLED',
       },
     });
     const { container } = render(<Menu {...props} />);

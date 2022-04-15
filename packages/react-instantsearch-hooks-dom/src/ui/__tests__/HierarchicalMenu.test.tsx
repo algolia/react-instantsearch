@@ -296,15 +296,15 @@ describe('HierarchicalMenu', () => {
       canToggleShowMore: false,
       classNames: {
         root: 'ROOT',
-        rootNoRefinement: 'ROOTNOREFINEMENT',
+        noRefinementRoot: 'ROOTNOREFINEMENT',
         list: 'LIST',
         item: 'ITEM',
-        itemSelected: 'ITEMSELECTED',
+        selectedItem: 'ITEMSELECTED',
         link: 'LINK',
         label: 'LABEL',
         count: 'COUNT',
         showMore: 'SHOWMORE',
-        showMoreDisabled: 'SHOWMOREDISABLED',
+        disabledShowMore: 'SHOWMOREDISABLED',
       },
     });
     const { container } = render(<HierarchicalMenu {...props} />);

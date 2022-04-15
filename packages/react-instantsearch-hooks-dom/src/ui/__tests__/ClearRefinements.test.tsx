@@ -147,7 +147,7 @@ describe('ClearRefinements', () => {
         classNames={{
           root: 'ROOT',
           button: 'BUTTON',
-          buttonDisabled: 'DISABLED',
+          disabledButton: 'DISABLED',
         }}
       />
     );

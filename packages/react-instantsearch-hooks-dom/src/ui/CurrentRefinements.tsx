@@ -26,7 +26,7 @@ export type CurrentRefinementsClassNames = {
   /**
    * Class names to apply to the root element when there are no refinements possible
    */
-  rootNoRefinement: string;
+  noRefinementRoot: string;
   /**
    * Class names to apply to the list element
    */
@@ -73,7 +73,7 @@ export function CurrentRefinements({
         !hasRefinements &&
           cx(
             'ais-CurrentRefinements--noRefinement',
-            classNames.rootNoRefinement
+            classNames.noRefinementRoot
           ),
         props.className
       )}

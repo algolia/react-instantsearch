@@ -28,7 +28,7 @@ export type HitsClassNames = {
    */
   list: string;
   /**
-   * Class names to apply to the individual hit element
+   * Class names to apply to each item element
    */
   item: string;
 };

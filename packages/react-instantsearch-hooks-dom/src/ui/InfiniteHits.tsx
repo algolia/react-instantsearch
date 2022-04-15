@@ -27,7 +27,7 @@ export type InfiniteHitsClassNames = {
   /**
    * Class names to apply to the "load previous" button when it's disabled
    */
-  loadPreviousDisabled: string;
+  disabledLoadPrevious: string;
   /**
    * Class names to apply to the "load more" button
    */
@@ -35,7 +35,7 @@ export type InfiniteHitsClassNames = {
   /**
    * Class names to apply to the "load more" button when it's disabled
    */
-  loadMoreDisabled: string;
+  disabledLoadMore: string;
   /**
    * Class names to apply to the list element
    */
@@ -82,7 +82,7 @@ export function InfiniteHits<THit extends Hit>({
             classNames.loadPrevious,
             isFirstPage &&
               cx(
-                classNames.loadPreviousDisabled,
+                classNames.disabledLoadPrevious,
                 'ais-InfiniteHits-loadPrevious--disabled'
               )
           )}
@@ -109,7 +109,7 @@ export function InfiniteHits<THit extends Hit>({
           isLastPage &&
             cx(
               'ais-InfiniteHits-loadMore--disabled',
-              classNames.loadMoreDisabled
+              classNames.disabledLoadMore
             )
         )}
         onClick={onShowMore}

@@ -629,7 +629,7 @@ describe('CurrentRefinements', () => {
             className="MyCurrentRefinements"
             classNames={{
               root: 'ROOT',
-              rootNoRefinement: 'ROOTNOREFINEMENT',
+              noRefinementRoot: 'ROOTNOREFINEMENT',
               list: 'LIST',
               listNoRefinement: 'LISTNOREFINEMENT',
               item: 'ITEM',
@@ -673,7 +673,7 @@ describe('CurrentRefinements', () => {
             className="MyCurrentRefinements"
             classNames={{
               root: 'ROOT',
-              rootNoRefinement: 'ROOTNOREFINEMENT',
+              noRefinementRoot: 'ROOTNOREFINEMENT',
               list: 'LIST',
               listNoRefinement: 'LISTNOREFINEMENT',
               item: 'ITEM',

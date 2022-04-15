@@ -1037,16 +1037,16 @@ describe('Pagination', () => {
         {...props}
         classNames={{
           root: 'ROOT',
-          rootNoRefinement: 'ROOTNOREFINEMENT',
+          noRefinementRoot: 'ROOTNOREFINEMENT',
           list: 'LIST',
           item: 'ITEM',
-          itemFirstPage: 'ITEMFIRSTPAGE',
-          itemPreviousPage: 'ITEMPREVIOUSPAGE',
-          itemPage: 'ITEMPAGE',
-          itemSelected: 'ITEMSELECTED',
-          itemDisabled: 'ITEMDISABLED',
-          itemNextPage: 'ITEMNEXTPAGE',
-          itemLastPage: 'ITEMLASTPAGE',
+          firstPageItem: 'ITEMFIRSTPAGE',
+          previousPageItem: 'ITEMPREVIOUSPAGE',
+          pageItem: 'ITEMPAGE',
+          selectedItem: 'ITEMSELECTED',
+          disabledItem: 'ITEMDISABLED',
+          nextPageItem: 'ITEMNEXTPAGE',
+          lastPageItem: 'ITEMLASTPAGE',
           link: 'LINK',
         }}
       />

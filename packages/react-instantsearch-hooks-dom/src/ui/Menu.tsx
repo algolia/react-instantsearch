@@ -33,7 +33,7 @@ export type MenuCSSClasses = {
   /**
    * Class names to apply to each selected item element
    */
-  itemSelected: string;
+  selectedItem: string;
   /**
    * Class names to apply to each link element
    */
@@ -53,7 +53,7 @@ export type MenuCSSClasses = {
   /**
    * Class names to apply to the "Show more" button if it's disabled
    */
-  showMoreDisabled: string;
+  disabledShowMore: string;
 };
 
 export function Menu({
@@ -80,7 +80,7 @@ export function Menu({
               'ais-Menu-item',
               classNames.item,
               item.isRefined &&
-                cx('ais-Menu-item--selected', classNames.itemSelected)
+                cx('ais-Menu-item--selected', classNames.selectedItem)
             )}
           >
             <a
@@ -107,7 +107,7 @@ export function Menu({
             'ais-Menu-showMore',
             classNames.showMore,
             !canToggleShowMore &&
-              cx('ais-Menu-showMore--disabled', classNames.showMoreDisabled)
+              cx('ais-Menu-showMore--disabled', classNames.disabledShowMore)
           )}
           disabled={!canToggleShowMore}
           onClick={onToggleShowMore}
