@@ -8,6 +8,7 @@ import { ShowMoreButton } from './ShowMoreButton';
 import type { RefinementListItem } from 'instantsearch.js/es/connectors/refinement-list/connectRefinementList';
 
 export type RefinementListProps = React.HTMLAttributes<HTMLDivElement> & {
+  canRefine: boolean;
   items: RefinementListItem[];
   onRefine(item: RefinementListItem): void;
   query: string;
@@ -76,6 +77,7 @@ export type RefinementListClassNames = {
 };
 
 export function RefinementList({
+  canRefine,
   items,
   onRefine,
   query,
@@ -95,7 +97,7 @@ export function RefinementList({
       className={cx(
         'ais-RefinementList',
         classNames.root,
-        items.length === 0 &&
+        !canRefine &&
           cx('ais-RefinementList--noRefinement', classNames.noRefinementRoot),
         className
       )}

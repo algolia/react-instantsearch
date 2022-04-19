@@ -90,7 +90,7 @@ function HierarchicalList({
           className={cx(
             'ais-HierarchicalMenu-item',
             classNames.item,
-            Boolean(item.data) &&
+            item.data &&
               cx('ais-HierarchicalMenu-item--parent', classNames.parentItem),
             item.isRefined &&
               cx('ais-HierarchicalMenu-item--selected', classNames.selectedItem)
@@ -118,7 +118,7 @@ function HierarchicalList({
               {item.count}
             </span>
           </a>
-          {Boolean(item.data) && (
+          {item.data && (
             <HierarchicalList
               className={cx(
                 'ais-HierarchicalMenu-list--child',

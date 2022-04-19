@@ -10,6 +10,7 @@ import type { RefinementListProps } from '../RefinementList';
 describe('RefinementList', () => {
   function createProps(props: Partial<RefinementListProps>) {
     return {
+      canRefine: true,
       items: [
         {
           value: 'Insignia™',
@@ -615,7 +616,11 @@ describe('RefinementList', () => {
   });
 
   test('allows custom class names (empty)', () => {
-    const props = createProps({ items: [], noResults: 'No results.' });
+    const props = createProps({
+      canRefine: false,
+      items: undefined,
+      noResults: 'No results.',
+    });
     const { container } = render(
       <RefinementList
         {...props}
