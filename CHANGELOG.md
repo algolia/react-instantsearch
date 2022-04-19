@@ -1,3 +1,12 @@
+# [6.24.0](https://github.com/algolia/react-instantsearch/compare/v6.23.3...v6.24.0) (2022-04-19)
+
+
+### Features
+
+* **hooks:** implement <RangeInput> ([2613971](https://github.com/algolia/react-instantsearch/commit/26139714162de7f64d881f9317a391c872fb2316))
+
+
+
 ## [6.23.3](https://github.com/algolia/react-instantsearch/compare/v6.23.2...v6.23.3) (2022-04-05)
 
 
