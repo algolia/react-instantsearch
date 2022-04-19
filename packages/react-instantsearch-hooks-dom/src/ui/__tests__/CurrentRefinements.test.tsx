@@ -11,10 +11,10 @@ describe('CurrentRefinements', () => {
     expect(container).toMatchInlineSnapshot(`
       <div>
         <div
-          class="ais-CurrentRefinements ais-CurrentRefinements--noRefinement"
+          class="ais-CurrentRefinements"
         >
           <ul
-            class="ais-CurrentRefinements-list ais-CurrentRefinements-list--noRefinement"
+            class="ais-CurrentRefinements-list"
           />
         </div>
       </div>
@@ -45,7 +45,6 @@ describe('CurrentRefinements', () => {
             ],
           },
         ]}
-        hasRefinements={true}
         onRemove={onRemove}
       />
     );
@@ -138,10 +137,10 @@ describe('CurrentRefinements', () => {
     expect(container).toMatchInlineSnapshot(`
       <div>
         <div
-          class="ais-CurrentRefinements ais-CurrentRefinements--noRefinement MyCurrentRefinements"
+          class="ais-CurrentRefinements MyCurrentRefinements"
         >
           <ul
-            class="ais-CurrentRefinements-list ais-CurrentRefinements-list--noRefinement"
+            class="ais-CurrentRefinements-list"
           />
         </div>
       </div>
@@ -160,11 +159,11 @@ describe('CurrentRefinements', () => {
     expect(container).toMatchInlineSnapshot(`
       <div>
         <div
-          class="ais-CurrentRefinements ais-CurrentRefinements--noRefinement"
+          class="ais-CurrentRefinements"
           title="Some custom title"
         >
           <ul
-            class="ais-CurrentRefinements-list ais-CurrentRefinements-list--noRefinement"
+            class="ais-CurrentRefinements-list"
           />
         </div>
       </div>
@@ -177,9 +176,7 @@ describe('CurrentRefinements', () => {
         <CurrentRefinements
           classNames={{
             root: 'ROOT',
-            noRefinementRoot: 'ROOTNOREFINEMENT',
             list: 'LIST',
-            listNoRefinement: 'LISTNOREFINEMENT',
             item: 'ITEM',
             label: 'LABEL',
             category: 'CATEGORY',
@@ -192,10 +189,10 @@ describe('CurrentRefinements', () => {
       expect(container).toMatchInlineSnapshot(`
         <div>
           <div
-            class="ais-CurrentRefinements ROOT ais-CurrentRefinements--noRefinement ROOTNOREFINEMENT"
+            class="ais-CurrentRefinements ROOT"
           >
             <ul
-              class="ais-CurrentRefinements-list LIST ais-CurrentRefinements-list--noRefinement LISTNOREFINEMENT"
+              class="ais-CurrentRefinements-list LIST"
             />
           </div>
         </div>
@@ -220,9 +217,7 @@ describe('CurrentRefinements', () => {
           ]}
           classNames={{
             root: 'ROOT',
-            noRefinementRoot: 'ROOTNOREFINEMENT',
             list: 'LIST',
-            listNoRefinement: 'LISTNOREFINEMENT',
             item: 'ITEM',
             label: 'LABEL',
             category: 'CATEGORY',
@@ -235,10 +230,10 @@ describe('CurrentRefinements', () => {
       expect(container).toMatchInlineSnapshot(`
         <div>
           <div
-            class="ais-CurrentRefinements ROOT ais-CurrentRefinements--noRefinement ROOTNOREFINEMENT"
+            class="ais-CurrentRefinements ROOT"
           >
             <ul
-              class="ais-CurrentRefinements-list LIST ais-CurrentRefinements-list--noRefinement LISTNOREFINEMENT"
+              class="ais-CurrentRefinements-list LIST"
             >
               <li
                 class="ais-CurrentRefinements-item ITEM"

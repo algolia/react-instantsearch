@@ -114,28 +114,6 @@ describe('CurrentRefinements', () => {
     `);
   });
 
-  test('renders with a specific set of class names when there are no refinements', async () => {
-    const { container } = render(
-      <InstantSearchHooksTestWrapper>
-        <CurrentRefinements />
-      </InstantSearchHooksTestWrapper>
-    );
-
-    await wait(0);
-
-    expect(container).toMatchInlineSnapshot(`
-      <div>
-        <div
-          class="ais-CurrentRefinements ais-CurrentRefinements--noRefinement"
-        >
-          <ul
-            class="ais-CurrentRefinements-list ais-CurrentRefinements-list--noRefinement"
-          />
-        </div>
-      </div>
-    `);
-  });
-
   test('clears a refinement', async () => {
     const { container, queryByText } = render(
       <InstantSearchHooksTestWrapper
@@ -629,9 +607,7 @@ describe('CurrentRefinements', () => {
             className="MyCurrentRefinements"
             classNames={{
               root: 'ROOT',
-              noRefinementRoot: 'ROOTNOREFINEMENT',
               list: 'LIST',
-              listNoRefinement: 'LISTNOREFINEMENT',
               item: 'ITEM',
               label: 'LABEL',
               category: 'CATEGORY',
@@ -647,14 +623,14 @@ describe('CurrentRefinements', () => {
       expect(container).toMatchInlineSnapshot(`
         <div>
           <div
-            class="ais-CurrentRefinements ROOT ais-CurrentRefinements--noRefinement ROOTNOREFINEMENT MyCurrentRefinements"
+            class="ais-CurrentRefinements ROOT MyCurrentRefinements"
           >
             <ul
-              class="ais-CurrentRefinements-list LIST ais-CurrentRefinements-list--noRefinement LISTNOREFINEMENT"
+              class="ais-CurrentRefinements-list LIST"
             />
           </div>
         </div>
-    `);
+      `);
     }
 
     {
@@ -673,9 +649,7 @@ describe('CurrentRefinements', () => {
             className="MyCurrentRefinements"
             classNames={{
               root: 'ROOT',
-              noRefinementRoot: 'ROOTNOREFINEMENT',
               list: 'LIST',
-              listNoRefinement: 'LISTNOREFINEMENT',
               item: 'ITEM',
               label: 'LABEL',
               category: 'CATEGORY',
@@ -747,11 +721,11 @@ describe('CurrentRefinements', () => {
     expect(container).toMatchInlineSnapshot(`
       <div>
         <div
-          class="ais-CurrentRefinements ais-CurrentRefinements--noRefinement MyCurrentRefinements"
+          class="ais-CurrentRefinements MyCurrentRefinements"
           title="Some custom title"
         >
           <ul
-            class="ais-CurrentRefinements-list ais-CurrentRefinements-list--noRefinement"
+            class="ais-CurrentRefinements-list"
           />
         </div>
       </div>

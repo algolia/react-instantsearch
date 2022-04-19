@@ -15,7 +15,6 @@ export type CurrentRefinementsProps = React.HTMLAttributes<HTMLDivElement> & {
       Record<string, unknown>
   >;
   onRemove?(refinement: CurrentRefinementsConnectorParamsRefinement): void;
-  hasRefinements?: boolean;
 };
 
 export type CurrentRefinementsClassNames = {
@@ -24,17 +23,9 @@ export type CurrentRefinementsClassNames = {
    */
   root: string;
   /**
-   * Class names to apply to the root element when there are no refinements possible
-   */
-  noRefinementRoot: string;
-  /**
    * Class names to apply to the list element
    */
   list: string;
-  /**
-   * Class names to apply to the list element when there are no refinements possible
-   */
-  listNoRefinement: string;
   /**
    * Class names to apply to each refinement
    */
@@ -61,34 +52,14 @@ export function CurrentRefinements({
   classNames = {},
   items = [],
   onRemove = () => {},
-  hasRefinements = false,
   ...props
 }: CurrentRefinementsProps) {
   return (
     <div
       {...props}
-      className={cx(
-        'ais-CurrentRefinements',
-        classNames.root,
-        !hasRefinements &&
-          cx(
-            'ais-CurrentRefinements--noRefinement',
-            classNames.noRefinementRoot
-          ),
-        props.className
-      )}
+      className={cx('ais-CurrentRefinements', classNames.root, props.className)}
     >
-      <ul
-        className={cx(
-          'ais-CurrentRefinements-list',
-          classNames.list,
-          !hasRefinements &&
-            cx(
-              'ais-CurrentRefinements-list--noRefinement',
-              classNames.listNoRefinement
-            )
-        )}
-      >
+      <ul className={cx('ais-CurrentRefinements-list', classNames.list)}>
         {items.map((item) => (
           <li
             key={item.label}
