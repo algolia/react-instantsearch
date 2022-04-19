@@ -193,12 +193,12 @@ describe('Menu', () => {
         root: 'ROOT',
         list: 'LIST',
         item: 'ITEM',
-        selectedItem: 'ITEMSELECTED',
+        selectedItem: 'SELECTEDITEM',
         label: 'LABEL',
         link: 'LINK',
         count: 'COUNT',
         showMore: 'SHOWMORE',
-        disabledShowMore: 'SHOWMOREDISABLED',
+        disabledShowMore: 'DISABLEDSHOWMORE',
       },
     });
     const { container } = render(<Menu {...props} />);
@@ -212,7 +212,7 @@ describe('Menu', () => {
             class="ais-Menu-list LIST"
           >
             <li
-              class="ais-Menu-item ITEM ais-Menu-item--selected ITEMSELECTED"
+              class="ais-Menu-item ITEM ais-Menu-item--selected SELECTEDITEM"
             >
               <a
                 class="ais-Menu-link LINK"
@@ -251,7 +251,7 @@ describe('Menu', () => {
             </li>
           </ul>
           <button
-            class="ais-Menu-showMore SHOWMORE ais-Menu-showMore--disabled SHOWMOREDISABLED"
+            class="ais-Menu-showMore SHOWMORE ais-Menu-showMore--disabled DISABLEDSHOWMORE"
             disabled=""
           >
             Show more

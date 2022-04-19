@@ -296,17 +296,17 @@ describe('HierarchicalMenu', () => {
       canToggleShowMore: false,
       classNames: {
         root: 'ROOT',
-        noRefinementRoot: 'ROOTNOREFINEMENT',
+        noRefinementRoot: 'NOREFINEMENTROOT',
         list: 'LIST',
         childList: 'CHILDLIST',
         item: 'ITEM',
-        selectedItem: 'ITEMSELECTED',
+        selectedItem: 'SELECTEDITEM',
         parentItem: 'PARENTITEM',
         link: 'LINK',
         label: 'LABEL',
         count: 'COUNT',
         showMore: 'SHOWMORE',
-        disabledShowMore: 'SHOWMOREDISABLED',
+        disabledShowMore: 'DISABLEDSHOWMORE',
       },
     });
     const { container } = render(<HierarchicalMenu {...props} />);
@@ -320,7 +320,7 @@ describe('HierarchicalMenu', () => {
             class="ais-HierarchicalMenu-list LIST"
           >
             <li
-              class="ais-HierarchicalMenu-item ITEM ais-HierarchicalMenu-item--parent PARENTITEM ais-HierarchicalMenu-item--selected ITEMSELECTED"
+              class="ais-HierarchicalMenu-item ITEM ais-HierarchicalMenu-item--parent PARENTITEM ais-HierarchicalMenu-item--selected SELECTEDITEM"
             >
               <a
                 class="ais-HierarchicalMenu-link LINK"
@@ -401,7 +401,7 @@ describe('HierarchicalMenu', () => {
             </li>
           </ul>
           <button
-            class="ais-HierarchicalMenu-showMore SHOWMORE ais-HierarchicalMenu-showMore--disabled SHOWMOREDISABLED"
+            class="ais-HierarchicalMenu-showMore SHOWMORE ais-HierarchicalMenu-showMore--disabled DISABLEDSHOWMORE"
             disabled=""
           >
             Show more

@@ -537,13 +537,13 @@ describe('RefinementList', () => {
         noResults: 'NORESULTS',
         list: 'LIST',
         item: 'ITEM',
-        selectedItem: 'ITEMSELECTED',
+        selectedItem: 'SELECTEDITEM',
         label: 'LABEL',
         checkbox: 'CHECKBOX',
         labelText: 'LABELTEXT',
         count: 'COUNT',
         showMore: 'SHOWMORE',
-        disabledShowMore: 'SHOWMOREDISABLED',
+        disabledShowMore: 'DISABLEDSHOWMORE',
       },
     });
     const { container } = render(<RefinementList {...props} />);
@@ -557,7 +557,7 @@ describe('RefinementList', () => {
             class="ais-RefinementList-list LIST"
           >
             <li
-              class="ais-RefinementList-item ITEM ais-RefinementList-item--selected ITEMSELECTED"
+              class="ais-RefinementList-item ITEM ais-RefinementList-item--selected SELECTEDITEM"
             >
               <label
                 class="ais-RefinementList-label LABEL"
@@ -605,7 +605,7 @@ describe('RefinementList', () => {
             </li>
           </ul>
           <button
-            class="ais-RefinementList-showMore SHOWMORE ais-RefinementList-showMore--disabled SHOWMOREDISABLED"
+            class="ais-RefinementList-showMore SHOWMORE ais-RefinementList-showMore--disabled DISABLEDSHOWMORE"
             disabled=""
           >
             Show more
