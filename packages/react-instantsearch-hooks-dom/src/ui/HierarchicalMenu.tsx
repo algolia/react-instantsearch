@@ -20,7 +20,7 @@ type HierarchicalMenuClassNames = {
    */
   list: string;
   /**
-   * Class names to apply to the child list element
+   * Class names to apply to each child list element
    */
   childList: string;
   /**
