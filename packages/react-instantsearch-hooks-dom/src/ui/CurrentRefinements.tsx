@@ -34,7 +34,7 @@ export type CurrentRefinementsClassNames = {
   /**
    * Class names to apply to the list element when there are no refinements possible
    */
-  listNoRefinement: string;
+  noRefinementList: string;
   /**
    * Class names to apply to each refinement
    */
@@ -85,7 +85,7 @@ export function CurrentRefinements({
           !hasRefinements &&
             cx(
               'ais-CurrentRefinements-list--noRefinement',
-              classNames.listNoRefinement
+              classNames.noRefinementList
             )
         )}
       >
