@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { NextPageContext } from 'next';
+import { GetServerSideProps } from 'next';
 import algoliasearch from 'algoliasearch/lite';
 import { Hit as AlgoliaHit } from 'instantsearch.js';
 import {
@@ -83,15 +83,16 @@ function FallbackComponent({ attribute }: { attribute: string }) {
   );
 }
 
-export async function getServerSideProps({ req }: NextPageContext) {
-  const protocol = req.headers.referer?.split('://')[0] || 'https';
-  const url = `${protocol}://${req.headers.host}${req.url}`;
-  const serverState = await getServerState(<HomePage url={url} />);
+export const getServerSideProps: GetServerSideProps<HomePageProps> =
+  async function getServerSideProps({ req }) {
+    const protocol = req.headers.referer?.split('://')[0] || 'https';
+    const url = `${protocol}://${req.headers.host}${req.url}`;
+    const serverState = await getServerState(<HomePage url={url} />);
 
-  return {
-    props: {
-      serverState,
-      url,
-    },
+    return {
+      props: {
+        serverState,
+        url,
+      },
+    };
   };
-}

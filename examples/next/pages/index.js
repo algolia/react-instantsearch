@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 import qs from 'qs';
 import algoliasearch from 'algoliasearch/lite';
@@ -26,17 +25,18 @@ const DEFAULT_PROPS = {
   indexName: 'instant_search',
 };
 
-function Page(props) {
+export default function Page(props) {
   const [searchState, setSearchState] = React.useState(props.searchState);
   const router = useRouter();
   const debouncedSetState = React.useRef();
 
   React.useEffect(() => {
-    if (router) {
-      router.beforePopState(({ url }) => {
-        setSearchState(pathToSearchState(url));
-      });
-    }
+    const listener = () => {
+      setSearchState(pathToSearchState(router.asPath));
+    };
+    router.events.on('routeChangeComplete', listener);
+
+    return () => router.events.off('routeChangeComplete', listener);
   }, [router]);
 
   return (
@@ -79,10 +79,3 @@ export async function getServerSideProps({ resolvedUrl }) {
     },
   };
 }
-
-Page.propTypes = {
-  resultsState: PropTypes.object,
-  searchState: PropTypes.object,
-};
-
-export default Page;

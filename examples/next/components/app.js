@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {
   RefinementList,
   SearchBox,
@@ -33,11 +32,7 @@ const HitComponent = ({ hit }) => (
   </div>
 );
 
-HitComponent.propTypes = {
-  hit: PropTypes.object,
-};
-
-function App(props) {
+export function App(props) {
   return (
     <InstantSearch {...props}>
       <Configure hitsPerPage={12} />
@@ -66,14 +61,3 @@ function App(props) {
     </InstantSearch>
   );
 }
-
-App.propTypes = {
-  searchState: PropTypes.object,
-  resultsState: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-  onSearchStateChange: PropTypes.func,
-  createURL: PropTypes.func,
-  indexName: PropTypes.string,
-  searchClient: PropTypes.object,
-};
-
-export default App;
