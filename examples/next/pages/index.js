@@ -31,12 +31,11 @@ export default function Page(props) {
   const debouncedSetState = React.useRef();
 
   React.useEffect(() => {
-    const listener = () => {
-      setSearchState(pathToSearchState(router.asPath));
-    };
-    router.events.on('routeChangeComplete', listener);
-
-    return () => router.events.off('routeChangeComplete', listener);
+    if (router) {
+      router.beforePopState(({ url }) => {
+        setSearchState(pathToSearchState(url));
+      });
+    }
   }, [router]);
 
   return (
@@ -52,9 +51,7 @@ export default function Page(props) {
           debouncedSetState.current = setTimeout(() => {
             const href = searchStateToURL(nextSearchState);
 
-            router.push(href, href, {
-              shallow: true,
-            });
+            router.push(href, href, { shallow: true });
           }, updateAfter);
 
           setSearchState(nextSearchState);
