@@ -42,7 +42,7 @@ function App(props) {
     <InstantSearch {...props}>
       <Configure hitsPerPage={12} />
       <header>
-        <h1>React InstantSearch + Next.Js</h1>
+        <h1>React InstantSearch + Next.js</h1>
         <SearchBox />
       </header>
       <main>
@@ -60,7 +60,7 @@ function App(props) {
           <a href="https://github.com/algolia/react-instantsearch/tree/master/examples/next">
             source code
           </a>{' '}
-          on github
+          on GitHub
         </div>
       </footer>
     </InstantSearch>
