@@ -39,16 +39,7 @@ HitComponent.propTypes = {
 
 function App(props) {
   return (
-    <InstantSearch
-      searchClient={props.searchClient}
-      resultsState={props.resultsState}
-      onSearchStateChange={props.onSearchStateChange}
-      searchState={props.searchState}
-      createURL={props.createURL}
-      indexName={props.indexName}
-      onSearchParameters={props.onSearchParameters}
-      {...props}
-    >
+    <InstantSearch {...props}>
       <Configure hitsPerPage={12} />
       <header>
         <h1>React InstantSearch + Next.Js</h1>
