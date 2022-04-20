@@ -6,10 +6,8 @@ import { SortBy as SortByUiComponent } from '../ui/SortBy';
 import type { SortByProps as SortByUiComponentProps } from '../ui/SortBy';
 import type { UseSortByProps } from 'react-instantsearch-hooks';
 
-export type SortByProps = Omit<
-  SortByUiComponentProps,
-  'items' | 'value' | 'onSelect'
-> &
+export type SortByProps = React.HTMLAttributes<HTMLDivElement> &
+  Pick<SortByUiComponentProps, 'classNames'> &
   UseSortByProps;
 
 export function SortBy({ items, transformItems, ...props }: SortByProps) {

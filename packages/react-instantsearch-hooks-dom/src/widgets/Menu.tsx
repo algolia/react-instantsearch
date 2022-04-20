@@ -6,16 +6,8 @@ import { Menu as MenuUiComponent } from '../ui/Menu';
 import type { MenuProps as MenuUiComponentProps } from '../ui/Menu';
 import type { UseMenuProps } from 'react-instantsearch-hooks';
 
-export type MenuProps = Omit<
-  MenuUiComponentProps,
-  | 'items'
-  | 'onRefine'
-  | 'createURL'
-  | 'noResults'
-  | 'canToggleShowMore'
-  | 'onToggleShowMore'
-  | 'isShowingMore'
-> &
+export type MenuProps = React.HTMLAttributes<HTMLDivElement> &
+  Pick<MenuUiComponentProps, 'classNames'> &
   UseMenuProps;
 
 export function Menu({

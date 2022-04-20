@@ -6,10 +6,8 @@ import { CurrentRefinements as CurrentRefinementsUiComponent } from '../ui/Curre
 import type { CurrentRefinementsProps as CurrentRefinementsUiComponentProps } from '../ui/CurrentRefinements';
 import type { UseCurrentRefinementsProps } from 'react-instantsearch-hooks';
 
-export type CurrentRefinementsProps = Omit<
-  CurrentRefinementsUiComponentProps,
-  'disabled' | 'onClick' | 'items' | 'hasRefinements'
-> &
+export type CurrentRefinementsProps = React.HTMLAttributes<HTMLDivElement> &
+  Pick<CurrentRefinementsUiComponentProps, 'classNames'> &
   UseCurrentRefinementsProps;
 
 export function CurrentRefinements({

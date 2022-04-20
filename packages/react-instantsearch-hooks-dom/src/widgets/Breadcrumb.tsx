@@ -6,11 +6,9 @@ import { Breadcrumb as BreadcrumbUiComponent } from '../ui/Breadcrumb';
 import type { BreadcrumbProps as BreadcrumbUiProps } from '../ui/Breadcrumb';
 import type { UseBreadcrumbProps } from 'react-instantsearch-hooks';
 
-export type BreadcrumbProps = Omit<
-  BreadcrumbUiProps,
-  'items' | 'hasItems' | 'createURL' | 'onNavigate' | 'translations'
-> &
-  Omit<UseBreadcrumbProps, 'separator'>;
+export type BreadcrumbProps = React.HTMLAttributes<HTMLDivElement> &
+  Pick<BreadcrumbUiProps, 'classNames'> &
+  UseBreadcrumbProps;
 
 export function Breadcrumb({
   attributes,
