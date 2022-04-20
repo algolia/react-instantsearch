@@ -8,7 +8,7 @@ import type { UseCurrentRefinementsProps } from 'react-instantsearch-hooks';
 
 export type CurrentRefinementsProps = Omit<
   CurrentRefinementsUiComponentProps,
-  'disabled' | 'onClick' | 'items'
+  'disabled' | 'onClick' | 'items' | 'hasRefinements'
 > &
   UseCurrentRefinementsProps;
 
@@ -18,7 +18,7 @@ export function CurrentRefinements({
   transformItems,
   ...props
 }: CurrentRefinementsProps) {
-  const { items, refine } = useCurrentRefinements(
+  const { items, refine, canRefine } = useCurrentRefinements(
     {
       includedAttributes,
       excludedAttributes,
@@ -30,6 +30,11 @@ export function CurrentRefinements({
   );
 
   return (
-    <CurrentRefinementsUiComponent {...props} items={items} onRemove={refine} />
+    <CurrentRefinementsUiComponent
+      {...props}
+      hasRefinements={canRefine}
+      items={items}
+      onRemove={refine}
+    />
   );
 }
