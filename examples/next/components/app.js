@@ -37,52 +37,52 @@ HitComponent.propTypes = {
   hit: PropTypes.object,
 };
 
-export default class extends React.Component {
-  static propTypes = {
-    searchState: PropTypes.object,
-    resultsState: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-    onSearchStateChange: PropTypes.func,
-    createURL: PropTypes.func,
-    indexName: PropTypes.string,
-    searchClient: PropTypes.object,
-  };
-
-  render() {
-    return (
-      <InstantSearch
-        searchClient={this.props.searchClient}
-        resultsState={this.props.resultsState}
-        onSearchStateChange={this.props.onSearchStateChange}
-        searchState={this.props.searchState}
-        createURL={this.props.createURL}
-        indexName={this.props.indexName}
-        onSearchParameters={this.props.onSearchParameters}
-        {...this.props}
-      >
-        <Configure hitsPerPage={12} />
-        <header>
-          <h1>React InstantSearch + Next.Js</h1>
-          <SearchBox />
-        </header>
-        <main>
-          <div className="menu">
-            <RefinementList attribute="categories" />
-          </div>
-          <div className="results">
-            <Hits hitComponent={HitComponent} />
-          </div>
-        </main>
-        <footer>
-          <Pagination />
-          <div>
-            See{' '}
-            <a href="https://github.com/algolia/react-instantsearch/tree/master/examples/next">
-              source code
-            </a>{' '}
-            on github
-          </div>
-        </footer>
-      </InstantSearch>
-    );
-  }
+function App(props) {
+  return (
+    <InstantSearch
+      searchClient={props.searchClient}
+      resultsState={props.resultsState}
+      onSearchStateChange={props.onSearchStateChange}
+      searchState={props.searchState}
+      createURL={props.createURL}
+      indexName={props.indexName}
+      onSearchParameters={props.onSearchParameters}
+      {...props}
+    >
+      <Configure hitsPerPage={12} />
+      <header>
+        <h1>React InstantSearch + Next.Js</h1>
+        <SearchBox />
+      </header>
+      <main>
+        <div className="menu">
+          <RefinementList attribute="categories" />
+        </div>
+        <div className="results">
+          <Hits hitComponent={HitComponent} />
+        </div>
+      </main>
+      <footer>
+        <Pagination />
+        <div>
+          See{' '}
+          <a href="https://github.com/algolia/react-instantsearch/tree/master/examples/next">
+            source code
+          </a>{' '}
+          on github
+        </div>
+      </footer>
+    </InstantSearch>
+  );
 }
+
+App.propTypes = {
+  searchState: PropTypes.object,
+  resultsState: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  onSearchStateChange: PropTypes.func,
+  createURL: PropTypes.func,
+  indexName: PropTypes.string,
+  searchClient: PropTypes.object,
+};
+
+export default App;

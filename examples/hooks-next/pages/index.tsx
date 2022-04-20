@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { NextPageContext } from 'next';
 import algoliasearch from 'algoliasearch/lite';
 import { Hit as AlgoliaHit } from 'instantsearch.js';
 import {
@@ -82,7 +83,7 @@ function FallbackComponent({ attribute }: { attribute: string }) {
   );
 }
 
-export async function getServerSideProps({ req }) {
+export async function getServerSideProps({ req }: NextPageContext) {
   const protocol = req.headers.referer?.split('://')[0] || 'https';
   const url = `${protocol}://${req.headers.host}${req.url}`;
   const serverState = await getServerState(<HomePage url={url} />);
