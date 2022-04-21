@@ -57,6 +57,11 @@ export function createSearchClient<TOptions extends Partial<SearchClient>>(
       }),
       ...options,
     };
+  } else {
+    options = {
+      _ua: 'Algolia for JavaScript (test)',
+      ...options,
+    };
   }
 
   return {
