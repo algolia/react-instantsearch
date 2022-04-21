@@ -3,14 +3,8 @@
 
 ### Bug Fixes
 
-* **hooks-dom:** make components class names consistent with InstantSearch.js ([#3430](https://github.com/algolia/react-instantsearch/issues/3430)) ([38f9680](https://github.com/algolia/react-instantsearch/commit/38f9680565998ae939a02cfaee52d17b5b35c990))
 * **hooks:** forbid importing from instantsearch.js root path ([#3437](https://github.com/algolia/react-instantsearch/issues/3437)) ([82ef9ea](https://github.com/algolia/react-instantsearch/commit/82ef9eaaec42bc54f15796b5b031a8656330a45c))
 * **packages:** correctly mark peer dependency ([#3439](https://github.com/algolia/react-instantsearch/issues/3439)) ([51e8818](https://github.com/algolia/react-instantsearch/commit/51e8818fce224819230c8bf6dea2a08d71d9be29)), closes [#3428](https://github.com/algolia/react-instantsearch/issues/3428)
-
-
-### Features
-
-* **hooks:** implement <RangeInput> ([2613971](https://github.com/algolia/react-instantsearch/commit/26139714162de7f64d881f9317a391c872fb2316))
 
 
 
