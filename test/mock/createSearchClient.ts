@@ -27,10 +27,10 @@ export function createSearchClient<TOptions extends Partial<SearchClient>>(
 ): OverrideKeys<SearchClient, TOptions> {
   const appId = (options as Record<string, unknown>).appId || 'appId';
 
-  if (algoliasearch.version.startsWith('4.')) {
-    (options.transporter as any) =
-      options.transporter ||
-      createTransporter({
+  // check if algoliasearch is v4 (has transporter)
+  if ('transporter' in algoliasearch('appId', 'apiKey')) {
+    options = {
+      transporter: createTransporter({
         timeouts: {
           connect: 2,
           read: 5,
@@ -54,7 +54,9 @@ export function createSearchClient<TOptions extends Partial<SearchClient>>(
         ]),
         headers: {},
         queryParameters: {},
-      });
+      }),
+      ...options,
+    };
   }
 
   return {
