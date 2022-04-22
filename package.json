@@ -124,7 +124,7 @@
     "null-loader": "3.0.0",
     "places.js": "1.16.4",
     "prettier": "2.4.1",
-    "prop-types": "15.6.2",
+    "prop-types": "15.8.1",
     "puppeteer": "1.20.0",
     "react": "17.0.2",
     "react-autosuggest": "9.4.3",
