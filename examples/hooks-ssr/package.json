@@ -14,7 +14,7 @@
     "@babel/preset-env": "7.4.5",
     "@babel/preset-react": "7.0.0",
     "babel-core": "6.26.3",
-    "babel-jest": "24.9.0",
+    "babel-jest": "27.5.1",
     "babel-loader": "8.0.6",
     "nodemon": "1.19.3",
     "webpack": "4.40.2",
