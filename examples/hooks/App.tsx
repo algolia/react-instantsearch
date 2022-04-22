@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Hit as AlgoliaHit } from 'instantsearch.js';
 import algoliasearch from 'algoliasearch/lite';
 import React from 'react';
