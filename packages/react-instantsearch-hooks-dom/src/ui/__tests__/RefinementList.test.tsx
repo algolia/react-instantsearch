@@ -5,10 +5,10 @@ import React, { createRef } from 'react';
 import { RefinementList } from '../RefinementList';
 import { SearchBox } from '../SearchBox';
 
-import type { RefinementListProps } from '../RefinementList';
+import type { RefinementListInternalProps } from '../RefinementList';
 
 describe('RefinementList', () => {
-  function createProps(props: Partial<RefinementListProps>) {
+  function createProps(props: Partial<RefinementListInternalProps>) {
     return {
       items: [
         {

@@ -6,9 +6,7 @@ import { Menu as MenuUiComponent } from '../ui/Menu';
 import type { MenuProps as MenuUiComponentProps } from '../ui/Menu';
 import type { UseMenuProps } from 'react-instantsearch-hooks';
 
-export type MenuProps = React.HTMLAttributes<HTMLDivElement> &
-  Pick<MenuUiComponentProps, 'classNames'> &
-  UseMenuProps;
+export type MenuProps = MenuUiComponentProps & UseMenuProps;
 
 export function Menu({
   attribute,

@@ -6,8 +6,7 @@ import { HierarchicalMenu as HierarchicalMenuUiComponent } from '../ui/Hierarchi
 import type { HierarchicalMenuProps as HierarchicalMenuUiComponentProps } from '../ui/HierarchicalMenu';
 import type { UseHierarchicalMenuProps } from 'react-instantsearch-hooks';
 
-export type HierarchicalMenuProps = React.HTMLAttributes<HTMLDivElement> &
-  Pick<HierarchicalMenuUiComponentProps, 'classNames'> &
+export type HierarchicalMenuProps = HierarchicalMenuUiComponentProps &
   UseHierarchicalMenuProps;
 
 export function HierarchicalMenu({

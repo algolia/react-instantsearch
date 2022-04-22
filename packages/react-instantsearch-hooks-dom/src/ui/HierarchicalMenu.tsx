@@ -57,8 +57,11 @@ type HierarchicalListProps = Pick<
   onNavigate: (value: string) => void;
 };
 
-export type HierarchicalMenuProps = React.HTMLAttributes<HTMLDivElement> &
-  HierarchicalListProps & {
+export type HierarchicalMenuProps = React.ComponentProps<'div'> &
+  Pick<HierarchicalListProps, 'classNames'>;
+
+export type HierarchicalMenuInternalProps = HierarchicalListProps &
+  HierarchicalMenuProps & {
     hasItems: boolean;
     showMore?: boolean;
     canToggleShowMore: boolean;
@@ -131,7 +134,7 @@ export function HierarchicalMenu({
   onToggleShowMore,
   isShowingMore,
   ...props
-}: HierarchicalMenuProps) {
+}: HierarchicalMenuInternalProps) {
   return (
     <div
       {...props}

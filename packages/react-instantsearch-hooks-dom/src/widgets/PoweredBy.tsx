@@ -5,8 +5,7 @@ import { PoweredBy as PoweredByUiComponent } from '../ui/PoweredBy';
 
 import type { PoweredByProps as PoweredByUiComponentProps } from '../ui/PoweredBy';
 
-export type PoweredByProps = React.HTMLAttributes<HTMLDivElement> &
-  Pick<PoweredByUiComponentProps, 'classNames' | 'theme'>;
+export type PoweredByProps = PoweredByUiComponentProps;
 
 export function PoweredBy(props: PoweredByProps) {
   const { url } = usePoweredBy();

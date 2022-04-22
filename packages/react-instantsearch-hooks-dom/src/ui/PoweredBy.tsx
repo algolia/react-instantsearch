@@ -25,10 +25,13 @@ export type PoweredByClassNames = {
   logo: string;
 };
 
-export type PoweredByProps = React.HTMLAttributes<HTMLDivElement> & {
+export type PoweredByProps = React.ComponentProps<'div'> & {
   classNames?: Partial<PoweredByClassNames>;
-  url: string;
   theme?: 'light' | 'dark';
+};
+
+export type PoweredByInternalProps = PoweredByProps & {
+  url: string;
 };
 
 export function PoweredBy({
@@ -36,7 +39,7 @@ export function PoweredBy({
   url,
   theme = 'light',
   ...props
-}: PoweredByProps) {
+}: PoweredByInternalProps) {
   return (
     <div
       {...props}

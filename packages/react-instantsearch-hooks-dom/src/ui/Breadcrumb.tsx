@@ -47,9 +47,12 @@ type UseBreadcrumbRenderState = ReturnType<typeof useBreadcrumb>;
 
 type BreadcrumbItem = UseBreadcrumbRenderState['items'][number];
 
-export type BreadcrumbProps = React.HTMLAttributes<HTMLDivElement> &
+export type BreadcrumbProps = React.ComponentProps<'div'> & {
+  classNames?: Partial<BreadcrumbClassNames>;
+};
+
+export type BreadcrumbInternalProps = BreadcrumbProps &
   Pick<UseBreadcrumbRenderState, 'items' | 'createURL'> & {
-    classNames?: Partial<BreadcrumbClassNames>;
     hasItems: boolean;
     onNavigate: UseBreadcrumbRenderState['refine'];
     separator?: string;
@@ -65,7 +68,7 @@ export function Breadcrumb({
   separator = '>',
   translations,
   ...props
-}: BreadcrumbProps) {
+}: BreadcrumbInternalProps) {
   const handleClick =
     (value: BreadcrumbItem['value']) =>
     (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {

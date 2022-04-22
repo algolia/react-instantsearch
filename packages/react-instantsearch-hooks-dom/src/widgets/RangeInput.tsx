@@ -6,9 +6,7 @@ import { RangeInput as RangeInputUiComponent } from '../ui/RangeInput';
 import type { RangeInputProps as RangeInputUiProps } from '../ui/RangeInput';
 import type { UseRangeProps } from 'react-instantsearch-hooks';
 
-export type RangeInputProps = React.HTMLAttributes<HTMLDivElement> &
-  Pick<RangeInputUiProps, 'classNames'> &
-  UseRangeProps;
+export type RangeInputProps = RangeInputUiProps & UseRangeProps;
 
 export function RangeInput({
   attribute,

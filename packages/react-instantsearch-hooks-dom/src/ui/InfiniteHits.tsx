@@ -5,13 +5,16 @@ import { cx } from './lib/cx';
 import type { Hit } from 'instantsearch.js';
 
 export type InfiniteHitsProps<THit> = React.ComponentProps<'div'> & {
+  classNames?: Partial<InfiniteHitsClassNames>;
   hitComponent?: React.JSXElementConstructor<{ hit: THit }>;
+};
+
+export type InfiniteHitsInternalProps<THit> = InfiniteHitsProps<THit> & {
   hits: THit[];
   isFirstPage: boolean;
   isLastPage: boolean;
   onShowPrevious?: () => void;
   onShowMore: () => void;
-  classNames?: Partial<InfiniteHitsClassNames>;
   translations: InfiniteHitsTranslations;
 };
 
@@ -69,7 +72,7 @@ export function InfiniteHits<THit extends Hit>({
   classNames = {},
   translations,
   ...props
-}: InfiniteHitsProps<THit>) {
+}: InfiniteHitsInternalProps<THit>) {
   return (
     <div
       {...props}

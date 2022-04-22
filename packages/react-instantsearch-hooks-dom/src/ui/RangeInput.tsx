@@ -6,12 +6,12 @@ import type { useRange } from 'react-instantsearch-hooks';
 
 type RangeRenderState = ReturnType<typeof useRange>;
 
-export type RangeInputProps = Omit<
-  React.HTMLAttributes<HTMLDivElement>,
-  'onSubmit'
-> &
+export type RangeInputProps = Omit<React.ComponentProps<'div'>, 'onSubmit'> & {
+  classNames?: Partial<RangeInputClassNames>;
+};
+
+export type RangeInputInternalProps = RangeInputProps &
   Pick<RangeRenderState, 'range' | 'start'> & {
-    classNames?: Partial<RangeInputClassNames>;
     disabled: boolean;
     onSubmit: RangeRenderState['refine'];
     step?: number;
@@ -80,7 +80,7 @@ export function RangeInput({
   onSubmit,
   translations,
   ...props
-}: RangeInputProps) {
+}: RangeInputInternalProps) {
   const values = {
     min:
       minValue !== -Infinity && minValue !== min

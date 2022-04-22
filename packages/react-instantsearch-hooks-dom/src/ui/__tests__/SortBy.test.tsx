@@ -4,10 +4,10 @@ import React from 'react';
 
 import { SortBy } from '../SortBy';
 
-import type { SortByProps } from '../SortBy';
+import type { SortByInternalProps } from '../SortBy';
 
 describe('SortBy', () => {
-  function createProps(props: Partial<SortByProps>) {
+  function createProps(props: Partial<SortByInternalProps>) {
     return {
       items: [
         { label: 'Featured', value: 'instant_search' },

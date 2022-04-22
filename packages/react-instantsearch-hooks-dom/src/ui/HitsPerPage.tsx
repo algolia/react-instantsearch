@@ -4,11 +4,14 @@ import { cx } from './lib/cx';
 
 import type { HitsPerPageConnectorParamsItem as HitsPerPageItem } from 'instantsearch.js/es/connectors/hits-per-page/connectHitsPerPage';
 
-export type HitsPerPageProps = React.HTMLAttributes<HTMLDivElement> & {
+export type HitsPerPageProps = React.ComponentProps<'div'> & {
+  classNames?: Partial<HitsPerPageClassNames>;
+};
+
+export type HitsPerPageInternalProps = HitsPerPageProps & {
   items: HitsPerPageItem[];
   onChange: (value: number) => void;
   currentValue: number;
-  classNames?: Partial<HitsPerPageClassNames>;
 };
 
 export type HitsPerPageClassNames = {
@@ -32,7 +35,7 @@ export function HitsPerPage({
   currentValue,
   classNames = {},
   ...props
-}: HitsPerPageProps) {
+}: HitsPerPageInternalProps) {
   return (
     <div
       {...props}

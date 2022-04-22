@@ -4,12 +4,12 @@ import React from 'react';
 
 import { ToggleRefinement } from '../ToggleRefinement';
 
-import type { ToggleRefinementProps } from '../ToggleRefinement';
+import type { ToggleRefinementInternalProps } from '../ToggleRefinement';
 
 describe('ToggleRefinement', () => {
   function createProps(
-    props: Partial<ToggleRefinementProps>
-  ): ToggleRefinementProps {
+    props: Partial<ToggleRefinementInternalProps>
+  ): ToggleRefinementInternalProps {
     return {
       label: 'Free shipping',
       onChange: jest.fn(),

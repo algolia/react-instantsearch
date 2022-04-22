@@ -4,10 +4,12 @@ import React from 'react';
 
 import { RangeInput } from '../RangeInput';
 
-import type { RangeInputProps } from '../RangeInput';
+import type { RangeInputInternalProps } from '../RangeInput';
 
 describe('RangeInput', () => {
-  function createProps(props: Partial<RangeInputProps> = {}): RangeInputProps {
+  function createProps(
+    props: Partial<RangeInputInternalProps> = {}
+  ): RangeInputInternalProps {
     return {
       range: { min: 1, max: 5000 },
       start: [undefined, undefined],

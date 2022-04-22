@@ -4,10 +4,10 @@ import React from 'react';
 
 import { Menu } from '../Menu';
 
-import type { MenuProps } from '../Menu';
+import type { MenuInternalProps } from '../Menu';
 
 describe('Menu', () => {
-  function createProps(props: Partial<MenuProps>): MenuProps {
+  function createProps(props: Partial<MenuInternalProps>): MenuInternalProps {
     return {
       items: [
         {

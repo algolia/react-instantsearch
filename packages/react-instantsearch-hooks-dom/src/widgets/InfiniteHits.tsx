@@ -8,11 +8,7 @@ import type { BaseHit, Hit } from 'instantsearch.js';
 import type { UseInfiniteHitsProps } from 'react-instantsearch-hooks';
 
 export type InfiniteHitsProps<THit extends BaseHit = BaseHit> =
-  React.HTMLAttributes<HTMLDivElement> &
-    Pick<
-      InfiniteHitsUiComponentProps<Hit<THit>>,
-      'classNames' | 'hitComponent'
-    > &
+  InfiniteHitsUiComponentProps<Hit<THit>> &
     UseInfiniteHitsProps<THit> & {
       /**
        * Displays the "Show Previous" button when the UI is loaded from a page

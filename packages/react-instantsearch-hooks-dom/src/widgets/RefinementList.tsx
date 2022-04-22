@@ -9,8 +9,7 @@ import type { RefinementListItem } from 'instantsearch.js/es/connectors/refineme
 import type { RefinementListWidgetParams } from 'instantsearch.js/es/widgets/refinement-list/refinement-list';
 import type { UseRefinementListProps } from 'react-instantsearch-hooks';
 
-export type RefinementListProps = React.HTMLAttributes<HTMLDivElement> &
-  Pick<RefinementListUiComponentProps, 'classNames'> &
+export type RefinementListProps = RefinementListUiComponentProps &
   UseRefinementListProps &
   Pick<RefinementListWidgetParams, 'searchable' | 'searchablePlaceholder'>;
 

@@ -4,12 +4,12 @@ import React from 'react';
 
 import { HierarchicalMenu } from '../HierarchicalMenu';
 
-import type { HierarchicalMenuProps } from '../HierarchicalMenu';
+import type { HierarchicalMenuInternalProps } from '../HierarchicalMenu';
 
 describe('HierarchicalMenu', () => {
   function createProps(
-    props: Partial<HierarchicalMenuProps> = {}
-  ): HierarchicalMenuProps {
+    props: Partial<HierarchicalMenuInternalProps> = {}
+  ): HierarchicalMenuInternalProps {
     return {
       items: [
         {

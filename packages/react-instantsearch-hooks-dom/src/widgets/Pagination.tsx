@@ -6,12 +6,7 @@ import { Pagination as PaginationUiComponent } from '../ui/Pagination';
 import type { PaginationProps as PaginationUiComponentProps } from '../ui/Pagination';
 import type { UsePaginationProps } from 'react-instantsearch-hooks';
 
-export type PaginationProps = React.HTMLAttributes<HTMLDivElement> &
-  Pick<
-    PaginationUiComponentProps,
-    'classNames' | 'showFirst' | 'showPrevious' | 'showNext' | 'showLast'
-  > &
-  UsePaginationProps;
+export type PaginationProps = PaginationUiComponentProps & UsePaginationProps;
 
 export function Pagination({
   showFirst,

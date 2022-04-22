@@ -56,20 +56,24 @@ export type SearchBoxTranslations = {
   resetTitle: string;
 };
 
-export type SearchBoxProps = React.HTMLAttributes<HTMLDivElement> &
-  Pick<React.HTMLAttributes<HTMLFormElement>, 'onSubmit'> &
-  Required<Pick<React.HTMLAttributes<HTMLFormElement>, 'onReset'>> &
-  Pick<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    'placeholder' | 'onChange'
-  > & {
-    inputRef: React.RefObject<HTMLInputElement>;
-    isSearchStalled: boolean;
-    value: string;
+export type SearchBoxProps = Omit<
+  React.ComponentProps<'div'>,
+  'onChange' | 'onReset'
+> &
+  Pick<React.ComponentProps<'form'>, 'onSubmit'> &
+  Pick<React.ComponentProps<'input'>, 'placeholder'> & {
     resetIconComponent?: React.JSXElementConstructor<IconProps>;
     submitIconComponent?: React.JSXElementConstructor<IconProps>;
     loadingIconComponent?: React.JSXElementConstructor<IconProps>;
     classNames?: Partial<SearchBoxClassNames>;
+  };
+
+export type SearchBoxInternalProps = SearchBoxProps &
+  Required<Pick<React.ComponentProps<'form'>, 'onReset'>> &
+  Pick<React.ComponentProps<'input'>, 'onChange'> & {
+    inputRef: React.RefObject<HTMLInputElement>;
+    isSearchStalled: boolean;
+    value: string;
     translations: SearchBoxTranslations;
   };
 
@@ -141,7 +145,7 @@ export function SearchBox({
   classNames = {},
   translations,
   ...props
-}: SearchBoxProps) {
+}: SearchBoxInternalProps) {
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     event.stopPropagation();

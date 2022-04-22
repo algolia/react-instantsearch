@@ -4,11 +4,11 @@ import React from 'react';
 
 import { ClearRefinements } from '../ClearRefinements';
 
-import type { ClearRefinementsProps } from '../ClearRefinements';
+import type { ClearRefinementsInternalProps } from '../ClearRefinements';
 
 function createProps(
-  props?: Partial<ClearRefinementsProps>
-): ClearRefinementsProps {
+  props?: Partial<ClearRefinementsInternalProps>
+): ClearRefinementsInternalProps {
   return {
     translations: {
       resetLabel: 'Clear refinements',

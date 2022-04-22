@@ -6,17 +6,7 @@ import { SearchBox as SearchBoxUiComponent } from '../ui/SearchBox';
 import type { SearchBoxProps as SearchBoxUiComponentProps } from '../ui/SearchBox';
 import type { UseSearchBoxProps } from 'react-instantsearch-hooks';
 
-export type SearchBoxProps = React.HTMLAttributes<HTMLDivElement> &
-  Pick<
-    SearchBoxUiComponentProps,
-    | 'classNames'
-    | 'onSubmit'
-    | 'placeholder'
-    | 'resetIconComponent'
-    | 'submitIconComponent'
-    | 'loadingIconComponent'
-  > &
-  UseSearchBoxProps;
+export type SearchBoxProps = SearchBoxUiComponentProps & UseSearchBoxProps;
 
 export function SearchBox(props: SearchBoxProps) {
   const { query, refine, isSearchStalled } = useSearchBox(props, {

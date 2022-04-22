@@ -6,8 +6,7 @@ import { ClearRefinements as ClearRefinementsUiComponent } from '../ui/ClearRefi
 import type { ClearRefinementsProps as ClearRefinementsUiComponentProps } from '../ui/ClearRefinements';
 import type { UseClearRefinementsProps } from 'react-instantsearch-hooks';
 
-export type ClearRefinementsProps = React.HTMLAttributes<HTMLDivElement> &
-  Pick<ClearRefinementsUiComponentProps, 'classNames'> &
+export type ClearRefinementsProps = ClearRefinementsUiComponentProps &
   UseClearRefinementsProps;
 
 export function ClearRefinements({

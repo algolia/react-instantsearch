@@ -6,9 +6,12 @@ import { ShowMoreButton } from './ShowMoreButton';
 import type { CreateURL } from 'instantsearch.js';
 import type { MenuItem } from 'instantsearch.js/es/connectors/menu/connectMenu';
 
-export type MenuProps = React.HTMLAttributes<HTMLDivElement> & {
+export type MenuProps = React.ComponentProps<'div'> & {
+  classNames?: Partial<MenuClassNames>;
+};
+
+export type MenuInternalProps = MenuProps & {
   items: MenuItem[];
-  classNames?: Partial<MenuCSSClasses>;
   showMore?: boolean;
   canToggleShowMore: boolean;
   onToggleShowMore: () => void;
@@ -17,7 +20,7 @@ export type MenuProps = React.HTMLAttributes<HTMLDivElement> & {
   onRefine: (item: MenuItem) => void;
 };
 
-export type MenuCSSClasses = {
+export type MenuClassNames = {
   /**
    * Class names to apply to the root element
    */
@@ -66,7 +69,7 @@ export function Menu({
   createURL,
   onRefine,
   ...props
-}: MenuProps) {
+}: MenuInternalProps) {
   return (
     <div
       {...props}

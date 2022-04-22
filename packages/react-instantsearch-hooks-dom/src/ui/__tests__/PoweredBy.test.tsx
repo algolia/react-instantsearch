@@ -3,10 +3,12 @@ import React from 'react';
 
 import { PoweredBy } from '../PoweredBy';
 
-import type { PoweredByProps } from '../PoweredBy';
+import type { PoweredByInternalProps } from '../PoweredBy';
 
 describe('PoweredBy', () => {
-  function createProps(props: Partial<PoweredByProps>): PoweredByProps {
+  function createProps(
+    props: Partial<PoweredByInternalProps>
+  ): PoweredByInternalProps {
     return {
       url: 'https://www.algolia.com/',
       theme: 'light',

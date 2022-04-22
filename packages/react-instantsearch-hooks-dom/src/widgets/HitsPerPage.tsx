@@ -6,8 +6,7 @@ import { HitsPerPage as HitsPerPageUiComponent } from '../ui/HitsPerPage';
 import type { HitsPerPageProps as HitsPerPageUiComponentProps } from '../ui/HitsPerPage';
 import type { UseHitsPerPageProps } from 'react-instantsearch-hooks';
 
-export type HitsPerPageProps = React.HTMLAttributes<HTMLDivElement> &
-  Pick<HitsPerPageUiComponentProps, 'classNames'> &
+export type HitsPerPageProps = HitsPerPageUiComponentProps &
   UseHitsPerPageProps;
 
 export function HitsPerPage(props: HitsPerPageProps) {

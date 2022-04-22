@@ -48,20 +48,24 @@ export type PaginationTranslations = {
   ariaPage(currentPage: number): string;
 };
 
-export type PaginationProps = React.HTMLAttributes<HTMLDivElement> & {
+export type PaginationProps = React.ComponentProps<'div'> & {
   classNames?: Partial<PaginationClassNames>;
+  showFirst?: boolean;
+  showPrevious?: boolean;
+  showNext?: boolean;
+  showLast?: boolean;
+};
+
+export type PaginationInternalProps = PaginationProps & {
   pages: number[];
   currentPage: number;
   isFirstPage: boolean;
   isLastPage: boolean;
   nbPages: number;
-  showFirst?: boolean;
-  showPrevious?: boolean;
-  showNext?: boolean;
-  showLast?: boolean;
   createURL: CreateURL<number>;
   onNavigate: (page: number) => void;
-} & { translations: PaginationTranslations };
+  translations: PaginationTranslations;
+};
 
 export type PaginationClassNames = {
   /**
@@ -129,7 +133,7 @@ export function Pagination({
   translations,
   classNames = {},
   ...props
-}: PaginationProps) {
+}: PaginationInternalProps) {
   const firstPageIndex = 0;
   const previousPageIndex = currentPage - 1;
   const nextPageIndex = currentPage + 1;

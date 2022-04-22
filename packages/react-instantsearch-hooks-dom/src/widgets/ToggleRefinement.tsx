@@ -7,11 +7,10 @@ import type { PartialKeys } from '../types';
 import type { ToggleRefinementProps as ToggleRefinementUiComponentProps } from '../ui/ToggleRefinement';
 import type { UseToggleRefinementProps } from 'react-instantsearch-hooks';
 
-export type ToggleRefinementProps = React.HTMLAttributes<HTMLDivElement> &
-  PartialKeys<
-    Pick<ToggleRefinementUiComponentProps, 'classNames' | 'label'>,
-    'label'
-  > &
+export type ToggleRefinementProps = PartialKeys<
+  ToggleRefinementUiComponentProps,
+  'label'
+> &
   UseToggleRefinementProps;
 
 export function ToggleRefinement({
