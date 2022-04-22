@@ -179,7 +179,7 @@ describe('RangeInput', () => {
       disabled: true,
       classNames: {
         root: 'ROOT',
-        rootNoRefinement: 'ROOTNOREFINEMENT',
+        noRefinementRoot: 'NOREFINEMENTROOT',
         form: 'FORM',
         label: 'LABEL',
         input: 'INPUT',
@@ -195,7 +195,7 @@ describe('RangeInput', () => {
     expect(container).toMatchInlineSnapshot(`
       <div>
         <div
-          class="ais-RangeInput ROOT ais-RangeInput-noRefinement ROOTNOREFINEMENT"
+          class="ais-RangeInput ROOT ais-RangeInput--noRefinement NOREFINEMENTROOT"
         >
           <form
             class="ais-RangeInput-form FORM"

@@ -26,6 +26,10 @@ export type MenuClassNames = {
    */
   root: string;
   /**
+   * Class names to apply to the root element when there are no refinements possible
+   */
+  noRefinementRoot: string;
+  /**
    * Class names to apply to the list element
    */
   list: string;
@@ -36,7 +40,7 @@ export type MenuClassNames = {
   /**
    * Class names to apply to each selected item element
    */
-  itemSelected: string;
+  selectedItem: string;
   /**
    * Class names to apply to each link element
    */
@@ -56,7 +60,7 @@ export type MenuClassNames = {
   /**
    * Class names to apply to the "Show more" button if it's disabled
    */
-  showMoreDisabled: string;
+  disabledShowMore: string;
 };
 
 export function Menu({
@@ -73,7 +77,13 @@ export function Menu({
   return (
     <div
       {...props}
-      className={cx('ais-Menu', classNames.root, props.className)}
+      className={cx(
+        'ais-Menu',
+        classNames.root,
+        items.length === 0 &&
+          cx('ais-Menu--noRefinement', classNames.noRefinementRoot),
+        props.className
+      )}
     >
       <ul className={cx('ais-Menu-list', classNames.list)}>
         {items.map((item) => (
@@ -83,7 +93,7 @@ export function Menu({
               'ais-Menu-item',
               classNames.item,
               item.isRefined &&
-                cx('ais-Menu-item--selected', classNames.itemSelected)
+                cx('ais-Menu-item--selected', classNames.selectedItem)
             )}
           >
             <a
@@ -110,7 +120,7 @@ export function Menu({
             'ais-Menu-showMore',
             classNames.showMore,
             !canToggleShowMore &&
-              cx('ais-Menu-showMore--disabled', classNames.showMoreDisabled)
+              cx('ais-Menu-showMore--disabled', classNames.disabledShowMore)
           )}
           disabled={!canToggleShowMore}
           onClick={onToggleShowMore}

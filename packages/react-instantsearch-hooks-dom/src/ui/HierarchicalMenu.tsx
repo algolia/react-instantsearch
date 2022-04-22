@@ -14,11 +14,15 @@ type HierarchicalMenuClassNames = {
   /**
    * Class names to apply to the root element when there are no refinements possible
    */
-  rootNoRefinement: string;
+  noRefinementRoot: string;
   /**
    * Class names to apply to the list element
    */
   list: string;
+  /**
+   * Class names to apply to each child list element
+   */
+  childList: string;
   /**
    * Class names to apply to each item element
    */
@@ -26,7 +30,11 @@ type HierarchicalMenuClassNames = {
   /**
    * Class names to apply to the selected item
    */
-  itemSelected: string;
+  selectedItem: string;
+  /**
+   * Class names to apply to the parent item of the list
+   */
+  parentItem: string;
   /**
    * Class names to apply to each link element
    */
@@ -46,13 +54,14 @@ type HierarchicalMenuClassNames = {
   /**
    * Class names to apply to the "Show more" button if it's disabled
    */
-  showMoreDisabled: string;
+  disabledShowMore: string;
 };
 
 type HierarchicalListProps = Pick<
   ReturnType<typeof useHierarchicalMenu>,
   'items' | 'createURL'
 > & {
+  className?: string;
   classNames?: Partial<HierarchicalMenuClassNames>;
   onNavigate: (value: string) => void;
 };
@@ -70,21 +79,24 @@ export type HierarchicalMenuInternalProps = HierarchicalListProps &
   };
 
 function HierarchicalList({
+  className,
   classNames = {},
   items,
   createURL,
   onNavigate,
 }: HierarchicalListProps) {
   return (
-    <ul className={cx('ais-HierarchicalMenu-list', classNames.list)}>
+    <ul className={cx('ais-HierarchicalMenu-list', classNames.list, className)}>
       {items.map((item) => (
         <li
           key={item.value}
           className={cx(
             'ais-HierarchicalMenu-item',
             classNames.item,
+            item.data &&
+              cx('ais-HierarchicalMenu-item--parent', classNames.parentItem),
             item.isRefined &&
-              cx('ais-HierarchicalMenu-item--selected', classNames.itemSelected)
+              cx('ais-HierarchicalMenu-item--selected', classNames.selectedItem)
           )}
         >
           <a
@@ -109,8 +121,12 @@ function HierarchicalList({
               {item.count}
             </span>
           </a>
-          {Boolean(item.data) && (
+          {item.data && (
             <HierarchicalList
+              className={cx(
+                'ais-HierarchicalMenu-list--child',
+                classNames.childList
+              )}
               classNames={classNames}
               items={item.data!}
               onNavigate={onNavigate}
@@ -142,7 +158,7 @@ export function HierarchicalMenu({
         'ais-HierarchicalMenu',
         classNames.root,
         !hasItems &&
-          cx('ais-HierarchicalMenu--noRefinement', classNames.rootNoRefinement),
+          cx('ais-HierarchicalMenu--noRefinement', classNames.noRefinementRoot),
         props.className
       )}
     >
@@ -160,7 +176,7 @@ export function HierarchicalMenu({
             !canToggleShowMore &&
               cx(
                 'ais-HierarchicalMenu-showMore--disabled',
-                classNames.showMoreDisabled
+                classNames.disabledShowMore
               )
           )}
           disabled={!canToggleShowMore}
