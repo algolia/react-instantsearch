@@ -1,3 +1,5 @@
 export type OptionalKeys<TObject> = {
-  [TKey in keyof TObject]-?: {} extends Pick<TObject, TKey> ? TKey : never;
+  [TKey in keyof TObject]-?: Record<string, unknown> extends Pick<TObject, TKey>
+    ? TKey
+    : never;
 }[keyof TObject];
