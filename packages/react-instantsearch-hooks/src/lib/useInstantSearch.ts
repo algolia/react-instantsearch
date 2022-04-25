@@ -7,7 +7,6 @@ import version from '../version';
 
 import { useForceUpdate } from './useForceUpdate';
 import { useStableValue } from './useStableValue';
-import { warn } from './warn';
 
 import type { InstantSearchServerContextApi } from '../components/InstantSearchServerContext';
 import type { InstantSearchServerState } from '../components/InstantSearchSSRProvider';
