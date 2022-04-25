@@ -7,22 +7,24 @@ import { ShowMoreButton } from './ShowMoreButton';
 
 import type { RefinementListItem } from 'instantsearch.js/es/connectors/refinement-list/connectRefinementList';
 
-export type RefinementListProps = React.ComponentProps<'div'> & {
-  classNames?: Partial<RefinementListClassNames>;
-};
-
-export type RefinementListInternalProps = RefinementListProps & {
+type WrapperProps = React.ComponentProps<'div'>;
+type RequiredProps = Required<{
   canRefine: boolean;
   items: RefinementListItem[];
   onRefine(item: RefinementListItem): void;
   query: string;
-  searchBox?: React.ReactNode;
-  noResults?: React.ReactNode;
-  showMore?: boolean;
+  searchBox: React.ReactNode | undefined;
+  noResults: React.ReactNode | undefined;
+  showMore: boolean | undefined;
   canToggleShowMore: boolean;
   onToggleShowMore: () => void;
   isShowingMore: boolean;
-};
+}>;
+type OptionalProps = Partial<{
+  classNames: Partial<RefinementListClassNames>;
+}>;
+
+export type RefinementListProps = WrapperProps & RequiredProps & OptionalProps;
 
 export type RefinementListClassNames = {
   /**
@@ -93,7 +95,7 @@ export function RefinementList({
   className,
   classNames = {},
   ...props
-}: RefinementListInternalProps) {
+}: RefinementListProps) {
   return (
     <div
       {...props}

@@ -4,12 +4,13 @@ import { useRefinementList } from 'react-instantsearch-hooks';
 import { RefinementList as RefinementListUiComponent } from '../ui/RefinementList';
 import { SearchBox as SearchBoxUiComponent } from '../ui/SearchBox';
 
+import type { WidgetProps } from '../types';
 import type { RefinementListProps as RefinementListUiComponentProps } from '../ui/RefinementList';
 import type { RefinementListItem } from 'instantsearch.js/es/connectors/refinement-list/connectRefinementList';
 import type { RefinementListWidgetParams } from 'instantsearch.js/es/widgets/refinement-list/refinement-list';
 import type { UseRefinementListProps } from 'react-instantsearch-hooks';
 
-export type RefinementListProps = RefinementListUiComponentProps &
+export type RefinementListProps = WidgetProps<RefinementListUiComponentProps> &
   UseRefinementListProps &
   Pick<RefinementListWidgetParams, 'searchable' | 'searchablePlaceholder'>;
 

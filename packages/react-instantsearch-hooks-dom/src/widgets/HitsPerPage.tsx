@@ -3,10 +3,11 @@ import { useHitsPerPage } from 'react-instantsearch-hooks';
 
 import { HitsPerPage as HitsPerPageUiComponent } from '../ui/HitsPerPage';
 
+import type { WidgetProps } from '../types';
 import type { HitsPerPageProps as HitsPerPageUiComponentProps } from '../ui/HitsPerPage';
 import type { UseHitsPerPageProps } from 'react-instantsearch-hooks';
 
-export type HitsPerPageProps = HitsPerPageUiComponentProps &
+export type HitsPerPageProps = WidgetProps<HitsPerPageUiComponentProps> &
   UseHitsPerPageProps;
 
 export function HitsPerPage(props: HitsPerPageProps) {

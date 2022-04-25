@@ -56,26 +56,27 @@ export type SearchBoxTranslations = {
   resetTitle: string;
 };
 
-export type SearchBoxProps = Omit<
-  React.ComponentProps<'div'>,
-  'onChange' | 'onReset'
-> &
+type WrapperProps = Omit<React.ComponentProps<'div'>, 'onChange' | 'onReset'>;
+type RequiredProps = Required<
+  Pick<React.ComponentProps<'form'>, 'onReset'> &
+    Pick<React.ComponentProps<'input'>, 'onChange'> & {
+      inputRef: React.RefObject<HTMLInputElement>;
+      isSearchStalled: boolean;
+      value: string;
+      translations: SearchBoxTranslations;
+    }
+>;
+type OptionalProps = Partial<
   Pick<React.ComponentProps<'form'>, 'onSubmit'> &
-  Pick<React.ComponentProps<'input'>, 'placeholder'> & {
-    resetIconComponent?: React.JSXElementConstructor<IconProps>;
-    submitIconComponent?: React.JSXElementConstructor<IconProps>;
-    loadingIconComponent?: React.JSXElementConstructor<IconProps>;
-    classNames?: Partial<SearchBoxClassNames>;
-  };
+    Pick<React.ComponentProps<'input'>, 'placeholder'> & {
+      resetIconComponent: React.JSXElementConstructor<IconProps>;
+      submitIconComponent: React.JSXElementConstructor<IconProps>;
+      loadingIconComponent: React.JSXElementConstructor<IconProps>;
+      classNames: Partial<SearchBoxClassNames>;
+    }
+>;
 
-export type SearchBoxInternalProps = SearchBoxProps &
-  Required<Pick<React.ComponentProps<'form'>, 'onReset'>> &
-  Pick<React.ComponentProps<'input'>, 'onChange'> & {
-    inputRef: React.RefObject<HTMLInputElement>;
-    isSearchStalled: boolean;
-    value: string;
-    translations: SearchBoxTranslations;
-  };
+export type SearchBoxProps = WrapperProps & RequiredProps & OptionalProps;
 
 function DefaultSubmitIcon({ classNames }: IconProps) {
   return (
@@ -145,7 +146,7 @@ export function SearchBox({
   classNames = {},
   translations,
   ...props
-}: SearchBoxInternalProps) {
+}: SearchBoxProps) {
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     event.stopPropagation();

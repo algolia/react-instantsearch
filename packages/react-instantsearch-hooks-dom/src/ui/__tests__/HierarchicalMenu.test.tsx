@@ -4,12 +4,12 @@ import React from 'react';
 
 import { HierarchicalMenu } from '../HierarchicalMenu';
 
-import type { HierarchicalMenuInternalProps } from '../HierarchicalMenu';
+import type { HierarchicalMenuProps } from '../HierarchicalMenu';
 
 describe('HierarchicalMenu', () => {
   function createProps(
-    props: Partial<HierarchicalMenuInternalProps> = {}
-  ): HierarchicalMenuInternalProps {
+    props: Partial<HierarchicalMenuProps> = {}
+  ): HierarchicalMenuProps {
     return {
       items: [
         {
@@ -45,6 +45,7 @@ describe('HierarchicalMenu', () => {
       hasItems: true,
       onNavigate: jest.fn(),
       createURL: jest.fn((value: string) => `#${value}`),
+      showMore: undefined,
       onToggleShowMore: jest.fn(),
       canToggleShowMore: true,
       isShowingMore: false,

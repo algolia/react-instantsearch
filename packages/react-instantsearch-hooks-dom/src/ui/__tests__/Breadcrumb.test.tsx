@@ -4,13 +4,13 @@ import React from 'react';
 
 import { Breadcrumb } from '../Breadcrumb';
 
-import type { BreadcrumbInternalProps } from '../Breadcrumb';
+import type { BreadcrumbProps } from '../Breadcrumb';
 
 describe('Breadcrumb', () => {
   function createProps({
     translations,
     ...props
-  }: Partial<BreadcrumbInternalProps> = {}): BreadcrumbInternalProps {
+  }: Partial<BreadcrumbProps> = {}): BreadcrumbProps {
     const createURL = jest.fn((value) => `#${value}`);
     const onNavigate = jest.fn();
 

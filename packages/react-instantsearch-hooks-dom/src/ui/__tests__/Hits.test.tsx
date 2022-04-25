@@ -3,12 +3,12 @@ import React from 'react';
 
 import { Hits } from '../Hits';
 
-import type { HitsInternalProps } from '../Hits';
+import type { HitsProps } from '../Hits';
 import type { Hit } from 'instantsearch.js';
 
 describe('Hits', () => {
   function createProps<THit extends Hit = Hit>(
-    props: Partial<HitsInternalProps<THit>>
+    props: Partial<HitsProps<THit>>
   ) {
     return {
       hits: [

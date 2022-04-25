@@ -3,10 +3,11 @@ import { useRange } from 'react-instantsearch-hooks';
 
 import { RangeInput as RangeInputUiComponent } from '../ui/RangeInput';
 
+import type { WidgetProps } from '../types';
 import type { RangeInputProps as RangeInputUiProps } from '../ui/RangeInput';
 import type { UseRangeProps } from 'react-instantsearch-hooks';
 
-export type RangeInputProps = RangeInputUiProps & UseRangeProps;
+export type RangeInputProps = WidgetProps<RangeInputUiProps> & UseRangeProps;
 
 export function RangeInput({
   attribute,

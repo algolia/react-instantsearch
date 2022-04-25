@@ -66,17 +66,21 @@ type HierarchicalListProps = Pick<
   onNavigate: (value: string) => void;
 };
 
-export type HierarchicalMenuProps = React.ComponentProps<'div'> &
-  Pick<HierarchicalListProps, 'classNames'>;
-
-export type HierarchicalMenuInternalProps = HierarchicalListProps &
-  HierarchicalMenuProps & {
+type WrapperProps = React.ComponentProps<'div'>;
+type RequiredProps = Required<
+  Omit<HierarchicalListProps, 'className' | 'classNames'> & {
     hasItems: boolean;
-    showMore?: boolean;
+    showMore: boolean | undefined;
     canToggleShowMore: boolean;
     onToggleShowMore: () => void;
     isShowingMore: boolean;
-  };
+  }
+>;
+type OptionalProps = Partial<Pick<HierarchicalListProps, 'classNames'>>;
+
+export type HierarchicalMenuProps = WrapperProps &
+  RequiredProps &
+  OptionalProps;
 
 function HierarchicalList({
   className,
@@ -150,7 +154,7 @@ export function HierarchicalMenu({
   onToggleShowMore,
   isShowingMore,
   ...props
-}: HierarchicalMenuInternalProps) {
+}: HierarchicalMenuProps) {
   return (
     <div
       {...props}

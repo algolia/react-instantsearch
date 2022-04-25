@@ -25,21 +25,23 @@ export type PoweredByClassNames = {
   logo: string;
 };
 
-export type PoweredByProps = React.ComponentProps<'div'> & {
-  classNames?: Partial<PoweredByClassNames>;
-  theme?: 'light' | 'dark';
-};
-
-export type PoweredByInternalProps = PoweredByProps & {
+type WrapperProps = React.ComponentProps<'div'>;
+type RequiredProps = Required<{
   url: string;
-};
+}>;
+type OptionalProps = Partial<{
+  classNames: Partial<PoweredByClassNames>;
+  theme: 'light' | 'dark';
+}>;
+
+export type PoweredByProps = WrapperProps & RequiredProps & OptionalProps;
 
 export function PoweredBy({
   classNames = {},
   url,
   theme = 'light',
   ...props
-}: PoweredByInternalProps) {
+}: PoweredByProps) {
   return (
     <div
       {...props}

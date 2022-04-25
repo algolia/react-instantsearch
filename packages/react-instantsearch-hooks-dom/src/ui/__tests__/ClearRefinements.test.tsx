@@ -4,12 +4,14 @@ import React from 'react';
 
 import { ClearRefinements } from '../ClearRefinements';
 
-import type { ClearRefinementsInternalProps } from '../ClearRefinements';
+import type { ClearRefinementsProps } from '../ClearRefinements';
 
 function createProps(
-  props?: Partial<ClearRefinementsInternalProps>
-): ClearRefinementsInternalProps {
+  props: Partial<ClearRefinementsProps> = {}
+): ClearRefinementsProps {
   return {
+    disabled: false,
+    onClick: jest.fn(),
     translations: {
       resetLabel: 'Clear refinements',
     },

@@ -4,9 +4,23 @@ import React from 'react';
 
 import { CurrentRefinements } from '../CurrentRefinements';
 
+import type { CurrentRefinementsProps } from '../CurrentRefinements';
+
+function createProps(
+  props: Partial<CurrentRefinementsProps> = {}
+): CurrentRefinementsProps {
+  return {
+    items: [],
+    onRemove: jest.fn(),
+    hasRefinements: false,
+    ...props,
+  };
+}
+
 describe('CurrentRefinements', () => {
   test('renders with default props', () => {
-    const { container } = render(<CurrentRefinements />);
+    const props = createProps();
+    const { container } = render(<CurrentRefinements {...props} />);
 
     expect(container).toMatchInlineSnapshot(`
       <div>
@@ -128,8 +142,9 @@ describe('CurrentRefinements', () => {
   });
 
   test('forwards a custom class name to the root element', () => {
+    const props = createProps();
     const { container } = render(
-      <CurrentRefinements className="MyCurrentRefinements" />
+      <CurrentRefinements {...props} className="MyCurrentRefinements" />
     );
 
     expect(document.querySelector('.ais-CurrentRefinements')).toHaveClass(
@@ -149,8 +164,9 @@ describe('CurrentRefinements', () => {
   });
 
   test('forwards `div` props to the root element', () => {
+    const props = createProps();
     const { container } = render(
-      <CurrentRefinements title="Some custom title" />
+      <CurrentRefinements {...props} title="Some custom title" />
     );
 
     expect(document.querySelector('.ais-CurrentRefinements')).toHaveAttribute(
@@ -173,8 +189,10 @@ describe('CurrentRefinements', () => {
 
   test('allows custom class names', () => {
     {
+      const props = createProps();
       const { container } = render(
         <CurrentRefinements
+          {...props}
           classNames={{
             root: 'ROOT',
             noRefinementRoot: 'NOREFINEMENTROOT',
@@ -203,21 +221,25 @@ describe('CurrentRefinements', () => {
     }
 
     {
+      const props = createProps({
+        items: [
+          {
+            label: 'brand',
+            refinements: [
+              {
+                attribute: 'brand',
+                label: 'Apple',
+                value: 'Apple',
+                type: 'disjunctive',
+              },
+            ],
+          },
+        ],
+        hasRefinements: true,
+      });
       const { container } = render(
         <CurrentRefinements
-          items={[
-            {
-              label: 'brand',
-              refinements: [
-                {
-                  attribute: 'brand',
-                  label: 'Apple',
-                  value: 'Apple',
-                  type: 'disjunctive',
-                },
-              ],
-            },
-          ]}
+          {...props}
           classNames={{
             root: 'ROOT',
             noRefinementRoot: 'NOREFINEMENTROOT',
@@ -235,10 +257,10 @@ describe('CurrentRefinements', () => {
       expect(container).toMatchInlineSnapshot(`
         <div>
           <div
-            class="ais-CurrentRefinements ROOT ais-CurrentRefinements--noRefinement NOREFINEMENTROOT"
+            class="ais-CurrentRefinements ROOT"
           >
             <ul
-              class="ais-CurrentRefinements-list LIST ais-CurrentRefinements-list--noRefinement NOREFINEMENTLIST"
+              class="ais-CurrentRefinements-list LIST"
             >
               <li
                 class="ais-CurrentRefinements-item ITEM"

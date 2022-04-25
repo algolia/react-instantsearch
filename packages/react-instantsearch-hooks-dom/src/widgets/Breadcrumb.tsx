@@ -3,10 +3,12 @@ import { useBreadcrumb } from 'react-instantsearch-hooks';
 
 import { Breadcrumb as BreadcrumbUiComponent } from '../ui/Breadcrumb';
 
+import type { WidgetProps } from '../types';
 import type { BreadcrumbProps as BreadcrumbUiProps } from '../ui/Breadcrumb';
 import type { UseBreadcrumbProps } from 'react-instantsearch-hooks';
 
-export type BreadcrumbProps = BreadcrumbUiProps & UseBreadcrumbProps;
+export type BreadcrumbProps = WidgetProps<BreadcrumbUiProps> &
+  UseBreadcrumbProps;
 
 export function Breadcrumb({
   attributes,

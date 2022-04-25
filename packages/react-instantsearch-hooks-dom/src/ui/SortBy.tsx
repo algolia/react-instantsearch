@@ -4,15 +4,18 @@ import { cx } from './lib/cx';
 
 import type { UseSortByProps } from 'react-instantsearch-hooks';
 
-export type SortByProps = Omit<React.ComponentProps<'div'>, 'onChange'> & {
-  classNames?: Partial<SortByClassNames>;
-};
+type WrapperProps = Omit<React.ComponentProps<'div'>, 'onChange'>;
+type RequiredProps = Required<
+  Pick<UseSortByProps, 'items'> & {
+    value: React.ComponentProps<'select'>['value'];
+    onChange(value: string): void;
+  }
+>;
+type OptionalProps = Partial<{
+  classNames: Partial<SortByClassNames>;
+}>;
 
-export type SortByInternalProps = SortByProps &
-  Pick<UseSortByProps, 'items'> &
-  Pick<React.ComponentProps<'select'>, 'value'> & {
-    onChange?(value: string): void;
-  };
+export type SortByProps = WrapperProps & RequiredProps & OptionalProps;
 
 export type SortByClassNames = {
   /**
@@ -32,10 +35,10 @@ export type SortByClassNames = {
 export function SortBy({
   items,
   value,
-  onChange = () => {},
+  onChange,
   classNames = {},
   ...props
-}: SortByInternalProps) {
+}: SortByProps) {
   return (
     <div
       {...props}

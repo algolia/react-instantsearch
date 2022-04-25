@@ -6,19 +6,21 @@ import { ShowMoreButton } from './ShowMoreButton';
 import type { CreateURL } from 'instantsearch.js';
 import type { MenuItem } from 'instantsearch.js/es/connectors/menu/connectMenu';
 
-export type MenuProps = React.ComponentProps<'div'> & {
-  classNames?: Partial<MenuClassNames>;
-};
-
-export type MenuInternalProps = MenuProps & {
+type WrapperProps = React.ComponentProps<'div'>;
+type RequiredProps = Required<{
   items: MenuItem[];
-  showMore?: boolean;
+  showMore: boolean | undefined;
   canToggleShowMore: boolean;
   onToggleShowMore: () => void;
   isShowingMore: boolean;
   createURL: CreateURL<MenuItem['value']>;
   onRefine: (item: MenuItem) => void;
-};
+}>;
+type OptionalProps = Partial<{
+  classNames: Partial<MenuClassNames>;
+}>;
+
+export type MenuProps = WrapperProps & RequiredProps & OptionalProps;
 
 export type MenuClassNames = {
   /**
@@ -73,7 +75,7 @@ export function Menu({
   createURL,
   onRefine,
   ...props
-}: MenuInternalProps) {
+}: MenuProps) {
   return (
     <div
       {...props}

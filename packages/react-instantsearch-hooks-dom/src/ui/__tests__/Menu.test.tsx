@@ -4,10 +4,10 @@ import React from 'react';
 
 import { Menu } from '../Menu';
 
-import type { MenuInternalProps } from '../Menu';
+import type { MenuProps } from '../Menu';
 
 describe('Menu', () => {
-  function createProps(props: Partial<MenuInternalProps>): MenuInternalProps {
+  function createProps(props: Partial<MenuProps>): MenuProps {
     return {
       items: [
         {
@@ -25,6 +25,7 @@ describe('Menu', () => {
       ],
       onRefine: jest.fn(),
       createURL: (value) => `#${value}`,
+      showMore: undefined,
       onToggleShowMore: jest.fn(),
       canToggleShowMore: true,
       isShowingMore: false,

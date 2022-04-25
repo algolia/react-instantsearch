@@ -3,11 +3,12 @@ import { useHierarchicalMenu } from 'react-instantsearch-hooks';
 
 import { HierarchicalMenu as HierarchicalMenuUiComponent } from '../ui/HierarchicalMenu';
 
+import type { WidgetProps } from '../types';
 import type { HierarchicalMenuProps as HierarchicalMenuUiComponentProps } from '../ui/HierarchicalMenu';
 import type { UseHierarchicalMenuProps } from 'react-instantsearch-hooks';
 
-export type HierarchicalMenuProps = HierarchicalMenuUiComponentProps &
-  UseHierarchicalMenuProps;
+export type HierarchicalMenuProps =
+  WidgetProps<HierarchicalMenuUiComponentProps> & UseHierarchicalMenuProps;
 
 export function HierarchicalMenu({
   attributes,

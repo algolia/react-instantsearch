@@ -4,11 +4,9 @@ import React from 'react';
 
 import { HitsPerPage } from '../HitsPerPage';
 
-import type { HitsPerPageInternalProps } from '../HitsPerPage';
+import type { HitsPerPageProps } from '../HitsPerPage';
 
-function createProps(
-  props?: Partial<HitsPerPageInternalProps>
-): HitsPerPageInternalProps {
+function createProps(props?: Partial<HitsPerPageProps>): HitsPerPageProps {
   return {
     items: [
       { label: '10', value: 10, default: true },

@@ -3,20 +3,22 @@ import { useInfiniteHits } from 'react-instantsearch-hooks';
 
 import { InfiniteHits as InfiniteHitsUiComponent } from '../ui/InfiniteHits';
 
+import type { WidgetProps } from '../types';
 import type { InfiniteHitsProps as InfiniteHitsUiComponentProps } from '../ui/InfiniteHits';
 import type { BaseHit, Hit } from 'instantsearch.js';
 import type { UseInfiniteHitsProps } from 'react-instantsearch-hooks';
 
-export type InfiniteHitsProps<THit extends BaseHit = BaseHit> =
-  InfiniteHitsUiComponentProps<Hit<THit>> &
-    UseInfiniteHitsProps<THit> & {
-      /**
-       * Displays the "Show Previous" button when the UI is loaded from a page
-       * beyond the first one.
-       * @default true
-       */
-      showPrevious?: boolean;
-    };
+export type InfiniteHitsProps<THit extends BaseHit = BaseHit> = WidgetProps<
+  InfiniteHitsUiComponentProps<Hit<THit>>
+> &
+  UseInfiniteHitsProps<THit> & {
+    /**
+     * Displays the "Show Previous" button when the UI is loaded from a page
+     * beyond the first one.
+     * @default true
+     */
+    showPrevious?: boolean;
+  };
 
 export function InfiniteHits<THit extends BaseHit = BaseHit>({
   showPrevious: shouldShowPrevious = true,

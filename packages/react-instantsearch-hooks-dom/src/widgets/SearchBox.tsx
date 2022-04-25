@@ -3,10 +3,12 @@ import { useSearchBox } from 'react-instantsearch-hooks';
 
 import { SearchBox as SearchBoxUiComponent } from '../ui/SearchBox';
 
+import type { WidgetProps } from '../types';
 import type { SearchBoxProps as SearchBoxUiComponentProps } from '../ui/SearchBox';
 import type { UseSearchBoxProps } from 'react-instantsearch-hooks';
 
-export type SearchBoxProps = SearchBoxUiComponentProps & UseSearchBoxProps;
+export type SearchBoxProps = WidgetProps<SearchBoxUiComponentProps> &
+  UseSearchBoxProps;
 
 export function SearchBox(props: SearchBoxProps) {
   const { query, refine, isSearchStalled } = useSearchBox(props, {

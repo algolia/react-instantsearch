@@ -4,10 +4,10 @@ import React from 'react';
 
 import { Pagination } from '../Pagination';
 
-import type { PaginationInternalProps } from '../Pagination';
+import type { PaginationProps } from '../Pagination';
 
 describe('Pagination', () => {
-  function createProps(props: Partial<PaginationInternalProps>) {
+  function createProps(props: Partial<PaginationProps>) {
     const onNavigate = jest.fn();
 
     return {

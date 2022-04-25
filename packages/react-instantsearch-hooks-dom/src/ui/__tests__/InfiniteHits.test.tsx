@@ -4,12 +4,12 @@ import React from 'react';
 
 import { InfiniteHits } from '../InfiniteHits';
 
-import type { InfiniteHitsInternalProps } from '../InfiniteHits';
+import type { InfiniteHitsProps } from '../InfiniteHits';
 import type { Hit } from 'instantsearch.js';
 
 describe('InfiniteHits', () => {
   function createProps<THit extends Hit = Hit>(
-    props: Partial<InfiniteHitsInternalProps<THit>>
+    props: Partial<InfiniteHitsProps<THit>>
   ) {
     return {
       hits: [

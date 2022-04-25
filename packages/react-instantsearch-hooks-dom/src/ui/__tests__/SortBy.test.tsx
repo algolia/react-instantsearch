@@ -4,16 +4,18 @@ import React from 'react';
 
 import { SortBy } from '../SortBy';
 
-import type { SortByInternalProps } from '../SortBy';
+import type { SortByProps } from '../SortBy';
 
 describe('SortBy', () => {
-  function createProps(props: Partial<SortByInternalProps>) {
+  function createProps(props: Partial<SortByProps>): SortByProps {
     return {
       items: [
         { label: 'Featured', value: 'instant_search' },
         { label: 'Price (asc)', value: 'instant_search_price_asc' },
         { label: 'Price (desc)', value: 'instant_search_price_desc' },
       ],
+      value: undefined,
+      onChange: jest.fn(),
       ...props,
     };
   }
@@ -70,8 +72,7 @@ describe('SortBy', () => {
   test('calls an `onChange` callback when selecting an option', () => {
     const props = createProps({});
 
-    const onChange = jest.fn();
-    const { getByRole } = render(<SortBy {...props} onChange={onChange} />);
+    const { getByRole } = render(<SortBy {...props} />);
 
     userEvent.selectOptions(
       document.querySelector('.ais-SortBy-select') as HTMLSelectElement,
@@ -81,7 +82,7 @@ describe('SortBy', () => {
     expect(document.querySelector('.ais-SortBy-select')).toHaveValue(
       'instant_search_price_asc'
     );
-    expect(onChange).toHaveBeenCalledTimes(1);
+    expect(props.onChange).toHaveBeenCalledTimes(1);
   });
 
   test('forwards a custom class name to the root element', () => {

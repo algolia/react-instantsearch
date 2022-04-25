@@ -4,10 +4,10 @@ import React, { createRef } from 'react';
 
 import { SearchBox } from '../SearchBox';
 
-import type { SearchBoxInternalProps } from '../SearchBox';
+import type { SearchBoxProps } from '../SearchBox';
 
 describe('SearchBox', () => {
-  function createProps(props: Partial<SearchBoxInternalProps>) {
+  function createProps(props: Partial<SearchBoxProps>): SearchBoxProps {
     const onChange = jest.fn();
     const onReset = jest.fn();
     const onSubmit = jest.fn();

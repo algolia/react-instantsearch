@@ -4,17 +4,16 @@ import React from 'react';
 
 import { RangeInput } from '../RangeInput';
 
-import type { RangeInputInternalProps } from '../RangeInput';
+import type { RangeInputProps } from '../RangeInput';
 
 describe('RangeInput', () => {
-  function createProps(
-    props: Partial<RangeInputInternalProps> = {}
-  ): RangeInputInternalProps {
+  function createProps(props: Partial<RangeInputProps> = {}): RangeInputProps {
     return {
       range: { min: 1, max: 5000 },
       start: [undefined, undefined],
       disabled: false,
       onSubmit: jest.fn(),
+      step: 1,
       translations: { separator: 'to', submit: 'Go' },
       ...props,
     };

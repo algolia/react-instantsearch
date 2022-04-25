@@ -3,15 +3,12 @@ import { useToggleRefinement } from 'react-instantsearch-hooks';
 
 import { ToggleRefinement as ToggleRefinementUiComponent } from '../ui/ToggleRefinement';
 
-import type { PartialKeys } from '../types';
+import type { WidgetProps } from '../types';
 import type { ToggleRefinementProps as ToggleRefinementUiComponentProps } from '../ui/ToggleRefinement';
 import type { UseToggleRefinementProps } from 'react-instantsearch-hooks';
 
-export type ToggleRefinementProps = PartialKeys<
-  ToggleRefinementUiComponentProps,
-  'label'
-> &
-  UseToggleRefinementProps;
+export type ToggleRefinementProps =
+  WidgetProps<ToggleRefinementUiComponentProps> & UseToggleRefinementProps;
 
 export function ToggleRefinement({
   attribute,

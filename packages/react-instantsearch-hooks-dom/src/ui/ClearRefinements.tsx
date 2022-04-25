@@ -9,14 +9,19 @@ export type ClearRefinementsTranslations = {
   resetLabel: string;
 };
 
-export type ClearRefinementsProps = React.ComponentProps<'div'> & {
-  classNames?: Partial<ClearRefinementsClassNames>;
-};
-
-export type ClearRefinementsInternalProps = ClearRefinementsProps &
+type WrapperProps = React.ComponentProps<'div'>;
+type RequiredProps = Required<
   Pick<React.ComponentProps<'button'>, 'disabled' | 'onClick'> & {
     translations: ClearRefinementsTranslations;
-  };
+  }
+>;
+type OptionalProps = Partial<{
+  classNames: Partial<ClearRefinementsClassNames>;
+}>;
+
+export type ClearRefinementsProps = WrapperProps &
+  RequiredProps &
+  OptionalProps;
 
 export type ClearRefinementsClassNames = {
   /**
@@ -35,11 +40,11 @@ export type ClearRefinementsClassNames = {
 
 export function ClearRefinements({
   classNames = {},
-  disabled = false,
-  onClick = () => {},
+  disabled,
+  onClick,
   translations,
   ...props
-}: ClearRefinementsInternalProps) {
+}: ClearRefinementsProps) {
   return (
     <div
       {...props}

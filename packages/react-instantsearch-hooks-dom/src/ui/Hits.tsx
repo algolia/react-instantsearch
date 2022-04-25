@@ -4,14 +4,18 @@ import { cx } from './lib/cx';
 
 import type { Hit } from 'instantsearch.js';
 
-export type HitsProps<THit> = React.ComponentProps<'div'> & {
-  classNames?: Partial<HitsClassNames>;
-  hitComponent?: React.JSXElementConstructor<{ hit: THit }>;
-};
-
-export type HitsInternalProps<THit> = HitsProps<THit> & {
+type WrapperProps = React.ComponentProps<'div'>;
+type RequiredProps<THit> = Required<{
   hits: THit[];
-};
+}>;
+type OptionalProps<THit> = Partial<{
+  classNames: Partial<HitsClassNames>;
+  hitComponent: React.JSXElementConstructor<{ hit: THit }>;
+}>;
+
+export type HitsProps<THit> = WrapperProps &
+  RequiredProps<THit> &
+  OptionalProps<THit>;
 
 function DefaultHitComponent({ hit }: { hit: Hit }) {
   return (
@@ -45,7 +49,7 @@ export function Hits<THit extends Hit>({
   hitComponent: HitComponent = DefaultHitComponent,
   classNames = {},
   ...props
-}: HitsInternalProps<THit>) {
+}: HitsProps<THit>) {
   return (
     <div
       {...props}

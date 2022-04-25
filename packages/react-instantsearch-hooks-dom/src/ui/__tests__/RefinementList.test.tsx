@@ -5,10 +5,12 @@ import React, { createRef } from 'react';
 import { RefinementList } from '../RefinementList';
 import { SearchBox } from '../SearchBox';
 
-import type { RefinementListInternalProps } from '../RefinementList';
+import type { RefinementListProps } from '../RefinementList';
 
 describe('RefinementList', () => {
-  function createProps(props: Partial<RefinementListInternalProps>) {
+  function createProps(
+    props: Partial<RefinementListProps>
+  ): RefinementListProps {
     return {
       canRefine: true,
       items: [
@@ -29,7 +31,9 @@ describe('RefinementList', () => {
       ],
       onRefine: jest.fn(),
       query: '',
-      searchBox: null,
+      searchBox: undefined,
+      noResults: undefined,
+      showMore: undefined,
       canToggleShowMore: true,
       isShowingMore: false,
       onToggleShowMore: jest.fn(),

@@ -21,18 +21,20 @@ export type ToggleRefinementClassNames = {
   labelText: string;
 };
 
-export type ToggleRefinementProps = Omit<
-  React.ComponentProps<'div'>,
-  'onChange'
-> & {
-  classNames?: Partial<ToggleRefinementClassNames>;
-  label: string;
-};
-
-export type ToggleRefinementInternalProps = ToggleRefinementProps &
+type WrapperProps = Omit<React.ComponentProps<'div'>, 'onChange'>;
+type RequiredProps = Required<
   Pick<React.ComponentProps<'input'>, 'checked'> & {
     onChange(isChecked: boolean): void;
-  };
+  }
+>;
+type OptionalProps = Partial<{
+  classNames: Partial<ToggleRefinementClassNames>;
+  label: string;
+}>;
+
+export type ToggleRefinementProps = WrapperProps &
+  RequiredProps &
+  OptionalProps;
 
 export function ToggleRefinement({
   classNames = {},
@@ -40,7 +42,7 @@ export function ToggleRefinement({
   onChange,
   label,
   ...props
-}: ToggleRefinementInternalProps) {
+}: ToggleRefinementProps) {
   return (
     <div
       {...props}
