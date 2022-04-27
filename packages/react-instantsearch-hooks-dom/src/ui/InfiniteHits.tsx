@@ -5,22 +5,24 @@ import { cx } from './lib/cx';
 import type { Hit } from 'instantsearch.js';
 
 type WrapperProps = React.ComponentProps<'div'>;
-type RequiredProps<THit> = Required<{
-  hits: THit[];
-  isFirstPage: boolean;
-  isLastPage: boolean;
-  onShowPrevious: (() => void) | undefined;
-  onShowMore: () => void;
-  translations: InfiniteHitsTranslations;
-}>;
-type OptionalProps<THit> = Partial<{
-  classNames: Partial<InfiniteHitsClassNames>;
-  hitComponent: React.JSXElementConstructor<{ hit: THit }>;
-}>;
 
-export type InfiniteHitsProps<THit> = WrapperProps &
-  RequiredProps<THit> &
-  OptionalProps<THit>;
+export type InfiniteHitsWidgetProps<THit> = WrapperProps & {
+  classNames?: Partial<InfiniteHitsClassNames>;
+  hitComponent?: React.JSXElementConstructor<{ hit: THit }>;
+};
+
+export type InfiniteHitsProps<THit> = Omit<
+  InfiniteHitsWidgetProps<THit>,
+  'hitComponent'
+> &
+  Required<Pick<InfiniteHitsWidgetProps<THit>, 'hitComponent'>> & {
+    hits: THit[];
+    isFirstPage: boolean;
+    isLastPage: boolean;
+    onShowPrevious: (() => void) | undefined;
+    onShowMore: () => void;
+    translations: InfiniteHitsTranslations;
+  };
 
 export type InfiniteHitsClassNames = {
   /**
@@ -62,16 +64,8 @@ export type InfiniteHitsTranslations = {
   showMore: string;
 };
 
-function DefaultHitComponent({ hit }: { hit: Hit }) {
-  return (
-    <div style={{ wordBreak: 'break-all' }}>
-      {JSON.stringify(hit).slice(0, 100)}…
-    </div>
-  );
-}
-
 export function InfiniteHits<THit extends Hit>({
-  hitComponent: HitComponent = DefaultHitComponent,
+  hitComponent: HitComponent,
   hits,
   isFirstPage,
   isLastPage,

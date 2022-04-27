@@ -49,7 +49,16 @@ export type PaginationTranslations = {
 };
 
 type WrapperProps = React.ComponentProps<'div'>;
-type RequiredProps = Required<{
+
+export type PaginationWidgetProps = WrapperProps & {
+  classNames?: Partial<PaginationClassNames>;
+  showFirst?: boolean;
+  showPrevious?: boolean;
+  showNext?: boolean;
+  showLast?: boolean;
+};
+
+export type PaginationProps = PaginationWidgetProps & {
   pages: number[];
   currentPage: number;
   isFirstPage: boolean;
@@ -58,16 +67,7 @@ type RequiredProps = Required<{
   createURL: CreateURL<number>;
   onNavigate: (page: number) => void;
   translations: PaginationTranslations;
-}>;
-type OptionalProps = Partial<{
-  classNames: Partial<PaginationClassNames>;
-  showFirst: boolean;
-  showPrevious: boolean;
-  showNext: boolean;
-  showLast: boolean;
-}>;
-
-export type PaginationProps = WrapperProps & RequiredProps & OptionalProps;
+};
 
 export type PaginationClassNames = {
   /**

@@ -3,12 +3,11 @@ import { useCurrentRefinements } from 'react-instantsearch-hooks';
 
 import { CurrentRefinements as CurrentRefinementsUiComponent } from '../ui/CurrentRefinements';
 
-import type { WidgetProps } from '../types';
-import type { CurrentRefinementsProps as CurrentRefinementsUiComponentProps } from '../ui/CurrentRefinements';
+import type { CurrentRefinementsWidgetProps } from '../ui/CurrentRefinements';
 import type { UseCurrentRefinementsProps } from 'react-instantsearch-hooks';
 
-export type CurrentRefinementsProps =
-  WidgetProps<CurrentRefinementsUiComponentProps> & UseCurrentRefinementsProps;
+export type CurrentRefinementsProps = CurrentRefinementsWidgetProps &
+  UseCurrentRefinementsProps;
 
 export function CurrentRefinements({
   includedAttributes,

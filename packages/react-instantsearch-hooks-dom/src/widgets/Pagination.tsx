@@ -3,12 +3,10 @@ import { usePagination } from 'react-instantsearch-hooks';
 
 import { Pagination as PaginationUiComponent } from '../ui/Pagination';
 
-import type { WidgetProps } from '../types';
-import type { PaginationProps as PaginationUiComponentProps } from '../ui/Pagination';
+import type { PaginationWidgetProps } from '../ui/Pagination';
 import type { UsePaginationProps } from 'react-instantsearch-hooks';
 
-export type PaginationProps = WidgetProps<PaginationUiComponentProps> &
-  UsePaginationProps;
+export type PaginationProps = PaginationWidgetProps & UsePaginationProps;
 
 export function Pagination({
   showFirst,

@@ -9,12 +9,15 @@ import type { Hit } from 'instantsearch.js';
 describe('Hits', () => {
   function createProps<THit extends Hit = Hit>(
     props: Partial<HitsProps<THit>>
-  ) {
+  ): HitsProps<THit> {
     return {
       hits: [
         { objectID: 'abc', __position: 1 },
         { objectID: 'def', __position: 2 },
       ] as THit[],
+      hitComponent: ({ hit }) => (
+        <strong>{`${hit.objectID} - ${hit.__position}`}</strong>
+      ),
       ...props,
     };
   }
@@ -35,64 +38,15 @@ describe('Hits', () => {
             <li
               class="ais-Hits-item"
             >
-              <div
-                style="word-break: break-all;"
-              >
-                {"objectID":"abc","__position":1}
-                …
-              </div>
-            </li>
-            <li
-              class="ais-Hits-item"
-            >
-              <div
-                style="word-break: break-all;"
-              >
-                {"objectID":"def","__position":2}
-                …
-              </div>
-            </li>
-          </ol>
-        </div>
-      </div>
-    `);
-  });
-
-  test('renders with custom hitComponent', () => {
-    const props = createProps({
-      hits: [
-        { objectID: 'abc', __position: 1, something: true },
-        { objectID: 'def', __position: 2, something: false },
-      ],
-      hitComponent: ({ hit }) => (
-        <strong>{`${hit.objectID} - ${hit.something}`}</strong>
-      ),
-    });
-
-    const { container } = render(<Hits {...props} />);
-
-    expect(container.querySelectorAll('strong')).toHaveLength(2);
-
-    expect(container).toMatchInlineSnapshot(`
-      <div>
-        <div
-          class="ais-Hits"
-        >
-          <ol
-            class="ais-Hits-list"
-          >
-            <li
-              class="ais-Hits-item"
-            >
               <strong>
-                abc - true
+                abc - 1
               </strong>
             </li>
             <li
               class="ais-Hits-item"
             >
               <strong>
-                def - false
+                def - 2
               </strong>
             </li>
           </ol>
@@ -135,22 +89,16 @@ describe('Hits', () => {
             <li
               class="ais-Hits-item ITEM"
             >
-              <div
-                style="word-break: break-all;"
-              >
-                {"objectID":"abc","__position":1}
-                …
-              </div>
+              <strong>
+                abc - 1
+              </strong>
             </li>
             <li
               class="ais-Hits-item ITEM"
             >
-              <div
-                style="word-break: break-all;"
-              >
-                {"objectID":"def","__position":2}
-                …
-              </div>
+              <strong>
+                def - 2
+              </strong>
             </li>
           </ol>
         </div>

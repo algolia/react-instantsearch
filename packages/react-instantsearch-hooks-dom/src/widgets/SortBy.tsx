@@ -3,11 +3,10 @@ import { useSortBy } from 'react-instantsearch-hooks';
 
 import { SortBy as SortByUiComponent } from '../ui/SortBy';
 
-import type { WidgetProps } from '../types';
-import type { SortByProps as SortByUiComponentProps } from '../ui/SortBy';
+import type { SortByWidgetProps } from '../ui/SortBy';
 import type { UseSortByProps } from 'react-instantsearch-hooks';
 
-export type SortByProps = WidgetProps<SortByUiComponentProps> & UseSortByProps;
+export type SortByProps = SortByWidgetProps & UseSortByProps;
 
 export function SortBy({ items, transformItems, ...props }: SortByProps) {
   const { currentRefinement, options, refine } = useSortBy(

@@ -26,15 +26,15 @@ export type PoweredByClassNames = {
 };
 
 type WrapperProps = React.ComponentProps<'div'>;
-type RequiredProps = Required<{
-  url: string;
-}>;
-type OptionalProps = Partial<{
-  classNames: Partial<PoweredByClassNames>;
-  theme: 'light' | 'dark';
-}>;
 
-export type PoweredByProps = WrapperProps & RequiredProps & OptionalProps;
+export type PoweredByWidgetProps = WrapperProps & {
+  classNames?: Partial<PoweredByClassNames>;
+  theme?: 'light' | 'dark';
+};
+
+export type PoweredByProps = PoweredByWidgetProps & {
+  url: string;
+};
 
 export function PoweredBy({
   classNames = {},

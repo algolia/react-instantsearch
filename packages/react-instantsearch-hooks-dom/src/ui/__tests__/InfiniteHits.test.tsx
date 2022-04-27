@@ -10,12 +10,12 @@ import type { Hit } from 'instantsearch.js';
 describe('InfiniteHits', () => {
   function createProps<THit extends Hit = Hit>(
     props: Partial<InfiniteHitsProps<THit>>
-  ) {
+  ): InfiniteHitsProps<THit> {
     return {
       hits: [
         { objectID: 'abc', __position: 1 },
         { objectID: 'def', __position: 2 },
-      ],
+      ] as THit[],
       isFirstPage: true,
       isLastPage: false,
       onShowPrevious: jest.fn(),
@@ -24,6 +24,9 @@ describe('InfiniteHits', () => {
         showPrevious: 'Show previous results',
         showMore: 'Show more results',
       },
+      hitComponent: ({ hit }) => (
+        <strong>{`${hit.objectID} - ${hit.__position}`}</strong>
+      ),
       ...props,
     };
   }
@@ -50,22 +53,16 @@ describe('InfiniteHits', () => {
             <li
               class="ais-InfiniteHits-item"
             >
-              <div
-                style="word-break: break-all;"
-              >
-                {"objectID":"abc","__position":1}
-                …
-              </div>
+              <strong>
+                abc - 1
+              </strong>
             </li>
             <li
               class="ais-InfiniteHits-item"
             >
-              <div
-                style="word-break: break-all;"
-              >
-                {"objectID":"def","__position":2}
-                …
-              </div>
+              <strong>
+                def - 2
+              </strong>
             </li>
           </ol>
           <button
@@ -125,22 +122,16 @@ describe('InfiniteHits', () => {
             <li
               class="ais-InfiniteHits-item ITEM"
             >
-              <div
-                style="word-break: break-all;"
-              >
-                {"objectID":"abc","__position":1}
-                …
-              </div>
+              <strong>
+                abc - 1
+              </strong>
             </li>
             <li
               class="ais-InfiniteHits-item ITEM"
             >
-              <div
-                style="word-break: break-all;"
-              >
-                {"objectID":"def","__position":2}
-                …
-              </div>
+              <strong>
+                def - 2
+              </strong>
             </li>
           </ol>
           <button
@@ -202,57 +193,6 @@ describe('InfiniteHits', () => {
     expect(
       container.querySelector<HTMLDivElement>('.ais-InfiniteHits')!.title
     ).toBe('hello world');
-  });
-
-  test('renders with custom hitComponent', () => {
-    const props = createProps({});
-
-    const { container } = render(
-      <InfiniteHits
-        {...props}
-        hitComponent={({ hit }) => <strong>{hit.objectID}</strong>}
-      />
-    );
-
-    expect(container.querySelectorAll('strong')).toHaveLength(2);
-
-    expect(container).toMatchInlineSnapshot(`
-      <div>
-        <div
-          class="ais-InfiniteHits"
-        >
-          <button
-            class="ais-InfiniteHits-loadPrevious ais-InfiniteHits-loadPrevious--disabled"
-            disabled=""
-          >
-            Show previous results
-          </button>
-          <ol
-            class="ais-InfiniteHits-list"
-          >
-            <li
-              class="ais-InfiniteHits-item"
-            >
-              <strong>
-                abc
-              </strong>
-            </li>
-            <li
-              class="ais-InfiniteHits-item"
-            >
-              <strong>
-                def
-              </strong>
-            </li>
-          </ol>
-          <button
-            class="ais-InfiniteHits-loadMore"
-          >
-            Show more results
-          </button>
-        </div>
-      </div>
-    `);
   });
 
   test('renders without showPrevious if disabled', () => {

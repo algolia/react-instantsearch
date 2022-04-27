@@ -3,12 +3,11 @@ import { useClearRefinements } from 'react-instantsearch-hooks';
 
 import { ClearRefinements as ClearRefinementsUiComponent } from '../ui/ClearRefinements';
 
-import type { WidgetProps } from '../types';
-import type { ClearRefinementsProps as ClearRefinementsUiComponentProps } from '../ui/ClearRefinements';
+import type { ClearRefinementsWidgetProps } from '../ui/ClearRefinements';
 import type { UseClearRefinementsProps } from 'react-instantsearch-hooks';
 
-export type ClearRefinementsProps =
-  WidgetProps<ClearRefinementsUiComponentProps> & UseClearRefinementsProps;
+export type ClearRefinementsProps = ClearRefinementsWidgetProps &
+  UseClearRefinementsProps;
 
 export function ClearRefinements({
   includedAttributes,

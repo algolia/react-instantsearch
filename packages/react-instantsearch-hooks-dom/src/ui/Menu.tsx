@@ -7,7 +7,12 @@ import type { CreateURL } from 'instantsearch.js';
 import type { MenuItem } from 'instantsearch.js/es/connectors/menu/connectMenu';
 
 type WrapperProps = React.ComponentProps<'div'>;
-type RequiredProps = Required<{
+
+export type MenuWidgetProps = WrapperProps & {
+  classNames?: Partial<MenuClassNames>;
+};
+
+export type MenuProps = MenuWidgetProps & {
   items: MenuItem[];
   showMore: boolean | undefined;
   canToggleShowMore: boolean;
@@ -15,12 +20,7 @@ type RequiredProps = Required<{
   isShowingMore: boolean;
   createURL: CreateURL<MenuItem['value']>;
   onRefine: (item: MenuItem) => void;
-}>;
-type OptionalProps = Partial<{
-  classNames: Partial<MenuClassNames>;
-}>;
-
-export type MenuProps = WrapperProps & RequiredProps & OptionalProps;
+};
 
 export type MenuClassNames = {
   /**

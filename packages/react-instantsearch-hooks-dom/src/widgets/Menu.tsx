@@ -3,11 +3,10 @@ import { useMenu } from 'react-instantsearch-hooks';
 
 import { Menu as MenuUiComponent } from '../ui/Menu';
 
-import type { WidgetProps } from '../types';
-import type { MenuProps as MenuUiComponentProps } from '../ui/Menu';
+import type { MenuWidgetProps } from '../ui/Menu';
 import type { UseMenuProps } from 'react-instantsearch-hooks';
 
-export type MenuProps = WidgetProps<MenuUiComponentProps> & UseMenuProps;
+export type MenuProps = MenuWidgetProps & UseMenuProps;
 
 export function Menu({
   attribute,

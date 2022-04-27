@@ -9,21 +9,19 @@ import type {
 } from 'instantsearch.js/es/connectors/current-refinements/connectCurrentRefinements';
 
 type WrapperProps = React.ComponentProps<'div'>;
-type RequiredProps = Required<{
+
+export type CurrentRefinementsWidgetProps = WrapperProps & {
+  classNames?: Partial<CurrentRefinementsClassNames>;
+};
+
+export type CurrentRefinementsProps = CurrentRefinementsWidgetProps & {
   items: Array<
     Pick<CurrentRefinementsConnectorParamsItem, 'label' | 'refinements'> &
       Record<string, unknown>
   >;
   onRemove(refinement: CurrentRefinementsConnectorParamsRefinement): void;
   hasRefinements: boolean;
-}>;
-type OptionalProps = Partial<{
-  classNames: Partial<CurrentRefinementsClassNames>;
-}>;
-
-export type CurrentRefinementsProps = WrapperProps &
-  RequiredProps &
-  OptionalProps;
+};
 
 export type CurrentRefinementsClassNames = {
   /**

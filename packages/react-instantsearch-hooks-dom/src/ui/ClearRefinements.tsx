@@ -10,18 +10,15 @@ export type ClearRefinementsTranslations = {
 };
 
 type WrapperProps = React.ComponentProps<'div'>;
-type RequiredProps = Required<
+
+export type ClearRefinementsWidgetProps = WrapperProps & {
+  classNames?: Partial<ClearRefinementsClassNames>;
+};
+
+export type ClearRefinementsProps = ClearRefinementsWidgetProps &
   Pick<React.ComponentProps<'button'>, 'disabled' | 'onClick'> & {
     translations: ClearRefinementsTranslations;
-  }
->;
-type OptionalProps = Partial<{
-  classNames: Partial<ClearRefinementsClassNames>;
-}>;
-
-export type ClearRefinementsProps = WrapperProps &
-  RequiredProps &
-  OptionalProps;
+  };
 
 export type ClearRefinementsClassNames = {
   /**

@@ -3,12 +3,11 @@ import { useToggleRefinement } from 'react-instantsearch-hooks';
 
 import { ToggleRefinement as ToggleRefinementUiComponent } from '../ui/ToggleRefinement';
 
-import type { WidgetProps } from '../types';
-import type { ToggleRefinementProps as ToggleRefinementUiComponentProps } from '../ui/ToggleRefinement';
+import type { ToggleRefinementWidgetProps } from '../ui/ToggleRefinement';
 import type { UseToggleRefinementProps } from 'react-instantsearch-hooks';
 
-export type ToggleRefinementProps =
-  WidgetProps<ToggleRefinementUiComponentProps> & UseToggleRefinementProps;
+export type ToggleRefinementProps = ToggleRefinementWidgetProps &
+  UseToggleRefinementProps;
 
 export function ToggleRefinement({
   attribute,

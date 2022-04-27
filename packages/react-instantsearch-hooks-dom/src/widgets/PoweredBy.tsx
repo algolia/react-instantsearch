@@ -3,10 +3,9 @@ import { usePoweredBy } from 'react-instantsearch-hooks';
 
 import { PoweredBy as PoweredByUiComponent } from '../ui/PoweredBy';
 
-import type { WidgetProps } from '../types';
-import type { PoweredByProps as PoweredByUiComponentProps } from '../ui/PoweredBy';
+import type { PoweredByWidgetProps } from '../ui/PoweredBy';
 
-export type PoweredByProps = WidgetProps<PoweredByUiComponentProps>;
+export type PoweredByProps = PoweredByWidgetProps;
 
 export function PoweredBy(props: PoweredByProps) {
   const { url } = usePoweredBy();

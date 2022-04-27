@@ -7,19 +7,18 @@ import type { useRange } from 'react-instantsearch-hooks';
 type RangeRenderState = ReturnType<typeof useRange>;
 
 type WrapperProps = Omit<React.ComponentProps<'div'>, 'onSubmit'>;
-type RequiredProps = Required<
+
+export type RangeInputWidgetProps = WrapperProps & {
+  classNames?: Partial<RangeInputClassNames>;
+};
+
+export type RangeInputProps = RangeInputWidgetProps &
   Pick<RangeRenderState, 'range' | 'start'> & {
     disabled: boolean;
     onSubmit: RangeRenderState['refine'];
     step: number;
     translations: RangeInputTranslations;
-  }
->;
-type OptionalProps = Partial<{
-  classNames: Partial<RangeInputClassNames>;
-}>;
-
-export type RangeInputProps = WrapperProps & RequiredProps & OptionalProps;
+  };
 
 export type RangeInputClassNames = {
   /**

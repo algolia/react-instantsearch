@@ -5,25 +5,16 @@ import { cx } from './lib/cx';
 import type { Hit } from 'instantsearch.js';
 
 type WrapperProps = React.ComponentProps<'div'>;
-type RequiredProps<THit> = Required<{
-  hits: THit[];
-}>;
-type OptionalProps<THit> = Partial<{
-  classNames: Partial<HitsClassNames>;
-  hitComponent: React.JSXElementConstructor<{ hit: THit }>;
-}>;
 
-export type HitsProps<THit> = WrapperProps &
-  RequiredProps<THit> &
-  OptionalProps<THit>;
+export type HitsWidgetProps<THit> = WrapperProps & {
+  classNames?: Partial<HitsClassNames>;
+  hitComponent?: React.JSXElementConstructor<{ hit: THit }>;
+};
 
-function DefaultHitComponent({ hit }: { hit: Hit }) {
-  return (
-    <div style={{ wordBreak: 'break-all' }}>
-      {JSON.stringify(hit).slice(0, 100)}…
-    </div>
-  );
-}
+export type HitsProps<THit> = Omit<HitsWidgetProps<THit>, 'hitComponent'> &
+  Required<Pick<HitsWidgetProps<THit>, 'hitComponent'>> & {
+    hits: THit[];
+  };
 
 export type HitsClassNames = {
   /**
@@ -46,7 +37,7 @@ export type HitsClassNames = {
 
 export function Hits<THit extends Hit>({
   hits,
-  hitComponent: HitComponent = DefaultHitComponent,
+  hitComponent: HitComponent,
   classNames = {},
   ...props
 }: HitsProps<THit>) {
