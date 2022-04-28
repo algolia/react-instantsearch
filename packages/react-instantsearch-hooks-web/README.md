@@ -17,9 +17,9 @@ InstantSearch’s goal is to help you implement awesome search experiences as sm
 React InstantSearch Hooks is available on the npm registry. It relies on [`algoliasearch`](https://github.com/algolia/algoliasearch-client-javascript) to communicate with Algolia APIs.
 
 ```sh
-yarn add algoliasearch react-instantsearch-hooks
+yarn add algoliasearch react-instantsearch-hooks-web
 # or
-npm install algoliasearch react-instantsearch-hooks
+npm install algoliasearch react-instantsearch-hooks-web
 ```
 
 ## Getting started
