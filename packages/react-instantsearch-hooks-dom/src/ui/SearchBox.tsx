@@ -56,7 +56,10 @@ export type SearchBoxTranslations = {
   resetTitle: string;
 };
 
-type WrapperProps = Omit<React.ComponentProps<'div'>, 'onChange' | 'onReset'>;
+type WrapperProps = Omit<
+  React.ComponentProps<'div'>,
+  'onChange' | 'onReset' | 'onSubmit'
+>;
 
 export type SearchBoxWidgetProps = WrapperProps &
   Pick<React.ComponentProps<'form'>, 'onSubmit'> &
