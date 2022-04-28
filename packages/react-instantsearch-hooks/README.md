@@ -1,6 +1,6 @@
 # react-instantsearch-hooks
 
-React InstantSearch Hooks is an open-source, UI library for React that lets you quickly build a search interface in your front-end application.
+React InstantSearch Hooks is an open-source UI library for React that lets you quickly build a search interface in your front-end application.
 
 InstantSearch’s goal is to help you implement awesome search experiences as smoothly as possible by providing a [complete search ecosystem](https://algolia.com/doc/guides/getting-started/how-algolia-works/#the-full-ecosystem). InstantSearch tackles an important part of this vast goal by providing front-end primitives that you can assemble into unique search interfaces.
 

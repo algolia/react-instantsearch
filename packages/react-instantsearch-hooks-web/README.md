@@ -1,12 +1,12 @@
 # react-instantsearch-hooks-web
 
-React InstantSearch Web is a React library that lets you create an instant-search result experience using [Algolia][algolia-website]’s search API. It is part of the InstantSearch family:
+React InstantSearch Hooks Web is an open-source React library that lets you create an instant search result experience using [Algolia][algolia-website]’s search API. It is part of the InstantSearch family:
 
 **React InstantSearch** | [InstantSearch.js][instantsearch.js-github] | [Angular InstantSearch][instantsearch-angular-github] | [Vue InstantSearch][instantsearch-vue-github] | [InstantSearch Android][instantsearch-android-github] | [InstantSearch iOS][instantsearch-ios-github]
 
 ## Why
 
-You should be using React InstantSearch if you want to:
+You should be using React InstantSearch Hooks Web if you want to:
 
 * Design search experiences with best practices
 * Customize your components at will
@@ -24,7 +24,7 @@ npm install algoliasearch react-instantsearch-hooks-web
 
 ## Getting started
 
-Using React InstantSearch is as simple as adding these components to your app:
+Using React InstantSearch Hooks Web is as simple as adding these components to your app:
 
 ```javascript
 import React from 'react';
