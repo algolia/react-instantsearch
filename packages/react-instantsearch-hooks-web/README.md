@@ -66,23 +66,20 @@ You can get to know React InstantSearch on [this playground][doc-playground].
 
 Start by [adding components][doc-getting-started] and tweaking the display. Once you get more familiar with the library, you can learn more advanced concepts in [our guides][doc-guides].
 
-## Troubleshooting
-
-Encountering an issue? Before reaching out to support, we recommend heading to our [FAQ](https://www.algolia.com/doc/guides/building-search-ui/troubleshooting/faq/react/) where you will find answers for the most common issues and gotchas with the library.
-
 ## Contributing
 
-We welcome all contributors, from casual to regular. You are only one command away to start the developer environment, [read our CONTRIBUTING guide](CONTRIBUTING.md).
+We welcome all contributors, from casual to regular. You are only one command away to start the developer environment, [read our CONTRIBUTING guide](https://github.com/algolia/react-instantsearch/blob/master/CONTRIBUTING.md).
 
 ## License
 
-React InstantSearch is [MIT licensed](LICENSE).
+React InstantSearch Hooks is [MIT licensed](../../LICENSE).
 
 <!-- Links -->
 
 [doc]: https://www.algolia.com/doc/guides/building-search-ui/what-is-instantsearch/react-hooks/
 [doc-getting-started]: https://www.algolia.com/doc/guides/building-search-ui/getting-started/react-hooks/
 [doc-guides]: https://www.algolia.com/doc/guides/building-search-ui/going-further/server-side-rendering/react-hooks/
+[doc-playground]: https://codesandbox.io/s/github/algolia/react-instantsearch/tree/master/examples/hooks
 [algolia-website]: https://www.algolia.com/
 [instantsearch.js-github]: https://github.com/algolia/instantsearch.js
 [instantsearch-android-github]: https://github.com/algolia/instantsearch-android
