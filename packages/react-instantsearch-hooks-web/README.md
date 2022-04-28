@@ -1,10 +1,52 @@
 # react-instantsearch-hooks-web
 
-> 🚧 This version is not yet production-ready.
+React InstantSearch Web is a React library that lets you create an instant-search result experience using [Algolia][algolia-website]’s search API. It is part of the InstantSearch family:
 
-React InstantSearch Hooks is an open-source, UI library for React that lets you quickly build a search interface in your front-end application.
+**React InstantSearch** | [InstantSearch.js][instantsearch.js-github] | [Angular InstantSearch][instantsearch-angular-github] | [Vue InstantSearch][instantsearch-vue-github] | [InstantSearch Android][instantsearch-android-github] | [InstantSearch iOS][instantsearch-ios-github]
 
-InstantSearch’s goal is to help you implement awesome search experiences as smoothly as possible by providing a [complete search ecosystem](https://algolia.com/doc/guides/getting-started/how-algolia-works/#the-full-ecosystem). InstantSearch tackles an important part of this vast goal by providing front-end primitives that you can assemble into unique search interfaces.
+## Why
+
+You should be using React InstantSearch if you want to:
+
+* Design search experiences with best practices
+* Customize your components at will
+* Follow React principles
+
+## Installation
+
+React InstantSearch is available on the npm registry. It relies on [`algoliasearch`](https://github.com/algolia/algoliasearch-client-javascript) to communicate with Algolia APIs.
+
+```sh
+yarn add algoliasearch react-instantsearch-web
+# or
+npm install algoliasearch react-instantsearch-web
+```
+
+## Getting started
+
+Using React InstantSearch is as simple as adding these components to your app:
+
+```javascript
+import React from 'react';
+import ReactDOM from 'react-dom';
+import algoliasearch from 'algoliasearch/lite';
+import { InstantSearch, SearchBox, Hits } from 'react-instantsearch-web';
+
+const searchClient = algoliasearch(
+  'latency',
+  '6be0576ff61c053d5f9a3225e2a90f76'
+);
+
+const App = () => (
+  <InstantSearch
+    indexName="bestbuy"
+    searchClient={searchClient}
+  >
+    <SearchBox />
+    <Hits />
+  </InstantSearch>
+);
+```
 
 <p align="center">
   <a href="https://codesandbox.io/s/github/algolia/react-instantsearch/tree/master/examples/hooks" title="Edit on CodeSandbox">
@@ -12,38 +54,38 @@ InstantSearch’s goal is to help you implement awesome search experiences as sm
   </a>
 </p>
 
-## Installation
-
-React InstantSearch Hooks is available on the npm registry. It relies on [`algoliasearch`](https://github.com/algolia/algoliasearch-client-javascript) to communicate with Algolia APIs.
-
-```sh
-yarn add algoliasearch react-instantsearch-hooks-web
-# or
-npm install algoliasearch react-instantsearch-hooks-web
-```
-
-## Getting started
-
-React InstantSearch Hooks is a React library that lets you create an instant search results experience using Algolia’s search API.
-
-Check out our [**Getting Started guide**](https://algolia.com/doc/guides/building-search-ui/getting-started/react-hooks/) to start implementing a full-featured search experience with React InstantSearch Hooks.
-
-## API reference
-
-Check out the [**API reference**](https://www.algolia.com/doc/api-reference/widgets/react-hooks/).
+To learn more about the library, follow the [getting started guide][doc-getting-started].
 
 ## Documentation
 
-The documentation is available on [algolia.com/doc](https://algolia.com/doc/guides/building-search-ui/what-is-instantsearch/react-hooks/).
+The documentation is available on [algolia.com/doc][doc].
+
+## Playground
+
+You can get to know React InstantSearch on [this playground][doc-playground].
+
+Start by [adding components][doc-getting-started] and tweaking the display. Once you get more familiar with the library, you can learn more advanced concepts in [our guides][doc-guides].
 
 ## Troubleshooting
 
-React InstantSearch Hooks is an experimental library, and might contain bugs. If you're experiencing issues, please refer to the [**Need help?**](https://algolia.com/doc/guides/building-search-ui/what-is-instantsearch/react-hooks/#need-help) section of the docs, or [open a new issue](https://github.com/algolia/react-instantsearch/issues/new?template=Bug_report_Hooks.md&labels=Scope%3A%20Hooks).
+Encountering an issue? Before reaching out to support, we recommend heading to our [FAQ](https://www.algolia.com/doc/guides/building-search-ui/troubleshooting/faq/react/) where you will find answers for the most common issues and gotchas with the library.
 
 ## Contributing
 
-We welcome all contributors, from casual to regular. You are only one command away to start the developer environment, [read our CONTRIBUTING guide](https://github.com/algolia/react-instantsearch/blob/master/CONTRIBUTING.md).
+We welcome all contributors, from casual to regular. You are only one command away to start the developer environment, [read our CONTRIBUTING guide](CONTRIBUTING.md).
 
 ## License
 
-React InstantSearch Hooks is [MIT licensed](../../LICENSE).
+React InstantSearch is [MIT licensed](LICENSE).
+
+<!-- Links -->
+
+[doc]: https://www.algolia.com/doc/guides/building-search-ui/what-is-instantsearch/react-hooks/
+[doc-getting-started]: https://www.algolia.com/doc/guides/building-search-ui/getting-started/react-hooks/
+[doc-guides]: https://www.algolia.com/doc/guides/building-search-ui/going-further/server-side-rendering/react-hooks/
+[algolia-website]: https://www.algolia.com/
+[instantsearch.js-github]: https://github.com/algolia/instantsearch.js
+[instantsearch-android-github]: https://github.com/algolia/instantsearch-android
+[instantsearch-ios-github]: https://github.com/algolia/instantsearch-ios
+[instantsearch-vue-github]: https://github.com/algolia/vue-instantsearch
+[instantsearch-angular-github]: https://github.com/algolia/angular-instantsearch
