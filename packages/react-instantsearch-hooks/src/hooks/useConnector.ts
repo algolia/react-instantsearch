@@ -1,7 +1,7 @@
-import { dequal } from 'dequal/lite';
 import { useMemo, useRef, useState } from 'react';
 
 import { createSearchResults } from '../lib/createSearchResults';
+import { dequal } from '../lib/dequal';
 import { useIndexContext } from '../lib/useIndexContext';
 import { useInstantSearchContext } from '../lib/useInstantSearchContext';
 import { useInstantSearchServerContext } from '../lib/useInstantSearchServerContext';
@@ -58,28 +58,21 @@ export function useConnector<
           const { instantSearchInstance, widgetParams, ...renderState } =
             connectorState;
 
-          const renderStateWithoutFns = Object.entries(renderState).reduce(
-            (acc, [key, value]) => {
-              if (typeof value === 'function') {
-                return acc;
-              }
-
-              acc[key] = value;
-
-              return acc;
-            },
-            {}
-          );
-
-          // We only update the state if the widget render state has changed.
-          // This avoids infinite loops when a function prop reference changes.
-          // We base the check only on non-function parameters because functions
-          // cannot be compared. It's safe to omit them because they get updated
+          // We only update the state when a widget render state param changes,
+          // except for functions. We ignore function reference changes to avoid
+          // infinite loops. It's safe to omit them because they get updated
           // every time another render param changes.
-          if (!dequal(renderStateWithoutFns, previousRenderStateRef.current)) {
+          if (
+            !dequal(
+              renderState,
+              previousRenderStateRef.current,
+              (a, b) =>
+                a?.constructor === Function && b?.constructor === Function
+            )
+          ) {
             // eslint-disable-next-line @typescript-eslint/no-use-before-define
             setState(renderState);
-            previousRenderStateRef.current = renderStateWithoutFns;
+            previousRenderStateRef.current = renderState;
           }
         }
       },
