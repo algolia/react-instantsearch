@@ -2,16 +2,16 @@ import React from 'react';
 
 import { IndexContext } from '../lib/IndexContext';
 import { InstantSearchContext } from '../lib/InstantSearchContext';
-import { useInstantSearch } from '../lib/useInstantSearch';
+import { useInstantSearchProvider } from '../lib/useInstantSearchProvider';
 
-import type { UseInstantSearchProps } from '../lib/useInstantSearch';
+import type { UseInstantSearchProviderProps } from '../lib/useInstantSearchProvider';
 
-export type InstantSearchProps = UseInstantSearchProps & {
+export type InstantSearchProps = UseInstantSearchProviderProps & {
   children?: React.ReactNode;
 };
 
 export function InstantSearch({ children, ...props }: InstantSearchProps) {
-  const search = useInstantSearch(props);
+  const search = useInstantSearchProvider(props);
 
   if (!search.started) {
     return null;

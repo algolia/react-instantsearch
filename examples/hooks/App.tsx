@@ -1,6 +1,6 @@
 import { Hit as AlgoliaHit } from 'instantsearch.js';
 import algoliasearch from 'algoliasearch/lite';
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   InstantSearch,
   Breadcrumb,
@@ -21,12 +21,16 @@ import {
   SearchBox,
   SortBy,
   ToggleRefinement,
+  useSearchResults,
+  useSearchState,
+  useInstantSearchContext,
 } from 'react-instantsearch-hooks-web';
 
 import { Panel, QueryRuleContext, QueryRuleCustomData } from './components';
 import { Tab, Tabs } from './components/layout';
 
 import './App.css';
+import { createInsightsMiddleware } from 'instantsearch.js/es/middlewares';
 
 const searchClient = algoliasearch(
   'latency',
@@ -49,13 +53,51 @@ function Hit({ hit }: HitProps) {
   );
 }
 
-export function App() {
+function App() {
+  // const search = useInstantSearchContext();
+  const { results, scopedResults, isSearchStalled } = useSearchResults();
+  // const { uiState, setUiState } = useSearchState();
+
+  // useEffect(() => {
+  //   const middleware = createInsightsMiddleware({ insightsClient: null });
+  //   search.use(middleware);
+
+  //   return () => search.unuse(middleware);
+  // }, [search]);
+
+  // const totalNbHits = scopedResults.reduce(
+  //   (acc, { results: { nbHits } }) => acc + nbHits,
+  //   0
+  // );
+
   return (
-    <InstantSearch
-      searchClient={searchClient}
-      indexName="instant_search"
-      routing={true}
-    >
+    <>
+      {/* <button
+        type="button"
+        onClick={() => {
+          search.refresh();
+        }}
+      >
+        refresh
+      </button> */}
+      {/* {isSearchStalled && <span>loading...</span>} */}
+      <p>There are {results.nbHits} results</p>
+      {/* <p>Across all indices there are {totalNbHits} results</p> */}
+      {/* <button
+        type="button"
+        onClick={() =>
+          setUiState((previous) => ({
+            ...previous,
+            instant_search: {
+              ...previous.instant_search,
+              page: previous.instant_search.page ?? 0 + 1,
+            },
+          }))
+        }
+      >
+        increase page {uiState.instant_search.page ?? 0}
+      </button> */}
+
       <Configure ruleContexts={[]} />
 
       <div className="Container">
@@ -167,6 +209,18 @@ export function App() {
           </Tabs>
         </div>
       </div>
+    </>
+  );
+}
+
+export function Root() {
+  return (
+    <InstantSearch
+      searchClient={searchClient}
+      indexName="instant_search"
+      routing={true}
+    >
+      <App />
     </InstantSearch>
   );
 }

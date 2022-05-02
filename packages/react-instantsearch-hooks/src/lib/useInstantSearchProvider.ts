@@ -18,9 +18,9 @@ const defaultUserAgents = [
   `react-instantsearch-hooks (${version})`,
 ];
 
-export type UseInstantSearchProps = InstantSearchOptions;
+export type UseInstantSearchProviderProps = InstantSearchOptions;
 
-export function useInstantSearch(props: UseInstantSearchProps) {
+export function useInstantSearchProvider(props: UseInstantSearchProviderProps) {
   const serverContext = useInstantSearchServerContext();
   const serverState = useInstantSearchSSRContext();
   const stableProps = useStableValue(props);
@@ -57,7 +57,7 @@ export function useInstantSearch(props: UseInstantSearchProps) {
 
 function serverAdapter(
   search: InstantSearch,
-  props: UseInstantSearchProps,
+  props: UseInstantSearchProviderProps,
   serverContext: InstantSearchServerContextApi | null,
   serverState: Partial<InstantSearchServerState> | null
 ): InstantSearch {
