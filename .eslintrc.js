@@ -148,14 +148,6 @@ const config = {
           },
         ],
         'import/extensions': ['error', 'never'],
-        'no-restricted-imports': [
-          'error',
-          {
-            // We disallow `dequal` imports to use our own fork that accepts a
-            // compare function.
-            paths: ['dequal', 'dequal/lite'],
-          },
-        ],
       },
       settings: {
         'import/parsers': {
