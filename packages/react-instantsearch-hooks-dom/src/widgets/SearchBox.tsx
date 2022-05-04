@@ -3,10 +3,20 @@ import { useSearchBox } from 'react-instantsearch-hooks';
 
 import { SearchBox as SearchBoxUiComponent } from '../ui/SearchBox';
 
-import type { SearchBoxWidgetProps } from '../ui/SearchBox';
+import type { SearchBoxClassNames, IconProps } from '../ui/SearchBox';
 import type { UseSearchBoxProps } from 'react-instantsearch-hooks';
 
-export type SearchBoxProps = SearchBoxWidgetProps & UseSearchBoxProps;
+export type SearchBoxProps = Omit<
+  React.ComponentProps<'div'>,
+  'onChange' | 'onReset' | 'onSubmit'
+> &
+  Pick<React.ComponentProps<'form'>, 'onSubmit'> &
+  Pick<React.ComponentProps<'input'>, 'placeholder'> & {
+    resetIconComponent?: React.JSXElementConstructor<IconProps>;
+    submitIconComponent?: React.JSXElementConstructor<IconProps>;
+    loadingIconComponent?: React.JSXElementConstructor<IconProps>;
+    classNames?: Partial<SearchBoxClassNames>;
+  } & UseSearchBoxProps;
 
 export function SearchBox(props: SearchBoxProps) {
   const { query, refine, isSearchStalled } = useSearchBox(props, {
