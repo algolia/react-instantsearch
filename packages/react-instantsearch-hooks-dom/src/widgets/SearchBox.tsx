@@ -3,10 +3,24 @@ import { useSearchBox } from 'react-instantsearch-hooks';
 
 import { SearchBox as SearchBoxUiComponent } from '../ui/SearchBox';
 
-import type { SearchBoxWidgetProps } from '../ui/SearchBox';
+import type { SearchBoxProps as SearchBoxUiComponentProps } from '../ui/SearchBox';
 import type { UseSearchBoxProps } from 'react-instantsearch-hooks';
 
-export type SearchBoxProps = SearchBoxWidgetProps & UseSearchBoxProps;
+type WidgetProps = Pick<
+  SearchBoxUiComponentProps,
+  | 'inputRef'
+  | 'isSearchStalled'
+  | 'onChange'
+  | 'onReset'
+  | 'value'
+  | 'translations'
+>;
+
+export type SearchBoxProps = Omit<
+  SearchBoxUiComponentProps,
+  keyof WidgetProps
+> &
+  UseSearchBoxProps;
 
 export function SearchBox(props: SearchBoxProps) {
   const { query, refine, isSearchStalled } = useSearchBox(props, {
@@ -45,18 +59,17 @@ export function SearchBox(props: SearchBoxProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
 
-  return (
-    <SearchBoxUiComponent
-      {...props}
-      inputRef={inputRef}
-      isSearchStalled={isSearchStalled}
-      onChange={onChange}
-      onReset={onReset}
-      value={value}
-      translations={{
-        submitTitle: 'Submit the search query.',
-        resetTitle: 'Clear the search query.',
-      }}
-    />
-  );
+  const widgetProps: WidgetProps = {
+    inputRef,
+    isSearchStalled,
+    onChange,
+    onReset,
+    value,
+    translations: {
+      submitTitle: 'Submit the search query.',
+      resetTitle: 'Clear the search query.',
+    },
+  };
+
+  return <SearchBoxUiComponent {...props} {...widgetProps} />;
 }

@@ -61,20 +61,17 @@ type WrapperProps = Omit<
   'onChange' | 'onReset' | 'onSubmit'
 >;
 
-export type SearchBoxWidgetProps = WrapperProps &
+export type SearchBoxProps = WrapperProps &
+  Required<
+    Pick<React.ComponentProps<'form'>, 'onReset'> &
+      Pick<React.ComponentProps<'input'>, 'onChange'>
+  > &
   Pick<React.ComponentProps<'form'>, 'onSubmit'> &
   Pick<React.ComponentProps<'input'>, 'placeholder'> & {
     resetIconComponent?: React.JSXElementConstructor<IconProps>;
     submitIconComponent?: React.JSXElementConstructor<IconProps>;
     loadingIconComponent?: React.JSXElementConstructor<IconProps>;
     classNames?: Partial<SearchBoxClassNames>;
-  };
-
-export type SearchBoxProps = SearchBoxWidgetProps &
-  Required<
-    Pick<React.ComponentProps<'form'>, 'onReset'> &
-      Pick<React.ComponentProps<'input'>, 'onChange'>
-  > & {
     inputRef: React.RefObject<HTMLInputElement>;
     isSearchStalled: boolean;
     value: string;
