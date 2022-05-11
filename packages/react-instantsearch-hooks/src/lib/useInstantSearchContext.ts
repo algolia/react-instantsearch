@@ -10,7 +10,9 @@ export function useInstantSearchContext<
   TUiState extends UiState,
   TRouteState = TUiState
 >() {
-  const search = useContext(InstantSearchContext);
+  // React context can't be generic itself, so we need to cast here.
+  const search: InstantSearch<TUiState, TRouteState> | null =
+    useContext(InstantSearchContext);
 
   invariant(
     search !== null,
@@ -18,6 +20,5 @@ export function useInstantSearchContext<
       'They are not compatible with the `react-instantsearch-core` and `react-instantsearch-dom` packages, so make sure to use the <InstantSearch> component from `react-instantsearch-hooks`.'
   );
 
-  // React context can't be generic itself, so we need to cast here.
-  return search as InstantSearch<TUiState, TRouteState>;
+  return search;
 }
