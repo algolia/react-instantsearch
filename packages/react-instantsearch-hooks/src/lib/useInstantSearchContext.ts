@@ -4,14 +4,20 @@ import { invariant } from '../lib/invariant';
 
 import { InstantSearchContext } from './InstantSearchContext';
 
-export function useInstantSearchContext() {
-  const context = useContext(InstantSearchContext);
+import type { InstantSearch, UiState } from 'instantsearch.js';
+
+export function useInstantSearchContext<
+  TUiState extends UiState,
+  TRouteState = TUiState
+>() {
+  const search = useContext(InstantSearchContext);
 
   invariant(
-    context !== null,
+    search !== null,
     'Hooks must be used inside the <InstantSearch> component.\n\n' +
       'They are not compatible with the `react-instantsearch-core` and `react-instantsearch-dom` packages, so make sure to use the <InstantSearch> component from `react-instantsearch-hooks`.'
   );
 
-  return context;
+  // React context can't be generic itself, so we need to cast here.
+  return search as InstantSearch<TUiState, TRouteState>;
 }
