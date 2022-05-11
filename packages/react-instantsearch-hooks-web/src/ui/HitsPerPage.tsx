@@ -4,10 +4,7 @@ import { cx } from './lib/cx';
 
 import type { HitsPerPageConnectorParamsItem as HitsPerPageItem } from 'instantsearch.js/es/connectors/hits-per-page/connectHitsPerPage';
 
-export type HitsPerPageProps = Omit<
-  React.HTMLAttributes<HTMLDivElement>,
-  'onChange'
-> & {
+export type HitsPerPageProps = Omit<React.ComponentProps<'div'>, 'onChange'> & {
   items: HitsPerPageItem[];
   onChange: (value: number) => void;
   currentValue: number;

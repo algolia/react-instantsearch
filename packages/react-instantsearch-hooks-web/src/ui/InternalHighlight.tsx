@@ -54,7 +54,7 @@ export type InternalHighlightClassNames = {
   separator: string;
 };
 
-export type InternalHighlightProps = React.HTMLAttributes<HTMLSpanElement> & {
+export type InternalHighlightProps = React.ComponentProps<'span'> & {
   classNames: InternalHighlightClassNames;
   highlightedTagName?: React.ReactType;
   nonHighlightedTagName?: React.ReactType;
