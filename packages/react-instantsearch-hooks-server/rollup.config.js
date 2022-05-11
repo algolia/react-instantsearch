@@ -39,7 +39,7 @@ const plugins = [
 
 const createConfiguration = ({ name, minify = false } = {}) => ({
   input: 'src/index.ts',
-  external: ['react', 'react-dom', 'react-instantsearch-hooks'],
+  external: ['react', 'react-instantsearch-hooks'],
   output: {
     file: `dist/umd/ReactInstantSearch${name}${minify ? '.min' : ''}.js`,
     name: `ReactInstantSearch${name}`,
