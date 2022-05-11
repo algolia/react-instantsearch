@@ -56,7 +56,10 @@ export type SearchBoxTranslations = {
   resetTitle: string;
 };
 
-export type SearchBoxProps = React.HTMLAttributes<HTMLDivElement> &
+export type SearchBoxProps = Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  'onSubmit' | 'onReset' | 'onChange'
+> &
   Pick<React.HTMLAttributes<HTMLFormElement>, 'onSubmit'> &
   Required<Pick<React.HTMLAttributes<HTMLFormElement>, 'onReset'>> &
   Pick<
