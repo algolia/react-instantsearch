@@ -10,9 +10,9 @@ export function useInstantSearchContext<
   TUiState extends UiState,
   TRouteState = TUiState
 >() {
-  // React context can't be generic itself, so we need to cast here.
-  const search: InstantSearch<TUiState, TRouteState> | null =
-    useContext(InstantSearchContext);
+  const search = useContext<InstantSearch<TUiState, TRouteState> | null>(
+    InstantSearchContext
+  );
 
   invariant(
     search !== null,
