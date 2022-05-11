@@ -71,27 +71,6 @@ export function getServerState(
     });
 }
 
-function importRenderToString() {
-  return Promise.all([
-    // React pre-18 doesn't use `exports` in package.json, requiring a fully resolved path
-    // Thus, only one of these imports is correct
-    // eslint-disable-next-line import/extensions
-    import('react-dom/server.js').catch(() => {}),
-    import('react-dom/server').catch(() => {}),
-  ]).then((imports) => {
-    const valid = imports.find(
-      (mod): mod is { renderToString: typeof RenderToString } =>
-        mod !== undefined
-    );
-
-    if (!valid) {
-      throw new Error('Could not import ReactDOMServer');
-    }
-
-    return valid.renderToString;
-  });
-}
-
 type ExecuteArgs = {
   children: ReactNode;
   renderToString: typeof RenderToString;
@@ -200,4 +179,25 @@ function getInitialResults(rootIndex: IndexWidget): InitialResults {
   });
 
   return initialResults;
+}
+
+function importRenderToString() {
+  return Promise.all([
+    // React pre-18 doesn't use `exports` in package.json, requiring a fully resolved path
+    // Thus, only one of these imports is correct
+    // eslint-disable-next-line import/extensions
+    import('react-dom/server.js').catch(() => {}),
+    import('react-dom/server').catch(() => {}),
+  ]).then((imports) => {
+    const valid = imports.find(
+      (mod): mod is { renderToString: typeof RenderToString } =>
+        mod !== undefined
+    );
+
+    if (!valid) {
+      throw new Error('Could not import ReactDOMServer');
+    }
+
+    return valid.renderToString;
+  });
 }
