@@ -37,6 +37,29 @@ describe('ClearRefinements', () => {
     `);
   });
 
+  test('renders with translations', () => {
+    const props = createProps({
+      translations: {
+        resetLabel: 'Reset filters',
+      },
+    });
+    const { container } = render(<ClearRefinements {...props} />);
+
+    expect(container).toMatchInlineSnapshot(`
+      <div>
+        <div
+          class="ais-ClearRefinements"
+        >
+          <button
+            class="ais-ClearRefinements-button"
+          >
+            Reset filters
+          </button>
+        </div>
+      </div>
+    `);
+  });
+
   test('calls an `onClick` callback when clicking the button', () => {
     const props = createProps({});
     const onClick = jest.fn();

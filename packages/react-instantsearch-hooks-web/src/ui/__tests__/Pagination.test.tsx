@@ -157,6 +157,101 @@ describe('Pagination', () => {
     `);
   });
 
+  test('renders with translations', () => {
+    const props = createProps({
+      translations: {
+        first: 'First',
+        previous: 'Previous',
+        next: 'Next',
+        last: 'Last',
+        page: (currentPage: number) => `(${String(currentPage)})`,
+        ariaFirst: 'First page',
+        ariaPrevious: 'Previous page',
+        ariaNext: 'Next page',
+        ariaLast: 'Last page',
+        ariaPage: (currentPage: number) => `Page number ${currentPage}`,
+      },
+    });
+    const { container } = render(<Pagination {...props} />);
+
+    expect(container).toMatchInlineSnapshot(`
+      <div>
+        <div
+          class="ais-Pagination"
+        >
+          <ul
+            class="ais-Pagination-list"
+          >
+            <li
+              class="ais-Pagination-item ais-Pagination-item--disabled ais-Pagination-item--firstPage"
+            >
+              <span
+                aria-label="First page"
+                class="ais-Pagination-link"
+              >
+                First
+              </span>
+            </li>
+            <li
+              class="ais-Pagination-item ais-Pagination-item--disabled ais-Pagination-item--previousPage"
+            >
+              <span
+                aria-label="Previous page"
+                class="ais-Pagination-link"
+              >
+                Previous
+              </span>
+            </li>
+            <li
+              class="ais-Pagination-item ais-Pagination-item--page ais-Pagination-item--selected"
+            >
+              <a
+                aria-label="Page number 1"
+                class="ais-Pagination-link"
+                href="/?page=1"
+              >
+                (1)
+              </a>
+            </li>
+            <li
+              class="ais-Pagination-item ais-Pagination-item--page"
+            >
+              <a
+                aria-label="Page number 2"
+                class="ais-Pagination-link"
+                href="/?page=2"
+              >
+                (2)
+              </a>
+            </li>
+            <li
+              class="ais-Pagination-item ais-Pagination-item--nextPage"
+            >
+              <a
+                aria-label="Next page"
+                class="ais-Pagination-link"
+                href="/?page=2"
+              >
+                Next
+              </a>
+            </li>
+            <li
+              class="ais-Pagination-item ais-Pagination-item--lastPage"
+            >
+              <a
+                aria-label="Last page"
+                class="ais-Pagination-link"
+                href="/?page=2"
+              >
+                Last
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    `);
+  });
+
   test('enables first and previous page when current page is not the first page', () => {
     const props = createProps({
       currentPage: 1,

@@ -78,6 +78,60 @@ describe('InfiniteHits', () => {
     `);
   });
 
+  test('renders with translations', () => {
+    const props = createProps({
+      translations: {
+        showPrevious: 'Load previous page',
+        showMore: 'Load next page',
+      },
+    });
+    const { container } = render(<InfiniteHits {...props} />);
+
+    expect(container).toMatchInlineSnapshot(`
+      <div>
+        <div
+          class="ais-InfiniteHits"
+        >
+          <button
+            class="ais-InfiniteHits-loadPrevious ais-InfiniteHits-loadPrevious--disabled"
+            disabled=""
+          >
+            Load previous page
+          </button>
+          <ol
+            class="ais-InfiniteHits-list"
+          >
+            <li
+              class="ais-InfiniteHits-item"
+            >
+              <div
+                style="word-break: break-all;"
+              >
+                {"objectID":"abc","__position":1}
+                …
+              </div>
+            </li>
+            <li
+              class="ais-InfiniteHits-item"
+            >
+              <div
+                style="word-break: break-all;"
+              >
+                {"objectID":"def","__position":2}
+                …
+              </div>
+            </li>
+          </ol>
+          <button
+            class="ais-InfiniteHits-loadMore"
+          >
+            Load next page
+          </button>
+        </div>
+      </div>
+    `);
+  });
+
   test('forwards a custom class name to the root element', () => {
     const props = createProps({});
 
