@@ -87,20 +87,6 @@ describe('ClearRefinements', () => {
 
     expect(button).toBeDisabled();
     expect(button).toHaveClass('ais-ClearRefinements-button--disabled');
-    expect(container).toMatchInlineSnapshot(`
-      <div>
-        <div
-          class="ais-ClearRefinements"
-        >
-          <button
-            class="ais-ClearRefinements-button ais-ClearRefinements-button--disabled"
-            disabled=""
-          >
-            Clear refinements
-          </button>
-        </div>
-      </div>
-    `);
 
     userEvent.click(
       container.querySelector(

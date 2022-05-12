@@ -183,78 +183,84 @@ describe('InfiniteHits', () => {
     `);
   });
 
-  test('renders without showPrevious if disabled', () => {
-    const props = createProps({});
+  describe('showPrevious', () => {
+    test('renders without showPrevious if disabled', () => {
+      const props = createProps({});
 
-    const { container } = render(
-      <InfiniteHits {...props} onShowPrevious={undefined} />
-    );
+      const { container } = render(
+        <InfiniteHits {...props} onShowPrevious={undefined} />
+      );
 
-    expect(
-      container.querySelector('.ais-InfiniteHits-loadPrevious')
-    ).toBeNull();
-  });
+      expect(
+        container.querySelector('.ais-InfiniteHits-loadPrevious')
+      ).toBeNull();
+    });
 
-  test('passes an `onShowPrevious` callback to the "Show Previous" button', () => {
-    const props = createProps({});
-    const onShowPrevious = jest.fn();
+    test('passes an `onShowPrevious` callback to the "Show Previous" button', () => {
+      const props = createProps({});
+      const onShowPrevious = jest.fn();
 
-    const { container } = render(
-      <InfiniteHits
-        {...props}
-        isFirstPage={false}
-        onShowPrevious={onShowPrevious}
-      />
-    );
+      const { container } = render(
+        <InfiniteHits
+          {...props}
+          isFirstPage={false}
+          onShowPrevious={onShowPrevious}
+        />
+      );
 
-    act(() => {
-      userEvent.click(
-        container.querySelector('.ais-InfiniteHits-loadPrevious')!
+      act(() => {
+        userEvent.click(
+          container.querySelector('.ais-InfiniteHits-loadPrevious')!
+        );
+      });
+
+      expect(onShowPrevious).toHaveBeenCalledTimes(1);
+    });
+
+    test('disables the "Show Previous" button', () => {
+      const props = createProps({});
+
+      const { container } = render(
+        <InfiniteHits {...props} isFirstPage onShowPrevious={() => {}} />
+      );
+
+      expect(
+        container.querySelector('.ais-InfiniteHits-loadPrevious')!.className
+      ).toEqual(
+        'ais-InfiniteHits-loadPrevious ais-InfiniteHits-loadPrevious--disabled'
       );
     });
-
-    expect(onShowPrevious).toHaveBeenCalledTimes(1);
   });
 
-  test('passes an `onShowMore` callback to the "Show More" button', () => {
-    const props = createProps({});
-    const onShowMore = jest.fn();
+  describe('showMore', () => {
+    test('passes an `onShowMore` callback to the "Show More" button', () => {
+      const props = createProps({});
+      const onShowMore = jest.fn();
 
-    const { container } = render(
-      <InfiniteHits {...props} isFirstPage={false} onShowMore={onShowMore} />
-    );
+      const { container } = render(
+        <InfiniteHits {...props} isFirstPage={false} onShowMore={onShowMore} />
+      );
 
-    act(() => {
-      userEvent.click(container.querySelector('.ais-InfiniteHits-loadMore')!);
+      act(() => {
+        userEvent.click(container.querySelector('.ais-InfiniteHits-loadMore')!);
+      });
+
+      expect(onShowMore).toHaveBeenCalledTimes(1);
     });
 
-    expect(onShowMore).toHaveBeenCalledTimes(1);
-  });
+    test('disables the "Show More" button', () => {
+      const props = createProps({});
 
-  test('disables the "Show Previous" button', () => {
-    const props = createProps({});
+      const { container } = render(
+        <InfiniteHits {...props} isLastPage onShowMore={() => {}} />
+      );
 
-    const { container } = render(
-      <InfiniteHits {...props} isFirstPage onShowPrevious={() => {}} />
-    );
-
-    expect(
-      container.querySelector('.ais-InfiniteHits-loadPrevious')!.className
-    ).toEqual(
-      'ais-InfiniteHits-loadPrevious ais-InfiniteHits-loadPrevious--disabled'
-    );
-  });
-
-  test('disables the "Show More" button', () => {
-    const props = createProps({});
-
-    const { container } = render(
-      <InfiniteHits {...props} isLastPage onShowMore={() => {}} />
-    );
-
-    expect(
-      container.querySelector('.ais-InfiniteHits-loadMore')!.className
-    ).toEqual('ais-InfiniteHits-loadMore ais-InfiniteHits-loadMore--disabled');
+      expect(
+        container.querySelector('.ais-InfiniteHits-loadMore')!.className
+      ).toEqual(
+        'ais-InfiniteHits-loadMore ais-InfiniteHits-loadMore--disabled'
+      );
+    });
   });
 
   test('allows custom class names', () => {
