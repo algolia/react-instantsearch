@@ -20,7 +20,7 @@ function createProps(props?: Partial<HitsPerPageProps>): HitsPerPageProps {
 }
 
 describe('HitsPerPage', () => {
-  test('renders with items', () => {
+  test('renders with props', () => {
     const props = createProps();
     const { container } = render(<HitsPerPage {...props} />);
 
@@ -56,7 +56,7 @@ describe('HitsPerPage', () => {
     `);
   });
 
-  test('forwards props to the root element', () => {
+  test('forwards `div` props to the root element', () => {
     const props = createProps({
       title: 'Some custom title',
       className: 'MyHitsPerPage',
@@ -130,7 +130,7 @@ describe('HitsPerPage', () => {
     ).toBe(false);
   });
 
-  test('calls `onChange` when selecting an option', () => {
+  test('calls an `onChange` callback when selecting an option', () => {
     const props = createProps();
     const { getByRole } = render(<HitsPerPage {...props} />);
 

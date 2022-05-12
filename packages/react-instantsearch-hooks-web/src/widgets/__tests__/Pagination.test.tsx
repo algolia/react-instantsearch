@@ -85,7 +85,7 @@ describe('Pagination', () => {
     `);
   });
 
-  test('renders with items', async () => {
+  test('renders with props', async () => {
     const client = createSearchClient({
       search: (requests) =>
         Promise.resolve(

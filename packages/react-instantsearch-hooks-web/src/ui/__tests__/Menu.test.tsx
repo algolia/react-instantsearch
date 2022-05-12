@@ -32,7 +32,7 @@ describe('Menu', () => {
     };
   }
 
-  test('renders with items', () => {
+  test('renders with props', () => {
     const props = createProps({});
     const { container } = render(<Menu {...props} />);
 
@@ -88,7 +88,7 @@ describe('Menu', () => {
     `);
   });
 
-  test('triggers an `onRefine` callback when clicking a link', () => {
+  test('calls an `onRefine` callback when clicking a link', () => {
     const props = createProps({});
     const { container } = render(<Menu {...props} />);
 

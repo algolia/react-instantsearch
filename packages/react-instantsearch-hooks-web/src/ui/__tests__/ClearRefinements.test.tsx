@@ -37,7 +37,7 @@ describe('ClearRefinements', () => {
     `);
   });
 
-  test('passes an `onClick` callback to the button', () => {
+  test('calls an `onClick` callback when clicking the button', () => {
     const props = createProps({});
     const onClick = jest.fn();
     const { container } = render(

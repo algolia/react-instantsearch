@@ -38,7 +38,7 @@ describe('Pagination', () => {
     };
   }
 
-  test('renders with items', () => {
+  test('renders with props', () => {
     const props = createProps({
       currentPage: 1,
       nbPages: 6,

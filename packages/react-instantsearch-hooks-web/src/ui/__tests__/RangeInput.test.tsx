@@ -18,7 +18,7 @@ describe('RangeInput', () => {
     };
   }
 
-  test('renders with items', () => {
+  test('renders with props', () => {
     const props = createProps();
     const { container } = render(<RangeInput {...props} />);
 
@@ -89,7 +89,7 @@ describe('RangeInput', () => {
   });
 
   describe('input', () => {
-    test('render with empty values', () => {
+    test('renders with empty values', () => {
       const props = createProps();
       const { container } = render(<RangeInput {...props} />);
 
@@ -100,7 +100,7 @@ describe('RangeInput', () => {
       ).toEqual(['', '']);
     });
 
-    test('render with empty values when refinement is equal to range', () => {
+    test('renders with empty values when refinement is equal to range', () => {
       const props = createProps({
         range: { min: 100, max: 1000 },
         start: [100, 1000],
@@ -114,7 +114,7 @@ describe('RangeInput', () => {
       ).toEqual(['', '']);
     });
 
-    test('render with refined values', () => {
+    test('renders with refined values', () => {
       const props = createProps({
         start: [100, 1000],
       });
@@ -146,7 +146,7 @@ describe('RangeInput', () => {
     });
   });
 
-  test('calls `onSubmit` callback when submitting form', () => {
+  test('calls an `onSubmit` callback when submitting form', () => {
     const props = createProps({ start: [100, 1000] });
     const { container } = render(<RangeInput {...props} />);
 

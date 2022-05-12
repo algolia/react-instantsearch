@@ -18,7 +18,7 @@ describe('SortBy', () => {
     };
   }
 
-  test('renders with items', () => {
+  test('renders with props', () => {
     const props = createProps({});
     const { container } = render(<SortBy {...props} />);
 

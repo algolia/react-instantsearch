@@ -90,7 +90,7 @@ describe('InfiniteHits', () => {
     );
   });
 
-  test('accepts custom class names', () => {
+  test('allows custom class names', () => {
     const props = createProps({});
 
     const { container } = render(
@@ -153,7 +153,7 @@ describe('InfiniteHits', () => {
     `);
   });
 
-  test('accepts custom class names (empty)', () => {
+  test('allows custom class names (empty)', () => {
     const props = createProps({ hits: [] as Hit[], isLastPage: true });
     const { container } = render(
       <InfiniteHits

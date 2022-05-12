@@ -379,7 +379,7 @@ describe('SearchBox', () => {
   });
 
   describe('onSubmit', () => {
-    test('calls provided onSubmit', () => {
+    test('calls an `onSubmit` callback when pressing enter key on input', () => {
       const props = createProps({});
 
       const { container } = render(<SearchBox {...props} />);
@@ -411,7 +411,7 @@ describe('SearchBox', () => {
   });
 
   describe('onReset', () => {
-    test('calls provided onReset', () => {
+    test('calls an `onReset` callback when clicking the reset button', () => {
       const props = createProps({});
 
       const { container } = render(<SearchBox {...props} />);
@@ -449,7 +449,7 @@ describe('SearchBox', () => {
   });
 
   describe('onChange', () => {
-    test('calls provided onChange', () => {
+    test('calls an `onChange` callback when changing input value', () => {
       const props = createProps({});
 
       const { container } = render(<SearchBox {...props} />);

@@ -37,7 +37,7 @@ function createSearchClientWithFacetsStats() {
 }
 
 describe('RangeInput', () => {
-  test('renders with default attributes', async () => {
+  test('renders with default props', async () => {
     const client = createSearchClientWithFacetsStats();
     const { container } = render(
       <InstantSearchHooksTestWrapper searchClient={client}>
@@ -100,7 +100,7 @@ describe('RangeInput', () => {
     `);
   });
 
-  test('renders with initial values', async () => {
+  test('renders with initial refinements', async () => {
     const client = createSearchClientWithFacetsStats();
     const { container } = render(
       <InstantSearchHooksTestWrapper

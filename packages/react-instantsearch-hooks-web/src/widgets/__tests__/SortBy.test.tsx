@@ -7,7 +7,7 @@ import { InstantSearchHooksTestWrapper, wait } from '../../../../../test/utils';
 import { SortBy } from '../SortBy';
 
 describe('SortBy', () => {
-  test('renders with items', async () => {
+  test('renders with props', async () => {
     const { container } = render(
       <InstantSearchHooksTestWrapper>
         <SortBy

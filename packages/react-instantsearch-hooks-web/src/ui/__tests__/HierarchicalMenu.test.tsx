@@ -52,7 +52,7 @@ describe('HierarchicalMenu', () => {
     };
   }
 
-  test('renders with items', () => {
+  test('renders with props', () => {
     const props = createProps();
     const { container } = render(<HierarchicalMenu {...props} />);
     expect(container).toMatchInlineSnapshot(`
@@ -149,7 +149,7 @@ describe('HierarchicalMenu', () => {
     `);
   });
 
-  test('triggers an `onNavigate` callback when clicking a checkbox', () => {
+  test('calls an `onNavigate` callback when clicking a checkbox', () => {
     const props = createProps();
     const { container } = render(<HierarchicalMenu {...props} />);
 

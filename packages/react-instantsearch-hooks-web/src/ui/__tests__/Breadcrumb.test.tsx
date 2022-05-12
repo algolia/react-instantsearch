@@ -31,7 +31,7 @@ describe('Breadcrumb', () => {
     };
   }
 
-  test('renders with items', () => {
+  test('renders with props', () => {
     const props = createProps();
     const { container } = render(<Breadcrumb {...props} />);
 

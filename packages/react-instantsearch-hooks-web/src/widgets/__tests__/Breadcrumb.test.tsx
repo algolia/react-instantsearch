@@ -42,7 +42,7 @@ describe('Breadcrumb', () => {
     searchClient.search.mockClear();
   });
 
-  test('renders with attributes', async () => {
+  test('renders with props', async () => {
     const { container } = render(
       <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <VirtualHierarchicalMenu attributes={hierarchicalAttributes} />
@@ -148,7 +148,7 @@ describe('Breadcrumb', () => {
     `);
   });
 
-  test('transforms the passed items', async () => {
+  test('transforms the items', async () => {
     const { container } = render(
       <InstantSearchHooksTestWrapper
         searchClient={searchClient}

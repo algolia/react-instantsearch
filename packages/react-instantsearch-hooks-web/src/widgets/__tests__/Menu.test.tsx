@@ -46,7 +46,7 @@ const search = jest.fn((requests) => {
 });
 
 describe('Menu', () => {
-  test('renders with items', async () => {
+  test('renders with props', async () => {
     const client = createSearchClient({ search });
     const { container } = render(
       <InstantSearchHooksTestWrapper searchClient={client}>

@@ -106,7 +106,7 @@ const searchForFacetValues = jest.fn(() =>
 );
 
 describe('RefinementList', () => {
-  test('renders with items', async () => {
+  test('renders with props', async () => {
     const client = createSearchClient({ search });
     const { container } = render(
       <InstantSearchHooksTestWrapper searchClient={client}>

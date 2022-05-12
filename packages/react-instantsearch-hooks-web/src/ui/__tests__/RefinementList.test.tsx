@@ -37,7 +37,7 @@ describe('RefinementList', () => {
     };
   }
 
-  test('renders with items', () => {
+  test('renders with props', () => {
     const props = createProps({});
     const { container } = render(<RefinementList {...props} />);
 
@@ -102,7 +102,7 @@ describe('RefinementList', () => {
     `);
   });
 
-  test('triggers an `onRefine` callback when clicking a checkbox', () => {
+  test('calls an `onRefine` callback when clicking a checkbox', () => {
     const props = createProps({});
     const { container } = render(<RefinementList {...props} />);
 

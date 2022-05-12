@@ -7,7 +7,7 @@ import { InstantSearchHooksTestWrapper, wait } from '../../../../../test/utils';
 import { HitsPerPage } from '../HitsPerPage';
 
 describe('HitsPerPage', () => {
-  test('renders with items', async () => {
+  test('renders with props', async () => {
     const { container } = render(
       <InstantSearchHooksTestWrapper>
         <HitsPerPage
