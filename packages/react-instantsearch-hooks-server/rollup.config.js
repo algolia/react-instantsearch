@@ -47,7 +47,7 @@ const createConfiguration = ({ name, minify = false } = {}) => ({
     format: 'umd',
     globals: {
       react: 'React',
-      'react-dom/server.js': 'ReactDOM',
+      'react-dom/server.js': 'ReactDOMServer',
       'react-instantsearch-hooks': 'ReactInstantSearchHooks',
     },
     banner: createBanner(name),
