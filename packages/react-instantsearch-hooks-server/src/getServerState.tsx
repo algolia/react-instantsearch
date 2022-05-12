@@ -189,15 +189,15 @@ function importRenderToString() {
     import('react-dom/server.js').catch(() => {}),
     import('react-dom/server').catch(() => {}),
   ]).then((imports) => {
-    const valid = imports.find(
+    const ReactDOMServer = imports.find(
       (mod): mod is { renderToString: typeof RenderToString } =>
         mod !== undefined
     );
 
-    if (!valid) {
-      throw new Error('Could not import ReactDOMServer');
+    if (!ReactDOMServer) {
+      throw new Error('Could not import ReactDOMServer.');
     }
 
-    return valid.renderToString;
+    return ReactDOMServer.renderToString;
   });
 }
