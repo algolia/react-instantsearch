@@ -89,7 +89,7 @@ function createTestEnvironment({
   };
 }
 
-// the module without extension exists
+// Only the module without extension exists
 jest.mock(
   'react-dom/server.js',
   () => {
@@ -106,8 +106,8 @@ jest.mock(
   { virtual: true }
 );
 
-describe('react-dom imports', () => {
-  test('works when one of the two imports exists (no extension)', async () => {
+describe('ReactDOMServer imports', () => {
+  test('works when the import with no extension exists', async () => {
     const searchClient = createSearchClient({});
     const { App } = createTestEnvironment({ searchClient });
 

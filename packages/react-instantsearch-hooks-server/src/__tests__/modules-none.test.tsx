@@ -106,8 +106,8 @@ jest.mock(
   { virtual: true }
 );
 
-describe('react-dom imports', () => {
-  test('throws when no react-dom is present', async () => {
+describe('ReactDOMServer imports', () => {
+  test('throws when no ReactDOMServer is present', async () => {
     const searchClient = createSearchClient({});
     const { App } = createTestEnvironment({ searchClient });
 
