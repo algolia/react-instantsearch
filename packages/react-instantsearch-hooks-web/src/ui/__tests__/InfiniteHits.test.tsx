@@ -132,132 +132,6 @@ describe('InfiniteHits', () => {
     `);
   });
 
-  test('forwards a custom class name to the root element', () => {
-    const props = createProps({});
-
-    const { container } = render(
-      <InfiniteHits {...props} className="MyInfiniteHits" />
-    );
-
-    expect(container.querySelector('.ais-InfiniteHits')!.className).toBe(
-      'ais-InfiniteHits MyInfiniteHits'
-    );
-  });
-
-  test('allows custom class names', () => {
-    const props = createProps({});
-
-    const { container } = render(
-      <InfiniteHits
-        {...props}
-        classNames={{
-          root: 'ROOT',
-          loadPrevious: 'LOADPREVIOUS',
-          disabledLoadPrevious: 'LOADPREVIOUSDISABLED',
-          loadMore: 'LOADMORE',
-          disabledLoadMore: 'LOADMOREDISABLED',
-          list: 'LIST',
-          item: 'ITEM',
-        }}
-      />
-    );
-
-    expect(container).toMatchInlineSnapshot(`
-      <div>
-        <div
-          class="ais-InfiniteHits ROOT"
-        >
-          <button
-            class="ais-InfiniteHits-loadPrevious LOADPREVIOUS ais-InfiniteHits-loadPrevious--disabled LOADPREVIOUSDISABLED"
-            disabled=""
-          >
-            Show previous results
-          </button>
-          <ol
-            class="ais-InfiniteHits-list LIST"
-          >
-            <li
-              class="ais-InfiniteHits-item ITEM"
-            >
-              <div
-                style="word-break: break-all;"
-              >
-                {"objectID":"abc","__position":1}
-                …
-              </div>
-            </li>
-            <li
-              class="ais-InfiniteHits-item ITEM"
-            >
-              <div
-                style="word-break: break-all;"
-              >
-                {"objectID":"def","__position":2}
-                …
-              </div>
-            </li>
-          </ol>
-          <button
-            class="ais-InfiniteHits-loadMore LOADMORE"
-          >
-            Show more results
-          </button>
-        </div>
-      </div>
-    `);
-  });
-
-  test('allows custom class names (empty)', () => {
-    const props = createProps({ hits: [] as Hit[], isLastPage: true });
-    const { container } = render(
-      <InfiniteHits
-        {...props}
-        classNames={{
-          root: 'ROOT',
-          emptyRoot: 'EMPTYROOT',
-          loadMore: 'LOADMORE',
-          disabledLoadMore: 'DISABLEDLOADMORE',
-        }}
-      />
-    );
-
-    expect(container).toMatchInlineSnapshot(`
-      <div>
-        <div
-          class="ais-InfiniteHits ROOT ais-InfiniteHits--empty EMPTYROOT"
-        >
-          <button
-            class="ais-InfiniteHits-loadPrevious ais-InfiniteHits-loadPrevious--disabled"
-            disabled=""
-          >
-            Show previous results
-          </button>
-          <ol
-            class="ais-InfiniteHits-list"
-          />
-          <button
-            class="ais-InfiniteHits-loadMore LOADMORE ais-InfiniteHits-loadMore--disabled DISABLEDLOADMORE"
-            disabled=""
-          >
-            Show more results
-          </button>
-        </div>
-      </div>
-    `);
-  });
-
-  test('forwards `div` props to the root element', () => {
-    const props = createProps({});
-
-    const { container } = render(
-      <InfiniteHits {...props} title="hello world" />
-    );
-
-    expect(
-      container.querySelector<HTMLDivElement>('.ais-InfiniteHits')!.title
-    ).toBe('hello world');
-  });
-
   test('renders with custom hitComponent', () => {
     const props = createProps({});
 
@@ -381,5 +255,117 @@ describe('InfiniteHits', () => {
     expect(
       container.querySelector('.ais-InfiniteHits-loadMore')!.className
     ).toEqual('ais-InfiniteHits-loadMore ais-InfiniteHits-loadMore--disabled');
+  });
+
+  test('allows custom class names', () => {
+    const props = createProps({
+      className: 'MyCustomInfiniteHits',
+      classNames: {
+        root: 'ROOT',
+        loadPrevious: 'LOADPREVIOUS',
+        disabledLoadPrevious: 'LOADPREVIOUSDISABLED',
+        loadMore: 'LOADMORE',
+        disabledLoadMore: 'LOADMOREDISABLED',
+        list: 'LIST',
+        item: 'ITEM',
+      },
+    });
+
+    const { container } = render(<InfiniteHits {...props} />);
+
+    expect(container).toMatchInlineSnapshot(`
+      <div>
+        <div
+          class="ais-InfiniteHits ROOT MyCustomInfiniteHits"
+        >
+          <button
+            class="ais-InfiniteHits-loadPrevious LOADPREVIOUS ais-InfiniteHits-loadPrevious--disabled LOADPREVIOUSDISABLED"
+            disabled=""
+          >
+            Show previous results
+          </button>
+          <ol
+            class="ais-InfiniteHits-list LIST"
+          >
+            <li
+              class="ais-InfiniteHits-item ITEM"
+            >
+              <div
+                style="word-break: break-all;"
+              >
+                {"objectID":"abc","__position":1}
+                …
+              </div>
+            </li>
+            <li
+              class="ais-InfiniteHits-item ITEM"
+            >
+              <div
+                style="word-break: break-all;"
+              >
+                {"objectID":"def","__position":2}
+                …
+              </div>
+            </li>
+          </ol>
+          <button
+            class="ais-InfiniteHits-loadMore LOADMORE"
+          >
+            Show more results
+          </button>
+        </div>
+      </div>
+    `);
+  });
+
+  test('allows custom class names (empty)', () => {
+    const props = createProps({
+      hits: [] as Hit[],
+      isLastPage: true,
+      className: 'MyCustomInfiniteHits',
+      classNames: {
+        root: 'ROOT',
+        emptyRoot: 'EMPTYROOT',
+        loadMore: 'LOADMORE',
+        disabledLoadMore: 'DISABLEDLOADMORE',
+      },
+    });
+    const { container } = render(<InfiniteHits {...props} />);
+
+    expect(container).toMatchInlineSnapshot(`
+      <div>
+        <div
+          class="ais-InfiniteHits ROOT ais-InfiniteHits--empty EMPTYROOT MyCustomInfiniteHits"
+        >
+          <button
+            class="ais-InfiniteHits-loadPrevious ais-InfiniteHits-loadPrevious--disabled"
+            disabled=""
+          >
+            Show previous results
+          </button>
+          <ol
+            class="ais-InfiniteHits-list"
+          />
+          <button
+            class="ais-InfiniteHits-loadMore LOADMORE ais-InfiniteHits-loadMore--disabled DISABLEDLOADMORE"
+            disabled=""
+          >
+            Show more results
+          </button>
+        </div>
+      </div>
+    `);
+  });
+
+  test('forwards `div` props to the root element', () => {
+    const props = createProps({});
+    const { container } = render(
+      <InfiniteHits {...props} title="hello world" />
+    );
+
+    expect(container.querySelector('.ais-InfiniteHits')).toHaveAttribute(
+      'title',
+      'hello world'
+    );
   });
 });

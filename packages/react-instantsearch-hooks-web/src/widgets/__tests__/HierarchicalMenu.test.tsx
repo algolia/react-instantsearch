@@ -283,28 +283,6 @@ describe('HierarchicalMenu', () => {
     `);
   });
 
-  test('forwards `div` props to the root element', async () => {
-    const client = createSearchClient({ search });
-    const { container } = render(
-      <InstantSearchHooksTestWrapper searchClient={client}>
-        <HierarchicalMenu
-          attributes={attributes}
-          className="MyHierarchicalMenu"
-          title="Some custom title"
-        />
-      </InstantSearchHooksTestWrapper>
-    );
-
-    await wait(0);
-
-    const rootElement = container.querySelector(
-      '.ais-HierarchicalMenu'
-    ) as HTMLDivElement;
-
-    expect(rootElement).toHaveClass('MyHierarchicalMenu');
-    expect(rootElement).toHaveAttribute('title', 'Some custom title');
-  });
-
   describe('sorting', () => {
     test('sorts the items by ascending name', async () => {
       const client = createSearchClient({ search });
@@ -701,5 +679,23 @@ describe('HierarchicalMenu', () => {
         </div>
       `);
     });
+  });
+
+  test('forwards custom class names and `div` props to the root element', () => {
+    const client = createSearchClient({ search });
+    const { container } = render(
+      <InstantSearchHooksTestWrapper searchClient={client}>
+        <HierarchicalMenu
+          attributes={attributes}
+          className="MyHierarchicalMenu"
+          classNames={{ root: 'ROOT' }}
+          title="Some custom title"
+        />
+      </InstantSearchHooksTestWrapper>
+    );
+
+    const root = container.firstChild;
+    expect(root).toHaveClass('MyHierarchicalMenu', 'ROOT');
+    expect(root).toHaveAttribute('title', 'Some custom title');
   });
 });

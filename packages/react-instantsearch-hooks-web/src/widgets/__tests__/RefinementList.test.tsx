@@ -824,26 +824,6 @@ describe('RefinementList', () => {
     `);
   });
 
-  test('forwards `div` props to the root element', async () => {
-    const client = createSearchClient({ search });
-    const { container } = render(
-      <InstantSearchHooksTestWrapper searchClient={client}>
-        <RefinementList
-          attribute="brand"
-          className="MyRefinementList"
-          title="Some custom title"
-        />
-      </InstantSearchHooksTestWrapper>
-    );
-
-    await wait(0);
-
-    expect(container.querySelector('.ais-RefinementList')).toHaveAttribute(
-      'title',
-      'Some custom title'
-    );
-  });
-
   describe('sorting', () => {
     test('sorts the items by ascending name', async () => {
       const client = createSearchClient({ search });
@@ -2552,5 +2532,23 @@ describe('RefinementList', () => {
         </div>
       `);
     });
+  });
+
+  test('forwards custom class names and `div` props to the root element', () => {
+    const client = createSearchClient({ search });
+    const { container } = render(
+      <InstantSearchHooksTestWrapper searchClient={client}>
+        <RefinementList
+          attribute="brand"
+          className="MyRefinementList"
+          classNames={{ root: 'ROOT' }}
+          title="Some custom title"
+        />
+      </InstantSearchHooksTestWrapper>
+    );
+
+    const root = container.firstChild;
+    expect(root).toHaveClass('MyRefinementList', 'ROOT');
+    expect(root).toHaveAttribute('title', 'Some custom title');
   });
 });

@@ -315,43 +315,22 @@ describe('Breadcrumb', () => {
     );
   });
 
-  test('forwards `div` props to the root element', async () => {
+  test('forwards custom class names and `div` props to the root element', () => {
     const { container } = render(
       <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <VirtualHierarchicalMenu attributes={hierarchicalAttributes} />
         <Breadcrumb
           className="MyBreadcrumb"
+          classNames={{ root: 'ROOT' }}
           title="Some custom title"
           attributes={hierarchicalAttributes}
         />
       </InstantSearchHooksTestWrapper>
     );
 
-    await wait(0);
-
-    expect(container).toMatchInlineSnapshot(`
-      <div>
-        <div
-          class="ais-Breadcrumb ais-Breadcrumb--noRefinement MyBreadcrumb"
-          title="Some custom title"
-        >
-          <ul
-            class="ais-Breadcrumb-list"
-          >
-            <li
-              class="ais-Breadcrumb-item ais-Breadcrumb-item--selected"
-            >
-              <a
-                class="ais-Breadcrumb-link"
-                href="#"
-              >
-                Home
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    `);
+    const root = container.firstChild;
+    expect(root).toHaveClass('MyBreadcrumb', 'ROOT');
+    expect(root).toHaveAttribute('title', 'Some custom title');
   });
 });
 

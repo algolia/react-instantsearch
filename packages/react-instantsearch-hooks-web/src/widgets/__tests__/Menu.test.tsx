@@ -443,24 +443,6 @@ describe('Menu', () => {
     `);
   });
 
-  test('forwards `div` props to the root element', async () => {
-    const client = createSearchClient({ search });
-    const { container } = render(
-      <InstantSearchHooksTestWrapper searchClient={client}>
-        <Menu attribute="brand" className="MyMenu" title="Some custom title" />
-      </InstantSearchHooksTestWrapper>
-    );
-
-    await wait(0);
-
-    expect(container.querySelector('.ais-Menu')).toHaveClass('MyMenu');
-
-    expect(container.querySelector('.ais-Menu')).toHaveAttribute(
-      'title',
-      'Some custom title'
-    );
-  });
-
   describe('sorting', () => {
     test('sorts the items by ascending name', async () => {
       const client = createSearchClient({ search });
@@ -1742,5 +1724,23 @@ describe('Menu', () => {
         </div>
       `);
     });
+  });
+
+  test('forwards custom class names and `div` props to the root element', () => {
+    const client = createSearchClient({ search });
+    const { container } = render(
+      <InstantSearchHooksTestWrapper searchClient={client}>
+        <Menu
+          attribute="brand"
+          className="MyMenu"
+          classNames={{ root: 'ROOT' }}
+          title="Some custom title"
+        />
+      </InstantSearchHooksTestWrapper>
+    );
+
+    const root = container.firstChild;
+    expect(root).toHaveClass('MyMenu', 'ROOT');
+    expect(root).toHaveAttribute('title', 'Some custom title');
   });
 });

@@ -1037,120 +1037,30 @@ describe('Pagination', () => {
     `);
   });
 
-  test('forwards a custom class name to the root element', () => {
-    const props = createProps({});
-
-    const { container } = render(
-      <Pagination {...props} className="MyPagination" />
-    );
-
-    expect(document.querySelector('.ais-Pagination')).toHaveClass(
-      'MyPagination'
-    );
-    expect(container).toMatchInlineSnapshot(`
-      <div>
-        <div
-          class="ais-Pagination MyPagination"
-        >
-          <ul
-            class="ais-Pagination-list"
-          >
-            <li
-              class="ais-Pagination-item ais-Pagination-item--disabled ais-Pagination-item--firstPage"
-            >
-              <span
-                aria-label="First"
-                class="ais-Pagination-link"
-              >
-                ‹‹
-              </span>
-            </li>
-            <li
-              class="ais-Pagination-item ais-Pagination-item--disabled ais-Pagination-item--previousPage"
-            >
-              <span
-                aria-label="Previous"
-                class="ais-Pagination-link"
-              >
-                ‹
-              </span>
-            </li>
-            <li
-              class="ais-Pagination-item ais-Pagination-item--page ais-Pagination-item--selected"
-            >
-              <a
-                aria-label="Page 1"
-                class="ais-Pagination-link"
-                href="/?page=1"
-              >
-                1
-              </a>
-            </li>
-            <li
-              class="ais-Pagination-item ais-Pagination-item--page"
-            >
-              <a
-                aria-label="Page 2"
-                class="ais-Pagination-link"
-                href="/?page=2"
-              >
-                2
-              </a>
-            </li>
-            <li
-              class="ais-Pagination-item ais-Pagination-item--nextPage"
-            >
-              <a
-                aria-label="Next"
-                class="ais-Pagination-link"
-                href="/?page=2"
-              >
-                ›
-              </a>
-            </li>
-            <li
-              class="ais-Pagination-item ais-Pagination-item--lastPage"
-            >
-              <a
-                aria-label="Last"
-                class="ais-Pagination-link"
-                href="/?page=2"
-              >
-                ››
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    `);
-  });
-
   test('allows custom class names', () => {
-    const props = createProps({});
-    const { container } = render(
-      <Pagination
-        {...props}
-        classNames={{
-          root: 'ROOT',
-          noRefinementRoot: 'NOREFINEMENTROOT',
-          list: 'LIST',
-          item: 'ITEM',
-          firstPageItem: 'FIRSTPAGEITEM',
-          previousPageItem: 'PREVIOUSPAGEITEM',
-          pageItem: 'PAGEITEM',
-          selectedItem: 'SELECTEDITEM',
-          disabledItem: 'DISABLEDITEM',
-          nextPageItem: 'NEXTPAGEITEM',
-          lastPageItem: 'LASTPAGEITEM',
-          link: 'LINK',
-        }}
-      />
-    );
+    const props = createProps({
+      className: 'MyCustomPagination',
+      classNames: {
+        root: 'ROOT',
+        noRefinementRoot: 'NOREFINEMENTROOT',
+        list: 'LIST',
+        item: 'ITEM',
+        firstPageItem: 'FIRSTPAGEITEM',
+        previousPageItem: 'PREVIOUSPAGEITEM',
+        pageItem: 'PAGEITEM',
+        selectedItem: 'SELECTEDITEM',
+        disabledItem: 'DISABLEDITEM',
+        nextPageItem: 'NEXTPAGEITEM',
+        lastPageItem: 'LASTPAGEITEM',
+        link: 'LINK',
+      },
+    });
+    const { container } = render(<Pagination {...props} />);
 
     expect(container).toMatchInlineSnapshot(`
       <div>
         <div
-          class="ais-Pagination ROOT"
+          class="ais-Pagination ROOT MyCustomPagination"
         >
           <ul
             class="ais-Pagination-list LIST"
@@ -1232,86 +1142,9 @@ describe('Pagination', () => {
       <Pagination {...props} title="Some custom title" />
     );
 
-    expect(document.querySelector('.ais-Pagination')).toHaveAttribute(
+    expect(container.querySelector('.ais-Pagination')).toHaveAttribute(
       'title',
       'Some custom title'
     );
-    expect(container).toMatchInlineSnapshot(`
-      <div>
-        <div
-          class="ais-Pagination"
-          title="Some custom title"
-        >
-          <ul
-            class="ais-Pagination-list"
-          >
-            <li
-              class="ais-Pagination-item ais-Pagination-item--disabled ais-Pagination-item--firstPage"
-            >
-              <span
-                aria-label="First"
-                class="ais-Pagination-link"
-              >
-                ‹‹
-              </span>
-            </li>
-            <li
-              class="ais-Pagination-item ais-Pagination-item--disabled ais-Pagination-item--previousPage"
-            >
-              <span
-                aria-label="Previous"
-                class="ais-Pagination-link"
-              >
-                ‹
-              </span>
-            </li>
-            <li
-              class="ais-Pagination-item ais-Pagination-item--page ais-Pagination-item--selected"
-            >
-              <a
-                aria-label="Page 1"
-                class="ais-Pagination-link"
-                href="/?page=1"
-              >
-                1
-              </a>
-            </li>
-            <li
-              class="ais-Pagination-item ais-Pagination-item--page"
-            >
-              <a
-                aria-label="Page 2"
-                class="ais-Pagination-link"
-                href="/?page=2"
-              >
-                2
-              </a>
-            </li>
-            <li
-              class="ais-Pagination-item ais-Pagination-item--nextPage"
-            >
-              <a
-                aria-label="Next"
-                class="ais-Pagination-link"
-                href="/?page=2"
-              >
-                ›
-              </a>
-            </li>
-            <li
-              class="ais-Pagination-item ais-Pagination-item--lastPage"
-            >
-              <a
-                aria-label="Last"
-                class="ais-Pagination-link"
-                href="/?page=2"
-              >
-                ››
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    `);
   });
 });

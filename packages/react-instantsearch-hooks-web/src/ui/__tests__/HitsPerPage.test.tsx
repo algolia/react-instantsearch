@@ -56,63 +56,6 @@ describe('HitsPerPage', () => {
     `);
   });
 
-  test('forwards `div` props to the root element', () => {
-    const props = createProps({
-      title: 'Some custom title',
-      className: 'MyHitsPerPage',
-    });
-    const { container } = render(<HitsPerPage {...props} />);
-    const root = container.firstChild;
-
-    expect(root).toHaveClass('ais-HitsPerPage', 'MyHitsPerPage');
-    expect(root).toHaveAttribute('title', 'Some custom title');
-  });
-
-  test('allows custom class names', () => {
-    const props = createProps({});
-    const { container } = render(
-      <HitsPerPage
-        {...props}
-        classNames={{
-          root: 'ROOT',
-          select: 'SELECT',
-          option: 'OPTION',
-        }}
-      />
-    );
-
-    expect(container).toMatchInlineSnapshot(`
-      <div>
-        <div
-          class="ais-HitsPerPage ROOT"
-        >
-          <select
-            class="ais-HitsPerPage-select SELECT"
-          >
-            <option
-              class="ais-HitsPerPage-option OPTION"
-              value="10"
-            >
-              10
-            </option>
-            <option
-              class="ais-HitsPerPage-option OPTION"
-              value="20"
-            >
-              20
-            </option>
-            <option
-              class="ais-HitsPerPage-option OPTION"
-              value="30"
-            >
-              30
-            </option>
-          </select>
-        </div>
-      </div>
-    `);
-  });
-
   test('selects current value', () => {
     const props = createProps({
       currentValue: 20,
@@ -143,5 +86,60 @@ describe('HitsPerPage', () => {
 
     expect(props.onChange).toHaveBeenCalledTimes(2);
     expect(props.onChange).toHaveBeenLastCalledWith(20);
+  });
+
+  test('allows custom class names', () => {
+    const props = createProps({
+      className: 'MyCustomHitsPerPage',
+      classNames: {
+        root: 'ROOT',
+        select: 'SELECT',
+        option: 'OPTION',
+      },
+    });
+    const { container } = render(<HitsPerPage {...props} />);
+
+    expect(container).toMatchInlineSnapshot(`
+      <div>
+        <div
+          class="ais-HitsPerPage ROOT MyCustomHitsPerPage"
+        >
+          <select
+            class="ais-HitsPerPage-select SELECT"
+          >
+            <option
+              class="ais-HitsPerPage-option OPTION"
+              value="10"
+            >
+              10
+            </option>
+            <option
+              class="ais-HitsPerPage-option OPTION"
+              value="20"
+            >
+              20
+            </option>
+            <option
+              class="ais-HitsPerPage-option OPTION"
+              value="30"
+            >
+              30
+            </option>
+          </select>
+        </div>
+      </div>
+    `);
+  });
+
+  test('forwards `div` props to the root element', () => {
+    const props = createProps({
+      title: 'Some custom title',
+    });
+    const { container } = render(<HitsPerPage {...props} />);
+
+    expect(container.querySelector('.ais-HitsPerPage')).toHaveAttribute(
+      'title',
+      'Some custom title'
+    );
   });
 });

@@ -175,6 +175,7 @@ describe('RangeInput', () => {
   test('allows custom class names', () => {
     const props = createProps({
       disabled: true,
+      className: 'MyCustomRangeInput',
       classNames: {
         root: 'ROOT',
         noRefinementRoot: 'NOREFINEMENTROOT',
@@ -187,13 +188,12 @@ describe('RangeInput', () => {
         submit: 'SUBMIT',
       },
     });
-
     const { container } = render(<RangeInput {...props} />);
 
     expect(container).toMatchInlineSnapshot(`
       <div>
         <div
-          class="ais-RangeInput ROOT ais-RangeInput--noRefinement NOREFINEMENTROOT"
+          class="ais-RangeInput ROOT ais-RangeInput--noRefinement NOREFINEMENTROOT MyCustomRangeInput"
         >
           <form
             class="ais-RangeInput-form FORM"

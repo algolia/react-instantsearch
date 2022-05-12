@@ -111,22 +111,26 @@ describe('ClearRefinements', () => {
     expect(onClick).toHaveBeenCalledTimes(0);
   });
 
-  test('forwards a custom class name to the root element', () => {
-    const props = createProps({});
-    const { container } = render(
-      <ClearRefinements {...props} className="MyClearsRefinements" />
-    );
+  test('allows custom class names', () => {
+    const props = createProps({
+      disabled: true,
+      className: 'MyCustomClearRefinements',
+      classNames: {
+        root: 'ROOT',
+        button: 'BUTTON',
+        disabledButton: 'DISABLEDBUTTON',
+      },
+    });
+    const { container } = render(<ClearRefinements {...props} />);
 
-    expect(container.querySelector('.ais-ClearRefinements')).toHaveClass(
-      'MyClearsRefinements'
-    );
     expect(container).toMatchInlineSnapshot(`
       <div>
         <div
-          class="ais-ClearRefinements MyClearsRefinements"
+          class="ais-ClearRefinements ROOT MyCustomClearRefinements"
         >
           <button
-            class="ais-ClearRefinements-button"
+            class="ais-ClearRefinements-button BUTTON ais-ClearRefinements-button--disabled DISABLEDBUTTON"
+            disabled=""
           >
             Clear refinements
           </button>
@@ -145,49 +149,5 @@ describe('ClearRefinements', () => {
       'title',
       'Some custom title'
     );
-    expect(container).toMatchInlineSnapshot(`
-      <div>
-        <div
-          class="ais-ClearRefinements"
-          title="Some custom title"
-        >
-          <button
-            class="ais-ClearRefinements-button"
-          >
-            Clear refinements
-          </button>
-        </div>
-      </div>
-    `);
-  });
-
-  test('allows custom class names', () => {
-    const props = createProps({});
-    const { container } = render(
-      <ClearRefinements
-        {...props}
-        disabled
-        classNames={{
-          root: 'ROOT',
-          button: 'BUTTON',
-          disabledButton: 'DISABLEDBUTTON',
-        }}
-      />
-    );
-
-    expect(container).toMatchInlineSnapshot(`
-      <div>
-        <div
-          class="ais-ClearRefinements ROOT"
-        >
-          <button
-            class="ais-ClearRefinements-button BUTTON ais-ClearRefinements-button--disabled DISABLEDBUTTON"
-            disabled=""
-          >
-            Clear refinements
-          </button>
-        </div>
-      </div>
-    `);
   });
 });

@@ -281,19 +281,11 @@ describe('HierarchicalMenu', () => {
     });
   });
 
-  test('forwards a custom class name to the root element', () => {
-    const props = createProps({ className: 'MyHierarchicalMenu' });
-    const { container } = render(<HierarchicalMenu {...props} />);
-
-    expect(container.querySelector('.ais-HierarchicalMenu')).toHaveClass(
-      'ais-HierarchicalMenu MyHierarchicalMenu'
-    );
-  });
-
   test('allows custom class names', () => {
     const props = createProps({
       showMore: true,
       canToggleShowMore: false,
+      className: 'MyCustomHierarchicalMenu',
       classNames: {
         root: 'ROOT',
         noRefinementRoot: 'NOREFINEMENTROOT',
@@ -314,7 +306,7 @@ describe('HierarchicalMenu', () => {
     expect(container).toMatchInlineSnapshot(`
       <div>
         <div
-          class="ais-HierarchicalMenu ROOT"
+          class="ais-HierarchicalMenu ROOT MyCustomHierarchicalMenu"
         >
           <ul
             class="ais-HierarchicalMenu-list LIST"
