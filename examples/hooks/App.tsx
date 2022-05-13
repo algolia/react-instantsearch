@@ -113,7 +113,7 @@ export function App() {
             />
             <HitsPerPage
               items={[
-                { label: '1 hits per page', value: 1, default: true },
+                { label: '20 hits per page', value: 20, default: true },
                 { label: '40 hits per page', value: 40 },
               ]}
             />
