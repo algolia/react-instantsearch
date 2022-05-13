@@ -174,54 +174,16 @@ describe('Breadcrumb', () => {
 
     await wait(0);
 
-    expect(container).toMatchInlineSnapshot(`
-      <div>
-        <div
-          class="ais-Breadcrumb"
-        >
-          <ul
-            class="ais-Breadcrumb-list"
-          >
-            <li
-              class="ais-Breadcrumb-item"
-            >
-              <a
-                class="ais-Breadcrumb-link"
-                href="#"
-              >
-                Home
-              </a>
-            </li>
-            <li
-              class="ais-Breadcrumb-item"
-            >
-              <span
-                aria-hidden="true"
-                class="ais-Breadcrumb-separator"
-              >
-                &gt;
-              </span>
-              <a
-                class="ais-Breadcrumb-link"
-                href="#"
-              >
-                CAMERAS & CAMCORDERS
-              </a>
-            </li>
-            <li
-              class="ais-Breadcrumb-item ais-Breadcrumb-item--selected"
-            >
-              <span
-                aria-hidden="true"
-                class="ais-Breadcrumb-separator"
-              >
-                &gt;
-              </span>
-              DIGITAL CAMERAS
-            </li>
-          </ul>
-        </div>
-      </div>
+    expect(
+      [...container.querySelectorAll('.ais-Breadcrumb-item')].map(
+        (item) => item.textContent
+      )
+    ).toMatchInlineSnapshot(`
+      Array [
+        "Home",
+        ">CAMERAS & CAMCORDERS",
+        ">DIGITAL CAMERAS",
+      ]
     `);
   });
 
