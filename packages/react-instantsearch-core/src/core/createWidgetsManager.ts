@@ -5,6 +5,7 @@ import { defer } from './utils';
 export type Widget = Component & {
   constructor: {
     displayName?: string;
+    $$widgetType?: string;
     _connectorDesc?: ConnectorDescription;
   };
 };

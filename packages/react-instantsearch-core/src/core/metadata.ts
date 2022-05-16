@@ -23,6 +23,7 @@ export function getMetadataPayload(
 
     return {
       displayName,
+      $$widgetType: constructor.$$widgetType,
       params: Object.keys(props).filter(
         (prop) =>
           !internalProps.includes(prop) &&
