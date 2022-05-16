@@ -46,7 +46,7 @@ export type ConnectorDescription = {
 };
 
 export type WidgetMeta = {
-  $$widgetType?: string;
+  $$widgetType: string;
 };
 
 type ConnectorProps = {
@@ -357,7 +357,10 @@ export function createConnectorWithoutContext(
 
 const createConnectorWithContext =
   (connectorDesc: ConnectorDescription) =>
-  (Composed: ReactType, meta: WidgetMeta = {}) => {
+  (
+    Composed: ReactType,
+    meta: WidgetMeta = { $$widgetType: 'custom-widget' }
+  ) => {
     const Connector = createConnectorWithoutContext(connectorDesc)(
       Composed,
       meta
