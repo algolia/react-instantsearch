@@ -97,7 +97,7 @@ describe('ClearRefinements', () => {
     expect(onClick).toHaveBeenCalledTimes(0);
   });
 
-  test('allows custom class names', () => {
+  test('accepts custom class names', () => {
     const props = createProps({
       disabled: true,
       className: 'MyCustomClearRefinements',

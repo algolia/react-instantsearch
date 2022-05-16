@@ -709,7 +709,7 @@ describe('Pagination', () => {
     `);
   });
 
-  test('allows custom class names', () => {
+  test('accepts custom class names', () => {
     const props = createProps({
       className: 'MyCustomPagination',
       classNames: {

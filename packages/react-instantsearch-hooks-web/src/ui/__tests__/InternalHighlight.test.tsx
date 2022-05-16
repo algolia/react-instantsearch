@@ -65,7 +65,7 @@ describe('Highlight', () => {
           <span
             class="SEPARATOR"
           >
-            , 
+            ,
           </span>
           <span
             class="NON-HIGHLIGHTED"
@@ -121,7 +121,7 @@ describe('Highlight', () => {
             class="SEPARATOR"
           >
             <strong>
-               - 
+               -
             </strong>
           </span>
           <small>
@@ -132,7 +132,7 @@ describe('Highlight', () => {
     `);
   });
 
-  test('allows custom class names', () => {
+  test('accepts custom class names', () => {
     const props: InternalHighlightProps = {
       parts: [
         [
@@ -169,7 +169,7 @@ describe('Highlight', () => {
           <span
             class="SEPARATOR"
           >
-            , 
+            ,
           </span>
           <span
             class="NON-HIGHLIGHTED"

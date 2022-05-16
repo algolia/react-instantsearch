@@ -81,7 +81,7 @@ describe('ToggleRefinement', () => {
     expect(props.onChange).toHaveBeenLastCalledWith(true);
   });
 
-  test('allows custom class names', () => {
+  test('accepts custom class names', () => {
     const props = createProps({
       className: 'MyCustomToggleRefinement',
       classNames: {

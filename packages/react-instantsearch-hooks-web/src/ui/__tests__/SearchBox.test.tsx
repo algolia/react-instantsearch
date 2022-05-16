@@ -349,7 +349,7 @@ describe('SearchBox', () => {
   });
 
   describe('onSubmit', () => {
-    test('calls an `onSubmit` callback when pressing enter key on input', () => {
+    test('calls an `onSubmit` callback when pressing `Enter` on the input element', () => {
       const props = createProps({});
 
       const { container } = render(<SearchBox {...props} />);
@@ -419,7 +419,7 @@ describe('SearchBox', () => {
   });
 
   describe('onChange', () => {
-    test('calls an `onChange` callback when changing input value', () => {
+    test('calls an `onChange` callback when changing the input value', () => {
       const props = createProps({});
 
       const { container } = render(<SearchBox {...props} />);
@@ -432,7 +432,7 @@ describe('SearchBox', () => {
     });
   });
 
-  test('allows custom class names', () => {
+  test('accepts custom class names', () => {
     const props = createProps({
       className: 'MyCustomSearchBox',
       classNames: {

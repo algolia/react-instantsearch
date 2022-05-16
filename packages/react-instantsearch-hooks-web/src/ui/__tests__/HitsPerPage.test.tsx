@@ -88,7 +88,7 @@ describe('HitsPerPage', () => {
     expect(props.onChange).toHaveBeenLastCalledWith(20);
   });
 
-  test('allows custom class names', () => {
+  test('accepts custom class names', () => {
     const props = createProps({
       className: 'MyCustomHitsPerPage',
       classNames: {

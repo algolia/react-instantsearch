@@ -263,7 +263,7 @@ describe('InfiniteHits', () => {
     });
   });
 
-  test('allows custom class names', () => {
+  test('accepts custom class names', () => {
     const props = createProps({
       className: 'MyCustomInfiniteHits',
       classNames: {
@@ -324,7 +324,7 @@ describe('InfiniteHits', () => {
     `);
   });
 
-  test('allows custom class names (empty)', () => {
+  test('accepts custom class names (empty)', () => {
     const props = createProps({
       hits: [] as Hit[],
       isLastPage: true,

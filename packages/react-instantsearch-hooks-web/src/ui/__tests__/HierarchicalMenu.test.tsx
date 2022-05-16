@@ -281,7 +281,7 @@ describe('HierarchicalMenu', () => {
     });
   });
 
-  test('allows custom class names', () => {
+  test('accepts custom class names', () => {
     const props = createProps({
       showMore: true,
       canToggleShowMore: false,

@@ -101,7 +101,7 @@ describe('Hits', () => {
     `);
   });
 
-  test('allows custom class names', () => {
+  test('accepts custom class names', () => {
     const props = createProps({
       className: 'MyCustomHits',
       classNames: {
@@ -146,7 +146,7 @@ describe('Hits', () => {
     `);
   });
 
-  test('allows custom class names (empty)', () => {
+  test('accepts custom class names (empty)', () => {
     const props = createProps({
       hits: [],
       className: 'MyCustomHits',

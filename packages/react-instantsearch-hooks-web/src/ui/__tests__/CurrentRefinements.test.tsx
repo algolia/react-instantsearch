@@ -129,7 +129,7 @@ describe('CurrentRefinements', () => {
     expect(onRemove).toHaveBeenCalledTimes(2);
   });
 
-  test('allows custom class names', () => {
+  test('accepts custom class names', () => {
     const props: Partial<CurrentRefinementsProps> = {
       className: 'MyCustomCurrentRefinements',
       classNames: {

@@ -178,7 +178,7 @@ describe('Menu', () => {
     });
   });
 
-  test('allows custom class names', () => {
+  test('accepts custom class names', () => {
     const props = createProps({
       showMore: true,
       canToggleShowMore: false,
@@ -255,7 +255,7 @@ describe('Menu', () => {
     `);
   });
 
-  test('allows custom class names (empty)', () => {
+  test('accepts custom class names (empty)', () => {
     const props = createProps({
       items: [],
       className: 'MyCustomMenu',

@@ -84,7 +84,7 @@ describe('SortBy', () => {
     expect(onChange).toHaveBeenCalledTimes(1);
   });
 
-  test('allows custom class names', () => {
+  test('accepts custom class names', () => {
     const props = createProps({
       className: 'MyCustomSortBy',
       classNames: {

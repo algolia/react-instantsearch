@@ -172,7 +172,7 @@ describe('RangeInput', () => {
     expect(props.onSubmit).toHaveBeenLastCalledWith([500, 5000]);
   });
 
-  test('allows custom class names', () => {
+  test('accepts custom class names', () => {
     const props = createProps({
       disabled: true,
       className: 'MyCustomRangeInput',

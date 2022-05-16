@@ -181,7 +181,7 @@ describe('Breadcrumb', () => {
     expect(props.onNavigate).toHaveBeenCalledTimes(1);
   });
 
-  test('allows custom class names', () => {
+  test('accepts custom class names', () => {
     const props = createProps({
       className: 'MyCustomBreadcrumb',
       classNames: {
