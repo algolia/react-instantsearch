@@ -45,8 +45,8 @@ export type ConnectorDescription = {
   defaultProps?: {};
 };
 
-export type WidgetMeta = {
-  $$widgetType: string;
+export type AdditionalWidgetProperties = {
+  $$widgetType?: string;
 };
 
 type ConnectorProps = {
@@ -84,12 +84,15 @@ export function createConnectorWithoutContext(
     typeof connectorDesc.getMetadata === 'function' ||
     typeof connectorDesc.transitionState === 'function';
 
-  return (Composed: ReactType, { $$widgetType }: WidgetMeta) => {
+  return (
+    Composed: ReactType,
+    additionalWidgetProperties: AdditionalWidgetProperties
+  ) => {
     class Connector extends Component<ConnectorProps, ConnectorState> {
       static displayName = `${connectorDesc.displayName}(${getDisplayName(
         Composed
       )})`;
-      static $$widgetType = $$widgetType;
+      static $$widgetType = additionalWidgetProperties.$$widgetType;
       static propTypes = connectorDesc.propTypes;
       static defaultProps = connectorDesc.defaultProps;
       static _connectorDesc = connectorDesc;
@@ -359,11 +362,11 @@ const createConnectorWithContext =
   (connectorDesc: ConnectorDescription) =>
   (
     Composed: ReactType,
-    meta: WidgetMeta = { $$widgetType: 'custom-widget' }
+    additionalWidgetProperties: AdditionalWidgetProperties = {}
   ) => {
     const Connector = createConnectorWithoutContext(connectorDesc)(
       Composed,
-      meta
+      additionalWidgetProperties
     );
 
     const ConnectorWrapper: React.FC<any> = (props) => (
