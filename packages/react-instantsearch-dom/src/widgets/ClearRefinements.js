@@ -44,5 +44,5 @@ const ClearRefinementsWidget = (props) => (
 );
 
 export default connectCurrentRefinements(ClearRefinementsWidget, {
-  $$widgetType: 'ais.currentRefinements',
+  $$widgetType: 'ais.clearRefinements',
 });

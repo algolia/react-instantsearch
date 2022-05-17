@@ -46,4 +46,4 @@ const MenuSelectWidget = (props) => (
   </PanelCallbackHandler>
 );
 
-export default connectMenu(MenuSelectWidget, { $$widgetType: 'ais.menu' });
+export default connectMenu(MenuSelectWidget, { $$widgetType: 'ais.menuSelect' });

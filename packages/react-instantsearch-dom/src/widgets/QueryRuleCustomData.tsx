@@ -14,5 +14,5 @@ const QueryRuleCustomDataWidget: React.FC<
 );
 
 export default connectQueryRules(QueryRuleCustomDataWidget, {
-  $$widgetType: 'ais.queryRules',
+  $$widgetType: 'ais.queryRuleCustomData',
 });
