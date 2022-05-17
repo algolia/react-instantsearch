@@ -43,7 +43,7 @@ function getCurrentRefinement(props, searchState, context) {
  */
 export default createConnector({
   displayName: 'AlgoliaSortBy',
-  $type: 'ais.sortBy',
+  $$type: 'ais.sortBy',
 
   propTypes: {
     defaultRefinement: PropTypes.string,

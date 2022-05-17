@@ -70,7 +70,7 @@ function transformValue(values) {
 
 export default createConnector({
   displayName: 'AlgoliaBreadcrumb',
-  $type: 'ais.breadcrumb',
+  $$type: 'ais.breadcrumb',
 
   propTypes: {
     attributes: (props, propName, componentName) => {

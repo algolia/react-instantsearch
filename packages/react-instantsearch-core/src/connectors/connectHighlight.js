@@ -68,7 +68,7 @@ const highlight = ({
  */
 export default createConnector({
   displayName: 'AlgoliaHighlighter',
-  $type: 'ais.highlighter',
+  $$type: 'ais.highlighter',
 
   propTypes: {},
 

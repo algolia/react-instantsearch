@@ -12,7 +12,7 @@ function getId() {
 
 export default createConnector({
   displayName: 'AlgoliaConfigure',
-  $type: 'ais.configure',
+  $$type: 'ais.configure',
   getProvidedProps() {
     return {};
   },

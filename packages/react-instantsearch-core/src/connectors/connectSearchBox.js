@@ -50,7 +50,7 @@ function cleanUp(props, searchState, context) {
  */
 export default createConnector({
   displayName: 'AlgoliaSearchBox',
-  $type: 'ais.searchBox',
+  $$type: 'ais.searchBox',
   $$type: 'ais.searchBox',
 
   propTypes: {

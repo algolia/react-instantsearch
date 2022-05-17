@@ -126,7 +126,7 @@ const refine = (searchState, nextValue, context) => {
 
 export default createConnector({
   displayName: 'AlgoliaGeoSearch',
-  $type: 'ais.geoSearch',
+  $$type: 'ais.geoSearch',
 
   getProvidedProps(props, searchState, searchResults) {
     const context = {

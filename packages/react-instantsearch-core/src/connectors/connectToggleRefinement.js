@@ -65,7 +65,7 @@ function cleanUp(props, searchState, context) {
  */
 export default createConnector({
   displayName: 'AlgoliaToggle',
-  $type: 'ais.toggle',
+  $$type: 'ais.toggle',
 
   propTypes: {
     label: PropTypes.string.isRequired,

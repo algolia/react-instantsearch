@@ -47,7 +47,7 @@ import { addAbsolutePositions, addQueryID } from '../core/utils';
  */
 export default createConnector({
   displayName: 'AlgoliaHits',
-  $type: 'ais.hits',
+  $$type: 'ais.hits',
 
   getProvidedProps(props, searchState, searchResults) {
     const results = getResults(searchResults, {

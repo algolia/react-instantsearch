@@ -68,7 +68,7 @@ const wrapInsightsClient =
 export default (insightsClient: InsightsClient) =>
   createConnector({
     displayName: 'AlgoliaInsights',
-  $type: 'ais.insights',
+    $$type: 'ais.insights',
 
     getProvidedProps(props, _, searchResults) {
       const results: Results = getResults(searchResults, {

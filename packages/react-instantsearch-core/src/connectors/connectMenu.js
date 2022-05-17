@@ -74,7 +74,7 @@ const defaultSortBy = ['count:desc', 'name:asc'];
  */
 export default createConnector({
   displayName: 'AlgoliaMenu',
-  $type: 'ais.menu',
+  $$type: 'ais.menu',
 
   propTypes: {
     attribute: PropTypes.string.isRequired,

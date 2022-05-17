@@ -41,7 +41,7 @@ function getCurrentRefinement(props, searchState, context) {
  */
 export default createConnector({
   displayName: 'AlgoliaHitsPerPage',
-  $type: 'ais.hitsPerPage',
+  $$type: 'ais.hitsPerPage',
 
   propTypes: {
     defaultRefinement: PropTypes.number.isRequired,

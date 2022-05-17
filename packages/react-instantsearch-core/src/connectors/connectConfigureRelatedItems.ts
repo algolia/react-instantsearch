@@ -137,7 +137,7 @@ interface ConnectorState {
 
 export default createConnector({
   displayName: 'AlgoliaConfigureRelatedItems',
-  $type: 'ais.configureRelatedItems',
+  $$type: 'ais.configureRelatedItems',
 
   defaultProps,
 

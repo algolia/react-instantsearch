@@ -52,7 +52,7 @@ function refine(props, searchState, nextPage, context) {
  */
 export default createConnector({
   displayName: 'AlgoliaPagination',
-  $type: 'ais.pagination',
+  $$type: 'ais.pagination',
 
   getProvidedProps(props, searchState, searchResults) {
     const results = getResults(searchResults, {
