@@ -364,7 +364,7 @@ const createConnectorWithContext =
   (connectorDesc: ConnectorDescription) =>
   (
     Composed: ReactType,
-    additionalWidgetProperties: AdditionalWidgetProperties = {}
+    additionalWidgetProperties?: AdditionalWidgetProperties
   ) => {
     const Connector = createConnectorWithoutContext(connectorDesc)(
       Composed,
