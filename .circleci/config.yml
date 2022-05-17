@@ -92,10 +92,23 @@ jobs:
       - run:
           name: Type checking
           command: yarn type-check
-      # react-instantsearch-hooks-server fails sometimes due to Jest cache
-      - run-with-retry:
+      - run:
           name: Unit Tests
-          command: yarn test --maxWorkers=4
+          command: |
+            retry() {
+              MAX_RETRY=2
+              n=0
+              until [ $n -ge $MAX_RETRY ]
+              do
+                  "$@" && break
+                  n=$[$n+1]
+              done
+              if [ $n -ge $MAX_RETRY ]; then
+                exit 1
+              fi
+            }
+
+            retry yarn test --maxWorkers=4
 
   test_integration:
     <<: *defaults
@@ -195,36 +208,3 @@ workflows:
                 - master
     jobs:
       - prepare_release
-
-commands:
-  run-with-retry:
-    description: Run command with retry
-    parameters:
-      command:
-        description: Command to run
-        type: string
-      retry-count:
-        description: Number of retry 
-        type: integer
-        default: 3
-      sleep:
-        description: Wait duration until next retry
-        type: integer
-        default: 5
-    steps:
-      - run: |
-          retry() {
-             MAX_RETRY=<< parameters.retry-count >>
-             n=0
-             until [ $n -ge $MAX_RETRY ]
-             do
-                "$@" && break
-                n=$[$n+1]
-                sleep << parameters.sleep >>
-             done
-             if [ $n -ge $MAX_RETRY ]; then
-               echo "failed: ${@}" >&2
-               exit 1
-             fi
-          }
-          retry << parameters.command >>
