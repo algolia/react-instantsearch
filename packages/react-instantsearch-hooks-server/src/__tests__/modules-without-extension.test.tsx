@@ -89,6 +89,8 @@ function createTestEnvironment({
   };
 }
 
+jest.retryTimes(3);
+
 // Only the module without extension exists
 jest.mock(
   'react-dom/server.js',
