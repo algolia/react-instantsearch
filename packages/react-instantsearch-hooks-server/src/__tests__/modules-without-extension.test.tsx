@@ -89,7 +89,7 @@ function createTestEnvironment({
   };
 }
 
-jest.retryTimes(3);
+jest.retryTimes(10);
 
 // Only the module without extension exists
 jest.mock(
