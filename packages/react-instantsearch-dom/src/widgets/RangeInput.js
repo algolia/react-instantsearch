@@ -51,4 +51,4 @@ const RangeInputWidget = (props) => (
   </PanelCallbackHandler>
 );
 
-export default connectRange(RangeInputWidget);
+export default connectRange(RangeInputWidget, { $$widgetType: 'ais.range' });
