@@ -7,6 +7,7 @@ import { InstantSearchConsumer, IndexConsumer } from './context';
 
 export type ConnectorDescription = {
   displayName: string;
+  $$type: string;
   /**
    * a function to filter the local state
    */
@@ -86,12 +87,13 @@ export function createConnectorWithoutContext(
 
   return (
     Composed: ReactType,
-    additionalWidgetProperties: AdditionalWidgetProperties
+    additionalWidgetProperties: AdditionalWidgetProperties = {}
   ) => {
     class Connector extends Component<ConnectorProps, ConnectorState> {
       static displayName = `${connectorDesc.displayName}(${getDisplayName(
         Composed
       )})`;
+      static $$type = connectorDesc.$$type;
       static $$widgetType = additionalWidgetProperties.$$widgetType;
       static propTypes = connectorDesc.propTypes;
       static defaultProps = connectorDesc.defaultProps;
