@@ -95,6 +95,10 @@ jobs:
       - run:
           name: Unit Tests
           command: yarn test --maxWorkers=4
+      - run:
+          name: Unit Tests (retry)
+          command: yarn test --maxWorkers=4
+          when: on_fail
 
   test_integration:
     <<: *defaults
