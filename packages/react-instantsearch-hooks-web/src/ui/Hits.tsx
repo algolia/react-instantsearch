@@ -8,7 +8,10 @@ import type { SendEventForHits } from 'instantsearch.js/es/lib/utils';
 export type HitsProps<THit> = React.ComponentProps<'div'> & {
   hits: THit[];
   sendEvent: SendEventForHits;
-  hitComponent?: React.JSXElementConstructor<{ hit: THit }>;
+  hitComponent?: React.JSXElementConstructor<{
+    hit: THit;
+    sendEvent: SendEventForHits;
+  }>;
   classNames?: Partial<HitsClassNames>;
 };
 
@@ -41,6 +44,7 @@ export type HitsClassNames = {
 
 export function Hits<THit extends Hit>({
   hits,
+  sendEvent,
   hitComponent: HitComponent = DefaultHitComponent,
   classNames = {},
   ...props
@@ -61,7 +65,7 @@ export function Hits<THit extends Hit>({
             key={hit.objectID}
             className={cx('ais-Hits-item', classNames.item)}
           >
-            <HitComponent hit={hit} />
+            <HitComponent hit={hit} sendEvent={sendEvent} />
           </li>
         ))}
       </ol>
