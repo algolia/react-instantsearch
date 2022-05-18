@@ -3,9 +3,11 @@ import React from 'react';
 import { cx } from './lib/cx';
 
 import type { Hit } from 'instantsearch.js';
+import type { SendEventForHits } from 'instantsearch.js/es/lib/utils';
 
 export type HitsProps<THit> = React.ComponentProps<'div'> & {
   hits: THit[];
+  sendEvent: SendEventForHits;
   hitComponent?: React.JSXElementConstructor<{ hit: THit }>;
   classNames?: Partial<HitsClassNames>;
 };

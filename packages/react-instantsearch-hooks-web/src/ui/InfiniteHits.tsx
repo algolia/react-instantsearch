@@ -3,10 +3,12 @@ import React from 'react';
 import { cx } from './lib/cx';
 
 import type { Hit } from 'instantsearch.js';
+import type { SendEventForHits } from 'instantsearch.js/es/lib/utils';
 
 export type InfiniteHitsProps<THit> = React.ComponentProps<'div'> & {
   hitComponent?: React.JSXElementConstructor<{ hit: THit }>;
   hits: THit[];
+  sendEvent: SendEventForHits;
   isFirstPage: boolean;
   isLastPage: boolean;
   onShowPrevious?: () => void;
