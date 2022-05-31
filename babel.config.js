@@ -51,7 +51,7 @@ module.exports = (api) => {
             // React-DOM also fails if the paths are incomplete
             'react-dom',
             // `use-sync-external-store` also fails if the paths are incomplete
-            'use-sync-external-store/shim',
+            'use-sync-external-store',
           ],
         },
       ],
