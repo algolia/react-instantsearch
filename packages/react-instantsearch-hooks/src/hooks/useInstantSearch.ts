@@ -42,6 +42,10 @@ export function useInstantSearch(): InstantSearchApi {
     [search]
   );
 
+  const refresh = useCallback(() => {
+    search.refresh();
+  }, [search]);
+
   return {
     results,
     scopedResults,
@@ -50,7 +54,7 @@ export function useInstantSearch(): InstantSearchApi {
     indexUiState,
     setIndexUiState,
     use,
-    refresh: () => search.refresh(),
+    refresh,
     search,
   };
 }

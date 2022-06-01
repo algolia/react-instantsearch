@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { AlgoliaSearchHelper, SearchResults } from 'algoliasearch-helper';
 import InstantSearch from 'instantsearch.js/es/lib/InstantSearch';
 import React, { useEffect } from 'react';
+import { SearchBox } from 'react-instantsearch-hooks-web';
 
 import { createSearchClient } from '../../../../../test/mock';
 import {
@@ -11,13 +12,7 @@ import {
   InstantSearchHooksTestWrapper,
   wait,
 } from '../../../../../test/utils';
-import { useSearchBox } from '../../connectors/useSearchBox';
 import { useInstantSearch } from '../useInstantSearch';
-
-function SearchBox() {
-  const { query } = useSearchBox({});
-  return <>{query}</>;
-}
 
 describe('useInstantSearch', () => {
   describe('usage', () => {
@@ -263,8 +258,14 @@ describe('useInstantSearch', () => {
     test('gives access use function', async () => {
       const wrapper = createInstantSearchTestWrapper();
 
+      const subscribe = jest.fn();
       const onStateChange = jest.fn();
-      const middleware = jest.fn(() => ({ onStateChange }));
+      const unsubscribe = jest.fn();
+      const middleware = jest.fn(() => ({
+        subscribe,
+        onStateChange,
+        unsubscribe,
+      }));
 
       const { result, waitForNextUpdate, unmount } = renderHook(
         () => {
@@ -273,7 +274,17 @@ describe('useInstantSearch', () => {
 
           return search;
         },
-        { wrapper }
+        {
+          wrapper: ({ children }) =>
+            wrapper({
+              children: (
+                <>
+                  <SearchBox />
+                  {children}
+                </>
+              ),
+            }),
+        }
       );
 
       // augmented once middleware was used
@@ -282,20 +293,41 @@ describe('useInstantSearch', () => {
           creator: middleware,
           instance: {
             onStateChange,
-            subscribe: expect.any(Function),
-            unsubscribe: expect.any(Function),
+            subscribe,
+            unsubscribe,
           },
         },
       ]);
 
+      expect(subscribe).toHaveBeenCalledTimes(1);
+      expect(onStateChange).toHaveBeenCalledTimes(0);
+      expect(unsubscribe).toHaveBeenCalledTimes(0);
+      expect(middleware).toHaveBeenCalledTimes(1);
+
       await waitForNextUpdate();
 
-      expect(middleware).toHaveBeenCalledTimes(1);
+      expect(subscribe).toHaveBeenCalledTimes(1);
+      expect(onStateChange).toHaveBeenCalledTimes(0);
+      expect(unsubscribe).toHaveBeenCalledTimes(0);
+
+      // simulate a change in query
+      result.current.renderState.indexName.searchBox!.refine('new query');
+      await waitForNextUpdate();
+
+      expect(subscribe).toHaveBeenCalledTimes(1);
+      expect(onStateChange).toHaveBeenCalledTimes(1);
+      expect(unsubscribe).toHaveBeenCalledTimes(0);
 
       unmount();
 
       // middleware was removed
       expect(result.current.middleware).toEqual([]);
+
+      expect(subscribe).toHaveBeenCalledTimes(1);
+      expect(onStateChange).toHaveBeenCalledTimes(1);
+      // it's called both by InstantSearch unmount/dispose, but then again by widget unmount because it's not fully removed
+      // THIS IS A BUG in InstantSearch.js, will make a PR to fix it.
+      expect(unsubscribe).toHaveBeenCalledTimes(2);
     });
   });
 
@@ -332,6 +364,28 @@ describe('useInstantSearch', () => {
       userEvent.click(container.querySelector('button')!);
 
       expect(searchClient.search).toHaveBeenCalledTimes(2);
+    });
+
+    test('provides a stable reference', async () => {
+      const wrapper = createInstantSearchTestWrapper();
+      const { result, waitForNextUpdate, rerender } = renderHook(
+        () => useInstantSearch(),
+        { wrapper }
+      );
+
+      expect(result.current.refresh).toEqual(expect.any(Function));
+
+      const ref = result.current.refresh;
+
+      await waitForNextUpdate();
+
+      // reference has not changed
+      expect(result.current.refresh).toEqual(ref);
+
+      rerender();
+
+      // reference has not changed
+      expect(result.current.refresh).toEqual(ref);
     });
   });
 
