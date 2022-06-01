@@ -210,7 +210,7 @@ describe('InstantSearchSSRProvider', () => {
             nbHits: 442,
             page: 0,
             nbPages: 23,
-            hitsPerPage: 20,
+            hitsPerPage: 2,
             facets: { brand: { Apple: 442, Samsung: 633 } },
             exhaustiveFacetsCount: true,
             exhaustiveNbHits: true,
