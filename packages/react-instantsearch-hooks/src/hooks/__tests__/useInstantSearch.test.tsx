@@ -4,7 +4,6 @@ import userEvent from '@testing-library/user-event';
 import { AlgoliaSearchHelper, SearchResults } from 'algoliasearch-helper';
 import InstantSearch from 'instantsearch.js/es/lib/InstantSearch';
 import React, { useEffect } from 'react';
-import { SearchBox } from 'react-instantsearch-hooks-web';
 
 import { createSearchClient } from '../../../../../test/mock';
 import {
@@ -12,7 +11,14 @@ import {
   InstantSearchHooksTestWrapper,
   wait,
 } from '../../../../../test/utils';
+import { useSearchBox } from '../../connectors/useSearchBox';
 import { useInstantSearch } from '../useInstantSearch';
+
+function SearchBox() {
+  const { query } = useSearchBox({});
+
+  return <>{query}</>;
+}
 
 describe('useInstantSearch', () => {
   describe('usage', () => {
@@ -320,14 +326,16 @@ describe('useInstantSearch', () => {
 
       unmount();
 
-      // middleware was removed
-      expect(result.current.middleware).toEqual([]);
-
       expect(subscribe).toHaveBeenCalledTimes(1);
       expect(onStateChange).toHaveBeenCalledTimes(1);
-      // it's called both by InstantSearch unmount/dispose, but then again by widget unmount because it's not fully removed
-      // THIS IS A BUG in InstantSearch.js, will make a PR to fix it.
+      // unsubscribe is first called by the parent InstantSearch unmounting
+      // 🚨 dispose doesn't remove middleware (because otherwise routing would break)
+      // then unuse is called by this widget itself unmounting.
+      // if only the component with useInstantSearch is unmounted, unsubscribe is called once.
       expect(unsubscribe).toHaveBeenCalledTimes(2);
+
+      // middleware was removed
+      expect(result.current.middleware).toEqual([]);
     });
   });
 
