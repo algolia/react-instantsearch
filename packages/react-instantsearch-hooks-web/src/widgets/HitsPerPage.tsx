@@ -15,7 +15,7 @@ export type HitsPerPageProps = Omit<
   HitsPerPageUiComponentProps,
   keyof UiProps
 > &
-  UseHitsPerPageProps & { notASwag: true };
+  UseHitsPerPageProps;
 
 export function HitsPerPage({
   items: userItems,
