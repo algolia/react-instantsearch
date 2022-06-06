@@ -15,12 +15,17 @@ export type HitsPerPageProps = Omit<
   HitsPerPageUiComponentProps,
   keyof UiProps
 > &
-  UseHitsPerPageProps;
+  UseHitsPerPageProps & { notASwag: true };
 
-export function HitsPerPage(props: HitsPerPageProps) {
-  const { items, refine } = useHitsPerPage(props, {
-    $$widgetType: 'ais.hitsPerPage',
-  });
+export function HitsPerPage({
+  items: userItems,
+  transformItems,
+  ...props
+}: HitsPerPageProps) {
+  const { items, refine } = useHitsPerPage(
+    { items: userItems, transformItems },
+    { $$widgetType: 'ais.hitsPerPage' }
+  );
   const { value: currentValue } =
     items.find(({ isRefined }) => isRefined)! || {};
 
