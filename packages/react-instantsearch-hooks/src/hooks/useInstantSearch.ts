@@ -20,7 +20,7 @@ type InstantSearchApi = {
   setUiState: InstantSearch['setUiState'];
   indexUiState: IndexUiState;
   setIndexUiState: (indexUiState: IndexUiState) => void;
-  use: (...middlewares: Middleware[]) => void;
+  use: (...middlewares: Middleware[]) => () => void;
   refresh: InstantSearch['refresh'];
   search: InstantSearch;
 };
@@ -31,7 +31,7 @@ export function useInstantSearch(): InstantSearchApi {
     useSearchState();
   const { results, scopedResults } = useSearchResults();
 
-  const use = useCallback(
+  const use: InstantSearchApi['use'] = useCallback(
     (...middlewares: Middleware[]) => {
       search.use(...middlewares);
 
@@ -42,7 +42,7 @@ export function useInstantSearch(): InstantSearchApi {
     [search]
   );
 
-  const refresh = useCallback(() => {
+  const refresh: InstantSearchApi['refresh'] = useCallback(() => {
     search.refresh();
   }, [search]);
 

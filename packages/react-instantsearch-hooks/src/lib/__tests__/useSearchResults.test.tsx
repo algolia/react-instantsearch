@@ -22,6 +22,7 @@ describe('useSearchResults', () => {
         }),
       ],
     });
+    expect(result.current.results.__isArtificial).toEqual(true);
 
     await waitForNextUpdate();
 
@@ -36,5 +37,7 @@ describe('useSearchResults', () => {
         }),
       ],
     });
+
+    expect(result.current.results.__isArtificial).toBeUndefined();
   });
 });
