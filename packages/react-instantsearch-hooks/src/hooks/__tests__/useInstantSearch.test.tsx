@@ -261,7 +261,7 @@ describe('useInstantSearch', () => {
   });
 
   describe('middleware', () => {
-    test('gives access use function', async () => {
+    test('gives access to the use function', async () => {
       const wrapper = createInstantSearchTestWrapper();
 
       const subscribe = jest.fn();
@@ -381,19 +381,19 @@ describe('useInstantSearch', () => {
         { wrapper }
       );
 
-      expect(result.current.refresh).toEqual(expect.any(Function));
+      expect(result.current.refresh).toBeInstanceOf(Function);
 
       const ref = result.current.refresh;
 
       await waitForNextUpdate();
 
       // reference has not changed
-      expect(result.current.refresh).toEqual(ref);
+      expect(result.current.refresh).toBe(ref);
 
       rerender();
 
       // reference has not changed
-      expect(result.current.refresh).toEqual(ref);
+      expect(result.current.refresh).toBe(ref);
     });
   });
 
