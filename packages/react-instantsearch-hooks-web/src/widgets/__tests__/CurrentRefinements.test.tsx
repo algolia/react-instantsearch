@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { useRefinementList } from 'react-instantsearch-hooks';
@@ -27,14 +27,15 @@ describe('CurrentRefinements', () => {
       </InstantSearchHooksTestWrapper>
     );
 
-    await wait(0);
+    await waitFor(() => {
+      expect(
+        document.querySelectorAll('.ais-CurrentRefinements-item')
+      ).toHaveLength(2);
+      expect(
+        document.querySelectorAll('.ais-CurrentRefinements-category')
+      ).toHaveLength(3);
+    });
 
-    expect(
-      document.querySelectorAll('.ais-CurrentRefinements-item')
-    ).toHaveLength(2);
-    expect(
-      document.querySelectorAll('.ais-CurrentRefinements-category')
-    ).toHaveLength(3);
     expect(container).toMatchInlineSnapshot(`
       <div>
         <div
@@ -154,14 +155,15 @@ describe('CurrentRefinements', () => {
       </InstantSearchHooksTestWrapper>
     );
 
-    await wait(0);
+    await waitFor(() => {
+      expect(
+        document.querySelectorAll('.ais-CurrentRefinements-item')
+      ).toHaveLength(2);
+      expect(
+        document.querySelectorAll('.ais-CurrentRefinements-category')
+      ).toHaveLength(3);
+    });
 
-    expect(
-      document.querySelectorAll('.ais-CurrentRefinements-item')
-    ).toHaveLength(2);
-    expect(
-      document.querySelectorAll('.ais-CurrentRefinements-category')
-    ).toHaveLength(3);
     expect(container).toMatchInlineSnapshot(`
       <div>
         <div
@@ -246,46 +248,48 @@ describe('CurrentRefinements', () => {
 
     userEvent.click(button3);
 
-    await wait(0);
+    await waitFor(() => {
+      expect(queryByText('Audio')).toBeNull();
+      expect(queryByText('Apple')).not.toBeNull();
+      expect(queryByText('Samsung')).not.toBeNull();
 
-    expect(queryByText('Audio')).toBeNull();
-    expect(queryByText('Apple')).not.toBeNull();
-    expect(queryByText('Samsung')).not.toBeNull();
-
-    expect(
-      document.querySelectorAll('.ais-CurrentRefinements-item')
-    ).toHaveLength(1);
-    expect(
-      document.querySelectorAll('.ais-CurrentRefinements-category')
-    ).toHaveLength(2);
+      expect(
+        document.querySelectorAll('.ais-CurrentRefinements-item')
+      ).toHaveLength(1);
+      expect(
+        document.querySelectorAll('.ais-CurrentRefinements-category')
+      ).toHaveLength(2);
+    });
 
     userEvent.click(button1);
 
-    await wait(0);
+    await waitFor(() => {
+      expect(queryByText('Audio')).toBeNull();
+      expect(queryByText('Apple')).toBeNull();
+      expect(queryByText('Samsung')).not.toBeNull();
 
-    expect(queryByText('Audio')).toBeNull();
-    expect(queryByText('Apple')).toBeNull();
-    expect(queryByText('Samsung')).not.toBeNull();
-    expect(
-      document.querySelectorAll('.ais-CurrentRefinements-item')
-    ).toHaveLength(1);
-    expect(
-      document.querySelectorAll('.ais-CurrentRefinements-category')
-    ).toHaveLength(1);
+      expect(
+        document.querySelectorAll('.ais-CurrentRefinements-item')
+      ).toHaveLength(1);
+      expect(
+        document.querySelectorAll('.ais-CurrentRefinements-category')
+      ).toHaveLength(1);
+    });
 
     userEvent.click(button2);
 
-    await wait(0);
+    await waitFor(() => {
+      expect(queryByText('Audio')).toBeNull();
+      expect(queryByText('Apple')).toBeNull();
+      expect(queryByText('Samsung')).toBeNull();
 
-    expect(queryByText('Audio')).toBeNull();
-    expect(queryByText('Apple')).toBeNull();
-    expect(queryByText('Samsung')).toBeNull();
-    expect(
-      document.querySelectorAll('.ais-CurrentRefinements-item')
-    ).toHaveLength(0);
-    expect(
-      document.querySelectorAll('.ais-CurrentRefinements-category')
-    ).toHaveLength(0);
+      expect(
+        document.querySelectorAll('.ais-CurrentRefinements-item')
+      ).toHaveLength(0);
+      expect(
+        document.querySelectorAll('.ais-CurrentRefinements-category')
+      ).toHaveLength(0);
+    });
   });
 
   test('does not trigger default event', async () => {

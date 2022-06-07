@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
@@ -45,9 +45,9 @@ describe('RangeInput', () => {
       </InstantSearchHooksTestWrapper>
     );
 
-    await wait(0);
-
-    expect(client.search).toHaveBeenCalledTimes(1);
+    await waitFor(() => {
+      expect(client.search).toHaveBeenCalledTimes(1);
+    });
 
     expect(container).toMatchInlineSnapshot(`
       <div>
@@ -152,9 +152,9 @@ describe('RangeInput', () => {
       </InstantSearchHooksTestWrapper>
     );
 
-    await wait(0);
-
-    expect(client.search).toHaveBeenCalledTimes(1);
+    await waitFor(() => {
+      expect(client.search).toHaveBeenCalledTimes(1);
+    });
 
     userEvent.type(
       container.querySelector('.ais-RangeInput-input--min')!,

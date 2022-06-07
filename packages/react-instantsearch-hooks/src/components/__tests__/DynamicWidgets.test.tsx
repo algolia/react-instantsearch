@@ -2,7 +2,6 @@ import { act, render, waitFor } from '@testing-library/react';
 import React, { createRef } from 'react';
 
 import { createSearchClient } from '../../../../../test/mock';
-import { wait } from '../../../../../test/utils';
 import { useHierarchicalMenu } from '../../connectors/useHierarchicalMenu';
 import { useMenu } from '../../connectors/useMenu';
 import { usePagination } from '../../connectors/usePagination';
@@ -405,7 +404,6 @@ describe('DynamicWidgets', () => {
 
     const { container, rerender } = render(<App attributes={['brand']} />);
 
-    await wait(0);
     await waitFor(() => {
       expect(container).toMatchInlineSnapshot(`
 <div>
@@ -423,8 +421,8 @@ describe('DynamicWidgets', () => {
       rerender(<App attributes={['brand', 'categories']} />);
     });
 
-    await wait(0);
     await waitFor(() => {
+      expect(searchClient.search).toHaveBeenCalledTimes(3);
       expect(container).toMatchInlineSnapshot(`
 <div>
   RefinementList(brand)
@@ -443,8 +441,8 @@ describe('DynamicWidgets', () => {
       rerender(<App attributes={['brand']} />);
     });
 
-    await wait(0);
     await waitFor(() => {
+      expect(searchClient.search).toHaveBeenCalledTimes(5);
       expect(container).toMatchInlineSnapshot(`
 <div>
   RefinementList(brand)

@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
@@ -114,13 +114,14 @@ describe('RefinementList', () => {
       </InstantSearchHooksTestWrapper>
     );
 
-    await wait(0);
+    await waitFor(() =>
+      expect(
+        container.querySelectorAll('.ais-RefinementList-item')
+      ).toHaveLength(10)
+    );
 
     expect(client.search).toHaveBeenCalledTimes(1);
 
-    expect(container.querySelectorAll('.ais-RefinementList-item')).toHaveLength(
-      10
-    );
     expect(container).toMatchInlineSnapshot(`
       <div>
         <div
@@ -396,7 +397,11 @@ describe('RefinementList', () => {
       </InstantSearchHooksTestWrapper>
     );
 
-    await wait(0);
+    await waitFor(() => {
+      expect(
+        container.querySelectorAll('.ais-RefinementList-item').length
+      ).toEqual(10);
+    });
 
     const [checkbox1, checkbox2] = [
       ...(container.querySelectorAll(
@@ -428,11 +433,12 @@ describe('RefinementList', () => {
       </InstantSearchHooksTestWrapper>
     );
 
-    await wait(0);
-
-    expect(container.querySelectorAll('.ais-RefinementList-item')).toHaveLength(
-      5
+    await waitFor(() =>
+      expect(
+        container.querySelectorAll('.ais-RefinementList-item')
+      ).toHaveLength(5)
     );
+
     expect(container).toMatchInlineSnapshot(`
       <div>
         <div
@@ -578,26 +584,24 @@ describe('RefinementList', () => {
       </InstantSearchHooksTestWrapper>
     );
 
-    await wait(0);
-
-    expect(
-      [...container.querySelectorAll('.ais-RefinementList-item')].map(
-        (item) => item.textContent
-      )
-    ).toMatchInlineSnapshot(`
-      Array [
-        "Insignia™746",
-        "Samsung633",
-        "Metra591",
-        "HP530",
-        "Apple442",
-        "GE394",
-        "Sony350",
-        "Incipio320",
-        "KitchenAid318",
-        "Whirlpool298",
-      ]
-    `);
+    await waitFor(() => {
+      expect(
+        Array.from(container.querySelectorAll('.ais-RefinementList-item')).map(
+          (item) => item.textContent
+        )
+      ).toEqual([
+        'Insignia™746',
+        'Samsung633',
+        'Metra591',
+        'HP530',
+        'Apple442',
+        'GE394',
+        'Sony350',
+        'Incipio320',
+        'KitchenAid318',
+        'Whirlpool298',
+      ]);
+    });
   });
 
   describe('sorting', () => {
@@ -609,24 +613,24 @@ describe('RefinementList', () => {
         </InstantSearchHooksTestWrapper>
       );
 
-      await wait(0);
-
-      expect(
-        Array.from(
-          container.querySelectorAll('.ais-RefinementList-labelText')
-        ).map((item) => item.textContent)
-      ).toEqual([
-        'Apple',
-        'Canon',
-        'Dell',
-        'Dynex™',
-        'Epson',
-        'Frigidaire',
-        'GE',
-        'HP',
-        'Hamilton Beach',
-        'Incipio',
-      ]);
+      await waitFor(() => {
+        expect(
+          Array.from(
+            container.querySelectorAll('.ais-RefinementList-labelText')
+          ).map((item) => item.textContent)
+        ).toEqual([
+          'Apple',
+          'Canon',
+          'Dell',
+          'Dynex™',
+          'Epson',
+          'Frigidaire',
+          'GE',
+          'HP',
+          'Hamilton Beach',
+          'Incipio',
+        ]);
+      });
     });
 
     test('sorts the items by descending name', async () => {
@@ -637,24 +641,24 @@ describe('RefinementList', () => {
         </InstantSearchHooksTestWrapper>
       );
 
-      await wait(0);
-
-      expect(
-        Array.from(
-          container.querySelectorAll('.ais-RefinementList-labelText')
-        ).map((item) => item.textContent)
-      ).toEqual([
-        'Whirlpool',
-        'Speck',
-        'Sony',
-        'Samsung',
-        'Platinum',
-        'OtterBox',
-        'Metra',
-        'LG',
-        'KitchenAid',
-        'Insignia™',
-      ]);
+      await waitFor(() => {
+        expect(
+          Array.from(
+            container.querySelectorAll('.ais-RefinementList-labelText')
+          ).map((item) => item.textContent)
+        ).toEqual([
+          'Whirlpool',
+          'Speck',
+          'Sony',
+          'Samsung',
+          'Platinum',
+          'OtterBox',
+          'Metra',
+          'LG',
+          'KitchenAid',
+          'Insignia™',
+        ]);
+      });
     });
 
     test('sorts the items by count', async () => {
@@ -665,24 +669,24 @@ describe('RefinementList', () => {
         </InstantSearchHooksTestWrapper>
       );
 
-      await wait(0);
-
-      expect(
-        Array.from(container.querySelectorAll('.ais-RefinementList-count')).map(
-          (item) => item.textContent
-        )
-      ).toEqual([
-        '746',
-        '633',
-        '591',
-        '530',
-        '442',
-        '394',
-        '350',
-        '320',
-        '318',
-        '298',
-      ]);
+      await waitFor(() => {
+        expect(
+          Array.from(
+            container.querySelectorAll('.ais-RefinementList-count')
+          ).map((item) => item.textContent)
+        ).toEqual([
+          '746',
+          '633',
+          '591',
+          '530',
+          '442',
+          '394',
+          '350',
+          '320',
+          '318',
+          '298',
+        ]);
+      });
     });
 
     test('sorts the items by refinement state', async () => {
@@ -693,24 +697,24 @@ describe('RefinementList', () => {
         </InstantSearchHooksTestWrapper>
       );
 
-      await wait(0);
-
-      expect(
-        Array.from(
-          container.querySelectorAll('.ais-RefinementList-labelText')
-        ).map((item) => item.textContent)
-      ).toEqual([
-        'Insignia™',
-        'Samsung',
-        'Metra',
-        'HP',
-        'Apple',
-        'GE',
-        'Sony',
-        'Incipio',
-        'KitchenAid',
-        'Whirlpool',
-      ]);
+      await waitFor(() => {
+        expect(
+          Array.from(
+            container.querySelectorAll('.ais-RefinementList-labelText')
+          ).map((item) => item.textContent)
+        ).toEqual([
+          'Insignia™',
+          'Samsung',
+          'Metra',
+          'HP',
+          'Apple',
+          'GE',
+          'Sony',
+          'Incipio',
+          'KitchenAid',
+          'Whirlpool',
+        ]);
+      });
 
       const [checkbox1, checkbox2] = Array.from(
         container.querySelectorAll(
@@ -721,24 +725,24 @@ describe('RefinementList', () => {
       userEvent.click(checkbox1);
       userEvent.click(checkbox2);
 
-      await wait(0);
-
-      expect(
-        Array.from(
-          container.querySelectorAll('.ais-RefinementList-labelText')
-        ).map((item) => item.textContent)
-      ).toEqual([
-        'KitchenAid',
-        'Whirlpool',
-        'Insignia™',
-        'Samsung',
-        'Metra',
-        'HP',
-        'Apple',
-        'GE',
-        'Sony',
-        'Incipio',
-      ]);
+      await waitFor(() => {
+        expect(
+          Array.from(
+            container.querySelectorAll('.ais-RefinementList-labelText')
+          ).map((item) => item.textContent)
+        ).toEqual([
+          'KitchenAid',
+          'Whirlpool',
+          'Insignia™',
+          'Samsung',
+          'Metra',
+          'HP',
+          'Apple',
+          'GE',
+          'Sony',
+          'Incipio',
+        ]);
+      });
     });
 
     test('sorts the items using a sorting function', async () => {
@@ -752,24 +756,24 @@ describe('RefinementList', () => {
         </InstantSearchHooksTestWrapper>
       );
 
-      await wait(0);
-
-      expect(
-        Array.from(
-          container.querySelectorAll('.ais-RefinementList-labelText')
-        ).map((item) => item.textContent)
-      ).toEqual([
-        'HP',
-        'GE',
-        'LG',
-        'Sony',
-        'Dell',
-        'Metra',
-        'Apple',
-        'Canon',
-        'Speck',
-        'Epson',
-      ]);
+      await waitFor(() => {
+        expect(
+          Array.from(
+            container.querySelectorAll('.ais-RefinementList-labelText')
+          ).map((item) => item.textContent)
+        ).toEqual([
+          'HP',
+          'GE',
+          'LG',
+          'Sony',
+          'Dell',
+          'Metra',
+          'Apple',
+          'Canon',
+          'Speck',
+          'Epson',
+        ]);
+      });
     });
   });
 
@@ -786,75 +790,77 @@ describe('RefinementList', () => {
         </InstantSearchHooksTestWrapper>
       );
 
-      await wait(0);
-
       const searchInput = container.querySelector(
         '.ais-SearchBox-input'
       ) as HTMLInputElement;
 
-      expect(
-        container.querySelector('.ais-RefinementList-searchBox')
-      ).toBeInTheDocument();
-      expect(searchInput).toHaveAttribute('placeholder', 'Search brands');
-      expect(
-        container.querySelector('.ais-Highlight-nonHighlighted')
-      ).toBeNull();
-      expect(container.querySelector('.ais-Highlight-highlighted')).toBeNull();
-      expect(
-        Array.from(
-          container.querySelectorAll('.ais-RefinementList-labelText')
-        ).map((item) => item.textContent)
-      ).toEqual([
-        'Insignia™',
-        'Samsung',
-        'Metra',
-        'HP',
-        'Apple',
-        'GE',
-        'Sony',
-        'Incipio',
-        'KitchenAid',
-        'Whirlpool',
-      ]);
+      await waitFor(() => {
+        expect(
+          container.querySelector('.ais-RefinementList-searchBox')
+        ).toBeInTheDocument();
+        expect(searchInput).toHaveAttribute('placeholder', 'Search brands');
+        expect(
+          container.querySelector('.ais-Highlight-nonHighlighted')
+        ).toBeNull();
+        expect(
+          container.querySelector('.ais-Highlight-highlighted')
+        ).toBeNull();
+        expect(
+          Array.from(
+            container.querySelectorAll('.ais-RefinementList-labelText')
+          ).map((item) => item.textContent)
+        ).toEqual([
+          'Insignia™',
+          'Samsung',
+          'Metra',
+          'HP',
+          'Apple',
+          'GE',
+          'Sony',
+          'Incipio',
+          'KitchenAid',
+          'Whirlpool',
+        ]);
+      });
 
       userEvent.type(searchInput, 'app');
 
-      await wait(0);
-
-      // One call per keystroke
-      expect(client.searchForFacetValues).toHaveBeenCalledTimes(3);
-      expect(client.searchForFacetValues).toHaveBeenLastCalledWith(
-        expect.arrayContaining([
-          expect.objectContaining({
-            params: expect.objectContaining({
-              facetName: 'brand',
-              facetQuery: 'app',
+      await waitFor(() => {
+        // One call per keystroke
+        expect(client.searchForFacetValues).toHaveBeenCalledTimes(3);
+        expect(client.searchForFacetValues).toHaveBeenLastCalledWith(
+          expect.arrayContaining([
+            expect.objectContaining({
+              params: expect.objectContaining({
+                facetName: 'brand',
+                facetQuery: 'app',
+              }),
             }),
-          }),
-        ])
-      );
-      expect(
-        container.querySelector('.ais-Highlight-nonHighlighted')
-      ).not.toBeNull();
-      expect(
-        container.querySelector('.ais-Highlight-highlighted')
-      ).not.toBeNull();
-      expect(
-        Array.from(
-          container.querySelectorAll('.ais-RefinementList-labelText')
-        ).map((item) => item.textContent)
-      ).toEqual([
-        'Apple',
-        'Alpine',
-        'APC',
-        'Amped Wireless',
-        "Applebee's",
-        'Amplicom',
-        'Apollo Enclosures',
-        'Apple®',
-        'Applica',
-        'Apricorn',
-      ]);
+          ])
+        );
+        expect(
+          container.querySelector('.ais-Highlight-nonHighlighted')
+        ).not.toBeNull();
+        expect(
+          container.querySelector('.ais-Highlight-highlighted')
+        ).not.toBeNull();
+        expect(
+          Array.from(
+            container.querySelectorAll('.ais-RefinementList-labelText')
+          ).map((item) => item.textContent)
+        ).toEqual([
+          'Apple',
+          'Alpine',
+          'APC',
+          'Amped Wireless',
+          "Applebee's",
+          'Amplicom',
+          'Apollo Enclosures',
+          'Apple®',
+          'Applica',
+          'Apricorn',
+        ]);
+      });
     });
 
     test('displays a fallback when there are no results', async () => {
@@ -1010,16 +1016,18 @@ describe('RefinementList', () => {
         </InstantSearchHooksTestWrapper>
       );
 
-      await wait(0);
+      await waitFor(() =>
+        expect(
+          container.querySelectorAll('.ais-RefinementList-item')
+        ).toHaveLength(10)
+      );
 
       const showMoreButton = container.querySelector(
         '.ais-RefinementList-showMore'
       ) as HTMLButtonElement;
 
       expect(showMoreButton).toHaveTextContent('Show more');
-      expect(
-        container.querySelectorAll('.ais-RefinementList-item')
-      ).toHaveLength(10);
+
       expect(container).toMatchInlineSnapshot(`
         <div>
           <div
@@ -1290,11 +1298,12 @@ describe('RefinementList', () => {
         </InstantSearchHooksTestWrapper>
       );
 
-      await wait(0);
+      await waitFor(() =>
+        expect(
+          container.querySelectorAll('.ais-RefinementList-item')
+        ).toHaveLength(10)
+      );
 
-      expect(
-        container.querySelectorAll('.ais-RefinementList-item')
-      ).toHaveLength(10);
       expect(
         container.querySelector('.ais-RefinementList-showMore')
       ).toBeInTheDocument();

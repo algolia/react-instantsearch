@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
@@ -128,29 +128,29 @@ describe('SortBy', () => {
       </InstantSearchHooksTestWrapper>
     );
 
-    await wait(0);
-
-    expect(client.search).toHaveBeenCalledWith(
-      expect.arrayContaining([
-        expect.objectContaining({ indexName: 'instant_search' }),
-      ])
-    );
+    await waitFor(() => {
+      expect(client.search).toHaveBeenCalledWith(
+        expect.arrayContaining([
+          expect.objectContaining({ indexName: 'instant_search' }),
+        ])
+      );
+    });
 
     userEvent.selectOptions(
       document.querySelector('.ais-SortBy-select') as HTMLSelectElement,
       getByRole('option', { name: 'Price (asc)' })
     );
 
-    await wait(0);
-
-    expect(document.querySelector('.ais-SortBy-select')).toHaveValue(
-      'instant_search_price_asc'
-    );
-    expect(client.search).toHaveBeenCalledWith(
-      expect.arrayContaining([
-        expect.objectContaining({ indexName: 'instant_search_price_asc' }),
-      ])
-    );
+    await waitFor(() => {
+      expect(document.querySelector('.ais-SortBy-select')).toHaveValue(
+        'instant_search_price_asc'
+      );
+      expect(client.search).toHaveBeenCalledWith(
+        expect.arrayContaining([
+          expect.objectContaining({ indexName: 'instant_search_price_asc' }),
+        ])
+      );
+    });
   });
 
   test('forwards custom class names and `div` props to the root element', () => {

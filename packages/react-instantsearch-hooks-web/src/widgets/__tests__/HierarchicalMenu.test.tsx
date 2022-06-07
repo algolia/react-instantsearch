@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
@@ -45,13 +45,13 @@ describe('HierarchicalMenu', () => {
       </InstantSearchHooksTestWrapper>
     );
 
-    await wait(0);
+    await waitFor(() => {
+      expect(
+        container.querySelectorAll('.ais-HierarchicalMenu-item')
+      ).toHaveLength(3);
+      expect(client.search).toHaveBeenCalledTimes(1);
+    });
 
-    expect(client.search).toHaveBeenCalledTimes(1);
-
-    expect(
-      container.querySelectorAll('.ais-HierarchicalMenu-item')
-    ).toHaveLength(3);
     expect(container).toMatchInlineSnapshot(`
       <div>
         <div
@@ -132,23 +132,23 @@ describe('HierarchicalMenu', () => {
       ) as HTMLAnchorElement
     );
 
-    await wait(0);
+    await waitFor(() => {
+      expect(firstCategory).toHaveClass('ais-HierarchicalMenu-item--selected');
 
-    expect(firstCategory).toHaveClass('ais-HierarchicalMenu-item--selected');
-
-    // Once on load, once on check
-    expect(client.search).toHaveBeenCalledTimes(2);
-    expect(client.search).toHaveBeenLastCalledWith(
-      expect.arrayContaining([
-        expect.objectContaining({
-          params: expect.objectContaining({
-            facetFilters: [
-              ['hierarchicalCategories.lvl0:Cameras & Camcorders'],
-            ],
+      // Once on load, once on check
+      expect(client.search).toHaveBeenCalledTimes(2);
+      expect(client.search).toHaveBeenLastCalledWith(
+        expect.arrayContaining([
+          expect.objectContaining({
+            params: expect.objectContaining({
+              facetFilters: [
+                ['hierarchicalCategories.lvl0:Cameras & Camcorders'],
+              ],
+            }),
           }),
-        }),
-      ])
-    );
+        ])
+      );
+    });
   });
 
   test('limits the number of items to display', async () => {
@@ -159,11 +159,12 @@ describe('HierarchicalMenu', () => {
       </InstantSearchHooksTestWrapper>
     );
 
-    await wait(0);
+    await waitFor(() =>
+      expect(
+        container.querySelectorAll('.ais-HierarchicalMenu-item')
+      ).toHaveLength(1)
+    );
 
-    expect(
-      container.querySelectorAll('.ais-HierarchicalMenu-item')
-    ).toHaveLength(1);
     expect(container).toMatchInlineSnapshot(`
       <div>
         <div
@@ -210,19 +211,17 @@ describe('HierarchicalMenu', () => {
       </InstantSearchHooksTestWrapper>
     );
 
-    await wait(0);
-
-    expect(
-      [...container.querySelectorAll('.ais-HierarchicalMenu-item')].map(
-        (item) => item.textContent
-      )
-    ).toMatchInlineSnapshot(`
-      Array [
-        "CAMERAS & CAMCORDERS1369",
-        "VIDEO GAMES505",
-        "WEARABLE TECHNOLOGY271",
-      ]
-    `);
+    await waitFor(() => {
+      expect(
+        Array.from(
+          container.querySelectorAll('.ais-HierarchicalMenu-item')
+        ).map((item) => item.textContent)
+      ).toEqual([
+        'CAMERAS & CAMCORDERS1369',
+        'VIDEO GAMES505',
+        'WEARABLE TECHNOLOGY271',
+      ]);
+    });
   });
 
   describe('sorting', () => {
@@ -234,13 +233,17 @@ describe('HierarchicalMenu', () => {
         </InstantSearchHooksTestWrapper>
       );
 
-      await wait(0);
-
-      expect(
-        Array.from(
-          container.querySelectorAll('.ais-HierarchicalMenu-labelText')
-        ).map((item) => item.textContent)
-      ).toEqual(['Cameras & Camcorders', 'Video Games', 'Wearable Technology']);
+      await waitFor(() =>
+        expect(
+          Array.from(
+            container.querySelectorAll('.ais-HierarchicalMenu-labelText')
+          ).map((item) => item.textContent)
+        ).toEqual([
+          'Cameras & Camcorders',
+          'Video Games',
+          'Wearable Technology',
+        ])
+      );
     });
 
     test('sorts the items by descending name', async () => {
@@ -251,13 +254,17 @@ describe('HierarchicalMenu', () => {
         </InstantSearchHooksTestWrapper>
       );
 
-      await wait(0);
-
-      expect(
-        Array.from(
-          container.querySelectorAll('.ais-HierarchicalMenu-labelText')
-        ).map((item) => item.textContent)
-      ).toEqual(['Wearable Technology', 'Video Games', 'Cameras & Camcorders']);
+      await waitFor(() =>
+        expect(
+          Array.from(
+            container.querySelectorAll('.ais-HierarchicalMenu-labelText')
+          ).map((item) => item.textContent)
+        ).toEqual([
+          'Wearable Technology',
+          'Video Games',
+          'Cameras & Camcorders',
+        ])
+      );
     });
 
     test('sorts the items by count', async () => {
@@ -268,13 +275,13 @@ describe('HierarchicalMenu', () => {
         </InstantSearchHooksTestWrapper>
       );
 
-      await wait(0);
-
-      expect(
-        Array.from(
-          container.querySelectorAll('.ais-HierarchicalMenu-count')
-        ).map((item) => item.textContent)
-      ).toEqual(['1369', '505', '271']);
+      await waitFor(() =>
+        expect(
+          Array.from(
+            container.querySelectorAll('.ais-HierarchicalMenu-count')
+          ).map((item) => item.textContent)
+        ).toEqual(['1369', '505', '271'])
+      );
     });
 
     test('sorts the items by refinement state', async () => {
@@ -294,45 +301,45 @@ describe('HierarchicalMenu', () => {
         </InstantSearchHooksTestWrapper>
       );
 
-      await wait(0);
-
-      expect(
-        Array.from(
-          container.querySelectorAll('.ais-HierarchicalMenu-labelText')
-        ).map((item) => item.textContent)
-      ).toEqual([
-        'Cameras & Camcorders n',
-        'Video Games n',
-        'Wearable Technology n',
-      ]);
+      await waitFor(() =>
+        expect(
+          Array.from(
+            container.querySelectorAll('.ais-HierarchicalMenu-labelText')
+          ).map((item) => item.textContent)
+        ).toEqual([
+          'Cameras & Camcorders n',
+          'Video Games n',
+          'Wearable Technology n',
+        ])
+      );
 
       userEvent.click(await findByText('Video Games n'));
 
-      await wait(0);
-
-      expect(
-        Array.from(
-          container.querySelectorAll('.ais-HierarchicalMenu-labelText')
-        ).map((item) => item.textContent)
-      ).toEqual([
-        'Video Games y',
-        'Cameras & Camcorders n',
-        'Wearable Technology n',
-      ]);
+      await waitFor(() => {
+        expect(
+          Array.from(
+            container.querySelectorAll('.ais-HierarchicalMenu-labelText')
+          ).map((item) => item.textContent)
+        ).toEqual([
+          'Video Games y',
+          'Cameras & Camcorders n',
+          'Wearable Technology n',
+        ]);
+      });
 
       userEvent.click(await findByText('Wearable Technology n'));
 
-      await wait(0);
-
-      expect(
-        Array.from(
-          container.querySelectorAll('.ais-HierarchicalMenu-labelText')
-        ).map((item) => item.textContent)
-      ).toEqual([
-        'Wearable Technology y',
-        'Cameras & Camcorders n',
-        'Video Games n',
-      ]);
+      await waitFor(() => {
+        expect(
+          Array.from(
+            container.querySelectorAll('.ais-HierarchicalMenu-labelText')
+          ).map((item) => item.textContent)
+        ).toEqual([
+          'Wearable Technology y',
+          'Cameras & Camcorders n',
+          'Video Games n',
+        ]);
+      });
     });
 
     test('sorts the items using a sorting function', async () => {
@@ -346,13 +353,17 @@ describe('HierarchicalMenu', () => {
         </InstantSearchHooksTestWrapper>
       );
 
-      await wait(0);
-
-      expect(
-        Array.from(
-          container.querySelectorAll('.ais-HierarchicalMenu-labelText')
-        ).map((item) => item.textContent)
-      ).toEqual(['Wearable Technology', 'Video Games', 'Cameras & Camcorders']);
+      await waitFor(() =>
+        expect(
+          Array.from(
+            container.querySelectorAll('.ais-HierarchicalMenu-labelText')
+          ).map((item) => item.textContent)
+        ).toEqual([
+          'Wearable Technology',
+          'Video Games',
+          'Cameras & Camcorders',
+        ])
+      );
     });
   });
 
@@ -365,16 +376,17 @@ describe('HierarchicalMenu', () => {
         </InstantSearchHooksTestWrapper>
       );
 
-      await wait(0);
+      await waitFor(() =>
+        expect(
+          container.querySelectorAll('.ais-HierarchicalMenu-item')
+        ).toHaveLength(1)
+      );
 
       const showMoreButton = container.querySelector(
         '.ais-HierarchicalMenu-showMore'
       ) as HTMLButtonElement;
       expect(showMoreButton).toHaveTextContent('Show more');
 
-      expect(
-        container.querySelectorAll('.ais-HierarchicalMenu-item')
-      ).toHaveLength(1);
       expect(container).toMatchInlineSnapshot(`
         <div>
           <div
@@ -435,15 +447,16 @@ describe('HierarchicalMenu', () => {
         </InstantSearchHooksTestWrapper>
       );
 
-      await wait(0);
+      await waitFor(() =>
+        expect(
+          container.querySelectorAll('.ais-HierarchicalMenu-item')
+        ).toHaveLength(1)
+      );
 
       const showMoreButton = container.querySelector(
         '.ais-HierarchicalMenu-showMore'
       ) as HTMLButtonElement;
 
-      expect(
-        container.querySelectorAll('.ais-HierarchicalMenu-item')
-      ).toHaveLength(1);
       expect(showMoreButton).toBeInTheDocument();
 
       userEvent.click(showMoreButton);

@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
@@ -86,9 +86,9 @@ describe('ToggleRefinement', () => {
       </InstantSearchHooksTestWrapper>
     );
 
-    await wait(0);
-
-    expect(client.search).toHaveBeenCalledTimes(1);
+    await waitFor(() => {
+      expect(client.search).toHaveBeenCalledTimes(1);
+    });
 
     const checkbox = container.querySelector<HTMLInputElement>(
       '.ais-ToggleRefinement-checkbox'
@@ -98,38 +98,38 @@ describe('ToggleRefinement', () => {
 
     userEvent.click(checkbox);
 
-    await wait(0);
-
-    expect(client.search).toHaveBeenCalledTimes(2);
-    expect(client.search).toHaveBeenLastCalledWith(
-      expect.arrayContaining([
-        expect.objectContaining({
-          params: {
-            facetFilters: [['free_shipping:true']],
-            facets: ['free_shipping'],
-            tagFilters: '',
-          },
-        }),
-      ])
-    );
-    expect(checkbox.checked).toBe(true);
+    await waitFor(() => {
+      expect(client.search).toHaveBeenCalledTimes(2);
+      expect(client.search).toHaveBeenLastCalledWith(
+        expect.arrayContaining([
+          expect.objectContaining({
+            params: {
+              facetFilters: [['free_shipping:true']],
+              facets: ['free_shipping'],
+              tagFilters: '',
+            },
+          }),
+        ])
+      );
+      expect(checkbox.checked).toBe(true);
+    });
 
     userEvent.click(checkbox);
 
-    await wait(0);
-
-    expect(client.search).toHaveBeenCalledTimes(3);
-    expect(client.search).toHaveBeenLastCalledWith(
-      expect.arrayContaining([
-        expect.objectContaining({
-          params: expect.objectContaining({
-            facets: ['free_shipping'],
-            tagFilters: '',
+    await waitFor(() => {
+      expect(client.search).toHaveBeenCalledTimes(3);
+      expect(client.search).toHaveBeenLastCalledWith(
+        expect.arrayContaining([
+          expect.objectContaining({
+            params: expect.objectContaining({
+              facets: ['free_shipping'],
+              tagFilters: '',
+            }),
           }),
-        }),
-      ])
-    );
-    expect(checkbox.checked).toBe(false);
+        ])
+      );
+      expect(checkbox.checked).toBe(false);
+    });
   });
 
   test('changes the value to filter on and off', async () => {
@@ -141,9 +141,9 @@ describe('ToggleRefinement', () => {
       </InstantSearchHooksTestWrapper>
     );
 
-    await wait(0);
-
-    expect(client.search).toHaveBeenCalledTimes(1);
+    await waitFor(() => {
+      expect(client.search).toHaveBeenCalledTimes(1);
+    });
 
     const checkbox = container.querySelector<HTMLInputElement>(
       '.ais-ToggleRefinement-checkbox'
@@ -151,35 +151,37 @@ describe('ToggleRefinement', () => {
 
     userEvent.click(checkbox);
 
-    await wait(0);
-
-    expect(client.search).toHaveBeenCalledTimes(2);
-    expect(client.search).toHaveBeenLastCalledWith(
-      expect.arrayContaining([
-        expect.objectContaining({
-          params: {
-            facetFilters: [['free_shipping:yes']],
-            facets: ['free_shipping'],
-            tagFilters: '',
-          },
-        }),
-      ])
-    );
+    await waitFor(() => {
+      expect(checkbox).toBeChecked();
+      expect(client.search).toHaveBeenCalledTimes(2);
+      expect(client.search).toHaveBeenLastCalledWith(
+        expect.arrayContaining([
+          expect.objectContaining({
+            params: {
+              facetFilters: [['free_shipping:yes']],
+              facets: ['free_shipping'],
+              tagFilters: '',
+            },
+          }),
+        ])
+      );
+    });
 
     userEvent.click(checkbox);
 
-    await wait(0);
-
-    expect(client.search).toHaveBeenCalledTimes(3);
-    expect(client.search).toHaveBeenLastCalledWith(
-      expect.arrayContaining([
-        expect.objectContaining({
-          params: expect.objectContaining({
-            facetFilters: [['free_shipping:no']],
+    await waitFor(() => {
+      expect(checkbox).not.toBeChecked();
+      expect(client.search).toHaveBeenCalledTimes(3);
+      expect(client.search).toHaveBeenLastCalledWith(
+        expect.arrayContaining([
+          expect.objectContaining({
+            params: expect.objectContaining({
+              facetFilters: [['free_shipping:no']],
+            }),
           }),
-        }),
-      ])
-    );
+        ])
+      );
+    });
   });
 
   test('forwards custom class names and `div` props to the root element', () => {

@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { useHierarchicalMenu } from 'react-instantsearch-hooks';
@@ -172,7 +172,7 @@ describe('Breadcrumb', () => {
       </InstantSearchHooksTestWrapper>
     );
 
-    await wait(0);
+    await waitFor(() => expect(searchClient.search).toHaveBeenCalledTimes(1));
 
     expect(
       [...container.querySelectorAll('.ais-Breadcrumb-item')].map(
@@ -206,9 +206,8 @@ describe('Breadcrumb', () => {
       </InstantSearchHooksTestWrapper>
     );
 
-    await wait(0);
+    await waitFor(() => expect(searchClient.search).toHaveBeenCalledTimes(1));
 
-    expect(searchClient.search).toHaveBeenCalledTimes(1);
     expect(container).toMatchInlineSnapshot(`
       <div>
         <div
@@ -260,8 +259,6 @@ describe('Breadcrumb', () => {
     `);
 
     userEvent.click(getByText('Cameras & Camcorders'));
-
-    await wait(0);
 
     expect(searchClient.search).toHaveBeenCalledTimes(2);
     expect(searchClient.search).toHaveBeenLastCalledWith(

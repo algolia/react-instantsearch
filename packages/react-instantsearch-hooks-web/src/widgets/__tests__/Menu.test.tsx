@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
@@ -54,11 +54,12 @@ describe('Menu', () => {
       </InstantSearchHooksTestWrapper>
     );
 
-    await wait(0);
+    await waitFor(() =>
+      expect(container.querySelectorAll('.ais-Menu-item')).toHaveLength(10)
+    );
 
     expect(client.search).toHaveBeenCalledTimes(1);
 
-    expect(container.querySelectorAll('.ais-Menu-item')).toHaveLength(10);
     expect(container).toMatchInlineSnapshot(`
       <div>
         <div
@@ -293,9 +294,10 @@ describe('Menu', () => {
       </InstantSearchHooksTestWrapper>
     );
 
-    await wait(0);
+    await waitFor(() =>
+      expect(container.querySelectorAll('.ais-Menu-item')).toHaveLength(5)
+    );
 
-    expect(container.querySelectorAll('.ais-Menu-item')).toHaveLength(5);
     expect(container).toMatchInlineSnapshot(`
       <div>
         <div
@@ -421,26 +423,24 @@ describe('Menu', () => {
       </InstantSearchHooksTestWrapper>
     );
 
-    await wait(0);
-
-    expect(
-      [...container.querySelectorAll('.ais-Menu-item')].map(
-        (el) => el.textContent
-      )
-    ).toMatchInlineSnapshot(`
-      Array [
-        "INSIGNIA™746",
-        "SAMSUNG633",
-        "METRA591",
-        "HP530",
-        "APPLE442",
-        "GE394",
-        "SONY350",
-        "INCIPIO320",
-        "KITCHENAID318",
-        "WHIRLPOOL298",
-      ]
-    `);
+    await waitFor(() => {
+      expect(
+        Array.from(container.querySelectorAll('.ais-Menu-item')).map(
+          (item) => item.textContent
+        )
+      ).toEqual([
+        'INSIGNIA™746',
+        'SAMSUNG633',
+        'METRA591',
+        'HP530',
+        'APPLE442',
+        'GE394',
+        'SONY350',
+        'INCIPIO320',
+        'KITCHENAID318',
+        'WHIRLPOOL298',
+      ]);
+    });
   });
 
   describe('sorting', () => {
@@ -452,24 +452,24 @@ describe('Menu', () => {
         </InstantSearchHooksTestWrapper>
       );
 
-      await wait(0);
-
-      expect(
-        Array.from(container.querySelectorAll('.ais-Menu-label')).map(
-          (item) => item.textContent
-        )
-      ).toEqual([
-        'Apple',
-        'Canon',
-        'Dell',
-        'Dynex™',
-        'Epson',
-        'Frigidaire',
-        'GE',
-        'HP',
-        'Hamilton Beach',
-        'Incipio',
-      ]);
+      await waitFor(() => {
+        expect(
+          Array.from(container.querySelectorAll('.ais-Menu-label')).map(
+            (item) => item.textContent
+          )
+        ).toEqual([
+          'Apple',
+          'Canon',
+          'Dell',
+          'Dynex™',
+          'Epson',
+          'Frigidaire',
+          'GE',
+          'HP',
+          'Hamilton Beach',
+          'Incipio',
+        ]);
+      });
     });
 
     test('sorts the items by descending name', async () => {
@@ -480,24 +480,24 @@ describe('Menu', () => {
         </InstantSearchHooksTestWrapper>
       );
 
-      await wait(0);
-
-      expect(
-        Array.from(container.querySelectorAll('.ais-Menu-label')).map(
-          (item) => item.textContent
-        )
-      ).toEqual([
-        'Whirlpool',
-        'Speck',
-        'Sony',
-        'Samsung',
-        'Platinum',
-        'OtterBox',
-        'Metra',
-        'LG',
-        'KitchenAid',
-        'Insignia™',
-      ]);
+      await waitFor(() => {
+        expect(
+          Array.from(container.querySelectorAll('.ais-Menu-label')).map(
+            (item) => item.textContent
+          )
+        ).toEqual([
+          'Whirlpool',
+          'Speck',
+          'Sony',
+          'Samsung',
+          'Platinum',
+          'OtterBox',
+          'Metra',
+          'LG',
+          'KitchenAid',
+          'Insignia™',
+        ]);
+      });
     });
 
     test('sorts the items by count', async () => {
@@ -508,24 +508,24 @@ describe('Menu', () => {
         </InstantSearchHooksTestWrapper>
       );
 
-      await wait(0);
-
-      expect(
-        Array.from(container.querySelectorAll('.ais-Menu-count')).map(
-          (item) => item.textContent
-        )
-      ).toEqual([
-        '746',
-        '633',
-        '591',
-        '530',
-        '442',
-        '394',
-        '350',
-        '320',
-        '318',
-        '298',
-      ]);
+      await waitFor(() => {
+        expect(
+          Array.from(container.querySelectorAll('.ais-Menu-count')).map(
+            (item) => item.textContent
+          )
+        ).toEqual([
+          '746',
+          '633',
+          '591',
+          '530',
+          '442',
+          '394',
+          '350',
+          '320',
+          '318',
+          '298',
+        ]);
+      });
     });
 
     test('sorts the items by refinement state', async () => {
@@ -545,66 +545,66 @@ describe('Menu', () => {
         </InstantSearchHooksTestWrapper>
       );
 
-      await wait(0);
-
-      expect(
-        Array.from(container.querySelectorAll('.ais-Menu-label')).map(
-          (item) => item.textContent
-        )
-      ).toEqual([
-        'Apple n',
-        'Canon n',
-        'Dell n',
-        'Dynex™ n',
-        'Epson n',
-        'Frigidaire n',
-        'GE n',
-        'HP n',
-        'Hamilton Beach n',
-        'Incipio n',
-      ]);
+      await waitFor(() => {
+        expect(
+          Array.from(container.querySelectorAll('.ais-Menu-label')).map(
+            (item) => item.textContent
+          )
+        ).toEqual([
+          'Apple n',
+          'Canon n',
+          'Dell n',
+          'Dynex™ n',
+          'Epson n',
+          'Frigidaire n',
+          'GE n',
+          'HP n',
+          'Hamilton Beach n',
+          'Incipio n',
+        ]);
+      });
 
       userEvent.click(await findByText('Hamilton Beach n'));
 
-      await wait(0);
-
-      expect(
-        Array.from(container.querySelectorAll('.ais-Menu-label')).map(
-          (item) => item.textContent
-        )
-      ).toEqual([
-        'Hamilton Beach y',
-        'Apple n',
-        'Canon n',
-        'Dell n',
-        'Dynex™ n',
-        'Epson n',
-        'Frigidaire n',
-        'GE n',
-        'HP n',
-        'Incipio n',
-      ]);
+      await waitFor(() => {
+        expect(
+          Array.from(container.querySelectorAll('.ais-Menu-label')).map(
+            (item) => item.textContent
+          )
+        ).toEqual([
+          'Hamilton Beach y',
+          'Apple n',
+          'Canon n',
+          'Dell n',
+          'Dynex™ n',
+          'Epson n',
+          'Frigidaire n',
+          'GE n',
+          'HP n',
+          'Incipio n',
+        ]);
+      });
 
       userEvent.click(await findByText('Frigidaire n'));
 
-      await wait(0);
-
-      expect(
-        Array.from(container.querySelectorAll('.ais-Menu-label')).map(
-          (item) => item.textContent
-        )
-      ).toEqual([
-        'Frigidaire y',
-        'Apple n',
-        'Canon n',
-        'Dell n',
-        'Dynex™ n',
-        'Epson n',
-        'GE n',
-        'HP n',
-        'Hamilton Beach n',
-        'Incipio n',
-      ]);
+      await waitFor(() => {
+        expect(
+          Array.from(container.querySelectorAll('.ais-Menu-label')).map(
+            (item) => item.textContent
+          )
+        ).toEqual([
+          'Frigidaire y',
+          'Apple n',
+          'Canon n',
+          'Dell n',
+          'Dynex™ n',
+          'Epson n',
+          'GE n',
+          'HP n',
+          'Hamilton Beach n',
+          'Incipio n',
+        ]);
+      });
     });
 
     test('sorts the items using a sorting function', async () => {
@@ -618,24 +618,24 @@ describe('Menu', () => {
         </InstantSearchHooksTestWrapper>
       );
 
-      await wait(0);
-
-      expect(
-        Array.from(container.querySelectorAll('.ais-Menu-label')).map(
-          (item) => item.textContent
-        )
-      ).toEqual([
-        'Whirlpool',
-        'Speck',
-        'Sony',
-        'Samsung',
-        'Platinum',
-        'OtterBox',
-        'Metra',
-        'LG',
-        'KitchenAid',
-        'Insignia™',
-      ]);
+      await waitFor(() => {
+        expect(
+          Array.from(container.querySelectorAll('.ais-Menu-label')).map(
+            (item) => item.textContent
+          )
+        ).toEqual([
+          'Whirlpool',
+          'Speck',
+          'Sony',
+          'Samsung',
+          'Platinum',
+          'OtterBox',
+          'Metra',
+          'LG',
+          'KitchenAid',
+          'Insignia™',
+        ]);
+      });
     });
   });
 
@@ -648,14 +648,15 @@ describe('Menu', () => {
         </InstantSearchHooksTestWrapper>
       );
 
-      await wait(0);
+      await waitFor(() =>
+        expect(container.querySelectorAll('.ais-Menu-item')).toHaveLength(10)
+      );
 
       const showMoreButton = container.querySelector(
         '.ais-Menu-showMore'
       ) as HTMLButtonElement;
 
       expect(showMoreButton).toHaveTextContent('Show more');
-      expect(container.querySelectorAll('.ais-Menu-item')).toHaveLength(10);
       expect(container).toMatchInlineSnapshot(`
         <div>
           <div
@@ -880,9 +881,10 @@ describe('Menu', () => {
         </InstantSearchHooksTestWrapper>
       );
 
-      await wait(0);
+      await waitFor(() =>
+        expect(container.querySelectorAll('.ais-Menu-item')).toHaveLength(10)
+      );
 
-      expect(container.querySelectorAll('.ais-Menu-item')).toHaveLength(10);
       expect(container.querySelector('.ais-Menu-showMore')).toBeInTheDocument();
 
       userEvent.click(
