@@ -7,10 +7,31 @@ import {
   createSearchClient,
   createSingleSearchResponse,
 } from '../../../../../test/mock';
-import { InstantSearchHooksTestWrapper, wait } from '../../../../../test/utils';
+import { InstantSearchHooksTestWrapper } from '../../../../../test/utils';
 import { Pagination } from '../Pagination';
 
+const searchClient = createSearchClient({
+  search: jest.fn((requests) =>
+    Promise.resolve(
+      createMultiSearchResponse(
+        ...requests.map((request) =>
+          createSingleSearchResponse({
+            hits: Array.from({ length: 1000 }).map((_, index) => ({
+              objectID: String(index),
+            })),
+            index: request.indexName,
+          })
+        )
+      )
+    )
+  ),
+});
+
 describe('Pagination', () => {
+  beforeEach(() => {
+    searchClient.search.mockClear();
+  });
+
   test('renders with default props', async () => {
     const { container } = render(
       <InstantSearchHooksTestWrapper>
@@ -18,7 +39,11 @@ describe('Pagination', () => {
       </InstantSearchHooksTestWrapper>
     );
 
-    await wait(0);
+    await waitFor(() =>
+      expect(container.querySelectorAll('.ais-Pagination-item').length).toEqual(
+        5
+      )
+    );
 
     expect(container).toMatchInlineSnapshot(`
       <div>
@@ -86,24 +111,8 @@ describe('Pagination', () => {
   });
 
   test('renders with props', async () => {
-    const client = createSearchClient({
-      search: (requests) =>
-        Promise.resolve(
-          createMultiSearchResponse(
-            ...requests.map((request) =>
-              createSingleSearchResponse({
-                hits: Array.from({ length: 1000 }).map((_, index) => ({
-                  objectID: String(index),
-                })),
-                index: request.indexName,
-              })
-            )
-          )
-        ),
-    });
-
     const { container } = render(
-      <InstantSearchHooksTestWrapper searchClient={client}>
+      <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <Pagination />
       </InstantSearchHooksTestWrapper>
     );
@@ -263,24 +272,8 @@ describe('Pagination', () => {
   });
 
   test('navigates between pages', async () => {
-    const search = jest.fn((requests) =>
-      Promise.resolve(
-        createMultiSearchResponse(
-          ...requests.map((request) =>
-            createSingleSearchResponse({
-              hits: Array.from({ length: 1000 }).map((_, index) => ({
-                objectID: String(index),
-              })),
-              index: request.indexName,
-            })
-          )
-        )
-      )
-    );
-    const client = createSearchClient({ search });
-
     const { container, getByText } = render(
-      <InstantSearchHooksTestWrapper searchClient={client}>
+      <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <Pagination />
       </InstantSearchHooksTestWrapper>
     );
@@ -290,8 +283,6 @@ describe('Pagination', () => {
         document.querySelectorAll('.ais-Pagination-item--page')
       ).toHaveLength(7)
     );
-
-    search.mockClear();
 
     expect(
       document.querySelector('.ais-Pagination-item--selected')
@@ -441,6 +432,8 @@ describe('Pagination', () => {
       '.ais-Pagination-item--lastPage'
     );
 
+    searchClient.search.mockClear();
+
     // We're on page 1, "First" and "Previous" links are disabled
     expect(firstPageItem).toHaveClass('ais-Pagination-item--disabled');
     expect(previousPageItem).toHaveClass('ais-Pagination-item--disabled');
@@ -454,15 +447,13 @@ describe('Pagination', () => {
       ) as HTMLAnchorElement
     );
 
-    await wait(0);
-
-    expect(search).not.toHaveBeenCalled();
+    await waitFor(() => expect(searchClient.search).not.toHaveBeenCalled());
 
     // We navigate to page 2
     userEvent.click(getByText('2'));
 
     await waitFor(() => {
-      expect(search).toHaveBeenLastCalledWith([
+      expect(searchClient.search).toHaveBeenLastCalledWith([
         expect.objectContaining({
           params: expect.objectContaining({ page: 1 }),
         }),
@@ -610,7 +601,7 @@ describe('Pagination', () => {
     userEvent.click(getByText('›'));
 
     await waitFor(() => {
-      expect(search).toHaveBeenLastCalledWith([
+      expect(searchClient.search).toHaveBeenLastCalledWith([
         expect.objectContaining({
           params: expect.objectContaining({ page: 2 }),
         }),
@@ -758,7 +749,7 @@ describe('Pagination', () => {
     userEvent.click(getByText('››'));
 
     await waitFor(() => {
-      expect(search).toHaveBeenLastCalledWith([
+      expect(searchClient.search).toHaveBeenLastCalledWith([
         expect.objectContaining({
           params: expect.objectContaining({ page: 49 }),
         }),
@@ -900,7 +891,7 @@ describe('Pagination', () => {
       </div>
     `);
 
-    search.mockClear();
+    searchClient.search.mockClear();
 
     // We're on last page, "Next" and "Last" links are disabled
     expect(nextPageItem).toHaveClass('ais-Pagination-item--disabled');
@@ -913,9 +904,7 @@ describe('Pagination', () => {
       lastPageItem!.querySelector('.ais-Pagination-link') as HTMLAnchorElement
     );
 
-    await waitFor(() => {
-      expect(search).not.toHaveBeenCalled();
-    });
+    await waitFor(() => expect(searchClient.search).not.toHaveBeenCalled());
 
     // We click on "Previous" link
     userEvent.click(
@@ -925,7 +914,7 @@ describe('Pagination', () => {
     );
 
     await waitFor(() => {
-      expect(search).toHaveBeenLastCalledWith([
+      expect(searchClient.search).toHaveBeenLastCalledWith([
         expect.objectContaining({
           params: expect.objectContaining({ page: 48 }),
         }),
@@ -1075,7 +1064,7 @@ describe('Pagination', () => {
     );
 
     await waitFor(() => {
-      expect(search).toHaveBeenLastCalledWith([
+      expect(searchClient.search).toHaveBeenLastCalledWith([
         expect.objectContaining({
           params: expect.objectContaining({ page: 0 }),
         }),
@@ -1219,31 +1208,15 @@ describe('Pagination', () => {
   });
 
   test('does not navigate when pressing a modifier key', async () => {
-    const search = jest.fn((requests) =>
-      Promise.resolve(
-        createMultiSearchResponse(
-          ...requests.map((request) =>
-            createSingleSearchResponse({
-              hits: Array.from({ length: 1000 }).map((_, index) => ({
-                objectID: String(index),
-              })),
-              index: request.indexName,
-            })
-          )
-        )
-      )
-    );
-    const client = createSearchClient({ search });
-
     const { getByText } = render(
-      <InstantSearchHooksTestWrapper searchClient={client}>
+      <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <Pagination />
       </InstantSearchHooksTestWrapper>
     );
 
-    await wait(0);
+    await waitFor(() => expect(searchClient.search).toHaveBeenCalledTimes(1));
 
-    search.mockClear();
+    searchClient.search.mockClear();
 
     const firstPageItem = document.querySelector(
       '.ais-Pagination-item--firstPage'
@@ -1299,28 +1272,12 @@ describe('Pagination', () => {
     userEvent.click(pageOneLink as HTMLAnchorElement, { metaKey: true });
     userEvent.click(pageOneLink as HTMLAnchorElement, { shiftKey: true });
 
-    expect(search).not.toHaveBeenCalled();
+    expect(searchClient.search).not.toHaveBeenCalled();
   });
 
   test('adds items around the current one', async () => {
-    const search = jest.fn((requests) =>
-      Promise.resolve(
-        createMultiSearchResponse(
-          ...requests.map((request) =>
-            createSingleSearchResponse({
-              hits: Array.from({ length: 1000 }).map((_, index) => ({
-                objectID: String(index),
-              })),
-              index: request.indexName,
-            })
-          )
-        )
-      )
-    );
-    const client = createSearchClient({ search });
-
     const { container } = render(
-      <InstantSearchHooksTestWrapper searchClient={client}>
+      <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <Pagination padding={4} />
       </InstantSearchHooksTestWrapper>
     );
@@ -1638,24 +1595,8 @@ describe('Pagination', () => {
   });
 
   test('limits the total pages to display', async () => {
-    const search = jest.fn((requests) =>
-      Promise.resolve(
-        createMultiSearchResponse(
-          ...requests.map((request) =>
-            createSingleSearchResponse({
-              hits: Array.from({ length: 1000 }).map((_, index) => ({
-                objectID: String(index),
-              })),
-              index: request.indexName,
-            })
-          )
-        )
-      )
-    );
-    const client = createSearchClient({ search });
-
     const { container } = render(
-      <InstantSearchHooksTestWrapper searchClient={client}>
+      <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <Pagination totalPages={4} />
       </InstantSearchHooksTestWrapper>
     );
@@ -1773,7 +1714,13 @@ describe('Pagination', () => {
       </InstantSearchHooksTestWrapper>
     );
 
-    await wait(0);
+    await waitFor(() =>
+      expect(
+        Array.from(container.querySelectorAll('.ais-Pagination-item')).map(
+          (item) => item.textContent
+        )
+      ).toEqual(['‹', '1', '›', '››'])
+    );
 
     expect(
       document.querySelector('.ais-Pagination-item--firstPage')
@@ -1840,7 +1787,13 @@ describe('Pagination', () => {
       </InstantSearchHooksTestWrapper>
     );
 
-    await wait(0);
+    await waitFor(() =>
+      expect(
+        Array.from(container.querySelectorAll('.ais-Pagination-item')).map(
+          (item) => item.textContent
+        )
+      ).toEqual(['‹‹', '1', '›', '››'])
+    );
 
     expect(
       document.querySelector('.ais-Pagination-item--previousPage')
@@ -1907,7 +1860,13 @@ describe('Pagination', () => {
       </InstantSearchHooksTestWrapper>
     );
 
-    await wait(0);
+    await waitFor(() =>
+      expect(
+        Array.from(container.querySelectorAll('.ais-Pagination-item')).map(
+          (item) => item.textContent
+        )
+      ).toEqual(['‹‹', '‹', '1', '››'])
+    );
 
     expect(document.querySelector('.ais-Pagination-item--nextPage')).toBeNull();
     expect(container).toMatchInlineSnapshot(`
@@ -1972,7 +1931,13 @@ describe('Pagination', () => {
       </InstantSearchHooksTestWrapper>
     );
 
-    await wait(0);
+    await waitFor(() =>
+      expect(
+        Array.from(container.querySelectorAll('.ais-Pagination-item')).map(
+          (item) => item.textContent
+        )
+      ).toEqual(['‹‹', '‹', '1', '›'])
+    );
 
     expect(document.querySelector('.ais-Pagination-item--lastPage')).toBeNull();
     expect(container).toMatchInlineSnapshot(`

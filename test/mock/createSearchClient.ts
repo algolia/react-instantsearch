@@ -20,7 +20,13 @@ type OverrideKeys<TTarget, TOptions> = TOptions extends Record<string, never>
   ? TTarget
   : Omit<TTarget, keyof TOptions> & TOptions;
 
-type SearchClient = ReturnType<typeof algoliasearch>;
+type SearchClient = OverrideKeys<
+  ReturnType<typeof algoliasearch>,
+  {
+    search: jest.Mock<any, any>;
+    searchForFacetValues: jest.Mock<any, any>;
+  }
+>;
 
 export function createSearchClient<TOptions extends Partial<SearchClient>>(
   options: TOptions

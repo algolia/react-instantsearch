@@ -3,18 +3,16 @@ import userEvent from '@testing-library/user-event';
 import React from 'react';
 
 import { createSearchClient } from '../../../../../test/mock';
-import { InstantSearchHooksTestWrapper, wait } from '../../../../../test/utils';
+import { InstantSearchHooksTestWrapper } from '../../../../../test/utils';
 import { ToggleRefinement } from '../ToggleRefinement';
 
 describe('ToggleRefinement', () => {
-  test('renders with props', async () => {
+  test('renders with props', () => {
     const { container } = render(
       <InstantSearchHooksTestWrapper>
         <ToggleRefinement attribute="free_shipping" />
       </InstantSearchHooksTestWrapper>
     );
-
-    await wait(0);
 
     expect(container).toMatchInlineSnapshot(`
       <div>
@@ -39,21 +37,19 @@ describe('ToggleRefinement', () => {
     `);
   });
 
-  test('customizes the label', async () => {
+  test('customizes the label', () => {
     const { container } = render(
       <InstantSearchHooksTestWrapper>
         <ToggleRefinement attribute="free_shipping" label="Free shipping" />
       </InstantSearchHooksTestWrapper>
     );
 
-    await wait(0);
-
     expect(
       container.querySelector('.ais-ToggleRefinement-labelText')
     ).toHaveTextContent('Free shipping');
   });
 
-  test('renders checked when the attribute is refined', async () => {
+  test('renders checked when the attribute is refined', () => {
     const { container } = render(
       <InstantSearchHooksTestWrapper
         initialUiState={{
@@ -67,8 +63,6 @@ describe('ToggleRefinement', () => {
         <ToggleRefinement attribute="free_shipping" />
       </InstantSearchHooksTestWrapper>
     );
-
-    await wait(0);
 
     expect(
       container.querySelector<HTMLInputElement>(

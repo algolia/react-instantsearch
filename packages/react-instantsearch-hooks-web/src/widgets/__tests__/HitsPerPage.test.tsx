@@ -1,15 +1,21 @@
-import { render } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
 import { createSearchClient } from '../../../../../test/mock';
-import { InstantSearchHooksTestWrapper, wait } from '../../../../../test/utils';
+import { InstantSearchHooksTestWrapper } from '../../../../../test/utils';
 import { HitsPerPage } from '../HitsPerPage';
 
+const searchClient = createSearchClient({});
+
 describe('HitsPerPage', () => {
+  beforeEach(() => {
+    searchClient.search.mockClear();
+  });
+
   test('renders with props', async () => {
     const { container } = render(
-      <InstantSearchHooksTestWrapper>
+      <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <HitsPerPage
           items={[
             { label: '10', value: 10, default: true },
@@ -20,7 +26,7 @@ describe('HitsPerPage', () => {
       </InstantSearchHooksTestWrapper>
     );
 
-    await wait(0);
+    await waitFor(() => expect(searchClient.search).toHaveBeenCalledTimes(1));
 
     expect(container).toMatchInlineSnapshot(`
       <div>
@@ -57,6 +63,7 @@ describe('HitsPerPage', () => {
   test('selects current value', async () => {
     const { getByRole } = render(
       <InstantSearchHooksTestWrapper
+        searchClient={searchClient}
         initialUiState={{
           indexName: {
             hitsPerPage: 20,
@@ -73,7 +80,7 @@ describe('HitsPerPage', () => {
       </InstantSearchHooksTestWrapper>
     );
 
-    await wait(0);
+    await waitFor(() => expect(searchClient.search).toHaveBeenCalledTimes(1));
 
     expect(
       (getByRole('option', { name: '10' }) as HTMLOptionElement).selected
@@ -87,7 +94,6 @@ describe('HitsPerPage', () => {
   });
 
   test('refines on select', async () => {
-    const searchClient = createSearchClient({});
     const { getByRole } = render(
       <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <HitsPerPage
@@ -100,9 +106,7 @@ describe('HitsPerPage', () => {
       </InstantSearchHooksTestWrapper>
     );
 
-    await wait(0);
-
-    expect(searchClient.search).toHaveBeenCalledTimes(1);
+    await waitFor(() => expect(searchClient.search).toHaveBeenCalledTimes(1));
 
     userEvent.selectOptions(getByRole('combobox'), ['30']);
 

@@ -8,7 +8,7 @@ import {
   createSearchClient,
   createSingleSearchResponse,
 } from '../../../../../test/mock';
-import { InstantSearchHooksTestWrapper, wait } from '../../../../../test/utils';
+import { InstantSearchHooksTestWrapper } from '../../../../../test/utils';
 import { Breadcrumb } from '../Breadcrumb';
 
 import type { UseHierarchicalMenuProps } from 'react-instantsearch-hooks';
@@ -50,7 +50,7 @@ describe('Breadcrumb', () => {
       </InstantSearchHooksTestWrapper>
     );
 
-    await wait(0);
+    await waitFor(() => expect(searchClient.search).toHaveBeenCalledTimes(1));
 
     expect(container).toMatchInlineSnapshot(`
       <div>
@@ -95,7 +95,7 @@ describe('Breadcrumb', () => {
       </InstantSearchHooksTestWrapper>
     );
 
-    await wait(0);
+    await waitFor(() => expect(searchClient.search).toHaveBeenCalledTimes(1));
 
     expect(container).toMatchInlineSnapshot(`
       <div>

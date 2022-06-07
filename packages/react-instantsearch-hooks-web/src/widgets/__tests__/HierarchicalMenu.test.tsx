@@ -7,7 +7,7 @@ import {
   createSearchClient,
   createSingleSearchResponse,
 } from '../../../../../test/mock';
-import { InstantSearchHooksTestWrapper, wait } from '../../../../../test/utils';
+import { InstantSearchHooksTestWrapper } from '../../../../../test/utils';
 import { HierarchicalMenu } from '../HierarchicalMenu';
 
 const attributes = [
@@ -426,12 +426,12 @@ describe('HierarchicalMenu', () => {
 
       userEvent.click(showMoreButton);
 
-      await wait(0);
-
-      expect(showMoreButton).toHaveTextContent('Show less');
-      expect(
-        container.querySelectorAll('.ais-HierarchicalMenu-item')
-      ).toHaveLength(3);
+      await waitFor(() => {
+        expect(showMoreButton).toHaveTextContent('Show less');
+        expect(
+          container.querySelectorAll('.ais-HierarchicalMenu-item')
+        ).toHaveLength(3);
+      });
     });
 
     test('limits the number of items to reveal', async () => {
@@ -461,11 +461,11 @@ describe('HierarchicalMenu', () => {
 
       userEvent.click(showMoreButton);
 
-      await wait(0);
-
-      expect(
-        container.querySelectorAll('.ais-HierarchicalMenu-item')
-      ).toHaveLength(2);
+      await waitFor(() =>
+        expect(
+          container.querySelectorAll('.ais-HierarchicalMenu-item')
+        ).toHaveLength(2)
+      );
     });
   });
 

@@ -3,11 +3,11 @@ import userEvent from '@testing-library/user-event';
 import React from 'react';
 
 import { createSearchClient } from '../../../../../test/mock';
-import { InstantSearchHooksTestWrapper, wait } from '../../../../../test/utils';
+import { InstantSearchHooksTestWrapper } from '../../../../../test/utils';
 import { SortBy } from '../SortBy';
 
 describe('SortBy', () => {
-  test('renders with props', async () => {
+  test('renders with props', () => {
     const { container } = render(
       <InstantSearchHooksTestWrapper>
         <SortBy
@@ -20,11 +20,6 @@ describe('SortBy', () => {
       </InstantSearchHooksTestWrapper>
     );
 
-    await wait(0);
-
-    expect(document.querySelector('.ais-SortBy-select')).toHaveValue(
-      'instant_search'
-    );
     expect(container).toMatchInlineSnapshot(`
       <div>
         <div
@@ -57,7 +52,7 @@ describe('SortBy', () => {
     `);
   });
 
-  test('transform the passed items', async () => {
+  test('transform the passed items', () => {
     const { container } = render(
       <InstantSearchHooksTestWrapper>
         <SortBy
@@ -75,8 +70,6 @@ describe('SortBy', () => {
         />
       </InstantSearchHooksTestWrapper>
     );
-
-    await wait(0);
 
     expect(container).toMatchInlineSnapshot(`
       <div>

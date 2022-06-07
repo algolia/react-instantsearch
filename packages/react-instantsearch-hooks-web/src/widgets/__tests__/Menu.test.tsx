@@ -7,58 +7,61 @@ import {
   createSearchClient,
   createSingleSearchResponse,
 } from '../../../../../test/mock';
-import { InstantSearchHooksTestWrapper, wait } from '../../../../../test/utils';
+import { InstantSearchHooksTestWrapper } from '../../../../../test/utils';
 import { Menu } from '../Menu';
 
-const search = jest.fn((requests) => {
-  return Promise.resolve(
-    createMultiSearchResponse(
-      ...requests.map(() =>
-        createSingleSearchResponse({
-          facets: {
-            brand: {
-              'Insignia™': 746,
-              Samsung: 633,
-              Metra: 591,
-              HP: 530,
-              Apple: 442,
-              GE: 394,
-              Sony: 350,
-              Incipio: 320,
-              KitchenAid: 318,
-              Whirlpool: 298,
-              LG: 291,
-              Canon: 287,
-              Frigidaire: 275,
-              Speck: 216,
-              OtterBox: 214,
-              Epson: 204,
-              'Dynex™': 184,
-              Dell: 174,
-              'Hamilton Beach': 173,
-              Platinum: 155,
+const searchClient = createSearchClient({
+  search: jest.fn((requests) => {
+    return Promise.resolve(
+      createMultiSearchResponse(
+        ...requests.map(() =>
+          createSingleSearchResponse({
+            facets: {
+              brand: {
+                'Insignia™': 746,
+                Samsung: 633,
+                Metra: 591,
+                HP: 530,
+                Apple: 442,
+                GE: 394,
+                Sony: 350,
+                Incipio: 320,
+                KitchenAid: 318,
+                Whirlpool: 298,
+                LG: 291,
+                Canon: 287,
+                Frigidaire: 275,
+                Speck: 216,
+                OtterBox: 214,
+                Epson: 204,
+                'Dynex™': 184,
+                Dell: 174,
+                'Hamilton Beach': 173,
+                Platinum: 155,
+              },
             },
-          },
-        })
+          })
+        )
       )
-    )
-  );
+    );
+  }),
 });
 
 describe('Menu', () => {
+  beforeEach(() => {
+    searchClient.search.mockClear();
+  });
+
   test('renders with props', async () => {
-    const client = createSearchClient({ search });
     const { container } = render(
-      <InstantSearchHooksTestWrapper searchClient={client}>
+      <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <Menu attribute="brand" />
       </InstantSearchHooksTestWrapper>
     );
 
-    await waitFor(() =>
-      expect(container.querySelectorAll('.ais-Menu-item')).toHaveLength(10)
-    );
+    await waitFor(() => expect(searchClient.search).toHaveBeenCalledTimes(1));
 
-    expect(client.search).toHaveBeenCalledTimes(1);
+    expect(container.querySelectorAll('.ais-Menu-item')).toHaveLength(10);
 
     expect(container).toMatchInlineSnapshot(`
       <div>
@@ -270,12 +273,13 @@ describe('Menu', () => {
 
     userEvent.click(firstItem);
 
-    await wait(0);
+    await waitFor(() => {
+      expect(firstItem.parentElement).toHaveClass('ais-Menu-item--selected');
+    });
 
-    expect(firstItem.parentElement).toHaveClass('ais-Menu-item--selected');
     // Once on load, once on check.
-    expect(client.search).toHaveBeenCalledTimes(2);
-    expect(client.search).toHaveBeenLastCalledWith(
+    expect(searchClient.search).toHaveBeenCalledTimes(2);
+    expect(searchClient.search).toHaveBeenLastCalledWith(
       expect.arrayContaining([
         expect.objectContaining({
           params: expect.objectContaining({
@@ -287,9 +291,8 @@ describe('Menu', () => {
   });
 
   test('limits the number of items to display', async () => {
-    const client = createSearchClient({ search });
     const { container } = render(
-      <InstantSearchHooksTestWrapper searchClient={client}>
+      <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <Menu attribute="brand" limit={5} />
       </InstantSearchHooksTestWrapper>
     );
@@ -408,9 +411,8 @@ describe('Menu', () => {
   });
 
   test('transforms the items', async () => {
-    const client = createSearchClient({ search });
     const { container } = render(
-      <InstantSearchHooksTestWrapper searchClient={client}>
+      <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <Menu
           attribute="brand"
           transformItems={(items) =>
@@ -445,9 +447,8 @@ describe('Menu', () => {
 
   describe('sorting', () => {
     test('sorts the items by ascending name', async () => {
-      const client = createSearchClient({ search });
       const { container } = render(
-        <InstantSearchHooksTestWrapper searchClient={client}>
+        <InstantSearchHooksTestWrapper searchClient={searchClient}>
           <Menu attribute="brand" sortBy={['name:asc']} />
         </InstantSearchHooksTestWrapper>
       );
@@ -473,9 +474,8 @@ describe('Menu', () => {
     });
 
     test('sorts the items by descending name', async () => {
-      const client = createSearchClient({ search });
       const { container } = render(
-        <InstantSearchHooksTestWrapper searchClient={client}>
+        <InstantSearchHooksTestWrapper searchClient={searchClient}>
           <Menu attribute="brand" sortBy={['name:desc']} />
         </InstantSearchHooksTestWrapper>
       );
@@ -501,9 +501,8 @@ describe('Menu', () => {
     });
 
     test('sorts the items by count', async () => {
-      const client = createSearchClient({ search });
       const { container } = render(
-        <InstantSearchHooksTestWrapper searchClient={client}>
+        <InstantSearchHooksTestWrapper searchClient={searchClient}>
           <Menu attribute="brand" sortBy={['count']} />
         </InstantSearchHooksTestWrapper>
       );
@@ -529,9 +528,8 @@ describe('Menu', () => {
     });
 
     test('sorts the items by refinement state', async () => {
-      const client = createSearchClient({ search });
       const { container, findByText } = render(
-        <InstantSearchHooksTestWrapper searchClient={client}>
+        <InstantSearchHooksTestWrapper searchClient={searchClient}>
           <Menu
             attribute="brand"
             sortBy={['isRefined', 'name']}
@@ -608,9 +606,8 @@ describe('Menu', () => {
     });
 
     test('sorts the items using a sorting function', async () => {
-      const client = createSearchClient({ search });
       const { container } = render(
-        <InstantSearchHooksTestWrapper searchClient={client}>
+        <InstantSearchHooksTestWrapper searchClient={searchClient}>
           <Menu
             attribute="brand"
             sortBy={(a, b) => b.name.localeCompare(a.name)}
@@ -641,9 +638,8 @@ describe('Menu', () => {
 
   describe('Show more / less', () => {
     test('displays a "Show more" button', async () => {
-      const client = createSearchClient({ search });
       const { container } = render(
-        <InstantSearchHooksTestWrapper searchClient={client}>
+        <InstantSearchHooksTestWrapper searchClient={searchClient}>
           <Menu attribute="brand" showMore={true} />
         </InstantSearchHooksTestWrapper>
       );
@@ -867,16 +863,15 @@ describe('Menu', () => {
 
       userEvent.click(showMoreButton);
 
-      await wait(0);
-
-      expect(showMoreButton).toHaveTextContent('Show less');
-      expect(container.querySelectorAll('.ais-Menu-item')).toHaveLength(20);
+      await waitFor(() => {
+        expect(showMoreButton).toHaveTextContent('Show less');
+        expect(container.querySelectorAll('.ais-Menu-item')).toHaveLength(20);
+      });
     });
 
     test('limits the number of items to reveal', async () => {
-      const client = createSearchClient({ search });
       const { container } = render(
-        <InstantSearchHooksTestWrapper searchClient={client}>
+        <InstantSearchHooksTestWrapper searchClient={searchClient}>
           <Menu attribute="brand" showMore={true} showMoreLimit={11} />
         </InstantSearchHooksTestWrapper>
       );
@@ -891,17 +886,18 @@ describe('Menu', () => {
         container.querySelector('.ais-Menu-showMore') as HTMLButtonElement
       );
 
-      await wait(0);
-
-      expect(container.querySelectorAll('.ais-Menu-item')).toHaveLength(11);
-      expect(container.querySelector('.ais-Menu-showMore')).toBeInTheDocument();
+      await waitFor(() => {
+        expect(container.querySelectorAll('.ais-Menu-item')).toHaveLength(11);
+        expect(
+          container.querySelector('.ais-Menu-showMore')
+        ).toBeInTheDocument();
+      });
     });
   });
 
   test('forwards custom class names and `div` props to the root element', () => {
-    const client = createSearchClient({ search });
     const { container } = render(
-      <InstantSearchHooksTestWrapper searchClient={client}>
+      <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <Menu
           attribute="brand"
           className="MyMenu"

@@ -7,7 +7,7 @@ import {
   createMultiSearchResponse,
   createSingleSearchResponse,
 } from '../../../../../test/mock/createAPIResponse';
-import { InstantSearchHooksTestWrapper, wait } from '../../../../../test/utils';
+import { InstantSearchHooksTestWrapper } from '../../../../../test/utils';
 import { InfiniteHits } from '../InfiniteHits';
 
 type CustomHit = {
@@ -320,7 +320,7 @@ describe('InfiniteHits', () => {
       </InstantSearchHooksTestWrapper>
     );
 
-    await wait(0);
+    await waitFor(() => expect(searchClient.search).toHaveBeenCalledTimes(1));
 
     expect(
       container.querySelector<HTMLButtonElement>(
@@ -348,7 +348,7 @@ describe('InfiniteHits', () => {
       </InstantSearchHooksTestWrapper>
     );
 
-    await wait(0);
+    await waitFor(() => expect(searchClient.search).toHaveBeenCalledTimes(1));
 
     expect(
       container.querySelector<HTMLButtonElement>('.ais-InfiniteHits-loadMore')

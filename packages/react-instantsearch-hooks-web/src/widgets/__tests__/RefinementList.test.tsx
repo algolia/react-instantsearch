@@ -8,108 +8,113 @@ import {
   createSFFVResponse,
   createSingleSearchResponse,
 } from '../../../../../test/mock';
-import { InstantSearchHooksTestWrapper, wait } from '../../../../../test/utils';
+import { InstantSearchHooksTestWrapper } from '../../../../../test/utils';
 import { RefinementList } from '../RefinementList';
 
-const search = jest.fn((requests) => {
-  return Promise.resolve(
-    createMultiSearchResponse(
-      ...requests.map(() =>
-        createSingleSearchResponse({
-          facets: {
-            brand: {
-              'Insignia™': 746,
-              Samsung: 633,
-              Metra: 591,
-              HP: 530,
-              Apple: 442,
-              GE: 394,
-              Sony: 350,
-              Incipio: 320,
-              KitchenAid: 318,
-              Whirlpool: 298,
-              LG: 291,
-              Canon: 287,
-              Frigidaire: 275,
-              Speck: 216,
-              OtterBox: 214,
-              Epson: 204,
-              'Dynex™': 184,
-              Dell: 174,
-              'Hamilton Beach': 173,
-              Platinum: 155,
+const searchClient = createSearchClient({
+  search: jest.fn((requests) => {
+    return Promise.resolve(
+      createMultiSearchResponse(
+        ...requests.map(() =>
+          createSingleSearchResponse({
+            facets: {
+              brand: {
+                'Insignia™': 746,
+                Samsung: 633,
+                Metra: 591,
+                HP: 530,
+                Apple: 442,
+                GE: 394,
+                Sony: 350,
+                Incipio: 320,
+                KitchenAid: 318,
+                Whirlpool: 298,
+                LG: 291,
+                Canon: 287,
+                Frigidaire: 275,
+                Speck: 216,
+                OtterBox: 214,
+                Epson: 204,
+                'Dynex™': 184,
+                Dell: 174,
+                'Hamilton Beach': 173,
+                Platinum: 155,
+              },
             },
-          },
-        })
+          })
+        )
       )
-    )
-  );
+    );
+  }),
+  searchForFacetValues: jest.fn(() =>
+    Promise.resolve([
+      createSFFVResponse({
+        facetHits: [
+          {
+            value: 'Apple',
+            highlighted: '__ais-highlight__App__/ais-highlight__le',
+            count: 442,
+          },
+          {
+            value: 'Alpine',
+            highlighted: '__ais-highlight__Alp__/ais-highlight__ine',
+            count: 30,
+          },
+          {
+            value: 'APC',
+            highlighted: '__ais-highlight__AP__/ais-highlight__C',
+            count: 24,
+          },
+          {
+            value: 'Amped Wireless',
+            highlighted: '__ais-highlight__Amp__/ais-highlight__ed Wireless',
+            count: 4,
+          },
+          {
+            value: "Applebee's",
+            highlighted: "__ais-highlight__App__/ais-highlight__lebee's",
+            count: 2,
+          },
+          {
+            value: 'Amplicom',
+            highlighted: '__ais-highlight__Amp__/ais-highlight__licom',
+            count: 1,
+          },
+          {
+            value: 'Apollo Enclosures',
+            highlighted: '__ais-highlight__Ap__/ais-highlight__ollo Enclosures',
+            count: 1,
+          },
+          {
+            value: 'Apple®',
+            highlighted: '__ais-highlight__App__/ais-highlight__le®',
+            count: 1,
+          },
+          {
+            value: 'Applica',
+            highlighted: '__ais-highlight__App__/ais-highlight__lica',
+            count: 1,
+          },
+          {
+            value: 'Apricorn',
+            highlighted: '__ais-highlight__Ap__/ais-highlight__ricorn',
+            count: 1,
+          },
+        ],
+      }),
+    ])
+  ),
 });
 
-const searchForFacetValues = jest.fn(() =>
-  Promise.resolve([
-    createSFFVResponse({
-      facetHits: [
-        {
-          value: 'Apple',
-          highlighted: '__ais-highlight__App__/ais-highlight__le',
-          count: 442,
-        },
-        {
-          value: 'Alpine',
-          highlighted: '__ais-highlight__Alp__/ais-highlight__ine',
-          count: 30,
-        },
-        {
-          value: 'APC',
-          highlighted: '__ais-highlight__AP__/ais-highlight__C',
-          count: 24,
-        },
-        {
-          value: 'Amped Wireless',
-          highlighted: '__ais-highlight__Amp__/ais-highlight__ed Wireless',
-          count: 4,
-        },
-        {
-          value: "Applebee's",
-          highlighted: "__ais-highlight__App__/ais-highlight__lebee's",
-          count: 2,
-        },
-        {
-          value: 'Amplicom',
-          highlighted: '__ais-highlight__Amp__/ais-highlight__licom',
-          count: 1,
-        },
-        {
-          value: 'Apollo Enclosures',
-          highlighted: '__ais-highlight__Ap__/ais-highlight__ollo Enclosures',
-          count: 1,
-        },
-        {
-          value: 'Apple®',
-          highlighted: '__ais-highlight__App__/ais-highlight__le®',
-          count: 1,
-        },
-        {
-          value: 'Applica',
-          highlighted: '__ais-highlight__App__/ais-highlight__lica',
-          count: 1,
-        },
-        {
-          value: 'Apricorn',
-          highlighted: '__ais-highlight__Ap__/ais-highlight__ricorn',
-          count: 1,
-        },
-      ],
-    }),
-  ])
-);
-
 describe('RefinementList', () => {
+  beforeEach(() => {
+    searchClient.search.mockClear();
+    searchClient.searchForFacetValues.mockClear();
+  });
+
   test('renders with props', async () => {
-    const client = createSearchClient({ search });
     const { container } = render(
-      <InstantSearchHooksTestWrapper searchClient={client}>
+      <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <RefinementList attribute="brand" />
       </InstantSearchHooksTestWrapper>
     );
@@ -120,7 +125,7 @@ describe('RefinementList', () => {
       ).toHaveLength(10)
     );
 
-    expect(client.search).toHaveBeenCalledTimes(1);
+    expect(searchClient.search).toHaveBeenCalledTimes(1);
 
     expect(container).toMatchInlineSnapshot(`
       <div>
@@ -373,26 +378,26 @@ describe('RefinementList', () => {
 
     userEvent.click(firstCheckbox);
 
-    await wait(0);
+    await waitFor(() => {
+      expect(firstCheckbox).toBeChecked();
 
-    expect(firstCheckbox).toBeChecked();
-    // Once on load, once on check.
-    expect(client.search).toHaveBeenCalledTimes(2);
-    expect(client.search).toHaveBeenLastCalledWith(
-      expect.arrayContaining([
-        expect.objectContaining({
-          params: expect.objectContaining({
-            facetFilters: [['brand:Insignia™']],
+      // Once on load, once on check.
+      expect(searchClient.search).toHaveBeenCalledTimes(2);
+      expect(searchClient.search).toHaveBeenLastCalledWith(
+        expect.arrayContaining([
+          expect.objectContaining({
+            params: expect.objectContaining({
+              facetFilters: [['brand:Insignia™']],
+            }),
           }),
-        }),
-      ])
-    );
+        ])
+      );
+    });
   });
 
   test('enables conjunctive faceting', async () => {
-    const client = createSearchClient({ search });
     const { container } = render(
-      <InstantSearchHooksTestWrapper searchClient={client}>
+      <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <RefinementList attribute="brand" operator="and" />
       </InstantSearchHooksTestWrapper>
     );
@@ -409,12 +414,12 @@ describe('RefinementList', () => {
       ) as NodeListOf<HTMLInputElement>),
     ].slice(0, 2);
 
-    userEvent.click(checkbox1);
-    userEvent.click(checkbox2);
+    userEvent.click(checkbox1); // client.search call 2
+    userEvent.click(checkbox2); // client.search call 3
 
-    await wait(0);
+    await waitFor(() => expect(searchClient.search).toHaveBeenCalledTimes(3));
 
-    expect(client.search).toHaveBeenLastCalledWith(
+    expect(searchClient.search).toHaveBeenLastCalledWith(
       expect.arrayContaining([
         expect.objectContaining({
           params: expect.objectContaining({
@@ -426,9 +431,8 @@ describe('RefinementList', () => {
   });
 
   test('limits the number of items to display', async () => {
-    const client = createSearchClient({ search });
     const { container } = render(
-      <InstantSearchHooksTestWrapper searchClient={client}>
+      <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <RefinementList attribute="brand" limit={5} />
       </InstantSearchHooksTestWrapper>
     );
@@ -569,9 +573,8 @@ describe('RefinementList', () => {
   });
 
   test('transforms the items', async () => {
-    const client = createSearchClient({ search });
     const { container } = render(
-      <InstantSearchHooksTestWrapper searchClient={client}>
+      <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <RefinementList
           attribute="brand"
           transformItems={(items) =>
@@ -606,9 +609,8 @@ describe('RefinementList', () => {
 
   describe('sorting', () => {
     test('sorts the items by ascending name', async () => {
-      const client = createSearchClient({ search });
       const { container } = render(
-        <InstantSearchHooksTestWrapper searchClient={client}>
+        <InstantSearchHooksTestWrapper searchClient={searchClient}>
           <RefinementList attribute="brand" sortBy={['name:asc']} />
         </InstantSearchHooksTestWrapper>
       );
@@ -634,9 +636,8 @@ describe('RefinementList', () => {
     });
 
     test('sorts the items by descending name', async () => {
-      const client = createSearchClient({ search });
       const { container } = render(
-        <InstantSearchHooksTestWrapper searchClient={client}>
+        <InstantSearchHooksTestWrapper searchClient={searchClient}>
           <RefinementList attribute="brand" sortBy={['name:desc']} />
         </InstantSearchHooksTestWrapper>
       );
@@ -662,9 +663,8 @@ describe('RefinementList', () => {
     });
 
     test('sorts the items by count', async () => {
-      const client = createSearchClient({ search });
       const { container } = render(
-        <InstantSearchHooksTestWrapper searchClient={client}>
+        <InstantSearchHooksTestWrapper searchClient={searchClient}>
           <RefinementList attribute="brand" sortBy={['count']} />
         </InstantSearchHooksTestWrapper>
       );
@@ -690,9 +690,8 @@ describe('RefinementList', () => {
     });
 
     test('sorts the items by refinement state', async () => {
-      const client = createSearchClient({ search });
       const { container } = render(
-        <InstantSearchHooksTestWrapper searchClient={client}>
+        <InstantSearchHooksTestWrapper searchClient={searchClient}>
           <RefinementList attribute="brand" sortBy={['isRefined']} />
         </InstantSearchHooksTestWrapper>
       );
@@ -746,9 +745,8 @@ describe('RefinementList', () => {
     });
 
     test('sorts the items using a sorting function', async () => {
-      const client = createSearchClient({ search });
       const { container } = render(
-        <InstantSearchHooksTestWrapper searchClient={client}>
+        <InstantSearchHooksTestWrapper searchClient={searchClient}>
           <RefinementList
             attribute="brand"
             sortBy={(a, b) => a.name.length - b.name.length}
@@ -779,9 +777,8 @@ describe('RefinementList', () => {
 
   describe('searching', () => {
     test('displays a search box', async () => {
-      const client = createSearchClient({ search, searchForFacetValues });
       const { container } = render(
-        <InstantSearchHooksTestWrapper searchClient={client}>
+        <InstantSearchHooksTestWrapper searchClient={searchClient}>
           <RefinementList
             attribute="brand"
             searchable={true}
@@ -827,8 +824,8 @@ describe('RefinementList', () => {
 
       await waitFor(() => {
         // One call per keystroke
-        expect(client.searchForFacetValues).toHaveBeenCalledTimes(3);
-        expect(client.searchForFacetValues).toHaveBeenLastCalledWith(
+        expect(searchClient.searchForFacetValues).toHaveBeenCalledTimes(3);
+        expect(searchClient.searchForFacetValues).toHaveBeenLastCalledWith(
           expect.arrayContaining([
             expect.objectContaining({
               params: expect.objectContaining({
@@ -865,7 +862,7 @@ describe('RefinementList', () => {
 
     test('displays a fallback when there are no results', async () => {
       const client = createSearchClient({
-        search,
+        search: searchClient.search,
         searchForFacetValues: jest.fn(() =>
           Promise.resolve([createSFFVResponse({ facetHits: [] })])
         ),
@@ -880,18 +877,21 @@ describe('RefinementList', () => {
         </InstantSearchHooksTestWrapper>
       );
 
-      await wait(0);
+      await waitFor(() => expect(client.search).toHaveBeenCalledTimes(1));
 
       userEvent.type(
         container.querySelector('.ais-SearchBox-input') as HTMLInputElement,
         'nothing'
       );
 
-      await wait(0);
+      await waitFor(() => {
+        expect(client.searchForFacetValues).toHaveBeenCalledTimes(7);
 
-      expect(
-        container.querySelector('.ais-RefinementList-noResults')
-      ).toHaveTextContent('No results.');
+        expect(
+          container.querySelector('.ais-RefinementList-noResults')
+        ).toHaveTextContent('No results.');
+      });
+
       expect(container.querySelector('.ais-RefinementList-list')).toBeNull();
       expect(container).toMatchInlineSnapshot(`
         <div>
@@ -1009,9 +1009,8 @@ describe('RefinementList', () => {
 
   describe('Show more / less', () => {
     test('displays a "Show more" button', async () => {
-      const client = createSearchClient({ search });
       const { container } = render(
-        <InstantSearchHooksTestWrapper searchClient={client}>
+        <InstantSearchHooksTestWrapper searchClient={searchClient}>
           <RefinementList attribute="brand" showMore={true} />
         </InstantSearchHooksTestWrapper>
       );
@@ -1278,18 +1277,17 @@ describe('RefinementList', () => {
 
       userEvent.click(showMoreButton);
 
-      await wait(0);
-
-      expect(showMoreButton).toHaveTextContent('Show less');
-      expect(
-        container.querySelectorAll('.ais-RefinementList-item')
-      ).toHaveLength(20);
+      await waitFor(() => {
+        expect(showMoreButton).toHaveTextContent('Show less');
+        expect(
+          container.querySelectorAll('.ais-RefinementList-item')
+        ).toHaveLength(20);
+      });
     });
 
     test('limits the number of items to reveal', async () => {
-      const client = createSearchClient({ search });
       const { container } = render(
-        <InstantSearchHooksTestWrapper searchClient={client}>
+        <InstantSearchHooksTestWrapper searchClient={searchClient}>
           <RefinementList
             attribute="brand"
             showMore={true}
@@ -1314,21 +1312,20 @@ describe('RefinementList', () => {
         ) as HTMLButtonElement
       );
 
-      await wait(0);
-
-      expect(
-        container.querySelectorAll('.ais-RefinementList-item')
-      ).toHaveLength(11);
-      expect(
-        container.querySelector('.ais-RefinementList-showMore')
-      ).toBeInTheDocument();
+      await waitFor(() => {
+        expect(
+          container.querySelectorAll('.ais-RefinementList-item')
+        ).toHaveLength(11);
+        expect(
+          container.querySelector('.ais-RefinementList-showMore')
+        ).toBeInTheDocument();
+      });
     });
   });
 
   test('forwards custom class names and `div` props to the root element', () => {
-    const client = createSearchClient({ search });
     const { container } = render(
-      <InstantSearchHooksTestWrapper searchClient={client}>
+      <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <RefinementList
           attribute="brand"
           className="MyRefinementList"

@@ -7,7 +7,7 @@ import {
   createSearchClient,
   createSingleSearchResponse,
 } from '../../../../../test/mock';
-import { InstantSearchHooksTestWrapper, wait } from '../../../../../test/utils';
+import { InstantSearchHooksTestWrapper } from '../../../../../test/utils';
 import { RangeInput } from '../RangeInput';
 
 function createSearchClientWithFacetsStats() {
@@ -117,7 +117,7 @@ describe('RangeInput', () => {
       </InstantSearchHooksTestWrapper>
     );
 
-    await wait(0);
+    await waitFor(() => expect(client.search).toHaveBeenCalledTimes(1));
 
     expect(container.querySelector('.ais-RangeInput-input--min')).toHaveValue(
       100
@@ -135,7 +135,7 @@ describe('RangeInput', () => {
       </InstantSearchHooksTestWrapper>
     );
 
-    await wait(0);
+    await waitFor(() => expect(client.search).toHaveBeenCalledTimes(1));
 
     ['min', 'max'].forEach((target) => {
       expect(
@@ -167,9 +167,8 @@ describe('RangeInput', () => {
 
     userEvent.click(container.querySelector('.ais-RangeInput-submit')!);
 
-    await wait(0);
+    await waitFor(() => expect(client.search).toHaveBeenCalledTimes(2));
 
-    expect(client.search).toHaveBeenCalledTimes(2);
     expect(client.search).toHaveBeenLastCalledWith(
       expect.arrayContaining([
         expect.objectContaining({
