@@ -58,15 +58,7 @@ describe('useSearchState', () => {
       },
     });
     const { result, waitForNextUpdate } = renderHook(() => useSearchState(), {
-      wrapper: ({ children }) =>
-        wrapper({
-          children: (
-            <>
-              <SearchBox />
-              {children}
-            </>
-          ),
-        }),
+      wrapper,
     });
 
     // Initial render state from manual `getWidgetRenderState`
@@ -101,7 +93,7 @@ describe('useSearchState', () => {
           <button
             type="button"
             onClick={() => {
-              setUiState({ indexName: { query: 'hey' } });
+              setUiState({ indexName: { query: 'new query' } });
             }}
           >
             {uiState.indexName.query}
@@ -111,25 +103,22 @@ describe('useSearchState', () => {
       );
     }
 
-    const { container } = render(
+    const { getByRole } = render(
       <InstantSearchHooksTestWrapper>
         <App />
       </InstantSearchHooksTestWrapper>
     );
+    const button = getByRole('button');
 
     await wait(0);
 
-    expect(container.innerHTML).toMatchInlineSnapshot(
-      `"<button type=\\"button\\"></button>"`
-    );
+    expect(button).toHaveTextContent('');
 
-    userEvent.click(container.querySelector('button')!);
+    userEvent.click(button);
 
     await wait(0);
 
-    expect(container.innerHTML).toMatchInlineSnapshot(
-      `"<button type=\\"button\\">hey</button>hey"`
-    );
+    expect(button).toHaveTextContent('new query');
   });
 
   test('returns a function to modify the index state', async () => {
@@ -141,7 +130,7 @@ describe('useSearchState', () => {
           <button
             type="button"
             onClick={() => {
-              setIndexUiState({ query: 'hey' });
+              setIndexUiState({ query: 'new query' });
             }}
           >
             {indexUiState.query}
@@ -151,24 +140,21 @@ describe('useSearchState', () => {
       );
     }
 
-    const { container } = render(
+    const { getByRole } = render(
       <InstantSearchHooksTestWrapper>
         <App />
       </InstantSearchHooksTestWrapper>
     );
+    const button = getByRole('button');
 
     await wait(0);
 
-    expect(container.innerHTML).toMatchInlineSnapshot(
-      `"<button type=\\"button\\"></button>"`
-    );
+    expect(button).toHaveTextContent('');
 
-    userEvent.click(container.querySelector('button')!);
+    userEvent.click(button);
 
     await wait(0);
 
-    expect(container.innerHTML).toMatchInlineSnapshot(
-      `"<button type=\\"button\\">hey</button>hey"`
-    );
+    expect(button).toHaveTextContent('new query');
   });
 });
