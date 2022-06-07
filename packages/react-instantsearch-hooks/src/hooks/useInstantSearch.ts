@@ -22,7 +22,6 @@ type InstantSearchApi = {
   setIndexUiState: (indexUiState: IndexUiState) => void;
   use: (...middlewares: Middleware[]) => () => void;
   refresh: InstantSearch['refresh'];
-  search: InstantSearch;
 };
 
 export function useInstantSearch(): InstantSearchApi {
@@ -55,6 +54,5 @@ export function useInstantSearch(): InstantSearchApi {
     setIndexUiState,
     use,
     refresh,
-    search,
   };
 }

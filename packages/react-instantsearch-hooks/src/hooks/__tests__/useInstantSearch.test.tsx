@@ -2,8 +2,8 @@ import { render } from '@testing-library/react';
 import { renderHook } from '@testing-library/react-hooks';
 import userEvent from '@testing-library/user-event';
 import { AlgoliaSearchHelper, SearchResults } from 'algoliasearch-helper';
-import InstantSearch from 'instantsearch.js/es/lib/InstantSearch';
 import React, { useEffect } from 'react';
+import { SearchBox } from 'react-instantsearch-hooks-web';
 
 import { createSearchClient } from '../../../../../test/mock';
 import {
@@ -11,14 +11,7 @@ import {
   InstantSearchHooksTestWrapper,
   wait,
 } from '../../../../../test/utils';
-import { useSearchBox } from '../../connectors/useSearchBox';
 import { useInstantSearch } from '../useInstantSearch';
-
-function SearchBox() {
-  const { query } = useSearchBox({});
-
-  return <>{query}</>;
-}
 
 describe('useInstantSearch', () => {
   describe('usage', () => {
@@ -31,23 +24,6 @@ describe('useInstantSearch', () => {
 
         They are not compatible with the \`react-instantsearch-core\` and \`react-instantsearch-dom\` packages, so make sure to use the <InstantSearch> component from \`react-instantsearch-hooks\`."
       `);
-    });
-
-    test('it returns all expected keys', () => {
-      const wrapper = createInstantSearchTestWrapper();
-      const { result } = renderHook(() => useInstantSearch(), { wrapper });
-
-      expect(Object.keys(result.current)).toEqual([
-        'results',
-        'scopedResults',
-        'uiState',
-        'setUiState',
-        'indexUiState',
-        'setIndexUiState',
-        'use',
-        'refresh',
-        'search',
-      ]);
     });
   });
 
@@ -177,6 +153,7 @@ describe('useInstantSearch', () => {
           <>
             <button
               type="button"
+              data-testid="button"
               onClick={() => {
                 setUiState({ indexName: { query: 'new query' } });
               }}
@@ -188,13 +165,13 @@ describe('useInstantSearch', () => {
         );
       }
 
-      const { findByRole } = render(
+      const { findByTestId } = render(
         <InstantSearchHooksTestWrapper>
           <App />
         </InstantSearchHooksTestWrapper>
       );
 
-      const button = await findByRole('button');
+      const button = await findByTestId('button');
 
       await wait(0);
 
@@ -215,6 +192,7 @@ describe('useInstantSearch', () => {
           <>
             <button
               type="button"
+              data-testid="button"
               onClick={() => {
                 setIndexUiState({ query: 'new query' });
               }}
@@ -226,13 +204,13 @@ describe('useInstantSearch', () => {
         );
       }
 
-      const { findByRole } = render(
+      const { findByTestId } = render(
         <InstantSearchHooksTestWrapper>
           <App />
         </InstantSearchHooksTestWrapper>
       );
 
-      const button = await findByRole('button');
+      const button = await findByTestId('button');
 
       await wait(0);
 
@@ -248,8 +226,6 @@ describe('useInstantSearch', () => {
 
   describe('middleware', () => {
     test('gives access to the use function', async () => {
-      const wrapper = createInstantSearchTestWrapper();
-
       const subscribe = jest.fn();
       const onStateChange = jest.fn();
       const unsubscribe = jest.fn();
@@ -259,59 +235,42 @@ describe('useInstantSearch', () => {
         unsubscribe,
       }));
 
-      const { result, waitForNextUpdate, unmount } = renderHook(
-        () => {
-          const { use, search } = useInstantSearch();
-          useEffect(() => use(middleware), [use]);
+      function Middleware() {
+        const { use } = useInstantSearch();
+        useEffect(() => use(middleware), [use]);
 
-          return search;
-        },
-        {
-          wrapper: ({ children }) =>
-            wrapper({
-              children: (
-                <>
-                  <SearchBox />
-                  {children}
-                </>
-              ),
-            }),
-        }
-      );
+        return null;
+      }
 
-      // augmented once middleware was used
-      expect(result.current.middleware).toEqual([
-        {
-          creator: middleware,
-          instance: {
-            onStateChange,
-            subscribe,
-            unsubscribe,
-          },
-        },
-      ]);
+      function App() {
+        return (
+          <InstantSearchHooksTestWrapper>
+            <Middleware />
+            <SearchBox placeholder="searchbox" />
+          </InstantSearchHooksTestWrapper>
+        );
+      }
 
-      expect(subscribe).toHaveBeenCalledTimes(1);
-      expect(onStateChange).toHaveBeenCalledTimes(0);
-      expect(unsubscribe).toHaveBeenCalledTimes(0);
+      const { unmount, findByPlaceholderText } = render(<App />);
+
       expect(middleware).toHaveBeenCalledTimes(1);
-
-      await waitForNextUpdate();
-
       expect(subscribe).toHaveBeenCalledTimes(1);
       expect(onStateChange).toHaveBeenCalledTimes(0);
       expect(unsubscribe).toHaveBeenCalledTimes(0);
 
       // simulate a change in query
-      result.current.renderState.indexName.searchBox!.refine('new query');
-      await waitForNextUpdate();
+      const searchBox = await findByPlaceholderText('searchbox');
+      userEvent.type(searchBox, 'new query');
+      await wait(0);
 
+      expect(middleware).toHaveBeenCalledTimes(1);
       expect(subscribe).toHaveBeenCalledTimes(1);
       expect(onStateChange).toHaveBeenCalledTimes(1);
       expect(unsubscribe).toHaveBeenCalledTimes(0);
 
       unmount();
 
+      expect(middleware).toHaveBeenCalledTimes(1);
       expect(subscribe).toHaveBeenCalledTimes(1);
       expect(onStateChange).toHaveBeenCalledTimes(1);
       // unsubscribe is first called by the parent InstantSearch unmounting
@@ -319,9 +278,6 @@ describe('useInstantSearch', () => {
       // then unuse is called by this widget itself unmounting.
       // if only the component with useInstantSearch is unmounted, unsubscribe is called once.
       expect(unsubscribe).toHaveBeenCalledTimes(2);
-
-      // middleware was removed
-      expect(result.current.middleware).toEqual([]);
     });
   });
 
@@ -380,65 +336,6 @@ describe('useInstantSearch', () => {
 
       // reference has not changed
       expect(result.current.refresh).toBe(ref);
-    });
-  });
-
-  describe('other instantsearch access', () => {
-    test('gives access to search instance', async () => {
-      const wrapper = createInstantSearchTestWrapper();
-      const { result, waitForNextUpdate } = renderHook(
-        () => useInstantSearch(),
-        { wrapper }
-      );
-
-      // Initial render state from manual `getWidgetRenderState`
-      expect(result.current).toEqual(
-        expect.objectContaining({
-          search: expect.any(InstantSearch),
-        })
-      );
-
-      await waitForNextUpdate();
-
-      // InstantSearch.js state from the `render` lifecycle step
-      expect(result.current).toEqual(
-        expect.objectContaining({
-          search: expect.any(InstantSearch),
-        })
-      );
-    });
-
-    test('search instance is the same reference across renders', async () => {
-      const wrapper = createInstantSearchTestWrapper();
-      const { result, waitForNextUpdate, rerender } = renderHook(
-        () => useInstantSearch(),
-        { wrapper }
-      );
-
-      // Initial render state from manual `getWidgetRenderState`
-      expect(result.current).toEqual(
-        expect.objectContaining({
-          search: expect.any(InstantSearch),
-        })
-      );
-      const firstReference = result.current.search;
-
-      await waitForNextUpdate();
-
-      // InstantSearch.js state from the `render` lifecycle step
-      expect(result.current).toEqual(
-        expect.objectContaining({
-          search: firstReference,
-        })
-      );
-
-      rerender();
-
-      expect(result.current).toEqual(
-        expect.objectContaining({
-          search: firstReference,
-        })
-      );
     });
   });
 });
