@@ -2,7 +2,7 @@ import { useConnector } from '../hooks/useConnector';
 
 import type { Connector, UiState } from 'instantsearch.js';
 
-type SearchStateRenderState<TUiState extends UiState> = {
+export type SearchStateRenderState<TUiState extends UiState> = {
   uiState: TUiState;
   indexUiState: TUiState[keyof TUiState];
   setUiState(
