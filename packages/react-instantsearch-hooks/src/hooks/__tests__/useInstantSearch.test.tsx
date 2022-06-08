@@ -277,6 +277,7 @@ describe('useInstantSearch', () => {
       // 🚨 dispose doesn't remove middleware (because otherwise routing would break)
       // then unuse is called by this widget itself unmounting.
       // if only the component with useInstantSearch is unmounted, unsubscribe is called once.
+      // This is a problem in InstantSearch.js and will be fixed there.
       expect(unsubscribe).toHaveBeenCalledTimes(2);
     });
   });
