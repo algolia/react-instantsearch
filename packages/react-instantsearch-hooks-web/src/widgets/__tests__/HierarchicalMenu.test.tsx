@@ -51,11 +51,12 @@ describe('HierarchicalMenu', () => {
     );
 
     await waitFor(() => {
-      expect(
-        container.querySelectorAll('.ais-HierarchicalMenu-item')
-      ).toHaveLength(3);
       expect(searchClient.search).toHaveBeenCalledTimes(1);
     });
+
+    expect(
+      container.querySelectorAll('.ais-HierarchicalMenu-item')
+    ).toHaveLength(3);
 
     expect(container).toMatchInlineSnapshot(`
       <div>

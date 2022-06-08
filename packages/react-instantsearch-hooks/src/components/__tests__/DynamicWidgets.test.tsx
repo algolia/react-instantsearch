@@ -126,12 +126,14 @@ describe('DynamicWidgets', () => {
     );
 
     await waitFor(() => {
-      expect(container).toMatchInlineSnapshot(`
-<div>
-  RefinementList(brand)
-</div>
-`);
+      expect(searchClient.search).toHaveBeenCalledTimes(1);
     });
+
+    expect(container).toMatchInlineSnapshot(`
+      <div>
+        RefinementList(brand)
+      </div>
+    `);
 
     expect(indexContextRef.current!.getWidgets()).toEqual([
       expect.objectContaining({ $$type: 'ais.refinementList' }),
@@ -156,20 +158,22 @@ describe('DynamicWidgets', () => {
     );
 
     await waitFor(() => {
-      expect(container).toMatchInlineSnapshot(`
-<div>
-  <div
-    class="ais-Panel"
-  >
-    <div
-      class="ais-Panel-body"
-    >
-      RefinementList(brand)
-    </div>
-  </div>
-</div>
-`);
+      expect(searchClient.search).toHaveBeenCalledTimes(1);
     });
+
+    expect(container).toMatchInlineSnapshot(`
+      <div>
+        <div
+          class="ais-Panel"
+        >
+          <div
+            class="ais-Panel-body"
+          >
+            RefinementList(brand)
+          </div>
+        </div>
+      </div>
+    `);
 
     expect(indexContextRef.current!.getWidgets()).toEqual([
       expect.objectContaining({ $$type: 'ais.refinementList' }),
@@ -267,12 +271,14 @@ describe('DynamicWidgets', () => {
     );
 
     await waitFor(() => {
-      expect(container).toMatchInlineSnapshot(`
-<div>
-  RefinementList(brand)
-</div>
-`);
+      expect(searchClient.search).toHaveBeenCalledTimes(1);
     });
+
+    expect(container).toMatchInlineSnapshot(`
+      <div>
+        RefinementList(brand)
+      </div>
+    `);
 
     expect(indexContextRef.current!.getWidgets()).toEqual([
       expect.objectContaining({ $$type: 'ais.refinementList' }),
@@ -300,14 +306,16 @@ describe('DynamicWidgets', () => {
     );
 
     await waitFor(() => {
-      expect(container).toMatchInlineSnapshot(`
-<div>
-  RefinementList(brand)
-  Menu(categories)
-  Menu(hierarchicalCategories.lvl0)
-</div>
-`);
+      expect(searchClient.search).toHaveBeenCalledTimes(1);
     });
+
+    expect(container).toMatchInlineSnapshot(`
+      <div>
+        RefinementList(brand)
+        Menu(categories)
+        Menu(hierarchicalCategories.lvl0)
+      </div>
+    `);
 
     expect(indexContextRef.current!.getWidgets()).toEqual([
       expect.objectContaining({ $$type: 'ais.refinementList' }),
@@ -336,14 +344,16 @@ describe('DynamicWidgets', () => {
     );
 
     await waitFor(() => {
-      expect(container).toMatchInlineSnapshot(`
-<div>
-  RefinementList(brand)
-  Menu(categories)
-  Menu(hierarchicalCategories.lvl0)
-</div>
-`);
+      expect(searchClient.search).toHaveBeenCalledTimes(1);
     });
+
+    expect(container).toMatchInlineSnapshot(`
+      <div>
+        RefinementList(brand)
+        Menu(categories)
+        Menu(hierarchicalCategories.lvl0)
+      </div>
+    `);
   });
 
   test('renders dynamic widgets in an Index', async () => {
@@ -361,12 +371,14 @@ describe('DynamicWidgets', () => {
     );
 
     await waitFor(() => {
-      expect(container).toMatchInlineSnapshot(`
-<div>
-  RefinementList(brand)
-</div>
-`);
+      expect(searchClient.search).toHaveBeenCalledTimes(1);
     });
+
+    expect(container).toMatchInlineSnapshot(`
+      <div>
+        RefinementList(brand)
+      </div>
+    `);
 
     const index = indexContextRef
       .current!.getWidgets()
@@ -405,12 +417,14 @@ describe('DynamicWidgets', () => {
     const { container, rerender } = render(<App attributes={['brand']} />);
 
     await waitFor(() => {
-      expect(container).toMatchInlineSnapshot(`
-<div>
-  RefinementList(brand)
-</div>
-`);
+      expect(searchClient.search).toHaveBeenCalledTimes(1);
     });
+
+    expect(container).toMatchInlineSnapshot(`
+      <div>
+        RefinementList(brand)
+      </div>
+    `);
 
     expect(indexContextRef.current!.getWidgets()).toEqual([
       expect.objectContaining({ $$type: 'ais.refinementList' }),
@@ -423,13 +437,14 @@ describe('DynamicWidgets', () => {
 
     await waitFor(() => {
       expect(searchClient.search).toHaveBeenCalledTimes(3);
-      expect(container).toMatchInlineSnapshot(`
-<div>
-  RefinementList(brand)
-  Menu(categories)
-</div>
-`);
     });
+
+    expect(container).toMatchInlineSnapshot(`
+      <div>
+        RefinementList(brand)
+        Menu(categories)
+      </div>
+    `);
 
     expect(indexContextRef.current!.getWidgets()).toEqual([
       expect.objectContaining({ $$type: 'ais.refinementList' }),
@@ -443,12 +458,13 @@ describe('DynamicWidgets', () => {
 
     await waitFor(() => {
       expect(searchClient.search).toHaveBeenCalledTimes(5);
-      expect(container).toMatchInlineSnapshot(`
-<div>
-  RefinementList(brand)
-</div>
-`);
     });
+
+    expect(container).toMatchInlineSnapshot(`
+      <div>
+        RefinementList(brand)
+      </div>
+    `);
 
     expect(indexContextRef.current!.getWidgets()).toEqual([
       expect.objectContaining({ $$type: 'ais.refinementList' }),
