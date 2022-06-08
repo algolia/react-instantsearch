@@ -14,33 +14,38 @@ const attributes = [
   'hierarchicalCategories.lvl0',
   'hierarchicalCategories.lvl1',
 ];
-const search = jest.fn((requests) =>
-  Promise.resolve(
-    createMultiSearchResponse(
-      ...requests.map(() =>
-        createSingleSearchResponse({
-          facets: {
-            'hierarchicalCategories.lvl0': {
-              'Cameras & Camcorders': 1369,
-              'Video Games': 505,
-              'Wearable Technology': 271,
+
+function getNewSearchClient() {
+  const search = jest.fn((requests) =>
+    Promise.resolve(
+      createMultiSearchResponse(
+        ...requests.map(() =>
+          createSingleSearchResponse({
+            facets: {
+              'hierarchicalCategories.lvl0': {
+                'Cameras & Camcorders': 1369,
+                'Video Games': 505,
+                'Wearable Technology': 271,
+              },
+              'hierarchicalCategories.lvl1': {
+                'Cameras & Camcorders > Digital Cameras': 170,
+                'Cameras & Camcorders > Memory Cards': 113,
+              },
             },
-            'hierarchicalCategories.lvl1': {
-              'Cameras & Camcorders > Digital Cameras': 170,
-              'Cameras & Camcorders > Memory Cards': 113,
-            },
-          },
-        })
+          })
+        )
       )
     )
-  )
-);
+  );
+
+  return createSearchClient({ search });
+}
 
 describe('HierarchicalMenu', () => {
   test('renders with props', async () => {
-    const client = createSearchClient({ search });
+    const searchClient = getNewSearchClient();
     const { container } = render(
-      <InstantSearchHooksTestWrapper searchClient={client}>
+      <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <HierarchicalMenu attributes={attributes} />
       </InstantSearchHooksTestWrapper>
     );
@@ -49,7 +54,7 @@ describe('HierarchicalMenu', () => {
       expect(
         container.querySelectorAll('.ais-HierarchicalMenu-item')
       ).toHaveLength(3);
-      expect(client.search).toHaveBeenCalledTimes(1);
+      expect(searchClient.search).toHaveBeenCalledTimes(1);
     });
 
     expect(container).toMatchInlineSnapshot(`
@@ -136,8 +141,8 @@ describe('HierarchicalMenu', () => {
       expect(firstCategory).toHaveClass('ais-HierarchicalMenu-item--selected');
 
       // Once on load, once on check
-      expect(client.search).toHaveBeenCalledTimes(2);
-      expect(client.search).toHaveBeenLastCalledWith(
+      expect(searchClient.search).toHaveBeenCalledTimes(2);
+      expect(searchClient.search).toHaveBeenLastCalledWith(
         expect.arrayContaining([
           expect.objectContaining({
             params: expect.objectContaining({
@@ -152,9 +157,9 @@ describe('HierarchicalMenu', () => {
   });
 
   test('limits the number of items to display', async () => {
-    const client = createSearchClient({ search });
+    const searchClient = getNewSearchClient();
     const { container } = render(
-      <InstantSearchHooksTestWrapper searchClient={client}>
+      <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <HierarchicalMenu attributes={attributes} limit={1} />
       </InstantSearchHooksTestWrapper>
     );
@@ -199,9 +204,9 @@ describe('HierarchicalMenu', () => {
   });
 
   test('transforms the items', async () => {
-    const client = createSearchClient({ search });
+    const searchClient = getNewSearchClient();
     const { container } = render(
-      <InstantSearchHooksTestWrapper searchClient={client}>
+      <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <HierarchicalMenu
           attributes={attributes}
           transformItems={(items) =>
@@ -226,9 +231,9 @@ describe('HierarchicalMenu', () => {
 
   describe('sorting', () => {
     test('sorts the items by ascending name', async () => {
-      const client = createSearchClient({ search });
+      const searchClient = getNewSearchClient();
       const { container } = render(
-        <InstantSearchHooksTestWrapper searchClient={client}>
+        <InstantSearchHooksTestWrapper searchClient={searchClient}>
           <HierarchicalMenu attributes={attributes} sortBy={['name:asc']} />
         </InstantSearchHooksTestWrapper>
       );
@@ -247,9 +252,9 @@ describe('HierarchicalMenu', () => {
     });
 
     test('sorts the items by descending name', async () => {
-      const client = createSearchClient({ search });
+      const searchClient = getNewSearchClient();
       const { container } = render(
-        <InstantSearchHooksTestWrapper searchClient={client}>
+        <InstantSearchHooksTestWrapper searchClient={searchClient}>
           <HierarchicalMenu attributes={attributes} sortBy={['name:desc']} />
         </InstantSearchHooksTestWrapper>
       );
@@ -268,9 +273,9 @@ describe('HierarchicalMenu', () => {
     });
 
     test('sorts the items by count', async () => {
-      const client = createSearchClient({ search });
+      const searchClient = getNewSearchClient();
       const { container } = render(
-        <InstantSearchHooksTestWrapper searchClient={client}>
+        <InstantSearchHooksTestWrapper searchClient={searchClient}>
           <HierarchicalMenu attributes={attributes} sortBy={['count']} />
         </InstantSearchHooksTestWrapper>
       );
@@ -285,9 +290,9 @@ describe('HierarchicalMenu', () => {
     });
 
     test('sorts the items by refinement state', async () => {
-      const client = createSearchClient({ search });
+      const searchClient = getNewSearchClient();
       const { container, findByText } = render(
-        <InstantSearchHooksTestWrapper searchClient={client}>
+        <InstantSearchHooksTestWrapper searchClient={searchClient}>
           <HierarchicalMenu
             attributes={attributes}
             sortBy={['isRefined', 'name']}
@@ -343,9 +348,9 @@ describe('HierarchicalMenu', () => {
     });
 
     test('sorts the items using a sorting function', async () => {
-      const client = createSearchClient({ search });
+      const searchClient = getNewSearchClient();
       const { container } = render(
-        <InstantSearchHooksTestWrapper searchClient={client}>
+        <InstantSearchHooksTestWrapper searchClient={searchClient}>
           <HierarchicalMenu
             attributes={attributes}
             sortBy={(a, b) => b.name.localeCompare(a.name)}
@@ -369,9 +374,9 @@ describe('HierarchicalMenu', () => {
 
   describe('Show more / less', () => {
     test('displays a "Show more" button', async () => {
-      const client = createSearchClient({ search });
+      const searchClient = getNewSearchClient();
       const { container } = render(
-        <InstantSearchHooksTestWrapper searchClient={client}>
+        <InstantSearchHooksTestWrapper searchClient={searchClient}>
           <HierarchicalMenu attributes={attributes} limit={1} showMore={true} />
         </InstantSearchHooksTestWrapper>
       );
@@ -435,9 +440,9 @@ describe('HierarchicalMenu', () => {
     });
 
     test('limits the number of items to reveal', async () => {
-      const client = createSearchClient({ search });
+      const searchClient = getNewSearchClient();
       const { container } = render(
-        <InstantSearchHooksTestWrapper searchClient={client}>
+        <InstantSearchHooksTestWrapper searchClient={searchClient}>
           <HierarchicalMenu
             attributes={attributes}
             limit={1}
@@ -470,9 +475,9 @@ describe('HierarchicalMenu', () => {
   });
 
   test('forwards custom class names and `div` props to the root element', () => {
-    const client = createSearchClient({ search });
+    const searchClient = getNewSearchClient();
     const { container } = render(
-      <InstantSearchHooksTestWrapper searchClient={client}>
+      <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <HierarchicalMenu
           attributes={attributes}
           className="MyHierarchicalMenu"

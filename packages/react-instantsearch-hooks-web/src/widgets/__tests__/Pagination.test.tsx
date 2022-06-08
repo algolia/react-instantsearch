@@ -10,28 +10,26 @@ import {
 import { InstantSearchHooksTestWrapper } from '../../../../../test/utils';
 import { Pagination } from '../Pagination';
 
-const searchClient = createSearchClient({
-  search: jest.fn((requests) =>
-    Promise.resolve(
-      createMultiSearchResponse(
-        ...requests.map((request) =>
-          createSingleSearchResponse({
-            hits: Array.from({ length: 1000 }).map((_, index) => ({
-              objectID: String(index),
-            })),
-            index: request.indexName,
-          })
+function getNewSearchClient() {
+  return createSearchClient({
+    search: jest.fn((requests) =>
+      Promise.resolve(
+        createMultiSearchResponse(
+          ...requests.map((request) =>
+            createSingleSearchResponse({
+              hits: Array.from({ length: 1000 }).map((_, index) => ({
+                objectID: String(index),
+              })),
+              index: request.indexName,
+            })
+          )
         )
       )
-    )
-  ),
-});
+    ),
+  });
+}
 
 describe('Pagination', () => {
-  beforeEach(() => {
-    searchClient.search.mockClear();
-  });
-
   test('renders with default props', async () => {
     const { container } = render(
       <InstantSearchHooksTestWrapper>
@@ -111,6 +109,7 @@ describe('Pagination', () => {
   });
 
   test('renders with props', async () => {
+    const searchClient = getNewSearchClient();
     const { container } = render(
       <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <Pagination />
@@ -272,6 +271,7 @@ describe('Pagination', () => {
   });
 
   test('navigates between pages', async () => {
+    const searchClient = getNewSearchClient();
     const { container, getByText } = render(
       <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <Pagination />
@@ -1208,6 +1208,7 @@ describe('Pagination', () => {
   });
 
   test('does not navigate when pressing a modifier key', async () => {
+    const searchClient = getNewSearchClient();
     const { getByText } = render(
       <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <Pagination />
@@ -1276,6 +1277,7 @@ describe('Pagination', () => {
   });
 
   test('adds items around the current one', async () => {
+    const searchClient = getNewSearchClient();
     const { container } = render(
       <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <Pagination padding={4} />
@@ -1595,6 +1597,7 @@ describe('Pagination', () => {
   });
 
   test('limits the total pages to display', async () => {
+    const searchClient = getNewSearchClient();
     const { container } = render(
       <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <Pagination totalPages={4} />

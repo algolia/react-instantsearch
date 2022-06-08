@@ -24,25 +24,24 @@ describe('Breadcrumb', () => {
   };
   const hierarchicalAttributes = Object.keys(hierarchicalFacets);
 
-  const searchClient = createSearchClient({
-    search: jest.fn((requests) =>
-      Promise.resolve(
-        createMultiSearchResponse(
-          ...requests.map(() =>
-            createSingleSearchResponse({
-              facets: hierarchicalFacets,
-            })
+  function getNewSearchClient() {
+    return createSearchClient({
+      search: jest.fn((requests) =>
+        Promise.resolve(
+          createMultiSearchResponse(
+            ...requests.map(() =>
+              createSingleSearchResponse({
+                facets: hierarchicalFacets,
+              })
+            )
           )
         )
-      )
-    ),
-  });
-
-  beforeEach(() => {
-    searchClient.search.mockClear();
-  });
+      ),
+    });
+  }
 
   test('renders with props', async () => {
+    const searchClient = getNewSearchClient();
     const { container } = render(
       <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <VirtualHierarchicalMenu attributes={hierarchicalAttributes} />
@@ -77,6 +76,7 @@ describe('Breadcrumb', () => {
   });
 
   test('renders with initial refinements', async () => {
+    const searchClient = getNewSearchClient();
     const { container } = render(
       <InstantSearchHooksTestWrapper
         searchClient={searchClient}
@@ -149,6 +149,7 @@ describe('Breadcrumb', () => {
   });
 
   test('transforms the items', async () => {
+    const searchClient = getNewSearchClient();
     const { container } = render(
       <InstantSearchHooksTestWrapper
         searchClient={searchClient}
@@ -188,6 +189,7 @@ describe('Breadcrumb', () => {
   });
 
   test('navigates to a parent category', async () => {
+    const searchClient = getNewSearchClient();
     const { container, getByText } = render(
       <InstantSearchHooksTestWrapper
         searchClient={searchClient}
@@ -275,6 +277,7 @@ describe('Breadcrumb', () => {
   });
 
   test('forwards custom class names and `div` props to the root element', () => {
+    const searchClient = getNewSearchClient();
     const { container } = render(
       <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <VirtualHierarchicalMenu attributes={hierarchicalAttributes} />

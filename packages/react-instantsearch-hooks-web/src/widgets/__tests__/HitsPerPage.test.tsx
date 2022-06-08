@@ -6,14 +6,13 @@ import { createSearchClient } from '../../../../../test/mock';
 import { InstantSearchHooksTestWrapper } from '../../../../../test/utils';
 import { HitsPerPage } from '../HitsPerPage';
 
-const searchClient = createSearchClient({});
+function getNewSearchClient() {
+  return createSearchClient({});
+}
 
 describe('HitsPerPage', () => {
-  beforeEach(() => {
-    searchClient.search.mockClear();
-  });
-
   test('renders with props', async () => {
+    const searchClient = getNewSearchClient();
     const { container } = render(
       <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <HitsPerPage
@@ -61,6 +60,7 @@ describe('HitsPerPage', () => {
   });
 
   test('selects current value', async () => {
+    const searchClient = getNewSearchClient();
     const { getByRole } = render(
       <InstantSearchHooksTestWrapper
         searchClient={searchClient}
@@ -94,6 +94,7 @@ describe('HitsPerPage', () => {
   });
 
   test('refines on select', async () => {
+    const searchClient = getNewSearchClient();
     const { getByRole } = render(
       <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <HitsPerPage

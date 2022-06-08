@@ -14,41 +14,40 @@ type CustomHit = {
   somethingSpecial: string;
 };
 
-const searchClient = createSearchClient({
-  search: jest.fn((requests) =>
-    Promise.resolve(
-      createMultiSearchResponse(
-        ...requests.map((request) => {
-          const { hitsPerPage = 3, page = 0 } = request.params!;
-          const hits = Array.from({ length: hitsPerPage }, (_, i) => {
-            const offset = hitsPerPage * page;
-            return {
-              objectID: (i + offset).toString(),
-              somethingSpecial: String.fromCharCode(
-                'a'.charCodeAt(0) + i + offset
-              ),
-            };
-          });
+function getNewSearchClient() {
+  return createSearchClient({
+    search: jest.fn((requests) =>
+      Promise.resolve(
+        createMultiSearchResponse(
+          ...requests.map((request) => {
+            const { hitsPerPage = 3, page = 0 } = request.params!;
+            const hits = Array.from({ length: hitsPerPage }, (_, i) => {
+              const offset = hitsPerPage * page;
+              return {
+                objectID: (i + offset).toString(),
+                somethingSpecial: String.fromCharCode(
+                  'a'.charCodeAt(0) + i + offset
+                ),
+              };
+            });
 
-          return createSingleSearchResponse<CustomHit>({
-            hits,
-            page,
-            nbPages: 10,
-            hitsPerPage,
-            index: request.indexName,
-          });
-        })
+            return createSingleSearchResponse<CustomHit>({
+              hits,
+              page,
+              nbPages: 10,
+              hitsPerPage,
+              index: request.indexName,
+            });
+          })
+        )
       )
-    )
-  ),
-});
+    ),
+  });
+}
 
 describe('InfiniteHits', () => {
-  beforeEach(() => {
-    searchClient.search.mockClear();
-  });
-
   test('renders with default props', async () => {
+    const searchClient = getNewSearchClient();
     const { container } = render(
       <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <InfiniteHits />
@@ -115,6 +114,7 @@ describe('InfiniteHits', () => {
   });
 
   test('renders with a custom hit component', async () => {
+    const searchClient = getNewSearchClient();
     const { container } = render(
       <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <InfiniteHits<CustomHit>
@@ -174,6 +174,7 @@ describe('InfiniteHits', () => {
   });
 
   test('displays more hits when clicking the "Show More" button', async () => {
+    const searchClient = getNewSearchClient();
     const { container } = render(
       <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <InfiniteHits
@@ -226,6 +227,7 @@ describe('InfiniteHits', () => {
   });
 
   test('displays previous hits when clicking the "Show Previous" button', async () => {
+    const searchClient = getNewSearchClient();
     const { container } = render(
       <InstantSearchHooksTestWrapper
         searchClient={searchClient}
@@ -283,6 +285,7 @@ describe('InfiniteHits', () => {
   });
 
   test('hides the "Show Previous" button when `showPrevious` is `false`', async () => {
+    const searchClient = getNewSearchClient();
     const { container } = render(
       <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <InfiniteHits showPrevious={false} />
@@ -314,6 +317,7 @@ describe('InfiniteHits', () => {
   });
 
   test('marks the "Show Previous" button as disabled on first page', async () => {
+    const searchClient = getNewSearchClient();
     const { container } = render(
       <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <InfiniteHits />
@@ -339,6 +343,7 @@ describe('InfiniteHits', () => {
   });
 
   test('marks the "Show More" button as disabled on last page', async () => {
+    const searchClient = getNewSearchClient();
     const { container } = render(
       <InstantSearchHooksTestWrapper
         searchClient={searchClient}
@@ -363,6 +368,7 @@ describe('InfiniteHits', () => {
   });
 
   test('forwards custom class names and `div` props to the root element', () => {
+    const searchClient = getNewSearchClient();
     const { container } = render(
       <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <InfiniteHits

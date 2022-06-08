@@ -9,13 +9,11 @@ import { CurrentRefinements } from '../CurrentRefinements';
 
 import type { UseRefinementListProps } from 'react-instantsearch-hooks';
 
-const searchClient = createSearchClient({});
+function getNewSearchClient() {
+  return createSearchClient({});
+}
 
 describe('CurrentRefinements', () => {
-  beforeEach(() => {
-    searchClient.search.mockClear();
-  });
-
   test('renders with default props', async () => {
     const { container } = render(
       <InstantSearchHooksTestWrapper
@@ -123,6 +121,7 @@ describe('CurrentRefinements', () => {
   });
 
   test('renders with a specific set of class names when there are no refinements', async () => {
+    const searchClient = getNewSearchClient();
     const { container } = render(
       <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <CurrentRefinements />
@@ -300,6 +299,7 @@ describe('CurrentRefinements', () => {
   });
 
   test('does not trigger default event', async () => {
+    const searchClient = getNewSearchClient();
     const onSubmit = jest.fn();
 
     render(
@@ -332,6 +332,7 @@ describe('CurrentRefinements', () => {
   });
 
   test('does not clear when pressing a modifier key', async () => {
+    const searchClient = getNewSearchClient();
     const { container } = render(
       <InstantSearchHooksTestWrapper
         searchClient={searchClient}
@@ -447,6 +448,7 @@ describe('CurrentRefinements', () => {
   });
 
   test('inclusively restricts what refinements to display', async () => {
+    const searchClient = getNewSearchClient();
     const { container, queryByText } = render(
       <InstantSearchHooksTestWrapper
         searchClient={searchClient}
@@ -509,6 +511,7 @@ describe('CurrentRefinements', () => {
   });
 
   test('exclusively restricts what refinements to display', async () => {
+    const searchClient = getNewSearchClient();
     const { container, queryByText } = render(
       <InstantSearchHooksTestWrapper
         searchClient={searchClient}
@@ -571,6 +574,7 @@ describe('CurrentRefinements', () => {
   });
 
   test('restricts what refinements to display with custom logic', async () => {
+    const searchClient = getNewSearchClient();
     const { container, queryByText } = render(
       <InstantSearchHooksTestWrapper
         searchClient={searchClient}
