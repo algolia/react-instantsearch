@@ -14,7 +14,7 @@ type CustomHit = {
   somethingSpecial: string;
 };
 
-function getNewSearchClient() {
+function createMockedSearchClient() {
   return createSearchClient({
     search: jest.fn((requests) =>
       Promise.resolve(
@@ -47,7 +47,7 @@ function getNewSearchClient() {
 
 describe('InfiniteHits', () => {
   test('renders with default props', async () => {
-    const searchClient = getNewSearchClient();
+    const searchClient = createMockedSearchClient();
     const { container } = render(
       <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <InfiniteHits />
@@ -114,7 +114,7 @@ describe('InfiniteHits', () => {
   });
 
   test('renders with a custom hit component', async () => {
-    const searchClient = getNewSearchClient();
+    const searchClient = createMockedSearchClient();
     const { container } = render(
       <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <InfiniteHits<CustomHit>
@@ -174,7 +174,7 @@ describe('InfiniteHits', () => {
   });
 
   test('displays more hits when clicking the "Show More" button', async () => {
-    const searchClient = getNewSearchClient();
+    const searchClient = createMockedSearchClient();
     const { container } = render(
       <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <InfiniteHits
@@ -227,7 +227,7 @@ describe('InfiniteHits', () => {
   });
 
   test('displays previous hits when clicking the "Show Previous" button', async () => {
-    const searchClient = getNewSearchClient();
+    const searchClient = createMockedSearchClient();
     const { container } = render(
       <InstantSearchHooksTestWrapper
         searchClient={searchClient}
@@ -285,7 +285,7 @@ describe('InfiniteHits', () => {
   });
 
   test('hides the "Show Previous" button when `showPrevious` is `false`', async () => {
-    const searchClient = getNewSearchClient();
+    const searchClient = createMockedSearchClient();
     const { container } = render(
       <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <InfiniteHits showPrevious={false} />
@@ -317,7 +317,7 @@ describe('InfiniteHits', () => {
   });
 
   test('marks the "Show Previous" button as disabled on first page', async () => {
-    const searchClient = getNewSearchClient();
+    const searchClient = createMockedSearchClient();
     const { container } = render(
       <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <InfiniteHits />
@@ -343,7 +343,7 @@ describe('InfiniteHits', () => {
   });
 
   test('marks the "Show More" button as disabled on last page', async () => {
-    const searchClient = getNewSearchClient();
+    const searchClient = createMockedSearchClient();
     const { container } = render(
       <InstantSearchHooksTestWrapper
         searchClient={searchClient}
@@ -368,7 +368,7 @@ describe('InfiniteHits', () => {
   });
 
   test('forwards custom class names and `div` props to the root element', () => {
-    const searchClient = getNewSearchClient();
+    const searchClient = createMockedSearchClient();
     const { container } = render(
       <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <InfiniteHits

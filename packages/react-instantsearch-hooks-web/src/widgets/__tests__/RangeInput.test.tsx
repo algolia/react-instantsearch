@@ -10,7 +10,7 @@ import {
 import { InstantSearchHooksTestWrapper } from '../../../../../test/utils';
 import { RangeInput } from '../RangeInput';
 
-function getNewSearchClient() {
+function createMockedSearchClient() {
   return createSearchClient({
     search: jest.fn((requests) => {
       return Promise.resolve(
@@ -38,7 +38,7 @@ function getNewSearchClient() {
 
 describe('RangeInput', () => {
   test('renders with default props', async () => {
-    const searchClient = getNewSearchClient();
+    const searchClient = createMockedSearchClient();
     const { container } = render(
       <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <RangeInput attribute="price" />
@@ -101,7 +101,7 @@ describe('RangeInput', () => {
   });
 
   test('renders with initial refinements', async () => {
-    const searchClient = getNewSearchClient();
+    const searchClient = createMockedSearchClient();
     const { container } = render(
       <InstantSearchHooksTestWrapper
         searchClient={searchClient}
@@ -128,7 +128,7 @@ describe('RangeInput', () => {
   });
 
   test('renders with precision', async () => {
-    const searchClient = getNewSearchClient();
+    const searchClient = createMockedSearchClient();
     const { container } = render(
       <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <RangeInput attribute="price" precision={2} />
@@ -145,7 +145,7 @@ describe('RangeInput', () => {
   });
 
   test('refines on submit', async () => {
-    const searchClient = getNewSearchClient();
+    const searchClient = createMockedSearchClient();
     const { container } = render(
       <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <RangeInput attribute="price" />
@@ -181,7 +181,7 @@ describe('RangeInput', () => {
   });
 
   test('forwards custom class names and `div` props to the root element', () => {
-    const searchClient = getNewSearchClient();
+    const searchClient = createMockedSearchClient();
     const { container } = render(
       <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <RangeInput

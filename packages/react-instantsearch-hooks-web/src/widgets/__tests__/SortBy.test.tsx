@@ -20,6 +20,10 @@ describe('SortBy', () => {
       </InstantSearchHooksTestWrapper>
     );
 
+    expect(document.querySelector('.ais-SortBy-select')).toHaveValue(
+      'instant_search'
+    );
+
     expect(container).toMatchInlineSnapshot(`
       <div>
         <div

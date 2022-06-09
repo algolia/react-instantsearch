@@ -24,7 +24,7 @@ describe('Breadcrumb', () => {
   };
   const hierarchicalAttributes = Object.keys(hierarchicalFacets);
 
-  function getNewSearchClient() {
+  function createMockedSearchClient() {
     return createSearchClient({
       search: jest.fn((requests) =>
         Promise.resolve(
@@ -41,7 +41,7 @@ describe('Breadcrumb', () => {
   }
 
   test('renders with props', async () => {
-    const searchClient = getNewSearchClient();
+    const searchClient = createMockedSearchClient();
     const { container } = render(
       <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <VirtualHierarchicalMenu attributes={hierarchicalAttributes} />
@@ -76,7 +76,7 @@ describe('Breadcrumb', () => {
   });
 
   test('renders with initial refinements', async () => {
-    const searchClient = getNewSearchClient();
+    const searchClient = createMockedSearchClient();
     const { container } = render(
       <InstantSearchHooksTestWrapper
         searchClient={searchClient}
@@ -149,7 +149,7 @@ describe('Breadcrumb', () => {
   });
 
   test('transforms the items', async () => {
-    const searchClient = getNewSearchClient();
+    const searchClient = createMockedSearchClient();
     const { container } = render(
       <InstantSearchHooksTestWrapper
         searchClient={searchClient}
@@ -189,7 +189,7 @@ describe('Breadcrumb', () => {
   });
 
   test('navigates to a parent category', async () => {
-    const searchClient = getNewSearchClient();
+    const searchClient = createMockedSearchClient();
     const { container, getByText } = render(
       <InstantSearchHooksTestWrapper
         searchClient={searchClient}
@@ -277,7 +277,7 @@ describe('Breadcrumb', () => {
   });
 
   test('forwards custom class names and `div` props to the root element', () => {
-    const searchClient = getNewSearchClient();
+    const searchClient = createMockedSearchClient();
     const { container } = render(
       <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <VirtualHierarchicalMenu attributes={hierarchicalAttributes} />

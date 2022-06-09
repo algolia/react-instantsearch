@@ -15,13 +15,9 @@ import type {
   UseCurrentRefinementsProps,
 } from 'react-instantsearch-hooks';
 
-function getNewSearchClient() {
-  return createSearchClient({});
-}
-
 describe('ClearRefinements', () => {
   test('renders with default props', async () => {
-    const searchClient = getNewSearchClient();
+    const searchClient = createSearchClient({});
     const { container } = render(
       <InstantSearchHooksTestWrapper
         searchClient={searchClient}
@@ -56,7 +52,7 @@ describe('ClearRefinements', () => {
   });
 
   test('renders with a disabled button when there are no refinements', async () => {
-    const searchClient = getNewSearchClient();
+    const searchClient = createSearchClient({});
     const { container } = render(
       <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <ClearRefinements />
@@ -86,7 +82,7 @@ describe('ClearRefinements', () => {
   });
 
   test('clears all refinements', async () => {
-    const searchClient = getNewSearchClient();
+    const searchClient = createSearchClient({});
     const { container, queryAllByRole } = render(
       <InstantSearchHooksTestWrapper
         searchClient={searchClient}
@@ -158,7 +154,7 @@ describe('ClearRefinements', () => {
   });
 
   test('inclusively restricts what refinements to clear', async () => {
-    const searchClient = getNewSearchClient();
+    const searchClient = createSearchClient({});
     const { container, queryAllByRole } = render(
       <InstantSearchHooksTestWrapper
         searchClient={searchClient}
@@ -252,7 +248,7 @@ describe('ClearRefinements', () => {
   });
 
   test('exclusively restricts what refinements to clear', async () => {
-    const searchClient = getNewSearchClient();
+    const searchClient = createSearchClient({});
     const { container, queryAllByRole } = render(
       <InstantSearchHooksTestWrapper
         searchClient={searchClient}
@@ -346,7 +342,7 @@ describe('ClearRefinements', () => {
   });
 
   test('restricts what refinements to clear with custom logic', async () => {
-    const searchClient = getNewSearchClient();
+    const searchClient = createSearchClient({});
     const { container, queryAllByRole } = render(
       <InstantSearchHooksTestWrapper
         searchClient={searchClient}

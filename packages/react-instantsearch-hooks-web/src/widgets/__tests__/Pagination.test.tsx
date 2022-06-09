@@ -10,7 +10,7 @@ import {
 import { InstantSearchHooksTestWrapper } from '../../../../../test/utils';
 import { Pagination } from '../Pagination';
 
-function getNewSearchClient() {
+function createMockedSearchClient() {
   return createSearchClient({
     search: jest.fn((requests) =>
       Promise.resolve(
@@ -109,7 +109,7 @@ describe('Pagination', () => {
   });
 
   test('renders with props', async () => {
-    const searchClient = getNewSearchClient();
+    const searchClient = createMockedSearchClient();
     const { container } = render(
       <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <Pagination />
@@ -271,7 +271,7 @@ describe('Pagination', () => {
   });
 
   test('navigates between pages', async () => {
-    const searchClient = getNewSearchClient();
+    const searchClient = createMockedSearchClient();
     const { container, getByText } = render(
       <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <Pagination />
@@ -1208,7 +1208,7 @@ describe('Pagination', () => {
   });
 
   test('does not navigate when pressing a modifier key', async () => {
-    const searchClient = getNewSearchClient();
+    const searchClient = createMockedSearchClient();
     const { getByText } = render(
       <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <Pagination />
@@ -1277,7 +1277,7 @@ describe('Pagination', () => {
   });
 
   test('adds items around the current one', async () => {
-    const searchClient = getNewSearchClient();
+    const searchClient = createMockedSearchClient();
     const { container } = render(
       <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <Pagination padding={4} />
@@ -1597,7 +1597,7 @@ describe('Pagination', () => {
   });
 
   test('limits the total pages to display', async () => {
-    const searchClient = getNewSearchClient();
+    const searchClient = createMockedSearchClient();
     const { container } = render(
       <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <Pagination totalPages={4} />

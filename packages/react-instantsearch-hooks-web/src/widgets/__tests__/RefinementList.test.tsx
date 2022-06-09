@@ -11,7 +11,7 @@ import {
 import { InstantSearchHooksTestWrapper } from '../../../../../test/utils';
 import { RefinementList } from '../RefinementList';
 
-function getNewSearchClient(parameters: Record<string, any> = {}) {
+function createMockedSearchClient(parameters: Record<string, any> = {}) {
   return createSearchClient({
     search: jest.fn((requests) => {
       return Promise.resolve(
@@ -112,7 +112,7 @@ function getNewSearchClient(parameters: Record<string, any> = {}) {
 
 describe('RefinementList', () => {
   test('renders with props', async () => {
-    const searchClient = getNewSearchClient();
+    const searchClient = createMockedSearchClient();
     const { container } = render(
       <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <RefinementList attribute="brand" />
@@ -396,7 +396,7 @@ describe('RefinementList', () => {
   });
 
   test('enables conjunctive faceting', async () => {
-    const searchClient = getNewSearchClient();
+    const searchClient = createMockedSearchClient();
     const { container } = render(
       <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <RefinementList attribute="brand" operator="and" />
@@ -432,7 +432,7 @@ describe('RefinementList', () => {
   });
 
   test('limits the number of items to display', async () => {
-    const searchClient = getNewSearchClient();
+    const searchClient = createMockedSearchClient();
     const { container } = render(
       <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <RefinementList attribute="brand" limit={5} />
@@ -575,7 +575,7 @@ describe('RefinementList', () => {
   });
 
   test('transforms the items', async () => {
-    const searchClient = getNewSearchClient();
+    const searchClient = createMockedSearchClient();
     const { container } = render(
       <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <RefinementList
@@ -612,7 +612,7 @@ describe('RefinementList', () => {
 
   describe('sorting', () => {
     test('sorts the items by ascending name', async () => {
-      const searchClient = getNewSearchClient();
+      const searchClient = createMockedSearchClient();
       const { container } = render(
         <InstantSearchHooksTestWrapper searchClient={searchClient}>
           <RefinementList attribute="brand" sortBy={['name:asc']} />
@@ -640,7 +640,7 @@ describe('RefinementList', () => {
     });
 
     test('sorts the items by descending name', async () => {
-      const searchClient = getNewSearchClient();
+      const searchClient = createMockedSearchClient();
       const { container } = render(
         <InstantSearchHooksTestWrapper searchClient={searchClient}>
           <RefinementList attribute="brand" sortBy={['name:desc']} />
@@ -668,7 +668,7 @@ describe('RefinementList', () => {
     });
 
     test('sorts the items by count', async () => {
-      const searchClient = getNewSearchClient();
+      const searchClient = createMockedSearchClient();
       const { container } = render(
         <InstantSearchHooksTestWrapper searchClient={searchClient}>
           <RefinementList attribute="brand" sortBy={['count']} />
@@ -696,7 +696,7 @@ describe('RefinementList', () => {
     });
 
     test('sorts the items by refinement state', async () => {
-      const searchClient = getNewSearchClient();
+      const searchClient = createMockedSearchClient();
       const { container } = render(
         <InstantSearchHooksTestWrapper searchClient={searchClient}>
           <RefinementList attribute="brand" sortBy={['isRefined']} />
@@ -752,7 +752,7 @@ describe('RefinementList', () => {
     });
 
     test('sorts the items using a sorting function', async () => {
-      const searchClient = getNewSearchClient();
+      const searchClient = createMockedSearchClient();
       const { container } = render(
         <InstantSearchHooksTestWrapper searchClient={searchClient}>
           <RefinementList
@@ -785,7 +785,7 @@ describe('RefinementList', () => {
 
   describe('searching', () => {
     test('displays a search box', async () => {
-      const searchClient = getNewSearchClient();
+      const searchClient = createMockedSearchClient();
       const { container } = render(
         <InstantSearchHooksTestWrapper searchClient={searchClient}>
           <RefinementList
@@ -870,7 +870,7 @@ describe('RefinementList', () => {
     });
 
     test('displays a fallback when there are no results', async () => {
-      const searchClient = getNewSearchClient({
+      const searchClient = createMockedSearchClient({
         searchForFacetValues: jest.fn(() =>
           Promise.resolve([createSFFVResponse({ facetHits: [] })])
         ),
@@ -1017,7 +1017,7 @@ describe('RefinementList', () => {
 
   describe('Show more / less', () => {
     test('displays a "Show more" button', async () => {
-      const searchClient = getNewSearchClient();
+      const searchClient = createMockedSearchClient();
       const { container } = render(
         <InstantSearchHooksTestWrapper searchClient={searchClient}>
           <RefinementList attribute="brand" showMore={true} />
@@ -1295,7 +1295,7 @@ describe('RefinementList', () => {
     });
 
     test('limits the number of items to reveal', async () => {
-      const searchClient = getNewSearchClient();
+      const searchClient = createMockedSearchClient();
       const { container } = render(
         <InstantSearchHooksTestWrapper searchClient={searchClient}>
           <RefinementList
@@ -1334,7 +1334,7 @@ describe('RefinementList', () => {
   });
 
   test('forwards custom class names and `div` props to the root element', () => {
-    const searchClient = getNewSearchClient();
+    const searchClient = createMockedSearchClient();
     const { container } = render(
       <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <RefinementList
