@@ -643,6 +643,9 @@ describe('useConnector', () => {
 
     rerender(<App callback={() => {}} />);
 
+    // This checks that InstantSearch doesn't re-render endlessly. We should
+    // still be able to optimize this render count to `1`, but `2` is acceptable
+    // for now compared to an infinite loop.
     await waitFor(() => expect(searchClient.search).toHaveBeenCalledTimes(2));
     expect(indexContext.current!.removeWidgets).toHaveBeenCalledTimes(1);
     expect(indexContext.current!.addWidgets).toHaveBeenCalledTimes(2);
