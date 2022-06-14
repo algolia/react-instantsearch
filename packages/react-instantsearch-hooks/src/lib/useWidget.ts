@@ -28,7 +28,7 @@ export function useWidget<TWidget extends Widget | IndexWidget, TProps>({
   }, [widget]);
 
   const cleanupTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const shouldSsrRender =
+  const shouldAddWidgetEarly =
     shouldSsr && !parentIndex.getWidgets().includes(widget);
 
   // This effect is responsible for adding, removing, and updating the widget.
@@ -43,7 +43,7 @@ export function useWidget<TWidget extends Widget | IndexWidget, TProps>({
 
     // Scenario 1: the widget is added for the first time.
     if (cleanupTimerRef.current === null) {
-      if (!shouldSsrRender) {
+      if (!shouldAddWidgetEarly) {
         parentIndex.addWidgets([widget]);
       }
     }
@@ -76,9 +76,9 @@ export function useWidget<TWidget extends Widget | IndexWidget, TProps>({
       // we're able to cancel it in the next effect.
       cleanupTimerRef.current = setTimeout(cleanup);
     };
-  }, [parentIndex, widget, shouldSsrRender]);
+  }, [parentIndex, widget, shouldAddWidgetEarly]);
 
-  if (shouldSsrRender) {
+  if (shouldAddWidgetEarly) {
     parentIndex.addWidgets([widget]);
   }
 }
