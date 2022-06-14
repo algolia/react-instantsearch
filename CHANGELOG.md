@@ -1,3 +1,19 @@
+# [6.28.0](https://github.com/algolia/react-instantsearch/compare/v6.27.0...v6.28.0) (2022-06-14)
+
+
+### Bug Fixes
+
+* **hooks-server:** import react server via an expression ([#3515](https://github.com/algolia/react-instantsearch/issues/3515)) ([91b96f7](https://github.com/algolia/react-instantsearch/commit/91b96f743b9315ed5ea781681b77fc7f5604ab6e)), closes [#3512](https://github.com/algolia/react-instantsearch/issues/3512)
+* **hooks-web:** fix duplicated key in <CurrentRefinements> ([#3513](https://github.com/algolia/react-instantsearch/issues/3513)) ([fc94d80](https://github.com/algolia/react-instantsearch/commit/fc94d806daf139f58b234cdc0b450da2efe861ee))
+* **types:** allow useInstantSearch to be generic ([#3508](https://github.com/algolia/react-instantsearch/issues/3508)) ([6807232](https://github.com/algolia/react-instantsearch/commit/68072324cf302801502a1b4c3d06703e57b55a97)), closes [algolia/instantsearch.js#5060](https://github.com/algolia/instantsearch.js/issues/5060)
+
+
+### Features
+
+* **hooks:** introduce `useInstantSearch()` ([#3494](https://github.com/algolia/react-instantsearch/issues/3494)) ([74d522c](https://github.com/algolia/react-instantsearch/commit/74d522c032326658f2a0b8f0001bd593e0085208))
+
+
+
 # [6.27.0](https://github.com/algolia/react-instantsearch/compare/v6.26.0...v6.27.0) (2022-06-07)
 
 
