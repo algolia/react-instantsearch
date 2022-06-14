@@ -14,7 +14,11 @@ import {
 } from 'react-instantsearch-hooks';
 import { Hits, RefinementList } from 'react-instantsearch-hooks-web';
 
-import { createSearchClient } from '../../../../test/mock';
+import {
+  createMultiSearchResponse,
+  createSearchClient,
+  createSingleSearchResponse,
+} from '../../../../test/mock';
 import { getServerState } from '../getServerState';
 
 import type {
@@ -28,10 +32,14 @@ function SearchBox() {
   return (
     <div className="ais-SearchBox">
       <form action="" className="ais-SearchBox-form" noValidate>
-        <input className="ais-SearchBox-input" type="search" value={query} />
+        <input className="ais-SearchBox-input" type="search" defaultValue={}={query}  />
       </form>
     </div>
   );
+}
+
+function Hit({ hit }) {
+  return <>{hit.objectID}</>;
 }
 
 type CreateTestEnvironmentProps = {
@@ -68,21 +76,21 @@ function createTestEnvironment({
         <SearchBox />
 
         <h2>instant_search</h2>
-        <Hits />
+        <Hits hitComponent={Hit} />
 
         <Index indexName="instant_search_price_asc">
           <h2>instant_search_price_asc</h2>
-          <Hits />
+          <Hits hitComponent={Hit} />
 
           <Index indexName="instant_search_rating_desc">
             <h2>instant_search_rating_desc</h2>
-            <Hits />
+            <Hits hitComponent={Hit} />
           </Index>
         </Index>
 
         <Index indexName="instant_search_price_desc">
           <h2>instant_search_price_desc</h2>
-          <Hits />
+          <Hits hitComponent={Hit} />
         </Index>
       </InstantSearch>
     );
@@ -380,7 +388,19 @@ describe('getServerState', () => {
   });
 
   test('returns HTML from server state', async () => {
-    const searchClient = createSearchClient({});
+    const searchClient = createSearchClient({
+      search: jest.fn((requests) =>
+        Promise.resolve(
+          createMultiSearchResponse(
+            ...requests.map(() =>
+              createSingleSearchResponse({
+                hits: [{ objectID: '1' }, { objectID: '2' }],
+              })
+            )
+          )
+        )
+      ),
+    });
     const { App } = createTestEnvironment({ searchClient });
 
     const serverState = await getServerState(<App />);
@@ -405,29 +425,53 @@ describe('getServerState', () => {
       <h2>
         instant_search
       </h2>
-      <div class="ais-Hits ais-Hits--empty">
+      <div class="ais-Hits">
         <ol class="ais-Hits-list">
+          <li class="ais-Hits-item">
+            1
+          </li>
+          <li class="ais-Hits-item">
+            2
+          </li>
         </ol>
       </div>
       <h2>
         instant_search_price_asc
       </h2>
-      <div class="ais-Hits ais-Hits--empty">
+      <div class="ais-Hits">
         <ol class="ais-Hits-list">
+          <li class="ais-Hits-item">
+            1
+          </li>
+          <li class="ais-Hits-item">
+            2
+          </li>
         </ol>
       </div>
       <h2>
         instant_search_rating_desc
       </h2>
-      <div class="ais-Hits ais-Hits--empty">
+      <div class="ais-Hits">
         <ol class="ais-Hits-list">
+          <li class="ais-Hits-item">
+            1
+          </li>
+          <li class="ais-Hits-item">
+            2
+          </li>
         </ol>
       </div>
       <h2>
         instant_search_price_desc
       </h2>
-      <div class="ais-Hits ais-Hits--empty">
+      <div class="ais-Hits">
         <ol class="ais-Hits-list">
+          <li class="ais-Hits-item">
+            1
+          </li>
+          <li class="ais-Hits-item">
+            2
+          </li>
         </ol>
       </div>
     `);
