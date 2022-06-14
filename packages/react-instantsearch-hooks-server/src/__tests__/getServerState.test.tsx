@@ -32,7 +32,11 @@ function SearchBox() {
   return (
     <div className="ais-SearchBox">
       <form action="" className="ais-SearchBox-form" noValidate>
-        <input className="ais-SearchBox-input" type="search" defaultValue={}={query}  />
+        <input
+          className="ais-SearchBox-input"
+          type="search"
+          defaultValue={query}
+        />
       </form>
     </div>
   );
