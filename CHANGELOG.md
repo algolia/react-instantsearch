@@ -6,7 +6,6 @@
 * **hooks-server:** import react server via an expression ([#3515](https://github.com/algolia/react-instantsearch/issues/3515)) ([91b96f7](https://github.com/algolia/react-instantsearch/commit/91b96f743b9315ed5ea781681b77fc7f5604ab6e)), closes [#3512](https://github.com/algolia/react-instantsearch/issues/3512)
 * **hooks-web:** fix duplicated key in <CurrentRefinements> ([#3513](https://github.com/algolia/react-instantsearch/issues/3513)) ([fc94d80](https://github.com/algolia/react-instantsearch/commit/fc94d806daf139f58b234cdc0b450da2efe861ee))
 * **hooks:** mount widgets in SSR to retrieve HTML ([#3518](https://github.com/algolia/react-instantsearch/issues/3518)) ([aa5f9d8](https://github.com/algolia/react-instantsearch/commit/aa5f9d84ddb6e97d05e6ad1baf2c6caa23891281))
-* **tests:** react 18 compatibility ([#3480](https://github.com/algolia/react-instantsearch/issues/3480)) ([e2d6c20](https://github.com/algolia/react-instantsearch/commit/e2d6c204fa0eab2f27b2e6c75e3a42c6831e0c77))
 * **types:** allow useInstantSearch to be generic ([#3508](https://github.com/algolia/react-instantsearch/issues/3508)) ([6807232](https://github.com/algolia/react-instantsearch/commit/68072324cf302801502a1b4c3d06703e57b55a97)), closes [algolia/instantsearch.js#5060](https://github.com/algolia/instantsearch.js/issues/5060)
 * **types:** support React 18 types ([#3481](https://github.com/algolia/react-instantsearch/issues/3481)) ([74cf8cb](https://github.com/algolia/react-instantsearch/commit/74cf8cb9be8ff3d113b57a50e7083df0d1bc94f2))
 
