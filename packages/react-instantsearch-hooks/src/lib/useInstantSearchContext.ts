@@ -11,7 +11,7 @@ export function useInstantSearchContext<
   TUiState extends UiState,
   TRouteState = TUiState
 >() {
-  const search = useContext<InstantSearch<TUiState, TRouteState> | null>(
+  const search = useContext(
     InstantSearchContext as Context<InstantSearch<TUiState, TRouteState> | null>
   );
 
