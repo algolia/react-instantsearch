@@ -82,7 +82,7 @@
     "@wdio/selenium-standalone-service": "5.16.10",
     "@wdio/spec-reporter": "5.16.11",
     "@wdio/static-server-service": "5.16.10",
-    "@wojtekmaj/enzyme-adapter-react-17": "0.6.5",
+    "@wojtekmaj/enzyme-adapter-react-17": "0.6.7",
     "algoliasearch": "4.11.0",
     "argos-cli": "0.1.3",
     "babel-eslint": "10.1.0",
