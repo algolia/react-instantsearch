@@ -57,6 +57,10 @@ module.exports = {
   pullRequestTeamReviewers: ['frontend-experiences-web'],
   buildCommand: ({ version }) =>
     `NODE_ENV=production VERSION=${version} yarn build`,
+  // Make sure the local branch is in sync with remote
+  // before pushing the ref and the tag on it
+  afterPublish: ({ exec }) =>
+    exec('git fetch && git rebase origin/master master'),
   slack: {
     // disable slack notification for `prepared` lifecycle.
     // Ship.js will send slack message only for `releaseSuccess`.
