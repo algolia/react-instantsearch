@@ -1,3 +1,12 @@
+## [6.28.1](https://github.com/algolia/react-instantsearch/compare/v6.28.0...v6.28.1) (2022-06-21)
+
+
+### Bug Fixes
+
+* **HierarchicalMenu:** show full hierarchical parent values ([#3521](https://github.com/algolia/react-instantsearch/issues/3521)) ([79c3890](https://github.com/algolia/react-instantsearch/commit/79c3890848175a4d70311e5c3929c902bb953c10))
+
+
+
 # [6.28.0](https://github.com/algolia/react-instantsearch/compare/v6.27.0...v6.28.0) (2022-06-15)
 
 
