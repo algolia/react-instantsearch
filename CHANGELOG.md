@@ -8,7 +8,8 @@
 
 ### Features
 
-* **core:** sort parameters, support client.search for sffv ([#3528](https://github.com/algolia/react-instantsearch/issues/3528)) ([8320d99](https://github.com/algolia/react-instantsearch/commit/8320d995385e27f271134b014bab6ffa955b3986))
+* **core:** sort parameters for improved cache rate ([#3528](https://github.com/algolia/react-instantsearch/issues/3528)) ([8320d99](https://github.com/algolia/react-instantsearch/commit/8320d995385e27f271134b014bab6ffa955b3986))
+* **core:** support client.search for sffv ([#3528](https://github.com/algolia/react-instantsearch/issues/3528)) ([8320d99](https://github.com/algolia/react-instantsearch/commit/8320d995385e27f271134b014bab6ffa955b3986))
 
 
 
