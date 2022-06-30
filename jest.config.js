@@ -22,9 +22,9 @@ module.exports = {
   globals: {
     __DEV__: true,
   },
-  // reporter for circleci
   reporters: [
     'default',
+    'github-actions',
     [
       'jest-junit',
       {
