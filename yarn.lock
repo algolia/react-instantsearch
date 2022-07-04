@@ -26557,7 +26557,7 @@ react-compound-slider@2.2.0:
     prop-types "^15.7.2"
     warning "^3.0.0"
 
-react-compound-slider@^3.4.0:
+react-compound-slider@3.4.0:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/react-compound-slider/-/react-compound-slider-3.4.0.tgz#0367befe1367bb7968b38d0cbf07db6192b3c57e"
   integrity sha512-KSje/rB0xSvvcb7YV0+82hkiXTV5ljSS7axKrNiXLf9AEO+rrr1Xq4MJWA+6v030YNNo/RoSoEB6D6fnoy+8ng==
