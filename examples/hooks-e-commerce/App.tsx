@@ -203,11 +203,7 @@ export function App() {
           <NoResults />
 
           <footer className="container-footer">
-            <Pagination
-              padding={2}
-              showFirst={false}
-              showLast={false}
-            />
+            <Pagination padding={2} showFirst={false} showLast={false} />
           </footer>
         </section>
       </main>

@@ -141,11 +141,6 @@ const router = historyRouter<RouteState>({
       arrayFormat: 'repeat',
     });
 
-    console.log(categoryPath);
-    if (categoryPath === 'Appliances%2FWashers+%26+Dryers/') {
-      debugger;
-    }
-
     return `${baseUrl}/${categoryPath}${queryString}${hash}`;
   },
 
