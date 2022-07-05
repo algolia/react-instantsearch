@@ -51,10 +51,7 @@ const decodedCategories = Object.keys(encodedCategories).reduce((acc, key) => {
 function getCategorySlug(name: string): string {
   const encodedName = decodedCategories[name] || name;
 
-  return encodeURIComponent(encodedName.replace(/ /g, '+')).replace(
-    /%2F/g,
-    '/'
-  );
+  return encodedName.split(' ').map(encodeURIComponent).join('+');
 }
 
 // Returns a name from the category slug.
