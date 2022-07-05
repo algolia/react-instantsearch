@@ -89,6 +89,7 @@ export function PriceSlider({
 
   useEffect(() => {
     setTicksValues(convertToTicks(start, range));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [start]);
 
   const onChange = (values: readonly number[]) => {

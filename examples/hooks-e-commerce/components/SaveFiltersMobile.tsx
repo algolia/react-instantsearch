@@ -7,16 +7,15 @@ import {
 import { useConnector } from 'react-instantsearch-hooks-web';
 import { formatNumber } from '../utils';
 
-export function SaveFiltersMobile ({ onClick }: {onClick: () => void}) {
+export function SaveFiltersMobile({ onClick }: { onClick: () => void }) {
   const { nbHits } = useConnector<StatsConnectorParams, StatsWidgetDescription>(
     connectStats,
     {},
     { $$widgetType: 'e-commerce.stats' }
-  );  return (
+  );
+  return (
     <button className="button button-primary" onClick={onClick}>
       See {formatNumber(nbHits)} results
     </button>
-  )
-};
-
-
+  );
+}

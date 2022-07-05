@@ -24,13 +24,14 @@ import {
   PriceSlider,
   Ratings,
   ResultsNumberMobile,
-  SaveFiltersMobile
+  SaveFiltersMobile,
 } from './components';
 
 import './Theme.css';
 import './App.css';
 import './App.mobile.css';
 import { formatNumber } from './utils';
+import getRouting from './routing';
 
 const searchClient = algoliasearch(
   'latency',
@@ -75,7 +76,7 @@ export function App() {
     <InstantSearch
       searchClient={searchClient}
       indexName="instant_search"
-      routing={true}
+      routing={getRouting('instant_search')}
     >
       <header className="header" ref={headerRef}>
         <p className="header-logo">
