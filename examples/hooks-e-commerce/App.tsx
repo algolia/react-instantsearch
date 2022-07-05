@@ -29,6 +29,7 @@ import {
 
 import './Theme.css';
 import './App.css';
+import './components/Pagination.css';
 import './App.mobile.css';
 import { formatNumber } from './utils';
 import getRouting from './routing';
