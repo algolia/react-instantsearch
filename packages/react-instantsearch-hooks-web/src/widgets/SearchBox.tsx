@@ -33,7 +33,7 @@ export function SearchBox({ queryHook, ...props }: SearchBoxProps) {
   }
 
   function onChange(event: React.ChangeEvent<HTMLInputElement>) {
-    const targetValue = event.target.value;
+    const targetValue = event.currentTarget.value;
     setValue(targetValue);
     refine(targetValue);
   }
