@@ -2,7 +2,7 @@ import React from 'react';
 import { useClearRefinements } from 'react-instantsearch-hooks-web';
 
 export function ClearFilters() {
-  const { refine } = useClearRefinements(
+  const { refine, canRefine } = useClearRefinements(
     {},
     { $$widgetType: 'e-commerce.clearRefinements' }
   );
@@ -10,7 +10,10 @@ export function ClearFilters() {
   return (
     <div className="ais-ClearRefinements">
       <button
-        className="ais-ClearRefinements-button"
+        className={`ais-ClearRefinements-button ${
+          !canRefine ? 'ais-ClearRefinements-button--disabled' : ''
+        }`}
+        disabled={!canRefine}
         type="button"
         onClick={refine}
       >
