@@ -24,26 +24,28 @@ export function SearchBox({ queryHook, ...props }: SearchBoxProps) {
     { queryHook },
     { $$widgetType: 'ais.searchBox' }
   );
-  const [value, setValue] = useState(query);
+  const [inputValue, setInputValue] = useState(query);
   const inputRef = useRef<HTMLInputElement>(null);
 
+  function setQuery(newQuery: string) {
+    setInputValue(newQuery);
+    refine(newQuery);
+  }
+
   function onReset() {
-    setValue('');
-    refine('');
+    setQuery('');
   }
 
   function onChange(event: React.ChangeEvent<HTMLInputElement>) {
-    const targetValue = event.currentTarget.value;
-    setValue(targetValue);
-    refine(targetValue);
+    setQuery(event.currentTarget.value);
   }
 
   // Track when the InstantSearch query changes to synchronize it with
   // the React state.
   // We bypass the state update if the input is focused to avoid concurrent
   // updates when typing.
-  if (query !== value && document.activeElement !== inputRef.current) {
-    setValue(query);
+  if (query !== inputValue && document.activeElement !== inputRef.current) {
+    setInputValue(query);
   }
 
   const uiProps: UiProps = {
@@ -51,7 +53,7 @@ export function SearchBox({ queryHook, ...props }: SearchBoxProps) {
     isSearchStalled,
     onChange,
     onReset,
-    value,
+    value: inputValue,
     translations: {
       submitTitle: 'Submit the search query.',
       resetTitle: 'Clear the search query.',
