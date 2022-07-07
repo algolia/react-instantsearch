@@ -11,5 +11,5 @@ echo "building via parcel"
 
 (
   cd examples/hooks-e-commerce;
-  yarn build --dist-dir ../../website/examples/hooks-e-commerce;
+  yarn build --public-url /examples/hooks-e-commerce --dist-dir ../../website/examples/hooks-e-commerce;
 )
