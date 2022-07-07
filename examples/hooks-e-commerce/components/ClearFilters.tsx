@@ -2,10 +2,7 @@ import React from 'react';
 import { useClearRefinements } from 'react-instantsearch-hooks-web';
 
 export function ClearFilters() {
-  const { refine, canRefine } = useClearRefinements(
-    {},
-    { $$widgetType: 'e-commerce.clearRefinements' }
-  );
+  const { refine, canRefine } = useClearRefinements();
 
   return (
     <div className="ais-ClearRefinements">
