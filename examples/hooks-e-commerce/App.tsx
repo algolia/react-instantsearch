@@ -20,6 +20,7 @@ import {
   ClearFilters,
   ClearFiltersMobile,
   NoResults,
+  NoResultsBoundary,
   Panel,
   PriceSlider,
   Ratings,
@@ -38,6 +39,9 @@ const searchClient = algoliasearch(
   'latency',
   '6be0576ff61c053d5f9a3225e2a90f76'
 );
+
+const indexName = 'instant_search';
+const routing = getRouting(indexName);
 
 export function App() {
   const containerRef = useRef<HTMLElement>(null);
@@ -76,8 +80,8 @@ export function App() {
   return (
     <InstantSearch
       searchClient={searchClient}
-      indexName="instant_search"
-      routing={getRouting('instant_search')}
+      indexName={indexName}
+      routing={routing}
     >
       <header className="header" ref={headerRef}>
         <p className="header-logo">
@@ -200,8 +204,9 @@ export function App() {
             />
           </header>
 
-          <Hits hitComponent={Hit} />
-          <NoResults />
+          <NoResultsBoundary fallback={<NoResults />}>
+            <Hits hitComponent={Hit} />
+          </NoResultsBoundary>
 
           <footer className="container-footer">
             <Pagination padding={2} showFirst={false} showLast={false} />

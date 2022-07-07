@@ -5,10 +5,6 @@ import { ClearFilters } from './ClearFilters';
 export function NoResults() {
   const { results } = useInstantSearch();
 
-  if (!results || results.nbHits > 0 || results.__isArtificial) {
-    return null;
-  }
-
   const hasRefinements = results.getRefinements().length > 0;
   const description = hasRefinements
     ? 'Try to reset your applied filters.'
@@ -101,5 +97,3 @@ export function NoResults() {
     </div>
   );
 }
-
-// export default connectStateResults(NoResults);

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   Slider,
   Rail,
@@ -84,13 +84,13 @@ export function PriceSlider({
     min,
     max,
   });
-
   const [ticksValues, setTicksValues] = useState(convertToTicks(start, range));
-
-  useEffect(() => {
+  const [prevStart, setPrevStart] = useState(start);
+  
+  if (start !== prevStart) {
     setTicksValues(convertToTicks(start, range));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [start]);
+    setPrevStart(start);
+  }
 
   const onChange = (values: readonly number[]) => {
     refine(values as [number, number]);
