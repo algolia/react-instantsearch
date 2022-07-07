@@ -34,6 +34,7 @@ import './components/Pagination.css';
 import './App.mobile.css';
 import { formatNumber } from './utils';
 import getRouting from './routing';
+import { ScrollTo } from './components/ScrollTo';
 
 const searchClient = algoliasearch(
   'latency',
@@ -102,117 +103,119 @@ export function App() {
         removeWordsIfNoResults="allOptional"
       />
 
-      <main className="container" ref={containerRef}>
-        <div className="container-wrapper">
-          <section className="container-filters" onKeyUp={onKeyUp}>
-            <div className="container-header">
-              <h2>Filters</h2>
+      <ScrollTo>
+        <main className="container" ref={containerRef}>
+          <div className="container-wrapper">
+            <section className="container-filters" onKeyUp={onKeyUp}>
+              <div className="container-header">
+                <h2>Filters</h2>
 
-              <div className="clear-filters" data-layout="desktop">
-                <ClearFilters />
+                <div className="clear-filters" data-layout="desktop">
+                  <ClearFilters />
+                </div>
+
+                <div className="clear-filters" data-layout="mobile">
+                  <ResultsNumberMobile />
+                </div>
               </div>
 
-              <div className="clear-filters" data-layout="mobile">
-                <ResultsNumberMobile />
+              <div className="container-body">
+                <Panel header="Category">
+                  <HierarchicalMenu
+                    attributes={[
+                      'hierarchicalCategories.lvl0',
+                      'hierarchicalCategories.lvl1',
+                    ]}
+                  />
+                </Panel>
+
+                <Panel header="Brands">
+                  <RefinementList
+                    attribute="brand"
+                    searchable={true}
+                    searchablePlaceholder="Search for brands…"
+                  />
+                </Panel>
+
+                <Panel header="Price">
+                  <PriceSlider attribute="price" />
+                </Panel>
+
+                <Panel header="Free shipping">
+                  <ToggleRefinement
+                    attribute="free_shipping"
+                    label="Display only items with free shipping"
+                    on={true}
+                  />
+                </Panel>
+
+                <Panel header="Ratings">
+                  <Ratings attribute="rating" />
+                </Panel>
               </div>
-            </div>
+            </section>
 
-            <div className="container-body">
-              <Panel header="Category">
-                <HierarchicalMenu
-                  attributes={[
-                    'hierarchicalCategories.lvl0',
-                    'hierarchicalCategories.lvl1',
-                  ]}
-                />
-              </Panel>
+            <footer className="container-filters-footer" data-layout="mobile">
+              <div className="container-filters-footer-button-wrapper">
+                <ClearFiltersMobile containerRef={containerRef} />
+              </div>
 
-              <Panel header="Brands">
-                <RefinementList
-                  attribute="brand"
-                  searchable={true}
-                  searchablePlaceholder="Search for brands…"
-                />
-              </Panel>
+              <div className="container-filters-footer-button-wrapper">
+                <SaveFiltersMobile onClick={closeFilters} />
+              </div>
+            </footer>
+          </div>
 
-              <Panel header="Price">
-                <PriceSlider attribute="price" />
-              </Panel>
+          <section className="container-results">
+            <header className="container-header container-options">
+              <SortBy
+                className="container-option"
+                items={[
+                  {
+                    label: 'Sort by featured',
+                    value: 'instant_search',
+                  },
+                  {
+                    label: 'Price ascending',
+                    value: 'instant_search_price_asc',
+                  },
+                  {
+                    label: 'Price descending',
+                    value: 'instant_search_price_desc',
+                  },
+                ]}
+              />
 
-              <Panel header="Free shipping">
-                <ToggleRefinement
-                  attribute="free_shipping"
-                  label="Display only items with free shipping"
-                  on={true}
-                />
-              </Panel>
+              <HitsPerPage
+                className="container-option"
+                items={[
+                  {
+                    label: '16 hits per page',
+                    value: 16,
+                    default: true,
+                  },
+                  {
+                    label: '32 hits per page',
+                    value: 32,
+                  },
+                  {
+                    label: '64 hits per page',
+                    value: 64,
+                  },
+                ]}
+              />
+            </header>
 
-              <Panel header="Ratings">
-                <Ratings attribute="rating" />
-              </Panel>
-            </div>
+            <NoResultsBoundary fallback={<NoResults />}>
+              <Hits hitComponent={Hit} />
+            </NoResultsBoundary>
+
+            <footer className="container-footer">
+              <Pagination padding={2} showFirst={false} showLast={false} />
+            </footer>
           </section>
-
-          <footer className="container-filters-footer" data-layout="mobile">
-            <div className="container-filters-footer-button-wrapper">
-              <ClearFiltersMobile containerRef={containerRef} />
-            </div>
-
-            <div className="container-filters-footer-button-wrapper">
-              <SaveFiltersMobile onClick={closeFilters} />
-            </div>
-          </footer>
-        </div>
-
-        <section className="container-results">
-          <header className="container-header container-options">
-            <SortBy
-              className="container-option"
-              items={[
-                {
-                  label: 'Sort by featured',
-                  value: 'instant_search',
-                },
-                {
-                  label: 'Price ascending',
-                  value: 'instant_search_price_asc',
-                },
-                {
-                  label: 'Price descending',
-                  value: 'instant_search_price_desc',
-                },
-              ]}
-            />
-
-            <HitsPerPage
-              className="container-option"
-              items={[
-                {
-                  label: '16 hits per page',
-                  value: 16,
-                  default: true,
-                },
-                {
-                  label: '32 hits per page',
-                  value: 32,
-                },
-                {
-                  label: '64 hits per page',
-                  value: 64,
-                },
-              ]}
-            />
-          </header>
-
-          <NoResultsBoundary fallback={<NoResults />}>
-            <Hits hitComponent={Hit} />
-          </NoResultsBoundary>
-
-          <footer className="container-footer">
-            <Pagination padding={2} showFirst={false} showLast={false} />
-          </footer>
-        </section>
-      </main>
+        </main>
+      </ScrollTo>
 
       <aside data-layout="mobile">
         <button
