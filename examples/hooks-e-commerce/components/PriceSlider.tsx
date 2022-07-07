@@ -86,7 +86,7 @@ export function PriceSlider({
   });
   const [ticksValues, setTicksValues] = useState(convertToTicks(start, range));
   const [prevStart, setPrevStart] = useState(start);
-  
+
   if (start !== prevStart) {
     setTicksValues(convertToTicks(start, range));
     setPrevStart(start);

@@ -7,7 +7,7 @@ import {
   RatingMenuWidgetDescription,
 } from 'instantsearch.js/es/connectors/rating-menu/connectRatingMenu';
 
-export function Ratings({ attribute }: {attribute: string}) {
+export function Ratings({ attribute }: { attribute: string }) {
   const { refine, items, createURL } = useConnector<
     RatingMenuConnectorParams,
     RatingMenuWidgetDescription
