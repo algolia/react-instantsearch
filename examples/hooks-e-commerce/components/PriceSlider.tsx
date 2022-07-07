@@ -79,11 +79,14 @@ export function PriceSlider({
   min?: number;
   max?: number;
 }) {
-  const { range, start, refine, canRefine } = useRange({
-    attribute,
-    min,
-    max,
-  });
+  const { range, start, refine, canRefine } = useRange(
+    {
+      attribute,
+      min,
+      max,
+    },
+    { $$widgetType: 'e-commerce.rangeSlider' }
+  );
   const [ticksValues, setTicksValues] = useState(convertToTicks(start, range));
   const [prevStart, setPrevStart] = useState(start);
 

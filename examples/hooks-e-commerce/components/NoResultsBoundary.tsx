@@ -5,8 +5,8 @@ export function NoResultsBoundary({
   children,
   fallback,
 }: {
-  children: React.ReactElement;
-  fallback: React.ReactElement;
+  children: React.ReactNode;
+  fallback: React.ReactNode;
 }) {
   const { results } = useInstantSearch();
 
@@ -21,5 +21,5 @@ export function NoResultsBoundary({
     );
   }
 
-  return children;
+  return <>{children}</>;
 }
