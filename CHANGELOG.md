@@ -4,6 +4,7 @@
 ### Bug Fixes
 
 * **hooks:** provide state and results APIs from "render" event ([#3554](https://github.com/algolia/react-instantsearch/issues/3554)) ([67d4788](https://github.com/algolia/react-instantsearch/commit/67d4788ab09ec2a57b43d53e8093b8c11120b761))
+* **hooks**: update instantsearch.js dependency ([#3557](https://github.com/algolia/react-instantsearch/issues/3557)) 
 
 
 
