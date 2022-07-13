@@ -1,19 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Mention from 'antd/lib/mention';
+import { Mentions } from 'antd';
 import algoliasearch from 'algoliasearch/lite';
 import { InstantSearch, connectAutoComplete } from 'react-instantsearch-dom';
-import 'antd/lib/mention/style/css';
+
+import 'antd/dist/antd.css';
+
+const { Option } = Mentions;
 
 const AsyncMention = ({ hits, refine }) => (
-  <Mention
-    style={{ width: 500, height: 100 }}
+  <Mentions
+    style={{ width: 600 }}
+    rows={4}
     prefix="@"
-    notFoundContent={'No suggestion'}
+    notFoundContent="No suggestion"
     placeholder="give someone an @-mention here"
-    suggestions={hits.map((hit) => hit.name)}
-    onSearchChange={(query) => refine(query)}
-  />
+    onSearch={(query) => refine(query)}
+  >
+    {hits.map((hit, index) => {
+      return (
+        <Option key={index} value={hit.name}>
+          {hit.name}
+        </Option>
+      );
+    })}
+  </Mentions>
 );
 
 AsyncMention.propTypes = {
