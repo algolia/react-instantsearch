@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import {
   InstantSearch,
   SearchBox,
-  useInstantSearch,
+  useSearchBox,
 } from 'react-instantsearch-hooks-web';
 
 import { createSearchClient } from '../../../../../../test/mock';
@@ -23,19 +23,12 @@ describe('routing back and forth to an InstantSearch instance', () => {
     const searchClient = createSearchClient({});
 
     let setQuery = (_query: string) => {};
-    function QueryMiddleware() {
-      const { use } = useInstantSearch();
+    function QueryController() {
+      const { refine } = useSearchBox();
 
       useEffect(() => {
-        return use(({ instantSearchInstance }) => {
-          return {
-            subscribe() {
-              setQuery =
-                instantSearchInstance.renderState.indexName.searchBox!.refine;
-            },
-          };
-        });
-      }, [use]);
+        setQuery = refine;
+      }, [refine]);
 
       return null;
     }
@@ -47,7 +40,7 @@ describe('routing back and forth to an InstantSearch instance', () => {
           indexName="indexName"
           routing={{ router: historyRouter({ writeDelay: 0 }) }}
         >
-          <QueryMiddleware />
+          <QueryController />
           <SearchBox />
         </InstantSearch>
       );
