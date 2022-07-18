@@ -1,5 +1,5 @@
 import InstantSearch from 'instantsearch.js/es/lib/InstantSearch';
-import { useCallback, useRef, useState, version as ReactVersion } from 'react';
+import { useCallback, useRef, version as ReactVersion } from 'react';
 import { useSyncExternalStore } from 'use-sync-external-store/shim';
 
 import { useInstantSearchServerContext } from '../lib/useInstantSearchServerContext';
@@ -34,7 +34,7 @@ export function useInstantSearchApi<TUiState extends UiState, TRouteState>(
   const serverState = useInstantSearchSSRContext();
   const initialResults = serverState?.initialResults;
   const searchRef = useRef<InstantSearch<TUiState, TRouteState> | null>(null);
-  const [prevProps, setPrevProps] = useState(props);
+  const prevPropsRef = useRef(props);
 
   if (searchRef.current === null) {
     const search = new InstantSearch(props);
@@ -72,10 +72,11 @@ export function useInstantSearchApi<TUiState extends UiState, TRouteState>(
 
   {
     const search = searchRef.current;
+    const prevProps = prevPropsRef.current;
 
     if (prevProps.indexName !== props.indexName) {
       search.helper!.setIndex(props.indexName).search();
-      setPrevProps(props);
+      prevPropsRef.current = props;
     }
 
     if (prevProps.searchClient !== props.searchClient) {
@@ -84,12 +85,12 @@ export function useInstantSearchApi<TUiState extends UiState, TRouteState>(
         serverContext && serverUserAgent,
       ]);
       search.mainHelper!.setClient(props.searchClient).search();
-      setPrevProps(props);
+      prevPropsRef.current = props;
     }
 
     if (prevProps.onStateChange !== props.onStateChange) {
       search.onStateChange = props.onStateChange;
-      setPrevProps(props);
+      prevPropsRef.current = props;
     }
 
     if (prevProps.searchFunction !== props.searchFunction) {
@@ -97,14 +98,14 @@ export function useInstantSearchApi<TUiState extends UiState, TRouteState>(
       // InstantSearch.js, so it will throw an error.
       // This is a fair behavior until we add an update API in InstantSearch.js.
       search._searchFunction = props.searchFunction;
-      setPrevProps(props);
+      prevPropsRef.current = props;
     }
 
     if (prevProps.stalledSearchDelay !== props.stalledSearchDelay) {
       // The default `stalledSearchDelay` in InstantSearch.js is 200ms.
       // We need to reset it when it's undefined to get back to the original value.
       search._stalledSearchDelay = props.stalledSearchDelay ?? 200;
-      setPrevProps(props);
+      prevPropsRef.current = props;
     }
 
     // Updating the `routing` prop is not supported because InstantSearch.js

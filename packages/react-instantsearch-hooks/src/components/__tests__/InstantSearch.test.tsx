@@ -542,8 +542,7 @@ describe('InstantSearch', () => {
 
     await waitFor(() => {
       expect(searchClient1.search).toHaveBeenCalledTimes(1);
-      // @TODO: can this call count go down to 1 in Strict Mode?
-      expect(searchClient2.search).toHaveBeenCalledTimes(2);
+      expect(searchClient2.search).toHaveBeenCalledTimes(1);
       expect(searchClient2.addAlgoliaAgent).toHaveBeenCalledWith(
         `react (${ReactVersion})`
       );
@@ -559,8 +558,8 @@ describe('InstantSearch', () => {
 
     await waitFor(() => {
       expect(searchClient1.search).toHaveBeenCalledTimes(1);
-      expect(searchClient2.search).toHaveBeenCalledTimes(2);
-      expect(searchClient3.search).toHaveBeenCalledTimes(2);
+      expect(searchClient2.search).toHaveBeenCalledTimes(1);
+      expect(searchClient3.search).toHaveBeenCalledTimes(1);
       expect(searchClient3.addAlgoliaAgent).toHaveBeenCalledWith(
         `react (${ReactVersion})`
       );
@@ -575,7 +574,7 @@ describe('InstantSearch', () => {
     userEvent.type(screen.getByRole('searchbox'), 'iphone');
 
     await waitFor(() => {
-      expect(searchClient3.search).toHaveBeenCalledTimes(8);
+      expect(searchClient3.search).toHaveBeenCalledTimes(7);
       expect(searchClient3.search).toHaveBeenLastCalledWith([
         {
           indexName: 'indexName',
@@ -611,11 +610,12 @@ describe('InstantSearch', () => {
       ]);
     });
 
+    expect(searchClient.search).toHaveBeenCalledTimes(1);
+
     rerender(<App indexName="indexName2" />);
 
     await waitFor(() => {
-      // @TODO: can this call count go down in Strict Mode?
-      expect(searchClient.search).toHaveBeenCalledTimes(3);
+      expect(searchClient.search).toHaveBeenCalledTimes(2);
       expect(searchClient.search).toHaveBeenLastCalledWith([
         expect.objectContaining({
           indexName: 'indexName2',
@@ -626,8 +626,7 @@ describe('InstantSearch', () => {
     rerender(<App indexName="indexName3" />);
 
     await waitFor(() => {
-      // @TODO: can this call count go down in Strict Mode?
-      expect(searchClient.search).toHaveBeenCalledTimes(5);
+      expect(searchClient.search).toHaveBeenCalledTimes(3);
       expect(searchClient.search).toHaveBeenLastCalledWith([
         expect.objectContaining({
           indexName: 'indexName3',
@@ -638,7 +637,7 @@ describe('InstantSearch', () => {
     userEvent.type(screen.getByRole('searchbox'), 'iphone');
 
     await waitFor(() => {
-      expect(searchClient.search).toHaveBeenCalledTimes(11);
+      expect(searchClient.search).toHaveBeenCalledTimes(9);
       expect(searchClient.search).toHaveBeenLastCalledWith([
         {
           indexName: 'indexName3',
