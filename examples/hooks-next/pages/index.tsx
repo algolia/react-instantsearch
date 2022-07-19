@@ -16,7 +16,10 @@ import { getServerState } from 'react-instantsearch-hooks-server';
 import { history } from 'instantsearch.js/es/lib/routers/index.js';
 import { Panel } from '../components/Panel';
 
-const client = algoliasearch('latency', '6be0576ff61c053d5f9a3225e2a90f76');
+const searchClient = algoliasearch(
+  'latency',
+  '6be0576ff61c053d5f9a3225e2a90f76'
+);
 
 type HitProps = {
   hit: AlgoliaHit<{
@@ -36,42 +39,44 @@ function Hit({ hit }: HitProps) {
 
 type HomePageProps = {
   serverState?: InstantSearchServerState;
-  url?: string;
+  serverUrl?: string;
 };
 
-export default function HomePage({ serverState, url }: HomePageProps) {
+export default function HomePage({ serverState, serverUrl }: HomePageProps) {
   return (
-    <InstantSearchSSRProvider {...serverState}>
+    <>
       <Head>
         <title>React InstantSearch Hooks - Next.js</title>
       </Head>
 
-      <InstantSearch
-        searchClient={client}
-        indexName="instant_search"
-        routing={{
-          router: history({
-            getLocation() {
-              if (typeof window === 'undefined') {
-                return new URL(url!) as unknown as Location;
-              }
+      <InstantSearchSSRProvider {...serverState}>
+        <InstantSearch
+          searchClient={searchClient}
+          indexName="instant_search"
+          routing={{
+            router: history({
+              getLocation() {
+                if (typeof window === 'undefined') {
+                  return new URL(serverUrl!) as unknown as Location;
+                }
 
-              return window.location;
-            },
-          }),
-        }}
-      >
-        <div className="Container">
-          <div>
-            <DynamicWidgets fallbackComponent={FallbackComponent} />
+                return window.location;
+              },
+            }),
+          }}
+        >
+          <div className="Container">
+            <div>
+              <DynamicWidgets fallbackComponent={FallbackComponent} />
+            </div>
+            <div>
+              <SearchBox />
+              <Hits hitComponent={Hit} />
+            </div>
           </div>
-          <div>
-            <SearchBox />
-            <Hits hitComponent={Hit} />
-          </div>
-        </div>
-      </InstantSearch>
-    </InstantSearchSSRProvider>
+        </InstantSearch>
+      </InstantSearchSSRProvider>
+    </>
   );
 }
 
@@ -86,13 +91,15 @@ function FallbackComponent({ attribute }: { attribute: string }) {
 export const getServerSideProps: GetServerSideProps<HomePageProps> =
   async function getServerSideProps({ req }) {
     const protocol = req.headers.referer?.split('://')[0] || 'https';
-    const url = `${protocol}://${req.headers.host}${req.url}`;
-    const serverState = await getServerState(<HomePage url={url} />);
+    const serverUrl = `${protocol}://${req.headers.host}${req.url}`;
+    const serverState = await getServerState(
+      <HomePage serverUrl={serverUrl} />
+    );
 
     return {
       props: {
         serverState,
-        url,
+        serverUrl,
       },
     };
   };
