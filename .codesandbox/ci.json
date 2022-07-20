@@ -1,5 +1,5 @@
 {
-  "node": "16.16.0",
+  "node": "16",
   "packages": ["packages/*"],
   "buildCommand": "lerna run build --scope react-* --ignore *-maps --ignore *-native",
   "sandboxes": [
