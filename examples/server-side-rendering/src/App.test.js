@@ -3,7 +3,7 @@
  */
 
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 import App from './App';
 
 describe('Server-side rendering recipes', () => {
@@ -14,9 +14,8 @@ describe('Server-side rendering recipes', () => {
         search() {},
       },
     };
+    const { container } = render(<App {...props} />);
 
-    const component = renderer.create(<App {...props} />);
-
-    expect(component.toJSON()).toMatchSnapshot();
+    expect(container).toMatchSnapshot();
   });
 });

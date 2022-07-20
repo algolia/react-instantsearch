@@ -1,5 +1,5 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 import { Router, Route } from 'react-router-dom/cjs/react-router-dom.min';
 import { createMemoryHistory } from 'history';
 
@@ -9,12 +9,12 @@ const history = createMemoryHistory('/');
 
 describe('react-router recipe', () => {
   it('App renders without crashing', () => {
-    const component = renderer.create(
+    const { container } = render(
       <Router history={history}>
         <Route path="/" component={App} />
       </Router>
     );
 
-    expect(component.toJSON()).toMatchSnapshot();
+    expect(container).toMatchSnapshot();
   });
 });

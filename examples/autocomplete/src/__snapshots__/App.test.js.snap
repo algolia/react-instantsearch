@@ -1,38 +1,43 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`autocomplete recipe Mentions renders without crashing 1`] = `
-"<Mention>
-  give someone an @-mention here
-  
-</Mention>"
+<div>
+  <div
+    class="ant-mentions"
+    style="width: 600px;"
+  >
+    <textarea
+      class="rc-textarea"
+      placeholder="give someone an @-mention here"
+      rows="4"
+    />
+  </div>
+</div>
 `;
 
 exports[`autocomplete recipe MultiIndex renders without crashing 1`] = `
-<div
-  aria-expanded={false}
-  aria-haspopup="listbox"
-  aria-owns="react-autowhatever-1"
-  className="react-autosuggest__container"
-  role="combobox"
->
-  <input
-    aria-activedescendant={null}
-    aria-autocomplete="list"
-    aria-controls="react-autowhatever-1"
-    autoComplete="off"
-    className="react-autosuggest__input"
-    onBlur={[Function]}
-    onChange={[Function]}
-    onFocus={[Function]}
-    onKeyDown={[Function]}
-    placeholder="Search for a product..."
-    type="text"
-    value=""
-  />
+<div>
   <div
-    className="react-autosuggest__suggestions-container"
-    id="react-autowhatever-1"
-    role="listbox"
-  />
+    aria-expanded="false"
+    aria-haspopup="listbox"
+    aria-owns="react-autowhatever-1"
+    class="react-autosuggest__container"
+    role="combobox"
+  >
+    <input
+      aria-autocomplete="list"
+      aria-controls="react-autowhatever-1"
+      autocomplete="off"
+      class="react-autosuggest__input"
+      placeholder="Search for a product..."
+      type="text"
+      value=""
+    />
+    <div
+      class="react-autosuggest__suggestions-container"
+      id="react-autowhatever-1"
+      role="listbox"
+    />
+  </div>
 </div>
 `;

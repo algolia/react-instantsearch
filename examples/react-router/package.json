@@ -4,14 +4,14 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "DISABLE_ESLINT_PLUGIN=true react-scripts start",
+    "build": "DISABLE_ESLINT_PLUGIN=true react-scripts build",
     "test": "CI=true react-scripts test"
   },
   "devDependencies": {
+    "@testing-library/react": "13.2.0",
     "history": "4.10.1",
-    "react-scripts": "3.1.2",
-    "react-test-renderer": "18.1.0"
+    "react-scripts": "5.0.1"
   },
   "dependencies": {
     "algoliasearch": "4.11.0",

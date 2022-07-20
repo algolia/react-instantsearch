@@ -1,25 +1,17 @@
 import React from 'react';
 import MultiIndex from './App-Multi-Index';
 import Mentions from './App-Mentions';
-import renderer from 'react-test-renderer';
-
-jest.mock('antd/lib/mention', () => {
-  return ({ placeholder, suggestions }) =>
-    `<Mention>
-  ${placeholder}
-  ${suggestions.join('\n')}
-</Mention>`;
-});
+import { render } from '@testing-library/react';
 
 describe('autocomplete recipe', () => {
   it('MultiIndex renders without crashing', () => {
-    const component = renderer.create(<MultiIndex />);
+    const { container } = render(<MultiIndex />);
 
-    expect(component.toJSON()).toMatchSnapshot();
+    expect(container).toMatchSnapshot();
   });
   it('Mentions renders without crashing', () => {
-    const component = renderer.create(<Mentions />);
+    const { container } = render(<Mentions />);
 
-    expect(component.toJSON()).toMatchSnapshot();
+    expect(container).toMatchSnapshot();
   });
 });

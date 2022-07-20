@@ -1,11 +1,11 @@
 import React from 'react';
 import App from './App';
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 
 describe('Multi index recipe', () => {
   it('App renders without crashing', () => {
-    const component = renderer.create(<App />);
+    const { container } = render(<App />);
 
-    expect(component.toJSON()).toMatchSnapshot();
+    expect(container).toMatchSnapshot();
   });
 });

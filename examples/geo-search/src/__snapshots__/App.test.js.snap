@@ -1,40 +1,36 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`geo-search recipe App renders without crashing 1`] = `
-Array [
-  "Type a destination or move the map to see the closest apartment.",
+<div>
+  Type a destination or move the map to see the closest apartment.
   <div
-    className="ais-SearchBox"
+    class="ais-SearchBox"
   >
     <form
       action=""
-      className="ais-SearchBox-form"
-      noValidate={true}
-      onReset={[Function]}
-      onSubmit={[Function]}
+      class="ais-SearchBox-form"
+      novalidate=""
       role="search"
     >
       <input
-        autoCapitalize="off"
-        autoComplete="off"
-        autoCorrect="off"
-        autoFocus={false}
-        className="ais-SearchBox-input"
-        maxLength="512"
-        onChange={[Function]}
+        autocapitalize="off"
+        autocomplete="off"
+        autocorrect="off"
+        class="ais-SearchBox-input"
+        maxlength="512"
         placeholder="Search here…"
-        required={true}
-        spellCheck="false"
+        required=""
+        spellcheck="false"
         type="search"
         value=""
       />
       <button
-        className="ais-SearchBox-submit"
+        class="ais-SearchBox-submit"
         title="Submit your search query."
         type="submit"
       >
         <svg
-          className="ais-SearchBox-submitIcon"
+          class="ais-SearchBox-submitIcon"
           height="10"
           viewBox="0 0 40 40"
           width="10"
@@ -46,13 +42,13 @@ Array [
         </svg>
       </button>
       <button
-        className="ais-SearchBox-reset"
-        hidden={true}
+        class="ais-SearchBox-reset"
+        hidden=""
         title="Clear the search query."
         type="reset"
       >
         <svg
-          className="ais-SearchBox-resetIcon"
+          class="ais-SearchBox-resetIcon"
           height="10"
           viewBox="0 0 20 20"
           width="10"
@@ -64,6 +60,6 @@ Array [
         </svg>
       </button>
     </form>
-  </div>,
-]
+  </div>
+</div>
 `;
