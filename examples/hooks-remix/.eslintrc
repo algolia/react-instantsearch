@@ -1,3 +1,7 @@
 {
-  "extends": ["@remix-run/eslint-config", "@remix-run/eslint-config/node"]
+  "extends": ["@remix-run/eslint-config", "@remix-run/eslint-config/node"],
+  "rules": {
+    "@typescript-eslint/naming-convention": "off",
+    "spaced-comment": ["error", "always", { "markers": ["/"] }]
+  }
 }
