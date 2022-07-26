@@ -18,13 +18,13 @@ import type { LinksFunction, LoaderFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 
-import { Hit } from 'components/Hit';
-import { Panel } from 'components/Panel';
-import { ScrollTo } from 'components/ScrollTo';
+import { Hit } from '../../components/Hit';
+import { Panel } from '../../components/Panel';
+import { ScrollTo } from '../../components/ScrollTo';
+import { NoResultsBoundary } from '../../components/NoResultsBoundary';
+import { SearchErrorToast } from '../../components/SearchErrorToast';
 
 import tailwindStyles from '../tailwind.css';
-import { NoResultsBoundary } from 'components/NoResultsBoundary';
-import { SearchErrorToast } from 'components/SearchErrorToast';
 
 const searchClient = algoliasearch(
   'latency',
