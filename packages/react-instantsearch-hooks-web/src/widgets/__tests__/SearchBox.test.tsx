@@ -254,4 +254,51 @@ describe('SearchBox', () => {
     expect(root).toHaveClass('MySearchBox', 'ROOT');
     expect(root).toHaveAttribute('title', 'Some custom title');
   });
+
+  test('does not refine query on type when searchAsYouType is false', () => {
+    let lastUiState: UiState = {};
+
+    const { container } = render(
+      <InstantSearchHooksTestWrapper
+        onStateChange={({ uiState }) => {
+          lastUiState = uiState;
+        }}
+      >
+        <SearchBox searchAsYouType={false} />
+      </InstantSearchHooksTestWrapper>
+    );
+
+    const input = container.querySelector<HTMLInputElement>(
+      '.ais-SearchBox-input'
+    )!;
+    input.focus();
+
+    userEvent.type(input, 'iPhone');
+
+    expect(input).toHaveValue('iPhone');
+    expect(lastUiState.indexName?.query).toBe(undefined);
+  });
+
+  test('refines on submit when no custom onSubmit is provided', () => {
+    let lastUiState: UiState = {};
+
+    const { container } = render(
+      <InstantSearchHooksTestWrapper
+        onStateChange={({ uiState }) => {
+          lastUiState = uiState;
+        }}
+      >
+        <SearchBox searchAsYouType={false} />
+      </InstantSearchHooksTestWrapper>
+    );
+
+    const input = container.querySelector<HTMLInputElement>(
+      '.ais-SearchBox-input'
+    )!;
+    input.focus();
+
+    userEvent.type(input, 'iPhone{Enter}');
+
+    expect(lastUiState.indexName.query).toBe('iPhone');
+  });
 });
