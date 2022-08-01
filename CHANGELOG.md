@@ -3,7 +3,7 @@
 
 ### Bug Fixes
 
-* **hooks:** use `label` CSS class in <HierarchicalMenu> ([#3583](https://github.com/algolia/react-instantsearch/issues/3583)) ([3e030ae](https://github.com/algolia/react-instantsearch/commit/3e030aedb9f285ff449eb82589bc6fea60b160cb))
+* **hooks:** replace `labelText` CSS class with `label` in `<HierarchicalMenu>` to align with InstantSearch's CSS specifications ([#3583](https://github.com/algolia/react-instantsearch/issues/3583)) ([3e030ae](https://github.com/algolia/react-instantsearch/commit/3e030aedb9f285ff449eb82589bc6fea60b160cb))
 
 
 
