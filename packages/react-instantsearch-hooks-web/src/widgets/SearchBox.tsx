@@ -23,10 +23,8 @@ export type SearchBoxProps = Omit<
 > &
   UseSearchBoxProps & {
     /**
-     * If false, triggers the search only on submit.
-     * @type {boolean}
+     * Whether to trigger the search only on submit.
      * @default true
-     * @optional
      */
     searchAsYouType?: boolean;
   };
