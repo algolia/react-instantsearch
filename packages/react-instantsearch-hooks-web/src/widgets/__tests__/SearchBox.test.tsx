@@ -279,7 +279,7 @@ describe('SearchBox', () => {
     expect(lastUiState.indexName?.query).toBe(undefined);
   });
 
-  test('refines on submit when no custom onSubmit is provided', () => {
+  test('refines on submit when searchAsYouType is false and no custom onSubmit is provided', () => {
     let lastUiState: UiState = {};
 
     const { container } = render(

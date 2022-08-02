@@ -62,7 +62,7 @@ export function SearchBox({
   function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     if (props.onSubmit) {
       props.onSubmit(event);
-    } else {
+    } else if (!searchAsYouType) {
       refine(inputValue);
     }
   }
