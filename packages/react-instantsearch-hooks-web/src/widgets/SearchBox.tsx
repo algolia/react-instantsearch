@@ -60,10 +60,12 @@ export function SearchBox({
   }
 
   function onSubmit(event: React.FormEvent<HTMLFormElement>) {
+    if (!searchAsYouType) {
+      refine(inputValue);
+    }
+
     if (props.onSubmit) {
       props.onSubmit(event);
-    } else if (!searchAsYouType) {
-      refine(inputValue);
     }
   }
 

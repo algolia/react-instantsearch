@@ -279,7 +279,8 @@ describe('SearchBox', () => {
     expect(lastUiState.indexName?.query).toBe(undefined);
   });
 
-  test('refines on submit when searchAsYouType is false and no custom onSubmit is provided', () => {
+  test('refines on submit when searchAsYouType is false, even if custom onSubmit is provided', () => {
+    const onSubmit = jest.fn();
     let lastUiState: UiState = {};
 
     const { container } = render(
@@ -288,7 +289,7 @@ describe('SearchBox', () => {
           lastUiState = uiState;
         }}
       >
-        <SearchBox searchAsYouType={false} />
+        <SearchBox searchAsYouType={false} onSubmit={onSubmit} />
       </InstantSearchHooksTestWrapper>
     );
 
@@ -300,5 +301,6 @@ describe('SearchBox', () => {
     userEvent.type(input, 'iPhone{Enter}');
 
     expect(lastUiState.indexName.query).toBe('iPhone');
+    expect(onSubmit).toHaveBeenCalledTimes(1);
   });
 });
