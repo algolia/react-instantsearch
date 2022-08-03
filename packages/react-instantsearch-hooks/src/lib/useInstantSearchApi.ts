@@ -138,6 +138,7 @@ export function useInstantSearchApi<TUiState extends UiState, TRouteState>(
         // We cancel the previous cleanup function because we don't want to
         // dispose the search during an update.
         clearTimeout(cleanupTimerRef.current);
+        search._preventWidgetCleanup = false;
       }
 
       return () => {
@@ -159,7 +160,8 @@ export function useInstantSearchApi<TUiState extends UiState, TRouteState>(
         // Executing the cleanup function in a `setTimeout()` lets us cancel it
         // in the next effect.
         // (There might be better ways to do this.)
-        cleanupTimerRef.current = setTimeout(cleanup, 0);
+        cleanupTimerRef.current = setTimeout(cleanup);
+        search._preventWidgetCleanup = true;
       };
     }, [forceUpdate]),
     () => searchRef.current,
