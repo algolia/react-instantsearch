@@ -3,7 +3,7 @@
 
 ### Features
 
-* **hooks:** add `searchAsYouType` option to <SearchBox> ([#3585](https://github.com/algolia/react-instantsearch/issues/3585)) ([c610385](https://github.com/algolia/react-instantsearch/commit/c610385cb9688b23b3e041e31b9edd60392b341d))
+* **hooks:** add `searchAsYouType` option to `<SearchBox>` ([#3585](https://github.com/algolia/react-instantsearch/issues/3585)) ([c610385](https://github.com/algolia/react-instantsearch/commit/c610385cb9688b23b3e041e31b9edd60392b341d))
 
 
 
