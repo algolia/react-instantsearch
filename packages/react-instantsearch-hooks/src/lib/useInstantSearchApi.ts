@@ -143,15 +143,7 @@ export function useInstantSearchApi<TUiState extends UiState, TRouteState>(
 
       return () => {
         function cleanup() {
-          // When `dispose()` is called, InstantSearch.js also calls `removeWigets()`.
-          // This is not desired because React starts by unmounting each widget
-          // before unmounting <InstantSearch>, so their `dispose()` methods are
-          // already called.
-          // Calling `removeWidgets()` would remove each widget multiple times.
-          const originalRemoveWidgets = search.removeWidgets;
-          search.removeWidgets = () => search;
           search.dispose();
-          search.removeWidgets = originalRemoveWidgets;
         }
 
         // We clean up only when the component that uses this subscription unmounts,
