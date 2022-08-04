@@ -153,6 +153,10 @@ export function useInstantSearchApi<TUiState extends UiState, TRouteState>(
         // in the next effect.
         // (There might be better ways to do this.)
         cleanupTimerRef.current = setTimeout(cleanup);
+
+        // We need to prevent the `useWidget` cleanup function so that widgets
+        // are not removed before the instance is disposed, triggering
+        // an unwanted search request.
         search._preventWidgetCleanup = true;
       };
     }, [forceUpdate]),

@@ -750,7 +750,7 @@ describe('InstantSearch', () => {
     });
   });
 
-  test('triggers no more than one search on unmount', async () => {
+  test('triggers no search on unmount', async () => {
     const searchClient = createSearchClient({});
 
     function App() {
