@@ -80,7 +80,7 @@ export function useWidget<TWidget extends Widget | IndexWidget, TProps>({
       // we're able to cancel it in the next effect.
       cleanupTimerRef.current = setTimeout(cleanup);
     };
-  }, [parentIndex, widget, shouldAddWidgetEarly]);
+  }, [parentIndex, widget, shouldAddWidgetEarly, search, props]);
 
   if (shouldAddWidgetEarly) {
     parentIndex.addWidgets([widget]);
