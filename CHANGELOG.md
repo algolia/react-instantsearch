@@ -1,3 +1,21 @@
+# [6.31.0](https://github.com/algolia/react-instantsearch/compare/v6.30.3...v6.31.0) (2022-08-03)
+
+
+### Features
+
+* **hooks:** add `searchAsYouType` option to `<SearchBox>` ([#3585](https://github.com/algolia/react-instantsearch/issues/3585)) ([c610385](https://github.com/algolia/react-instantsearch/commit/c610385cb9688b23b3e041e31b9edd60392b341d))
+
+
+
+## [6.30.3](https://github.com/algolia/react-instantsearch/compare/v6.30.2...v6.30.3) (2022-08-01)
+
+
+### Bug Fixes
+
+* **hooks:** replace `labelText` CSS class with `label` in `<HierarchicalMenu>` to align with InstantSearch's CSS specifications ([#3583](https://github.com/algolia/react-instantsearch/issues/3583)) ([3e030ae](https://github.com/algolia/react-instantsearch/commit/3e030aedb9f285ff449eb82589bc6fea60b160cb))
+
+
+
 ## [6.30.2](https://github.com/algolia/react-instantsearch/compare/v6.30.1...v6.30.2) (2022-07-18)
 
 
