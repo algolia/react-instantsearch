@@ -21,10 +21,15 @@ export function useSearchResults(): SearchResultsApi {
 
   useEffect(() => {
     function handleRender() {
-      setSearchResults({
-        results: searchIndex.getResults()!, // Results can't be `null` after the first render.
-        scopedResults: searchIndex.getScopedResults(),
-      });
+      const results = searchIndex.getResults();
+
+      // results can be null when first search is stalled, in this case we skip the update
+      if (results !== null) {
+        setSearchResults({
+          results,
+          scopedResults: searchIndex.getScopedResults(),
+        });
+      }
     }
 
     search.addListener('render', handleRender);
