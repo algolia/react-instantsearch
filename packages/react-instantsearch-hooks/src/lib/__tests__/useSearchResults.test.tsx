@@ -54,7 +54,7 @@ describe('useSearchResults', () => {
     expect(result.current.results.__isArtificial).toBeUndefined();
   });
 
-  test('should not return null results when first search is stalled', async () => {
+  test('does not return `null` results when first search is stalled', async () => {
     const wrapper = createInstantSearchTestWrapper({
       stalledSearchDelay: 0,
       searchClient: createSearchClient({
@@ -77,19 +77,6 @@ describe('useSearchResults', () => {
           ),
         }),
     });
-
-    // Initial render
-    expect(result.current).toEqual({
-      results: expect.any(SearchResults),
-      scopedResults: [
-        expect.objectContaining({
-          helper: expect.any(AlgoliaSearchHelper),
-          indexId: 'indexName',
-          results: expect.any(SearchResults),
-        }),
-      ],
-    });
-    expect(result.current.results.__isArtificial).toEqual(true);
 
     await waitForNextUpdate();
 
