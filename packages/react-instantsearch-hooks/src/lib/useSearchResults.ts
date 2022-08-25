@@ -23,8 +23,9 @@ export function useSearchResults(): SearchResultsApi {
     function handleRender() {
       const results = searchIndex.getResults();
 
-      // results can be null when first search is stalled, in this case we skip the update
-      // see: https://github.com/algolia/instantsearch.js/blob/20996c7a159988c58e00ff24d2d2dc98af8b980f/src/widgets/index/index.ts#L652-L657
+      // Results can be `null` when the first search is stalled.
+      // In this case, we skip the update.
+      // See: https://github.com/algolia/instantsearch.js/blob/20996c7a159988c58e00ff24d2d2dc98af8b980f/src/widgets/index/index.ts#L652-L657
       if (results !== null) {
         setSearchResults({
           results,
