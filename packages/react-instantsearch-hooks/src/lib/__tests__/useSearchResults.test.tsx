@@ -54,7 +54,7 @@ describe('useSearchResults', () => {
     expect(result.current.results.__isArtificial).toBeUndefined();
   });
 
-  test('does not return `null` results when first search is stalled', async () => {
+  test('does not return `null` results when the first search is stalled', async () => {
     const wrapper = createInstantSearchTestWrapper({
       stalledSearchDelay: 0,
       searchClient: createSearchClient({
