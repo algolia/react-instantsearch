@@ -145,7 +145,7 @@
     "rollup-plugin-uglify": "6.0.3",
     "shipjs": "0.24.1",
     "style-loader": "1.0.0",
-    "typescript": "4.3.5",
+    "typescript": "4.8.2",
     "webpack": "4.40.2",
     "webpack-cli": "3.3.7"
   },
