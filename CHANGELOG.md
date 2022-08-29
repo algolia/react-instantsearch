@@ -3,7 +3,7 @@
 
 ### Bug Fixes
 
-* **useInstantSearch:** `results` is `null` when first search is stalled ([#3597](https://github.com/algolia/react-instantsearch/issues/3597)) ([6f71d78](https://github.com/algolia/react-instantsearch/commit/6f71d78868fde55a3f9c4460edc337a1e99df4f9))
+* **useInstantSearch:** prevent `results` from being `null` when first search is stalled ([#3597](https://github.com/algolia/react-instantsearch/issues/3597)) ([6f71d78](https://github.com/algolia/react-instantsearch/commit/6f71d78868fde55a3f9c4460edc337a1e99df4f9))
 
 
 
