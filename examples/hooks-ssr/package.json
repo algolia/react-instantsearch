@@ -24,8 +24,8 @@
   "dependencies": {
     "algoliasearch": "4.11.0",
     "express": "4.17.1",
-    "react": "18.1.0",
-    "react-dom": "18.1.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
     "react-instantsearch-hooks-server": "6.32.1",
     "react-instantsearch-hooks-web": "6.32.1"
   }
