@@ -317,4 +317,20 @@ describe('SearchBox', () => {
     expect(lastUiState.indexName.query).toBe('iPhone');
     expect(onSubmit).toHaveBeenCalledTimes(1);
   });
+
+  test('renders with translations', () => {
+    const { getByRole } = render(
+      <InstantSearchHooksTestWrapper>
+        <SearchBox
+          translations={{ resetTitle: 'Reset', submitTitle: 'Submit' }}
+        />
+      </InstantSearchHooksTestWrapper>
+    );
+
+    expect(getByRole('button', { name: 'Submit' })).toBeInTheDocument();
+
+    userEvent.type(getByRole('searchbox'), 'nothing');
+
+    expect(getByRole('button', { name: 'Reset' })).toBeInTheDocument();
+  });
 });

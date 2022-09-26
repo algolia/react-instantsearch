@@ -33,6 +33,10 @@ describe('RefinementList', () => {
       canToggleShowMore: true,
       isShowingMore: false,
       onToggleShowMore: jest.fn(),
+      translations: {
+        showMore: 'Show more',
+        showLess: 'Show less',
+      },
       ...props,
     };
   }
@@ -644,5 +648,20 @@ describe('RefinementList', () => {
       'title',
       'Some custom title'
     );
+  });
+
+  test('renders with translations', () => {
+    const props = createProps({
+      showMore: true,
+      translations: {
+        showLess: 'Show less brands',
+        showMore: 'Show more brands',
+      },
+    });
+    const { getByRole } = render(<RefinementList {...props} />);
+
+    expect(
+      getByRole('button', { name: 'Show more brands' })
+    ).toBeInTheDocument();
   });
 });

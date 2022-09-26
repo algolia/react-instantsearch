@@ -2013,4 +2013,89 @@ describe('Pagination', () => {
     expect(root).toHaveClass('MyPagination', 'ROOT');
     expect(root).toHaveAttribute('title', 'Some custom title');
   });
+
+  test('renders with translations', () => {
+    const { container } = render(
+      <InstantSearchHooksTestWrapper>
+        <Pagination
+          translations={{
+            ariaFirst: 'First page',
+            ariaLast: 'Last page',
+            ariaNext: 'Next page',
+            ariaPrevious: 'Previous page',
+            ariaPage: (currentPage) => `Page number ${currentPage}`,
+            first: 'First',
+            last: 'Last',
+            next: 'Next',
+            previous: 'Previous',
+            page: (currentPage) => `#${currentPage}`,
+          }}
+        />
+      </InstantSearchHooksTestWrapper>
+    );
+
+    expect(container).toMatchInlineSnapshot(`
+      <div>
+        <div
+          class="ais-Pagination ais-Pagination--noRefinement"
+        >
+          <ul
+            class="ais-Pagination-list"
+          >
+            <li
+              class="ais-Pagination-item ais-Pagination-item--disabled ais-Pagination-item--firstPage"
+            >
+              <span
+                aria-label="First page"
+                class="ais-Pagination-link"
+              >
+                First
+              </span>
+            </li>
+            <li
+              class="ais-Pagination-item ais-Pagination-item--disabled ais-Pagination-item--previousPage"
+            >
+              <span
+                aria-label="Previous page"
+                class="ais-Pagination-link"
+              >
+                Previous
+              </span>
+            </li>
+            <li
+              class="ais-Pagination-item ais-Pagination-item--page ais-Pagination-item--selected"
+            >
+              <a
+                aria-label="Page number 1"
+                class="ais-Pagination-link"
+                href="#"
+              >
+                #1
+              </a>
+            </li>
+            <li
+              class="ais-Pagination-item ais-Pagination-item--disabled ais-Pagination-item--nextPage"
+            >
+              <span
+                aria-label="Next page"
+                class="ais-Pagination-link"
+              >
+                Next
+              </span>
+            </li>
+            <li
+              class="ais-Pagination-item ais-Pagination-item--disabled ais-Pagination-item--lastPage"
+            >
+              <span
+                aria-label="Last page"
+                class="ais-Pagination-link"
+              >
+                Last
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    `);
+  });
 });

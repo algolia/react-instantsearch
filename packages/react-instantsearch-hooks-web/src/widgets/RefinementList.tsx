@@ -5,6 +5,7 @@ import { RefinementList as RefinementListUiComponent } from '../ui/RefinementLis
 import { SearchBox as SearchBoxUiComponent } from '../ui/SearchBox';
 
 import type { RefinementListProps as RefinementListUiComponentProps } from '../ui/RefinementList';
+import type { SearchBoxTranslations } from '../ui/SearchBox';
 import type { RefinementListItem } from 'instantsearch.js/es/connectors/refinement-list/connectRefinementList';
 import type { RefinementListWidgetParams } from 'instantsearch.js/es/widgets/refinement-list/refinement-list';
 import type { UseRefinementListProps } from 'react-instantsearch-hooks';
@@ -20,6 +21,7 @@ type UiProps = Pick<
   | 'canToggleShowMore'
   | 'onToggleShowMore'
   | 'isShowingMore'
+  | 'translations'
 >;
 
 export type RefinementListProps = Omit<
@@ -27,7 +29,15 @@ export type RefinementListProps = Omit<
   keyof UiProps
 > &
   UseRefinementListProps &
-  Pick<RefinementListWidgetParams, 'searchable' | 'searchablePlaceholder'>;
+  Pick<RefinementListWidgetParams, 'searchable' | 'searchablePlaceholder'> & {
+    translations?: UiProps['translations'] &
+      SearchBoxTranslations & {
+        /**
+         * What to display when there are no results.
+         */
+        noResults: string;
+      };
+  };
 
 export function RefinementList({
   searchable,
@@ -40,6 +50,13 @@ export function RefinementList({
   sortBy,
   escapeFacetValues,
   transformItems,
+  translations = {
+    resetTitle: 'Clear the search query.',
+    submitTitle: 'Submit the search query.',
+    noResults: 'No results.',
+    showLess: 'Show less',
+    showMore: 'Show more',
+  },
   ...props
 }: RefinementListProps) {
   const {
@@ -109,16 +126,23 @@ export function RefinementList({
         onReset={onReset}
         onSubmit={onSubmit}
         translations={{
-          submitTitle: 'Submit the search query.',
-          resetTitle: 'Clear the search query.',
+          submitTitle: translations.submitTitle,
+          resetTitle: translations.resetTitle,
         }}
       />
     ),
     noResults:
-      searchable && isFromSearch && items.length === 0 && 'No results.',
+      searchable &&
+      isFromSearch &&
+      items.length === 0 &&
+      translations.noResults,
     canToggleShowMore,
     onToggleShowMore: toggleShowMore,
     isShowingMore,
+    translations: {
+      showLess: translations.showLess,
+      showMore: translations.showMore,
+    },
   };
 
   return (

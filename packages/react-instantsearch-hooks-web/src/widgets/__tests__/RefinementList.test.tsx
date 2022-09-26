@@ -1350,4 +1350,68 @@ describe('RefinementList', () => {
     expect(root).toHaveClass('MyRefinementList', 'ROOT');
     expect(root).toHaveAttribute('title', 'Some custom title');
   });
+
+  describe('translations', () => {
+    const translations = {
+      noResults: 'Zero results',
+      resetTitle: 'Reset',
+      showLess: 'Show less brands',
+      showMore: 'Show more brands',
+      submitTitle: 'Submit',
+    };
+
+    test('show more button', async () => {
+      const searchClient = createMockedSearchClient();
+      const { findByRole } = render(
+        <InstantSearchHooksTestWrapper searchClient={searchClient}>
+          <RefinementList
+            attribute="brand"
+            showMore
+            translations={translations}
+          />
+        </InstantSearchHooksTestWrapper>
+      );
+
+      expect(
+        await findByRole('button', { name: 'Show more brands' })
+      ).toBeInTheDocument();
+    });
+
+    test('Search with no results', async () => {
+      const searchClient = createMockedSearchClient({
+        searchForFacetValues: jest.fn(() =>
+          Promise.resolve([createSFFVResponse({ facetHits: [] })])
+        ),
+      });
+      const { container, getByRole } = render(
+        <InstantSearchHooksTestWrapper searchClient={searchClient}>
+          <RefinementList
+            attribute="brand"
+            showMore
+            translations={translations}
+            searchable
+          />
+        </InstantSearchHooksTestWrapper>
+      );
+
+      await waitFor(() => expect(searchClient.search).toHaveBeenCalledTimes(1));
+
+      expect(getByRole('button', { name: 'Submit' })).toBeInTheDocument();
+
+      userEvent.type(
+        container.querySelector('.ais-SearchBox-input') as HTMLInputElement,
+        'nothing'
+      );
+
+      expect(getByRole('button', { name: 'Reset' })).toBeInTheDocument();
+
+      await waitFor(() => {
+        expect(searchClient.searchForFacetValues).toHaveBeenCalledTimes(7);
+
+        expect(
+          container.querySelector('.ais-RefinementList-noResults')
+        ).toHaveTextContent('Zero results');
+      });
+    });
+  });
 });

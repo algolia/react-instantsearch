@@ -197,4 +197,28 @@ describe('RangeInput', () => {
     expect(root).toHaveClass('MyRangeInput', 'ROOT');
     expect(root).toHaveAttribute('title', 'Some custom title');
   });
+
+  test('renders with translations', async () => {
+    const searchClient = createMockedSearchClient();
+    const { container } = render(
+      <InstantSearchHooksTestWrapper searchClient={searchClient}>
+        <RangeInput
+          attribute="price"
+          translations={{ separator: 'SEPARATOR', submit: 'SUBMIT' }}
+        />
+      </InstantSearchHooksTestWrapper>
+    );
+
+    await waitFor(() => {
+      expect(searchClient.search).toHaveBeenCalledTimes(1);
+    });
+
+    expect(
+      container.querySelector('.ais-RangeInput-separator')
+    ).toHaveTextContent('SEPARATOR');
+
+    expect(container.querySelector('.ais-RangeInput-submit')).toHaveTextContent(
+      'SUBMIT'
+    );
+  });
 });
