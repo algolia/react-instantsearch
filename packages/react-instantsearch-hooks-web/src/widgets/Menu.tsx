@@ -18,7 +18,7 @@ type UiProps = Pick<
 >;
 
 export type MenuProps = Omit<MenuUiComponentProps, keyof UiProps> &
-  UseMenuProps & { translations?: UiProps['translations'] };
+  UseMenuProps & { translations?: Partial<UiProps['translations']> };
 
 export function Menu({
   attribute,
@@ -27,7 +27,7 @@ export function Menu({
   showMoreLimit,
   sortBy,
   transformItems,
-  translations = { showLess: 'Show less', showMore: 'Show more' },
+  translations,
   ...props
 }: MenuProps) {
   const {
@@ -58,7 +58,11 @@ export function Menu({
     canToggleShowMore,
     onToggleShowMore: toggleShowMore,
     isShowingMore,
-    translations,
+    translations: {
+      showLess: 'Show less',
+      showMore: 'Show more',
+      ...translations,
+    },
   };
 
   return <MenuUiComponent {...props} {...uiProps} showMore={showMore} />;

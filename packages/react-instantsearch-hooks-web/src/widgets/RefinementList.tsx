@@ -30,13 +30,15 @@ export type RefinementListProps = Omit<
 > &
   UseRefinementListProps &
   Pick<RefinementListWidgetParams, 'searchable' | 'searchablePlaceholder'> & {
-    translations?: UiProps['translations'] &
-      SearchBoxTranslations & {
-        /**
-         * What to display when there are no results.
-         */
-        noResults: string;
-      };
+    translations?: Partial<
+      UiProps['translations'] &
+        SearchBoxTranslations & {
+          /**
+           * What to display when there are no results.
+           */
+          noResults: string;
+        }
+    >;
   };
 
 export function RefinementList({
@@ -50,13 +52,7 @@ export function RefinementList({
   sortBy,
   escapeFacetValues,
   transformItems,
-  translations = {
-    resetTitle: 'Clear the search query.',
-    submitTitle: 'Submit the search query.',
-    noResults: 'No results.',
-    showLess: 'Show less',
-    showMore: 'Show more',
-  },
+  translations,
   ...props
 }: RefinementListProps) {
   const {
@@ -111,6 +107,15 @@ export function RefinementList({
     }
   }
 
+  const mergedTranslations = {
+    resetTitle: 'Clear the search query.',
+    submitTitle: 'Submit the search query.',
+    noResults: 'No results.',
+    showLess: 'Show less',
+    showMore: 'Show more',
+    ...translations,
+  };
+
   const uiProps: UiProps = {
     items,
     canRefine,
@@ -126,8 +131,8 @@ export function RefinementList({
         onReset={onReset}
         onSubmit={onSubmit}
         translations={{
-          submitTitle: translations.submitTitle,
-          resetTitle: translations.resetTitle,
+          submitTitle: mergedTranslations.submitTitle,
+          resetTitle: mergedTranslations.resetTitle,
         }}
       />
     ),
@@ -135,13 +140,13 @@ export function RefinementList({
       searchable &&
       isFromSearch &&
       items.length === 0 &&
-      translations.noResults,
+      mergedTranslations.noResults,
     canToggleShowMore,
     onToggleShowMore: toggleShowMore,
     isShowingMore,
     translations: {
-      showLess: translations.showLess,
-      showMore: translations.showMore,
+      showLess: mergedTranslations.showLess,
+      showMore: mergedTranslations.showMore,
     },
   };
 

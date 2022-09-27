@@ -22,7 +22,9 @@ export type HierarchicalMenuProps = Omit<
   HierarchicalMenuUiComponentProps,
   keyof UiProps
 > &
-  UseHierarchicalMenuProps & { translations?: UiProps['translations'] };
+  UseHierarchicalMenuProps & {
+    translations?: Partial<UiProps['translations']>;
+  };
 
 export function HierarchicalMenu({
   attributes,
@@ -34,7 +36,7 @@ export function HierarchicalMenu({
   showParentLevel,
   sortBy,
   transformItems,
-  translations = { showLess: 'Show less', showMore: 'Show more' },
+  translations,
   ...props
 }: HierarchicalMenuProps) {
   const {
@@ -70,7 +72,11 @@ export function HierarchicalMenu({
     canToggleShowMore,
     onToggleShowMore: toggleShowMore,
     isShowingMore,
-    translations,
+    translations: {
+      showLess: 'Show less',
+      showMore: 'Show more',
+      ...translations,
+    },
   };
 
   return (

@@ -13,7 +13,7 @@ type UiProps = Pick<
 
 export type BreadcrumbProps = Omit<BreadcrumbUiProps, keyof UiProps> &
   Omit<UseBreadcrumbProps, 'separator'> & {
-    translations?: UiProps['translations'];
+    translations?: Partial<UiProps['translations']>;
   };
 
 export function Breadcrumb({
@@ -21,7 +21,7 @@ export function Breadcrumb({
   rootPath,
   separator,
   transformItems,
-  translations = { root: 'Home' },
+  translations,
   ...props
 }: BreadcrumbProps) {
   const { canRefine, createURL, items, refine } = useBreadcrumb(
@@ -38,7 +38,7 @@ export function Breadcrumb({
     hasItems: canRefine,
     createURL,
     onNavigate: refine,
-    translations,
+    translations: { root: 'Home', ...translations },
   };
 
   return <BreadcrumbUiComponent {...props} {...uiProps} />;

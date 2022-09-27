@@ -12,17 +12,14 @@ type UiProps = Pick<
 >;
 
 export type RangeInputProps = Omit<RangeInputUiProps, keyof UiProps> &
-  UseRangeProps & { translations?: UiProps['translations'] };
+  UseRangeProps & { translations?: Partial<UiProps['translations']> };
 
 export function RangeInput({
   attribute,
   min,
   max,
   precision,
-  translations = {
-    separator: 'to',
-    submit: 'Go',
-  },
+  translations,
   ...props
 }: RangeInputProps) {
   const { range, start, canRefine, refine } = useRange(
@@ -38,7 +35,11 @@ export function RangeInput({
     step,
     disabled: !canRefine,
     onSubmit: refine,
-    translations,
+    translations: {
+      separator: 'to',
+      submit: 'Go',
+      ...translations,
+    },
   };
 
   return <RangeInputUiComponent {...props} {...uiProps} />;

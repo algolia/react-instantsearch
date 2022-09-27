@@ -29,7 +29,7 @@ export type InfiniteHitsProps<THit extends BaseHit = BaseHit> = Omit<
      * @default true
      */
     showPrevious?: boolean;
-    translations?: UiProps<THit>['translations'];
+    translations?: Partial<UiProps<THit>['translations']>;
   };
 
 export function InfiniteHits<THit extends BaseHit = BaseHit>({
@@ -38,10 +38,7 @@ export function InfiniteHits<THit extends BaseHit = BaseHit>({
   escapeHTML,
   showPrevious: userShowPrevious,
   transformItems,
-  translations = {
-    showPrevious: 'Show previous results',
-    showMore: 'Show more results',
-  },
+  translations,
   ...props
 }: InfiniteHitsProps<THit>) {
   const { hits, sendEvent, showPrevious, showMore, isFirstPage, isLastPage } =
@@ -57,7 +54,11 @@ export function InfiniteHits<THit extends BaseHit = BaseHit>({
     onShowMore: showMore,
     isFirstPage,
     isLastPage,
-    translations,
+    translations: {
+      showPrevious: 'Show previous results',
+      showMore: 'Show more results',
+      ...translations,
+    },
   };
 
   return <InfiniteHitsUiComponent {...props} {...uiProps} />;
