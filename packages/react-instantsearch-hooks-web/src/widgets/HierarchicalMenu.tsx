@@ -73,8 +73,8 @@ export function HierarchicalMenu({
     onToggleShowMore: toggleShowMore,
     isShowingMore,
     translations: {
-      showLess: 'Show less',
-      showMore: 'Show more',
+      showLessButtonText: 'Show less',
+      showMoreButtonText: 'Show more',
       ...translations,
     },
   };

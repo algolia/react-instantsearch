@@ -38,7 +38,7 @@ export function Breadcrumb({
     hasItems: canRefine,
     createURL,
     onNavigate: refine,
-    translations: { root: 'Home', ...translations },
+    translations: { rootElementText: 'Home', ...translations },
   };
 
   return <BreadcrumbUiComponent {...props} {...uiProps} />;

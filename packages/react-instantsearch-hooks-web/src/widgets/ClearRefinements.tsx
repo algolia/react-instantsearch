@@ -41,7 +41,7 @@ export function ClearRefinements({
     onClick: refine,
     disabled: !canRefine,
     translations: {
-      resetLabel: 'Clear refinements',
+      resetButtonText: 'Clear refinements',
       ...translations,
     },
   };

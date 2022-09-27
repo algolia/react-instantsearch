@@ -302,7 +302,7 @@ describe('Breadcrumb', () => {
         <VirtualHierarchicalMenu attributes={hierarchicalAttributes} />
         <Breadcrumb
           attributes={hierarchicalAttributes}
-          translations={{ root: 'Index' }}
+          translations={{ rootElementText: 'Index' }}
         />
       </InstantSearchHooksTestWrapper>
     );

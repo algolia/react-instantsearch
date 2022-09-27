@@ -322,7 +322,10 @@ describe('SearchBox', () => {
     const { getByRole } = render(
       <InstantSearchHooksTestWrapper>
         <SearchBox
-          translations={{ resetTitle: 'Reset', submitTitle: 'Submit' }}
+          translations={{
+            resetButtonTitle: 'Reset',
+            submitButtonTitle: 'Submit',
+          }}
         />
       </InstantSearchHooksTestWrapper>
     );

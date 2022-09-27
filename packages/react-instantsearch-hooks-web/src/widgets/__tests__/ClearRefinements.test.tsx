@@ -467,7 +467,7 @@ describe('ClearRefinements', () => {
         }}
       >
         <RefinementList attribute="brand" />
-        <ClearRefinements translations={{ resetLabel: 'Reset' }} />
+        <ClearRefinements translations={{ resetButtonText: 'Reset' }} />
       </InstantSearchHooksTestWrapper>
     );
 

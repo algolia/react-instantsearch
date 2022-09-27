@@ -9,11 +9,11 @@ export type ShowMoreButtonTranslations = {
   /**
    * Alternative text for the show more button.
    */
-  showMore: string;
+  showMoreButtonText: string;
   /**
    * Alternative text for the show less button.
    */
-  showLess: string;
+  showLessButtonText: string;
 };
 
 export function ShowMoreButton({
@@ -23,7 +23,9 @@ export function ShowMoreButton({
 }: ShowMoreButtonProps) {
   return (
     <button {...props}>
-      {isShowingMore ? translations.showLess : translations.showMore}
+      {isShowingMore
+        ? translations.showLessButtonText
+        : translations.showMoreButtonText}
     </button>
   );
 }

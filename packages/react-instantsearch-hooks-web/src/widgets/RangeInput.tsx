@@ -36,8 +36,8 @@ export function RangeInput({
     disabled: !canRefine,
     onSubmit: refine,
     translations: {
-      separator: 'to',
-      submit: 'Go',
+      separatorElementText: 'to',
+      submitButtonText: 'Go',
       ...translations,
     },
   };

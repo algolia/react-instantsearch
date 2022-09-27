@@ -34,8 +34,8 @@ describe('RefinementList', () => {
       isShowingMore: false,
       onToggleShowMore: jest.fn(),
       translations: {
-        showMore: 'Show more',
-        showLess: 'Show less',
+        showMoreButtonText: 'Show more',
+        showLessButtonText: 'Show less',
       },
       ...props,
     };
@@ -221,8 +221,8 @@ describe('RefinementList', () => {
           onReset={jest.fn}
           onSubmit={jest.fn}
           translations={{
-            submitTitle: 'Submit the search query.',
-            resetTitle: 'Clear the search query.',
+            submitButtonTitle: 'Submit the search query.',
+            resetButtonTitle: 'Clear the search query.',
           }}
         />
       ),
@@ -417,8 +417,8 @@ describe('RefinementList', () => {
           onReset={jest.fn}
           onSubmit={jest.fn}
           translations={{
-            submitTitle: 'Submit the search query.',
-            resetTitle: 'Clear the search query.',
+            submitButtonTitle: 'Submit the search query.',
+            resetButtonTitle: 'Clear the search query.',
           }}
         />
       ),
@@ -654,8 +654,8 @@ describe('RefinementList', () => {
     const props = createProps({
       showMore: true,
       translations: {
-        showLess: 'Show less brands',
-        showMore: 'Show more brands',
+        showLessButtonText: 'Show less brands',
+        showMoreButtonText: 'Show more brands',
       },
     });
     const { getByRole } = render(<RefinementList {...props} />);

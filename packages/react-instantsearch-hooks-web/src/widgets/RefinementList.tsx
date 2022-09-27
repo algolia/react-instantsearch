@@ -108,11 +108,11 @@ export function RefinementList({
   }
 
   const mergedTranslations = {
-    resetTitle: 'Clear the search query.',
-    submitTitle: 'Submit the search query.',
+    resetButtonTitle: 'Clear the search query.',
+    submitButtonTitle: 'Submit the search query.',
     noResults: 'No results.',
-    showLess: 'Show less',
-    showMore: 'Show more',
+    showLessButtonText: 'Show less',
+    showMoreButtonText: 'Show more',
     ...translations,
   };
 
@@ -131,8 +131,8 @@ export function RefinementList({
         onReset={onReset}
         onSubmit={onSubmit}
         translations={{
-          submitTitle: mergedTranslations.submitTitle,
-          resetTitle: mergedTranslations.resetTitle,
+          submitButtonTitle: mergedTranslations.submitButtonTitle,
+          resetButtonTitle: mergedTranslations.resetButtonTitle,
         }}
       />
     ),
@@ -145,8 +145,8 @@ export function RefinementList({
     onToggleShowMore: toggleShowMore,
     isShowingMore,
     translations: {
-      showLess: mergedTranslations.showLess,
-      showMore: mergedTranslations.showMore,
+      showLessButtonText: mergedTranslations.showLessButtonText,
+      showMoreButtonText: mergedTranslations.showMoreButtonText,
     },
   };
 

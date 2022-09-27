@@ -55,8 +55,8 @@ export function InfiniteHits<THit extends BaseHit = BaseHit>({
     isFirstPage,
     isLastPage,
     translations: {
-      showPrevious: 'Show previous results',
-      showMore: 'Show more results',
+      showPreviousButtonText: 'Show previous results',
+      showMoreButtonText: 'Show more results',
       ...translations,
     },
   };

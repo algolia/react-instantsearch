@@ -393,8 +393,8 @@ describe('InfiniteHits', () => {
       >
         <InfiniteHits
           translations={{
-            showMore: 'Display more',
-            showPrevious: 'Display previous',
+            showMoreButtonText: 'Display more',
+            showPreviousButtonText: 'Display previous',
           }}
         />
       </InstantSearchHooksTestWrapper>

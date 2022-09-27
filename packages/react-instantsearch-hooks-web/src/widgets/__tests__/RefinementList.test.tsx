@@ -11,6 +11,8 @@ import {
 import { InstantSearchHooksTestWrapper } from '../../../../../test/utils';
 import { RefinementList } from '../RefinementList';
 
+import type { RefinementListProps } from '../RefinementList';
+
 function createMockedSearchClient(parameters: Record<string, any> = {}) {
   return createSearchClient({
     search: jest.fn((requests) => {
@@ -1352,12 +1354,12 @@ describe('RefinementList', () => {
   });
 
   describe('translations', () => {
-    const translations = {
+    const translations: RefinementListProps['translations'] = {
       noResults: 'Zero results',
-      resetTitle: 'Reset',
-      showLess: 'Show less brands',
-      showMore: 'Show more brands',
-      submitTitle: 'Submit',
+      resetButtonTitle: 'Reset',
+      showLessButtonText: 'Show less brands',
+      showMoreButtonText: 'Show more brands',
+      submitButtonTitle: 'Submit',
     };
 
     test('show more button', async () => {

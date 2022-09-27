@@ -204,7 +204,10 @@ describe('RangeInput', () => {
       <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <RangeInput
           attribute="price"
-          translations={{ separator: 'SEPARATOR', submit: 'SUBMIT' }}
+          translations={{
+            separatorElementText: 'SEPARATOR',
+            submitButtonText: 'SUBMIT',
+          }}
         />
       </InstantSearchHooksTestWrapper>
     );

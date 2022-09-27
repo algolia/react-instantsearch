@@ -29,8 +29,8 @@ describe('Menu', () => {
       canToggleShowMore: true,
       isShowingMore: false,
       translations: {
-        showMore: 'Show more',
-        showLess: 'Show less',
+        showMoreButtonText: 'Show more',
+        showLessButtonText: 'Show less',
       },
       ...props,
     };
@@ -297,8 +297,8 @@ describe('Menu', () => {
         {...props}
         showMore
         translations={{
-          showLess: 'Show less brands',
-          showMore: 'Show more brands',
+          showLessButtonText: 'Show less brands',
+          showMoreButtonText: 'Show more brands',
         }}
       />
     );

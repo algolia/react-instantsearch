@@ -2019,16 +2019,16 @@ describe('Pagination', () => {
       <InstantSearchHooksTestWrapper>
         <Pagination
           translations={{
-            ariaFirst: 'First page',
-            ariaLast: 'Last page',
-            ariaNext: 'Next page',
-            ariaPrevious: 'Previous page',
-            ariaPage: (currentPage) => `Page number ${currentPage}`,
-            first: 'First',
-            last: 'Last',
-            next: 'Next',
-            previous: 'Previous',
-            page: (currentPage) => `#${currentPage}`,
+            firstPageItemAriaLabel: 'First page',
+            lastPageItemAriaLabel: 'Last page',
+            nextPageItemAriaLabel: 'Next page',
+            previousPageItemAriaLabel: 'Previous page',
+            pageItemAriaLabel: (currentPage) => `Page number ${currentPage}`,
+            firstPageItemText: 'First',
+            lastPageItemText: 'Last',
+            nextPageItemText: 'Next',
+            previousPageItemText: 'Previous',
+            pageItemText: (currentPage) => `#${currentPage}`,
           }}
         />
       </InstantSearchHooksTestWrapper>
