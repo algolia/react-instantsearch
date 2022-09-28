@@ -27,12 +27,12 @@ describe('Pagination', () => {
         previousPageItemText: '‹',
         nextPageItemText: '›',
         lastPageItemText: '››',
-        pageItemText: (currentPage: number) => String(currentPage),
+        pageItemText: ({ currentPage }) => String(currentPage),
         firstPageItemAriaLabel: 'First',
         previousPageItemAriaLabel: 'Previous',
         nextPageItemAriaLabel: 'Next',
         lastPageItemAriaLabel: 'Last',
-        pageItemAriaLabel: (currentPage: number) => `Page ${currentPage}`,
+        pageItemAriaLabel: ({ currentPage }) => `Page ${currentPage}`,
       },
       ...props,
     };
@@ -164,13 +164,14 @@ describe('Pagination', () => {
         previousPageItemText: 'Previous',
         nextPageItemText: 'Next',
         lastPageItemText: 'Last',
-        pageItemText: (currentPage: number) => `(${String(currentPage)})`,
+        pageItemText: ({ currentPage, nbPages }) =>
+          `(${String(currentPage)})/(${String(nbPages)})`,
         firstPageItemAriaLabel: 'First page',
         previousPageItemAriaLabel: 'Previous page',
         nextPageItemAriaLabel: 'Next page',
         lastPageItemAriaLabel: 'Last page',
-        pageItemAriaLabel: (currentPage: number) =>
-          `Page number ${currentPage}`,
+        pageItemAriaLabel: ({ currentPage, nbPages }) =>
+          `Page number ${currentPage} of ${nbPages}`,
       },
     });
     const { container } = render(<Pagination {...props} />);
@@ -207,22 +208,22 @@ describe('Pagination', () => {
               class="ais-Pagination-item ais-Pagination-item--page ais-Pagination-item--selected"
             >
               <a
-                aria-label="Page number 1"
+                aria-label="Page number 1 of 2"
                 class="ais-Pagination-link"
                 href="/?page=1"
               >
-                (1)
+                (1)/(2)
               </a>
             </li>
             <li
               class="ais-Pagination-item ais-Pagination-item--page"
             >
               <a
-                aria-label="Page number 2"
+                aria-label="Page number 2 of 2"
                 class="ais-Pagination-link"
                 href="/?page=2"
               >
-                (2)
+                (2)/(2)
               </a>
             </li>
             <li

@@ -5,13 +5,18 @@ type ShowMoreButtonProps = React.ComponentProps<'button'> & {
   translations: ShowMoreButtonTranslations;
 };
 
+export type ShowMoreButtonTextOptions = {
+  /**
+   * Whether the widget is showing more items or not.
+   */
+  isShowingMore: boolean;
+};
+
 export type ShowMoreButtonTranslations = {
   /**
    * Alternative text for the show more button.
    */
-  showMoreButtonText: (showMoreButtonTextOptions: {
-    isShowingMore: boolean;
-  }) => string;
+  showMoreButtonText(options: ShowMoreButtonTextOptions): string;
 };
 
 export function ShowMoreButton({

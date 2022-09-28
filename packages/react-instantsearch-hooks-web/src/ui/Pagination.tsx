@@ -5,6 +5,17 @@ import { isModifierClick } from './lib/isModifierClick';
 
 import type { CreateURL } from 'instantsearch.js';
 
+export type PageItemTextOptions = {
+  /**
+   * The page number to be displayed.
+   */
+  currentPage: number;
+  /**
+   * The total number of pages.
+   */
+  nbPages: number;
+};
+
 export type PaginationTranslations = {
   /**
    * The label for the first page's button.
@@ -25,7 +36,7 @@ export type PaginationTranslations = {
   /**
    * The label for a page's button.
    */
-  pageItemText(currentPage: number): string;
+  pageItemText(options: PageItemTextOptions): string;
   /**
    * The accessible label for the first page's button.
    */
@@ -45,7 +56,7 @@ export type PaginationTranslations = {
   /**
    * The accessible label for a page's button.
    */
-  pageItemAriaLabel(currentPage: number): string;
+  pageItemAriaLabel(options: PageItemTextOptions): string;
 };
 
 export type PaginationProps = React.ComponentProps<'div'> & {
@@ -189,11 +200,14 @@ export function Pagination({
                   cx('ais-Pagination-item--selected', classNames.selectedItem)
               )}
               classNames={classNames}
-              aria-label={translations.pageItemAriaLabel(page + 1)}
+              aria-label={translations.pageItemAriaLabel({
+                currentPage: page + 1,
+                nbPages,
+              })}
               href={createURL(page)}
               onClick={() => onNavigate(page)}
             >
-              {translations.pageItemText(page + 1)}
+              {translations.pageItemText({ currentPage: page + 1, nbPages })}
             </PaginationItem>
           );
         })}

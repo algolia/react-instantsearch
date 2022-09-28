@@ -2023,12 +2023,14 @@ describe('Pagination', () => {
             lastPageItemAriaLabel: 'Last page',
             nextPageItemAriaLabel: 'Next page',
             previousPageItemAriaLabel: 'Previous page',
-            pageItemAriaLabel: (currentPage) => `Page number ${currentPage}`,
+            pageItemAriaLabel: ({ currentPage, nbPages }) =>
+              `Page number ${currentPage} of ${nbPages}`,
             firstPageItemText: 'First',
             lastPageItemText: 'Last',
             nextPageItemText: 'Next',
             previousPageItemText: 'Previous',
-            pageItemText: (currentPage) => `#${currentPage}`,
+            pageItemText: ({ currentPage, nbPages }) =>
+              `#${currentPage}/${nbPages}`,
           }}
         />
       </InstantSearchHooksTestWrapper>
@@ -2066,11 +2068,11 @@ describe('Pagination', () => {
               class="ais-Pagination-item ais-Pagination-item--page ais-Pagination-item--selected"
             >
               <a
-                aria-label="Page number 1"
+                aria-label="Page number 1 of 0"
                 class="ais-Pagination-link"
                 href="#"
               >
-                #1
+                #1/0
               </a>
             </li>
             <li
