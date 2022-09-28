@@ -11,8 +11,6 @@ import {
 import { InstantSearchHooksTestWrapper } from '../../../../../test/utils';
 import { RefinementList } from '../RefinementList';
 
-import type { RefinementListProps } from '../RefinementList';
-
 const FACET_HITS = [
   {
     value: 'Apple',
@@ -1354,66 +1352,62 @@ describe('RefinementList', () => {
     expect(root).toHaveAttribute('title', 'Some custom title');
   });
 
-  describe('translations', () => {
-    const translations: RefinementListProps['translations'] = {
-      noResultsText: 'Zero results',
-      resetButtonTitle: 'Reset',
-      showMoreButtonText({ isShowingMore }) {
-        return isShowingMore ? 'Show less brands' : 'Show more brands';
-      },
-      submitButtonTitle: 'Submit',
-    };
-
-    test('show more button', async () => {
-      const searchClient = createMockedSearchClient({
-        searchForFacetValues: jest.fn(
-          ([
-            {
-              params: { facetQuery },
+  test('renders with translations', async () => {
+    const searchClient = createMockedSearchClient({
+      searchForFacetValues: jest.fn(
+        ([
+          {
+            params: { facetQuery },
+          },
+        ]) => {
+          return Promise.resolve([
+            createSFFVResponse({
+              facetHits: facetQuery === 'nothing' ? [] : FACET_HITS,
+            }),
+          ]);
+        }
+      ),
+    });
+    const { container, getByRole } = render(
+      <InstantSearchHooksTestWrapper searchClient={searchClient}>
+        <RefinementList
+          attribute="brand"
+          showMore
+          translations={{
+            noResultsText: 'Zero results',
+            resetButtonTitle: 'Reset',
+            showMoreButtonText({ isShowingMore }) {
+              return isShowingMore ? 'Show less brands' : 'Show more brands';
             },
-          ]) => {
-            return Promise.resolve([
-              createSFFVResponse({
-                facetHits: facetQuery === 'nothing' ? [] : FACET_HITS,
-              }),
-            ]);
-          }
-        ),
-      });
-      const { container, getByRole } = render(
-        <InstantSearchHooksTestWrapper searchClient={searchClient}>
-          <RefinementList
-            attribute="brand"
-            showMore
-            translations={translations}
-            searchable
-          />
-        </InstantSearchHooksTestWrapper>
-      );
+            submitButtonTitle: 'Submit',
+          }}
+          searchable
+        />
+      </InstantSearchHooksTestWrapper>
+    );
 
-      await waitFor(() => expect(searchClient.search).toHaveBeenCalledTimes(1));
+    await waitFor(() => expect(searchClient.search).toHaveBeenCalledTimes(1));
 
-      const showMoreButton = getByRole('button', { name: 'Show more brands' });
-      expect(showMoreButton).toBeInTheDocument();
-      userEvent.click(showMoreButton);
-      expect(showMoreButton).toHaveTextContent('Show less brands');
+    const showMoreButton = getByRole('button', { name: 'Show more brands' });
+    expect(showMoreButton).toBeInTheDocument();
+    userEvent.click(showMoreButton);
+    expect(showMoreButton).toHaveTextContent('Show less brands');
 
-      expect(getByRole('button', { name: 'Submit' })).toBeInTheDocument();
+    expect(getByRole('button', { name: 'Submit' })).toBeInTheDocument();
 
-      userEvent.type(
-        container.querySelector('.ais-SearchBox-input') as HTMLInputElement,
-        'nothing'
-      );
+    userEvent.type(
+      container.querySelector('.ais-SearchBox-input') as HTMLInputElement,
+      'nothing'
+    );
 
-      expect(getByRole('button', { name: 'Reset' })).toBeInTheDocument();
+    expect(getByRole('button', { name: 'Reset' })).toBeInTheDocument();
 
-      await waitFor(() => {
-        expect(searchClient.searchForFacetValues).toHaveBeenCalledTimes(7);
+    await waitFor(() => {
+      expect(searchClient.searchForFacetValues).toHaveBeenCalledTimes(7);
 
-        expect(
-          container.querySelector('.ais-RefinementList-noResults')
-        ).toHaveTextContent('Zero results');
-      });
+      expect(
+        container.querySelector('.ais-RefinementList-noResults')
+      ).toHaveTextContent('Zero results');
     });
   });
 });
