@@ -500,8 +500,11 @@ describe('HierarchicalMenu', () => {
         <HierarchicalMenu
           attributes={attributes}
           translations={{
-            showLessButtonText: 'Show less categories',
-            showMoreButtonText: 'Show more categories',
+            showMoreButtonText({ isShowingMore }) {
+              return isShowingMore
+                ? 'Show less categories'
+                : 'Show more categories';
+            },
           }}
           showMore
         />

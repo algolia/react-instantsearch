@@ -928,8 +928,9 @@ describe('Menu', () => {
         <Menu
           attribute="brand"
           translations={{
-            showLessButtonText: 'Show less branda',
-            showMoreButtonText: 'Show more brands',
+            showMoreButtonText({ isShowingMore }) {
+              return isShowingMore ? 'Show less brands' : 'Show more brands';
+            },
           }}
           showMore
         />

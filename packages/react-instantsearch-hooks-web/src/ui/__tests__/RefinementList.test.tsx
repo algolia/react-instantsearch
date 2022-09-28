@@ -34,8 +34,9 @@ describe('RefinementList', () => {
       isShowingMore: false,
       onToggleShowMore: jest.fn(),
       translations: {
-        showMoreButtonText: 'Show more',
-        showLessButtonText: 'Show less',
+        showMoreButtonText({ isShowingMore }) {
+          return isShowingMore ? 'Show less' : 'Show more';
+        },
       },
       ...props,
     };
@@ -654,8 +655,9 @@ describe('RefinementList', () => {
     const props = createProps({
       showMore: true,
       translations: {
-        showLessButtonText: 'Show less brands',
-        showMoreButtonText: 'Show more brands',
+        showMoreButtonText({ isShowingMore }) {
+          return isShowingMore ? 'Show less brands' : 'Show more brands';
+        },
       },
     });
     const { getByRole } = render(<RefinementList {...props} />);

@@ -111,8 +111,9 @@ export function RefinementList({
     resetButtonTitle: 'Clear the search query.',
     submitButtonTitle: 'Submit the search query.',
     noResults: 'No results.',
-    showLessButtonText: 'Show less',
-    showMoreButtonText: 'Show more',
+    showMoreButtonText(options) {
+      return options.isShowingMore ? 'Show less' : 'Show more';
+    },
     ...translations,
   };
 
@@ -145,7 +146,6 @@ export function RefinementList({
     onToggleShowMore: toggleShowMore,
     isShowingMore,
     translations: {
-      showLessButtonText: mergedTranslations.showLessButtonText,
       showMoreButtonText: mergedTranslations.showMoreButtonText,
     },
   };

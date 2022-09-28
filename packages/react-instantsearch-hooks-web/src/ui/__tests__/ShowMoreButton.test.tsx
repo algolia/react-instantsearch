@@ -5,8 +5,9 @@ import React from 'react';
 import { ShowMoreButton } from '../ShowMoreButton';
 
 const defaultTranslations = {
-  showMoreButtonText: 'Show more',
-  showLessButtonText: 'Show less',
+  showMoreButtonText({ isShowingMore }) {
+    return isShowingMore ? 'Show less' : 'Show more';
+  },
 };
 
 describe('ShowMoreButton', () => {
@@ -84,8 +85,9 @@ describe('ShowMoreButton', () => {
 
   test('renders translations', () => {
     const translations = {
-      showMoreButtonText: 'Display more',
-      showLessButtonText: 'Display less',
+      showMoreButtonText({ isShowingMore }) {
+        return isShowingMore ? 'Display less' : 'Display more';
+      },
     };
     const { getByRole, rerender } = render(
       <ShowMoreButton isShowingMore translations={translations} />

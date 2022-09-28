@@ -59,8 +59,9 @@ export function Menu({
     onToggleShowMore: toggleShowMore,
     isShowingMore,
     translations: {
-      showLessButtonText: 'Show less',
-      showMoreButtonText: 'Show more',
+      showMoreButtonText(options) {
+        return options.isShowingMore ? 'Show less' : 'Show more';
+      },
       ...translations,
     },
   };

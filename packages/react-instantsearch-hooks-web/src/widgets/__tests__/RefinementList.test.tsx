@@ -1357,8 +1357,9 @@ describe('RefinementList', () => {
     const translations: RefinementListProps['translations'] = {
       noResults: 'Zero results',
       resetButtonTitle: 'Reset',
-      showLessButtonText: 'Show less brands',
-      showMoreButtonText: 'Show more brands',
+      showMoreButtonText({ isShowingMore }) {
+        return isShowingMore ? 'Show less brands' : 'Show more brands';
+      },
       submitButtonTitle: 'Submit',
     };
 
