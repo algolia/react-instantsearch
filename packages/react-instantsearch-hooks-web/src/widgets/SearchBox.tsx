@@ -86,8 +86,8 @@ export function SearchBox({
     onSubmit,
     value: inputValue,
     translations: {
-      submitButtonTitle: 'Submit the search query.',
-      resetButtonTitle: 'Clear the search query.',
+      submitButtonTitle: 'Submit the search query',
+      resetButtonTitle: 'Clear the search query',
       ...translations,
     },
   };

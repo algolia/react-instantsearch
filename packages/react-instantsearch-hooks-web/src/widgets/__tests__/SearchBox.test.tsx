@@ -37,7 +37,7 @@ describe('SearchBox', () => {
             />
             <button
               class="ais-SearchBox-submit"
-              title="Submit the search query."
+              title="Submit the search query"
               type="submit"
             >
               <svg
@@ -54,7 +54,7 @@ describe('SearchBox', () => {
             <button
               class="ais-SearchBox-reset"
               hidden=""
-              title="Clear the search query."
+              title="Clear the search query"
               type="reset"
             >
               <svg

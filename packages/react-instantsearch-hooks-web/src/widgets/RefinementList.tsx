@@ -36,7 +36,7 @@ export type RefinementListProps = Omit<
           /**
            * What to display when there are no results.
            */
-          noResults: string;
+          noResultsText: string;
         }
     >;
   };
@@ -108,9 +108,9 @@ export function RefinementList({
   }
 
   const mergedTranslations = {
-    resetButtonTitle: 'Clear the search query.',
-    submitButtonTitle: 'Submit the search query.',
-    noResults: 'No results.',
+    resetButtonTitle: 'Clear the search query',
+    submitButtonTitle: 'Submit the search query',
+    noResultsText: 'No results.',
     showMoreButtonText(options) {
       return options.isShowingMore ? 'Show less' : 'Show more';
     },
@@ -141,7 +141,7 @@ export function RefinementList({
       searchable &&
       isFromSearch &&
       items.length === 0 &&
-      mergedTranslations.noResults,
+      mergedTranslations.noResultsText,
     canToggleShowMore,
     onToggleShowMore: toggleShowMore,
     isShowingMore,

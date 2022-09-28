@@ -419,21 +419,26 @@ describe('HierarchicalMenu', () => {
   });
 
   test('renders with translations', () => {
-    const props = createProps();
-    const { getByRole } = render(
-      <HierarchicalMenu
-        {...props}
-        showMore
-        translations={{
-          showMoreButtonText({ isShowingMore }) {
-            return isShowingMore ? 'Show less brands' : 'Show more brands';
-          },
-        }}
-      />
+    const props = createProps({
+      showMore: true,
+      translations: {
+        showMoreButtonText({ isShowingMore }) {
+          return isShowingMore ? 'Show less brands' : 'Show more brands';
+        },
+      },
+    });
+    const { getByRole, rerender } = render(
+      <HierarchicalMenu {...props} isShowingMore={false} />
     );
 
     expect(
       getByRole('button', { name: 'Show more brands' })
+    ).toBeInTheDocument();
+
+    rerender(<HierarchicalMenu {...props} isShowingMore />);
+
+    expect(
+      getByRole('button', { name: 'Show less brands' })
     ).toBeInTheDocument();
   });
 });

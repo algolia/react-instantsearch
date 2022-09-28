@@ -205,8 +205,8 @@ describe('RangeInput', () => {
         <RangeInput
           attribute="price"
           translations={{
-            separatorElementText: 'SEPARATOR',
-            submitButtonText: 'SUBMIT',
+            separatorElementText: 'to',
+            submitButtonText: 'Send',
           }}
         />
       </InstantSearchHooksTestWrapper>
@@ -218,10 +218,10 @@ describe('RangeInput', () => {
 
     expect(
       container.querySelector('.ais-RangeInput-separator')
-    ).toHaveTextContent('SEPARATOR');
+    ).toHaveTextContent('to');
 
     expect(container.querySelector('.ais-RangeInput-submit')).toHaveTextContent(
-      'SUBMIT'
+      'Send'
     );
   });
 });

@@ -499,6 +499,7 @@ describe('HierarchicalMenu', () => {
       <InstantSearchHooksTestWrapper searchClient={searchClient}>
         <HierarchicalMenu
           attributes={attributes}
+          limit={1}
           translations={{
             showMoreButtonText({ isShowingMore }) {
               return isShowingMore
@@ -515,8 +516,12 @@ describe('HierarchicalMenu', () => {
       expect(searchClient.search).toHaveBeenCalledTimes(1);
     });
 
-    expect(
-      getByRole('button', { name: 'Show more categories' })
-    ).toBeInTheDocument();
+    const button = getByRole('button', { name: 'Show more categories' });
+
+    expect(button).toBeInTheDocument();
+
+    userEvent.click(button);
+
+    expect(button).toHaveTextContent('Show less categories');
   });
 });

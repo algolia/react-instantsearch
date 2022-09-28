@@ -941,8 +941,12 @@ describe('Menu', () => {
       expect(searchClient.search).toHaveBeenCalledTimes(1);
     });
 
-    expect(
-      getByRole('button', { name: 'Show more brands' })
-    ).toBeInTheDocument();
+    const button = getByRole('button', { name: 'Show more brands' });
+
+    expect(button).toBeInTheDocument();
+
+    userEvent.click(button);
+
+    expect(button).toHaveTextContent('Show less brands');
   });
 });

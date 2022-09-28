@@ -660,10 +660,18 @@ describe('RefinementList', () => {
         },
       },
     });
-    const { getByRole } = render(<RefinementList {...props} />);
+    const { getByRole, rerender } = render(
+      <RefinementList {...props} isShowingMore={false} />
+    );
 
     expect(
       getByRole('button', { name: 'Show more brands' })
+    ).toBeInTheDocument();
+
+    rerender(<RefinementList {...props} isShowingMore />);
+
+    expect(
+      getByRole('button', { name: 'Show less brands' })
     ).toBeInTheDocument();
   });
 });
