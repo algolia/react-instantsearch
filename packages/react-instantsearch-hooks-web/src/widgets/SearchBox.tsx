@@ -52,6 +52,10 @@ export function SearchBox({
 
   function onReset() {
     setQuery('');
+
+    if (!searchAsYouType) {
+      refine('');
+    }
   }
 
   function onChange(event: React.ChangeEvent<HTMLInputElement>) {
