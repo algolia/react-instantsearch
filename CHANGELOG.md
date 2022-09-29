@@ -3,7 +3,7 @@
 
 ### Features
 
-* **hooks-web:** translations for widgets ([#3638](https://github.com/algolia/react-instantsearch/issues/3638)) ([63b506f](https://github.com/algolia/react-instantsearch/commit/63b506f9dbad284f45ac17210e17c4a2a8f099b6))
+* **hooks-web:** introduce Translations API ([#3638](https://github.com/algolia/react-instantsearch/issues/3638)) ([63b506f](https://github.com/algolia/react-instantsearch/commit/63b506f9dbad284f45ac17210e17c4a2a8f099b6))
 
 ### Fixes
 * **hooks-web:** when searchAsYouType=false, pressing the reset button searches (previously only reset the query) ([#3642](https://github.com/algolia/react-instantsearch/issues/3642)) ([f969deb](https://github.com/algolia/react-instantsearch/commit/f969deb05fd4f53aaa251ff88b52db2224ce0786))
