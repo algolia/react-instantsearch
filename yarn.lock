@@ -16941,10 +16941,10 @@ instantsearch.css@7.4.5:
   resolved "https://registry.yarnpkg.com/instantsearch.css/-/instantsearch.css-7.4.5.tgz#2a521aa634329bf1680f79adf87c79d67669ec8d"
   integrity sha512-iIGBYjCokU93DDB8kbeztKtlu4qVEyTg1xvS6iSO1YvqRwkIZgf0tmsl/GytsLdZhuw8j4wEaeYsCzNbeJ/zEQ==
 
-instantsearch.js@4.46.1, instantsearch.js@^4.46.1:
-  version "4.46.1"
-  resolved "https://registry.yarnpkg.com/instantsearch.js/-/instantsearch.js-4.46.1.tgz#93f2309e6fb8821b00a00eadcb14c368e713ddca"
-  integrity sha512-zcuCVtMPwpzmqprtUMh6qF21hJiaipRSA8vbFZlrRfNZMg0gkm5JE2sPPBDoMWMED+1yIIDgoyLzTKRXamJzlQ==
+"instantsearch.js@https://pkg.csb.dev/algolia/instantsearch.js/commit/fe91dc7f/instantsearch.js":
+  version "4.46.3"
+  uid "7083a2b2126d1462bfd407ba824fe0bd684b21e2"
+  resolved "https://pkg.csb.dev/algolia/instantsearch.js/commit/fe91dc7f/instantsearch.js#7083a2b2126d1462bfd407ba824fe0bd684b21e2"
   dependencies:
     "@algolia/events" "^4.0.1"
     "@algolia/ui-components-highlight-vdom" "^1.1.2"

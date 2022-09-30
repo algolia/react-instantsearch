@@ -12,11 +12,20 @@ type InstantSearchApi<TUiState extends UiState> = SearchStateApi<TUiState> &
   SearchResultsApi & {
     use: (...middlewares: Middleware[]) => () => void;
     refresh: InstantSearch['refresh'];
+    status: InstantSearch['status'];
+    error: InstantSearch['error'];
   };
 
-export function useInstantSearch<
-  TUiState extends UiState = UiState
->(): InstantSearchApi<TUiState> {
+export type UseInstantSearchProps = {
+  /**
+   * catch any error happening in the search lifecycle and handle it with this hook.
+   */
+  catchError?: boolean;
+};
+
+export function useInstantSearch<TUiState extends UiState = UiState>({
+  catchError,
+}: UseInstantSearchProps = {}): InstantSearchApi<TUiState> {
   const search = useInstantSearchContext<TUiState>();
   const { uiState, setUiState, indexUiState, setIndexUiState } =
     useSearchState<TUiState>();
@@ -37,6 +46,10 @@ export function useInstantSearch<
     search.refresh();
   }, [search]);
 
+  if (catchError) {
+    search.on('error', () => {});
+  }
+
   return {
     results,
     scopedResults,
@@ -46,5 +59,7 @@ export function useInstantSearch<
     setIndexUiState,
     use,
     refresh,
+    status: search.status,
+    error: search.error,
   };
 }
