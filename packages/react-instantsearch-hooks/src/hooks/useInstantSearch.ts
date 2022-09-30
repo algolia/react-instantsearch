@@ -1,4 +1,4 @@
-import { useCallback, useRef } from 'react';
+import { useCallback } from 'react';
 
 import { useInstantSearchContext } from '../lib/useInstantSearchContext';
 import { useIsomorphicLayoutEffect } from '../lib/useIsomorphicLayoutEffect';
