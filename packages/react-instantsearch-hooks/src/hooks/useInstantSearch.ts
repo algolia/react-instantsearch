@@ -1,6 +1,7 @@
-import { useCallback } from 'react';
+import { useCallback, useRef } from 'react';
 
 import { useInstantSearchContext } from '../lib/useInstantSearchContext';
+import { useIsomorphicLayoutEffect } from '../lib/useIsomorphicLayoutEffect';
 import { useSearchResults } from '../lib/useSearchResults';
 import { useSearchState } from '../lib/useSearchState';
 
@@ -46,9 +47,14 @@ export function useInstantSearch<TUiState extends UiState = UiState>({
     search.refresh();
   }, [search]);
 
-  if (catchError) {
-    search.on('error', () => {});
-  }
+  useIsomorphicLayoutEffect(() => {
+    if (catchError) {
+      const onError = () => {};
+      search.addListener('error', onError);
+      return () => search.removeListener('error', onError);
+    }
+    return () => {};
+  }, [search, catchError]);
 
   return {
     results,
