@@ -114,8 +114,19 @@ describe('ReactDOMServer imports', () => {
     await expect(
       getServerState(<App />)
     ).rejects.toThrowErrorMatchingInlineSnapshot(
-      `"Could not import ReactDOMServer."`
+      `"Could not import ReactDOMServer. You can provide it as an argument: getServerState(<Search />, ReactDOMServer.renderToString)."`
     );
+  });
+
+  test('does not throw if user provides their own renderToString', async () => {
+    const searchClient = createSearchClient({});
+    const { App } = createTestEnvironment({ searchClient });
+
+    const serverState = await getServerState(<App />, (element) =>
+      jest.requireActual('react-dom/server').renderToString(element)
+    );
+
+    expect(serverState.initialResults).toEqual(expect.any(Object));
   });
 });
 

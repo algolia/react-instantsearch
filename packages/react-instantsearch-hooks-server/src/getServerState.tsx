@@ -8,7 +8,6 @@ import {
 import type { InitialResults, InstantSearch, UiState } from 'instantsearch.js';
 import type { IndexWidget } from 'instantsearch.js/es/widgets/index/index';
 import type { ReactNode } from 'react';
-import type { renderToString as reactRenderToString } from 'react-dom/server';
 import type {
   InstantSearchServerContextApi,
   InstantSearchServerState,
@@ -16,11 +15,14 @@ import type {
 
 type SearchRef = { current: InstantSearch | undefined };
 
+export type RenderToString = (element: JSX.Element) => unknown;
+
 /**
  * Returns the InstantSearch server state from a component.
  */
 export function getServerState(
-  children: ReactNode
+  children: ReactNode,
+  renderToString?: RenderToString
 ): Promise<InstantSearchServerState> {
   const searchRef: SearchRef = {
     current: undefined,
@@ -33,16 +35,16 @@ export function getServerState(
     searchRef.current = search;
   };
 
-  return importRenderToString()
-    .then((renderToString) => {
+  return importRenderToString(renderToString)
+    .then((render) => {
       return execute({
         children,
-        renderToString,
+        render,
         searchRef,
         notifyServer,
-      }).then((serverState) => ({ serverState, renderToString }));
+      }).then((serverState) => ({ serverState, render }));
     })
-    .then(({ renderToString, serverState }) => {
+    .then(({ render, serverState }) => {
       let shouldRefetch = false;
 
       // <DynamicWidgets> requires another query to retrieve the dynamic widgets
@@ -62,7 +64,7 @@ export function getServerState(
               {children}
             </InstantSearchSSRProvider>
           ),
-          renderToString,
+          render,
           searchRef,
           notifyServer,
         });
@@ -74,18 +76,13 @@ export function getServerState(
 
 type ExecuteArgs = {
   children: ReactNode;
-  renderToString: typeof reactRenderToString;
+  render: RenderToString;
   notifyServer: InstantSearchServerContextApi<UiState, UiState>['notifyServer'];
   searchRef: SearchRef;
 };
 
-function execute({
-  children,
-  renderToString,
-  notifyServer,
-  searchRef,
-}: ExecuteArgs) {
-  renderToString(
+function execute({ children, render, notifyServer, searchRef }: ExecuteArgs) {
+  render(
     <InstantSearchServerContext.Provider value={{ notifyServer }}>
       {children}
     </InstantSearchServerContext.Provider>
@@ -182,7 +179,13 @@ function getInitialResults(rootIndex: IndexWidget): InitialResults {
   return initialResults;
 }
 
-function importRenderToString() {
+function importRenderToString(
+  renderToString?: RenderToString
+): Promise<RenderToString> {
+  if (renderToString) {
+    return Promise.resolve(renderToString);
+  }
+
   // React pre-18 doesn't use `exports` in package.json, requiring a fully resolved path
   // Thus, only one of these imports is correct
   const modules = ['react-dom/server.js', 'react-dom/server'];
@@ -191,12 +194,13 @@ function importRenderToString() {
   return Promise.all(modules.map((mod) => import(mod).catch(() => {}))).then(
     (imports: unknown[]) => {
       const ReactDOMServer = imports.find(
-        (mod): mod is { renderToString: typeof reactRenderToString } =>
-          mod !== undefined
+        (mod): mod is { renderToString: RenderToString } => mod !== undefined
       );
 
       if (!ReactDOMServer) {
-        throw new Error('Could not import ReactDOMServer.');
+        throw new Error(
+          'Could not import ReactDOMServer. You can provide it as an argument: getServerState(<Search />, ReactDOMServer.renderToString).'
+        );
       }
 
       return ReactDOMServer.renderToString;
