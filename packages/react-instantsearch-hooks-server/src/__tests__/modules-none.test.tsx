@@ -122,9 +122,10 @@ describe('ReactDOMServer imports', () => {
     const searchClient = createSearchClient({});
     const { App } = createTestEnvironment({ searchClient });
 
-    const serverState = await getServerState(<App />, (element) =>
-      jest.requireActual('react-dom/server').renderToString(element)
-    );
+    const serverState = await getServerState(<App />, {
+      renderToString: (element) =>
+        jest.requireActual('react-dom/server').renderToString(element),
+    });
 
     expect(serverState.initialResults).toEqual(expect.any(Object));
   });

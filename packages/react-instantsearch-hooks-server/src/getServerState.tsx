@@ -17,12 +17,16 @@ type SearchRef = { current: InstantSearch | undefined };
 
 export type RenderToString = (element: JSX.Element) => unknown;
 
+export type GetServerStateOptions = {
+  renderToString?: RenderToString;
+};
+
 /**
  * Returns the InstantSearch server state from a component.
  */
 export function getServerState(
   children: ReactNode,
-  renderToString?: RenderToString
+  options: GetServerStateOptions = {}
 ): Promise<InstantSearchServerState> {
   const searchRef: SearchRef = {
     current: undefined,
@@ -35,16 +39,16 @@ export function getServerState(
     searchRef.current = search;
   };
 
-  return importRenderToString(renderToString)
-    .then((render) => {
+  return importRenderToString(options.renderToString)
+    .then((renderToString) => {
       return execute({
         children,
-        render,
+        renderToString,
         searchRef,
         notifyServer,
-      }).then((serverState) => ({ serverState, render }));
+      }).then((serverState) => ({ serverState, renderToString }));
     })
-    .then(({ render, serverState }) => {
+    .then(({ renderToString, serverState }) => {
       let shouldRefetch = false;
 
       // <DynamicWidgets> requires another query to retrieve the dynamic widgets
@@ -64,7 +68,7 @@ export function getServerState(
               {children}
             </InstantSearchSSRProvider>
           ),
-          render,
+          renderToString,
           searchRef,
           notifyServer,
         });
@@ -76,13 +80,18 @@ export function getServerState(
 
 type ExecuteArgs = {
   children: ReactNode;
-  render: RenderToString;
+  renderToString: RenderToString;
   notifyServer: InstantSearchServerContextApi<UiState, UiState>['notifyServer'];
   searchRef: SearchRef;
 };
 
-function execute({ children, render, notifyServer, searchRef }: ExecuteArgs) {
-  render(
+function execute({
+  children,
+  renderToString,
+  notifyServer,
+  searchRef,
+}: ExecuteArgs) {
+  renderToString(
     <InstantSearchServerContext.Provider value={{ notifyServer }}>
       {children}
     </InstantSearchServerContext.Provider>
@@ -199,7 +208,7 @@ function importRenderToString(
 
       if (!ReactDOMServer) {
         throw new Error(
-          'Could not import ReactDOMServer. You can provide it as an argument: getServerState(<Search />, ReactDOMServer.renderToString).'
+          'Could not import ReactDOMServer. You can provide it as an argument: getServerState(<Search />, { renderToString }).'
         );
       }
 
