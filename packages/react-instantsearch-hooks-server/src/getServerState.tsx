@@ -194,6 +194,10 @@ function importRenderToString(
   if (renderToString) {
     return Promise.resolve(renderToString);
   }
+  // eslint-disable-next-line no-console
+  console.warn(
+    '[InstantSearch] `renderToString` should be passed to getServerState(<App/>, { renderToString })'
+  );
 
   // React pre-18 doesn't use `exports` in package.json, requiring a fully resolved path
   // Thus, only one of these imports is correct
