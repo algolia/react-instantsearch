@@ -89,7 +89,7 @@ export const getServerSideProps: GetServerSideProps<HomePageProps> =
     const protocol = req.headers.referer?.split('://')[0] || 'https';
     const url = `${protocol}://${req.headers.host}${req.url}`;
     const serverState = await getServerState(<HomePage url={url} />, {
-      // renderToString,
+      renderToString,
     });
 
     return {
