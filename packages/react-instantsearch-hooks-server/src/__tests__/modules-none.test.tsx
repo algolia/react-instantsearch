@@ -118,7 +118,7 @@ describe('ReactDOMServer imports', () => {
     );
   });
 
-  test('does not throw if user provides their own renderToString', async () => {
+  test('calls the provided renderToString function', async () => {
     const searchClient = createSearchClient({});
     const { App } = createTestEnvironment({ searchClient });
 
