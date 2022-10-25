@@ -8,6 +8,7 @@
 * **PoweredBy:** update component logo ([#3661](https://github.com/algolia/react-instantsearch/issues/3661)) ([69c1b2a](https://github.com/algolia/react-instantsearch/commit/69c1b2acef64d972dfa6c6beb8967032119ad2d5))
 
 
+
 # [6.37.0](https://github.com/algolia/react-instantsearch/compare/v6.36.0...v6.37.0) (2022-10-18)
 
 
