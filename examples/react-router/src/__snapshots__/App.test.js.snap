@@ -94,6 +94,11 @@ exports[`react-router recipe App renders without crashing 1`] = `
         <svg
           className="ais-PoweredBy-logo"
           height="27"
+          style={
+            Object {
+              "marginLeft": "0.3rem",
+            }
+          }
           viewBox="0 0 512 117"
           width="118"
         >

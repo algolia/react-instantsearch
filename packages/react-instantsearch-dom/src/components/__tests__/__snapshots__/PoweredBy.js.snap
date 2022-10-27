@@ -20,6 +20,11 @@ exports[`PoweredBy applies translations 1`] = `
     <svg
       className="ais-PoweredBy-logo"
       height="27"
+      style={
+        Object {
+          "marginLeft": "0.3rem",
+        }
+      }
       viewBox="0 0 512 117"
       width="118"
     >
@@ -52,6 +57,11 @@ exports[`PoweredBy default 1`] = `
     <svg
       className="ais-PoweredBy-logo"
       height="27"
+      style={
+        Object {
+          "marginLeft": "0.3rem",
+        }
+      }
       viewBox="0 0 512 117"
       width="118"
     >
@@ -84,6 +94,11 @@ exports[`PoweredBy default with className 1`] = `
     <svg
       className="ais-PoweredBy-logo"
       height="27"
+      style={
+        Object {
+          "marginLeft": "0.3rem",
+        }
+      }
       viewBox="0 0 512 117"
       width="118"
     >
