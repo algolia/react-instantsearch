@@ -1,3 +1,12 @@
+## [6.38.1](https://github.com/algolia/react-instantsearch/compare/v6.38.0...v6.38.1) (2022-11-08)
+
+
+### Bug Fixes
+
+* **hooks:** avoid effect in useStableValue ([#3670](https://github.com/algolia/react-instantsearch/issues/3670)) ([d1f53ae](https://github.com/algolia/react-instantsearch/commit/d1f53ae815b75f13c18fd245e0403d57e7ae391c)), closes [/github.com/algolia/react-instantsearch/blob/f436d31184f3f75b33a1fdaa19c665e77948df28/packages/react-instantsearch-hooks/src/hooks/useConnector.ts#L26-L29](https://github.com//github.com/algolia/react-instantsearch/blob/f436d31184f3f75b33a1fdaa19c665e77948df28/packages/react-instantsearch-hooks/src/hooks/useConnector.ts/issues/L26-L29) [/github.com/algolia/react-instantsearch/blob/aa5f9d84ddb6e97d05e6ad1baf2c6caa23891281/packages/react-instantsearch-hooks/src/lib/useIndex.ts#L22](https://github.com//github.com/algolia/react-instantsearch/blob/aa5f9d84ddb6e97d05e6ad1baf2c6caa23891281/packages/react-instantsearch-hooks/src/lib/useIndex.ts/issues/L22)
+
+
+
 # [6.38.0](https://github.com/algolia/react-instantsearch/compare/v6.37.0...v6.38.0) (2022-10-25)
 
 
