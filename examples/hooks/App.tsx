@@ -7,6 +7,7 @@ import {
   Configure,
   ClearRefinements,
   CurrentRefinements,
+  DynamicWidgets,
   HierarchicalMenu,
   Highlight,
   Hits,
@@ -66,36 +67,38 @@ export function App() {
 
         <div className="Container">
           <div>
-            <Panel header="Brands">
-              <RefinementList
-                attribute="brand"
-                searchable={true}
-                searchablePlaceholder="Search brands"
-                showMore={true}
-              />
-            </Panel>
-            <Panel header="Categories">
-              <Menu attribute="categories" showMore={true} />
-            </Panel>
-            <Panel header="Hierarchy">
-              <HierarchicalMenu
-                attributes={[
-                  'hierarchicalCategories.lvl0',
-                  'hierarchicalCategories.lvl1',
-                  'hierarchicalCategories.lvl2',
-                ]}
-                showMore={true}
-              />
-            </Panel>
-            <Panel header="Price">
-              <RangeInput attribute="price" />
-            </Panel>
-            <Panel header="Free Shipping">
-              <ToggleRefinement
-                attribute="free_shipping"
-                label="Free shipping"
-              />
-            </Panel>
+            <DynamicWidgets>
+              <Panel header="Brands">
+                <RefinementList
+                  attribute="brand"
+                  searchable={true}
+                  searchablePlaceholder="Search brands"
+                  showMore={true}
+                />
+              </Panel>
+              <Panel header="Categories">
+                <Menu attribute="categories" showMore={true} />
+              </Panel>
+              <Panel header="Hierarchy">
+                <HierarchicalMenu
+                  attributes={[
+                    'hierarchicalCategories.lvl0',
+                    'hierarchicalCategories.lvl1',
+                    'hierarchicalCategories.lvl2',
+                  ]}
+                  showMore={true}
+                />
+              </Panel>
+              <Panel header="Price">
+                <RangeInput attribute="price" />
+              </Panel>
+              <Panel header="Free Shipping">
+                <ToggleRefinement
+                  attribute="free_shipping"
+                  label="Free shipping"
+                />
+              </Panel>
+            </DynamicWidgets>
           </div>
           <div className="Search">
             <Breadcrumb
