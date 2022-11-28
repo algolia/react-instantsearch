@@ -32,55 +32,11 @@ import {
 import { Tab, Tabs } from './components/layout';
 
 import './App.css';
-import { MultipleQueriesQuery } from '@algolia/client-search';
 
 const searchClient = algoliasearch(
   'latency',
   '6be0576ff61c053d5f9a3225e2a90f76'
 );
-const search = searchClient.search;
-(searchClient as any).search = function (queries: MultipleQueriesQuery[]) {
-  const { fakeIndices, actualQueries } = queries.reduce<{
-    fakeIndices: number[];
-    actualQueries: MultipleQueriesQuery[];
-  }>(
-    (acc, query, i) => {
-      if (query.indexName === 'root') {
-        acc.fakeIndices.push(i);
-      } else {
-        acc.actualQueries.push(query);
-      }
-      return acc;
-    },
-    {
-      actualQueries: [],
-      fakeIndices: [],
-    }
-  );
-
-  return search(actualQueries).then((res) => {
-    const response = {
-      results: fakeIndices.reduce((acc, i) => {
-        acc.splice(i, 0, {
-          query: '',
-          page: 0,
-          hitsPerPage: 20,
-          hits: [],
-          nbHits: 0,
-          nbPages: 0,
-          params: '',
-          exhaustiveNbHits: false,
-          exhaustiveFacetsCount: false,
-          processingTimeMS: 0,
-          index: 'root',
-        });
-        return acc;
-      }, res.results.slice()),
-    };
-
-    return response;
-  });
-};
 
 type HitProps = {
   hit: AlgoliaHit<{
@@ -100,8 +56,12 @@ function Hit({ hit }: HitProps) {
 
 export function App() {
   return (
-    <InstantSearch searchClient={searchClient} indexName="root" routing={true}>
-      <Index indexName="instant_search">
+    <InstantSearch
+      searchClient={searchClient}
+      indexName="instant_search"
+      routing={true}
+    >
+      <Index indexName="instant_search" indexId="not_root">
         <Configure ruleContexts={[]} />
 
         <div className="Container">
@@ -188,7 +148,7 @@ export function App() {
 
             <Index
               indexName="autocomplete_demo_products_query_suggestions"
-              parentIndexId="root"
+              parentIndexId="instant_search"
             >
               <Configure hitsPerPage={3} />
               <Hits />
