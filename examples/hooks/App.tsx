@@ -7,12 +7,12 @@ import {
   Configure,
   ClearRefinements,
   CurrentRefinements,
-  DynamicWidgets,
   HierarchicalMenu,
   Highlight,
   Hits,
   HitsPerPage,
   InfiniteHits,
+  Index,
   Menu,
   Pagination,
   RangeInput,
@@ -32,11 +32,55 @@ import {
 import { Tab, Tabs } from './components/layout';
 
 import './App.css';
+import { MultipleQueriesQuery } from '@algolia/client-search';
 
 const searchClient = algoliasearch(
   'latency',
   '6be0576ff61c053d5f9a3225e2a90f76'
 );
+const search = searchClient.search;
+(searchClient as any).search = function (queries: MultipleQueriesQuery[]) {
+  const { fakeIndices, actualQueries } = queries.reduce<{
+    fakeIndices: number[];
+    actualQueries: MultipleQueriesQuery[];
+  }>(
+    (acc, query, i) => {
+      if (query.indexName === 'root') {
+        acc.fakeIndices.push(i);
+      } else {
+        acc.actualQueries.push(query);
+      }
+      return acc;
+    },
+    {
+      actualQueries: [],
+      fakeIndices: [],
+    }
+  );
+
+  return search(actualQueries).then((res) => {
+    const response = {
+      results: fakeIndices.reduce((acc, i) => {
+        acc.splice(i, 0, {
+          query: '',
+          page: 0,
+          hitsPerPage: 20,
+          hits: [],
+          nbHits: 0,
+          nbPages: 0,
+          params: '',
+          exhaustiveNbHits: false,
+          exhaustiveFacetsCount: false,
+          processingTimeMS: 0,
+          index: 'root',
+        });
+        return acc;
+      }, res.results.slice()),
+    };
+
+    return response;
+  });
+};
 
 type HitProps = {
   hit: AlgoliaHit<{
@@ -56,16 +100,12 @@ function Hit({ hit }: HitProps) {
 
 export function App() {
   return (
-    <InstantSearch
-      searchClient={searchClient}
-      indexName="instant_search"
-      routing={true}
-    >
-      <Configure ruleContexts={[]} />
+    <InstantSearch searchClient={searchClient} indexName="root" routing={true}>
+      <Index indexName="instant_search">
+        <Configure ruleContexts={[]} />
 
-      <div className="Container">
-        <div>
-          <DynamicWidgets>
+        <div className="Container">
+          <div>
             <Panel header="Brands">
               <RefinementList
                 attribute="brand"
@@ -96,84 +136,94 @@ export function App() {
                 label="Free shipping"
               />
             </Panel>
-          </DynamicWidgets>
-        </div>
-        <div className="Search">
-          <Breadcrumb
-            attributes={[
-              'hierarchicalCategories.lvl0',
-              'hierarchicalCategories.lvl1',
-              'hierarchicalCategories.lvl2',
-            ]}
-          />
-
-          <SearchBox placeholder="Search" autoFocus />
-
-          <div className="Search-header">
-            <PoweredBy />
-            <HitsPerPage
-              items={[
-                { label: '20 hits per page', value: 20, default: true },
-                { label: '40 hits per page', value: 40 },
+          </div>
+          <div className="Search">
+            <Breadcrumb
+              attributes={[
+                'hierarchicalCategories.lvl0',
+                'hierarchicalCategories.lvl1',
+                'hierarchicalCategories.lvl2',
               ]}
             />
-            <SortBy
-              items={[
-                { label: 'Relevance', value: 'instant_search' },
-                { label: 'Price (asc)', value: 'instant_search_price_asc' },
-                { label: 'Price (desc)', value: 'instant_search_price_desc' },
-              ]}
+
+            <SearchBox placeholder="Search" autoFocus />
+
+            <div className="Search-header">
+              <PoweredBy />
+              <HitsPerPage
+                items={[
+                  { label: '20 hits per page', value: 20, default: true },
+                  { label: '40 hits per page', value: 40 },
+                ]}
+              />
+              <SortBy
+                items={[
+                  { label: 'Relevance', value: 'instant_search' },
+                  { label: 'Price (asc)', value: 'instant_search_price_asc' },
+                  { label: 'Price (desc)', value: 'instant_search_price_desc' },
+                ]}
+              />
+              <Refresh />
+            </div>
+
+            <div className="CurrentRefinements">
+              <ClearRefinements />
+              <CurrentRefinements
+                transformItems={(items) =>
+                  items.map((item) => {
+                    const label = item.label.startsWith(
+                      'hierarchicalCategories'
+                    )
+                      ? 'Hierarchy'
+                      : item.label;
+
+                    return {
+                      ...item,
+                      attribute: label,
+                    };
+                  })
+                }
+              />
+            </div>
+
+            <Index
+              indexName="autocomplete_demo_products_query_suggestions"
+              parentIndexId="root"
+            >
+              <Configure hitsPerPage={3} />
+              <Hits />
+            </Index>
+
+            <QueryRuleContext
+              trackedFilters={{
+                brand: () => ['Apple'],
+              }}
             />
-            <Refresh />
+
+            <QueryRuleCustomData>
+              {({ items }) => (
+                <>
+                  {items.map((item) => (
+                    <a href={item.link} key={item.banner}>
+                      <img src={item.banner} alt={item.title} />
+                    </a>
+                  ))}
+                </>
+              )}
+            </QueryRuleCustomData>
+
+            <Tabs>
+              <Tab title="Hits">
+                <Hits hitComponent={Hit} />
+                <Pagination className="Pagination" />
+              </Tab>
+              <Tab title="InfiniteHits">
+                <InfiniteHits showPrevious hitComponent={Hit} />
+              </Tab>
+            </Tabs>
           </div>
-
-          <div className="CurrentRefinements">
-            <ClearRefinements />
-            <CurrentRefinements
-              transformItems={(items) =>
-                items.map((item) => {
-                  const label = item.label.startsWith('hierarchicalCategories')
-                    ? 'Hierarchy'
-                    : item.label;
-
-                  return {
-                    ...item,
-                    attribute: label,
-                  };
-                })
-              }
-            />
-          </div>
-
-          <QueryRuleContext
-            trackedFilters={{
-              brand: () => ['Apple'],
-            }}
-          />
-
-          <QueryRuleCustomData>
-            {({ items }) => (
-              <>
-                {items.map((item) => (
-                  <a href={item.link} key={item.banner}>
-                    <img src={item.banner} alt={item.title} />
-                  </a>
-                ))}
-              </>
-            )}
-          </QueryRuleCustomData>
-
-          <Tabs>
-            <Tab title="Hits">
-              <Hits hitComponent={Hit} />
-              <Pagination className="Pagination" />
-            </Tab>
-            <Tab title="InfiniteHits">
-              <InfiniteHits showPrevious hitComponent={Hit} />
-            </Tab>
-          </Tabs>
         </div>
-      </div>
+      </Index>
     </InstantSearch>
   );
 }
