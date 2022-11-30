@@ -42,17 +42,11 @@ jobs:
           command: yarn test:build
       - store_artifacts:
           path: packages/react-instantsearch/dist
-      - store_artifacts:
           path: packages/react-instantsearch-core/dist
-      - store_artifacts:
           path: packages/react-instantsearch-dom/dist
-      - store_artifacts:
           path: packages/react-instantsearch-dom-maps/dist
-      - store_artifacts:
           path: packages/react-instantsearch-hooks/dist
-      - store_artifacts:
           path: packages/react-instantsearch-hooks-server/dist
-      - store_artifacts:
           path: packages/react-instantsearch-native/dist
 
   test_unit:
