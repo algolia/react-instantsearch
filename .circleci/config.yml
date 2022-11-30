@@ -41,13 +41,14 @@ jobs:
           name: Build & Test packages size
           command: yarn test:build
       - store_artifacts:
-          path: packages/react-instantsearch/dist
-          path: packages/react-instantsearch-core/dist
-          path: packages/react-instantsearch-dom/dist
-          path: packages/react-instantsearch-dom-maps/dist
-          path: packages/react-instantsearch-hooks/dist
-          path: packages/react-instantsearch-hooks-server/dist
-          path: packages/react-instantsearch-native/dist
+          paths:
+            - packages/react-instantsearch/dist
+            - packages/react-instantsearch-core/dist
+            - packages/react-instantsearch-dom/dist
+            - packages/react-instantsearch-dom-maps/dist
+            - packages/react-instantsearch-hooks/dist
+            - packages/react-instantsearch-hooks-server/dist
+            - packages/react-instantsearch-native/dist
 
   test_unit:
     <<: *defaults
