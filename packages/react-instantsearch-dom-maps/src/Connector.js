@@ -77,7 +77,7 @@ export class Connector extends Component {
       isRefineOnMapMove: !isRefineOnMapMove,
     }));
 
-  setMapMoveSinceLastRefine = next => {
+  setMapMoveSinceLastRefine = (next) => {
     const { hasMapMoveSinceLastRefine } = this.state;
 
     if (hasMapMoveSinceLastRefine === next) {
@@ -116,4 +116,4 @@ export class Connector extends Component {
   }
 }
 
-export default connectGeoSearch(Connector);
+export default connectGeoSearch(Connector, { $$widgetType: 'ais.geoSearch' });

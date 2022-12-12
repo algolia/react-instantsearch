@@ -1,11 +1,12 @@
-/* eslint-disable import/no-commonjs */
+const wrapWarningWithDevCheck = require('./scripts/babel/wrap-warning-with-dev-check');
+const extensionResolver = require('./scripts/babel/extension-resolver');
 
 const isES = process.env.BABEL_ENV === 'es';
 const isRollup = process.env.BABEL_ENV === 'rollup';
 
-const clean = x => x.filter(Boolean);
+const clean = (x) => x.filter(Boolean);
 
-module.exports = api => {
+module.exports = (api) => {
   const isTest = api.env('test');
   const targets = {};
 
@@ -17,6 +18,7 @@ module.exports = api => {
 
   return {
     presets: [
+      '@babel/preset-typescript',
       [
         '@babel/preset-env',
         {
@@ -29,11 +31,34 @@ module.exports = api => {
     plugins: clean([
       '@babel/plugin-proposal-class-properties',
       isRollup && 'babel-plugin-transform-react-remove-prop-types',
+      wrapWarningWithDevCheck,
+      [
+        'inline-replace-variables',
+        {
+          __DEV__: {
+            type: 'node',
+            replacement: "process.env.NODE_ENV !== 'production'",
+          },
+        },
+      ],
+      isES && [
+        extensionResolver,
+        {
+          // For verification, see test/module/packages-are-es-modules.mjs
+          modulesToResolve: [
+            // InstantSearch.js/es is an ES Module, so needs complete paths,
+            'instantsearch.js',
+            // React-DOM also fails if the paths are incomplete
+            'react-dom',
+            // `use-sync-external-store` also fails if the paths are incomplete
+            'use-sync-external-store',
+          ],
+        },
+      ],
     ]),
     overrides: [
       {
         test: 'packages/*',
-        presets: ['@babel/preset-typescript'],
         plugins: [
           [
             '@babel/plugin-transform-runtime',

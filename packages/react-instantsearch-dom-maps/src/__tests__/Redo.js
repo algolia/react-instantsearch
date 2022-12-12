@@ -1,6 +1,6 @@
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import { createFakeMapInstance } from '../../test/mockGoogleMaps';
 import { Redo } from '../Redo';
 
@@ -9,7 +9,7 @@ Enzyme.configure({ adapter: new Adapter() });
 describe('Redo', () => {
   const defaultProps = {
     googleMapsInstance: createFakeMapInstance(),
-    translate: x => x,
+    translate: (x) => x,
 
     hasMapMoveSinceLastRefine: false,
     refineWithInstance: () => {},

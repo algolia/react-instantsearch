@@ -8,6 +8,7 @@ const cx = createClassNames('MenuSelect');
 
 class MenuSelect extends Component {
   static propTypes = {
+    id: PropTypes.string,
     items: PropTypes.arrayOf(
       PropTypes.shape({
         label: PropTypes.string.isRequired,
@@ -32,7 +33,7 @@ class MenuSelect extends Component {
   get selectedValue() {
     const { value } = find(
       this.props.items,
-      item => item.isRefined === true
+      (item) => item.isRefined === true
     ) || {
       value: 'ais__see__all__option',
     };
@@ -44,13 +45,14 @@ class MenuSelect extends Component {
   };
 
   render() {
-    const { items, canRefine, translate, className } = this.props;
+    const { id, items, canRefine, translate, className } = this.props;
 
     return (
       <div
         className={classNames(cx('', !canRefine && '-noRefinement'), className)}
       >
         <select
+          id={id}
           value={this.selectedValue}
           onChange={this.handleSelectChange}
           className={cx('select')}
@@ -59,7 +61,7 @@ class MenuSelect extends Component {
             {translate('seeAllOption')}
           </option>
 
-          {items.map(item => (
+          {items.map((item) => (
             <option
               key={item.value}
               value={item.value}

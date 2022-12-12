@@ -52,10 +52,10 @@ import Menu from '../components/Menu';
  * );
  */
 
-const MenuWidget = props => (
+const MenuWidget = (props) => (
   <PanelCallbackHandler {...props}>
     <Menu {...props} />
   </PanelCallbackHandler>
 );
 
-export default connectMenu(MenuWidget);
+export default connectMenu(MenuWidget, { $$widgetType: 'ais.menu' });

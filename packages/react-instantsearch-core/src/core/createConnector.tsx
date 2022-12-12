@@ -1,15 +1,13 @@
-import React, { Component, ReactType } from 'react';
+import type { ElementType } from 'react';
+import React, { Component } from 'react';
 import isEqual from 'react-fast-compare';
 import { shallowEqual, getDisplayName, removeEmptyKey } from './utils';
-import {
-  InstantSearchConsumer,
-  InstantSearchContext,
-  IndexConsumer,
-  IndexContext,
-} from './context';
+import type { InstantSearchContext, IndexContext } from './context';
+import { InstantSearchConsumer, IndexConsumer } from './context';
 
 export type ConnectorDescription = {
   displayName: string;
+  $$type: string;
   /**
    * a function to filter the local state
    */
@@ -48,6 +46,10 @@ export type ConnectorDescription = {
   defaultProps?: {};
 };
 
+export type AdditionalWidgetProperties = {
+  $$widgetType?: string;
+};
+
 type ConnectorProps = {
   contextValue: InstantSearchContext;
   indexContextValue?: IndexContext;
@@ -83,17 +85,24 @@ export function createConnectorWithoutContext(
     typeof connectorDesc.getMetadata === 'function' ||
     typeof connectorDesc.transitionState === 'function';
 
-  return (Composed: ReactType) => {
+  return (
+    Composed: ElementType,
+    additionalWidgetProperties: AdditionalWidgetProperties = {}
+  ) => {
     class Connector extends Component<ConnectorProps, ConnectorState> {
       static displayName = `${connectorDesc.displayName}(${getDisplayName(
         Composed
       )})`;
+      static $$type = connectorDesc.$$type;
+      static $$widgetType = additionalWidgetProperties.$$widgetType;
       static propTypes = connectorDesc.propTypes;
       static defaultProps = connectorDesc.defaultProps;
+      static _connectorDesc = connectorDesc;
 
       unsubscribe?: () => void;
       unregisterWidget?: () => void;
 
+      cleanupTimerRef: ReturnType<typeof setTimeout> | null = null;
       isUnmounting = false;
 
       state: ConnectorState = {
@@ -111,12 +120,18 @@ export function createConnectorWithoutContext(
               multiIndexContext: this.props.indexContextValue,
             },
             this.props,
-            connectorDesc.getMetadata && connectorDesc.getMetadata.bind(this)
+            connectorDesc.getMetadata && connectorDesc.getMetadata.bind(this),
+            connectorDesc.displayName
           );
         }
       }
 
       componentDidMount() {
+        if (this.cleanupTimerRef) {
+          clearTimeout(this.cleanupTimerRef);
+          this.cleanupTimerRef = null;
+        }
+
         this.unsubscribe = this.props.contextValue.store.subscribe(() => {
           if (!this.isUnmounting) {
             this.setState({
@@ -126,9 +141,8 @@ export function createConnectorWithoutContext(
         });
 
         if (isWidget) {
-          this.unregisterWidget = this.props.contextValue.widgetsManager.registerWidget(
-            this
-          );
+          this.unregisterWidget =
+            this.props.contextValue.widgetsManager.registerWidget(this);
         }
       }
 
@@ -185,32 +199,34 @@ export function createConnectorWithoutContext(
       }
 
       componentWillUnmount() {
-        this.isUnmounting = true;
+        this.cleanupTimerRef = setTimeout(() => {
+          this.isUnmounting = true;
 
-        if (this.unsubscribe) {
-          this.unsubscribe();
-        }
-
-        if (this.unregisterWidget) {
-          this.unregisterWidget();
-
-          if (typeof connectorDesc.cleanUp === 'function') {
-            const nextState = connectorDesc.cleanUp.call(
-              this,
-              this.props,
-              this.props.contextValue.store.getState().widgets
-            );
-
-            this.props.contextValue.store.setState({
-              ...this.props.contextValue.store.getState(),
-              widgets: nextState,
-            });
-
-            this.props.contextValue.onSearchStateChange(
-              removeEmptyKey(nextState)
-            );
+          if (this.unsubscribe) {
+            this.unsubscribe();
           }
-        }
+
+          if (this.unregisterWidget) {
+            this.unregisterWidget();
+
+            if (typeof connectorDesc.cleanUp === 'function') {
+              const nextState = connectorDesc.cleanUp.call(
+                this,
+                this.props,
+                this.props.contextValue.store.getState().widgets
+              );
+
+              this.props.contextValue.store.setState({
+                ...this.props.contextValue.store.getState(),
+                widgets: nextState,
+              });
+
+              this.props.contextValue.onSearchStateChange(
+                removeEmptyKey(nextState)
+              );
+            }
+          }
+        });
       }
 
       getProvidedProps(props) {
@@ -352,28 +368,34 @@ export function createConnectorWithoutContext(
   };
 }
 
-const createConnectorWithContext = (connectorDesc: ConnectorDescription) => (
-  Composed: ReactType
-) => {
-  const Connector = createConnectorWithoutContext(connectorDesc)(Composed);
+const createConnectorWithContext =
+  (connectorDesc: ConnectorDescription) =>
+  (
+    Composed: ElementType,
+    additionalWidgetProperties?: AdditionalWidgetProperties
+  ) => {
+    const Connector = createConnectorWithoutContext(connectorDesc)(
+      Composed,
+      additionalWidgetProperties
+    );
 
-  const ConnectorWrapper: React.FC<any> = props => (
-    <InstantSearchConsumer>
-      {contextValue => (
-        <IndexConsumer>
-          {indexContextValue => (
-            <Connector
-              contextValue={contextValue}
-              indexContextValue={indexContextValue}
-              {...props}
-            />
-          )}
-        </IndexConsumer>
-      )}
-    </InstantSearchConsumer>
-  );
+    const ConnectorWrapper: React.FC<any> = (props) => (
+      <InstantSearchConsumer>
+        {(contextValue) => (
+          <IndexConsumer>
+            {(indexContextValue) => (
+              <Connector
+                contextValue={contextValue}
+                indexContextValue={indexContextValue}
+                {...props}
+              />
+            )}
+          </IndexConsumer>
+        )}
+      </InstantSearchConsumer>
+    );
 
-  return ConnectorWrapper;
-};
+    return ConnectorWrapper;
+  };
 
 export default createConnectorWithContext;

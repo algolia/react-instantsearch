@@ -1,6 +1,6 @@
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import RangeInput, { RawRangeInput } from '../RangeInput';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -46,7 +46,7 @@ describe('RawRangeInput', () => {
       canRefine: true,
       precision: 0,
       refine: () => {},
-      translate: x => x,
+      translate: (x) => x,
       min: undefined,
       max: undefined,
     };
@@ -168,7 +168,7 @@ describe('RawRangeInput', () => {
   });
 
   describe('didUpdate', () => {
-    it('expect to update state when props have changed ', () => {
+    it('expect to update state when props have changed', () => {
       const props = {
         canRefine: false,
         currentRefinement: {

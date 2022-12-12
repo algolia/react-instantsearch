@@ -1,9 +1,10 @@
 import React from 'react';
 import Enzyme, { shallow, mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import createInstantSearchManager from '../../core/createInstantSearchManager';
 import InstantSearch from '../InstantSearch';
 import { InstantSearchConsumer } from '../../core/context';
+import { wait } from '../../../../../test/utils';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -171,11 +172,14 @@ describe('InstantSearch', () => {
 
   it('works as a controlled input', () => {
     const ism = createFakeInstantSearchManager({
-      transitionState: searchState => ({ ...searchState, transitioned: true }),
+      transitionState: (searchState) => ({
+        ...searchState,
+        transitioned: true,
+      }),
     });
     createInstantSearchManager.mockImplementation(() => ism);
     const initialState = { a: 0 };
-    const onSearchStateChange = jest.fn(searchState => {
+    const onSearchStateChange = jest.fn((searchState) => {
       // eslint-disable-next-line @typescript-eslint/no-use-before-define
       wrapper.setProps({
         searchState: { a: searchState.a + 1 },
@@ -189,7 +193,7 @@ describe('InstantSearch', () => {
         createURL={() => '#'}
       >
         <InstantSearchConsumer>
-          {contextValue => (
+          {(contextValue) => (
             <button
               onClick={() => contextValue.onInternalStateUpdate({ a: 1 })}
             />
@@ -218,7 +222,7 @@ describe('InstantSearch', () => {
 
   it('keeps the `searchState` up to date as a controlled input', () => {
     createInstantSearchManager.mockImplementation((...args) => {
-      const module = require.requireActual(
+      const module = jest.requireActual(
         '../../core/createInstantSearchManager'
       );
 
@@ -227,7 +231,7 @@ describe('InstantSearch', () => {
 
     const widget = jest.fn(() => null);
     const initialState = { a: 0 };
-    const onSearchStateChange = searchState => {
+    const onSearchStateChange = (searchState) => {
       // eslint-disable-next-line @typescript-eslint/no-use-before-define
       wrapper.setProps({
         searchState: { a: searchState.a + 1 },
@@ -242,7 +246,7 @@ describe('InstantSearch', () => {
         createURL={() => '#'}
       >
         <InstantSearchConsumer>
-          {contextValue => (
+          {(contextValue) => (
             <React.Fragment>
               {widget(contextValue.store.getState().widgets)}
               <button
@@ -269,14 +273,17 @@ describe('InstantSearch', () => {
 
   it('works as an uncontrolled input', () => {
     const ism = createFakeInstantSearchManager({
-      transitionState: searchState => ({ ...searchState, transitioned: true }),
+      transitionState: (searchState) => ({
+        ...searchState,
+        transitioned: true,
+      }),
     });
     createInstantSearchManager.mockImplementation(() => ism);
 
     const wrapper = mount(
       <InstantSearch {...DEFAULT_PROPS}>
         <InstantSearchConsumer>
-          {contextValue => (
+          {(contextValue) => (
             <button
               onClick={({ nextState }) =>
                 contextValue.onInternalStateUpdate(nextState)
@@ -312,7 +319,7 @@ describe('InstantSearch', () => {
     mount(
       <InstantSearch {...DEFAULT_PROPS}>
         <InstantSearchConsumer>
-          {contextValue => {
+          {(contextValue) => {
             childContext = contextValue;
             return null;
           }}
@@ -324,7 +331,7 @@ describe('InstantSearch', () => {
     expect(childContext.widgetsManager).toBe(ism.widgetsManager);
   });
 
-  it('onSearchStateChange should not be called and search should be skipped if the widget is unmounted', () => {
+  it('onSearchStateChange should not be called and search should be skipped if the widget is unmounted', async () => {
     const ism = createFakeInstantSearchManager();
     let childContext;
     createInstantSearchManager.mockImplementation(() => ism);
@@ -335,7 +342,7 @@ describe('InstantSearch', () => {
         onSearchStateChange={onSearchStateChangeMock}
       >
         <InstantSearchConsumer>
-          {contextValue => {
+          {(contextValue) => {
             childContext = contextValue;
             return null;
           }}
@@ -344,6 +351,9 @@ describe('InstantSearch', () => {
     );
 
     wrapper.unmount();
+
+    await wait(0);
+
     childContext.onSearchStateChange({});
 
     expect(onSearchStateChangeMock).toHaveBeenCalledTimes(0);
@@ -413,7 +423,7 @@ describe('InstantSearch', () => {
     const wrapper = mount(
       <InstantSearch {...DEFAULT_PROPS}>
         <InstantSearchConsumer>
-          {contextValue => contextValue.mainTargetedIndex}
+          {(contextValue) => contextValue.mainTargetedIndex}
         </InstantSearchConsumer>
       </InstantSearch>
     );
@@ -453,7 +463,7 @@ describe('InstantSearch', () => {
         onSearchParameters={onSearchParametersMock}
       >
         <InstantSearchConsumer>
-          {contextValue => {
+          {(contextValue) => {
             childContext = contextValue;
             return null;
           }}
@@ -476,7 +486,7 @@ describe('InstantSearch', () => {
         searchState={{ search: 'state' }}
       >
         <InstantSearchConsumer>
-          {contextValue => {
+          {(contextValue) => {
             childContext = contextValue;
             return null;
           }}
@@ -494,7 +504,7 @@ describe('InstantSearch', () => {
     mount(
       <InstantSearch {...DEFAULT_PROPS}>
         <InstantSearchConsumer>
-          {contextValue => {
+          {(contextValue) => {
             childContext = contextValue;
             return null;
           }}
@@ -511,14 +521,14 @@ describe('InstantSearch', () => {
     it('passes through to createURL when it is defined', () => {
       const widgetsIds = [];
       const ism = createFakeInstantSearchManager({
-        transitionState: searchState => ({
+        transitionState: (searchState) => ({
           ...searchState,
           transitioned: true,
         }),
         getWidgetsIds: () => widgetsIds,
       });
       createInstantSearchManager.mockImplementation(() => ism);
-      const createURL = jest.fn(searchState => searchState);
+      const createURL = jest.fn((searchState) => searchState);
 
       let childContext;
       mount(
@@ -529,7 +539,7 @@ describe('InstantSearch', () => {
           createURL={createURL}
         >
           <InstantSearchConsumer>
-            {contextValue => {
+            {(contextValue) => {
               childContext = contextValue;
               return null;
             }}
@@ -548,7 +558,7 @@ describe('InstantSearch', () => {
       mount(
         <InstantSearch {...DEFAULT_PROPS}>
           <InstantSearchConsumer>
-            {contextValue => {
+            {(contextValue) => {
               childContext = contextValue;
               return null;
             }}
@@ -568,7 +578,7 @@ describe('InstantSearch', () => {
       mount(
         <InstantSearch {...DEFAULT_PROPS}>
           <InstantSearchConsumer>
-            {contextValue => {
+            {(contextValue) => {
               childContext = contextValue;
               return null;
             }}

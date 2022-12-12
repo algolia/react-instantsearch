@@ -55,24 +55,20 @@ See: https://alg.li/VpPpLt`);
   }
 }
 
-const wrapInsightsClient = (
-  aa: InsightsClient,
-  results: Results,
-  currentHit: Hit
-) => (
-  method: InsightsClientMethod,
-  payload: Partial<InsightsClientPayload>
-) => {
-  if (typeof aa !== 'function') {
-    throw new TypeError(`Expected insightsClient to be a Function`);
-  }
-  const inferredPayload = inferPayload({ method, results, currentHit });
-  aa(method, { ...inferredPayload, ...payload } as any);
-};
+const wrapInsightsClient =
+  (aa: InsightsClient, results: Results, currentHit: Hit) =>
+  (method: InsightsClientMethod, payload: Partial<InsightsClientPayload>) => {
+    if (typeof aa !== 'function') {
+      throw new TypeError(`Expected insightsClient to be a Function`);
+    }
+    const inferredPayload = inferPayload({ method, results, currentHit });
+    aa(method, { ...inferredPayload, ...payload } as any);
+  };
 
 export default (insightsClient: InsightsClient) =>
   createConnector({
     displayName: 'AlgoliaInsights',
+    $$type: 'ais.insights',
 
     getProvidedProps(props, _, searchResults) {
       const results: Results = getResults(searchResults, {

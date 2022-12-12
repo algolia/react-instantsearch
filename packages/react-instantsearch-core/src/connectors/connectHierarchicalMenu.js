@@ -8,8 +8,9 @@ import {
   getCurrentRefinementValue,
   getResults,
 } from '../core/indexUtils';
+import { unescapeFacetValue } from '../core/utils';
 
-export const getId = props => props.attributes[0];
+export const getId = (props) => props.attributes[0];
 
 const namespace = 'hierarchicalMenu';
 
@@ -28,14 +29,14 @@ function getCurrentRefinement(props, searchState, context) {
   return currentRefinement;
 }
 
-function getValue(path, props, searchState, context) {
+function getValue(value, props, searchState, context) {
   const { id, attributes, separator, rootPath, showParentLevel } = props;
 
   const currentRefinement = getCurrentRefinement(props, searchState, context);
   let nextRefinement;
 
   if (currentRefinement === null) {
-    nextRefinement = path;
+    nextRefinement = value;
   } else {
     const tmpSearchParameters = new algoliasearchHelper.SearchParameters({
       hierarchicalFacets: [
@@ -51,7 +52,7 @@ function getValue(path, props, searchState, context) {
 
     nextRefinement = tmpSearchParameters
       .toggleHierarchicalFacetRefinement(id, currentRefinement)
-      .toggleHierarchicalFacetRefinement(id, path)
+      .toggleHierarchicalFacetRefinement(id, value)
       .getHierarchicalRefinement(id)[0];
   }
 
@@ -59,9 +60,9 @@ function getValue(path, props, searchState, context) {
 }
 
 function transformValue(value, props, searchState, context) {
-  return value.map(v => ({
+  return value.map((v) => ({
     label: v.name,
-    value: getValue(v.path, props, searchState, context),
+    value: getValue(v.escapedValue, props, searchState, context),
     count: v.count,
     isRefined: v.isRefined,
     items: v.data && transformValue(v.data, props, searchState, context),
@@ -98,7 +99,7 @@ const sortBy = ['name:asc'];
  * websites. From a UX point of view, we suggest not displaying more than two levels deep.
  * @name connectHierarchicalMenu
  * @requirements To use this widget, your attributes must be formatted in a specific way.
- * If you want for example to have a hiearchical menu of categories, objects in your index
+ * If you want for example to have a hierarchical menu of categories, objects in your index
  * should be formatted this way:
  *
  * ```json
@@ -138,10 +139,11 @@ const sortBy = ['name:asc'];
  */
 export default createConnector({
   displayName: 'AlgoliaHierarchicalMenu',
+  $$type: 'ais.hierarchicalMenu',
 
   propTypes: {
     attributes: (props, propName, componentName) => {
-      const isNotString = val => typeof val !== 'string';
+      const isNotString = (val) => typeof val !== 'string';
       if (
         !Array.isArray(props[propName]) ||
         props[propName].some(isNotString) ||
@@ -161,6 +163,7 @@ export default createConnector({
     limit: PropTypes.number,
     showMoreLimit: PropTypes.number,
     transformItems: PropTypes.func,
+    facetOrdering: PropTypes.bool,
   },
 
   defaultProps: {
@@ -170,10 +173,11 @@ export default createConnector({
     separator: ' > ',
     rootPath: null,
     showParentLevel: true,
+    facetOrdering: true,
   },
 
   getProvidedProps(props, searchState, searchResults) {
-    const { showMore, limit, showMoreLimit } = props;
+    const { showMore, limit, showMoreLimit, facetOrdering } = props;
     const id = getId(props);
 
     const results = getResults(searchResults, {
@@ -194,7 +198,7 @@ export default createConnector({
       };
     }
     const itemsLimit = showMore ? showMoreLimit : limit;
-    const value = results.getFacetValues(id, { sortBy });
+    const value = results.getFacetValues(id, { sortBy, facetOrdering });
     const items = value.data
       ? transformValue(value.data, props, searchState, {
           ais: props.contextValue,
@@ -284,9 +288,9 @@ export default createConnector({
       ? []
       : [
           {
-            label: `${rootAttribute}: ${currentRefinement}`,
+            label: `${rootAttribute}: ${unescapeFacetValue(currentRefinement)}`,
             attribute: rootAttribute,
-            value: nextState =>
+            value: (nextState) =>
               refine(props, nextState, '', {
                 ais: props.contextValue,
                 multiIndexContext: props.indexContextValue,

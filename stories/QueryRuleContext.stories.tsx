@@ -29,7 +29,7 @@ const stories = storiesOf('QueryRuleContext', module);
 
 const StoryHits = connectHits(({ hits }: { hits: MovieHit[] }) => (
   <div className="hits">
-    {hits.map(hit => (
+    {hits.map((hit) => (
       <div key={hit.objectID} className="hit">
         <div className="hit-picture">
           <img src={hit.image} />
@@ -49,7 +49,7 @@ const storyProps = {
   appId: 'latency',
   apiKey: 'af044fb0788d6bb15f807e4420592bc5',
   indexName: 'instant_search_movies',
-  linkedStoryGroup: 'QueryRuleCustomData.stories.tsx',
+  linkedStoryGroup: 'QueryRuleContext.stories.tsx',
   hitsElement: <StoryHits />,
 };
 

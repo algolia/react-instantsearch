@@ -2,17 +2,20 @@ import React, { Component, Children } from 'react';
 import isEqual from 'react-fast-compare';
 import PropTypes from 'prop-types';
 import createInstantSearchManager from '../core/createInstantSearchManager';
-import {
-  InstantSearchProvider,
-  InstantSearchContext,
-  IndexContext,
-} from '../core/context';
-import { Store } from '../core/createStore';
-import { PlainSearchParameters, SearchParameters } from 'algoliasearch-helper';
-import { MultiResponse } from '../types/algoliasearch';
-import { ConnectorDescription } from '../core/createConnector';
+import type { InstantSearchContext, IndexContext } from '../core/context';
+import { InstantSearchProvider } from '../core/context';
+import type { Store } from '../core/createStore';
+import type {
+  PlainSearchParameters,
+  SearchParameters,
+} from 'algoliasearch-helper';
+import type { MultiResponse } from '../types/algoliasearch';
+import type { ConnectorDescription } from '../core/createConnector';
+import type { WidgetsManager } from '../core/createWidgetsManager';
+import { isMetadataEnabled, injectMetadata } from '../core/metadata';
 
 type ResultsState = {
+  metadata: never[];
   state: PlainSearchParameters;
   rawResults: MultiResponse;
 };
@@ -20,11 +23,12 @@ type ResultsState = {
 // @TODO: move to createInstantSearchManager when it's TS
 type InstantSearchManager = {
   store: Store;
-  widgetsManager: any;
+  widgetsManager: WidgetsManager;
   getWidgetsIds(): any;
-  getSearchParameters(
-    ...args: any[]
-  ): { mainParameters: SearchParameters; derivedParameters: SearchParameters };
+  getSearchParameters(...args: any[]): {
+    mainParameters: SearchParameters;
+    derivedParameters: SearchParameters;
+  };
   onSearchForFacetValues(...args: any[]): any;
   onExternalStateUpdate(...args: any[]): any;
   transitionState: any;
@@ -34,7 +38,7 @@ type InstantSearchManager = {
   skipSearch(...args: any[]): any;
 };
 
-type SearchClient = {
+export type SearchClient = {
   search: (requests: Array<{}>) => Promise<{}>;
   searchForFacetValues: (requests: Array<{}>) => Promise<{}>;
 };
@@ -60,9 +64,11 @@ type Props = {
     searchState: SearchState;
     context: { ais: InstantSearchContext; multiIndexContext: IndexContext };
     props: object;
+    displayName: string;
   }) => void;
   stalledSearchDelay?: number;
-  resultsState: ResultsState | { [indexId: string]: ResultsState };
+  resultsState?: ResultsState | { [indexId: string]: ResultsState };
+  children?: React.ReactNode;
 };
 
 type State = {
@@ -150,8 +156,8 @@ class InstantSearch extends Component<Props, State> {
     prevState: State
   ): Partial<State> {
     const nextIsControlled = isControlled(nextProps);
-    const previousSearchState = prevState.instantSearchManager.store.getState()
-      .widgets;
+    const previousSearchState =
+      prevState.instantSearchManager.store.getState().widgets;
     const nextSearchState = nextProps.searchState;
 
     if (nextIsControlled && !isEqual(previousSearchState, nextSearchState)) {
@@ -169,6 +175,7 @@ class InstantSearch extends Component<Props, State> {
     };
   }
 
+  cleanupTimerRef: ReturnType<typeof setTimeout> | null = null;
   isUnmounting: boolean = false;
 
   constructor(props: Props) {
@@ -228,9 +235,25 @@ class InstantSearch extends Component<Props, State> {
     }
   }
 
+  componentDidMount() {
+    if (this.cleanupTimerRef) {
+      clearTimeout(this.cleanupTimerRef);
+      this.cleanupTimerRef = null;
+    }
+
+    if (isMetadataEnabled()) {
+      injectMetadata(
+        this.state.instantSearchManager.widgetsManager.getWidgets(),
+        this.props.searchClient
+      );
+    }
+  }
+
   componentWillUnmount() {
-    this.isUnmounting = true;
-    this.state.instantSearchManager.skipSearch();
+    this.cleanupTimerRef = setTimeout(() => {
+      this.isUnmounting = true;
+      this.state.instantSearchManager.skipSearch();
+    });
   }
 
   createHrefForState(searchState: SearchState) {
@@ -263,7 +286,8 @@ class InstantSearch extends Component<Props, State> {
       multiIndexContext: IndexContext;
     },
     props: object,
-    getMetadata: ConnectorDescription['getMetadata']
+    getMetadata: ConnectorDescription['getMetadata'],
+    displayName: string
   ) {
     if (this.props.onSearchParameters) {
       const searchState = this.props.searchState ? this.props.searchState : {};
@@ -282,6 +306,7 @@ class InstantSearch extends Component<Props, State> {
         context,
         props,
         searchState,
+        displayName,
       });
     }
   }

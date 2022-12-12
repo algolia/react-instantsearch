@@ -43,6 +43,7 @@ function getCurrentRefinement(props, searchState, context) {
  */
 export default createConnector({
   displayName: 'AlgoliaSortBy',
+  $$type: 'ais.sortBy',
 
   propTypes: {
     defaultRefinement: PropTypes.string,
@@ -60,7 +61,7 @@ export default createConnector({
       ais: props.contextValue,
       multiIndexContext: props.indexContextValue,
     });
-    const items = props.items.map(item =>
+    const items = props.items.map((item) =>
       item.value === currentRefinement
         ? { ...item, isRefined: true }
         : { ...item, isRefined: false }

@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import Enzyme, { mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import RatingMenu from '../RatingMenu';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -288,10 +288,7 @@ describe('RatingMenu', () => {
 
   it('should display the right number of stars', () => {
     const wrapper = mount(ratingMenu);
-    wrapper
-      .find('.ais-RatingMenu-link')
-      .last()
-      .simulate('click');
+    wrapper.find('.ais-RatingMenu-link').last().simulate('click');
 
     const selectedItem = wrapper.find('.ais-RatingMenu-item--selected');
 

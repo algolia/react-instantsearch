@@ -42,7 +42,7 @@ function getCurrentRefinement(props, searchState, context) {
     context,
     `${namespace}.${getId(props)}`,
     '',
-    currentRefinement => {
+    (currentRefinement) => {
       if (currentRefinement === '') {
         return '';
       }
@@ -53,15 +53,15 @@ function getCurrentRefinement(props, searchState, context) {
 
 function isRefinementsRangeIncludesInsideItemRange(stats, start, end) {
   return (
-    (stats.min > start && stats.min < end) ||
-    (stats.max > start && stats.max < end)
+    (stats.min >= start && stats.min <= end) ||
+    (stats.max >= start && stats.max <= end)
   );
 }
 
 function isItemRangeIncludedInsideRefinementsRange(stats, start, end) {
   return (
-    (start > stats.min && start < stats.max) ||
-    (end > stats.min && end < stats.max)
+    (start >= stats.min && start <= stats.max) ||
+    (end >= stats.min && end <= stats.max)
   );
 }
 
@@ -113,6 +113,7 @@ function cleanUp(props, searchState, context) {
  */
 export default createConnector({
   displayName: 'AlgoliaNumericMenu',
+  $$type: 'ais.numericMenu',
 
   propTypes: {
     id: PropTypes.string,
@@ -138,7 +139,7 @@ export default createConnector({
       multiIndexContext: props.indexContextValue,
     });
 
-    const items = props.items.map(item => {
+    const items = props.items.map((item) => {
       const value = stringifyItem(item);
       return {
         label: item.label,
@@ -154,8 +155,8 @@ export default createConnector({
       results && results.getFacetByName(attribute)
         ? results.getFacetStats(attribute)
         : null;
-    const refinedItem = find(items, item => item.isRefined === true);
-    if (!items.some(item => item.value === '')) {
+    const refinedItem = find(items, (item) => item.isRefined === true);
+    if (!items.some((item) => item.value === '')) {
       items.push({
         value: '',
         isRefined: refinedItem === undefined,
@@ -173,7 +174,7 @@ export default createConnector({
       currentRefinement,
       canRefine:
         transformedItems.length > 0 &&
-        transformedItems.some(item => item.noRefinement === false),
+        transformedItems.some((item) => item.noRefinement === false),
     };
   },
 
@@ -232,13 +233,13 @@ export default createConnector({
     if (value !== '') {
       const { label } = find(
         props.items,
-        item => stringifyItem(item) === value
+        (item) => stringifyItem(item) === value
       );
       items.push({
         label: `${props.attribute}: ${label}`,
         attribute: props.attribute,
         currentRefinement: label,
-        value: nextState =>
+        value: (nextState) =>
           refine(props, nextState, '', {
             ais: props.contextValue,
             multiIndexContext: props.indexContextValue,

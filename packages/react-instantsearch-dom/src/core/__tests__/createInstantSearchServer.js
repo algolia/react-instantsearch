@@ -1,12 +1,14 @@
 import React from 'react';
 import Enzyme from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import { SearchParameters } from 'algoliasearch-helper';
 import {
   Index,
   InstantSearch,
+  DynamicWidgets,
   createConnector,
   version,
+  connectRefinementList,
 } from 'react-instantsearch-core';
 import { findResultsState } from '../createInstantSearchServer';
 import { SearchBox } from 'react-instantsearch-dom';
@@ -15,16 +17,36 @@ Enzyme.configure({ adapter: new Adapter() });
 
 describe('findResultsState', () => {
   const createSearchClient = ({ transformResponseParams } = {}) => ({
-    search: requests =>
+    search: jest.fn((requests) =>
       Promise.resolve({
         results: requests.map(({ indexName, params: { query } }) => ({
           query,
+          hits: [],
+          renderingContent: {
+            facetOrdering: {
+              facets: {
+                order: ['brand', 'hierarchicalCategories.lvl0', 'categories'],
+              },
+              values: {
+                brand: {
+                  sortRemainingBy: 'count',
+                },
+                categories: {
+                  sortRemainingBy: 'count',
+                },
+                'hierarchicalCategories.lvl0': {
+                  sortRemainingBy: 'count',
+                },
+              },
+            },
+          },
           params: transformResponseParams
             ? transformResponseParams(query)
             : `query=${encodeURIComponent(query)}`,
           index: indexName,
         })),
-      }),
+      })
+    ),
   });
 
   const createWidget = ({ getSearchParameters = () => {} } = {}) =>
@@ -56,7 +78,7 @@ describe('findResultsState', () => {
 
   const requiredProps = {
     indexName: 'indexName',
-    searchClient: createSearchClient(),
+    searchClient: createSearchClient({}),
   };
 
   it('throws an error if props are not provided', () => {
@@ -85,7 +107,7 @@ describe('findResultsState', () => {
     const App = () => <div />;
 
     const props = {
-      searchClient: createSearchClient(),
+      searchClient: createSearchClient({}),
     };
 
     const trigger = () => findResultsState(App, props);
@@ -96,14 +118,14 @@ describe('findResultsState', () => {
   });
 
   it('adds expected Algolia agents', () => {
-    const App = props => (
+    const App = (props) => (
       <InstantSearch {...props}>
         <SearchBox />
       </InstantSearch>
     );
 
     const searchClient = {
-      ...createSearchClient(),
+      ...createSearchClient({}),
       addAlgoliaAgent: jest.fn(),
     };
 
@@ -132,7 +154,7 @@ describe('findResultsState', () => {
   });
 
   it('does not throw if `searchClient` does not have a `addAlgoliaAgent()` method', () => {
-    const App = props => (
+    const App = (props) => (
       <InstantSearch {...props}>
         <SearchBox />
       </InstantSearch>
@@ -140,7 +162,7 @@ describe('findResultsState', () => {
 
     const props = {
       ...requiredProps,
-      searchClient: createSearchClient(),
+      searchClient: createSearchClient({}),
     };
 
     const trigger = () => findResultsState(App, props);
@@ -149,11 +171,11 @@ describe('findResultsState', () => {
   });
 
   it('throws if no widgets are added', () => {
-    const App = props => <InstantSearch {...props} />;
+    const App = (props) => <InstantSearch {...props} />;
 
     const props = {
       ...requiredProps,
-      searchClient: createSearchClient(),
+      searchClient: createSearchClient({}),
     };
 
     expect(() =>
@@ -167,7 +189,7 @@ describe('findResultsState', () => {
     it('results should be state & results', async () => {
       const Connected = createWidget();
 
-      const App = props => (
+      const App = (props) => (
         <InstantSearch {...props}>
           <Connected />
         </InstantSearch>
@@ -194,7 +216,7 @@ describe('findResultsState', () => {
         getSearchParameters,
       });
 
-      const App = props => (
+      const App = (props) => (
         <InstantSearch {...props}>
           <Connected />
         </InstantSearch>
@@ -218,7 +240,7 @@ describe('findResultsState', () => {
     it('without search state', async () => {
       const Connected = createWidget();
 
-      const App = props => (
+      const App = (props) => (
         <InstantSearch {...props}>
           <Connected />
         </InstantSearch>
@@ -242,7 +264,7 @@ describe('findResultsState', () => {
     it('with search state', async () => {
       const Connected = createWidget();
 
-      const App = props => (
+      const App = (props) => (
         <InstantSearch {...props}>
           <Connected />
         </InstantSearch>
@@ -269,7 +291,7 @@ describe('findResultsState', () => {
     it('forwards metadata', async () => {
       const Connected = createWidget();
 
-      const App = props => (
+      const App = (props) => (
         <InstantSearch {...props}>
           <Connected prop="something" />
         </InstantSearch>
@@ -303,7 +325,7 @@ describe('findResultsState', () => {
       it('with one query', async () => {
         const Connected = createWidget();
 
-        const App = props => (
+        const App = (props) => (
           <InstantSearch {...props}>
             <Connected />
           </InstantSearch>
@@ -311,7 +333,7 @@ describe('findResultsState', () => {
 
         const props = {
           ...requiredProps,
-          searchClient: createSearchClient(),
+          searchClient: createSearchClient({}),
           searchState: {
             query: 'iPhone',
           },
@@ -327,7 +349,7 @@ describe('findResultsState', () => {
       it('with custom client, without "params"', async () => {
         const Connected = createWidget();
 
-        const App = props => (
+        const App = (props) => (
           <InstantSearch {...props}>
             <Connected />
           </InstantSearch>
@@ -353,7 +375,7 @@ describe('findResultsState', () => {
       it('with shadowing query', async () => {
         const Connected = createWidget();
 
-        const App = props => (
+        const App = (props) => (
           <InstantSearch {...props}>
             <Connected />
           </InstantSearch>
@@ -361,7 +383,7 @@ describe('findResultsState', () => {
 
         const props = {
           ...requiredProps,
-          searchClient: createSearchClient(),
+          searchClient: createSearchClient({}),
           searchState: {
             query: 'iPhone&query=iphone',
           },
@@ -377,7 +399,7 @@ describe('findResultsState', () => {
       it('with modified query', async () => {
         const Connected = createWidget();
 
-        const App = props => (
+        const App = (props) => (
           <InstantSearch {...props}>
             <Connected />
           </InstantSearch>
@@ -386,7 +408,7 @@ describe('findResultsState', () => {
         const props = {
           ...requiredProps,
           searchClient: createSearchClient({
-            transformResponseParams: query =>
+            transformResponseParams: (query) =>
               `query=${encodeURIComponent(query)}&query=modified`,
           }),
           searchState: {
@@ -404,7 +426,7 @@ describe('findResultsState', () => {
       it('with shadowing query and modified query', async () => {
         const Connected = createWidget();
 
-        const App = props => (
+        const App = (props) => (
           <InstantSearch {...props}>
             <Connected />
           </InstantSearch>
@@ -413,7 +435,7 @@ describe('findResultsState', () => {
         const props = {
           ...requiredProps,
           searchClient: createSearchClient({
-            transformResponseParams: query =>
+            transformResponseParams: (query) =>
               `query=${encodeURIComponent(query)}&query=modified`,
           }),
           searchState: {
@@ -431,7 +453,7 @@ describe('findResultsState', () => {
       it('with padded, modified query', async () => {
         const Connected = createWidget();
 
-        const App = props => (
+        const App = (props) => (
           <InstantSearch {...props}>
             <Connected />
           </InstantSearch>
@@ -440,7 +462,7 @@ describe('findResultsState', () => {
         const props = {
           ...requiredProps,
           searchClient: createSearchClient({
-            transformResponseParams: query =>
+            transformResponseParams: (query) =>
               `test=1&query=${encodeURIComponent(query)}&boo=ba&query=modified`,
           }),
           searchState: {
@@ -458,7 +480,7 @@ describe('findResultsState', () => {
       it('with nothing returned', async () => {
         const Connected = createWidget();
 
-        const App = props => (
+        const App = (props) => (
           <InstantSearch {...props}>
             <Connected />
           </InstantSearch>
@@ -482,7 +504,7 @@ describe('findResultsState', () => {
       it('with no query returned', async () => {
         const Connected = createWidget();
 
-        const App = props => (
+        const App = (props) => (
           <InstantSearch {...props}>
             <Connected />
           </InstantSearch>
@@ -503,13 +525,85 @@ describe('findResultsState', () => {
         expect(data.rawResults[0].params).toMatchInlineSnapshot(`"lol=lol"`);
       });
     });
+
+    it('searches twice (cached) with dynamic widgets', async () => {
+      const RefinementList = connectRefinementList(() => null);
+      const App = (props) => (
+        <InstantSearch {...props}>
+          <DynamicWidgets fallbackComponent={RefinementList} />
+        </InstantSearch>
+      );
+
+      const props = {
+        searchClient: createSearchClient({}),
+        indexName: 'abc',
+        searchState: {
+          query: 'iPhone',
+        },
+      };
+
+      await findResultsState(App, props);
+
+      expect(props.searchClient.search).toHaveBeenCalledTimes(2);
+      // both calls are the same, so they're cached
+      expect(props.searchClient.search.mock.calls[0][0]).toEqual(
+        props.searchClient.search.mock.calls[1][0]
+      );
+    });
+
+    it('searches twice with dynamic widgets and a refinement', async () => {
+      const RefinementList = connectRefinementList(() => null);
+      const App = (props) => (
+        <InstantSearch {...props}>
+          <DynamicWidgets fallbackComponent={RefinementList} />
+        </InstantSearch>
+      );
+
+      const props = {
+        searchClient: createSearchClient({}),
+        indexName: 'instant_search',
+        searchState: {
+          query: 'iPhone',
+          refinementList: { categories: ['refined!'] },
+        },
+      };
+
+      await findResultsState(App, props);
+
+      expect(props.searchClient.search).toHaveBeenCalledTimes(2);
+
+      // first query doesn't have the fallback widget mounted yet
+      expect(props.searchClient.search.mock.calls[0][0][0]).toEqual({
+        indexName: 'instant_search',
+        params: {
+          facets: ['*'],
+          highlightPostTag: '</ais-highlight-0000000000>',
+          highlightPreTag: '<ais-highlight-0000000000>',
+          maxValuesPerFacet: 20,
+          tagFilters: '',
+        },
+      });
+
+      // second query does have the fallback widget mounted, and thus also the refinement
+      expect(props.searchClient.search.mock.calls[1][0][0]).toEqual({
+        indexName: 'instant_search',
+        params: {
+          facetFilters: [['categories:refined!']],
+          facets: ['*'],
+          highlightPostTag: '</ais-highlight-0000000000>',
+          highlightPreTag: '<ais-highlight-0000000000>',
+          maxValuesPerFacet: 20,
+          tagFilters: '',
+        },
+      });
+    });
   });
 
   describe('multi index', () => {
     it('results should be instance of SearchResults and SearchParameters', async () => {
       const Connected = createWidget();
 
-      const App = props => (
+      const App = (props) => (
         <InstantSearch {...props}>
           <Index indexName="index2">
             <Connected />
@@ -523,7 +617,7 @@ describe('findResultsState', () => {
 
       const { results } = await findResultsState(App, props);
 
-      results.forEach(result => {
+      results.forEach((result) => {
         expect(result.state).toBeInstanceOf(SearchParameters);
         expect(result.rawResults).toBeInstanceOf(Array);
       });
@@ -535,7 +629,7 @@ describe('findResultsState', () => {
         getSearchParameters,
       });
 
-      const App = props => (
+      const App = (props) => (
         <InstantSearch {...props}>
           <Index indexName="index2">
             <Connected />
@@ -560,7 +654,7 @@ describe('findResultsState', () => {
 
     it('without search state - first API', async () => {
       const Connected = createWidget();
-      const App = props => (
+      const App = (props) => (
         <InstantSearch {...props}>
           <Index indexId="index1" indexName="index1">
             <Connected />
@@ -608,7 +702,7 @@ describe('findResultsState', () => {
 
     it('without search state - second API', async () => {
       const Connected = createWidget();
-      const App = props => (
+      const App = (props) => (
         <InstantSearch {...props}>
           <Connected />
 
@@ -653,7 +747,7 @@ describe('findResultsState', () => {
 
     it('without search state - same index', async () => {
       const Connected = createWidget();
-      const App = props => (
+      const App = (props) => (
         <InstantSearch {...props}>
           <Connected defaultRefinement="Apple" />
 
@@ -698,7 +792,7 @@ describe('findResultsState', () => {
 
     it('with search state - first API', async () => {
       const Connected = createWidget();
-      const App = props => (
+      const App = (props) => (
         <InstantSearch {...props}>
           <Index indexId="index1" indexName="index1">
             <Connected />
@@ -755,7 +849,7 @@ describe('findResultsState', () => {
 
     it('with search state - second API', async () => {
       const Connected = createWidget();
-      const App = props => (
+      const App = (props) => (
         <InstantSearch {...props}>
           <Connected />
 
@@ -808,7 +902,7 @@ describe('findResultsState', () => {
 
     it('with search state - same index', async () => {
       const Connected = createWidget();
-      const App = props => (
+      const App = (props) => (
         <InstantSearch {...props}>
           <Connected />
 
@@ -860,7 +954,7 @@ describe('findResultsState', () => {
 
     it('forwards metadata', async () => {
       const Connected = createWidget();
-      const App = props => (
+      const App = (props) => (
         <InstantSearch {...props}>
           <Connected prop="value1" />
 
@@ -923,7 +1017,7 @@ describe('findResultsState', () => {
     describe('cleaning "params"', () => {
       it('multiple queries', async () => {
         const Connected = createWidget();
-        const App = props => (
+        const App = (props) => (
           <InstantSearch {...props}>
             <Connected />
             <Index indexId="index1WithRefinement" indexName="index1">
@@ -934,7 +1028,7 @@ describe('findResultsState', () => {
 
         const props = {
           ...requiredProps,
-          searchClient: createSearchClient(),
+          searchClient: createSearchClient({}),
           indexName: 'index1',
           searchState: {
             query: 'iPhone',
@@ -962,7 +1056,7 @@ describe('findResultsState', () => {
 
       it('custom client without "params"', async () => {
         const Connected = createWidget();
-        const App = props => (
+        const App = (props) => (
           <InstantSearch {...props}>
             <Connected />
             <Index indexId="index1WithRefinement" indexName="index1">
@@ -1001,7 +1095,7 @@ describe('findResultsState', () => {
 
       it('server-side params', async () => {
         const Connected = createWidget();
-        const App = props => (
+        const App = (props) => (
           <InstantSearch {...props}>
             <Connected />
             <Index indexId="index1WithRefinement" indexName="index1">
@@ -1013,7 +1107,7 @@ describe('findResultsState', () => {
         const props = {
           ...requiredProps,
           searchClient: createSearchClient({
-            transformResponseParams: query =>
+            transformResponseParams: (query) =>
               `query=${encodeURIComponent(query)}&query=modified`,
           }),
           indexName: 'index1',
@@ -1039,6 +1133,121 @@ describe('findResultsState', () => {
         expect(second.rawResults[0].params).toMatchInlineSnapshot(
           `"query=iPad%26query%3Dtest"`
         );
+      });
+    });
+
+    it('searches once with multiple indices', async () => {
+      const Connected = createWidget();
+      const App = (props) => (
+        <InstantSearch {...props}>
+          <Connected />
+          <Index indexId="index1WithRefinement" indexName="index1">
+            <Connected />
+          </Index>
+          <Index indexId="index2WithRefinement" indexName="index2">
+            <Connected />
+          </Index>
+        </InstantSearch>
+      );
+
+      const props = {
+        searchClient: createSearchClient({}),
+        indexName: 'abc',
+        searchState: {
+          query: 'iPhone',
+        },
+      };
+
+      const { results } = await findResultsState(App, props);
+
+      expect(props.searchClient.search).toHaveBeenCalledTimes(1);
+      expect(results.map(({ _internalIndexId }) => _internalIndexId)).toEqual([
+        'abc',
+        'index1WithRefinement',
+        'index2WithRefinement',
+      ]);
+    });
+
+    it('searches twice (cached) with dynamic widgets', async () => {
+      const RefinementList = connectRefinementList(() => null);
+      const App = (props) => (
+        <InstantSearch {...props}>
+          <Index indexName="index1WithRefinement">
+            <DynamicWidgets fallbackComponent={RefinementList} />
+          </Index>
+        </InstantSearch>
+      );
+
+      const props = {
+        searchClient: createSearchClient({}),
+        indexName: 'abc',
+        searchState: {
+          query: 'iPhone',
+        },
+      };
+
+      await findResultsState(App, props);
+
+      // [search, dynamic]
+      expect(props.searchClient.search).toHaveBeenCalledTimes(2);
+
+      // both calls are the same, so they're cached
+      expect(props.searchClient.search.mock.calls[0][0]).toEqual(
+        props.searchClient.search.mock.calls[1][0]
+      );
+    });
+
+    it('searches twice with dynamic widgets and a refinement', async () => {
+      const RefinementList = connectRefinementList(() => null);
+      const App = (props) => (
+        <InstantSearch {...props}>
+          <Index indexName="index1WithRefinement">
+            <DynamicWidgets fallbackComponent={RefinementList} />
+          </Index>
+        </InstantSearch>
+      );
+
+      const props = {
+        searchClient: createSearchClient({}),
+        indexName: 'instant_search',
+        searchState: {
+          query: 'iPhone',
+          indices: {
+            index1WithRefinement: {
+              refinementList: { categories: ['refined!'] },
+            },
+          },
+        },
+      };
+
+      await findResultsState(App, props);
+
+      // [search, dynamic]
+      expect(props.searchClient.search).toHaveBeenCalledTimes(2);
+
+      // first query doesn't have the fallback widget mounted yet
+      expect(props.searchClient.search.mock.calls[0][0][1]).toEqual({
+        indexName: 'index1WithRefinement',
+        params: {
+          facets: ['*'],
+          highlightPostTag: '</ais-highlight-0000000000>',
+          highlightPreTag: '<ais-highlight-0000000000>',
+          maxValuesPerFacet: 20,
+          tagFilters: '',
+        },
+      });
+
+      // second query does have the fallback widget mounted, and thus also the refinement
+      expect(props.searchClient.search.mock.calls[1][0][1]).toEqual({
+        indexName: 'index1WithRefinement',
+        params: {
+          facetFilters: [['categories:refined!']],
+          facets: ['*'],
+          highlightPostTag: '</ais-highlight-0000000000>',
+          highlightPreTag: '<ais-highlight-0000000000>',
+          maxValuesPerFacet: 20,
+          tagFilters: '',
+        },
       });
     });
   });

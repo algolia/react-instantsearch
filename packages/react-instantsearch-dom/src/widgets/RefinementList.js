@@ -55,10 +55,12 @@ import RefinementList from '../components/RefinementList';
  * );
  */
 
-const RefinementListWidget = props => (
+const RefinementListWidget = (props) => (
   <PanelCallbackHandler {...props}>
     <RefinementList {...props} />
   </PanelCallbackHandler>
 );
 
-export default connectRefinementList(RefinementListWidget);
+export default connectRefinementList(RefinementListWidget, {
+  $$widgetType: 'ais.refinementList',
+});

@@ -1,11 +1,7 @@
 import React, { Component, Children } from 'react';
 import PropTypes from 'prop-types';
-import {
-  InstantSearchConsumer,
-  InstantSearchContext,
-  IndexProvider,
-  IndexContext,
-} from '../core/context';
+import type { InstantSearchContext, IndexContext } from '../core/context';
+import { InstantSearchConsumer, IndexProvider } from '../core/context';
 
 function getIndexContext(props: Props): IndexContext {
   return {
@@ -16,6 +12,7 @@ function getIndexContext(props: Props): IndexContext {
 type Props = {
   indexName: string;
   indexId: string;
+  children?: React.ReactNode;
 };
 
 type InnerProps = Props & { contextValue: InstantSearchContext };
@@ -61,6 +58,10 @@ class Index extends Component<InnerProps, State> {
     children: PropTypes.node,
   };
 
+  static displayName = 'AlgoliaIndex';
+  static $$type = 'ais.index';
+  static $$widgetType = 'ais.index';
+
   static getDerivedStateFromProps(props: InnerProps) {
     return {
       indexContext: getIndexContext(props),
@@ -83,14 +84,14 @@ class Index extends Component<InnerProps, State> {
         multiIndexContext: this.state.indexContext,
       },
       this.props,
-      undefined
+      undefined,
+      Index.displayName
     );
   }
 
   componentDidMount() {
-    this.unregisterWidget = this.props.contextValue.widgetsManager.registerWidget(
-      this
-    );
+    this.unregisterWidget =
+      this.props.contextValue.widgetsManager.registerWidget(this);
   }
 
   componentDidUpdate(prevProps: InnerProps) {
@@ -129,11 +130,11 @@ type IndexWrapperProps = {
   indexId?: string;
 };
 
-const IndexWrapper: React.FC<IndexWrapperProps> = props => {
+const IndexWrapper: React.FC<IndexWrapperProps> = (props) => {
   const inferredIndexId = props.indexName;
   return (
     <InstantSearchConsumer>
-      {contextValue => (
+      {(contextValue) => (
         <Index
           contextValue={contextValue}
           indexId={inferredIndexId}

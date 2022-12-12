@@ -1,4 +1,5 @@
-import createConnector, { ConnectedProps } from '../core/createConnector';
+import type { ConnectedProps } from '../core/createConnector';
+import createConnector from '../core/createConnector';
 import {
   refineValue,
   getCurrentRefinementValue,
@@ -27,6 +28,7 @@ function getCurrentRefinement(
 
 export default createConnector({
   displayName: 'AlgoliaRelevantSort',
+  $$type: 'ais.relevantSort',
 
   getProvidedProps(props, _searchState, searchResults) {
     const results = getResults(searchResults, {

@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import Enzyme, { mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import HitsPerPage from '../HitsPerPage';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -52,6 +52,27 @@ describe('HitsPerPage', () => {
         .toJSON()
     ).toMatchSnapshot());
 
+  it('should forward the id to Select', () => {
+    const id = 'ais-select';
+    const wrapper = mount(
+      <HitsPerPage
+        id={id}
+        createURL={() => '#'}
+        items={[
+          { value: 2, label: '2 hits per page' },
+          { value: 4, label: '4 hits per page' },
+          { value: 6, label: '6 hits per page' },
+          { value: 8, label: '8 hits per page' },
+        ]}
+        refine={() => null}
+        currentRefinement={2}
+      />
+    );
+
+    const selectedValue = wrapper.find('select').getDOMNode();
+    expect(selectedValue.getAttribute('id')).toEqual(id);
+  });
+
   it('refines its value on change', () => {
     const refine = jest.fn();
     const wrapper = mount(
@@ -70,12 +91,7 @@ describe('HitsPerPage', () => {
 
     const selectedValue = wrapper.find('select');
     expect(selectedValue.find('option')).toHaveLength(4);
-    expect(
-      selectedValue
-        .find('option')
-        .first()
-        .text()
-    ).toBe('2 hits per page');
+    expect(selectedValue.find('option').first().text()).toBe('2 hits per page');
 
     selectedValue.find('select').simulate('change', { target: { value: '6' } });
 
@@ -96,11 +112,6 @@ describe('HitsPerPage', () => {
 
     const selectedValue = wrapper.find('select');
     expect(selectedValue.find('option')).toHaveLength(4);
-    expect(
-      selectedValue
-        .find('option')
-        .first()
-        .text()
-    ).toBe('2');
+    expect(selectedValue.find('option').first().text()).toBe('2');
   });
 });

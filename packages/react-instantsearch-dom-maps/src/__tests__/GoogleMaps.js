@@ -1,6 +1,6 @@
 import React from 'react';
 import Enzyme, { shallow, mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import {
   createFakeGoogleReference,
   createFakeMapInstance,
@@ -26,12 +26,14 @@ describe('GoogleMaps', () => {
     boundingBox: null,
   };
 
-  const simulateMapReadyEvent = google => {
+  const simulateMapReadyEvent = (google) => {
     google.maps.event.addListenerOnce.mock.calls[0][2]();
   };
 
   const simulateEvent = (fn, eventName, event) => {
-    fn.addListener.mock.calls.find(call => call.includes(eventName))[1](event);
+    fn.addListener.mock.calls.find((call) => call.includes(eventName))[1](
+      event
+    );
   };
 
   it('expect render correctly without the map rendered', () => {
@@ -237,7 +239,7 @@ describe('GoogleMaps', () => {
       expect(props.onIdle).toHaveBeenCalledTimes(0);
     });
 
-    ['center_changed', 'zoom_changed', 'dragstart'].forEach(eventName => {
+    ['center_changed', 'zoom_changed', 'dragstart'].forEach((eventName) => {
       it(`expect to call change callback on "${eventName}"`, () => {
         const mapInstance = createFakeMapInstance();
         const google = createFakeGoogleReference({
@@ -358,10 +360,62 @@ describe('GoogleMaps', () => {
         mapInstance,
       });
 
-      google.maps.LatLngBounds.mockImplementation((sw, ne) => ({
-        northEast: ne,
-        southWest: sw,
-      }));
+      const props = {
+        ...defaultProps,
+        google,
+      };
+
+      const wrapper = shallow(
+        <GoogleMaps {...props}>
+          <div>This is the children</div>
+        </GoogleMaps>
+      );
+
+      simulateMapReadyEvent(google);
+
+      expect(mapInstance.fitBounds).toHaveBeenCalledTimes(0);
+
+      expect(mapInstance.setZoom).toHaveBeenCalledTimes(1); // cDM
+      expect(mapInstance.setCenter).toHaveBeenCalledTimes(1); // cDM
+
+      wrapper.setProps({
+        boundingBoxPadding: 0,
+        boundingBox: {
+          northEast: {
+            lat: 14,
+            lng: 14,
+          },
+          southWest: {
+            lat: 10,
+            lng: 10,
+          },
+        },
+      });
+
+      expect(mapInstance.fitBounds).toHaveBeenCalledTimes(1);
+      expect(mapInstance.fitBounds).toHaveBeenCalledWith(
+        expect.objectContaining({
+          northEast: {
+            lat: 10,
+            lng: 10,
+          },
+          southWest: {
+            lat: 14,
+            lng: 14,
+          },
+        }),
+        0
+      );
+
+      expect(mapInstance.setZoom).toHaveBeenCalledTimes(1); // cDM
+      expect(mapInstance.setCenter).toHaveBeenCalledTimes(1); // cDM
+    });
+
+    it('expect not to call fitBounds on didUpdate when boundingBox equal to previous', () => {
+      const mapInstance = createFakeMapInstance();
+      const google = createFakeGoogleReference({
+        mapInstance,
+      });
 
       const props = {
         ...defaultProps,
@@ -397,7 +451,33 @@ describe('GoogleMaps', () => {
 
       expect(mapInstance.fitBounds).toHaveBeenCalledTimes(1);
       expect(mapInstance.fitBounds).toHaveBeenCalledWith(
-        {
+        expect.objectContaining({
+          northEast: {
+            lat: 14,
+            lng: 14,
+          },
+          southWest: {
+            lat: 10,
+            lng: 10,
+          },
+        }),
+        0
+      );
+
+      expect(mapInstance.setZoom).toHaveBeenCalledTimes(1); // cDM
+      expect(mapInstance.setCenter).toHaveBeenCalledTimes(1); // cDM
+
+      mapInstance.getBounds.mockImplementation(
+        () =>
+          new google.maps.LatLngBounds(
+            { lat: 14, lng: 14 },
+            { lat: 10, lng: 10 }
+          )
+      );
+
+      wrapper.setProps({
+        boundingBoxPadding: 0,
+        boundingBox: {
           northEast: {
             lat: 10,
             lng: 10,
@@ -407,11 +487,9 @@ describe('GoogleMaps', () => {
             lng: 14,
           },
         },
-        0
-      );
+      });
 
-      expect(mapInstance.setZoom).toHaveBeenCalledTimes(1); // cDM
-      expect(mapInstance.setCenter).toHaveBeenCalledTimes(1); // cDM
+      expect(mapInstance.fitBounds).toHaveBeenCalledTimes(1);
     });
 
     it('expect to call setCenter & setZoom when boundingBox is not provided', () => {
@@ -544,7 +622,7 @@ describe('GoogleMaps', () => {
 
       wrapper.unmount();
 
-      internalListeners.forEach(listener => {
+      internalListeners.forEach((listener) => {
         expect(listener.remove).toHaveBeenCalledTimes(1);
       });
     });

@@ -1,6 +1,6 @@
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import translatable from '../translatable';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -10,7 +10,7 @@ describe('translatable', () => {
     const Dummy = () => null;
     const defaultTranslations = {
       sup: 'hey',
-      thing: n => `${n} things`,
+      thing: (n) => `${n} things`,
     };
     const Translated = translatable(defaultTranslations)(Dummy);
     const { translate } = shallow(<Translated />)
@@ -24,7 +24,7 @@ describe('translatable', () => {
     const Dummy = () => null;
     const defaultTranslations = {
       sup: 'hey',
-      thing: n => `${n} things`,
+      thing: (n) => `${n} things`,
       fallbackThing: 'hi',
     };
     const translations = {

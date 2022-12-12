@@ -31,7 +31,7 @@ const getBoundingBoxId = () => 'boundingBox';
 const getAroundLatLngId = () => 'aroundLatLng';
 const getConfigureAroundLatLngId = () => 'configure.aroundLatLng';
 
-const currentRefinementToString = currentRefinement =>
+const currentRefinementToString = (currentRefinement) =>
   [
     currentRefinement.northEast.lat,
     currentRefinement.northEast.lng,
@@ -39,7 +39,7 @@ const currentRefinementToString = currentRefinement =>
     currentRefinement.southWest.lng,
   ].join();
 
-const stringToCurrentRefinement = value => {
+const stringToCurrentRefinement = (value) => {
   const values = value.split(',');
 
   return {
@@ -55,7 +55,7 @@ const stringToCurrentRefinement = value => {
 };
 
 const latLngRegExp = /^(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)$/;
-const stringToPosition = value => {
+const stringToPosition = (value) => {
   const pattern = value.match(latLngRegExp);
 
   return {
@@ -126,6 +126,7 @@ const refine = (searchState, nextValue, context) => {
 
 export default createConnector({
   displayName: 'AlgoliaGeoSearch',
+  $$type: 'ais.geoSearch',
 
   getProvidedProps(props, searchState, searchResults) {
     const context = {
@@ -175,7 +176,7 @@ export default createConnector({
       currentPositionFromSearchState || currentPositionFromSearchParameters;
 
     return {
-      hits: !results ? [] : results.hits.filter(_ => Boolean(_._geoloc)),
+      hits: !results ? [] : results.hits.filter((_) => Boolean(_._geoloc)),
       isRefinedWithMap: Boolean(currentRefinement),
       currentRefinement,
       position,
@@ -227,7 +228,7 @@ export default createConnector({
     if (currentRefinement) {
       items.push({
         label: `${id}: ${currentRefinementToString(currentRefinement)}`,
-        value: nextState => refine(nextState, nextRefinement, context),
+        value: (nextState) => refine(nextState, nextRefinement, context),
         currentRefinement,
       });
     }

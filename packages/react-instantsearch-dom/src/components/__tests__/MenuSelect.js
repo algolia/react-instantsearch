@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import Enzyme, { mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import MenuSelect from '../MenuSelect';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -44,6 +44,16 @@ describe('MenuSelect', () => {
       )
       .toJSON();
     expect(tree).toMatchSnapshot();
+  });
+
+  it('default menu select with custom id', () => {
+    const id = 'menu-select';
+    const wrapper = mount(
+      <MenuSelect id={id} refine={() => {}} items={[]} canRefine={false} />
+    );
+
+    const select = wrapper.find('select').getDOMNode();
+    expect(select.getAttribute('id')).toEqual(id);
   });
 
   it('default menu select with no refinement', () => {

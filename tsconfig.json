@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "ESNEXT",
-    "module": "es2015",
+    "module": "es2020",
     "moduleResolution": "node",
     "jsx": "preserve",
     "noEmit": true,
@@ -18,5 +18,11 @@
     "noFallthroughCasesInSwitch": true,
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true
-  }
+  },
+  "exclude": [
+    "examples/hooks-next/next-env.d.ts",
+    // @TODO: we need to re-enable type checking in the React Native example
+    // when the RN types work with React 18.
+    "examples/hooks-react-native"
+  ]
 }

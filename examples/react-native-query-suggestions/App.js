@@ -21,7 +21,6 @@ import {
   connectRefinementList,
 } from 'react-instantsearch-native';
 import Highlight from './Highlight';
-import { omit } from 'lodash';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const searchClient = algoliasearch(
@@ -122,7 +121,11 @@ export default class App extends React.Component {
   }
 
   setQuery(query, category) {
-    const searchState = omit(this.state.searchState, ['query', 'page']);
+    const {
+      query: _query,
+      page: _page,
+      ...searchState
+    } = this.state.searchState;
     if (searchState.indices && searchState.indices.instant_search) {
       searchState.indices.instant_search.page = 0;
     }
@@ -200,14 +203,13 @@ class SearchBox extends Component {
       <View style={styles.searchBoxContainer}>
         <Image
           source={{
-            uri:
-              'https://www.algolia.com/static_assets/images/press/downloads/algolia-mark-blue.png',
+            uri: 'https://www.algolia.com/static_assets/images/press/downloads/algolia-mark-blue.png',
           }}
           style={styles.algoliaLogo}
         />
         <TextInput
           style={styles.searchBox}
-          onChangeText={text => {
+          onChangeText={(text) => {
             if (text === '') {
               this.props.clearFilter();
             }
@@ -327,7 +329,7 @@ const SuggestionsHits = connectHits(({ hits, onPressItem }) => (
   />
 ));
 
-const buildItemCategoryText = categoryText => (
+const buildItemCategoryText = (categoryText) => (
   <View style={styles.categoryTextContainer}>
     <Text style={styles.categoryTextIn}> in</Text>
     <Text style={styles.categoryText}> {categoryText}</Text>

@@ -7,6 +7,7 @@ import {
   getCurrentRefinementValue,
   getResults,
 } from '../core/indexUtils';
+import { unescapeFacetValue } from '../core/utils';
 
 const namespace = 'menu';
 
@@ -29,9 +30,9 @@ function getCurrentRefinement(props, searchState, context) {
   return currentRefinement;
 }
 
-function getValue(name, props, searchState, context) {
+function getValue(value, props, searchState, context) {
   const currentRefinement = getCurrentRefinement(props, searchState, context);
-  return name === currentRefinement ? '' : name;
+  return value === currentRefinement ? '' : value;
 }
 
 function getLimit({ showMore, limit, showMoreLimit }) {
@@ -73,6 +74,7 @@ const defaultSortBy = ['count:desc', 'name:asc'];
  */
 export default createConnector({
   displayName: 'AlgoliaMenu',
+  $$type: 'ais.menu',
 
   propTypes: {
     attribute: PropTypes.string.isRequired,
@@ -82,12 +84,14 @@ export default createConnector({
     defaultRefinement: PropTypes.string,
     transformItems: PropTypes.func,
     searchable: PropTypes.bool,
+    facetOrdering: PropTypes.bool,
   },
 
   defaultProps: {
     showMore: false,
     limit: 10,
     showMoreLimit: 20,
+    facetOrdering: true,
   },
 
   getProvidedProps(
@@ -97,7 +101,7 @@ export default createConnector({
     meta,
     searchForFacetValuesResults
   ) {
-    const { attribute, searchable, indexContextValue } = props;
+    const { attribute, searchable, indexContextValue, facetOrdering } = props;
     const results = getResults(searchResults, {
       ais: props.contextValue,
       multiIndexContext: props.indexContextValue,
@@ -135,9 +139,9 @@ export default createConnector({
 
     let items;
     if (isFromSearch) {
-      items = searchForFacetValuesResults[attribute].map(v => ({
+      items = searchForFacetValuesResults[attribute].map((v) => ({
         label: v.value,
-        value: getValue(v.value, props, searchState, {
+        value: getValue(v.escapedValue, props, searchState, {
           ais: props.contextValue,
           multiIndexContext: props.indexContextValue,
         }),
@@ -149,10 +153,11 @@ export default createConnector({
       items = results
         .getFacetValues(attribute, {
           sortBy: searchable ? undefined : defaultSortBy,
+          facetOrdering,
         })
-        .map(v => ({
+        .map((v) => ({
           label: v.name,
-          value: getValue(v.name, props, searchState, {
+          value: getValue(v.escapedValue, props, searchState, {
             ais: props.contextValue,
             multiIndexContext: props.indexContextValue,
           }),
@@ -242,9 +247,11 @@ export default createConnector({
           ? []
           : [
               {
-                label: `${props.attribute}: ${currentRefinement}`,
+                label: `${props.attribute}: ${unescapeFacetValue(
+                  currentRefinement
+                )}`,
                 attribute: props.attribute,
-                value: nextState =>
+                value: (nextState) =>
                   refine(props, nextState, '', {
                     ais: props.contextValue,
                     multiIndexContext: props.indexContextValue,

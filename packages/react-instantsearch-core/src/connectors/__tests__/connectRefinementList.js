@@ -1,7 +1,7 @@
-import { SearchParameters } from 'algoliasearch-helper';
+import { SearchResults, SearchParameters } from 'algoliasearch-helper';
 import connect from '../connectRefinementList';
 
-jest.mock('../../core/createConnector', () => x => x);
+jest.mock('../../core/createConnector', () => (x) => x);
 
 let props;
 let params;
@@ -82,11 +82,13 @@ describe('connectRefinementList', () => {
       results.getFacetValues.mockImplementation(() => [
         {
           name: 'wat',
+          escapedValue: 'wat',
           isRefined: true,
           count: 20,
         },
         {
           name: 'oy',
+          escapedValue: 'oy',
           isRefined: false,
           count: 10,
         },
@@ -135,6 +137,7 @@ describe('connectRefinementList', () => {
           ok: [
             {
               value: 'wat',
+              escapedValue: 'wat',
               count: 10,
               highlighted: 'wat',
               isRefined: false,
@@ -220,7 +223,8 @@ describe('connectRefinementList', () => {
         {
           ok: [
             {
-              value: ['wat'],
+              value: 'wat',
+              escapedValue: 'wat',
               label: 'wat',
               isRefined: true,
               count: 20,
@@ -234,11 +238,121 @@ describe('connectRefinementList', () => {
           _highlightResult: { label: { value: 'wat' } },
           count: 20,
           isRefined: true,
-          label: ['wat'],
-          value: [['wat']],
+          label: 'wat',
+          value: ['wat'],
         },
       ]);
       expect(props.isFromSearch).toBe(true);
+    });
+
+    it('facetValues have facetOrdering by default', () => {
+      const userProps = {
+        ...connect.defaultProps,
+        attribute: 'ok',
+        contextValue,
+      };
+      const searchState = {
+        refinementList: { ok: ['wat'] },
+      };
+      const parameters = connect.getSearchParameters(
+        new SearchParameters(),
+        userProps,
+        searchState
+      );
+
+      const searchResults = new SearchResults(parameters, [
+        {
+          hits: [],
+          renderingContent: {
+            facetOrdering: {
+              values: {
+                ok: {
+                  order: ['lol'],
+                },
+              },
+            },
+          },
+          facets: {
+            ok: {
+              wat: 20,
+              lol: 2000,
+            },
+          },
+        },
+      ]);
+
+      const providedProps = connect.getProvidedProps(userProps, searchState, {
+        results: searchResults,
+      });
+
+      expect(providedProps.items).toEqual([
+        {
+          count: 2000,
+          isRefined: false,
+          label: 'lol',
+          value: ['wat', 'lol'],
+        },
+        {
+          count: 20,
+          isRefined: true,
+          label: 'wat',
+          value: [],
+        },
+      ]);
+      expect(providedProps.isFromSearch).toBe(false);
+    });
+
+    it('facetValues results does not use facetOrdering if disabled', () => {
+      const userProps = { attribute: 'ok', facetOrdering: false, contextValue };
+      const searchState = {
+        refinementList: { ok: ['wat'] },
+      };
+      const parameters = connect.getSearchParameters(
+        new SearchParameters(),
+        userProps,
+        searchState
+      );
+
+      const searchResults = new SearchResults(parameters, [
+        {
+          hits: [],
+          renderingContent: {
+            facetOrdering: {
+              values: {
+                ok: {
+                  order: ['lol'],
+                },
+              },
+            },
+          },
+          facets: {
+            ok: {
+              wat: 20,
+              lol: 2000,
+            },
+          },
+        },
+      ]);
+
+      const providedProps = connect.getProvidedProps(userProps, searchState, {
+        results: searchResults,
+      });
+
+      expect(providedProps.items).toEqual([
+        {
+          count: 20,
+          isRefined: true,
+          label: 'wat',
+          value: [],
+        },
+        {
+          count: 2000,
+          isRefined: false,
+          label: 'lol',
+          value: ['wat', 'lol'],
+        },
+      ]);
+      expect(providedProps.isFromSearch).toBe(false);
     });
 
     it("calling refine updates the widget's search state", () => {
@@ -338,64 +452,95 @@ describe('connectRefinementList', () => {
       );
     });
 
-    it('registers its id in metadata', () => {
-      const metadata = connect.getMetadata(
-        { attribute: 'ok', contextValue },
-        {}
-      );
-      expect(metadata).toEqual({ id: 'ok', index: 'index', items: [] });
-    });
-
-    it('registers its filter in metadata', () => {
-      const metadata = connect.getMetadata(
-        { attribute: 'wot', contextValue },
-        { refinementList: { wot: ['wat', 'wut'] } }
-      );
-      expect(metadata).toEqual({
-        id: 'wot',
-        index: 'index',
-        items: [
-          {
-            label: 'wot: ',
-            attribute: 'wot',
-            currentRefinement: ['wat', 'wut'],
-            value: metadata.items[0].value,
-            items: [
-              {
-                label: 'wat',
-                value: metadata.items[0].items[0].value,
-              },
-              {
-                label: 'wut',
-                value: metadata.items[0].items[1].value,
-              },
-            ],
-            // Ignore value, we test it later
-          },
-        ],
-      });
-    });
-
-    it('items value function should clear it from the search state', () => {
-      const metadata = connect.getMetadata(
-        { attribute: 'one', contextValue },
-        { refinementList: { one: ['one1', 'one2'], two: ['two'] } }
-      );
-
-      let searchState = metadata.items[0].items[0].value({
-        refinementList: { one: ['one1', 'one2'], two: ['two'] },
+    describe('getMetadata', () => {
+      it('registers its id in metadata', () => {
+        const metadata = connect.getMetadata(
+          { attribute: 'ok', contextValue },
+          {}
+        );
+        expect(metadata).toEqual({ id: 'ok', index: 'index', items: [] });
       });
 
-      expect(searchState).toEqual({
-        page: 1,
-        refinementList: { one: ['one2'], two: ['two'] },
+      it('registers its filter in metadata', () => {
+        const metadata = connect.getMetadata(
+          { attribute: 'wot', contextValue },
+          { refinementList: { wot: ['wat', 'wut'] } }
+        );
+        expect(metadata).toEqual({
+          id: 'wot',
+          index: 'index',
+          items: [
+            {
+              label: 'wot: ',
+              attribute: 'wot',
+              currentRefinement: ['wat', 'wut'],
+              value: metadata.items[0].value,
+              items: [
+                {
+                  label: 'wat',
+                  value: metadata.items[0].items[0].value,
+                },
+                {
+                  label: 'wut',
+                  value: metadata.items[0].items[1].value,
+                },
+              ],
+              // Ignore value, we test it later
+            },
+          ],
+        });
       });
 
-      searchState = metadata.items[0].items[1].value(searchState);
+      it('registers escaped filterd in metadata', () => {
+        const metadata = connect.getMetadata(
+          { attribute: 'wot', contextValue },
+          { refinementList: { wot: ['\\-wat', 'wut'] } }
+        );
+        expect(metadata).toEqual({
+          id: 'wot',
+          index: 'index',
+          items: [
+            {
+              label: 'wot: ',
+              attribute: 'wot',
+              currentRefinement: ['\\-wat', 'wut'],
+              value: metadata.items[0].value,
+              items: [
+                {
+                  label: '-wat',
+                  value: metadata.items[0].items[0].value,
+                },
+                {
+                  label: 'wut',
+                  value: metadata.items[0].items[1].value,
+                },
+              ],
+            },
+          ],
+        });
+      });
 
-      expect(searchState).toEqual({
-        page: 1,
-        refinementList: { one: '', two: ['two'] },
+      it('items value function should clear it from the search state', () => {
+        const metadata = connect.getMetadata(
+          { attribute: 'one', contextValue },
+          { refinementList: { one: ['one1', 'one2'], two: ['two'] } }
+        );
+
+        let searchState = metadata.items[0].items[0].value({
+          refinementList: { one: ['one1', 'one2'], two: ['two'] },
+        });
+
+        expect(searchState).toEqual({
+          page: 1,
+          refinementList: { one: ['one2'], two: ['two'] },
+        });
+
+        searchState = metadata.items[0].items[1].value(searchState);
+
+        expect(searchState).toEqual({
+          page: 1,
+          refinementList: { one: '', two: ['two'] },
+        });
       });
     });
 

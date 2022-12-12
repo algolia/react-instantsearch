@@ -1,8 +1,10 @@
 export { connectAutoComplete } from 'react-instantsearch-core';
 export { connectBreadcrumb } from 'react-instantsearch-core';
 export { connectConfigure } from 'react-instantsearch-core';
+export { EXPERIMENTAL_connectConfigureRelatedItems } from 'react-instantsearch-core';
 export {
-  EXPERIMENTAL_connectConfigureRelatedItems,
+  connectDynamicWidgets,
+  EXPERIMENTAL_connectDynamicWidgets,
 } from 'react-instantsearch-core';
 export { connectCurrentRefinements } from 'react-instantsearch-core';
 export { connectGeoSearch } from 'react-instantsearch-core';

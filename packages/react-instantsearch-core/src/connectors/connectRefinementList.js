@@ -7,6 +7,7 @@ import {
   getCurrentRefinementValue,
   getResults,
 } from '../core/indexUtils';
+import { unescapeFacetValue } from '../core/utils';
 
 const namespace = 'refinementList';
 
@@ -34,12 +35,12 @@ function getCurrentRefinement(props, searchState, context) {
   return [];
 }
 
-function getValue(name, props, searchState, context) {
+function getValue(value, props, searchState, context) {
   const currentRefinement = getCurrentRefinement(props, searchState, context);
-  const isAnewValue = currentRefinement.indexOf(name) === -1;
+  const isAnewValue = currentRefinement.indexOf(value) === -1;
   const nextRefinement = isAnewValue
-    ? currentRefinement.concat([name]) // cannot use .push(), it mutates
-    : currentRefinement.filter(selectedValue => selectedValue !== name); // cannot use .splice(), it mutates
+    ? currentRefinement.concat([value]) // cannot use .push(), it mutates
+    : currentRefinement.filter((selectedValue) => selectedValue !== value); // cannot use .splice(), it mutates
   return nextRefinement;
 }
 
@@ -91,6 +92,7 @@ function cleanUp(props, searchState, context) {
 const sortBy = ['isRefined', 'count:desc', 'name:asc'];
 export default createConnector({
   displayName: 'AlgoliaRefinementList',
+  $$type: 'ais.refinementList',
 
   propTypes: {
     id: PropTypes.string,
@@ -104,6 +106,7 @@ export default createConnector({
     ),
     searchable: PropTypes.bool,
     transformItems: PropTypes.func,
+    facetOrdering: PropTypes.bool,
   },
 
   defaultProps: {
@@ -111,6 +114,7 @@ export default createConnector({
     showMore: false,
     limit: 10,
     showMoreLimit: 20,
+    facetOrdering: true,
   },
 
   getProvidedProps(
@@ -120,7 +124,7 @@ export default createConnector({
     metadata,
     searchForFacetValuesResults
   ) {
-    const { attribute, searchable, indexContextValue } = props;
+    const { attribute, searchable, indexContextValue, facetOrdering } = props;
     const results = getResults(searchResults, {
       ais: props.contextValue,
       multiIndexContext: props.indexContextValue,
@@ -157,9 +161,9 @@ export default createConnector({
     }
 
     const items = isFromSearch
-      ? searchForFacetValuesResults[attribute].map(v => ({
+      ? searchForFacetValuesResults[attribute].map((v) => ({
           label: v.value,
-          value: getValue(v.value, props, searchState, {
+          value: getValue(v.escapedValue, props, searchState, {
             ais: props.contextValue,
             multiIndexContext: props.indexContextValue,
           }),
@@ -167,15 +171,17 @@ export default createConnector({
           count: v.count,
           isRefined: v.isRefined,
         }))
-      : results.getFacetValues(attribute, { sortBy }).map(v => ({
-          label: v.name,
-          value: getValue(v.name, props, searchState, {
-            ais: props.contextValue,
-            multiIndexContext: props.indexContextValue,
-          }),
-          count: v.count,
-          isRefined: v.isRefined,
-        }));
+      : results
+          .getFacetValues(attribute, { sortBy, facetOrdering })
+          .map((v) => ({
+            label: v.name,
+            value: getValue(v.escapedValue, props, searchState, {
+              ais: props.contextValue,
+              multiIndexContext: props.indexContextValue,
+            }),
+            count: v.count,
+            isRefined: v.isRefined,
+          }));
 
     const transformedItems = props.transformItems
       ? props.transformItems(items)
@@ -259,16 +265,16 @@ export default createConnector({
                   searchState,
                   context
                 ),
-                value: nextState => refine(props, nextState, [], context),
+                value: (nextState) => refine(props, nextState, [], context),
                 items: getCurrentRefinement(props, searchState, context).map(
-                  item => ({
-                    label: `${item}`,
-                    value: nextState => {
+                  (item) => ({
+                    label: unescapeFacetValue(`${item}`),
+                    value: (nextState) => {
                       const nextSelectedItems = getCurrentRefinement(
                         props,
                         nextState,
                         context
-                      ).filter(other => other !== item);
+                      ).filter((other) => other !== item);
                       return refine(
                         props,
                         searchState,

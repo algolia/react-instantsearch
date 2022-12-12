@@ -1,7 +1,7 @@
-import { SearchParameters } from 'algoliasearch-helper';
+import { SearchParameters, SearchResults } from 'algoliasearch-helper';
 import connect from '../connectMenu';
 
-jest.mock('../../core/createConnector', () => x => x);
+jest.mock('../../core/createConnector', () => (x) => x);
 
 let props;
 let params;
@@ -86,11 +86,13 @@ describe('connectMenu', () => {
       results.getFacetValues.mockImplementation(() => [
         {
           name: 'wat',
+          escapedValue: 'wat',
           isRefined: true,
           count: 20,
         },
         {
           name: 'oy',
+          escapedValue: 'oy',
           isRefined: false,
           count: 10,
         },
@@ -159,6 +161,7 @@ describe('connectMenu', () => {
           ok: [
             {
               value: 'wat',
+              escapedValue: 'wat',
               count: 10,
               highlighted: 'wat',
               isRefined: false,
@@ -224,6 +227,7 @@ describe('connectMenu', () => {
       results.getFacetValues.mockImplementation(() => [
         {
           name: 'wat',
+          escapedValue: 'wat',
           isRefined: true,
           count: 20,
         },
@@ -243,6 +247,116 @@ describe('connectMenu', () => {
           count: 20,
         },
       ]);
+    });
+
+    it('facetValues have facetOrdering by default', () => {
+      const userProps = {
+        ...connect.defaultProps,
+        attribute: 'ok',
+        contextValue,
+      };
+      const searchState = {
+        menu: { ok: 'wat' },
+      };
+      const parameters = connect.getSearchParameters(
+        new SearchParameters(),
+        userProps,
+        searchState
+      );
+
+      const searchResults = new SearchResults(parameters, [
+        {
+          hits: [],
+          renderingContent: {
+            facetOrdering: {
+              values: {
+                ok: {
+                  order: ['wat'],
+                },
+              },
+            },
+          },
+          facets: {
+            ok: {
+              wat: 20,
+              lol: 2000,
+            },
+          },
+        },
+      ]);
+
+      const providedProps = connect.getProvidedProps(userProps, searchState, {
+        results: searchResults,
+      });
+
+      expect(providedProps.items).toEqual([
+        {
+          count: 20,
+          isRefined: true,
+          label: 'wat',
+          value: '',
+        },
+        {
+          count: 2000,
+          isRefined: false,
+          label: 'lol',
+          value: 'lol',
+        },
+      ]);
+      expect(providedProps.isFromSearch).toBe(false);
+    });
+
+    it('facetValues results does not use facetOrdering if disabled', () => {
+      const userProps = { attribute: 'ok', facetOrdering: false, contextValue };
+      const searchState = {
+        menu: { ok: 'wat' },
+      };
+      const parameters = connect.getSearchParameters(
+        new SearchParameters(),
+        userProps,
+        searchState
+      );
+
+      const searchResults = new SearchResults(parameters, [
+        {
+          hits: [],
+          renderingContent: {
+            facetOrdering: {
+              values: {
+                ok: {
+                  order: ['wat'],
+                },
+              },
+            },
+          },
+          facets: {
+            ok: {
+              wat: 20,
+              lol: 2000,
+            },
+          },
+        },
+      ]);
+
+      const providedProps = connect.getProvidedProps(userProps, searchState, {
+        results: searchResults,
+      });
+
+      expect(providedProps.items).toEqual([
+        {
+          count: 2000,
+          isRefined: false,
+          label: 'lol',
+          value: 'lol',
+        },
+        {
+          count: 20,
+          isRefined: true,
+          label: 'wat',
+          value: '',
+        },
+      ]);
+      expect(providedProps.isFromSearch).toBe(false);
     });
 
     it("calling refine updates the widget's search state", () => {
@@ -421,11 +535,13 @@ describe('connectMenu', () => {
         getFacetValues: jest.fn(() => [
           {
             name: 'oy',
+            escapedValue: 'oy',
             isRefined: true,
             count: 10,
           },
           {
             name: 'wat',
+            escapedValue: 'wat',
             isRefined: false,
             count: 20,
           },
@@ -435,13 +551,14 @@ describe('connectMenu', () => {
       };
 
       props = connect.getProvidedProps(
-        { attribute: 'ok', contextValue },
+        { ...connect.defaultProps, attribute: 'ok', contextValue },
         {},
         { results }
       );
 
       expect(results.getFacetValues).toHaveBeenCalledWith('ok', {
         sortBy: ['count:desc', 'name:asc'],
+        facetOrdering: true,
       });
 
       expect(props.items).toEqual([
@@ -465,11 +582,13 @@ describe('connectMenu', () => {
         getFacetValues: jest.fn(() => [
           {
             name: 'oy',
+            escapedValue: 'oy',
             isRefined: true,
             count: 10,
           },
           {
             name: 'wat',
+            escapedValue: 'wat',
             isRefined: false,
             count: 20,
           },
@@ -479,13 +598,19 @@ describe('connectMenu', () => {
       };
 
       props = connect.getProvidedProps(
-        { attribute: 'ok', searchable: true, contextValue },
+        {
+          ...connect.defaultProps,
+          attribute: 'ok',
+          searchable: true,
+          contextValue,
+        },
         {},
         { results }
       );
 
       expect(results.getFacetValues).toHaveBeenCalledWith('ok', {
         sortBy: undefined,
+        facetOrdering: true,
       });
 
       expect(props.items).toEqual([
@@ -610,11 +735,13 @@ describe('connectMenu', () => {
       results.second.getFacetValues.mockImplementation(() => [
         {
           name: 'wat',
+          escapedValue: 'wat',
           isRefined: true,
           count: 20,
         },
         {
           name: 'oy',
+          escapedValue: 'oy',
           isRefined: false,
           count: 10,
         },
@@ -684,6 +811,7 @@ describe('connectMenu', () => {
           ok: [
             {
               value: 'wat',
+              escapedValue: 'wat',
               count: 10,
               highlighted: 'wat',
               isRefined: false,
@@ -750,6 +878,7 @@ describe('connectMenu', () => {
       results.second.getFacetValues.mockImplementation(() => [
         {
           name: 'wat',
+          escapedValue: 'wat',
           isRefined: true,
           count: 20,
         },
@@ -833,84 +962,106 @@ describe('connectMenu', () => {
       );
     });
 
-    it('registers its filter in metadata', () => {
-      const metadata = connect.getMetadata(
-        { attribute: 'wot', contextValue, indexContextValue },
-        { indices: { second: { menu: { wot: 'wat' } } } }
-      );
-      expect(metadata).toEqual({
-        id: 'wot',
-        index: 'second',
-        items: [
+    describe('getMetaData', () => {
+      it('registers its filter in metadata', () => {
+        const metadata = connect.getMetadata(
+          { attribute: 'wot', contextValue, indexContextValue },
+          { indices: { second: { menu: { wot: 'wat' } } } }
+        );
+        expect(metadata).toEqual({
+          id: 'wot',
+          index: 'second',
+          items: [
+            {
+              label: 'wot: wat',
+              attribute: 'wot',
+              currentRefinement: 'wat',
+              // Ignore clear, we test it later
+              value: metadata.items[0].value,
+            },
+          ],
+        });
+      });
+
+      it('registers escaped metadata', () => {
+        const metadata = connect.getMetadata(
+          { attribute: 'wot', contextValue, indexContextValue },
+          { indices: { second: { menu: { wot: '\\-wat' } } } }
+        );
+        expect(metadata).toEqual({
+          id: 'wot',
+          index: 'second',
+          items: [
+            {
+              label: 'wot: -wat',
+              attribute: 'wot',
+              currentRefinement: '\\-wat',
+              // Ignore clear, we test it later
+              value: metadata.items[0].value,
+            },
+          ],
+        });
+      });
+
+      it('items value function should clear it from the search state', () => {
+        const metadata = connect.getMetadata(
+          { attribute: 'one', contextValue, indexContextValue },
+          { indices: { second: { menu: { one: 'one', two: 'two' } } } }
+        );
+
+        const searchState = metadata.items[0].value({
+          indices: { second: { menu: { one: 'one', two: 'two' } } },
+        });
+
+        expect(searchState).toEqual({
+          indices: { second: { page: 1, menu: { one: '', two: 'two' } } },
+        });
+      });
+
+      it('should return the right searchState when clean up', () => {
+        let searchState = connect.cleanUp(
+          { attribute: 'name', contextValue, indexContextValue },
           {
-            label: 'wot: wat',
-            attribute: 'wot',
-            currentRefinement: 'wat',
-            // Ignore clear, we test it later
-            value: metadata.items[0].value,
-          },
-        ],
-      });
-    });
+            indices: {
+              first: {
+                random: { untouched: 'yes' },
+              },
+              second: {
+                menu: { name: 'searchState', name2: 'searchState2' },
+                another: { searchState: 'searchState' },
+              },
+            },
+          }
+        );
 
-    it('items value function should clear it from the search state', () => {
-      const metadata = connect.getMetadata(
-        { attribute: 'one', contextValue, indexContextValue },
-        { indices: { second: { menu: { one: 'one', two: 'two' } } } }
-      );
-
-      const searchState = metadata.items[0].value({
-        indices: { second: { menu: { one: 'one', two: 'two' } } },
-      });
-
-      expect(searchState).toEqual({
-        indices: { second: { page: 1, menu: { one: '', two: 'two' } } },
-      });
-    });
-
-    it('should return the right searchState when clean up', () => {
-      let searchState = connect.cleanUp(
-        { attribute: 'name', contextValue, indexContextValue },
-        {
+        expect(searchState).toEqual({
           indices: {
             first: {
               random: { untouched: 'yes' },
             },
             second: {
-              menu: { name: 'searchState', name2: 'searchState2' },
-              another: { searchState: 'searchState' },
+              another: {
+                searchState: 'searchState',
+              },
+              menu: {
+                name2: 'searchState2',
+              },
             },
           },
-        }
-      );
+        });
 
-      expect(searchState).toEqual({
-        indices: {
-          first: {
-            random: { untouched: 'yes' },
-          },
-          second: {
-            another: {
-              searchState: 'searchState',
+        searchState = connect.cleanUp(
+          { attribute: 'name2', contextValue, indexContextValue },
+          searchState
+        );
+        expect(searchState).toEqual({
+          indices: {
+            first: {
+              random: { untouched: 'yes' },
             },
-            menu: {
-              name2: 'searchState2',
-            },
+            second: { another: { searchState: 'searchState' }, menu: {} },
           },
-        },
-      });
-
-      searchState = connect.cleanUp(
-        { attribute: 'name2', contextValue, indexContextValue },
-        searchState
-      );
-      expect(searchState).toEqual({
-        indices: {
-          first: {
-            random: { untouched: 'yes' },
-          },
-          second: { another: { searchState: 'searchState' }, menu: {} },
-        },
+        });
       });
     });
 

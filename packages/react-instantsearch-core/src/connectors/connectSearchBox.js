@@ -50,6 +50,7 @@ function cleanUp(props, searchState, context) {
  */
 export default createConnector({
   displayName: 'AlgoliaSearchBox',
+  $$type: 'ais.searchBox',
 
   propTypes: {
     defaultRefinement: PropTypes.string,
@@ -106,7 +107,7 @@ export default createConnector({
           : [
               {
                 label: `${id}: ${currentRefinement}`,
-                value: nextState =>
+                value: (nextState) =>
                   refine(props, nextState, '', {
                     ais: props.contextValue,
                     multiIndexContext: props.indexContextValue,

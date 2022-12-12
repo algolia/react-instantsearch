@@ -1,6 +1,6 @@
 import React from 'react';
 import Enzyme, { shallow, mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import SortBy from '../SortBy';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -25,6 +25,26 @@ describe('SortBy', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should forward the id to Select', () => {
+    const id = 'ais-select';
+    const wrapper = mount(
+      <SortBy
+        id={id}
+        items={[
+          { value: 'index1' },
+          { value: 'index2' },
+          { value: 'index3' },
+          { value: 'index4' },
+        ]}
+        currentRefinement={'index1'}
+        refine={() => null}
+      />
+    );
+
+    const select = wrapper.find('select').getDOMNode();
+    expect(select.getAttribute('id')).toEqual(id);
+  });
+
   it('refines its value on change', () => {
     const refine = jest.fn();
     const wrapper = mount(
@@ -43,12 +63,7 @@ describe('SortBy', () => {
 
     const selectedValue = wrapper.find('select');
     expect(selectedValue.find('option')).toHaveLength(4);
-    expect(
-      selectedValue
-        .find('option')
-        .first()
-        .text()
-    ).toBe('index name 1');
+    expect(selectedValue.find('option').first().text()).toBe('index name 1');
 
     selectedValue
       .find('select')
@@ -76,11 +91,6 @@ describe('SortBy', () => {
 
     const selectedValue = wrapper.find('select');
     expect(selectedValue.find('option')).toHaveLength(4);
-    expect(
-      selectedValue
-        .find('option')
-        .first()
-        .text()
-    ).toBe('index1');
+    expect(selectedValue.find('option').first().text()).toBe('index1');
   });
 });

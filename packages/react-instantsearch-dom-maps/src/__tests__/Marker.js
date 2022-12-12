@@ -1,6 +1,6 @@
 import React from 'react';
 import Enzyme, { shallow, mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import {
   createFakeGoogleReference,
   createFakeMapInstance,
@@ -13,7 +13,7 @@ import Connected, { Marker } from '../Marker';
 Enzyme.configure({ adapter: new Adapter() });
 
 jest.mock('../utils', () => {
-  const module = require.requireActual('../utils');
+  const module = jest.requireActual('../utils');
 
   return {
     registerEvents: jest.fn(),

@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import createConnector from '../core/createConnector';
 import { refineValue, getResults } from '../core/indexUtils';
 
-export const getId = props => props.attributes[0];
+export const getId = (props) => props.attributes[0];
 
 const namespace = 'hierarchicalMenu';
 
@@ -18,9 +18,9 @@ function transformValue(values) {
     if (item.isRefined) {
       acc.push({
         label: item.name,
-        // If dealing with a nested "items", "value" is equal to the previous value concatenated with the current label
-        // If dealing with the first level, "value" is equal to the current label
-        value: item.path,
+        // If dealing with a nested "items", "value" is equal to the previous value concatenated with the current value
+        // If dealing with the first level, "value" is equal to the current value
+        value: item.escapedValue,
       });
       // Create a variable in order to keep the same acc for the recursion, otherwise "reduce" returns a new one
       if (item.data) {
@@ -70,10 +70,11 @@ function transformValue(values) {
 
 export default createConnector({
   displayName: 'AlgoliaBreadcrumb',
+  $$type: 'ais.breadcrumb',
 
   propTypes: {
     attributes: (props, propName, componentName) => {
-      const isNotString = val => typeof val !== 'string';
+      const isNotString = (val) => typeof val !== 'string';
       if (
         !Array.isArray(props[propName]) ||
         props[propName].some(isNotString) ||

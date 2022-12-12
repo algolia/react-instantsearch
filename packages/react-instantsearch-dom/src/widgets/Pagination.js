@@ -57,10 +57,12 @@ import Pagination from '../components/Pagination';
  * );
  */
 
-const PaginationWidget = props => (
+const PaginationWidget = (props) => (
   <PanelCallbackHandler {...props}>
     <Pagination {...props} />
   </PanelCallbackHandler>
 );
 
-export default connectPagination(PaginationWidget);
+export default connectPagination(PaginationWidget, {
+  $$widgetType: 'ais.pagination',
+});

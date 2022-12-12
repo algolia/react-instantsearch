@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import Enzyme, { shallow, mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import SearchBox from '../SearchBox';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -23,6 +23,14 @@ describe('SearchBox', () => {
     expect(instance.toJSON()).toMatchSnapshot();
 
     instance.unmount();
+  });
+
+  it('applies its default props with custom inputId', () => {
+    const inputId = 'search-box';
+    const wrapper = mount(<SearchBox inputId={inputId} refine={() => null} />);
+
+    const input = wrapper.find('input').getDOMNode();
+    expect(input.getAttribute('id')).toEqual(inputId);
   });
 
   it('transfers the autoFocus prop to the underlying input element', () => {
@@ -174,7 +182,7 @@ describe('SearchBox', () => {
       <SearchBox
         refine={() => null}
         focusShortcuts={['s', 84]}
-        inputRef={node => {
+        inputRef={(node) => {
           input = node;
         }}
       />
@@ -232,7 +240,7 @@ describe('SearchBox', () => {
     expect(onReset).toHaveBeenCalled();
 
     // simulate input search events
-    inputEventsList.forEach(eventName => {
+    inputEventsList.forEach((eventName) => {
       wrapper
         .find('input')
         .simulate(eventName.replace(/^on/, '').toLowerCase());
@@ -311,12 +319,12 @@ describe('SearchBox', () => {
     expect(inputRef.current.tagName).toEqual('INPUT');
   });
 
-  it('should return a ref when given a callback', () => {
+  it('should return a ref when given a callback as input ref', () => {
     let inputRef;
     const wrapper = mount(
       <SearchBox
         refine={() => null}
-        inputRef={ref => {
+        inputRef={(ref) => {
           inputRef = ref;
         }}
       />
@@ -329,5 +337,26 @@ describe('SearchBox', () => {
 
     expect(refSpy).toHaveBeenCalled();
     expect(inputRef.tagName).toEqual('INPUT');
+  });
+
+  it('should point created refs to its form element', () => {
+    const formRef = React.createRef();
+    mount(<SearchBox refine={() => null} formRef={formRef} />);
+
+    expect(formRef.current.tagName).toEqual('FORM');
+  });
+
+  it('should return a ref when given a callback as form ref', () => {
+    let formRef;
+    mount(
+      <SearchBox
+        refine={() => null}
+        formRef={(ref) => {
+          formRef = ref;
+        }}
+      />
+    );
+
+    expect(formRef.tagName).toEqual('FORM');
   });
 });

@@ -12,7 +12,7 @@ import HierarchicalMenu from '../components/HierarchicalMenu';
  * @name HierarchicalMenu
  * @kind widget
  * @requirements To use this widget, your attributes must be formatted in a specific way.
- * If you want for example to have a hiearchical menu of categories, objects in your index
+ * If you want for example to have a hierarchical menu of categories, objects in your index
  * should be formatted this way:
  *
  * ```json
@@ -62,6 +62,7 @@ import HierarchicalMenu from '../components/HierarchicalMenu';
  * @themeKey ais-HierarchicalMenu-item--selected - the selected menu list item
  * @themeKey ais-HierarchicalMenu-item--parent - the menu list item containing children
  * @themeKey ais-HierarchicalMenu-link - the clickable menu element
+ * @themeKey ais-HierarchicalMenu-link--selected - the clickable element of a selected menu list item
  * @themeKey ais-HierarchicalMenu-label - the label of each item
  * @themeKey ais-HierarchicalMenu-count - the count of values for each item
  * @themeKey ais-HierarchicalMenu-showMore - the button used to display more categories
@@ -93,10 +94,12 @@ import HierarchicalMenu from '../components/HierarchicalMenu';
  * );
  */
 
-const HierarchicalMenuWidget = props => (
+const HierarchicalMenuWidget = (props) => (
   <PanelCallbackHandler {...props}>
     <HierarchicalMenu {...props} />
   </PanelCallbackHandler>
 );
 
-export default connectHierarchicalMenu(HierarchicalMenuWidget);
+export default connectHierarchicalMenu(HierarchicalMenuWidget, {
+  $$widgetType: 'ais.hierarchicalMenu',
+});

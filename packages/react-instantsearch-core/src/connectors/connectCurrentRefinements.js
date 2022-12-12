@@ -15,6 +15,7 @@ import createConnector from '../core/createConnector';
  */
 export default createConnector({
   displayName: 'AlgoliaCurrentRefinements',
+  $$type: 'ais.currentRefinements',
 
   propTypes: {
     transformItems: PropTypes.func,
@@ -34,7 +35,7 @@ export default createConnector({
             return res;
           }
           return res.concat(
-            meta.items.map(item => ({
+            meta.items.map((item) => ({
               ...item,
               id: meta.id,
               index: meta.index,
@@ -58,7 +59,7 @@ export default createConnector({
   refine(props, searchState, items) {
     // `value` corresponds to our internal clear function computed in each connector metadata.
     const refinementsToClear =
-      items instanceof Array ? items.map(item => item.value) : [items];
+      items instanceof Array ? items.map((item) => item.value) : [items];
     return refinementsToClear.reduce((res, clear) => clear(res), searchState);
   },
 });

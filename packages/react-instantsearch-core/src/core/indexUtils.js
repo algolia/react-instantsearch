@@ -6,6 +6,9 @@ export function getIndexId(context) {
     : context.ais.mainTargetedIndex;
 }
 
+/**
+ * @returns {import('algoliasearch-helper').SearchResults} results
+ */
 export function getResults(searchResults, context) {
   if (searchResults.results) {
     if (searchResults.results.hits) {
@@ -25,7 +28,6 @@ export function hasMultipleIndices(context) {
   return context && context.multiIndexContext;
 }
 
-// eslint-disable-next-line max-params
 export function refineValue(
   searchState,
   nextRefinement,
@@ -51,7 +53,7 @@ export function refineValue(
     // see: https://github.com/algolia/react-instantsearch/issues/310
     // see: https://github.com/algolia/react-instantsearch/issues/637
     if (searchState.indices && resetPage) {
-      Object.keys(searchState.indices).forEach(targetedIndex => {
+      Object.keys(searchState.indices).forEach((targetedIndex) => {
         searchState = refineValue(
           searchState,
           { page: 1 },
@@ -103,7 +105,6 @@ function refineSingleIndex(searchState, nextRefinement, resetPage) {
   return { ...searchState, ...nextRefinement, ...page };
 }
 
-// eslint-disable-next-line max-params
 function refineMultiIndexWithNamespace(
   searchState,
   nextRefinement,

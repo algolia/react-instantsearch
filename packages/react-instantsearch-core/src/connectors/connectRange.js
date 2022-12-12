@@ -187,6 +187,7 @@ function cleanUp(props, searchState, context) {
 
 export default createConnector({
   displayName: 'AlgoliaRange',
+  $$type: 'ais.range',
 
   propTypes: {
     id: PropTypes.string,
@@ -216,7 +217,7 @@ export default createConnector({
     const stats = hasFacet ? results.getFacetStats(attribute) || {} : {};
     const facetValues = hasFacet ? results.getFacetValues(attribute) : [];
 
-    const count = facetValues.map(v => ({
+    const count = facetValues.map((v) => ({
       value: v.name,
       count: v.count,
     }));
@@ -317,7 +318,7 @@ export default createConnector({
       items.push({
         label: fragments.join(''),
         attribute: props.attribute,
-        value: nextState =>
+        value: (nextState) =>
           refine(props, nextState, {}, this._currentRange, {
             ais: props.contextValue,
             multiIndexContext: props.indexContextValue,

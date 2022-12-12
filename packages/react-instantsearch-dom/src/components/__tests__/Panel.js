@@ -1,6 +1,6 @@
 import React from 'react';
 import Enzyme, { shallow, mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import Panel, { PanelConsumer } from '../Panel';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -75,7 +75,7 @@ describe('Panel', () => {
     const wrapper = mount(
       <Panel>
         <PanelConsumer>
-          {setCanRefine => {
+          {(setCanRefine) => {
             provided = setCanRefine;
             return null;
           }}
@@ -90,7 +90,7 @@ describe('Panel', () => {
     const wrapper = mount(
       <Panel>
         <PanelConsumer>
-          {setCanRefine => (
+          {(setCanRefine) => (
             <button onClick={() => setCanRefine(false)}>
               call setCanRefine
             </button>

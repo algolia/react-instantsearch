@@ -45,10 +45,12 @@ import RangeInput from '../components/RangeInput';
  * );
  */
 
-const RangeInputWidget = props => (
+const RangeInputWidget = (props) => (
   <PanelCallbackHandler {...props}>
     <RangeInput {...props} />
   </PanelCallbackHandler>
 );
 
-export default connectRange(RangeInputWidget);
+export default connectRange(RangeInputWidget, {
+  $$widgetType: 'ais.rangeInput',
+});

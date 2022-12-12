@@ -51,10 +51,12 @@ import RatingMenu from '../components/RatingMenu';
  * );
  */
 
-const RatingMenuWidget = props => (
+const RatingMenuWidget = (props) => (
   <PanelCallbackHandler {...props}>
     <RatingMenu {...props} />
   </PanelCallbackHandler>
 );
 
-export default connectRange(RatingMenuWidget);
+export default connectRange(RatingMenuWidget, {
+  $$widgetType: 'ais.ratingMenu',
+});

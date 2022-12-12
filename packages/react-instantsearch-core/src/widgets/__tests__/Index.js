@@ -1,6 +1,6 @@
 import React from 'react';
 import Enzyme, { shallow, mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import { SearchParameters } from 'algoliasearch-helper';
 import Index, { IndexComponentWithoutContext } from '../Index';
 import { IndexConsumer, InstantSearchProvider } from '../../core/context';
@@ -94,7 +94,7 @@ describe('Index', () => {
     const wrapper = mount(
       <IndexComponentWithoutContext {...requiredProps} contextValue={context}>
         <IndexConsumer>
-          {multiIndexContext => (
+          {(multiIndexContext) => (
             <div className="inner">{multiIndexContext.targetedIndex}</div>
           )}
         </IndexConsumer>
@@ -170,11 +170,11 @@ describe('Index', () => {
       },
     };
 
-    const Dummy = props => JSON.stringify(props, null, 2).replace(/"/g, '');
+    const Dummy = (props) => JSON.stringify(props, null, 2).replace(/"/g, '');
 
     const Connected = createConnector({
       displayName: 'Connector',
-      getProvidedProps: props => ({ providedProps: props }),
+      getProvidedProps: (props) => ({ providedProps: props }),
     })(Dummy);
 
     const props = {

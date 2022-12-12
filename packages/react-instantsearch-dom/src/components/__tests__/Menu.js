@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import Enzyme, { mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import Link from '../Link';
 import Menu from '../Menu';
 
@@ -283,10 +283,7 @@ describe('Menu', () => {
     it('should refine the selected value and display selected refinement back', () => {
       const wrapper = mount(menu);
 
-      const firstItem = wrapper
-        .find('li')
-        .first()
-        .find(Link);
+      const firstItem = wrapper.find('li').first().find(Link);
       firstItem.simulate('click');
 
       expect(refine.mock.calls).toHaveLength(1);

@@ -1,6 +1,6 @@
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import List from '../List';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -9,7 +9,7 @@ describe('List', () => {
   const defaultProps = {
     items: [],
     canRefine: true,
-    renderItem: item => <span>{item.value}</span>,
+    renderItem: (item) => <span>{item.value}</span>,
     cx: (...args) => args.filter(Boolean).join(' '),
   };
 

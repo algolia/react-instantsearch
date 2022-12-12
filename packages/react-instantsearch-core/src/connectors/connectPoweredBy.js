@@ -9,10 +9,13 @@ import createConnector from '../core/createConnector';
  */
 export default createConnector({
   displayName: 'AlgoliaPoweredBy',
+  $$type: 'ais.poweredBy',
 
   getProvidedProps() {
     const hostname =
-      typeof window === 'undefined' ? '' : window.location.hostname;
+      typeof window === 'undefined' || typeof window.location === 'undefined'
+        ? ''
+        : window.location.hostname;
 
     const url =
       'https://www.algolia.com/?' +

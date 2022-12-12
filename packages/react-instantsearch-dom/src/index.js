@@ -14,10 +14,12 @@ export { InstantSearch } from 'react-instantsearch-core';
 export { connectAutoComplete } from 'react-instantsearch-core';
 export { connectBreadcrumb } from 'react-instantsearch-core';
 export { connectConfigure } from 'react-instantsearch-core';
-export {
-  EXPERIMENTAL_connectConfigureRelatedItems,
-} from 'react-instantsearch-core';
+export { EXPERIMENTAL_connectConfigureRelatedItems } from 'react-instantsearch-core';
 export { connectCurrentRefinements } from 'react-instantsearch-core';
+export {
+  connectDynamicWidgets,
+  EXPERIMENTAL_connectDynamicWidgets,
+} from 'react-instantsearch-core';
 export { connectGeoSearch } from 'react-instantsearch-core';
 export { connectHierarchicalMenu } from 'react-instantsearch-core';
 export { connectHighlight } from 'react-instantsearch-core';
@@ -70,6 +72,11 @@ export { default as VoiceSearch } from './widgets/VoiceSearch';
 export { default as QueryRuleCustomData } from './widgets/QueryRuleCustomData';
 export { default as EXPERIMENTAL_Answers } from './widgets/Answers';
 
+import DynamicWidgets from './widgets/DynamicWidgets';
+/** @deprecated use DynamicWidgets */
+const ExperimentalDynamicWidgets = DynamicWidgets;
+export { DynamicWidgets, ExperimentalDynamicWidgets };
+
 // hooks
 export { default as EXPERIMENTAL_useAnswers } from './hooks/useAnswers';
 
@@ -80,9 +87,7 @@ export { createClassNames } from './core/utils';
 export { default as createVoiceSearchHelper } from './lib/voiceSearchHelper';
 
 // insights
-export {
-  default as getInsightsAnonymousUserToken,
-} from './core/getInsightsAnonymousUserToken';
+export { default as getInsightsAnonymousUserToken } from './core/getInsightsAnonymousUserToken';
 
 // InfiniteHits Cache
 export { createInfiniteHitsSessionStorageCache } from './lib/infiniteHitsCache';

@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import Enzyme, { mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import HierarchicalMenu from '../HierarchicalMenu';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -23,7 +23,7 @@ describe('HierarchicalMenu', () => {
                 { value: 'white2', label: 'white2', count: 4 },
               ],
             },
-            { value: 'black', count: 20, label: 'black' },
+            { value: 'black', isRefined: true, count: 20, label: 'black' },
             { value: 'blue', count: 30, label: 'blue' },
           ]}
           limit={2}
@@ -123,10 +123,7 @@ describe('HierarchicalMenu', () => {
 
     expect(itemParent).toHaveLength(1);
 
-    itemParent
-      .find('Link')
-      .first()
-      .simulate('click');
+    itemParent.find('Link').first().simulate('click');
     expect(refine.mock.calls).toHaveLength(1);
     expect(refine.mock.calls[0][0]).toEqual('white');
 

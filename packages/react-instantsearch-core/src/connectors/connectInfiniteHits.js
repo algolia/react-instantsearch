@@ -71,6 +71,7 @@ function extractHitsFromCachedHits(cachedHits) {
  */
 export default createConnector({
   displayName: 'AlgoliaInfiniteHits',
+  $$type: 'ais.infiniteHits',
 
   getProvidedProps(props, searchState, searchResults) {
     const results = getResults(searchResults, {
@@ -113,8 +114,8 @@ export default createConnector({
     const hasPrevious = firstReceivedPage > 0;
     const lastPageIndex = nbPages - 1;
     const hasMore = lastReceivedPage < lastPageIndex;
-    const refinePrevious = event => this.refine(event, firstReceivedPage - 1);
-    const refineNext = event => this.refine(event, lastReceivedPage + 1);
+    const refinePrevious = (event) => this.refine(event, firstReceivedPage - 1);
+    const refineNext = (event) => this.refine(event, lastReceivedPage + 1);
 
     return {
       hits: extractHitsFromCachedHits(cachedHits),

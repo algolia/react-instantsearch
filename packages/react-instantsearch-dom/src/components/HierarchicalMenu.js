@@ -34,12 +34,12 @@ class HierarchicalMenu extends Component {
     className: '',
   };
 
-  renderItem = item => {
+  renderItem = (item) => {
     const { createURL, refine } = this.props;
 
     return (
       <Link
-        className={cx('link')}
+        className={cx('link', item.isRefined && 'link--selected')}
         onClick={() => refine(item.value)}
         href={createURL(item.value)}
       >
@@ -76,5 +76,5 @@ class HierarchicalMenu extends Component {
 }
 
 export default translatable({
-  showMore: extended => (extended ? 'Show less' : 'Show more'),
+  showMore: (extended) => (extended ? 'Show less' : 'Show more'),
 })(HierarchicalMenu);

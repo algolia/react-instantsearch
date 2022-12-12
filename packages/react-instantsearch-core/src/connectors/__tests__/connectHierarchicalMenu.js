@@ -1,7 +1,7 @@
-import { SearchParameters } from 'algoliasearch-helper';
+import { SearchResults, SearchParameters } from 'algoliasearch-helper';
 import connect from '../connectHierarchicalMenu';
 
-jest.mock('../../core/createConnector', () => x => x);
+jest.mock('../../core/createConnector', () => (x) => x);
 
 describe('connectHierarchicalMenu', () => {
   describe('single index', () => {
@@ -44,16 +44,19 @@ describe('connectHierarchicalMenu', () => {
           {
             name: 'wat',
             path: 'wat',
+            escapedValue: 'wat',
             count: 20,
             data: [
               {
                 name: 'wot',
                 path: 'wat > wot',
+                escapedValue: 'wat > wot',
                 count: 15,
               },
               {
                 name: 'wut',
                 path: 'wat > wut',
+                escapedValue: 'wat > wut',
                 count: 5,
               },
             ],
@@ -61,6 +64,7 @@ describe('connectHierarchicalMenu', () => {
           {
             name: 'oy',
             path: 'oy',
+            escapedValue: 'oy',
             count: 10,
           },
         ],
@@ -174,6 +178,159 @@ describe('connectHierarchicalMenu', () => {
       expect(props.items).toEqual(['items']);
     });
 
+    it('facetValues results uses facetOrdering by default', () => {
+      const props = {
+        ...connect.defaultProps,
+        attributes: ['lvl0', 'lvl1'],
+        contextValue,
+      };
+      const searchState = { hierarchicalMenu: { lvl0: 'wat' } };
+      const state = connect.getSearchParameters(
+        new SearchParameters(),
+        props,
+        searchState
+      );
+      const results = new SearchResults(state, [
+        {
+          hits: [],
+          renderingContent: {
+            facetOrdering: {
+              values: {
+                lvl0: {
+                  order: ['wat'],
+                },
+                lvl1: {
+                  order: ['wat > wut'],
+                },
+              },
+            },
+          },
+          facets: {
+            lvl0: {
+              wat: 20,
+              oy: 10,
+            },
+            lvl1: {
+              'wat > wot': 15,
+              'wat > wut': 5,
+            },
+          },
+        },
+      ]);
+
+      const providedProps = connect.getProvidedProps(props, searchState, {
+        results,
+      });
+      expect(providedProps.items).toEqual([
+        {
+          label: 'wat',
+          value: undefined,
+          count: 20,
+          isRefined: true,
+          items: [
+            {
+              label: 'wut',
+              value: 'wat > wut',
+              count: 5,
+              isRefined: false,
+              items: null,
+            },
+            {
+              label: 'wot',
+              value: 'wat > wot',
+              count: 15,
+              isRefined: false,
+              items: null,
+            },
+          ],
+        },
+        {
+          label: 'oy',
+          value: 'oy',
+          count: 10,
+          isRefined: false,
+          items: null,
+        },
+      ]);
+    });
+
+    it('facetValues results does not use facetOrdering if disabled', () => {
+      const props = {
+        attributes: ['lvl0', 'lvl1'],
+        facetOrdering: false,
+        contextValue,
+      };
+      const searchState = { hierarchicalMenu: { lvl0: 'wat' } };
+      const state = connect.getSearchParameters(
+        new SearchParameters(),
+        props,
+        searchState
+      );
+      const results = new SearchResults(state, [
+        {
+          hits: [],
+          renderingContent: {
+            facetOrdering: {
+              values: {
+                lvl0: {
+                  order: ['wat'],
+                },
+                lvl1: {
+                  order: ['wat > wut'],
+                },
+              },
+            },
+          },
+          facets: {
+            lvl0: {
+              wat: 20,
+              oy: 10,
+            },
+            lvl1: {
+              'wat > wot': 15,
+              'wat > wut': 5,
+            },
+          },
+        },
+      ]);
+
+      const providedProps = connect.getProvidedProps(props, searchState, {
+        results,
+      });
+      expect(providedProps.items).toEqual([
+        {
+          label: 'oy',
+          value: 'oy',
+          count: 10,
+          isRefined: false,
+          items: null,
+        },
+        {
+          label: 'wat',
+          value: undefined,
+          count: 20,
+          isRefined: true,
+          items: [
+            // default ordering: alphabetical
+            {
+              label: 'wot',
+              value: 'wat > wot',
+              count: 15,
+              isRefined: false,
+              items: null,
+            },
+            {
+              label: 'wut',
+              value: 'wat > wut',
+              count: 5,
+              isRefined: false,
+              items: null,
+            },
+          ],
+        },
+      ]);
+    });
+
     it('shows the effect of showMoreLimit when there is no transformItems', () => {
       const results = {
         getFacetValues: jest.fn(),
@@ -185,21 +342,25 @@ describe('connectHierarchicalMenu', () => {
           {
             name: 'wat',
             path: 'wat',
+            escapedValue: 'wat',
             count: 20,
             data: [
               {
                 name: 'wot',
                 path: 'wat > wot',
+                escapedValue: 'wat > wot',
                 count: 15,
               },
               {
                 name: 'wut',
                 path: 'wat > wut',
+                escapedValue: 'wat > wut',
                 count: 3,
               },
               {
                 name: 'wit',
                 path: 'wat > wit',
+                escapedValue: 'wat > wit',
                 count: 5,
               },
             ],
@@ -207,11 +368,13 @@ describe('connectHierarchicalMenu', () => {
           {
             name: 'oy',
             path: 'oy',
+            escapedValue: 'oy',
             count: 10,
           },
           {
             name: 'ay',
             path: 'ay',
+            escapedValue: 'ay',
             count: 3,
           },
         ],
@@ -266,21 +429,25 @@ describe('connectHierarchicalMenu', () => {
           {
             name: 'wat',
             path: 'wat',
+            escapedValue: 'wat',
             count: 20,
             data: [
               {
                 name: 'wot',
                 path: 'wat > wot',
+                escapedValue: 'wat > wot',
                 count: 15,
               },
               {
                 name: 'wut',
                 path: 'wat > wut',
+                escapedValue: 'wat > wut',
                 count: 3,
               },
               {
                 name: 'wit',
                 path: 'wat > wit',
+                escapedValue: 'wat > wit',
                 count: 5,
               },
             ],
@@ -288,11 +455,13 @@ describe('connectHierarchicalMenu', () => {
           {
             name: 'oy',
             path: 'oy',
+            escapedValue: 'oy',
             count: 10,
           },
           {
             name: 'ay',
             path: 'ay',
+            escapedValue: 'ay',
             count: 3,
           },
         ],
@@ -348,7 +517,7 @@ describe('connectHierarchicalMenu', () => {
         if (a.label > b.label) return 1;
         return 0;
       }
-      const transformItems = jest.fn(items => items.sort(compareItem));
+      const transformItems = jest.fn((items) => items.sort(compareItem));
       props = connect.getProvidedProps(
         { attributes: ['ok'], transformItems, contextValue },
         {},
@@ -506,47 +675,68 @@ describe('connectHierarchicalMenu', () => {
       );
     });
 
-    it('registers its id in metadata', () => {
-      const metadata = connect.getMetadata(
-        { attributes: ['ok'], contextValue },
-        {}
-      );
-      expect(metadata).toEqual({ items: [], index: 'index', id: 'ok' });
-    });
-
-    it('registers its filter in metadata', () => {
-      const metadata = connect.getMetadata(
-        { attributes: ['ok'], contextValue },
-        { hierarchicalMenu: { ok: 'wat' } }
-      );
-      expect(metadata).toEqual({
-        id: 'ok',
-        index: 'index',
-        items: [
-          {
-            label: 'ok: wat',
-            attribute: 'ok',
-            currentRefinement: 'wat',
-            // Ignore clear, we test it later
-            value: metadata.items[0].value,
-          },
-        ],
-      });
-    });
-
-    it('items value function should clear it from the search state', () => {
-      const metadata = connect.getMetadata(
-        { attributes: ['one'], contextValue },
-        { hierarchicalMenu: { one: 'one', two: 'two' } }
-      );
-
-      const searchState = metadata.items[0].value({
-        hierarchicalMenu: { one: 'one', two: 'two' },
+    describe('getMetaData', () => {
+      it('registers its id in metadata', () => {
+        const metadata = connect.getMetadata(
+          { attributes: ['ok'], contextValue },
+          {}
+        );
+        expect(metadata).toEqual({ items: [], index: 'index', id: 'ok' });
       });
 
-      expect(searchState).toEqual({
-        page: 1,
-        hierarchicalMenu: { one: '', two: 'two' },
+      it('registers its filter in metadata', () => {
+        const metadata = connect.getMetadata(
+          { attributes: ['ok'], contextValue },
+          { hierarchicalMenu: { ok: 'wat' } }
+        );
+        expect(metadata).toEqual({
+          id: 'ok',
+          index: 'index',
+          items: [
+            {
+              label: 'ok: wat',
+              attribute: 'ok',
+              currentRefinement: 'wat',
+              // Ignore clear, we test it later
+              value: metadata.items[0].value,
+            },
+          ],
+        });
+      });
+
+      it('registers escaped filter in metadata', () => {
+        const metadata = connect.getMetadata(
+          { attributes: ['ok'], contextValue },
+          { hierarchicalMenu: { ok: '\\-wat' } }
+        );
+        expect(metadata).toEqual({
+          id: 'ok',
+          index: 'index',
+          items: [
+            {
+              label: 'ok: -wat',
+              attribute: 'ok',
+              currentRefinement: '\\-wat',
+              value: metadata.items[0].value,
+            },
+          ],
+        });
+      });
+
+      it('items value function should clear it from the search state', () => {
+        const metadata = connect.getMetadata(
+          { attributes: ['one'], contextValue },
+          { hierarchicalMenu: { one: 'one', two: 'two' } }
+        );
+
+        const searchState = metadata.items[0].value({
+          hierarchicalMenu: { one: 'one', two: 'two' },
+        });
+
+        expect(searchState).toEqual({
+          page: 1,
+          hierarchicalMenu: { one: '', two: 'two' },
+        });
       });
     });
 
@@ -632,16 +822,19 @@ describe('connectHierarchicalMenu', () => {
           {
             name: 'wat',
             path: 'wat',
+            escapedValue: 'wat',
             count: 20,
             data: [
               {
                 name: 'wot',
                 path: 'wat > wot',
+                escapedValue: 'wat > wot',
                 count: 15,
               },
               {
                 name: 'wut',
                 path: 'wat > wut',
+                escapedValue: 'wat > wut',
                 count: 5,
               },
             ],
@@ -649,6 +842,7 @@ describe('connectHierarchicalMenu', () => {
           {
             name: 'oy',
             path: 'oy',
+            escapedValue: 'oy',
             count: 10,
           },
         ],

@@ -1,24 +1,25 @@
-/* eslint-disable import/no-commonjs */
 const fs = require('fs');
 const path = require('path');
-const getLatestVersion = require('latest-version');
+const shell = require('shelljs');
 
-const packages = [
-  'packages/react-instantsearch-core',
-  'packages/react-instantsearch-dom-maps',
-  'packages/react-instantsearch-dom',
-  'packages/react-instantsearch-native',
-  'packages/react-instantsearch',
-];
+const packages = JSON.parse(
+  shell.exec('yarn run --silent lerna list --toposort --json', {
+    silent: true,
+  })
+);
+const cwd = process.cwd();
 
 module.exports = {
   monorepo: {
     mainVersionFile: 'lerna.json',
-    packagesToBump: packages,
-    packagesToPublish: packages,
+    // We rely on Lerna to bump our dependencies.
+    packagesToBump: [],
+    packagesToPublish: packages.map(({ location }) =>
+      location.replace(`${cwd}/`, '')
+    ),
   },
   versionUpdated: ({ version, exec, dir }) => {
-    // write to `packages/react-instantsearch-core/src/core/version.js`
+    // Update version in `react-instantsearch-core`
     fs.writeFileSync(
       path.resolve(
         dir,
@@ -30,12 +31,33 @@ module.exports = {
       ),
       `export default '${version}';\n`
     );
+    // Update version in `react-instantsearch-hooks`
+    fs.writeFileSync(
+      path.resolve(
+        dir,
+        'packages',
+        'react-instantsearch-hooks',
+        'src',
+        'version.ts'
+      ),
+      `export default '${version}';\n`
+    );
 
-    // update version in top level package
-    exec(`mversion ${version}`);
+    // Update version in packages and dependencies
+    exec(
+      `yarn lerna version ${version} --exact --no-git-tag-version --no-push --yes`
+    );
 
-    // update version in packages & dependencies
-    exec(`lerna version ${version} --no-git-tag-version --no-push --yes`);
+    // Update peerDependency in `react-instantsearch-dom-maps`
+    const file = path.resolve(
+      dir,
+      'packages',
+      'react-instantsearch-dom-maps',
+      'package.json'
+    );
+    const package = require(file);
+    package.peerDependencies['react-instantsearch-dom'] = `${version}`;
+    fs.writeFileSync(file, JSON.stringify(package, null, 2));
   },
   shouldPrepare: ({ releaseType, commitNumbersPerType }) => {
     const { fix = 0 } = commitNumbersPerType;
@@ -44,36 +66,25 @@ module.exports = {
     }
     return true;
   },
-  pullRequestTeamReviewers: ['instantsearch-for-websites'],
+  pullRequestTeamReviewers: ['frontend-experiences-web'],
   buildCommand: ({ version }) =>
     `NODE_ENV=production VERSION=${version} yarn build`,
-  afterPublish: async ({ exec, version }) => {
-    await waitUntil(async () => {
-      const latestVersion = await getLatestVersion('react-instantsearch', {
-        version: 'latest',
-      });
-      return latestVersion === version;
-    });
-    exec(`git config --global user.email "instantsearch-bot@algolia.com"`);
-    exec(`git config --global user.name "InstantSearch"`);
-    exec(`node scripts/update-examples.js ${version}`);
-    exec(`git push origin master`);
-  },
   slack: {
     // disable slack notification for `prepared` lifecycle.
     // Ship.js will send slack message only for `releaseSuccess`.
     prepared: null,
     releaseSuccess: ({
-      appName,
       version,
       tagName,
       latestCommitHash,
       latestCommitUrl,
       repoURL,
     }) => ({
-      pretext: [`:tada: Successfully released *${appName}@${version}*`].join(
-        '\n'
-      ),
+      pretext: [
+        `:tada: Successfully released *React InstantSearch v${version}*`,
+        '',
+        `Make sure to run \`yarn run release-templates\` in \`create-instantsearch-app\`.`,
+      ].join('\n'),
       fields: [
         {
           title: 'Branch',
@@ -98,14 +109,3 @@ module.exports = {
     }),
   },
 };
-
-function waitUntil(checkFn) {
-  return new Promise(resolve => {
-    const intervalId = setInterval(async () => {
-      if (await checkFn()) {
-        clearInterval(intervalId);
-        resolve();
-      }
-    }, 3000);
-  });
-}

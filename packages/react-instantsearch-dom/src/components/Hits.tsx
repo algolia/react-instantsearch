@@ -14,12 +14,15 @@ type HitProps = {
 type Props = {
   hits: Hit[];
   className?: string;
-  hitComponent?: React.FunctionComponent<HitProps>;
+  hitComponent?:
+    | string
+    | React.ElementType<HitProps>
+    | React.ExoticComponent<HitProps>;
 };
 
 const cx = createClassNames('Hits');
 
-const DefaultHitComponent: React.FC<HitProps> = props => (
+const DefaultHitComponent: React.FC<HitProps> = (props) => (
   <div
     style={{
       borderBottom: '1px solid #bbb',
@@ -40,7 +43,7 @@ const Hits: React.FC<Props> = ({
 }) => (
   <div className={classNames(cx(''), className)}>
     <ul className={cx('list')}>
-      {hits.map(hit => (
+      {hits.map((hit) => (
         <li className={cx('item')} key={hit.objectID}>
           <HitComponent hit={hit} />
         </li>
@@ -57,7 +60,9 @@ const HitPropTypes = PropTypes.shape({
 Hits.propTypes = {
   hits: PropTypes.arrayOf(HitPropTypes.isRequired).isRequired,
   className: PropTypes.string,
-  hitComponent: PropTypes.func,
+
+  // this is actually PropTypes.elementType, but our prop-types version is outdated
+  hitComponent: PropTypes.any,
 };
 
 export default Hits;
