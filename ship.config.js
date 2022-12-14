@@ -1,6 +1,4 @@
 /* eslint-disable import/no-commonjs */
-const fs = require('fs');
-const path = require('path');
 const shell = require('shelljs');
 
 const packages = JSON.parse(
@@ -20,26 +18,10 @@ module.exports = {
   getTagName: () =>
     packages.map((package) => `${package.name}@${package.version}`),
   getStagingBranchName: () => `chore/release-${Date.now()}`,
-  version({ exec, dir }) {
+  version({ exec }) {
     exec(
       'yarn lerna version --no-git-tag-version --no-push --exact --conventional-commits --yes'
     );
-
-    // Update peerDependency in `react-instantsearch-dom-maps`
-    const file = path.resolve(
-      dir,
-      'packages',
-      'react-instantsearch-dom-maps',
-      'package.json'
-    );
-    const package = require(file);
-    package.peerDependencies['react-instantsearch-dom'] = require(path.resolve(
-      dir,
-      'packages',
-      'react-instantsearch-dom',
-      'package.json'
-    )).version;
-    fs.writeFileSync(file, JSON.stringify(package, null, 2));
 
     return {
       // This is used for shouldPrepare
