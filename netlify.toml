@@ -1,5 +1,5 @@
 [build]
-  command = "yarn run storybook:build --quiet && yarn run website:build"
+  command = "echo 'build not needed'"
   publish = "website"
 
 [build.environment]

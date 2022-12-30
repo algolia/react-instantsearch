@@ -102,6 +102,7 @@
 /examples/Recipes.html https://www.algolia.com/doc/guides/building-search-ui/resources/ui-and-ux-patterns/react/
 
 # New examples
+/storybook/*   https://instantsearchjs.netlify.app/stories/react/:splat 301!
 /examples/default-theme   https://instantsearchjs.netlify.app/examples/react/default-theme/ 301!
 /examples/tourism   https://instantsearchjs.netlify.app/examples/react/tourism/ 301!
 /examples/media   https://instantsearchjs.netlify.app/examples/react/media/ 301!
